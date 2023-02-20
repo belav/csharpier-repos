@@ -13,9 +13,15 @@ namespace System.Workflow.ComponentModel.Serialization
     internal sealed class DependencyStoreSurrogate : ISerializationSurrogate
     {
         internal DependencyStoreSurrogate() { }
-        void ISerializationSurrogate.GetObjectData(object obj, SerializationInfo info, StreamingContext context)
+
+        void ISerializationSurrogate.GetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context
+        )
         {
-            IDictionary<DependencyProperty, object> store = obj as IDictionary<DependencyProperty, object>;
+            IDictionary<DependencyProperty, object> store =
+                obj as IDictionary<DependencyProperty, object>;
             if (store == null)
                 throw new ArgumentException("obj");
 
@@ -39,7 +45,13 @@ namespace System.Workflow.ComponentModel.Serialization
 
             info.SetType(typeof(DependencyStoreRef));
         }
-        object ISerializationSurrogate.SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
+
+        object ISerializationSurrogate.SetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context,
+            ISurrogateSelector selector
+        )
         {
             return null;
         }
@@ -61,6 +73,7 @@ namespace System.Workflow.ComponentModel.Serialization
 
                 return this.store;
             }
+
             void IDeserializationCallback.OnDeserialization(Object sender)
             {
                 if (this.store != null)

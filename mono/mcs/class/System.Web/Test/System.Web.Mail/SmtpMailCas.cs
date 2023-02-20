@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,24 +37,25 @@ using System.Text;
 using System.Web;
 using System.Web.Mail;
 
-namespace MonoCasTests.System.Web.Mail {
-
+namespace MonoCasTests.System.Web.Mail
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class SmtpMailCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class SmtpMailCas : AspNetHostingMinimal
+    {
         private MailMessage msg;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            string fname = Path.GetTempFileName ();
-            using (FileStream fs = File.OpenWrite (fname)) {
-                fs.WriteByte (0);
-                fs.Close ();
+            string fname = Path.GetTempFileName();
+            using (FileStream fs = File.OpenWrite(fname))
+            {
+                fs.WriteByte(0);
+                fs.Close();
             }
-            msg = new MailMessage ();
-            msg.Attachments.Add (new MailAttachment (fname));
+            msg = new MailMessage();
+            msg.Attachments.Add(new MailAttachment(fname));
             msg.Bcc = "bcc@localhost.com";
             msg.Body = "Hola!";
             msg.BodyEncoding = Encoding.ASCII;
@@ -68,34 +69,39 @@ namespace MonoCasTests.System.Web.Mail {
             msg.UrlContentBase = "http://www.example.org";
             msg.UrlContentLocation = "http://www.example.com";
             // ensure the static ctor is called at full trust
-            Assert.IsNotNull (SmtpMail.SmtpServer);
+            Assert.IsNotNull(SmtpMail.SmtpServer);
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void SmtpServer_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void SmtpServer_Deny_Unrestricted()
         {
             // get/set
             SmtpMail.SmtpServer = "localhost";
-            Assert.AreEqual ("localhost", SmtpMail.SmtpServer, "SmtpServer");
+            Assert.AreEqual("localhost", SmtpMail.SmtpServer, "SmtpServer");
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Medium)]
-        [ExpectedException (typeof (SecurityException))]
-        public void SendMessage_Deny_Medium ()
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Medium)]
+        [ExpectedException(typeof(SecurityException))]
+        public void SendMessage_Deny_Medium()
         {
-            SmtpMail.Send (msg);
+            SmtpMail.Send(msg);
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Medium)]
-        public void SendMessage_PermitOnly_Medium ()
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.Medium
+        )]
+        public void SendMessage_PermitOnly_Medium()
         {
-            try {
-                SmtpMail.Send (msg);
+            try
+            {
+                SmtpMail.Send(msg);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 // HttpException: can't sent mail
                 // TypeInitializationException: missing stuff in machine.config
                 // ConfigurationException: missing stuff in machine.config
@@ -105,21 +111,26 @@ namespace MonoCasTests.System.Web.Mail {
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Medium)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Send_Deny_Medium ()
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Medium)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Send_Deny_Medium()
         {
-            SmtpMail.Send (msg.From, msg.To, msg.Subject, msg.Body);
+            SmtpMail.Send(msg.From, msg.To, msg.Subject, msg.Body);
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Medium)]
-        public void Send_PermitOnly_Medium ()
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.Medium
+        )]
+        public void Send_PermitOnly_Medium()
         {
-            try {
-                SmtpMail.Send (msg.From, msg.To, msg.Subject, msg.Body);
+            try
+            {
+                SmtpMail.Send(msg.From, msg.To, msg.Subject, msg.Body);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 // HttpException: can't sent mail
                 // TypeInitializationException: missing stuff in machine.config
                 // ConfigurationException: missing stuff in machine.config
@@ -130,18 +141,22 @@ namespace MonoCasTests.System.Web.Mail {
 
         // LinkDemand tests
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
             // in this case testing with a (private) ctor isn't very conveniant
             // and the LinkDemand promotion (to Demand) will still occurs on other stuff
             // and (finally) we know that the SmtpServer properties isn't protected ifself
-            MethodInfo mi = this.Type.GetProperty ("SmtpServer").GetGetMethod ();
-            Assert.IsNotNull (mi, "get");
-            return mi.Invoke (null, null);
+            MethodInfo mi = this.Type.GetProperty("SmtpServer").GetGetMethod();
+            Assert.IsNotNull(mi, "get");
+            return mi.Invoke(null, null);
         }
 
-        public override Type Type {
-            get { return typeof (SmtpMail); }
+        public override Type Type
+        {
+            get { return typeof(SmtpMail); }
         }
     }
 }

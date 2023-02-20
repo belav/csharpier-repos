@@ -2,19 +2,21 @@
 // Line: 16
 // Compiler options: -unsafe
 
-class X {
-    delegate void S ();
+class X
+{
+    delegate void S();
 
-    unsafe void M ()
+    unsafe void M()
     {
         int i;
-        int * j ;
+        int* j;
 
-        S s = delegate {
+        S s = delegate
+        {
             i = 1;
         };
         j = &i;
     }
 
-    static void Main () {}
+    static void Main() { }
 }

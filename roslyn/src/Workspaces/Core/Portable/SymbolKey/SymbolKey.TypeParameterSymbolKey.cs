@@ -25,7 +25,10 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            )
             {
                 var isCref = reader.ReadBoolean();
 
@@ -34,7 +37,8 @@ namespace Microsoft.CodeAnalysis
                     var location = reader.ReadLocation(out var locationFailureReason)!;
                     if (locationFailureReason != null)
                     {
-                        failureReason = $"({nameof(TypeParameterSymbolKey)} {nameof(location)} failed -> {locationFailureReason})";
+                        failureReason =
+                            $"({nameof(TypeParameterSymbolKey)} {nameof(location)} failed -> {locationFailureReason})";
                         return default;
                     }
 
@@ -46,11 +50,14 @@ namespace Microsoft.CodeAnalysis
                 else
                 {
                     var metadataName = reader.ReadString();
-                    var containingSymbolResolution = reader.ReadSymbolKey(out var containingSymbolFailureReason);
+                    var containingSymbolResolution = reader.ReadSymbolKey(
+                        out var containingSymbolFailureReason
+                    );
 
                     if (containingSymbolFailureReason != null)
                     {
-                        failureReason = $"({nameof(TypeParameterSymbolKey)} {nameof(containingSymbolResolution)} failed -> {containingSymbolFailureReason})";
+                        failureReason =
+                            $"({nameof(TypeParameterSymbolKey)} {nameof(containingSymbolResolution)} failed -> {containingSymbolFailureReason})";
                         return default;
                     }
 
@@ -66,7 +73,11 @@ namespace Microsoft.CodeAnalysis
                         }
                     }
 
-                    return CreateResolution(result, $"({nameof(TypeParameterSymbolKey)} '{metadataName}' not found)", out failureReason);
+                    return CreateResolution(
+                        result,
+                        $"({nameof(TypeParameterSymbolKey)} '{metadataName}' not found)",
+                        out failureReason
+                    );
                 }
             }
         }

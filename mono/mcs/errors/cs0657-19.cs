@@ -4,7 +4,8 @@
 
 using System;
 
-interface X {
-  [field:NonSerialized]
-  event EventHandler XEvent;
+interface X
+{
+    [field: NonSerialized]
+    event EventHandler XEvent;
 }

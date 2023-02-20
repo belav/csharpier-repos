@@ -2,16 +2,16 @@ using System;
 
 public class C
 {
-    public static readonly C Token = new C ();
+    public static readonly C Token = new C();
 
-    public static C operator & (C set, E value)
+    public static C operator &(C set, E value)
     {
         return Token;
     }
 
-    public static implicit operator E (C c)
+    public static implicit operator E(C c)
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 }
 
@@ -29,9 +29,9 @@ enum E2
 
 class FooClass
 {
-    public static int Main ()
+    public static int Main()
     {
-        C m = new C ();
+        C m = new C();
         var x = E.Item;
         var res = m & x;
         if (res != C.Token)
@@ -44,6 +44,6 @@ class FooClass
         E2 e2 = E2.C;
 
         int day1 = e2 - E2.A;
-        return 0;    
+        return 0;
     }
 }

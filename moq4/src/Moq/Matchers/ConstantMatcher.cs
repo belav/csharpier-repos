@@ -24,11 +24,15 @@ namespace Moq.Matchers
                 return true;
             }
 
-            if (this.constantValue is IEnumerable && argument is IEnumerable enumerable &&
-                !(this.constantValue is IMocked) && !(argument is IMocked))
-                // the above checks on the second line are necessary to ensure we have usable
-                // implementations of IEnumerable, which might very well not be the case for
-                // mocked objects.
+            if (
+                this.constantValue is IEnumerable
+                && argument is IEnumerable enumerable
+                && !(this.constantValue is IMocked)
+                && !(argument is IMocked)
+            )
+            // the above checks on the second line are necessary to ensure we have usable
+            // implementations of IEnumerable, which might very well not be the case for
+            // mocked objects.
             {
                 return this.MatchesEnumerable(enumerable);
             }

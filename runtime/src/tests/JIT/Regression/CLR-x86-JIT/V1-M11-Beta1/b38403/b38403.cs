@@ -22,7 +22,8 @@ namespace Test
 
         static void Static1(float param4, AA param5)
         {
-            while (AA.m_bStatic1) ;
+            while (AA.m_bStatic1)
+                ;
         }
 
         public static int Main()

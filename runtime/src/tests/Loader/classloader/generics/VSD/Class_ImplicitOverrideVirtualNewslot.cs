@@ -13,21 +13,17 @@ Non-Generic virtual methods:
 Generic virtual methods:
                         Non-generic Interface    Generic Interface
         Non-generic type            Test1             Test5
-        Generic type                Test3            Test7 
+        Generic type                Test3            Test7
 
 */
 
 using System;
 
+public class A<T> { }
 
-public class A<T>
-{}
+public struct S<T> { }
 
-public struct S<T>
-{}
-
-
-public interface I 
+public interface I
 {
     int method1();
     int method2<T>();
@@ -39,35 +35,31 @@ public interface IGen<T>
     int method2<M>();
 }
 
-
 public class C1 : I
 {
     public virtual int method1()
     {
         return 1;
     }
-    
+
     public virtual int method2<T>()
     {
         return 2;
     }
 }
 
-
-public class C2<T> : I 
+public class C2<T> : I
 {
     public virtual int method1()
     {
         return 3;
     }
-    
+
     public virtual int method2<U>()
     {
         return 4;
     }
 }
-
-
 
 public class C3Int : IGen<int>
 {
@@ -75,7 +67,7 @@ public class C3Int : IGen<int>
     {
         return 5;
     }
-    
+
     public virtual int method2<U>()
     {
         return 6;
@@ -88,21 +80,20 @@ public class C3String : IGen<string>
     {
         return 5;
     }
-    
+
     public virtual int method2<U>()
     {
         return 6;
     }
 }
 
-
-public class C3Object: IGen<object>
+public class C3Object : IGen<object>
 {
     public virtual int method1()
     {
         return 5;
     }
-    
+
     public virtual int method2<U>()
     {
         return 6;
@@ -115,23 +106,18 @@ public class C4<T> : IGen<T>
     {
         return 7;
     }
-    
+
     public virtual int method2<U>()
     {
         return 8;
     }
-
 }
-
-
-
 
 public class Test_Class_ImplicitOverrideVirtualNewslot
 {
-
     public static int counter = 0;
     public static bool pass = true;
-    
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -140,21 +126,18 @@ public class Test_Class_ImplicitOverrideVirtualNewslot
             pass = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
-    
 
     public static void TestNonGenInterface_NonGenType()
     {
         I ic1 = new C1();
 
         // TEST1: test generic virtual method
-        Eval( (ic1.method2<int>().ToString()).Equals("2") );
-        Eval( (ic1.method2<string>() .ToString()).Equals("2") );
-        Eval( (ic1.method2<object>().ToString()).Equals("2") );
-        Eval( (ic1.method2<A<int>>().ToString()).Equals("2") );
-        Eval( (ic1.method2<S<object>>().ToString()).Equals("2") );
+        Eval((ic1.method2<int>().ToString()).Equals("2"));
+        Eval((ic1.method2<string>().ToString()).Equals("2"));
+        Eval((ic1.method2<object>().ToString()).Equals("2"));
+        Eval((ic1.method2<A<int>>().ToString()).Equals("2"));
+        Eval((ic1.method2<S<object>>().ToString()).Equals("2"));
     }
 
     public static void TestNonGenInterface_GenType()
@@ -165,32 +148,29 @@ public class Test_Class_ImplicitOverrideVirtualNewslot
 
         // TEST2: test non generic virtual method
 
-         Eval( (ic2Int.method1().ToString()).Equals("3") );
-        Eval( (ic2String.method1().ToString()).Equals("3") );
-        Eval( (ic2Object.method1().ToString()).Equals("3") );
-        
+        Eval((ic2Int.method1().ToString()).Equals("3"));
+        Eval((ic2String.method1().ToString()).Equals("3"));
+        Eval((ic2Object.method1().ToString()).Equals("3"));
 
-        
         // TEST3: test generic virtual method
 
-        Eval( (ic2Int.method2<int>().ToString()).Equals("4") );
-        Eval( (ic2Int.method2<object>().ToString()).Equals("4") );
-        Eval( (ic2Int.method2<string>().ToString()).Equals("4") );
-        Eval( (ic2Int.method2<A<int>>().ToString()).Equals("4") );
-        Eval( (ic2Int.method2<S<string>>().ToString()).Equals("4") );
-        
-        Eval( (ic2String.method2<int>().ToString()).Equals("4") );
-        Eval( (ic2String.method2<object>().ToString()).Equals("4") );
-        Eval( (ic2String.method2<string>().ToString()).Equals("4") );
-        Eval( (ic2String.method2<A<int>>().ToString()).Equals("4") );
-        Eval( (ic2String.method2<S<string>>().ToString()).Equals("4") );
+        Eval((ic2Int.method2<int>().ToString()).Equals("4"));
+        Eval((ic2Int.method2<object>().ToString()).Equals("4"));
+        Eval((ic2Int.method2<string>().ToString()).Equals("4"));
+        Eval((ic2Int.method2<A<int>>().ToString()).Equals("4"));
+        Eval((ic2Int.method2<S<string>>().ToString()).Equals("4"));
 
-        Eval( (ic2Object.method2<int>().ToString()).Equals("4") );
-        Eval( (ic2Object.method2<object>().ToString()).Equals("4") );
-        Eval( (ic2Object.method2<string>().ToString()).Equals("4") );
-        Eval( (ic2Object.method2<A<int>>().ToString()).Equals("4") );
-        Eval( (ic2Object.method2<S<string>>().ToString()).Equals("4") );
-    
+        Eval((ic2String.method2<int>().ToString()).Equals("4"));
+        Eval((ic2String.method2<object>().ToString()).Equals("4"));
+        Eval((ic2String.method2<string>().ToString()).Equals("4"));
+        Eval((ic2String.method2<A<int>>().ToString()).Equals("4"));
+        Eval((ic2String.method2<S<string>>().ToString()).Equals("4"));
+
+        Eval((ic2Object.method2<int>().ToString()).Equals("4"));
+        Eval((ic2Object.method2<object>().ToString()).Equals("4"));
+        Eval((ic2Object.method2<string>().ToString()).Equals("4"));
+        Eval((ic2Object.method2<A<int>>().ToString()).Equals("4"));
+        Eval((ic2Object.method2<S<string>>().ToString()).Equals("4"));
     }
 
     public static void TestGenInterface_NonGenType()
@@ -201,35 +181,30 @@ public class Test_Class_ImplicitOverrideVirtualNewslot
 
         // TEST4: test non generic virtual method
 
-        Eval( (iIntc3.method1().ToString()).Equals("5") );
-        Eval( (iObjectc3.method1().ToString()).Equals("5") );
-        Eval( (iStringc3.method1().ToString()).Equals("5") );
-        
-    
+        Eval((iIntc3.method1().ToString()).Equals("5"));
+        Eval((iObjectc3.method1().ToString()).Equals("5"));
+        Eval((iStringc3.method1().ToString()).Equals("5"));
 
-        
         // TEST5: test generic virtual method
 
 
-        Eval( (iIntc3.method2<int>().ToString()).Equals("6") );
-        Eval( (iIntc3.method2<object>().ToString()).Equals("6") );
-        Eval( (iIntc3.method2<string>().ToString()).Equals("6") );
-        Eval( (iIntc3.method2<A<int>>().ToString()).Equals("6") );
-        Eval( (iIntc3.method2<S<string>>().ToString()).Equals("6") );
-        
-        Eval( (iStringc3.method2<int>().ToString()).Equals("6") );
-        Eval( (iStringc3.method2<object>().ToString()).Equals("6") );
-        Eval( (iStringc3.method2<string>().ToString()).Equals("6") );
-        Eval( (iStringc3.method2<A<int>>().ToString()).Equals("6") );
-        Eval( (iStringc3.method2<S<string>>().ToString()).Equals("6") );
+        Eval((iIntc3.method2<int>().ToString()).Equals("6"));
+        Eval((iIntc3.method2<object>().ToString()).Equals("6"));
+        Eval((iIntc3.method2<string>().ToString()).Equals("6"));
+        Eval((iIntc3.method2<A<int>>().ToString()).Equals("6"));
+        Eval((iIntc3.method2<S<string>>().ToString()).Equals("6"));
 
-        Eval( (iObjectc3.method2<int>().ToString()).Equals("6") );
-        Eval( (iObjectc3.method2<object>().ToString()).Equals("6") );
-        Eval( (iObjectc3.method2<string>().ToString()).Equals("6") );
-        Eval( (iObjectc3.method2<A<int>>().ToString()).Equals("6") );
-        Eval( (iObjectc3.method2<S<string>>().ToString()).Equals("6") );
-        
+        Eval((iStringc3.method2<int>().ToString()).Equals("6"));
+        Eval((iStringc3.method2<object>().ToString()).Equals("6"));
+        Eval((iStringc3.method2<string>().ToString()).Equals("6"));
+        Eval((iStringc3.method2<A<int>>().ToString()).Equals("6"));
+        Eval((iStringc3.method2<S<string>>().ToString()).Equals("6"));
 
+        Eval((iObjectc3.method2<int>().ToString()).Equals("6"));
+        Eval((iObjectc3.method2<object>().ToString()).Equals("6"));
+        Eval((iObjectc3.method2<string>().ToString()).Equals("6"));
+        Eval((iObjectc3.method2<A<int>>().ToString()).Equals("6"));
+        Eval((iObjectc3.method2<S<string>>().ToString()).Equals("6"));
     }
 
     public static void TestGenInterface_GenType()
@@ -240,45 +215,38 @@ public class Test_Class_ImplicitOverrideVirtualNewslot
 
         // TEST6: test non generic virtual method
 
-        Eval( (iGenC4Int.method1().ToString()).Equals("7") );
-        Eval( (iGenC4Object.method1().ToString()).Equals("7") );
-        Eval( (iGenC4String.method1().ToString()).Equals("7") );
+        Eval((iGenC4Int.method1().ToString()).Equals("7"));
+        Eval((iGenC4Object.method1().ToString()).Equals("7"));
+        Eval((iGenC4String.method1().ToString()).Equals("7"));
 
-        
-    
-        
         // TEST7: test generic virtual method
 
-        Eval( (iGenC4Int.method2<int>().ToString()).Equals("8") );
-        Eval( (iGenC4Int.method2<object>().ToString()).Equals("8") );
-        Eval( (iGenC4Int.method2<string>().ToString()).Equals("8") );
-        Eval( (iGenC4Int.method2<A<int>>().ToString()).Equals("8") );
-        Eval( (iGenC4Int.method2<S<string>>().ToString()).Equals("8") );
-        
-        Eval( (iGenC4String.method2<int>().ToString()).Equals("8") );
-        Eval( (iGenC4String.method2<object>().ToString()).Equals("8") );
-        Eval( (iGenC4String.method2<string>().ToString()).Equals("8") );
-        Eval( (iGenC4String.method2<A<int>>().ToString()).Equals("8") );
-        Eval( (iGenC4String.method2<S<string>>().ToString()).Equals("8") );
+        Eval((iGenC4Int.method2<int>().ToString()).Equals("8"));
+        Eval((iGenC4Int.method2<object>().ToString()).Equals("8"));
+        Eval((iGenC4Int.method2<string>().ToString()).Equals("8"));
+        Eval((iGenC4Int.method2<A<int>>().ToString()).Equals("8"));
+        Eval((iGenC4Int.method2<S<string>>().ToString()).Equals("8"));
 
-        Eval( (iGenC4Object.method2<int>().ToString()).Equals("8") );
-        Eval( (iGenC4Object.method2<object>().ToString()).Equals("8") );
-        Eval( (iGenC4Object.method2<string>().ToString()).Equals("8") );
-        Eval( (iGenC4Object.method2<A<int>>().ToString()).Equals("8") );
-        Eval( (iGenC4Object.method2<S<string>>().ToString()).Equals("8") );
-        
+        Eval((iGenC4String.method2<int>().ToString()).Equals("8"));
+        Eval((iGenC4String.method2<object>().ToString()).Equals("8"));
+        Eval((iGenC4String.method2<string>().ToString()).Equals("8"));
+        Eval((iGenC4String.method2<A<int>>().ToString()).Equals("8"));
+        Eval((iGenC4String.method2<S<string>>().ToString()).Equals("8"));
+
+        Eval((iGenC4Object.method2<int>().ToString()).Equals("8"));
+        Eval((iGenC4Object.method2<object>().ToString()).Equals("8"));
+        Eval((iGenC4Object.method2<string>().ToString()).Equals("8"));
+        Eval((iGenC4Object.method2<A<int>>().ToString()).Equals("8"));
+        Eval((iGenC4Object.method2<S<string>>().ToString()).Equals("8"));
     }
 
-
-    
     public static int Main()
     {
-
         TestNonGenInterface_NonGenType();
         TestNonGenInterface_GenType();
         TestGenInterface_NonGenType();
         TestGenInterface_GenType();
-        
+
         if (pass)
         {
             Console.WriteLine("PASS");
@@ -289,7 +257,5 @@ public class Test_Class_ImplicitOverrideVirtualNewslot
             Console.WriteLine("FAIL");
             return 101;
         }
-        
-        
     }
 }

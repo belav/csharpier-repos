@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,10 +35,9 @@ namespace System.Web.UI.WebControls
 {
     public class ControlIDConverter : StringConverter
     {
-        public ControlIDConverter ()
-        { }
+        public ControlIDConverter() { }
 
-        protected virtual bool FilterControl (Control control)
+        protected virtual bool FilterControl(Control control)
         {
             return true;
         }
@@ -48,7 +47,9 @@ namespace System.Web.UI.WebControls
             return null;
         }*/
 
-        public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
+        public override TypeConverter.StandardValuesCollection GetStandardValues(
+            ITypeDescriptorContext context
+        )
         {
             if (context == null)
                 return null;
@@ -59,13 +60,14 @@ namespace System.Web.UI.WebControls
                 return null;
 
             ComponentCollection ctrlCollection = container.Components;
-            ArrayList arrayList = new ArrayList (0);
+            ArrayList arrayList = new ArrayList(0);
 
-            foreach (Control control in ctrlCollection) {
+            foreach (Control control in ctrlCollection)
+            {
                 if (FilterControl(control))
-                    arrayList.Add (control.ID);
+                    arrayList.Add(control.ID);
             }
-            return new StandardValuesCollection (arrayList);
+            return new StandardValuesCollection(arrayList);
         }
 
         /*public bool GetStandardValuesExclusive ()
@@ -73,8 +75,7 @@ namespace System.Web.UI.WebControls
             return false;
         }*/
 
-        public override bool GetStandardValuesExclusive 
-                    (ITypeDescriptorContext context)
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {
             return false;
         }
@@ -84,13 +85,12 @@ namespace System.Web.UI.WebControls
             return false;
         }*/
 
-        public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
             if (context == null)
                 return false;
-            
+
             return true;
         }
     }
 }
-

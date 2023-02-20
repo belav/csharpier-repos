@@ -95,7 +95,10 @@ namespace System.Net.Http
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties<HttpMessageContent, HttpContent>(TypeAssert.TypeProperties.IsPublicVisibleClass | TypeAssert.TypeProperties.IsDisposable);
+            Assert.Type.HasProperties<HttpMessageContent, HttpContent>(
+                TypeAssert.TypeProperties.IsPublicVisibleClass
+                    | TypeAssert.TypeProperties.IsDisposable
+            );
         }
 
         [Fact]
@@ -111,7 +114,13 @@ namespace System.Net.Http
         [Fact]
         public void RequestConstructorThrowsOnNull()
         {
-            Assert.ThrowsArgumentNull(() => { new HttpMessageContent((HttpRequestMessage)null); }, "httpRequest");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new HttpMessageContent((HttpRequestMessage)null);
+                },
+                "httpRequest"
+            );
         }
 
         [Fact]
@@ -127,9 +136,14 @@ namespace System.Net.Http
         [Fact]
         public void ResponseConstructorThrowsOnNull()
         {
-            Assert.ThrowsArgumentNull(() => { new HttpMessageContent((HttpResponseMessage)null); }, "httpResponse");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new HttpMessageContent((HttpResponseMessage)null);
+                },
+                "httpResponse"
+            );
         }
-
 
         [Fact]
         public async Task SerializeRequest()
@@ -257,7 +271,10 @@ namespace System.Net.Http
         {
             for (int cnt = 0; cnt < iterations; cnt++)
             {
-                HttpRequestMessage request = CreateRequest(ParserData.HttpRequestUriWithPortAndQuery, false);
+                HttpRequestMessage request = CreateRequest(
+                    ParserData.HttpRequestUriWithPortAndQuery,
+                    false
+                );
                 HttpMessageContent instance = new HttpMessageContent(request);
                 string message = await ReadContentAsync(instance);
                 Assert.Equal(ParserData.HttpRequestWithPortAndQuery, message);
@@ -292,7 +309,13 @@ namespace System.Net.Http
             HttpRequestMessage request = CreateRequest(ParserData.HttpRequestUri, false);
             HttpMessageContent instance = new HttpMessageContent(request);
             instance.Dispose();
-            Assert.ThrowsObjectDisposed(() => { request.Method = HttpMethod.Get; }, typeof(HttpRequestMessage).FullName);
+            Assert.ThrowsObjectDisposed(
+                () =>
+                {
+                    request.Method = HttpMethod.Get;
+                },
+                typeof(HttpRequestMessage).FullName
+            );
         }
 
         [Fact]
@@ -301,7 +324,13 @@ namespace System.Net.Http
             HttpResponseMessage response = CreateResponse(false);
             HttpMessageContent instance = new HttpMessageContent(response);
             instance.Dispose();
-            Assert.ThrowsObjectDisposed(() => { response.StatusCode = HttpStatusCode.OK; }, typeof(HttpResponseMessage).FullName);
+            Assert.ThrowsObjectDisposed(
+                () =>
+                {
+                    response.StatusCode = HttpStatusCode.OK;
+                },
+                typeof(HttpResponseMessage).FullName
+            );
         }
     }
 }

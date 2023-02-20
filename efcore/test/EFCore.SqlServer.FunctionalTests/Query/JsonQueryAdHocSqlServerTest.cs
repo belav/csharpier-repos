@@ -6,12 +6,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public class JsonQueryAdHocSqlServerTest : JsonQueryAdHocTestBase
 {
     public JsonQueryAdHocSqlServerTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
+        : base(testOutputHelper) { }
 
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
     protected override void Seed29219(MyContext29219 ctx)
     {
@@ -40,8 +37,10 @@ public class JsonQueryAdHocSqlServerTest : JsonQueryAdHocTestBase
         ctx.Entities.AddRange(entity1, entity2);
         ctx.SaveChanges();
 
-        ctx.Database.ExecuteSqlRaw(@"INSERT INTO [Entities] ([Id], [Reference], [Collection])
-VALUES(3, N'{{ ""NonNullableScalar"" : 30 }}', N'[{{ ""NonNullableScalar"" : 10001 }}]')");
+        ctx.Database.ExecuteSqlRaw(
+            @"INSERT INTO [Entities] ([Id], [Reference], [Collection])
+VALUES(3, N'{{ ""NonNullableScalar"" : 30 }}', N'[{{ ""NonNullableScalar"" : 10001 }}]')"
+        );
     }
 
     protected override void SeedArrayOfPrimitives(MyContextArrayOfPrimitives ctx)

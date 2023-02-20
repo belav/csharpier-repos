@@ -21,5 +21,6 @@ public interface IModelExpressionProvider
     /// <returns>A new <see cref="ModelExpression"/> instance describing the given <paramref name="expression"/>.</returns>
     ModelExpression CreateModelExpression<TModel, TValue>(
         ViewDataDictionary<TModel> viewData,
-        Expression<Func<TModel, TValue>> expression);
+        Expression<Func<TModel, TValue>> expression
+    );
 }

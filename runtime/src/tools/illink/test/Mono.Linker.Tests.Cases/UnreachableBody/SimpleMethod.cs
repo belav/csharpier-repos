@@ -3,18 +3,18 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.UnreachableBody
 {
-    [SetupLinkerArgument ("--enable-opt", "unreachablebodies")]
+    [SetupLinkerArgument("--enable-opt", "unreachablebodies")]
     public class SimpleMethod
     {
-        public static void Main ()
+        public static void Main()
         {
-            UsedToMarkMethod (null);
+            UsedToMarkMethod(null);
         }
 
         [Kept]
-        static void UsedToMarkMethod (Foo f)
+        static void UsedToMarkMethod(Foo f)
         {
-            f.Method ();
+            f.Method();
         }
 
         [Kept]
@@ -22,14 +22,12 @@ namespace Mono.Linker.Tests.Cases.UnreachableBody
         {
             [Kept]
             [ExpectBodyModified]
-            public void Method ()
+            public void Method()
             {
-                UsedByMethod ();
+                UsedByMethod();
             }
 
-            void UsedByMethod ()
-            {
-            }
+            void UsedByMethod() { }
         }
     }
 }

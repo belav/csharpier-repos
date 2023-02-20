@@ -3,12 +3,10 @@
 
 class C
 {
-    public static async void Main ()
+    public static async void Main()
     {
-        await Call ();
+        await Call();
     }
-    
-    static async void Call ()
-    {
-    }
+
+    static async void Call() { }
 }

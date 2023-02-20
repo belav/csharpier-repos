@@ -16,13 +16,14 @@ namespace POS_Server.Controllers
     public class serialsController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller>
         [HttpPost]
         [Route("Get")]
         public string Get(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
-var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -41,31 +42,35 @@ var strP = TokenManager.GetPrincipal(token);
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var serialsList = entity.serials
-                        .Where(S=> S.itemId == itemId)
-                    .Select(S => new
-                    {
-                        S.serialId,
-                        S.itemId,
-                        S.serialNum,
-                        S.isActive,
-                        S.createUserId,
-                        S.createDate,
-                        S.updateUserId,
-                        S.updateDate,
-                    })
-                    .ToList();
+                        .Where(S => S.itemId == itemId)
+                        .Select(
+                            S =>
+                                new
+                                {
+                                    S.serialId,
+                                    S.itemId,
+                                    S.serialNum,
+                                    S.isActive,
+                                    S.createUserId,
+                                    S.createDate,
+                                    S.updateUserId,
+                                    S.updateDate,
+                                }
+                        )
+                        .ToList();
                     return TokenManager.GenerateToken(serialsList);
                 }
             }
         }
+
         // add or update location
         [HttpPost]
         [Route("Save")]
         public string Save(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             string message = "";
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -81,7 +86,10 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         serialObject = c.Value.Replace("\\", string.Empty);
                         serialObject = serialObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<serials>(serialObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<serials>(
+                            serialObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -93,8 +101,8 @@ var strP = TokenManager.GetPrincipal(token);
                         var serialEntity = entity.Set<serials>();
                         if (newObject.serialId == 0)
                         {
-                            newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             newObject.updateUserId = newObject.createUserId;
 
                             tmpSerial = serialEntity.Add(newObject);
@@ -104,11 +112,13 @@ var strP = TokenManager.GetPrincipal(token);
                         }
                         else
                         {
-                            tmpSerial = entity.serials.Where(p => p.serialId == newObject.serialId).FirstOrDefault();
+                            tmpSerial = entity.serials
+                                .Where(p => p.serialId == newObject.serialId)
+                                .FirstOrDefault();
                             tmpSerial.itemId = newObject.itemId;
                             tmpSerial.serialNum = newObject.serialNum;
                             tmpSerial.isActive = newObject.isActive;
-                            tmpSerial.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpSerial.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             tmpSerial.updateUserId = newObject.createUserId;
                             entity.SaveChanges();
                             message = tmpSerial.serialId.ToString();
@@ -123,13 +133,14 @@ var strP = TokenManager.GetPrincipal(token);
             }
             return message;
         }
+
         [HttpPost]
         [Route("Delete")]
         public string Delete(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             string message = "";
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -191,7 +202,7 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         message = "0";
                         return TokenManager.GenerateToken(message);
-                        }
+                    }
                 }
             }
         }

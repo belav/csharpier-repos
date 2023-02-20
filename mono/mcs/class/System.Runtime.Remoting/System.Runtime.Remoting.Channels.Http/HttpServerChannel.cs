@@ -1,11 +1,11 @@
 //
 // HttpServerChannel.cs
-// 
+//
 // Author:
 //   Michael Hutchinson <mhutchinson@novell.com>
-// 
+//
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,13 +35,15 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Channels.Http
 {
-
-    public class HttpServerChannel : BaseChannelWithProperties,
-        IChannel, IChannelReceiver, IChannelReceiverHook
+    public class HttpServerChannel
+        : BaseChannelWithProperties,
+            IChannel,
+            IChannelReceiver,
+            IChannelReceiverHook
     {
         string name = "http server";
         int priority = 1;
-        
+
         string machineName = null;
         IPAddress bindAddress = IPAddress.Any;
         int port = -1; // querying GetChannelUri () on .NET indicates this is the default value
@@ -55,116 +57,131 @@ namespace System.Runtime.Remoting.Channels.Http
 
         #region Constructors
 
-        public HttpServerChannel ()
+        public HttpServerChannel()
         {
             //DONT START SERVER, EVEN THOUGH ALL OTHER CONSTRUCTORS DO
-            BuildSink (null);
+            BuildSink(null);
         }
 
-        public HttpServerChannel (int port)
+        public HttpServerChannel(int port)
         {
             this.port = port;
-            BuildSink (null);
+            BuildSink(null);
         }
-        
-        [MonoTODO ("Handle the listen property")]
-        public HttpServerChannel (IDictionary properties, IServerChannelSinkProvider sinkProvider)
-        {
 
-            if (properties != null) {
-                foreach (DictionaryEntry property in properties) {
-                    switch ((string)property.Key) {
-                    case "name":
-                        //NOTE: matching MS behaviour: throws InvalidCastException, allows null
-                        this.name = (string)property.Value;
-                        break;
-                    case "priority":
-                        this.priority = Convert.ToInt32 (property.Value);
-                        break;
-                    case "port":
-                        this.port = Convert.ToInt32 (property.Value);
-                        break;
-                    case "suppressChannelData":
-                        this.suppressChannelData = Convert.ToBoolean (property.Value);
-                        break;
-                    case "bindTo":
-                        bindAddress = IPAddress.Parse ((string)property.Value);
-                        break;
-                    case "useIpAddress":
-                        this.useIPAddress = Convert.ToBoolean (property.Value);
-                        break;
-                    case "machineName":
-                        this.machineName = (string)property.Value;
-                        break;
-                    case "listen":
-                        this.wantsToListen = Convert.ToBoolean (property.Value);
-                        break;
+        [MonoTODO("Handle the listen property")]
+        public HttpServerChannel(IDictionary properties, IServerChannelSinkProvider sinkProvider)
+        {
+            if (properties != null)
+            {
+                foreach (DictionaryEntry property in properties)
+                {
+                    switch ((string)property.Key)
+                    {
+                        case "name":
+                            //NOTE: matching MS behaviour: throws InvalidCastException, allows null
+                            this.name = (string)property.Value;
+                            break;
+                        case "priority":
+                            this.priority = Convert.ToInt32(property.Value);
+                            break;
+                        case "port":
+                            this.port = Convert.ToInt32(property.Value);
+                            break;
+                        case "suppressChannelData":
+                            this.suppressChannelData = Convert.ToBoolean(property.Value);
+                            break;
+                        case "bindTo":
+                            bindAddress = IPAddress.Parse((string)property.Value);
+                            break;
+                        case "useIpAddress":
+                            this.useIPAddress = Convert.ToBoolean(property.Value);
+                            break;
+                        case "machineName":
+                            this.machineName = (string)property.Value;
+                            break;
+                        case "listen":
+                            this.wantsToListen = Convert.ToBoolean(property.Value);
+                            break;
                     }
                 }
             }
 
-            BuildSink (sinkProvider);
+            BuildSink(sinkProvider);
         }
 
-        public HttpServerChannel (string name, int port)
-            : this (name, port, null)
-        {
-        }
+        public HttpServerChannel(string name, int port)
+            : this(name, port, null) { }
 
-        public HttpServerChannel (string name, int port, IServerChannelSinkProvider sinkProvider)
+        public HttpServerChannel(string name, int port, IServerChannelSinkProvider sinkProvider)
         {
             this.name = name;
             this.port = port;
-            BuildSink (sinkProvider);
+            BuildSink(sinkProvider);
         }
 
-        void BuildSink (IServerChannelSinkProvider sinkProvider)
+        void BuildSink(IServerChannelSinkProvider sinkProvider)
         {
             //resolve names (modified from TcpChannel)
-            if (machineName == null) {
-                if (useIPAddress) {
-                    if (!bindAddress.Equals (IPAddress.Any)) {
-                        machineName = bindAddress.ToString ();
-                    } else {
-                        IPHostEntry hostEntry = Dns.Resolve (Dns.GetHostName ());
+            if (machineName == null)
+            {
+                if (useIPAddress)
+                {
+                    if (!bindAddress.Equals(IPAddress.Any))
+                    {
+                        machineName = bindAddress.ToString();
+                    }
+                    else
+                    {
+                        IPHostEntry hostEntry = Dns.Resolve(Dns.GetHostName());
                         if (hostEntry.AddressList.Length == 0)
-                            throw new RemotingException ("IP address could not be determined for this host");
+                            throw new RemotingException(
+                                "IP address could not be determined for this host"
+                            );
                         // We DON'T want to take the resolved address from the hostEntry, since the socket
                         // should still bind to IPAddress.Any, so that we get the loopback too
-                        machineName = hostEntry.AddressList[0].ToString ();
+                        machineName = hostEntry.AddressList[0].ToString();
                     }
-                } else {
-                    IPHostEntry hostEntry = Dns.GetHostByName (Dns.GetHostName ());
+                }
+                else
+                {
+                    IPHostEntry hostEntry = Dns.GetHostByName(Dns.GetHostName());
                     bindAddress = hostEntry.AddressList[0];
                     machineName = hostEntry.HostName;
                 }
             }
 
-            if (sinkProvider == null) {
+            if (sinkProvider == null)
+            {
                 //build a default chain that can handle wsdl, soap, binary
-                sinkProvider = new SdlChannelSinkProvider (); //for wsdl
-                sinkProvider.Next = new SoapServerFormatterSinkProvider ();
-                sinkProvider.Next.Next = new BinaryServerFormatterSinkProvider ();
+                sinkProvider = new SdlChannelSinkProvider(); //for wsdl
+                sinkProvider.Next = new SoapServerFormatterSinkProvider();
+                sinkProvider.Next.Next = new BinaryServerFormatterSinkProvider();
             }
-            
+
             //MS compat: channelData is null when port < 0
-            if (port >= 0) {
-                channelData = new ChannelDataStore (null);
+            if (port >= 0)
+            {
+                channelData = new ChannelDataStore(null);
                 IServerChannelSinkProvider provider = sinkProvider;
-                while (provider != null) {
-                    provider.GetChannelData (channelData);
+                while (provider != null)
+                {
+                    provider.GetChannelData(channelData);
                     provider = provider.Next;
                 }
             }
-            
+
             //create the sink chain and add an HTTP sink
-            IServerChannelSink nextSink = ChannelServices.CreateServerChannelSinkChain (sinkProvider, this);
-            sink = new HttpServerTransportSink (nextSink);
+            IServerChannelSink nextSink = ChannelServices.CreateServerChannelSinkChain(
+                sinkProvider,
+                this
+            );
+            sink = new HttpServerTransportSink(nextSink);
 
             // BaseChannelWithProperties wants this to be set with the chain
             base.SinksWithProperties = nextSink;
 
-            StartListening (null);
+            StartListening(null);
         }
 
         #endregion
@@ -181,14 +198,14 @@ namespace System.Runtime.Remoting.Channels.Http
             get { return priority; }
         }
 
-        public string Parse (string url, out string objectURI)
+        public string Parse(string url, out string objectURI)
         {
-            return HttpChannel.ParseInternal (url, out objectURI);
+            return HttpChannel.ParseInternal(url, out objectURI);
         }
 
         #endregion
 
-        public string GetChannelUri ()
+        public string GetChannelUri()
         {
             return "http://" + machineName + ":" + port;
         }
@@ -197,21 +214,22 @@ namespace System.Runtime.Remoting.Channels.Http
 
         public object ChannelData
         {
-            get
-            {
-                return suppressChannelData ? null
-                    : channelData;
-            }
+            get { return suppressChannelData ? null : channelData; }
         }
 
         //from TcpServerChannel
-        public virtual string[] GetUrlsForUri (string objectUri)
+        public virtual string[] GetUrlsForUri(string objectUri)
         {
-            if (!objectUri.StartsWith ("/"))
+            if (!objectUri.StartsWith("/"))
                 objectUri = "/" + objectUri;
 
-            if (channelData == null || channelData.ChannelUris == null || channelData.ChannelUris.Length < 1) {
-                return new string[] { GetChannelUri () + objectUri };
+            if (
+                channelData == null
+                || channelData.ChannelUris == null
+                || channelData.ChannelUris.Length < 1
+            )
+            {
+                return new string[] { GetChannelUri() + objectUri };
             }
 
             string[] channelUris = channelData.ChannelUris;
@@ -223,7 +241,7 @@ namespace System.Runtime.Remoting.Channels.Http
             return result;
         }
 
-        public void StartListening (object data)
+        public void StartListening(object data)
         {
             if (listener != null)
                 return;
@@ -231,27 +249,32 @@ namespace System.Runtime.Remoting.Channels.Http
             if (port < 0)
                 return;
 
-            try {
-                listener = new RemotingHttpListener (bindAddress, port, sink);
-            } catch (Exception) {
-                if (listener != null) {
-                    listener.Dispose ();
+            try
+            {
+                listener = new RemotingHttpListener(bindAddress, port, sink);
+            }
+            catch (Exception)
+            {
+                if (listener != null)
+                {
+                    listener.Dispose();
                     listener = null;
                 }
                 throw;
             }
-            
+
             if (port == 0)
                 port = listener.AssignedPort;
-            
-            channelData.ChannelUris = new string [] { GetChannelUri () };
+
+            channelData.ChannelUris = new string[] { GetChannelUri() };
             wantsToListen = false;
         }
 
-        public void StopListening (object data)
+        public void StopListening(object data)
         {
-            if (listener != null) {
-                listener.Dispose ();
+            if (listener != null)
+            {
+                listener.Dispose();
                 listener = null;
             }
         }
@@ -275,11 +298,11 @@ namespace System.Runtime.Remoting.Channels.Http
 
         #region IChannelReceiverHook
 
-        public void AddHookChannelUri (string channelUri)
+        public void AddHookChannelUri(string channelUri)
         {
-            string [] newUris = new string[1] { channelUri };
+            string[] newUris = new string[1] { channelUri };
             if (channelData == null)
-                channelData = new ChannelDataStore (newUris);
+                channelData = new ChannelDataStore(newUris);
             else
                 channelData.ChannelUris = newUris;
             wantsToListen = false;
@@ -298,9 +321,7 @@ namespace System.Runtime.Remoting.Channels.Http
         public bool WantsToListen
         {
             get { return wantsToListen; }
-            set {
-                throw new NotImplementedException ("Behaviour not yet determined");
-            }
+            set { throw new NotImplementedException("Behaviour not yet determined"); }
         }
 
         #endregion

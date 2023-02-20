@@ -23,7 +23,7 @@ namespace HtmlAgilityPack
             File.Copy(source, target, true);
         }
     }
-    
+
     internal class HtmlCmdLine
     {
         static internal bool Help;
@@ -38,7 +38,7 @@ namespace HtmlAgilityPack
         {
             string p = def;
             string[] args = Environment.GetCommandLineArgs();
-            for (int i=1;i<args.Length;i++)
+            for (int i = 1; i < args.Length; i++)
             {
                 GetStringArg(args[i], name, ref p);
             }
@@ -50,11 +50,11 @@ namespace HtmlAgilityPack
             string p = def;
             string[] args = Environment.GetCommandLineArgs();
             int j = 0;
-            for (int i=1;i<args.Length;i++)
+            for (int i = 1; i < args.Length; i++)
             {
                 if (GetStringArg(args[i], ref p))
                 {
-                    if (index==j)
+                    if (index == j)
                         return p;
                     else
                         p = def;
@@ -68,7 +68,7 @@ namespace HtmlAgilityPack
         {
             bool p = def;
             string[] args = Environment.GetCommandLineArgs();
-            for (int i=1;i<args.Length;i++)
+            for (int i = 1; i < args.Length; i++)
             {
                 GetBoolArg(args[i], name, ref p);
             }
@@ -79,7 +79,7 @@ namespace HtmlAgilityPack
         {
             int p = def;
             string[] args = Environment.GetCommandLineArgs();
-            for (int i=1;i<args.Length;i++)
+            for (int i = 1; i < args.Length; i++)
             {
                 GetIntArg(args[i], name, ref p);
             }
@@ -89,7 +89,7 @@ namespace HtmlAgilityPack
         private static void ParseArgs()
         {
             string[] args = Environment.GetCommandLineArgs();
-            for (int i=1;i<args.Length;i++)
+            for (int i = 1; i < args.Length; i++)
             {
                 // help
                 GetBoolArg(args[i], "?", ref Help);
@@ -100,7 +100,7 @@ namespace HtmlAgilityPack
 
         private static bool GetStringArg(string Arg, ref string ArgValue)
         {
-            if (('/'==Arg[0]) || ('-'==Arg[0]))
+            if (('/' == Arg[0]) || ('-' == Arg[0]))
                 return false;
             ArgValue = Arg;
             return true;
@@ -108,45 +108,44 @@ namespace HtmlAgilityPack
 
         private static void GetStringArg(string Arg, string Name, ref string ArgValue)
         {
-            if (Arg.Length<(Name.Length+3)) // -name:x is 3 more than name
+            if (Arg.Length < (Name.Length + 3)) // -name:x is 3 more than name
                 return;
-            if (('/'!=Arg[0]) && ('-'!=Arg[0]))    // not a param
+            if (('/' != Arg[0]) && ('-' != Arg[0])) // not a param
                 return;
-            if (Arg.Substring(1, Name.Length).ToLower()==Name.ToLower())
-                ArgValue = Arg.Substring(Name.Length+2, Arg.Length-Name.Length-2);
+            if (Arg.Substring(1, Name.Length).ToLower() == Name.ToLower())
+                ArgValue = Arg.Substring(Name.Length + 2, Arg.Length - Name.Length - 2);
         }
 
         private static void GetBoolArg(string Arg, string Name, ref bool ArgValue)
         {
-            if (Arg.Length<(Name.Length+1)) // -name is 1 more than name
+            if (Arg.Length < (Name.Length + 1)) // -name is 1 more than name
                 return;
-            if (('/'!=Arg[0]) && ('-'!=Arg[0]))    // not a param
+            if (('/' != Arg[0]) && ('-' != Arg[0])) // not a param
                 return;
-            if (Arg.Substring(1, Name.Length).ToLower()==Name.ToLower())
+            if (Arg.Substring(1, Name.Length).ToLower() == Name.ToLower())
                 ArgValue = true;
         }
 
         private static void GetIntArg(string Arg, string Name, ref int ArgValue)
         {
-            if (Arg.Length<(Name.Length+3)) // -name:12 is 3 more than name
+            if (Arg.Length < (Name.Length + 3)) // -name:12 is 3 more than name
                 return;
-            if (('/'!=Arg[0]) && ('-'!=Arg[0]))    // not a param
+            if (('/' != Arg[0]) && ('-' != Arg[0])) // not a param
                 return;
-            if (Arg.Substring(1, Name.Length).ToLower()==Name.ToLower())
+            if (Arg.Substring(1, Name.Length).ToLower() == Name.ToLower())
             {
                 try
                 {
-                    ArgValue = Convert.ToInt32(Arg.Substring(Name.Length+2, Arg.Length-Name.Length-2));
+                    ArgValue = Convert.ToInt32(
+                        Arg.Substring(Name.Length + 2, Arg.Length - Name.Length - 2)
+                    );
                 }
-                catch
-                {
-                }
-                
+                catch { }
             }
         }
     }
 
-    internal class HtmlConsoleListener: System.Diagnostics.TraceListener
+    internal class HtmlConsoleListener : System.Diagnostics.TraceListener
     {
         public override void WriteLine(string Message)
         {
@@ -157,7 +156,7 @@ namespace HtmlAgilityPack
         {
             Write(Message, "");
         }
-    
+
         public override void Write(string Message, string Category)
         {
             Console.Write("T:" + Category + ": " + Message);
@@ -168,5 +167,4 @@ namespace HtmlAgilityPack
             Write(Message + "\n", Category);
         }
     }
-
 }

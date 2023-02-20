@@ -11,6 +11,7 @@ namespace Microsoft.Interop
     {
         private static readonly Forwarder s_forwarder = new Forwarder();
 
-        public IMarshallingGenerator Create(TypePositionInfo info, StubCodeContext context) => s_forwarder;
+        public IMarshallingGenerator Create(TypePositionInfo info, StubCodeContext context) =>
+            s_forwarder;
     }
 }

@@ -5,7 +5,7 @@ using System;
 
 public class Enumerator
 {
-    public bool MoveNext ()
+    public bool MoveNext()
     {
         return false;
     }
@@ -13,28 +13,27 @@ public class Enumerator
     public int Current { get; set; }
 }
 
-
 public class Base
 {
-    public Enumerator GetEnumerator ()
+    public Enumerator GetEnumerator()
     {
-        return new Enumerator ();
+        return new Enumerator();
     }
 }
 
 public class C : Base
 {
-    new internal Enumerator GetEnumerator ()
+    new internal Enumerator GetEnumerator()
     {
-        return new Enumerator ();
+        return new Enumerator();
     }
 }
 
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        foreach (var e in new C ())
-            Console.WriteLine (e);
+        foreach (var e in new C())
+            Console.WriteLine(e);
     }
 }

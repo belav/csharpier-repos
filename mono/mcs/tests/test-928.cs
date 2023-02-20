@@ -6,46 +6,50 @@ using System.Linq;
 
 unsafe class Program
 {
-    public static void Test ()
+    public static void Test()
     {
         string s = "";
-        unsafe {
-            fixed (char *chars = s) {
-            }
+        unsafe
+        {
+            fixed (char* chars = s) { }
         }
     }
 
-    public static bool StringNull (string s)
+    public static bool StringNull(string s)
     {
-        unsafe {
-            fixed (char *a = s) {
+        unsafe
+        {
+            fixed (char* a = s)
+            {
                 return a == null;
             }
         }
     }
 
-    public static bool ArrayNull (int[] a)
+    public static bool ArrayNull(int[] a)
     {
-        unsafe {
-            fixed (int *e = a) {
+        unsafe
+        {
+            fixed (int* e = a)
+            {
                 return e == null;
             }
         }
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        Test ();
+        Test();
 
-        var m = typeof (Program).GetMethod ("Test");
-        var lv = m.GetMethodBody ().LocalVariables.Where (l => l.LocalType == typeof (char*)).Single ();
+        var m = typeof(Program).GetMethod("Test");
+        var lv = m.GetMethodBody().LocalVariables.Where(l => l.LocalType == typeof(char*)).Single();
         if (lv.IsPinned)
             return 1;
 
-        if (!StringNull (null))
+        if (!StringNull(null))
             return 1;
 
-        if (!ArrayNull (null))
+        if (!ArrayNull(null))
             return 2;
 
         return 0;

@@ -3,11 +3,13 @@
 
 struct S
 {
-    public int val { set {} }
+    public int val
+    {
+        set { }
+    }
 
-    public void Do (object o) 
+    public void Do(object o)
     {
         ((S)o).val = 4;
     }
 }
-

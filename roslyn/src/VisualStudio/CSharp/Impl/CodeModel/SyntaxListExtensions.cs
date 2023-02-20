@@ -24,7 +24,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             return list;
         }
 
-        public static IReadOnlyList<TNode> AsReadOnlyList<TNode>(this SeparatedSyntaxList<TNode> separatedList)
+        public static IReadOnlyList<TNode> AsReadOnlyList<TNode>(
+            this SeparatedSyntaxList<TNode> separatedList
+        )
             where TNode : SyntaxNode
         {
             return separatedList;

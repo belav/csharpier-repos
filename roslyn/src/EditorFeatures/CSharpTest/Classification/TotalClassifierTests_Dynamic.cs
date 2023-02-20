@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         [CombinatorialData]
         public async Task DynamicAsParamTypeAndDefault(TestHost testHost)
         {
-            await TestInClassAsync(@"void M(dynamic d = default(dynamic",
+            await TestInClassAsync(
+                @"void M(dynamic d = default(dynamic",
                 testHost,
                 Keyword("void"),
                 Method("M"),
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Operators.Equals,
                 Keyword("default"),
                 Punctuation.OpenParen,
-                Keyword("dynamic"));
+                Keyword("dynamic")
+            );
         }
 
         [Theory]
@@ -37,7 +39,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task DynamicExplicitConversion(TestHost testHost)
         {
             await TestInMethodAsync(
-@"dynamic d = (dynamic)a;",
+                @"dynamic d = (dynamic)a;",
                 testHost,
                 Keyword("dynamic"),
                 Local("d"),
@@ -46,14 +48,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("dynamic"),
                 Punctuation.CloseParen,
                 Identifier("a"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicMethodCall(TestHost testHost)
         {
-            await TestInMethodAsync(@"dynamic.Equals(1, 1);",
+            await TestInMethodAsync(
+                @"dynamic.Equals(1, 1);",
                 testHost,
                 Identifier("dynamic"),
                 Operators.Dot,
@@ -63,18 +67,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Comma,
                 Number("1"),
                 Punctuation.CloseParen,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicNullable(TestHost testHost)
         {
-            await TestInMethodAsync(@"dynamic? a",
+            await TestInMethodAsync(
+                @"dynamic? a",
                 testHost,
                 Keyword("dynamic"),
                 Operators.QuestionMark,
-                Local("a"));
+                Local("a")
+            );
         }
 
         [Theory]
@@ -82,7 +89,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task DynamicAsUsingAliasForClass(TestHost testHost)
         {
             await TestAsync(
-@"using dynamic = System.EventArgs;",
+                @"using dynamic = System.EventArgs;",
                 testHost,
                 Keyword("using"),
                 Class("dynamic"),
@@ -90,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Class("EventArgs"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -98,7 +106,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task DynamicAsUsingAliasForDelegate(TestHost testHost)
         {
             await TestAsync(
-@"using dynamic = System.Action;",
+                @"using dynamic = System.Action;",
                 testHost,
                 Keyword("using"),
                 Delegate("dynamic"),
@@ -106,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Delegate("Action"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -114,7 +123,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task DynamicAsUsingAliasForStruct(TestHost testHost)
         {
             await TestAsync(
-@"using dynamic = System.DateTime;",
+                @"using dynamic = System.DateTime;",
                 testHost,
                 Keyword("using"),
                 Struct("dynamic"),
@@ -122,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Struct("DateTime"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -130,7 +140,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task DynamicAsUsingAliasForEnum(TestHost testHost)
         {
             await TestAsync(
-@"using dynamic = System.DayOfWeek;",
+                @"using dynamic = System.DayOfWeek;",
                 testHost,
                 Keyword("using"),
                 Enum("dynamic"),
@@ -138,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Enum("DayOfWeek"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -146,7 +157,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task DynamicAsUsingAliasForInterface(TestHost testHost)
         {
             await TestAsync(
-@"using dynamic = System.IDisposable;",
+                @"using dynamic = System.IDisposable;",
                 testHost,
                 Keyword("using"),
                 Interface("dynamic"),
@@ -154,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Interface("IDisposable"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -162,7 +174,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task DynamicAsExternAlias(TestHost testHost)
         {
             await TestAsync(
-@"extern alias dynamic;
+                @"extern alias dynamic;
 
 class C
 {
@@ -181,27 +193,31 @@ class C
                 Identifier("Goo"),
                 Field("a"),
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicAsDelegateType(TestHost testHost)
         {
-            await TestAsync(@"delegate void dynamic()",
+            await TestAsync(
+                @"delegate void dynamic()",
                 testHost,
                 Keyword("delegate"),
                 Keyword("void"),
                 Delegate("dynamic"),
                 Punctuation.OpenParen,
-                Punctuation.CloseParen);
+                Punctuation.CloseParen
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicAsDelegateReturnTypeAndParam(TestHost testHost)
         {
-            await TestAsync(@"delegate dynamic MyDelegate (dynamic d)",
+            await TestAsync(
+                @"delegate dynamic MyDelegate (dynamic d)",
                 testHost,
                 Keyword("delegate"),
                 Keyword("dynamic"),
@@ -209,7 +225,8 @@ class C
                 Punctuation.OpenParen,
                 Keyword("dynamic"),
                 Parameter("d"),
-                Punctuation.CloseParen);
+                Punctuation.CloseParen
+            );
         }
 
         [Theory]
@@ -217,7 +234,7 @@ class C
         public async Task DynamicAsDelegateLocalVariable(TestHost testHost)
         {
             await TestInMethodAsync(
-@"Func<string> f = delegate
+                @"Func<string> f = delegate
 {
     int dynamic = 10;
     return dynamic.ToString();
@@ -244,7 +261,8 @@ class C
                 Punctuation.CloseParen,
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -252,7 +270,7 @@ class C
         public async Task DynamicAsGenericTypeName(TestHost testHost)
         {
             await TestAsync(
-@"partial class dynamic<T>
+                @"partial class dynamic<T>
 {
 }
 
@@ -278,7 +296,8 @@ class C
                 Punctuation.CloseAngle,
                 Field("d"),
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -286,7 +305,7 @@ class C
         public async Task DynamicAsGenericField(TestHost testHost)
         {
             await TestAsync(
-@"class A<T>
+                @"class A<T>
 {
     T dynamic;
 }",
@@ -300,28 +319,32 @@ class C
                 TypeParameter("T"),
                 Field("dynamic"),
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicAsIndexerTypeAndParameter(TestHost testHost)
         {
-            await TestInClassAsync(@"dynamic this[dynamic i]",
+            await TestInClassAsync(
+                @"dynamic this[dynamic i]",
                 testHost,
                 Keyword("dynamic"),
                 Keyword("this"),
                 Punctuation.OpenBracket,
                 Keyword("dynamic"),
                 Parameter("i"),
-                Punctuation.CloseBracket);
+                Punctuation.CloseBracket
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicAsOperatorTypeAndParameter(TestHost testHost)
         {
-            await TestInClassAsync(@"static dynamic operator +(dynamic d1)",
+            await TestInClassAsync(
+                @"static dynamic operator +(dynamic d1)",
                 testHost,
                 Keyword("static"),
                 Keyword("dynamic"),
@@ -330,14 +353,16 @@ class C
                 Punctuation.OpenParen,
                 Keyword("dynamic"),
                 Parameter("d1"),
-                Punctuation.CloseParen);
+                Punctuation.CloseParen
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicAsOperatorName(TestHost testHost)
         {
-            await TestInClassAsync(@"static explicit operator dynamic(dynamic s)",
+            await TestInClassAsync(
+                @"static explicit operator dynamic(dynamic s)",
                 testHost,
                 Keyword("static"),
                 Keyword("explicit"),
@@ -346,14 +371,16 @@ class C
                 Punctuation.OpenParen,
                 Keyword("dynamic"),
                 Parameter("s"),
-                Punctuation.CloseParen);
+                Punctuation.CloseParen
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicAsPropertyTypeAndName(TestHost testHost)
         {
-            await TestInClassAsync(@"dynamic dynamic { get; set; }",
+            await TestInClassAsync(
+                @"dynamic dynamic { get; set; }",
                 testHost,
                 Keyword("dynamic"),
                 Property("dynamic"),
@@ -362,25 +389,29 @@ class C
                 Punctuation.Semicolon,
                 Keyword("set"),
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicAsEventName(TestHost testHost)
         {
-            await TestInClassAsync(@"event Action dynamic",
+            await TestInClassAsync(
+                @"event Action dynamic",
                 testHost,
                 Keyword("event"),
                 Identifier("Action"),
-                Event("dynamic"));
+                Event("dynamic")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicAsLinqLocalVariable(TestHost testHost)
         {
-            await TestInMethodAsync(@"var v = from dynamic in names",
+            await TestInMethodAsync(
+                @"var v = from dynamic in names",
                 testHost,
                 Keyword("var"),
                 Local("v"),
@@ -388,7 +419,8 @@ class C
                 Keyword("from"),
                 Identifier("dynamic"),
                 Keyword("in"),
-                Identifier("names"));
+                Identifier("names")
+            );
         }
 
         [Theory]
@@ -396,7 +428,7 @@ class C
         public async Task DynamicAsAnonymousTypePropertyName(TestHost testHost)
         {
             await TestInMethodAsync(
-@"var v = from dynamic in names
+                @"var v = from dynamic in names
         select new { dynamic = dynamic };",
                 testHost,
                 Keyword("var"),
@@ -413,7 +445,8 @@ class C
                 Operators.Equals,
                 Identifier("dynamic"),
                 Punctuation.CloseCurly,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -421,7 +454,7 @@ class C
         public async Task DynamicAsArgumentToLambdaExpression(TestHost testHost)
         {
             await TestInMethodAsync(
-@"var p = names.Select(dynamic => dynamic.Length);",
+                @"var p = names.Select(dynamic => dynamic.Length);",
                 testHost,
                 Keyword("var"),
                 Local("p"),
@@ -436,7 +469,8 @@ class C
                 Operators.Dot,
                 Identifier("Length"),
                 Punctuation.CloseParen,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -444,7 +478,7 @@ class C
         public async Task DynamicAsAnonymousMethodLocalVariable(TestHost testHost)
         {
             await TestInMethodAsync(
-@"D f = delegate
+                @"D f = delegate
 {
     string dynamic = ""a"";
     return dynamic.Length;
@@ -466,7 +500,8 @@ class C
                 Property("Length"),
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -474,7 +509,7 @@ class C
         public async Task DynamicAsMethodName(TestHost testHost)
         {
             await TestInClassAsync(
-@"dynamic dynamic()
+                @"dynamic dynamic()
 {
 }",
                 testHost,
@@ -483,7 +518,8 @@ class C
                 Punctuation.OpenParen,
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -491,7 +527,7 @@ class C
         public async Task DynamicAsStaticMethodTypeAndParams(TestHost testHost)
         {
             await TestInClassAsync(
-@"static dynamic dynamic(params dynamic[] dynamic)
+                @"static dynamic dynamic(params dynamic[] dynamic)
 {
 }",
                 testHost,
@@ -507,7 +543,8 @@ class C
                 Parameter("dynamic"),
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -515,7 +552,7 @@ class C
         public async Task DynamicArraysInMethodSignature(TestHost testHost)
         {
             await TestInClassAsync(
-@"dynamic[] M(dynamic[] p, params dynamic[] pa)
+                @"dynamic[] M(dynamic[] p, params dynamic[] pa)
 {
 }",
                 testHost,
@@ -536,7 +573,8 @@ class C
                 Parameter("pa"),
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -544,7 +582,7 @@ class C
         public async Task DynamicInPartialMethods(TestHost testHost)
         {
             await TestInClassAsync(
-@"partial void F(dynamic d);
+                @"partial void F(dynamic d);
 
 partial void F(dynamic d)
 {
@@ -566,7 +604,8 @@ partial void F(dynamic d)
                 Parameter("d"),
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -574,7 +613,7 @@ partial void F(dynamic d)
         public async Task DynamicRefAndOutParameters(TestHost testHost)
         {
             await TestInClassAsync(
-@"void F(ref dynamic r, out dynamic o)
+                @"void F(ref dynamic r, out dynamic o)
 {
 }",
                 testHost,
@@ -590,7 +629,8 @@ partial void F(dynamic d)
                 Parameter("o"),
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -598,7 +638,7 @@ partial void F(dynamic d)
         public async Task DynamicInExtensionMethod(TestHost testHost)
         {
             await TestInClassAsync(
-@"dynamic F(this dynamic self, dynamic p)
+                @"dynamic F(this dynamic self, dynamic p)
 {
 }",
                 testHost,
@@ -613,7 +653,8 @@ partial void F(dynamic d)
                 Parameter("p"),
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -621,7 +662,7 @@ partial void F(dynamic d)
         public async Task DynamicAsBaseClass(TestHost testHost)
         {
             await TestAsync(
-@"class C : dynamic
+                @"class C : dynamic
 {
 }",
                 testHost,
@@ -630,7 +671,8 @@ partial void F(dynamic d)
                 Punctuation.Colon,
                 Keyword("dynamic"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -638,7 +680,7 @@ partial void F(dynamic d)
         public async Task DynamicAsGenericConstraint(TestHost testHost)
         {
             await TestAsync(
-@"class C<T> where T : dynamic
+                @"class C<T> where T : dynamic
 {
 }",
                 testHost,
@@ -652,7 +694,8 @@ partial void F(dynamic d)
                 Punctuation.Colon,
                 Keyword("dynamic"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -660,7 +703,7 @@ partial void F(dynamic d)
         public async Task DynamicSizeOf(TestHost testHost)
         {
             await TestInClassAsync(
-@"unsafe int M()
+                @"unsafe int M()
 {
     return sizeof(dynamic);
 }",
@@ -677,19 +720,22 @@ partial void F(dynamic d)
                 Keyword("dynamic"),
                 Punctuation.CloseParen,
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicTypeOf(TestHost testHost)
         {
-            await TestInMethodAsync(@"typeof(dynamic)",
+            await TestInMethodAsync(
+                @"typeof(dynamic)",
                 testHost,
                 Keyword("typeof"),
                 Punctuation.OpenParen,
                 Keyword("dynamic"),
-                Punctuation.CloseParen);
+                Punctuation.CloseParen
+            );
         }
 
         [Theory, WorkItem(44423, "https://github.com/dotnet/roslyn/issues/44423")]
@@ -697,7 +743,7 @@ partial void F(dynamic d)
         public async Task DynamicAsArrayName(bool script, TestHost testHost)
         {
             var code =
-@"int[] dynamic = {
+                @"int[] dynamic = {
     1
 };";
 
@@ -716,33 +762,38 @@ partial void F(dynamic d)
                 Punctuation.OpenCurly,
                 Number("1"),
                 Punctuation.CloseCurly,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicInForeach(TestHost testHost)
         {
-            await TestInMethodAsync(@"foreach (dynamic dynamic in dynamic",
+            await TestInMethodAsync(
+                @"foreach (dynamic dynamic in dynamic",
                 testHost,
                 ControlKeyword("foreach"),
                 Punctuation.OpenParen,
                 Keyword("dynamic"),
                 Local("dynamic"),
                 ControlKeyword("in"),
-                Identifier("dynamic"));
+                Identifier("dynamic")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicInUsing(TestHost testHost)
         {
-            await TestInMethodAsync(@"using(dynamic d",
+            await TestInMethodAsync(
+                @"using(dynamic d",
                 testHost,
                 Keyword("using"),
                 Punctuation.OpenParen,
                 Keyword("dynamic"),
-                Local("d"));
+                Local("d")
+            );
         }
 
         [Theory]
@@ -750,11 +801,12 @@ partial void F(dynamic d)
         public async Task DynamicAsLocalVariableName(TestHost testHost)
         {
             await TestInMethodAsync(
-@"dynamic dynamic;",
+                @"dynamic dynamic;",
                 testHost,
                 Keyword("dynamic"),
                 Local("dynamic"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -762,14 +814,15 @@ partial void F(dynamic d)
         public async Task DynamicAsNamespaceName(TestHost testHost)
         {
             await TestAsync(
-@"namespace dynamic
+                @"namespace dynamic
 {
 }",
                 testHost,
                 Keyword("namespace"),
                 Namespace("dynamic"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -777,14 +830,15 @@ partial void F(dynamic d)
         public async Task DynamicAsClassName(TestHost testHost)
         {
             await TestAsync(
-@"class dynamic
+                @"class dynamic
 {
 }",
                 testHost,
                 Keyword("class"),
                 Class("dynamic"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -792,7 +846,7 @@ partial void F(dynamic d)
         public async Task DynamicAsConstructorDeclarationName(TestHost testHost)
         {
             await TestAsync(
-@"class dynamic
+                @"class dynamic
 {
     dynamic()
     {
@@ -807,7 +861,8 @@ partial void F(dynamic d)
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -815,13 +870,14 @@ partial void F(dynamic d)
         public async Task DynamicAsNamespaceAlias(TestHost testHost)
         {
             await TestInMethodAsync(
-@"dynamic.FileInfo file;",
+                @"dynamic.FileInfo file;",
                 testHost,
                 Identifier("dynamic"),
                 Operators.Dot,
                 Identifier("FileInfo"),
                 Local("file"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -829,7 +885,7 @@ partial void F(dynamic d)
         public async Task DynamicAsGotoLabel(TestHost testHost)
         {
             await TestInMethodAsync(
-@"dynamic: int i = 0;
+                @"dynamic: int i = 0;
         goto dynamic;",
                 testHost,
                 Label("dynamic"),
@@ -841,7 +897,8 @@ partial void F(dynamic d)
                 Punctuation.Semicolon,
                 ControlKeyword("goto"),
                 Label("dynamic"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -849,7 +906,7 @@ partial void F(dynamic d)
         public async Task DynamicAsEnumField(TestHost testHost)
         {
             await TestInMethodAsync(
-@"A a = A.dynamic;",
+                @"A a = A.dynamic;",
                 testHost,
                 Identifier("A"),
                 Local("a"),
@@ -857,7 +914,8 @@ partial void F(dynamic d)
                 Identifier("A"),
                 Operators.Dot,
                 Identifier("dynamic"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -865,7 +923,7 @@ partial void F(dynamic d)
         public async Task DynamicAsEnumFieldDefinition(TestHost testHost)
         {
             await TestAsync(
-@"enum A
+                @"enum A
 {
     dynamic
 }",
@@ -874,7 +932,8 @@ partial void F(dynamic d)
                 Enum("A"),
                 Punctuation.OpenCurly,
                 EnumMember("dynamic"),
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -882,14 +941,15 @@ partial void F(dynamic d)
         public async Task DynamicAsEnumType(TestHost testHost)
         {
             await TestAsync(
-@"enum dynamic
+                @"enum dynamic
 {
 }",
                 testHost,
                 Keyword("enum"),
                 Enum("dynamic"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -897,7 +957,7 @@ partial void F(dynamic d)
         public async Task DynamicAsGenericTypeParameter(TestHost testHost)
         {
             await TestAsync(
-@"class C<dynamic, T> where dynamic : T
+                @"class C<dynamic, T> where dynamic : T
 {
     dynamic d;
 }",
@@ -917,51 +977,50 @@ partial void F(dynamic d)
                 TypeParameter("dynamic"),
                 Field("d"),
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicAsFieldType(TestHost testHost)
         {
-            await TestInClassAsync(@"dynamic d",
-                testHost,
-                Keyword("dynamic"),
-                Field("d"));
+            await TestInClassAsync(@"dynamic d", testHost, Keyword("dynamic"), Field("d"));
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicAsStaticFieldType(TestHost testHost)
         {
-            await TestInClassAsync(@"static dynamic d",
+            await TestInClassAsync(
+                @"static dynamic d",
                 testHost,
                 Keyword("static"),
                 Keyword("dynamic"),
                 Field("d"),
-                Static("d"));
+                Static("d")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicAsLocalVariableType(TestHost testHost)
         {
-            await TestInMethodAsync(@"dynamic d",
-                testHost,
-                Keyword("dynamic"),
-                Local("d"));
+            await TestInMethodAsync(@"dynamic d", testHost, Keyword("dynamic"), Local("d"));
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicAsArrayLocalVariableType(TestHost testHost)
         {
-            await TestInMethodAsync(@"dynamic[] d",
+            await TestInMethodAsync(
+                @"dynamic[] d",
                 testHost,
                 Keyword("dynamic"),
                 Punctuation.OpenBracket,
                 Punctuation.CloseBracket,
-                Local("d"));
+                Local("d")
+            );
         }
 
         [Theory]
@@ -969,7 +1028,7 @@ partial void F(dynamic d)
         public async Task DynamicAsLambdaParameterType(TestHost testHost)
         {
             await TestInMethodAsync(
-@"var q = a.Where((dynamic d) => d == dynamic);",
+                @"var q = a.Where((dynamic d) => d == dynamic);",
                 testHost,
                 Keyword("var"),
                 Local("q"),
@@ -987,7 +1046,8 @@ partial void F(dynamic d)
                 Operators.EqualsEquals,
                 Identifier("dynamic"),
                 Punctuation.CloseParen,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -995,7 +1055,7 @@ partial void F(dynamic d)
         public async Task DynamicArray(TestHost testHost)
         {
             await TestInMethodAsync(
-@"dynamic d = new dynamic[5];",
+                @"dynamic d = new dynamic[5];",
                 testHost,
                 Keyword("dynamic"),
                 Local("d"),
@@ -1005,7 +1065,8 @@ partial void F(dynamic d)
                 Punctuation.OpenBracket,
                 Number("5"),
                 Punctuation.CloseBracket,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -1013,7 +1074,7 @@ partial void F(dynamic d)
         public async Task DynamicConstructor(TestHost testHost)
         {
             await TestInMethodAsync(
-@"dynamic d = new dynamic();",
+                @"dynamic d = new dynamic();",
                 testHost,
                 Keyword("dynamic"),
                 Local("d"),
@@ -1022,34 +1083,39 @@ partial void F(dynamic d)
                 Keyword("dynamic"),
                 Punctuation.OpenParen,
                 Punctuation.CloseParen,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicAfterIs(TestHost testHost)
         {
-            await TestInMethodAsync(@"if (a is dynamic)",
+            await TestInMethodAsync(
+                @"if (a is dynamic)",
                 testHost,
                 ControlKeyword("if"),
                 Punctuation.OpenParen,
                 Identifier("a"),
                 Keyword("is"),
                 Keyword("dynamic"),
-                Punctuation.CloseParen);
+                Punctuation.CloseParen
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DynamicAfterAs(TestHost testHost)
         {
-            await TestInMethodAsync(@"a = a as dynamic",
+            await TestInMethodAsync(
+                @"a = a as dynamic",
                 testHost,
                 Identifier("a"),
                 Operators.Equals,
                 Identifier("a"),
                 Keyword("as"),
-                Keyword("dynamic"));
+                Keyword("dynamic")
+            );
         }
 
         [Theory]
@@ -1057,7 +1123,7 @@ partial void F(dynamic d)
         public async Task DynamicAsGenericTypeArgument(TestHost testHost)
         {
             await TestInMethodAsync(
-@"List<dynamic> l = new List<dynamic>();",
+                @"List<dynamic> l = new List<dynamic>();",
                 testHost,
                 Identifier("List"),
                 Punctuation.OpenAngle,
@@ -1072,7 +1138,8 @@ partial void F(dynamic d)
                 Punctuation.CloseAngle,
                 Punctuation.OpenParen,
                 Punctuation.CloseParen,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -1080,7 +1147,7 @@ partial void F(dynamic d)
         public async Task DynamicAsSecondGenericTypeArgument(TestHost testHost)
         {
             await TestInMethodAsync(
-@"KVP<string, dynamic> kvp;",
+                @"KVP<string, dynamic> kvp;",
                 testHost,
                 Identifier("KVP"),
                 Punctuation.OpenAngle,
@@ -1089,7 +1156,8 @@ partial void F(dynamic d)
                 Keyword("dynamic"),
                 Punctuation.CloseAngle,
                 Local("kvp"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory]
@@ -1097,15 +1165,17 @@ partial void F(dynamic d)
         public async Task DynamicAsRegionLabel(TestHost testHost)
         {
             var code =
-@"#region dynamic
+                @"#region dynamic
 #endregion";
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 PPKeyword("#"),
                 PPKeyword("region"),
                 PPText("dynamic"),
                 PPKeyword("#"),
-                PPKeyword("endregion"));
+                PPKeyword("endregion")
+            );
         }
 
         [Theory]
@@ -1113,14 +1183,15 @@ partial void F(dynamic d)
         public async Task DynamicAsInterfaceType(TestHost testHost)
         {
             await TestAsync(
-@"interface dynamic
+                @"interface dynamic
 {
 }",
                 testHost,
                 Keyword("interface"),
                 Interface("dynamic"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -1128,14 +1199,15 @@ partial void F(dynamic d)
         public async Task DynamicAsStructType(TestHost testHost)
         {
             await TestAsync(
-@"struct dynamic
+                @"struct dynamic
 {
 }",
                 testHost,
                 Keyword("struct"),
                 Struct("dynamic"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory]
@@ -1143,14 +1215,15 @@ partial void F(dynamic d)
         public async Task DynamicAsUndefinedGenericType(TestHost testHost)
         {
             await TestInMethodAsync(
-@"dynamic<int> d;",
+                @"dynamic<int> d;",
                 testHost,
                 Identifier("dynamic"),
                 Punctuation.OpenAngle,
                 Keyword("int"),
                 Punctuation.CloseAngle,
                 Local("d"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
     }
 }

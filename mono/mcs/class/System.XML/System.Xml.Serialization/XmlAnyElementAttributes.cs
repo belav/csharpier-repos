@@ -1,5 +1,5 @@
 //
-// XmlAnyElementAttributes.cs: 
+// XmlAnyElementAttributes.cs:
 //
 // Author:
 //   John Donagher (john@webmeta.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,28 +37,22 @@ namespace System.Xml.Serialization
     /// Summary description for XmlAnyElementAttributes.
     /// </summary>
 
-    public class XmlAnyElementAttributes : CollectionBase {
-
-        public XmlAnyElementAttribute this[int index] 
+    public class XmlAnyElementAttributes : CollectionBase
+    {
+        public XmlAnyElementAttribute this[int index]
         {
-            get 
-            {
-                return (XmlAnyElementAttribute)List[index];
-            }
-            set 
-            {
-                List[index] = value;
-            }    
+            get { return (XmlAnyElementAttribute)List[index]; }
+            set { List[index] = value; }
         }
 
         public int Add(XmlAnyElementAttribute attribute)
         {
-            return (List as IList).Add (attribute);
+            return (List as IList).Add(attribute);
         }
 
         public bool Contains(XmlAnyElementAttribute attribute)
         {
-            return List.Contains(attribute);    
+            return List.Contains(attribute);
         }
 
         public int IndexOf(XmlAnyElementAttribute attribute)
@@ -76,23 +70,26 @@ namespace System.Xml.Serialization
             List.Remove(attribute);
         }
 
-        public void CopyTo(XmlAnyElementAttribute[] array,int index)
+        public void CopyTo(XmlAnyElementAttribute[] array, int index)
         {
             List.CopyTo(array, index);
         }
-        
-        internal void AddKeyHash (System.Text.StringBuilder sb)
+
+        internal void AddKeyHash(System.Text.StringBuilder sb)
         {
-            if (Count == 0) return;
-            
-            sb.Append ("XAEAS ");
-            for (int n=0; n<Count; n++)
-                this[n].AddKeyHash (sb);
-            sb.Append ('|');
+            if (Count == 0)
+                return;
+
+            sb.Append("XAEAS ");
+            for (int n = 0; n < Count; n++)
+                this[n].AddKeyHash(sb);
+            sb.Append('|');
         }
 
-        internal int Order {
-            get {
+        internal int Order
+        {
+            get
+            {
                 foreach (XmlAnyElementAttribute e in this)
                     if (e.Order >= 0)
                         return e.Order;

@@ -12,7 +12,8 @@ internal static class MvcRazorDiagnosticListenerExtensions
     public static void BeforeViewPage(
         this DiagnosticListener diagnosticListener,
         IRazorPage page,
-        ViewContext viewContext)
+        ViewContext viewContext
+    )
     {
         // Inlinable fast-path check if Diagnositcs is enabled
         if (diagnosticListener.IsEnabled())
@@ -24,7 +25,8 @@ internal static class MvcRazorDiagnosticListenerExtensions
     private static void BeforeViewPageImpl(
         this DiagnosticListener diagnosticListener,
         IRazorPage page,
-        ViewContext viewContext)
+        ViewContext viewContext
+    )
     {
         if (diagnosticListener.IsEnabled(Diagnostics.BeforeViewPageEventData.EventName))
         {
@@ -35,14 +37,16 @@ internal static class MvcRazorDiagnosticListenerExtensions
                     viewContext,
                     viewContext.ActionDescriptor,
                     viewContext.HttpContext
-                ));
+                )
+            );
         }
     }
 
     public static void AfterViewPage(
         this DiagnosticListener diagnosticListener,
         IRazorPage page,
-        ViewContext viewContext)
+        ViewContext viewContext
+    )
     {
         // Inlinable fast-path check if Diagnositcs is enabled
         if (diagnosticListener.IsEnabled())
@@ -54,7 +58,8 @@ internal static class MvcRazorDiagnosticListenerExtensions
     private static void AfterViewPageImpl(
         this DiagnosticListener diagnosticListener,
         IRazorPage page,
-        ViewContext viewContext)
+        ViewContext viewContext
+    )
     {
         if (diagnosticListener.IsEnabled(Diagnostics.AfterViewPageEventData.EventName))
         {
@@ -65,7 +70,8 @@ internal static class MvcRazorDiagnosticListenerExtensions
                     viewContext,
                     viewContext.ActionDescriptor,
                     viewContext.HttpContext
-                ));
+                )
+            );
         }
     }
 }

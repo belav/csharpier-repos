@@ -40,164 +40,174 @@ namespace MonoTests.System.Data.Common
     public class DataAdapterTest
     {
         [Test]
-        public void AcceptChangesDuringFill ()
+        public void AcceptChangesDuringFill()
         {
-            DataAdapter da = new MyAdapter ();
+            DataAdapter da = new MyAdapter();
             da.AcceptChangesDuringFill = true;
-            Assert.IsTrue (da.AcceptChangesDuringFill, "#1");
+            Assert.IsTrue(da.AcceptChangesDuringFill, "#1");
             da.AcceptChangesDuringFill = false;
-            Assert.IsFalse (da.AcceptChangesDuringFill, "#2");
+            Assert.IsFalse(da.AcceptChangesDuringFill, "#2");
             da.AcceptChangesDuringFill = true;
-            Assert.IsTrue (da.AcceptChangesDuringFill, "#3");
+            Assert.IsTrue(da.AcceptChangesDuringFill, "#3");
         }
 
         [Test]
-        public void AcceptChangesDuringUpdate ()
+        public void AcceptChangesDuringUpdate()
         {
-            DataAdapter da = new MyAdapter ();
+            DataAdapter da = new MyAdapter();
             da.AcceptChangesDuringUpdate = true;
-            Assert.IsTrue (da.AcceptChangesDuringUpdate, "#1");
+            Assert.IsTrue(da.AcceptChangesDuringUpdate, "#1");
             da.AcceptChangesDuringUpdate = false;
-            Assert.IsFalse (da.AcceptChangesDuringUpdate, "#2");
+            Assert.IsFalse(da.AcceptChangesDuringUpdate, "#2");
             da.AcceptChangesDuringUpdate = true;
-            Assert.IsTrue (da.AcceptChangesDuringUpdate, "#3");
+            Assert.IsTrue(da.AcceptChangesDuringUpdate, "#3");
         }
 
         [Test]
-        public void ContinueUpdateOnError ()
+        public void ContinueUpdateOnError()
         {
-            DataAdapter da = new MyAdapter ();
+            DataAdapter da = new MyAdapter();
             da.ContinueUpdateOnError = true;
-            Assert.IsTrue (da.ContinueUpdateOnError, "#1");
+            Assert.IsTrue(da.ContinueUpdateOnError, "#1");
             da.ContinueUpdateOnError = false;
-            Assert.IsFalse (da.ContinueUpdateOnError, "#2");
+            Assert.IsFalse(da.ContinueUpdateOnError, "#2");
             da.ContinueUpdateOnError = true;
-            Assert.IsTrue (da.ContinueUpdateOnError, "#3");
+            Assert.IsTrue(da.ContinueUpdateOnError, "#3");
         }
 
         [Test]
-        public void Fill_Direct ()
+        public void Fill_Direct()
         {
-            DataAdapter da = new MyAdapter ();
-            DataSet ds = new DataSet ();
-            try {
-                da.Fill (ds);
-                Assert.Fail ("#1");
-            } catch (NotSupportedException ex) {
+            DataAdapter da = new MyAdapter();
+            DataSet ds = new DataSet();
+            try
+            {
+                da.Fill(ds);
+                Assert.Fail("#1");
+            }
+            catch (NotSupportedException ex)
+            {
                 // Specified method is not supported
-                Assert.AreEqual (typeof (NotSupportedException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
+                Assert.AreEqual(typeof(NotSupportedException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
             }
         }
 
         [Test]
-        public void FillLoadOption ()
+        public void FillLoadOption()
         {
-            DataAdapter da = new MyAdapter ();
+            DataAdapter da = new MyAdapter();
             da.FillLoadOption = LoadOption.PreserveChanges;
-            Assert.AreEqual (LoadOption.PreserveChanges, da.FillLoadOption, "#1");
+            Assert.AreEqual(LoadOption.PreserveChanges, da.FillLoadOption, "#1");
             da.FillLoadOption = LoadOption.OverwriteChanges;
-            Assert.AreEqual (LoadOption.OverwriteChanges, da.FillLoadOption, "#2");
+            Assert.AreEqual(LoadOption.OverwriteChanges, da.FillLoadOption, "#2");
             da.FillLoadOption = LoadOption.Upsert;
-            Assert.AreEqual (LoadOption.Upsert, da.FillLoadOption, "#3");
+            Assert.AreEqual(LoadOption.Upsert, da.FillLoadOption, "#3");
         }
 
         [Test]
-        public void FillLoadOption_Invalid ()
+        public void FillLoadOption_Invalid()
         {
-            DataAdapter da = new MyAdapter ();
-            try {
-                da.FillLoadOption = (LoadOption) 666;
-                Assert.Fail ("#1");
-            } catch (ArgumentOutOfRangeException ex) {
+            DataAdapter da = new MyAdapter();
+            try
+            {
+                da.FillLoadOption = (LoadOption)666;
+                Assert.Fail("#1");
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
                 // The LoadOption enumeration value, 666, is invalid
-                Assert.AreEqual (typeof (ArgumentOutOfRangeException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.IsTrue (ex.Message.IndexOf ("LoadOption") != -1, "#5");
-                Assert.IsTrue (ex.Message.IndexOf ("666") != -1, "#6");
-                Assert.IsNotNull (ex.ParamName, "#7");
-                Assert.AreEqual ("LoadOption", ex.ParamName, "#8");
+                Assert.AreEqual(typeof(ArgumentOutOfRangeException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+                Assert.IsTrue(ex.Message.IndexOf("LoadOption") != -1, "#5");
+                Assert.IsTrue(ex.Message.IndexOf("666") != -1, "#6");
+                Assert.IsNotNull(ex.ParamName, "#7");
+                Assert.AreEqual("LoadOption", ex.ParamName, "#8");
             }
         }
 
         [Test]
-        public void MissingMappingAction_Valid ()
+        public void MissingMappingAction_Valid()
         {
-            DataAdapter da = new MyAdapter ();
+            DataAdapter da = new MyAdapter();
             da.MissingMappingAction = MissingMappingAction.Passthrough;
-            Assert.AreEqual (MissingMappingAction.Passthrough, da.MissingMappingAction, "#1");
+            Assert.AreEqual(MissingMappingAction.Passthrough, da.MissingMappingAction, "#1");
             da.MissingMappingAction = MissingMappingAction.Ignore;
-            Assert.AreEqual (MissingMappingAction.Ignore, da.MissingMappingAction, "#2");
+            Assert.AreEqual(MissingMappingAction.Ignore, da.MissingMappingAction, "#2");
             da.MissingMappingAction = MissingMappingAction.Error;
-            Assert.AreEqual (MissingMappingAction.Error, da.MissingMappingAction, "#3");
+            Assert.AreEqual(MissingMappingAction.Error, da.MissingMappingAction, "#3");
         }
 
         [Test]
-        public void MissingMappingAction_Invalid ()
+        public void MissingMappingAction_Invalid()
         {
-            DataAdapter da = new MyAdapter ();
-            try {
-                da.MissingMappingAction = (MissingMappingAction) 666;
-                Assert.Fail ("#1");
-            } catch (ArgumentOutOfRangeException ex) {
+            DataAdapter da = new MyAdapter();
+            try
+            {
+                da.MissingMappingAction = (MissingMappingAction)666;
+                Assert.Fail("#1");
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
                 // The MissingMappingAction enumeration value, 666, is invalid
-                Assert.AreEqual (typeof (ArgumentOutOfRangeException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.IsTrue (ex.Message.IndexOf ("MissingMappingAction") != -1, "#5");
-                Assert.IsTrue (ex.Message.IndexOf ("666") != -1, "#6");
-                Assert.IsNotNull (ex.ParamName, "#7");
-                Assert.AreEqual ("MissingMappingAction", ex.ParamName, "#8");
+                Assert.AreEqual(typeof(ArgumentOutOfRangeException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+                Assert.IsTrue(ex.Message.IndexOf("MissingMappingAction") != -1, "#5");
+                Assert.IsTrue(ex.Message.IndexOf("666") != -1, "#6");
+                Assert.IsNotNull(ex.ParamName, "#7");
+                Assert.AreEqual("MissingMappingAction", ex.ParamName, "#8");
             }
         }
 
         [Test]
-        public void MissingSchemaAction_Valid ()
+        public void MissingSchemaAction_Valid()
         {
-            DataAdapter da = new MyAdapter ();
+            DataAdapter da = new MyAdapter();
             da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-            Assert.AreEqual (MissingSchemaAction.AddWithKey, da.MissingSchemaAction, "#1");
+            Assert.AreEqual(MissingSchemaAction.AddWithKey, da.MissingSchemaAction, "#1");
             da.MissingSchemaAction = MissingSchemaAction.Ignore;
-            Assert.AreEqual (MissingSchemaAction.Ignore, da.MissingSchemaAction, "#2");
+            Assert.AreEqual(MissingSchemaAction.Ignore, da.MissingSchemaAction, "#2");
             da.MissingSchemaAction = MissingSchemaAction.Error;
-            Assert.AreEqual (MissingSchemaAction.Error, da.MissingSchemaAction, "#3");
+            Assert.AreEqual(MissingSchemaAction.Error, da.MissingSchemaAction, "#3");
         }
 
         [Test]
-        public void MissingSchemaAction_Invalid ()
+        public void MissingSchemaAction_Invalid()
         {
-            DataAdapter da = new MyAdapter ();
-            try {
-                da.MissingSchemaAction = (MissingSchemaAction) 666;
-                Assert.Fail ("#1");
-            } catch (ArgumentOutOfRangeException ex) {
+            DataAdapter da = new MyAdapter();
+            try
+            {
+                da.MissingSchemaAction = (MissingSchemaAction)666;
+                Assert.Fail("#1");
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
                 // The MissingSchemaAction enumeration value, 666, is invalid
-                Assert.AreEqual (typeof (ArgumentOutOfRangeException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.IsTrue (ex.Message.IndexOf ("MissingSchemaAction") != -1, "#5");
-                Assert.IsTrue (ex.Message.IndexOf ("666") != -1, "#6");
-                Assert.IsNotNull (ex.ParamName, "#7");
-                Assert.AreEqual ("MissingSchemaAction", ex.ParamName, "#8");
+                Assert.AreEqual(typeof(ArgumentOutOfRangeException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+                Assert.IsTrue(ex.Message.IndexOf("MissingSchemaAction") != -1, "#5");
+                Assert.IsTrue(ex.Message.IndexOf("666") != -1, "#6");
+                Assert.IsNotNull(ex.ParamName, "#7");
+                Assert.AreEqual("MissingSchemaAction", ex.ParamName, "#8");
             }
         }
 
         [Test]
-        public void ReturnProviderSpecificTypes ()
+        public void ReturnProviderSpecificTypes()
         {
-            DataAdapter da = new MyAdapter ();
+            DataAdapter da = new MyAdapter();
             da.ReturnProviderSpecificTypes = true;
-            Assert.IsTrue (da.ReturnProviderSpecificTypes, "#1");
+            Assert.IsTrue(da.ReturnProviderSpecificTypes, "#1");
             da.ReturnProviderSpecificTypes = false;
-            Assert.IsFalse (da.ReturnProviderSpecificTypes, "#2");
+            Assert.IsFalse(da.ReturnProviderSpecificTypes, "#2");
             da.ReturnProviderSpecificTypes = true;
-            Assert.IsTrue (da.ReturnProviderSpecificTypes, "#3");
+            Assert.IsTrue(da.ReturnProviderSpecificTypes, "#3");
         }
     }
 
-    class MyAdapter : DataAdapter
-    {
-    }
+    class MyAdapter : DataAdapter { }
 }

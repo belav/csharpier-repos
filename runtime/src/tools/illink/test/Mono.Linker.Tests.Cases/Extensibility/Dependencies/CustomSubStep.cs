@@ -6,8 +6,8 @@ class CustomSubStep : BaseSubStep
 {
     public override SubStepTargets Targets => SubStepTargets.Type;
 
-    public override void ProcessType (TypeDefinition type)
+    public override void ProcessType(TypeDefinition type)
     {
-        Annotations.Mark (type);
+        Annotations.Mark(type);
     }
 }

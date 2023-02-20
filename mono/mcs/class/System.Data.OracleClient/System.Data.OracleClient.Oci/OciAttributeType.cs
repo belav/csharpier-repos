@@ -1,6 +1,6 @@
-// 
-// OciAttributeType.cs 
-//  
+//
+// OciAttributeType.cs
+//
 // Part of managed C#/.NET library System.Data.OracleClient.dll
 //
 // Part of the Mono class libraries at
@@ -8,17 +8,19 @@
 //
 // Assembly: System.Data.OracleClient.dll
 // Namespace: System.Data.OracleClient.Oci
-// 
-// Author: 
+//
+// Author:
 //     Tim Coleman <tim@timcoleman.com>
-//         
+//
 // Copyright (C) Tim Coleman, 2003
-// 
+//
 
 using System;
 
-namespace System.Data.OracleClient.Oci {
-    internal enum OciAttributeType {
+namespace System.Data.OracleClient.Oci
+{
+    internal enum OciAttributeType
+    {
         FunctionCode = 0x01,
         ObjectMode = 0x02,
         NonBlockingMode = 0x03,
@@ -40,8 +42,10 @@ namespace System.Data.OracleClient.Oci {
         RowId = 0x13,
         CharacterSet = 0x14,
         NChar = 0x15,
+
         // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Not a secret.")]
         Username = 0x16,
+
         // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Not a secret.")]
         Password = 0x17,
         StatementType = 0x18,

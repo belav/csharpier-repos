@@ -11,7 +11,8 @@ internal sealed class DescriptorRegistry
 {
     private readonly object _lock = new object();
     private readonly HashSet<FileDescriptor> _fileDescriptors = new HashSet<FileDescriptor>();
-    private readonly ConcurrentDictionary<Type, DescriptorBase> _typeDescriptorMap = new ConcurrentDictionary<Type, DescriptorBase>();
+    private readonly ConcurrentDictionary<Type, DescriptorBase> _typeDescriptorMap =
+        new ConcurrentDictionary<Type, DescriptorBase>();
 
     public DescriptorRegistry()
     {

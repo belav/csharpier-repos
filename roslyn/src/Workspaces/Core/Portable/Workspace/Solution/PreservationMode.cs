@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis
 
     internal static class PreservationModeExtensions
     {
-        public static bool IsValid(this PreservationMode mode)
-            => mode is >= PreservationMode.PreserveValue and <= PreservationMode.PreserveIdentity;
+        public static bool IsValid(this PreservationMode mode) =>
+            mode is >= PreservationMode.PreserveValue and <= PreservationMode.PreserveIdentity;
     }
 }

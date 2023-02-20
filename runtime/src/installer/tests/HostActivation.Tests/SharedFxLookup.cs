@@ -33,13 +33,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             // From the artifacts dir, it's possible to find where the sharedFrameworkPublish folder is. We need
             // to locate it because we'll copy its contents into other folders
-            string artifactsDir = new RepoDirectoriesProvider().GetTestContextVariable("TEST_ARTIFACTS");
+            string artifactsDir = new RepoDirectoriesProvider().GetTestContextVariable(
+                "TEST_ARTIFACTS"
+            );
             _builtDotnet = Path.Combine(artifactsDir, "sharedFrameworkPublish");
 
             // The dotnetSharedFxLookup dir will contain some folders and files that will be
             // necessary to perform the tests
             string baseDir = Path.Combine(artifactsDir, "dotnetSharedFxLookup");
-            _baseDirArtifact = new TestArtifact(SharedFramework.CalculateUniqueTestDirectory(baseDir));
+            _baseDirArtifact = new TestArtifact(
+                SharedFramework.CalculateUniqueTestDirectory(baseDir)
+            );
 
             // The two tested locations will be the cwd and the exe dir. Both cwd and exe dir
             // are easily overwritten, so they will be placed inside the multilevel folder.
@@ -51,7 +55,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // SharedFxBaseDirs contain all available version folders
             _exeSharedFxBaseDir = Path.Combine(_executableDir, "shared", "Microsoft.NETCore.App");
 
-            _exeSharedUberFxBaseDir = Path.Combine(_executableDir, "shared", "Microsoft.UberFramework");
+            _exeSharedUberFxBaseDir = Path.Combine(
+                _executableDir,
+                "shared",
+                "Microsoft.UberFramework"
+            );
 
             // Create directories. It's necessary to copy the entire publish folder to the exe dir because
             // we'll need to build from it. The CopyDirectory method automatically creates the dest dir
@@ -59,7 +67,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             SharedFramework.CopyDirectory(_builtDotnet, _executableDir);
 
             // Restore and build SharedFxLookupPortableApp from exe dir
-            SharedFxLookupPortableAppFixture = new TestProjectFixture("SharedFxLookupPortableApp", RepoDirectories)
+            SharedFxLookupPortableAppFixture = new TestProjectFixture(
+                "SharedFxLookupPortableApp",
+                RepoDirectories
+            )
                 .EnsureRestored()
                 .BuildProject();
             var fixture = SharedFxLookupPortableAppFixture;
@@ -68,9 +79,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // locate the builtSharedFxDir from which we can get the files contained in the version folder
             string greatestVersionSharedFxPath = fixture.BuiltDotnet.GreatestVersionSharedFxPath;
             _sharedFxVersion = (new DirectoryInfo(greatestVersionSharedFxPath)).Name;
-            _builtSharedFxDir = Path.Combine(_builtDotnet, "shared", "Microsoft.NETCore.App", _sharedFxVersion);
-            _builtSharedUberFxDir = Path.Combine(_builtDotnet, "shared", "Microsoft.UberFramework", _sharedFxVersion);
-            SharedFramework.CreateUberFrameworkArtifacts(_builtSharedFxDir, _builtSharedUberFxDir, SystemCollectionsImmutableAssemblyVersion, SystemCollectionsImmutableFileVersion);
+            _builtSharedFxDir = Path.Combine(
+                _builtDotnet,
+                "shared",
+                "Microsoft.NETCore.App",
+                _sharedFxVersion
+            );
+            _builtSharedUberFxDir = Path.Combine(
+                _builtDotnet,
+                "shared",
+                "Microsoft.UberFramework",
+                _sharedFxVersion
+            );
+            SharedFramework.CreateUberFrameworkArtifacts(
+                _builtSharedFxDir,
+                _builtSharedUberFxDir,
+                SystemCollectionsImmutableAssemblyVersion,
+                SystemCollectionsImmutableFileVersion
+            );
         }
 
         public void Dispose()
@@ -82,24 +108,53 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [Fact]
         public void Multiple_SharedFxLookup_NetCoreApp_MinorRollForward_Wins_Over_UberFx()
         {
-            var fixture = SharedFxLookupPortableAppFixture
-                .Copy();
+            var fixture = SharedFxLookupPortableAppFixture.Copy();
 
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            string runtimeConfig = Path.Combine(fixture.TestProject.OutputDirectory, "SharedFxLookupPortableApp.runtimeconfig.json");
-            SharedFramework.SetRuntimeConfigJson(runtimeConfig, "7777.0.0", null, useUberFramework: true);
+            string runtimeConfig = Path.Combine(
+                fixture.TestProject.OutputDirectory,
+                "SharedFxLookupPortableApp.runtimeconfig.json"
+            );
+            SharedFramework.SetRuntimeConfigJson(
+                runtimeConfig,
+                "7777.0.0",
+                null,
+                useUberFramework: true
+            );
 
             // Modify the Uber values
-            SharedFramework.CreateUberFrameworkArtifacts(_builtSharedFxDir, _builtSharedUberFxDir, "0.0.0.1", "0.0.0.2");
+            SharedFramework.CreateUberFrameworkArtifacts(
+                _builtSharedFxDir,
+                _builtSharedUberFxDir,
+                "0.0.0.1",
+                "0.0.0.2"
+            );
 
             // Add versions in the exe folders
-            SharedFramework.AddAvailableSharedFxVersions(_builtSharedFxDir, _exeSharedFxBaseDir, "9999.1.0");
-            SharedFramework.AddAvailableSharedUberFxVersions(_builtSharedUberFxDir, _exeSharedUberFxBaseDir, "9999.0.0", "7777.0.0");
+            SharedFramework.AddAvailableSharedFxVersions(
+                _builtSharedFxDir,
+                _exeSharedFxBaseDir,
+                "9999.1.0"
+            );
+            SharedFramework.AddAvailableSharedUberFxVersions(
+                _builtSharedUberFxDir,
+                _exeSharedUberFxBaseDir,
+                "9999.0.0",
+                "7777.0.0"
+            );
 
-            string uberFile = Path.Combine(_exeSharedUberFxBaseDir, "7777.0.0", "System.Collections.Immutable.dll");
-            string netCoreAppFile = Path.Combine(_exeSharedFxBaseDir, "9999.1.0", "System.Collections.Immutable.dll");
+            string uberFile = Path.Combine(
+                _exeSharedUberFxBaseDir,
+                "7777.0.0",
+                "System.Collections.Immutable.dll"
+            );
+            string netCoreAppFile = Path.Combine(
+                _exeSharedFxBaseDir,
+                "9999.1.0",
+                "System.Collections.Immutable.dll"
+            );
             // The System.Collections.Immutable.dll is located in the UberFramework and NetCoreApp
             // Version: NetCoreApp 9999.0.0
             //          UberFramework 7777.0.0
@@ -108,29 +163,49 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             //      UberFramework 7777.0.0
             // Expected: 9999.1.0
             //           7777.0.0
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .WorkingDirectory(_currentWorkingDir)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining($"Replacing deps entry [{uberFile}, AssemblyVersion:0.0.0.1, FileVersion:0.0.0.2] with [{netCoreAppFile}");
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    $"Replacing deps entry [{uberFile}, AssemblyVersion:0.0.0.1, FileVersion:0.0.0.2] with [{netCoreAppFile}"
+                );
         }
 
         [Fact]
         public void Multiple_SharedFxLookup_Uber_Wins_Over_NetCoreApp_On_PatchRollForward()
         {
-            var fixture = SharedFxLookupPortableAppFixture
-                .Copy();
+            var fixture = SharedFxLookupPortableAppFixture.Copy();
 
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            string runtimeConfig = Path.Combine(fixture.TestProject.OutputDirectory, "SharedFxLookupPortableApp.runtimeconfig.json");
-            SharedFramework.SetRuntimeConfigJson(runtimeConfig, "7777.0.0", null, useUberFramework: true);
+            string runtimeConfig = Path.Combine(
+                fixture.TestProject.OutputDirectory,
+                "SharedFxLookupPortableApp.runtimeconfig.json"
+            );
+            SharedFramework.SetRuntimeConfigJson(
+                runtimeConfig,
+                "7777.0.0",
+                null,
+                useUberFramework: true
+            );
 
             // Add versions in the exe folders
-            SharedFramework.AddAvailableSharedFxVersions(_builtSharedFxDir, _exeSharedFxBaseDir, "9999.0.1");
-            SharedFramework.AddAvailableSharedUberFxVersions(_builtSharedUberFxDir, _exeSharedUberFxBaseDir, "9999.0.0", "7777.0.0");
+            SharedFramework.AddAvailableSharedFxVersions(
+                _builtSharedFxDir,
+                _exeSharedFxBaseDir,
+                "9999.0.1"
+            );
+            SharedFramework.AddAvailableSharedUberFxVersions(
+                _builtSharedUberFxDir,
+                _exeSharedUberFxBaseDir,
+                "9999.0.0",
+                "7777.0.0"
+            );
 
             // The System.Collections.Immutable.dll is located in the UberFramework and NetCoreApp
             // Version: NetCoreApp 9999.0.0
@@ -140,13 +215,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             //      UberFramework 7777.0.0
             // Expected: 9999.0.1
             //           7777.0.0
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .WorkingDirectory(_currentWorkingDir)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine("7777.0.0", "System.Collections.Immutable.dll"))
-                .And.NotHaveStdErrContaining(Path.Combine("9999.1.0", "System.Collections.Immutable.dll"));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine("7777.0.0", "System.Collections.Immutable.dll")
+                )
+                .And.NotHaveStdErrContaining(
+                    Path.Combine("9999.1.0", "System.Collections.Immutable.dll")
+                );
         }
     }
 }

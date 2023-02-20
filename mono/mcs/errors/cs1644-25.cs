@@ -9,8 +9,8 @@ class Data
 
 class A
 {
-    void Foo ()
+    void Foo()
     {
-        new Data () { Value = 3 };
+        new Data() { Value = 3 };
     }
 }

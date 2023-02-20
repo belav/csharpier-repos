@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,11 +34,10 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace System 
+namespace System
 {
-    [StructLayout (LayoutKind.Auto)]
-    public
-    struct ArgIterator
+    [StructLayout(LayoutKind.Auto)]
+    public struct ArgIterator
     {
 #pragma warning disable 169, 414
         IntPtr sig;
@@ -47,86 +46,88 @@ namespace System
         int num_args;
 #pragma warning restore 169, 414
 
-        [MethodImpl (MethodImplOptions.InternalCall)]
-        extern void Setup (IntPtr argsp, IntPtr start);
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        extern void Setup(IntPtr argsp, IntPtr start);
 
-        public ArgIterator (RuntimeArgumentHandle arglist)
+        public ArgIterator(RuntimeArgumentHandle arglist)
         {
             sig = IntPtr.Zero;
             args = IntPtr.Zero;
             next_arg = num_args = 0;
             if (arglist.args == IntPtr.Zero)
-                throw new PlatformNotSupportedException ();
-            Setup (arglist.args, IntPtr.Zero);
+                throw new PlatformNotSupportedException();
+            Setup(arglist.args, IntPtr.Zero);
         }
 
-        [CLSCompliant (false)]
-        unsafe public ArgIterator (RuntimeArgumentHandle arglist, void *ptr)
+        [CLSCompliant(false)]
+        unsafe public ArgIterator(RuntimeArgumentHandle arglist, void* ptr)
         {
             sig = IntPtr.Zero;
             args = IntPtr.Zero;
             next_arg = num_args = 0;
             if (arglist.args == IntPtr.Zero)
-                throw new PlatformNotSupportedException ();
-            Setup (arglist.args, (IntPtr) ptr);
+                throw new PlatformNotSupportedException();
+            Setup(arglist.args, (IntPtr)ptr);
         }
 
-        public void End ()
+        public void End()
         {
             next_arg = num_args;
         }
 
-        public override bool Equals (object o)
+        public override bool Equals(object o)
         {
-            throw new NotSupportedException ("ArgIterator does not support Equals.");
+            throw new NotSupportedException("ArgIterator does not support Equals.");
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return sig.GetHashCode ();
+            return sig.GetHashCode();
         }
 
-        [CLSCompliant (false)]
-        public TypedReference GetNextArg ()
+        [CLSCompliant(false)]
+        public TypedReference GetNextArg()
         {
             if (num_args == next_arg)
-                throw new InvalidOperationException ("Invalid iterator position.");
-            TypedReference result = new TypedReference ();
-            unsafe {
-                IntGetNextArg (&result);
+                throw new InvalidOperationException("Invalid iterator position.");
+            TypedReference result = new TypedReference();
+            unsafe
+            {
+                IntGetNextArg(&result);
             }
             return result;
         }
 
-        [MethodImpl (MethodImplOptions.InternalCall)]
-        extern unsafe void IntGetNextArg (void *res);
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        extern unsafe void IntGetNextArg(void* res);
 
-        [CLSCompliant (false)]
-        public TypedReference GetNextArg (RuntimeTypeHandle rth)
+        [CLSCompliant(false)]
+        public TypedReference GetNextArg(RuntimeTypeHandle rth)
         {
             if (num_args == next_arg)
-                throw new InvalidOperationException ("Invalid iterator position.");
-            TypedReference result = new TypedReference ();
-            unsafe {
-                IntGetNextArgWithType (&result, rth.Value);
+                throw new InvalidOperationException("Invalid iterator position.");
+            TypedReference result = new TypedReference();
+            unsafe
+            {
+                IntGetNextArgWithType(&result, rth.Value);
             }
             return result;
         }
 
-        [MethodImpl (MethodImplOptions.InternalCall)]
-        extern unsafe void IntGetNextArgWithType (void *res, IntPtr rth);
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        extern unsafe void IntGetNextArgWithType(void* res, IntPtr rth);
 
-        public RuntimeTypeHandle GetNextArgType ()
+        public RuntimeTypeHandle GetNextArgType()
         {
             if (num_args == next_arg)
-                throw new InvalidOperationException ("Invalid iterator position.");
-            return new RuntimeTypeHandle (IntGetNextArgType ());
+                throw new InvalidOperationException("Invalid iterator position.");
+            return new RuntimeTypeHandle(IntGetNextArgType());
         }
 
-        [MethodImpl (MethodImplOptions.InternalCall)]
-        extern IntPtr IntGetNextArgType ();
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        extern IntPtr IntGetNextArgType();
 
-        public int GetRemainingCount ()
+        public int GetRemainingCount()
         {
             return num_args - next_arg;
         }

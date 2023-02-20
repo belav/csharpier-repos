@@ -18,13 +18,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class NamedParameterCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(NamedParameterCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(NamedParameterCompletionProvider);
 
         [Fact]
         public async Task SendEnterThroughToEditorTest()
         {
-            const string markup = @"
+            const string markup =
+                @"
 class Goo
 {
     public Goo(int a = 42)
@@ -36,15 +37,31 @@ class Goo
     }
 }";
 
-            await VerifySendEnterThroughToEnterAsync(markup, "a:", sendThroughEnterOption: EnterKeyRule.Never, expected: false);
-            await VerifySendEnterThroughToEnterAsync(markup, "a:", sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord, expected: true);
-            await VerifySendEnterThroughToEnterAsync(markup, "a:", sendThroughEnterOption: EnterKeyRule.Always, expected: true);
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "a:",
+                sendThroughEnterOption: EnterKeyRule.Never,
+                expected: false
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "a:",
+                sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord,
+                expected: true
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "a:",
+                sendThroughEnterOption: EnterKeyRule.Always,
+                expected: true
+            );
         }
 
         [Fact]
         public async Task CommitCharacterTest()
         {
-            const string markup = @"
+            const string markup =
+                @"
 class Goo
 {
     public Goo(int a = 42)
@@ -62,7 +79,8 @@ class Goo
         [Fact]
         public async Task InObjectCreation()
         {
-            var markup = @"
+            var markup =
+                @"
 class Goo
 {
     public Goo(int a = 42)
@@ -80,7 +98,8 @@ class Goo
         [Fact]
         public async Task InBaseConstructor()
         {
-            var markup = @"
+            var markup =
+                @"
 class Goo
 {
     public Goo(int a = 42)
@@ -99,7 +118,8 @@ class DogBed : Goo
         [Fact]
         public async Task InvocationExpression()
         {
-            var markup = @"
+            var markup =
+                @"
 class Goo
 {
     void Bar(int a)
@@ -115,7 +135,8 @@ class Goo
         [Fact]
         public async Task InvocationExpressionAfterComma()
         {
-            var markup = @"
+            var markup =
+                @"
 class Goo
 {
     void Bar(int a, string b)
@@ -131,7 +152,8 @@ class Goo
         [Fact]
         public async Task ElementAccessExpression()
         {
-            var markup = @"
+            var markup =
+                @"
 class SampleCollection<T>
 {
     private T[] arr = new T[100];
@@ -164,7 +186,8 @@ class Program
         [Fact]
         public async Task PartialMethods()
         {
-            var markup = @"
+            var markup =
+                @"
 partial class PartialClass
 {
     static partial void Goo(int declaring);
@@ -185,7 +208,8 @@ partial class PartialClass
         [Fact]
         public async Task ExtendedPartialMethods()
         {
-            var markup = @"
+            var markup =
+                @"
 partial class PartialClass
 {
     public static partial void Goo(int declaring);
@@ -206,7 +230,8 @@ partial class PartialClass
         [Fact]
         public async Task NotAfterColon()
         {
-            var markup = @"
+            var markup =
+                @"
 class Goo
 {
     void Bar(int a, string b)
@@ -222,7 +247,8 @@ class Goo
         [Fact, WorkItem(544292, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544292")]
         public async Task NotInCollectionInitializers()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 class Goo
 {
@@ -239,7 +265,8 @@ class Goo
         [Fact, WorkItem(544191, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544191")]
         public async Task FilteringOverloadsByCallSite()
         {
-            var markup = @"
+            var markup =
+                @"
 class Class1
 {
     void Test()
@@ -262,7 +289,8 @@ class Class1
         [Fact]
         public async Task DontFilterYet()
         {
-            var markup = @"
+            var markup =
+                @"
 class Class1
 {
     void Test()
@@ -285,7 +313,8 @@ class Class1
         [Fact, WorkItem(544191, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544191")]
         public async Task FilteringOverloadsByCallSiteComplex()
         {
-            var markup = @"
+            var markup =
+                @"
 class Goo
 {
     void Test()
@@ -318,7 +347,8 @@ class Bar { }
         [Fact]
         public async Task MethodOverloads()
         {
-            var markup = @"
+            var markup =
+                @"
 class Goo
 {
     void Test()
@@ -346,7 +376,8 @@ class Goo
         [Fact]
         public async Task ExistingNamedParamsAreFilteredOut()
         {
-            var markup = @"
+            var markup =
+                @"
 class Goo
 {
     void Test()
@@ -378,7 +409,8 @@ class Goo
         [Fact, WorkItem(529369, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529369")]
         public async Task VerbatimIdentifierNotAKeyword()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     void Goo(int @integer)
@@ -393,7 +425,8 @@ class Program
         [Fact, WorkItem(544209, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544209")]
         public async Task DescriptionStringInMethodOverloads()
         {
-            var markup = @"
+            var markup =
+                @"
 class Class1
 {
     void Test()
@@ -408,14 +441,19 @@ class Class1
     { }
 }
 ";
-            await VerifyItemExistsAsync(markup, "obj", displayTextSuffix: ":",
-                expectedDescriptionOrNull: $"({FeaturesResources.parameter}) Class1 obj = default(Class1)");
+            await VerifyItemExistsAsync(
+                markup,
+                "obj",
+                displayTextSuffix: ":",
+                expectedDescriptionOrNull: $"({FeaturesResources.parameter}) Class1 obj = default(Class1)"
+            );
         }
 
         [Fact]
         public async Task InDelegates()
         {
-            var markup = @"
+            var markup =
+                @"
 public delegate void Del(string message);
 
 class Program
@@ -437,7 +475,8 @@ class Program
         [Fact]
         public async Task InDelegateInvokeSyntax()
         {
-            var markup = @"
+            var markup =
+                @"
 public delegate void Del(string message);
 
 class Program
@@ -459,7 +498,8 @@ class Program
         [Fact]
         public async Task NotInComment()
         {
-            var markup = @"
+            var markup =
+                @"
 public class Test
 {
 static void Main()
@@ -476,7 +516,8 @@ static void M(int x, int y) { }
         [Fact]
         public async Task CommitWithColonWordFullyTyped()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -486,7 +527,8 @@ class Program
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -501,7 +543,8 @@ class Program
         [Fact]
         public async Task CommitWithColonWordPartiallyTyped()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -511,7 +554,8 @@ class Program
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 class Program
 {
     static void Main(string[] args)

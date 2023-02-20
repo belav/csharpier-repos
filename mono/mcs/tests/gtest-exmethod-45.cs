@@ -2,9 +2,9 @@
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
         string s = null;
-        s.TestExt ();
+        s.TestExt();
     }
 }

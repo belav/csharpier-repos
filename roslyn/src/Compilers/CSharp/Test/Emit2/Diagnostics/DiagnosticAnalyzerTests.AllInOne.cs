@@ -35,8 +35,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             missingSyntaxKinds.Add(SyntaxKind.RecordDeclaration);
 
             var analyzer = new CSharpTrackingDiagnosticAnalyzer();
-            var options = new AnalyzerOptions(new[] { new TestAdditionalText() }.ToImmutableArray<AdditionalText>());
-            CreateCompilationWithMscorlib45(source).VerifyAnalyzerDiagnostics(new[] { analyzer }, options);
+            var options = new AnalyzerOptions(
+                new[] { new TestAdditionalText() }.ToImmutableArray<AdditionalText>()
+            );
+            CreateCompilationWithMscorlib45(source)
+                .VerifyAnalyzerDiagnostics(new[] { analyzer }, options);
             analyzer.VerifyAllAnalyzerMembersWereCalled();
             analyzer.VerifyAnalyzeSymbolCalledForAllSymbolKinds();
             analyzer.VerifyAnalyzeNodeCalledForAllSyntaxKinds(missingSyntaxKinds);
@@ -47,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void DiagnosticAnalyzerIndexerDeclaration()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public string this[int index]
@@ -57,7 +61,8 @@ public class C
     }
 }
 ";
-            CreateCompilationWithMscorlib45(source).VerifyAnalyzerDiagnostics(new[] { new CSharpTrackingDiagnosticAnalyzer() });
+            CreateCompilationWithMscorlib45(source)
+                .VerifyAnalyzerDiagnostics(new[] { new CSharpTrackingDiagnosticAnalyzer() });
         }
 
         // AllInOne does not include experimental features.
@@ -66,7 +71,8 @@ public class C
         [Fact]
         public void DiagnosticAnalyzerConditionalAccess()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public string this[int index]
@@ -76,17 +82,21 @@ public class C
     }
 }
 ";
-            CreateCompilationWithMscorlib45(source).VerifyAnalyzerDiagnostics(new[] { new CSharpTrackingDiagnosticAnalyzer() });
+            CreateCompilationWithMscorlib45(source)
+                .VerifyAnalyzerDiagnostics(new[] { new CSharpTrackingDiagnosticAnalyzer() });
         }
 
         [Fact]
         public void DiagnosticAnalyzerExpressionBodiedProperty()
         {
-            var comp = CreateCompilationWithMscorlib45(@"
+            var comp = CreateCompilationWithMscorlib45(
+                    @"
 public class C
 {
     public int P => 10;
-}").VerifyAnalyzerDiagnostics(new[] { new CSharpTrackingDiagnosticAnalyzer() });
+}"
+                )
+                .VerifyAnalyzerDiagnostics(new[] { new CSharpTrackingDiagnosticAnalyzer() });
         }
 
         #endregion
@@ -96,19 +106,24 @@ public class C
         public void AnalyzerDriverIsSafeAgainstAnalyzerExceptions()
         {
             var compilation = CreateCompilationWithMscorlib45(TestResource.AllInOneCSharpCode);
-            var options = new AnalyzerOptions(new[] { new TestAdditionalText() }.ToImmutableArray<AdditionalText>());
+            var options = new AnalyzerOptions(
+                new[] { new TestAdditionalText() }.ToImmutableArray<AdditionalText>()
+            );
 
-            ThrowingDiagnosticAnalyzer<SyntaxKind>.VerifyAnalyzerEngineIsSafeAgainstExceptions(analyzer =>
-                compilation.GetAnalyzerDiagnostics(new[] { analyzer }, options));
+            ThrowingDiagnosticAnalyzer<SyntaxKind>.VerifyAnalyzerEngineIsSafeAgainstExceptions(
+                analyzer => compilation.GetAnalyzerDiagnostics(new[] { analyzer }, options)
+            );
         }
 
         [Fact]
         public void AnalyzerOptionsArePassedToAllAnalyzers()
         {
             var text = new StringText(string.Empty, encodingOpt: null);
-            AnalyzerOptions options = new AnalyzerOptions
-            (
-                new[] { new TestAdditionalText("myfilepath", text) }.ToImmutableArray<AdditionalText>()
+            AnalyzerOptions options = new AnalyzerOptions(
+                new[]
+                {
+                    new TestAdditionalText("myfilepath", text)
+                }.ToImmutableArray<AdditionalText>()
             );
 
             var compilation = CreateCompilationWithMscorlib45(TestResource.AllInOneCSharpCode);

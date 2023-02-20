@@ -5,11 +5,13 @@ using System;
 
 class X
 {
-    void Test2 (object o)
+    void Test2(object o)
     {
-        if (o is ValueType s) {
-            if (o is long s) {
-                Console.WriteLine (s);
+        if (o is ValueType s)
+        {
+            if (o is long s)
+            {
+                Console.WriteLine(s);
             }
         }
     }

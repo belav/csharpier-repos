@@ -16,14 +16,17 @@ namespace Microsoft.CodeAnalysis.CSharp.GoToDefinition
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGoToDefinitionSymbolService()
-        {
-        }
+        public CSharpGoToDefinitionSymbolService() { }
 
-        protected override ISymbol FindRelatedExplicitlyDeclaredSymbol(ISymbol symbol, Compilation compilation)
-            => symbol;
+        protected override ISymbol FindRelatedExplicitlyDeclaredSymbol(
+            ISymbol symbol,
+            Compilation compilation
+        ) => symbol;
 
-        protected override int? GetTargetPositionIfControlFlow(SemanticModel semanticModel, SyntaxToken token)
+        protected override int? GetTargetPositionIfControlFlow(
+            SemanticModel semanticModel,
+            SyntaxToken token
+        )
         {
             var node = token.GetRequiredParent();
 
@@ -50,22 +53,22 @@ namespace Microsoft.CodeAnalysis.CSharp.GoToDefinition
 
                 case SyntaxKind.YieldKeyword:
                 case SyntaxKind.ReturnKeyword:
+                {
+                    var foundReturnableConstruct = TryFindContainingReturnableConstruct(node);
+                    if (foundReturnableConstruct is null)
                     {
-                        var foundReturnableConstruct = TryFindContainingReturnableConstruct(node);
-                        if (foundReturnableConstruct is null)
-                        {
-                            return null;
-                        }
-
-                        var symbol = semanticModel.GetDeclaredSymbol(foundReturnableConstruct);
-                        if (symbol is null)
-                        {
-                            // for lambdas
-                            return foundReturnableConstruct.GetFirstToken().Span.Start;
-                        }
-
-                        return symbol.Locations.FirstOrNone().SourceSpan.Start;
+                        return null;
                     }
+
+                    var symbol = semanticModel.GetDeclaredSymbol(foundReturnableConstruct);
+                    if (symbol is null)
+                    {
+                        // for lambdas
+                        return foundReturnableConstruct.GetFirstToken().Span.Start;
+                    }
+
+                    return symbol.Locations.FirstOrNone().SourceSpan.Start;
+                }
             }
 
             return null;
@@ -76,8 +79,10 @@ namespace Microsoft.CodeAnalysis.CSharp.GoToDefinition
                 {
                     var kind = node.Kind();
 
-                    if (node.IsReturnableConstruct() ||
-                        SyntaxFacts.GetTypeDeclarationKind(kind) != SyntaxKind.None)
+                    if (
+                        node.IsReturnableConstruct()
+                        || SyntaxFacts.GetTypeDeclarationKind(kind) != SyntaxKind.None
+                    )
                     {
                         return null;
                     }
@@ -92,8 +97,10 @@ namespace Microsoft.CodeAnalysis.CSharp.GoToDefinition
             {
                 while (node is not null && !node.IsBreakableConstruct())
                 {
-                    if (node.IsReturnableConstruct() ||
-                        SyntaxFacts.GetTypeDeclarationKind(node.Kind()) != SyntaxKind.None)
+                    if (
+                        node.IsReturnableConstruct()
+                        || SyntaxFacts.GetTypeDeclarationKind(node.Kind()) != SyntaxKind.None
+                    )
                     {
                         return null;
                     }

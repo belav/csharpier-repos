@@ -3,18 +3,20 @@
 //
 using System;
 
-delegate void S ();
+delegate void S();
 
-class X {
-    public static int Main ()
+class X
+{
+    public static int Main()
     {
         int a = 1;
         if (a != 1)
             return 1;
-        
-        Console.WriteLine ("A is = " + a);
-        S b= delegate {
-            Console.WriteLine ("on delegate");
+
+        Console.WriteLine("A is = " + a);
+        S b = delegate
+        {
+            Console.WriteLine("on delegate");
             a = 2;
         };
         if (a != 1)
@@ -22,8 +24,7 @@ class X {
         b();
         if (a != 2)
             return 3;
-        Console.WriteLine ("OK");
+        Console.WriteLine("OK");
         return 0;
     }
 }
-        

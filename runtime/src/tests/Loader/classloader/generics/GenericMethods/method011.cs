@@ -4,9 +4,9 @@
 using System;
 using System.Threading;
 
-interface IFoo 
+interface IFoo
 {
-    U Function<U>(U u);        
+    U Function<U>(U u);
 }
 
 class Foo : IFoo
@@ -15,13 +15,13 @@ class Foo : IFoo
     {
         return u;
     }
-        
 }
 
 public class Test_method011
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -30,17 +30,15 @@ public class Test_method011
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
         IFoo f = new Foo();
 
         Eval(f.Function<int>(1).Equals(1));
         Eval(f.Function<string>("string").Equals("string"));
-        
-        
+
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -51,7 +49,5 @@ public class Test_method011
             Console.WriteLine("Test Failed");
             return 1;
         }
-        
     }
 }
-

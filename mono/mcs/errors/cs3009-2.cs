@@ -5,7 +5,6 @@
 using System;
 using System.Runtime.Serialization;
 
-[assembly:CLSCompliant (true)]
+[assembly: CLSCompliant(true)]
 
-public abstract class CLSClass: Formatter {
-}
+public abstract class CLSClass : Formatter { }

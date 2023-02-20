@@ -4,7 +4,6 @@ using System;
 
 public class Nullable
 {
-
     public static bool BoxUnboxToNQ(object o)
     {
         return ((int)(ValueType)o == (int)55);
@@ -13,7 +12,7 @@ public class Nullable
     public static bool Run()
     {
         int? i = 55;
-        
+
         return BoxUnboxToNQ(i);
     }
 

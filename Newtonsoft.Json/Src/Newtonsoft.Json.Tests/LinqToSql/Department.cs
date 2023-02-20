@@ -37,9 +37,7 @@ namespace Newtonsoft.Json.Tests.LinqToSql
     public partial class Department
     {
         [JsonConverter(typeof(DepartmentConverter))]
-        public class DepartmentMetadata
-        {
-        }
+        public class DepartmentMetadata { }
     }
 }
 

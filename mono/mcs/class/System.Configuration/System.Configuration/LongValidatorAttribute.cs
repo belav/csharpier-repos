@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,9 +28,9 @@
 
 using System;
 
-namespace System.Configuration {
-
-    [AttributeUsage (AttributeTargets.Property)]
+namespace System.Configuration
+{
+    [AttributeUsage(AttributeTargets.Property)]
     public sealed class LongValidatorAttribute : ConfigurationValidatorAttribute
     {
         bool excludeRange = false;
@@ -38,33 +38,47 @@ namespace System.Configuration {
         long minValue = 0;
         ConfigurationValidatorBase instance;
 
-        public LongValidatorAttribute ()
+        public LongValidatorAttribute() { }
+
+        public bool ExcludeRange
         {
-        }
-
-        public bool ExcludeRange {
             get { return excludeRange; }
-            set { excludeRange = value; instance = null; }
+            set
+            {
+                excludeRange = value;
+                instance = null;
+            }
         }
 
-        public long MaxValue {
+        public long MaxValue
+        {
             get { return maxValue; }
-            set { maxValue = value; instance = null; }
+            set
+            {
+                maxValue = value;
+                instance = null;
+            }
         }
 
-        public long MinValue {
+        public long MinValue
+        {
             get { return minValue; }
-            set { minValue = value; instance = null; }
+            set
+            {
+                minValue = value;
+                instance = null;
+            }
         }
 
-        public override ConfigurationValidatorBase ValidatorInstance {
-            get {
+        public override ConfigurationValidatorBase ValidatorInstance
+        {
+            get
+            {
                 if (instance == null)
-                    instance = new LongValidator (minValue, maxValue, excludeRange);
+                    instance = new LongValidator(minValue, maxValue, excludeRange);
 
                 return instance;
             }
         }
     }
 }
-

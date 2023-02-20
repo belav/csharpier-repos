@@ -4,17 +4,15 @@ public class Foo<T>
 {
     Node node;
 
-    public Node Test<V> ()
+    public Node Test<V>()
     {
         return node;
     }
 
-    public class Node
-    { }
+    public class Node { }
 }
 
 class X
 {
-    public static void Main ()
-    { }
+    public static void Main() { }
 }

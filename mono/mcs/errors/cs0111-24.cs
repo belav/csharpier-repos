@@ -8,15 +8,15 @@ interface IMyInterface<T>
     bool Prop { set; }
 }
 
-public class MyClass: IMyInterface<string>
+public class MyClass : IMyInterface<string>
 {
     bool IMyInterface<string>.Prop
     {
-        set {}
+        set { }
     }
 
     bool IMyInterface<System.String>.Prop
     {
-        set {}
+        set { }
     }
 }

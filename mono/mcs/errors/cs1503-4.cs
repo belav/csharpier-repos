@@ -2,18 +2,19 @@
 // Line: 17
 
 class A { }
+
 class B : A { }
 
 class Test
 {
-    static void Foo (out B b)
+    static void Foo(out B b)
     {
-        b = new B ();
+        b = new B();
     }
 
-    static void Main ()
+    static void Main()
     {
         A a;
-        Foo (out a);
+        Foo(out a);
     }
 }

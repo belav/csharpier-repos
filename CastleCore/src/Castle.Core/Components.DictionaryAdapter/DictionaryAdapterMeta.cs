@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,9 +26,16 @@ namespace Castle.Components.DictionaryAdapter
         private IDictionary extendedProperties;
         private readonly Func<DictionaryAdapterInstance, IDictionaryAdapter> creator;
 
-        public DictionaryAdapterMeta(Type type, Type implementation, object[] behaviors, IDictionaryMetaInitializer[] metaInitializers, 
-                                     IDictionaryInitializer[] initializers, IDictionary<string, PropertyDescriptor> properties,
-                                     IDictionaryAdapterFactory factory, Func<DictionaryAdapterInstance, IDictionaryAdapter> creator)
+        public DictionaryAdapterMeta(
+            Type type,
+            Type implementation,
+            object[] behaviors,
+            IDictionaryMetaInitializer[] metaInitializers,
+            IDictionaryInitializer[] initializers,
+            IDictionary<string, PropertyDescriptor> properties,
+            IDictionaryAdapterFactory factory,
+            Func<DictionaryAdapterInstance, IDictionaryAdapter> creator
+        )
         {
             Type = type;
             Implementation = implementation;
@@ -70,13 +77,14 @@ namespace Castle.Components.DictionaryAdapter
 
         public PropertyDescriptor CreateDescriptor()
         {
-            var metaInitializers   = MetaInitializers;
-            var sharedAnnotations  = CollectSharedBehaviors(Behaviors,    metaInitializers);
+            var metaInitializers = MetaInitializers;
+            var sharedAnnotations = CollectSharedBehaviors(Behaviors, metaInitializers);
             var sharedInitializers = CollectSharedBehaviors(Initializers, metaInitializers);
 
-            var descriptor = (sharedAnnotations != null)
-                ? new PropertyDescriptor(sharedAnnotations.ToArray())
-                : new PropertyDescriptor();
+            var descriptor =
+                (sharedAnnotations != null)
+                    ? new PropertyDescriptor(sharedAnnotations.ToArray())
+                    : new PropertyDescriptor();
 
             descriptor.AddBehaviors(metaInitializers);
 
@@ -86,7 +94,10 @@ namespace Castle.Components.DictionaryAdapter
             return descriptor;
         }
 
-        private static List<T> CollectSharedBehaviors<T>(T[] source, IDictionaryMetaInitializer[] predicates)
+        private static List<T> CollectSharedBehaviors<T>(
+            T[] source,
+            IDictionaryMetaInitializer[] predicates
+        )
         {
             var results = null as List<T>;
 

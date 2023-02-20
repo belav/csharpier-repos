@@ -6,19 +6,19 @@ class A2
 {
     public class N<T>
     {
-        public static N<T> Method ()
+        public static N<T> Method()
         {
-            return default (N<T>);
+            return default(N<T>);
         }
     }
 }
 
 class Test
 {
-    public static int Main ()
+    public static int Main()
     {
-        A2.N<short> b1 = A2.N<short>.Method ();
-        A.N<byte> b2 = A.N<byte>.Method ();
+        A2.N<short> b1 = A2.N<short>.Method();
+        A.N<byte> b2 = A.N<byte>.Method();
 
         return 0;
     }

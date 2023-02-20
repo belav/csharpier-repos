@@ -13,6 +13,7 @@ namespace System.Xml.Xsl.XsltOld
     {
         private VariableAction[] _variables;
         public XPathNavigator StyleSheet { get; }
+
         public DbgData(Compiler compiler)
         {
             DbgCompiler dbgCompiler = (DbgCompiler)compiler;
@@ -20,16 +21,25 @@ namespace System.Xml.Xsl.XsltOld
             _variables = dbgCompiler.LocalVariables;
             dbgCompiler.Debugger.OnInstructionCompile(this.StyleSheet);
         }
-        internal void ReplaceVariables(VariableAction[] vars) { _variables = vars; }
+
+        internal void ReplaceVariables(VariableAction[] vars)
+        {
+            _variables = vars;
+        }
 
         // static Empty:
         private static readonly DbgData s_nullDbgData = new DbgData();
+
         private DbgData()
         {
             StyleSheet = null!;
             _variables = Array.Empty<VariableAction>();
         }
-        public static DbgData Empty { get { return s_nullDbgData; } }
+
+        public static DbgData Empty
+        {
+            get { return s_nullDbgData; }
+        }
     }
 
     internal sealed class DbgCompiler : Compiler
@@ -40,7 +50,11 @@ namespace System.Xml.Xsl.XsltOld
         {
             _debugger = debugger;
         }
-        public override IXsltDebugger Debugger { get { return _debugger; } }
+
+        public override IXsltDebugger Debugger
+        {
+            get { return _debugger; }
+        }
 
         // Variables
         //
@@ -52,7 +66,8 @@ namespace System.Xml.Xsl.XsltOld
         //          No duplicates posible.
         private readonly List<VariableAction> _globalVars = new List<VariableAction>();
         private readonly List<VariableAction> _localVars = new List<VariableAction>();
-        private VariableAction[]? _globalVarsCache, _localVarsCache;
+        private VariableAction[]? _globalVarsCache,
+            _localVarsCache;
 
         public VariableAction[] GlobalVariables
         {
@@ -91,7 +106,10 @@ namespace System.Xml.Xsl.XsltOld
                     { // Duplicate var definition
                         if (variable.Stylesheetid < oldVar.Stylesheetid)
                         {
-                            Debug.Assert(variable.VarKey != -1, "Variable was already placed and it should replace prev var.");
+                            Debug.Assert(
+                                variable.VarKey != -1,
+                                "Variable was already placed and it should replace prev var."
+                            );
                             _globalVars[i] = variable;
                             _globalVarsCache = null;
                         }
@@ -112,7 +130,10 @@ namespace System.Xml.Xsl.XsltOld
         private void UnDefineVariables(int count)
         {
             Debug.Assert(0 <= count, "This scope can't have more variables than we have in total");
-            Debug.Assert(count <= _localVars.Count, "This scope can't have more variables than we have in total");
+            Debug.Assert(
+                count <= _localVars.Count,
+                "This scope can't have more variables than we have in total"
+            );
             if (count != 0)
             {
                 _localVars.RemoveRange(_localVars.Count - count, count);
@@ -164,7 +185,7 @@ namespace System.Xml.Xsl.XsltOld
         }
 
         public override ChooseAction CreateChooseAction()
-        {//!!! don't need to be here
+        { //!!! don't need to be here
             ChooseAction action = new ChooseAction();
             action.Compile(this);
             return action;
@@ -493,7 +514,8 @@ namespace System.Xml.Xsl.XsltOld
 
         private sealed class IfActionDbg : IfAction
         {
-            internal IfActionDbg(ConditionType type) : base(type) { }
+            internal IfActionDbg(ConditionType type)
+                : base(type) { }
 
             internal override void Compile(Compiler compiler)
             {
@@ -594,7 +616,11 @@ namespace System.Xml.Xsl.XsltOld
                 if (builtIn != null && builtIn.Length != 0)
                 {
                     compiler.AllowBuiltInMode = true;
-                    builtInSheet = compiler.RootAction.CompileImport(compiler, compiler.ResolveUri(builtIn), int.MaxValue);
+                    builtInSheet = compiler.RootAction.CompileImport(
+                        compiler,
+                        compiler.ResolveUri(builtIn),
+                        int.MaxValue
+                    );
                     compiler.AllowBuiltInMode = false;
                 }
 
@@ -710,7 +736,9 @@ namespace System.Xml.Xsl.XsltOld
 
         private sealed class VariableActionDbg : VariableAction
         {
-            internal VariableActionDbg(VariableType type) : base(type) { }
+            internal VariableActionDbg(VariableType type)
+                : base(type) { }
+
             private DbgData? _dbgData;
 
             internal override void Compile(Compiler compiler)
@@ -752,12 +780,17 @@ namespace System.Xml.Xsl.XsltOld
         private sealed class BeginEventDbg : BeginEvent
         {
             private readonly DbgData _dbgData;
-            internal override DbgData DbgData { get { return _dbgData; } }
+            internal override DbgData DbgData
+            {
+                get { return _dbgData; }
+            }
 
-            public BeginEventDbg(Compiler compiler) : base(compiler)
+            public BeginEventDbg(Compiler compiler)
+                : base(compiler)
             {
                 _dbgData = new DbgData(compiler);
             }
+
             public override bool Output(Processor processor, ActionFrame frame)
             {
                 this.OnInstructionExecute(processor);
@@ -768,12 +801,17 @@ namespace System.Xml.Xsl.XsltOld
         private sealed class TextEventDbg : TextEvent
         {
             private readonly DbgData _dbgData;
-            internal override DbgData DbgData { get { return _dbgData; } }
+            internal override DbgData DbgData
+            {
+                get { return _dbgData; }
+            }
 
-            public TextEventDbg(Compiler compiler) : base(compiler)
+            public TextEventDbg(Compiler compiler)
+                : base(compiler)
             {
                 _dbgData = new DbgData(compiler);
             }
+
             public override bool Output(Processor processor, ActionFrame frame)
             {
                 this.OnInstructionExecute(processor);

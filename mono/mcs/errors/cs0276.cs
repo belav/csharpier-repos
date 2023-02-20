@@ -2,12 +2,10 @@
 // Line: 7
 // Compiler options: -t:library
 
- class Error0276 
- {
-     protected internal string Message {
-         internal set {
-         }
-     }
-
- }
-
+class Error0276
+{
+    protected internal string Message
+    {
+        internal set { }
+    }
+}

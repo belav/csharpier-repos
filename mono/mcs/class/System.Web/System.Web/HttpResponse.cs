@@ -1,7 +1,7 @@
 //
-// System.Web.HttpResponse.cs 
+// System.Web.HttpResponse.cs
 //
-// 
+//
 // Author:
 //    Miguel de Icaza (miguel@novell.com)
 //    Gonzalo Paniagua Javier (gonzalo@ximian.com)
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,9 +46,12 @@ using System.Web.SessionState;
 using System.Web.Routing;
 
 namespace System.Web
-{    
+{
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public sealed partial class HttpResponse
     {
         internal HttpWorkerRequest WorkerRequest;
@@ -56,13 +59,13 @@ namespace System.Web
         internal bool buffer = true;
 
         ArrayList fileDependencies;
-        
+
         HttpContext context;
         TextWriter writer;
         HttpCachePolicy cache_policy;
         Encoding encoding;
         HttpCookieCollection cookies;
-        
+
         int status_code = 200;
         string status_description = "OK";
 
@@ -74,7 +77,7 @@ namespace System.Web
         string redirect_location;
         string version_header;
         bool version_header_checked;
-        
+
         //
         // Negative Content-Length means we auto-compute the size of content-length
         // can be overwritten with AppendHeader ("Content-Length", value)
@@ -95,7 +98,7 @@ namespace System.Web
         //
         string transfer_encoding;
         internal bool use_chunked;
-        
+
         bool closed;
         bool completed;
         internal bool suppress_content;
@@ -107,109 +110,124 @@ namespace System.Web
         bool is_request_being_redirected;
         Encoding headerEncoding;
 
-        internal HttpResponse ()
+        internal HttpResponse()
         {
-            output_stream = new HttpResponseStream (this);
-            writer = new HttpWriter (this);
+            output_stream = new HttpResponseStream(this);
+            writer = new HttpWriter(this);
         }
 
-        public HttpResponse (TextWriter writer) : this ()
+        public HttpResponse(TextWriter writer)
+            : this()
         {
-
             this.writer = writer;
         }
 
-        internal HttpResponse (HttpWorkerRequest worker_request, HttpContext context) : this ()
+        internal HttpResponse(HttpWorkerRequest worker_request, HttpContext context)
+            : this()
         {
             WorkerRequest = worker_request;
             this.context = context;
 
-            if (worker_request != null && worker_request.GetHttpVersion () == "HTTP/1.1") {
-                string gi = worker_request.GetServerVariable ("GATEWAY_INTERFACE");
-                use_chunked = (String.IsNullOrEmpty (gi) ||
-                    !gi.StartsWith ("cgi", StringComparison.OrdinalIgnoreCase));
-            } else {
+            if (worker_request != null && worker_request.GetHttpVersion() == "HTTP/1.1")
+            {
+                string gi = worker_request.GetServerVariable("GATEWAY_INTERFACE");
+                use_chunked = (
+                    String.IsNullOrEmpty(gi)
+                    || !gi.StartsWith("cgi", StringComparison.OrdinalIgnoreCase)
+                );
+            }
+            else
+            {
                 use_chunked = false;
             }
-            writer = new HttpWriter (this);
+            writer = new HttpWriter(this);
         }
 
-        internal TextWriter SetTextWriter (TextWriter writer)
+        internal TextWriter SetTextWriter(TextWriter writer)
         {
             TextWriter prev = this.writer;
             this.writer = writer;
             return prev;
         }
 
-        internal string VersionHeader {
-            get {
-                if (!version_header_checked && version_header == null) {
+        internal string VersionHeader
+        {
+            get
+            {
+                if (!version_header_checked && version_header == null)
+                {
                     version_header_checked = true;
                     HttpRuntimeSection config = HttpRuntime.Section;
                     if (config != null && config.EnableVersionHeader)
-                        version_header = Environment.Version.ToString (3);
+                        version_header = Environment.Version.ToString(3);
                 }
 
                 return version_header;
             }
         }
 
-        internal HttpContext Context {
+        internal HttpContext Context
+        {
             get { return context; }
             set { context = value; }
         }
-            
-        internal string[] FileDependencies {
-            get {
+
+        internal string[] FileDependencies
+        {
+            get
+            {
                 if (fileDependencies == null || fileDependencies.Count == 0)
-                    return new string[0] {};
-                return (string[]) fileDependencies.ToArray (typeof (string));
+                    return new string[0] { };
+                return (string[])fileDependencies.ToArray(typeof(string));
             }
         }
-        
-        ArrayList FileDependenciesArray {
-            get {
+
+        ArrayList FileDependenciesArray
+        {
+            get
+            {
                 if (fileDependencies == null)
-                    fileDependencies = new ArrayList ();
+                    fileDependencies = new ArrayList();
                 return fileDependencies;
             }
         }
-        
-        public bool Buffer {
-            get {
-                return buffer;
-            }
 
-            set {
-                buffer = value;
-            }
+        public bool Buffer
+        {
+            get { return buffer; }
+            set { buffer = value; }
         }
 
-        public bool BufferOutput {
-            get {
-                return buffer;
-            }
-
-            set {
-                buffer = value;
-            }
+        public bool BufferOutput
+        {
+            get { return buffer; }
+            set { buffer = value; }
         }
 
         //
         // Use the default from <globalization> section if the client has not set the encoding
         //
-        public Encoding ContentEncoding {
-            get {
-                if (encoding == null) {
-                    if (context != null) {
+        public Encoding ContentEncoding
+        {
+            get
+            {
+                if (encoding == null)
+                {
+                    if (context != null)
+                    {
                         string client_content_type = context.Request.ContentType;
-                        string parameter = HttpRequest.GetParameter (client_content_type, "; charset=");
-                        if (parameter != null) {
-                            try {
+                        string parameter = HttpRequest.GetParameter(
+                            client_content_type,
+                            "; charset="
+                        );
+                        if (parameter != null)
+                        {
+                            try
+                            {
                                 // Do what the #1 web server does
-                                encoding = Encoding.GetEncoding (parameter);
-                            } catch {
+                                encoding = Encoding.GetEncoding(parameter);
                             }
+                            catch { }
                         }
                     }
                     if (encoding == null)
@@ -217,286 +235,276 @@ namespace System.Web
                 }
                 return encoding;
             }
-
-            set {
+            set
+            {
                 if (value == null)
-                    throw new ArgumentException ("ContentEncoding can not be null");
+                    throw new ArgumentException("ContentEncoding can not be null");
 
                 encoding = value;
                 HttpWriter http_writer = writer as HttpWriter;
                 if (http_writer != null)
-                    http_writer.SetEncoding (encoding);
-            }
-        }
-        
-        public string ContentType {
-            get {
-                return content_type;
-            }
-
-            set {
-                content_type = value;
+                    http_writer.SetEncoding(encoding);
             }
         }
 
-        public string Charset {
-            get {
+        public string ContentType
+        {
+            get { return content_type; }
+            set { content_type = value; }
+        }
+
+        public string Charset
+        {
+            get
+            {
                 if (charset == null)
                     charset = ContentEncoding.WebName;
-                
+
                 return charset;
             }
-
-            set {
+            set
+            {
                 charset_set = true;
                 charset = value;
             }
         }
-        
-        public HttpCookieCollection Cookies {
-            get {
+
+        public HttpCookieCollection Cookies
+        {
+            get
+            {
                 if (cookies == null)
-                    cookies = new HttpCookieCollection (true, false);
+                    cookies = new HttpCookieCollection(true, false);
                 return cookies;
             }
         }
-        
-        public int Expires {
-            get {
+
+        public int Expires
+        {
+            get
+            {
                 if (cache_policy == null)
                     return 0;
 
-                return cache_policy.ExpireMinutes ();
+                return cache_policy.ExpireMinutes();
             }
-
-            set {
-                Cache.SetExpires (DateTime.Now + new TimeSpan (0, value, 0));
-            }
-        }
-        
-        public DateTime ExpiresAbsolute {
-            get {
-                return Cache.Expires;
-            }
-
-            set {
-                Cache.SetExpires (value);
-            }
+            set { Cache.SetExpires(DateTime.Now + new TimeSpan(0, value, 0)); }
         }
 
-        public Stream Filter {
-            get {
+        public DateTime ExpiresAbsolute
+        {
+            get { return Cache.Expires; }
+            set { Cache.SetExpires(value); }
+        }
+
+        public Stream Filter
+        {
+            get
+            {
                 if (WorkerRequest == null)
                     return null;
 
                 return output_stream.Filter;
             }
-
-            set {
-                output_stream.Filter = value;
-            }
+            set { output_stream.Filter = value; }
         }
 
-        public Encoding HeaderEncoding {
-            get {
-                if (headerEncoding == null) {
-                    GlobalizationSection gs = WebConfigurationManager.SafeGetSection ("system.web/globalization", typeof (GlobalizationSection)) as GlobalizationSection;
+        public Encoding HeaderEncoding
+        {
+            get
+            {
+                if (headerEncoding == null)
+                {
+                    GlobalizationSection gs =
+                        WebConfigurationManager.SafeGetSection(
+                            "system.web/globalization",
+                            typeof(GlobalizationSection)
+                        ) as GlobalizationSection;
 
                     if (gs == null)
                         headerEncoding = Encoding.UTF8;
-                    else {
+                    else
+                    {
                         headerEncoding = gs.ResponseHeaderEncoding;
                         if (headerEncoding == Encoding.Unicode)
-                            throw new HttpException ("HeaderEncoding must not be Unicode");
+                            throw new HttpException("HeaderEncoding must not be Unicode");
                     }
                 }
                 return headerEncoding;
             }
-            set {
+            set
+            {
                 if (headers_sent)
-                    throw new HttpException ("headers have already been sent");
+                    throw new HttpException("headers have already been sent");
                 if (value == null)
-                    throw new ArgumentNullException ("HeaderEncoding");
+                    throw new ArgumentNullException("HeaderEncoding");
                 if (value == Encoding.Unicode)
-                    throw new HttpException ("HeaderEncoding must not be Unicode");
+                    throw new HttpException("HeaderEncoding must not be Unicode");
                 headerEncoding = value;
             }
         }
 
-        public NameValueCollection Headers {
-            get {
+        public NameValueCollection Headers
+        {
+            get
+            {
                 if (headers == null)
-                    headers = new HttpHeaderCollection ();
+                    headers = new HttpHeaderCollection();
 
                 return headers;
             }
         }
 
-        
-        public bool IsClientConnected {
-            get {
+        public bool IsClientConnected
+        {
+            get
+            {
                 if (WorkerRequest == null)
                     return true; // yep that's true
 
-                return WorkerRequest.IsClientConnected ();
+                return WorkerRequest.IsClientConnected();
             }
         }
 
-        public bool IsRequestBeingRedirected {
+        public bool IsRequestBeingRedirected
+        {
             get { return is_request_being_redirected; }
         }
 
-        public TextWriter Output {
-            get {
-                return writer;
-            }
+        public TextWriter Output
+        {
+            get { return writer; }
             set { writer = value; }
         }
 
-        public Stream OutputStream {
-            get {
-                return output_stream;
-            }
+        public Stream OutputStream
+        {
+            get { return output_stream; }
         }
-        
-        public string RedirectLocation {
-            get {
-                return redirect_location;
-            }
 
-            set {
-                redirect_location = value;
-            }
+        public string RedirectLocation
+        {
+            get { return redirect_location; }
+            set { redirect_location = value; }
         }
-        
-        public string Status {
-            get { return String.Concat (status_code.ToString (), " ", StatusDescription); }
 
-            set {
-                int p = value.IndexOf (' ');
+        public string Status
+        {
+            get { return String.Concat(status_code.ToString(), " ", StatusDescription); }
+            set
+            {
+                int p = value.IndexOf(' ');
                 if (p == -1)
-                    throw new HttpException ("Invalid format for the Status property");
+                    throw new HttpException("Invalid format for the Status property");
 
-                string s = value.Substring (0, p);
-                
-                if (!Int32.TryParse (s, out status_code))
-                    throw new HttpException ("Invalid format for the Status property");
-                
-                status_description = value.Substring (p+1);
+                string s = value.Substring(0, p);
+
+                if (!Int32.TryParse(s, out status_code))
+                    throw new HttpException("Invalid format for the Status property");
+
+                status_description = value.Substring(p + 1);
             }
         }
 
         // We ignore the two properties on Mono as they are for use with IIS7, but there is
         // no point in throwing PlatformNotSupportedException. We might find a use for them
         // some day.
-        public int SubStatusCode {
-            get;
-            set;
-        }
+        public int SubStatusCode { get; set; }
 
-        public bool SuppressFormsAuthenticationRedirect {
-            get;
-            set;
-        }
+        public bool SuppressFormsAuthenticationRedirect { get; set; }
 
-        public bool TrySkipIisCustomErrors {
-            get;
-            set;
-        }
-        
-        public int StatusCode {
-            get {
-                return status_code;
-            }
+        public bool TrySkipIisCustomErrors { get; set; }
 
-            set {
+        public int StatusCode
+        {
+            get { return status_code; }
+            set
+            {
                 if (headers_sent)
-                    throw new HttpException ("headers have already been sent");
-                
+                    throw new HttpException("headers have already been sent");
+
                 status_code = value;
                 status_description = null;
             }
         }
 
-        public string StatusDescription {
-            get {
+        public string StatusDescription
+        {
+            get
+            {
                 if (status_description == null)
-                    status_description = HttpWorkerRequest.GetStatusDescription (status_code);
+                    status_description = HttpWorkerRequest.GetStatusDescription(status_code);
 
                 return status_description;
             }
-
-            set {
+            set
+            {
                 if (headers_sent)
-                    throw new HttpException ("headers have already been sent");
-                
+                    throw new HttpException("headers have already been sent");
+
                 status_description = value;
             }
         }
-        
-        public bool SuppressContent {
-            get {
-                return suppress_content;
-            }
 
-            set {
-                suppress_content = value;
-            }
+        public bool SuppressContent
+        {
+            get { return suppress_content; }
+            set { suppress_content = value; }
         }
 
-        [MonoTODO ("Not implemented")]
-        public void AddCacheDependency (params CacheDependency[] dependencies)
+        [MonoTODO("Not implemented")]
+        public void AddCacheDependency(params CacheDependency[] dependencies)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoTODO ("Not implemented")]
-        public void AddCacheItemDependencies (string[] cacheKeys)
+        [MonoTODO("Not implemented")]
+        public void AddCacheItemDependencies(string[] cacheKeys)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO("Currently does nothing")]
-        public void AddCacheItemDependencies (ArrayList cacheKeys)
+        public void AddCacheItemDependencies(ArrayList cacheKeys)
         {
             // TODO: talk to jackson about the cache
         }
 
         [MonoTODO("Currently does nothing")]
-        public void AddCacheItemDependency (string cacheKey)
+        public void AddCacheItemDependency(string cacheKey)
         {
             // TODO: talk to jackson about the cache
         }
-        
-        public void AddFileDependencies (ArrayList filenames)
+
+        public void AddFileDependencies(ArrayList filenames)
         {
             if (filenames == null || filenames.Count == 0)
                 return;
-            FileDependenciesArray.AddRange (filenames);
+            FileDependenciesArray.AddRange(filenames);
         }
 
-        public void AddFileDependencies (string[] filenames)
+        public void AddFileDependencies(string[] filenames)
         {
             if (filenames == null || filenames.Length == 0)
                 return;
-            FileDependenciesArray.AddRange (filenames);
+            FileDependenciesArray.AddRange(filenames);
         }
 
-        public void AddFileDependency (string filename)
+        public void AddFileDependency(string filename)
         {
             if (filename == null || filename == String.Empty)
                 return;
-            FileDependenciesArray.Add (filename);
+            FileDependenciesArray.Add(filename);
         }
 
-        public void AddHeader (string name, string value)
+        public void AddHeader(string name, string value)
         {
-            AppendHeader (name, value);
+            AppendHeader(name, value);
         }
 
-        public void AppendCookie (HttpCookie cookie)
+        public void AppendCookie(HttpCookie cookie)
         {
-            Cookies.Add (cookie);
+            Cookies.Add(cookie);
         }
 
         //
@@ -504,97 +512,113 @@ namespace System.Web
         //    Special case for Content-Length, Content-Type, Transfer-Encoding and Cache-Control
         //
         //
-        public void AppendHeader (string name, string value)
+        public void AppendHeader(string name, string value)
         {
             if (headers_sent)
-                throw new HttpException ("Headers have been already sent");
-            if (String.Compare (name, "content-length", StringComparison.OrdinalIgnoreCase) == 0){
-                content_length = (long) UInt64.Parse (value);
+                throw new HttpException("Headers have been already sent");
+            if (String.Compare(name, "content-length", StringComparison.OrdinalIgnoreCase) == 0)
+            {
+                content_length = (long)UInt64.Parse(value);
                 use_chunked = false;
                 return;
             }
 
-            if (String.Compare (name, "content-type", StringComparison.OrdinalIgnoreCase) == 0){
+            if (String.Compare(name, "content-type", StringComparison.OrdinalIgnoreCase) == 0)
+            {
                 ContentType = value;
                 return;
             }
 
-            if (String.Compare (name, "transfer-encoding", StringComparison.OrdinalIgnoreCase) == 0){
+            if (String.Compare(name, "transfer-encoding", StringComparison.OrdinalIgnoreCase) == 0)
+            {
                 transfer_encoding = value;
                 use_chunked = false;
                 return;
             }
 
-            if (String.Compare (name, "cache-control", StringComparison.OrdinalIgnoreCase) == 0){
+            if (String.Compare(name, "cache-control", StringComparison.OrdinalIgnoreCase) == 0)
+            {
                 user_cache_control = value;
                 return;
             }
 
-            Headers.Add (name, value);
+            Headers.Add(name, value);
         }
 
-        [AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Medium)]
-        public void AppendToLog (string param)
+        [AspNetHostingPermission(
+            SecurityAction.Demand,
+            Level = AspNetHostingPermissionLevel.Medium
+        )]
+        public void AppendToLog(string param)
         {
-            Console.Write ("System.Web: ");
-            Console.WriteLine (param);
+            Console.Write("System.Web: ");
+            Console.WriteLine(param);
         }
-        
-        public string ApplyAppPathModifier (string virtualPath)
+
+        public string ApplyAppPathModifier(string virtualPath)
         {
             if (virtualPath == null || context == null)
                 return null;
-        
+
             if (virtualPath.Length == 0)
                 return context.Request.RootVirtualDir;
 
-            if (UrlUtils.IsRelativeUrl (virtualPath)) {
-                virtualPath = UrlUtils.Combine (context.Request.RootVirtualDir, virtualPath);
-            } else if (UrlUtils.IsRooted (virtualPath)) {
-                virtualPath = UrlUtils.Canonic (virtualPath);
+            if (UrlUtils.IsRelativeUrl(virtualPath))
+            {
+                virtualPath = UrlUtils.Combine(context.Request.RootVirtualDir, virtualPath);
+            }
+            else if (UrlUtils.IsRooted(virtualPath))
+            {
+                virtualPath = UrlUtils.Canonic(virtualPath);
             }
 
             bool cookieless = false;
-            SessionStateSection config = WebConfigurationManager.GetWebApplicationSection ("system.web/sessionState") as SessionStateSection;
-            cookieless = SessionStateModule.IsCookieLess (context, config);
+            SessionStateSection config =
+                WebConfigurationManager.GetWebApplicationSection("system.web/sessionState")
+                as SessionStateSection;
+            cookieless = SessionStateModule.IsCookieLess(context, config);
 
             if (!cookieless)
                 return virtualPath;
 
-            if (app_path_mod != null && virtualPath.IndexOf (app_path_mod) < 0) {
-                if (UrlUtils.HasSessionId (virtualPath))
-                    virtualPath = UrlUtils.RemoveSessionId (VirtualPathUtility.GetDirectory (virtualPath), virtualPath);
-                return UrlUtils.InsertSessionId (app_path_mod, virtualPath);
+            if (app_path_mod != null && virtualPath.IndexOf(app_path_mod) < 0)
+            {
+                if (UrlUtils.HasSessionId(virtualPath))
+                    virtualPath = UrlUtils.RemoveSessionId(
+                        VirtualPathUtility.GetDirectory(virtualPath),
+                        virtualPath
+                    );
+                return UrlUtils.InsertSessionId(app_path_mod, virtualPath);
             }
-        
+
             return virtualPath;
         }
 
-        public void BinaryWrite (byte [] buffer)
+        public void BinaryWrite(byte[] buffer)
         {
-            output_stream.Write (buffer, 0, buffer.Length);
+            output_stream.Write(buffer, 0, buffer.Length);
         }
 
-        internal void BinaryWrite (byte [] buffer, int start, int len)
+        internal void BinaryWrite(byte[] buffer, int start, int len)
         {
-            output_stream.Write (buffer, start, len);
+            output_stream.Write(buffer, start, len);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            ClearContent ();
+            ClearContent();
         }
 
-        public void ClearContent ()
+        public void ClearContent()
         {
-            output_stream.Clear ();
+            output_stream.Clear();
             content_length = -1;
         }
 
-        public void ClearHeaders ()
+        public void ClearHeaders()
         {
             if (headers_sent)
-                throw new HttpException ("headers have been already sent");
+                throw new HttpException("headers have been already sent");
 
             // Reset the special case headers.
             content_length = -1;
@@ -605,42 +629,44 @@ namespace System.Web
                 cache_policy.Cacheability = HttpCacheability.Private;
 
             if (headers != null)
-                headers.Clear ();
+                headers.Clear();
         }
 
-        internal bool HeadersSent {
-            get {
-                return headers_sent;
-            }
+        internal bool HeadersSent
+        {
+            get { return headers_sent; }
         }
 
-        public void Close ()
+        public void Close()
         {
             if (closed)
                 return;
             if (WorkerRequest != null)
-                WorkerRequest.CloseConnection ();
+                WorkerRequest.CloseConnection();
             closed = true;
         }
 
-        public void DisableKernelCache ()
+        public void DisableKernelCache()
         {
             // does nothing in Mono
         }
-        
-        public void End ()
+
+        public void End()
         {
             if (context == null)
                 return;
-            
-            if (context.TimeoutPossible) {
-                Thread.CurrentThread.Abort (FlagEnd.Value);
-            } else {
+
+            if (context.TimeoutPossible)
+            {
+                Thread.CurrentThread.Abort(FlagEnd.Value);
+            }
+            else
+            {
                 // If this is called from an async event, signal the completion
                 // but don't throw.
                 HttpApplication app_instance = context.ApplicationInstance;
                 if (app_instance != null)
-                    app_instance.CompleteRequest ();
+                    app_instance.CompleteRequest();
             }
         }
 
@@ -650,53 +676,81 @@ namespace System.Web
         //   Transfer-Encoding (chunked)
         //   Cache-Control
         //   X-AspNet-Version
-        void AddHeadersNoCache (NameValueCollection write_headers, bool final_flush)
+        void AddHeadersNoCache(NameValueCollection write_headers, bool final_flush)
         {
             //
             // Transfer-Encoding
             //
             if (use_chunked)
-                write_headers.Add ("Transfer-Encoding", "chunked");
+                write_headers.Add("Transfer-Encoding", "chunked");
             else if (transfer_encoding != null)
-                write_headers.Add ("Transfer-Encoding", transfer_encoding);
+                write_headers.Add("Transfer-Encoding", transfer_encoding);
             if (redirect_location != null)
-                write_headers.Add ("Location", redirect_location);
-            
+                write_headers.Add("Location", redirect_location);
+
             string vh = VersionHeader;
             if (vh != null)
-                write_headers.Add ("X-AspNet-Version", vh);
+                write_headers.Add("X-AspNet-Version", vh);
 
             //
             // If Content-Length is set.
             //
-            if (content_length >= 0) {
-                write_headers.Add (HttpWorkerRequest.GetKnownResponseHeaderName (HttpWorkerRequest.HeaderContentLength),
-                           content_length.ToString (Helpers.InvariantCulture));
-            } else if (BufferOutput) {
-                if (final_flush) {                    
+            if (content_length >= 0)
+            {
+                write_headers.Add(
+                    HttpWorkerRequest.GetKnownResponseHeaderName(
+                        HttpWorkerRequest.HeaderContentLength
+                    ),
+                    content_length.ToString(Helpers.InvariantCulture)
+                );
+            }
+            else if (BufferOutput)
+            {
+                if (final_flush)
+                {
                     //
                     // If we are buffering and this is the last flush, not a middle-flush,
                     // we know the content-length.
                     //
                     content_length = output_stream.total;
-                    write_headers.Add (HttpWorkerRequest.GetKnownResponseHeaderName (HttpWorkerRequest.HeaderContentLength),
-                               content_length.ToString (Helpers.InvariantCulture));
-                } else {
+                    write_headers.Add(
+                        HttpWorkerRequest.GetKnownResponseHeaderName(
+                            HttpWorkerRequest.HeaderContentLength
+                        ),
+                        content_length.ToString(Helpers.InvariantCulture)
+                    );
+                }
+                else
+                {
                     //
                     // We are buffering, and this is a flush in the middle.
                     // If we are not chunked, we need to set "Connection: close".
                     //
-                    if (use_chunked){
-                        write_headers.Add (HttpWorkerRequest.GetKnownResponseHeaderName (HttpWorkerRequest.HeaderConnection), "close");
+                    if (use_chunked)
+                    {
+                        write_headers.Add(
+                            HttpWorkerRequest.GetKnownResponseHeaderName(
+                                HttpWorkerRequest.HeaderConnection
+                            ),
+                            "close"
+                        );
                     }
                 }
-            } else {
+            }
+            else
+            {
                 //
                 // If the content-length is not set, and we are not buffering, we must
                 // close at the end.
                 //
-                if (use_chunked){
-                    write_headers.Add (HttpWorkerRequest.GetKnownResponseHeaderName (HttpWorkerRequest.HeaderConnection), "close");
+                if (use_chunked)
+                {
+                    write_headers.Add(
+                        HttpWorkerRequest.GetKnownResponseHeaderName(
+                            HttpWorkerRequest.HeaderConnection
+                        ),
+                        "close"
+                    );
                 }
             }
 
@@ -704,33 +758,37 @@ namespace System.Web
             // Cache Control, the cache policy takes precedence over the cache_control property.
             //
             if (cache_policy != null)
-                cache_policy.SetHeaders (this, headers);
+                cache_policy.SetHeaders(this, headers);
             else
-                write_headers.Add ("Cache-Control", CacheControl);
-            
+                write_headers.Add("Cache-Control", CacheControl);
+
             //
             // Content-Type
             //
-            if (content_type != null){
+            if (content_type != null)
+            {
                 string header = content_type;
 
-                if (charset_set || header == "text/plain" || header == "text/html") {
-                    if (header.IndexOf ("charset=") == -1 && !string.IsNullOrEmpty (charset)) {
+                if (charset_set || header == "text/plain" || header == "text/html")
+                {
+                    if (header.IndexOf("charset=") == -1 && !string.IsNullOrEmpty(charset))
+                    {
                         header += "; charset=" + charset;
                     }
                 }
-                
-                write_headers.Add ("Content-Type", header);
+
+                write_headers.Add("Content-Type", header);
             }
 
-            if (cookies != null && cookies.Count != 0){
+            if (cookies != null && cookies.Count != 0)
+            {
                 int n = cookies.Count;
                 for (int i = 0; i < n; i++)
-                    write_headers.Add ("Set-Cookie", cookies.Get (i).GetCookieHeaderValue ());
+                    write_headers.Add("Set-Cookie", cookies.Get(i).GetCookieHeaderValue());
             }
         }
 
-        internal void WriteHeaders (bool final_flush)
+        internal void WriteHeaders(bool final_flush)
         {
             if (headers_sent)
                 return;
@@ -738,557 +796,638 @@ namespace System.Web
             //
             // Flush
             //
-            if (context != null) {
+            if (context != null)
+            {
                 HttpApplication app_instance = context.ApplicationInstance;
                 if (app_instance != null)
-                    app_instance.TriggerPreSendRequestHeaders ();
+                    app_instance.TriggerPreSendRequestHeaders();
             }
 
             headers_sent = true;
 
             if (cached_response != null)
-                cached_response.SetHeaders (headers);
+                cached_response.SetHeaders(headers);
 
             // If this page is cached use the cached headers
-            // instead of the standard headers    
+            // instead of the standard headers
             NameValueCollection write_headers;
             if (cached_headers != null)
                 write_headers = cached_headers;
-            else {
+            else
+            {
                 write_headers = Headers;
-                AddHeadersNoCache (write_headers, final_flush);
+                AddHeadersNoCache(write_headers, final_flush);
             }
-            
-            if (WorkerRequest != null)
-                WorkerRequest.SendStatus (status_code, StatusDescription);
 
-            if (WorkerRequest != null) {
+            if (WorkerRequest != null)
+                WorkerRequest.SendStatus(status_code, StatusDescription);
+
+            if (WorkerRequest != null)
+            {
                 string header_name;
                 string[] values;
                 int header_index;
-                
-                for (int i = 0; i < write_headers.Count; i++) {
-                    header_name = write_headers.GetKey (i);
-                    header_index = HttpWorkerRequest.GetKnownResponseHeaderIndex (header_name);
-                    values = write_headers.GetValues (i);
+
+                for (int i = 0; i < write_headers.Count; i++)
+                {
+                    header_name = write_headers.GetKey(i);
+                    header_index = HttpWorkerRequest.GetKnownResponseHeaderIndex(header_name);
+                    values = write_headers.GetValues(i);
                     if (values == null)
                         continue;
-                    
-                    foreach (string val in values) {
+
+                    foreach (string val in values)
+                    {
                         if (header_index > -1)
-                            WorkerRequest.SendKnownResponseHeader (header_index, val);
+                            WorkerRequest.SendKnownResponseHeader(header_index, val);
                         else
-                            WorkerRequest.SendUnknownResponseHeader (header_name, val);
+                            WorkerRequest.SendUnknownResponseHeader(header_name, val);
                     }
                 }
             }
         }
 
-        internal void DoFilter (bool close)
+        internal void DoFilter(bool close)
         {
             if (output_stream.HaveFilter && context != null && context.Error == null)
-                output_stream.ApplyFilter (close);
+                output_stream.ApplyFilter(close);
         }
 
-        internal void Flush (bool final_flush)
+        internal void Flush(bool final_flush)
         {
             if (completed)
-                throw new HttpException ("Server cannot flush a completed response");
-            
-            DoFilter (final_flush);
-            if (!headers_sent){
+                throw new HttpException("Server cannot flush a completed response");
+
+            DoFilter(final_flush);
+            if (!headers_sent)
+            {
                 if (final_flush || status_code != 200)
                     use_chunked = false;
             }
 
             bool head = ((context != null) && (context.Request.HttpMethod == "HEAD"));
-            if (suppress_content || head) {
+            if (suppress_content || head)
+            {
                 if (!headers_sent)
-                    WriteHeaders (true);
-                output_stream.Clear ();
+                    WriteHeaders(true);
+                output_stream.Clear();
                 if (WorkerRequest != null)
-                    output_stream.Flush (WorkerRequest, true); // ignore final_flush here.
+                    output_stream.Flush(WorkerRequest, true); // ignore final_flush here.
                 completed = true;
                 return;
             }
             completed = final_flush;
-            
-            if (!headers_sent)
-                WriteHeaders (final_flush);
 
-            if (context != null) {
+            if (!headers_sent)
+                WriteHeaders(final_flush);
+
+            if (context != null)
+            {
                 HttpApplication app_instance = context.ApplicationInstance;
                 if (app_instance != null)
-                    app_instance.TriggerPreSendRequestContent ();
+                    app_instance.TriggerPreSendRequestContent();
             }
 
             if (IsCached)
-                cached_response.SetData (output_stream.GetData ());
+                cached_response.SetData(output_stream.GetData());
 
             if (WorkerRequest != null)
-                output_stream.Flush (WorkerRequest, final_flush);
+                output_stream.Flush(WorkerRequest, final_flush);
         }
 
-        public void Flush ()
+        public void Flush()
         {
-            Flush (false);
+            Flush(false);
         }
 
-        public void Pics (string value)
+        public void Pics(string value)
         {
-            AppendHeader ("PICS-Label", value);
+            AppendHeader("PICS-Label", value);
         }
 
-        void Redirect (string url, bool endResponse, int code)
+        void Redirect(string url, bool endResponse, int code)
         {
             if (url == null)
-                throw new ArgumentNullException ("url");
-            
-            if (headers_sent)
-                throw new HttpException ("Headers have already been sent");
+                throw new ArgumentNullException("url");
 
-            if (url.IndexOf ('\n') != -1)
-                throw new ArgumentException ("Redirect URI cannot contain newline characters.", "url");
-            
+            if (headers_sent)
+                throw new HttpException("Headers have already been sent");
+
+            if (url.IndexOf('\n') != -1)
+                throw new ArgumentException(
+                    "Redirect URI cannot contain newline characters.",
+                    "url"
+                );
+
             is_request_being_redirected = true;
-            ClearHeaders ();
-            ClearContent ();
-            
+            ClearHeaders();
+            ClearContent();
+
             StatusCode = code;
-            url = ApplyAppPathModifier (url);
+            url = ApplyAppPathModifier(url);
 
             bool isFullyQualified;
-            if (StrUtils.StartsWith (url, "http:", true) ||
-                StrUtils.StartsWith (url, "https:", true) ||
-                StrUtils.StartsWith (url, "file:", true) ||
-                StrUtils.StartsWith (url, "ftp:", true))
+            if (
+                StrUtils.StartsWith(url, "http:", true)
+                || StrUtils.StartsWith(url, "https:", true)
+                || StrUtils.StartsWith(url, "file:", true)
+                || StrUtils.StartsWith(url, "ftp:", true)
+            )
                 isFullyQualified = true;
             else
                 isFullyQualified = false;
 
-            if (!isFullyQualified) {
+            if (!isFullyQualified)
+            {
                 HttpRuntimeSection config = HttpRuntime.Section;
-                if (config != null && config.UseFullyQualifiedRedirectUrl) {
-                    var ub = new UriBuilder (context.Request.Url);
-                    int qpos = url.IndexOf ('?');
-                    if (qpos == -1) {
+                if (config != null && config.UseFullyQualifiedRedirectUrl)
+                {
+                    var ub = new UriBuilder(context.Request.Url);
+                    int qpos = url.IndexOf('?');
+                    if (qpos == -1)
+                    {
                         ub.Path = url;
                         ub.Query = null;
-                    } else {
-                        ub.Path = url.Substring (0, qpos);
-                        ub.Query = url.Substring (qpos + 1);
+                    }
+                    else
+                    {
+                        ub.Path = url.Substring(0, qpos);
+                        ub.Query = url.Substring(qpos + 1);
                     }
                     ub.Fragment = null;
                     ub.Password = null;
                     ub.UserName = null;
-                    url = ub.Uri.ToString ();
+                    url = ub.Uri.ToString();
                 }
             }
-            
+
             redirect_location = url;
 
             // Text for browsers that can't handle location header
-            Write ("<html><head><title>Object moved</title></head><body>\r\n");
-            Write ("<h2>Object moved to <a href=\"" + url + "\">here</a></h2>\r\n");
-            Write ("</body><html>\r\n");
-            
+            Write("<html><head><title>Object moved</title></head><body>\r\n");
+            Write("<h2>Object moved to <a href=\"" + url + "\">here</a></h2>\r\n");
+            Write("</body><html>\r\n");
+
             if (endResponse)
-                End ();
+                End();
             is_request_being_redirected = false;
         }
-        
-        public void Redirect (string url)
+
+        public void Redirect(string url)
         {
-            Redirect (url, true);
+            Redirect(url, true);
         }
 
-        public void Redirect (string url, bool endResponse)
+        public void Redirect(string url, bool endResponse)
         {
-            Redirect (url, endResponse, 302);
-        }
-        public void RedirectPermanent (string url)
-        {
-            RedirectPermanent (url, true);
+            Redirect(url, endResponse, 302);
         }
 
-        public void RedirectPermanent (string url, bool endResponse)
+        public void RedirectPermanent(string url)
         {
-            Redirect (url, endResponse, 301);
+            RedirectPermanent(url, true);
         }
 
-        public void RedirectToRoute (object routeValues)
+        public void RedirectPermanent(string url, bool endResponse)
         {
-            RedirectToRoute ("RedirectToRoute", null, new RouteValueDictionary (routeValues), 302, true);
+            Redirect(url, endResponse, 301);
         }
 
-        public void RedirectToRoute (RouteValueDictionary routeValues)
+        public void RedirectToRoute(object routeValues)
         {
-            RedirectToRoute ("RedirectToRoute", null, routeValues, 302, true);
+            RedirectToRoute(
+                "RedirectToRoute",
+                null,
+                new RouteValueDictionary(routeValues),
+                302,
+                true
+            );
         }
 
-        public void RedirectToRoute (string routeName)
+        public void RedirectToRoute(RouteValueDictionary routeValues)
         {
-            RedirectToRoute ("RedirectToRoute", routeName, null, 302, true);
+            RedirectToRoute("RedirectToRoute", null, routeValues, 302, true);
         }
 
-        public void RedirectToRoute (string routeName, object routeValues)
+        public void RedirectToRoute(string routeName)
         {
-            RedirectToRoute ("RedirectToRoute", routeName, new RouteValueDictionary (routeValues), 302, true);
+            RedirectToRoute("RedirectToRoute", routeName, null, 302, true);
         }
 
-        public void RedirectToRoute (string routeName, RouteValueDictionary routeValues)
+        public void RedirectToRoute(string routeName, object routeValues)
         {
-            RedirectToRoute ("RedirectToRoute", routeName, routeValues, 302, true);
+            RedirectToRoute(
+                "RedirectToRoute",
+                routeName,
+                new RouteValueDictionary(routeValues),
+                302,
+                true
+            );
         }
 
-        public void RedirectToRoutePermanent (object routeValues)
+        public void RedirectToRoute(string routeName, RouteValueDictionary routeValues)
         {
-            RedirectToRoute ("RedirectToRoutePermanent", null, new RouteValueDictionary (routeValues), 301, false);
+            RedirectToRoute("RedirectToRoute", routeName, routeValues, 302, true);
         }
 
-        public void RedirectToRoutePermanent (RouteValueDictionary routeValues)
+        public void RedirectToRoutePermanent(object routeValues)
         {
-            RedirectToRoute ("RedirectToRoutePermanent", null, routeValues, 301, false);
+            RedirectToRoute(
+                "RedirectToRoutePermanent",
+                null,
+                new RouteValueDictionary(routeValues),
+                301,
+                false
+            );
         }
 
-        public void RedirectToRoutePermanent (string routeName)
+        public void RedirectToRoutePermanent(RouteValueDictionary routeValues)
         {
-            RedirectToRoute ("RedirectToRoutePermanent", routeName, null, 301, false);
+            RedirectToRoute("RedirectToRoutePermanent", null, routeValues, 301, false);
         }
 
-        public void RedirectToRoutePermanent (string routeName, object routeValues)
+        public void RedirectToRoutePermanent(string routeName)
         {
-            RedirectToRoute ("RedirectToRoutePermanent", routeName, new RouteValueDictionary (routeValues), 301, false);
-        }        
-
-        public void RedirectToRoutePermanent (string routeName, RouteValueDictionary routeValues)
-        {
-            RedirectToRoute ("RedirectToRoutePermanent", routeName, routeValues, 301, false);
+            RedirectToRoute("RedirectToRoutePermanent", routeName, null, 301, false);
         }
-        
-        void RedirectToRoute (string callerName, string routeName, RouteValueDictionary routeValues, int redirectCode, bool endResponse)
+
+        public void RedirectToRoutePermanent(string routeName, object routeValues)
+        {
+            RedirectToRoute(
+                "RedirectToRoutePermanent",
+                routeName,
+                new RouteValueDictionary(routeValues),
+                301,
+                false
+            );
+        }
+
+        public void RedirectToRoutePermanent(string routeName, RouteValueDictionary routeValues)
+        {
+            RedirectToRoute("RedirectToRoutePermanent", routeName, routeValues, 301, false);
+        }
+
+        void RedirectToRoute(
+            string callerName,
+            string routeName,
+            RouteValueDictionary routeValues,
+            int redirectCode,
+            bool endResponse
+        )
         {
             HttpContext ctx = context ?? HttpContext.Current;
             HttpRequest req = ctx != null ? ctx.Request : null;
-            
+
             if (req == null)
                 // Let's emulate .NET
-                throw new NullReferenceException ();
-            
-            VirtualPathData vpd = RouteTable.Routes.GetVirtualPath (req.RequestContext, routeName, routeValues);
+                throw new NullReferenceException();
+
+            VirtualPathData vpd = RouteTable.Routes.GetVirtualPath(
+                req.RequestContext,
+                routeName,
+                routeValues
+            );
             string redirectUrl = vpd != null ? vpd.VirtualPath : null;
-            if (String.IsNullOrEmpty (redirectUrl))
-                throw new InvalidOperationException ("No matching route found for RedirectToRoute");
+            if (String.IsNullOrEmpty(redirectUrl))
+                throw new InvalidOperationException("No matching route found for RedirectToRoute");
 
-            Redirect (redirectUrl, true, redirectCode);
+            Redirect(redirectUrl, true, redirectCode);
         }
 
-        public static void RemoveOutputCacheItem (string path, string providerName)
+        public static void RemoveOutputCacheItem(string path, string providerName)
         {
             if (path == null)
-                throw new ArgumentNullException ("path");
+                throw new ArgumentNullException("path");
 
-            if (path.Length > 0 && path [0] != '/')
-                throw new ArgumentException ("Invalid path for HttpResponse.RemoveOutputCacheItem: '" + path + "'. An absolute virtual path is expected");
+            if (path.Length > 0 && path[0] != '/')
+                throw new ArgumentException(
+                    "Invalid path for HttpResponse.RemoveOutputCacheItem: '"
+                        + path
+                        + "'. An absolute virtual path is expected"
+                );
 
-            OutputCache.RemoveFromProvider (path, providerName);
+            OutputCache.RemoveFromProvider(path, providerName);
         }
-        public static void RemoveOutputCacheItem (string path)
+
+        public static void RemoveOutputCacheItem(string path)
         {
             if (path == null)
-                throw new ArgumentNullException ("path");
+                throw new ArgumentNullException("path");
 
             if (path.Length == 0)
                 return;
 
-            if (path [0] != '/')
-                throw new ArgumentException ("'" + path + "' is not an absolute virtual path.");
+            if (path[0] != '/')
+                throw new ArgumentException("'" + path + "' is not an absolute virtual path.");
 
-            RemoveOutputCacheItem (path, OutputCache.DefaultProviderName);
+            RemoveOutputCacheItem(path, OutputCache.DefaultProviderName);
         }
 
-        public void SetCookie (HttpCookie cookie)
+        public void SetCookie(HttpCookie cookie)
         {
-            AppendCookie (cookie);
+            AppendCookie(cookie);
         }
 
-        public void Write (char ch)
-        {
-            TextWriter writer = Output;
-            // Emulating .NET
-            if (writer == null)
-                throw new NullReferenceException (".NET 4.0 emulation. A null value was found where an object was required.");
-            writer.Write (ch);
-        }
-
-        public void Write (object obj)
+        public void Write(char ch)
         {
             TextWriter writer = Output;
             // Emulating .NET
             if (writer == null)
-                throw new NullReferenceException (".NET 4.0 emulation. A null value was found where an object was required.");
+                throw new NullReferenceException(
+                    ".NET 4.0 emulation. A null value was found where an object was required."
+                );
+            writer.Write(ch);
+        }
+
+        public void Write(object obj)
+        {
+            TextWriter writer = Output;
+            // Emulating .NET
+            if (writer == null)
+                throw new NullReferenceException(
+                    ".NET 4.0 emulation. A null value was found where an object was required."
+                );
             if (obj == null)
                 return;
-            
-            writer.Write (obj.ToString ());
-        }
-        
-        public void Write (string s)
-        {
-            TextWriter writer = Output;
-            // Emulating .NET
-            if (writer == null)
-                throw new NullReferenceException (".NET 4.0 emulation. A null value was found where an object was required.");
-            writer.Write (s);
-        }
-        
-        public void Write (char [] buffer, int index, int count)
-        {
-            TextWriter writer = Output;
-            // Emulating .NET
-            if (writer == null)
-                throw new NullReferenceException (".NET 4.0 emulation. A null value was found where an object was required.");
-            writer.Write (buffer, index, count);
+
+            writer.Write(obj.ToString());
         }
 
-        bool IsFileSystemDirSeparator (char ch)
+        public void Write(string s)
+        {
+            TextWriter writer = Output;
+            // Emulating .NET
+            if (writer == null)
+                throw new NullReferenceException(
+                    ".NET 4.0 emulation. A null value was found where an object was required."
+                );
+            writer.Write(s);
+        }
+
+        public void Write(char[] buffer, int index, int count)
+        {
+            TextWriter writer = Output;
+            // Emulating .NET
+            if (writer == null)
+                throw new NullReferenceException(
+                    ".NET 4.0 emulation. A null value was found where an object was required."
+                );
+            writer.Write(buffer, index, count);
+        }
+
+        bool IsFileSystemDirSeparator(char ch)
         {
             return ch == '\\' || ch == '/';
         }
-        
-        string GetNormalizedFileName (string fn)
+
+        string GetNormalizedFileName(string fn)
         {
-            if (String.IsNullOrEmpty (fn))
+            if (String.IsNullOrEmpty(fn))
                 return fn;
 
             // On Linux we don't change \ to / since filenames with \ are valid. We also
             // don't remove drive: designator for the same reason.
             int len = fn.Length;
-            if (len >= 3 && fn [1] == ':' && IsFileSystemDirSeparator (fn [2]))
-                return Path.GetFullPath (fn); // drive-qualified absolute file path
+            if (len >= 3 && fn[1] == ':' && IsFileSystemDirSeparator(fn[2]))
+                return Path.GetFullPath(fn); // drive-qualified absolute file path
 
-            bool startsWithDirSeparator = IsFileSystemDirSeparator (fn [0]);
-            if (len >= 2 && startsWithDirSeparator && IsFileSystemDirSeparator (fn [1]))
-                return Path.GetFullPath (fn); // UNC path
+            bool startsWithDirSeparator = IsFileSystemDirSeparator(fn[0]);
+            if (len >= 2 && startsWithDirSeparator && IsFileSystemDirSeparator(fn[1]))
+                return Path.GetFullPath(fn); // UNC path
 
-            if (!startsWithDirSeparator) {
+            if (!startsWithDirSeparator)
+            {
                 HttpContext ctx = context ?? HttpContext.Current;
                 HttpRequest req = ctx != null ? ctx.Request : null;
-                
+
                 if (req != null)
-                    return req.MapPath (fn);
+                    return req.MapPath(fn);
             }
-            
+
             return fn; // Or should we rather throw?
         }
-        
-        internal void WriteFile (FileStream fs, long offset, long size)
+
+        internal void WriteFile(FileStream fs, long offset, long size)
         {
-            byte [] buffer = new byte [32*1024];
+            byte[] buffer = new byte[32 * 1024];
 
             if (offset != 0)
                 fs.Position = offset;
 
             long remain = size;
             int n;
-            while (remain > 0 && (n = fs.Read (buffer, 0, (int) Math.Min (remain, 32*1024))) != 0){
+            while (remain > 0 && (n = fs.Read(buffer, 0, (int)Math.Min(remain, 32 * 1024))) != 0)
+            {
                 remain -= n;
-                output_stream.Write (buffer, 0, n);
+                output_stream.Write(buffer, 0, n);
             }
         }
-        
-        public void WriteFile (string filename)
+
+        public void WriteFile(string filename)
         {
-            WriteFile (filename, false);
+            WriteFile(filename, false);
         }
 
-        public void WriteFile (string filename, bool readIntoMemory)
+        public void WriteFile(string filename, bool readIntoMemory)
         {
             if (filename == null)
-                throw new ArgumentNullException ("filename");
+                throw new ArgumentNullException("filename");
 
-            string fn = GetNormalizedFileName (filename);
-            if (readIntoMemory){
-                using (FileStream fs = File.OpenRead (fn))
-                    WriteFile (fs, 0, fs.Length);
-            } else {
-                FileInfo fi = new FileInfo (fn);
-                output_stream.WriteFile (fn, 0, fi.Length);
+            string fn = GetNormalizedFileName(filename);
+            if (readIntoMemory)
+            {
+                using (FileStream fs = File.OpenRead(fn))
+                    WriteFile(fs, 0, fs.Length);
+            }
+            else
+            {
+                FileInfo fi = new FileInfo(fn);
+                output_stream.WriteFile(fn, 0, fi.Length);
             }
             if (buffer)
                 return;
 
-            output_stream.ApplyFilter (false);
-            Flush ();
+            output_stream.ApplyFilter(false);
+            Flush();
         }
 
-        public void WriteFile (IntPtr fileHandle, long offset, long size)
+        public void WriteFile(IntPtr fileHandle, long offset, long size)
         {
             if (offset < 0)
-                throw new ArgumentNullException ("offset can not be negative");
+                throw new ArgumentNullException("offset can not be negative");
             if (size < 0)
-                throw new ArgumentNullException ("size can not be negative");
+                throw new ArgumentNullException("size can not be negative");
 
             if (size == 0)
                 return;
 
-            // Note: this .ctor will throw a SecurityException if the caller 
+            // Note: this .ctor will throw a SecurityException if the caller
             // doesn't have the UnmanagedCode permission
-            using (FileStream fs = new FileStream (fileHandle, FileAccess.Read))
-                WriteFile (fs, offset, size);
+            using (FileStream fs = new FileStream(fileHandle, FileAccess.Read))
+                WriteFile(fs, offset, size);
 
             if (buffer)
                 return;
-            output_stream.ApplyFilter (false);
-            Flush ();
+            output_stream.ApplyFilter(false);
+            Flush();
         }
 
-        public void WriteFile (string filename, long offset, long size)
+        public void WriteFile(string filename, long offset, long size)
         {
             if (filename == null)
-                throw new ArgumentNullException ("filename");
+                throw new ArgumentNullException("filename");
             if (offset < 0)
-                throw new ArgumentNullException ("offset can not be negative");
+                throw new ArgumentNullException("offset can not be negative");
             if (size < 0)
-                throw new ArgumentNullException ("size can not be negative");
+                throw new ArgumentNullException("size can not be negative");
 
             if (size == 0)
                 return;
-            
-            FileStream fs = File.OpenRead (filename);
-            WriteFile (fs, offset, size);
+
+            FileStream fs = File.OpenRead(filename);
+            WriteFile(fs, offset, size);
 
             if (buffer)
                 return;
 
-            output_stream.ApplyFilter (false);
-            Flush ();
+            output_stream.ApplyFilter(false);
+            Flush();
         }
 
-        public void WriteSubstitution (HttpResponseSubstitutionCallback callback)
+        public void WriteSubstitution(HttpResponseSubstitutionCallback callback)
         {
             // Emulation of .NET behavior
             if (callback == null)
-                throw new NullReferenceException ();
+                throw new NullReferenceException();
 
             object target = callback.Target;
-            if (target != null && target.GetType () == typeof (Control))
-                throw new ArgumentException ("callback");
+            if (target != null && target.GetType() == typeof(Control))
+                throw new ArgumentException("callback");
 
-            string s = callback (context);
-            if (!IsCached) {
-                Write (s);
+            string s = callback(context);
+            if (!IsCached)
+            {
+                Write(s);
                 return;
             }
 
             Cache.Cacheability = HttpCacheability.Server;
-            Flush ();
+            Flush();
             if (WorkerRequest == null)
-                Write (s); // better this than nothing
-            else {
-                byte[] bytes = WebEncoding.ResponseEncoding.GetBytes (s);
-                WorkerRequest.SendResponseFromMemory (bytes, bytes.Length);
+                Write(s); // better this than nothing
+            else
+            {
+                byte[] bytes = WebEncoding.ResponseEncoding.GetBytes(s);
+                WorkerRequest.SendResponseFromMemory(bytes, bytes.Length);
             }
-            
-            cached_response.SetData (callback);
+
+            cached_response.SetData(callback);
         }
 
         //
         // Like WriteFile, but never buffers, so we manually Flush here
         //
-        public void TransmitFile (string filename) 
+        public void TransmitFile(string filename)
         {
             if (filename == null)
-                throw new ArgumentNullException ("filename");
+                throw new ArgumentNullException("filename");
 
-            TransmitFile (filename, false);
+            TransmitFile(filename, false);
         }
 
-        internal void TransmitFile (string filename, bool final_flush)
+        internal void TransmitFile(string filename, bool final_flush)
         {
-            FileInfo fi = new FileInfo (filename);
-            using (Stream s = fi.OpenRead ()) { } // Just check if we can read.
-            output_stream.WriteFile (filename, 0, fi.Length);
-            output_stream.ApplyFilter (final_flush);
-            Flush (final_flush);
+            FileInfo fi = new FileInfo(filename);
+            using (Stream s = fi.OpenRead()) { } // Just check if we can read.
+            output_stream.WriteFile(filename, 0, fi.Length);
+            output_stream.ApplyFilter(final_flush);
+            Flush(final_flush);
         }
 
-        public void TransmitFile (string filename, long offset, long length)
+        public void TransmitFile(string filename, long offset, long length)
         {
-            output_stream.WriteFile (filename, offset, length);
-            output_stream.ApplyFilter (false);
-            Flush (false);
+            output_stream.WriteFile(filename, offset, length);
+            output_stream.ApplyFilter(false);
+            Flush(false);
         }
-        
-        internal void TransmitFile (VirtualFile vf)
+
+        internal void TransmitFile(VirtualFile vf)
         {
-            TransmitFile (vf, false);
+            TransmitFile(vf, false);
         }
 
         const int bufLen = 65535;
-        internal void TransmitFile (VirtualFile vf, bool final_flush)
+
+        internal void TransmitFile(VirtualFile vf, bool final_flush)
         {
             if (vf == null)
-                throw new ArgumentNullException ("vf");
+                throw new ArgumentNullException("vf");
 
-            if (vf is DefaultVirtualFile) {
-                TransmitFile (HostingEnvironment.MapPath (vf.VirtualPath), final_flush);
+            if (vf is DefaultVirtualFile)
+            {
+                TransmitFile(HostingEnvironment.MapPath(vf.VirtualPath), final_flush);
                 return;
             }
-            
-            byte[] buf = new byte [bufLen];
-            using (Stream s = vf.Open ()) {
+
+            byte[] buf = new byte[bufLen];
+            using (Stream s = vf.Open())
+            {
                 int readBytes;
-                while ((readBytes = s.Read (buf, 0, bufLen)) > 0) {
-                    output_stream.Write (buf, 0, readBytes);
-                    output_stream.ApplyFilter (final_flush);
-                    Flush (false);
+                while ((readBytes = s.Read(buf, 0, bufLen)) > 0)
+                {
+                    output_stream.Write(buf, 0, readBytes);
+                    output_stream.ApplyFilter(final_flush);
+                    Flush(false);
                 }
                 if (final_flush)
-                    Flush (true);
+                    Flush(true);
             }
         }
-        
-#region Session state support
-        internal void SetAppPathModifier (string app_modifier)
+
+        #region Session state support
+        internal void SetAppPathModifier(string app_modifier)
         {
             app_path_mod = app_modifier;
         }
-#endregion
-        
-#region Cache Support
-        internal void SetCachedHeaders (NameValueCollection headers)
+        #endregion
+
+        #region Cache Support
+        internal void SetCachedHeaders(NameValueCollection headers)
         {
             cached_headers = headers;
-            
         }
 
-        internal bool IsCached {
+        internal bool IsCached
+        {
             get { return cached_response != null; }
-            set {
+            set
+            {
                 if (value)
-                    cached_response = new CachedRawResponse (cache_policy);
+                    cached_response = new CachedRawResponse(cache_policy);
                 else
                     cached_response = null;
             }
         }
 
-        public HttpCachePolicy Cache {
-            get {
+        public HttpCachePolicy Cache
+        {
+            get
+            {
                 if (cache_policy == null)
-                    cache_policy = new HttpCachePolicy ();
-                
+                    cache_policy = new HttpCachePolicy();
+
                 return cache_policy;
             }
-        }        
+        }
 
-        internal CachedRawResponse GetCachedResponse ()
+        internal CachedRawResponse GetCachedResponse()
         {
-            if (cached_response != null) {
+            if (cached_response != null)
+            {
                 cached_response.StatusCode = StatusCode;
                 cached_response.StatusDescription = StatusDescription;
             }
-            
+
             return cached_response;
         }
 
@@ -1296,50 +1435,60 @@ namespace System.Web
         // This is one of the old ASP compatibility methods, the real cache
         // control is in the Cache property, and this is a second class citizen
         //
-        public string CacheControl {
-            set {
-                if (value == null || value == "") {
-                    Cache.SetCacheability (HttpCacheability.NoCache);
+        public string CacheControl
+        {
+            set
+            {
+                if (value == null || value == "")
+                {
+                    Cache.SetCacheability(HttpCacheability.NoCache);
                     user_cache_control = null;
-                } else if (String.Compare (value, "public", true, Helpers.InvariantCulture) == 0) {
-                    Cache.SetCacheability (HttpCacheability.Public);
+                }
+                else if (String.Compare(value, "public", true, Helpers.InvariantCulture) == 0)
+                {
+                    Cache.SetCacheability(HttpCacheability.Public);
                     user_cache_control = "public";
-                } else if (String.Compare (value, "private", true, Helpers.InvariantCulture) == 0) {
-                    Cache.SetCacheability (HttpCacheability.Private);
+                }
+                else if (String.Compare(value, "private", true, Helpers.InvariantCulture) == 0)
+                {
+                    Cache.SetCacheability(HttpCacheability.Private);
                     user_cache_control = "private";
-                } else if (String.Compare (value, "no-cache", true, Helpers.InvariantCulture) == 0) {
-                    Cache.SetCacheability (HttpCacheability.NoCache);
+                }
+                else if (String.Compare(value, "no-cache", true, Helpers.InvariantCulture) == 0)
+                {
+                    Cache.SetCacheability(HttpCacheability.NoCache);
                     user_cache_control = "no-cache";
-                } else
-                    throw new ArgumentException ("CacheControl property only allows `public', " +
-                                     "`private' or no-cache, for different uses, use " +
-                                     "Response.AppendHeader");
+                }
+                else
+                    throw new ArgumentException(
+                        "CacheControl property only allows `public', "
+                            + "`private' or no-cache, for different uses, use "
+                            + "Response.AppendHeader"
+                    );
             }
-
             get { return (user_cache_control != null) ? user_cache_control : "private"; }
         }
-#endregion
+        #endregion
 
-        internal int GetOutputByteCount ()
+        internal int GetOutputByteCount()
         {
-            return output_stream.GetTotalLength ();
+            return output_stream.GetTotalLength();
         }
 
-        internal void ReleaseResources ()
+        internal void ReleaseResources()
         {
             if (output_stream != null)
-                output_stream.ReleaseResources (true);
+                output_stream.ReleaseResources(true);
             if (completed)
                 return;
-            
-            Close ();
+
+            Close();
             completed = true;
         }
     }
 
     static class FlagEnd
     {
-        public static readonly object Value = new object ();
+        public static readonly object Value = new object();
     }
 }
-

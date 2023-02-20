@@ -13,9 +13,7 @@ namespace System.IO.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                using (var watcher = new FileSystemWatcher(""))
-                {
-                }
+                using (var watcher = new FileSystemWatcher("")) { }
             });
         }
 
@@ -24,9 +22,7 @@ namespace System.IO.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                using (var watcher = new FileSystemWatcher(GetTestFilePath()))
-                {
-                }
+                using (var watcher = new FileSystemWatcher(GetTestFilePath())) { }
             });
         }
 
@@ -66,7 +62,16 @@ namespace System.IO.Tests
         [OuterLoop("This test has a longer than average timeout and may fail intermittently")]
         public void FileSystemWatcher_Directory_Create_DeepDirectoryStructure()
         {
-            string deepDir = CreateTestDirectory(TestDirectory, "dir", "dir", "dir", "dir", "dir", "dir", "dir");
+            string deepDir = CreateTestDirectory(
+                TestDirectory,
+                "dir",
+                "dir",
+                "dir",
+                "dir",
+                "dir",
+                "dir",
+                "dir"
+            );
             using (var watcher = new FileSystemWatcher(TestDirectory, "*"))
             {
                 watcher.IncludeSubdirectories = true;
@@ -77,7 +82,14 @@ namespace System.IO.Tests
                 Action action = () => Directory.CreateDirectory(dirPath);
                 Action cleanup = () => Directory.Delete(dirPath);
 
-                ExpectEvent(watcher, WatcherChangeTypes.Created, action, cleanup, dirPath, LongWaitTimeout);
+                ExpectEvent(
+                    watcher,
+                    WatcherChangeTypes.Created,
+                    action,
+                    cleanup,
+                    dirPath,
+                    LongWaitTimeout
+                );
             }
         }
 
@@ -90,7 +102,8 @@ namespace System.IO.Tests
             {
                 // Make the symlink in our path (to the temp folder) and make sure an event is raised
                 string symLinkPath = Path.Combine(dir, GetRandomLinkName());
-                Action action = () => Assert.True(MountHelper.CreateSymbolicLink(symLinkPath, temp, true));
+                Action action = () =>
+                    Assert.True(MountHelper.CreateSymbolicLink(symLinkPath, temp, true));
                 Action cleanup = () => Directory.Delete(symLinkPath);
 
                 ExpectEvent(watcher, WatcherChangeTypes.Created, action, cleanup, symLinkPath);

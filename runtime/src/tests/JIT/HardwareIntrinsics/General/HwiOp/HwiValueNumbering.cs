@@ -113,7 +113,6 @@ unsafe class HwiValueNumbering
         }
     }
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void ProblemWithLoadHigh_Sse2()
     {
@@ -193,5 +192,6 @@ unsafe class HwiValueNumbering
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void JitUse<T>(T* arg) where T : unmanaged { }
+    public static void JitUse<T>(T* arg)
+        where T : unmanaged { }
 }

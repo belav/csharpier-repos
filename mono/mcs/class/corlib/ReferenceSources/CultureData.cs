@@ -35,10 +35,10 @@ using System.Runtime.CompilerServices;
 
 namespace System.Globalization
 {
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     class CultureData
     {
-#region Sync with object-internals.h
+        #region Sync with object-internals.h
         // Time
         private String sAM1159; // (user can override) AM designator
         private String sPM2359; // (user can override) PM designator
@@ -49,7 +49,7 @@ namespace System.Globalization
         // Calendar specific data
         private int iFirstDayOfWeek; // (user can override) first day of week (gregorian really)
         private int iFirstWeekOfYear; // (user can override) first week of year (gregorian really)
-#endregion        
+        #endregion
         private volatile int[] waCalendars; // all available calendar type(s).  The first one is the default calendar
 
         // Store for specific data about each calendar
@@ -74,69 +74,93 @@ namespace System.Globalization
         bool isRightToLeft;
         string sListSeparator;
 
-        private CultureData (string name)
+        private CultureData(string name)
         {
             this.sRealName = name;
         }
 
         static CultureData s_Invariant;
 
-        public static CultureData Invariant {
-            get {
-                if (s_Invariant == null) {
-                    var invariant = new CultureData ("");
+        public static CultureData Invariant
+        {
+            get
+            {
+                if (s_Invariant == null)
+                {
+                    var invariant = new CultureData("");
 
                     // Language
-                    invariant.sISO639Language = "iv";                   // ISO 639 Language Name
+                    invariant.sISO639Language = "iv"; // ISO 639 Language Name
 
                     // Time
-                    invariant.sAM1159 = "AM";                   // AM designator
-                    invariant.sPM2359 = "PM";                   // PM designator
+                    invariant.sAM1159 = "AM"; // AM designator
+                    invariant.sPM2359 = "PM"; // PM designator
                     invariant.sTimeSeparator = ":";
-                    invariant.saLongTimes = new String[] { "HH:mm:ss" };                             // time format
-                    invariant.saShortTimes = new String[] { "HH:mm", "hh:mm tt", "H:mm", "h:mm tt" }; // short time format
+                    invariant.saLongTimes = new String[] { "HH:mm:ss" }; // time format
+                    invariant.saShortTimes = new String[]
+                    {
+                        "HH:mm",
+                        "hh:mm tt",
+                        "H:mm",
+                        "h:mm tt"
+                    }; // short time format
 
                     // Calendar specific data
-                    invariant.iFirstDayOfWeek = 0;                      // first day of week
-                    invariant.iFirstWeekOfYear = 0;                      // first week of year
-                    invariant.waCalendars = new int[] { (int)CalendarId.GREGORIAN };       // all available calendar type(s).  The first one is the default calendar
+                    invariant.iFirstDayOfWeek = 0; // first day of week
+                    invariant.iFirstWeekOfYear = 0; // first week of year
+                    invariant.waCalendars = new int[] { (int)CalendarId.GREGORIAN }; // all available calendar type(s).  The first one is the default calendar
 
                     // Store for specific data about each calendar
                     invariant.calendars = new CalendarData[CalendarData.MAX_CALENDARS];
                     invariant.calendars[0] = CalendarData.Invariant;
 
-                    invariant.iDefaultAnsiCodePage = 1252;                   // default ansi code page ID (ACP)
-                    invariant.iDefaultOemCodePage = 437;                    // default oem code page ID (OCP or OEM)
-                    invariant.iDefaultMacCodePage = 10000;                  // default macintosh code page
-                    invariant.iDefaultEbcdicCodePage = 037;                    // default EBCDIC code page
+                    invariant.iDefaultAnsiCodePage = 1252; // default ansi code page ID (ACP)
+                    invariant.iDefaultOemCodePage = 437; // default oem code page ID (OCP or OEM)
+                    invariant.iDefaultMacCodePage = 10000; // default macintosh code page
+                    invariant.iDefaultEbcdicCodePage = 037; // default EBCDIC code page
 
                     invariant.sListSeparator = ",";
-                    
-                    Interlocked.CompareExchange (ref s_Invariant, invariant, null);
+
+                    Interlocked.CompareExchange(ref s_Invariant, invariant, null);
                 }
 
                 return s_Invariant;
             }
         }
 
-        public static CultureData GetCultureData (string cultureName, bool useUserOverride)
+        public static CultureData GetCultureData(string cultureName, bool useUserOverride)
         {
-            try {
-                var ci = new CultureInfo (cultureName, useUserOverride);
+            try
+            {
+                var ci = new CultureInfo(cultureName, useUserOverride);
                 return ci.m_cultureData;
-            } catch {
+            }
+            catch
+            {
                 return null;
             }
         }
 
-        public static CultureData GetCultureData (string cultureName, bool useUserOverride, int datetimeIndex, int calendarId, int numberIndex, string iso2lang,
-            int ansiCodePage, int oemCodePage, int macCodePage, int ebcdicCodePage, bool rightToLeft, string listSeparator)
+        public static CultureData GetCultureData(
+            string cultureName,
+            bool useUserOverride,
+            int datetimeIndex,
+            int calendarId,
+            int numberIndex,
+            string iso2lang,
+            int ansiCodePage,
+            int oemCodePage,
+            int macCodePage,
+            int ebcdicCodePage,
+            bool rightToLeft,
+            string listSeparator
+        )
         {
-            if (string.IsNullOrEmpty (cultureName))
+            if (string.IsNullOrEmpty(cultureName))
                 return Invariant;
 
-            var cd = new CultureData (cultureName);
-            cd.fill_culture_data (datetimeIndex);
+            var cd = new CultureData(cultureName);
+            cd.fill_culture_data(datetimeIndex);
             cd.bUseOverrides = useUserOverride;
             cd.calendarId = calendarId;
             cd.numberIndex = numberIndex;
@@ -150,16 +174,16 @@ namespace System.Globalization
             return cd;
         }
 
-        internal static CultureData GetCultureData (int culture, bool bUseUserOverride)
+        internal static CultureData GetCultureData(int culture, bool bUseUserOverride)
         {
             // Legacy path which we should never hit
             return null;
         }
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        extern void fill_culture_data (int datetimeIndex);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern void fill_culture_data(int datetimeIndex);
 
-        public CalendarData GetCalendar (int calendarId)
+        public CalendarData GetCalendar(int calendarId)
         {
             // arrays are 0 based, calendarIds are 1 based
             int calendarIndex = calendarId - 1;
@@ -171,80 +195,77 @@ namespace System.Globalization
             }
 
             var calendarData = calendars[calendarIndex];
-            if (calendarData == null) {
-                calendarData = new CalendarData (sRealName, calendarId, bUseOverrides);
-                calendars [calendarIndex] = calendarData;
+            if (calendarData == null)
+            {
+                calendarData = new CalendarData(sRealName, calendarId, bUseOverrides);
+                calendars[calendarIndex] = calendarData;
             }
 
             return calendarData;
         }
 
-        internal String[] LongTimes {
-            get {
-                return saLongTimes;
-            }
+        internal String[] LongTimes
+        {
+            get { return saLongTimes; }
         }
 
-        internal String[] ShortTimes {
-            get {
-                return saShortTimes;
-            }
+        internal String[] ShortTimes
+        {
+            get { return saShortTimes; }
         }
 
-        internal String SISO639LANGNAME {
-            get {
-                return sISO639Language;
-            }
+        internal String SISO639LANGNAME
+        {
+            get { return sISO639Language; }
         }
 
-        internal int IFIRSTDAYOFWEEK {
-            get {
-                return iFirstDayOfWeek;
-            }
+        internal int IFIRSTDAYOFWEEK
+        {
+            get { return iFirstDayOfWeek; }
         }
 
-        internal int IFIRSTWEEKOFYEAR {
-            get {
-                return iFirstWeekOfYear;
-            }
+        internal int IFIRSTWEEKOFYEAR
+        {
+            get { return iFirstWeekOfYear; }
         }
 
-        internal String SAM1159 {
-            get {
-                return sAM1159;
-            }
+        internal String SAM1159
+        {
+            get { return sAM1159; }
         }
 
-        internal String SPM2359 {
-            get {
-                return sPM2359;
-            }
+        internal String SPM2359
+        {
+            get { return sPM2359; }
         }
 
-        internal String TimeSeparator {
-            get {
-                return sTimeSeparator;
-            }
+        internal String TimeSeparator
+        {
+            get { return sTimeSeparator; }
         }
 
-        internal int[] CalendarIds {
-            get {
-                if (this.waCalendars == null) {
+        internal int[] CalendarIds
+        {
+            get
+            {
+                if (this.waCalendars == null)
+                {
                     // Need this specialization because GetJapaneseCalendarDTFI/GetTaiwanCalendarDTFI depend on
                     // optional calendars
-                    switch (sISO639Language) {
-                    case "ja":
-                        waCalendars = new int[] { calendarId, Calendar.CAL_JAPAN };
-                        break;
-                    case "zh":
-                        waCalendars = new int[] { calendarId, Calendar.CAL_TAIWAN };
-                        break;
-                    case "he":
-                        waCalendars = new int[] { calendarId, Calendar.CAL_HEBREW };
-                        break;
-                    default:
-                        waCalendars = new int [] { calendarId };
-                        break;
+                    switch (sISO639Language)
+                    {
+                        case "ja":
+                            waCalendars = new int[] { calendarId, Calendar.CAL_JAPAN };
+                            break;
+                        case "zh":
+                            waCalendars = new int[] { calendarId, Calendar.CAL_TAIWAN };
+                            break;
+                        case "he":
+                            waCalendars = new int[] { calendarId, Calendar.CAL_HEBREW };
+                            break;
+                        default:
+                            waCalendars = new int[] { calendarId };
+                            break;
                     }
                 }
 
@@ -252,7 +273,7 @@ namespace System.Globalization
             }
         }
 
-        internal CalendarId[] GetCalendarIds() 
+        internal CalendarId[] GetCalendarIds()
         {
             var items = new CalendarId[CalendarIds.Length];
             for (int i = 0; i < CalendarIds.Length; i++)
@@ -260,81 +281,67 @@ namespace System.Globalization
             return items;
         }
 
-        internal bool IsInvariantCulture {
-            get {
-                return string.IsNullOrEmpty (sRealName);
-            }
+        internal bool IsInvariantCulture
+        {
+            get { return string.IsNullOrEmpty(sRealName); }
         }
 
-        internal String CultureName {
-            get {
-                return sRealName;
-            }
+        internal String CultureName
+        {
+            get { return sRealName; }
         }
 
-        internal String SCOMPAREINFO {
-            get {
-                return "";
-            }
+        internal String SCOMPAREINFO
+        {
+            get { return ""; }
         }
 
-        internal String STEXTINFO {
-            get {
-                return sRealName;
-            }
+        internal String STEXTINFO
+        {
+            get { return sRealName; }
         }
 
-        internal int ILANGUAGE {
-            get {
-                return 0;
-            }
+        internal int ILANGUAGE
+        {
+            get { return 0; }
         }
 
-        internal int IDEFAULTANSICODEPAGE {
-            get {
-                return iDefaultAnsiCodePage;
-            }
+        internal int IDEFAULTANSICODEPAGE
+        {
+            get { return iDefaultAnsiCodePage; }
         }
 
-        internal int IDEFAULTOEMCODEPAGE {
-            get {
-                return iDefaultOemCodePage;
-            }
+        internal int IDEFAULTOEMCODEPAGE
+        {
+            get { return iDefaultOemCodePage; }
         }
 
-        internal int IDEFAULTMACCODEPAGE {
-            get {
-                return iDefaultMacCodePage;
-            }
+        internal int IDEFAULTMACCODEPAGE
+        {
+            get { return iDefaultMacCodePage; }
         }
 
-        internal int IDEFAULTEBCDICCODEPAGE {
-            get {
-                return iDefaultEbcdicCodePage;
-            }
+        internal int IDEFAULTEBCDICCODEPAGE
+        {
+            get { return iDefaultEbcdicCodePage; }
         }
 
-        internal bool IsRightToLeft {
-            get {
-                return isRightToLeft;
-            }
+        internal bool IsRightToLeft
+        {
+            get { return isRightToLeft; }
         }
 
-        internal String SLIST {
-            get {
-                return sListSeparator;
-            }
+        internal String SLIST
+        {
+            get { return sListSeparator; }
         }
 
-#region from reference sources
+        #region from reference sources
 
         // Are overrides enabled?
         internal bool UseUserOverride
         {
-            get
-            {
-                return this.bUseOverrides;
-            }
+            get { return this.bUseOverrides; }
         }
 
         // Native calendar names.  index of optional calendar - 1, empty if no optional calendar at that number
@@ -354,14 +361,20 @@ namespace System.Globalization
 
         internal String[] AbbrevEraNames(int calendarId)
         {
-            Contract.Assert(calendarId > 0, "[CultureData.saAbbrevEraNames] Expected Calendar.ID > 0");
+            Contract.Assert(
+                calendarId > 0,
+                "[CultureData.saAbbrevEraNames] Expected Calendar.ID > 0"
+            );
 
             return this.GetCalendar(calendarId).saAbbrevEraNames;
         }
 
         internal String[] AbbreviatedEnglishEraNames(int calendarId)
         {
-            Contract.Assert(calendarId > 0, "[CultureData.saAbbrevEraNames] Expected Calendar.ID > 0");
+            Contract.Assert(
+                calendarId > 0,
+                "[CultureData.saAbbrevEraNames] Expected Calendar.ID > 0"
+            );
 
             return this.GetCalendar(calendarId).saAbbrevEnglishEraNames;
         }
@@ -445,7 +458,10 @@ namespace System.Globalization
         internal String DateSeparator(int calendarId)
         {
 #if MONO // see https://github.com/dotnet/coreclr/pull/19976
-            if (calendarId == (int)CalendarId.JAPAN && !AppContextSwitches.EnforceLegacyJapaneseDateParsing)
+            if (
+                calendarId == (int)CalendarId.JAPAN
+                && !AppContextSwitches.EnforceLegacyJapaneseDateParsing
+            )
             {
                 // The date separator is derived from the default short date pattern. So far this pattern is using
                 // '/' as date separator when using the Japanese calendar which make the formatting and parsing work fine.
@@ -509,7 +525,10 @@ namespace System.Globalization
         private static int IndexOfTimePart(string format, int startIndex, string timeParts)
         {
             Contract.Assert(startIndex >= 0, "startIndex cannot be negative");
-            Contract.Assert(timeParts.IndexOfAny(new char[] { '\'', '\\' }) == -1, "timeParts cannot include quote characters");
+            Contract.Assert(
+                timeParts.IndexOfAny(new char[] { '\'', '\\' }) == -1,
+                "timeParts cannot include quote characters"
+            );
             bool inQuote = false;
             for (int i = startIndex; i < format.Length; ++i)
             {
@@ -606,7 +625,7 @@ namespace System.Globalization
             return (result.ToString());
         }
 
-#endregion
+        #endregion
 
 
         static internal String[] ReescapeWin32Strings(String[] array)
@@ -627,7 +646,7 @@ namespace System.Globalization
         // mono/metadta/culture-info.h NumberFormatEntryManaged must match
         // mcs/class/corlib/ReferenceSources/CultureData.cs NumberFormatEntryManaged.
         // This is sorted alphabetically.
-        [StructLayout (LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         internal struct NumberFormatEntryManaged
         {
             internal int currency_decimal_digits;
@@ -655,28 +674,30 @@ namespace System.Globalization
             internal int positive_sign;
         }
 
-        static private unsafe int strlen (byte* s)
+        static private unsafe int strlen(byte* s)
         {
             int length = 0;
-            while (s [length] != 0)
+            while (s[length] != 0)
                 ++length;
             return length;
         }
 
-        static private unsafe string idx2string (byte* data, int idx)
+        static private unsafe string idx2string(byte* data, int idx)
         {
-            return Encoding.UTF8.GetString (data + idx, strlen (data + idx));
+            return Encoding.UTF8.GetString(data + idx, strlen(data + idx));
         }
 
-        private int [] create_group_sizes_array (int gs0, int gs1)
+        private int[] create_group_sizes_array(int gs0, int gs1)
         {
             // group_sizes is an array of up to two integers, -1 terminated.
-            return (gs0 == -1) ? new int [ ] { }
-                 : (gs1 == -1) ? new int [ ] {gs0}
-                       : new int [ ] {gs0, gs1};
+            return (gs0 == -1)
+                ? new int[] { }
+                : (gs1 == -1)
+                    ? new int[] { gs0 }
+                    : new int[] { gs0, gs1 };
         }
 
-        internal unsafe void GetNFIValues (NumberFormatInfo nfi)
+        internal unsafe void GetNFIValues(NumberFormatInfo nfi)
         {
             if (this.IsInvariantCulture)
             {
@@ -693,29 +714,35 @@ namespace System.Globalization
                 // PercentGroupSize
                 // PercentGroupSeparator
                 //
-                var nfe = new NumberFormatEntryManaged ();
-                byte* data = fill_number_data (numberIndex, ref nfe);
-                nfi.currencyGroupSizes = create_group_sizes_array (nfe.currency_group_sizes0, nfe.currency_group_sizes1);
-                nfi.numberGroupSizes = create_group_sizes_array (nfe.number_group_sizes0, nfe.number_group_sizes1);
-                nfi.NaNSymbol = idx2string (data, nfe.nan_symbol);
+                var nfe = new NumberFormatEntryManaged();
+                byte* data = fill_number_data(numberIndex, ref nfe);
+                nfi.currencyGroupSizes = create_group_sizes_array(
+                    nfe.currency_group_sizes0,
+                    nfe.currency_group_sizes1
+                );
+                nfi.numberGroupSizes = create_group_sizes_array(
+                    nfe.number_group_sizes0,
+                    nfe.number_group_sizes1
+                );
+                nfi.NaNSymbol = idx2string(data, nfe.nan_symbol);
                 nfi.currencyDecimalDigits = nfe.currency_decimal_digits;
-                nfi.currencyDecimalSeparator = idx2string (data, nfe.currency_decimal_separator);
-                nfi.currencyGroupSeparator = idx2string (data, nfe.currency_group_separator);
+                nfi.currencyDecimalSeparator = idx2string(data, nfe.currency_decimal_separator);
+                nfi.currencyGroupSeparator = idx2string(data, nfe.currency_group_separator);
                 nfi.currencyNegativePattern = nfe.currency_negative_pattern;
                 nfi.currencyPositivePattern = nfe.currency_positive_pattern;
-                nfi.currencySymbol = idx2string (data, nfe.currency_symbol);
-                nfi.negativeInfinitySymbol = idx2string (data, nfe.negative_infinity_symbol);
-                nfi.negativeSign = idx2string (data, nfe.negative_sign);
+                nfi.currencySymbol = idx2string(data, nfe.currency_symbol);
+                nfi.negativeInfinitySymbol = idx2string(data, nfe.negative_infinity_symbol);
+                nfi.negativeSign = idx2string(data, nfe.negative_sign);
                 nfi.numberDecimalDigits = nfe.number_decimal_digits;
-                nfi.numberDecimalSeparator = idx2string (data, nfe.number_decimal_separator);
-                nfi.numberGroupSeparator = idx2string (data, nfe.number_group_separator);
+                nfi.numberDecimalSeparator = idx2string(data, nfe.number_decimal_separator);
+                nfi.numberGroupSeparator = idx2string(data, nfe.number_group_separator);
                 nfi.numberNegativePattern = nfe.number_negative_pattern;
-                nfi.perMilleSymbol = idx2string (data, nfe.per_mille_symbol);
+                nfi.perMilleSymbol = idx2string(data, nfe.per_mille_symbol);
                 nfi.percentNegativePattern = nfe.percent_negative_pattern;
                 nfi.percentPositivePattern = nfe.percent_positive_pattern;
-                nfi.percentSymbol = idx2string (data, nfe.percent_symbol);
-                nfi.positiveInfinitySymbol = idx2string (data, nfe.positive_infinity_symbol);
-                nfi.positiveSign = idx2string (data, nfe.positive_sign);
+                nfi.percentSymbol = idx2string(data, nfe.percent_symbol);
+                nfi.positiveInfinitySymbol = idx2string(data, nfe.positive_infinity_symbol);
+                nfi.positiveSign = idx2string(data, nfe.positive_sign);
             }
 
             //
@@ -727,7 +754,7 @@ namespace System.Globalization
             nfi.percentGroupSeparator = nfi.numberGroupSeparator;
         }
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        extern unsafe static byte* fill_number_data (int index, ref NumberFormatEntryManaged nfe);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern unsafe static byte* fill_number_data(int index, ref NumberFormatEntryManaged nfe);
     }
 }

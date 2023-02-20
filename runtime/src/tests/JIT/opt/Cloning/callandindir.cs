@@ -16,9 +16,9 @@ class CallAndIndir
     {
         for (int i = low; i < high; i++)
         {
-             z += a[i];
-             S(); 
-        }  
+            z += a[i];
+            S();
+        }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -26,8 +26,8 @@ class CallAndIndir
     {
         for (int i = low; i < high; i++)
         {
-             z += a[i];
-        }  
+            z += a[i];
+        }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -36,19 +36,19 @@ class CallAndIndir
         int r = 0;
         for (int i = low; i < high; i++)
         {
-             r += a[i];
-             S();
-        }  
+            r += a[i];
+            S();
+        }
         z += r;
     }
 
     public static int Main()
     {
-         int[] a = new int[] { 1, 2, 3, 4 };
-         int z = 0;
-         F(a, 2, 4, ref z);
-         G(a, 2, 4, ref z);
-         H(a, 2, 4, ref z);
-         return z + 79;
+        int[] a = new int[] { 1, 2, 3, 4 };
+        int z = 0;
+        F(a, 2, 4, ref z);
+        G(a, 2, 4, ref z);
+        H(a, 2, 4, ref z);
+        return z + 79;
     }
 }

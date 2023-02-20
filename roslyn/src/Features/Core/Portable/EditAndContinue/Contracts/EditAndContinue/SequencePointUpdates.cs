@@ -18,9 +18,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// </summary>
         /// <param name="fileName">Name of the file which was modified.</param>
         /// <param name="lineUpdates">Collection of the file lines affected by the update.</param>
-        public SequencePointUpdates(
-            string fileName,
-            ImmutableArray<SourceLineUpdate> lineUpdates)
+        public SequencePointUpdates(string fileName, ImmutableArray<SourceLineUpdate> lineUpdates)
         {
             FileName = fileName;
             LineUpdates = lineUpdates;

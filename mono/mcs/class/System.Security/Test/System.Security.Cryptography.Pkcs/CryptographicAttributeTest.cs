@@ -15,86 +15,85 @@ using System.Collections;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Pkcs;
 
-namespace MonoTests.System.Security.Cryptography.Pkcs {
-
+namespace MonoTests.System.Security.Cryptography.Pkcs
+{
     [TestFixture]
-    public class CryptographicAttributeTest {
-
+    public class CryptographicAttributeTest
+    {
         static string defaultOid = "1.2.840.113549.1.7.1";
         static string defaultName = "PKCS 7 Data";
 
         [Test]
-        public void ConstructorOid () 
+        public void ConstructorOid()
         {
-            Oid o = new Oid (defaultOid);
-            CryptographicAttribute ca = new CryptographicAttribute (o);
-            Assert.AreEqual (defaultName, ca.Oid.FriendlyName, "Oid.FriendlyName");
-            Assert.AreEqual (defaultOid, ca.Oid.Value, "Oid.Value");
-            Assert.AreEqual (0, ca.Values.Count, "Values");
+            Oid o = new Oid(defaultOid);
+            CryptographicAttribute ca = new CryptographicAttribute(o);
+            Assert.AreEqual(defaultName, ca.Oid.FriendlyName, "Oid.FriendlyName");
+            Assert.AreEqual(defaultOid, ca.Oid.Value, "Oid.Value");
+            Assert.AreEqual(0, ca.Values.Count, "Values");
         }
 
         [Test]
         //BUG [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorOidNull () 
+        public void ConstructorOidNull()
         {
-            CryptographicAttribute ca = new CryptographicAttribute (null);
+            CryptographicAttribute ca = new CryptographicAttribute(null);
         }
 
         [Test]
-        public void ConstructorOidArrayList () 
+        public void ConstructorOidArrayList()
         {
-            Oid o = new Oid (defaultOid);
-            ArrayList al = new ArrayList ();
-            CryptographicAttribute ca = new CryptographicAttribute (o, al);
-            Assert.AreEqual (defaultName, ca.Oid.FriendlyName, "Oid.FriendlyName");
-            Assert.AreEqual (defaultOid, ca.Oid.Value, "Oid.Value");
-            Assert.AreEqual (0, ca.Values.Count, "Values");
-        }
-
-        [Test]
-        //BUG [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorOidNullArrayList () 
-        {
-            ArrayList al = new ArrayList ();
-            CryptographicAttribute ca = new CryptographicAttribute (null, al);
+            Oid o = new Oid(defaultOid);
+            ArrayList al = new ArrayList();
+            CryptographicAttribute ca = new CryptographicAttribute(o, al);
+            Assert.AreEqual(defaultName, ca.Oid.FriendlyName, "Oid.FriendlyName");
+            Assert.AreEqual(defaultOid, ca.Oid.Value, "Oid.Value");
+            Assert.AreEqual(0, ca.Values.Count, "Values");
         }
 
         [Test]
         //BUG [ExpectedException (typeof (ArgumentNullException))]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void ConstructorOidArrayListNull () 
+        public void ConstructorOidNullArrayList()
         {
-            Oid o = new Oid (defaultOid);
+            ArrayList al = new ArrayList();
+            CryptographicAttribute ca = new CryptographicAttribute(null, al);
+        }
+
+        [Test]
+        //BUG [ExpectedException (typeof (ArgumentNullException))]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void ConstructorOidArrayListNull()
+        {
+            Oid o = new Oid(defaultOid);
             ArrayList al = null; // do not confuse compiler
-            CryptographicAttribute ca = new CryptographicAttribute (o, al);
+            CryptographicAttribute ca = new CryptographicAttribute(o, al);
         }
 
         [Test]
-        public void ConstructorOidObject () 
+        public void ConstructorOidObject()
         {
-            Oid o = new Oid (defaultOid);
-            CryptographicAttribute ca = new CryptographicAttribute (o, o);
-            Assert.AreEqual (defaultName, ca.Oid.FriendlyName, "Oid.FriendlyName");
-            Assert.AreEqual (defaultOid, ca.Oid.Value, "Oid.Value");
-            Assert.AreEqual (1, ca.Values.Count, "Values");
-        }
-
-        [Test]
-        //BUG [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorOidNullObject () 
-        {
-            Oid o = new Oid (defaultOid);
-            CryptographicAttribute ca = new CryptographicAttribute (null, o);
+            Oid o = new Oid(defaultOid);
+            CryptographicAttribute ca = new CryptographicAttribute(o, o);
+            Assert.AreEqual(defaultName, ca.Oid.FriendlyName, "Oid.FriendlyName");
+            Assert.AreEqual(defaultOid, ca.Oid.Value, "Oid.Value");
+            Assert.AreEqual(1, ca.Values.Count, "Values");
         }
 
         [Test]
         //BUG [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorOidObjectNull () 
+        public void ConstructorOidNullObject()
         {
-            Oid o = new Oid (defaultOid);
+            Oid o = new Oid(defaultOid);
+            CryptographicAttribute ca = new CryptographicAttribute(null, o);
+        }
+
+        [Test]
+        //BUG [ExpectedException (typeof (ArgumentNullException))]
+        public void ConstructorOidObjectNull()
+        {
+            Oid o = new Oid(defaultOid);
             object obj = null; // do not confuse compiler
-            CryptographicAttribute ca = new CryptographicAttribute (o, obj);
+            CryptographicAttribute ca = new CryptographicAttribute(o, obj);
         }
     }
 }
-

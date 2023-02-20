@@ -4,13 +4,11 @@ namespace Mono.Linker.Tests.Cases.Attributes.OnlyKeepUsed.Dependencies
 {
     public class AttributeDefinedAndUsedInOtherAssemblyIsKept_Lib
     {
-        public static void UseTheAttributeType ()
+        public static void UseTheAttributeType()
         {
-            var str = typeof (FooAttribute).ToString ();
+            var str = typeof(FooAttribute).ToString();
         }
 
-        public class FooAttribute : Attribute
-        {
-        }
+        public class FooAttribute : Attribute { }
     }
 }

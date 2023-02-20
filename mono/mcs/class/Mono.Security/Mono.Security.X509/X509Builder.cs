@@ -5,7 +5,7 @@
 //    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2002, 2003 Motus Technologies Inc. (http://www.motus.com)
-// (C) 2004 Novell (http://www.novell.com) 
+// (C) 2004 Novell (http://www.novell.com)
 //
 
 //
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,24 +35,25 @@ using System.Security.Cryptography;
 
 using Mono.Security;
 
-namespace Mono.Security.X509 {
-
-    public abstract class X509Builder {
-
+namespace Mono.Security.X509
+{
+    public abstract class X509Builder
+    {
         private const string defaultHash = "SHA1";
         private string hashName;
 
-        protected X509Builder ()
+        protected X509Builder()
         {
             hashName = defaultHash;
         }
 
-        protected abstract ASN1 ToBeSigned (string hashName);
+        protected abstract ASN1 ToBeSigned(string hashName);
 
         // move to PKCS1
-        protected string GetOid (string hashName) 
+        protected string GetOid(string hashName)
         {
-            switch (hashName.ToLower (CultureInfo.InvariantCulture)) {
+            switch (hashName.ToLower(CultureInfo.InvariantCulture))
+            {
                 case "md2":
                     // md2withRSAEncryption (1 2 840 113549 1 1 2)
                     return "1.2.840.113549.1.1.2";
@@ -75,13 +76,15 @@ namespace Mono.Security.X509 {
                     // sha512WithRSAEncryption     OBJECT IDENTIFIER ::= { pkcs-1 13 }
                     return "1.2.840.113549.1.1.13";
                 default:
-                    throw new NotSupportedException ("Unknown hash algorithm " + hashName);
+                    throw new NotSupportedException("Unknown hash algorithm " + hashName);
             }
         }
 
-        public string Hash {
+        public string Hash
+        {
             get { return hashName; }
-            set { 
+            set
+            {
                 if (hashName == null)
                     hashName = defaultHash;
                 else
@@ -89,66 +92,66 @@ namespace Mono.Security.X509 {
             }
         }
 
-        public virtual byte[] Sign (AsymmetricAlgorithm aa) 
+        public virtual byte[] Sign(AsymmetricAlgorithm aa)
         {
             if (aa is RSA)
-                return Sign (aa as RSA);
+                return Sign(aa as RSA);
             else if (aa is DSA)
-                return Sign (aa as DSA);
+                return Sign(aa as DSA);
             else
-                throw new NotSupportedException ("Unknown Asymmetric Algorithm " + aa.ToString());
+                throw new NotSupportedException("Unknown Asymmetric Algorithm " + aa.ToString());
         }
 
-        private byte[] Build (ASN1 tbs, string hashoid, byte[] signature) 
+        private byte[] Build(ASN1 tbs, string hashoid, byte[] signature)
         {
-            ASN1 builder = new ASN1 (0x30);
-            builder.Add (tbs);
-            builder.Add (PKCS7.AlgorithmIdentifier (hashoid));
+            ASN1 builder = new ASN1(0x30);
+            builder.Add(tbs);
+            builder.Add(PKCS7.AlgorithmIdentifier(hashoid));
             // first byte of BITSTRING is the number of unused bits in the first byte
-            byte[] bitstring = new byte [signature.Length + 1];
-            Buffer.BlockCopy (signature, 0, bitstring, 1, signature.Length);
-            builder.Add (new ASN1 (0x03, bitstring));
-            return builder.GetBytes ();
+            byte[] bitstring = new byte[signature.Length + 1];
+            Buffer.BlockCopy(signature, 0, bitstring, 1, signature.Length);
+            builder.Add(new ASN1(0x03, bitstring));
+            return builder.GetBytes();
         }
 
-        public virtual byte[] Sign (RSA key)
+        public virtual byte[] Sign(RSA key)
         {
-            string oid = GetOid (hashName);
-            ASN1 tbs = ToBeSigned (oid);
-            HashAlgorithm ha = HashAlgorithm.Create (hashName);
-            byte[] hash = ha.ComputeHash (tbs.GetBytes ());
+            string oid = GetOid(hashName);
+            ASN1 tbs = ToBeSigned(oid);
+            HashAlgorithm ha = HashAlgorithm.Create(hashName);
+            byte[] hash = ha.ComputeHash(tbs.GetBytes());
 
-            RSAPKCS1SignatureFormatter pkcs1 = new RSAPKCS1SignatureFormatter (key);
-            pkcs1.SetHashAlgorithm (hashName);
-            byte[] signature = pkcs1.CreateSignature (hash);
+            RSAPKCS1SignatureFormatter pkcs1 = new RSAPKCS1SignatureFormatter(key);
+            pkcs1.SetHashAlgorithm(hashName);
+            byte[] signature = pkcs1.CreateSignature(hash);
 
-            return Build (tbs, oid, signature);
+            return Build(tbs, oid, signature);
         }
 
-        public virtual byte[] Sign (DSA key) 
+        public virtual byte[] Sign(DSA key)
         {
             string oid = "1.2.840.10040.4.3";
-            ASN1 tbs = ToBeSigned (oid);
-            HashAlgorithm ha = HashAlgorithm.Create (hashName);
+            ASN1 tbs = ToBeSigned(oid);
+            HashAlgorithm ha = HashAlgorithm.Create(hashName);
             if (!(ha is SHA1))
-                throw new NotSupportedException ("Only SHA-1 is supported for DSA");
-            byte[] hash = ha.ComputeHash (tbs.GetBytes ());
+                throw new NotSupportedException("Only SHA-1 is supported for DSA");
+            byte[] hash = ha.ComputeHash(tbs.GetBytes());
 
-            DSASignatureFormatter dsa = new DSASignatureFormatter (key);
-            dsa.SetHashAlgorithm (hashName);
-            byte[] rs = dsa.CreateSignature (hash);
+            DSASignatureFormatter dsa = new DSASignatureFormatter(key);
+            dsa.SetHashAlgorithm(hashName);
+            byte[] rs = dsa.CreateSignature(hash);
 
             // split R and S
-            byte[] r = new byte [20];
-            Buffer.BlockCopy (rs, 0, r, 0, 20);
-            byte[] s = new byte [20];
-            Buffer.BlockCopy (rs, 20, s, 0, 20);
-            ASN1 signature = new ASN1 (0x30);
-            signature.Add (new ASN1 (0x02, r));
-            signature.Add (new ASN1 (0x02, s));
+            byte[] r = new byte[20];
+            Buffer.BlockCopy(rs, 0, r, 0, 20);
+            byte[] s = new byte[20];
+            Buffer.BlockCopy(rs, 20, s, 0, 20);
+            ASN1 signature = new ASN1(0x30);
+            signature.Add(new ASN1(0x02, r));
+            signature.Add(new ASN1(0x02, s));
 
             // dsaWithSha1 (1 2 840 10040 4 3)
-            return Build (tbs, oid, signature.GetBytes ());
+            return Build(tbs, oid, signature.GetBytes());
         }
     }
 }

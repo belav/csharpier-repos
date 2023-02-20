@@ -26,7 +26,6 @@ namespace Moq.Behaviors
 
             if (this.mock.CallBase)
             {
-
 #if FEATURE_DEFAULT_INTERFACE_IMPLEMENTATIONS
                 var tryCallDefaultInterfaceImplementation = false;
 #endif
@@ -98,7 +97,6 @@ namespace Moq.Behaviors
                     return;
                 }
 #endif
-
             }
 
             if (method.ReturnType != typeof(void))
@@ -106,7 +104,12 @@ namespace Moq.Behaviors
                 var returnValue = this.mock.GetDefaultValue(method, out var innerMock);
                 if (innerMock != null && invocation.MatchingSetup == null)
                 {
-                    var setup = new InnerMockSetup(originalExpression: null, this.mock, expectation: MethodExpectation.CreateFrom(invocation), returnValue);
+                    var setup = new InnerMockSetup(
+                        originalExpression: null,
+                        this.mock,
+                        expectation: MethodExpectation.CreateFrom(invocation),
+                        returnValue
+                    );
                     this.mock.MutableSetups.Add(setup);
                     setup.Execute(invocation);
                 }

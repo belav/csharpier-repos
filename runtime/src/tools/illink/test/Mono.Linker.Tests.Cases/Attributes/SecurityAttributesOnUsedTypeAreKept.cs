@@ -5,20 +5,18 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Attributes
 {
-    [SetupLinkerArgument ("--strip-security", "false")]
+    [SetupLinkerArgument("--strip-security", "false")]
     class SecurityAttributesOnUsedTypeAreKept
     {
-        static void Main ()
+        static void Main()
         {
-            new Foo ();
+            new Foo();
         }
 
-        [SecurityPermission (SecurityAction.LinkDemand)]
+        [SecurityPermission(SecurityAction.LinkDemand)]
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptSecurity (typeof (SecurityPermissionAttribute))]
-        class Foo
-        {
-        }
+        [KeptMember(".ctor()")]
+        [KeptSecurity(typeof(SecurityPermissionAttribute))]
+        class Foo { }
     }
 }

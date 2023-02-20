@@ -4,7 +4,7 @@
 
 static class Extensions
 {
-    public static string Foo (this string s)
+    public static string Foo(this string s)
     {
         return s;
     }
@@ -12,8 +12,8 @@ static class Extensions
 
 public class M
 {
-    public static void Main ()
+    public static void Main()
     {
-        1.Foo ("foo");
+        1.Foo("foo");
     }
 }

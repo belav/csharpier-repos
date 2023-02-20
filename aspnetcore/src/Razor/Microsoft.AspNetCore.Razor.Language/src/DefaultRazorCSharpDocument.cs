@@ -20,7 +20,8 @@ internal class DefaultRazorCSharpDocument : RazorCSharpDocument
         RazorCodeGenerationOptions options,
         RazorDiagnostic[] diagnostics,
         SourceMapping[] sourceMappings,
-        LinePragma[] linePragmas)
+        LinePragma[] linePragmas
+    )
     {
         if (generatedCode == null)
         {

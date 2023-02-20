@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.CompensatingResourceManager.Compensator.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,24 +31,26 @@
 using System;
 using System.EnterpriseServices;
 
-namespace System.EnterpriseServices.CompensatingResourceManager {
-    public class Compensator : ServicedComponent{
-
+namespace System.EnterpriseServices.CompensatingResourceManager
+{
+    public class Compensator : ServicedComponent
+    {
         #region Constructors
 
         [MonoTODO]
-        public Compensator ()
+        public Compensator()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion // Constructors
 
         #region Properties
 
-        public Clerk Clerk {
+        public Clerk Clerk
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
         #endregion // Properties
@@ -56,57 +58,57 @@ namespace System.EnterpriseServices.CompensatingResourceManager {
         #region Methods
 
         [MonoTODO]
-        public virtual bool AbortRecord (LogRecord rec)
+        public virtual bool AbortRecord(LogRecord rec)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void BeginAbort (bool fRecovery)
+        public virtual void BeginAbort(bool fRecovery)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void BeginCommit (bool fRecovery)
+        public virtual void BeginCommit(bool fRecovery)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void BeginPrepare ()
+        public virtual void BeginPrepare()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual bool CommitRecord (LogRecord rec)
+        public virtual bool CommitRecord(LogRecord rec)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void EndAbort ()
+        public virtual void EndAbort()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void EndCommit ()
+        public virtual void EndCommit()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual bool EndPrepare ()
+        public virtual bool EndPrepare()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual bool PrepareRecord (LogRecord rec)
+        public virtual bool PrepareRecord(LogRecord rec)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion // Methods

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,19 +38,25 @@ namespace MonoTests.System.IdentityModel.Selectors
     public class LocalIdKeyIdentifierClauseTest
     {
         [Test]
-        public void LocalId ()
+        public void LocalId()
         {
-            Assert.AreEqual ("urn:local-id1",
-                new LocalIdKeyIdentifierClause ("urn:local-id1").LocalId, "#1");
-            Assert.AreEqual ("#local-id1",
-                new LocalIdKeyIdentifierClause ("#local-id1").LocalId, "#2");
+            Assert.AreEqual(
+                "urn:local-id1",
+                new LocalIdKeyIdentifierClause("urn:local-id1").LocalId,
+                "#1"
+            );
+            Assert.AreEqual(
+                "#local-id1",
+                new LocalIdKeyIdentifierClause("#local-id1").LocalId,
+                "#2"
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void CreateKey ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void CreateKey()
         {
-            new LocalIdKeyIdentifierClause ("urn:local-id1").CreateKey ();
+            new LocalIdKeyIdentifierClause("urn:local-id1").CreateKey();
         }
     }
 }

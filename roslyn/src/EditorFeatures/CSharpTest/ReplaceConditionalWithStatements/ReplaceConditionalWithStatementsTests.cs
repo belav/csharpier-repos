@@ -47,7 +47,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -80,7 +81,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -113,7 +115,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -150,7 +153,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -181,7 +185,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -191,14 +196,12 @@ public class ReplaceConditionalWithStatementsTests
         {
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
             TestState = { OutputKind = OutputKind.ConsoleApplication },
-            TestCode =
-            """
+            TestCode = """
             bool b = true;
             long a;
             a = $$b ? 0 : 1L;
             """,
-            FixedCode =
-            """
+            FixedCode = """
             bool b = true;
             long a;
             if (b)
@@ -220,14 +223,12 @@ public class ReplaceConditionalWithStatementsTests
         {
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
             TestState = { OutputKind = OutputKind.ConsoleApplication },
-            TestCode =
-            """
+            TestCode = """
             bool b = true;
             long a;
             $$a = b ? 0 : 1L;
             """,
-            FixedCode =
-            """
+            FixedCode = """
             bool b = true;
             long a;
             if (b)
@@ -245,8 +246,7 @@ public class ReplaceConditionalWithStatementsTests
     [Fact]
     public async Task TestRefLocalDeclaration1()
     {
-        var source =
-            """
+        var source = """
             class C
             {
                 void M(bool b)
@@ -263,8 +263,7 @@ public class ReplaceConditionalWithStatementsTests
     [Fact]
     public async Task TestUsingLocalDeclaration1()
     {
-        var source =
-            """
+        var source = """
             using System;
             class C
             {
@@ -307,7 +306,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -316,8 +316,7 @@ public class ReplaceConditionalWithStatementsTests
         await new VerifyCS.Test
         {
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp10,
-            TestCode =
-            """
+            TestCode = """
             record X(int A);
             class C
             {
@@ -333,8 +332,7 @@ public class ReplaceConditionalWithStatementsTests
                 }
             }
             """,
-            FixedCode =
-            """
+            FixedCode = """
             record X(int A);
             class C
             {
@@ -389,7 +387,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -421,7 +420,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -453,7 +453,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -491,7 +492,8 @@ public class ReplaceConditionalWithStatementsTests
             
                 int N(int v) => v;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -501,13 +503,11 @@ public class ReplaceConditionalWithStatementsTests
         {
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp10,
             TestState = { OutputKind = OutputKind.ConsoleApplication },
-            TestCode =
-            """
+            TestCode = """
             bool b = true;
             object a = $$b ? 0 : 1L;
             """,
-            FixedCode =
-            """
+            FixedCode = """
             bool b = true;
             object a;
 
@@ -530,13 +530,11 @@ public class ReplaceConditionalWithStatementsTests
         {
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp10,
             TestState = { OutputKind = OutputKind.ConsoleApplication },
-            TestCode =
-            """
+            TestCode = """
             bool b = true;
             $$object a = b ? 0 : 1L;
             """,
-            FixedCode =
-            """
+            FixedCode = """
             bool b = true;
             object a;
 
@@ -559,13 +557,11 @@ public class ReplaceConditionalWithStatementsTests
         {
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp10,
             TestState = { OutputKind = OutputKind.ConsoleApplication },
-            TestCode =
-            """
+            TestCode = """
             bool b = true;
             var a = $$b ? 0 : 1L;
             """,
-            FixedCode =
-            """
+            FixedCode = """
             bool b = true;
             long a;
 
@@ -609,7 +605,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -640,7 +637,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -671,7 +669,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -704,7 +703,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -737,7 +737,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -770,7 +771,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -803,7 +805,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -840,7 +843,8 @@ public class ReplaceConditionalWithStatementsTests
             
                 void F<T>(T value) => Console.WriteLine(typeof(T));
             }
-            """);
+            """
+        );
     }
 
     [Fact(Skip = "Causes assert in compiler layer")]
@@ -878,7 +882,8 @@ public class ReplaceConditionalWithStatementsTests
             
                 void F(object value) => Console.WriteLine(value.GetType());
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -911,7 +916,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -944,7 +950,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -979,7 +986,8 @@ public class ReplaceConditionalWithStatementsTests
                     return default;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1014,7 +1022,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1049,7 +1058,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1082,7 +1092,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1115,7 +1126,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1152,7 +1164,8 @@ public class ReplaceConditionalWithStatementsTests
 
                 int N(int v) => v;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1190,7 +1203,8 @@ public class ReplaceConditionalWithStatementsTests
 
                 int N(int v) => v;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1225,7 +1239,8 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1260,6 +1275,7 @@ public class ReplaceConditionalWithStatementsTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 }

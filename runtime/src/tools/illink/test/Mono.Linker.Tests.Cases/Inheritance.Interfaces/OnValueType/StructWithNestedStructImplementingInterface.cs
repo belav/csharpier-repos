@@ -9,86 +9,70 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnValueType
     /// </summary>
     public class StructWithNestedStructImplementingInterface
     {
-        public static void Main ()
+        public static void Main()
         {
-            var type = typeof (IBuildable<>);
-            GC.KeepAlive (type);
-            var test = new Profile ();
-            test.Foo ();
+            var type = typeof(IBuildable<>);
+            GC.KeepAlive(type);
+            var test = new Profile();
+            test.Foo();
         }
 
         [Kept]
-        public interface IRunner
-        {
-        }
+        public interface IRunner { }
 
-        public interface IBuildable
-        {
-        }
+        public interface IBuildable { }
 
         [Kept]
         public interface IBuilder
         {
-            Result<IRunner> Build (Node node, Node root, World world);
+            Result<IRunner> Build(Node node, Node root, World world);
         }
 
         [Kept]
-        public interface IBuildable<T> : IBuildable where T : IBuilder, new()
-        {
-        }
+        public interface IBuildable<T> : IBuildable
+            where T : IBuilder, new() { }
 
-        public struct Result<T> : IResult
-        {
-        }
+        public struct Result<T> : IResult { }
 
-        public class Node
-        {
-        }
+        public class Node { }
 
-        public class World
-        {
-        }
+        public class World { }
 
-        public interface IResult
-        {
-        }
+        public interface IResult { }
 
         [Kept]
-        [KeptInterface (typeof (IBuilder))]
-        [KeptMember (".ctor()")]
-        public abstract class Builder<T> : IBuilder where T : IRunner
+        [KeptInterface(typeof(IBuilder))]
+        [KeptMember(".ctor()")]
+        public abstract class Builder<T> : IBuilder
+            where T : IRunner
         {
-            public abstract Result<T> Build (Node node, Node root, World world);
+            public abstract Result<T> Build(Node node, Node root, World world);
 
-            Result<IRunner> IBuilder.Build (Node node, Node root, World world)
+            Result<IRunner> IBuilder.Build(Node node, Node root, World world)
             {
-                return default (Result<IRunner>);
+                return default(Result<IRunner>);
             }
         }
 
         [Kept]
-        [KeptInterface (typeof (IBuildable<Profile.Builder>))]
+        [KeptInterface(typeof(IBuildable<Profile.Builder>))]
         public struct Profile : IBuildable<Profile.Builder>
         {
             [Kept]
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
 
             [Kept]
-            [KeptInterface (typeof (IRunner))]
-            private sealed class Runner : IRunner
-            {
-            }
+            [KeptInterface(typeof(IRunner))]
+            private sealed class Runner : IRunner { }
 
             [Kept]
-            [KeptBaseType (typeof (Builder<Runner>))]
-            [KeptMember (".ctor()")]
+            [KeptBaseType(typeof(Builder<Runner>))]
+            [KeptMember(".ctor()")]
             private sealed class Builder : Builder<Runner>
             {
-                public override Result<Runner> Build (Node node, Node root, World world)
+                public override Result<Runner> Build(Node node, Node root, World world)
                 {
-                    return default (Result<Runner>);
+                    return default(Result<Runner>);
                 }
             }
         }

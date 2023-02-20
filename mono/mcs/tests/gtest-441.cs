@@ -16,10 +16,9 @@ namespace Name
             get { return list; }
         }
 
-        public static void Main (string[] args)
+        public static void Main(string[] args)
         {
-            Subclass c = new Subclass ();
+            Subclass c = new Subclass();
         }
     }
 }
-

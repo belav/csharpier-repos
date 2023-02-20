@@ -4,5 +4,5 @@
 
 using System;
 
-[CLSCompliant (true)]
-public delegate void D ();
+[CLSCompliant(true)]
+public delegate void D();

@@ -5,7 +5,10 @@ namespace RoutingSandbox.Framework;
 
 public static class FrameworkEndpointRouteBuilderExtensions
 {
-    public static IEndpointConventionBuilder MapFramework(this IEndpointRouteBuilder endpoints, Action<FrameworkConfigurationBuilder> configure)
+    public static IEndpointConventionBuilder MapFramework(
+        this IEndpointRouteBuilder endpoints,
+        Action<FrameworkConfigurationBuilder> configure
+    )
     {
         if (endpoints == null)
         {
@@ -16,7 +19,8 @@ public static class FrameworkEndpointRouteBuilderExtensions
             throw new ArgumentNullException(nameof(configure));
         }
 
-        var dataSource = endpoints.ServiceProvider.GetRequiredService<FrameworkEndpointDataSource>();
+        var dataSource =
+            endpoints.ServiceProvider.GetRequiredService<FrameworkEndpointDataSource>();
 
         var configurationBuilder = new FrameworkConfigurationBuilder(dataSource);
         configure(configurationBuilder);

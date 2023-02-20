@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,64 +33,77 @@ namespace System
 {
     public class UriTemplateMatch
     {
-        public UriTemplateMatch ()
-        {
-        }
+        public UriTemplateMatch() { }
 
-        Uri base_uri, request_uri;
-        NameValueCollection nvc, query_params;
+        Uri base_uri,
+            request_uri;
+        NameValueCollection nvc,
+            query_params;
         object data;
         UriTemplate template;
-        Collection<string> path_segments, wildcard;
+        Collection<string> path_segments,
+            wildcard;
 
-        public Uri BaseUri {
+        public Uri BaseUri
+        {
             get { return base_uri; }
             set { base_uri = value; }
         }
 
-        public NameValueCollection BoundVariables {
-            get {
+        public NameValueCollection BoundVariables
+        {
+            get
+            {
                 if (nvc == null)
-                    nvc = new NameValueCollection ();
+                    nvc = new NameValueCollection();
                 return nvc;
             }
         }
 
-        public object Data {
+        public object Data
+        {
             get { return data; }
             set { data = value; }
         }
 
-        public NameValueCollection QueryParameters {
-            get {
+        public NameValueCollection QueryParameters
+        {
+            get
+            {
                 if (query_params == null)
-                    query_params = new NameValueCollection ();
+                    query_params = new NameValueCollection();
                 return query_params;
             }
         }
 
-        public Collection<string> RelativePathSegments { 
-            get {
+        public Collection<string> RelativePathSegments
+        {
+            get
+            {
                 if (path_segments == null)
-                    path_segments = new Collection<string> ();
+                    path_segments = new Collection<string>();
                 return path_segments;
             }
         }
 
-        public Uri RequestUri {
+        public Uri RequestUri
+        {
             get { return request_uri; }
             set { request_uri = value; }
         }
 
-        public UriTemplate Template {
+        public UriTemplate Template
+        {
             get { return template; }
             set { template = value; }
         }
 
-        public Collection<string> WildcardPathSegments {
-            get {
+        public Collection<string> WildcardPathSegments
+        {
+            get
+            {
                 if (wildcard == null)
-                    wildcard = new Collection<string> ();
+                    wildcard = new Collection<string>();
                 return wildcard;
             }
         }

@@ -40,11 +40,11 @@ namespace Tester
 {
     class CacheItemComparer : IComparer
     {
-        public int Compare (object o1, object o2)
+        public int Compare(object o1, object o2)
         {
             CacheItem x = o1 as CacheItem;
             CacheItem y = o2 as CacheItem;
-            
+
             if (x == null && y == null)
                 return 0;
 
@@ -56,7 +56,7 @@ namespace Tester
 
             if (x.ExpiresAt == y.ExpiresAt)
                 return 0;
-            
+
             return x.ExpiresAt < y.ExpiresAt ? -1 : 1;
         }
     }

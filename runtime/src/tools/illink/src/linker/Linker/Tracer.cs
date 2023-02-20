@@ -41,42 +41,45 @@ namespace Mono.Linker
 
         List<IDependencyRecorder>? recorders;
 
-        public Tracer (LinkContext context)
+        public Tracer(LinkContext context)
         {
             this.context = context;
         }
 
-        public void Finish ()
+        public void Finish()
         {
-            if (recorders != null) {
-                foreach (var recorder in recorders) {
-                    recorder.FinishRecording ();
+            if (recorders != null)
+            {
+                foreach (var recorder in recorders)
+                {
+                    recorder.FinishRecording();
                     if (recorder is IDisposable disposableRecorder)
-                        disposableRecorder.Dispose ();
+                        disposableRecorder.Dispose();
                 }
             }
 
             recorders = null;
         }
 
-        public void AddRecorder (IDependencyRecorder recorder)
+        public void AddRecorder(IDependencyRecorder recorder)
         {
-            recorders ??= new List<IDependencyRecorder> ();
+            recorders ??= new List<IDependencyRecorder>();
 
-            recorders.Add (recorder);
+            recorders.Add(recorder);
         }
 
-        [MemberNotNullWhen (true, "recorders")]
-        bool IsRecordingEnabled ()
+        [MemberNotNullWhen(true, "recorders")]
+        bool IsRecordingEnabled()
         {
             return recorders != null;
         }
 
-        public void AddDirectDependency (object target, in DependencyInfo reason, bool marked)
+        public void AddDirectDependency(object target, in DependencyInfo reason, bool marked)
         {
-            if (IsRecordingEnabled ()) {
+            if (IsRecordingEnabled())
+            {
                 foreach (IDependencyRecorder recorder in recorders)
-                    recorder.RecordDependency (target, reason, marked);
+                    recorder.RecordDependency(target, reason, marked);
             }
         }
     }

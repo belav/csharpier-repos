@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -9,19 +9,19 @@
 //
 //  Namespace:    System.Web.UI.WebControls[Windows.Forms].Charting
 //
-//    Classes:    ChartRenderingEngine, ValueA, PointA, RectangleA, 
+//    Classes:    ChartRenderingEngine, ValueA, PointA, RectangleA,
 //                ColorA
 //
-//  Purpose:    ChartRenderingEngine class provides a common interface 
-//              to the graphics rendering and animation engines. 
-//              Internally it uses SvgChartGraphics, FlashGraphics or 
-//              GdiGraphics classes depending on the ActiveRenderingType 
+//  Purpose:    ChartRenderingEngine class provides a common interface
+//              to the graphics rendering and animation engines.
+//              Internally it uses SvgChartGraphics, FlashGraphics or
+//              GdiGraphics classes depending on the ActiveRenderingType
 //              property settings.
 //
 //              ValueA, PointA, RectangleA and ColorA classes are
 //              used to store data about animated values like colors
-//              position or rectangles. They store starting value/time, 
-//              end value/time, repeat flags and other settings. These 
+//              position or rectangles. They store starting value/time,
+//              end value/time, repeat flags and other settings. These
 //              clases are used with animation engines.
 //
 //    Reviwed:    AG - Jul 15, 2003
@@ -52,14 +52,12 @@ using System.Web.UI.DataVisualization.Charting.Utilities;
 using System.Web.UI.DataVisualization.Charting.Borders3D;
 #endif
 
-
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
 namespace System.Web.UI.DataVisualization.Charting
-
 #endif
 {
     #region Enumerations
@@ -72,25 +70,39 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// GDI+ AxisName
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Gdi")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Gdi"
+        )]
         Gdi,
 
         /// <summary>
         /// SVG AxisName
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Svg")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Svg"
+        )]
         Svg,
     }
 
     #endregion // Enumerations
 
     /// <summary>
-    /// The ChartGraphics class provides a common interface to the 
+    /// The ChartGraphics class provides a common interface to the
     /// graphics rendering.
     /// </summary>
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public partial class ChartGraphics
     {
@@ -118,13 +130,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="pen">Pen object that determines the color, width, and style of the line.</param>
         /// <param name="pt1">PointF structure that represents the first point to connect.</param>
         /// <param name="pt2">PointF structure that represents the second point to connect.</param>
-        internal void DrawLine(
-            Pen pen,
-            PointF pt1,
-            PointF pt2
-            )
+        internal void DrawLine(Pen pen, PointF pt1, PointF pt2)
         {
-            RenderingObject.DrawLine( pen, pt1, pt2 );
+            RenderingObject.DrawLine(pen, pt1, pt2);
         }
 
         /// <summary>
@@ -135,15 +143,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="y1">y-coordinate of the first point.</param>
         /// <param name="x2">x-coordinate of the second point.</param>
         /// <param name="y2">y-coordinate of the second point.</param>
-        internal void DrawLine(
-            Pen pen,
-            float x1,
-            float y1,
-            float x2,
-            float y2
-            )
+        internal void DrawLine(Pen pen, float x1, float y1, float x2, float y2)
         {
-            RenderingObject.DrawLine( pen, x1, y1, x2, y2 );
+            RenderingObject.DrawLine(pen, x1, y1, x2, y2);
         }
 
         /// <summary>
@@ -166,9 +168,9 @@ namespace System.Web.UI.DataVisualization.Charting
             int srcHeight,
             GraphicsUnit srcUnit,
             ImageAttributes imageAttr
-            )
+        )
         {
-            RenderingObject.DrawImage( 
+            RenderingObject.DrawImage(
                 image,
                 destRect,
                 srcX,
@@ -177,11 +179,11 @@ namespace System.Web.UI.DataVisualization.Charting
                 srcHeight,
                 srcUnit,
                 imageAttr
-                );
+            );
         }
 
         /// <summary>
-        /// Draws an ellipse defined by a bounding rectangle specified by 
+        /// Draws an ellipse defined by a bounding rectangle specified by
         /// a pair of coordinates, a height, and a width.
         /// </summary>
         /// <param name="pen">Pen object that determines the color, width, and style of the ellipse.</param>
@@ -189,20 +191,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="y">y-coordinate of the upper-left corner of the bounding rectangle that defines the ellipse.</param>
         /// <param name="width">Width of the bounding rectangle that defines the ellipse.</param>
         /// <param name="height">Height of the bounding rectangle that defines the ellipse.</param>
-        internal void DrawEllipse(
-            Pen pen,
-            float x,
-            float y,
-            float width,
-            float height
-            )
+        internal void DrawEllipse(Pen pen, float x, float y, float width, float height)
         {
-            RenderingObject.DrawEllipse( pen, x, y, width, height );
+            RenderingObject.DrawEllipse(pen, x, y, width, height);
         }
 
         /// <summary>
-        /// Draws a cardinal spline through a specified array of PointF structures 
-        /// using a specified tension. The drawing begins offset from 
+        /// Draws a cardinal spline through a specified array of PointF structures
+        /// using a specified tension. The drawing begins offset from
         /// the beginning of the array.
         /// </summary>
         /// <param name="pen">Pen object that determines the color, width, and height of the curve.</param>
@@ -216,7 +212,7 @@ namespace System.Web.UI.DataVisualization.Charting
             int offset,
             int numberOfSegments,
             float tension
-            )
+        )
         {
             ChartGraphics chartGraphics = this as ChartGraphics;
             if (chartGraphics == null || !chartGraphics.IsMetafile)
@@ -226,7 +222,7 @@ namespace System.Web.UI.DataVisualization.Charting
             else
             {
                 // Special handling required for the metafiles. We cannot pass large array of
-                // points because they will be persisted inside EMF file and cause exponential 
+                // points because they will be persisted inside EMF file and cause exponential
                 // increase in emf file size. Draw curve method uses additional 2, 3 or 4 points
                 // depending on which segement is drawn.
                 PointF[] pointsExact = null;
@@ -268,7 +264,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         offset = 1;
                     }
 
-                    // Render the curve using minimum number of required points in the array 
+                    // Render the curve using minimum number of required points in the array
                     RenderingObject.DrawCurve(pen, pointsExact, offset, numberOfSegments, tension);
                 }
             }
@@ -282,15 +278,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="y">y-coordinate of the upper-left corner of the rectangle to draw.</param>
         /// <param name="width">Width of the rectangle to draw.</param>
         /// <param name="height">Height of the rectangle to draw.</param>
-        internal void DrawRectangle(
-            Pen pen,
-            int x,
-            int y,
-            int width,
-            int height
-            )
+        internal void DrawRectangle(Pen pen, int x, int y, int width, int height)
         {
-            RenderingObject.DrawRectangle( pen, x, y, width, height );
+            RenderingObject.DrawRectangle(pen, x, y, width, height);
         }
 
         /// <summary>
@@ -298,12 +288,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="pen">Pen object that determines the color, width, and style of the polygon.</param>
         /// <param name="points">Array of PointF structures that represent the vertices of the polygon.</param>
-        internal void DrawPolygon(
-            Pen pen,
-            PointF[] points
-            )
+        internal void DrawPolygon(Pen pen, PointF[] points)
         {
-            RenderingObject.DrawPolygon( pen, points );
+            RenderingObject.DrawPolygon(pen, points);
         }
 
         /// <summary>
@@ -320,13 +307,16 @@ namespace System.Web.UI.DataVisualization.Charting
             Brush brush,
             RectangleF layoutRectangle,
             StringFormat format
-            )
+        )
         {
             using (StringFormat fmt = (StringFormat)format.Clone())
             {
-                if ( IsRightToLeft )
+                if (IsRightToLeft)
                     fmt.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
-                if (!IsTextClipped && (fmt.FormatFlags & StringFormatFlags.NoClip) != StringFormatFlags.NoClip)
+                if (
+                    !IsTextClipped
+                    && (fmt.FormatFlags & StringFormatFlags.NoClip) != StringFormatFlags.NoClip
+                )
                     fmt.FormatFlags |= StringFormatFlags.NoClip;
                 RenderingObject.DrawString(s, font, brush, layoutRectangle, fmt);
             }
@@ -346,7 +336,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Brush brush,
             PointF point,
             StringFormat format
-            )
+        )
         {
             if (IsRightToLeft)
             {
@@ -364,7 +354,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     RenderingObject.DrawString(s, font, brush, point, fmt);
                 }
             }
-            else 
+            else
                 RenderingObject.DrawString(s, font, brush, point, format);
         }
 
@@ -388,9 +378,18 @@ namespace System.Web.UI.DataVisualization.Charting
             float srcHeight,
             GraphicsUnit srcUnit,
             ImageAttributes imageAttrs
-            )
+        )
         {
-            RenderingObject.DrawImage( image, destRect, srcX, srcY, srcWidth, srcHeight, srcUnit, imageAttrs );
+            RenderingObject.DrawImage(
+                image,
+                destRect,
+                srcX,
+                srcY,
+                srcWidth,
+                srcHeight,
+                srcUnit,
+                imageAttrs
+            );
         }
 
         /// <summary>
@@ -401,15 +400,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="y">The y-coordinate of the upper-left corner of the rectangle to draw.</param>
         /// <param name="width">The width of the rectangle to draw.</param>
         /// <param name="height">The height of the rectangle to draw.</param>
-        internal void DrawRectangle(
-            Pen pen,
-            float x,
-            float y,
-            float width,
-            float height
-            )
+        internal void DrawRectangle(Pen pen, float x, float y, float width, float height)
         {
-            RenderingObject.DrawRectangle( pen, x, y, width, height );
+            RenderingObject.DrawRectangle(pen, x, y, width, height);
         }
 
         /// <summary>
@@ -417,19 +410,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="pen">Pen object that determines the color, width, and style of the path.</param>
         /// <param name="path">GraphicsPath object to draw.</param>
-        internal void DrawPath(
-            Pen pen,
-            GraphicsPath path
-            )
+        internal void DrawPath(Pen pen, GraphicsPath path)
         {
             // Check if path is empty
-            if(path == null || 
-                path.PointCount == 0)
+            if (path == null || path.PointCount == 0)
             {
                 return;
             }
 
-            RenderingObject.DrawPath( pen, path );
+            RenderingObject.DrawPath(pen, path);
         }
 
         /// <summary>
@@ -450,9 +439,9 @@ namespace System.Web.UI.DataVisualization.Charting
             float height,
             float startAngle,
             float sweepAngle
-            )
+        )
         {
-            RenderingObject.DrawPie( pen, x, y, width, height, startAngle, sweepAngle );
+            RenderingObject.DrawPie(pen, x, y, width, height, startAngle, sweepAngle);
         }
 
         /// <summary>
@@ -460,12 +449,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="pen">Pen object that determines the color, width, and style of the ellipse.</param>
         /// <param name="rect">RectangleF structure that defines the boundaries of the ellipse.</param>
-        internal void DrawEllipse(
-            Pen pen,
-            RectangleF rect
-            )
+        internal void DrawEllipse(Pen pen, RectangleF rect)
         {
-            RenderingObject.DrawEllipse( pen, rect );
+            RenderingObject.DrawEllipse(pen, rect);
         }
 
         /// <summary>
@@ -473,12 +459,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="pen">Pen object that determines the color, width, and style of the line segments.</param>
         /// <param name="points">Array of PointF structures that represent the points to connect.</param>
-        internal void DrawLines(
-            Pen pen,
-            PointF[] points
-            )
+        internal void DrawLines(Pen pen, PointF[] points)
         {
-            RenderingObject.DrawLines( pen, points );
+            RenderingObject.DrawLines(pen, points);
         }
 
         #endregion // Drawing Methods
@@ -486,17 +469,14 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Filling Methods
 
         /// <summary>
-        /// Fills the interior of an ellipse defined by a bounding rectangle 
+        /// Fills the interior of an ellipse defined by a bounding rectangle
         /// specified by a RectangleF structure.
         /// </summary>
         /// <param name="brush">Brush object that determines the characteristics of the fill.</param>
         /// <param name="rect">RectangleF structure that represents the bounding rectangle that defines the ellipse.</param>
-        internal void FillEllipse(
-            Brush brush,
-            RectangleF rect
-            )
+        internal void FillEllipse(Brush brush, RectangleF rect)
         {
-            RenderingObject.FillEllipse( brush, rect );
+            RenderingObject.FillEllipse(brush, rect);
         }
 
         /// <summary>
@@ -504,19 +484,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="brush">Brush object that determines the characteristics of the fill.</param>
         /// <param name="path">GraphicsPath object that represents the path to fill.</param>
-        internal void FillPath(
-            Brush brush,
-            GraphicsPath path
-            )
+        internal void FillPath(Brush brush, GraphicsPath path)
         {
             // Check if path is empty
-            if(path == null || 
-                path.PointCount == 0)
+            if (path == null || path.PointCount == 0)
             {
                 return;
             }
 
-            RenderingObject.FillPath( brush, path );
+            RenderingObject.FillPath(brush, path);
         }
 
         /// <summary>
@@ -524,12 +500,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="brush">Brush object that determines the characteristics of the fill.</param>
         /// <param name="region">Region object that represents the area to fill.</param>
-        internal void FillRegion(
-            Brush brush,
-            Region region
-            )
+        internal void FillRegion(Brush brush, Region region)
         {
-            RenderingObject.FillRegion( brush, region );
+            RenderingObject.FillRegion(brush, region);
         }
 
         /// <summary>
@@ -537,12 +510,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="brush">Brush object that determines the characteristics of the fill.</param>
         /// <param name="rect">RectangleF structure that represents the rectangle to fill.</param>
-        internal void FillRectangle(
-            Brush brush,
-            RectangleF rect
-            )
+        internal void FillRectangle(Brush brush, RectangleF rect)
         {
-            RenderingObject.FillRectangle( brush, rect );
+            RenderingObject.FillRectangle(brush, rect);
         }
 
         /// <summary>
@@ -553,15 +523,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="y">y-coordinate of the upper-left corner of the rectangle to fill.</param>
         /// <param name="width">Width of the rectangle to fill.</param>
         /// <param name="height">Height of the rectangle to fill.</param>
-        internal void FillRectangle(
-            Brush brush,
-            float x,
-            float y,
-            float width,
-            float height
-            )
+        internal void FillRectangle(Brush brush, float x, float y, float width, float height)
         {
-            RenderingObject.FillRectangle( brush, x, y, width, height );
+            RenderingObject.FillRectangle(brush, x, y, width, height);
         }
 
         /// <summary>
@@ -569,17 +533,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="brush">Brush object that determines the characteristics of the fill.</param>
         /// <param name="points">Array of PointF structures that represent the vertices of the polygon to fill.</param>
-        internal void FillPolygon(
-            Brush brush,
-            PointF[] points
-            )
+        internal void FillPolygon(Brush brush, PointF[] points)
         {
-            RenderingObject.FillPolygon( brush, points );
+            RenderingObject.FillPolygon(brush, points);
         }
 
         /// <summary>
-        /// Fills the interior of a pie section defined by an ellipse 
-        /// specified by a pair of coordinates, a width, and a height 
+        /// Fills the interior of a pie section defined by an ellipse
+        /// specified by a pair of coordinates, a width, and a height
         /// and two radial lines.
         /// </summary>
         /// <param name="brush">Brush object that determines the characteristics of the fill.</param>
@@ -597,11 +558,11 @@ namespace System.Web.UI.DataVisualization.Charting
             float height,
             float startAngle,
             float sweepAngle
-            )
+        )
         {
-            RenderingObject.FillPie( brush, x, y, width, height, startAngle, sweepAngle );
+            RenderingObject.FillPie(brush, x, y, width, height, startAngle, sweepAngle);
         }
-        
+
         #endregion // Filling Methods
 
         #region Other Methods
@@ -611,9 +572,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="url">The location of the referenced object, expressed as a URI reference.</param>
         /// <param name="title">Title which could be used for tooltips.</param>
-        internal void StartHotRegion( string url, string title )
+        internal void StartHotRegion(string url, string title)
         {
-            RenderingObject.BeginSelection( url, title );
+            RenderingObject.BeginSelection(url, title);
         }
 
         /// <summary>
@@ -622,7 +583,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="point">Data Point which properties are used for SVG selection</param>
         internal void StartHotRegion(DataPoint point)
         {
-            StartHotRegion( point, false );
+            StartHotRegion(point, false);
         }
 
         /// <summary>
@@ -637,11 +598,12 @@ namespace System.Web.UI.DataVisualization.Charting
 #if !Microsoft_CONTROL
             hRef = (labelRegion) ? point.LabelUrl : point.Url;
 #endif
-            if(hRef.Length > 0 || tooltip.Length > 0)
+            if (hRef.Length > 0 || tooltip.Length > 0)
             {
-                RenderingObject.BeginSelection( 
-                    point.ReplaceKeywords( hRef ), 
-                    point.ReplaceKeywords( tooltip ) );
+                RenderingObject.BeginSelection(
+                    point.ReplaceKeywords(hRef),
+                    point.ReplaceKeywords(tooltip)
+                );
             }
         }
 
@@ -654,7 +616,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Measures the specified string when drawn with the specified 
+        /// Measures the specified string when drawn with the specified
         /// Font object and formatted with the specified StringFormat object.
         /// </summary>
         /// <param name="text">String to measure.</param>
@@ -667,24 +629,21 @@ namespace System.Web.UI.DataVisualization.Charting
             Font font,
             SizeF layoutArea,
             StringFormat stringFormat
-            )
+        )
         {
-            return RenderingObject.MeasureString( text, font, layoutArea, stringFormat );
+            return RenderingObject.MeasureString(text, font, layoutArea, stringFormat);
         }
 
         /// <summary>
-        /// Measures the specified string when drawn with the specified 
+        /// Measures the specified string when drawn with the specified
         /// Font object and formatted with the specified StringFormat object.
         /// </summary>
         /// <param name="text">String to measure.</param>
         /// <param name="font">Font object defines the text format of the string.</param>
         /// <returns>This method returns a SizeF structure that represents the size, in pixels, of the string specified in the text parameter as drawn with the font parameter and the stringFormat parameter.</returns>
-        internal SizeF MeasureString(
-            string text,
-            Font font
-            )
+        internal SizeF MeasureString(string text, Font font)
         {
-            return RenderingObject.MeasureString( text, font );
+            return RenderingObject.MeasureString(text, font);
         }
 
         /// <summary>
@@ -700,11 +659,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Restores the state of this Graphics object to the state represented by a GraphicsState object.
         /// </summary>
         /// <param name="gstate">GraphicsState object that represents the state to which to restore this Graphics object.</param>
-        internal void Restore(
-            GraphicsState gstate
-            )
+        internal void Restore(GraphicsState gstate)
         {
-            RenderingObject.Restore( gstate );
+            RenderingObject.Restore(gstate);
         }
 
         /// <summary>
@@ -721,7 +678,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="rect">RectangleF structure that represents the new clip region.</param>
         internal void SetClipAbs(RectangleF rect)
         {
-            RenderingObject.SetClip( rect );
+            RenderingObject.SetClip(rect);
         }
 
         /// <summary>
@@ -729,12 +686,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="dx">x component of the translation.</param>
         /// <param name="dy">y component of the translation.</param>
-        internal void TranslateTransform(
-            float dx,
-            float dy
-            )
+        internal void TranslateTransform(float dx, float dy)
         {
-            RenderingObject.TranslateTransform( dx, dy );
+            RenderingObject.TranslateTransform(dx, dy);
         }
 
         #endregion // Other Methods
@@ -746,10 +700,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal IChartRenderingEngine RenderingObject
         {
-            get
-            {
-                return _gdiGraphics;
-            }
+            get { return _gdiGraphics; }
         }
 
         /// <summary>
@@ -757,25 +708,16 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal RenderingType ActiveRenderingType
         {
-            get
-            {
-                return _activeRenderingType;
-            }
+            get { return _activeRenderingType; }
         }
 
         /// <summary>
         /// Gets or sets the rendering mode for text associated with this Graphics object.
         /// </summary>
-        internal TextRenderingHint TextRenderingHint 
+        internal TextRenderingHint TextRenderingHint
         {
-            get
-            {
-                return RenderingObject.TextRenderingHint;
-            }
-            set
-            {
-                RenderingObject.TextRenderingHint = value;
-            }
+            get { return RenderingObject.TextRenderingHint; }
+            set { RenderingObject.TextRenderingHint = value; }
         }
 
         /// <summary>
@@ -783,54 +725,34 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal Matrix Transform
         {
-            get
-            {
-                return RenderingObject.Transform;
-            }
-            set
-            {
-                RenderingObject.Transform = value;
-            }
+            get { return RenderingObject.Transform; }
+            set { RenderingObject.Transform = value; }
         }
 
         /// <summary>
         /// Gets or sets the rendering quality for this Graphics object.
         /// </summary>
-        internal SmoothingMode SmoothingMode 
+        internal SmoothingMode SmoothingMode
         {
-            get
-            {
-                return RenderingObject.SmoothingMode;
-            }
-            set
-            {
-                RenderingObject.SmoothingMode = value;
-            }
+            get { return RenderingObject.SmoothingMode; }
+            set { RenderingObject.SmoothingMode = value; }
         }
 
         /// <summary>
         /// Gets or sets a Region object that limits the drawing region of this Graphics object.
         /// </summary>
-        internal Region Clip 
+        internal Region Clip
         {
-            get
-            {
-                return RenderingObject.Clip;
-            }
-            set
-            {
-                RenderingObject.Clip = value;
-            }
+            get { return RenderingObject.Clip; }
+            set { RenderingObject.Clip = value; }
         }
 
         /// <summary>
         /// Gets a value indicating whether the clipping region of this Graphics object is empty.
         /// </summary>
-        internal bool IsClipEmpty {
-            get
-            {
-                return RenderingObject.IsClipEmpty;
-            }
+        internal bool IsClipEmpty
+        {
+            get { return RenderingObject.IsClipEmpty; }
         }
 
         /// <summary>
@@ -838,14 +760,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public Graphics Graphics
         {
-            get
-            {
-                return RenderingObject.Graphics;
-            }
-            set
-            {
-                RenderingObject.Graphics = value;
-            }
+            get { return RenderingObject.Graphics; }
+            set { RenderingObject.Graphics = value; }
         }
 
         #endregion // Properties

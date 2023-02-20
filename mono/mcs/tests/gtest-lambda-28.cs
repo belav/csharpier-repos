@@ -1,8 +1,6 @@
 using System;
 
-class G<T>
-{
-}
+class G<T> { }
 
 class C
 {
@@ -10,8 +8,8 @@ class C
     {
         return null;
     }
-    
-    public static int Main ()
+
+    public static int Main()
     {
         G<int>[] tasks = new G<int>[0];
         G<G<int>[]> r = M(tasks, l => l);

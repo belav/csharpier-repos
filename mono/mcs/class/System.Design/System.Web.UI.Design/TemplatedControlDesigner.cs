@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,151 +37,176 @@ namespace System.Web.UI.Design
 {
     public abstract class TemplatedControlDesigner : ControlDesigner
     {
-        public TemplatedControlDesigner ()
+        public TemplatedControlDesigner() { }
+
+        [MonoTODO]
+        public override void Initialize(IComponent component)
         {
+            throw new NotImplementedException();
+        }
+
+        [Obsolete(
+            "Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0."
+        )]
+        protected abstract ITemplateEditingFrame CreateTemplateEditingFrame(
+            TemplateEditingVerb verb
+        );
+
+        [Obsolete(
+            "Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0."
+        )]
+        protected abstract TemplateEditingVerb[] GetCachedTemplateEditingVerbs();
+
+        [Obsolete(
+            "Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0."
+        )]
+        public abstract string GetTemplateContent(
+            ITemplateEditingFrame editingFrame,
+            string templateName,
+            out bool allowEditing
+        );
+
+        [Obsolete(
+            "Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0."
+        )]
+        public abstract void SetTemplateContent(
+            ITemplateEditingFrame editingFrame,
+            string templateName,
+            string templateContent
+        );
+
+        [MonoTODO]
+        [Obsolete(
+            "Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0."
+        )]
+        public void EnterTemplateMode(ITemplateEditingFrame newTemplateEditingFrame)
+        {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override void Initialize (IComponent component)
+        [Obsolete(
+            "Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0."
+        )]
+        public void ExitTemplateMode(bool fSwitchingTemplates, bool fNested, bool fSave)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-        protected abstract ITemplateEditingFrame CreateTemplateEditingFrame (TemplateEditingVerb verb);
-
-        [Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-        protected abstract TemplateEditingVerb[] GetCachedTemplateEditingVerbs ();
-
-        [Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-        public abstract string GetTemplateContent (ITemplateEditingFrame editingFrame, string templateName, out bool allowEditing);
-
-        [Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-        public abstract void SetTemplateContent (ITemplateEditingFrame editingFrame, string templateName, string templateContent);
-
-        [MonoTODO]
-        [Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-        public void EnterTemplateMode (ITemplateEditingFrame newTemplateEditingFrame)
-        {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        [Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-        public void ExitTemplateMode (bool fSwitchingTemplates, bool fNested, bool fSave)
-        {
-            throw new NotImplementedException ();
-        }
-
-
-        [Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-        public virtual string GetTemplateContainerDataItemProperty (string templateName)
+        [Obsolete(
+            "Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0."
+        )]
+        public virtual string GetTemplateContainerDataItemProperty(string templateName)
         {
             return string.Empty;
         }
 
-        [Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-        public virtual IEnumerable GetTemplateContainerDataSource (string templateName)
+        [Obsolete(
+            "Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0."
+        )]
+        public virtual IEnumerable GetTemplateContainerDataSource(string templateName)
         {
             return null;
         }
 
         [MonoTODO]
-        [Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-        public TemplateEditingVerb[] GetTemplateEditingVerbs ()
+        [Obsolete(
+            "Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0."
+        )]
+        public TemplateEditingVerb[] GetTemplateEditingVerbs()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected ITemplate GetTemplateFromText (string text)
+        protected ITemplate GetTemplateFromText(string text)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-        public virtual Type GetTemplatePropertyParentType (string templateName)
+        [Obsolete(
+            "Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0."
+        )]
+        public virtual Type GetTemplatePropertyParentType(string templateName)
         {
-            return base.Component.GetType ();
+            return base.Component.GetType();
         }
 
         [MonoTODO]
-        protected string GetTextFromTemplate (ITemplate template)
+        protected string GetTextFromTemplate(ITemplate template)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        [Obsolete ("Use ControlDesigner.Tag instead")]
-        protected override void OnBehaviorAttached ()
+        [Obsolete("Use ControlDesigner.Tag instead")]
+        protected override void OnBehaviorAttached()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override void OnComponentChanged (object sender, ComponentChangedEventArgs ce)
+        public override void OnComponentChanged(object sender, ComponentChangedEventArgs ce)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override void OnSetParent ()
+        public override void OnSetParent()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected virtual void OnTemplateModeChanged ()
+        protected virtual void OnTemplateModeChanged()
         {
-            throw new NotImplementedException ();
-        }
-
-
-        [MonoTODO]
-        protected void SaveActiveTemplateEditingFrame ()
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override void UpdateDesignTimeHtml ()
+        protected void SaveActiveTemplateEditingFrame()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override bool DataBindingsEnabled {
-            get { throw new NotImplementedException (); }
+        [MonoTODO]
+        public override void UpdateDesignTimeHtml()
+        {
+            throw new NotImplementedException();
         }
 
-        public override TemplateGroupCollection TemplateGroups {
-            get { throw new NotImplementedException (); }
+        protected override bool DataBindingsEnabled
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        [Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-        public ITemplateEditingFrame ActiveTemplateEditingFrame {
-            get {
-                return _activeTemplateFrame;
-            }
+        public override TemplateGroupCollection TemplateGroups
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public bool CanEnterTemplateMode {
-            get {
-                return _enableTemplateEditing;
-            }
+        [Obsolete(
+            "Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0."
+        )]
+        public ITemplateEditingFrame ActiveTemplateEditingFrame
+        {
+            get { return _activeTemplateFrame; }
         }
 
-
-        [Obsolete ("Use ControlDesigner.InTemplateMode instead")]
-        public new bool InTemplateMode {
-            get {
-                return _templateMode;
-            }
+        public bool CanEnterTemplateMode
+        {
+            get { return _enableTemplateEditing; }
         }
 
-        internal EventHandler TemplateEditingVerbHandler {
-            get {
-                return _templateVerbHandler;
-            }
+        [Obsolete("Use ControlDesigner.InTemplateMode instead")]
+        public new bool InTemplateMode
+        {
+            get { return _templateMode; }
+        }
+
+        internal EventHandler TemplateEditingVerbHandler
+        {
+            get { return _templateVerbHandler; }
         }
 
         private ITemplateEditingFrame _activeTemplateFrame;

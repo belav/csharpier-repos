@@ -2,17 +2,16 @@
 
 class C
 {
-    void Test_1 ()
+    void Test_1()
     {
-        object a = new object (),  b = new object ();
+        object a = new object(),
+            b = new object();
     }
-    
-    void Test_2 ()
+
+    void Test_2()
     {
         for (int i = 0; i <= 10; ++i) { }
     }
-    
-    public static void Main ()
-    {
-    }
+
+    public static void Main() { }
 }

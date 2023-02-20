@@ -17,47 +17,88 @@ namespace System.Text
         // sorted alphabetically.
         //
         private const string s_encodingNames =
-            "ansi_x3.4-1968" + // 20127
-            "ansi_x3.4-1986" + // 20127
-            "ascii" + // 20127
-            "cp367" + // 20127
-            "cp819" + // 28591
-            "csascii" + // 20127
-            "csisolatin1" + // 28591
-            "csunicode11utf7" + // 65000
-            "ibm367" + // 20127
-            "ibm819" + // 28591
-            "iso-10646-ucs-2" + // 1200
-            "iso-8859-1" + // 28591
-            "iso-ir-100" + // 28591
-            "iso-ir-6" + // 20127
-            "iso646-us" + // 20127
-            "iso8859-1" + // 28591
-            "iso_646.irv:1991" + // 20127
-            "iso_8859-1" + // 28591
-            "iso_8859-1:1987" + // 28591
-            "l1" + // 28591
-            "latin1" + // 28591
-            "ucs-2" + // 1200
-            "unicode" + // 1200
-            "unicode-1-1-utf-7" + // 65000
-            "unicode-1-1-utf-8" + // 65001
-            "unicode-2-0-utf-7" + // 65000
-            "unicode-2-0-utf-8" + // 65001
-            "unicodefffe" + // 1201
-            "us" + // 20127
-            "us-ascii" + // 20127
-            "utf-16" + // 1200
-            "utf-16be" + // 1201
-            "utf-16le" + // 1200
-            "utf-32" + // 12000
-            "utf-32be" + // 12001
-            "utf-32le" + // 12000
-            "utf-7" + // 65000
-            "utf-8" + // 65001
-            "x-unicode-1-1-utf-7" + // 65000
-            "x-unicode-1-1-utf-8" + // 65001
-            "x-unicode-2-0-utf-7" + // 65000
+            "ansi_x3.4-1968"
+            + // 20127
+            "ansi_x3.4-1986"
+            + // 20127
+            "ascii"
+            + // 20127
+            "cp367"
+            + // 20127
+            "cp819"
+            + // 28591
+            "csascii"
+            + // 20127
+            "csisolatin1"
+            + // 28591
+            "csunicode11utf7"
+            + // 65000
+            "ibm367"
+            + // 20127
+            "ibm819"
+            + // 28591
+            "iso-10646-ucs-2"
+            + // 1200
+            "iso-8859-1"
+            + // 28591
+            "iso-ir-100"
+            + // 28591
+            "iso-ir-6"
+            + // 20127
+            "iso646-us"
+            + // 20127
+            "iso8859-1"
+            + // 28591
+            "iso_646.irv:1991"
+            + // 20127
+            "iso_8859-1"
+            + // 28591
+            "iso_8859-1:1987"
+            + // 28591
+            "l1"
+            + // 28591
+            "latin1"
+            + // 28591
+            "ucs-2"
+            + // 1200
+            "unicode"
+            + // 1200
+            "unicode-1-1-utf-7"
+            + // 65000
+            "unicode-1-1-utf-8"
+            + // 65001
+            "unicode-2-0-utf-7"
+            + // 65000
+            "unicode-2-0-utf-8"
+            + // 65001
+            "unicodefffe"
+            + // 1201
+            "us"
+            + // 20127
+            "us-ascii"
+            + // 20127
+            "utf-16"
+            + // 1200
+            "utf-16be"
+            + // 1201
+            "utf-16le"
+            + // 1200
+            "utf-32"
+            + // 12000
+            "utf-32be"
+            + // 12001
+            "utf-32le"
+            + // 12000
+            "utf-7"
+            + // 65000
+            "utf-8"
+            + // 65001
+            "x-unicode-1-1-utf-7"
+            + // 65000
+            "x-unicode-1-1-utf-8"
+            + // 65001
+            "x-unicode-2-0-utf-7"
+            + // 65000
             "x-unicode-2-0-utf-8"; // 65001
 
         //
@@ -210,13 +251,20 @@ namespace System.Text
         // generating a large amount of code in the static constructor.
         //
         private const string s_webNames =
-            "utf-16" + // 1200
-            "utf-16BE" + // 1201
-            "utf-32" + // 12000
-            "utf-32BE" + // 12001
-            "us-ascii" + // 20127
-            "iso-8859-1" + // 28591
-            "utf-7" + // 65000
+            "utf-16"
+            + // 1200
+            "utf-16BE"
+            + // 1201
+            "utf-32"
+            + // 12000
+            "utf-32BE"
+            + // 12001
+            "us-ascii"
+            + // 20127
+            "iso-8859-1"
+            + // 28591
+            "utf-7"
+            + // 65000
             "utf-8"; // 65001
 
         //
@@ -245,13 +293,20 @@ namespace System.Text
         // generating a large amount of code in the static constructor.
         //
         private const string s_englishNames =
-            "Unicode" + // 1200
-            "Unicode (Big-Endian)" + // 1201
-            "Unicode (UTF-32)" + // 12000
-            "Unicode (UTF-32 Big-Endian)" + // 12001
-            "US-ASCII" + // 20127
-            "Western European (ISO)" + // 28591
-            "Unicode (UTF-7)" + // 65000
+            "Unicode"
+            + // 1200
+            "Unicode (Big-Endian)"
+            + // 1201
+            "Unicode (UTF-32)"
+            + // 12000
+            "Unicode (UTF-32 Big-Endian)"
+            + // 12001
+            "US-ASCII"
+            + // 20127
+            "Western European (ISO)"
+            + // 28591
+            "Unicode (UTF-7)"
+            + // 65000
             "Unicode (UTF-8)"; // 65001
 
         //
@@ -286,9 +341,15 @@ namespace System.Text
             0,
             0,
             MIMECONTF_MAILNEWS | MIMECONTF_SAVABLE_MAILNEWS,
-            MIMECONTF_MAILNEWS | MIMECONTF_BROWSER | MIMECONTF_SAVABLE_MAILNEWS | MIMECONTF_SAVABLE_BROWSER,
+            MIMECONTF_MAILNEWS
+                | MIMECONTF_BROWSER
+                | MIMECONTF_SAVABLE_MAILNEWS
+                | MIMECONTF_SAVABLE_BROWSER,
             MIMECONTF_MAILNEWS | MIMECONTF_SAVABLE_MAILNEWS,
-            MIMECONTF_MAILNEWS | MIMECONTF_BROWSER | MIMECONTF_SAVABLE_MAILNEWS | MIMECONTF_SAVABLE_BROWSER
+            MIMECONTF_MAILNEWS
+                | MIMECONTF_BROWSER
+                | MIMECONTF_SAVABLE_MAILNEWS
+                | MIMECONTF_SAVABLE_BROWSER
         };
     }
 }

@@ -11,33 +11,33 @@ namespace ILLink.RoslynAnalyzer.Tests.Interop.PInvoke
         protected override string TestSuiteName => "Interop/PInvoke/Com";
 
         [Fact]
-        public Task DefaultConstructorOfParameterIsRemoved ()
+        public Task DefaultConstructorOfParameterIsRemoved()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task DefaultConstructorOfReturnTypeIsRemoved ()
+        public Task DefaultConstructorOfReturnTypeIsRemoved()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task FieldsOfParameterAreRemoved ()
+        public Task FieldsOfParameterAreRemoved()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task FieldsOfReturnTypeAreRemoved ()
+        public Task FieldsOfReturnTypeAreRemoved()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task FieldsOfThisAreRemoved ()
+        public Task FieldsOfThisAreRemoved()
         {
-            return RunTest ();
+            return RunTest();
         }
     }
 }

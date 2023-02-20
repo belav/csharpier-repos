@@ -30,83 +30,90 @@ using System.Collections.Generic;
 
 namespace System.Windows.Forms
 {
-    [ListBindable (false)]
-    public class NumericUpDownAccelerationCollection : MarshalByRefObject, ICollection<NumericUpDownAcceleration>, 
-        IEnumerable<NumericUpDownAcceleration>, IEnumerable
+    [ListBindable(false)]
+    public class NumericUpDownAccelerationCollection
+        : MarshalByRefObject,
+            ICollection<NumericUpDownAcceleration>,
+            IEnumerable<NumericUpDownAcceleration>,
+            IEnumerable
     {
         #region Fields
         private List<NumericUpDownAcceleration> items;
         #endregion
 
         #region Properties
-        public int Count {
+        public int Count
+        {
             get { return items.Count; }
         }
 
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return false; }
         }
 
-        public NumericUpDownAcceleration this[int index] {
+        public NumericUpDownAcceleration this[int index]
+        {
             get { return items[index]; }
         }
         #endregion
 
         #region Constructor
-        public NumericUpDownAccelerationCollection ()
+        public NumericUpDownAccelerationCollection()
         {
-            items = new List<NumericUpDownAcceleration> ();
+            items = new List<NumericUpDownAcceleration>();
         }
         #endregion
 
         #region Public Methods
-        public void Add (NumericUpDownAcceleration acceleration)
+        public void Add(NumericUpDownAcceleration acceleration)
         {
             if (acceleration == null)
-                throw new ArgumentNullException ("Acceleration cannot be null");
+                throw new ArgumentNullException("Acceleration cannot be null");
 
             int i = 0;
-            for (; i < items.Count; i++) {
+            for (; i < items.Count; i++)
+            {
                 if (acceleration.Seconds < items[i].Seconds)
                     break;
             }
-            items.Insert (i, acceleration);
+            items.Insert(i, acceleration);
         }
 
-        public void AddRange (params NumericUpDownAcceleration[] accelerations)
+        public void AddRange(params NumericUpDownAcceleration[] accelerations)
         {
             for (int i = 0; i < accelerations.Length; i++)
-                Add (accelerations [i]);
+                Add(accelerations[i]);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            items.Clear ();
+            items.Clear();
         }
 
-        public bool Contains (NumericUpDownAcceleration acceleration)
+        public bool Contains(NumericUpDownAcceleration acceleration)
         {
-            return items.Contains (acceleration);
+            return items.Contains(acceleration);
         }
 
-        public void CopyTo (NumericUpDownAcceleration[] array, int index)
+        public void CopyTo(NumericUpDownAcceleration[] array, int index)
         {
-            items.CopyTo (array, index);
+            items.CopyTo(array, index);
         }
 
-        public bool Remove (NumericUpDownAcceleration acceleration)
+        public bool Remove(NumericUpDownAcceleration acceleration)
         {
-            return items.Remove (acceleration);
+            return items.Remove(acceleration);
         }
 
-        IEnumerator<NumericUpDownAcceleration> IEnumerable<NumericUpDownAcceleration>.GetEnumerator ()
+        IEnumerator<NumericUpDownAcceleration> IEnumerable<NumericUpDownAcceleration>.GetEnumerator()
         {
-            return items.GetEnumerator ();
+            return items.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator ()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return items.GetEnumerator ();
+            return items.GetEnumerator();
         }
         #endregion
     }

@@ -51,12 +51,17 @@ namespace Newtonsoft.Json.Tests.Issues
             Assert.AreEqual("{}", json);
         }
 
-        public enum ServerType { STUN, TURN };
+        public enum ServerType
+        {
+            STUN,
+            TURN
+        };
 
         public class TestClass
         {
             [JsonIgnore]
-            public IEnumerable<ServerType> ServerTypes => Enum.GetValues(typeof(ServerType)).Cast<ServerType>();
+            public IEnumerable<ServerType> ServerTypes =>
+                Enum.GetValues(typeof(ServerType)).Cast<ServerType>();
         }
     }
 }

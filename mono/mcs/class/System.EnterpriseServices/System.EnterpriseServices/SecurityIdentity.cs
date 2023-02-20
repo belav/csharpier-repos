@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.SecurityIdentity.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,43 +31,44 @@
 using System;
 using System.Collections;
 
-namespace System.EnterpriseServices {
-    public sealed class SecurityIdentity {
-
+namespace System.EnterpriseServices
+{
+    public sealed class SecurityIdentity
+    {
         #region Constructors
 
         [MonoTODO]
-        internal SecurityIdentity ()
-        {
-        }
+        internal SecurityIdentity() { }
 
         [MonoTODO]
-        internal SecurityIdentity (ISecurityIdentityColl collection)
-        {
-        }
+        internal SecurityIdentity(ISecurityIdentityColl collection) { }
 
         #endregion // Constructors
 
         #region Properties
 
-        public string AccountName {
+        public string AccountName
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
-        public AuthenticationOption AuthenticationLevel {
+        public AuthenticationOption AuthenticationLevel
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
-        public int AuthenticationService {
+        public int AuthenticationService
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
-        public ImpersonationLevelOption ImpersonationLevel {
+        public ImpersonationLevelOption ImpersonationLevel
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
         #endregion // Properties

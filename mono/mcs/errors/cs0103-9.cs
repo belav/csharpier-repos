@@ -5,10 +5,8 @@ using System.Linq;
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        var e = from a in "abcd"
-            join b in "defg" on "a" equals a
-            select a;
+        var e = from a in "abcd" join b in "defg" on "a" equals a select a;
     }
 }

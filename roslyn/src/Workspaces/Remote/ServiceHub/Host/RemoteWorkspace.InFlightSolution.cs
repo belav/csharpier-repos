@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Remote
             /// CancellationTokenSource controlling the execution of <see cref="_disconnectedSolutionTask"/> and <see
             /// cref="_primaryBranchTask"/>.
             /// </summary>
-            private readonly CancellationTokenSource _cancellationTokenSource_doNotAccessDirectly = new();
+            private readonly CancellationTokenSource _cancellationTokenSource_doNotAccessDirectly =
+                new();
 
             /// <summary>
             /// Background work to just compute the disconnected solution associated with this <see cref="SolutionChecksum"/>
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Remote
             public InFlightSolution(
                 RemoteWorkspace workspace,
                 Checksum solutionChecksum,
-                Func<CancellationToken, Task<Solution>> computeDisconnectedSolutionAsync)
+                Func<CancellationToken, Task<Solution>> computeDisconnectedSolutionAsync
+            )
             {
                 Contract.ThrowIfFalse(workspace._gate.CurrentCount == 0);
 
@@ -69,7 +71,10 @@ namespace Microsoft.CodeAnalysis.Remote
                 // cache state in RemoteWorkspace must always run fully to completion without issue.  We don't want
                 // anything we call in the constructor to possibly prevent the constructor from running to completion.
                 var cancellationToken = this.CancellationToken;
-                _disconnectedSolutionTask = Task.Run(() => computeDisconnectedSolutionAsync(cancellationToken), cancellationToken);
+                _disconnectedSolutionTask = Task.Run(
+                    () => computeDisconnectedSolutionAsync(cancellationToken),
+                    cancellationToken
+                );
             }
 
             private CancellationToken CancellationToken
@@ -77,7 +82,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 get
                 {
                     // Only safe to get this when the lock is being held.  That way nothing is racing against the work
-                    // in DecrementInFlightCount_NoLock which cancels this CTS. 
+                    // in DecrementInFlightCount_NoLock which cancels this CTS.
                     Contract.ThrowIfFalse(_workspace._gate.CurrentCount == 0);
                     return _cancellationTokenSource_doNotAccessDirectly.Token;
                 }
@@ -102,13 +107,17 @@ namespace Microsoft.CodeAnalysis.Remote
             /// checksum be the primary solution of this workspace.
             /// </summary>
             /// <param name="updatePrimaryBranchAsync"></param>
-            public void TryKickOffPrimaryBranchWork_NoLock(Func<Solution, CancellationToken, Task<Solution>> updatePrimaryBranchAsync)
+            public void TryKickOffPrimaryBranchWork_NoLock(
+                Func<Solution, CancellationToken, Task<Solution>> updatePrimaryBranchAsync
+            )
             {
                 try
                 {
                     Contract.ThrowIfFalse(_workspace._gate.CurrentCount == 0);
                     Contract.ThrowIfNull(updatePrimaryBranchAsync);
-                    Contract.ThrowIfTrue(this._cancellationTokenSource_doNotAccessDirectly.IsCancellationRequested);
+                    Contract.ThrowIfTrue(
+                        this._cancellationTokenSource_doNotAccessDirectly.IsCancellationRequested
+                    );
 
                     // Already set up the work to update the primary branch
                     if (_primaryBranchTask != null)
@@ -122,7 +131,10 @@ namespace Microsoft.CodeAnalysis.Remote
                     // cache state in RemoteWorkspace must always run fully to completion without issue. We don't want
                     // anything we call in this method to possibly prevent the method from running to completion.
                     var cancellationToken = this.CancellationToken;
-                    _primaryBranchTask = Task.Run(() => ComputePrimaryBranchAsync(cancellationToken), cancellationToken);
+                    _primaryBranchTask = Task.Run(
+                        () => ComputePrimaryBranchAsync(cancellationToken),
+                        cancellationToken
+                    );
                 }
                 catch (Exception ex) when (FatalError.ReportAndPropagate(ex, ErrorSeverity.General))
                 {
@@ -137,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     var solution = await _disconnectedSolutionTask.ConfigureAwait(false);
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    return await updatePrimaryBranchAsync(solution, cancellationToken).ConfigureAwait(false);
+                    return await updatePrimaryBranchAsync(solution, cancellationToken)
+                        .ConfigureAwait(false);
                 }
             }
 
@@ -167,11 +180,18 @@ namespace Microsoft.CodeAnalysis.Remote
                 _cancellationTokenSource_doNotAccessDirectly.Dispose();
 
                 // If we're going away, we better find ourself in the mapping for this checksum.
-                Contract.ThrowIfFalse(_workspace._solutionChecksumToSolution.TryGetValue(SolutionChecksum, out var existingSolution));
+                Contract.ThrowIfFalse(
+                    _workspace._solutionChecksumToSolution.TryGetValue(
+                        SolutionChecksum,
+                        out var existingSolution
+                    )
+                );
                 Contract.ThrowIfFalse(existingSolution == this);
 
                 // And we better succeed at actually removing.
-                Contract.ThrowIfFalse(_workspace._solutionChecksumToSolution.Remove(SolutionChecksum));
+                Contract.ThrowIfFalse(
+                    _workspace._solutionChecksumToSolution.Remove(SolutionChecksum)
+                );
 
                 _workspace.CheckCacheInvariants_NoLock();
 

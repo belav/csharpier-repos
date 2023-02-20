@@ -18,10 +18,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public string ClassName
         {
-            get
-            {
-                return _className;
-            }
+            get { return _className; }
         }
 
         public FieldInfo[] FieldInfos

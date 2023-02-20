@@ -19,7 +19,10 @@ namespace System.ServiceModel.Diagnostics
             this.Counters = new PerformanceCounter[(int)PerfCounters.TotalCounters];
             for (int i = 0; i < (int)PerfCounters.TotalCounters; i++)
             {
-                PerformanceCounter counter = PerformanceCounters.GetServicePerformanceCounter(perfCounterNames[i], this.InstanceName);
+                PerformanceCounter counter = PerformanceCounters.GetServicePerformanceCounter(
+                    perfCounterNames[i],
+                    this.InstanceName
+                );
                 if (counter != null)
                 {
                     try
@@ -36,8 +39,13 @@ namespace System.ServiceModel.Diagnostics
                         }
                         if (DiagnosticUtility.ShouldTraceError)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.PerformanceCountersFailedForService,
-                                SR.GetString(SR.TraceCodePerformanceCountersFailedForService), null, e);
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Error,
+                                TraceCode.PerformanceCountersFailedForService,
+                                SR.GetString(SR.TraceCodePerformanceCountersFailedForService),
+                                null,
+                                e
+                            );
                         }
                         break;
                     }
@@ -94,7 +102,6 @@ namespace System.ServiceModel.Diagnostics
             Increment((int)PerfCounters.CallsFaultedPerSecond);
             Decrement((int)PerfCounters.CallsOutstanding);
         }
-
 
         internal override void SaveCallDuration(long time)
         {

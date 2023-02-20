@@ -15,7 +15,13 @@ public class DefaultRazorParsingPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(builder =>
         {
             builder.Phases.Add(phase);
-            builder.Features.Add(new DefaultRazorParserOptionsFeature(designTime: false, version: RazorLanguageVersion.Latest, fileKind: null));
+            builder.Features.Add(
+                new DefaultRazorParserOptionsFeature(
+                    designTime: false,
+                    version: RazorLanguageVersion.Latest,
+                    fileKind: null
+                )
+            );
         });
 
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
@@ -32,12 +38,20 @@ public class DefaultRazorParsingPhaseTest
     {
         // Arrange
         var phase = new DefaultRazorParsingPhase();
-        var engine = RazorProjectEngine.CreateEmpty((builder) =>
-        {
-            builder.Phases.Add(phase);
-            builder.Features.Add(new DefaultRazorParserOptionsFeature(designTime: false, version: RazorLanguageVersion.Latest, fileKind: null));
-            builder.Features.Add(new MyParserOptionsFeature());
-        });
+        var engine = RazorProjectEngine.CreateEmpty(
+            (builder) =>
+            {
+                builder.Phases.Add(phase);
+                builder.Features.Add(
+                    new DefaultRazorParserOptionsFeature(
+                        designTime: false,
+                        version: RazorLanguageVersion.Latest,
+                        fileKind: null
+                    )
+                );
+                builder.Features.Add(new MyParserOptionsFeature());
+            }
+        );
 
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
 
@@ -55,18 +69,22 @@ public class DefaultRazorParsingPhaseTest
     {
         // Arrange
         var phase = new DefaultRazorParsingPhase();
-        var engine = RazorProjectEngine.CreateEmpty((builder) =>
-        {
-            builder.Phases.Add(phase);
-            builder.Features.Add(new DefaultRazorParserOptionsFeature(designTime: false, version: RazorLanguageVersion.Latest, fileKind: null));
-            builder.Features.Add(new MyParserOptionsFeature());
-        });
+        var engine = RazorProjectEngine.CreateEmpty(
+            (builder) =>
+            {
+                builder.Phases.Add(phase);
+                builder.Features.Add(
+                    new DefaultRazorParserOptionsFeature(
+                        designTime: false,
+                        version: RazorLanguageVersion.Latest,
+                        fileKind: null
+                    )
+                );
+                builder.Features.Add(new MyParserOptionsFeature());
+            }
+        );
 
-        var imports = new[]
-        {
-                TestRazorSourceDocument.Create(),
-                TestRazorSourceDocument.Create(),
-            };
+        var imports = new[] { TestRazorSourceDocument.Create(), TestRazorSourceDocument.Create(), };
 
         var codeDocument = TestRazorCodeDocument.Create(TestRazorSourceDocument.Create(), imports);
 
@@ -76,17 +94,30 @@ public class DefaultRazorParsingPhaseTest
         // Assert
         Assert.Collection(
             codeDocument.GetImportSyntaxTrees(),
-            t => { Assert.Same(t.Source, imports[0]); Assert.Equal("test", Assert.Single(t.Options.Directives).Directive); },
-            t => { Assert.Same(t.Source, imports[1]); Assert.Equal("test", Assert.Single(t.Options.Directives).Directive); });
+            t =>
+            {
+                Assert.Same(t.Source, imports[0]);
+                Assert.Equal("test", Assert.Single(t.Options.Directives).Directive);
+            },
+            t =>
+            {
+                Assert.Same(t.Source, imports[1]);
+                Assert.Equal("test", Assert.Single(t.Options.Directives).Directive);
+            }
+        );
     }
 
-    private class MyParserOptionsFeature : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature
+    private class MyParserOptionsFeature
+        : RazorEngineFeatureBase,
+            IConfigureRazorParserOptionsFeature
     {
         public int Order { get; }
 
         public void Configure(RazorParserOptionsBuilder options)
         {
-            options.Directives.Add(DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine));
+            options.Directives.Add(
+                DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine)
+            );
         }
     }
 }

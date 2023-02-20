@@ -11,10 +11,14 @@ namespace MonoTests.Microsoft.Build.Tasks
     {
         List<BuildMessageEventArgs> messages;
         List<BuildEventArgs> all_messages;
-        int target_started, target_finished;
-        int task_started, task_finished;
-        int project_started, project_finished;
-        int build_started, build_finished;
+        int target_started,
+            target_finished;
+        int task_started,
+            task_finished;
+        int project_started,
+            project_finished;
+        int build_started,
+            build_finished;
 
         public int BuildStarted
         {
@@ -28,10 +32,10 @@ namespace MonoTests.Microsoft.Build.Tasks
             set { build_finished = value; }
         }
 
-        public TestMessageLogger ()
+        public TestMessageLogger()
         {
-            messages = new List<BuildMessageEventArgs> ();
-            all_messages = new List<BuildEventArgs> ();
+            messages = new List<BuildMessageEventArgs>();
+            all_messages = new List<BuildEventArgs>();
         }
 
         public int ProjectStarted
@@ -78,62 +82,98 @@ namespace MonoTests.Microsoft.Build.Tasks
             get { return messages.Count; }
         }
 
-        public LoggerVerbosity Verbosity { get { return LoggerVerbosity.Normal; } set { } }
-
-        public string Parameters { get { return null; } set { } }
-
-        public void Initialize (IEventSource eventSource)
+        public LoggerVerbosity Verbosity
         {
-            eventSource.MessageRaised += new BuildMessageEventHandler (MessageHandler);
+            get { return LoggerVerbosity.Normal; }
+            set { }
+        }
 
-            eventSource.ErrorRaised += new BuildErrorEventHandler (AllMessagesHandler);
-            eventSource.ErrorRaised += (e,o) => ErrorsCount ++;
+        public string Parameters
+        {
+            get { return null; }
+            set { }
+        }
+
+        public void Initialize(IEventSource eventSource)
+        {
+            eventSource.MessageRaised += new BuildMessageEventHandler(MessageHandler);
+
+            eventSource.ErrorRaised += new BuildErrorEventHandler(AllMessagesHandler);
+            eventSource.ErrorRaised += (e, o) => ErrorsCount++;
 
             eventSource.WarningRaised += new BuildWarningEventHandler(AllMessagesHandler);
-            eventSource.WarningRaised += (e,o) => WarningsCount ++;
+            eventSource.WarningRaised += (e, o) => WarningsCount++;
 
-            eventSource.TargetStarted += delegate { target_started++; };
-            eventSource.TargetFinished += delegate { target_finished++; };
-            eventSource.TaskStarted += delegate { task_started++; };
-            eventSource.TaskFinished += delegate { task_finished++; };
-            eventSource.ProjectStarted += delegate(object sender, ProjectStartedEventArgs args) { project_started++; };
-            eventSource.ProjectFinished += delegate (object sender, ProjectFinishedEventArgs args) { project_finished++; };
-            eventSource.BuildStarted += delegate { build_started ++; };
-            eventSource.BuildFinished += delegate { build_finished++; };
+            eventSource.TargetStarted += delegate
+            {
+                target_started++;
+            };
+            eventSource.TargetFinished += delegate
+            {
+                target_finished++;
+            };
+            eventSource.TaskStarted += delegate
+            {
+                task_started++;
+            };
+            eventSource.TaskFinished += delegate
+            {
+                task_finished++;
+            };
+            eventSource.ProjectStarted += delegate(object sender, ProjectStartedEventArgs args)
+            {
+                project_started++;
+            };
+            eventSource.ProjectFinished += delegate(object sender, ProjectFinishedEventArgs args)
+            {
+                project_finished++;
+            };
+            eventSource.BuildStarted += delegate
+            {
+                build_started++;
+            };
+            eventSource.BuildFinished += delegate
+            {
+                build_finished++;
+            };
         }
 
-        public void Shutdown ()
+        public void Shutdown() { }
+
+        private void MessageHandler(object sender, BuildMessageEventArgs args)
         {
+            if (args.Message.StartsWith("Using") == false)
+                messages.Add(args);
+            all_messages.Add(args);
         }
 
-        private void MessageHandler (object sender, BuildMessageEventArgs args)
+        private void AllMessagesHandler(object sender, BuildEventArgs args)
         {
-            if (args.Message.StartsWith ("Using") == false)
-                messages.Add (args);
-            all_messages.Add (args);
+            all_messages.Add(args);
         }
 
-        private void AllMessagesHandler (object sender, BuildEventArgs args)
+        public int NormalMessageCount
         {
-            all_messages.Add (args);
-        }
-
-        public int NormalMessageCount {
             get
             {
-                int count = 0, i = 0;
-                while (i ++ < messages.Count)
-                    if (messages [i - 1].Importance == MessageImportance.Normal)
+                int count = 0,
+                    i = 0;
+                while (i++ < messages.Count)
+                    if (messages[i - 1].Importance == MessageImportance.Normal)
                         count++;
                 return count;
             }
         }
 
-        public int WarningMessageCount {
-            get {
-                int count = 0, i = 0;
-                while (i++ < messages.Count) {
-                    var importance = messages [i - 1].Importance;
+        public int WarningMessageCount
+        {
+            get
+            {
+                int count = 0,
+                    i = 0;
+                while (i++ < messages.Count)
+                {
+                    var importance = messages[i - 1].Importance;
                     if (importance == MessageImportance.High)
                         count++;
                 }
@@ -141,28 +181,31 @@ namespace MonoTests.Microsoft.Build.Tasks
             }
         }
 
-        public int CheckHead (string text, MessageImportance importance)
+        public int CheckHead(string text, MessageImportance importance)
         {
             string actual_msg;
-            return CheckHead (text, importance, out actual_msg);
+            return CheckHead(text, importance, out actual_msg);
         }
 
-        public int CheckHead (string text, MessageImportance importance, out string actual_msg)
+        public int CheckHead(string text, MessageImportance importance, out string actual_msg)
         {
             BuildMessageEventArgs actual = null;
             actual_msg = String.Empty;
 
-            if (messages.Count > 0) {
+            if (messages.Count > 0)
+            {
                 //find first @importance level message
                 int i = -1;
-                while (++i < messages.Count && messages [i].Importance != importance)
+                while (++i < messages.Count && messages[i].Importance != importance)
                     ;
 
-                if (i < messages.Count) {
-                    actual = messages [i];
-                    messages.RemoveAt (i);
+                if (i < messages.Count)
+                {
+                    actual = messages[i];
+                    messages.RemoveAt(i);
                 }
-            } else
+            }
+            else
                 return 1;
 
             if (actual != null)
@@ -175,15 +218,17 @@ namespace MonoTests.Microsoft.Build.Tasks
 
         //return: 0 - found
         //        1 - msg not found,
-        public int CheckAny (string text, MessageImportance importance)
+        public int CheckAny(string text, MessageImportance importance)
         {
             if (messages.Count <= 0)
                 return 1;
 
             int foundAt = -1;
-            for (int i = 0; i < messages.Count; i ++) {
-                BuildMessageEventArgs arg = messages [i];
-                if (text == arg.Message && importance == arg.Importance) {
+            for (int i = 0; i < messages.Count; i++)
+            {
+                BuildMessageEventArgs arg = messages[i];
+                if (text == arg.Message && importance == arg.Importance)
+                {
                     foundAt = i;
                     break;
                 }
@@ -193,16 +238,18 @@ namespace MonoTests.Microsoft.Build.Tasks
                 return 1;
 
             //found
-            messages.RemoveAt (foundAt);
+            messages.RemoveAt(foundAt);
             return 0;
         }
 
-        public int CheckFullLog (string text)
+        public int CheckFullLog(string text)
         {
-            for (int i = 0; i < all_messages.Count; i ++) {
-                BuildEventArgs arg = all_messages [i];
-                if (text == arg.Message) {
-                    all_messages.RemoveAt (i);
+            for (int i = 0; i < all_messages.Count; i++)
+            {
+                BuildEventArgs arg = all_messages[i];
+                if (text == arg.Message)
+                {
+                    all_messages.RemoveAt(i);
                     return 0;
                 }
             }
@@ -210,36 +257,33 @@ namespace MonoTests.Microsoft.Build.Tasks
             return 1;
         }
 
-        public void DumpMessages ()
+        public void DumpMessages()
         {
             foreach (BuildEventArgs arg in all_messages)
-                Console.WriteLine ("Msg: {0}", arg.Message);
+                Console.WriteLine("Msg: {0}", arg.Message);
         }
 
-        public void DumpMessages (StringBuilder sb)
+        public void DumpMessages(StringBuilder sb)
         {
             foreach (BuildEventArgs arg in all_messages)
-                sb.AppendLine (string.Format ("Msg: {0}", arg.Message));
+                sb.AppendLine(string.Format("Msg: {0}", arg.Message));
         }
 
-        public void CheckLoggedMessageHead (string expected, string id)
+        public void CheckLoggedMessageHead(string expected, string id)
         {
             string actual;
-            int result = CheckHead (expected, MessageImportance.Normal, out actual);
+            int result = CheckHead(expected, MessageImportance.Normal, out actual);
             if (result == 1)
-                Assert.Fail ("{0}: Expected message '{1}' was not emitted.", id, expected);
+                Assert.Fail("{0}: Expected message '{1}' was not emitted.", id, expected);
             if (result == 2)
                 return;
         }
 
-        public void CheckLoggedAny (string expected, MessageImportance importance, string id)
+        public void CheckLoggedAny(string expected, MessageImportance importance, string id)
         {
-            int res = CheckAny (expected, importance);
+            int res = CheckAny(expected, importance);
             if (res != 0)
-                Assert.Fail ("{0}: Expected message '{1}' was not emitted.", id, expected);
+                Assert.Fail("{0}: Expected message '{1}' was not emitted.", id, expected);
         }
-
-
     }
-
 }

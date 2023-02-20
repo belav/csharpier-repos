@@ -3,6 +3,4 @@
 // Compiler options: -warnaserror
 
 [method: Obsolete]
-public interface I
-{
-}
+public interface I { }

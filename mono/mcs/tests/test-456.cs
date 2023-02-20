@@ -1,20 +1,23 @@
 // Compiler options: -unsafe
 
-struct Foo {
+struct Foo
+{
     public float f;
-    public void foo ()
+
+    public void foo()
     {
-        unsafe {
-            fixed (float *pf2 = &f) {
-            }
+        unsafe
+        {
+            fixed (float* pf2 = &f) { }
         }
     }
 }
 
-class Test {
-    public static void Main ()
+class Test
+{
+    public static void Main()
     {
-        Foo x = new Foo ();
-        x.foo ();
+        Foo x = new Foo();
+        x.foo();
     }
 }

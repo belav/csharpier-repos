@@ -29,65 +29,67 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System;
     using System.Collections;
 
     using Mono.Cecil.Cil;
 
-    internal sealed class OverrideCollection : CollectionBase, IReflectionVisitable {
-
+    internal sealed class OverrideCollection : CollectionBase, IReflectionVisitable
+    {
         MethodDefinition m_container;
 
-        public MethodReference this [int index] {
-            get { return List [index] as MethodReference; }
-            set { List [index] = value; }
+        public MethodReference this[int index]
+        {
+            get { return List[index] as MethodReference; }
+            set { List[index] = value; }
         }
 
-        public MethodDefinition Container {
+        public MethodDefinition Container
+        {
             get { return m_container; }
         }
 
-        public OverrideCollection (MethodDefinition container)
+        public OverrideCollection(MethodDefinition container)
         {
             m_container = container;
         }
 
-        public void Add (MethodReference value)
+        public void Add(MethodReference value)
         {
-            List.Add (value);
+            List.Add(value);
         }
 
-        public bool Contains (MethodReference value)
+        public bool Contains(MethodReference value)
         {
-            return List.Contains (value);
+            return List.Contains(value);
         }
 
-        public int IndexOf (MethodReference value)
+        public int IndexOf(MethodReference value)
         {
-            return List.IndexOf (value);
+            return List.IndexOf(value);
         }
 
-        public void Insert (int index, MethodReference value)
+        public void Insert(int index, MethodReference value)
         {
-            List.Insert (index, value);
+            List.Insert(index, value);
         }
 
-        public void Remove (MethodReference value)
+        public void Remove(MethodReference value)
         {
-            List.Remove (value);
+            List.Remove(value);
         }
 
-        protected override void OnValidate (object o)
+        protected override void OnValidate(object o)
         {
-            if (! (o is MethodReference))
-                throw new ArgumentException ("Must be of type " + typeof (MethodReference).FullName);
+            if (!(o is MethodReference))
+                throw new ArgumentException("Must be of type " + typeof(MethodReference).FullName);
         }
 
-        public void Accept (IReflectionVisitor visitor)
+        public void Accept(IReflectionVisitor visitor)
         {
-            visitor.VisitOverrideCollection (this);
+            visitor.VisitOverrideCollection(this);
         }
     }
 }

@@ -19,7 +19,9 @@ namespace System.Transactions.Configuration
     // http://msdn.microsoft.com/en-us/library/system.transactions.configuration.transactionssectiongroup.aspx
     public class TransactionsSectionGroup : ConfigurationSectionGroup
     {
-        public static TransactionsSectionGroup GetSectionGroup(System.Configuration.Configuration config)
+        public static TransactionsSectionGroup GetSectionGroup(
+            System.Configuration.Configuration config
+        )
         {
             if (config == null)
                 throw new ArgumentNullException("config");

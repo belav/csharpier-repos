@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,45 +39,47 @@ namespace System.ServiceModel.Security.Tokens
 {
     public class SupportingTokenParameters
     {
-        ParamList endorsing = new ParamList (),
-              signed = new ParamList (),
-              signed_encrypted = new ParamList (),
-              signed_endorsing = new ParamList ();
+        ParamList endorsing = new ParamList(),
+            signed = new ParamList(),
+            signed_encrypted = new ParamList(),
+            signed_endorsing = new ParamList();
 
-        public SupportingTokenParameters ()
+        public SupportingTokenParameters() { }
+
+        private SupportingTokenParameters(SupportingTokenParameters source)
         {
+            endorsing = new ParamList(source.endorsing);
+            signed = new ParamList(source.signed);
+            signed_encrypted = new ParamList(source.signed_encrypted);
+            signed_endorsing = new ParamList(source.signed_endorsing);
         }
 
-        private SupportingTokenParameters (SupportingTokenParameters source)
+        public Collection<SecurityTokenParameters> Endorsing
         {
-            endorsing = new ParamList (source.endorsing);
-            signed = new ParamList (source.signed);
-            signed_encrypted= new ParamList (source.signed_encrypted);
-            signed_endorsing = new ParamList (source.signed_endorsing);
-        }
-
-        public Collection<SecurityTokenParameters> Endorsing {
             get { return endorsing; }
         }
 
-        public Collection<SecurityTokenParameters> Signed {
+        public Collection<SecurityTokenParameters> Signed
+        {
             get { return signed; }
         }
 
-        public Collection<SecurityTokenParameters> SignedEncrypted {
+        public Collection<SecurityTokenParameters> SignedEncrypted
+        {
             get { return signed_encrypted; }
         }
 
-        public Collection<SecurityTokenParameters> SignedEndorsing {
+        public Collection<SecurityTokenParameters> SignedEndorsing
+        {
             get { return signed_endorsing; }
         }
 
-        public SupportingTokenParameters Clone ()
+        public SupportingTokenParameters Clone()
         {
-            return new SupportingTokenParameters (this);
+            return new SupportingTokenParameters(this);
         }
 
-        public void SetKeyDerivation (bool requireDerivedKeys)
+        public void SetKeyDerivation(bool requireDerivedKeys)
         {
             foreach (SecurityTokenParameters p in endorsing)
                 p.RequireDerivedKeys = requireDerivedKeys;
@@ -89,23 +91,33 @@ namespace System.ServiceModel.Security.Tokens
                 p.RequireDerivedKeys = requireDerivedKeys;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            var sb = new StringBuilder ();
-            AppendCollection (sb, Endorsing, "endorsing", "Endorsing");
-            AppendCollection (sb, Signed, "signed", "Signed");
-            AppendCollection (sb, SignedEncrypted, "signed encrypted", "SignedEncrypted");
-            AppendCollection (sb, SignedEndorsing, "signed endorsing", "SignedEndorsing");
+            var sb = new StringBuilder();
+            AppendCollection(sb, Endorsing, "endorsing", "Endorsing");
+            AppendCollection(sb, Signed, "signed", "Signed");
+            AppendCollection(sb, SignedEncrypted, "signed encrypted", "SignedEncrypted");
+            AppendCollection(sb, SignedEndorsing, "signed endorsing", "SignedEndorsing");
             sb.Length--; // chop trailing EOL.
-            return sb.ToString ();
+            return sb.ToString();
         }
 
-        void AppendCollection (StringBuilder sb, Collection<SecurityTokenParameters> col, string emptyLabel, string label)
+        void AppendCollection(
+            StringBuilder sb,
+            Collection<SecurityTokenParameters> col,
+            string emptyLabel,
+            string label
+        )
         {
             if (col.Count == 0)
-                sb.AppendFormat ("No {0} tokens.\n", emptyLabel);
+                sb.AppendFormat("No {0} tokens.\n", emptyLabel);
             for (int i = 0; i < col.Count; i++)
-                sb.AppendFormat ("{0}[{1}]\n  {2}\n", label, i, String.Join ("\n  ", col [i].ToString ().Split ('\n')));
+                sb.AppendFormat(
+                    "{0}[{1}]\n  {2}\n",
+                    label,
+                    i,
+                    String.Join("\n  ", col[i].ToString().Split('\n'))
+                );
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Called when the diagnostic analyzer engine decides to remove existing diagnostics.
         /// For example, this can happen when a document is removed from a solution.  In that
         /// case the analyzer engine will delete all diagnostics associated with that document.
-        /// Any layers caching diagnostics should listen for these events to know when to 
+        /// Any layers caching diagnostics should listen for these events to know when to
         /// delete their cached items entirely.
         /// </summary>
         DiagnosticsRemoved,

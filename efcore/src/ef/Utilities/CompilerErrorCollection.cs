@@ -6,12 +6,9 @@ namespace System.CodeDom.Compiler
 {
     internal class CompilerErrorCollection
     {
-        public bool HasErrors
-            => false;
+        public bool HasErrors => false;
 
-        public void Add(CompilerError error)
-        {
-        }
+        public void Add(CompilerError error) { }
     }
 }
 

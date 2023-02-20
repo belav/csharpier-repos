@@ -40,14 +40,12 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
             static bool TryGetSDKVersion(
                 string solutionFolder,
-                [NotNullWhen(true)] out string? version)
+                [NotNullWhen(true)] out string? version
+            )
             {
                 var globalJsonPath = Path.Combine(solutionFolder, "global.json");
                 var globalJsonString = File.ReadAllText(globalJsonPath);
-                version = JsonNode.Parse(globalJsonString)
-                    ?["sdk"]
-                    ?["version"]
-                    ?.GetValue<string>();
+                version = JsonNode.Parse(globalJsonString)?["sdk"]?["version"]?.GetValue<string>();
                 return version is not null;
             }
 
@@ -55,7 +53,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 string solutionFolder,
                 string version,
                 [NotNullWhen(true)] out string? sdkPath,
-                [NotNullWhen(true)] out string? msbuildPath)
+                [NotNullWhen(true)] out string? msbuildPath
+            )
             {
                 sdkPath = null;
                 msbuildPath = null;
@@ -71,9 +70,11 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 }
 
                 // check if sdk is installed
-                var programFilesSDKFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "dotnet");
-                var programFilesSDK = Path.Combine(
-                    programFilesSDKFolder, "sdk", version);
+                var programFilesSDKFolder = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
+                    "dotnet"
+                );
+                var programFilesSDK = Path.Combine(programFilesSDKFolder, "sdk", version);
                 if (Directory.Exists(programFilesSDK))
                 {
                     sdkPath = programFilesSDKFolder;
@@ -87,9 +88,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                     return false;
                 }
 
-                var specifiedSDKFolder = Path.Combine(
-                specifiedSDKPath,
-                "dotnet", "sdk", version);
+                var specifiedSDKFolder = Path.Combine(specifiedSDKPath, "dotnet", "sdk", version);
                 if (Directory.Exists(specifiedSDKFolder))
                 {
                     sdkPath = specifiedSDKPath;
@@ -105,7 +104,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 // Expected assembly path:
                 //  <solutionFolder>\artifacts\bin\Microsoft.CodeAnalysis.Workspaces.MSBuild.UnitTests\<Configuration>\<TFM>\Microsoft.CodeAnalysis.Workspaces.MSBuild.UnitTests.dll
                 var assemblyLocation = typeof(DotNetSdkMSBuildInstalled).Assembly.Location;
-                var solutionFolder = Directory.GetParent(assemblyLocation)
+                var solutionFolder = Directory
+                    .GetParent(assemblyLocation)
                     ?.Parent?.Parent?.Parent?.Parent?.Parent?.FullName;
                 Assumes.NotNull(solutionFolder);
                 return solutionFolder;
@@ -113,12 +113,9 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         }
 #endif
 
-        public DotNetSdkMSBuildInstalled()
-        {
-        }
+        public DotNetSdkMSBuildInstalled() { }
 
-        public override bool ShouldSkip
-            => SdkPath is null;
+        public override bool ShouldSkip => SdkPath is null;
 
         public override string SkipReason
 #if NETCOREAPP

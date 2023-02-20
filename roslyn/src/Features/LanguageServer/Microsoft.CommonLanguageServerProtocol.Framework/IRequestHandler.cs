@@ -18,5 +18,9 @@ public interface IRequestHandler<TRequest, TResponse, TRequestContext> : IMethod
     /// <param name="context">The LSP request context, which should have been filled in with document information from <see cref="ITextDocumentIdentifierHandler{RequestType, TextDocumentIdentifierType}.GetTextDocumentIdentifier(RequestType)"/> if applicable.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the request processing.</param>
     /// <returns>The LSP response.</returns>
-    Task<TResponse> HandleRequestAsync(TRequest request, TRequestContext context, CancellationToken cancellationToken);
+    Task<TResponse> HandleRequestAsync(
+        TRequest request,
+        TRequestContext context,
+        CancellationToken cancellationToken
+    );
 }

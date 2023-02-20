@@ -58,9 +58,8 @@ namespace System.Drawing.Printing
         private PrinterSettings printerSettings = null!;
 #pragma warning restore 649
 
-        public PageSettings() : this(new PrinterSettings())
-        {
-        }
+        public PageSettings()
+            : this(new PrinterSettings()) { }
 
         public PageSettings(PrinterSettings printerSettings)
         {
@@ -74,7 +73,14 @@ namespace System.Drawing.Printing
         }
 
         // used by PrinterSettings.DefaultPageSettings
-        internal PageSettings(PrinterSettings printerSettings, bool color, bool landscape, PaperSize paperSize, PaperSource paperSource, PrinterResolution printerResolution)
+        internal PageSettings(
+            PrinterSettings printerSettings,
+            bool color,
+            bool landscape,
+            PaperSize paperSize,
+            PaperSource paperSource,
+            PrinterResolution printerResolution
+        )
         {
             PrinterSettings = printerSettings;
             this.color = color;
@@ -114,10 +120,7 @@ namespace System.Drawing.Printing
                     throw new InvalidPrinterException(this.printerSettings);
                 return color;
             }
-            set
-            {
-                color = value;
-            }
+            set { color = value; }
         }
 
         public bool Landscape
@@ -128,10 +131,7 @@ namespace System.Drawing.Printing
                     throw new InvalidPrinterException(this.printerSettings);
                 return landscape;
             }
-            set
-            {
-                landscape = value;
-            }
+            set { landscape = value; }
         }
 
         public Margins Margins
@@ -142,10 +142,7 @@ namespace System.Drawing.Printing
                     throw new InvalidPrinterException(this.printerSettings);
                 return margins;
             }
-            set
-            {
-                margins = value;
-            }
+            set { margins = value; }
         }
 
         public PaperSize PaperSize
@@ -195,60 +192,59 @@ namespace System.Drawing.Printing
 
         public PrinterSettings PrinterSettings
         {
-            get
-            {
-                return printerSettings;
-            }
-            set
-            {
-                printerSettings = value;
-            }
+            get { return printerSettings; }
+            set { printerSettings = value; }
         }
         public float HardMarginX
         {
-            get
-            {
-                return hardMarginX;
-            }
+            get { return hardMarginX; }
         }
 
         public float HardMarginY
         {
-            get
-            {
-                return hardMarginY;
-            }
+            get { return hardMarginY; }
         }
 
         public RectangleF PrintableArea
         {
-            get
-            {
-                return printableArea;
-            }
+            get { return printableArea; }
         }
-
 
         public object Clone()
         {
             // We do a deep copy
-            PrinterResolution pres = new PrinterResolution(this.printerResolution.Kind, this.printerResolution.X, this.printerResolution.Y);
-            PaperSource psource = new PaperSource(this.paperSource.Kind, this.paperSource.SourceName);
-            PaperSize psize = new PaperSize(this.paperSize.PaperName, this.paperSize.Width, this.paperSize.Height);
+            PrinterResolution pres = new PrinterResolution(
+                this.printerResolution.Kind,
+                this.printerResolution.X,
+                this.printerResolution.Y
+            );
+            PaperSource psource = new PaperSource(
+                this.paperSource.Kind,
+                this.paperSource.SourceName
+            );
+            PaperSize psize = new PaperSize(
+                this.paperSize.PaperName,
+                this.paperSize.Width,
+                this.paperSize.Height
+            );
             psize.RawKind = (int)this.paperSize.Kind;
 
-            PageSettings ps = new PageSettings(this.printerSettings, this.color, this.landscape,
-                    psize, psource, pres);
+            PageSettings ps = new PageSettings(
+                this.printerSettings,
+                this.color,
+                this.landscape,
+                psize,
+                psource,
+                pres
+            );
             ps.Margins = (Margins)this.margins.Clone();
             return ps;
         }
-
 
         public void CopyToHdevmode(IntPtr hdevmode)
         {
             throw new NotImplementedException();
         }
-
 
         public void SetHdevmode(IntPtr hdevmode)
         {

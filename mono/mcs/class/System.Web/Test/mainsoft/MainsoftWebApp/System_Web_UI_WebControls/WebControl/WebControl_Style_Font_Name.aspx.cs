@@ -35,29 +35,31 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class WebControl_Style_Font_Name
-        : GHTWebControlBase
+    public class WebControl_Style_Font_Name : GHTWebControlBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) {
+        override protected void OnInit(EventArgs e)
+        {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
             //
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
             foreach (Type currentType in TypesToTest)
             {
@@ -120,7 +122,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             {
                 // ProjectData.SetProjectError(exception17);
                 ArgumentException exception4 = exception17;
-                this.GHTSubTestAddResult("Test passed. Expected ArgumentException exception was caught.");
+                this.GHTSubTestAddResult(
+                    "Test passed. Expected ArgumentException exception was caught."
+                );
                 // ProjectData.ClearProjectError();
             }
             catch (Exception exception18)
@@ -177,9 +181,12 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             {
                 this.GHTSubTestBegin(ctrlType, "Set Names, See that Name is changed accordingly.");
                 this.TestedControl.ControlStyle.Font.Name = "Times New Roman";
-                textArray1 = new string[] { "Aharoni", "Courier New", "David" } ;
+                textArray1 = new string[] { "Aharoni", "Courier New", "David" };
                 this.TestedControl.ControlStyle.Font.Names = textArray1;
-                this.Compare(this.TestedControl.ControlStyle.Font.Name, this.TestedControl.ControlStyle.Font.Names[0]);
+                this.Compare(
+                    this.TestedControl.ControlStyle.Font.Name,
+                    this.TestedControl.ControlStyle.Font.Names[0]
+                );
             }
             catch (ArgumentException exception23)
             {
@@ -201,13 +208,16 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 this.GHTSubTestBegin(ctrlType, "Set Names, See that Name is changed accordingly.");
                 FontInfo info1 = this.TestedControl.ControlStyle.Font;
                 info1.Name = "Times New Roman";
-                textArray1 = new string[] { "Aharoni", "Courier New", "David" } ;
+                textArray1 = new string[] { "Aharoni", "Courier New", "David" };
                 info1.Names = textArray1;
                 string text1 = info1.Names[0];
                 info1.Names[0] = info1.Names[1];
                 info1.Names[1] = text1;
                 info1 = null;
-                this.Compare(this.TestedControl.ControlStyle.Font.Name, this.TestedControl.ControlStyle.Font.Names[0]);
+                this.Compare(
+                    this.TestedControl.ControlStyle.Font.Name,
+                    this.TestedControl.ControlStyle.Font.Names[0]
+                );
             }
             catch (ArgumentException exception25)
             {
@@ -225,6 +235,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTSubTestEnd();
         }
- 
     }
 }

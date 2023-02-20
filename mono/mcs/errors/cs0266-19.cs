@@ -3,17 +3,17 @@
 
 class A
 {
-    public static A operator -- (A x)
+    public static A operator --(A x)
     {
-        return new A ();
+        return new A();
     }
 }
 
 class B : A
 {
-    static void Main ()
+    static void Main()
     {
-        B b = new B ();
+        B b = new B();
         --b;
     }
 }

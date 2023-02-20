@@ -31,14 +31,22 @@ namespace System.Web.Razor.Parser.SyntaxTree
             }
         }
 
-        internal Block(BlockType type, IEnumerable<SyntaxTreeNode> contents, IBlockCodeGenerator generator)
+        internal Block(
+            BlockType type,
+            IEnumerable<SyntaxTreeNode> contents,
+            IBlockCodeGenerator generator
+        )
         {
             Type = type;
             CodeGenerator = generator;
             Children = contents;
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "Type is the most appropriate name for this property and there is little chance of confusion with GetType")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "Type is the most appropriate name for this property and there is little chance of confusion with GetType"
+        )]
         public BlockType Type { get; private set; }
 
         public IEnumerable<SyntaxTreeNode> Children { get; private set; }
@@ -98,16 +106,23 @@ namespace System.Web.Razor.Parser.SyntaxTree
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.CurrentCulture, "{0} Block at {1}::{2} (Gen:{3})", Type, Start, Length, CodeGenerator);
+            return String.Format(
+                CultureInfo.CurrentCulture,
+                "{0} Block at {1}::{2} (Gen:{3})",
+                Type,
+                Start,
+                Length,
+                CodeGenerator
+            );
         }
 
         public override bool Equals(object obj)
         {
             Block other = obj as Block;
-            return other != null &&
-                   Type == other.Type &&
-                   Equals(CodeGenerator, other.CodeGenerator) &&
-                   ChildrenEqual(Children, other.Children);
+            return other != null
+                && Type == other.Type
+                && Equals(CodeGenerator, other.CodeGenerator)
+                && ChildrenEqual(Children, other.Children);
         }
 
         public override int GetHashCode()
@@ -167,14 +182,20 @@ namespace System.Web.Razor.Parser.SyntaxTree
             return owner;
         }
 
-        private static bool ChildrenEqual(IEnumerable<SyntaxTreeNode> left, IEnumerable<SyntaxTreeNode> right)
+        private static bool ChildrenEqual(
+            IEnumerable<SyntaxTreeNode> left,
+            IEnumerable<SyntaxTreeNode> right
+        )
         {
             IEnumerator<SyntaxTreeNode> leftEnum = left.GetEnumerator();
             IEnumerator<SyntaxTreeNode> rightEnum = right.GetEnumerator();
             while (leftEnum.MoveNext())
             {
-                if (!rightEnum.MoveNext() || // More items in left than in right
-                    !Equals(leftEnum.Current, rightEnum.Current))
+                if (
+                    !rightEnum.MoveNext()
+                    || // More items in left than in right
+                    !Equals(leftEnum.Current, rightEnum.Current)
+                )
                 {
                     // Nodes are not equal
                     return false;

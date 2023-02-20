@@ -1,13 +1,12 @@
-delegate void FooHandler ();
+delegate void FooHandler();
 
 class X
 {
-    public static void foo ()
-    { }
+    public static void foo() { }
 
-    public static void Main ()
+    public static void Main()
     {
-        object o = new FooHandler (foo);
-        ((FooHandler) o) ();
+        object o = new FooHandler(foo);
+        ((FooHandler)o)();
     }
 }

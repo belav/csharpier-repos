@@ -5,6 +5,6 @@ namespace Mono.Debugger.Soft
 {
     public interface IInvokeAsyncResult : IAsyncResult
     {
-        void Abort ();
+        void Abort();
     }
 }

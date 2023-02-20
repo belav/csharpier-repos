@@ -29,14 +29,18 @@ public class CompilationTests
     [ReleaseBuildOnlyTheory]
     [InlineData("")]
     [InlineData("-p:PublishSingleFile=true")]
-    public void App_referencing_system_commandline_can_be_trimmed(string additionalArgs)
-        => PublishAndValidate("Trimming", "warning IL", additionalArgs);
+    public void App_referencing_system_commandline_can_be_trimmed(string additionalArgs) =>
+        PublishAndValidate("Trimming", "warning IL", additionalArgs);
 
     [ReleaseBuildOnlyFact]
-    public void App_referencing_system_commandline_can_be_compiled_ahead_of_time()
-        => PublishAndValidate("NativeAOT", "AOT analysis warning");
+    public void App_referencing_system_commandline_can_be_compiled_ahead_of_time() =>
+        PublishAndValidate("NativeAOT", "AOT analysis warning");
 
-    private void PublishAndValidate(string appName, string warningText, string additionalArgs = null)
+    private void PublishAndValidate(
+        string appName,
+        string warningText,
+        string additionalArgs = null
+    )
     {
         var stdOut = new StringBuilder();
         var stdErr = new StringBuilder();
@@ -48,13 +52,15 @@ public class CompilationTests
         Process.RunToCompletion(
             DotnetMuxer.Path.FullName,
             $"clean -c Release -r {rId}",
-            workingDirectory: workingDirectory);
+            workingDirectory: workingDirectory
+        );
 
         string publishCommand = string.Format(
             "publish -c Release -r {0} --self-contained -p:SystemCommandLineDllPath=\"{1}\" -p:TreatWarningsAsErrors=true {2}",
             rId,
             _systemCommandLineDllPath,
-            additionalArgs);
+            additionalArgs
+        );
 
         var exitCode = Process.RunToCompletion(
             DotnetMuxer.Path.FullName,
@@ -69,7 +75,8 @@ public class CompilationTests
                 _output.WriteLine(s);
                 stdErr.Append(s);
             },
-            workingDirectory);
+            workingDirectory
+        );
 
         stdOut.ToString().Should().NotContain(": error CS");
         stdOut.ToString().Should().NotContain(warningText);
@@ -79,7 +86,9 @@ public class CompilationTests
 
     private static string GetPortableRuntimeIdentifier()
     {
-        string osPart = OperatingSystem.IsWindows() ? "win" : (OperatingSystem.IsMacOS() ? "osx" : "linux");
+        string osPart = OperatingSystem.IsWindows()
+            ? "win"
+            : (OperatingSystem.IsMacOS() ? "osx" : "linux");
         return $"{osPart}-{RuntimeEnvironment.RuntimeArchitecture}";
     }
 }

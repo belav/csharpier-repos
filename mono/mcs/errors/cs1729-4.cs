@@ -3,15 +3,13 @@
 
 using System;
 
-public class IgnoreAttribute : Attribute {
-
-        public IgnoreAttribute (String name) { }
+public class IgnoreAttribute : Attribute
+{
+    public IgnoreAttribute(String name) { }
 }
 
-class C {
-        
+class C
+{
     [Ignore]
-    public void Method ()
-    {
-    }
+    public void Method() { }
 }

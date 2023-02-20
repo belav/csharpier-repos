@@ -16,9 +16,11 @@ namespace Moq.Async
         /// <param name="obj">The (possibly awaitable) object to be "unwrapped".</param>
         public static object TryGetResultRecursive(object obj)
         {
-            if (obj != null
+            if (
+                obj != null
                 && AwaitableFactory.TryGet(obj.GetType()) is { } awaitableFactory
-                && awaitableFactory.TryGetResult(obj, out var result))
+                && awaitableFactory.TryGetResult(obj, out var result)
+            )
             {
                 return Awaitable.TryGetResultRecursive(result);
             }

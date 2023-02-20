@@ -7,21 +7,21 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.ComponentModel
 {
     // Keep framework code that calls TypeConverter methods like ConvertFrom
-    [SetupLinkerTrimMode ("skip")]
-    [Reference ("System.dll")]
+    [SetupLinkerTrimMode("skip")]
+    [Reference("System.dll")]
     public class TypeConverterOnMembers
     {
-        public static void Main ()
+        public static void Main()
         {
-            var r1 = new OnProperty ().Foo;
-            var r2 = new OnField ().Field;
-            TestArgumentWithTypeNameReferencingANonExistentType ();
+            var r1 = new OnProperty().Foo;
+            var r2 = new OnField().Field;
+            TestArgumentWithTypeNameReferencingANonExistentType();
         }
 
         [Kept]
-        public static void TestArgumentWithTypeNameReferencingANonExistentType ()
+        public static void TestArgumentWithTypeNameReferencingANonExistentType()
         {
-            _ = new OnProperty ().Bar;
+            _ = new OnProperty().Bar;
         }
     }
 
@@ -29,35 +29,41 @@ namespace Mono.Linker.Tests.Cases.ComponentModel
     class OnProperty
     {
         [Kept]
-        public OnProperty ()
+        public OnProperty() { }
+
+        [TypeConverter(typeof(Custom1))]
+        [Kept]
+        [KeptAttributeAttribute(typeof(TypeConverterAttribute))]
+        [KeptBackingField]
+        public string Foo
         {
+            [Kept]
+            get;
+            set;
         }
 
-        [TypeConverter (typeof (Custom1))]
-
+        [TypeConverter("NonExistentType")]
         [Kept]
-        [KeptAttributeAttribute (typeof (TypeConverterAttribute))]
+        [KeptAttributeAttribute(typeof(TypeConverterAttribute))]
         [KeptBackingField]
-        public string Foo { [Kept] get; set; }
-
-        [TypeConverter ("NonExistentType")]
+        [ExpectedWarning(
+            "IL2105",
+            "Type 'NonExistentType' was not found in the caller assembly nor in the base library. "
+                + "Type name strings used for dynamically accessing a type should be assembly qualified."
+        )]
+        public string Bar
+        {
+            [Kept]
+            get;
+            set;
+        }
 
         [Kept]
-        [KeptAttributeAttribute (typeof (TypeConverterAttribute))]
-        [KeptBackingField]
-        [ExpectedWarning ("IL2105",
-            "Type 'NonExistentType' was not found in the caller assembly nor in the base library. " +
-            "Type name strings used for dynamically accessing a type should be assembly qualified.")]
-        public string Bar { [Kept] get; set; }
-
-        [Kept]
-        [KeptBaseType (typeof (TypeConverter))]
+        [KeptBaseType(typeof(TypeConverter))]
         class Custom1 : TypeConverter
         {
             [Kept]
-            public Custom1 (Type type)
-            {
-            }
+            public Custom1(Type type) { }
         }
     }
 
@@ -65,27 +71,26 @@ namespace Mono.Linker.Tests.Cases.ComponentModel
     class OnField
     {
         [Kept]
-        public OnField ()
-        {
-        }
+        public OnField() { }
 
-        [TypeConverter (typeof (Custom2))]
-
+        [TypeConverter(typeof(Custom2))]
         [Kept]
-        [KeptAttributeAttribute (typeof (TypeConverterAttribute))]
+        [KeptAttributeAttribute(typeof(TypeConverterAttribute))]
         public object Field;
 
         [Kept]
-        [KeptBaseType (typeof (TypeConverter))]
+        [KeptBaseType(typeof(TypeConverter))]
         class Custom2 : TypeConverter
         {
             [Kept]
-            public Custom2 ()
-            {
-            }
+            public Custom2() { }
 
             [Kept]
-            public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            )
             {
                 return "test";
             }

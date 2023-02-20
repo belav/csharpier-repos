@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,12 +40,12 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace System.Reflection.Emit {
-
-    [ComVisible (true)]
-    [StructLayout (LayoutKind.Sequential)]
-    public sealed class DynamicMethod : MethodInfo {
-
+namespace System.Reflection.Emit
+{
+    [ComVisible(true)]
+    [StructLayout(LayoutKind.Sequential)]
+    public sealed class DynamicMethod : MethodInfo
+    {
 #pragma warning disable 169, 414, 649
         #region Sync with reflection.h
         private RuntimeMethodHandle mhandle;
@@ -64,57 +64,149 @@ namespace System.Reflection.Emit {
         private Type owner;
         #endregion
 #pragma warning restore 169, 414, 649
-        
+
         private Delegate deleg;
         private RuntimeMethodInfo method;
         private ParameterBuilder[] pinfo;
         internal bool creating;
         private DynamicILInfo il_info;
 
-        public DynamicMethod (string name, Type returnType, Type[] parameterTypes, Module m) : this (name, returnType, parameterTypes, m, false) {
-        }
+        public DynamicMethod(string name, Type returnType, Type[] parameterTypes, Module m)
+            : this(name, returnType, parameterTypes, m, false) { }
 
-        public DynamicMethod (string name, Type returnType, Type[] parameterTypes, Type owner) : this (name, returnType, parameterTypes, owner, false) {
-        }
+        public DynamicMethod(string name, Type returnType, Type[] parameterTypes, Type owner)
+            : this(name, returnType, parameterTypes, owner, false) { }
 
-        public DynamicMethod (string name, Type returnType, Type[] parameterTypes, Module m, bool skipVisibility) : this (name, MethodAttributes.Public | MethodAttributes.Static, CallingConventions.Standard, returnType, parameterTypes, m, skipVisibility) {
-        }
+        public DynamicMethod(
+            string name,
+            Type returnType,
+            Type[] parameterTypes,
+            Module m,
+            bool skipVisibility
+        )
+            : this(
+                name,
+                MethodAttributes.Public | MethodAttributes.Static,
+                CallingConventions.Standard,
+                returnType,
+                parameterTypes,
+                m,
+                skipVisibility
+            ) { }
 
-        public DynamicMethod (string name, Type returnType, Type[] parameterTypes, Type owner, bool skipVisibility) : this (name, MethodAttributes.Public | MethodAttributes.Static, CallingConventions.Standard, returnType, parameterTypes, owner, skipVisibility) {
-        }
+        public DynamicMethod(
+            string name,
+            Type returnType,
+            Type[] parameterTypes,
+            Type owner,
+            bool skipVisibility
+        )
+            : this(
+                name,
+                MethodAttributes.Public | MethodAttributes.Static,
+                CallingConventions.Standard,
+                returnType,
+                parameterTypes,
+                owner,
+                skipVisibility
+            ) { }
 
-        public DynamicMethod (string name, MethodAttributes attributes, CallingConventions callingConvention, Type returnType, Type[] parameterTypes, Type owner, bool skipVisibility) : this (name, attributes, callingConvention, returnType, parameterTypes, owner, owner.Module, skipVisibility, false) {
-        }
+        public DynamicMethod(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type returnType,
+            Type[] parameterTypes,
+            Type owner,
+            bool skipVisibility
+        )
+            : this(
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                parameterTypes,
+                owner,
+                owner.Module,
+                skipVisibility,
+                false
+            ) { }
 
-        public DynamicMethod (string name, MethodAttributes attributes, CallingConventions callingConvention, Type returnType, Type[] parameterTypes, Module m, bool skipVisibility) : this (name, attributes, callingConvention, returnType, parameterTypes, null, m, skipVisibility, false) {
-        }
+        public DynamicMethod(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type returnType,
+            Type[] parameterTypes,
+            Module m,
+            bool skipVisibility
+        )
+            : this(
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                parameterTypes,
+                null,
+                m,
+                skipVisibility,
+                false
+            ) { }
 
-        public DynamicMethod (string name, Type returnType, Type[] parameterTypes) : this (name, returnType, parameterTypes, false) {
-        }
+        public DynamicMethod(string name, Type returnType, Type[] parameterTypes)
+            : this(name, returnType, parameterTypes, false) { }
 
-        [MonoTODO ("Visibility is not restricted")]
-        public DynamicMethod (string name, Type returnType, Type[] parameterTypes, bool restrictedSkipVisibility)
-            : this (name, MethodAttributes.Public | MethodAttributes.Static, CallingConventions.Standard, returnType, parameterTypes, null, null, restrictedSkipVisibility, true)
-        {
-        }
+        [MonoTODO("Visibility is not restricted")]
+        public DynamicMethod(
+            string name,
+            Type returnType,
+            Type[] parameterTypes,
+            bool restrictedSkipVisibility
+        )
+            : this(
+                name,
+                MethodAttributes.Public | MethodAttributes.Static,
+                CallingConventions.Standard,
+                returnType,
+                parameterTypes,
+                null,
+                null,
+                restrictedSkipVisibility,
+                true
+            ) { }
 
-        DynamicMethod (string name, MethodAttributes attributes, CallingConventions callingConvention, Type returnType, Type [] parameterTypes, Type owner, Module m, bool skipVisibility, bool anonHosted)
+        DynamicMethod(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type returnType,
+            Type[] parameterTypes,
+            Type owner,
+            Module m,
+            bool skipVisibility,
+            bool anonHosted
+        )
         {
             if (name == null)
-                throw new ArgumentNullException ("name");
+                throw new ArgumentNullException("name");
             if (returnType == null)
-                returnType = typeof (void);
+                returnType = typeof(void);
             if ((m == null) && !anonHosted)
-                throw new ArgumentNullException ("m");
+                throw new ArgumentNullException("m");
             if (returnType.IsByRef)
-                throw new ArgumentException ("Return type can't be a byref type", "returnType");
-            if (parameterTypes != null) {
+                throw new ArgumentException("Return type can't be a byref type", "returnType");
+            if (parameterTypes != null)
+            {
                 for (int i = 0; i < parameterTypes.Length; ++i)
-                    if (parameterTypes [i] == null)
-                        throw new ArgumentException ("Parameter " + i + " is null", "parameterTypes");
+                    if (parameterTypes[i] == null)
+                        throw new ArgumentException(
+                            "Parameter " + i + " is null",
+                            "parameterTypes"
+                        );
             }
-            if (owner != null && (owner.IsArray || owner.IsInterface)) {
-                throw new ArgumentException ("Owner can't be an array or an interface.");
+            if (owner != null && (owner.IsArray || owner.IsInterface))
+            {
+                throw new ArgumentException("Owner can't be an array or an interface.");
             }
 
             if (m == null)
@@ -131,154 +223,183 @@ namespace System.Reflection.Emit {
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void create_dynamic_method (DynamicMethod m);
+        private static extern void create_dynamic_method(DynamicMethod m);
 
-        private void CreateDynMethod () {
+        private void CreateDynMethod()
+        {
             // Clearing of ilgen in create_dynamic_method is not yet synchronized for multiple threads
-            lock (this) {
-                if (mhandle.Value == IntPtr.Zero) {
+            lock (this)
+            {
+                if (mhandle.Value == IntPtr.Zero)
+                {
                     if (ilgen == null || ilgen.ILOffset == 0)
-                        throw new InvalidOperationException ("Method '" + name + "' does not have a method body.");
+                        throw new InvalidOperationException(
+                            "Method '" + name + "' does not have a method body."
+                        );
 
-                    ilgen.label_fixup (this);
+                    ilgen.label_fixup(this);
 
                     // Have to create all DynamicMethods referenced by this one
-                    try {
+                    try
+                    {
                         // Used to avoid cycles
                         creating = true;
-                        if (refs != null) {
-                            for (int i = 0; i < refs.Length; ++i) {
-                                if (refs [i] is DynamicMethod) {
-                                    DynamicMethod m = (DynamicMethod)refs [i];
+                        if (refs != null)
+                        {
+                            for (int i = 0; i < refs.Length; ++i)
+                            {
+                                if (refs[i] is DynamicMethod)
+                                {
+                                    DynamicMethod m = (DynamicMethod)refs[i];
                                     if (!m.creating)
-                                        m.CreateDynMethod ();
+                                        m.CreateDynMethod();
                                 }
                             }
                         }
-                    } finally {
+                    }
+                    finally
+                    {
                         creating = false;
                     }
-                    create_dynamic_method (this);
+                    create_dynamic_method(this);
                     ilgen = null;
                 }
             }
         }
 
-        [ComVisible (true)]
-        sealed override
-        public Delegate CreateDelegate (Type delegateType)
+        [ComVisible(true)]
+        sealed override public Delegate CreateDelegate(Type delegateType)
         {
             if (delegateType == null)
-                throw new ArgumentNullException ("delegateType");
+                throw new ArgumentNullException("delegateType");
             if (deleg != null)
                 return deleg;
 
-            CreateDynMethod ();
+            CreateDynMethod();
 
-            deleg = Delegate.CreateDelegate (delegateType, null, this);
+            deleg = Delegate.CreateDelegate(delegateType, null, this);
             return deleg;
         }
 
-        [ComVisible (true)]
-        sealed override
-        public Delegate CreateDelegate (Type delegateType, object target)
+        [ComVisible(true)]
+        sealed override public Delegate CreateDelegate(Type delegateType, object target)
         {
             if (delegateType == null)
-                throw new ArgumentNullException ("delegateType");
+                throw new ArgumentNullException("delegateType");
 
-            CreateDynMethod ();
+            CreateDynMethod();
 
             /* Can't cache the delegate since it is different for each target */
-            return Delegate.CreateDelegate (delegateType, target, this);
+            return Delegate.CreateDelegate(delegateType, target, this);
         }
-        
-        public ParameterBuilder DefineParameter (int position, ParameterAttributes attributes, string parameterName)
+
+        public ParameterBuilder DefineParameter(
+            int position,
+            ParameterAttributes attributes,
+            string parameterName
+        )
         {
             //
             // Extension: Mono allows position == 0 for the return attribute
             //
             if ((position < 0) || (position > parameters.Length))
-                throw new ArgumentOutOfRangeException ("position");
+                throw new ArgumentOutOfRangeException("position");
 
-            RejectIfCreated ();
+            RejectIfCreated();
 
-            ParameterBuilder pb = new ParameterBuilder (this, position, attributes, parameterName);
+            ParameterBuilder pb = new ParameterBuilder(this, position, attributes, parameterName);
             if (pinfo == null)
-                pinfo = new ParameterBuilder [parameters.Length + 1];
-            pinfo [position] = pb;
+                pinfo = new ParameterBuilder[parameters.Length + 1];
+            pinfo[position] = pb;
             return pb;
         }
 
-        public override MethodInfo GetBaseDefinition () {
+        public override MethodInfo GetBaseDefinition()
+        {
             return this;
         }
 
-        public override object[] GetCustomAttributes (bool inherit) {
+        public override object[] GetCustomAttributes(bool inherit)
+        {
             // support for MethodImplAttribute PCA
             return new Object[] { new MethodImplAttribute(GetMethodImplementationFlags()) };
         }
 
-        public override object[] GetCustomAttributes (Type attributeType,
-                                  bool inherit) {
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
             if (attributeType == null)
-                throw new ArgumentNullException ("attributeType");
+                throw new ArgumentNullException("attributeType");
 
-            if (attributeType.IsAssignableFrom (typeof (MethodImplAttribute)))
-                return new Object[] { new MethodImplAttribute (GetMethodImplementationFlags()) };
+            if (attributeType.IsAssignableFrom(typeof(MethodImplAttribute)))
+                return new Object[] { new MethodImplAttribute(GetMethodImplementationFlags()) };
             else
                 return EmptyArray<Object>.Value;
         }
 
-        public DynamicILInfo GetDynamicILInfo () {
+        public DynamicILInfo GetDynamicILInfo()
+        {
             if (il_info == null)
-                il_info = new DynamicILInfo (this);
+                il_info = new DynamicILInfo(this);
             return il_info;
         }
 
-        public ILGenerator GetILGenerator () {
-            return GetILGenerator (64);
+        public ILGenerator GetILGenerator()
+        {
+            return GetILGenerator(64);
         }
 
-        public ILGenerator GetILGenerator (int streamSize) {
-            if (((GetMethodImplementationFlags () & MethodImplAttributes.CodeTypeMask) != 
-                 MethodImplAttributes.IL) ||
-                ((GetMethodImplementationFlags () & MethodImplAttributes.ManagedMask) != 
-                 MethodImplAttributes.Managed))
-                throw new InvalidOperationException ("Method body should not exist.");
+        public ILGenerator GetILGenerator(int streamSize)
+        {
+            if (
+                (
+                    (GetMethodImplementationFlags() & MethodImplAttributes.CodeTypeMask)
+                    != MethodImplAttributes.IL
+                )
+                || (
+                    (GetMethodImplementationFlags() & MethodImplAttributes.ManagedMask)
+                    != MethodImplAttributes.Managed
+                )
+            )
+                throw new InvalidOperationException("Method body should not exist.");
             if (ilgen != null)
                 return ilgen;
-            ilgen = new ILGenerator (Module, new DynamicMethodTokenGenerator (this), streamSize);
+            ilgen = new ILGenerator(Module, new DynamicMethodTokenGenerator(this), streamSize);
             return ilgen;
-        }        
-
-        public override MethodImplAttributes GetMethodImplementationFlags () {
-            return MethodImplAttributes.IL | MethodImplAttributes.Managed | MethodImplAttributes.NoInlining;
         }
 
-        public override ParameterInfo[] GetParameters ()
+        public override MethodImplAttributes GetMethodImplementationFlags()
         {
-            return GetParametersInternal ();
+            return MethodImplAttributes.IL
+                | MethodImplAttributes.Managed
+                | MethodImplAttributes.NoInlining;
         }
 
-        internal override ParameterInfo[] GetParametersInternal ()
+        public override ParameterInfo[] GetParameters()
+        {
+            return GetParametersInternal();
+        }
+
+        internal override ParameterInfo[] GetParametersInternal()
         {
             if (parameters == null)
                 return EmptyArray<ParameterInfo>.Value;
 
-            ParameterInfo[] retval = new ParameterInfo [parameters.Length];
-            for (int i = 0; i < parameters.Length; i++) {
-                retval [i] = RuntimeParameterInfo.New (pinfo?[i + 1], parameters [i], this, i + 1);
+            ParameterInfo[] retval = new ParameterInfo[parameters.Length];
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                retval[i] = RuntimeParameterInfo.New(pinfo?[i + 1], parameters[i], this, i + 1);
             }
             return retval;
         }
-        
-        internal override int GetParametersCount ()
+
+        internal override int GetParametersCount()
         {
             return parameters == null ? 0 : parameters.Length;
-        }        
+        }
 
-        internal override Type GetParameterType (int pos) {
-            return parameters [pos];
+        internal override Type GetParameterType(int pos)
+        {
+            return parameters[pos];
         }
 
         /*
@@ -290,138 +411,137 @@ namespace System.Reflection.Emit {
         }
         */
 
-        public override object Invoke (object obj, BindingFlags invokeAttr,
-                                       Binder binder, object[] parameters,
-                                       CultureInfo culture)
+        public override object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        )
         {
-            try {
-                CreateDynMethod ();
+            try
+            {
+                CreateDynMethod();
                 if (method == null)
-                    method = new RuntimeMethodInfo (mhandle);
+                    method = new RuntimeMethodInfo(mhandle);
 
-                return method.Invoke (obj, invokeAttr, binder, parameters, culture);
+                return method.Invoke(obj, invokeAttr, binder, parameters, culture);
             }
-            catch (MethodAccessException mae) {
-                throw new TargetInvocationException ("Method cannot be invoked.", mae);
+            catch (MethodAccessException mae)
+            {
+                throw new TargetInvocationException("Method cannot be invoked.", mae);
             }
         }
 
-        public override bool IsDefined (Type attributeType, bool inherit) {
+        public override bool IsDefined(Type attributeType, bool inherit)
+        {
             if (attributeType == null)
-                throw new ArgumentNullException ("attributeType");
+                throw new ArgumentNullException("attributeType");
 
-            if (attributeType.IsAssignableFrom (typeof (MethodImplAttribute)))
+            if (attributeType.IsAssignableFrom(typeof(MethodImplAttribute)))
                 return true;
             else
                 return false;
         }
 
-        public override string ToString () {
+        public override string ToString()
+        {
             string parms = String.Empty;
-            ParameterInfo[] p = GetParametersInternal ();
-            for (int i = 0; i < p.Length; ++i) {
+            ParameterInfo[] p = GetParametersInternal();
+            for (int i = 0; i < p.Length; ++i)
+            {
                 if (i > 0)
                     parms = parms + ", ";
-                parms = parms + p [i].ParameterType.Name;
+                parms = parms + p[i].ParameterType.Name;
             }
-            return ReturnType.Name+" "+Name+"("+parms+")";
+            return ReturnType.Name + " " + Name + "(" + parms + ")";
         }
 
-        public override MethodAttributes Attributes {
-            get {
-                return attributes;
-            }
+        public override MethodAttributes Attributes
+        {
+            get { return attributes; }
         }
 
-        public override CallingConventions CallingConvention {
-            get {
-                return callingConvention;
-            }
+        public override CallingConventions CallingConvention
+        {
+            get { return callingConvention; }
         }
 
-        public override Type DeclaringType {
-            get {
-                return null;
-            }
+        public override Type DeclaringType
+        {
+            get { return null; }
         }
 
-        public bool InitLocals {
-            get {
-                return init_locals;
-            }
-            set {
-                init_locals = value;
-            }
+        public bool InitLocals
+        {
+            get { return init_locals; }
+            set { init_locals = value; }
         }
 
-        public override RuntimeMethodHandle MethodHandle {
-            get {
-                return mhandle;
-            }
+        public override RuntimeMethodHandle MethodHandle
+        {
+            get { return mhandle; }
         }
 
-        public override Module Module {
-            get {
-                return module;
-            }
+        public override Module Module
+        {
+            get { return module; }
         }
 
-        public override string Name {
-            get {
-                return name;
-            }
+        public override string Name
+        {
+            get { return name; }
         }
 
-        public override Type ReflectedType {
-            get {
-                return null;
-            }
+        public override Type ReflectedType
+        {
+            get { return null; }
         }
 
         [MonoTODO("Not implemented")]
-        public override ParameterInfo ReturnParameter {
-            get {
-                throw new NotImplementedException ();
-            }
+        public override ParameterInfo ReturnParameter
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public override Type ReturnType {
-            get {
-                return returnType;
-            }
+        public override Type ReturnType
+        {
+            get { return returnType; }
         }
 
         [MonoTODO("Not implemented")]
-        public override ICustomAttributeProvider ReturnTypeCustomAttributes {
-            get {
-                throw new NotImplementedException ();
-            }
+        public override ICustomAttributeProvider ReturnTypeCustomAttributes
+        {
+            get { throw new NotImplementedException(); }
         }
 
-/*
-        public override int MetadataToken {
-            get {
-                return 0;
-            }
-        }
-*/
+        /*
+                public override int MetadataToken {
+                    get {
+                        return 0;
+                    }
+                }
+        */
 
-        private void RejectIfCreated () {
+        private void RejectIfCreated()
+        {
             if (mhandle.Value != IntPtr.Zero)
-                throw new InvalidOperationException ("Type definition of the method is complete.");
+                throw new InvalidOperationException("Type definition of the method is complete.");
         }
 
-        internal int AddRef (object reference) {
+        internal int AddRef(object reference)
+        {
             if (refs == null)
-                refs = new object [4];
-            if (nrefs >= refs.Length - 1) {
-                object [] new_refs = new object [refs.Length * 2];
-                System.Array.Copy (refs, new_refs, refs.Length);
+                refs = new object[4];
+            if (nrefs >= refs.Length - 1)
+            {
+                object[] new_refs = new object[refs.Length * 2];
+                System.Array.Copy(refs, new_refs, refs.Length);
                 refs = new_refs;
             }
-            refs [nrefs] = reference;
+            refs[nrefs] = reference;
             /* Reserved by the runtime */
-            refs [nrefs + 1] = null;
+            refs[nrefs + 1] = null;
             nrefs += 2;
             return nrefs - 1;
         }
@@ -431,44 +551,52 @@ namespace System.Reflection.Emit {
         {
             public static readonly Module anon_host_module;
 
-            static AnonHostModuleHolder () {
-                AssemblyName aname = new AssemblyName ();
+            static AnonHostModuleHolder()
+            {
+                AssemblyName aname = new AssemblyName();
                 aname.Name = "Anonymously Hosted DynamicMethods Assembly";
-                AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (aname, AssemblyBuilderAccess.Run);
+                AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                    aname,
+                    AssemblyBuilderAccess.Run
+                );
 
-                anon_host_module = ab.GetManifestModule ();
+                anon_host_module = ab.GetManifestModule();
             }
 
-            public static Module AnonHostModule {
-                get {
-                    return anon_host_module;
-                }
+            public static Module AnonHostModule
+            {
+                get { return anon_host_module; }
             }
         }
     }
 
-    internal class DynamicMethodTokenGenerator : TokenGenerator {
-
+    internal class DynamicMethodTokenGenerator : TokenGenerator
+    {
         private DynamicMethod m;
 
-        public DynamicMethodTokenGenerator (DynamicMethod m) {
+        public DynamicMethodTokenGenerator(DynamicMethod m)
+        {
             this.m = m;
         }
 
-        public int GetToken (string str) {
-            return m.AddRef (str);
+        public int GetToken(string str)
+        {
+            return m.AddRef(str);
         }
 
-        public int GetToken (MethodBase method, Type[] opt_param_types) {
-            throw new InvalidOperationException ();
+        public int GetToken(MethodBase method, Type[] opt_param_types)
+        {
+            throw new InvalidOperationException();
         }
 
-        public int GetToken (MemberInfo member, bool create_open_instance) {
-            return m.AddRef (member);
+        public int GetToken(MemberInfo member, bool create_open_instance)
+        {
+            return m.AddRef(member);
         }
 
-        public int GetToken (SignatureHelper helper) {
-            return m.AddRef (helper);
+        public int GetToken(SignatureHelper helper)
+        {
+            return m.AddRef(helper);
         }
     }
 }

@@ -22,6 +22,16 @@ namespace Microsoft.CodeAnalysis.LanguageService
         ReturnsDocumentation = 1 << 7,
         ValueDocumentation = 1 << 8,
         RemarksDocumentation = 1 << 9,
-        All = MainDescription | AwaitableUsageText | Documentation | TypeParameterMap | StructuralTypes | Exceptions | Captures | ReturnsDocumentation | ValueDocumentation | RemarksDocumentation,
+        All =
+            MainDescription
+            | AwaitableUsageText
+            | Documentation
+            | TypeParameterMap
+            | StructuralTypes
+            | Exceptions
+            | Captures
+            | ReturnsDocumentation
+            | ValueDocumentation
+            | RemarksDocumentation,
     }
 }

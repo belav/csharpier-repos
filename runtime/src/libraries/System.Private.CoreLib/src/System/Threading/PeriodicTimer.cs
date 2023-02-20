@@ -18,6 +18,7 @@ namespace System.Threading
     {
         /// <summary>The underlying timer.</summary>
         private readonly TimerQueueTimer _timer;
+
         /// <summary>All state other than the _timer, so that the rooted timer's callback doesn't indirectly root itself by referring to _timer.</summary>
         private readonly State _state;
 
@@ -34,7 +35,13 @@ namespace System.Threading
             }
 
             _state = new State();
-            _timer = new TimerQueueTimer(s => ((State)s!).Signal(), _state, (uint)ms, (uint)ms, flowExecutionContext: false);
+            _timer = new TimerQueueTimer(
+                s => ((State)s!).Signal(),
+                _state,
+                (uint)ms,
+                (uint)ms,
+                flowExecutionContext: false
+            );
         }
 
         /// <summary>Wait for the next tick of the timer, or for the timer to be stopped.</summary>
@@ -48,8 +55,9 @@ namespace System.Threading
         /// calls to <see cref="WaitForNextTickAsync"/>.  Similarly, a call to <see cref="Dispose"/> will void any tick not yet consumed. <see cref="WaitForNextTickAsync"/>
         /// may only be used by one consumer at a time, and may be used concurrently with a single call to <see cref="Dispose"/>.
         /// </remarks>
-        public ValueTask<bool> WaitForNextTickAsync(CancellationToken cancellationToken = default) =>
-            _state.WaitForNextTickAsync(this, cancellationToken);
+        public ValueTask<bool> WaitForNextTickAsync(
+            CancellationToken cancellationToken = default
+        ) => _state.WaitForNextTickAsync(this, cancellationToken);
 
         /// <summary>Stops the timer and releases associated managed resources.</summary>
         /// <remarks>
@@ -85,19 +93,27 @@ namespace System.Threading
             /// can be GC'd appropriately.
             /// </remarks>
             private PeriodicTimer? _owner;
+
             /// <summary>Core of the <see cref="IValueTaskSource{TResult}"/> implementation.</summary>
             private ManualResetValueTaskSourceCore<bool> _mrvtsc;
+
             /// <summary>Cancellation registration for any active <see cref="WaitForNextTickAsync"/> call.</summary>
             private CancellationTokenRegistration _ctr;
+
             /// <summary>Whether the timer has been stopped.</summary>
             private bool _stopped;
+
             /// <summary>Whether there's a pending notification to be received.  This could be due to the timer firing, the timer being stopped, or cancellation being requested.</summary>
             private bool _signaled;
+
             /// <summary>Whether there's a <see cref="WaitForNextTickAsync"/> call in flight.</summary>
             private bool _activeWait;
 
             /// <summary>Wait for the next tick of the timer, or for the timer to be stopped.</summary>
-            public ValueTask<bool> WaitForNextTickAsync(PeriodicTimer owner, CancellationToken cancellationToken)
+            public ValueTask<bool> WaitForNextTickAsync(
+                PeriodicTimer owner,
+                CancellationToken cancellationToken
+            )
             {
                 lock (this)
                 {
@@ -133,7 +149,11 @@ namespace System.Threading
                     // timer fires, stop is called, or cancellation is requested.
                     _owner = owner;
                     _activeWait = true;
-                    _ctr = cancellationToken.UnsafeRegister(static (state, cancellationToken) => ((State)state!).Signal(cancellationToken: cancellationToken), this);
+                    _ctr = cancellationToken.UnsafeRegister(
+                        static (state, cancellationToken) =>
+                            ((State)state!).Signal(cancellationToken: cancellationToken),
+                        this
+                    );
 
                     return new ValueTask<bool>(this, _mrvtsc.Version);
                 }
@@ -163,7 +183,11 @@ namespace System.Threading
                         // was to escape that lock, so that we don't invoke any synchronous continuations from the ValueTask as part
                         // of completing _mrvtsc.  However, in that case, we also haven't returned the ValueTask to the caller, so there
                         // won't be any continuations yet, which makes this safe.
-                        _mrvtsc.SetException(ExceptionDispatchInfo.SetCurrentStackTrace(new OperationCanceledException(cancellationToken)));
+                        _mrvtsc.SetException(
+                            ExceptionDispatchInfo.SetCurrentStackTrace(
+                                new OperationCanceledException(cancellationToken)
+                            )
+                        );
                     }
                     else
                     {
@@ -211,11 +235,16 @@ namespace System.Threading
             }
 
             /// <inheritdoc/>
-            ValueTaskSourceStatus IValueTaskSource<bool>.GetStatus(short token) => _mrvtsc.GetStatus(token);
+            ValueTaskSourceStatus IValueTaskSource<bool>.GetStatus(short token) =>
+                _mrvtsc.GetStatus(token);
 
             /// <inheritdoc/>
-            void IValueTaskSource<bool>.OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags) =>
-                _mrvtsc.OnCompleted(continuation, state, token, flags);
+            void IValueTaskSource<bool>.OnCompleted(
+                Action<object?> continuation,
+                object? state,
+                short token,
+                ValueTaskSourceOnCompletedFlags flags
+            ) => _mrvtsc.OnCompleted(continuation, state, token, flags);
         }
     }
 }

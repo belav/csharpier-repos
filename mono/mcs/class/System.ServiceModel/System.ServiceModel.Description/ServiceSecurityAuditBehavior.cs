@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,49 +37,57 @@ namespace System.ServiceModel.Description
     {
         AuditLogLocation audit_log_loc;
         bool suppress_failure;
-        AuditLevel msg_audit_level, svc_audit_level;
+        AuditLevel msg_audit_level,
+            svc_audit_level;
 
-        public AuditLogLocation AuditLogLocation {
+        public AuditLogLocation AuditLogLocation
+        {
             get { return audit_log_loc; }
             set { audit_log_loc = value; }
         }
 
-        public AuditLevel MessageAuthenticationAuditLevel {
+        public AuditLevel MessageAuthenticationAuditLevel
+        {
             get { return msg_audit_level; }
             set { msg_audit_level = value; }
         }
 
-        public AuditLevel ServiceAuthorizationAuditLevel {
+        public AuditLevel ServiceAuthorizationAuditLevel
+        {
             get { return svc_audit_level; }
             set { svc_audit_level = value; }
         }
 
-        public bool SuppressAuditFailure {
+        public bool SuppressAuditFailure
+        {
             get { return suppress_failure; }
             set { suppress_failure = value; }
         }
 
-        void IServiceBehavior.AddBindingParameters (
+        void IServiceBehavior.AddBindingParameters(
             ServiceDescription description,
             ServiceHostBase serviceHostBase,
             Collection<ServiceEndpoint> endpoints,
-            BindingParameterCollection parameters)
+            BindingParameterCollection parameters
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        void IServiceBehavior.ApplyDispatchBehavior (
+        void IServiceBehavior.ApplyDispatchBehavior(
             ServiceDescription description,
-            ServiceHostBase serviceHostBase)
+            ServiceHostBase serviceHostBase
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        void IServiceBehavior.Validate (
+        void IServiceBehavior.Validate(
             ServiceDescription description,
-            ServiceHostBase serviceHostBase)
+            ServiceHostBase serviceHostBase
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

@@ -18,7 +18,16 @@ namespace Mono.Linker.Tests.TestCasesRunner
         public readonly ILScanResults TrimmingResults;
         public readonly TestLogWriter LogWriter;
 
-        public ILCompilerTestCaseResult (TestCase testCase, NPath inputAssemblyPath, NPath expectationsAssemblyPath, TestCaseSandbox sandbox, TestCaseMetadataProvider metadataProvider, ManagedCompilationResult compilationResult, ILScanResults trimmingResults, TestLogWriter logWriter)
+        public ILCompilerTestCaseResult(
+            TestCase testCase,
+            NPath inputAssemblyPath,
+            NPath expectationsAssemblyPath,
+            TestCaseSandbox sandbox,
+            TestCaseMetadataProvider metadataProvider,
+            ManagedCompilationResult compilationResult,
+            ILScanResults trimmingResults,
+            TestLogWriter logWriter
+        )
         {
             TestCase = testCase;
             InputAssemblyPath = inputAssemblyPath;

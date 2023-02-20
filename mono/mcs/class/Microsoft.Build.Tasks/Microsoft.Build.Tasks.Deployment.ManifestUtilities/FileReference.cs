@@ -30,73 +30,80 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-    
-    [ComVisible (false)]
-    
-    public sealed class FileReference : BaseReference {
-    
-        ComClass[]    comClasses;
-        bool        isDataFile;
-        ProxyStub[]    proxyStubs;
-        TypeLib[]    typeLibs;
-        ComClass[]    xmlComClasses;
-        ProxyStub[]    xmlProxyStubs;
-        TypeLib[]    xmlTypeLibs;
-        string        xmlWriteableType;
-    
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public sealed class FileReference : BaseReference
+    {
+        ComClass[] comClasses;
+        bool isDataFile;
+        ProxyStub[] proxyStubs;
+        TypeLib[] typeLibs;
+        ComClass[] xmlComClasses;
+        ProxyStub[] xmlProxyStubs;
+        TypeLib[] xmlTypeLibs;
+        string xmlWriteableType;
+
         [MonoTODO]
-        public FileReference ()
+        public FileReference()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public FileReference (string path)
+        public FileReference(string path)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public ComClass[] ComClasses {
+
+        public ComClass[] ComClasses
+        {
             get { return comClasses; }
         }
-        
-        public bool IsDataFile {
+
+        public bool IsDataFile
+        {
             get { return isDataFile; }
             set { isDataFile = value; }
         }
-        
-        public ProxyStub[] ProxyStubs {
+
+        public ProxyStub[] ProxyStubs
+        {
             get { return proxyStubs; }
         }
-        
-        public TypeLib[] TypeLibs {
+
+        public TypeLib[] TypeLibs
+        {
             get { return typeLibs; }
         }
-        
-        public ComClass[] XmlComClasses {
+
+        public ComClass[] XmlComClasses
+        {
             get { return xmlComClasses; }
             set { xmlComClasses = value; }
         }
-        
-        public ProxyStub[] XmlProxyStubs {
+
+        public ProxyStub[] XmlProxyStubs
+        {
             get { return xmlProxyStubs; }
             set { xmlProxyStubs = value; }
         }
-        
-        public TypeLib[] XmlTypeLibs {
+
+        public TypeLib[] XmlTypeLibs
+        {
             get { return xmlTypeLibs; }
             set { xmlTypeLibs = value; }
         }
-        
-        public string XmlWriteableType {
+
+        public string XmlWriteableType
+        {
             get { return xmlWriteableType; }
             set { xmlWriteableType = value; }
         }
-        
-        protected internal override string SortName {
+
+        protected internal override string SortName
+        {
             get { return null; }
         }
     }
 }
-

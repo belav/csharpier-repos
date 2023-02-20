@@ -7,9 +7,9 @@
 // Reduced from 47.2 KiB to 1.6 KiB in 00:00:23
 // Hits JIT assert in Release:
 // Assertion failed 'i < BitSetTraits::GetSize(env)' in 'Program:Main(Fuzzlyn.ExecutionServer.IRuntime)' during 'Redundant branch opts' (IL size 260; hash 0xade6b36b; FullOpts)
-// 
+//
 //     File: /Users/runner/work/1/s/src/coreclr/jit/bitsetasshortlong.h Line: 261
-// 
+//
 
 using System;
 
@@ -58,7 +58,6 @@ public class Runtime_71599
         return 101;
     }
 
-
     public static void Test()
     {
         ushort[] vr2 = default(ushort[]);
@@ -99,7 +98,6 @@ public class Runtime_71599
 
             s_rt.WriteLine(vr9);
         }
-
     }
 }
 

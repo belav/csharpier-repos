@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,58 +27,63 @@ using System;
 using System.Collections.ObjectModel;
 using System.Security;
 
-namespace System.Security.RightsManagement {
-
-    [SecurityCritical (SecurityCriticalScope.Everything)]
+namespace System.Security.RightsManagement
+{
+    [SecurityCritical(SecurityCriticalScope.Everything)]
     public class SecureEnvironment : IDisposable
     {
-        internal SecureEnvironment ()
+        internal SecureEnvironment()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public string ApplicationManifest {
-            get { throw new NotImplementedException (); }
-        }
-
-        public ContentUser User {
-            get { throw new NotImplementedException (); }
-        }
-
-        public static SecureEnvironment Create (string applicationManifest, ContentUser user)
+        public string ApplicationManifest
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public static SecureEnvironment Create (string applicationManifest, AuthenticationType authentication, UserActivationMode userActivationMode)
+        public ContentUser User
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public void Dispose ()
+        public static SecureEnvironment Create(string applicationManifest, ContentUser user)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected virtual void Dispose (bool disposing)
+        public static SecureEnvironment Create(
+            string applicationManifest,
+            AuthenticationType authentication,
+            UserActivationMode userActivationMode
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public static ReadOnlyCollection<ContentUser> GetActivatedUsers ()
+        public void Dispose()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public static bool IsUserActivated (ContentUser user)
+        protected virtual void Dispose(bool disposing)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public static void RemoveActivatedUser (ContentUser user)
+        public static ReadOnlyCollection<ContentUser> GetActivatedUsers()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
+        }
+
+        public static bool IsUserActivated(ContentUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void RemoveActivatedUser(ContentUser user)
+        {
+            throw new NotImplementedException();
         }
     }
-
 }

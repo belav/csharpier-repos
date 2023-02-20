@@ -22,18 +22,18 @@ namespace System.CommandLine.Rendering.Tests
         {
             _output = output;
 
-            _terminal = new TestTerminal
-            {
-                Width = 150
-            };
+            _terminal = new TestTerminal { Width = 150 };
         }
 
         [Theory]
         [InlineData(OutputMode.Ansi)]
         [InlineData(OutputMode.NonAnsi)]
-        public void A_row_is_written_for_each_item_and_a_header_for_each_column(OutputMode outputMode)
+        public void A_row_is_written_for_each_item_and_a_header_for_each_column(
+            OutputMode outputMode
+        )
         {
-            var options = new[] {
+            var options = new[]
+            {
                 new Option<string>("-s", "a short option"),
                 new Option<string>("--very-long", "a long option")
             };
@@ -47,31 +47,44 @@ namespace System.CommandLine.Rendering.Tests
             lines
                 .Should()
                 .BeEquivalentSequenceTo(
-                    Cell("Option     ", 0, 0), Cell("  ", 11, 0), Cell("              ", 13, 0),
-                    Cell("-s         ", 0, 1), Cell("  ", 11, 1), Cell("a short option", 13, 1),
-                    Cell("--very-long", 0, 2), Cell("  ", 11, 2), Cell("a long option ", 13, 2));
+                    Cell("Option     ", 0, 0),
+                    Cell("  ", 11, 0),
+                    Cell("              ", 13, 0),
+                    Cell("-s         ", 0, 1),
+                    Cell("  ", 11, 1),
+                    Cell("a short option", 13, 1),
+                    Cell("--very-long", 0, 2),
+                    Cell("  ", 11, 2),
+                    Cell("a long option ", 13, 2)
+                );
         }
 
         [Fact]
         public void A_row_is_written_for_each_item_and_a_header_for_each_column_in_file_mode()
         {
             var options = new[]
-                          {
-                              new Option<string>("-s", "a short option"),
-                              new Option<string>("--very-long", "a long option")
-                          };
+            {
+                new Option<string>("-s", "a short option"),
+                new Option<string>("--very-long", "a long option")
+            };
 
             var view = new OptionsHelpView(options);
 
-            view.Render(new ConsoleRenderer(_terminal, OutputMode.PlainText), new Region(0, 0, 30, 3));
+            view.Render(
+                new ConsoleRenderer(_terminal, OutputMode.PlainText),
+                new Region(0, 0, 30, 3)
+            );
 
             _terminal.Out
-                    .ToString()
-                    .Should()
-                    .Be(
-                        "Option                     " + NewLine +
-                        "-s           a short option" + NewLine +
-                        "--very-long  a long option ");
+                .ToString()
+                .Should()
+                .Be(
+                    "Option                     "
+                        + NewLine
+                        + "-s           a short option"
+                        + NewLine
+                        + "--very-long  a long option "
+                );
         }
 
         [Theory]
@@ -79,46 +92,44 @@ namespace System.CommandLine.Rendering.Tests
         [InlineData(OutputMode.NonAnsi)]
         public void Column_widths_are_aligned_to_the_longest_cell(OutputMode outputMode)
         {
-            var options = new[] {
+            var options = new[]
+            {
                 new Option<string>("-s", "an option"),
                 new Option<string>("--very-long", "an option")
             };
 
             var view = new OptionsHelpView(options);
 
-            view.Render(new ConsoleRenderer(_terminal, outputMode), new Region(0,0, 30, 3));
+            view.Render(new ConsoleRenderer(_terminal, outputMode), new Region(0, 0, 30, 3));
 
-            var lines = _terminal.RenderOperations()
-                                .Select(l => l.Text)
-                                .ToArray();
+            var lines = _terminal.RenderOperations().Select(l => l.Text).ToArray();
 
-            lines[1].IndexOf("an option")
-                    .Should()
-                    .Be(lines[2].IndexOf("an option"));
+            lines[1].IndexOf("an option").Should().Be(lines[2].IndexOf("an option"));
         }
 
         [Fact]
         public void Column_widths_are_aligned_to_the_longest_cell_in_file_mode()
         {
-            var options = new[] {
+            var options = new[]
+            {
                 new Option<string>("-s", "an option"),
                 new Option<string>("--very-long", "an option")
             };
 
             var view = new OptionsHelpView(options);
 
-            view.Render(new ConsoleRenderer(_terminal, OutputMode.PlainText), new Region(0,0, 30, 3));
+            view.Render(
+                new ConsoleRenderer(_terminal, OutputMode.PlainText),
+                new Region(0, 0, 30, 3)
+            );
 
-            var lines = _terminal.Out.ToString()
-                                .Split(NewLine)
-                                .ToArray();
+            var lines = _terminal.Out.ToString().Split(NewLine).ToArray();
 
-            lines[1].IndexOf("an option")
-                    .Should()
-                    .Be(lines[2].IndexOf("an option"));
+            lines[1].IndexOf("an option").Should().Be(lines[2].IndexOf("an option"));
         }
 
-        private TextRendered Cell(string text, int left, int top) => new(text, new Point(left, top));
+        private TextRendered Cell(string text, int left, int top) =>
+            new(text, new Point(left, top));
     }
 
     public class OptionsHelpView : TableView<Option>

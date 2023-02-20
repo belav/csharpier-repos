@@ -4,12 +4,12 @@ public class A<T>
 {
     T value;
 
-    public A (T value)
+    public A(T value)
     {
         this.value = value;
     }
 
-    public static explicit operator T (A<T> source)
+    public static explicit operator T(A<T> source)
     {
         return source.value;
     }
@@ -17,16 +17,16 @@ public class A<T>
 
 public class Test
 {
-    public static int Main ()
+    public static int Main()
     {
-        var source = new A<int?> (3);
-        if (N ((int)source) != 3)
+        var source = new A<int?>(3);
+        if (N((int)source) != 3)
             return 1;
 
         return 0;
     }
 
-    static int N (int value)
+    static int N(int value)
     {
         return value;
     }

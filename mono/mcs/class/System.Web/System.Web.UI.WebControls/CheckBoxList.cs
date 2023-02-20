@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,128 +35,151 @@ using System.Web.Util;
 namespace System.Web.UI.WebControls
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class CheckBoxList : ListControl, IRepeatInfoUser, INamingContainer, IPostBackDataHandler 
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class CheckBoxList : ListControl, IRepeatInfoUser, INamingContainer, IPostBackDataHandler
     {
         CheckBox check_box;
 
-        public CheckBoxList ()
+        public CheckBoxList()
         {
-            check_box = new CheckBox ();
-            Controls.Add (check_box);
+            check_box = new CheckBox();
+            Controls.Add(check_box);
         }
 
         [DefaultValue(-1)]
-        [WebSysDescription ("")]
-        [WebCategory ("Layout")]
-        public virtual int CellPadding {
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual int CellPadding
+        {
             get { return TableStyle.CellPadding; }
             set { TableStyle.CellPadding = value; }
         }
 
         [DefaultValue(-1)]
-        [WebSysDescription ("")]
-        [WebCategory ("Layout")]
-        public virtual int CellSpacing {
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual int CellSpacing
+        {
             get { return TableStyle.CellSpacing; }
             set { TableStyle.CellSpacing = value; }
         }
 
         [DefaultValue(0)]
-        [WebSysDescription ("")]
-        [WebCategory ("Layout")]
-        public virtual int RepeatColumns {
-            get { return ViewState.GetInt ("RepeatColumns", 0); }
-            set {
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual int RepeatColumns
+        {
+            get { return ViewState.GetInt("RepeatColumns", 0); }
+            set
+            {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException ("value");
-                ViewState ["RepeatColumns"] = value;
+                    throw new ArgumentOutOfRangeException("value");
+                ViewState["RepeatColumns"] = value;
             }
         }
 
         [DefaultValue(RepeatDirection.Vertical)]
-        [WebSysDescription ("")]
-        [WebCategory ("Layout")]
-        public virtual RepeatDirection RepeatDirection {
-            get { return (RepeatDirection) ViewState.GetInt ("RepeatDirection", (int) RepeatDirection.Vertical); }
-            set {
-                if (value < RepeatDirection.Horizontal ||
-                        value > RepeatDirection.Vertical)
-                    throw new ArgumentOutOfRangeException ("value");
-                ViewState ["RepeatDirection"] = value;
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual RepeatDirection RepeatDirection
+        {
+            get
+            {
+                return (RepeatDirection)
+                    ViewState.GetInt("RepeatDirection", (int)RepeatDirection.Vertical);
+            }
+            set
+            {
+                if (value < RepeatDirection.Horizontal || value > RepeatDirection.Vertical)
+                    throw new ArgumentOutOfRangeException("value");
+                ViewState["RepeatDirection"] = value;
             }
         }
 
         [DefaultValue(RepeatLayout.Table)]
-        [WebSysDescription ("")]
-        [WebCategory ("Layout")]
-        public virtual RepeatLayout RepeatLayout {
-            get { return (RepeatLayout) ViewState.GetInt ("RepeatLayout", (int) RepeatLayout.Table); }
-            set {
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual RepeatLayout RepeatLayout
+        {
+            get { return (RepeatLayout)ViewState.GetInt("RepeatLayout", (int)RepeatLayout.Table); }
+            set
+            {
                 bool outOfRange;
                 outOfRange = value < RepeatLayout.Table || value > RepeatLayout.OrderedList;
                 if (outOfRange)
-                    throw new ArgumentOutOfRangeException ("value");
-                ViewState ["RepeatLayout"] = value;
+                    throw new ArgumentOutOfRangeException("value");
+                ViewState["RepeatLayout"] = value;
             }
         }
 
         [DefaultValue(TextAlign.Right)]
-        [WebSysDescription ("")]
-        [WebCategory ("Appearance")]
-        public virtual TextAlign TextAlign {
-            get { return (TextAlign) ViewState.GetInt ("TextAlign", (int) TextAlign.Right); }
-            set {
+        [WebSysDescription("")]
+        [WebCategory("Appearance")]
+        public virtual TextAlign TextAlign
+        {
+            get { return (TextAlign)ViewState.GetInt("TextAlign", (int)TextAlign.Right); }
+            set
+            {
                 if (value < TextAlign.Left || value > TextAlign.Right)
-                    throw new ArgumentOutOfRangeException ("value");
-                ViewState ["TextAlign"] = value;
+                    throw new ArgumentOutOfRangeException("value");
+                ViewState["TextAlign"] = value;
             }
         }
 
-        TableStyle TableStyle {
-            get { return (TableStyle) ControlStyle; }
-        }
-
-        protected override Style CreateControlStyle ()
+        TableStyle TableStyle
         {
-            return new TableStyle (ViewState);
+            get { return (TableStyle)ControlStyle; }
         }
 
-        protected override Control FindControl (string id, int pathOffset)
+        protected override Style CreateControlStyle()
+        {
+            return new TableStyle(ViewState);
+        }
+
+        protected override Control FindControl(string id, int pathOffset)
         {
             // Always, or in just all my tests?
             return this;
         }
 
-        protected internal override void OnPreRender (EventArgs e)
+        protected internal override void OnPreRender(EventArgs e)
         {
-            base.OnPreRender (e);
+            base.OnPreRender(e);
 
             // Register all of the checked controls so we can
             // find out when they are unchecked.
             Page page = Page;
-            for (int i = 0; i < Items.Count; i++) {
-                if (Items [i].Selected) {
-                    check_box.ID = i.ToString (Helpers.InvariantCulture);
+            for (int i = 0; i < Items.Count; i++)
+            {
+                if (Items[i].Selected)
+                {
+                    check_box.ID = i.ToString(Helpers.InvariantCulture);
                     if (page != null)
-                        page.RegisterRequiresPostBack (check_box);
+                        page.RegisterRequiresPostBack(check_box);
                 }
             }
         }
 
-        protected internal override void Render (HtmlTextWriter writer)
+        protected internal override void Render(HtmlTextWriter writer)
         {
             if (Items.Count == 0)
                 return;
 
-            RepeatInfo ri = new RepeatInfo ();
+            RepeatInfo ri = new RepeatInfo();
             ri.RepeatColumns = RepeatColumns;
             ri.RepeatDirection = RepeatDirection;
             ri.RepeatLayout = RepeatLayout;
 
             short ti = 0;
-            if (TabIndex != 0) {
+            if (TabIndex != 0)
+            {
                 check_box.TabIndex = TabIndex;
                 ti = TabIndex;
                 TabIndex = 0;
@@ -166,126 +189,150 @@ namespace System.Web.UI.WebControls
             check_box.AccessKey = ak;
             this.AccessKey = null;
 
-            ri.RenderRepeater (writer, this, TableStyle, this);
+            ri.RenderRepeater(writer, this, TableStyle, this);
 
             if (ti != 0)
                 TabIndex = ti;
             this.AccessKey = ak;
         }
 
-        protected virtual bool LoadPostData (string postDataKey, NameValueCollection postCollection)
+        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
         {
             if (!IsEnabled)
                 return false;
 
-            EnsureDataBound ();
+            EnsureDataBound();
             int checkbox = -1;
 
-            try {
-                string id = postDataKey.Substring (ClientID.Length + 1);
-                if (Char.IsDigit (id [0]))
-                    checkbox = Int32.Parse (id, Helpers.InvariantCulture);
-            } catch {
+            try
+            {
+                string id = postDataKey.Substring(ClientID.Length + 1);
+                if (Char.IsDigit(id[0]))
+                    checkbox = Int32.Parse(id, Helpers.InvariantCulture);
+            }
+            catch
+            {
                 return false;
             }
 
             if (checkbox == -1)
                 return false;
 
+            ListItem item = Items[checkbox];
 
-            ListItem item = Items [checkbox];
-
-            if (item.Enabled) {
-                string val = postCollection [postDataKey];
+            if (item.Enabled)
+            {
+                string val = postCollection[postDataKey];
                 bool ischecked = val == "on";
 #if NET_4_0
-                if (!RenderingCompatibilityLessThan40) {
+                if (!RenderingCompatibilityLessThan40)
+                {
                     ischecked = val == item.Value;
-                }                
+                }
 #endif
-                if (ischecked && !item.Selected) {
+                if (ischecked && !item.Selected)
+                {
                     item.Selected = true;
                     return true;
-                } else if (!ischecked && item.Selected) {
+                }
+                else if (!ischecked && item.Selected)
+                {
                     item.Selected = false;
                     return true;
                 }
             }
-            
+
             return false;
         }
 
-        protected virtual void RaisePostDataChangedEvent ()
+        protected virtual void RaisePostDataChangedEvent()
         {
-            if (CausesValidation) {
+            if (CausesValidation)
+            {
                 Page page = Page;
                 if (page != null)
-                    page.Validate (ValidationGroup);
+                    page.Validate(ValidationGroup);
             }
-            
-            OnSelectedIndexChanged (EventArgs.Empty);
+
+            OnSelectedIndexChanged(EventArgs.Empty);
         }
 
-        bool IPostBackDataHandler.LoadPostData (string postDataKey, NameValueCollection postCollection)
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
         {
-            return LoadPostData (postDataKey, postCollection);
+            return LoadPostData(postDataKey, postCollection);
         }
 
-        void IPostBackDataHandler.RaisePostDataChangedEvent ()
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
         {
-            RaisePostDataChangedEvent ();
+            RaisePostDataChangedEvent();
         }
 
-        protected virtual bool HasFooter  {
+        protected virtual bool HasFooter
+        {
             get { return false; }
         }
 
-        bool IRepeatInfoUser.HasFooter {
+        bool IRepeatInfoUser.HasFooter
+        {
             get { return HasFooter; }
         }
 
-        protected virtual bool HasHeader {
+        protected virtual bool HasHeader
+        {
             get { return false; }
         }
 
-        bool IRepeatInfoUser.HasHeader {
+        bool IRepeatInfoUser.HasHeader
+        {
             get { return HasHeader; }
         }
 
-        protected virtual bool HasSeparators {
+        protected virtual bool HasSeparators
+        {
             get { return false; }
         }
 
-        bool IRepeatInfoUser.HasSeparators {
+        bool IRepeatInfoUser.HasSeparators
+        {
             get { return HasSeparators; }
         }
 
-        protected virtual int RepeatedItemCount {
+        protected virtual int RepeatedItemCount
+        {
             get { return Items.Count; }
         }
 
-        int IRepeatInfoUser.RepeatedItemCount {
+        int IRepeatInfoUser.RepeatedItemCount
+        {
             get { return RepeatedItemCount; }
         }
 
-        protected virtual Style GetItemStyle (ListItemType itemType, int repeatIndex)
+        protected virtual Style GetItemStyle(ListItemType itemType, int repeatIndex)
         {
             return null;
         }
 
-        Style IRepeatInfoUser.GetItemStyle (ListItemType itemType, int repeatIndex)
+        Style IRepeatInfoUser.GetItemStyle(ListItemType itemType, int repeatIndex)
         {
-            return GetItemStyle (itemType, repeatIndex);
+            return GetItemStyle(itemType, repeatIndex);
         }
 
-        protected virtual void RenderItem (ListItemType itemType, int repeatIndex, RepeatInfo repeatInfo, HtmlTextWriter writer)
+        protected virtual void RenderItem(
+            ListItemType itemType,
+            int repeatIndex,
+            RepeatInfo repeatInfo,
+            HtmlTextWriter writer
+        )
         {
-            ListItem item = Items [repeatIndex];
+            ListItem item = Items[repeatIndex];
 
             string cssClass = check_box.CssClass;
-            if (!String.IsNullOrEmpty (cssClass))
+            if (!String.IsNullOrEmpty(cssClass))
                 check_box.CssClass = String.Empty;
-            check_box.ID = repeatIndex.ToString (Helpers.InvariantCulture);
+            check_box.ID = repeatIndex.ToString(Helpers.InvariantCulture);
             check_box.Text = item.Text;
             check_box.AutoPostBack = AutoPostBack;
             check_box.Checked = item.Selected;
@@ -298,24 +345,30 @@ namespace System.Web.UI.WebControls
             check_box.ValidationGroup = ValidationGroup;
             check_box.CausesValidation = CausesValidation;
             if (check_box.HasAttributes)
-                check_box.Attributes.Clear ();
+                check_box.Attributes.Clear();
             if (item.HasAttributes)
-                check_box.Attributes.CopyFrom (item.Attributes);
-            if (!RenderingCompatibilityLessThan40) {
+                check_box.Attributes.CopyFrom(item.Attributes);
+            if (!RenderingCompatibilityLessThan40)
+            {
                 var attrs = check_box.InputAttributes;
-            
-                attrs.Clear ();
-                attrs.Add ("value", item.Value);
+
+                attrs.Clear();
+                attrs.Add("value", item.Value);
             }
-            check_box.RenderControl (writer);
+            check_box.RenderControl(writer);
         }
 
-        void IRepeatInfoUser.RenderItem (ListItemType itemType, int repeatIndex, RepeatInfo repeatInfo, HtmlTextWriter writer)
+        void IRepeatInfoUser.RenderItem(
+            ListItemType itemType,
+            int repeatIndex,
+            RepeatInfo repeatInfo,
+            HtmlTextWriter writer
+        )
         {
-            RenderItem (itemType, repeatIndex, repeatInfo, writer);
+            RenderItem(itemType, repeatIndex, repeatInfo, writer);
         }
 
-        internal override bool MultiSelectOk ()
+        internal override bool MultiSelectOk()
         {
             return true;
         }

@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.MessagePartCollection.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,80 +28,82 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services.Description {
-    public sealed class MessagePartCollection : ServiceDescriptionBaseCollection {
-
+namespace System.Web.Services.Description
+{
+    public sealed class MessagePartCollection : ServiceDescriptionBaseCollection
+    {
         #region Constructors
 
-        internal MessagePartCollection (Message message)
-            : base (message)
-        {
-        }    
+        internal MessagePartCollection(Message message)
+            : base(message) { }
 
         #endregion
 
         #region Properties
 
-        public MessagePart this [int index] {
-            get { 
+        public MessagePart this[int index]
+        {
+            get
+            {
                 if (index < 0 || index > Count)
-                    throw new ArgumentOutOfRangeException ();
-                return (MessagePart) List[index]; 
+                    throw new ArgumentOutOfRangeException();
+                return (MessagePart)List[index];
             }
-                        set { List [index] = value; }
+            set { List[index] = value; }
         }
 
-        public MessagePart this [string name] {
-            get { return this [IndexOf ((MessagePart) Table[name])]; }
+        public MessagePart this[string name]
+        {
+            get { return this[IndexOf((MessagePart)Table[name])]; }
         }
 
         #endregion // Properties
 
         #region Methods
 
-        public int Add (MessagePart messagePart) 
+        public int Add(MessagePart messagePart)
         {
-            Insert (Count, messagePart);
+            Insert(Count, messagePart);
             return (Count - 1);
         }
 
-        public bool Contains (MessagePart messagePart)
+        public bool Contains(MessagePart messagePart)
         {
-            return List.Contains (messagePart);
+            return List.Contains(messagePart);
         }
 
-        public void CopyTo (MessagePart[] array, int index) 
+        public void CopyTo(MessagePart[] array, int index)
         {
-            List.CopyTo (array, index);
+            List.CopyTo(array, index);
         }
 
-        protected override string GetKey (object value) 
+        protected override string GetKey(object value)
         {
             if (!(value is MessagePart))
-                throw new InvalidCastException ();
-            return ((MessagePart) value).Name;
+                throw new InvalidCastException();
+            return ((MessagePart)value).Name;
         }
 
-        public int IndexOf (MessagePart messagePart)
+        public int IndexOf(MessagePart messagePart)
         {
-            return List.IndexOf (messagePart);
+            return List.IndexOf(messagePart);
         }
 
-        public void Insert (int index, MessagePart messagePart)
+        public void Insert(int index, MessagePart messagePart)
         {
-            List.Insert (index, messagePart);
+            List.Insert(index, messagePart);
         }
-    
-        public void Remove (MessagePart messagePart)
+
+        public void Remove(MessagePart messagePart)
         {
-            List.Remove (messagePart);
+            List.Remove(messagePart);
         }
-            
-        protected override void SetParent (object value, object parent)
+
+        protected override void SetParent(object value, object parent)
         {
-            ((MessagePart) value).SetParent ((Message) parent);
+            ((MessagePart)value).SetParent((Message)parent);
         }
-            
+
         #endregion // Methods
     }
 }

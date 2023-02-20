@@ -1,24 +1,24 @@
 /*
 Used to determine Browser Capabilities by the Browsers UserAgent String and related
 Browser supplied Headers.
-Copyright (C) 2002-Present  Owen Brady (Ocean at owenbrady dot net) 
+Copyright (C) 2002-Present  Owen Brady (Ocean at owenbrady dot net)
 and Dean Brettle (dean at brettle dot com)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy 
+Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights 
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is furnished
 to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all 
+The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace System.Web.Configuration.nBrowser
@@ -35,15 +35,13 @@ namespace System.Web.Configuration.nBrowser
         private System.Collections.Specialized.ListDictionary Lookup;
         private System.Collections.Specialized.ListDictionary DefaultLookup;
         internal List<Node> RefNodes;
-        
+
         public string FileName
         {
-            get
-            {
-                return pFileName;
-            }
+            get { return pFileName; }
         }
         private string pFileName = string.Empty;
+
         public File(string file)
         {
             pFileName = file;
@@ -55,8 +53,9 @@ namespace System.Web.Configuration.nBrowser
 
             this.Load(BrowserFile);
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="file"></param>
         public File(System.Xml.XmlDocument BrowserFile, string filename)
@@ -64,6 +63,7 @@ namespace System.Web.Configuration.nBrowser
             pFileName = filename;
             this.Load(BrowserFile);
         }
+
         private void Load(System.Xml.XmlDocument BrowserFile)
         {
             Lookup = new System.Collections.Specialized.ListDictionary();
@@ -72,7 +72,7 @@ namespace System.Web.Configuration.nBrowser
             System.Xml.XmlNode node;
             //I know this might allocate more nodes then needed but never less.
             Nodes = new Node[BrowserFile.DocumentElement.ChildNodes.Count];
-            for (int a = 0;a <= BrowserFile.DocumentElement.ChildNodes.Count - 1;a++)
+            for (int a = 0; a <= BrowserFile.DocumentElement.ChildNodes.Count - 1; a++)
             {
                 node = BrowserFile.DocumentElement.ChildNodes[a];
 
@@ -118,6 +118,7 @@ namespace System.Web.Configuration.nBrowser
                 }
             }
         }
+
         /// <summary>
         /// Returns a Array of strings, which represent the Id Attributes of all the
         /// Browser/Gatway Nodes
@@ -126,7 +127,6 @@ namespace System.Web.Configuration.nBrowser
         {
             get
             {
-
                 string[] k = new string[Lookup.Keys.Count];
                 //12-29-05
                 //This will copy the Keys In Alphabetical Order
@@ -134,10 +134,13 @@ namespace System.Web.Configuration.nBrowser
                 //This Method is ment to copy the Keys in the order
                 //that they were in the xml file.
                 int b = 0;
-                for (int i = 0;i <= Nodes.Length - 1;i++)
+                for (int i = 0; i <= Nodes.Length - 1; i++)
                 {
-                    if (Nodes[i] != null && Nodes[i].NameType != NodeType.DefaultBrowser 
-                        && Nodes[i].RefId.Length == 0)
+                    if (
+                        Nodes[i] != null
+                        && Nodes[i].NameType != NodeType.DefaultBrowser
+                        && Nodes[i].RefId.Length == 0
+                    )
                     {
                         k[b] = Nodes[i].Id;
                         b++;
@@ -146,6 +149,7 @@ namespace System.Web.Configuration.nBrowser
                 return k;
             }
         }
+
         /// <summary>
         /// Returns a Array of strings, which represent the Id Attributes of all the
         /// DefaultBrowser Nodes
@@ -161,7 +165,7 @@ namespace System.Web.Configuration.nBrowser
                 //This Method is ment to copy the Keys in the order
                 //that they were in the xml file.
                 int b = 0;
-                for (int i = 0;i <= Nodes.Length - 1;i++)
+                for (int i = 0; i <= Nodes.Length - 1; i++)
                 {
                     if (Nodes[i] != null && Nodes[i].NameType == NodeType.DefaultBrowser)
                     {
@@ -174,7 +178,7 @@ namespace System.Web.Configuration.nBrowser
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="Key"></param>
         /// <returns></returns>
@@ -182,12 +186,12 @@ namespace System.Web.Configuration.nBrowser
         {
             object o = Lookup[Key];
             if (o == null)
-                return GetDefaultNode (Key);
+                return GetDefaultNode(Key);
             return Nodes[(int)o];
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="Key"></param>
         /// <returns></returns>

@@ -22,9 +22,7 @@ public class FeatureCollection : IFeatureCollection
     /// <summary>
     /// Initializes a new instance of <see cref="FeatureCollection"/>.
     /// </summary>
-    public FeatureCollection()
-    {
-    }
+    public FeatureCollection() { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FeatureCollection"/> with the specified initial capacity.
@@ -57,7 +55,10 @@ public class FeatureCollection : IFeatureCollection
     }
 
     /// <inheritdoc />
-    public bool IsReadOnly { get { return false; } }
+    public bool IsReadOnly
+    {
+        get { return false; }
+    }
 
     /// <inheritdoc />
     public object? this[Type key]
@@ -69,7 +70,9 @@ public class FeatureCollection : IFeatureCollection
                 throw new ArgumentNullException(nameof(key));
             }
 
-            return _features != null && _features.TryGetValue(key, out var result) ? result : _defaults?[key];
+            return _features != null && _features.TryGetValue(key, out var result)
+                ? result
+                : _defaults?[key];
         }
         set
         {
@@ -115,7 +118,11 @@ public class FeatureCollection : IFeatureCollection
         if (_defaults != null)
         {
             // Don't return features masked by the wrapper.
-            foreach (var pair in _features == null ? _defaults : _defaults.Except(_features, FeatureKeyComparer))
+            foreach (
+                var pair in _features == null
+                    ? _defaults
+                    : _defaults.Except(_features, FeatureKeyComparer)
+            )
             {
                 yield return pair;
             }

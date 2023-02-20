@@ -34,42 +34,38 @@ namespace System.Net.Http.Headers
     {
         readonly HttpContent content;
 
-        internal HttpContentHeaders (HttpContent content)
-            : base (HttpHeaderKind.Content)
+        internal HttpContentHeaders(HttpContent content)
+            : base(HttpHeaderKind.Content)
         {
             this.content = content;
         }
-        
-        public ICollection<string> Allow {
-            get {
-                return GetValues<string> ("Allow");
-            }
+
+        public ICollection<string> Allow
+        {
+            get { return GetValues<string>("Allow"); }
         }
 
-        public ICollection<string> ContentEncoding {
-            get {
-                return GetValues<string> ("Content-Encoding");
-            }
-        }
-        
-        public ContentDispositionHeaderValue ContentDisposition {
-            get {
-                return GetValue<ContentDispositionHeaderValue> ("Content-Disposition");
-            }
-            set {
-                AddOrRemove ("Content-Disposition", value);
-            }
+        public ICollection<string> ContentEncoding
+        {
+            get { return GetValues<string>("Content-Encoding"); }
         }
 
-        public ICollection<string> ContentLanguage {
-            get {
-                return GetValues<string> ("Content-Language");
-            }
+        public ContentDispositionHeaderValue ContentDisposition
+        {
+            get { return GetValue<ContentDispositionHeaderValue>("Content-Disposition"); }
+            set { AddOrRemove("Content-Disposition", value); }
         }
 
-        public long? ContentLength {
-            get {
-                long? v = GetValue<long?> ("Content-Length");
+        public ICollection<string> ContentLanguage
+        {
+            get { return GetValues<string>("Content-Language"); }
+        }
+
+        public long? ContentLength
+        {
+            get
+            {
+                long? v = GetValue<long?>("Content-Length");
                 if (v != null)
                     return v;
 
@@ -78,71 +74,52 @@ namespace System.Net.Http.Headers
                     return v;
 
                 long l;
-                if (content.TryComputeLength (out l)) {
+                if (content.TryComputeLength(out l))
+                {
                     // .net compatibility reading value actually set header property value
-                    SetValue ("Content-Length", l);
+                    SetValue("Content-Length", l);
                     return l;
                 }
 
                 return null;
             }
-            set {
-                AddOrRemove ("Content-Length", value);
-            }
+            set { AddOrRemove("Content-Length", value); }
         }
 
-        public Uri ContentLocation {
-            get {
-                return GetValue<Uri> ("Content-Location");
-            }
-            set {
-                AddOrRemove ("Content-Location", value);
-            }
+        public Uri ContentLocation
+        {
+            get { return GetValue<Uri>("Content-Location"); }
+            set { AddOrRemove("Content-Location", value); }
         }
 
-        public byte[] ContentMD5 {
-            get {
-                return GetValue<byte[]> ("Content-MD5");
-            }
-            set {
-                AddOrRemove ("Content-MD5", value, Parser.MD5.ToString);
-            }
+        public byte[] ContentMD5
+        {
+            get { return GetValue<byte[]>("Content-MD5"); }
+            set { AddOrRemove("Content-MD5", value, Parser.MD5.ToString); }
         }
 
-        public ContentRangeHeaderValue ContentRange {
-            get {
-                return GetValue<ContentRangeHeaderValue> ("Content-Range");
-            }
-            set {
-                AddOrRemove ("Content-Range", value);
-            }
+        public ContentRangeHeaderValue ContentRange
+        {
+            get { return GetValue<ContentRangeHeaderValue>("Content-Range"); }
+            set { AddOrRemove("Content-Range", value); }
         }
 
-        public MediaTypeHeaderValue ContentType {
-            get {
-                return GetValue<MediaTypeHeaderValue> ("Content-Type");
-            }
-            set {
-                AddOrRemove ("Content-Type", value);
-            }
+        public MediaTypeHeaderValue ContentType
+        {
+            get { return GetValue<MediaTypeHeaderValue>("Content-Type"); }
+            set { AddOrRemove("Content-Type", value); }
         }
 
-        public DateTimeOffset? Expires {
-            get {
-                return GetValue<DateTimeOffset?> ("Expires");
-            }
-            set {
-                AddOrRemove ("Expires", value, Parser.DateTime.ToString);
-            }
+        public DateTimeOffset? Expires
+        {
+            get { return GetValue<DateTimeOffset?>("Expires"); }
+            set { AddOrRemove("Expires", value, Parser.DateTime.ToString); }
         }
 
-        public DateTimeOffset? LastModified {
-            get {
-                return GetValue<DateTimeOffset?> ("Last-Modified");
-            }
-            set {
-                AddOrRemove ("Last-Modified", value, Parser.DateTime.ToString);
-            }
+        public DateTimeOffset? LastModified
+        {
+            get { return GetValue<DateTimeOffset?>("Last-Modified"); }
+            set { AddOrRemove("Last-Modified", value, Parser.DateTime.ToString); }
         }
     }
 }

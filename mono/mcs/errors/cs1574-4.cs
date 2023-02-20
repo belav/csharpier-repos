@@ -6,6 +6,4 @@ using System;
 
 /// <seealso cref="System.Xml.XmlDocument"/>
 /// with /noconfig, it cannot be resolved.
-public class Test
-{
-}
+public class Test { }

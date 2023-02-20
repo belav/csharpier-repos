@@ -32,22 +32,19 @@ using System.Drawing.Imaging;
 //
 public class SampleDrawingImage
 {
-    
-    public static void Main (string[] args)
+    public static void Main(string[] args)
     {
-        Stream stout, stin;
+        Stream stout,
+            stin;
 
-        stin = File.OpenRead ("bitmaps/horse.bmp");
-        Bitmap bmp = new Bitmap (stin);
-        
+        stin = File.OpenRead("bitmaps/horse.bmp");
+        Bitmap bmp = new Bitmap(stin);
+
         // Draw a red rectangle
-        Graphics gr = Graphics.FromImage (bmp);
-        gr.DrawRectangle (new Pen (Color.Red, 2), 10.0F, 10.0F, 40.0F, 40.0F);
-        
-        stout = File.Open ("horse.jpg", FileMode.Create);
-        bmp.Save (stout, ImageFormat.Jpeg);
+        Graphics gr = Graphics.FromImage(bmp);
+        gr.DrawRectangle(new Pen(Color.Red, 2), 10.0F, 10.0F, 40.0F, 40.0F);
+
+        stout = File.Open("horse.jpg", FileMode.Create);
+        bmp.Save(stout, ImageFormat.Jpeg);
     }
-
 }
-
-

@@ -13,6 +13,7 @@ namespace System.DirectoryServices.ActiveDirectory
         {
             this.InnerList.AddRange(values ?? new ArrayList());
         }
+
         public string this[int index]
         {
             get

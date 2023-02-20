@@ -6,7 +6,7 @@ namespace C5
 {
     public abstract class EnumerableBase<T> : SCG.IEnumerable<T>
     {
-        public abstract SCG.IEnumerator<T> GetEnumerator ();
+        public abstract SCG.IEnumerator<T> GetEnumerator();
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -16,7 +16,7 @@ namespace C5
 
     public class ArrayBase<T> : EnumerableBase<T>
     {
-        public override SCG.IEnumerator<T> GetEnumerator ()
+        public override SCG.IEnumerator<T> GetEnumerator()
         {
             yield break;
         }
@@ -24,9 +24,9 @@ namespace C5
 
     public class ArrayList<T> : ArrayBase<T>
     {
-        public override SCG.IEnumerator<T> GetEnumerator ()
+        public override SCG.IEnumerator<T> GetEnumerator()
         {
-            return base.GetEnumerator ();
+            return base.GetEnumerator();
         }
     }
 }

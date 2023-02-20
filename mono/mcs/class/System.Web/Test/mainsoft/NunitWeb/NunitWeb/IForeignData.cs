@@ -1,7 +1,8 @@
 using System;
 using System.Reflection;
 
-namespace MonoTests.SystemWeb.Framework {
+namespace MonoTests.SystemWeb.Framework
+{
     /// <summary>
     /// This interface is used to add foreign data to the implementing class
     /// instances (similar to Python common practice) or AOP field injection.
@@ -26,10 +27,6 @@ namespace MonoTests.SystemWeb.Framework {
         /// </summary>
         /// <param name="type">Type that wishes to inject a field.</param>
         /// <returns></returns>
-        object this [Type type]
-        {
-            get;
-            set;
-        }
+        object this[Type type] { get; set; }
     }
 }

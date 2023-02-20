@@ -19,10 +19,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,15 +41,18 @@ using System.Threading;
 
 namespace System.ServiceProcess
 {
-    [InstallerType (typeof (ServiceProcessInstaller))]
+    [InstallerType(typeof(ServiceProcessInstaller))]
     public class ServiceBase : Component
     {
-        internal delegate void RunServiceCallback (ServiceBase [] services);
+        internal delegate void RunServiceCallback(ServiceBase[] services);
 
         // This member is used for interoperation with mono-service
         internal static RunServiceCallback RunService;
 
-        internal delegate void NotifyStatusCallback (ServiceBase service, ServiceControllerStatus status);
+        internal delegate void NotifyStatusCallback(
+            ServiceBase service,
+            ServiceControllerStatus status
+        );
         internal static NotifyStatusCallback NotifyStatus;
 
         public const int MaxNameLength = 80;
@@ -67,176 +70,190 @@ namespace System.ServiceProcess
         ManualResetEvent stop_event;
         static bool share_process;
 
-        public ServiceBase ()
-        {
-        }
+        public ServiceBase() { }
 
-        [DefaultValue (true)]
-        [ServiceProcessDescription ("Whether the service should automatically write to the event log on common events such as Install and Start.")]
-        public bool AutoLog {
+        [DefaultValue(true)]
+        [ServiceProcessDescription(
+            "Whether the service should automatically write to the event log on common events such as Install and Start."
+        )]
+        public bool AutoLog
+        {
             get { return auto_log; }
             set { auto_log = value; }
         }
 
-        [DefaultValue (false)]
+        [DefaultValue(false)]
         [MonoTODO]
-        public bool CanHandlePowerEvent {
+        public bool CanHandlePowerEvent
+        {
             get { return can_handle_power_event; }
-            set {
+            set
+            {
                 if (hasStarted)
-                    throw new InvalidOperationException (
-                            Locale.GetText ("Cannot modify this property " +
-                                            "after the service has started."));
+                    throw new InvalidOperationException(
+                        Locale.GetText(
+                            "Cannot modify this property " + "after the service has started."
+                        )
+                    );
 
                 can_handle_power_event = value;
             }
         }
 
-        [DefaultValue (false)]
+        [DefaultValue(false)]
         [MonoTODO]
-        [ComVisible (false)]
-        public bool CanHandleSessionChangeEvent {
+        [ComVisible(false)]
+        public bool CanHandleSessionChangeEvent
+        {
             get { return can_handle_session_change_event; }
-            set {
+            set
+            {
                 if (hasStarted)
-                    throw new InvalidOperationException (
-                            Locale.GetText ("Cannot modify this property " +
-                                            "after the service has started."));
+                    throw new InvalidOperationException(
+                        Locale.GetText(
+                            "Cannot modify this property " + "after the service has started."
+                        )
+                    );
 
                 can_handle_session_change_event = value;
             }
         }
 
-        [DefaultValue (false)]
-        public bool CanPauseAndContinue {
+        [DefaultValue(false)]
+        public bool CanPauseAndContinue
+        {
             get { return can_pause_and_continue; }
-            set {
+            set
+            {
                 if (hasStarted)
-                    throw new InvalidOperationException (
-                            Locale.GetText ("Cannot modify this property " +
-                                            "after the service has started."));
+                    throw new InvalidOperationException(
+                        Locale.GetText(
+                            "Cannot modify this property " + "after the service has started."
+                        )
+                    );
 
                 can_pause_and_continue = value;
             }
         }
 
-        [DefaultValue (false)]
-        public bool CanShutdown {
+        [DefaultValue(false)]
+        public bool CanShutdown
+        {
             get { return can_shutdown; }
-            set {
+            set
+            {
                 if (hasStarted)
-                    throw new InvalidOperationException (
-                            Locale.GetText ("Cannot modify this property " +
-                                            "after the service has started."));
+                    throw new InvalidOperationException(
+                        Locale.GetText(
+                            "Cannot modify this property " + "after the service has started."
+                        )
+                    );
 
                 can_shutdown = value;
             }
         }
 
-        [DefaultValue (true)]
-        public bool CanStop {
+        [DefaultValue(true)]
+        public bool CanStop
+        {
             get { return can_stop; }
-            set {
+            set
+            {
                 if (hasStarted)
-                    throw new InvalidOperationException (
-                            Locale.GetText ("Cannot modify this property " +
-                                            "after the service has started."));
+                    throw new InvalidOperationException(
+                        Locale.GetText(
+                            "Cannot modify this property " + "after the service has started."
+                        )
+                    );
 
                 can_stop = value;
             }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public virtual EventLog EventLog {
-            get {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual EventLog EventLog
+        {
+            get
+            {
                 if (event_log == null)
-                    event_log = new EventLog ("Application", ".", service_name);
+                    event_log = new EventLog("Application", ".", service_name);
                 return event_log;
             }
         }
 
-        [ComVisible (false)]
+        [ComVisible(false)]
         public int ExitCode { get; set; }
 
         [MonoTODO]
-        [EditorBrowsable (EditorBrowsableState.Advanced)]
-        protected IntPtr ServiceHandle {
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        protected IntPtr ServiceHandle
+        {
             get { return service_handle; }
         }
 
-        [ServiceProcessDescription ("The name by which the service is identified to the system.")]
-        [TypeConverter ("System.Diagnostics.Design.StringValueConverter, " + Consts.AssemblySystem_Design)]
-        public string ServiceName {
+        [ServiceProcessDescription("The name by which the service is identified to the system.")]
+        [TypeConverter(
+            "System.Diagnostics.Design.StringValueConverter, " + Consts.AssemblySystem_Design
+        )]
+        public string ServiceName
+        {
             get { return service_name; }
-            set {
+            set
+            {
                 if (hasStarted)
-                    throw new InvalidOperationException (
-                            Locale.GetText ("Cannot modify this property " +
-                                            "after the service has started."));
+                    throw new InvalidOperationException(
+                        Locale.GetText(
+                            "Cannot modify this property " + "after the service has started."
+                        )
+                    );
 
                 service_name = value;
             }
         }
 
-        protected override void Dispose (bool disposing)
-        {
-        }
+        protected override void Dispose(bool disposing) { }
 
-        protected virtual void OnStart (string [] args)
-        {
-        }
+        protected virtual void OnStart(string[] args) { }
 
-        protected virtual void OnStop ()
-        {
-        }
+        protected virtual void OnStop() { }
 
-        protected virtual void OnContinue ()
-        {
-        }
+        protected virtual void OnContinue() { }
 
-        protected virtual void OnCustomCommand (int command)
-        {
-        }
+        protected virtual void OnCustomCommand(int command) { }
 
-        protected virtual void OnPause ()
-        {
-        }
+        protected virtual void OnPause() { }
 
-        protected virtual bool OnPowerEvent (PowerBroadcastStatus powerStatus)
+        protected virtual bool OnPowerEvent(PowerBroadcastStatus powerStatus)
         {
             return true;
         }
 
-        protected virtual void OnShutdown ()
-        {
-        }
+        protected virtual void OnShutdown() { }
 
-        protected virtual void OnSessionChange (SessionChangeDescription changeDescription)
-        {
-        }
+        protected virtual void OnSessionChange(SessionChangeDescription changeDescription) { }
 
-        [ComVisible (false)]
+        [ComVisible(false)]
         [MonoTODO]
-        public void RequestAdditionalTime (int milliseconds)
+        public void RequestAdditionalTime(int milliseconds)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Stop ()
+        public void Stop()
         {
             if (stop_event != null)
-                stop_event.Set ();
+                stop_event.Set();
             else
-                OnStop ();
+                OnStop();
         }
 
-        private void SetStatus (ServiceControllerStatus status)
+        private void SetStatus(ServiceControllerStatus status)
         {
             if (!hasStarted && status != ServiceControllerStatus.Stopped)
                 hasStarted = true;
             if (NotifyStatus != null)
-                NotifyStatus (this, status);
+                NotifyStatus(this, status);
         }
 
         #region Win32 implementation
@@ -283,22 +300,29 @@ namespace System.ServiceProcess
             SERVICE_FILE_SYSTEM_DRIVER = 0x2,
             SERVICE_ADAPTER = 0x4,
             SERVICE_RECOGNIZER_DRIVER = 0x8,
-            SERVICE_DRIVER = (SERVICE_KERNEL_DRIVER | SERVICE_FILE_SYSTEM_DRIVER | SERVICE_RECOGNIZER_DRIVER),
+            SERVICE_DRIVER =
+                (SERVICE_KERNEL_DRIVER | SERVICE_FILE_SYSTEM_DRIVER | SERVICE_RECOGNIZER_DRIVER),
             SERVICE_WIN32_OWN_PROCESS = 0x10,
             SERVICE_WIN32_SHARE_PROCESS = 0x20,
             SERVICE_INTERACTIVE_PROCESS = 0x100,
             SERVICETYPE_NO_CHANGE = SERVICE_NO_CHANGE,
             SERVICE_WIN32 = (SERVICE_WIN32_OWN_PROCESS | SERVICE_WIN32_SHARE_PROCESS),
-            SERVICE_TYPE_ALL = (SERVICE_WIN32 | SERVICE_ADAPTER | SERVICE_DRIVER | SERVICE_INTERACTIVE_PROCESS)
+            SERVICE_TYPE_ALL =
+                (SERVICE_WIN32 | SERVICE_ADAPTER | SERVICE_DRIVER | SERVICE_INTERACTIVE_PROCESS)
         }
 
-        [UnmanagedFunctionPointerAttribute (CallingConvention.StdCall)]
-        private delegate int LPHANDLER_FUNCTION_EX(int dwControl, int dwEventType, IntPtr lpEventData, IntPtr lpContext);
+        [UnmanagedFunctionPointerAttribute(CallingConvention.StdCall)]
+        private delegate int LPHANDLER_FUNCTION_EX(
+            int dwControl,
+            int dwEventType,
+            IntPtr lpEventData,
+            IntPtr lpContext
+        );
 
-        [UnmanagedFunctionPointerAttribute (CallingConvention.StdCall)]
+        [UnmanagedFunctionPointerAttribute(CallingConvention.StdCall)]
         private delegate void LPSERVICE_MAIN_FUNCTION(int dwArgc, IntPtr lpszArgv);
 
-        [StructLayout (LayoutKind.Sequential, Pack = 1)]
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
         private struct SERVICE_STATUS
         {
             public int dwServiceType;
@@ -310,177 +334,194 @@ namespace System.ServiceProcess
             public int dwWaitHint;
         }
 
-        [StructLayout (LayoutKind.Sequential, Pack = 1)]
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
         private struct SERVICE_TABLE_ENTRY
         {
-            [MarshalAs (UnmanagedType.LPWStr)]
+            [MarshalAs(UnmanagedType.LPWStr)]
             public string lpServiceName;
             public LPSERVICE_MAIN_FUNCTION lpServiceProc;
         }
 
-        [DllImport ("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern IntPtr RegisterServiceCtrlHandlerEx (
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern IntPtr RegisterServiceCtrlHandlerEx(
             string lpServiceName,
             LPHANDLER_FUNCTION_EX lpHandlerProc,
-            IntPtr lpContext);
+            IntPtr lpContext
+        );
 
-        [DllImport ("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern bool SetServiceStatus (
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern bool SetServiceStatus(
             IntPtr hServiceStatus,
-            [MarshalAs (UnmanagedType.LPStruct)] SERVICE_STATUS status);
+            [MarshalAs(UnmanagedType.LPStruct)] SERVICE_STATUS status
+        );
 
-        [DllImport ("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern bool StartServiceCtrlDispatcher (
-            [MarshalAs (UnmanagedType.LPArray)] SERVICE_TABLE_ENTRY[] lpServiceTable);
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern bool StartServiceCtrlDispatcher(
+            [MarshalAs(UnmanagedType.LPArray)] SERVICE_TABLE_ENTRY[] lpServiceTable
+        );
 
-        private static void Win32NotifyStatus (ServiceBase service, ServiceControllerStatus status)
+        private static void Win32NotifyStatus(ServiceBase service, ServiceControllerStatus status)
         {
-            SERVICE_STATUS service_status = new SERVICE_STATUS ();
+            SERVICE_STATUS service_status = new SERVICE_STATUS();
 
-            service_status.dwServiceType = share_process ? (int)SERVICE_TYPE.SERVICE_WIN32_SHARE_PROCESS : (int)SERVICE_TYPE.SERVICE_WIN32_OWN_PROCESS;
+            service_status.dwServiceType = share_process
+                ? (int)SERVICE_TYPE.SERVICE_WIN32_SHARE_PROCESS
+                : (int)SERVICE_TYPE.SERVICE_WIN32_OWN_PROCESS;
 
             service_status.dwCurrentState = (int)status;
 
             if (status != ServiceControllerStatus.StartPending)
             {
                 if (service.can_stop)
-                    service_status.dwControlsAccepted |= (int)SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_STOP;
+                    service_status.dwControlsAccepted |= (int)
+                        SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_STOP;
 
                 if (service.can_pause_and_continue)
-                    service_status.dwControlsAccepted |= (int)SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_PAUSE_CONTINUE;
+                    service_status.dwControlsAccepted |= (int)
+                        SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_PAUSE_CONTINUE;
 
                 if (service.can_handle_power_event)
-                    service_status.dwControlsAccepted |= (int)SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_POWEREVENT;
+                    service_status.dwControlsAccepted |= (int)
+                        SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_POWEREVENT;
 
                 if (service.can_handle_session_change_event)
-                    service_status.dwControlsAccepted |= (int)SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_SESSIONCHANGE;
+                    service_status.dwControlsAccepted |= (int)
+                        SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_SESSIONCHANGE;
 
                 if (service.can_shutdown)
-                    service_status.dwControlsAccepted |= (int)SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_SHUTDOWN;
+                    service_status.dwControlsAccepted |= (int)
+                        SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_SHUTDOWN;
             }
 
             service_status.dwWin32ExitCode = service.ExitCode;
             service_status.dwWaitHint = 5000;
 
-            SetServiceStatus (service.service_handle, service_status);
+            SetServiceStatus(service.service_handle, service_status);
         }
 
-        private int Win32HandlerFn (int dwControl, int dwEventType, IntPtr lpEventData, IntPtr lpContext)
+        private int Win32HandlerFn(
+            int dwControl,
+            int dwEventType,
+            IntPtr lpEventData,
+            IntPtr lpContext
+        )
         {
             switch ((SERVICE_CONTROL_TYPE)dwControl)
             {
-            case SERVICE_CONTROL_TYPE.SERVICE_CONTROL_STOP:
-                if (can_stop)
-                {
-                    Stop ();
+                case SERVICE_CONTROL_TYPE.SERVICE_CONTROL_STOP:
+                    if (can_stop)
+                    {
+                        Stop();
+                        return NO_ERROR;
+                    }
+                    break;
+                case SERVICE_CONTROL_TYPE.SERVICE_CONTROL_PAUSE:
+                    if (can_pause_and_continue)
+                    {
+                        SetStatus(ServiceControllerStatus.PausePending);
+                        OnPause();
+                        SetStatus(ServiceControllerStatus.Paused);
+                        return NO_ERROR;
+                    }
+                    break;
+                case SERVICE_CONTROL_TYPE.SERVICE_CONTROL_CONTINUE:
+                    if (can_pause_and_continue)
+                    {
+                        SetStatus(ServiceControllerStatus.ContinuePending);
+                        OnContinue();
+                        SetStatus(ServiceControllerStatus.Running);
+                        return NO_ERROR;
+                    }
+                    break;
+                case SERVICE_CONTROL_TYPE.SERVICE_CONTROL_INTERROGATE:
                     return NO_ERROR;
-                }
-                break;
-            case SERVICE_CONTROL_TYPE.SERVICE_CONTROL_PAUSE:
-                if (can_pause_and_continue)
-                {
-                    SetStatus (ServiceControllerStatus.PausePending);
-                    OnPause ();
-                    SetStatus (ServiceControllerStatus.Paused);
-                    return NO_ERROR;
-                }
-                break;
-            case SERVICE_CONTROL_TYPE.SERVICE_CONTROL_CONTINUE:
-                if (can_pause_and_continue)
-                {
-                    SetStatus (ServiceControllerStatus.ContinuePending);
-                    OnContinue ();
-                    SetStatus (ServiceControllerStatus.Running);
-                    return NO_ERROR;
-                }
-                break;
-            case SERVICE_CONTROL_TYPE.SERVICE_CONTROL_INTERROGATE:
-                return NO_ERROR;
-            case SERVICE_CONTROL_TYPE.SERVICE_CONTROL_SHUTDOWN:
-                if (can_shutdown)
-                {
-                    OnShutdown ();
-                    return NO_ERROR;
-                }
-                break;
-            default:
-                break;
+                case SERVICE_CONTROL_TYPE.SERVICE_CONTROL_SHUTDOWN:
+                    if (can_shutdown)
+                    {
+                        OnShutdown();
+                        return NO_ERROR;
+                    }
+                    break;
+                default:
+                    break;
             }
             return ERROR_CALL_NOT_IMPLEMENTED;
         }
 
-        [ComVisible (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        [MonoTODO ("This only makes sense on Windows")]
-        public void ServiceMainCallback (int argCount, IntPtr argPointer)
+        [ComVisible(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [MonoTODO("This only makes sense on Windows")]
+        public void ServiceMainCallback(int argCount, IntPtr argPointer)
         {
-            LPHANDLER_FUNCTION_EX handler = new LPHANDLER_FUNCTION_EX (Win32HandlerFn);
+            LPHANDLER_FUNCTION_EX handler = new LPHANDLER_FUNCTION_EX(Win32HandlerFn);
             // handler needs to last until the service stops
 
-            service_handle = RegisterServiceCtrlHandlerEx (ServiceName ?? "", handler, IntPtr.Zero);
+            service_handle = RegisterServiceCtrlHandlerEx(ServiceName ?? "", handler, IntPtr.Zero);
 
             if (service_handle != IntPtr.Zero)
             {
-                SetStatus (ServiceControllerStatus.StartPending);
-                
-                stop_event = new ManualResetEvent (false);
+                SetStatus(ServiceControllerStatus.StartPending);
+
+                stop_event = new ManualResetEvent(false);
 
                 string[] args = new string[argCount];
-                for (int i=0; i<argCount; i++)
+                for (int i = 0; i < argCount; i++)
                 {
-                    IntPtr arg = Marshal.ReadIntPtr (argPointer, IntPtr.Size * i);
-                    args[i] = Marshal.PtrToStringUni (arg);
+                    IntPtr arg = Marshal.ReadIntPtr(argPointer, IntPtr.Size * i);
+                    args[i] = Marshal.PtrToStringUni(arg);
                 }
 
-                OnStart (args);
+                OnStart(args);
 
-                SetStatus (ServiceControllerStatus.Running);
+                SetStatus(ServiceControllerStatus.Running);
 
-                stop_event.WaitOne ();
+                stop_event.WaitOne();
 
-                SetStatus (ServiceControllerStatus.StopPending);
+                SetStatus(ServiceControllerStatus.StopPending);
 
-                OnStop ();
+                OnStop();
 
-                SetStatus (ServiceControllerStatus.Stopped);
+                SetStatus(ServiceControllerStatus.Stopped);
             }
         }
 
-        private static void Win32RunService (ServiceBase [] services)
+        private static void Win32RunService(ServiceBase[] services)
         {
             SERVICE_TABLE_ENTRY[] table = new SERVICE_TABLE_ENTRY[services.Length + 1];
 
-            NotifyStatus = new NotifyStatusCallback (Win32NotifyStatus);
+            NotifyStatus = new NotifyStatusCallback(Win32NotifyStatus);
 
-            for (int i = 0; i<services.Length; i++)
+            for (int i = 0; i < services.Length; i++)
             {
                 table[i].lpServiceName = services[i].ServiceName ?? "";
-                table[i].lpServiceProc = new LPSERVICE_MAIN_FUNCTION (services[i].ServiceMainCallback);
+                table[i].lpServiceProc = new LPSERVICE_MAIN_FUNCTION(
+                    services[i].ServiceMainCallback
+                );
             }
 
             // table[services.Length] is a NULL terminator
 
             share_process = (services.Length > 1);
 
-            if (!StartServiceCtrlDispatcher (table))
-                throw new Win32Exception ();
+            if (!StartServiceCtrlDispatcher(table))
+                throw new Win32Exception();
         }
 
         #endregion Win32 implementation
 
-        public static void Run (ServiceBase service)
+        public static void Run(ServiceBase service)
         {
-            Run (new ServiceBase [] { service });
+            Run(new ServiceBase[] { service });
         }
 
-        public static void Run (ServiceBase [] services)
+        public static void Run(ServiceBase[] services)
         {
-            int p = (int) Environment.OSVersion.Platform;
+            int p = (int)Environment.OSVersion.Platform;
 
             if (RunService != null)
-                RunService (services);
+                RunService(services);
             else if (!(p == 4 || p == 128 || p == 6))
-                Win32RunService (services);
+                Win32RunService(services);
             else
                 Console.Error.WriteLine("Use mono-service to start service processes");
         }

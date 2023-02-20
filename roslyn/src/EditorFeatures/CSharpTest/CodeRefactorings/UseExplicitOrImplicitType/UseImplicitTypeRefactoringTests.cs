@@ -17,13 +17,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseImplicitType)]
     public class UseImplicitTypeRefactoringTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new UseImplicitTypeCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new UseImplicitTypeCodeRefactoringProvider();
 
         [Fact]
         public async Task TestIntLocalDeclaration()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -32,7 +35,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -47,7 +51,8 @@ class C
         [Fact, WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestSelection1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -56,7 +61,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -71,7 +77,8 @@ class C
         [Fact, WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestSelection2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -80,7 +87,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -96,7 +104,8 @@ class C
         [WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestSelectionNotType()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -105,7 +114,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -120,7 +130,8 @@ class C
         [Fact]
         public async Task TestForeachInsideLocalDeclaration()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -129,7 +140,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -144,7 +156,8 @@ class C
         [Fact]
         public async Task TestInIntPattern()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -159,7 +172,8 @@ class C
         [Fact]
         public async Task TestIntLocalDeclaration_Multiple()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -174,7 +188,8 @@ class C
         [Fact]
         public async Task TestIntLocalDeclaration_NoInitializer()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -189,7 +204,8 @@ class C
         [Fact]
         public async Task TestIntForLoop()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -198,7 +214,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -213,7 +230,8 @@ class C
         [Fact]
         public async Task TestInDispose()
         {
-            var code = @"
+            var code =
+                @"
 class C : System.IDisposable
 {
     static void Main()
@@ -222,7 +240,8 @@ class C : System.IDisposable
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C : System.IDisposable
 {
     static void Main()
@@ -237,7 +256,8 @@ class C : System.IDisposable
         [Fact]
         public async Task TestIntForeachLoop()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -246,7 +266,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -261,7 +282,8 @@ class C
         [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestIntForeachLoop2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -270,7 +292,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -285,7 +308,8 @@ class C
         [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestIntForeachLoop3()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -294,7 +318,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -309,7 +334,8 @@ class C
         [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestIntForeachLoop4()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -318,7 +344,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -333,7 +360,8 @@ class C
         [Fact]
         public async Task TestIntDeconstruction()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -342,7 +370,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -357,7 +386,8 @@ class C
         [Fact]
         public async Task TestIntDeconstruction2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -366,7 +396,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -381,7 +412,8 @@ class C
         [Fact, WorkItem(26923, "https://github.com/dotnet/roslyn/issues/26923")]
         public async Task NoSuggestionOnForeachCollectionExpression()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -402,7 +434,8 @@ class C
         [Fact, WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task NoSuggestionWithinAnExpression()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System;
 
 class C
@@ -420,7 +453,8 @@ class C
         [Fact, WorkItem(42880, "https://github.com/dotnet/roslyn/issues/42880")]
         public async Task TestRefLocal1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -430,7 +464,8 @@ class C
         [||]ref string rStr1 = ref str;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -447,7 +482,8 @@ class C
         [Fact, WorkItem(42880, "https://github.com/dotnet/roslyn/issues/42880")]
         public async Task TestRefLocal2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -458,7 +494,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -475,7 +512,8 @@ class C
         [Fact, WorkItem(42880, "https://github.com/dotnet/roslyn/issues/42880")]
         public async Task TestRefLocal3()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -486,7 +524,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -503,7 +542,8 @@ class C
         [Fact, WorkItem(42880, "https://github.com/dotnet/roslyn/issues/42880")]
         public async Task TestRefReadonlyLocal1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -514,7 +554,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -531,7 +572,8 @@ class C
         [Fact, WorkItem(42880, "https://github.com/dotnet/roslyn/issues/42880")]
         public async Task TestRefReadonlyLocal2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main()
@@ -542,7 +584,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main()
@@ -556,39 +599,108 @@ class C
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
 
-        private async Task TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(string initialMarkup, string expectedMarkup)
+        private async Task TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(
+            string initialMarkup,
+            string expectedMarkup
+        )
         {
             // Enabled because the diagnostic is disabled
-            await TestInRegularAndScriptAsync(initialMarkup, expectedMarkup, options: this.PreferImplicitTypeWithNone());
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expectedMarkup,
+                options: this.PreferImplicitTypeWithNone()
+            );
 
             // Enabled because the diagnostic is checking for the other direction
-            await TestInRegularAndScriptAsync(initialMarkup, expectedMarkup, options: this.PreferExplicitTypeWithNone());
-            await TestInRegularAndScriptAsync(initialMarkup, expectedMarkup, options: this.PreferExplicitTypeWithSilent());
-            await TestInRegularAndScriptAsync(initialMarkup, expectedMarkup, options: this.PreferExplicitTypeWithInfo());
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expectedMarkup,
+                options: this.PreferExplicitTypeWithNone()
+            );
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expectedMarkup,
+                options: this.PreferExplicitTypeWithSilent()
+            );
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expectedMarkup,
+                options: this.PreferExplicitTypeWithInfo()
+            );
 
             // Disabled because the diagnostic will report it instead
-            await TestMissingInRegularAndScriptAsync(initialMarkup, parameters: new TestParameters(options: this.PreferImplicitTypeWithSilent()));
-            await TestMissingInRegularAndScriptAsync(initialMarkup, parameters: new TestParameters(options: this.PreferImplicitTypeWithInfo()));
-            await TestMissingInRegularAndScriptAsync(initialMarkup, parameters: new TestParameters(options: this.PreferImplicitTypeWithWarning()));
-            await TestMissingInRegularAndScriptAsync(initialMarkup, parameters: new TestParameters(options: this.PreferImplicitTypeWithError()));
+            await TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                parameters: new TestParameters(options: this.PreferImplicitTypeWithSilent())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                parameters: new TestParameters(options: this.PreferImplicitTypeWithInfo())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                parameters: new TestParameters(options: this.PreferImplicitTypeWithWarning())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                parameters: new TestParameters(options: this.PreferImplicitTypeWithError())
+            );
 
             // Currently this refactoring is still enabled in cases where it would cause a warning or error
-            await TestInRegularAndScriptAsync(initialMarkup, expectedMarkup, options: this.PreferExplicitTypeWithWarning());
-            await TestInRegularAndScriptAsync(initialMarkup, expectedMarkup, options: this.PreferExplicitTypeWithError());
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expectedMarkup,
+                options: this.PreferExplicitTypeWithWarning()
+            );
+            await TestInRegularAndScriptAsync(
+                initialMarkup,
+                expectedMarkup,
+                options: this.PreferExplicitTypeWithError()
+            );
         }
 
         private async Task TestMissingInRegularAndScriptAsync(string initialMarkup)
         {
-            await TestMissingInRegularAndScriptAsync(initialMarkup, parameters: new TestParameters(options: this.PreferImplicitTypeWithNone()));
-            await TestMissingInRegularAndScriptAsync(initialMarkup, parameters: new TestParameters(options: this.PreferExplicitTypeWithNone()));
-            await TestMissingInRegularAndScriptAsync(initialMarkup, parameters: new TestParameters(options: this.PreferImplicitTypeWithSilent()));
-            await TestMissingInRegularAndScriptAsync(initialMarkup, parameters: new TestParameters(options: this.PreferExplicitTypeWithSilent()));
-            await TestMissingInRegularAndScriptAsync(initialMarkup, parameters: new TestParameters(options: this.PreferImplicitTypeWithInfo()));
-            await TestMissingInRegularAndScriptAsync(initialMarkup, parameters: new TestParameters(options: this.PreferExplicitTypeWithInfo()));
-            await TestMissingInRegularAndScriptAsync(initialMarkup, parameters: new TestParameters(options: this.PreferImplicitTypeWithWarning()));
-            await TestMissingInRegularAndScriptAsync(initialMarkup, parameters: new TestParameters(options: this.PreferExplicitTypeWithWarning()));
-            await TestMissingInRegularAndScriptAsync(initialMarkup, parameters: new TestParameters(options: this.PreferImplicitTypeWithError()));
-            await TestMissingInRegularAndScriptAsync(initialMarkup, parameters: new TestParameters(options: this.PreferExplicitTypeWithError()));
+            await TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                parameters: new TestParameters(options: this.PreferImplicitTypeWithNone())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                parameters: new TestParameters(options: this.PreferExplicitTypeWithNone())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                parameters: new TestParameters(options: this.PreferImplicitTypeWithSilent())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                parameters: new TestParameters(options: this.PreferExplicitTypeWithSilent())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                parameters: new TestParameters(options: this.PreferImplicitTypeWithInfo())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                parameters: new TestParameters(options: this.PreferExplicitTypeWithInfo())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                parameters: new TestParameters(options: this.PreferImplicitTypeWithWarning())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                parameters: new TestParameters(options: this.PreferExplicitTypeWithWarning())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                parameters: new TestParameters(options: this.PreferImplicitTypeWithError())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                parameters: new TestParameters(options: this.PreferExplicitTypeWithError())
+            );
         }
     }
 }

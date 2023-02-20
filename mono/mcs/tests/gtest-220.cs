@@ -27,12 +27,12 @@ class PopQuiz
         System.Console.WriteLine(s);
         if (s != "System.Char")
             return 2;
-        
+
         s = o.c.GetType().FullName;
         System.Console.WriteLine();
         if (s != "System.Int32")
             return 3;
-        
+
         return 0;
     }
 }

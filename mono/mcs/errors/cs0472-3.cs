@@ -4,7 +4,7 @@
 
 public class X
 {
-    public static void Compute (int x)
+    public static void Compute(int x)
     {
         if (true && x != null)
             return;

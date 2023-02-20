@@ -11,7 +11,7 @@ public class Repro
 {
     public static object _monitor = new Object();
     private ManualResetEvent _event;
-    private ManualResetEvent _event2;    
+    private ManualResetEvent _event2;
     public static int _status = 1;
 
     public static int Main(string[] arguments)
@@ -23,7 +23,7 @@ public class Repro
     {
         _event = new ManualResetEvent(false);
         _event2 = new ManualResetEvent(false);
-        
+
         Thread thread1 = new Thread(this.Thread1);
         thread1.Start();
 
@@ -37,7 +37,7 @@ public class Repro
             Console.WriteLine("Test Passed");
         else
             Console.WriteLine("Test Failed");
-        
+
         return _status;
     }
 
@@ -54,14 +54,14 @@ public class Repro
     {
         Stopwatch timer = new Stopwatch();
         _event.WaitOne();
-        
+
         timer.Start();
-        for (int i=10;i<=30;i=i+10)
+        for (int i = 10; i <= 30; i = i + 10)
         {
             bool tookLock = false;
             Monitor.TryEnter(_monitor, TimeSpan.FromSeconds(i), ref tookLock);
 
-            if(tookLock)
+            if (tookLock)
             {
                 _status = 98;
                 Console.WriteLine("TryEnter got monitor that it should not have been able to....");
@@ -73,19 +73,27 @@ public class Repro
                 timer.Stop();
                 if ((timer.Elapsed + TimeSpan.FromSeconds(1)) < TimeSpan.FromSeconds(i))
                 {
-                    Console.WriteLine("TryEnter returned early in {0}, but expected {1}", timer.Elapsed, TimeSpan.FromSeconds(i));
+                    Console.WriteLine(
+                        "TryEnter returned early in {0}, but expected {1}",
+                        timer.Elapsed,
+                        TimeSpan.FromSeconds(i)
+                    );
                     _status = 99;
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("TryEnter returned as expected in {0}, with expected {1}", timer.Elapsed, TimeSpan.FromSeconds(i));
+                    Console.WriteLine(
+                        "TryEnter returned as expected in {0}, with expected {1}",
+                        timer.Elapsed,
+                        TimeSpan.FromSeconds(i)
+                    );
                 }
                 timer = Stopwatch.StartNew();
             }
         }
 
         if (_status == 1)
-            _status=100;
+            _status = 100;
     }
 }

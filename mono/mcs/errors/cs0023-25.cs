@@ -3,8 +3,9 @@
 
 class C
 {
-    static void Foo<T> (T t) where T : struct
+    static void Foo<T>(T t)
+        where T : struct
     {
-        var r = t?.ToString ();
+        var r = t?.ToString();
     }
 }

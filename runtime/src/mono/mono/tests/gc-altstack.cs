@@ -6,59 +6,74 @@ public class Tests
 {
     static bool finished = false;
 
-    static void fault () {
-        while (!finished) {
+    static void fault()
+    {
+        while (!finished)
+        {
             object o = null;
-            try {
-                o.ToString ();
-            } catch {
+            try
+            {
+                o.ToString();
             }
+            catch { }
         }
     }
 
-    static void gc (int niter) {
+    static void gc(int niter)
+    {
         int i = 0;
-        while (i < niter) {
-            i ++;
+        while (i < niter)
+        {
+            i++;
             if (i % 100 == 0)
-                Console.Write (".");
-            GC.Collect ();
+                Console.Write(".");
+            GC.Collect();
         }
         finished = true;
-        Console.WriteLine ();
+        Console.WriteLine();
     }
 
-    static void test (bool main, int niter) {
+    static void test(bool main, int niter)
+    {
         finished = false;
 
-        if (main) {
-            var t = new Thread (delegate () {
-                    gc (niter);
-                });
-            t.Start ();
+        if (main)
+        {
+            var t = new Thread(
+                delegate()
+                {
+                    gc(niter);
+                }
+            );
+            t.Start();
 
-            fault ();
-        } else {
-            var t = new Thread (delegate () {
-                    fault ();
-                });
-            t.Start ();
+            fault();
+        }
+        else
+        {
+            var t = new Thread(
+                delegate()
+                {
+                    fault();
+                }
+            );
+            t.Start();
 
-            gc (niter);
+            gc(niter);
         }
     }
 
-    public static void Main (String[] args) {
+    public static void Main(String[] args)
+    {
         /* Test for running a GC while executing a SIGSEGV handler on an altstack */
         int niter;
 
         if (args.Length > 0)
-            niter = Int32.Parse (args [0]);
+            niter = Int32.Parse(args[0]);
         else
             niter = 1000;
 
-        test (false, niter);
-        test (true, niter);
+        test(false, niter);
+        test(true, niter);
     }
 }
-

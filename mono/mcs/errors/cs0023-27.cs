@@ -6,7 +6,7 @@ class C2<T>
     C2<T> i;
     T field;
 
-    public void Foo ()
+    public void Foo()
     {
         var x = i?.field;
     }

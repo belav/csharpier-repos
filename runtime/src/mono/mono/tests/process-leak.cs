@@ -2,7 +2,6 @@ using System;
 using System.Diagnostics;
 using System.Reflection;
 
-
 namespace ToManyOpenHandles
 {
     class Program
@@ -22,7 +21,7 @@ namespace ToManyOpenHandles
 
         private static void WriteStuffMode(string counter)
         {
-            Console.WriteLine("Run {0} {1}", counter, Console.ReadLine ());
+            Console.WriteLine("Run {0} {1}", counter, Console.ReadLine());
         }
 
         private static void RunStuffMode()
@@ -52,13 +51,13 @@ namespace ToManyOpenHandles
                 p.BeginOutputReadLine();
                 p.BeginErrorReadLine();
 
-                p.StandardInput.WriteLine ("hello");
+                p.StandardInput.WriteLine("hello");
 
                 p.WaitForExit();
                 p.CancelErrorRead();
                 p.CancelOutputRead();
 
-                GC.Collect ();
+                GC.Collect();
             }
         }
 

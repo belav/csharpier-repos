@@ -16,12 +16,12 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(IDictionary<int, string>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(IDictionary<int, string>)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleHttpValueProvider
-                {
-                    { "foo[0]", "42" },
-                }
+                ValueProvider = new SimpleHttpValueProvider { { "foo[0]", "42" }, }
             };
 
             DictionaryModelBinderProvider binderProvider = new DictionaryModelBinderProvider();
@@ -39,12 +39,12 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleHttpValueProvider
-                {
-                    { "foo[0]", "42" },
-                }
+                ValueProvider = new SimpleHttpValueProvider { { "foo[0]", "42" }, }
             };
 
             DictionaryModelBinderProvider binderProvider = new DictionaryModelBinderProvider();
@@ -88,7 +88,10 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(IDictionary<int, string>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(IDictionary<int, string>)
+                ),
                 ModelName = "foo",
                 ValueProvider = new SimpleHttpValueProvider()
             };

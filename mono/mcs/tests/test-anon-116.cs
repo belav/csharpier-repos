@@ -5,12 +5,12 @@ class A
 {
     public A(TestFunc<int> func) { }
 
-    public static void Main ()
-    { }
+    public static void Main() { }
 }
 
 class TestClass
 {
     readonly A a = new A(delegate(int a) { });
+
     static void Func<T>(TestFunc<T> func) { }
 }

@@ -10,9 +10,11 @@ class Program
     }
 }
 
-class A {
+class A
+{
     private int? _counter;
-    public int? Counter {
+    public int? Counter
+    {
         get { return _counter; }
     }
 }

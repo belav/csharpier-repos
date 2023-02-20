@@ -17,20 +17,20 @@ namespace MonoTests.System.XmlSerialization
     public class XmlAnyElementAttributeTests
     {
         [Test]
-        public void NameDefault ()
+        public void NameDefault()
         {
-            XmlAnyElementAttribute attr = new XmlAnyElementAttribute ();
-            Assert.AreEqual (string.Empty, attr.Name, "#1");
+            XmlAnyElementAttribute attr = new XmlAnyElementAttribute();
+            Assert.AreEqual(string.Empty, attr.Name, "#1");
 
             attr.Name = null;
-            Assert.AreEqual (string.Empty, attr.Name, "#2");
+            Assert.AreEqual(string.Empty, attr.Name, "#2");
         }
 
         [Test]
-        public void NamespaceDefault ()
+        public void NamespaceDefault()
         {
-            XmlAnyElementAttribute attr = new XmlAnyElementAttribute ();
-            Assert.IsNull (attr.Namespace);
+            XmlAnyElementAttribute attr = new XmlAnyElementAttribute();
+            Assert.IsNull(attr.Namespace);
         }
     }
 }

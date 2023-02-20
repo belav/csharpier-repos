@@ -28,11 +28,13 @@
 using Microsoft.Build.Framework;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Framework {
+namespace MonoTests.Microsoft.Build.Framework
+{
     [TestFixture]
-    public class TargetFinishedEventArgsTest {
+    public class TargetFinishedEventArgsTest
+    {
         [Test]
-        public void AssignmentTest ()
+        public void AssignmentTest()
         {
             TargetFinishedEventArgs tfea;
             string message = "message";
@@ -41,15 +43,22 @@ namespace MonoTests.Microsoft.Build.Framework {
             string projectFile = "projectFile";
             string targetFile = "targetFile";
             bool succeeded = true;
-            
-            tfea = new TargetFinishedEventArgs (message, helpKeyword, targetName, projectFile, targetFile, succeeded);
-            
-            Assert.AreEqual (message, tfea.Message, "Message");
-            Assert.AreEqual (helpKeyword, tfea.HelpKeyword, "HelpKeyword");
-            Assert.AreEqual (targetName, tfea.TargetName, "TargetName");
-            Assert.AreEqual (projectFile, tfea.ProjectFile, "ProjectFile");
-            Assert.AreEqual (targetFile, tfea.TargetFile, "TargetFile");
-            Assert.AreEqual (succeeded, tfea.Succeeded, "Succeeded"); 
-        } 
+
+            tfea = new TargetFinishedEventArgs(
+                message,
+                helpKeyword,
+                targetName,
+                projectFile,
+                targetFile,
+                succeeded
+            );
+
+            Assert.AreEqual(message, tfea.Message, "Message");
+            Assert.AreEqual(helpKeyword, tfea.HelpKeyword, "HelpKeyword");
+            Assert.AreEqual(targetName, tfea.TargetName, "TargetName");
+            Assert.AreEqual(projectFile, tfea.ProjectFile, "ProjectFile");
+            Assert.AreEqual(targetFile, tfea.TargetFile, "TargetFile");
+            Assert.AreEqual(succeeded, tfea.Succeeded, "Succeeded");
+        }
     }
 }

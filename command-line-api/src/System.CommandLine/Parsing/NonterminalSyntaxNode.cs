@@ -9,11 +9,11 @@ namespace System.CommandLine.Parsing
     {
         private List<SyntaxNode>? _children;
 
-        protected NonterminalSyntaxNode(Token token, SyntaxNode? parent) : base(token, parent)
-        {
-        }
+        protected NonterminalSyntaxNode(Token token, SyntaxNode? parent)
+            : base(token, parent) { }
 
-        public IReadOnlyList<SyntaxNode> Children => _children is not null ? _children : Array.Empty<SyntaxNode>();
+        public IReadOnlyList<SyntaxNode> Children =>
+            _children is not null ? _children : Array.Empty<SyntaxNode>();
 
         internal void AddChildNode(SyntaxNode node) => (_children ??= new()).Add(node);
     }

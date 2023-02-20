@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,38 +38,41 @@ namespace MonoTests.System.ComponentModel
     public class TypeDescriptionProviderTest
     {
         [Test]
-        public void IsSupportedType ()
+        public void IsSupportedType()
         {
-            CustomDescriptionProvider provider = new CustomDescriptionProvider ();
-            Assert.IsTrue (provider.IsSupportedType (typeof (string)), "#A1");
-            Assert.IsTrue (provider.IsSupportedType (typeof (object)), "#A2");
-            Assert.IsTrue (provider.IsSupportedType (typeof (CustomDescriptionProvider)), "#A3");
+            CustomDescriptionProvider provider = new CustomDescriptionProvider();
+            Assert.IsTrue(provider.IsSupportedType(typeof(string)), "#A1");
+            Assert.IsTrue(provider.IsSupportedType(typeof(object)), "#A2");
+            Assert.IsTrue(provider.IsSupportedType(typeof(CustomDescriptionProvider)), "#A3");
         }
 
         [Test]
-        public void GetRuntimeType ()
+        public void GetRuntimeType()
         {
-            CustomDescriptionProvider provider = new CustomDescriptionProvider ();
-            Assert.AreEqual (typeof (CustomDescriptionProvider), provider.GetRuntimeType (typeof (CustomDescriptionProvider)), "#A0");
-            Assert.AreEqual (typeof (object), provider.GetRuntimeType (typeof (object)), "#A1");
+            CustomDescriptionProvider provider = new CustomDescriptionProvider();
+            Assert.AreEqual(
+                typeof(CustomDescriptionProvider),
+                provider.GetRuntimeType(typeof(CustomDescriptionProvider)),
+                "#A0"
+            );
+            Assert.AreEqual(typeof(object), provider.GetRuntimeType(typeof(object)), "#A1");
         }
 
         [Test]
-        public void GetExtenderProviders ()
+        public void GetExtenderProviders()
         {
-            CustomDescriptionProvider provider = new CustomDescriptionProvider ();
-            IExtenderProvider [] providers = provider.GetExtenderProviders (typeof (object));
-            Assert.IsNotNull (providers, "#A0");
-            Assert.AreEqual (0, providers.Length, "#A1");
+            CustomDescriptionProvider provider = new CustomDescriptionProvider();
+            IExtenderProvider[] providers = provider.GetExtenderProviders(typeof(object));
+            Assert.IsNotNull(providers, "#A0");
+            Assert.AreEqual(0, providers.Length, "#A1");
         }
 
         class CustomDescriptionProvider : TypeDescriptionProvider
         {
-            public new IExtenderProvider [] GetExtenderProviders (object instance)
+            public new IExtenderProvider[] GetExtenderProviders(object instance)
             {
-                return base.GetExtenderProviders (instance);
+                return base.GetExtenderProviders(instance);
             }
         }
     }
 }
-

@@ -34,7 +34,7 @@ namespace Mono.Tools.LocaleBuilder
     {
         //
         // All values must match defines from culture-info.h
-        // 
+        //
         public const int NUM_DAYS = 7;
         public const int NUM_MONTHS = 13;
         public const int GROUP_SIZE = 2;

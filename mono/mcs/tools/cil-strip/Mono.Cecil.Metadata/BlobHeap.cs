@@ -26,53 +26,52 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
+namespace Mono.Cecil.Metadata
+{
     using System;
     using System.Collections;
     using System.IO;
 
-    internal class BlobHeap : MetadataHeap {
+    internal class BlobHeap : MetadataHeap
+    {
+        internal BlobHeap(MetadataStream stream)
+            : base(stream, MetadataStream.Blob) { }
 
-        internal BlobHeap (MetadataStream stream) : base (stream, MetadataStream.Blob)
+        public byte[] Read(uint index)
         {
+            return ReadBytesFromStream(index);
         }
 
-        public byte [] Read (uint index)
+        public BinaryReader GetReader(uint index)
         {
-            return ReadBytesFromStream (index);
+            return new BinaryReader(new MemoryStream(Read(index)));
         }
 
-        public BinaryReader GetReader (uint index)
+        public override void Accept(IMetadataVisitor visitor)
         {
-            return new BinaryReader (new MemoryStream (Read (index)));
-        }
-
-        public override void Accept (IMetadataVisitor visitor)
-        {
-            visitor.VisitBlobHeap (this);
+            visitor.VisitBlobHeap(this);
         }
     }
 
-    class ByteArrayEqualityComparer : IHashCodeProvider, IComparer {
+    class ByteArrayEqualityComparer : IHashCodeProvider, IComparer
+    {
+        public static readonly ByteArrayEqualityComparer Instance = new ByteArrayEqualityComparer();
 
-        public static readonly ByteArrayEqualityComparer Instance = new ByteArrayEqualityComparer ();
-
-        public int GetHashCode (object obj)
+        public int GetHashCode(object obj)
         {
-            byte [] array = (byte []) obj;
+            byte[] array = (byte[])obj;
 
             int hash = 0;
             for (int i = 0; i < array.Length; i++)
-                hash = (hash * 37) ^ array [i];
+                hash = (hash * 37) ^ array[i];
 
             return hash;
         }
 
-        public int Compare (object a, object b)
+        public int Compare(object a, object b)
         {
-            byte [] x = (byte []) a;
-            byte [] y = (byte []) b;
+            byte[] x = (byte[])a;
+            byte[] y = (byte[])b;
 
             if (x == null || y == null)
                 return x == y ? 0 : 1;
@@ -81,7 +80,7 @@ namespace Mono.Cecil.Metadata {
                 return 1;
 
             for (int i = 0; i < x.Length; i++)
-                if (x [i] != y [i])
+                if (x[i] != y[i])
                     return 1;
 
             return 0;

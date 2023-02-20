@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<UInt32>>() / sizeof(UInt32);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<UInt32>>() / sizeof(UInt32);
 
         public bool Succeeded { get; set; } = true;
 
@@ -76,19 +77,24 @@ namespace JIT.HardwareIntrinsics.General
             Vector128<UInt32> value = Vector128.Create(values[0], values[1], values[2], values[3]);
 
             object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.ToVector256))
-                                .MakeGenericMethod(typeof(UInt32))
-                                .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector128.ToVector256))
+                .MakeGenericMethod(typeof(UInt32))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector256<UInt32>)(result), values, isUnsafe: false);
 
             object unsafeResult = typeof(Vector128)
-                                    .GetMethod(nameof(Vector128.ToVector256))
-                                    .MakeGenericMethod(typeof(UInt32))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector128.ToVector256))
+                .MakeGenericMethod(typeof(UInt32))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector256<UInt32>)(unsafeResult), values, isUnsafe: true);
         }
 
-        private void ValidateResult(Vector256<UInt32> result, UInt32[] values, bool isUnsafe, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector256<UInt32> result,
+            UInt32[] values,
+            bool isUnsafe,
+            [CallerMemberName] string method = ""
+        )
         {
             UInt32[] resultElements = new UInt32[ElementCount * 2];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt32, byte>(ref resultElements[0]), result);
@@ -96,7 +102,12 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult(resultElements, values, isUnsafe, method);
         }
 
-        private void ValidateResult(UInt32[] result, UInt32[] values, bool isUnsafe, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt32[] result,
+            UInt32[] values,
+            bool isUnsafe,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -123,9 +134,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<UInt32>.ToVector256{(isUnsafe ? "Unsafe" : "")}(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<UInt32>.ToVector256{(isUnsafe ? "Unsafe" : "")}(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

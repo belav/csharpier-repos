@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,19 +37,19 @@ namespace System.ServiceModel.Channels
         bool cache_cookies = true;
         int cookie_renewal = 60;
         bool detect_replays = true;
-        IdentityVerifier verifier = IdentityVerifier.CreateDefault ();
+        IdentityVerifier verifier = IdentityVerifier.CreateDefault();
         TimeSpan max_cookie_cache_time = TimeSpan.MaxValue;
         bool reconnect = true;
         int replay_cache_size = 900000;
-        TimeSpan renewal_interval = TimeSpan.FromHours (10);
-        TimeSpan rollover_interval = TimeSpan.FromMinutes (5);
+        TimeSpan renewal_interval = TimeSpan.FromHours(10);
+        TimeSpan rollover_interval = TimeSpan.FromMinutes(5);
 #endif
 
-        public LocalClientSecuritySettings ()
+        public LocalClientSecuritySettings()
         {
-            MaxClockSkew = TimeSpan.FromMinutes (5);
-            ReplayWindow = TimeSpan.FromMinutes (5);
-            TimestampValidityDuration = TimeSpan.FromMinutes (5);
+            MaxClockSkew = TimeSpan.FromMinutes(5);
+            ReplayWindow = TimeSpan.FromMinutes(5);
+            TimestampValidityDuration = TimeSpan.FromMinutes(5);
         }
 
         public TimeSpan MaxClockSkew { get; set; }
@@ -57,48 +57,57 @@ namespace System.ServiceModel.Channels
         public TimeSpan TimestampValidityDuration { get; set; }
 
 #if !MOBILE
-        public bool CacheCookies {
+        public bool CacheCookies
+        {
             get { return cache_cookies; }
             set { cache_cookies = value; }
         }
-        public int CookieRenewalThresholdPercentage {
+        public int CookieRenewalThresholdPercentage
+        {
             get { return cookie_renewal; }
             set { cookie_renewal = value; }
         }
-        public bool DetectReplays {
+        public bool DetectReplays
+        {
             get { return detect_replays; }
             set { detect_replays = value; }
         }
-        public IdentityVerifier IdentityVerifier {
+        public IdentityVerifier IdentityVerifier
+        {
             get { return verifier; }
             set { verifier = value; }
         }
-        public TimeSpan MaxCookieCachingTime {
+        public TimeSpan MaxCookieCachingTime
+        {
             get { return max_cookie_cache_time; }
             set { max_cookie_cache_time = value; }
         }
-        public bool ReconnectTransportOnFailure {
+        public bool ReconnectTransportOnFailure
+        {
             get { return reconnect; }
             set { reconnect = value; }
         }
-        public int ReplayCacheSize {
+        public int ReplayCacheSize
+        {
             get { return replay_cache_size; }
             set { replay_cache_size = value; }
         }
-        public TimeSpan SessionKeyRenewalInterval {
+        public TimeSpan SessionKeyRenewalInterval
+        {
             get { return renewal_interval; }
             set { renewal_interval = value; }
         }
-        public TimeSpan SessionKeyRolloverInterval {
+        public TimeSpan SessionKeyRolloverInterval
+        {
             get { return rollover_interval; }
             set { rollover_interval = value; }
         }
 #endif
 
-        [MonoTODO ("What happens to IdentityVerifier?")]
-        public LocalClientSecuritySettings Clone ()
+        [MonoTODO("What happens to IdentityVerifier?")]
+        public LocalClientSecuritySettings Clone()
         {
-            return (LocalClientSecuritySettings) MemberwiseClone ();
+            return (LocalClientSecuritySettings)MemberwiseClone();
         }
     }
 }

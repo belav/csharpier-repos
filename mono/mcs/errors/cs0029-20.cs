@@ -3,9 +3,7 @@
 
 class A<T>
 {
-    public class B<U>
-    {
-    }
+    public class B<U> { }
 }
 
 class Test

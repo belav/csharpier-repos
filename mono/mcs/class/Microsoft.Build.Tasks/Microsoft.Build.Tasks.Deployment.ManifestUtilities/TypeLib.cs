@@ -30,72 +30,81 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-    
-    [ComVisible (false)]
-    public class TypeLib {
-    
-        string    flags;
-        string    helpDirectory;
-        string    resourceId;
-        string    tlbId;
-        string    version;
-        string    xmlFlags;
-        string    xmlHelpDirectory;
-        string    xmlResourceId;
-        string    xmlTlbId;
-        string    xmlVersion;
-    
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public class TypeLib
+    {
+        string flags;
+        string helpDirectory;
+        string resourceId;
+        string tlbId;
+        string version;
+        string xmlFlags;
+        string xmlHelpDirectory;
+        string xmlResourceId;
+        string xmlTlbId;
+        string xmlVersion;
+
         [MonoTODO]
-        public TypeLib ()
+        public TypeLib()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public string Flags {
+
+        public string Flags
+        {
             get { return flags; }
         }
-        
-        public string HelpDirectory {
+
+        public string HelpDirectory
+        {
             get { return helpDirectory; }
         }
-        
-        public string ResourceId {
+
+        public string ResourceId
+        {
             get { return resourceId; }
         }
-        
-        public string TlbId {
+
+        public string TlbId
+        {
             get { return tlbId; }
         }
-        
-        public string Version {
+
+        public string Version
+        {
             get { return version; }
         }
-        
-        public string XmlFlags {
+
+        public string XmlFlags
+        {
             get { return xmlFlags; }
             set { xmlFlags = value; }
         }
-        
-        public string XmlHelpDirectory {
+
+        public string XmlHelpDirectory
+        {
             get { return xmlHelpDirectory; }
             set { xmlHelpDirectory = value; }
         }
-        
-        public string XmlResourceId {
+
+        public string XmlResourceId
+        {
             get { return xmlResourceId; }
             set { xmlResourceId = value; }
         }
-        
-        public string XmlTlbId {
+
+        public string XmlTlbId
+        {
             get { return xmlTlbId; }
             set { xmlTlbId = value; }
         }
-        
-        public string XmlVersion {
+
+        public string XmlVersion
+        {
             get { return xmlVersion; }
             set { xmlVersion = value; }
         }
     }
 }
-

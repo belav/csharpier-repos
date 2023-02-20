@@ -5,7 +5,7 @@ using System;
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
         Func<int, int, int> l = (a, a) => 1;
     }

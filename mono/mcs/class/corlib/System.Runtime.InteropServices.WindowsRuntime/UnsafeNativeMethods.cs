@@ -2,7 +2,7 @@
 // UnsafeNativeMethods.cs
 //
 // Author:
-//   Tautvydas Žilys <zilys@unity3d.com>
+//   Tautvydas ï¿½ilys <zilys@unity3d.com>
 //
 // Copyright (c) 2016 Unity Technologies (https://www.unity3d.com)
 //
@@ -32,45 +32,63 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     {
 #if !DISABLE_COM
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern int WindowsCreateString(string sourceString, int length, IntPtr* hstring);
-        
+        public static extern int WindowsCreateString(
+            string sourceString,
+            int length,
+            IntPtr* hstring
+        );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern int WindowsDeleteString(IntPtr hstring);
-        
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern char* WindowsGetStringRawBuffer(IntPtr hstring, uint* length);
-        
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern bool RoOriginateLanguageException(int error, string message, IntPtr languageException);
-        
+        public static extern bool RoOriginateLanguageException(
+            int error,
+            string message,
+            IntPtr languageException
+        );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void RoReportUnhandledError(IRestrictedErrorInfo error);
-        
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern IRestrictedErrorInfo GetRestrictedErrorInfo();
 #else
-        public static int WindowsCreateString(string sourceString, int length, IntPtr* hstring) {
-            throw new NotImplementedException ();
+        public static int WindowsCreateString(string sourceString, int length, IntPtr* hstring)
+        {
+            throw new NotImplementedException();
         }
 
-        public static int WindowsDeleteString(IntPtr hstring) {
-            throw new NotImplementedException ();
+        public static int WindowsDeleteString(IntPtr hstring)
+        {
+            throw new NotImplementedException();
         }
 
-        public static char* WindowsGetStringRawBuffer(IntPtr hstring, uint* length) {
-            throw new NotImplementedException ();
+        public static char* WindowsGetStringRawBuffer(IntPtr hstring, uint* length)
+        {
+            throw new NotImplementedException();
         }
 
-        public static bool RoOriginateLanguageException(int error, string message, IntPtr languageException) {
-            throw new NotImplementedException ();
+        public static bool RoOriginateLanguageException(
+            int error,
+            string message,
+            IntPtr languageException
+        )
+        {
+            throw new NotImplementedException();
         }
 
-        public static void RoReportUnhandledError(IRestrictedErrorInfo error) {
-            throw new NotImplementedException ();
+        public static void RoReportUnhandledError(IRestrictedErrorInfo error)
+        {
+            throw new NotImplementedException();
         }
 
-        public static IRestrictedErrorInfo GetRestrictedErrorInfo() {
-            throw new NotImplementedException ();
+        public static IRestrictedErrorInfo GetRestrictedErrorInfo()
+        {
+            throw new NotImplementedException();
         }
 #endif
     }

@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,7 +32,11 @@ namespace Castle.DynamicProxy.Internal
             // by finding a constructor ourselves
             Type[] constructorArgTypes;
             object[] constructorArgs;
-            GetArguments(attribute.ConstructorArguments, out constructorArgTypes, out constructorArgs);
+            GetArguments(
+                attribute.ConstructorArguments,
+                out constructorArgTypes,
+                out constructorArgs
+            );
             var constructor = attribute.AttributeType.GetConstructor(constructorArgTypes);
 
             PropertyInfo[] properties;
@@ -41,18 +45,28 @@ namespace Castle.DynamicProxy.Internal
             object[] fieldValues;
             GetSettersAndFields(
                 attribute.AttributeType,
-                attribute.NamedArguments, out properties, out propertyValues, out fields, out fieldValues);
+                attribute.NamedArguments,
+                out properties,
+                out propertyValues,
+                out fields,
+                out fieldValues
+            );
 
-            return new CustomAttributeInfo(constructor,
-                                           constructorArgs,
-                                           properties,
-                                           propertyValues,
-                                           fields,
-                                           fieldValues);
+            return new CustomAttributeInfo(
+                constructor,
+                constructorArgs,
+                properties,
+                propertyValues,
+                fields,
+                fieldValues
+            );
         }
 
-        private static void GetArguments(IList<CustomAttributeTypedArgument> constructorArguments,
-            out Type[] constructorArgTypes, out object[] constructorArgs)
+        private static void GetArguments(
+            IList<CustomAttributeTypedArgument> constructorArguments,
+            out Type[] constructorArgTypes,
+            out object[] constructorArgs
+        )
         {
             constructorArgTypes = new Type[constructorArguments.Count];
             constructorArgs = new object[constructorArguments.Count];
@@ -63,7 +77,9 @@ namespace Castle.DynamicProxy.Internal
             }
         }
 
-        private static object[] GetArguments(IList<CustomAttributeTypedArgument> constructorArguments)
+        private static object[] GetArguments(
+            IList<CustomAttributeTypedArgument> constructorArguments
+        )
         {
             var arguments = new object[constructorArguments.Count];
             for (var i = 0; i < constructorArguments.Count; i++)
@@ -88,9 +104,14 @@ namespace Castle.DynamicProxy.Internal
             return array;
         }
 
-        private static void GetSettersAndFields(Type attributeType, IEnumerable<CustomAttributeNamedArgument> namedArguments,
-            out PropertyInfo[] properties, out object[] propertyValues,
-            out FieldInfo[] fields, out object[] fieldValues)
+        private static void GetSettersAndFields(
+            Type attributeType,
+            IEnumerable<CustomAttributeNamedArgument> namedArguments,
+            out PropertyInfo[] properties,
+            out object[] propertyValues,
+            out FieldInfo[] fields,
+            out object[] fieldValues
+        )
         {
             var propertyList = new List<PropertyInfo>();
             var propertyValuesList = new List<object>();
@@ -116,7 +137,9 @@ namespace Castle.DynamicProxy.Internal
             fieldValues = fieldValuesList.ToArray();
         }
 
-        public static IEnumerable<CustomAttributeInfo> GetNonInheritableAttributes(this MemberInfo member)
+        public static IEnumerable<CustomAttributeInfo> GetNonInheritableAttributes(
+            this MemberInfo member
+        )
         {
             Debug.Assert(member != null, "member != null");
             var attributes = member.CustomAttributes;
@@ -136,14 +159,14 @@ namespace Castle.DynamicProxy.Internal
                 }
                 catch (ArgumentException e)
                 {
-                    var message =
-                        string.Format(
-                            "Due to limitations in CLR, DynamicProxy was unable to successfully replicate non-inheritable attribute {0} on {1}{2}. " +
-                            "To avoid this error you can chose not to replicate this attribute type by calling '{3}.Add(typeof({0}))'.",
-                            attributeType.FullName,
-                            member.DeclaringType.FullName,
-                            (member is TypeInfo) ? "" : ("." + member.Name),
-                            typeof(AttributesToAvoidReplicating).FullName);
+                    var message = string.Format(
+                        "Due to limitations in CLR, DynamicProxy was unable to successfully replicate non-inheritable attribute {0} on {1}{2}. "
+                            + "To avoid this error you can chose not to replicate this attribute type by calling '{3}.Add(typeof({0}))'.",
+                        attributeType.FullName,
+                        member.DeclaringType.FullName,
+                        (member is TypeInfo) ? "" : ("." + member.Name),
+                        typeof(AttributesToAvoidReplicating).FullName
+                    );
                     throw new NotSupportedException(message, e);
                 }
                 if (info != null)
@@ -153,7 +176,9 @@ namespace Castle.DynamicProxy.Internal
             }
         }
 
-        public static IEnumerable<CustomAttributeInfo> GetNonInheritableAttributes(this ParameterInfo parameter)
+        public static IEnumerable<CustomAttributeInfo> GetNonInheritableAttributes(
+            this ParameterInfo parameter
+        )
         {
             Debug.Assert(parameter != null, "parameter != null");
 
@@ -218,7 +243,8 @@ namespace Castle.DynamicProxy.Internal
             return false;
         }
 
-        public static CustomAttributeInfo CreateInfo<TAttribute>() where TAttribute : Attribute, new()
+        public static CustomAttributeInfo CreateInfo<TAttribute>()
+            where TAttribute : Attribute, new()
         {
             var constructor = typeof(TAttribute).GetConstructor(Type.EmptyTypes);
             Debug.Assert(constructor != null, "constructor != null");
@@ -229,7 +255,10 @@ namespace Castle.DynamicProxy.Internal
         public static CustomAttributeInfo CreateInfo(Type attribute, object[] constructorArguments)
         {
             Debug.Assert(attribute != null, "attribute != null");
-            Debug.Assert(typeof(Attribute).IsAssignableFrom(attribute), "typeof(Attribute).IsAssignableFrom(attribute)");
+            Debug.Assert(
+                typeof(Attribute).IsAssignableFrom(attribute),
+                "typeof(Attribute).IsAssignableFrom(attribute)"
+            );
             Debug.Assert(constructorArguments != null, "constructorArguments != null");
 
             var constructor = attribute.GetConstructor(GetTypes(constructorArguments));

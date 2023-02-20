@@ -2,12 +2,12 @@ class Stack<T>
 {
     T t;
 
-    public Stack (T t)
+    public Stack(T t)
     {
         this.t = t;
     }
 
-    public object Test ()
+    public object Test()
     {
         // Boxing the type parameter `T' to an object.
         return t;
@@ -16,14 +16,14 @@ class Stack<T>
 
 class X
 {
-    public static object Test (Stack<int> stack)
+    public static object Test(Stack<int> stack)
     {
-        return stack.Test ();
+        return stack.Test();
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        Stack<int> stack = new Stack<int> (9);
-        System.Console.WriteLine (Test (stack));
+        Stack<int> stack = new Stack<int>(9);
+        System.Console.WriteLine(Test(stack));
     }
 }

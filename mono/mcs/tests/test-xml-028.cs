@@ -7,7 +7,7 @@ public partial class Test
 {
     string Bar;
 
-    public static void Main () {}
+    public static void Main() { }
 
     /// <summary>
     /// Partial inner class!
@@ -30,4 +30,3 @@ public partial class Test
         string Fuga;
     }
 }
-

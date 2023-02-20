@@ -17,7 +17,11 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             int expectedParameterIndex = 1;
 
             // Act
-            ParameterExpressionFingerprint fingerprint = new ParameterExpressionFingerprint(expectedNodeType, expectedType, expectedParameterIndex);
+            ParameterExpressionFingerprint fingerprint = new ParameterExpressionFingerprint(
+                expectedNodeType,
+                expectedType,
+                expectedParameterIndex
+            );
 
             // Assert
             Assert.Equal(expectedNodeType, fingerprint.NodeType);
@@ -34,8 +38,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             int parameterIndex = 1;
 
             // Act
-            ParameterExpressionFingerprint fingerprint1 = new ParameterExpressionFingerprint(nodeType, type, parameterIndex);
-            ParameterExpressionFingerprint fingerprint2 = new ParameterExpressionFingerprint(nodeType, type, parameterIndex);
+            ParameterExpressionFingerprint fingerprint1 = new ParameterExpressionFingerprint(
+                nodeType,
+                type,
+                parameterIndex
+            );
+            ParameterExpressionFingerprint fingerprint2 = new ParameterExpressionFingerprint(
+                nodeType,
+                type,
+                parameterIndex
+            );
 
             // Assert
             Assert.Equal(fingerprint1, fingerprint2);
@@ -51,8 +63,15 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             int parameterIndex = 1;
 
             // Act
-            ParameterExpressionFingerprint fingerprint1 = new ParameterExpressionFingerprint(nodeType, type, parameterIndex);
-            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(nodeType, type);
+            ParameterExpressionFingerprint fingerprint1 = new ParameterExpressionFingerprint(
+                nodeType,
+                type,
+                parameterIndex
+            );
+            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.NotEqual<ExpressionFingerprint>(fingerprint1, fingerprint2);
@@ -67,8 +86,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             int parameterIndex = 1;
 
             // Act
-            ParameterExpressionFingerprint fingerprint1 = new ParameterExpressionFingerprint(nodeType, type, parameterIndex);
-            ParameterExpressionFingerprint fingerprint2 = new ParameterExpressionFingerprint(nodeType, type, -1 /* parameterIndex */);
+            ParameterExpressionFingerprint fingerprint1 = new ParameterExpressionFingerprint(
+                nodeType,
+                type,
+                parameterIndex
+            );
+            ParameterExpressionFingerprint fingerprint2 = new ParameterExpressionFingerprint(
+                nodeType,
+                type,
+                -1 /* parameterIndex */
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);
@@ -83,8 +110,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             int parameterIndex = 1;
 
             // Act
-            ParameterExpressionFingerprint fingerprint1 = new ParameterExpressionFingerprint(nodeType, type, parameterIndex);
-            ParameterExpressionFingerprint fingerprint2 = new ParameterExpressionFingerprint(nodeType, typeof(string), parameterIndex);
+            ParameterExpressionFingerprint fingerprint1 = new ParameterExpressionFingerprint(
+                nodeType,
+                type,
+                parameterIndex
+            );
+            ParameterExpressionFingerprint fingerprint2 = new ParameterExpressionFingerprint(
+                nodeType,
+                typeof(string),
+                parameterIndex
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);

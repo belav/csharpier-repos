@@ -14,7 +14,7 @@ namespace Mono.Linker.Steps
         {
             public readonly MessageOrigin Origin;
 
-            public Scope (in MessageOrigin origin)
+            public Scope(in MessageOrigin origin)
             {
                 Origin = origin;
             }
@@ -27,27 +27,29 @@ namespace Mono.Linker.Steps
             readonly MessageOrigin _origin;
             readonly MarkScopeStack _scopeStack;
 
-            public LocalScope (in MessageOrigin origin, MarkScopeStack scopeStack)
+            public LocalScope(in MessageOrigin origin, MarkScopeStack scopeStack)
             {
                 _origin = origin;
                 _scopeStack = scopeStack;
 
-                _scopeStack.Push (new Scope (new MessageOrigin (origin)));
+                _scopeStack.Push(new Scope(new MessageOrigin(origin)));
             }
 
-            public LocalScope (in Scope scope, MarkScopeStack scopeStack)
+            public LocalScope(in Scope scope, MarkScopeStack scopeStack)
             {
                 _origin = scope.Origin;
                 _scopeStack = scopeStack;
-                _scopeStack.Push (scope);
+                _scopeStack.Push(scope);
             }
 
-            public void Dispose ()
+            public void Dispose()
             {
-                Scope scope = _scopeStack.Pop ();
+                Scope scope = _scopeStack.Pop();
 
                 if (_origin.Provider != scope.Origin.Provider)
-                    throw new InternalErrorException ($"Scope stack imbalance - expected to pop '{_origin}' but instead popped '{scope.Origin}'.");
+                    throw new InternalErrorException(
+                        $"Scope stack imbalance - expected to pop '{_origin}' but instead popped '{scope.Origin}'."
+                    );
             }
         }
 
@@ -57,75 +59,84 @@ namespace Mono.Linker.Steps
             readonly Scope _childScope;
             readonly MarkScopeStack _scopeStack;
 
-            public ParentScope (MarkScopeStack scopeStack)
+            public ParentScope(MarkScopeStack scopeStack)
             {
                 _scopeStack = scopeStack;
-                _childScope = _scopeStack.Pop ();
+                _childScope = _scopeStack.Pop();
                 _parentScope = _scopeStack.CurrentScope;
             }
 
-            public void Dispose ()
+            public void Dispose()
             {
                 if (_parentScope.Origin.Provider != _scopeStack.CurrentScope.Origin.Provider)
-                    throw new InternalErrorException ($"Scope stack imbalance - expected top of stack to be '{_parentScope.Origin}' but instead found '{_scopeStack.CurrentScope.Origin}'.");
+                    throw new InternalErrorException(
+                        $"Scope stack imbalance - expected top of stack to be '{_parentScope.Origin}' but instead found '{_scopeStack.CurrentScope.Origin}'."
+                    );
 
-                _scopeStack.Push (_childScope);
+                _scopeStack.Push(_childScope);
             }
         }
 
-        public MarkScopeStack ()
+        public MarkScopeStack()
         {
-            _scopeStack = new Stack<Scope> ();
+            _scopeStack = new Stack<Scope>();
         }
 
-        public IDisposable PushScope (in MessageOrigin origin)
+        public IDisposable PushScope(in MessageOrigin origin)
         {
-            return new LocalScope (origin, this);
+            return new LocalScope(origin, this);
         }
 
-        public IDisposable PushScope (in Scope scope)
+        public IDisposable PushScope(in Scope scope)
         {
-            return new LocalScope (scope, this);
+            return new LocalScope(scope, this);
         }
 
-        public IDisposable PopToParent ()
+        public IDisposable PopToParent()
         {
-            return new ParentScope (this);
+            return new ParentScope(this);
         }
 
-        public Scope CurrentScope {
-            get {
-                if (!_scopeStack.TryPeek (out var result))
-                    throw new InternalErrorException ($"Scope stack imbalance - expected scope but instead the stack is empty.");
+        public Scope CurrentScope
+        {
+            get
+            {
+                if (!_scopeStack.TryPeek(out var result))
+                    throw new InternalErrorException(
+                        $"Scope stack imbalance - expected scope but instead the stack is empty."
+                    );
 
                 return result;
             }
         }
 
-        public void UpdateCurrentScopeInstructionOffset (int offset)
+        public void UpdateCurrentScopeInstructionOffset(int offset)
         {
-            var scope = _scopeStack.Pop ();
+            var scope = _scopeStack.Pop();
             if (scope.Origin.Provider is not MethodDefinition)
-                throw new InternalErrorException ($"Trying to update instruction offset of scope stack which is not a method. Current stack scope is '{scope}'.");
+                throw new InternalErrorException(
+                    $"Trying to update instruction offset of scope stack which is not a method. Current stack scope is '{scope}'."
+                );
 
-            _scopeStack.Push (new Scope (new MessageOrigin (scope.Origin.Provider, offset)));
+            _scopeStack.Push(new Scope(new MessageOrigin(scope.Origin.Provider, offset)));
         }
 
-        void Push (in Scope scope)
+        void Push(in Scope scope)
         {
-            _scopeStack.Push (scope);
+            _scopeStack.Push(scope);
         }
 
-        Scope Pop ()
+        Scope Pop()
         {
-            if (!_scopeStack.TryPop (out var result))
-                throw new InternalErrorException ($"Scope stack imbalance - trying to pop empty stack.");
+            if (!_scopeStack.TryPop(out var result))
+                throw new InternalErrorException(
+                    $"Scope stack imbalance - trying to pop empty stack."
+                );
 
             return result;
         }
 
-        [Conditional ("DEBUG")]
-        public void AssertIsEmpty () => Debug.Assert (_scopeStack.Count == 0);
-
+        [Conditional("DEBUG")]
+        public void AssertIsEmpty() => Debug.Assert(_scopeStack.Count == 0);
     }
 }

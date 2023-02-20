@@ -3,25 +3,24 @@ using System.Threading.Tasks;
 
 public class Class1
 {
-    protected void InvokeAction (Action action)
+    protected void InvokeAction(Action action)
     {
-        action ();
+        action();
     }
 
-    public void Bar()
-    {
-    }
+    public void Bar() { }
 
-    async Task Test ()
+    async Task Test()
     {
         Task.Run(async () =>
             {
-                var implementor = ServiceLocator.GetImplementor<IInterface1> ();
+                var implementor = ServiceLocator.GetImplementor<IInterface1>();
                 string message = null;
-                bool result = await implementor.Foo ((s) => message = s);
+                bool result = await implementor.Foo((s) => message = s);
 
-                InvokeAction (() => Bar ());
-            }).Wait ();
+                InvokeAction(() => Bar());
+            })
+            .Wait();
     }
 
     interface IInterface1
@@ -31,24 +30,24 @@ public class Class1
 
     class CIInterface1 : IInterface1
     {
-        public Task<bool> Foo (Action<string> action)
+        public Task<bool> Foo(Action<string> action)
         {
-            action ("msg");
-            return Task.FromResult (false);
+            action("msg");
+            return Task.FromResult(false);
         }
     }
 
     static class ServiceLocator
     {
-        public static TService GetImplementor<TService>() where TService : class
+        public static TService GetImplementor<TService>()
+            where TService : class
         {
-            return (TService) (object) new CIInterface1 ();
+            return (TService)(object)new CIInterface1();
         }
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        new Class1 ().Test ().Wait ();
+        new Class1().Test().Wait();
     }
 }
-

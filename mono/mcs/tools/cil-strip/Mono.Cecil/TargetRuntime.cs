@@ -26,9 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
-    internal enum TargetRuntime {
+namespace Mono.Cecil
+{
+    internal enum TargetRuntime
+    {
         NET_1_0,
         NET_1_1,
         NET_2_0,

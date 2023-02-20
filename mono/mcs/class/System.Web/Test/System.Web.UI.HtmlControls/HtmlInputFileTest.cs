@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,38 +34,38 @@ using System.Web.UI.HtmlControls;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.HtmlControls {
-
-    public class HtmlInputFilePoker : HtmlInputFile {
-
-        public HtmlInputFilePoker ()
+namespace MonoTests.System.Web.UI.HtmlControls
+{
+    public class HtmlInputFilePoker : HtmlInputFile
+    {
+        public HtmlInputFilePoker()
         {
-            TrackViewState ();
+            TrackViewState();
         }
 
-        public object SaveState ()
+        public object SaveState()
         {
-            return SaveViewState ();
+            return SaveViewState();
         }
 
-        public void LoadState (object state)
+        public void LoadState(object state)
         {
-            LoadViewState (state);
+            LoadViewState(state);
         }
 
-        public void DoRenderAttributes (HtmlTextWriter writer)
+        public void DoRenderAttributes(HtmlTextWriter writer)
         {
-            RenderAttributes (writer);
+            RenderAttributes(writer);
         }
     }
 
     [TestFixture]
-    public class HtmlInputFileTest {
-
+    public class HtmlInputFileTest
+    {
         [Test]
-        public void Defaults ()
+        public void Defaults()
         {
-            HtmlInputFilePoker p = new HtmlInputFilePoker ();
+            HtmlInputFilePoker p = new HtmlInputFilePoker();
 
             /* MS throws a null exception on both
              * get_PostedFile and get_Value in this test,
@@ -74,31 +74,31 @@ namespace MonoTests.System.Web.UI.HtmlControls {
              * Page.Request.Files (which our test doesn't
              * support) */
 
-            Assert.AreEqual ("", p.Accept, "A1");
-            Assert.AreEqual (-1, p.MaxLength, "A2");
+            Assert.AreEqual("", p.Accept, "A1");
+            Assert.AreEqual(-1, p.MaxLength, "A2");
             //Assert.IsNull (p.PostedFile, "A3");
-            Assert.AreEqual (-1, p.Size, "A4");
+            Assert.AreEqual(-1, p.Size, "A4");
             //Assert.AreEqual ("", p.Value, "A5");
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void ValueSetter ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ValueSetter()
         {
-            HtmlInputFilePoker p = new HtmlInputFilePoker ();
+            HtmlInputFilePoker p = new HtmlInputFilePoker();
             p.Value = "/etc/passwd";
         }
 
         [Test]
-        public void Attribute_Count ()
+        public void Attribute_Count()
         {
-            HtmlInputFilePoker p = new HtmlInputFilePoker ();
+            HtmlInputFilePoker p = new HtmlInputFilePoker();
 
             p.Accept = "*.*";
             p.MaxLength = 50;
             p.Size = 20;
 
-            Assert.AreEqual (4, p.Attributes.Count, "A1");
+            Assert.AreEqual(4, p.Attributes.Count, "A1");
         }
 
 #if false
@@ -118,16 +118,15 @@ namespace MonoTests.System.Web.UI.HtmlControls {
 #endif
 
         [Test]
-        public void RenderAttributes ()
+        public void RenderAttributes()
         {
-            StringWriter sw = new StringWriter ();
-            HtmlTextWriter tw = new HtmlTextWriter (sw);
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter tw = new HtmlTextWriter(sw);
 
-            HtmlInputFilePoker p = new HtmlInputFilePoker ();
+            HtmlInputFilePoker p = new HtmlInputFilePoker();
 
-            p.DoRenderAttributes (tw);
-            Assert.AreEqual (" name type=\"file\" /", sw.ToString (), "A1");
+            p.DoRenderAttributes(tw);
+            Assert.AreEqual(" name type=\"file\" /", sw.ToString(), "A1");
         }
-    }    
+    }
 }
-

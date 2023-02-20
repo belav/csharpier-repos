@@ -2,10 +2,12 @@
 // Line:
 // Compiler options: -warnaserror -warn:2
 
-class Base {
-    public void F () {}
+class Base
+{
+    public void F() { }
 }
 
-class Derived : Base {
-    void F () {}
+class Derived : Base
+{
+    void F() { }
 }

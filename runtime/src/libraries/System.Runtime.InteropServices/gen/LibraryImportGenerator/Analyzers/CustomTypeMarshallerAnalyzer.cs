@@ -25,11 +25,21 @@ namespace Microsoft.Interop.Analyzers
             public const string Key = nameof(MissingMemberNames);
             public const char Delimiter = ' ';
 
-            public const string ValueManagedToNativeConstructor = nameof(ValueManagedToNativeConstructor);
-            public const string ValueCallerAllocatedBufferConstructor = nameof(ValueCallerAllocatedBufferConstructor);
-            public const string CollectionManagedToNativeConstructor = nameof(CollectionManagedToNativeConstructor);
-            public const string CollectionCallerAllocatedBufferConstructor = nameof(CollectionCallerAllocatedBufferConstructor);
-            public const string CollectionNativeElementSizeConstructor = nameof(CollectionNativeElementSizeConstructor);
+            public const string ValueManagedToNativeConstructor = nameof(
+                ValueManagedToNativeConstructor
+            );
+            public const string ValueCallerAllocatedBufferConstructor = nameof(
+                ValueCallerAllocatedBufferConstructor
+            );
+            public const string CollectionManagedToNativeConstructor = nameof(
+                CollectionManagedToNativeConstructor
+            );
+            public const string CollectionCallerAllocatedBufferConstructor = nameof(
+                CollectionCallerAllocatedBufferConstructor
+            );
+            public const string CollectionNativeElementSizeConstructor = nameof(
+                CollectionNativeElementSizeConstructor
+            );
         }
 
         public static readonly DiagnosticDescriptor MarshallerTypeMustSpecifyManagedTypeRule =
@@ -40,7 +50,10 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.MarshallerTypeMustSpecifyManagedTypeDescription)));
+                description: GetResourceString(
+                    nameof(SR.MarshallerTypeMustSpecifyManagedTypeDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor CustomTypeMarshallerAttributeMustBeValidRule =
             new DiagnosticDescriptor(
@@ -50,7 +63,10 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.CustomTypeMarshallerAttributeMustBeValidDescription)));
+                description: GetResourceString(
+                    nameof(SR.CustomTypeMarshallerAttributeMustBeValidDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor MarshallerKindMustBeValidRule =
             new DiagnosticDescriptor(
@@ -60,7 +76,8 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.MarshallerKindMustBeValidDescription)));
+                description: GetResourceString(nameof(SR.MarshallerKindMustBeValidDescription))
+            );
 
         public static readonly DiagnosticDescriptor MarshallerDirectionMustBeValidRule =
             new DiagnosticDescriptor(
@@ -70,17 +87,23 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.MarshallerDirectionMustBeValidDescription)));
+                description: GetResourceString(nameof(SR.MarshallerDirectionMustBeValidDescription))
+            );
 
         public static readonly DiagnosticDescriptor NativeTypeMustHaveCustomTypeMarshallerAttributeRule =
             new DiagnosticDescriptor(
                 Ids.InvalidNativeType,
                 GetResourceString(nameof(SR.InvalidNativeTypeTitle)),
-                GetResourceString(nameof(SR.NativeTypeMustHaveCustomTypeMarshallerAttributeMessage)),
+                GetResourceString(
+                    nameof(SR.NativeTypeMustHaveCustomTypeMarshallerAttributeMessage)
+                ),
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.NativeTypeMustHaveCustomTypeMarshallerAttributeDescription)));
+                description: GetResourceString(
+                    nameof(SR.NativeTypeMustHaveCustomTypeMarshallerAttributeDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor NativeTypeMustBeBlittableRule =
             new DiagnosticDescriptor(
@@ -90,7 +113,8 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.NativeTypeMustBeBlittableDescription)));
+                description: GetResourceString(nameof(SR.NativeTypeMustBeBlittableDescription))
+            );
 
         public static readonly DiagnosticDescriptor GetPinnableReferenceReturnTypeBlittableRule =
             new DiagnosticDescriptor(
@@ -100,7 +124,10 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.GetPinnableReferenceReturnTypeBlittableDescription)));
+                description: GetResourceString(
+                    nameof(SR.GetPinnableReferenceReturnTypeBlittableDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor NativeTypeMustBePointerSizedRule =
             new DiagnosticDescriptor(
@@ -110,7 +137,8 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.NativeTypeMustBePointerSizedDescription)));
+                description: GetResourceString(nameof(SR.NativeTypeMustBePointerSizedDescription))
+            );
 
         public static readonly DiagnosticDescriptor CustomMarshallerTypeMustSupportDirectionRule =
             new DiagnosticDescriptor(
@@ -120,7 +148,10 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.CustomMarshallerTypeMustSupportDirectionDescription)));
+                description: GetResourceString(
+                    nameof(SR.CustomMarshallerTypeMustSupportDirectionDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor ValueInRequiresOneParameterConstructorRule =
             new DiagnosticDescriptor(
@@ -130,37 +161,57 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.ValueInRequiresOneParameterConstructorDescription)));
+                description: GetResourceString(
+                    nameof(SR.ValueInRequiresOneParameterConstructorDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor LinearCollectionInRequiresTwoParameterConstructorRule =
             new DiagnosticDescriptor(
                 Ids.CustomMarshallerTypeMustHaveRequiredShape,
                 GetResourceString(nameof(SR.CustomMarshallerTypeMustHaveRequiredShapeTitle)),
-                GetResourceString(nameof(SR.LinearCollectionInRequiresTwoParameterConstructorMessage)),
+                GetResourceString(
+                    nameof(SR.LinearCollectionInRequiresTwoParameterConstructorMessage)
+                ),
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.LinearCollectionInRequiresTwoParameterConstructorDescription)));
+                description: GetResourceString(
+                    nameof(SR.LinearCollectionInRequiresTwoParameterConstructorDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor ValueInCallerAllocatedBufferRequiresSpanConstructorRule =
             new DiagnosticDescriptor(
                 Ids.CustomMarshallerTypeMustHaveRequiredShape,
                 GetResourceString(nameof(SR.CustomMarshallerTypeMustHaveRequiredShapeTitle)),
-                GetResourceString(nameof(SR.ValueInCallerAllocatedBufferRequiresSpanConstructorMessage)),
+                GetResourceString(
+                    nameof(SR.ValueInCallerAllocatedBufferRequiresSpanConstructorMessage)
+                ),
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.ValueInCallerAllocatedBufferRequiresSpanConstructorDescription)));
+                description: GetResourceString(
+                    nameof(SR.ValueInCallerAllocatedBufferRequiresSpanConstructorDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor LinearCollectionInCallerAllocatedBufferRequiresSpanConstructorRule =
             new DiagnosticDescriptor(
                 Ids.CustomMarshallerTypeMustHaveRequiredShape,
                 GetResourceString(nameof(SR.CustomMarshallerTypeMustHaveRequiredShapeTitle)),
-                GetResourceString(nameof(SR.LinearCollectionInCallerAllocatedBufferRequiresSpanConstructorMessage)),
+                GetResourceString(
+                    nameof(SR.LinearCollectionInCallerAllocatedBufferRequiresSpanConstructorMessage)
+                ),
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.LinearCollectionInCallerAllocatedBufferRequiresSpanConstructorDescription)));
+                description: GetResourceString(
+                    nameof(
+                        SR.LinearCollectionInCallerAllocatedBufferRequiresSpanConstructorDescription
+                    )
+                )
+            );
 
         public static readonly DiagnosticDescriptor OutRequiresToManagedRule =
             new DiagnosticDescriptor(
@@ -170,7 +221,8 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.OutRequiresToManagedDescription)));
+                description: GetResourceString(nameof(SR.OutRequiresToManagedDescription))
+            );
 
         public static readonly DiagnosticDescriptor LinearCollectionInRequiresCollectionMethodsRule =
             new DiagnosticDescriptor(
@@ -180,7 +232,10 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.LinearCollectionInRequiresCollectionMethodsDescription)));
+                description: GetResourceString(
+                    nameof(SR.LinearCollectionInRequiresCollectionMethodsDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor LinearCollectionOutRequiresCollectionMethodsRule =
             new DiagnosticDescriptor(
@@ -190,7 +245,10 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.LinearCollectionOutRequiresCollectionMethodsDescription)));
+                description: GetResourceString(
+                    nameof(SR.LinearCollectionOutRequiresCollectionMethodsDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor LinearCollectionOutRequiresIntConstructorRule =
             new DiagnosticDescriptor(
@@ -200,7 +258,10 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.LinearCollectionOutRequiresIntConstructorDescription)));
+                description: GetResourceString(
+                    nameof(SR.LinearCollectionOutRequiresIntConstructorDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor UnmanagedResourcesRequiresFreeNativeRule =
             new DiagnosticDescriptor(
@@ -210,7 +271,10 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.UnmanagedResourcesRequiresFreeNativeDescription)));
+                description: GetResourceString(
+                    nameof(SR.UnmanagedResourcesRequiresFreeNativeDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor OutTwoStageMarshallingRequiresFromNativeValueRule =
             new DiagnosticDescriptor(
@@ -220,7 +284,10 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.OutTwoStageMarshallingRequiresFromNativeValueDescription)));
+                description: GetResourceString(
+                    nameof(SR.OutTwoStageMarshallingRequiresFromNativeValueDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor InTwoStageMarshallingRequiresToNativeValueRule =
             new DiagnosticDescriptor(
@@ -230,27 +297,46 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.InTwoStageMarshallingRequiresToNativeValueDescription)));
+                description: GetResourceString(
+                    nameof(SR.InTwoStageMarshallingRequiresToNativeValueDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor GetPinnableReferenceShouldSupportAllocatingMarshallingFallbackRule =
             new DiagnosticDescriptor(
                 Ids.MissingAllocatingMarshallingFallback,
                 GetResourceString(nameof(SR.MissingAllocatingMarshallingFallbackTitle)),
-                GetResourceString(nameof(SR.GetPinnableReferenceShouldSupportAllocatingMarshallingFallbackMessage)),
+                GetResourceString(
+                    nameof(SR.GetPinnableReferenceShouldSupportAllocatingMarshallingFallbackMessage)
+                ),
                 Category,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.GetPinnableReferenceShouldSupportAllocatingMarshallingFallbackDescription)));
+                description: GetResourceString(
+                    nameof(
+                        SR.GetPinnableReferenceShouldSupportAllocatingMarshallingFallbackDescription
+                    )
+                )
+            );
 
         public static readonly DiagnosticDescriptor CallerAllocMarshallingShouldSupportAllocatingMarshallingFallbackRule =
             new DiagnosticDescriptor(
                 Ids.MissingAllocatingMarshallingFallback,
                 GetResourceString(nameof(SR.MissingAllocatingMarshallingFallbackTitle)),
-                GetResourceString(nameof(SR.CallerAllocMarshallingShouldSupportAllocatingMarshallingFallbackMessage)),
+                GetResourceString(
+                    nameof(
+                        SR.CallerAllocMarshallingShouldSupportAllocatingMarshallingFallbackMessage
+                    )
+                ),
                 Category,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.CallerAllocMarshallingShouldSupportAllocatingMarshallingFallbackDescription)));
+                description: GetResourceString(
+                    nameof(
+                        SR.CallerAllocMarshallingShouldSupportAllocatingMarshallingFallbackDescription
+                    )
+                )
+            );
 
         public static readonly DiagnosticDescriptor CallerAllocConstructorMustHaveBufferSizeRule =
             new DiagnosticDescriptor(
@@ -260,7 +346,10 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.CallerAllocConstructorMustHaveBufferSizeDescription)));
+                description: GetResourceString(
+                    nameof(SR.CallerAllocConstructorMustHaveBufferSizeDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor RefNativeValueUnsupportedRule =
             new DiagnosticDescriptor(
@@ -270,7 +359,8 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.RefNativeValueUnsupportedDescription)));
+                description: GetResourceString(nameof(SR.RefNativeValueUnsupportedDescription))
+            );
 
         public static readonly DiagnosticDescriptor NativeGenericTypeMustBeClosedOrMatchArityRule =
             new DiagnosticDescriptor(
@@ -280,57 +370,97 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.NativeGenericTypeMustBeClosedOrMatchArityDescription)));
+                description: GetResourceString(
+                    nameof(SR.NativeGenericTypeMustBeClosedOrMatchArityDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor MarshallerGetPinnableReferenceRequiresTwoStageMarshallingRule =
             new DiagnosticDescriptor(
                 Ids.ProvidedMethodsNotSpecifiedInFeatures,
                 GetResourceString(nameof(SR.ProvidedMethodsNotSpecifiedInFeaturesTitle)),
-                GetResourceString(nameof(SR.MarshallerGetPinnableReferenceRequiresTwoStageMarshallingMessage)),
+                GetResourceString(
+                    nameof(SR.MarshallerGetPinnableReferenceRequiresTwoStageMarshallingMessage)
+                ),
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.MarshallerGetPinnableReferenceRequiresTwoStageMarshallingDescription)));
+                description: GetResourceString(
+                    nameof(SR.MarshallerGetPinnableReferenceRequiresTwoStageMarshallingDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor FreeNativeMethodProvidedShouldSpecifyUnmanagedResourcesFeatureRule =
             new DiagnosticDescriptor(
                 Ids.ProvidedMethodsNotSpecifiedInFeatures,
                 GetResourceString(nameof(SR.ProvidedMethodsNotSpecifiedInFeaturesTitle)),
-                GetResourceString(nameof(SR.FreeNativeMethodProvidedShouldSpecifyUnmanagedResourcesFeatureMessage)),
+                GetResourceString(
+                    nameof(SR.FreeNativeMethodProvidedShouldSpecifyUnmanagedResourcesFeatureMessage)
+                ),
                 Category,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.FreeNativeMethodProvidedShouldSpecifyUnmanagedResourcesFeatureDescription)));
+                description: GetResourceString(
+                    nameof(
+                        SR.FreeNativeMethodProvidedShouldSpecifyUnmanagedResourcesFeatureDescription
+                    )
+                )
+            );
 
         public static readonly DiagnosticDescriptor ToNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureRule =
             new DiagnosticDescriptor(
                 Ids.ProvidedMethodsNotSpecifiedInFeatures,
                 GetResourceString(nameof(SR.ProvidedMethodsNotSpecifiedInFeaturesTitle)),
-                GetResourceString(nameof(SR.ToNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureMessage)),
+                GetResourceString(
+                    nameof(
+                        SR.ToNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureMessage
+                    )
+                ),
                 Category,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.ToNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureDescription)));
+                description: GetResourceString(
+                    nameof(
+                        SR.ToNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureDescription
+                    )
+                )
+            );
 
         public static readonly DiagnosticDescriptor FromNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureRule =
             new DiagnosticDescriptor(
                 Ids.ProvidedMethodsNotSpecifiedInFeatures,
                 GetResourceString(nameof(SR.ProvidedMethodsNotSpecifiedInFeaturesTitle)),
-                GetResourceString(nameof(SR.FromNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureMessage)),
+                GetResourceString(
+                    nameof(
+                        SR.FromNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureMessage
+                    )
+                ),
                 Category,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.FromNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureDescription)));
+                description: GetResourceString(
+                    nameof(
+                        SR.FromNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureDescription
+                    )
+                )
+            );
 
         public static readonly DiagnosticDescriptor CallerAllocatedBufferConstructorProvidedShouldSpecifyFeatureRule =
             new DiagnosticDescriptor(
                 Ids.ProvidedMethodsNotSpecifiedInFeatures,
                 GetResourceString(nameof(SR.ProvidedMethodsNotSpecifiedInFeaturesTitle)),
-                GetResourceString(nameof(SR.CallerAllocatedBufferConstructorProvidedShouldSpecifyFeatureMessage)),
+                GetResourceString(
+                    nameof(SR.CallerAllocatedBufferConstructorProvidedShouldSpecifyFeatureMessage)
+                ),
                 Category,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.CallerAllocatedBufferConstructorProvidedShouldSpecifyFeatureDescription)));
+                description: GetResourceString(
+                    nameof(
+                        SR.CallerAllocatedBufferConstructorProvidedShouldSpecifyFeatureDescription
+                    )
+                )
+            );
 
         public static readonly DiagnosticDescriptor TwoStageMarshallingNativeTypesMustMatchRule =
             new DiagnosticDescriptor(
@@ -340,7 +470,10 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.TwoStageMarshallingNativeTypesMustMatchDescription)));
+                description: GetResourceString(
+                    nameof(SR.TwoStageMarshallingNativeTypesMustMatchDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor LinearCollectionElementTypesMustMatchRule =
             new DiagnosticDescriptor(
@@ -350,7 +483,10 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.LinearCollectionElementTypesMustMatchDescription)));
+                description: GetResourceString(
+                    nameof(SR.LinearCollectionElementTypesMustMatchDescription)
+                )
+            );
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(
@@ -382,7 +518,8 @@ namespace Microsoft.Interop.Analyzers
                 FromNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureRule,
                 CallerAllocatedBufferConstructorProvidedShouldSpecifyFeatureRule,
                 TwoStageMarshallingNativeTypesMustMatchRule,
-                LinearCollectionElementTypesMustMatchRule);
+                LinearCollectionElementTypesMustMatchRule
+            );
 
         public override void Initialize(AnalysisContext context)
         {
@@ -394,22 +531,48 @@ namespace Microsoft.Interop.Analyzers
 
         private void PrepareForAnalysis(CompilationStartAnalysisContext context)
         {
-            INamedTypeSymbol? spanOfT = context.Compilation.GetTypeByMetadataName(TypeNames.System_Span_Metadata);
-            INamedTypeSymbol? spanOfByte = spanOfT?.Construct(context.Compilation.GetSpecialType(SpecialType.System_Byte));
-            INamedTypeSymbol? readOnlySpanOfT = context.Compilation.GetTypeByMetadataName(TypeNames.System_ReadOnlySpan_Metadata);
-            INamedTypeSymbol? readOnlySpanOfByte = readOnlySpanOfT?.Construct(context.Compilation.GetSpecialType(SpecialType.System_Byte));
+            INamedTypeSymbol? spanOfT = context.Compilation.GetTypeByMetadataName(
+                TypeNames.System_Span_Metadata
+            );
+            INamedTypeSymbol? spanOfByte = spanOfT?.Construct(
+                context.Compilation.GetSpecialType(SpecialType.System_Byte)
+            );
+            INamedTypeSymbol? readOnlySpanOfT = context.Compilation.GetTypeByMetadataName(
+                TypeNames.System_ReadOnlySpan_Metadata
+            );
+            INamedTypeSymbol? readOnlySpanOfByte = readOnlySpanOfT?.Construct(
+                context.Compilation.GetSpecialType(SpecialType.System_Byte)
+            );
 
             if (spanOfT is not null && readOnlySpanOfT is not null)
             {
-                var perCompilationAnalyzer = new PerCompilationAnalyzer(spanOfT, spanOfByte, readOnlySpanOfT, readOnlySpanOfByte);
+                var perCompilationAnalyzer = new PerCompilationAnalyzer(
+                    spanOfT,
+                    spanOfByte,
+                    readOnlySpanOfT,
+                    readOnlySpanOfByte
+                );
 
                 // Analyze NativeMarshalling/MarshalUsing for correctness
-                context.RegisterSymbolAction(PerCompilationAnalyzer.AnalyzeTypeDefinition, SymbolKind.NamedType);
-                context.RegisterSymbolAction(PerCompilationAnalyzer.AnalyzeElement, SymbolKind.Parameter, SymbolKind.Field);
-                context.RegisterSymbolAction(PerCompilationAnalyzer.AnalyzeReturnType, SymbolKind.Method);
+                context.RegisterSymbolAction(
+                    PerCompilationAnalyzer.AnalyzeTypeDefinition,
+                    SymbolKind.NamedType
+                );
+                context.RegisterSymbolAction(
+                    PerCompilationAnalyzer.AnalyzeElement,
+                    SymbolKind.Parameter,
+                    SymbolKind.Field
+                );
+                context.RegisterSymbolAction(
+                    PerCompilationAnalyzer.AnalyzeReturnType,
+                    SymbolKind.Method
+                );
 
                 // Analyze marshaller type to validate shape.
-                context.RegisterSymbolAction(perCompilationAnalyzer.AnalyzeMarshallerType, SymbolKind.NamedType);
+                context.RegisterSymbolAction(
+                    perCompilationAnalyzer.AnalyzeMarshallerType,
+                    SymbolKind.NamedType
+                );
             }
         }
 
@@ -420,7 +583,12 @@ namespace Microsoft.Interop.Analyzers
             private readonly INamedTypeSymbol _spanOfByte;
             private readonly INamedTypeSymbol _readOnlySpanOfByte;
 
-            public PerCompilationAnalyzer(INamedTypeSymbol spanOfT, INamedTypeSymbol? spanOfByte, INamedTypeSymbol readOnlySpanOfT, INamedTypeSymbol? readOnlySpanOfByte)
+            public PerCompilationAnalyzer(
+                INamedTypeSymbol spanOfT,
+                INamedTypeSymbol? spanOfByte,
+                INamedTypeSymbol readOnlySpanOfT,
+                INamedTypeSymbol? readOnlySpanOfByte
+            )
             {
                 _spanOfT = spanOfT;
                 _spanOfByte = spanOfByte;
@@ -432,7 +600,8 @@ namespace Microsoft.Interop.Analyzers
             {
                 INamedTypeSymbol type = (INamedTypeSymbol)context.Symbol;
 
-                (AttributeData? attributeData, INamedTypeSymbol? marshallerType) = ManualTypeMarshallingHelper.GetDefaultMarshallerInfo(type);
+                (AttributeData? attributeData, INamedTypeSymbol? marshallerType) =
+                    ManualTypeMarshallingHelper.GetDefaultMarshallerInfo(type);
 
                 if (attributeData is null)
                 {
@@ -450,34 +619,61 @@ namespace Microsoft.Interop.Analyzers
                     IFieldSymbol field => field.Type,
                     _ => throw new InvalidOperationException()
                 };
-                AttributeData? attributeData = context.Symbol.GetAttributes().FirstOrDefault(attr => attr.AttributeClass.ToDisplayString() == TypeNames.MarshalUsingAttribute);
+                AttributeData? attributeData = context.Symbol
+                    .GetAttributes()
+                    .FirstOrDefault(
+                        attr =>
+                            attr.AttributeClass.ToDisplayString() == TypeNames.MarshalUsingAttribute
+                    );
                 if (attributeData is null || attributeData.ConstructorArguments.Length == 0)
                 {
                     return;
                 }
-                AnalyzeManagedTypeMarshallingInfo(context, managedType, attributeData, attributeData.ConstructorArguments[0].Value as INamedTypeSymbol);
+                AnalyzeManagedTypeMarshallingInfo(
+                    context,
+                    managedType,
+                    attributeData,
+                    attributeData.ConstructorArguments[0].Value as INamedTypeSymbol
+                );
             }
 
             public static void AnalyzeReturnType(SymbolAnalysisContext context)
             {
                 IMethodSymbol method = (IMethodSymbol)context.Symbol;
                 ITypeSymbol managedType = method.ReturnType;
-                AttributeData? attributeData = method.GetReturnTypeAttributes().FirstOrDefault(attr => attr.AttributeClass.ToDisplayString() == TypeNames.MarshalUsingAttribute);
+                AttributeData? attributeData = method
+                    .GetReturnTypeAttributes()
+                    .FirstOrDefault(
+                        attr =>
+                            attr.AttributeClass.ToDisplayString() == TypeNames.MarshalUsingAttribute
+                    );
                 if (attributeData is null || attributeData.ConstructorArguments.Length == 0)
                 {
                     return;
                 }
-                AnalyzeManagedTypeMarshallingInfo(context, managedType, attributeData, attributeData.ConstructorArguments[0].Value as INamedTypeSymbol);
+                AnalyzeManagedTypeMarshallingInfo(
+                    context,
+                    managedType,
+                    attributeData,
+                    attributeData.ConstructorArguments[0].Value as INamedTypeSymbol
+                );
             }
 
-            private static void AnalyzeManagedTypeMarshallingInfo(SymbolAnalysisContext context, ITypeSymbol type, AttributeData attributeData, INamedTypeSymbol? marshallerType)
+            private static void AnalyzeManagedTypeMarshallingInfo(
+                SymbolAnalysisContext context,
+                ITypeSymbol type,
+                AttributeData attributeData,
+                INamedTypeSymbol? marshallerType
+            )
             {
                 if (marshallerType is null)
                 {
                     context.ReportDiagnostic(
                         attributeData.CreateDiagnostic(
                             NativeTypeMustHaveCustomTypeMarshallerAttributeRule,
-                            type.ToDisplayString()));
+                            type.ToDisplayString()
+                        )
+                    );
                     return;
                 }
 
@@ -487,19 +683,28 @@ namespace Microsoft.Interop.Analyzers
                         attributeData.CreateDiagnostic(
                             NativeGenericTypeMustBeClosedOrMatchArityRule,
                             marshallerType.ToDisplayString(),
-                            type.ToDisplayString()));
+                            type.ToDisplayString()
+                        )
+                    );
                 }
 
-                (bool hasCustomTypeMarshallerAttribute, ITypeSymbol? marshallerManagedType, _) = ManualTypeMarshallingHelper.GetMarshallerShapeInfo(marshallerType);
+                (bool hasCustomTypeMarshallerAttribute, ITypeSymbol? marshallerManagedType, _) =
+                    ManualTypeMarshallingHelper.GetMarshallerShapeInfo(marshallerType);
 
-                marshallerManagedType = ManualTypeMarshallingHelper.ResolveManagedType(marshallerManagedType, marshallerType, context.Compilation);
+                marshallerManagedType = ManualTypeMarshallingHelper.ResolveManagedType(
+                    marshallerManagedType,
+                    marshallerType,
+                    context.Compilation
+                );
 
                 if (!hasCustomTypeMarshallerAttribute)
                 {
                     context.ReportDiagnostic(
                         attributeData.CreateDiagnostic(
                             NativeTypeMustHaveCustomTypeMarshallerAttributeRule,
-                            type.ToDisplayString()));
+                            type.ToDisplayString()
+                        )
+                    );
                     return;
                 }
 
@@ -508,7 +713,9 @@ namespace Microsoft.Interop.Analyzers
                     context.ReportDiagnostic(
                         attributeData.CreateDiagnostic(
                             NativeTypeMustHaveCustomTypeMarshallerAttributeRule,
-                            type.ToDisplayString()));
+                            type.ToDisplayString()
+                        )
+                    );
                     return;
                 }
 
@@ -517,16 +724,25 @@ namespace Microsoft.Interop.Analyzers
                     context.ReportDiagnostic(
                         attributeData.CreateDiagnostic(
                             NativeTypeMustHaveCustomTypeMarshallerAttributeRule,
-                            type.ToDisplayString()));
+                            type.ToDisplayString()
+                        )
+                    );
                     return;
                 }
             }
 
-            private static bool TypeSymbolsConstructedFromEqualTypes(ITypeSymbol left, ITypeSymbol right)
+            private static bool TypeSymbolsConstructedFromEqualTypes(
+                ITypeSymbol left,
+                ITypeSymbol right
+            )
             {
                 return (left, right) switch
                 {
-                    (INamedTypeSymbol namedLeft, INamedTypeSymbol namedRight) => SymbolEqualityComparer.Default.Equals(namedLeft.ConstructedFrom, namedRight.ConstructedFrom),
+                    (INamedTypeSymbol namedLeft, INamedTypeSymbol namedRight)
+                        => SymbolEqualityComparer.Default.Equals(
+                            namedLeft.ConstructedFrom,
+                            namedRight.ConstructedFrom
+                        ),
                     _ => SymbolEqualityComparer.Default.Equals(left, right)
                 };
             }
@@ -534,8 +750,16 @@ namespace Microsoft.Interop.Analyzers
             public void AnalyzeMarshallerType(SymbolAnalysisContext context)
             {
                 INamedTypeSymbol marshallerType = (INamedTypeSymbol)context.Symbol;
-                (bool hasCustomTypeMarshallerAttribute, ITypeSymbol? type, CustomTypeMarshallerData? marshallerDataMaybe) = ManualTypeMarshallingHelper.GetMarshallerShapeInfo(marshallerType);
-                type = ManualTypeMarshallingHelper.ResolveManagedType(type, marshallerType, context.Compilation);
+                (
+                    bool hasCustomTypeMarshallerAttribute,
+                    ITypeSymbol? type,
+                    CustomTypeMarshallerData? marshallerDataMaybe
+                ) = ManualTypeMarshallingHelper.GetMarshallerShapeInfo(marshallerType);
+                type = ManualTypeMarshallingHelper.ResolveManagedType(
+                    type,
+                    marshallerType,
+                    context.Compilation
+                );
 
                 if (!hasCustomTypeMarshallerAttribute)
                 {
@@ -543,19 +767,34 @@ namespace Microsoft.Interop.Analyzers
                 }
                 if (type is null)
                 {
-                    context.ReportDiagnostic(marshallerType.CreateDiagnostic(MarshallerTypeMustSpecifyManagedTypeRule, marshallerType.ToDisplayString()));
+                    context.ReportDiagnostic(
+                        marshallerType.CreateDiagnostic(
+                            MarshallerTypeMustSpecifyManagedTypeRule,
+                            marshallerType.ToDisplayString()
+                        )
+                    );
                     return;
                 }
 
                 if (marshallerDataMaybe is not { } marshallerData)
                 {
-                    context.ReportDiagnostic(marshallerType.CreateDiagnostic(CustomTypeMarshallerAttributeMustBeValidRule, marshallerType.ToDisplayString()));
+                    context.ReportDiagnostic(
+                        marshallerType.CreateDiagnostic(
+                            CustomTypeMarshallerAttributeMustBeValidRule,
+                            marshallerType.ToDisplayString()
+                        )
+                    );
                     return;
                 }
 
                 if (!Enum.IsDefined(typeof(CustomTypeMarshallerKind), marshallerData.Kind))
                 {
-                    context.ReportDiagnostic(marshallerType.CreateDiagnostic(MarshallerKindMustBeValidRule, marshallerType.ToDisplayString()));
+                    context.ReportDiagnostic(
+                        marshallerType.CreateDiagnostic(
+                            MarshallerKindMustBeValidRule,
+                            marshallerType.ToDisplayString()
+                        )
+                    );
                     return;
                 }
 
@@ -567,10 +806,15 @@ namespace Microsoft.Interop.Analyzers
                             marshallerType.CreateDiagnostic(
                                 NativeGenericTypeMustBeClosedOrMatchArityRule,
                                 marshallerType.ToDisplayString(),
-                                type.ToDisplayString()));
+                                type.ToDisplayString()
+                            )
+                        );
                         return;
                     }
-                    type = generic.ConstructedFrom.Construct(marshallerType.TypeArguments, marshallerType.TypeArgumentNullableAnnotations);
+                    type = generic.ConstructedFrom.Construct(
+                        marshallerType.TypeArguments,
+                        marshallerType.TypeArgumentNullableAnnotations
+                    );
                 }
 
                 IMethodSymbol? inConstructor = null;
@@ -583,16 +827,36 @@ namespace Microsoft.Interop.Analyzers
                         continue;
                     }
 
-                    if (inConstructor is null && ManualTypeMarshallingHelper.IsManagedToNativeConstructor(ctor, type, marshallerData.Kind))
+                    if (
+                        inConstructor is null
+                        && ManualTypeMarshallingHelper.IsManagedToNativeConstructor(
+                            ctor,
+                            type,
+                            marshallerData.Kind
+                        )
+                    )
                     {
                         inConstructor = ctor;
                     }
 
-                    if (callerAllocatedSpanConstructor is null && ManualTypeMarshallingHelper.IsCallerAllocatedSpanConstructor(ctor, type, _spanOfT, marshallerData.Kind, out _))
+                    if (
+                        callerAllocatedSpanConstructor is null
+                        && ManualTypeMarshallingHelper.IsCallerAllocatedSpanConstructor(
+                            ctor,
+                            type,
+                            _spanOfT,
+                            marshallerData.Kind,
+                            out _
+                        )
+                    )
                     {
                         callerAllocatedSpanConstructor = ctor;
                     }
-                    if (collectionOutConstructor is null && ctor.Parameters.Length == 1 && ctor.Parameters[0].Type.SpecialType == SpecialType.System_Int32)
+                    if (
+                        collectionOutConstructor is null
+                        && ctor.Parameters.Length == 1
+                        && ctor.Parameters[0].Type.SpecialType == SpecialType.System_Int32
+                    )
                     {
                         collectionOutConstructor = ctor;
                     }
@@ -607,29 +871,47 @@ namespace Microsoft.Interop.Analyzers
                                 GetInConstructorShapeRule(marshallerData.Kind),
                                 ImmutableDictionary<string, string>.Empty.Add(
                                     MissingMemberNames.Key,
-                                    GetInConstructorMissingMemberName(marshallerData.Kind)),
+                                    GetInConstructorMissingMemberName(marshallerData.Kind)
+                                ),
                                 marshallerType.ToDisplayString(),
-                                type.ToDisplayString()));
+                                type.ToDisplayString()
+                            )
+                        );
                     }
-                    if (marshallerData.Features.HasFlag(CustomTypeMarshallerFeatures.CallerAllocatedBuffer))
+                    if (
+                        marshallerData.Features.HasFlag(
+                            CustomTypeMarshallerFeatures.CallerAllocatedBuffer
+                        )
+                    )
                     {
                         if (callerAllocatedSpanConstructor is null)
                         {
                             context.ReportDiagnostic(
                                 marshallerType.CreateDiagnostic(
-                                    GetCallerAllocatedBufferConstructorShapeRule(marshallerData.Kind),
+                                    GetCallerAllocatedBufferConstructorShapeRule(
+                                        marshallerData.Kind
+                                    ),
                                     ImmutableDictionary<string, string>.Empty.Add(
                                         MissingMemberNames.Key,
-                                        GetCallerAllocatedBufferConstructorMissingMemberName(marshallerData.Kind)),
+                                        GetCallerAllocatedBufferConstructorMissingMemberName(
+                                            marshallerData.Kind
+                                        )
+                                    ),
                                     marshallerType.ToDisplayString(),
-                                    type.ToDisplayString()));
+                                    type.ToDisplayString()
+                                )
+                            );
                         }
                         if (marshallerData.BufferSize == null)
                         {
                             context.ReportDiagnostic(
-                                (callerAllocatedSpanConstructor ?? (ISymbol)marshallerType).CreateDiagnostic(
+                                (
+                                    callerAllocatedSpanConstructor ?? (ISymbol)marshallerType
+                                ).CreateDiagnostic(
                                     CallerAllocConstructorMustHaveBufferSizeRule,
-                                    marshallerType.ToDisplayString()));
+                                    marshallerType.ToDisplayString()
+                                )
+                            );
                         }
                     }
                     else if (callerAllocatedSpanConstructor is not null)
@@ -639,8 +921,11 @@ namespace Microsoft.Interop.Analyzers
                                 CallerAllocatedBufferConstructorProvidedShouldSpecifyFeatureRule,
                                 ImmutableDictionary<string, string>.Empty.Add(
                                     MissingFeaturesKey,
-                                    nameof(CustomTypeMarshallerFeatures.CallerAllocatedBuffer)),
-                            marshallerType.ToDisplayString()));
+                                    nameof(CustomTypeMarshallerFeatures.CallerAllocatedBuffer)
+                                ),
+                                marshallerType.ToDisplayString()
+                            )
+                        );
                     }
 
                     // Validate that this type can support marshalling when stackalloc is not usable.
@@ -649,34 +934,70 @@ namespace Microsoft.Interop.Analyzers
                         context.ReportDiagnostic(
                             marshallerType.CreateDiagnostic(
                                 CallerAllocMarshallingShouldSupportAllocatingMarshallingFallbackRule,
-                                marshallerType.ToDisplayString()));
+                                marshallerType.ToDisplayString()
+                            )
+                        );
                     }
                 }
 
-                if (marshallerData.Direction.HasFlag(CustomTypeMarshallerDirection.Out) && !ManualTypeMarshallingHelper.HasToManagedMethod(marshallerType, type))
+                if (
+                    marshallerData.Direction.HasFlag(CustomTypeMarshallerDirection.Out)
+                    && !ManualTypeMarshallingHelper.HasToManagedMethod(marshallerType, type)
+                )
                 {
                     context.ReportDiagnostic(
                         marshallerType.CreateDiagnostic(
                             OutRequiresToManagedRule,
                             ImmutableDictionary<string, string>.Empty.Add(
                                 MissingMemberNames.Key,
-                                ShapeMemberNames.Value.ToManaged),
-                            marshallerType.ToDisplayString()));
+                                ShapeMemberNames.Value.ToManaged
+                            ),
+                            marshallerType.ToDisplayString()
+                        )
+                    );
                 }
 
                 if (marshallerData.Kind == CustomTypeMarshallerKind.LinearCollection)
                 {
-                    IMethodSymbol? getManagedValuesSourceMethod = ManualTypeMarshallingHelper.FindGetManagedValuesSourceMethod(marshallerType, _readOnlySpanOfT);
-                    IMethodSymbol? getManagedValuesDestinationMethod = ManualTypeMarshallingHelper.FindGetManagedValuesDestinationMethod(marshallerType, _spanOfT);
-                    IMethodSymbol? getNativeValuesSourceMethod = ManualTypeMarshallingHelper.FindGetNativeValuesSourceMethod(marshallerType, _readOnlySpanOfByte);
-                    IMethodSymbol? getNativeValuesDestinationMethod = ManualTypeMarshallingHelper.FindGetNativeValuesDestinationMethod(marshallerType, _spanOfByte);
-                    if (marshallerData.Direction.HasFlag(CustomTypeMarshallerDirection.In) && (getManagedValuesSourceMethod is null || getNativeValuesDestinationMethod is null))
+                    IMethodSymbol? getManagedValuesSourceMethod =
+                        ManualTypeMarshallingHelper.FindGetManagedValuesSourceMethod(
+                            marshallerType,
+                            _readOnlySpanOfT
+                        );
+                    IMethodSymbol? getManagedValuesDestinationMethod =
+                        ManualTypeMarshallingHelper.FindGetManagedValuesDestinationMethod(
+                            marshallerType,
+                            _spanOfT
+                        );
+                    IMethodSymbol? getNativeValuesSourceMethod =
+                        ManualTypeMarshallingHelper.FindGetNativeValuesSourceMethod(
+                            marshallerType,
+                            _readOnlySpanOfByte
+                        );
+                    IMethodSymbol? getNativeValuesDestinationMethod =
+                        ManualTypeMarshallingHelper.FindGetNativeValuesDestinationMethod(
+                            marshallerType,
+                            _spanOfByte
+                        );
+                    if (
+                        marshallerData.Direction.HasFlag(CustomTypeMarshallerDirection.In)
+                        && (
+                            getManagedValuesSourceMethod is null
+                            || getNativeValuesDestinationMethod is null
+                        )
+                    )
                     {
-                        var missingMembers = (getManagedValuesSourceMethod, getNativeValuesDestinationMethod) switch
+                        var missingMembers = (
+                            getManagedValuesSourceMethod,
+                            getNativeValuesDestinationMethod
+                        ) switch
                         {
-                            (null, not null) => ShapeMemberNames.LinearCollection.GetManagedValuesSource,
-                            (not null, null) => ShapeMemberNames.LinearCollection.GetNativeValuesDestination,
-                            (null, null) => $"{ShapeMemberNames.LinearCollection.GetManagedValuesSource}{MissingMemberNames.Delimiter}{ShapeMemberNames.LinearCollection.GetNativeValuesDestination}",
+                            (null, not null)
+                                => ShapeMemberNames.LinearCollection.GetManagedValuesSource,
+                            (not null, null)
+                                => ShapeMemberNames.LinearCollection.GetNativeValuesDestination,
+                            (null, null)
+                                => $"{ShapeMemberNames.LinearCollection.GetManagedValuesSource}{MissingMemberNames.Delimiter}{ShapeMemberNames.LinearCollection.GetNativeValuesDestination}",
                             (not null, not null) => string.Empty
                         };
                         context.ReportDiagnostic(
@@ -684,17 +1005,32 @@ namespace Microsoft.Interop.Analyzers
                                 LinearCollectionInRequiresCollectionMethodsRule,
                                 ImmutableDictionary<string, string>.Empty.Add(
                                     MissingMemberNames.Key,
-                                    missingMembers),
-                                marshallerType.ToDisplayString()));
+                                    missingMembers
+                                ),
+                                marshallerType.ToDisplayString()
+                            )
+                        );
                     }
 
-                    if (marshallerData.Direction.HasFlag(CustomTypeMarshallerDirection.Out) && (getNativeValuesSourceMethod is null || getManagedValuesDestinationMethod is null))
+                    if (
+                        marshallerData.Direction.HasFlag(CustomTypeMarshallerDirection.Out)
+                        && (
+                            getNativeValuesSourceMethod is null
+                            || getManagedValuesDestinationMethod is null
+                        )
+                    )
                     {
-                        var missingMembers = (getNativeValuesSourceMethod, getManagedValuesDestinationMethod) switch
+                        var missingMembers = (
+                            getNativeValuesSourceMethod,
+                            getManagedValuesDestinationMethod
+                        ) switch
                         {
-                            (not null, null) => ShapeMemberNames.LinearCollection.GetNativeValuesSource,
-                            (null, not null) => ShapeMemberNames.LinearCollection.GetManagedValuesDestination,
-                            (null, null) => $"{ShapeMemberNames.LinearCollection.GetNativeValuesSource}{MissingMemberNames.Delimiter}{ShapeMemberNames.LinearCollection.GetManagedValuesDestination}",
+                            (not null, null)
+                                => ShapeMemberNames.LinearCollection.GetNativeValuesSource,
+                            (null, not null)
+                                => ShapeMemberNames.LinearCollection.GetManagedValuesDestination,
+                            (null, null)
+                                => $"{ShapeMemberNames.LinearCollection.GetNativeValuesSource}{MissingMemberNames.Delimiter}{ShapeMemberNames.LinearCollection.GetManagedValuesDestination}",
                             (not null, not null) => string.Empty
                         };
                         context.ReportDiagnostic(
@@ -702,94 +1038,161 @@ namespace Microsoft.Interop.Analyzers
                                 LinearCollectionOutRequiresCollectionMethodsRule,
                                 ImmutableDictionary<string, string>.Empty.Add(
                                     MissingMemberNames.Key,
-                                    missingMembers),
-                                marshallerType.ToDisplayString()));
+                                    missingMembers
+                                ),
+                                marshallerType.ToDisplayString()
+                            )
+                        );
                     }
 
-                    if (getManagedValuesSourceMethod is not null
+                    if (
+                        getManagedValuesSourceMethod is not null
                         && getManagedValuesDestinationMethod is not null
                         && !SymbolEqualityComparer.Default.Equals(
-                            ((INamedTypeSymbol)getManagedValuesSourceMethod.ReturnType).TypeArguments[0],
-                            ((INamedTypeSymbol)getManagedValuesDestinationMethod.ReturnType).TypeArguments[0]))
+                            (
+                                (INamedTypeSymbol)getManagedValuesSourceMethod.ReturnType
+                            ).TypeArguments[0],
+                            (
+                                (INamedTypeSymbol)getManagedValuesDestinationMethod.ReturnType
+                            ).TypeArguments[0]
+                        )
+                    )
                     {
-                        context.ReportDiagnostic(getManagedValuesSourceMethod.CreateDiagnostic(LinearCollectionElementTypesMustMatchRule));
+                        context.ReportDiagnostic(
+                            getManagedValuesSourceMethod.CreateDiagnostic(
+                                LinearCollectionElementTypesMustMatchRule
+                            )
+                        );
                     }
-                    if (marshallerData.Direction.HasFlag(CustomTypeMarshallerDirection.Out) && collectionOutConstructor is null)
+                    if (
+                        marshallerData.Direction.HasFlag(CustomTypeMarshallerDirection.Out)
+                        && collectionOutConstructor is null
+                    )
                     {
                         context.ReportDiagnostic(
                             marshallerType.CreateDiagnostic(
                                 LinearCollectionOutRequiresIntConstructorRule,
                                 ImmutableDictionary<string, string>.Empty.Add(
                                     MissingMemberNames.Key,
-                                    MissingMemberNames.CollectionNativeElementSizeConstructor),
-                                marshallerType.ToDisplayString()));
+                                    MissingMemberNames.CollectionNativeElementSizeConstructor
+                                ),
+                                marshallerType.ToDisplayString()
+                            )
+                        );
                     }
                 }
 
-
                 // Validate that the native type has at least one marshalling direction (either managed to native or native to managed)
-                if ((marshallerData.Direction & CustomTypeMarshallerDirection.Ref) == CustomTypeMarshallerDirection.None)
+                if (
+                    (marshallerData.Direction & CustomTypeMarshallerDirection.Ref)
+                    == CustomTypeMarshallerDirection.None
+                )
                 {
                     context.ReportDiagnostic(
                         marshallerType.CreateDiagnostic(
                             CustomMarshallerTypeMustSupportDirectionRule,
-                            marshallerType.ToDisplayString()));
+                            marshallerType.ToDisplayString()
+                        )
+                    );
                 }
 
-                if (marshallerData.Features.HasFlag(CustomTypeMarshallerFeatures.UnmanagedResources) && !ManualTypeMarshallingHelper.HasFreeNativeMethod(marshallerType))
+                if (
+                    marshallerData.Features.HasFlag(CustomTypeMarshallerFeatures.UnmanagedResources)
+                    && !ManualTypeMarshallingHelper.HasFreeNativeMethod(marshallerType)
+                )
                 {
                     context.ReportDiagnostic(
                         marshallerType.CreateDiagnostic(
                             UnmanagedResourcesRequiresFreeNativeRule,
                             ImmutableDictionary<string, string>.Empty.Add(
                                 MissingMemberNames.Key,
-                                ShapeMemberNames.Value.FreeNative),
+                                ShapeMemberNames.Value.FreeNative
+                            ),
                             marshallerType.ToDisplayString(),
-                            type.ToDisplayString()));
+                            type.ToDisplayString()
+                        )
+                    );
                 }
-                else if (!marshallerData.Features.HasFlag(CustomTypeMarshallerFeatures.UnmanagedResources) && ManualTypeMarshallingHelper.HasFreeNativeMethod(marshallerType))
+                else if (
+                    !marshallerData.Features.HasFlag(
+                        CustomTypeMarshallerFeatures.UnmanagedResources
+                    ) && ManualTypeMarshallingHelper.HasFreeNativeMethod(marshallerType)
+                )
                 {
                     context.ReportDiagnostic(
                         marshallerType.CreateDiagnostic(
                             FreeNativeMethodProvidedShouldSpecifyUnmanagedResourcesFeatureRule,
                             ImmutableDictionary<string, string>.Empty.Add(
                                 MissingFeaturesKey,
-                                nameof(CustomTypeMarshallerFeatures.UnmanagedResources)),
-                            marshallerType.ToDisplayString()));
+                                nameof(CustomTypeMarshallerFeatures.UnmanagedResources)
+                            ),
+                            marshallerType.ToDisplayString()
+                        )
+                    );
                 }
 
-                IMethodSymbol? toNativeValueMethod = ManualTypeMarshallingHelper.FindToNativeValueMethod(marshallerType);
-                IMethodSymbol? fromNativeValueMethod = ManualTypeMarshallingHelper.FindFromNativeValueMethod(marshallerType);
-                bool toNativeValueMethodIsRefReturn = toNativeValueMethod is { ReturnsByRef: true } or { ReturnsByRefReadonly: true };
+                IMethodSymbol? toNativeValueMethod =
+                    ManualTypeMarshallingHelper.FindToNativeValueMethod(marshallerType);
+                IMethodSymbol? fromNativeValueMethod =
+                    ManualTypeMarshallingHelper.FindFromNativeValueMethod(marshallerType);
+                bool toNativeValueMethodIsRefReturn =
+                    toNativeValueMethod is { ReturnsByRef: true } or { ReturnsByRefReadonly: true };
                 ITypeSymbol nativeType = marshallerType;
 
-                if (marshallerData.Features.HasFlag(CustomTypeMarshallerFeatures.TwoStageMarshalling))
+                if (
+                    marshallerData.Features.HasFlag(
+                        CustomTypeMarshallerFeatures.TwoStageMarshalling
+                    )
+                )
                 {
-                    if (marshallerData.Direction.HasFlag(CustomTypeMarshallerDirection.In) && toNativeValueMethod is null)
+                    if (
+                        marshallerData.Direction.HasFlag(CustomTypeMarshallerDirection.In)
+                        && toNativeValueMethod is null
+                    )
                     {
-                        context.ReportDiagnostic(marshallerType.CreateDiagnostic(
-                            InTwoStageMarshallingRequiresToNativeValueRule,
-                            ImmutableDictionary<string, string>.Empty.Add(
-                                MissingMemberNames.Key,
-                                ShapeMemberNames.Value.ToNativeValue),
-                            marshallerType.ToDisplayString()));
+                        context.ReportDiagnostic(
+                            marshallerType.CreateDiagnostic(
+                                InTwoStageMarshallingRequiresToNativeValueRule,
+                                ImmutableDictionary<string, string>.Empty.Add(
+                                    MissingMemberNames.Key,
+                                    ShapeMemberNames.Value.ToNativeValue
+                                ),
+                                marshallerType.ToDisplayString()
+                            )
+                        );
                     }
-                    if (marshallerData.Direction.HasFlag(CustomTypeMarshallerDirection.Out) && fromNativeValueMethod is null)
+                    if (
+                        marshallerData.Direction.HasFlag(CustomTypeMarshallerDirection.Out)
+                        && fromNativeValueMethod is null
+                    )
                     {
-                        context.ReportDiagnostic(marshallerType.CreateDiagnostic(
-                            OutTwoStageMarshallingRequiresFromNativeValueRule,
-                            ImmutableDictionary<string, string>.Empty.Add(
-                                MissingMemberNames.Key,
-                                ShapeMemberNames.Value.FromNativeValue),
-                            marshallerType.ToDisplayString()));
+                        context.ReportDiagnostic(
+                            marshallerType.CreateDiagnostic(
+                                OutTwoStageMarshallingRequiresFromNativeValueRule,
+                                ImmutableDictionary<string, string>.Empty.Add(
+                                    MissingMemberNames.Key,
+                                    ShapeMemberNames.Value.FromNativeValue
+                                ),
+                                marshallerType.ToDisplayString()
+                            )
+                        );
                     }
 
                     // ToNativeValue and FromNativeValue must be provided with the same type.
-                    if (toNativeValueMethod is not null
+                    if (
+                        toNativeValueMethod is not null
                         && fromNativeValueMethod is not null
-                        && !SymbolEqualityComparer.Default.Equals(toNativeValueMethod.ReturnType, fromNativeValueMethod.Parameters[0].Type))
+                        && !SymbolEqualityComparer.Default.Equals(
+                            toNativeValueMethod.ReturnType,
+                            fromNativeValueMethod.Parameters[0].Type
+                        )
+                    )
                     {
-                        context.ReportDiagnostic(toNativeValueMethod.CreateDiagnostic(TwoStageMarshallingNativeTypesMustMatchRule));
+                        context.ReportDiagnostic(
+                            toNativeValueMethod.CreateDiagnostic(
+                                TwoStageMarshallingNativeTypesMustMatchRule
+                            )
+                        );
                     }
                 }
                 else if (fromNativeValueMethod is not null)
@@ -799,8 +1202,11 @@ namespace Microsoft.Interop.Analyzers
                             FromNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureRule,
                             ImmutableDictionary<string, string>.Empty.Add(
                                 MissingFeaturesKey,
-                                nameof(CustomTypeMarshallerFeatures.TwoStageMarshalling)),
-                            marshallerType.ToDisplayString()));
+                                nameof(CustomTypeMarshallerFeatures.TwoStageMarshalling)
+                            ),
+                            marshallerType.ToDisplayString()
+                        )
+                    );
                 }
                 else if (toNativeValueMethod is not null)
                 {
@@ -809,8 +1215,11 @@ namespace Microsoft.Interop.Analyzers
                             ToNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureRule,
                             ImmutableDictionary<string, string>.Empty.Add(
                                 MissingFeaturesKey,
-                                nameof(CustomTypeMarshallerFeatures.TwoStageMarshalling)),
-                            marshallerType.ToDisplayString()));
+                                nameof(CustomTypeMarshallerFeatures.TwoStageMarshalling)
+                            ),
+                            marshallerType.ToDisplayString()
+                        )
+                    );
                 }
 
                 if (toNativeValueMethod is not null)
@@ -820,12 +1229,17 @@ namespace Microsoft.Interop.Analyzers
                         context.ReportDiagnostic(
                             toNativeValueMethod.CreateDiagnostic(
                                 RefNativeValueUnsupportedRule,
-                                marshallerType.ToDisplayString()));
+                                marshallerType.ToDisplayString()
+                            )
+                        );
                     }
 
                     nativeType = toNativeValueMethod.ReturnType;
                 }
-                else if (ManualTypeMarshallingHelper.FindGetPinnableReference(marshallerType) is IMethodSymbol marshallerGetPinnableReferenceMethod)
+                else if (
+                    ManualTypeMarshallingHelper.FindGetPinnableReference(marshallerType)
+                    is IMethodSymbol marshallerGetPinnableReferenceMethod
+                )
                 {
                     // If we don't have a ToNativeValue method, then we disallow a GetPinnableReference on the marshaler type.
                     // We do this since there is no valid use case that we can think of for a GetPinnableReference on a blittable type
@@ -834,7 +1248,9 @@ namespace Microsoft.Interop.Analyzers
                     context.ReportDiagnostic(
                         marshallerGetPinnableReferenceMethod.CreateDiagnostic(
                             MarshallerGetPinnableReferenceRequiresTwoStageMarshallingRule,
-                            nativeType.ToDisplayString()));
+                            nativeType.ToDisplayString()
+                        )
+                    );
                 }
 
                 if (!nativeType.IsConsideredBlittable())
@@ -843,15 +1259,27 @@ namespace Microsoft.Interop.Analyzers
                         (toNativeValueMethod ?? (ISymbol)marshallerType).CreateDiagnostic(
                             NativeTypeMustBeBlittableRule,
                             nativeType.ToDisplayString(),
-                            type.ToDisplayString()));
+                            type.ToDisplayString()
+                        )
+                    );
                 }
 
-                if (SymbolEqualityComparer.Default.Equals(ManualTypeMarshallingHelper.GetDefaultMarshallerInfo(type).marshallerType, marshallerType)
-                    && ManualTypeMarshallingHelper.FindGetPinnableReference(type) is IMethodSymbol managedGetPinnableReferenceMethod)
+                if (
+                    SymbolEqualityComparer.Default.Equals(
+                        ManualTypeMarshallingHelper.GetDefaultMarshallerInfo(type).marshallerType,
+                        marshallerType
+                    )
+                    && ManualTypeMarshallingHelper.FindGetPinnableReference(type)
+                        is IMethodSymbol managedGetPinnableReferenceMethod
+                )
                 {
                     if (!managedGetPinnableReferenceMethod.ReturnType.IsConsideredBlittable())
                     {
-                        context.ReportDiagnostic(managedGetPinnableReferenceMethod.CreateDiagnostic(GetPinnableReferenceReturnTypeBlittableRule));
+                        context.ReportDiagnostic(
+                            managedGetPinnableReferenceMethod.CreateDiagnostic(
+                                GetPinnableReferenceReturnTypeBlittableRule
+                            )
+                        );
                     }
                     // Validate that our marshaler supports scenarios where GetPinnableReference cannot be used.
                     if (!marshallerData.Direction.HasFlag(CustomTypeMarshallerDirection.In))
@@ -859,51 +1287,81 @@ namespace Microsoft.Interop.Analyzers
                         context.ReportDiagnostic(
                             type.CreateDiagnostic(
                                 GetPinnableReferenceShouldSupportAllocatingMarshallingFallbackRule,
-                                type.ToDisplayString()));
+                                type.ToDisplayString()
+                            )
+                        );
                     }
 
                     // If the managed type has a GetPinnableReference method, make sure that the Value getter is also a pointer-sized primitive.
                     // This ensures that marshalling via pinning the managed value and marshalling via the default marshaller will have the same ABI.
-                    if (toNativeValueMethod is not null
+                    if (
+                        toNativeValueMethod is not null
                         && !toNativeValueMethodIsRefReturn // Ref returns are already reported above as invalid, so don't issue another warning here about them
-                        && nativeType is not (
-                        IPointerTypeSymbol or
-                        { SpecialType: SpecialType.System_IntPtr } or
-                        { SpecialType: SpecialType.System_UIntPtr }))
+                        && nativeType
+                            is not (
+                                IPointerTypeSymbol
+                                or { SpecialType: SpecialType.System_IntPtr }
+                                or { SpecialType: SpecialType.System_UIntPtr }
+                            )
+                    )
                     {
                         context.ReportDiagnostic(
                             toNativeValueMethod.CreateDiagnostic(
                                 NativeTypeMustBePointerSizedRule,
                                 nativeType.ToDisplayString(),
-                                managedGetPinnableReferenceMethod.ContainingType.ToDisplayString()));
+                                managedGetPinnableReferenceMethod.ContainingType.ToDisplayString()
+                            )
+                        );
                     }
                 }
             }
 
-            private static DiagnosticDescriptor GetInConstructorShapeRule(CustomTypeMarshallerKind kind) => kind switch
-            {
-                CustomTypeMarshallerKind.Value => ValueInRequiresOneParameterConstructorRule,
-                CustomTypeMarshallerKind.LinearCollection => LinearCollectionInRequiresTwoParameterConstructorRule,
-                _ => throw new UnreachableException()
-            };
-            private static string GetInConstructorMissingMemberName(CustomTypeMarshallerKind kind) => kind switch
-            {
-                CustomTypeMarshallerKind.Value => MissingMemberNames.ValueManagedToNativeConstructor,
-                CustomTypeMarshallerKind.LinearCollection => MissingMemberNames.CollectionManagedToNativeConstructor,
-                _ => throw new UnreachableException()
-            };
-            private static DiagnosticDescriptor GetCallerAllocatedBufferConstructorShapeRule(CustomTypeMarshallerKind kind) => kind switch
-            {
-                CustomTypeMarshallerKind.Value => ValueInCallerAllocatedBufferRequiresSpanConstructorRule,
-                CustomTypeMarshallerKind.LinearCollection => LinearCollectionInCallerAllocatedBufferRequiresSpanConstructorRule,
-                _ => throw new UnreachableException()
-            };
-            private static string GetCallerAllocatedBufferConstructorMissingMemberName(CustomTypeMarshallerKind kind) => kind switch
-            {
-                CustomTypeMarshallerKind.Value => MissingMemberNames.ValueCallerAllocatedBufferConstructor,
-                CustomTypeMarshallerKind.LinearCollection => MissingMemberNames.CollectionCallerAllocatedBufferConstructor,
-                _ => throw new UnreachableException()
-            };
+            private static DiagnosticDescriptor GetInConstructorShapeRule(
+                CustomTypeMarshallerKind kind
+            ) =>
+                kind switch
+                {
+                    CustomTypeMarshallerKind.Value => ValueInRequiresOneParameterConstructorRule,
+                    CustomTypeMarshallerKind.LinearCollection
+                        => LinearCollectionInRequiresTwoParameterConstructorRule,
+                    _ => throw new UnreachableException()
+                };
+
+            private static string GetInConstructorMissingMemberName(
+                CustomTypeMarshallerKind kind
+            ) =>
+                kind switch
+                {
+                    CustomTypeMarshallerKind.Value
+                        => MissingMemberNames.ValueManagedToNativeConstructor,
+                    CustomTypeMarshallerKind.LinearCollection
+                        => MissingMemberNames.CollectionManagedToNativeConstructor,
+                    _ => throw new UnreachableException()
+                };
+
+            private static DiagnosticDescriptor GetCallerAllocatedBufferConstructorShapeRule(
+                CustomTypeMarshallerKind kind
+            ) =>
+                kind switch
+                {
+                    CustomTypeMarshallerKind.Value
+                        => ValueInCallerAllocatedBufferRequiresSpanConstructorRule,
+                    CustomTypeMarshallerKind.LinearCollection
+                        => LinearCollectionInCallerAllocatedBufferRequiresSpanConstructorRule,
+                    _ => throw new UnreachableException()
+                };
+
+            private static string GetCallerAllocatedBufferConstructorMissingMemberName(
+                CustomTypeMarshallerKind kind
+            ) =>
+                kind switch
+                {
+                    CustomTypeMarshallerKind.Value
+                        => MissingMemberNames.ValueCallerAllocatedBufferConstructor,
+                    CustomTypeMarshallerKind.LinearCollection
+                        => MissingMemberNames.CollectionCallerAllocatedBufferConstructor,
+                    _ => throw new UnreachableException()
+                };
         }
     }
 }

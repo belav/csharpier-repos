@@ -5,21 +5,19 @@ namespace Mono.Linker.Tests.Cases.Interop.InternalCalls
 {
     class DefaultConstructorOfReturnTypeIsNotRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            var a = SomeMethod ();
+            var a = SomeMethod();
         }
 
         class A
         {
             [Kept]
-            public A ()
-            {
-            }
+            public A() { }
         }
 
         [Kept]
-        [MethodImpl (MethodImplOptions.InternalCall)]
-        static extern A SomeMethod ();
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        static extern A SomeMethod();
     }
 }

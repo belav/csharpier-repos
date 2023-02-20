@@ -4,9 +4,9 @@
 
 class Program
 {
-    static void Main ()
+    static void Main()
     {
         S s;
-        s.Test ();
+        s.Test();
     }
 }

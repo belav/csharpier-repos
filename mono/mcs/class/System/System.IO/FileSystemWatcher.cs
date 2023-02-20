@@ -1,11 +1,11 @@
-// 
+//
 // System.IO.FileSystemWatcher.cs
 //
 // Authors:
 //     Tim Coleman (tim@timcoleman.com)
 //    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
-// Copyright (C) Tim Coleman, 2002 
+// Copyright (C) Tim Coleman, 2002
 // (c) 2003 Ximian, Inc. (http://www.ximian.com)
 // Copyright (C) 2004, 2006 Novell, Inc (http://www.novell.com)
 //
@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,11 +39,12 @@ using System.Security.Permissions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace System.IO {
+namespace System.IO
+{
     [DefaultEvent("Changed")]
-    [IODescription ("")]
-    public partial class FileSystemWatcher : Component, ISupportInitialize {
-
+    [IODescription("")]
+    public partial class FileSystemWatcher : Component, ISupportInitialize
+    {
         #region Fields
 
         bool inited;
@@ -63,41 +64,40 @@ namespace System.IO {
         string mangledFilter;
         IFileWatcher watcher;
         object watcher_handle;
-        static object lockobj = new object ();
+        static object lockobj = new object();
 
         #endregion // Fields
 
         #region Constructors
 
-        public FileSystemWatcher ()
+        public FileSystemWatcher()
         {
-            this.notifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+            this.notifyFilter =
+                NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
             this.enableRaisingEvents = false;
             this.filter = "*";
             this.includeSubdirectories = false;
             this.internalBufferSize = 8192;
             this.path = "";
-            InitWatcher ();
+            InitWatcher();
         }
 
-        public FileSystemWatcher (string path)
-            : this (path, "*")
-        {
-        }
+        public FileSystemWatcher(string path)
+            : this(path, "*") { }
 
-        public FileSystemWatcher (string path, string filter)
+        public FileSystemWatcher(string path, string filter)
         {
             if (path == null)
-                throw new ArgumentNullException ("path");
+                throw new ArgumentNullException("path");
 
             if (filter == null)
-                throw new ArgumentNullException ("filter");
+                throw new ArgumentNullException("filter");
 
             if (path == String.Empty)
-                throw new ArgumentException ("Empty path", "path");
+                throw new ArgumentException("Empty path", "path");
 
-            if (!Directory.Exists (path))
-                throw new ArgumentException ("Directory does not exist", "path");
+            if (!Directory.Exists(path))
+                throw new ArgumentException("Directory does not exist", "path");
 
             this.inited = false;
             this.start_requested = false;
@@ -108,80 +108,91 @@ namespace System.IO {
 
             this.includeSubdirectories = false;
             this.internalBufferSize = 8192;
-            this.notifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+            this.notifyFilter =
+                NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
             this.path = path;
             this.synchronizingObject = null;
-            InitWatcher ();
+            InitWatcher();
         }
 
-        [EnvironmentPermission (SecurityAction.Assert, Read="MONO_MANAGED_WATCHER")]
-        void InitWatcher ()
+        [EnvironmentPermission(SecurityAction.Assert, Read = "MONO_MANAGED_WATCHER")]
+        void InitWatcher()
         {
-            lock (lockobj) {
+            lock (lockobj)
+            {
                 if (watcher_handle != null)
                     return;
 
-                string managed = Environment.GetEnvironmentVariable ("MONO_MANAGED_WATCHER");
+                string managed = Environment.GetEnvironmentVariable("MONO_MANAGED_WATCHER");
                 int mode = 0;
                 if (managed == null)
-                    mode = InternalSupportsFSW ();
-                
+                    mode = InternalSupportsFSW();
+
                 bool ok = false;
-                switch (mode) {
-                case 1: // windows
-                    ok = DefaultWatcher.GetInstance (out watcher);
-                    watcher_handle = this;
-                    break;
-                case 2: // libfam
-                    ok = FAMWatcher.GetInstance (out watcher, false);
-                    watcher_handle = this;
-                    break;
-                case 3: // kevent
-                    ok = KeventWatcher.GetInstance (out watcher);
-                    watcher_handle = this;
-                    break;
-                case 4: // libgamin
-                    ok = FAMWatcher.GetInstance (out watcher, true);
-                    watcher_handle = this;
-                    break;
-                case 6: // CoreFX
-                    ok = CoreFXFileSystemWatcherProxy.GetInstance (out watcher);
-                    watcher_handle = (watcher as CoreFXFileSystemWatcherProxy).NewWatcher (this);
-                    break;
+                switch (mode)
+                {
+                    case 1: // windows
+                        ok = DefaultWatcher.GetInstance(out watcher);
+                        watcher_handle = this;
+                        break;
+                    case 2: // libfam
+                        ok = FAMWatcher.GetInstance(out watcher, false);
+                        watcher_handle = this;
+                        break;
+                    case 3: // kevent
+                        ok = KeventWatcher.GetInstance(out watcher);
+                        watcher_handle = this;
+                        break;
+                    case 4: // libgamin
+                        ok = FAMWatcher.GetInstance(out watcher, true);
+                        watcher_handle = this;
+                        break;
+                    case 6: // CoreFX
+                        ok = CoreFXFileSystemWatcherProxy.GetInstance(out watcher);
+                        watcher_handle = (watcher as CoreFXFileSystemWatcherProxy).NewWatcher(this);
+                        break;
                 }
 
-                if (mode == 0 || !ok) {
-                    if (String.Compare (managed, "disabled", true) == 0)
-                        NullFileWatcher.GetInstance (out watcher);
-                    else {
-                        DefaultWatcher.GetInstance (out watcher);
+                if (mode == 0 || !ok)
+                {
+                    if (String.Compare(managed, "disabled", true) == 0)
+                        NullFileWatcher.GetInstance(out watcher);
+                    else
+                    {
+                        DefaultWatcher.GetInstance(out watcher);
                         watcher_handle = this;
                     }
                 }
                 this.inited = true;
 
-                ShowWatcherInfo ();
+                ShowWatcherInfo();
             }
         }
 
-        [Conditional ("DEBUG"), Conditional ("TRACE")]
-        void ShowWatcherInfo ()
+        [Conditional("DEBUG"), Conditional("TRACE")]
+        void ShowWatcherInfo()
         {
-            Console.WriteLine ("Watcher implementation: {0}", watcher != null ? watcher.GetType ().ToString () : "<none>");
+            Console.WriteLine(
+                "Watcher implementation: {0}",
+                watcher != null ? watcher.GetType().ToString() : "<none>"
+            );
         }
-        
+
         #endregion // Constructors
 
         #region Properties
 
         /* If this is enabled, we Pulse this instance */
-        internal bool Waiting {
+        internal bool Waiting
+        {
             get { return waiting; }
             set { waiting = value; }
         }
 
-        internal string MangledFilter {
-            get {
+        internal string MangledFilter
+        {
+            get
+            {
                 if (filter != "*.*")
                     return filter;
 
@@ -193,25 +204,31 @@ namespace System.IO {
             }
         }
 
-        internal SearchPattern2 Pattern {
-            get {
-                if (pattern == null) {
-                    if (watcher?.GetType () == typeof (KeventWatcher))
-                        pattern = new SearchPattern2 (MangledFilter, true); //assume we want to ignore case (OS X)
+        internal SearchPattern2 Pattern
+        {
+            get
+            {
+                if (pattern == null)
+                {
+                    if (watcher?.GetType() == typeof(KeventWatcher))
+                        pattern = new SearchPattern2(MangledFilter, true); //assume we want to ignore case (OS X)
                     else
-                        pattern = new SearchPattern2 (MangledFilter);
+                        pattern = new SearchPattern2(MangledFilter);
                 }
                 return pattern;
             }
         }
 
-        internal string FullPath {
-            get {
-                if (fullpath == null) {
+        internal string FullPath
+        {
+            get
+            {
+                if (fullpath == null)
+                {
                     if (path == null || path == "")
                         fullpath = Environment.CurrentDirectory;
                     else
-                        fullpath = System.IO.Path.GetFullPath (path);
+                        fullpath = System.IO.Path.GetFullPath(path);
                 }
 
                 return fullpath;
@@ -220,11 +237,13 @@ namespace System.IO {
 
         [DefaultValue(false)]
         [IODescription("Flag to indicate if this instance is active")]
-        public bool EnableRaisingEvents {
+        public bool EnableRaisingEvents
+        {
             get { return enableRaisingEvents; }
-            set {
+            set
+            {
                 if (disposed)
-                    throw new ObjectDisposedException (GetType().Name);
+                    throw new ObjectDisposedException(GetType().Name);
 
                 start_requested = true;
                 if (!inited)
@@ -233,10 +252,13 @@ namespace System.IO {
                     return; // Do nothing
 
                 enableRaisingEvents = value;
-                if (value) {
-                    Start ();
-                } else {
-                    Stop ();
+                if (value)
+                {
+                    Start();
+                }
+                else
+                {
+                    Stop();
                     start_requested = false;
                 }
             }
@@ -245,14 +267,19 @@ namespace System.IO {
         [DefaultValue("*.*")]
         [IODescription("File name filter pattern")]
         [SettingsBindable(true)]
-        [TypeConverter ("System.Diagnostics.Design.StringValueConverter, " + Consts.AssemblySystem_Design)]
-        public string Filter {
+        [TypeConverter(
+            "System.Diagnostics.Design.StringValueConverter, " + Consts.AssemblySystem_Design
+        )]
+        public string Filter
+        {
             get { return filter; }
-            set {
+            set
+            {
                 if (value == null || value == "")
                     value = "*";
 
-                if (!string.Equals(filter, value, PathInternal.StringComparison)) {
+                if (!string.Equals(filter, value, PathInternal.StringComparison))
+                {
                     filter = value == "*.*" ? "*" : value;
                     pattern = null;
                     mangledFilter = null;
@@ -262,25 +289,30 @@ namespace System.IO {
 
         [DefaultValue(false)]
         [IODescription("Flag to indicate we want to watch subdirectories")]
-        public bool IncludeSubdirectories {
+        public bool IncludeSubdirectories
+        {
             get { return includeSubdirectories; }
-            set {
+            set
+            {
                 if (includeSubdirectories == value)
                     return;
 
                 includeSubdirectories = value;
-                if (value && enableRaisingEvents) {
-                    Stop ();
-                    Start ();
+                if (value && enableRaisingEvents)
+                {
+                    Stop();
+                    Start();
                 }
             }
         }
 
         [Browsable(false)]
         [DefaultValue(8192)]
-        public int InternalBufferSize {
+        public int InternalBufferSize
+        {
             get { return internalBufferSize; }
-            set {
+            set
+            {
                 if (internalBufferSize == value)
                     return;
 
@@ -288,25 +320,31 @@ namespace System.IO {
                     value = 4096;
 
                 internalBufferSize = value;
-                if (enableRaisingEvents) {
-                    Stop ();
-                    Start ();
+                if (enableRaisingEvents)
+                {
+                    Stop();
+                    Start();
                 }
             }
         }
 
-        [DefaultValue(NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.LastWrite)]
+        [DefaultValue(
+            NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.LastWrite
+        )]
         [IODescription("Flag to indicate which change event we want to monitor")]
-        public NotifyFilters NotifyFilter {
+        public NotifyFilters NotifyFilter
+        {
             get { return notifyFilter; }
-            set {
+            set
+            {
                 if (notifyFilter == value)
                     return;
-                    
+
                 notifyFilter = value;
-                if (enableRaisingEvents) {
-                    Stop ();
-                    Start ();
+                if (enableRaisingEvents)
+                {
+                    Stop();
+                    Start();
                 }
             }
         }
@@ -314,13 +352,20 @@ namespace System.IO {
         [DefaultValue("")]
         [IODescription("The directory to monitor")]
         [SettingsBindable(true)]
-        [TypeConverter ("System.Diagnostics.Design.StringValueConverter, " + Consts.AssemblySystem_Design)]
-        [Editor ("System.Diagnostics.Design.FSWPathEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        public string Path {
+        [TypeConverter(
+            "System.Diagnostics.Design.StringValueConverter, " + Consts.AssemblySystem_Design
+        )]
+        [Editor(
+            "System.Diagnostics.Design.FSWPathEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        public string Path
+        {
             get { return path; }
-            set {
+            set
+            {
                 if (disposed)
-                    throw new ObjectDisposedException (GetType().Name);
+                    throw new ObjectDisposedException(GetType().Name);
 
                 value = (value == null) ? string.Empty : value;
                 if (string.Equals(path, value, PathInternal.StringComparison))
@@ -329,9 +374,12 @@ namespace System.IO {
                 bool exists = false;
                 Exception exc = null;
 
-                try {
-                    exists = Directory.Exists (value);
-                } catch (Exception e) {
+                try
+                {
+                    exists = Directory.Exists(value);
+                }
+                catch (Exception e)
+                {
                     exc = e;
                 }
 
@@ -339,19 +387,24 @@ namespace System.IO {
                     throw new ArgumentException(SR.Format(SR.InvalidDirName, value), nameof(Path));
 
                 if (!exists)
-                    throw new ArgumentException(SR.Format(SR.InvalidDirName_NotExists, value), nameof(Path));
+                    throw new ArgumentException(
+                        SR.Format(SR.InvalidDirName_NotExists, value),
+                        nameof(Path)
+                    );
 
                 path = value;
                 fullpath = null;
-                if (enableRaisingEvents) {
-                    Stop ();
-                    Start ();
+                if (enableRaisingEvents)
+                {
+                    Stop();
+                    Start();
                 }
             }
         }
 
         [Browsable(false)]
-        public override ISite Site {
+        public override ISite Site
+        {
             get { return base.Site; }
             set
             {
@@ -362,9 +415,12 @@ namespace System.IO {
         }
 
         [DefaultValue(null)]
-        [IODescription("The object used to marshal the event handler calls resulting from a directory change")]
-        [Browsable (false)]
-        public ISynchronizeInvoke SynchronizingObject {
+        [IODescription(
+            "The object used to marshal the event handler calls resulting from a directory change"
+        )]
+        [Browsable(false)]
+        public ISynchronizeInvoke SynchronizingObject
+        {
             get { return synchronizingObject; }
             set { synchronizingObject = value; }
         }
@@ -372,120 +428,128 @@ namespace System.IO {
         #endregion // Properties
 
         #region Methods
-    
-        public void BeginInit ()
+
+        public void BeginInit()
         {
             // Not necessary in Mono
             // but if called, EndInit() must be called
             inited = false;
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (disposed)
                 return;
 
-            try {
-                watcher?.StopDispatching (watcher_handle);
-                watcher?.Dispose (watcher_handle);
-            } catch (Exception) { }
+            try
+            {
+                watcher?.StopDispatching(watcher_handle);
+                watcher?.Dispose(watcher_handle);
+            }
+            catch (Exception) { }
 
             watcher_handle = null;
             watcher = null;
 
             disposed = true;
-            base.Dispose (disposing);
-            GC.SuppressFinalize (this);
+            base.Dispose(disposing);
+            GC.SuppressFinalize(this);
         }
 
-        ~FileSystemWatcher ()
+        ~FileSystemWatcher()
         {
             if (disposed)
                 return;
 
-            Dispose (false);
+            Dispose(false);
         }
-        
-        public void EndInit ()
+
+        public void EndInit()
         {
             inited = true;
             if (start_requested)
                 this.EnableRaisingEvents = true;
         }
 
-        enum EventType {
+        enum EventType
+        {
             FileSystemEvent,
             ErrorEvent,
             RenameEvent
         }
-        private void RaiseEvent (Delegate ev, EventArgs arg, EventType evtype)
+
+        private void RaiseEvent(Delegate ev, EventArgs arg, EventType evtype)
         {
             if (disposed)
                 return;
             if (ev == null)
                 return;
 
-            if (synchronizingObject == null) {
-                foreach (var target in ev.GetInvocationList()) {
-                    switch (evtype) {
-                    case EventType.RenameEvent:
-                        ((RenamedEventHandler)target).Invoke (this, (RenamedEventArgs)arg);
-                        break;
-                    case EventType.ErrorEvent:
-                        ((ErrorEventHandler)target).Invoke (this, (ErrorEventArgs)arg);
-                        break;
-                    case EventType.FileSystemEvent:
-                        ((FileSystemEventHandler)target).Invoke (this, (FileSystemEventArgs)arg);
-                        break;
+            if (synchronizingObject == null)
+            {
+                foreach (var target in ev.GetInvocationList())
+                {
+                    switch (evtype)
+                    {
+                        case EventType.RenameEvent:
+                            ((RenamedEventHandler)target).Invoke(this, (RenamedEventArgs)arg);
+                            break;
+                        case EventType.ErrorEvent:
+                            ((ErrorEventHandler)target).Invoke(this, (ErrorEventArgs)arg);
+                            break;
+                        case EventType.FileSystemEvent:
+                            ((FileSystemEventHandler)target).Invoke(this, (FileSystemEventArgs)arg);
+                            break;
                     }
                 }
                 return;
             }
-            
-            synchronizingObject.BeginInvoke (ev, new object [] {this, arg});
+
+            synchronizingObject.BeginInvoke(ev, new object[] { this, arg });
         }
 
-        protected void OnChanged (FileSystemEventArgs e)
+        protected void OnChanged(FileSystemEventArgs e)
         {
-            RaiseEvent (Changed, e, EventType.FileSystemEvent);
+            RaiseEvent(Changed, e, EventType.FileSystemEvent);
         }
 
-        protected void OnCreated (FileSystemEventArgs e)
+        protected void OnCreated(FileSystemEventArgs e)
         {
-            RaiseEvent (Created, e, EventType.FileSystemEvent);
+            RaiseEvent(Created, e, EventType.FileSystemEvent);
         }
 
-        protected void OnDeleted (FileSystemEventArgs e)
+        protected void OnDeleted(FileSystemEventArgs e)
         {
-            RaiseEvent (Deleted, e, EventType.FileSystemEvent);
+            RaiseEvent(Deleted, e, EventType.FileSystemEvent);
         }
 
-        protected void OnError (ErrorEventArgs e)
+        protected void OnError(ErrorEventArgs e)
         {
-            RaiseEvent (Error, e, EventType.ErrorEvent);
+            RaiseEvent(Error, e, EventType.ErrorEvent);
         }
 
-        protected void OnRenamed (RenamedEventArgs e)
+        protected void OnRenamed(RenamedEventArgs e)
         {
-            RaiseEvent (Renamed, e, EventType.RenameEvent);
+            RaiseEvent(Renamed, e, EventType.RenameEvent);
         }
 
-        public WaitForChangedResult WaitForChanged (WatcherChangeTypes changeType)
+        public WaitForChangedResult WaitForChanged(WatcherChangeTypes changeType)
         {
-            return WaitForChanged (changeType, Timeout.Infinite);
+            return WaitForChanged(changeType, Timeout.Infinite);
         }
 
-        public WaitForChangedResult WaitForChanged (WatcherChangeTypes changeType, int timeout)
+        public WaitForChangedResult WaitForChanged(WatcherChangeTypes changeType, int timeout)
         {
-            WaitForChangedResult result = new WaitForChangedResult ();
+            WaitForChangedResult result = new WaitForChangedResult();
             bool prevEnabled = EnableRaisingEvents;
             if (!prevEnabled)
                 EnableRaisingEvents = true;
 
             bool gotData;
-            lock (this) {
+            lock (this)
+            {
                 waiting = true;
-                gotData = Monitor.Wait (this, timeout);
+                gotData = Monitor.Wait(this, timeout);
                 if (gotData)
                     result = this.lastData;
             }
@@ -497,76 +561,100 @@ namespace System.IO {
             return result;
         }
 
-        internal void DispatchErrorEvents (ErrorEventArgs args)
+        internal void DispatchErrorEvents(ErrorEventArgs args)
         {
             if (disposed)
                 return;
-            OnError (args);
+            OnError(args);
         }
 
-        internal void DispatchEvents (FileAction act, string filename, ref RenamedEventArgs renamed)
+        internal void DispatchEvents(FileAction act, string filename, ref RenamedEventArgs renamed)
         {
             if (disposed)
                 return;
-            if (waiting) {
-                lastData = new WaitForChangedResult ();
+            if (waiting)
+            {
+                lastData = new WaitForChangedResult();
             }
 
-            switch (act) {
-            case FileAction.Added:
-                lastData.Name = filename;
-                lastData.ChangeType = WatcherChangeTypes.Created;
-                Task.Run (() => OnCreated (new FileSystemEventArgs (WatcherChangeTypes.Created, path, filename)));
-                break;
-            case FileAction.Removed:
-                lastData.Name = filename;
-                lastData.ChangeType = WatcherChangeTypes.Deleted;
-                Task.Run (() => OnDeleted (new FileSystemEventArgs (WatcherChangeTypes.Deleted, path, filename)));
-                break;
-            case FileAction.Modified:
-                lastData.Name = filename;
-                lastData.ChangeType = WatcherChangeTypes.Changed;
-                Task.Run (() => OnChanged (new FileSystemEventArgs (WatcherChangeTypes.Changed, path, filename)));
-                break;
-            case FileAction.RenamedOldName:
-                if (renamed != null) {
-                    OnRenamed (renamed);
-                }
-                lastData.OldName = filename;
-                lastData.ChangeType = WatcherChangeTypes.Renamed;
-                renamed = new RenamedEventArgs (WatcherChangeTypes.Renamed, path, filename, "");
-                break;
-            case FileAction.RenamedNewName:
-                lastData.Name = filename;
-                lastData.ChangeType = WatcherChangeTypes.Renamed;
-                if (renamed == null) {
-                    renamed = new RenamedEventArgs (WatcherChangeTypes.Renamed, path, "", filename);
-                }
-                var renamed_ref = renamed;
-                Task.Run (() => OnRenamed (renamed_ref));
-                renamed = null;
-                break;
-            default:
-                break;
+            switch (act)
+            {
+                case FileAction.Added:
+                    lastData.Name = filename;
+                    lastData.ChangeType = WatcherChangeTypes.Created;
+                    Task.Run(
+                        () =>
+                            OnCreated(
+                                new FileSystemEventArgs(WatcherChangeTypes.Created, path, filename)
+                            )
+                    );
+                    break;
+                case FileAction.Removed:
+                    lastData.Name = filename;
+                    lastData.ChangeType = WatcherChangeTypes.Deleted;
+                    Task.Run(
+                        () =>
+                            OnDeleted(
+                                new FileSystemEventArgs(WatcherChangeTypes.Deleted, path, filename)
+                            )
+                    );
+                    break;
+                case FileAction.Modified:
+                    lastData.Name = filename;
+                    lastData.ChangeType = WatcherChangeTypes.Changed;
+                    Task.Run(
+                        () =>
+                            OnChanged(
+                                new FileSystemEventArgs(WatcherChangeTypes.Changed, path, filename)
+                            )
+                    );
+                    break;
+                case FileAction.RenamedOldName:
+                    if (renamed != null)
+                    {
+                        OnRenamed(renamed);
+                    }
+                    lastData.OldName = filename;
+                    lastData.ChangeType = WatcherChangeTypes.Renamed;
+                    renamed = new RenamedEventArgs(WatcherChangeTypes.Renamed, path, filename, "");
+                    break;
+                case FileAction.RenamedNewName:
+                    lastData.Name = filename;
+                    lastData.ChangeType = WatcherChangeTypes.Renamed;
+                    if (renamed == null)
+                    {
+                        renamed = new RenamedEventArgs(
+                            WatcherChangeTypes.Renamed,
+                            path,
+                            "",
+                            filename
+                        );
+                    }
+                    var renamed_ref = renamed;
+                    Task.Run(() => OnRenamed(renamed_ref));
+                    renamed = null;
+                    break;
+                default:
+                    break;
             }
         }
 
-        void Start ()
+        void Start()
         {
             if (disposed)
                 return;
             if (watcher_handle == null)
                 return;
-            watcher?.StartDispatching (watcher_handle);
+            watcher?.StartDispatching(watcher_handle);
         }
 
-        void Stop ()
+        void Stop()
         {
             if (disposed)
                 return;
             if (watcher_handle == null)
                 return;
-            watcher?.StopDispatching (watcher_handle);
+            watcher?.StopDispatching(watcher_handle);
         }
         #endregion // Methods
 
@@ -597,7 +685,6 @@ namespace System.IO {
         /* 5 -> inotify        */
         /* 6 -> CoreFX        */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static extern int InternalSupportsFSW ();
+        static extern int InternalSupportsFSW();
     }
 }
-

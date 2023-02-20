@@ -9,6 +9,7 @@
 
 using System.Diagnostics;
 using System.Data.Objects;
+
 namespace System.Data.Common.QueryCache
 {
     internal class ShaperFactoryQueryCacheKey<T> : QueryCacheKey
@@ -17,7 +18,11 @@ namespace System.Data.Common.QueryCache
         private readonly MergeOption _mergeOption;
         private readonly bool _isValueLayer;
 
-        internal ShaperFactoryQueryCacheKey(string columnMapKey, MergeOption mergeOption, bool isValueLayer)
+        internal ShaperFactoryQueryCacheKey(
+            string columnMapKey,
+            MergeOption mergeOption,
+            bool isValueLayer
+        )
         {
             Debug.Assert(null != columnMapKey, "null columnMapKey");
             _columnMapKey = columnMapKey;

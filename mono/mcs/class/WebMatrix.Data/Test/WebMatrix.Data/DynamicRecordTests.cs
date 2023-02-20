@@ -1,21 +1,21 @@
-// 
+//
 // DynamicRecordTests.cs
-//  
+//
 // Author:
 //       Jérémie "garuma" Laval <jeremie.laval@gmail.com>
-// 
+//
 // Copyright (c) 2011 Novell
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -40,58 +40,59 @@ namespace MonoTests.WebMatrix.Data
         DynamicRecord record;
 
         [SetUp]
-        public void Setup ()
+        public void Setup()
         {
-            var fields = new Dictionary<string, object> () {
+            var fields = new Dictionary<string, object>()
+            {
                 { "foo", 1 },
                 { "bar", 4.1f },
                 { "foobar", "foobar" }
             };
-            record = new DynamicRecord (fields);
+            record = new DynamicRecord(fields);
         }
 
         [Test]
-        public void ColumnsTest ()
+        public void ColumnsTest()
         {
             var columns = record.Columns;
-            Assert.AreEqual (3, columns.Count);
+            Assert.AreEqual(3, columns.Count);
 
-            Assert.AreEqual ("foo", columns[0]);
-            Assert.AreEqual ("bar", columns[1]);
-            Assert.AreEqual ("foobar", columns[2]);
+            Assert.AreEqual("foo", columns[0]);
+            Assert.AreEqual("bar", columns[1]);
+            Assert.AreEqual("foobar", columns[2]);
         }
 
         [Test]
-        public void AccessByNameTest ()
+        public void AccessByNameTest()
         {
-            Assert.AreEqual (1, record["foo"]);
-            Assert.AreEqual (4.1f, record["bar"]);
-            Assert.AreEqual ("foobar", record["foobar"]);
+            Assert.AreEqual(1, record["foo"]);
+            Assert.AreEqual(4.1f, record["bar"]);
+            Assert.AreEqual("foobar", record["foobar"]);
         }
 
         [Test]
-        public void AccessByIndexTest ()
+        public void AccessByIndexTest()
         {
-            Assert.AreEqual (1, record[0]);
-            Assert.AreEqual (4.1f, record[1]);
-            Assert.AreEqual ("foobar", record[2]);
+            Assert.AreEqual(1, record[0]);
+            Assert.AreEqual(4.1f, record[1]);
+            Assert.AreEqual("foobar", record[2]);
         }
 
         [Test]
-        public void AccesByDynamicTest ()
+        public void AccesByDynamicTest()
         {
             dynamic r = record;
 
-            Assert.AreEqual (1, r.foo);
-            Assert.AreEqual (4.1f, r.bar);
-            Assert.AreEqual ("foobar", r.foobar);
+            Assert.AreEqual(1, r.foo);
+            Assert.AreEqual(4.1f, r.bar);
+            Assert.AreEqual("foobar", r.foobar);
         }
 
         [Test]
-        public void GetDynamicMemberNamesTest ()
+        public void GetDynamicMemberNamesTest()
         {
             var expected = new string[] { "foo", "bar", "foobar" };
-            CollectionAssert.AreEquivalent (expected, record.GetDynamicMemberNames ());
+            CollectionAssert.AreEquivalent(expected, record.GetDynamicMemberNames());
         }
     }
 }

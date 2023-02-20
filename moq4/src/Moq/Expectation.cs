@@ -33,9 +33,7 @@ namespace Moq
 
         public abstract bool IsMatch(Invocation invocation);
 
-        public virtual void SetupEvaluatedSuccessfully(Invocation invocation)
-        {
-        }
+        public virtual void SetupEvaluatedSuccessfully(Invocation invocation) { }
 
         public override string ToString()
         {

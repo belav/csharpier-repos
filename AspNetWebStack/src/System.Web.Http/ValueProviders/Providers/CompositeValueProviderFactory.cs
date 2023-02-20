@@ -21,9 +21,12 @@ namespace System.Web.Http.ValueProviders.Providers
             return GetValueProvider(actionContext, _factories);
         }
 
-        // Get a single ValueProvider from a collection of factories. 
+        // Get a single ValueProvider from a collection of factories.
         // This will never return null.
-        internal static IValueProvider GetValueProvider(HttpActionContext actionContext, ValueProviderFactory[] factories)
+        internal static IValueProvider GetValueProvider(
+            HttpActionContext actionContext,
+            ValueProviderFactory[] factories
+        )
         {
             // Fast-path the case of just one factory
             if (factories.Length == 1)
@@ -50,7 +53,7 @@ namespace System.Web.Http.ValueProviders.Providers
             {
                 return providers[0];
             }
-            
+
             return new CompositeValueProvider(providers);
         }
     }

@@ -6,8 +6,6 @@ namespace Mono.Linker.Tests.Cases.TestFramework.Dependencies
     public class CanSandboxDependenciesUsingType_Source1
     {
         [Kept]
-        public static void Method ()
-        {
-        }
+        public static void Method() { }
     }
 }

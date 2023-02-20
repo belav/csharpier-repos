@@ -10,26 +10,26 @@ using System.Collections;
 /// </summary>
 public class Test
 {
-  static void Main()
-  {
-  }
+    static void Main() { }
 
-  private class A
-  {
-    public object this[int index] {
-      get { return null; }
+    private class A
+    {
+        public object this[int index]
+        {
+            get { return null; }
+        }
+
+        public object this[string index]
+        {
+            get { return null; }
+        }
     }
 
-    public object this[string index] {
-      get { return null; }
+    private class B
+    {
+        public object this[int index]
+        {
+            get { return null; }
+        }
     }
-  }
-
-  private class B
-  {
-    public object this[int index] {
-      get { return null; }
-    }
-  }
 }
-

@@ -36,13 +36,21 @@ namespace System.ServiceModel.Activities.Presentation
                 }
                 else
                 {
-                    Fx.Assert(false, "Content must be of either ReceiveMessageContent, ReceiveParametersContent, SendMessageContent or SendParametersContent.");
+                    Fx.Assert(
+                        false,
+                        "Content must be of either ReceiveMessageContent, ReceiveParametersContent, SendMessageContent or SendParametersContent."
+                    );
                     return null;
                 }
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             throw FxTrace.Exception.AsError(new NotSupportedException());
         }

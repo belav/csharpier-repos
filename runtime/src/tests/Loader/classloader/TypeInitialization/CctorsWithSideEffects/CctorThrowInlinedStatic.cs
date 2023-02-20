@@ -3,7 +3,7 @@
 
 /*
 
-A .cctor has only one chance to run in any appdomain. 
+A .cctor has only one chance to run in any appdomain.
 If it fails, the 2nd time we try to access a static field we check if .cctor has been run. And it has, but failed so we fail again.
 
 Test_CctorThrowInlinedStatic throws an exception inside .cctor.
@@ -46,73 +46,56 @@ public class Foo
 
 public class NotInlined
 {
-
     static NotInlined()
     {
         Console.WriteLine("Inside NotInlined::.cctor");
         throw new Exception();
     }
 
-    [MethodImpl(MethodImplOptions.NoInlining)] 
-    public static void NotInlinedMeth()
-    {
-    }
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void NotInlinedMeth() { }
 }
-
 
 public class Inlined
 {
-
     static Inlined()
     {
         Console.WriteLine("Inside Inlined::.cctor");
         throw new Exception();
     }
 
-    public static void InlinedMeth()
-    {
-    }
+    public static void InlinedMeth() { }
 }
-
 
 public struct NotInlinedVal
 {
-
     static NotInlinedVal()
     {
         Console.WriteLine("Inside NotInlinedVal::.cctor");
         throw new Exception();
     }
 
-    [MethodImpl(MethodImplOptions.NoInlining)] 
-    public static void NotInlinedValMeth()
-    {
-    }
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void NotInlinedValMeth() { }
 }
-
 
 public class InlinedVal
 {
-
     static InlinedVal()
     {
         Console.WriteLine("Inside InlinedVal::.cctor");
         throw new Exception();
     }
 
-    public static void InlinedValMeth()
-    {
-    }
+    public static void InlinedValMeth() { }
 }
 
 public class Test_CctorThrowInlinedStatic
 {
-
-
     public static bool RunTest(int i)
     {
         bool result = true;
-        
+
         switch (i)
         {
             case 1:
@@ -121,7 +104,9 @@ public class Test_CctorThrowInlinedStatic
                 {
                     Console.WriteLine("Accessing class's inlined static method");
                     Foo.Meth_In();
-                    Console.WriteLine("Did not catch expected TypeInitializationException exception");
+                    Console.WriteLine(
+                        "Did not catch expected TypeInitializationException exception"
+                    );
                     result = false;
                 }
                 catch (TypeInitializationException)
@@ -137,7 +122,9 @@ public class Test_CctorThrowInlinedStatic
                 try
                 {
                     Foo.Meth_In();
-                    Console.WriteLine("Did not catch expected TypeInitializationException exception\n");
+                    Console.WriteLine(
+                        "Did not catch expected TypeInitializationException exception\n"
+                    );
                     result = false;
                 }
                 catch (TypeInitializationException)
@@ -158,7 +145,9 @@ public class Test_CctorThrowInlinedStatic
                 {
                     Console.WriteLine("Accessing struct's inlined static method");
                     Foo.ValMeth_In();
-                    Console.WriteLine("Did not catch expected TypeInitializationException exception");
+                    Console.WriteLine(
+                        "Did not catch expected TypeInitializationException exception"
+                    );
                     result = false;
                 }
                 catch (TypeInitializationException)
@@ -174,7 +163,9 @@ public class Test_CctorThrowInlinedStatic
                 try
                 {
                     Foo.ValMeth_In();
-                    Console.WriteLine("Did not catch expected TypeInitializationException exception");
+                    Console.WriteLine(
+                        "Did not catch expected TypeInitializationException exception"
+                    );
                     result = false;
                 }
                 catch (TypeInitializationException)
@@ -197,7 +188,9 @@ public class Test_CctorThrowInlinedStatic
 
                     Foo.Meth_NotIn();
 
-                    Console.WriteLine("Did not catch expected TypeInitializationException exception");
+                    Console.WriteLine(
+                        "Did not catch expected TypeInitializationException exception"
+                    );
                     result = false;
                 }
                 catch (TypeInitializationException)
@@ -214,7 +207,9 @@ public class Test_CctorThrowInlinedStatic
                 {
                     Foo.Meth_NotIn();
 
-                    Console.WriteLine("Did not catch expected TypeInitializationException exception");
+                    Console.WriteLine(
+                        "Did not catch expected TypeInitializationException exception"
+                    );
                     result = false;
                 }
                 catch (TypeInitializationException)
@@ -236,8 +231,9 @@ public class Test_CctorThrowInlinedStatic
                     Console.WriteLine("Accessing struct's not inlined static method");
                     Foo.ValMeth_NotIn();
 
-                    
-                    Console.WriteLine("Did not catch expected TypeInitializationException exception");
+                    Console.WriteLine(
+                        "Did not catch expected TypeInitializationException exception"
+                    );
                     result = false;
                 }
                 catch (TypeInitializationException)
@@ -253,8 +249,10 @@ public class Test_CctorThrowInlinedStatic
                 try
                 {
                     Foo.ValMeth_NotIn();
-                    
-                    Console.WriteLine("Did not catch expected TypeInitializationException exception\n");
+
+                    Console.WriteLine(
+                        "Did not catch expected TypeInitializationException exception\n"
+                    );
                     result = false;
                 }
                 catch (TypeInitializationException)
@@ -269,27 +267,26 @@ public class Test_CctorThrowInlinedStatic
 
                 return result;
             }
-            
-            default :
+
+            default:
                 return false;
         }
     }
 
-
     public static int Main()
     {
         bool pass = true;
-        
+
         // run tests
         if (!RunTest(1))
             pass = false;
-        
+
         if (!RunTest(2))
             pass = false;
-        
+
         if (!RunTest(3))
             pass = false;
-        
+
         if (!RunTest(4))
             pass = false;
 
@@ -303,6 +300,5 @@ public class Test_CctorThrowInlinedStatic
             Console.WriteLine("FAIL");
             return 101;
         }
-        
     }
 }

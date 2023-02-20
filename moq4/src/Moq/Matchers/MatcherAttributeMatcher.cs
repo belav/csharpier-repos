@@ -12,10 +12,10 @@ namespace Moq.Matchers
 {
     /// <summary>
     /// Matcher to treat static functions as matchers.
-    /// 
+    ///
     /// mock.Setup(x => x.StringMethod(A.MagicString()));
-    /// 
-    /// public static class A 
+    ///
+    /// public static class A
     /// {
     ///     [Matcher]
     ///     public static string MagicString() { return null; }
@@ -24,7 +24,7 @@ namespace Moq.Matchers
     ///         return arg == "magic";
     ///     }
     /// }
-    /// 
+    ///
     /// Will succeed if: mock.Object.StringMethod("magic");
     /// and fail with any other call.
     /// </summary>
@@ -41,7 +41,9 @@ namespace Moq.Matchers
 
         private static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
         {
-            var expectedParametersTypes = new[] { call.Method.ReturnType }.Concat(call.Method.GetParameters().Select(p => p.ParameterType)).ToArray();
+            var expectedParametersTypes = new[] { call.Method.ReturnType }
+                .Concat(call.Method.GetParameters().Select(p => p.ParameterType))
+                .ToArray();
 
             MethodInfo method = null;
 
@@ -51,30 +53,46 @@ namespace Moq.Matchers
                 // passing generic type arguments for the query.
                 var genericArgs = call.Method.GetGenericArguments();
 
-                method = call.Method.DeclaringType.GetMethods(call.Method.Name)
-                    .Where(m =>
-                        m.IsGenericMethodDefinition &&
-                        m.GetGenericArguments().Length ==
-                            call.Method.GetGenericMethodDefinition().GetGenericArguments().Length &&
-                        expectedParametersTypes.SequenceEqual(
-                            m.MakeGenericMethod(genericArgs).GetParameters().Select(p => p.ParameterType)))
+                method = call.Method.DeclaringType
+                    .GetMethods(call.Method.Name)
+                    .Where(
+                        m =>
+                            m.IsGenericMethodDefinition
+                            && m.GetGenericArguments().Length
+                                == call.Method
+                                    .GetGenericMethodDefinition()
+                                    .GetGenericArguments()
+                                    .Length
+                            && expectedParametersTypes.SequenceEqual(
+                                m.MakeGenericMethod(genericArgs)
+                                    .GetParameters()
+                                    .Select(p => p.ParameterType)
+                            )
+                    )
                     .Select(m => m.MakeGenericMethod(genericArgs))
                     .FirstOrDefault();
             }
             else
             {
-                method = call.Method.DeclaringType.GetMethod(call.Method.Name, expectedParametersTypes);
+                method = call.Method.DeclaringType.GetMethod(
+                    call.Method.Name,
+                    expectedParametersTypes
+                );
             }
 
-            // throw if validatorMethod doesn't exists            
+            // throw if validatorMethod doesn't exists
             if (method == null)
             {
-                throw new MissingMethodException(string.Format(CultureInfo.CurrentCulture,
-                    "public {0}bool {1}({2}) in class {3}.",
-                    call.Method.IsStatic ? "static " : String.Empty,
-                    call.Method.Name,
-                    String.Join(", ", expectedParametersTypes.Select(x => x.Name).ToArray()),
-                    call.Method.DeclaringType.ToString()));
+                throw new MissingMethodException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "public {0}bool {1}({2}) in class {3}.",
+                        call.Method.IsStatic ? "static " : String.Empty,
+                        call.Method.Name,
+                        String.Join(", ", expectedParametersTypes.Select(x => x.Name).ToArray()),
+                        call.Method.DeclaringType.ToString()
+                    )
+                );
             }
             return method;
         }
@@ -82,10 +100,15 @@ namespace Moq.Matchers
         public bool Matches(object argument, Type parameterType)
         {
             // use matcher Expression to get extra arguments
-            var extraArgs = this.expression.Arguments.Select(ae => ((ConstantExpression)ae.PartialEval()).Value);
+            var extraArgs = this.expression.Arguments.Select(
+                ae => ((ConstantExpression)ae.PartialEval()).Value
+            );
             var args = new[] { argument }.Concat(extraArgs).ToArray();
             // for static and non-static method
-            var instance = this.expression.Object == null ? null : (this.expression.Object.PartialEval() as ConstantExpression).Value;
+            var instance =
+                this.expression.Object == null
+                    ? null
+                    : (this.expression.Object.PartialEval() as ConstantExpression).Value;
             return (bool)validatorMethod.Invoke(instance, args);
         }
 

@@ -30,41 +30,50 @@ using System;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-    public sealed class Warning : TaskExtension {
-        
-        string    code;
-        string    helpKeyword;
-        string    text;
-    
-        public Warning ()
-        {
-        }
+namespace Microsoft.Build.Tasks
+{
+    public sealed class Warning : TaskExtension
+    {
+        string code;
+        string helpKeyword;
+        string text;
 
-        public override bool Execute ()
+        public Warning() { }
+
+        public override bool Execute()
         {
-            if (String.IsNullOrEmpty (text))
+            if (String.IsNullOrEmpty(text))
                 return true;
 
-            Log.LogWarning (null, code, helpKeyword,
-                String.IsNullOrEmpty (File) ? BuildEngine.ProjectFileOfTaskNode : File,
-                BuildEngine.LineNumberOfTaskNode, BuildEngine.ColumnNumberOfTaskNode,
-                BuildEngine.LineNumberOfTaskNode, BuildEngine.ColumnNumberOfTaskNode,
-                text, null);
+            Log.LogWarning(
+                null,
+                code,
+                helpKeyword,
+                String.IsNullOrEmpty(File) ? BuildEngine.ProjectFileOfTaskNode : File,
+                BuildEngine.LineNumberOfTaskNode,
+                BuildEngine.ColumnNumberOfTaskNode,
+                BuildEngine.LineNumberOfTaskNode,
+                BuildEngine.ColumnNumberOfTaskNode,
+                text,
+                null
+            );
             return true;
         }
 
-        public string Code {
+        public string Code
+        {
             get { return code; }
             set { code = value; }
         }
-        
-        public string HelpKeyword {
+
+        public string HelpKeyword
+        {
             get { return helpKeyword; }
             set { helpKeyword = value; }
         }
-        
-        public string Text {
+
+        public string Text
+        {
             get { return text; }
             set { text = value; }
         }
@@ -72,4 +81,3 @@ namespace Microsoft.Build.Tasks {
         public string File { get; set; }
     }
 }
-

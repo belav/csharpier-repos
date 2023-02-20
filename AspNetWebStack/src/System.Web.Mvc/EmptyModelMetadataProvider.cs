@@ -7,7 +7,13 @@ namespace System.Web.Mvc
 {
     public class EmptyModelMetadataProvider : AssociatedMetadataProvider
     {
-        protected override ModelMetadata CreateMetadata(IEnumerable<Attribute> attributes, Type containerType, Func<object> modelAccessor, Type modelType, string propertyName)
+        protected override ModelMetadata CreateMetadata(
+            IEnumerable<Attribute> attributes,
+            Type containerType,
+            Func<object> modelAccessor,
+            Type modelType,
+            string propertyName
+        )
         {
             return new ModelMetadata(this, containerType, modelAccessor, modelType, propertyName);
         }

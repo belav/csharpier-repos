@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,50 +31,50 @@
 
 #if !MOBILE
 
-namespace System.Security.Cryptography {
-
+namespace System.Security.Cryptography
+{
     // this is a wrapper around MD5CryptoServiceProvider
     // see README.CNG and README.CSP for more details
 
-    public sealed class MD5Cng : MD5 {
-
-        static byte[] Empty = new byte [0];
+    public sealed class MD5Cng : MD5
+    {
+        static byte[] Empty = new byte[0];
 
         private MD5 hash;
 
         [SecurityCritical]
-        public MD5Cng ()
+        public MD5Cng()
         {
-            // note: we don't use MD5.Create since CryptoConfig could, 
+            // note: we don't use MD5.Create since CryptoConfig could,
             // if set to use this class, result in a endless recursion
-            hash = new MD5CryptoServiceProvider ();
+            hash = new MD5CryptoServiceProvider();
         }
 
         [SecurityCritical]
-        public override void Initialize ()
+        public override void Initialize()
         {
-            hash.Initialize ();
+            hash.Initialize();
         }
 
         [SecurityCritical]
-        protected override void HashCore (byte[] array, int ibStart, int cbSize)
+        protected override void HashCore(byte[] array, int ibStart, int cbSize)
         {
-            hash.TransformBlock (array, ibStart, cbSize, null, 0);
+            hash.TransformBlock(array, ibStart, cbSize, null, 0);
         }
 
         [SecurityCritical]
-        protected override byte[] HashFinal ()
+        protected override byte[] HashFinal()
         {
-            hash.TransformFinalBlock (Empty, 0, 0);
+            hash.TransformFinalBlock(Empty, 0, 0);
             HashValue = hash.Hash;
             return HashValue;
         }
 
         [SecurityCritical]
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            (hash as IDisposable).Dispose ();
-            base.Dispose (disposing);
+            (hash as IDisposable).Dispose();
+            base.Dispose(disposing);
         }
     }
 }

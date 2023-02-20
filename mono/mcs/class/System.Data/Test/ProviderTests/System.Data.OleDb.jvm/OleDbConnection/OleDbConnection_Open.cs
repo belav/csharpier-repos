@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,7 +26,6 @@ using System.Data;
 using System.Data.OleDb;
 
 using MonoTests.System.Data.Utils;
-
 
 using NUnit.Framework;
 
@@ -47,8 +46,15 @@ namespace MonoTests.System.Data.OleDb
             {
                 ConString = MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString;
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
         [TearDown]
@@ -71,7 +77,7 @@ namespace MonoTests.System.Data.OleDb
                 tc.run();
                 tc.TearDown();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -85,13 +91,13 @@ namespace MonoTests.System.Data.OleDb
         public void run()
         {
             Exception exp = null;
-      
+
             BeginCase("Open Connection ");
             try
             {
                 con = new OleDbConnection(ConString);
                 con.Open();
-                Compare(con.State , ConnectionState.Open);
+                Compare(con.State, ConnectionState.Open);
             }
             catch (Exception ex)
             {
@@ -99,11 +105,12 @@ namespace MonoTests.System.Data.OleDb
             }
             finally
             {
-                if (con != null) con.Close();
+                if (con != null)
+                    con.Close();
                 EndCase(exp);
                 exp = null;
             }
-        
+
             ConString = ConString.Replace("User Id", "uid");
 
             BeginCase("Open Connection - uid");
@@ -111,7 +118,7 @@ namespace MonoTests.System.Data.OleDb
             {
                 con = new OleDbConnection(ConString);
                 con.Open();
-                Compare(con.State , ConnectionState.Open);
+                Compare(con.State, ConnectionState.Open);
             }
             catch (Exception ex)
             {
@@ -119,7 +126,8 @@ namespace MonoTests.System.Data.OleDb
             }
             finally
             {
-                if (con != null) con.Close();
+                if (con != null)
+                    con.Close();
                 EndCase(exp);
                 exp = null;
             }
@@ -132,15 +140,16 @@ namespace MonoTests.System.Data.OleDb
             }
             catch (ArgumentException ex)
             {
-                ExpectedExceptionCaught(ex); 
+                ExpectedExceptionCaught(ex);
             }
-            catch 
+            catch
             {
                 ExpectedExceptionNotCaught("System.ArgumentException");
             }
             finally
             {
-                if (con != null) con.Close();
+                if (con != null)
+                    con.Close();
                 EndCase(exp);
                 exp = null;
             }

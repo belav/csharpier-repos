@@ -37,8 +37,10 @@ namespace System
         public static bool SupportsAlpn => false;
         public static bool SupportsClientAlpn => false;
 
-        public static bool IsWindows {
-            get {
+        public static bool IsWindows
+        {
+            get
+            {
                 PlatformID id = Environment.OSVersion.Platform;
                 return id == PlatformID.Win32Windows || id == PlatformID.Win32NT;
             }

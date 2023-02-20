@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,35 +34,31 @@
 using System;
 using System.Globalization;
 
-namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
+namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {
     [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class SoapMonthDay : ISoapXsd
     {
-        static readonly string[] _datetimeFormats = new string[]
-        {
-            "--MM-dd",
-            "--MM-ddzzz"
-        };
-        
+        static readonly string[] _datetimeFormats = new string[] { "--MM-dd", "--MM-ddzzz" };
+
         DateTime _value;
-        
-        public SoapMonthDay ()
-        {
-        }
-        
-        public SoapMonthDay (DateTime value)
+
+        public SoapMonthDay() { }
+
+        public SoapMonthDay(DateTime value)
         {
             _value = value;
         }
-        
-        public DateTime Value {
-            get { return _value; } 
+
+        public DateTime Value
+        {
+            get { return _value; }
             set { _value = value; }
         }
 
-        public static string XsdType {
+        public static string XsdType
+        {
             get { return "gMonthDay"; }
         }
 
@@ -70,11 +66,11 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
         {
             return XsdType;
         }
-        
-        public static SoapMonthDay Parse (string value)
+
+        public static SoapMonthDay Parse(string value)
         {
-            DateTime d = DateTime.ParseExact (value, _datetimeFormats, null, DateTimeStyles.None);
-            return new SoapMonthDay (d);
+            DateTime d = DateTime.ParseExact(value, _datetimeFormats, null, DateTimeStyles.None);
+            return new SoapMonthDay(d);
         }
 
         public override string ToString()

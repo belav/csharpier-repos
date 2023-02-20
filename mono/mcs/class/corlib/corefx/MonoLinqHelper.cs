@@ -10,7 +10,7 @@ namespace System.IO
     {
         public static T[] ToArray<T>(this IEnumerable<T> source)
         {
-            return EnumerableHelpers.ToArray<T> (source);
+            return EnumerableHelpers.ToArray<T>(source);
         }
     }
 }

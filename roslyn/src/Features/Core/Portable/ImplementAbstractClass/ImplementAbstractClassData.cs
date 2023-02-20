@@ -27,15 +27,26 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
         private readonly ImplementTypeGenerationOptions _options;
         private readonly SyntaxNode _classNode;
         private readonly SyntaxToken _classIdentifier;
-        private readonly ImmutableArray<(INamedTypeSymbol type, ImmutableArray<ISymbol> members)> _unimplementedMembers;
+        private readonly ImmutableArray<(
+            INamedTypeSymbol type,
+            ImmutableArray<ISymbol> members
+        )> _unimplementedMembers;
 
         public readonly INamedTypeSymbol ClassType;
         public readonly INamedTypeSymbol AbstractClassType;
 
         public ImplementAbstractClassData(
-            Document document, ImplementTypeGenerationOptions options, SyntaxNode classNode, SyntaxToken classIdentifier,
-            INamedTypeSymbol classType, INamedTypeSymbol abstractClassType,
-            ImmutableArray<(INamedTypeSymbol type, ImmutableArray<ISymbol> members)> unimplementedMembers)
+            Document document,
+            ImplementTypeGenerationOptions options,
+            SyntaxNode classNode,
+            SyntaxToken classIdentifier,
+            INamedTypeSymbol classType,
+            INamedTypeSymbol abstractClassType,
+            ImmutableArray<(
+                INamedTypeSymbol type,
+                ImmutableArray<ISymbol> members
+            )> unimplementedMembers
+        )
         {
             _document = document;
             _options = options;
@@ -47,10 +58,20 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
         }
 
         public static async Task<ImplementAbstractClassData?> TryGetDataAsync(
-            Document document, SyntaxNode classNode, SyntaxToken classIdentifier, ImplementTypeGenerationOptions options, CancellationToken cancellationToken)
+            Document document,
+            SyntaxNode classNode,
+            SyntaxToken classIdentifier,
+            ImplementTypeGenerationOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            if (semanticModel.GetDeclaredSymbol(classNode, cancellationToken) is not INamedTypeSymbol classType)
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            if (
+                semanticModel.GetDeclaredSymbol(classNode, cancellationToken)
+                is not INamedTypeSymbol classType
+            )
                 return null;
 
             if (classType.IsAbstract)
@@ -66,32 +87,68 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             var unimplementedMembers = classType.GetAllUnimplementedMembers(
                 SpecializedCollections.SingletonEnumerable(abstractClassType),
                 includeMembersRequiringExplicitImplementation: false,
-                cancellationToken);
+                cancellationToken
+            );
 
             if (unimplementedMembers.IsEmpty)
                 return null;
 
             return new ImplementAbstractClassData(
-                document, options, classNode, classIdentifier,
-                classType, abstractClassType, unimplementedMembers);
+                document,
+                options,
+                classNode,
+                classIdentifier,
+                classType,
+                abstractClassType,
+                unimplementedMembers
+            );
         }
 
         public static async Task<Document?> TryImplementAbstractClassAsync(
-            Document document, SyntaxNode classNode, SyntaxToken classIdentifier, ImplementTypeGenerationOptions options, CancellationToken cancellationToken)
+            Document document,
+            SyntaxNode classNode,
+            SyntaxToken classIdentifier,
+            ImplementTypeGenerationOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var data = await TryGetDataAsync(document, classNode, classIdentifier, options, cancellationToken).ConfigureAwait(false);
+            var data = await TryGetDataAsync(
+                    document,
+                    classNode,
+                    classIdentifier,
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (data == null)
                 return null;
 
-            return await data.ImplementAbstractClassAsync(throughMember: null, canDelegateAllMembers: null, cancellationToken).ConfigureAwait(false);
+            return await data.ImplementAbstractClassAsync(
+                    throughMember: null,
+                    canDelegateAllMembers: null,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         public async Task<Document> ImplementAbstractClassAsync(
-            ISymbol? throughMember, bool? canDelegateAllMembers, CancellationToken cancellationToken)
+            ISymbol? throughMember,
+            bool? canDelegateAllMembers,
+            CancellationToken cancellationToken
+        )
         {
-            var compilation = await _document.Project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-            var memberDefinitions = GenerateMembers(compilation, throughMember, _options.ImplementTypeOptions.PropertyGenerationBehavior, cancellationToken);
-            var groupMembers = _options.ImplementTypeOptions.InsertionBehavior == ImplementTypeInsertionBehavior.WithOtherMembersOfTheSameKind;
+            var compilation = await _document.Project
+                .GetRequiredCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var memberDefinitions = GenerateMembers(
+                compilation,
+                throughMember,
+                _options.ImplementTypeOptions.PropertyGenerationBehavior,
+                cancellationToken
+            );
+            var groupMembers =
+                _options.ImplementTypeOptions.InsertionBehavior
+                == ImplementTypeInsertionBehavior.WithOtherMembersOfTheSameKind;
 
             // If we're implementing through one of our members, but we can't delegate all members
             // through it, then give an error message on the class decl letting the user know.
@@ -101,89 +158,145 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             {
                 classNodeToAddMembersTo = _classNode.ReplaceToken(
                     _classIdentifier,
-                    _classIdentifier.WithAdditionalAnnotations(ConflictAnnotation.Create(
-                        FeaturesResources.Base_classes_contain_inaccessible_unimplemented_members)));
+                    _classIdentifier.WithAdditionalAnnotations(
+                        ConflictAnnotation.Create(
+                            FeaturesResources.Base_classes_contain_inaccessible_unimplemented_members
+                        )
+                    )
+                );
             }
 
             var context = new CodeGenerationContext(
                 contextLocation: classNodeToAddMembersTo.GetLocation(),
                 autoInsertionLocation: groupMembers,
-                sortMembers: groupMembers);
+                sortMembers: groupMembers
+            );
 
             var codeGenerator = _document.GetRequiredLanguageService<ICodeGenerationService>();
-            var codeGenOptions = await _document.GetCodeGenerationOptionsAsync(_options.FallbackOptions, cancellationToken).ConfigureAwait(false);
+            var codeGenOptions = await _document
+                .GetCodeGenerationOptionsAsync(_options.FallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
 
             var updatedClassNode = codeGenerator.AddMembers(
                 classNodeToAddMembersTo,
                 memberDefinitions,
                 codeGenOptions.GetInfo(context, _document.Project),
-                cancellationToken);
+                cancellationToken
+            );
 
-            var root = await _document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await _document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var newRoot = root.ReplaceNode(_classNode, updatedClassNode);
 
             return _document.WithSyntaxRoot(newRoot);
         }
 
         private ImmutableArray<ISymbol> GenerateMembers(
-            Compilation compilation, ISymbol? throughMember,
+            Compilation compilation,
+            ISymbol? throughMember,
             ImplementTypePropertyGenerationBehavior propertyGenerationBehavior,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return _unimplementedMembers
                 .SelectMany(t => t.members)
-                .Select(m => GenerateMember(compilation, m, throughMember, propertyGenerationBehavior, cancellationToken))
+                .Select(
+                    m =>
+                        GenerateMember(
+                            compilation,
+                            m,
+                            throughMember,
+                            propertyGenerationBehavior,
+                            cancellationToken
+                        )
+                )
                 .WhereNotNull()
                 .ToImmutableArray();
         }
 
         private ISymbol? GenerateMember(
-            Compilation compilation, ISymbol member, ISymbol? throughMember,
+            Compilation compilation,
+            ISymbol member,
+            ISymbol? throughMember,
             ImplementTypePropertyGenerationBehavior propertyGenerationBehavior,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             // Check if we need to add 'unsafe' to the signature we're generating.
             var syntaxFacts = _document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var addUnsafe = member.RequiresUnsafeModifier() && !syntaxFacts.IsUnsafeContext(_classNode);
+            var addUnsafe =
+                member.RequiresUnsafeModifier() && !syntaxFacts.IsUnsafeContext(_classNode);
 
-            return GenerateMember(compilation, member, throughMember, addUnsafe, propertyGenerationBehavior);
+            return GenerateMember(
+                compilation,
+                member,
+                throughMember,
+                addUnsafe,
+                propertyGenerationBehavior
+            );
         }
 
         private ISymbol? GenerateMember(
-            Compilation compilation, ISymbol member, ISymbol? throughMember, bool addUnsafe,
-            ImplementTypePropertyGenerationBehavior propertyGenerationBehavior)
+            Compilation compilation,
+            ISymbol member,
+            ISymbol? throughMember,
+            bool addUnsafe,
+            ImplementTypePropertyGenerationBehavior propertyGenerationBehavior
+        )
         {
-            var modifiers = new DeclarationModifiers(isOverride: true, isUnsafe: addUnsafe, isRequired: member.IsRequired());
+            var modifiers = new DeclarationModifiers(
+                isOverride: true,
+                isUnsafe: addUnsafe,
+                isRequired: member.IsRequired()
+            );
             var accessibility = member.ComputeResultantAccessibility(ClassType);
 
             // only call through one of members for this symbol if we can actually access the symbol
             // from our type.
-            if (throughMember != null &&
-                !member.IsAccessibleWithin(ClassType, throughMember.GetMemberType()))
+            if (
+                throughMember != null
+                && !member.IsAccessibleWithin(ClassType, throughMember.GetMemberType())
+            )
             {
                 return null;
             }
 
             return member switch
             {
-                IMethodSymbol method => GenerateMethod(compilation, method, throughMember, modifiers, accessibility),
-                IPropertySymbol property => GenerateProperty(compilation, property, throughMember, modifiers, accessibility, propertyGenerationBehavior),
-                IEventSymbol @event => GenerateEvent(@event, throughMember, accessibility, modifiers),
+                IMethodSymbol method
+                    => GenerateMethod(compilation, method, throughMember, modifiers, accessibility),
+                IPropertySymbol property
+                    => GenerateProperty(
+                        compilation,
+                        property,
+                        throughMember,
+                        modifiers,
+                        accessibility,
+                        propertyGenerationBehavior
+                    ),
+                IEventSymbol @event
+                    => GenerateEvent(@event, throughMember, accessibility, modifiers),
                 _ => null,
             };
         }
 
         private ISymbol GenerateMethod(
-            Compilation compilation, IMethodSymbol method, ISymbol? throughMember,
-            DeclarationModifiers modifiers, Accessibility accessibility)
+            Compilation compilation,
+            IMethodSymbol method,
+            ISymbol? throughMember,
+            DeclarationModifiers modifiers,
+            Accessibility accessibility
+        )
         {
             var syntaxFacts = _document.GetRequiredLanguageService<ISyntaxFactsService>();
             var generator = _document.GetRequiredLanguageService<SyntaxGenerator>();
-            var body = throughMember == null
-                ? generator.CreateThrowNotImplementedStatement(compilation)
-                : generator.GenerateDelegateThroughMemberStatement(method, throughMember);
+            var body =
+                throughMember == null
+                    ? generator.CreateThrowNotImplementedStatement(compilation)
+                    : generator.GenerateDelegateThroughMemberStatement(method, throughMember);
 
             method = method.EnsureNonConflictingNames(ClassType, syntaxFacts);
 
@@ -191,7 +304,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
                 method,
                 accessibility: accessibility,
                 modifiers: modifiers,
-                statements: ImmutableArray.Create(body));
+                statements: ImmutableArray.Create(body)
+            );
         }
 
         private IPropertySymbol GenerateProperty(
@@ -200,16 +314,20 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             ISymbol? throughMember,
             DeclarationModifiers modifiers,
             Accessibility accessibility,
-            ImplementTypePropertyGenerationBehavior propertyGenerationBehavior)
+            ImplementTypePropertyGenerationBehavior propertyGenerationBehavior
+        )
         {
             if (property.GetMethod == null)
             {
                 // Can't generate an auto-prop for a setter-only property.
-                propertyGenerationBehavior = ImplementTypePropertyGenerationBehavior.PreferThrowingProperties;
+                propertyGenerationBehavior =
+                    ImplementTypePropertyGenerationBehavior.PreferThrowingProperties;
             }
 
             var generator = _document.GetRequiredLanguageService<SyntaxGenerator>();
-            var preferAutoProperties = propertyGenerationBehavior == ImplementTypePropertyGenerationBehavior.PreferAutoProperties;
+            var preferAutoProperties =
+                propertyGenerationBehavior
+                == ImplementTypePropertyGenerationBehavior.PreferAutoProperties;
 
             var getMethod = ShouldGenerateAccessor(property.GetMethod)
                 ? CodeGenerationSymbolFactory.CreateAccessorSymbol(
@@ -217,7 +335,12 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
                     attributes: default,
                     accessibility: property.GetMethod.ComputeResultantAccessibility(ClassType),
                     statements: generator.GetGetAccessorStatements(
-                        compilation, property, throughMember, preferAutoProperties))
+                        compilation,
+                        property,
+                        throughMember,
+                        preferAutoProperties
+                    )
+                )
                 : null;
 
             var setMethod = ShouldGenerateAccessor(property.SetMethod)
@@ -226,7 +349,12 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
                     attributes: default,
                     accessibility: property.SetMethod.ComputeResultantAccessibility(ClassType),
                     statements: generator.GetSetAccessorStatements(
-                        compilation, property, throughMember, preferAutoProperties))
+                        compilation,
+                        property,
+                        throughMember,
+                        preferAutoProperties
+                    )
+                )
                 : null;
 
             return CodeGenerationSymbolFactory.CreatePropertySymbol(
@@ -234,50 +362,80 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
                 accessibility: accessibility,
                 modifiers: modifiers,
                 getMethod: getMethod,
-                setMethod: setMethod);
+                setMethod: setMethod
+            );
         }
 
         private IEventSymbol GenerateEvent(
-            IEventSymbol @event, ISymbol? throughMember, Accessibility accessibility, DeclarationModifiers modifiers)
+            IEventSymbol @event,
+            ISymbol? throughMember,
+            Accessibility accessibility,
+            DeclarationModifiers modifiers
+        )
         {
             var generator = _document.GetRequiredLanguageService<SyntaxGenerator>();
             return CodeGenerationSymbolFactory.CreateEventSymbol(
-                @event, accessibility: accessibility, modifiers: modifiers,
-                addMethod: GetEventAddOrRemoveMethod(@event, @event.AddMethod, throughMember, generator.AddEventHandler),
-                removeMethod: GetEventAddOrRemoveMethod(@event, @event.RemoveMethod, throughMember, generator.RemoveEventHandler));
+                @event,
+                accessibility: accessibility,
+                modifiers: modifiers,
+                addMethod: GetEventAddOrRemoveMethod(
+                    @event,
+                    @event.AddMethod,
+                    throughMember,
+                    generator.AddEventHandler
+                ),
+                removeMethod: GetEventAddOrRemoveMethod(
+                    @event,
+                    @event.RemoveMethod,
+                    throughMember,
+                    generator.RemoveEventHandler
+                )
+            );
         }
 
         private IMethodSymbol? GetEventAddOrRemoveMethod(
-            IEventSymbol @event, IMethodSymbol? accessor, ISymbol? throughMember,
-            Func<SyntaxNode, SyntaxNode, SyntaxNode> createAddOrRemoveHandler)
+            IEventSymbol @event,
+            IMethodSymbol? accessor,
+            ISymbol? throughMember,
+            Func<SyntaxNode, SyntaxNode, SyntaxNode> createAddOrRemoveHandler
+        )
         {
             if (accessor == null || throughMember == null)
                 return null;
 
             var generator = _document.GetRequiredLanguageService<SyntaxGenerator>();
-            var throughExpression = generator.CreateDelegateThroughExpression(@event, throughMember);
-            var statement = generator.ExpressionStatement(createAddOrRemoveHandler(
-                generator.MemberAccessExpression(throughExpression, @event.Name),
-                generator.IdentifierName("value")));
+            var throughExpression = generator.CreateDelegateThroughExpression(
+                @event,
+                throughMember
+            );
+            var statement = generator.ExpressionStatement(
+                createAddOrRemoveHandler(
+                    generator.MemberAccessExpression(throughExpression, @event.Name),
+                    generator.IdentifierName("value")
+                )
+            );
 
             return CodeGenerationSymbolFactory.CreateAccessorSymbol(
                 attributes: default,
                 accessibility: Accessibility.NotApplicable,
-                statements: ImmutableArray.Create(statement));
+                statements: ImmutableArray.Create(statement)
+            );
         }
 
-        private bool ShouldGenerateAccessor([NotNullWhen(true)] IMethodSymbol? method)
-            => method != null && ClassType.FindImplementationForAbstractMember(method) == null;
+        private bool ShouldGenerateAccessor([NotNullWhen(true)] IMethodSymbol? method) =>
+            method != null && ClassType.FindImplementationForAbstractMember(method) == null;
 
         public IEnumerable<(ISymbol symbol, bool canDelegateAllMembers)> GetDelegatableMembers()
         {
-            var fields = ClassType.GetMembers()
+            var fields = ClassType
+                .GetMembers()
                 .OfType<IFieldSymbol>()
                 .Where(f => !f.IsImplicitlyDeclared)
                 .Where(f => InheritsFromOrEquals(f.Type, AbstractClassType))
                 .OfType<ISymbol>();
 
-            var properties = ClassType.GetMembers()
+            var properties = ClassType
+                .GetMembers()
                 .OfType<IPropertySymbol>()
                 .Where(p => !p.IsImplicitlyDeclared && p.Parameters.Length == 0)
                 .Where(p => InheritsFromOrEquals(p.Type, AbstractClassType))
@@ -289,9 +447,13 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             foreach (var fieldOrProp in fields.Concat(properties))
             {
                 var fieldOrPropType = fieldOrProp.GetMemberType();
-                var allUnimplementedMembers = _unimplementedMembers.SelectMany(t => t.members).ToImmutableArray();
+                var allUnimplementedMembers = _unimplementedMembers
+                    .SelectMany(t => t.members)
+                    .ToImmutableArray();
 
-                var accessibleCount = allUnimplementedMembers.Count(m => m.IsAccessibleWithin(ClassType, throughType: fieldOrPropType));
+                var accessibleCount = allUnimplementedMembers.Count(
+                    m => m.IsAccessibleWithin(ClassType, throughType: fieldOrPropType)
+                );
                 if (accessibleCount > 0)
                 {
                     // there was at least one unimplemented member that we could implement here
@@ -299,13 +461,17 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
                     // indicate if we will be able to delegate all unimplemented members through
                     // this.  If not, we'll let the user know that they can delegate through this
                     // but that it will not fully fix the error.
-                    yield return (fieldOrProp, canDelegateAllMembers: accessibleCount == allUnimplementedMembers.Length);
+                    yield return (
+                        fieldOrProp,
+                        canDelegateAllMembers: accessibleCount == allUnimplementedMembers.Length
+                    );
                 }
             }
         }
 
-        private static bool InheritsFromOrEquals(ITypeSymbol type, ITypeSymbol baseType)
-            => GetBaseTypesAndThis(type).Contains(t => SymbolEquivalenceComparer.Instance.Equals(t, baseType));
+        private static bool InheritsFromOrEquals(ITypeSymbol type, ITypeSymbol baseType) =>
+            GetBaseTypesAndThis(type)
+                .Contains(t => SymbolEquivalenceComparer.Instance.Equals(t, baseType));
 
         private static IEnumerable<ITypeSymbol> GetBaseTypesAndThis(ITypeSymbol? type)
         {
@@ -318,13 +484,12 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
                 // now the compiler gives no way to determine the effective base class of a type
                 // parameter.  So we do a poor mans version and attempt to figure it out from the
                 // constraints ourselves.
-                if (current.BaseType == null &&
-                    current is ITypeParameterSymbol typeParameter)
+                if (current.BaseType == null && current is ITypeParameterSymbol typeParameter)
                 {
                     var constraints = typeParameter.ConstraintTypes;
                     current =
-                        constraints.OfType<INamedTypeSymbol>().FirstOrDefault() ??
-                        constraints.FirstOrDefault(t => t.IsReferenceType);
+                        constraints.OfType<INamedTypeSymbol>().FirstOrDefault()
+                        ?? constraints.FirstOrDefault(t => t.IsReferenceType);
                     continue;
                 }
 

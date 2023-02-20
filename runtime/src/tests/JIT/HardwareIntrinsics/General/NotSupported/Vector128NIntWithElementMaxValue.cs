@@ -23,7 +23,10 @@ namespace JIT.HardwareIntrinsics.General
 
             try
             {
-                Vector128<nint> result = default(Vector128<nint>).WithElement(int.MaxValue, (nint)0);
+                Vector128<nint> result = default(Vector128<nint>).WithElement(
+                    int.MaxValue,
+                    (nint)0
+                );
             }
             catch (NotSupportedException)
             {
@@ -32,7 +35,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128NIntWithElementMaxValue: RunNotSupportedScenario failed to throw NotSupportedException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128NIntWithElementMaxValue: RunNotSupportedScenario failed to throw NotSupportedException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 throw new Exception("One or more scenarios did not complete as expected.");

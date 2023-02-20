@@ -4,19 +4,19 @@ namespace Mono.Linker.Tests.Cases.Statics
 {
     public class StaticFieldInitializer
     {
-        public static void Main ()
+        public static void Main()
         {
-            C.Foo ();
+            C.Foo();
         }
 
-        [KeptMember (".cctor()")]
+        [KeptMember(".cctor()")]
         static class C
         {
             [Kept]
-            public static object o = new object ();
+            public static object o = new object();
 
             [Kept]
-            public static object Foo ()
+            public static object Foo()
             {
                 return o;
             }

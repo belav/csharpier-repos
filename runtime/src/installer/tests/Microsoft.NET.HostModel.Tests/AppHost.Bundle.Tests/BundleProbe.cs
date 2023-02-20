@@ -24,14 +24,14 @@ namespace AppHost.Bundle.Tests
             var fixture = sharedTestState.TestFixture.Copy();
             string appExe = BundleHelper.GetHostPath(fixture);
 
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("No BUNDLE_PROBE");
+                .And.HaveStdOutContaining("No BUNDLE_PROBE");
         }
 
         [Fact]
@@ -40,14 +40,14 @@ namespace AppHost.Bundle.Tests
             var fixture = sharedTestState.TestFixture.Copy();
             string singleFile = BundleSelfContainedApp(fixture);
 
-            Command.Create(singleFile, "SingleFile")
+            Command
+                .Create(singleFile, "SingleFile")
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("BUNDLE_PROBE OK");
+                .And.HaveStdOutContaining("BUNDLE_PROBE OK");
         }
 
         public class SharedTestState : SharedTestStateBase, IDisposable

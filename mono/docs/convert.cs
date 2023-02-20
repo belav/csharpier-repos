@@ -1,12 +1,12 @@
 using HtmlAgilityPack;
 
-class Convert {
-    
-    static void Main (string [] args)
+class Convert
+{
+    static void Main(string[] args)
     {
         HtmlDocument doc = new HtmlDocument();
-        doc.Load(args [0]);
+        doc.Load(args[0]);
         doc.OptionOutputAsXml = true;
-        doc.Save(args [1]);
+        doc.Save(args[1]);
     }
 }

@@ -3,11 +3,10 @@
 
 using System.Diagnostics;
 
-[module: DebuggableAttribute (false, false)] 
-[module: DebuggableAttribute (false, false)] 
+[module: DebuggableAttribute(false, false)]
+[module: DebuggableAttribute(false, false)]
 
-class MainClass {
-        static void Main()
-        {
-        }
+class MainClass
+{
+    static void Main() { }
 }

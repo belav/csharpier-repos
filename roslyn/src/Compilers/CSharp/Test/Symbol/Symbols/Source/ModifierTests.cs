@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void Simple1()
         {
             var text =
-@"abstract class A : Base
+                @"abstract class A : Base
 {
     void M1() { }
     public void M2() { }
@@ -97,7 +97,7 @@ abstract class Base
         public void InScript()
         {
             var text =
-@"
+                @"
 void M1() { }
 public void M2() { }
 protected void M3() { }
@@ -140,7 +140,8 @@ static void M12() { }
         [Fact]
         public void TypeMap()
         {
-            var source = @"
+            var source =
+                @"
 struct S<T> where T : struct
 {
 }
@@ -150,116 +151,165 @@ struct S<T> where T : struct
             comp.VerifyDiagnostics();
 
             var intType = comp.GetSpecialType(SpecialType.System_Int32);
-            var customModifiers = ImmutableArray.Create(CSharpCustomModifier.CreateOptional(intType));
+            var customModifiers = ImmutableArray.Create(
+                CSharpCustomModifier.CreateOptional(intType)
+            );
 
             var structType = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("S");
             var typeParamType = structType.TypeParameters.Single();
 
-            var pointerType = new PointerTypeSymbol(TypeWithAnnotations.Create(typeParamType, customModifiers: customModifiers)); // NOTE: We're constructing this manually, since it's illegal.
-            var arrayType = ArrayTypeSymbol.CreateCSharpArray(comp.Assembly, TypeWithAnnotations.Create(typeParamType, customModifiers: customModifiers)); // This is legal, but we're already manually constructing types.
+            var pointerType = new PointerTypeSymbol(
+                TypeWithAnnotations.Create(typeParamType, customModifiers: customModifiers)
+            ); // NOTE: We're constructing this manually, since it's illegal.
+            var arrayType = ArrayTypeSymbol.CreateCSharpArray(
+                comp.Assembly,
+                TypeWithAnnotations.Create(typeParamType, customModifiers: customModifiers)
+            ); // This is legal, but we're already manually constructing types.
 
-            var typeMap = new TypeMap(ImmutableArray.Create(typeParamType), ImmutableArray.Create(TypeWithAnnotations.Create(intType)));
+            var typeMap = new TypeMap(
+                ImmutableArray.Create(typeParamType),
+                ImmutableArray.Create(TypeWithAnnotations.Create(intType))
+            );
 
-            var substitutedPointerType = (PointerTypeSymbol)typeMap.SubstituteType(pointerType).AsTypeSymbolOnly();
-            var substitutedArrayType = (ArrayTypeSymbol)typeMap.SubstituteType(arrayType).AsTypeSymbolOnly();
+            var substitutedPointerType = (PointerTypeSymbol)
+                typeMap.SubstituteType(pointerType).AsTypeSymbolOnly();
+            var substitutedArrayType = (ArrayTypeSymbol)
+                typeMap.SubstituteType(arrayType).AsTypeSymbolOnly();
 
             // The map changed the types.
             Assert.Equal(intType, substitutedPointerType.PointedAtType);
             Assert.Equal(intType, substitutedArrayType.ElementType);
 
             // The map preserved the custom modifiers.
-            Assert.Equal(customModifiers, substitutedPointerType.PointedAtTypeWithAnnotations.CustomModifiers);
-            Assert.Equal(customModifiers, substitutedArrayType.ElementTypeWithAnnotations.CustomModifiers);
+            Assert.Equal(
+                customModifiers,
+                substitutedPointerType.PointedAtTypeWithAnnotations.CustomModifiers
+            );
+            Assert.Equal(
+                customModifiers,
+                substitutedArrayType.ElementTypeWithAnnotations.CustomModifiers
+            );
         }
 
         [Fact, WorkItem(63758, "https://github.com/dotnet/roslyn/issues/63758")]
         public void ReadonlyParameter1()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Base {
     public void M(ref readonly int X) {
     }
-}").VerifyDiagnostics(
-                // (3,23): error CS9068: 'readonly' is not supported as a parameter modifier. Did you mean 'in'?
-                //     public void M(ref readonly int X) {
-                Diagnostic(ErrorCode.ERR_ReadOnlyNotSuppAsParamModDidYouMeanIn, "readonly").WithLocation(3, 23));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (3,23): error CS9068: 'readonly' is not supported as a parameter modifier. Did you mean 'in'?
+                    //     public void M(ref readonly int X) {
+                    Diagnostic(ErrorCode.ERR_ReadOnlyNotSuppAsParamModDidYouMeanIn, "readonly")
+                        .WithLocation(3, 23)
+                );
         }
 
         [Fact, WorkItem(63758, "https://github.com/dotnet/roslyn/issues/63758")]
         public void ReadonlyParameter2()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Base {
     public void M(readonly ref int X) {
     }
-}").VerifyDiagnostics(
-            // (3,19): error CS9068: 'readonly' is not supported as a parameter modifier. Did you mean 'in'?
-            //     public void M(readonly ref int X) {
-            Diagnostic(ErrorCode.ERR_ReadOnlyNotSuppAsParamModDidYouMeanIn, "readonly").WithLocation(3, 19));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (3,19): error CS9068: 'readonly' is not supported as a parameter modifier. Did you mean 'in'?
+                    //     public void M(readonly ref int X) {
+                    Diagnostic(ErrorCode.ERR_ReadOnlyNotSuppAsParamModDidYouMeanIn, "readonly")
+                        .WithLocation(3, 19)
+                );
         }
 
         [Fact, WorkItem(63758, "https://github.com/dotnet/roslyn/issues/63758")]
         public void ReadonlyParameter3()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Base {
     public void M(readonly int X) {
     }
-}").VerifyDiagnostics(
-                // (3,19): error CS9068: 'readonly' is not supported as a parameter modifier. Did you mean 'in'?
-                //     public void M(readonly int X) {
-                Diagnostic(ErrorCode.ERR_ReadOnlyNotSuppAsParamModDidYouMeanIn, "readonly").WithLocation(3, 19));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (3,19): error CS9068: 'readonly' is not supported as a parameter modifier. Did you mean 'in'?
+                    //     public void M(readonly int X) {
+                    Diagnostic(ErrorCode.ERR_ReadOnlyNotSuppAsParamModDidYouMeanIn, "readonly")
+                        .WithLocation(3, 19)
+                );
         }
 
         [Fact, WorkItem(63758, "https://github.com/dotnet/roslyn/issues/63758")]
         public void ReadonlyParameter4()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Base {
     void M()
     {
         var v = (readonly int i) => { };
     }
-}").VerifyDiagnostics(
-                // (5,18): error CS9068: 'readonly' is not supported as a parameter modifier. Did you mean 'in'?
-                //         var v = (readonly int i) => { };
-                Diagnostic(ErrorCode.ERR_ReadOnlyNotSuppAsParamModDidYouMeanIn, "readonly").WithLocation(5, 18));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (5,18): error CS9068: 'readonly' is not supported as a parameter modifier. Did you mean 'in'?
+                    //         var v = (readonly int i) => { };
+                    Diagnostic(ErrorCode.ERR_ReadOnlyNotSuppAsParamModDidYouMeanIn, "readonly")
+                        .WithLocation(5, 18)
+                );
         }
 
         [Fact, WorkItem(63758, "https://github.com/dotnet/roslyn/issues/63758")]
         public void ReadonlyParameter5()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Base {
     void M()
     {
         var v = (ref readonly int i) => { };
     }
-}").VerifyDiagnostics(
-                // (5,22): error CS9068: 'readonly' is not supported as a parameter modifier. Did you mean 'in'?
-                //         var v = (ref readonly int i) => { };
-                Diagnostic(ErrorCode.ERR_ReadOnlyNotSuppAsParamModDidYouMeanIn, "readonly").WithLocation(5, 22));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (5,22): error CS9068: 'readonly' is not supported as a parameter modifier. Did you mean 'in'?
+                    //         var v = (ref readonly int i) => { };
+                    Diagnostic(ErrorCode.ERR_ReadOnlyNotSuppAsParamModDidYouMeanIn, "readonly")
+                        .WithLocation(5, 22)
+                );
         }
 
         [Fact, WorkItem(63758, "https://github.com/dotnet/roslyn/issues/63758")]
         public void ReadonlyParameter6()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Base {
     void M()
     {
         var v = (readonly ref int i) => { };
     }
-}").VerifyDiagnostics(
-                // (5,18): error CS9068: 'readonly' is not supported as a parameter modifier. Did you mean 'in'?
-                //         var v = (readonly ref int i) => { };
-                Diagnostic(ErrorCode.ERR_ReadOnlyNotSuppAsParamModDidYouMeanIn, "readonly").WithLocation(5, 18));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (5,18): error CS9068: 'readonly' is not supported as a parameter modifier. Did you mean 'in'?
+                    //         var v = (readonly ref int i) => { };
+                    Diagnostic(ErrorCode.ERR_ReadOnlyNotSuppAsParamModDidYouMeanIn, "readonly")
+                        .WithLocation(5, 18)
+                );
         }
 
         [Fact]
         public void RefExtensionMethodsNotSupportedBefore7_2_InSyntax()
         {
-            var code = @"
+            var code =
+                @"
 public static class Extensions
 {
     public static void Print(in this int p)
@@ -276,16 +326,29 @@ public static class Program
     }
 }";
 
-            CreateCompilation(code, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_1)).VerifyDiagnostics(
-                // (4,30): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use language version 7.2 or greater.
-                //     public static void Print(in this int p)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "in").WithArguments("readonly references", "7.2").WithLocation(4, 30),
-                // (4,33): error CS8302: Feature 'ref extension methods' is not available in C# 7.1. Please use language version 7.2 or greater.
-                //     public static void Print(in this int p)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "this").WithArguments("ref extension methods", "7.2").WithLocation(4, 33),
-                // (14,9): error CS8302: Feature 'ref extension methods' is not available in C# 7.1. Please use language version 7.2 or greater.
-                //         p.Print();
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "p").WithArguments("ref extension methods", "7.2").WithLocation(14, 9));
+            CreateCompilation(
+                    code,
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp7_1
+                    )
+                )
+                .VerifyDiagnostics(
+                    // (4,30): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use language version 7.2 or greater.
+                    //     public static void Print(in this int p)
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "in")
+                        .WithArguments("readonly references", "7.2")
+                        .WithLocation(4, 30),
+                    // (4,33): error CS8302: Feature 'ref extension methods' is not available in C# 7.1. Please use language version 7.2 or greater.
+                    //     public static void Print(in this int p)
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "this")
+                        .WithArguments("ref extension methods", "7.2")
+                        .WithLocation(4, 33),
+                    // (14,9): error CS8302: Feature 'ref extension methods' is not available in C# 7.1. Please use language version 7.2 or greater.
+                    //         p.Print();
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "p")
+                        .WithArguments("ref extension methods", "7.2")
+                        .WithLocation(14, 9)
+                );
 
             CompileAndVerify(code, expectedOutput: "5");
         }
@@ -293,7 +356,8 @@ public static class Program
         [Fact]
         public void RefExtensionMethodsNotSupportedBefore7_2_RefSyntax()
         {
-            var code = @"
+            var code =
+                @"
 public static class Extensions
 {
     public static void Print(ref this int p)
@@ -310,13 +374,24 @@ public static class Program
     }
 }";
 
-            CreateCompilation(code, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_1)).VerifyDiagnostics(
-                // (4,34): error CS8302: Feature 'ref extension methods' is not available in C# 7.1. Please use language version 7.2 or greater.
-                //     public static void Print(ref this int p)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "this").WithArguments("ref extension methods", "7.2").WithLocation(4, 34),
-                // (14,9): error CS8302: Feature 'ref extension methods' is not available in C# 7.1. Please use language version 7.2 or greater.
-                //         p.Print();
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "p").WithArguments("ref extension methods", "7.2").WithLocation(14, 9));
+            CreateCompilation(
+                    code,
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp7_1
+                    )
+                )
+                .VerifyDiagnostics(
+                    // (4,34): error CS8302: Feature 'ref extension methods' is not available in C# 7.1. Please use language version 7.2 or greater.
+                    //     public static void Print(ref this int p)
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "this")
+                        .WithArguments("ref extension methods", "7.2")
+                        .WithLocation(4, 34),
+                    // (14,9): error CS8302: Feature 'ref extension methods' is not available in C# 7.1. Please use language version 7.2 or greater.
+                    //         p.Print();
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "p")
+                        .WithArguments("ref extension methods", "7.2")
+                        .WithLocation(14, 9)
+                );
 
             CompileAndVerify(code, expectedOutput: "5");
         }
@@ -325,16 +400,21 @@ public static class Program
         [CompilerTrait(CompilerFeature.ReadOnlyReferences)]
         public void InParametersWouldErrorOutInEarlierCSharpVersions()
         {
-            var code = @"
+            var code =
+                @"
 public class Test
 {
     public void DoSomething(in int x) { }
 }";
 
-            CreateCompilation(code, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7)).VerifyDiagnostics(
-                // (4,29): error CS8107: Feature 'readonly references' is not available in C# 7.0. Please use language version 7.2 or greater.
-                //     public void DoSomething(in int x) { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "in").WithArguments("readonly references", "7.2").WithLocation(4, 29));
+            CreateCompilation(code, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7))
+                .VerifyDiagnostics(
+                    // (4,29): error CS8107: Feature 'readonly references' is not available in C# 7.0. Please use language version 7.2 or greater.
+                    //     public void DoSomething(in int x) { }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "in")
+                        .WithArguments("readonly references", "7.2")
+                        .WithLocation(4, 29)
+                );
         }
     }
 }

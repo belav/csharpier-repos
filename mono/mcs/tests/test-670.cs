@@ -4,7 +4,7 @@ using System;
 
 unsafe class C
 {
-    public static void Main ()
+    public static void Main()
     {
         int x = 5;
         int* a = &(*(x + (int*)null));

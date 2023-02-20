@@ -14,64 +14,67 @@ namespace Mono.Linker.Tests.Cases.Reflection
     [ExpectedNoWarnings]
     public class TypeDelegator
     {
-        public static void Main ()
+        public static void Main()
         {
-            TestTypeUsedWithDelegator ();
-            TestNullValue ();
-            TestNoValue ();
-            TestDataFlowPropagation ();
-            TestDataFlowOfUnannotated ();
+            TestTypeUsedWithDelegator();
+            TestNullValue();
+            TestNoValue();
+            TestDataFlowPropagation();
+            TestDataFlowOfUnannotated();
         }
 
         [Kept]
         static class TypeUsedWithDelegator
         {
             [Kept]
-            public static void Method () { }
+            public static void Method() { }
 
-            public static void UnrelatedMethod () { }
+            public static void UnrelatedMethod() { }
         }
 
         [Kept]
-        static void TestTypeUsedWithDelegator ()
+        static void TestTypeUsedWithDelegator()
         {
-            _ = new System.Reflection.TypeDelegator (typeof (TypeUsedWithDelegator)).GetMethod ("Method");
+            _ = new System.Reflection.TypeDelegator(typeof(TypeUsedWithDelegator)).GetMethod(
+                "Method"
+            );
         }
 
         [Kept]
-        static void TestNullValue ()
+        static void TestNullValue()
         {
-            var typeDelegator = new System.Reflection.TypeDelegator (null);
-            typeDelegator.RequiresAll ();
+            var typeDelegator = new System.Reflection.TypeDelegator(null);
+            typeDelegator.RequiresAll();
         }
 
         [Kept]
-        static void TestNoValue ()
+        static void TestNoValue()
         {
             Type t = null;
-            Type noValue = Type.GetTypeFromHandle (t.TypeHandle);
-            var typeDelegator = new System.Reflection.TypeDelegator (noValue);
-            typeDelegator.RequiresAll ();
+            Type noValue = Type.GetTypeFromHandle(t.TypeHandle);
+            var typeDelegator = new System.Reflection.TypeDelegator(noValue);
+            typeDelegator.RequiresAll();
         }
 
         [Kept]
-        [ExpectedWarning ("IL2067", nameof (DataFlowTypeExtensions.RequiresPublicFields))]
-        static void TestDataFlowPropagation (
-            [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)]
-            Type typeWithPublicMethods = null)
+        [ExpectedWarning("IL2067", nameof(DataFlowTypeExtensions.RequiresPublicFields))]
+        static void TestDataFlowPropagation(
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                Type typeWithPublicMethods = null
+        )
         {
-            var typeDelegator = new System.Reflection.TypeDelegator (typeWithPublicMethods);
-            typeDelegator.RequiresPublicMethods (); // Should not warn
-            typeDelegator.RequiresPublicFields (); // Should warn
+            var typeDelegator = new System.Reflection.TypeDelegator(typeWithPublicMethods);
+            typeDelegator.RequiresPublicMethods(); // Should not warn
+            typeDelegator.RequiresPublicFields(); // Should warn
         }
 
         [Kept]
-        [ExpectedWarning ("IL2067", nameof (DataFlowTypeExtensions.RequiresPublicMethods))]
-        static void TestDataFlowOfUnannotated (Type unknownType = null)
+        [ExpectedWarning("IL2067", nameof(DataFlowTypeExtensions.RequiresPublicMethods))]
+        static void TestDataFlowOfUnannotated(Type unknownType = null)
         {
-            var typeDelegator = new System.Reflection.TypeDelegator (unknownType);
-            unknownType.RequiresPublicMethods ();
+            var typeDelegator = new System.Reflection.TypeDelegator(unknownType);
+            unknownType.RequiresPublicMethods();
         }
     }
 }

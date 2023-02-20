@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,56 +33,67 @@ using System.ComponentModel.Design;
 
 namespace System.Web.UI.Design
 {
-    [Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
+    [Obsolete(
+        "Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0."
+    )]
     public sealed class TemplateEditingService : ITemplateEditingService, IDisposable
     {
-        public TemplateEditingService (IDesignerHost designerHost)
+        public TemplateEditingService(IDesignerHost designerHost)
         {
             if (designerHost == null)
-                throw new ArgumentNullException ("designerHost");
+                throw new ArgumentNullException("designerHost");
 
             _designerHost = designerHost;
         }
 
-        ~TemplateEditingService ()
+        ~TemplateEditingService()
         {
-            Dispose (false);
+            Dispose(false);
         }
 
         [MonoTODO]
-        public ITemplateEditingFrame CreateFrame (TemplatedControlDesigner designer, string frameName, string[] templateNames)
+        public ITemplateEditingFrame CreateFrame(
+            TemplatedControlDesigner designer,
+            string frameName,
+            string[] templateNames
+        )
         {
-            return CreateFrame (designer, frameName, templateNames, null, null);
+            return CreateFrame(designer, frameName, templateNames, null, null);
         }
 
         [MonoTODO]
-        public ITemplateEditingFrame CreateFrame (TemplatedControlDesigner designer, string frameName, string[] templateNames, Style controlStyle, Style[] templateStyles)
+        public ITemplateEditingFrame CreateFrame(
+            TemplatedControlDesigner designer,
+            string frameName,
+            string[] templateNames,
+            Style controlStyle,
+            Style[] templateStyles
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
-            GC.SuppressFinalize (this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        private void Dispose (bool disposing)
+        private void Dispose(bool disposing)
         {
             if (disposing)
                 _designerHost = null;
         }
 
         [MonoTODO]
-        public string GetContainingTemplateName (Control control)
+        public string GetContainingTemplateName(Control control)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool SupportsNestedTemplateEditing {
-            get {
-                return false;
-            }
+        public bool SupportsNestedTemplateEditing
+        {
+            get { return false; }
         }
 
         private IDesignerHost _designerHost;

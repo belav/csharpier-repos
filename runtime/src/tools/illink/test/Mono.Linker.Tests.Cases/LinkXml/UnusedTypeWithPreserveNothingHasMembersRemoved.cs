@@ -3,12 +3,10 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
-    [SetupLinkerDescriptorFile ("UnusedTypeWithPreserveNothingHasMembersRemoved.xml")]
+    [SetupLinkerDescriptorFile("UnusedTypeWithPreserveNothingHasMembersRemoved.xml")]
     class UnusedTypeWithPreserveNothingHasMembersRemoved
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
         class Unused
@@ -27,29 +25,17 @@ namespace Mono.Linker.Tests.Cases.LinkXml
             private static string Property5 { get; set; }
             internal static string Property6 { get; set; }
 
-            public void Method1 ()
-            {
-            }
+            public void Method1() { }
 
-            private void Method2 ()
-            {
-            }
+            private void Method2() { }
 
-            internal void Method3 ()
-            {
-            }
+            internal void Method3() { }
 
-            public static void Method4 ()
-            {
-            }
+            public static void Method4() { }
 
-            private static void Method5 ()
-            {
-            }
+            private static void Method5() { }
 
-            internal static void Method6 ()
-            {
-            }
+            internal static void Method6() { }
         }
     }
 }

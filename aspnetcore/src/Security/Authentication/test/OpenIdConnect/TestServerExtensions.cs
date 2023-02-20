@@ -14,12 +14,20 @@ internal static class TestServerExtensions
         return SendAsync(server, url, cookieHeader: null);
     }
 
-    public static Task<TestTransaction> SendAsync(this TestServer server, string url, string cookieHeader)
+    public static Task<TestTransaction> SendAsync(
+        this TestServer server,
+        string url,
+        string cookieHeader
+    )
     {
         return SendAsync(server, new HttpRequestMessage(HttpMethod.Get, url), cookieHeader);
     }
 
-    public static async Task<TestTransaction> SendAsync(this TestServer server, HttpRequestMessage request, string cookieHeader)
+    public static async Task<TestTransaction> SendAsync(
+        this TestServer server,
+        HttpRequestMessage request,
+        string cookieHeader
+    )
     {
         if (!string.IsNullOrEmpty(cookieHeader))
         {
@@ -38,9 +46,11 @@ internal static class TestServerExtensions
         }
 
         transaction.ResponseText = await transaction.Response.Content.ReadAsStringAsync();
-        if (transaction.Response.Content != null &&
-            transaction.Response.Content.Headers.ContentType != null &&
-            transaction.Response.Content.Headers.ContentType.MediaType == "text/xml")
+        if (
+            transaction.Response.Content != null
+            && transaction.Response.Content.Headers.ContentType != null
+            && transaction.Response.Content.Headers.ContentType.MediaType == "text/xml"
+        )
         {
             transaction.ResponseElement = XElement.Parse(transaction.ResponseText);
         }

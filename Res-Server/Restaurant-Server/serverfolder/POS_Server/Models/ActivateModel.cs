@@ -5,13 +5,10 @@ using System.Web;
 
 namespace POS_Server.Models
 {
-    public class ActivateModelModel
-    {
+    public class ActivateModelModel { }
 
-    }
     public class PosSerialSend
     {
-
         public string serial { get; set; }
         public string posDeviceCode { get; set; }
 
@@ -22,9 +19,6 @@ namespace POS_Server.Models
         public Nullable<long> posSettingId { get; set; }
         public Nullable<long> posId { get; set; }
         public bool unLimited { get; set; }
-
-
-
     }
 
     public class daysremain
@@ -34,7 +28,8 @@ namespace POS_Server.Models
         public Nullable<int> hours { get; set; }
         public Nullable<int> minute { get; set; }
     }
-        public class packagesSend
+
+    public class packagesSend
     {
         public Nullable<int> packageUserId { get; set; }
         public string packageName { get; set; }
@@ -65,11 +60,9 @@ namespace POS_Server.Models
         public bool canRenew { get; set; }
         public bool isBooked { get; set; }
 
-
         public Nullable<System.DateTime> bookDate { get; set; }
 
         public Nullable<System.DateTime> expireDate { get; set; }
-
 
         public string type { get; set; }
         public bool isPayed { get; set; }
@@ -81,17 +74,16 @@ namespace POS_Server.Models
 
         public string packageNumber { get; set; }
 
-      
         public Nullable<int> pId { get; set; }
         public Nullable<int> pcdId { get; set; }
         public string activeState { get; set; }
         public string activeres { get; set; }
 
-        public string customerName { get; set; }// 6- customer Name
-        public string customerLastName { get; set; }// 6- customer LastName
-        public string agentName { get; set; }// 5- Agent name 
-        public string agentAccountName { get; set; }//5- Agent AccountName
-        public string agentLastName { get; set; }//5- Agent LastName
+        public string customerName { get; set; } // 6- customer Name
+        public string customerLastName { get; set; } // 6- customer LastName
+        public string agentName { get; set; } // 5- Agent name
+        public string agentAccountName { get; set; } //5- Agent AccountName
+        public string agentLastName { get; set; } //5- Agent LastName
 
         public Nullable<System.DateTime> pocrDate { get; set; }
         public Nullable<int> poId { get; set; }
@@ -101,8 +93,8 @@ namespace POS_Server.Models
         public string activeApp { get; set; }
         public string confirmStat { get; set; }
         public string isDemo { get; set; }
-
     }
+
     public class SendDetail
     {
         public List<PosSerialSend> PosSerialSendList;

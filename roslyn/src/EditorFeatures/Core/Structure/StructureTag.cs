@@ -16,7 +16,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
     {
         private readonly AbstractStructureTaggerProvider _tagProvider;
 
-        public StructureTag(AbstractStructureTaggerProvider tagProvider, BlockSpan blockSpan, ITextSnapshot snapshot)
+        public StructureTag(
+            AbstractStructureTaggerProvider tagProvider,
+            BlockSpan blockSpan,
+            ITextSnapshot snapshot
+        )
         {
             Snapshot = snapshot;
             OutliningSpan = blockSpan.TextSpan.ToSpan();
@@ -63,29 +67,58 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
 
         // Editor uses this here:
         // https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_git/VS-Platform?path=/src/Editor/Text/Impl/Structure/StructureSpanningTree/StructureSpanningTree.cs&version=GBmain&line=308&lineEnd=309&lineStartColumn=1&lineEndColumn=1&lineStyle=plain&_a=contents
-        public override int GetHashCode()
-            => Hash.Combine(this.GuideLineHorizontalAnchorPoint.GetHashCode(),
-               Hash.Combine(this.Type,
-               Hash.Combine(this.IsCollapsible,
-               Hash.Combine(this.IsDefaultCollapsed,
-               Hash.Combine(this.IsImplementation,
-               Hash.Combine(this.OutliningSpan.GetHashCode(),
-               Hash.Combine(this.HeaderSpan.GetHashCode(), this.GuideLineSpan.GetHashCode())))))));
+        public override int GetHashCode() =>
+            Hash.Combine(
+                this.GuideLineHorizontalAnchorPoint.GetHashCode(),
+                Hash.Combine(
+                    this.Type,
+                    Hash.Combine(
+                        this.IsCollapsible,
+                        Hash.Combine(
+                            this.IsDefaultCollapsed,
+                            Hash.Combine(
+                                this.IsImplementation,
+                                Hash.Combine(
+                                    this.OutliningSpan.GetHashCode(),
+                                    Hash.Combine(
+                                        this.HeaderSpan.GetHashCode(),
+                                        this.GuideLineSpan.GetHashCode()
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
 
-        public override bool Equals(object? obj)
-            => Equals(obj as StructureTag);
+        public override bool Equals(object? obj) => Equals(obj as StructureTag);
 
         public bool Equals(StructureTag? other)
         {
-            return other != null &&
-                this.GuideLineHorizontalAnchorPoint == other.GuideLineHorizontalAnchorPoint &&
-                this.Type == other.Type &&
-                this.IsCollapsible == other.IsCollapsible &&
-                this.IsDefaultCollapsed == other.IsDefaultCollapsed &&
-                this.IsImplementation == other.IsImplementation &&
-                _tagProvider.SpanEquals(this.Snapshot, this.OutliningSpan, other.Snapshot, other.OutliningSpan) &&
-                _tagProvider.SpanEquals(this.Snapshot, this.HeaderSpan, other.Snapshot, other.HeaderSpan) &&
-                _tagProvider.SpanEquals(this.Snapshot, this.GuideLineSpan, other.Snapshot, other.GuideLineSpan);
+            return other != null
+                && this.GuideLineHorizontalAnchorPoint == other.GuideLineHorizontalAnchorPoint
+                && this.Type == other.Type
+                && this.IsCollapsible == other.IsCollapsible
+                && this.IsDefaultCollapsed == other.IsDefaultCollapsed
+                && this.IsImplementation == other.IsImplementation
+                && _tagProvider.SpanEquals(
+                    this.Snapshot,
+                    this.OutliningSpan,
+                    other.Snapshot,
+                    other.OutliningSpan
+                )
+                && _tagProvider.SpanEquals(
+                    this.Snapshot,
+                    this.HeaderSpan,
+                    other.Snapshot,
+                    other.HeaderSpan
+                )
+                && _tagProvider.SpanEquals(
+                    this.Snapshot,
+                    this.GuideLineSpan,
+                    other.Snapshot,
+                    other.GuideLineSpan
+                );
         }
 
         public object? GetCollapsedForm()

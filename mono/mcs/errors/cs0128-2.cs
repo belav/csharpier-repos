@@ -3,9 +3,10 @@
 
 class C
 {
-    static void Foo (int arg)
+    static void Foo(int arg)
     {
-        switch (arg) {
+        switch (arg)
+        {
             case 1:
                 int res = 1;
                 break;

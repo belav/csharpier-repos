@@ -10,14 +10,17 @@ namespace Internal.Runtime.Augments
 
         readonly Thread thread;
 
-        RuntimeThread (Thread t) { thread = t; }
-        
-        public void ResetThreadPoolThread () {}
-        
-        public static RuntimeThread InitializeThreadPoolThread () => new RuntimeThread (null);
+        RuntimeThread(Thread t)
+        {
+            thread = t;
+        }
 
-        public static RuntimeThread Create (ParameterizedThreadStart start, int maxStackSize) 
-            => new RuntimeThread (new Thread (start, maxStackSize));
+        public void ResetThreadPoolThread() { }
+
+        public static RuntimeThread InitializeThreadPoolThread() => new RuntimeThread(null);
+
+        public static RuntimeThread Create(ParameterizedThreadStart start, int maxStackSize) =>
+            new RuntimeThread(new Thread(start, maxStackSize));
 
         public bool IsBackground
         {
@@ -25,21 +28,21 @@ namespace Internal.Runtime.Augments
             set => thread.IsBackground = value;
         }
 
-        public void Start () => thread.Start ();
+        public void Start() => thread.Start();
 
-        public void Start (object state) => thread.Start (state);
+        public void Start(object state) => thread.Start(state);
 
-        public static void Sleep(int millisecondsTimeout) => Thread.Sleep (millisecondsTimeout);
+        public static void Sleep(int millisecondsTimeout) => Thread.Sleep(millisecondsTimeout);
 
-        public static bool Yield () => Thread.Yield ();
+        public static bool Yield() => Thread.Yield();
 
-        public static bool SpinWait (int iterations)
+        public static bool SpinWait(int iterations)
         {
-            Thread.SpinWait (iterations);
+            Thread.SpinWait(iterations);
             return true;
         }
 
-        public static int GetCurrentProcessorId ()
+        public static int GetCurrentProcessorId()
         {
             // TODO: Implement correctly
             return 1;

@@ -35,76 +35,77 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Collections;
 
-    // Automatically reroutes Messages to the designer
-    //
-    
+// Automatically reroutes Messages to the designer
+//
+
 namespace System.Windows.Forms.Design
 {
-
     internal class WndProcRouter : IWindowTarget, IDisposable
     {
         private IWindowTarget _oldTarget;
         private IMessageReceiver _receiver;
         private Control _control;
-        
-        public WndProcRouter (Control control, IMessageReceiver receiver)
+
+        public WndProcRouter(Control control, IMessageReceiver receiver)
         {
             if (control == null)
-                throw new ArgumentNullException ("control");
+                throw new ArgumentNullException("control");
             if (receiver == null)
-                throw new ArgumentNullException ("receiver");
-            
+                throw new ArgumentNullException("receiver");
+
             _oldTarget = control.WindowTarget;
             _control = control;
             _receiver = receiver;
         }
-        
-        public Control Control {
+
+        public Control Control
+        {
             get { return _control; }
         }
 
-        public IWindowTarget OldWindowTarget {
+        public IWindowTarget OldWindowTarget
+        {
             get { return _oldTarget; }
         }
 
         // Route the message to the control
         //
-        public void ToControl (ref Message m)
+        public void ToControl(ref Message m)
         {
             //Console.WriteLine ("Control: " + ((Native.Msg)m.Msg).ToString ());
             if (_oldTarget != null)
-                _oldTarget.OnMessage (ref m);
+                _oldTarget.OnMessage(ref m);
         }
-        
-        public void ToSystem (ref Message m)
+
+        public void ToSystem(ref Message m)
         {
             //Console.WriteLine ("System: " + ((Native.Msg)m.Msg).ToString ());
-            Native.DefWndProc (ref m);
+            Native.DefWndProc(ref m);
         }
-        
+
         // Just pass it to the old IWindowTarget
         //
-        void IWindowTarget.OnHandleChange (IntPtr newHandle)
+        void IWindowTarget.OnHandleChange(IntPtr newHandle)
         {
             if (_oldTarget != null)
-                _oldTarget.OnHandleChange (newHandle);
+                _oldTarget.OnHandleChange(newHandle);
         }
 
         // Route the msg to the designer if available, else to
         // control itself.
         //
-        void IWindowTarget.OnMessage (ref Message m)
+        void IWindowTarget.OnMessage(ref Message m)
         {
             //Console.WriteLine ("Message: " + ((Native.Msg)m.Msg).ToString ());
             if (_receiver != null)
-                _receiver.WndProc (ref m);
+                _receiver.WndProc(ref m);
             else
-                this.ToControl (ref m);
+                this.ToControl(ref m);
         }
 
         // Disposes and puts back the old IWindowTarget
         //
-        public void Dispose ()
+        public void Dispose()
         {
             if (_control != null)
                 _control.WindowTarget = _oldTarget;
@@ -112,6 +113,5 @@ namespace System.Windows.Forms.Design
             _control = null;
             _oldTarget = null;
         }
-
     }
 }

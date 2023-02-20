@@ -1,11 +1,11 @@
-// 
+//
 // Method.cs
-// 
+//
 // Authors:
 //     Alexander Chebaturkin (chebaturkin@gmail.com)
-// 
+//
 // Copyright (C) 2011 Alexander Chebaturkin
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,18 +13,18 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-//  
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-// 
+//
 
 using System;
 using System.Collections.Generic;
@@ -33,10 +33,12 @@ using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Mono.Collections.Generic;
 
-namespace Mono.CodeContracts.Static.AST {
-    class Method : Member, IEquatable<Method> {
+namespace Mono.CodeContracts.Static.AST
+{
+    class Method : Member, IEquatable<Method>
+    {
         #region Delegates
-        public delegate void MethodContractProvider (Method method);
+        public delegate void MethodContractProvider(Method method);
         #endregion
 
         private readonly MethodDefinition definition;
@@ -47,13 +49,14 @@ namespace Mono.CodeContracts.Static.AST {
         private TypeNode returnType;
         private This thisParameter;
 
-        public Method (MethodDefinition definition)
-            : base (NodeType.Method)
+        public Method(MethodDefinition definition)
+            : base(NodeType.Method)
         {
             this.definition = definition;
         }
 
-        private Method (MethodDefinition definition, Block block) : base (NodeType.Method)
+        private Method(MethodDefinition definition, Block block)
+            : base(NodeType.Method)
         {
             this.definition = definition;
             this.block = block;
@@ -71,12 +74,12 @@ namespace Mono.CodeContracts.Static.AST {
 
         public override TypeNode DeclaringType
         {
-            get { return TypeNode.Create (this.definition.DeclaringType); }
+            get { return TypeNode.Create(this.definition.DeclaringType); }
         }
 
         public override Module Module
         {
-            get { return new Module (this.definition.Module); }
+            get { return new Module(this.definition.Module); }
         }
 
         public Method OverriddenMethod
@@ -85,7 +88,7 @@ namespace Mono.CodeContracts.Static.AST {
             {
                 if (!this.definition.HasOverrides)
                     return null;
-                return ParseMethodDefinition (this.definition.Overrides [0].Resolve ());
+                return ParseMethodDefinition(this.definition.Overrides[0].Resolve());
             }
         }
 
@@ -94,7 +97,7 @@ namespace Mono.CodeContracts.Static.AST {
             get
             {
                 if (this.block == null)
-                    this.block = ParseMethodBlock (this.definition);
+                    this.block = ParseMethodBlock(this.definition);
                 return this.block;
             }
             set { this.block = value; }
@@ -104,10 +107,11 @@ namespace Mono.CodeContracts.Static.AST {
         {
             get
             {
-                if (this.contract == null && ContractProvider != null) {
+                if (this.contract == null && ContractProvider != null)
+                {
                     MethodContractProvider provider = ContractProvider;
                     ContractProvider = null;
-                    provider (this);
+                    provider(this);
                 }
                 return this.contract;
             }
@@ -125,7 +129,8 @@ namespace Mono.CodeContracts.Static.AST {
             get { return this.method_contract_provider; }
             set
             {
-                if (value == null) {
+                if (value == null)
+                {
                     this.method_contract_provider = null;
                     return;
                 }
@@ -138,7 +143,6 @@ namespace Mono.CodeContracts.Static.AST {
                 this.contract = null;
             }
         }
-
 
         public bool IsFinal
         {
@@ -240,7 +244,9 @@ namespace Mono.CodeContracts.Static.AST {
             get
             {
                 if (this.parameters == null)
-                    this.parameters = this.definition.Parameters.Select (i => new Parameter (i)).ToList ();
+                    this.parameters = this.definition.Parameters
+                        .Select(i => new Parameter(i))
+                        .ToList();
                 return this.parameters;
             }
             set { this.parameters = value; }
@@ -256,7 +262,7 @@ namespace Mono.CodeContracts.Static.AST {
             get
             {
                 if (this.returnType == null)
-                    this.returnType = TypeNode.Create (this.definition.ReturnType);
+                    this.returnType = TypeNode.Create(this.definition.ReturnType);
                 return this.returnType;
             }
             set { this.returnType = value; }
@@ -277,7 +283,9 @@ namespace Mono.CodeContracts.Static.AST {
             get
             {
                 if (this.thisParameter == null && !IsStatic && DeclaringType != null)
-                    ThisParameter = !DeclaringType.IsValueType ? new This (DeclaringType.SelfInstantiation ()) : new This (DeclaringType.SelfInstantiation ().GetReferenceType ());
+                    ThisParameter = !DeclaringType.IsValueType
+                        ? new This(DeclaringType.SelfInstantiation())
+                        : new This(DeclaringType.SelfInstantiation().GetReferenceType());
                 return this.thisParameter;
             }
             private set
@@ -297,7 +305,7 @@ namespace Mono.CodeContracts.Static.AST {
                 Collection<GenericParameter> genericParameters = this.definition.GenericParameters;
                 if (genericParameters == null)
                     return null;
-                return genericParameters.Select (it => TypeNode.Create (it)).ToList ();
+                return genericParameters.Select(it => TypeNode.Create(it)).ToList();
             }
         }
 
@@ -308,7 +316,7 @@ namespace Mono.CodeContracts.Static.AST {
                 Collection<VariableDefinition> variables = this.definition.Body.Variables;
                 if (variables == null)
                     return null;
-                return variables.Select (it => new Local (it)).ToList ();
+                return variables.Select(it => new Local(it)).ToList();
             }
         }
 
@@ -318,28 +326,28 @@ namespace Mono.CodeContracts.Static.AST {
         }
 
         #region IEquatable<Method> Members
-        public bool Equals (Method other)
+        public bool Equals(Method other)
         {
             return this.definition == other.definition;
         }
         #endregion
 
-        public static Method ParseMethodDefinition (MethodDefinition methodDefinition)
+        public static Method ParseMethodDefinition(MethodDefinition methodDefinition)
         {
-            Block methodBlock = ParseMethodBlock (methodDefinition);
+            Block methodBlock = ParseMethodBlock(methodDefinition);
 
-            return new Method (methodDefinition, methodBlock);
+            return new Method(methodDefinition, methodBlock);
         }
 
-        private static Block ParseMethodBlock (MethodDefinition methodDefinition)
+        private static Block ParseMethodBlock(MethodDefinition methodDefinition)
         {
-            var bp = new BodyParser (methodDefinition);
-            return new Block (bp.ParseBlocks ());
+            var bp = new BodyParser(methodDefinition);
+            return new Block(bp.ParseBlocks());
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return string.Format ("Method(Name: {0})", FullName);
+            return string.Format("Method(Name: {0})", FullName);
         }
     }
 }

@@ -6,7 +6,8 @@ namespace System.ServiceModel.MsmqIntegration
     using System.ServiceModel.Channels;
 
     sealed class MsmqIntegrationMessagePool
-        : SynchronizedDisposablePool<MsmqIntegrationInputMessage>, IMsmqMessagePool
+        : SynchronizedDisposablePool<MsmqIntegrationInputMessage>,
+            IMsmqMessagePool
     {
         int maxPoolSize;
 
@@ -26,7 +27,7 @@ namespace System.ServiceModel.MsmqIntegration
 
         void IMsmqMessagePool.ReturnMessage(MsmqInputMessage message)
         {
-            if (! this.Return(message as MsmqIntegrationInputMessage))
+            if (!this.Return(message as MsmqIntegrationInputMessage))
             {
                 MsmqDiagnostics.PoolFull(this.maxPoolSize);
                 message.Dispose();

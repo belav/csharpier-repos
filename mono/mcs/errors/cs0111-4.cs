@@ -3,15 +3,9 @@
 
 public class C
 {
-    void Foo (int i)
-    {
-    }
-    
-    void Foo<T> (T i)
-    {
-    }
-    
-    void Foo<U> (U i)
-    {
-    }
+    void Foo(int i) { }
+
+    void Foo<T>(T i) { }
+
+    void Foo<U>(U i) { }
 }

@@ -1,10 +1,8 @@
-// Compiler options: -unsafe 
+// Compiler options: -unsafe
 
 unsafe class X
 {
-    struct S
-    {
-    }
+    struct S { }
 
     public class N<T>
     {
@@ -14,8 +12,8 @@ unsafe class X
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        new X.N<int> ();
+        new X.N<int>();
     }
 }

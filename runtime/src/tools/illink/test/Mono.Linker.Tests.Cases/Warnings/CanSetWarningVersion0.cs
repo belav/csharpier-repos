@@ -6,22 +6,22 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.Warnings
 {
     [SkipKeptItemsValidation]
-    [SetupLinkerArgument ("--verbose")]
-    [SetupLinkerArgument ("--warn", "0")]
-    [LogDoesNotContain ("IL2067")]
+    [SetupLinkerArgument("--verbose")]
+    [SetupLinkerArgument("--warn", "0")]
+    [LogDoesNotContain("IL2067")]
     public class CanSetWarningVersion0
     {
-        public static void Main ()
+        public static void Main()
         {
-            GetMethod ();
+            GetMethod();
         }
 
-        [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicFields)]
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
         static string type;
 
-        static void GetMethod ()
+        static void GetMethod()
         {
-            _ = Type.GetType (type).GetMethod ("Method");
+            _ = Type.GetType(type).GetMethod("Method");
         }
     }
 }

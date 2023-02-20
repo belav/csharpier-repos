@@ -31,35 +31,36 @@ namespace Mono.Security.Interface
 {
     public sealed class MonoTlsSettings
     {
-        public MonoRemoteCertificateValidationCallback RemoteCertificateValidationCallback {
-            get; set;
-        }
+        public MonoRemoteCertificateValidationCallback RemoteCertificateValidationCallback { get; set; }
 
-        public MonoLocalCertificateSelectionCallback ClientCertificateSelectionCallback {
-            get; set;
-        }
+        public MonoLocalCertificateSelectionCallback ClientCertificateSelectionCallback { get; set; }
 
-        public bool CheckCertificateName {
+        public bool CheckCertificateName
+        {
             get { return checkCertName; }
             set { checkCertName = value; }
         }
 
-        public bool CheckCertificateRevocationStatus {
+        public bool CheckCertificateRevocationStatus
+        {
             get { return checkCertRevocationStatus; }
             set { checkCertRevocationStatus = value; }
         }
 
-        public bool? UseServicePointManagerCallback {
+        public bool? UseServicePointManagerCallback
+        {
             get { return useServicePointManagerCallback; }
             set { useServicePointManagerCallback = value; }
         }
 
-        public bool SkipSystemValidators {
+        public bool SkipSystemValidators
+        {
             get { return skipSystemValidators; }
             set { skipSystemValidators = value; }
         }
 
-        public bool CallbackNeedsCertificateChain {
+        public bool CallbackNeedsCertificateChain
+        {
             get { return callbackNeedsChain; }
             set { callbackNeedsChain = value; }
         }
@@ -67,54 +68,36 @@ namespace Mono.Security.Interface
         /*
          * Use custom time for certificate expiration checks
          */
-        public DateTime? CertificateValidationTime {
-            get; set;
-        }
+        public DateTime? CertificateValidationTime { get; set; }
 
         /*
          * This is only supported if CertificateValidationHelper.SupportsTrustAnchors is true.
          */
-        public X509CertificateCollection TrustAnchors {
-            get; set;
-        }
+        public X509CertificateCollection TrustAnchors { get; set; }
 
-        public object UserSettings {
-            get; set;
-        }
+        public object UserSettings { get; set; }
 
-        internal string[] CertificateSearchPaths {
-            get; set;
-        }
+        internal string[] CertificateSearchPaths { get; set; }
 
         /*
          * This is only supported if MonoTlsProvider.SupportsCleanShutdown is true.
          */
-        internal bool SendCloseNotify {
-            get; set;
-        }
+        internal bool SendCloseNotify { get; set; }
 
         /*
          * Client Certificate Support.
          */
-        public string[] ClientCertificateIssuers {
-            get; set;
-        }
+        public string[] ClientCertificateIssuers { get; set; }
 
-        public bool DisallowUnauthenticatedCertificateRequest {
-            get; set;
-        }
+        public bool DisallowUnauthenticatedCertificateRequest { get; set; }
 
         /*
          * If you set this here, then it will override 'ServicePointManager.SecurityProtocol'.
          */
-        public TlsProtocols? EnabledProtocols {
-            get; set;
-        }
+        public TlsProtocols? EnabledProtocols { get; set; }
 
-        [CLSCompliant (false)]
-        public CipherSuiteCode[] EnabledCiphers {
-            get; set;
-        }
+        [CLSCompliant(false)]
+        public CipherSuiteCode[] EnabledCiphers { get; set; }
 
         bool cloned = false;
         bool checkCertName = true;
@@ -124,61 +107,61 @@ namespace Mono.Security.Interface
         bool callbackNeedsChain = true;
         ICertificateValidator certificateValidator;
 
-        public MonoTlsSettings ()
-        {
-        }
+        public MonoTlsSettings() { }
 
         static MonoTlsSettings defaultSettings;
 
-        public static MonoTlsSettings DefaultSettings {
-            get {
+        public static MonoTlsSettings DefaultSettings
+        {
+            get
+            {
                 if (defaultSettings == null)
-                    Interlocked.CompareExchange (ref defaultSettings, new MonoTlsSettings (), null);
+                    Interlocked.CompareExchange(ref defaultSettings, new MonoTlsSettings(), null);
                 return defaultSettings;
             }
-            set {
-                defaultSettings = value ?? new MonoTlsSettings ();
-            }
+            set { defaultSettings = value ?? new MonoTlsSettings(); }
         }
 
-        public static MonoTlsSettings CopyDefaultSettings ()
+        public static MonoTlsSettings CopyDefaultSettings()
         {
-            return DefaultSettings.Clone ();
+            return DefaultSettings.Clone();
         }
 
         #region Private APIs
 
         /*
          * Private APIs - do not use!
-         * 
+         *
          * This is only public to avoid making our internals visible to System.dll.
-         * 
+         *
          */
 
-        [Obsolete ("Do not use outside System.dll!")]
-        public ICertificateValidator CertificateValidator {
+        [Obsolete("Do not use outside System.dll!")]
+        public ICertificateValidator CertificateValidator
+        {
             get { return certificateValidator; }
         }
 
-        [Obsolete ("Do not use outside System.dll!")]
-        public MonoTlsSettings CloneWithValidator (ICertificateValidator validator)
+        [Obsolete("Do not use outside System.dll!")]
+        public MonoTlsSettings CloneWithValidator(ICertificateValidator validator)
         {
-            if (cloned) {
+            if (cloned)
+            {
                 this.certificateValidator = validator;
                 return this;
             }
 
-            var copy = new MonoTlsSettings (this);
+            var copy = new MonoTlsSettings(this);
             copy.certificateValidator = validator;
             return copy;
         }
 
-        public MonoTlsSettings Clone ()
+        public MonoTlsSettings Clone()
         {
-            return new MonoTlsSettings (this);
+            return new MonoTlsSettings(this);
         }
 
-        MonoTlsSettings (MonoTlsSettings other)
+        MonoTlsSettings(MonoTlsSettings other)
         {
             RemoteCertificateValidationCallback = other.RemoteCertificateValidationCallback;
             ClientCertificateSelectionCallback = other.ClientCertificateSelectionCallback;
@@ -193,12 +176,14 @@ namespace Mono.Security.Interface
             CertificateValidationTime = other.CertificateValidationTime;
             SendCloseNotify = other.SendCloseNotify;
             ClientCertificateIssuers = other.ClientCertificateIssuers;
-            DisallowUnauthenticatedCertificateRequest = other.DisallowUnauthenticatedCertificateRequest;
+            DisallowUnauthenticatedCertificateRequest =
+                other.DisallowUnauthenticatedCertificateRequest;
             if (other.TrustAnchors != null)
-                TrustAnchors = new X509CertificateCollection (other.TrustAnchors);
-            if (other.CertificateSearchPaths != null) {
-                CertificateSearchPaths = new string [other.CertificateSearchPaths.Length];
-                other.CertificateSearchPaths.CopyTo (CertificateSearchPaths, 0);
+                TrustAnchors = new X509CertificateCollection(other.TrustAnchors);
+            if (other.CertificateSearchPaths != null)
+            {
+                CertificateSearchPaths = new string[other.CertificateSearchPaths.Length];
+                other.CertificateSearchPaths.CopyTo(CertificateSearchPaths, 0);
             }
 
             cloned = true;
@@ -207,4 +192,3 @@ namespace Mono.Security.Interface
         #endregion
     }
 }
-

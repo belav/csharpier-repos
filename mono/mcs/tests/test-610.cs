@@ -2,14 +2,10 @@ public class A
 {
     private class C
     {
-        protected class D : C
-        {
-        }
+        protected class D : C { }
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }
 
 namespace N
@@ -18,17 +14,12 @@ namespace N
     {
         protected class C : A
         {
-            public class E
-            {
-            }
+            public class E { }
         }
 
         protected internal class A : B
         {
-            protected class D : C.E
-            {
-            }
+            protected class D : C.E { }
         }
     }
 }
-

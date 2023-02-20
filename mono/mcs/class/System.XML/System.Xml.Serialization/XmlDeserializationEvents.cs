@@ -1,5 +1,5 @@
-// 
-// System.Xml.Serialization.XmlDeserializationEvents.cs 
+//
+// System.Xml.Serialization.XmlDeserializationEvents.cs
 //
 // Author:
 //   Lluis Sanchez Gual (lluis@ximian.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,7 +31,7 @@
 
 using System;
 
-namespace System.Xml.Serialization 
+namespace System.Xml.Serialization
 {
     public struct XmlDeserializationEvents
     {
@@ -40,29 +40,28 @@ namespace System.Xml.Serialization
         XmlNodeEventHandler onUnknownNode;
         UnreferencedObjectEventHandler onUnreferencedObject;
 
-        public XmlAttributeEventHandler OnUnknownAttribute 
+        public XmlAttributeEventHandler OnUnknownAttribute
         {
             get { return onUnknownAttribute; }
             set { onUnknownAttribute = value; }
         }
 
-        public XmlElementEventHandler OnUnknownElement 
+        public XmlElementEventHandler OnUnknownElement
         {
             get { return onUnknownElement; }
             set { onUnknownElement = value; }
         }
 
-        public XmlNodeEventHandler OnUnknownNode 
+        public XmlNodeEventHandler OnUnknownNode
         {
             get { return onUnknownNode; }
             set { onUnknownNode = value; }
         }
 
-        public UnreferencedObjectEventHandler OnUnreferencedObject 
+        public UnreferencedObjectEventHandler OnUnreferencedObject
         {
             get { return onUnreferencedObject; }
             set { onUnreferencedObject = value; }
         }
     }
 }
-

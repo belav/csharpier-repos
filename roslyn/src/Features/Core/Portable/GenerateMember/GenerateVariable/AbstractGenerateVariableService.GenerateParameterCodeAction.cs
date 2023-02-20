@@ -10,7 +10,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 {
-    internal partial class AbstractGenerateVariableService<TService, TSimpleNameSyntax, TExpressionSyntax>
+    internal partial class AbstractGenerateVariableService<
+        TService,
+        TSimpleNameSyntax,
+        TExpressionSyntax
+    >
     {
         private class GenerateParameterCodeAction : CodeAction
         {
@@ -19,7 +23,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             private readonly bool _includeOverridesAndImplementations;
             private readonly int _parameterIndex;
 
-            public GenerateParameterCodeAction(Document document, State state, bool includeOverridesAndImplementations, int parameterIndex)
+            public GenerateParameterCodeAction(
+                Document document,
+                State state,
+                bool includeOverridesAndImplementations,
+                int parameterIndex
+            )
             {
                 _document = document;
                 _state = state;
@@ -35,23 +44,26 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                         ? FeaturesResources.Generate_parameter_0_and_overrides_implementations
                         : FeaturesResources.Generate_parameter_0;
 
-                    return string.Format(
-                        text,
-                        _state.IdentifierToken.ValueText);
+                    return string.Format(text, _state.IdentifierToken.ValueText);
                 }
             }
 
-            protected override Task<Solution?> GetChangedSolutionAsync(CancellationToken cancellationToken)
+            protected override Task<Solution?> GetChangedSolutionAsync(
+                CancellationToken cancellationToken
+            )
             {
-                return AddParameterService.AddParameterAsync(
-                    _document,
-                    _state.ContainingMethod,
-                    _state.LocalType,
-                    RefKind.None,
-                    _state.IdentifierToken.ValueText,
-                    _parameterIndex,
-                    _includeOverridesAndImplementations,
-                    cancellationToken).AsNullable();
+                return AddParameterService
+                    .AddParameterAsync(
+                        _document,
+                        _state.ContainingMethod,
+                        _state.LocalType,
+                        RefKind.None,
+                        _state.IdentifierToken.ValueText,
+                        _parameterIndex,
+                        _includeOverridesAndImplementations,
+                        cancellationToken
+                    )
+                    .AsNullable();
             }
         }
     }

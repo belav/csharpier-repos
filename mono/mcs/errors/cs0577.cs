@@ -3,10 +3,11 @@
 
 interface I
 {
-    void F ();
+    void F();
 }
 
-class MainClass: I {
-        [System.Diagnostics.Conditional("DEBUG")]
-        void I.F () {}
+class MainClass : I
+{
+    [System.Diagnostics.Conditional("DEBUG")]
+    void I.F() { }
 }

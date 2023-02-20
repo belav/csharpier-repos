@@ -3,7 +3,7 @@
 
 class T
 {
-    public void FooBar ()
+    public void FooBar()
     {
         const string Foo = Foo;
     }

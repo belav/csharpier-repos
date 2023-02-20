@@ -41,18 +41,25 @@ namespace MonoTests.System.IO.Compression
         {
             using (var sha1 = SHA1.Create())
             {
-                return BitConverter.ToString(sha1.ComputeHash(stream))
-                    .Replace("-", string.Empty);
+                return BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", string.Empty);
             }
         }
 
         [Test]
         public void ZipGetEntryReadMode()
         {
-            var tmpFile = Path.GetTempFileName ();
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Read))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 var entry = archive.GetEntry("foo.txt");
                 Assert.IsNotNull(entry);
@@ -61,36 +68,55 @@ namespace MonoTests.System.IO.Compression
                 Assert.IsNull(nullEntry);
             }
 
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
 
         [Test]
         public void ZipGetEntryCreateMode()
         {
-            var tmpFile = Path.GetTempFileName ();
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Create))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Create
+                )
+            )
             {
-                try {
+                try
+                {
                     archive.GetEntry("foo");
-                } catch(NotSupportedException ex) {
+                }
+                catch (NotSupportedException ex)
+                {
                     return;
                 }
 
                 Assert.Fail();
             }
 
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
 
         [Test]
         public void ZipGetEntryUpdateMode()
         {
-            var tmpFile = Path.GetTempFileName ();
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Read))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 var entry = archive.GetEntry("foo.txt");
                 Assert.IsNotNull(entry);
@@ -99,16 +125,24 @@ namespace MonoTests.System.IO.Compression
                 Assert.IsNull(nullEntry);
             }
 
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
 
         [Test]
         public void ZipGetEntryOpen()
         {
-            var tmpFile = Path.GetTempFileName ();
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Read))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 var entry = archive.GetEntry("foo.txt");
                 Assert.IsNotNull(entry);
@@ -116,44 +150,65 @@ namespace MonoTests.System.IO.Compression
                 var foo = entry.Open();
             }
 
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
 
         [Test]
         public void ZipOpenAndReopenEntry()
         {
-            var tmpFile = Path.GetTempFileName ();    
-            try {
-                File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
-                using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                    ZipArchiveMode.Update))
+            var tmpFile = Path.GetTempFileName();
+            try
+            {
+                File.Copy(
+                    TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                    tmpFile,
+                    overwrite: true
+                );
+                using (
+                    var archive = new ZipArchive(
+                        File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                        ZipArchiveMode.Update
+                    )
+                )
                 {
                     var entry = archive.GetEntry("foo.txt");
                     Assert.IsNotNull(entry);
 
                     var stream = entry.Open();
 
-                    try {
+                    try
+                    {
                         stream = entry.Open();
-                    } catch (global::System.IO.IOException ex) {
+                    }
+                    catch (global::System.IO.IOException ex)
+                    {
                         return;
                     }
 
                     Assert.Fail();
                 }
-            } finally {
-                File.Delete (tmpFile);
+            }
+            finally
+            {
+                File.Delete(tmpFile);
             }
         }
-
 
         [Test]
         public void ZipOpenCloseAndReopenEntry()
         {
-            var tmpFile = Path.GetTempFileName ();    
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Update))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Update
+                )
+            )
             {
                 var entry = archive.GetEntry("foo.txt");
                 Assert.IsNotNull(entry);
@@ -163,16 +218,24 @@ namespace MonoTests.System.IO.Compression
                 stream = entry.Open();
             }
 
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
 
         [Test]
         public void ZipGetEntryDeleteReadMode()
         {
-            var tmpFile = Path.GetTempFileName ();    
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Update))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Update
+                )
+            )
             {
                 var entry = archive.GetEntry("foo.txt");
                 Assert.IsNotNull(entry);
@@ -180,23 +243,35 @@ namespace MonoTests.System.IO.Compression
                 entry.Delete();
             }
 
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Read))
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 var entry = archive.GetEntry("foo.txt");
                 Assert.IsNull(entry);
             }
 
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
 
         [Test]
         public void ZipDeleteEntryCheckEntries()
         {
-            var tmpFile = Path.GetTempFileName ();
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Update))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Update
+                )
+            )
             {
                 var entry = archive.GetEntry("foo.txt");
                 Assert.IsNotNull(entry);
@@ -206,16 +281,24 @@ namespace MonoTests.System.IO.Compression
                 Assert.IsNull(archive.Entries.FirstOrDefault(e => e == entry));
             }
 
-            File.Delete (tmpFile);
-        }        
+            File.Delete(tmpFile);
+        }
 
         [Test]
         public void ZipGetEntryDeleteUpdateMode()
         {
-            var tmpFile = Path.GetTempFileName ();    
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Update))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Update
+                )
+            )
             {
                 var entry = archive.GetEntry("foo.txt");
                 Assert.IsNotNull(entry);
@@ -223,22 +306,30 @@ namespace MonoTests.System.IO.Compression
                 entry.Delete();
             }
 
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Read))
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 var entry = archive.GetEntry("foo.txt");
                 Assert.IsNull(entry);
             }
 
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
 
         [Test]
         public void ZipCreateArchive()
         {
-            var tmpFile = Path.GetTempFileName ();    
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Create),
-                ZipArchiveMode.Create))
+            var tmpFile = Path.GetTempFileName();
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Create),
+                    ZipArchiveMode.Create
+                )
+            )
             {
                 var dir = archive.CreateEntry("foobar/");
 
@@ -250,8 +341,12 @@ namespace MonoTests.System.IO.Compression
                 }
             }
 
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Read))
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 Assert.IsNotNull(archive.GetEntry("foobar/"));
 
@@ -264,55 +359,83 @@ namespace MonoTests.System.IO.Compression
                 Assert.AreEqual("foo", text);
             }
 
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
 
         [Test]
         public void ZipEnumerateEntriesModifiedTime()
         {
-            var tmpFile = Path.GetTempFileName ();    
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                tmpFile,
+                overwrite: true
+            );
             var date = DateTimeOffset.Now;
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Update))
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Update
+                )
+            )
             {
                 var entry = archive.GetEntry("foo.txt");
                 entry.LastWriteTime = date;
             }
 
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Read))
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 var entry = archive.GetEntry("foo.txt");
                 Assert.AreEqual(entry.LastWriteTime.Year, date.Year);
                 Assert.AreEqual(entry.LastWriteTime.Month, date.Month);
                 Assert.AreEqual(entry.LastWriteTime.Day, date.Day);
-
             }
 
-            File.Delete (tmpFile);
-        }        
+            File.Delete(tmpFile);
+        }
 
         [Test]
         public void ZipEnumerateArchiveDefaultLastWriteTime()
         {
-            var tmpFile = Path.GetTempFileName ();    
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/test.nupkg"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Read))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/test.nupkg"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 var entry = archive.GetEntry("_rels/.rels");
                 Assert.AreEqual(new DateTime(624511296000000000).Ticks, entry.LastWriteTime.Ticks);
                 Assert.IsNotNull(entry);
             }
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
 
         public void ZipGetArchiveEntryStreamLengthPosition(ZipArchiveMode mode)
         {
-            var tmpFile = Path.GetTempFileName ();    
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/test.nupkg"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite), mode))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/test.nupkg"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    mode
+                )
+            )
             {
                 var entry = archive.GetEntry("_rels/.rels");
                 using (var stream = entry.Open())
@@ -332,7 +455,7 @@ namespace MonoTests.System.IO.Compression
                     }
                 }
             }
-            File.Delete (tmpFile);    
+            File.Delete(tmpFile);
         }
 
         [Test]
@@ -345,15 +468,23 @@ namespace MonoTests.System.IO.Compression
         public void ZipGetArchiveEntryStreamLengthPositionUpdateMode()
         {
             ZipGetArchiveEntryStreamLengthPosition(ZipArchiveMode.Update);
-        }        
+        }
 
         [Test]
         public void ZipEnumerateEntriesReadMode()
         {
-            var tmpFile = Path.GetTempFileName ();
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Read))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 var entries = archive.Entries;
                 Assert.AreEqual(5, entries.Count);
@@ -365,16 +496,24 @@ namespace MonoTests.System.IO.Compression
                 Assert.AreEqual("foobar/foo.txt", entries[4].FullName);
             }
 
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
 
         [Test]
         public void ZipWriteEntriesUpdateMode()
         {
-            var tmpFile = Path.GetTempFileName ();
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Update))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Update
+                )
+            )
             {
                 var foo = archive.GetEntry("foo.txt");
                 using (var stream = foo.Open())
@@ -384,8 +523,12 @@ namespace MonoTests.System.IO.Compression
                 }
             }
 
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Read))
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 var foo = archive.GetEntry("foo.txt");
                 using (var stream = foo.Open())
@@ -396,7 +539,7 @@ namespace MonoTests.System.IO.Compression
                 }
             }
 
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
 
         [Test]
@@ -436,10 +579,18 @@ namespace MonoTests.System.IO.Compression
         [Test]
         public void ZipWriteEntriesUpdateModeNonZeroPosition()
         {
-            var tmpFile = Path.GetTempFileName ();
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Update))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Update
+                )
+            )
             {
                 var foo = archive.GetEntry("foo.txt");
                 using (var stream = foo.Open())
@@ -452,8 +603,12 @@ namespace MonoTests.System.IO.Compression
                 }
             }
 
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Read))
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 var entries = archive.Entries;
                 var foo = archive.GetEntry("foo.txt");
@@ -465,16 +620,24 @@ namespace MonoTests.System.IO.Compression
                 }
             }
 
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
 
         [Test]
         public void ZipEnumerateEntriesUpdateMode()
         {
-            var tmpFile = Path.GetTempFileName ();
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
-                ZipArchiveMode.Read))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open, FileAccess.ReadWrite),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 var entries = archive.Entries;
                 Assert.AreEqual(5, entries.Count);
@@ -486,81 +649,104 @@ namespace MonoTests.System.IO.Compression
                 Assert.AreEqual("foobar/foo.txt", entries[4].FullName);
             }
 
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
 
         [Test]
         public void ZipEnumerateEntriesCreateMode()
         {
-            var tmpFile = Path.GetTempFileName ();
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/archive.zip"), tmpFile, overwrite: true);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open),
-                ZipArchiveMode.Create))
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/archive.zip"),
+                tmpFile,
+                overwrite: true
+            );
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open),
+                    ZipArchiveMode.Create
+                )
+            )
             {
-                try {
+                try
+                {
                     archive.Entries.ToList();
-                } catch(NotSupportedException ex) {
+                }
+                catch (NotSupportedException ex)
+                {
                     return;
                 }
-                
-                Assert.Fail();                
+
+                Assert.Fail();
             }
 
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
 
         [Test]
         public void ZipUpdateEmptyArchive()
         {
-            var tmpFile = Path.GetTempFileName ();
+            var tmpFile = Path.GetTempFileName();
             File.WriteAllText(tmpFile, string.Empty);
-            using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open),
-                ZipArchiveMode.Update))
-            {
-            }
-            File.Delete (tmpFile);
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Open),
+                    ZipArchiveMode.Update
+                )
+            ) { }
+            File.Delete(tmpFile);
         }
 
-        class MyFakeStream : FileStream 
+        class MyFakeStream : FileStream
         {
-            public MyFakeStream (string path, FileMode mode) : base(path, mode) {}
+            public MyFakeStream(string path, FileMode mode)
+                : base(path, mode) { }
 
             /// <summary>
             /// Simulate "CanSeek" is false, which is the case when you are retreiving data from web.
             /// </summary>
             public override bool CanSeek => false;
 
-            public override long Position {
-                get {throw new NotSupportedException();}
-                set {throw new NotSupportedException();}
+            public override long Position
+            {
+                get { throw new NotSupportedException(); }
+                set { throw new NotSupportedException(); }
             }
         }
 
         [Test]
         public void ZipReadNonSeekableStream()
         {
-            var tmpFile = Path.GetTempFileName ();
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/test.nupkg"), tmpFile, overwrite: true);
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/test.nupkg"),
+                tmpFile,
+                overwrite: true
+            );
             var stream = new MyFakeStream(tmpFile, FileMode.Open);
-            using (var archive = new ZipArchive (stream, ZipArchiveMode.Read))
-            {
-            }
-            File.Delete (tmpFile);
+            using (var archive = new ZipArchive(stream, ZipArchiveMode.Read)) { }
+            File.Delete(tmpFile);
         }
 
         [Test]
         public void ZipWriteNonSeekableStream()
         {
-            var tmpFile = Path.GetTempFileName ();
-            File.Copy (TestResourceHelper.GetFullPathOfResource ("Test/resources/test.nupkg"), tmpFile, overwrite: true);
-            var stream = new MyFakeStream(tmpFile, FileMode.Open );
-            using ( var archive = new ZipArchive( stream, ZipArchiveMode.Create ) ) {
-                var entry = archive.CreateEntry( "foo" );
-                using ( var es = entry.Open() ) {
-                    es.Write( new byte[] { 4, 2 }, 0, 2 );
+            var tmpFile = Path.GetTempFileName();
+            File.Copy(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/test.nupkg"),
+                tmpFile,
+                overwrite: true
+            );
+            var stream = new MyFakeStream(tmpFile, FileMode.Open);
+            using (var archive = new ZipArchive(stream, ZipArchiveMode.Create))
+            {
+                var entry = archive.CreateEntry("foo");
+                using (var es = entry.Open())
+                {
+                    es.Write(new byte[] { 4, 2 }, 0, 2);
                 }
             }
-            File.Delete (tmpFile);
+            File.Delete(tmpFile);
         }
     }
 }

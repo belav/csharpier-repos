@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Collections;
 using System.Globalization;
 
-
 public class Bug
 {
     public static int Main()

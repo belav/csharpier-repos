@@ -13,7 +13,10 @@ internal sealed class EndpointNameAddressScheme : IEndpointAddressScheme<string>
 
     public EndpointNameAddressScheme(EndpointDataSource dataSource)
     {
-        _cache = new DataSourceDependentCache<Dictionary<string, Endpoint[]>>(dataSource, Initialize);
+        _cache = new DataSourceDependentCache<Dictionary<string, Endpoint[]>>(
+            dataSource,
+            Initialize
+        );
     }
 
     // Internal for tests
@@ -91,7 +94,11 @@ internal sealed class EndpointNameAddressScheme : IEndpointAddressScheme<string>
 
         static string? GetEndpointName(Endpoint endpoint)
         {
-            if (endpoint.Metadata.GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration == true)
+            if (
+                endpoint.Metadata
+                    .GetMetadata<ISuppressLinkGenerationMetadata>()
+                    ?.SuppressLinkGeneration == true
+            )
             {
                 // Skip anything that's suppressed for linking.
                 return null;

@@ -13,13 +13,17 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
     internal class OptionUpdater : SettingsUpdaterBase<IOption2, object>
     {
         public OptionUpdater(Workspace workspace, string editorconfigPath)
-            : base(workspace, editorconfigPath)
-        {
-        }
+            : base(workspace, editorconfigPath) { }
 
-        protected override SourceText? GetNewText(SourceText sourceText,
-                                                  IReadOnlyList<(IOption2 option, object value)> settingsToUpdate,
-                                                  CancellationToken token)
-            => SettingsUpdateHelper.TryUpdateAnalyzerConfigDocument(sourceText, EditorconfigPath, settingsToUpdate);
+        protected override SourceText? GetNewText(
+            SourceText sourceText,
+            IReadOnlyList<(IOption2 option, object value)> settingsToUpdate,
+            CancellationToken token
+        ) =>
+            SettingsUpdateHelper.TryUpdateAnalyzerConfigDocument(
+                sourceText,
+                EditorconfigPath,
+                settingsToUpdate
+            );
     }
 }

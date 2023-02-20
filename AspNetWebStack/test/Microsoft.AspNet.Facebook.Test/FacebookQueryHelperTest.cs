@@ -12,10 +12,16 @@ namespace Microsoft.AspNet.Facebook.Test
     {
         [Theory]
         [InlineData(typeof(SimpleUser), "?fields=id,name,picture.fields(url)")]
-        [InlineData(typeof(UserWithFriends), "?fields=id,name,picture.fields(url),friends.fields(id,name,picture.fields(url))")]
+        [InlineData(
+            typeof(UserWithFriends),
+            "?fields=id,name,picture.fields(url),friends.fields(id,name,picture.fields(url))"
+        )]
         [InlineData(typeof(UserTypeWithIgnoredProperties), "?fields=id")]
         [InlineData(typeof(UserTypeWithRenamedProperties), "?fields=id,name,picture.fields(url)")]
-        [InlineData(typeof(UserTypeWithFieldModifiers), "?fields=id,name,picture.type(large).fields(url),friends.limit(5).fields(id,name,picture.fields(url))")]
+        [InlineData(
+            typeof(UserTypeWithFieldModifiers),
+            "?fields=id,name,picture.type(large).fields(url),friends.limit(5).fields(id,name,picture.fields(url))"
+        )]
         public void GetFields_ReturnsExpectedQuery(Type modelType, string expectedQuery)
         {
             Assert.Equal(expectedQuery, FacebookQueryHelper.GetFields(modelType));
@@ -28,7 +34,8 @@ namespace Microsoft.AspNet.Facebook.Test
         {
             Assert.Throws<InvalidOperationException>(
                 () => FacebookQueryHelper.GetFields(modelType),
-                Resources.CircularReferenceNotSupported);
+                Resources.CircularReferenceNotSupported
+            );
         }
     }
 }

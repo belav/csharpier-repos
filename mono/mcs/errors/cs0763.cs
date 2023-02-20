@@ -4,9 +4,7 @@
 
 public partial class C
 {
-    static partial void Foo ()
-    {
-    }
-    
-    partial void Foo ();
+    static partial void Foo() { }
+
+    partial void Foo();
 }

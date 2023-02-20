@@ -6,12 +6,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 public class AppendSelectIdentityExpressionMutator : ExpressionMutator
 {
     public AppendSelectIdentityExpressionMutator(DbContext context)
-        : base(context)
-    {
-    }
+        : base(context) { }
 
-    public override bool IsValid(Expression expression)
-        => IsQueryableResult(expression);
+    public override bool IsValid(Expression expression) => IsQueryableResult(expression);
 
     public override Expression Apply(Expression expression, Random random)
     {

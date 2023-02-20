@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,23 +40,29 @@ namespace System.ComponentModel.Design
         DesignerActionListsChangedType change_type;
         DesignerActionListCollection action_lists;
 
-        public DesignerActionListsChangedEventArgs (object relatedObject, DesignerActionListsChangedType changeType,
-                                DesignerActionListCollection actionLists)
+        public DesignerActionListsChangedEventArgs(
+            object relatedObject,
+            DesignerActionListsChangedType changeType,
+            DesignerActionListCollection actionLists
+        )
         {
             this.related_object = relatedObject;
             this.change_type = changeType;
             this.action_lists = actionLists;
         }
 
-        public DesignerActionListCollection ActionLists {
+        public DesignerActionListCollection ActionLists
+        {
             get { return action_lists; }
         }
 
-        public DesignerActionListsChangedType ChangeType {
+        public DesignerActionListsChangedType ChangeType
+        {
             get { return change_type; }
         }
 
-        public object RelatedObject {
+        public object RelatedObject
+        {
             get { return related_object; }
         }
     }

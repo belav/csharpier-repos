@@ -8,6 +8,6 @@ namespace Mono.Linker.Steps
     /// </summary>
     public interface IMarkHandler
     {
-        void Initialize (LinkContext context, MarkContext markContext);
+        void Initialize(LinkContext context, MarkContext markContext);
     }
 }

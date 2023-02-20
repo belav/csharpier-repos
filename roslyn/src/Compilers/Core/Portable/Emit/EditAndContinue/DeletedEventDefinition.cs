@@ -8,17 +8,25 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 {
-    internal sealed class DeletedEventDefinition : DeletedDefinition<IEventDefinition>, IEventDefinition
+    internal sealed class DeletedEventDefinition
+        : DeletedDefinition<IEventDefinition>,
+            IEventDefinition
     {
         private readonly ITypeDefinition _containingTypeDef;
         private readonly DeletedMethodDefinition _adder;
         private readonly DeletedMethodDefinition _remover;
         private readonly DeletedMethodDefinition? _caller;
 
-        public DeletedEventDefinition(IEventDefinition oldEvent, DeletedMethodDefinition adder, DeletedMethodDefinition remover, DeletedMethodDefinition? caller, ITypeDefinition containingTypeDef, Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers)
+        public DeletedEventDefinition(
+            IEventDefinition oldEvent,
+            DeletedMethodDefinition adder,
+            DeletedMethodDefinition remover,
+            DeletedMethodDefinition? caller,
+            ITypeDefinition containingTypeDef,
+            Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers
+        )
             : base(oldEvent, typesUsedByDeletedMembers)
         {
-
             _containingTypeDef = containingTypeDef;
             _adder = adder;
             _remover = remover;

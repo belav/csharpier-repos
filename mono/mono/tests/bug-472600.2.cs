@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class EventInfoTestClass
 {
-    static EventInfoTestClass ()
+    static EventInfoTestClass()
     {
         string s = System.Environment.StackTrace;
     }
@@ -11,13 +11,13 @@ public class EventInfoTestClass
 
 class Test
 {
-    static void Main ()
+    static void Main()
     {
-        TestEventSubscription<object> ();
+        TestEventSubscription<object>();
     }
 
-    public static void TestEventSubscription<T> ()
+    public static void TestEventSubscription<T>()
     {
-        new EventInfoTestClass ();
+        new EventInfoTestClass();
     }
 }

@@ -29,17 +29,15 @@
 
 namespace System.Diagnostics.Tracing
 {
-    [AttributeUsageAttribute (AttributeTargets.Method)]
+    [AttributeUsageAttribute(AttributeTargets.Method)]
     public sealed class EventAttribute : Attribute
     {
-        public EventAttribute (int eventId)
+        public EventAttribute(int eventId)
         {
             EventId = eventId;
         }
 
-        public int EventId {
-            get; private set;
-        }
+        public int EventId { get; private set; }
 
         public EventActivityOptions ActivityOptions { get; set; }
         public EventLevel Level { get; set; }
@@ -52,4 +50,3 @@ namespace System.Diagnostics.Tracing
         public byte Version { get; set; }
     }
 }
-

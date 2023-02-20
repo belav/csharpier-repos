@@ -12,8 +12,18 @@ namespace Moq
     {
         private object value;
 
-        public StubbedPropertySetup(Mock mock, LambdaExpression expression, MethodInfo getter, MethodInfo setter, object initialValue)
-            : base(originalExpression: null, mock, new PropertyAccessorExpectation(expression, getter, setter))
+        public StubbedPropertySetup(
+            Mock mock,
+            LambdaExpression expression,
+            MethodInfo getter,
+            MethodInfo setter,
+            object initialValue
+        )
+            : base(
+                originalExpression: null,
+                mock,
+                new PropertyAccessorExpectation(expression, getter, setter)
+            )
         {
             // NOTE:
             //
@@ -63,9 +73,7 @@ namespace Moq
             return base.ToString() + " (stubbed)";
         }
 
-        protected override void VerifySelf()
-        {
-        }
+        protected override void VerifySelf() { }
 
         private sealed class PropertyAccessorExpectation : Expectation
         {
@@ -73,7 +81,11 @@ namespace Moq
             private readonly MethodInfo getter;
             private readonly MethodInfo setter;
 
-            public PropertyAccessorExpectation(LambdaExpression expression, MethodInfo getter, MethodInfo setter)
+            public PropertyAccessorExpectation(
+                LambdaExpression expression,
+                MethodInfo getter,
+                MethodInfo setter
+            )
             {
                 Debug.Assert(expression != null);
                 Debug.Assert(expression.IsProperty());
@@ -95,7 +107,9 @@ namespace Moq
 
             public override int GetHashCode()
             {
-                return unchecked((this.getter?.GetHashCode() ?? 0) + 103 * (this.setter?.GetHashCode() ?? 0));
+                return unchecked(
+                    (this.getter?.GetHashCode() ?? 0) + 103 * (this.setter?.GetHashCode() ?? 0)
+                );
             }
 
             public override bool IsMatch(Invocation invocation)

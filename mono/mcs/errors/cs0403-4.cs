@@ -3,7 +3,7 @@
 
 class Test<T>
 {
-    public T Null ()
+    public T Null()
     {
         return (null);
     }

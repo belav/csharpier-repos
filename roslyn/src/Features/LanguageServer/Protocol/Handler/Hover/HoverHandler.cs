@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// </summary>
     [ExportCSharpVisualBasicStatelessLspService(typeof(HoverHandler)), Shared]
     [Method(Methods.TextDocumentHoverName)]
-    internal sealed class HoverHandler : ILspServiceDocumentRequestHandler<TextDocumentPositionParams, Hover?>
+    internal sealed class HoverHandler
+        : ILspServiceDocumentRequestHandler<TextDocumentPositionParams, Hover?>
     {
         private readonly IGlobalOptionService _globalOptions;
 
@@ -37,16 +38,34 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public TextDocumentIdentifier GetTextDocumentIdentifier(TextDocumentPositionParams request) => request.TextDocument;
+        public TextDocumentIdentifier GetTextDocumentIdentifier(
+            TextDocumentPositionParams request
+        ) => request.TextDocument;
 
-        public async Task<Hover?> HandleRequestAsync(TextDocumentPositionParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<Hover?> HandleRequestAsync(
+            TextDocumentPositionParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.GetRequiredDocument();
             var clientCapabilities = context.GetRequiredClientCapabilities();
 
-            var position = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(request.Position), cancellationToken).ConfigureAwait(false);
+            var position = await document
+                .GetPositionFromLinePositionAsync(
+                    ProtocolConversions.PositionToLinePosition(request.Position),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var options = _globalOptions.GetSymbolDescriptionOptions(document.Project.Language);
-            return await GetHoverAsync(document, position, options, clientCapabilities, cancellationToken).ConfigureAwait(false);
+            return await GetHoverAsync(
+                    document,
+                    position,
+                    options,
+                    clientCapabilities,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         internal static async Task<Hover?> GetHoverAsync(
@@ -54,17 +73,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             int position,
             SymbolDescriptionOptions options,
             ClientCapabilities clientCapabilities,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Get the quick info service to compute quick info.
             // This code path is only invoked for C# and VB, so we can directly cast to QuickInfoServiceWithProviders.
             var quickInfoService = document.GetRequiredLanguageService<QuickInfoService>();
-            var info = await quickInfoService.GetQuickInfoAsync(document, position, options, cancellationToken).ConfigureAwait(false);
+            var info = await quickInfoService
+                .GetQuickInfoAsync(document, position, options, cancellationToken)
+                .ConfigureAwait(false);
             if (info == null)
                 return null;
 
-            var hoverService = document.Project.Solution.Services.GetRequiredService<ILspHoverResultCreationService>();
-            return await hoverService.CreateHoverAsync(document, info, clientCapabilities, cancellationToken).ConfigureAwait(false);
+            var hoverService =
+                document.Project.Solution.Services.GetRequiredService<ILspHoverResultCreationService>();
+            return await hoverService
+                .CreateHoverAsync(document, info, clientCapabilities, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

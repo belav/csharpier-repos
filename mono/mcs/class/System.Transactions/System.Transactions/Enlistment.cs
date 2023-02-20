@@ -16,21 +16,18 @@ namespace System.Transactions
     {
         internal bool done;
 
-        internal Enlistment ()
+        internal Enlistment()
         {
             done = false;
         }
 
-        public void Done ()
+        public void Done()
         {
             done = true;
 
             InternalOnDone();
         }
 
-        internal virtual void InternalOnDone ()
-        {
-        }
+        internal virtual void InternalOnDone() { }
     }
 }
-

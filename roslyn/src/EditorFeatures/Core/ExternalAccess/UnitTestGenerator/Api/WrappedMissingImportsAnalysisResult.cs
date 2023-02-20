@@ -11,7 +11,9 @@ internal sealed class WrappedMissingImportsAnalysisResult
 {
     public ImmutableArray<WrappedAddImportFixData> AddImportFixDatas;
 
-    public WrappedMissingImportsAnalysisResult(ImmutableArray<WrappedAddImportFixData> addImportFixDatas)
+    public WrappedMissingImportsAnalysisResult(
+        ImmutableArray<WrappedAddImportFixData> addImportFixDatas
+    )
     {
         AddImportFixDatas = addImportFixDatas;
     }

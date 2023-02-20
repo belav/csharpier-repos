@@ -13,7 +13,10 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
 {
-    using VerifyCS = CSharpCodeFixVerifier<CSharpRemoveConfusingSuppressionDiagnosticAnalyzer, CSharpRemoveConfusingSuppressionCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        CSharpRemoveConfusingSuppressionDiagnosticAnalyzer,
+        CSharpRemoveConfusingSuppressionCodeFixProvider
+    >;
 
     public class RemoveConfusingSuppressionTests
     {
@@ -21,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         public async Task TestRemoveWithIsExpression1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M(object o)
@@ -31,7 +34,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(object o)
@@ -40,14 +43,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(44872, "https://github.com/dotnet/roslyn/issues/44872")]
         public async Task TestRemoveWithIsPattern1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M(object o)
@@ -57,7 +61,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(object o)
@@ -66,7 +70,8 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(44872, "https://github.com/dotnet/roslyn/issues/44872")]
@@ -75,7 +80,7 @@ class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -86,7 +91,7 @@ class C
     }
 }",
                 FixedCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -107,7 +112,7 @@ class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -118,7 +123,7 @@ class C
     }
 }",
                 FixedCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -139,7 +144,7 @@ class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -150,7 +155,7 @@ class C
     }
 }",
                 FixedCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -171,7 +176,7 @@ class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -185,7 +190,7 @@ class C
                 {
                     Sources =
                     {
-@"
+                        @"
 class C
 {
     void M(object o)
@@ -208,7 +213,7 @@ class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -222,7 +227,7 @@ class C
     }
 }",
                 FixedCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -236,7 +241,8 @@ class C
     }
 }",
                 NumberOfFixAllIterations = 1,
-                CodeActionEquivalenceKey = CSharpRemoveConfusingSuppressionCodeFixProvider.RemoveOperator,
+                CodeActionEquivalenceKey =
+                    CSharpRemoveConfusingSuppressionCodeFixProvider.RemoveOperator,
             }.RunAsync();
         }
 
@@ -246,7 +252,7 @@ class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -260,7 +266,7 @@ class C
     }
 }",
                 FixedCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -274,7 +280,8 @@ class C
     }
 }",
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = CSharpRemoveConfusingSuppressionCodeFixProvider.NegateExpression,
+                CodeActionEquivalenceKey =
+                    CSharpRemoveConfusingSuppressionCodeFixProvider.NegateExpression,
                 NumberOfFixAllIterations = 1,
             }.RunAsync();
         }
@@ -285,7 +292,7 @@ class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -299,7 +306,7 @@ class C
     }
 }",
                 FixedCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -313,7 +320,8 @@ class C
     }
 }",
                 NumberOfFixAllIterations = 1,
-                CodeActionEquivalenceKey = CSharpRemoveConfusingSuppressionCodeFixProvider.RemoveOperator,
+                CodeActionEquivalenceKey =
+                    CSharpRemoveConfusingSuppressionCodeFixProvider.RemoveOperator,
             }.RunAsync();
         }
 
@@ -323,7 +331,7 @@ class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -337,7 +345,7 @@ class C
     }
 }",
                 FixedCode =
-@"
+                    @"
 class C
 {
     void M(object o)
@@ -352,7 +360,8 @@ class C
 }",
                 NumberOfFixAllIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = CSharpRemoveConfusingSuppressionCodeFixProvider.NegateExpression,
+                CodeActionEquivalenceKey =
+                    CSharpRemoveConfusingSuppressionCodeFixProvider.NegateExpression,
             }.RunAsync();
         }
     }

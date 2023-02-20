@@ -44,28 +44,33 @@ namespace MonoTests.System
         }
 
         [Test]
-        public void GetTargetType ()
+        public void GetTargetType()
         {
             TestFields fields = new TestFields { MaxValue = 1234 };
 
             TypedReference ti = __makeref(fields);
-            Assert.AreEqual (typeof (TestFields), TypedReference.GetTargetType (ti));
+            Assert.AreEqual(typeof(TestFields), TypedReference.GetTargetType(ti));
         }
 
-        struct AStruct {
+        struct AStruct
+        {
             public string b;
         }
 
-        class CClass {
+        class CClass
+        {
             public AStruct a;
         }
 
         [Test]
-        public void MakeTypedReference ()
+        public void MakeTypedReference()
         {
-            var o = new CClass () { a = new AStruct () { b = "5" }};
-            TypedReference r = TypedReference.MakeTypedReference (o, new FieldInfo[] { typeof (CClass).GetField ("a"), typeof (AStruct).GetField ("b") });
-            Assert.AreEqual ("5", TypedReference.ToObject (r));
+            var o = new CClass() { a = new AStruct() { b = "5" } };
+            TypedReference r = TypedReference.MakeTypedReference(
+                o,
+                new FieldInfo[] { typeof(CClass).GetField("a"), typeof(AStruct).GetField("b") }
+            );
+            Assert.AreEqual("5", TypedReference.ToObject(r));
         }
     }
 #endif

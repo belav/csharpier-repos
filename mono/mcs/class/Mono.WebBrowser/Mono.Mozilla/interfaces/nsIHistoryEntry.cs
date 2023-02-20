@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,34 +30,37 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Mono.Mozilla {
-
-    [Guid ("A41661D4-1417-11D5-9882-00C04FA02F40")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIHistoryEntry {
-
-#region nsIHistoryEntry
+namespace Mono.Mozilla
+{
+    [Guid("A41661D4-1417-11D5-9882-00C04FA02F40")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIHistoryEntry
+    {
+        #region nsIHistoryEntry
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getURI ([MarshalAs (UnmanagedType.Interface)]  out nsIURI ret);
-
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getTitle ([MarshalAs(UnmanagedType.LPWStr)]   string ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getURI([MarshalAs(UnmanagedType.Interface)] out nsIURI ret);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getIsSubFrame ( out bool ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getTitle([MarshalAs(UnmanagedType.LPWStr)] string ret);
 
-#endregion
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getIsSubFrame(out bool ret);
+
+        #endregion
     }
 
-
-    internal class nsHistoryEntry {
-        public static nsIHistoryEntry GetProxy (Mono.WebBrowser.IWebBrowser control, nsIHistoryEntry obj)
+    internal class nsHistoryEntry
+    {
+        public static nsIHistoryEntry GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIHistoryEntry obj
+        )
         {
-            object o = Base.GetProxyForObject (control, typeof(nsIHistoryEntry).GUID, obj);
+            object o = Base.GetProxyForObject(control, typeof(nsIHistoryEntry).GUID, obj);
             return o as nsIHistoryEntry;
         }
     }

@@ -38,32 +38,36 @@ namespace Mono.Net.Security
         static X509RevocationMode revocation_mode;
 #endif
 
-        static SystemCertificateValidator ()
+        static SystemCertificateValidator()
         {
 #if MONOTOUCH
             is_macosx = true;
 #elif (MONODROID || ORBIS) && !MOBILE_DESKTOP_HOST
             is_macosx = false;
 #else
-            is_macosx = Environment.OSVersion.Platform != PlatformID.Win32NT && System.IO.File.Exists (OSX509Certificates.SecurityLibrary);
+            is_macosx =
+                Environment.OSVersion.Platform != PlatformID.Win32NT
+                && System.IO.File.Exists(OSX509Certificates.SecurityLibrary);
 #endif
 
 #if !MOBILE
             revocation_mode = X509RevocationMode.NoCheck;
-            try {
-                string str = Environment.GetEnvironmentVariable ("MONO_X509_REVOCATION_MODE");
-                if (String.IsNullOrEmpty (str))
+            try
+            {
+                string str = Environment.GetEnvironmentVariable("MONO_X509_REVOCATION_MODE");
+                if (String.IsNullOrEmpty(str))
                     return;
-                revocation_mode = (X509RevocationMode)Enum.Parse (typeof(X509RevocationMode), str, true);
-            } catch {
+                revocation_mode = (X509RevocationMode)
+                    Enum.Parse(typeof(X509RevocationMode), str, true);
             }
+            catch { }
 #endif
         }
 
-        public static X509Chain CreateX509Chain (X509CertificateCollection certs)
+        public static X509Chain CreateX509Chain(X509CertificateCollection certs)
         {
-            var chain = new X509Chain ();
-            chain.ChainPolicy = new X509ChainPolicy ((X509CertificateCollection)(object)certs);
+            var chain = new X509Chain();
+            chain.ChainPolicy = new X509ChainPolicy((X509CertificateCollection)(object)certs);
 
 #if !MOBILE
             chain.ChainPolicy.RevocationMode = revocation_mode;
@@ -72,7 +76,12 @@ namespace Mono.Net.Security
             return chain;
         }
 
-        static bool BuildX509Chain (X509CertificateCollection certs, X509Chain chain, ref SslPolicyErrors errors, ref int status11)
+        static bool BuildX509Chain(
+            X509CertificateCollection certs,
+            X509Chain chain,
+            ref SslPolicyErrors errors,
+            ref int status11
+        )
         {
 #if MOBILE
             return false;
@@ -80,23 +89,29 @@ namespace Mono.Net.Security
             if (is_macosx)
                 return false;
 
-            var leaf = (X509Certificate2)certs [0];
+            var leaf = (X509Certificate2)certs[0];
 
             bool ok;
-            try {
-                ok = chain.Build (leaf);
+            try
+            {
+                ok = chain.Build(leaf);
                 if (!ok)
-                    errors |= GetErrorsFromChain (chain);
-            } catch (Exception e) {
-                Console.Error.WriteLine ("ERROR building certificate chain: {0}", e);
-                Console.Error.WriteLine ("Please, report this problem to the Mono team");
+                    errors |= GetErrorsFromChain(chain);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine("ERROR building certificate chain: {0}", e);
+                Console.Error.WriteLine("Please, report this problem to the Mono team");
                 errors |= SslPolicyErrors.RemoteCertificateChainErrors;
                 ok = false;
             }
 
-            try {
-                status11 = GetStatusFromChain (chain);
-            } catch {
+            try
+            {
+                status11 = GetStatusFromChain(chain);
+            }
+            catch
+            {
                 status11 = -2146762485; // TRUST_E_FAIL - generic
             }
 
@@ -104,21 +119,29 @@ namespace Mono.Net.Security
 #endif
         }
 
-        static bool CheckUsage (X509CertificateCollection certs, string host, ref SslPolicyErrors errors, ref int status11)
+        static bool CheckUsage(
+            X509CertificateCollection certs,
+            string host,
+            ref SslPolicyErrors errors,
+            ref int status11
+        )
         {
 #if !MONOTOUCH
             var leaf = certs[0] as X509Certificate2;
             if (leaf == null)
-                leaf = new X509Certificate2 (certs[0]);
+                leaf = new X509Certificate2(certs[0]);
             // for OSX and iOS we're using the native API to check for the SSL server policy and host names
-            if (!is_macosx) {
-                if (!CheckCertificateUsage (leaf)) {
+            if (!is_macosx)
+            {
+                if (!CheckCertificateUsage(leaf))
+                {
                     errors |= SslPolicyErrors.RemoteCertificateChainErrors;
                     status11 = -2146762490; //CERT_E_PURPOSE 0x800B0106
                     return false;
                 }
 
-                if (!string.IsNullOrEmpty (host) && !CheckServerIdentity (leaf, host)) {
+                if (!string.IsNullOrEmpty(host) && !CheckServerIdentity(leaf, host))
+                {
                     errors |= SslPolicyErrors.RemoteCertificateNameMismatch;
                     status11 = -2146762481; // CERT_E_CN_NO_MATCH 0x800B010F
                     return false;
@@ -128,9 +151,16 @@ namespace Mono.Net.Security
             return true;
         }
 
-        static bool EvaluateSystem (X509CertificateCollection certs, X509CertificateCollection anchors, string host, X509Chain chain, ref SslPolicyErrors errors, ref int status11)
+        static bool EvaluateSystem(
+            X509CertificateCollection certs,
+            X509CertificateCollection anchors,
+            string host,
+            X509Chain chain,
+            ref SslPolicyErrors errors,
+            ref int status11
+        )
         {
-            var leaf = certs [0];
+            var leaf = certs[0];
             bool result;
 
 #if MONODROID && !MOBILE_DESKTOP_HOST
@@ -155,28 +185,39 @@ namespace Mono.Net.Security
                 // Ignore
             }
 #else
-            if (is_macosx) {
+            if (is_macosx)
+            {
 #if !ORBIS
                 // Attempt to use OSX certificates
                 // Ideally we should return the SecTrustResult
-                OSX509Certificates.SecTrustResult trustResult = OSX509Certificates.SecTrustResult.Deny;
-                try {
-                    trustResult = OSX509Certificates.TrustEvaluateSsl (certs, anchors, host);
+                OSX509Certificates.SecTrustResult trustResult = OSX509Certificates
+                    .SecTrustResult
+                    .Deny;
+                try
+                {
+                    trustResult = OSX509Certificates.TrustEvaluateSsl(certs, anchors, host);
                     // We could use the other values of trustResult to pass this extra information
                     // to the .NET 2 callback for values like SecTrustResult.Confirm
-                    result = (trustResult == OSX509Certificates.SecTrustResult.Proceed ||
-                        trustResult == OSX509Certificates.SecTrustResult.Unspecified);
-                } catch {
+                    result = (
+                        trustResult == OSX509Certificates.SecTrustResult.Proceed
+                        || trustResult == OSX509Certificates.SecTrustResult.Unspecified
+                    );
+                }
+                catch
+                {
                     result = false;
                     errors |= SslPolicyErrors.RemoteCertificateChainErrors;
                     // Ignore
                 }
 
-                if (result) {
+                if (result)
+                {
                     // TrustEvaluateSsl was successful so there's no trust error
                     // IOW we discard our own chain (since we trust OSX one instead)
                     errors = 0;
-                } else {
+                }
+                else
+                {
                     // callback and DefaultCertificatePolicy needs this since 'result' is not specified
                     status11 = (int)trustResult;
                     errors |= SslPolicyErrors.RemoteCertificateChainErrors;
@@ -184,29 +225,36 @@ namespace Mono.Net.Security
 #else
                 throw new PlatformNotSupportedException ();
 #endif
-            } else {
-                result = BuildX509Chain (certs, chain, ref errors, ref status11);
+            }
+            else
+            {
+                result = BuildX509Chain(certs, chain, ref errors, ref status11);
             }
 #endif
 
             return result;
         }
 
-        public static bool Evaluate (
-            MonoTlsSettings settings, string host, X509CertificateCollection certs,
-            X509Chain chain, ref SslPolicyErrors errors, ref int status11)
+        public static bool Evaluate(
+            MonoTlsSettings settings,
+            string host,
+            X509CertificateCollection certs,
+            X509Chain chain,
+            ref SslPolicyErrors errors,
+            ref int status11
+        )
         {
-            if (!CheckUsage (certs, host, ref errors, ref status11))
+            if (!CheckUsage(certs, host, ref errors, ref status11))
                 return false;
 
             if (settings != null && settings.SkipSystemValidators)
                 return false;
 
             var anchors = settings != null ? settings.TrustAnchors : null;
-            return EvaluateSystem (certs, anchors, host, chain, ref errors, ref status11);
+            return EvaluateSystem(certs, anchors, host, chain, ref errors, ref status11);
         }
 
-        internal static bool NeedsChain (MonoTlsSettings settings)
+        internal static bool NeedsChain(MonoTlsSettings settings)
         {
 #if MOBILE
             return false;
@@ -223,10 +271,11 @@ namespace Mono.Net.Security
         }
 
 #if !MOBILE
-        static int GetStatusFromChain (X509Chain chain)
+        static int GetStatusFromChain(X509Chain chain)
         {
             long result = 0;
-            foreach (var status in chain.ChainStatus) {
+            foreach (var status in chain.ChainStatus)
+            {
                 X509ChainStatusFlags flags = status.Status;
                 if (flags == X509ChainStatusFlags.NoError)
                     continue;
@@ -305,10 +354,11 @@ namespace Mono.Net.Security
             return (int)result;
         }
 
-        static SslPolicyErrors GetErrorsFromChain (X509Chain chain)
+        static SslPolicyErrors GetErrorsFromChain(X509Chain chain)
         {
             SslPolicyErrors errors = SslPolicyErrors.None;
-            foreach (var status in chain.ChainStatus) {
+            foreach (var status in chain.ChainStatus)
+            {
                 if (status.Status == X509ChainStatusFlags.NoError)
                     continue;
                 errors |= SslPolicyErrors.RemoteCertificateChainErrors;
@@ -319,50 +369,64 @@ namespace Mono.Net.Security
 #endif
 
 #if !MONOTOUCH
-        static X509KeyUsageFlags s_flags = X509KeyUsageFlags.DigitalSignature |
-            X509KeyUsageFlags.KeyAgreement |
-            X509KeyUsageFlags.KeyEncipherment;
+        static X509KeyUsageFlags s_flags =
+            X509KeyUsageFlags.DigitalSignature
+            | X509KeyUsageFlags.KeyAgreement
+            | X509KeyUsageFlags.KeyEncipherment;
+
         // Adapted to System 2.0+ from TlsServerCertificate.cs
         //------------------------------
         // Note: this method only works for RSA certificates
         // DH certificates requires some changes - does anyone use one ?
-        static bool CheckCertificateUsage (X509Certificate2 cert)
+        static bool CheckCertificateUsage(X509Certificate2 cert)
         {
-            try {
+            try
+            {
                 // certificate extensions are required for this
                 // we "must" accept older certificates without proofs
                 if (cert.Version < 3)
                     return true;
 
-                X509KeyUsageExtension kux = (cert.Extensions ["2.5.29.15"] as X509KeyUsageExtension);
-                X509EnhancedKeyUsageExtension eku = (cert.Extensions ["2.5.29.37"] as X509EnhancedKeyUsageExtension);
-                if (kux != null && eku != null) {
-                    // RFC3280 states that when both KeyUsageExtension and 
+                X509KeyUsageExtension kux = (cert.Extensions["2.5.29.15"] as X509KeyUsageExtension);
+                X509EnhancedKeyUsageExtension eku = (
+                    cert.Extensions["2.5.29.37"] as X509EnhancedKeyUsageExtension
+                );
+                if (kux != null && eku != null)
+                {
+                    // RFC3280 states that when both KeyUsageExtension and
                     // ExtendedKeyUsageExtension are present then BOTH should
                     // be valid
                     if ((kux.KeyUsages & s_flags) == 0)
                         return false;
-                    return eku.EnhancedKeyUsages ["1.3.6.1.5.5.7.3.1"] != null ||
-                        eku.EnhancedKeyUsages ["2.16.840.1.113730.4.1"] != null;
-                } else if (kux != null) {
+                    return eku.EnhancedKeyUsages["1.3.6.1.5.5.7.3.1"] != null
+                        || eku.EnhancedKeyUsages["2.16.840.1.113730.4.1"] != null;
+                }
+                else if (kux != null)
+                {
                     return ((kux.KeyUsages & s_flags) != 0);
-                } else if (eku != null) {
+                }
+                else if (eku != null)
+                {
                     // Server Authentication (1.3.6.1.5.5.7.3.1) or
                     // Netscape Server Gated Crypto (2.16.840.1.113730.4)
-                    return eku.EnhancedKeyUsages ["1.3.6.1.5.5.7.3.1"] != null ||
-                        eku.EnhancedKeyUsages ["2.16.840.1.113730.4.1"] != null;
+                    return eku.EnhancedKeyUsages["1.3.6.1.5.5.7.3.1"] != null
+                        || eku.EnhancedKeyUsages["2.16.840.1.113730.4.1"] != null;
                 }
 
                 // last chance - try with older (deprecated) Netscape extensions
-                X509Extension ext = cert.Extensions ["2.16.840.1.113730.1.1"];
-                if (ext != null) {
-                    string text = ext.NetscapeCertType (false);
-                    return text.IndexOf ("SSL Server Authentication", StringComparison.Ordinal) != -1;
+                X509Extension ext = cert.Extensions["2.16.840.1.113730.1.1"];
+                if (ext != null)
+                {
+                    string text = ext.NetscapeCertType(false);
+                    return text.IndexOf("SSL Server Authentication", StringComparison.Ordinal)
+                        != -1;
                 }
                 return true;
-            } catch (Exception e) {
-                Console.Error.WriteLine ("ERROR processing certificate: {0}", e);
-                Console.Error.WriteLine ("Please, report this problem to the Mono team");
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine("ERROR processing certificate: {0}", e);
+                Console.Error.WriteLine("Please, report this problem to the Mono team");
                 return false;
             }
         }
@@ -377,99 +441,128 @@ namespace Mono.Net.Security
         // 2.1.        exact match is required
         // 3.    Use of the most specific Common Name (CN=) in the Subject
         // 3.1        Existing practice but DEPRECATED
-        static bool CheckServerIdentity (X509Certificate2 cert, string targetHost)
+        static bool CheckServerIdentity(X509Certificate2 cert, string targetHost)
         {
-            try {
-                var mcert = new MSX.X509Certificate (cert.RawData);
-                MSX.X509Extension ext = mcert.Extensions ["2.5.29.17"];
+            try
+            {
+                var mcert = new MSX.X509Certificate(cert.RawData);
+                MSX.X509Extension ext = mcert.Extensions["2.5.29.17"];
                 // 1. subjectAltName
-                if (ext != null) {
-                    SubjectAltNameExtension subjectAltName = new SubjectAltNameExtension (ext);
+                if (ext != null)
+                {
+                    SubjectAltNameExtension subjectAltName = new SubjectAltNameExtension(ext);
                     // 1.1 - multiple dNSName
-                    foreach (string dns in subjectAltName.DNSNames) {
+                    foreach (string dns in subjectAltName.DNSNames)
+                    {
                         // 1.2 TODO - wildcard support
-                        if (Match (targetHost, dns))
+                        if (Match(targetHost, dns))
                             return true;
                     }
                     // 2. ipAddress
-                    foreach (string ip in subjectAltName.IPAddresses) {
+                    foreach (string ip in subjectAltName.IPAddresses)
+                    {
                         // 2.1. Exact match required
                         if (ip == targetHost)
                             return true;
                     }
                 }
                 // 3. Common Name (CN=)
-                return CheckDomainName (mcert.SubjectName, targetHost);
-            } catch (Exception e) {
-                Console.Error.WriteLine ("ERROR processing certificate: {0}", e);
-                Console.Error.WriteLine ("Please, report this problem to the Mono team");
+                return CheckDomainName(mcert.SubjectName, targetHost);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine("ERROR processing certificate: {0}", e);
+                Console.Error.WriteLine("Please, report this problem to the Mono team");
                 return false;
             }
         }
 
-        static bool CheckDomainName (string subjectName, string targetHost)
+        static bool CheckDomainName(string subjectName, string targetHost)
         {
-            string    domainName = String.Empty;
-            Regex search = new Regex (@"CN\s*=\s*([^,]*)");
-            MatchCollection    elements = search.Matches (subjectName);
-            if (elements.Count == 1) {
-                if (elements [0].Success)
-                    domainName = elements [0].Groups [1].Value.ToString ();
+            string domainName = String.Empty;
+            Regex search = new Regex(@"CN\s*=\s*([^,]*)");
+            MatchCollection elements = search.Matches(subjectName);
+            if (elements.Count == 1)
+            {
+                if (elements[0].Success)
+                    domainName = elements[0].Groups[1].Value.ToString();
             }
 
-            return Match (targetHost, domainName);
+            return Match(targetHost, domainName);
         }
 
         // ensure the pattern is valid wrt to RFC2595 and RFC2818
         // http://www.ietf.org/rfc/rfc2595.txt
         // http://www.ietf.org/rfc/rfc2818.txt
-        static bool Match (string hostname, string pattern)
+        static bool Match(string hostname, string pattern)
         {
             // check if this is a pattern
-            int index = pattern.IndexOf ('*');
-            if (index == -1) {
+            int index = pattern.IndexOf('*');
+            if (index == -1)
+            {
                 // not a pattern, do a direct case-insensitive comparison
-                return (String.Compare (hostname, pattern, true, CultureInfo.InvariantCulture) == 0);
+                return (String.Compare(hostname, pattern, true, CultureInfo.InvariantCulture) == 0);
             }
 
             // check pattern validity
             // A "*" wildcard character MAY be used as the left-most name component in the certificate.
 
             // unless this is the last char (valid)
-            if (index != pattern.Length - 1) {
+            if (index != pattern.Length - 1)
+            {
                 // then the next char must be a dot .'.
-                if (pattern [index + 1] != '.')
+                if (pattern[index + 1] != '.')
                     return false;
             }
 
             // only one (A) wildcard is supported
-            int i2 = pattern.IndexOf ('*', index + 1);
+            int i2 = pattern.IndexOf('*', index + 1);
             if (i2 != -1)
                 return false;
 
             // match the end of the pattern
-            string end = pattern.Substring (index + 1);
+            string end = pattern.Substring(index + 1);
             int length = hostname.Length - end.Length;
             // no point to check a pattern that is longer than the hostname
             if (length <= 0)
                 return false;
 
-            if (String.Compare (hostname, length, end, 0, end.Length, true, CultureInfo.InvariantCulture) != 0)
+            if (
+                String.Compare(
+                    hostname,
+                    length,
+                    end,
+                    0,
+                    end.Length,
+                    true,
+                    CultureInfo.InvariantCulture
+                ) != 0
+            )
                 return false;
 
             // special case, we start with the wildcard
-            if (index == 0) {
+            if (index == 0)
+            {
                 // ensure we hostname non-matched part (start) doesn't contain a dot
-                int i3 = hostname.IndexOf ('.');
+                int i3 = hostname.IndexOf('.');
                 return ((i3 == -1) || (i3 >= (hostname.Length - end.Length)));
             }
 
             // match the start of the pattern
-            string start = pattern.Substring (0, index);
-            return (String.Compare (hostname, 0, start, 0, start.Length, true, CultureInfo.InvariantCulture) == 0);
+            string start = pattern.Substring(0, index);
+            return (
+                String.Compare(
+                    hostname,
+                    0,
+                    start,
+                    0,
+                    start.Length,
+                    true,
+                    CultureInfo.InvariantCulture
+                ) == 0
+            );
         }
 #endif
     }
 }
 #endif
-

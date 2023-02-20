@@ -7,11 +7,9 @@ namespace MonoTests.System
 {
     public class Test
     {
-        public static void Main ()
+        public static void Main()
         {
-            Console.WriteLine (System.Type.GetType ("System.String"));
+            Console.WriteLine(System.Type.GetType("System.String"));
         }
     }
 }
-
-

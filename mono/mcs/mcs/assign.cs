@@ -4,7 +4,7 @@
 // Author:
 //   Miguel de Icaza (miguel@ximian.com)
 //   Martin Baulig (martin@ximian.com)
-//   Marek Safar (marek.safar@gmail.com)    
+//   Marek Safar (marek.safar@gmail.com)
 //
 // Dual licensed under the terms of the MIT X11 or GNU GPL
 //
@@ -20,8 +20,8 @@ using IKVM.Reflection.Emit;
 using System.Reflection.Emit;
 #endif
 
-namespace Mono.CSharp {
-
+namespace Mono.CSharp
+{
     /// <summary>
     ///   This interface is implemented by expressions that can be assigned to.
     /// </summary>
@@ -36,13 +36,14 @@ namespace Mono.CSharp {
     ///   No values on the top of the stack are expected to be left by
     ///   invoking this method.
     /// </remarks>
-    public interface IAssignMethod {
+    public interface IAssignMethod
+    {
         //
         // This is an extra version of Emit. If leave_copy is `true'
         // A copy of the expression will be left on the stack at the
         // end of the code generated for EmitAssign
         //
-        void Emit (EmitContext ec, bool leave_copy);
+        void Emit(EmitContext ec, bool leave_copy);
 
         //
         // This method does the assignment
@@ -52,7 +53,7 @@ namespace Mono.CSharp {
         // be data on the stack that it can use to compuatate its value. This is
         // for expressions like a [f ()] ++, where you can't call `f ()' twice.
         //
-        void EmitAssign (EmitContext ec, Expression source, bool leave_copy, bool isCompound);
+        void EmitAssign(EmitContext ec, Expression source, bool leave_copy, bool isCompound);
 
         /*
         For simple assignments, this interface is very simple, EmitAssign is called with source
@@ -181,107 +182,112 @@ namespace Mono.CSharp {
     ///   get the indirection.
     ///
     /// </remarks>
-    public class LocalTemporary : Expression, IMemoryLocation, IAssignMethod {
+    public class LocalTemporary : Expression, IMemoryLocation, IAssignMethod
+    {
         LocalBuilder builder;
 
-        public LocalTemporary (TypeSpec t)
+        public LocalTemporary(TypeSpec t)
         {
             type = t;
             eclass = ExprClass.Value;
         }
 
-        public LocalTemporary (LocalBuilder b, TypeSpec t)
-            : this (t)
+        public LocalTemporary(LocalBuilder b, TypeSpec t)
+            : this(t)
         {
             builder = b;
         }
 
-        public void Release (EmitContext ec)
+        public void Release(EmitContext ec)
         {
-            ec.FreeTemporaryLocal (builder, type);
+            ec.FreeTemporaryLocal(builder, type);
             builder = null;
         }
 
-        public override bool ContainsEmitWithAwait ()
+        public override bool ContainsEmitWithAwait()
         {
             return false;
         }
 
-        public override Expression CreateExpressionTree (ResolveContext ec)
+        public override Expression CreateExpressionTree(ResolveContext ec)
         {
-            Arguments args = new Arguments (1);
-            args.Add (new Argument (this));
-            return CreateExpressionFactoryCall (ec, "Constant", args);
+            Arguments args = new Arguments(1);
+            args.Add(new Argument(this));
+            return CreateExpressionFactoryCall(ec, "Constant", args);
         }
 
-        protected override Expression DoResolve (ResolveContext ec)
-        {
-            return this;
-        }
-
-        public override Expression DoResolveLValue (ResolveContext ec, Expression right_side)
+        protected override Expression DoResolve(ResolveContext ec)
         {
             return this;
         }
 
-        public override void Emit (EmitContext ec)
+        public override Expression DoResolveLValue(ResolveContext ec, Expression right_side)
+        {
+            return this;
+        }
+
+        public override void Emit(EmitContext ec)
         {
             if (builder == null)
-                throw new InternalErrorException ("Emit without Store, or after Release");
+                throw new InternalErrorException("Emit without Store, or after Release");
 
-            ec.Emit (OpCodes.Ldloc, builder);
+            ec.Emit(OpCodes.Ldloc, builder);
         }
 
         #region IAssignMethod Members
 
-        public void Emit (EmitContext ec, bool leave_copy)
+        public void Emit(EmitContext ec, bool leave_copy)
         {
-            Emit (ec);
+            Emit(ec);
 
             if (leave_copy)
-                Emit (ec);
+                Emit(ec);
         }
 
-        public void EmitAssign (EmitContext ec, Expression source, bool leave_copy, bool isCompound)
+        public void EmitAssign(EmitContext ec, Expression source, bool leave_copy, bool isCompound)
         {
             if (isCompound)
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
 
-            source.Emit (ec);
+            source.Emit(ec);
 
-            Store (ec);
+            Store(ec);
 
             if (leave_copy)
-                Emit (ec);
+                Emit(ec);
         }
 
         #endregion
 
-        public LocalBuilder Builder {
+        public LocalBuilder Builder
+        {
             get { return builder; }
         }
 
-        public void Store (EmitContext ec)
+        public void Store(EmitContext ec)
         {
             if (builder == null)
-                builder = ec.GetTemporaryLocal (type);
+                builder = ec.GetTemporaryLocal(type);
 
-            ec.Emit (OpCodes.Stloc, builder);
+            ec.Emit(OpCodes.Stloc, builder);
         }
 
-        public void AddressOf (EmitContext ec, AddressOp mode)
+        public void AddressOf(EmitContext ec, AddressOp mode)
         {
             if (builder == null)
-                builder = ec.GetTemporaryLocal (type);
+                builder = ec.GetTemporaryLocal(type);
 
-            if (builder.LocalType.IsByRef) {
+            if (builder.LocalType.IsByRef)
+            {
                 //
                 // if is_address, than this is just the address anyways,
                 // so we just return this.
                 //
-                ec.Emit (OpCodes.Ldloc, builder);
-            } else {
-                ec.Emit (OpCodes.Ldloca, builder);
+                ec.Emit(OpCodes.Ldloc, builder);
+            }
+            else
+            {
+                ec.Emit(OpCodes.Ldloca, builder);
             }
         }
     }
@@ -290,54 +296,56 @@ namespace Mono.CSharp {
     ///   The Assign node takes care of assigning the value of source into
     ///   the expression represented by target.
     /// </summary>
-    public abstract class Assign : ExpressionStatement {
-        protected Expression target, source;
+    public abstract class Assign : ExpressionStatement
+    {
+        protected Expression target,
+            source;
 
-        protected Assign (Expression target, Expression source, Location loc)
+        protected Assign(Expression target, Expression source, Location loc)
         {
             this.target = target;
             this.source = source;
             this.loc = loc;
         }
-        
-        public Expression Target {
+
+        public Expression Target
+        {
             get { return target; }
         }
 
-        public Expression Source {
-            get {
-                return source;
-            }
-        }
-
-        public override Location StartLocation {
-            get {
-                return target.StartLocation;
-            }
-        }
-
-        public override bool ContainsEmitWithAwait ()
+        public Expression Source
         {
-            return target.ContainsEmitWithAwait () || source.ContainsEmitWithAwait ();
+            get { return source; }
         }
 
-        public override Expression CreateExpressionTree (ResolveContext ec)
+        public override Location StartLocation
         {
-            ec.Report.Error (832, loc, "An expression tree cannot contain an assignment operator");
+            get { return target.StartLocation; }
+        }
+
+        public override bool ContainsEmitWithAwait()
+        {
+            return target.ContainsEmitWithAwait() || source.ContainsEmitWithAwait();
+        }
+
+        public override Expression CreateExpressionTree(ResolveContext ec)
+        {
+            ec.Report.Error(832, loc, "An expression tree cannot contain an assignment operator");
             return null;
         }
 
-        protected override Expression DoResolve (ResolveContext ec)
+        protected override Expression DoResolve(ResolveContext ec)
         {
             bool ok = true;
-            source = source.Resolve (ec);
-                        
-            if (source == null) {
+            source = source.Resolve(ec);
+
+            if (source == null)
+            {
                 ok = false;
                 source = ErrorExpression.Instance;
             }
 
-            target = target.ResolveLValue (ec, source);
+            target = target.ResolveLValue(ec, source);
 
             if (target == null || !ok)
                 return null;
@@ -348,13 +356,15 @@ namespace Mono.CSharp {
             eclass = ExprClass.Value;
             type = target_type;
 
-            if (!(target is IAssignMethod)) {
-                target.Error_ValueAssignment (ec, source);
+            if (!(target is IAssignMethod))
+            {
+                target.Error_ValueAssignment(ec, source);
                 return null;
             }
 
-            if (target_type != source_type) {
-                Expression resolved = ResolveConversions (ec);
+            if (target_type != source_type)
+            {
+                Expression resolved = ResolveConversions(ec);
 
                 if (resolved != this)
                     return resolved;
@@ -363,13 +373,15 @@ namespace Mono.CSharp {
             return this;
         }
 
-        public override System.Linq.Expressions.Expression MakeExpression (BuilderContext ctx)
+        public override System.Linq.Expressions.Expression MakeExpression(BuilderContext ctx)
         {
             var tassign = target as IDynamicAssign;
             if (tassign == null)
-                throw new InternalErrorException (target.GetType () + " does not support dynamic assignment");
+                throw new InternalErrorException(
+                    target.GetType() + " does not support dynamic assignment"
+                );
 
-            var target_object = tassign.MakeAssignExpression (ctx, source);
+            var target_object = tassign.MakeAssignExpression(ctx, source);
 
             //
             // Some hacking is needed as DLR does not support void type and requires
@@ -382,162 +394,181 @@ namespace Mono.CSharp {
                 return target_object;
 
             System.Linq.Expressions.UnaryExpression source_object;
-            if (ctx.HasSet (BuilderContext.Options.CheckedScope)) {
-                source_object = System.Linq.Expressions.Expression.ConvertChecked (source.MakeExpression (ctx), target_object.Type);
-            } else {
-                source_object = System.Linq.Expressions.Expression.Convert (source.MakeExpression (ctx), target_object.Type);
+            if (ctx.HasSet(BuilderContext.Options.CheckedScope))
+            {
+                source_object = System.Linq.Expressions.Expression.ConvertChecked(
+                    source.MakeExpression(ctx),
+                    target_object.Type
+                );
+            }
+            else
+            {
+                source_object = System.Linq.Expressions.Expression.Convert(
+                    source.MakeExpression(ctx),
+                    target_object.Type
+                );
             }
 
-            return System.Linq.Expressions.Expression.Assign (target_object, source_object);
+            return System.Linq.Expressions.Expression.Assign(target_object, source_object);
         }
 
-        protected virtual Expression ResolveConversions (ResolveContext rc)
+        protected virtual Expression ResolveConversions(ResolveContext rc)
         {
             var ttype = target.Type;
             var stackAlloc = source as StackAlloc;
-            if (stackAlloc != null && ttype.Arity == 1 && ttype.GetDefinition () == rc.Module.PredefinedTypes.SpanGeneric.TypeSpec &&
-                rc.Module.Compiler.Settings.Version >= LanguageVersion.V_7_2) {
-
-                var etype = ttype.TypeArguments [0];
+            if (
+                stackAlloc != null
+                && ttype.Arity == 1
+                && ttype.GetDefinition() == rc.Module.PredefinedTypes.SpanGeneric.TypeSpec
+                && rc.Module.Compiler.Settings.Version >= LanguageVersion.V_7_2
+            )
+            {
+                var etype = ttype.TypeArguments[0];
                 var stype = ((PointerContainer)source.Type).Element;
-                if (etype == stype && stackAlloc.ResolveSpanConversion (rc, ttype)) {
+                if (etype == stype && stackAlloc.ResolveSpanConversion(rc, ttype))
+                {
                     return this;
                 }
             }
 
-            source = Convert.ImplicitConversionRequired (rc, source, ttype, source.Location);
+            source = Convert.ImplicitConversionRequired(rc, source, ttype, source.Location);
             if (source == null)
                 return null;
 
             return this;
         }
 
-        void Emit (EmitContext ec, bool is_statement)
+        void Emit(EmitContext ec, bool is_statement)
         {
-            IAssignMethod t = (IAssignMethod) target;
-            t.EmitAssign (ec, source, !is_statement, this is CompoundAssign);
+            IAssignMethod t = (IAssignMethod)target;
+            t.EmitAssign(ec, source, !is_statement, this is CompoundAssign);
         }
 
-        public override void Emit (EmitContext ec)
+        public override void Emit(EmitContext ec)
         {
-            Emit (ec, false);
+            Emit(ec, false);
         }
 
-        public override void EmitStatement (EmitContext ec)
+        public override void EmitStatement(EmitContext ec)
         {
-            Emit (ec, true);
+            Emit(ec, true);
         }
 
-        public override void FlowAnalysis (FlowAnalysisContext fc)
+        public override void FlowAnalysis(FlowAnalysisContext fc)
         {
-            source.FlowAnalysis (fc);
+            source.FlowAnalysis(fc);
 
-            if (target is ArrayAccess || target is IndexerExpr) {
-                target.FlowAnalysis (fc);
+            if (target is ArrayAccess || target is IndexerExpr)
+            {
+                target.FlowAnalysis(fc);
                 return;
             }
 
             var pe = target as PropertyExpr;
             if (pe != null && !pe.IsAutoPropertyAccess)
-                target.FlowAnalysis (fc);
+                target.FlowAnalysis(fc);
         }
 
-        protected override void CloneTo (CloneContext clonectx, Expression t)
+        protected override void CloneTo(CloneContext clonectx, Expression t)
         {
-            Assign _target = (Assign) t;
+            Assign _target = (Assign)t;
 
-            _target.target = target.Clone (clonectx);
-            _target.source = source.Clone (clonectx);
+            _target.target = target.Clone(clonectx);
+            _target.source = source.Clone(clonectx);
         }
 
-        public override object Accept (StructuralVisitor visitor)
+        public override object Accept(StructuralVisitor visitor)
         {
-            return visitor.Visit (this);
+            return visitor.Visit(this);
         }
     }
 
     public class SimpleAssign : Assign
     {
-        public SimpleAssign (Expression target, Expression source)
-            : this (target, source, target.Location)
-        {
-        }
+        public SimpleAssign(Expression target, Expression source)
+            : this(target, source, target.Location) { }
 
-        public SimpleAssign (Expression target, Expression source, Location loc)
-            : base (target, source, loc)
-        {
-        }
+        public SimpleAssign(Expression target, Expression source, Location loc)
+            : base(target, source, loc) { }
 
-        bool CheckEqualAssign (Expression t)
+        bool CheckEqualAssign(Expression t)
         {
-            if (source is Assign) {
-                Assign a = (Assign) source;
-                if (t.Equals (a.Target))
+            if (source is Assign)
+            {
+                Assign a = (Assign)source;
+                if (t.Equals(a.Target))
                     return true;
-                return a is SimpleAssign && ((SimpleAssign) a).CheckEqualAssign (t);
+                return a is SimpleAssign && ((SimpleAssign)a).CheckEqualAssign(t);
             }
-            return t.Equals (source);
+            return t.Equals(source);
         }
 
-        protected override Expression DoResolve (ResolveContext ec)
+        protected override Expression DoResolve(ResolveContext ec)
         {
-            Expression e = base.DoResolve (ec);
+            Expression e = base.DoResolve(ec);
             if (e == null || e != this)
                 return e;
 
-            if (CheckEqualAssign (target))
-                ec.Report.Warning (1717, 3, loc, "Assignment made to same variable; did you mean to assign something else?");
+            if (CheckEqualAssign(target))
+                ec.Report.Warning(
+                    1717,
+                    3,
+                    loc,
+                    "Assignment made to same variable; did you mean to assign something else?"
+                );
 
             return this;
         }
 
-        public override void FlowAnalysis (FlowAnalysisContext fc)
+        public override void FlowAnalysis(FlowAnalysisContext fc)
         {
-            base.FlowAnalysis (fc);
+            base.FlowAnalysis(fc);
 
             var vr = target as VariableReference;
-            if (vr != null) {
+            if (vr != null)
+            {
                 if (vr.VariableInfo != null)
-                    fc.SetVariableAssigned (vr.VariableInfo);
+                    fc.SetVariableAssigned(vr.VariableInfo);
 
                 return;
             }
 
             var fe = target as FieldExpr;
-            if (fe != null) {
-                fe.SetFieldAssigned (fc);
+            if (fe != null)
+            {
+                fe.SetFieldAssigned(fc);
                 return;
             }
 
             var pe = target as PropertyExpr;
-            if (pe != null) {
-                pe.SetBackingFieldAssigned (fc);
+            if (pe != null)
+            {
+                pe.SetBackingFieldAssigned(fc);
                 return;
             }
 
             var td = target as TupleDeconstruct;
-            if (td != null) {
-                td.SetGeneratedFieldAssigned (fc);
+            if (td != null)
+            {
+                td.SetGeneratedFieldAssigned(fc);
                 return;
             }
         }
 
-        public override Reachability MarkReachable (Reachability rc)
+        public override Reachability MarkReachable(Reachability rc)
         {
-            return source.MarkReachable (rc);
+            return source.MarkReachable(rc);
         }
     }
 
     public class RuntimeExplicitAssign : Assign
     {
-        public RuntimeExplicitAssign (Expression target, Expression source)
-            : base (target, source, target.Location)
-        {
-        }
+        public RuntimeExplicitAssign(Expression target, Expression source)
+            : base(target, source, target.Location) { }
 
-        protected override Expression ResolveConversions (ResolveContext ec)
+        protected override Expression ResolveConversions(ResolveContext ec)
         {
-            source = EmptyCast.Create (source, target.Type);
+            source = EmptyCast.Create(source, target.Type);
             return this;
         }
     }
@@ -547,18 +578,19 @@ namespace Mono.CSharp {
     //
     class CompilerAssign : Assign
     {
-        public CompilerAssign (Expression target, Expression source, Location loc)
-            : base (target, source, loc)
+        public CompilerAssign(Expression target, Expression source, Location loc)
+            : base(target, source, loc)
         {
-            if (target.Type != null) {
+            if (target.Type != null)
+            {
                 type = target.Type;
                 eclass = ExprClass.Value;
             }
         }
 
-        protected override Expression DoResolve (ResolveContext ec)
+        protected override Expression DoResolve(ResolveContext ec)
         {
-            var expr = base.DoResolve (ec);
+            var expr = base.DoResolve(ec);
             var vr = target as VariableReference;
             if (vr != null && vr.VariableInfo != null)
                 vr.VariableInfo.IsEverAssigned = false;
@@ -566,7 +598,7 @@ namespace Mono.CSharp {
             return expr;
         }
 
-        public void UpdateSource (Expression source)
+        public void UpdateSource(Expression source)
         {
             base.source = source;
         }
@@ -586,8 +618,8 @@ namespace Mono.CSharp {
         {
             readonly ExplicitBlock ctor_block;
 
-            public FieldInitializerContext (IMemberContext mc, BlockContext constructorContext)
-                : base (mc, null, constructorContext.ReturnType)
+            public FieldInitializerContext(IMemberContext mc, BlockContext constructorContext)
+                : base(mc, null, constructorContext.ReturnType)
             {
                 flags |= Options.FieldInitializerScope | Options.ConstructorScope;
                 this.ctor_block = constructorContext.CurrentBlock.Explicit;
@@ -596,10 +628,9 @@ namespace Mono.CSharp {
                     CurrentBlock = ctor_block;
             }
 
-            public override ExplicitBlock ConstructorBlock {
-                get {
-                    return ctor_block;
-                }
+            public override ExplicitBlock ConstructorBlock
+            {
+                get { return ctor_block; }
             }
         }
 
@@ -609,45 +640,47 @@ namespace Mono.CSharp {
         ExpressionStatement resolved;
         FieldBase mc;
 
-        public FieldInitializer (FieldBase mc, Expression expression, Location loc)
-            : base (new FieldExpr (mc.Spec, expression.Location), expression, loc)
+        public FieldInitializer(FieldBase mc, Expression expression, Location loc)
+            : base(new FieldExpr(mc.Spec, expression.Location), expression, loc)
         {
             this.mc = mc;
             if (!mc.IsStatic)
-                ((FieldExpr)target).InstanceExpression = new CompilerGeneratedThis (mc.CurrentType, expression.Location);
+                ((FieldExpr)target).InstanceExpression = new CompilerGeneratedThis(
+                    mc.CurrentType,
+                    expression.Location
+                );
         }
 
         public int AssignmentOffset { get; private set; }
 
-        public FieldBase Field {
-            get {
-                return mc;
-            }
+        public FieldBase Field
+        {
+            get { return mc; }
         }
 
-        public override Location StartLocation {
-            get {
-                return loc;
-            }
+        public override Location StartLocation
+        {
+            get { return loc; }
         }
 
-        protected override Expression DoResolve (ResolveContext rc)
+        protected override Expression DoResolve(ResolveContext rc)
         {
             // Field initializer can be resolved (fail) many times
             if (source == null)
                 return null;
 
-            if (resolved == null) {
-                var bc = (BlockContext) rc;
-                var ctx = new FieldInitializerContext (mc, bc);
-                resolved = base.DoResolve (ctx) as ExpressionStatement;
+            if (resolved == null)
+            {
+                var bc = (BlockContext)rc;
+                var ctx = new FieldInitializerContext(mc, bc);
+                resolved = base.DoResolve(ctx) as ExpressionStatement;
                 AssignmentOffset = ctx.AssignmentInfoOffset - bc.AssignmentInfoOffset;
             }
 
             return resolved;
         }
 
-        public override void EmitStatement (EmitContext ec)
+        public override void EmitStatement(EmitContext ec)
         {
             if (resolved == null)
                 return;
@@ -657,39 +690,42 @@ namespace Mono.CSharp {
             // block to allow debugging field initializers when constructor is
             // compiler generated
             //
-            if (ec.HasSet (BuilderContext.Options.OmitDebugInfo) && ec.HasMethodSymbolBuilder) {
-                using (ec.With (BuilderContext.Options.OmitDebugInfo, false)) {
-                    ec.Mark (loc);
+            if (ec.HasSet(BuilderContext.Options.OmitDebugInfo) && ec.HasMethodSymbolBuilder)
+            {
+                using (ec.With(BuilderContext.Options.OmitDebugInfo, false))
+                {
+                    ec.Mark(loc);
                 }
             }
 
             if (resolved != this)
-                resolved.EmitStatement (ec);
+                resolved.EmitStatement(ec);
             else
-                base.EmitStatement (ec);
+                base.EmitStatement(ec);
         }
 
-        public override void FlowAnalysis (FlowAnalysisContext fc)
+        public override void FlowAnalysis(FlowAnalysisContext fc)
         {
-            source.FlowAnalysis (fc);
-            ((FieldExpr) target).SetFieldAssigned (fc);
+            source.FlowAnalysis(fc);
+            ((FieldExpr)target).SetFieldAssigned(fc);
         }
-        
-        public bool IsDefaultInitializer {
-            get {
+
+        public bool IsDefaultInitializer
+        {
+            get
+            {
                 Constant c = source as Constant;
                 if (c == null)
                     return false;
-                
+
                 FieldExpr fe = (FieldExpr)target;
-                return c.IsDefaultInitializer (fe.Type);
+                return c.IsDefaultInitializer(fe.Type);
             }
         }
 
-        public override bool IsSideEffectFree {
-            get {
-                return source.IsSideEffectFree;
-            }
+        public override bool IsSideEffectFree
+        {
+            get { return source.IsSideEffectFree; }
         }
     }
 
@@ -698,24 +734,27 @@ namespace Mono.CSharp {
         readonly Field field;
         readonly Parameter parameter;
 
-        public PrimaryConstructorAssign (Field field, Parameter parameter)
-            : base (null, null, parameter.Location)
+        public PrimaryConstructorAssign(Field field, Parameter parameter)
+            : base(null, null, parameter.Location)
         {
             this.field = field;
             this.parameter = parameter;
         }
 
-        protected override Expression DoResolve (ResolveContext rc)
+        protected override Expression DoResolve(ResolveContext rc)
         {
-            target = new FieldExpr (field, loc);
-            source = rc.CurrentBlock.ParametersBlock.GetParameterInfo (parameter).CreateReferenceExpression (rc, loc);
-            return base.DoResolve (rc);
+            target = new FieldExpr(field, loc);
+            source = rc.CurrentBlock.ParametersBlock
+                .GetParameterInfo(parameter)
+                .CreateReferenceExpression(rc, loc);
+            return base.DoResolve(rc);
         }
 
-        public override void EmitStatement (EmitContext ec)
+        public override void EmitStatement(EmitContext ec)
         {
-            using (ec.With (BuilderContext.Options.OmitDebugInfo, true)) {
-                base.EmitStatement (ec);
+            using (ec.With(BuilderContext.Options.OmitDebugInfo, true))
+            {
+                base.EmitStatement(ec);
             }
         }
     }
@@ -730,7 +769,7 @@ namespace Mono.CSharp {
         {
             readonly Expression child;
 
-            public TargetExpression (Expression child)
+            public TargetExpression(Expression child)
             {
                 this.child = child;
                 this.loc = child.Location;
@@ -738,31 +777,31 @@ namespace Mono.CSharp {
 
             public bool RequiresEmitWithAwait { get; set; }
 
-            public override bool ContainsEmitWithAwait ()
+            public override bool ContainsEmitWithAwait()
             {
-                return RequiresEmitWithAwait || child.ContainsEmitWithAwait ();
+                return RequiresEmitWithAwait || child.ContainsEmitWithAwait();
             }
 
-            public override Expression CreateExpressionTree (ResolveContext ec)
+            public override Expression CreateExpressionTree(ResolveContext ec)
             {
-                throw new NotSupportedException ("ET");
+                throw new NotSupportedException("ET");
             }
 
-            protected override Expression DoResolve (ResolveContext ec)
+            protected override Expression DoResolve(ResolveContext ec)
             {
                 type = child.Type;
                 eclass = ExprClass.Value;
                 return this;
             }
 
-            public override void Emit (EmitContext ec)
+            public override void Emit(EmitContext ec)
             {
-                child.Emit (ec);
+                child.Emit(ec);
             }
 
-            public override Expression EmitToField (EmitContext ec)
+            public override Expression EmitToField(EmitContext ec)
             {
-                return child.EmitToField (ec);
+                return child.EmitToField(ec);
             }
         }
 
@@ -771,49 +810,60 @@ namespace Mono.CSharp {
         Expression right;
         Expression left;
 
-        public CompoundAssign (Binary.Operator op, Expression target, Expression source)
-            : base (target, source, target.Location)
+        public CompoundAssign(Binary.Operator op, Expression target, Expression source)
+            : base(target, source, target.Location)
         {
             right = source;
             this.op = op;
         }
 
-        public CompoundAssign (Binary.Operator op, Expression target, Expression source, Expression left)
-            : this (op, target, source)
+        public CompoundAssign(
+            Binary.Operator op,
+            Expression target,
+            Expression source,
+            Expression left
+        )
+            : this(op, target, source)
         {
             this.left = left;
         }
 
-        public Binary.Operator Operator {
-            get {
-                return op;
-            }
+        public Binary.Operator Operator
+        {
+            get { return op; }
         }
 
-        protected override Expression DoResolve (ResolveContext ec)
+        protected override Expression DoResolve(ResolveContext ec)
         {
-            right = right.Resolve (ec);
+            right = right.Resolve(ec);
             if (right == null)
                 return null;
 
             MemberAccess ma = target as MemberAccess;
-            using (ec.Set (ResolveContext.Options.CompoundAssignmentScope)) {
-                target = target.Resolve (ec);
+            using (ec.Set(ResolveContext.Options.CompoundAssignmentScope))
+            {
+                target = target.Resolve(ec);
             }
-            
+
             if (target == null)
                 return null;
 
-            if (target is MethodGroupExpr){
-                ec.Report.Error (1656, loc,
+            if (target is MethodGroupExpr)
+            {
+                ec.Report.Error(
+                    1656,
+                    loc,
                     "Cannot assign to `{0}' because it is a `{1}'",
-                    ((MethodGroupExpr)target).Name, target.ExprClassName);
+                    ((MethodGroupExpr)target).Name,
+                    target.ExprClassName
+                );
                 return null;
             }
 
             var event_expr = target as EventExpr;
-            if (event_expr != null) {
-                source = Convert.ImplicitConversionRequired (ec, right, target.Type, loc);
+            if (event_expr != null)
+            {
+                source = Convert.ImplicitConversionRequired(ec, right, target.Type, loc);
                 if (source == null)
                     return null;
 
@@ -825,7 +875,7 @@ namespace Mono.CSharp {
                 else
                     rside = null;
 
-                target = target.ResolveLValue (ec, rside);
+                target = target.ResolveLValue(ec, rside);
                 if (target == null)
                     return null;
 
@@ -840,17 +890,18 @@ namespace Mono.CSharp {
             // effects.
             //
             if (left == null)
-                left = new TargetExpression (target);
+                left = new TargetExpression(target);
 
-            source = new Binary (op, left, right, true);
+            source = new Binary(op, left, right, true);
 
-            if (target is DynamicMemberAssignable) {
-                Arguments targs = ((DynamicMemberAssignable) target).Arguments;
-                source = source.Resolve (ec);
+            if (target is DynamicMemberAssignable)
+            {
+                Arguments targs = ((DynamicMemberAssignable)target).Arguments;
+                source = source.Resolve(ec);
 
-                Arguments args = new Arguments (targs.Count + 1);
-                args.AddRange (targs);
-                args.Add (new Argument (source));
+                Arguments args = new Arguments(targs.Count + 1);
+                args.AddRange(targs);
+                args.Add(new Argument(source));
 
                 var binder_flags = CSharpBinderFlags.ValueFromCompoundAssignment;
 
@@ -858,45 +909,61 @@ namespace Mono.CSharp {
                 // Compound assignment does target conversion using additional method
                 // call, set checked context as the binary operation can overflow
                 //
-                if (ec.HasSet (ResolveContext.Options.CheckedScope))
+                if (ec.HasSet(ResolveContext.Options.CheckedScope))
                     binder_flags |= CSharpBinderFlags.CheckedContext;
 
-                if (target is DynamicMemberBinder) {
-                    source = new DynamicMemberBinder (ma.Name, binder_flags, args, loc).Resolve (ec);
+                if (target is DynamicMemberBinder)
+                {
+                    source = new DynamicMemberBinder(ma.Name, binder_flags, args, loc).Resolve(ec);
 
                     // Handles possible event addition/subtraction
-                    if (op == Binary.Operator.Addition || op == Binary.Operator.Subtraction) {
-                        args = new Arguments (targs.Count + 1);
-                        args.AddRange (targs);
-                        args.Add (new Argument (right));
-                        string method_prefix = op == Binary.Operator.Addition ?
-                            Event.AEventAccessor.AddPrefix : Event.AEventAccessor.RemovePrefix;
+                    if (op == Binary.Operator.Addition || op == Binary.Operator.Subtraction)
+                    {
+                        args = new Arguments(targs.Count + 1);
+                        args.AddRange(targs);
+                        args.Add(new Argument(right));
+                        string method_prefix =
+                            op == Binary.Operator.Addition
+                                ? Event.AEventAccessor.AddPrefix
+                                : Event.AEventAccessor.RemovePrefix;
 
-                        var invoke = DynamicInvocation.CreateSpecialNameInvoke (
-                            new MemberAccess (right, method_prefix + ma.Name, loc), args, loc).Resolve (ec);
+                        var invoke = DynamicInvocation
+                            .CreateSpecialNameInvoke(
+                                new MemberAccess(right, method_prefix + ma.Name, loc),
+                                args,
+                                loc
+                            )
+                            .Resolve(ec);
 
-                        args = new Arguments (targs.Count);
-                        args.AddRange (targs);
-                        source = new DynamicEventCompoundAssign (ma.Name, args,
-                            (ExpressionStatement) source, (ExpressionStatement) invoke, loc).Resolve (ec);
+                        args = new Arguments(targs.Count);
+                        args.AddRange(targs);
+                        source = new DynamicEventCompoundAssign(
+                            ma.Name,
+                            args,
+                            (ExpressionStatement)source,
+                            (ExpressionStatement)invoke,
+                            loc
+                        ).Resolve(ec);
                     }
-                } else {
-                    source = new DynamicIndexBinder (binder_flags, args, loc).Resolve (ec);
+                }
+                else
+                {
+                    source = new DynamicIndexBinder(binder_flags, args, loc).Resolve(ec);
                 }
 
                 return source;
             }
 
-            return base.DoResolve (ec);
+            return base.DoResolve(ec);
         }
 
-        public override void FlowAnalysis (FlowAnalysisContext fc)
+        public override void FlowAnalysis(FlowAnalysisContext fc)
         {
-            target.FlowAnalysis (fc);
-            source.FlowAnalysis (fc);
+            target.FlowAnalysis(fc);
+            source.FlowAnalysis(fc);
         }
 
-        protected override Expression ResolveConversions (ResolveContext ec)
+        protected override Expression ResolveConversions(ResolveContext ec)
         {
             //
             // LAMESPEC: Under dynamic context no target conversion is happening
@@ -911,8 +978,9 @@ namespace Mono.CSharp {
             //
             // 1. the return type is implicitly convertible to the type of target
             //
-            if (Convert.ImplicitConversionExists (ec, source, target_type)) {
-                source = Convert.ImplicitConversion (ec, source, target_type, loc);
+            if (Convert.ImplicitConversionExists(ec, source, target_type))
+            {
+                source = Convert.ImplicitConversion(ec, source, target_type, loc);
                 return this;
             }
 
@@ -920,55 +988,72 @@ namespace Mono.CSharp {
             // Otherwise, if the selected operator is a predefined operator
             //
             Binary b = source as Binary;
-            if (b == null) {
+            if (b == null)
+            {
                 if (source is ReducedExpression)
-                    b = ((ReducedExpression) source).OriginalExpression as Binary;
-                else if (source is ReducedExpression.ReducedConstantExpression) {
-                    b = ((ReducedExpression.ReducedConstantExpression) source).OriginalExpression as Binary;
-                } else if (source is Nullable.LiftedBinaryOperator) {
-                    var po = ((Nullable.LiftedBinaryOperator) source);
+                    b = ((ReducedExpression)source).OriginalExpression as Binary;
+                else if (source is ReducedExpression.ReducedConstantExpression)
+                {
+                    b =
+                        ((ReducedExpression.ReducedConstantExpression)source).OriginalExpression
+                        as Binary;
+                }
+                else if (source is Nullable.LiftedBinaryOperator)
+                {
+                    var po = ((Nullable.LiftedBinaryOperator)source);
                     if (po.UserOperator == null)
                         b = po.Binary;
-                } else if (source is TypeCast) {
-                    b = ((TypeCast) source).Child as Binary;
+                }
+                else if (source is TypeCast)
+                {
+                    b = ((TypeCast)source).Child as Binary;
                 }
             }
 
-            if (b != null) {
+            if (b != null)
+            {
                 //
                 // 2a. the operator is a shift operator
                 //
                 // 2b. the return type is explicitly convertible to the type of x, and
                 // y is implicitly convertible to the type of x
                 //
-                if ((b.Oper & Binary.Operator.ShiftMask) != 0 ||
-                    Convert.ImplicitConversionExists (ec, right, target_type)) {
-                    source = Convert.ExplicitConversion (ec, source, target_type, loc);
+                if (
+                    (b.Oper & Binary.Operator.ShiftMask) != 0
+                    || Convert.ImplicitConversionExists(ec, right, target_type)
+                )
+                {
+                    source = Convert.ExplicitConversion(ec, source, target_type, loc);
                     return this;
                 }
             }
 
-            if (source.Type.BuiltinType == BuiltinTypeSpec.Type.Dynamic) {
-                Arguments arg = new Arguments (1);
-                arg.Add (new Argument (source));
-                return new SimpleAssign (target, new DynamicConversion (target_type, CSharpBinderFlags.ConvertExplicit, arg, loc), loc).Resolve (ec);
+            if (source.Type.BuiltinType == BuiltinTypeSpec.Type.Dynamic)
+            {
+                Arguments arg = new Arguments(1);
+                arg.Add(new Argument(source));
+                return new SimpleAssign(
+                    target,
+                    new DynamicConversion(target_type, CSharpBinderFlags.ConvertExplicit, arg, loc),
+                    loc
+                ).Resolve(ec);
             }
 
-            right.Error_ValueCannotBeConverted (ec, target_type, false);
+            right.Error_ValueCannotBeConverted(ec, target_type, false);
             return null;
         }
 
-        protected override void CloneTo (CloneContext clonectx, Expression t)
+        protected override void CloneTo(CloneContext clonectx, Expression t)
         {
-            CompoundAssign ctarget = (CompoundAssign) t;
+            CompoundAssign ctarget = (CompoundAssign)t;
 
-            ctarget.right = ctarget.source = source.Clone (clonectx);
-            ctarget.target = target.Clone (clonectx);
+            ctarget.right = ctarget.source = source.Clone(clonectx);
+            ctarget.target = target.Clone(clonectx);
         }
 
-        public override object Accept (StructuralVisitor visitor)
+        public override object Accept(StructuralVisitor visitor)
         {
-            return visitor.Visit (this);
+            return visitor.Visit(this);
         }
     }
 }

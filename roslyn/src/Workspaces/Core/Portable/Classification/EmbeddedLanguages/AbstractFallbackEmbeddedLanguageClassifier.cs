@@ -46,7 +46,10 @@ namespace Microsoft.CodeAnalysis.Classification
             foreach (var vc in virtualChars)
             {
                 if (vc.Span.Length > 1)
-                    context.AddClassification(ClassificationTypeNames.StringEscapeCharacter, vc.Span);
+                    context.AddClassification(
+                        ClassificationTypeNames.StringEscapeCharacter,
+                        vc.Span
+                    );
             }
         }
     }

@@ -28,7 +28,14 @@
 namespace System.Diagnostics.CodeAnalysis
 {
     /// <summary>Specifies that an output will not be null even if the corresponding type allows it.</summary>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Method
+            | AttributeTargets.Parameter
+            | AttributeTargets.Property
+            | AttributeTargets.ReturnValue,
+        AllowMultiple = true
+    )]
     internal sealed class NotNullAttribute : Attribute { }
 
     /// <summary>Specifies that when a method returns <see cref="ReturnValue"/>, the parameter will not be null even if the corresponding type allows it.</summary>
@@ -46,14 +53,21 @@ namespace System.Diagnostics.CodeAnalysis
     }
 
     /// <summary>Specifies that an output may be null even if the corresponding type disallows it.</summary>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, Inherited = false)]
-    internal sealed class MaybeNullAttribute : Attribute
-    { }
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Parameter
+            | AttributeTargets.Property
+            | AttributeTargets.ReturnValue,
+        Inherited = false
+    )]
+    internal sealed class MaybeNullAttribute : Attribute { }
 
     /// <summary>Specifies that null is allowed as an input even if the corresponding type disallows it.</summary>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property, Inherited = false)]
-    internal sealed class AllowNullAttribute : Attribute
-    { }
+    [AttributeUsage(
+        AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property,
+        Inherited = false
+    )]
+    internal sealed class AllowNullAttribute : Attribute { }
 
     /// <summary>
     /// Specifies that the method will not return if the associated Boolean parameter is passed the specified value.
@@ -68,7 +82,8 @@ namespace System.Diagnostics.CodeAnalysis
         /// The condition parameter value. Code after the method will be considered unreachable by diagnostics if the argument to
         /// the associated parameter matches this value.
         /// </param>
-        public DoesNotReturnIfAttribute(bool parameterValue) => this.ParameterValue = parameterValue;
+        public DoesNotReturnIfAttribute(bool parameterValue) =>
+            this.ParameterValue = parameterValue;
 
         /// <summary>Gets the condition parameter value.</summary>
         public bool ParameterValue { get; }

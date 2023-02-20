@@ -11,6 +11,7 @@ public class Program
 {
     public static IRT s_rt;
     public static long s_4;
+
     public static int Main()
     {
         s_rt = new C();
@@ -26,7 +27,6 @@ public class Program
         return 0;
     }
 }
-
 
 public interface IRT
 {

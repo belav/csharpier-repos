@@ -2,9 +2,9 @@
 // Line: 8
 // Compiler options: -warnaserror -warn:1
 
-[assembly:System.CLSCompliant(true)]
+[assembly: System.CLSCompliant(true)]
 
-namespace System {
-    public interface Icomparable {
-    }
+namespace System
+{
+    public interface Icomparable { }
 }

@@ -42,17 +42,19 @@ public static class DefaultFilesExtensions
     /// Files are served from the path specified in <see cref="IWebHostEnvironment.WebRootPath"/>
     /// or <see cref="IWebHostEnvironment.WebRootFileProvider"/> which defaults to the 'wwwroot' subfolder.
     /// </remarks>
-    public static IApplicationBuilder UseDefaultFiles(this IApplicationBuilder app, string requestPath)
+    public static IApplicationBuilder UseDefaultFiles(
+        this IApplicationBuilder app,
+        string requestPath
+    )
     {
         if (app == null)
         {
             throw new ArgumentNullException(nameof(app));
         }
 
-        return app.UseDefaultFiles(new DefaultFilesOptions
-        {
-            RequestPath = new PathString(requestPath)
-        });
+        return app.UseDefaultFiles(
+            new DefaultFilesOptions { RequestPath = new PathString(requestPath) }
+        );
     }
 
     /// <summary>
@@ -61,7 +63,10 @@ public static class DefaultFilesExtensions
     /// <param name="app"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseDefaultFiles(this IApplicationBuilder app, DefaultFilesOptions options)
+    public static IApplicationBuilder UseDefaultFiles(
+        this IApplicationBuilder app,
+        DefaultFilesOptions options
+    )
     {
         if (app == null)
         {

@@ -3,7 +3,7 @@
 
 class C
 {
-    public static explicit operator X (params C[] foo)
+    public static explicit operator X(params C[] foo)
     {
         return null;
     }

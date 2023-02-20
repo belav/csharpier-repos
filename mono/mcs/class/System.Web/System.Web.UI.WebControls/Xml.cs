@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,17 +35,27 @@ using System.Xml.Xsl;
 using System.Xml.XPath;
 using System.Collections;
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [DefaultProperty ("DocumentSource")]
-    [Designer ("System.Web.UI.Design.WebControls.XmlDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-    [PersistChildren (true)]
-    [ControlBuilder (typeof (XmlBuilder))] 
-    public class Xml : Control {
+    [DefaultProperty("DocumentSource")]
+    [Designer(
+        "System.Web.UI.Design.WebControls.XmlDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    [PersistChildren(true)]
+    [ControlBuilder(typeof(XmlBuilder))]
+    public class Xml : Control
+    {
         // Property set variables
         XmlDocument xml_document;
         XPathNavigator xpath_navigator;
@@ -56,38 +66,32 @@ namespace System.Web.UI.WebControls {
         XsltArgumentList transform_arguments;
         string transform_file;
 
-        public Xml ()
-        {
-        }
+        public Xml() { }
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        [MonoTODO ("Anything else?")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [MonoTODO("Anything else?")]
         public override string ClientID
         {
-            get {
-                return base.ClientID;
-            }
+            get { return base.ClientID; }
         }
 
-        [MonoTODO ("Anything else?")]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override ControlCollection Controls 
+        [MonoTODO("Anything else?")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override ControlCollection Controls
         {
-            get {
-                return base.Controls;
-            }
+            get { return base.Controls; }
         }
-        
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-[Obsolete ("Use the XPathNavigator property instead by creating an XPathDocument and calling CreateNavigator().")]
-        public XmlDocument Document {
-            get {
-                return xml_document;
-            }
-
-            set {
+        [Obsolete(
+            "Use the XPathNavigator property instead by creating an XPathDocument and calling CreateNavigator()."
+        )]
+        public XmlDocument Document
+        {
+            get { return xml_document; }
+            set
+            {
                 xml_content = null;
                 xml_file = null;
                 xml_document = value;
@@ -96,147 +100,157 @@ namespace System.Web.UI.WebControls {
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string DocumentContent {
-            get {
-                return (xml_content != null)? xml_content : "";
-            }
-
-            set {
+        public string DocumentContent
+        {
+            get { return (xml_content != null) ? xml_content : ""; }
+            set
+            {
                 xml_content = value;
                 xml_file = null;
                 xml_document = null;
             }
         }
 
-        [DefaultValue ("")]
+        [DefaultValue("")]
         [UrlProperty]
-        [Editor ("System.Web.UI.Design.XmlUrlEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        [WebSysDescription ("")]
-        [WebCategory ("Behavior")]
-        [MonoLimitation ("Absolute path to the file system is not supported; use a relative URI instead.")]
-        public string DocumentSource {
-            get {
+        [Editor(
+            "System.Web.UI.Design.XmlUrlEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        [MonoLimitation(
+            "Absolute path to the file system is not supported; use a relative URI instead."
+        )]
+        public string DocumentSource
+        {
+            get
+            {
                 if (xml_file == null)
                     return "";
-                
+
                 return xml_file;
             }
-
-            set {
+            set
+            {
                 xml_content = null;
                 xml_file = value;
                 xml_document = null;
             }
         }
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        [Browsable (false)]
-        [DefaultValue (false)]
-        public override bool EnableTheming 
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [Browsable(false)]
+        [DefaultValue(false)]
+        public override bool EnableTheming
         {
             get { return false; }
-            set { throw new NotSupportedException (); }
+            set { throw new NotSupportedException(); }
         }
 
-        [DefaultValue ("")]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        [Browsable (false)]
+        [DefaultValue("")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [Browsable(false)]
         public override string SkinID
         {
             // MSDN: Always returns an empty string (""). This property is not supported.
             get { return String.Empty; }
             // MSDN: Any attempt to set the value of this property throws a NotSupportedException exception.
-            set { throw new NotSupportedException ("SkinID is not supported on Xml control"); }
+            set { throw new NotSupportedException("SkinID is not supported on Xml control"); }
         }
-        
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [WebSysDescription ("")]
-        [WebCategory ("Behavior")]
-        public XslTransform Transform {
-            get {
-                return xsl_transform;
-            }
-
-            set {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        public XslTransform Transform
+        {
+            get { return xsl_transform; }
+            set
+            {
                 transform_file = null;
                 xsl_transform = value;
             }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [WebSysDescription ("")]
-        [WebCategory ("Behavior")]
-        public XsltArgumentList TransformArgumentList {
-            get {
-                return transform_arguments;
-            }
-
-            set {
-                transform_arguments = value;
-            }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        public XsltArgumentList TransformArgumentList
+        {
+            get { return transform_arguments; }
+            set { transform_arguments = value; }
         }
 
-        [DefaultValue ("")]
-        [Editor ("System.Web.UI.Design.XslUrlEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        [MonoLimitation ("Absolute path to the file system is not supported; use a relative URI instead.")]
-        public string TransformSource {
-            get {
+        [DefaultValue("")]
+        [Editor(
+            "System.Web.UI.Design.XslUrlEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        [MonoLimitation(
+            "Absolute path to the file system is not supported; use a relative URI instead."
+        )]
+        public string TransformSource
+        {
+            get
+            {
                 if (transform_file == null)
                     return "";
                 return transform_file;
             }
-
-            set {
+            set
+            {
                 transform_file = value;
                 xsl_transform = null;
             }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
-        public XPathNavigator XPathNavigator 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        public XPathNavigator XPathNavigator
         {
             get { return xpath_navigator; }
             set { xpath_navigator = value; }
         }
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override Control FindControl (string id) 
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override Control FindControl(string id)
         {
             return null;
         }
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override void Focus ()
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override void Focus()
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override bool HasControls ()
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool HasControls()
         {
             return false;
         }
 
-        protected internal
-        override void Render (HtmlTextWriter output)
+        protected internal override void Render(HtmlTextWriter output)
         {
             XmlDocument xml_doc = null;
 
-            if (xpath_navigator == null) {
+            if (xpath_navigator == null)
+            {
                 if (xml_document != null)
                     xml_doc = xml_document;
-                else {
-                    if (xml_content != null) {
-                        xml_doc = new XmlDocument ();
-                        xml_doc.LoadXml (xml_content);
+                else
+                {
+                    if (xml_content != null)
+                    {
+                        xml_doc = new XmlDocument();
+                        xml_doc.LoadXml(xml_content);
                     }
-                    else if (xml_file != null) {
-                        xml_doc = new XmlDocument ();
-                        xml_doc.Load (MapPathSecure (xml_file));
+                    else if (xml_file != null)
+                    {
+                        xml_doc = new XmlDocument();
+                        xml_doc.Load(MapPathSecure(xml_file));
                     }
                     else
                         return;
@@ -244,53 +258,65 @@ namespace System.Web.UI.WebControls {
             }
 
             XslTransform t = xsl_transform;
-            if (transform_file != null){
-                t = new XslTransform ();
-                t.Load (MapPathSecure (transform_file));
+            if (transform_file != null)
+            {
+                t = new XslTransform();
+                t.Load(MapPathSecure(transform_file));
             }
 
-            if (t != null){
-                if (xpath_navigator != null) {
+            if (t != null)
+            {
+                if (xpath_navigator != null)
+                {
                     t.Transform(xpath_navigator, transform_arguments, output);
                 }
-                else {
-                    t.Transform (xml_doc, transform_arguments, output, null);
+                else
+                {
+                    t.Transform(xml_doc, transform_arguments, output, null);
                 }
                 return;
             }
-                
-            XmlTextWriter xmlwriter = new XmlTextWriter (output);
+
+            XmlTextWriter xmlwriter = new XmlTextWriter(output);
             xmlwriter.Formatting = Formatting.None;
-            if (xpath_navigator != null) {
-                xmlwriter.WriteStartDocument ();
-                xpath_navigator.WriteSubtree (xmlwriter);
+            if (xpath_navigator != null)
+            {
+                xmlwriter.WriteStartDocument();
+                xpath_navigator.WriteSubtree(xmlwriter);
             }
-            else {
-                xml_doc.Save (xmlwriter);
+            else
+            {
+                xml_doc.Save(xmlwriter);
             }
         }
 
-        protected override void AddParsedSubObject (object obj)
+        protected override void AddParsedSubObject(object obj)
         {
             LiteralControl lc = obj as LiteralControl;
-            
-            if (lc != null){
-                xml_document = new XmlDocument ();
-                xml_document.LoadXml (lc.Text);
-            } else {
-                throw new HttpException (
-                             String.Format ("Objects of type {0} are not supported as children of the Xml control",
-                                    obj.GetType ()));
+
+            if (lc != null)
+            {
+                xml_document = new XmlDocument();
+                xml_document.LoadXml(lc.Text);
+            }
+            else
+            {
+                throw new HttpException(
+                    String.Format(
+                        "Objects of type {0} are not supported as children of the Xml control",
+                        obj.GetType()
+                    )
+                );
             }
         }
 
-        protected override ControlCollection CreateControlCollection ()
+        protected override ControlCollection CreateControlCollection()
         {
-            return new EmptyControlCollection (this);
+            return new EmptyControlCollection(this);
         }
 
         [MonoTODO("Always returns null")]
-        protected override IDictionary GetDesignModeState ()
+        protected override IDictionary GetDesignModeState()
         {
             return null;
         }

@@ -10,10 +10,12 @@ namespace Microsoft.CodeAnalysis
         /// It is unknown if the <see cref="SyntaxTree"/> is automatically generated.
         /// </summary>
         Unknown,
+
         /// <summary>
         /// The <see cref="SyntaxTree"/> is not automatically generated.
         /// </summary>
         NotGenerated,
+
         /// <summary>
         /// The <see cref="SyntaxTree"/> is marked as automatically generated.
         /// </summary>

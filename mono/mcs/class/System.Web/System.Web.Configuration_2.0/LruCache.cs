@@ -30,10 +30,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace System.Web.Configuration {
-
-    class LruCache<TKey, TValue> {
-        Dictionary<TKey, LinkedListNode <TValue>> dict;
+namespace System.Web.Configuration
+{
+    class LruCache<TKey, TValue>
+    {
+        Dictionary<TKey, LinkedListNode<TValue>> dict;
         Dictionary<LinkedListNode<TValue>, TKey> revdict;
         LinkedList<TValue> list;
         int entry_limit;
@@ -43,99 +44,107 @@ namespace System.Web.Configuration {
 
         internal string EvictionWarning { set; private get; }
 
-        public LruCache (int entryLimit)
+        public LruCache(int entryLimit)
         {
             entry_limit = entryLimit;
-            dict = new Dictionary<TKey, LinkedListNode<TValue>> ();
-            revdict = new Dictionary<LinkedListNode<TValue>, TKey> ();
-            list = new LinkedList<TValue> ();
+            dict = new Dictionary<TKey, LinkedListNode<TValue>>();
+            revdict = new Dictionary<LinkedListNode<TValue>, TKey>();
+            list = new LinkedList<TValue>();
         }
 
         //for debugging: public int Count { get { return dict.Count; } }
 
-        void Evict ()
+        void Evict()
         {
             var last = list.Last;
             if (last == null)
                 return;
 
-            var key = revdict [last];
+            var key = revdict[last];
 
-            dict.Remove (key);
-            revdict.Remove (last);
-            list.RemoveLast ();
-            DisposeValue (last.Value);
+            dict.Remove(key);
+            revdict.Remove(last);
+            list.RemoveLast();
+            DisposeValue(last.Value);
             evictions++;
 
-            if (!String.IsNullOrEmpty (EvictionWarning) && !eviction_warning_shown && (evictions >= entry_limit)) {
-                Console.Error.WriteLine ("WARNING: " + EvictionWarning);
+            if (
+                !String.IsNullOrEmpty(EvictionWarning)
+                && !eviction_warning_shown
+                && (evictions >= entry_limit)
+            )
+            {
+                Console.Error.WriteLine("WARNING: " + EvictionWarning);
                 eviction_warning_shown = true;
             }
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            foreach (var element in list) {
-                DisposeValue (element);
+            foreach (var element in list)
+            {
+                DisposeValue(element);
             }
 
-            dict.Clear ();
-            revdict.Clear ();
-            list.Clear ();
+            dict.Clear();
+            revdict.Clear();
+            list.Clear();
             eviction_warning_shown = false;
             evictions = 0;
         }
 
-        void DisposeValue (TValue value)
+        void DisposeValue(TValue value)
         {
-            if (value is IDisposable) {
-                ((IDisposable)value).Dispose ();
+            if (value is IDisposable)
+            {
+                ((IDisposable)value).Dispose();
             }
         }
 
-        public bool TryGetValue (TKey key, out TValue value)
+        public bool TryGetValue(TKey key, out TValue value)
         {
             LinkedListNode<TValue> node;
 
-            if (dict.TryGetValue (key, out node)){
-                list.Remove (node);
-                list.AddFirst (node);
+            if (dict.TryGetValue(key, out node))
+            {
+                list.Remove(node);
+                list.AddFirst(node);
 
                 value = node.Value;
                 return true;
             }
-            value = default (TValue);
+            value = default(TValue);
             return false;
         }
 
-        public void Add (TKey key, TValue value)
+        public void Add(TKey key, TValue value)
         {
             LinkedListNode<TValue> node;
 
-            if (dict.TryGetValue (key, out node)){
-
+            if (dict.TryGetValue(key, out node))
+            {
                 // If we already have a key, move it to the front
-                list.Remove (node);
-                list.AddFirst (node);
+                list.Remove(node);
+                list.AddFirst(node);
 
                 // Remove the old value
-                DisposeValue (node.Value);
+                DisposeValue(node.Value);
 
                 node.Value = value;
                 return;
             }
 
             if (dict.Count >= entry_limit)
-                Evict ();
+                Evict();
 
             // Adding new node
-            node = new LinkedListNode<TValue> (value);
-            list.AddFirst (node);
-            dict [key] = node;
-            revdict [node] = key;
+            node = new LinkedListNode<TValue>(value);
+            list.AddFirst(node);
+            dict[key] = node;
+            revdict[node] = key;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return "LRUCache dict={0} revdict={1} list={2}";
         }

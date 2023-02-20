@@ -17,9 +17,7 @@ namespace Microsoft.CodeAnalysis.VisualBasic
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualBasicProjectFileLoaderFactory()
-        {
-        }
+        public VisualBasicProjectFileLoaderFactory() { }
 
         public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
         {

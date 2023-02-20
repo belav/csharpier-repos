@@ -18,7 +18,8 @@ internal static partial class SyntaxValueProviderExtensions
     /// syntax tree changes, we will always get different nodes (since they point back at the syntax tree).  So we can
     /// just use the syntax tree itself to determine value semantics here.
     /// </summary>
-    private sealed class SyntaxNodeGrouping<TSyntaxNode> : IEquatable<SyntaxNodeGrouping<TSyntaxNode>>
+    private sealed class SyntaxNodeGrouping<TSyntaxNode>
+        : IEquatable<SyntaxNodeGrouping<TSyntaxNode>>
         where TSyntaxNode : SyntaxNode
     {
         public readonly SyntaxTree SyntaxTree;
@@ -30,13 +31,11 @@ internal static partial class SyntaxValueProviderExtensions
             SyntaxNodes = grouping.OrderBy(static n => n.FullSpan.Start).ToImmutableArray();
         }
 
-        public override int GetHashCode()
-            => SyntaxTree.GetHashCode();
+        public override int GetHashCode() => SyntaxTree.GetHashCode();
 
-        public override bool Equals(object? obj)
-            => Equals(obj as SyntaxNodeGrouping<TSyntaxNode>);
+        public override bool Equals(object? obj) => Equals(obj as SyntaxNodeGrouping<TSyntaxNode>);
 
-        public bool Equals(SyntaxNodeGrouping<TSyntaxNode>? obj)
-            => this.SyntaxTree == obj?.SyntaxTree;
+        public bool Equals(SyntaxNodeGrouping<TSyntaxNode>? obj) =>
+            this.SyntaxTree == obj?.SyntaxTree;
     }
 }

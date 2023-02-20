@@ -3,20 +3,19 @@
 
 using System.Runtime.CompilerServices;
 
-class BaseClass {
-        protected virtual bool this[int index] {
-                get {
-                        return true;
-                }
-        }
+class BaseClass
+{
+    protected virtual bool this[int index]
+    {
+        get { return true; }
+    }
 }
 
-class DerivedClass: BaseClass {
-        [IndexerName("Error")]
-        protected override bool this[int index] {
-                get {
-                        return false;
-                }
-        }
+class DerivedClass : BaseClass
+{
+    [IndexerName("Error")]
+    protected override bool this[int index]
+    {
+        get { return false; }
+    }
 }
-

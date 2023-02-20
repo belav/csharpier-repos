@@ -1,12 +1,11 @@
 // CS0191: A readonly field `X.a' cannot be assigned to (except in a constructor or a variable initializer)
 // Line: 8
-class X {
+class X
+{
     readonly int a;
 
-    void Y ()
+    void Y()
     {
         a = 1;
     }
 }
-
-    

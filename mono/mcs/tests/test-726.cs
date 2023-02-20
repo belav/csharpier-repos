@@ -1,6 +1,6 @@
 interface IFoo
 {
-    object Clone ();
+    object Clone();
 }
 
 class CS0102 : IFoo
@@ -12,7 +12,5 @@ class CS0102 : IFoo
 
     public class Clone { }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

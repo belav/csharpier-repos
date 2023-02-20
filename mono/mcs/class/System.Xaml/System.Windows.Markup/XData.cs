@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,16 +32,19 @@ using System.Xml;
 
 namespace System.Windows.Markup
 {
-    [ContentProperty ("Text")]
+    [ContentProperty("Text")]
     public sealed class XData
     {
         string text;
         XmlReader reader;
 
-        public string Text {
+        public string Text
+        {
             get { return text; }
-            set {
-                if (value == null) {
+            set
+            {
+                if (value == null)
+                {
                     text = null;
                     reader = null;
                 }
@@ -50,13 +53,16 @@ namespace System.Windows.Markup
             }
         }
 
-        public object XmlReader {
-            get {
+        public object XmlReader
+        {
+            get
+            {
                 if (reader == null)
-                    reader = System.Xml.XmlReader.Create (new StringReader (text));
+                    reader = System.Xml.XmlReader.Create(new StringReader(text));
                 return reader;
             }
-            set {
+            set
+            {
                 // silly? yes, it's also a hack in .NET - who cares?
                 reader = value as XmlReader;
                 text = null;

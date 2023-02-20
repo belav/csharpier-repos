@@ -6,27 +6,25 @@ namespace Mono.Linker.Tests.Cases.UnreachableBody
     /// <summary>
     /// Stubbing an empty method would result in more instructions.  It's more size efficient to just leave it alone
     /// </summary>
-    [SetupLinkerArgument ("--enable-opt", "unreachablebodies")]
+    [SetupLinkerArgument("--enable-opt", "unreachablebodies")]
     public class NotWorthConvertingEmpty
     {
-        public static void Main ()
+        public static void Main()
         {
-            UsedToMarkMethod (null);
+            UsedToMarkMethod(null);
         }
 
         [Kept]
-        static void UsedToMarkMethod (Foo f)
+        static void UsedToMarkMethod(Foo f)
         {
-            f.Method ();
+            f.Method();
         }
 
         [Kept]
         class Foo
         {
             [Kept]
-            public void Method ()
-            {
-            }
+            public void Method() { }
         }
     }
 }

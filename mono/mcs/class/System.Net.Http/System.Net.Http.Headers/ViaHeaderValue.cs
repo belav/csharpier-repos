@@ -32,142 +32,168 @@ namespace System.Net.Http.Headers
 {
     public class ViaHeaderValue : ICloneable
     {
-        public ViaHeaderValue (string protocolVersion, string receivedBy)
+        public ViaHeaderValue(string protocolVersion, string receivedBy)
         {
-            Parser.Token.Check (protocolVersion);
-            Parser.Uri.Check (receivedBy);
+            Parser.Token.Check(protocolVersion);
+            Parser.Uri.Check(receivedBy);
 
             ProtocolVersion = protocolVersion;
             ReceivedBy = receivedBy;
         }
 
-        public ViaHeaderValue (string protocolVersion, string receivedBy, string protocolName)
-            : this (protocolVersion, receivedBy)
+        public ViaHeaderValue(string protocolVersion, string receivedBy, string protocolName)
+            : this(protocolVersion, receivedBy)
         {
-            if (!string.IsNullOrEmpty (protocolName)) {
-                Parser.Token.Check (protocolName);
+            if (!string.IsNullOrEmpty(protocolName))
+            {
+                Parser.Token.Check(protocolName);
                 ProtocolName = protocolName;
             }
         }
 
-        public ViaHeaderValue (string protocolVersion, string receivedBy, string protocolName, string comment)
-            : this (protocolVersion, receivedBy, protocolName)
+        public ViaHeaderValue(
+            string protocolVersion,
+            string receivedBy,
+            string protocolName,
+            string comment
+        )
+            : this(protocolVersion, receivedBy, protocolName)
         {
-            if (!string.IsNullOrEmpty (comment)) {
-                Parser.Token.CheckComment (comment);
+            if (!string.IsNullOrEmpty(comment))
+            {
+                Parser.Token.CheckComment(comment);
                 Comment = comment;
             }
         }
 
-        private ViaHeaderValue ()
-        {
-        }
+        private ViaHeaderValue() { }
 
         public string Comment { get; private set; }
         public string ProtocolName { get; private set; }
         public string ProtocolVersion { get; private set; }
         public string ReceivedBy { get; private set; }
 
-        object ICloneable.Clone ()
+        object ICloneable.Clone()
         {
-            return MemberwiseClone ();
+            return MemberwiseClone();
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             var source = obj as ViaHeaderValue;
             if (source == null)
                 return false;
 
-            return string.Equals (source.Comment, Comment, StringComparison.Ordinal) &&
-                string.Equals (source.ProtocolName, ProtocolName, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals (source.ProtocolVersion, ProtocolVersion, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals (source.ReceivedBy, ReceivedBy, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(source.Comment, Comment, StringComparison.Ordinal)
+                && string.Equals(
+                    source.ProtocolName,
+                    ProtocolName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                && string.Equals(
+                    source.ProtocolVersion,
+                    ProtocolVersion,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                && string.Equals(source.ReceivedBy, ReceivedBy, StringComparison.OrdinalIgnoreCase);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            int hc = ProtocolVersion.ToLowerInvariant ().GetHashCode ();
-            hc ^= ReceivedBy.ToLowerInvariant ().GetHashCode ();
+            int hc = ProtocolVersion.ToLowerInvariant().GetHashCode();
+            hc ^= ReceivedBy.ToLowerInvariant().GetHashCode();
 
-            if (!string.IsNullOrEmpty (ProtocolName)) {
-                hc ^= ProtocolName.ToLowerInvariant ().GetHashCode ();
+            if (!string.IsNullOrEmpty(ProtocolName))
+            {
+                hc ^= ProtocolName.ToLowerInvariant().GetHashCode();
             }
 
-            if (!string.IsNullOrEmpty (Comment)) {
-                hc ^= Comment.GetHashCode ();
+            if (!string.IsNullOrEmpty(Comment))
+            {
+                hc ^= Comment.GetHashCode();
             }
 
             return hc;
         }
 
-        public static ViaHeaderValue Parse (string input)
+        public static ViaHeaderValue Parse(string input)
         {
             ViaHeaderValue value;
-            if (TryParse (input, out value))
+            if (TryParse(input, out value))
                 return value;
 
-            throw new FormatException (input);
+            throw new FormatException(input);
         }
-        
-        public static bool TryParse (string input, out ViaHeaderValue parsedValue)
+
+        public static bool TryParse(string input, out ViaHeaderValue parsedValue)
         {
-            var lexer = new Lexer (input);
+            var lexer = new Lexer(input);
             Token token;
-            if (TryParseElement (lexer, out parsedValue, out token) && token == Token.Type.End)
+            if (TryParseElement(lexer, out parsedValue, out token) && token == Token.Type.End)
                 return true;
 
             parsedValue = null;
             return false;
         }
 
-        internal static bool TryParse (string input, int minimalCount, out List<ViaHeaderValue> result)
+        internal static bool TryParse(
+            string input,
+            int minimalCount,
+            out List<ViaHeaderValue> result
+        )
         {
-            return CollectionParser.TryParse (input, minimalCount, TryParseElement, out result);
+            return CollectionParser.TryParse(input, minimalCount, TryParseElement, out result);
         }
 
-        static bool TryParseElement (Lexer lexer, out ViaHeaderValue parsedValue, out Token t)    
+        static bool TryParseElement(Lexer lexer, out ViaHeaderValue parsedValue, out Token t)
         {
             parsedValue = null;
 
-            t = lexer.Scan ();
+            t = lexer.Scan();
             if (t != Token.Type.Token)
                 return false;
 
-            var next = lexer.Scan ();
-            ViaHeaderValue value = new ViaHeaderValue ();
+            var next = lexer.Scan();
+            ViaHeaderValue value = new ViaHeaderValue();
 
-            if (next == Token.Type.SeparatorSlash) {
-                next = lexer.Scan ();
+            if (next == Token.Type.SeparatorSlash)
+            {
+                next = lexer.Scan();
                 if (next != Token.Type.Token)
                     return false;
 
-                value.ProtocolName = lexer.GetStringValue (t);
-                value.ProtocolVersion = lexer.GetStringValue (next);
+                value.ProtocolName = lexer.GetStringValue(t);
+                value.ProtocolVersion = lexer.GetStringValue(next);
 
-                next = lexer.Scan ();
-            } else {
-                value.ProtocolVersion = lexer.GetStringValue (t);
+                next = lexer.Scan();
+            }
+            else
+            {
+                value.ProtocolVersion = lexer.GetStringValue(t);
             }
 
             if (next != Token.Type.Token)
                 return false;
 
-            if (lexer.PeekChar () == ':') {
-                lexer.EatChar ();
+            if (lexer.PeekChar() == ':')
+            {
+                lexer.EatChar();
 
-                t = lexer.Scan ();
+                t = lexer.Scan();
                 if (t != Token.Type.Token)
                     return false;
-            } else {
+            }
+            else
+            {
                 t = next;
             }
 
-            value.ReceivedBy = lexer.GetStringValue (next, t);
+            value.ReceivedBy = lexer.GetStringValue(next, t);
 
             string comment;
-            if (lexer.ScanCommentOptional (out comment, out t)) {
-                t = lexer.Scan ();
+            if (lexer.ScanCommentOptional(out comment, out t))
+            {
+                t = lexer.Scan();
             }
 
             value.Comment = comment;
@@ -175,11 +201,12 @@ namespace System.Net.Http.Headers
             return true;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            string s = ProtocolName != null ?
-                ProtocolName + "/" + ProtocolVersion + " " + ReceivedBy :
-                ProtocolVersion + " " + ReceivedBy;
+            string s =
+                ProtocolName != null
+                    ? ProtocolName + "/" + ProtocolVersion + " " + ReceivedBy
+                    : ProtocolVersion + " " + ReceivedBy;
 
             return Comment != null ? s + " " + Comment : s;
         }

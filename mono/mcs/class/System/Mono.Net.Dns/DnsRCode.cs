@@ -18,8 +18,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-namespace Mono.Net.Dns {
-    enum DnsRCode : ushort {
+namespace Mono.Net.Dns
+{
+    enum DnsRCode : ushort
+    {
         NoError = 0,
         FormErr = 1,
         ServFail = 2,
@@ -41,4 +43,3 @@ namespace Mono.Net.Dns {
         BadTrunc = 22,
     }
 }
-

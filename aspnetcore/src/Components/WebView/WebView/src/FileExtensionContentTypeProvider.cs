@@ -25,8 +25,9 @@ internal sealed class FileExtensionContentTypeProvider : IContentTypeProvider
     /// Creates a new provider with a set of default mappings.
     /// </summary>
     public FileExtensionContentTypeProvider()
-        : this(new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-        {
+        : this(
+            new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
                 { ".323", "text/h323" },
                 { ".3g2", "video/3gpp2" },
                 { ".3gp2", "video/3gpp2" },
@@ -92,10 +93,16 @@ internal sealed class FileExtensionContentTypeProvider : IContentTypeProvider
                 { ".dlm", "text/dlm" },
                 { ".doc", "application/msword" },
                 { ".docm", "application/vnd.ms-word.document.macroEnabled.12" },
-                { ".docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document" },
+                {
+                    ".docx",
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                },
                 { ".dot", "application/msword" },
                 { ".dotm", "application/vnd.ms-word.template.macroEnabled.12" },
-                { ".dotx", "application/vnd.openxmlformats-officedocument.wordprocessingml.template" },
+                {
+                    ".dotx",
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.template"
+                },
                 { ".dsp", "application/octet-stream" },
                 { ".dtd", "text/xml" },
                 { ".dvi", "application/x-dvi" },
@@ -247,15 +254,24 @@ internal sealed class FileExtensionContentTypeProvider : IContentTypeProvider
                 { ".pnz", "image/png" },
                 { ".pot", "application/vnd.ms-powerpoint" },
                 { ".potm", "application/vnd.ms-powerpoint.template.macroEnabled.12" },
-                { ".potx", "application/vnd.openxmlformats-officedocument.presentationml.template" },
+                {
+                    ".potx",
+                    "application/vnd.openxmlformats-officedocument.presentationml.template"
+                },
                 { ".ppam", "application/vnd.ms-powerpoint.addin.macroEnabled.12" },
                 { ".ppm", "image/x-portable-pixmap" },
                 { ".pps", "application/vnd.ms-powerpoint" },
                 { ".ppsm", "application/vnd.ms-powerpoint.slideshow.macroEnabled.12" },
-                { ".ppsx", "application/vnd.openxmlformats-officedocument.presentationml.slideshow" },
+                {
+                    ".ppsx",
+                    "application/vnd.openxmlformats-officedocument.presentationml.slideshow"
+                },
                 { ".ppt", "application/vnd.ms-powerpoint" },
                 { ".pptm", "application/vnd.ms-powerpoint.presentation.macroEnabled.12" },
-                { ".pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation" },
+                {
+                    ".pptx",
+                    "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                },
                 { ".prf", "application/pics-rules" },
                 { ".prm", "application/octet-stream" },
                 { ".prx", "application/octet-stream" },
@@ -408,9 +424,8 @@ internal sealed class FileExtensionContentTypeProvider : IContentTypeProvider
                 { ".xwd", "image/x-xwindowdump" },
                 { ".z", "application/x-compress" },
                 { ".zip", "application/x-zip-compressed" },
-        })
-    {
-    }
+            }
+        ) { }
     #endregion
 
     /// <summary>

@@ -12,18 +12,15 @@ class Stack<T>
     //
     // PEVerify the resulting executable on Windows to make sure !
     //
-    void Hello (Stack<T> stack)
-    {
-    }
+    void Hello(Stack<T> stack) { }
 
-    void Test ()
+    void Test()
     {
-        Hello (this);
+        Hello(this);
     }
 }
 
 class X
 {
-    public static void Main ()
-    { }
+    public static void Main() { }
 }

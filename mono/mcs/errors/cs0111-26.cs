@@ -3,12 +3,12 @@
 
 public interface I
 {
-    void M<X> ();
+    void M<X>();
 }
 
-public class Blah: I
+public class Blah : I
 {
-        void I.M<X> () {}
-        void I.M<X> () {}
-}
+    void I.M<X>() { }
 
+    void I.M<X>() { }
+}

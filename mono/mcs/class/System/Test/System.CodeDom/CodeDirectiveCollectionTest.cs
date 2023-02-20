@@ -1,5 +1,5 @@
 //
-// CodeDirectiveCollectionTest.cs 
+// CodeDirectiveCollectionTest.cs
 //    - Unit tests for System.CodeDom.CodeDirectiveCollection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,211 +34,210 @@ using System;
 using System.Collections;
 using System.CodeDom;
 
-namespace MonoTests.System.CodeDom {
+namespace MonoTests.System.CodeDom
+{
     [TestFixture]
-    public class CodeDirectiveCollectionTest {
+    public class CodeDirectiveCollectionTest
+    {
         [Test]
-        public void Constructor0 ()
+        public void Constructor0()
         {
-            CodeDirectiveCollection coll = new CodeDirectiveCollection ();
-            Assert.IsFalse (((IList) coll).IsFixedSize, "#1");
-            Assert.IsFalse (((IList) coll).IsReadOnly, "#2");
-            Assert.AreEqual (0, coll.Count, "#3");
-            Assert.IsFalse (((ICollection) coll).IsSynchronized, "#4");
+            CodeDirectiveCollection coll = new CodeDirectiveCollection();
+            Assert.IsFalse(((IList)coll).IsFixedSize, "#1");
+            Assert.IsFalse(((IList)coll).IsReadOnly, "#2");
+            Assert.AreEqual(0, coll.Count, "#3");
+            Assert.IsFalse(((ICollection)coll).IsSynchronized, "#4");
         }
 
         [Test]
-        public void Constructor1 ()
+        public void Constructor1()
         {
-            CodeDirective cd1 = new CodeDirective ();
-            CodeDirective cd2 = new CodeDirective ();
+            CodeDirective cd1 = new CodeDirective();
+            CodeDirective cd2 = new CodeDirective();
 
             CodeDirective[] directives = new CodeDirective[] { cd1, cd2 };
-            CodeDirectiveCollection coll = new CodeDirectiveCollection (
-                directives);
+            CodeDirectiveCollection coll = new CodeDirectiveCollection(directives);
 
-            Assert.AreEqual (2, coll.Count, "#1");
-            Assert.AreEqual (0, coll.IndexOf (cd1), "#2");
-            Assert.AreEqual (1, coll.IndexOf (cd2), "#3");
+            Assert.AreEqual(2, coll.Count, "#1");
+            Assert.AreEqual(0, coll.IndexOf(cd1), "#2");
+            Assert.AreEqual(1, coll.IndexOf(cd2), "#3");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Constructor1_NullItem ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor1_NullItem()
         {
-            CodeDirective[] directives = new CodeDirective[] { 
-                new CodeDirective (), null };
+            CodeDirective[] directives = new CodeDirective[] { new CodeDirective(), null };
 
-            CodeDirectiveCollection coll = new CodeDirectiveCollection (
-                directives);
+            CodeDirectiveCollection coll = new CodeDirectiveCollection(directives);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Constructor1_Null () {
-            CodeDirectiveCollection coll = new CodeDirectiveCollection (
-                (CodeDirective[]) null);
-        }
-
-        [Test]
-        public void Constructor2 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor1_Null()
         {
-            CodeDirective cd1 = new CodeDirective ();
-            CodeDirective cd2 = new CodeDirective ();
-
-            CodeDirectiveCollection c = new CodeDirectiveCollection ();
-            c.Add (cd1);
-            c.Add (cd2);
-
-            CodeDirectiveCollection coll = new CodeDirectiveCollection (c);
-            Assert.AreEqual (2, coll.Count, "#1");
-            Assert.AreEqual (0, coll.IndexOf (cd1), "#2");
-            Assert.AreEqual (1, coll.IndexOf (cd2), "#3");
+            CodeDirectiveCollection coll = new CodeDirectiveCollection((CodeDirective[])null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Constructor2_Null ()
+        public void Constructor2()
         {
-            CodeDirectiveCollection coll = new CodeDirectiveCollection (
-                (CodeDirectiveCollection) null);
+            CodeDirective cd1 = new CodeDirective();
+            CodeDirective cd2 = new CodeDirective();
+
+            CodeDirectiveCollection c = new CodeDirectiveCollection();
+            c.Add(cd1);
+            c.Add(cd2);
+
+            CodeDirectiveCollection coll = new CodeDirectiveCollection(c);
+            Assert.AreEqual(2, coll.Count, "#1");
+            Assert.AreEqual(0, coll.IndexOf(cd1), "#2");
+            Assert.AreEqual(1, coll.IndexOf(cd2), "#3");
         }
 
         [Test]
-        public void Add ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor2_Null()
         {
-            CodeDirective cd1 = new CodeDirective ();
-            CodeDirective cd2 = new CodeDirective ();
-
-            CodeDirectiveCollection coll = new CodeDirectiveCollection ();
-            Assert.AreEqual (0, coll.Add (cd1), "#1");
-            Assert.AreEqual (1, coll.Count, "#2");
-            Assert.AreEqual (0, coll.IndexOf (cd1), "#3");
-
-            Assert.AreEqual (1, coll.Add (cd2), "#4");
-            Assert.AreEqual (2, coll.Count, "#5");
-            Assert.AreEqual (1, coll.IndexOf (cd2), "#6");
+            CodeDirectiveCollection coll = new CodeDirectiveCollection(
+                (CodeDirectiveCollection)null
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Add_Null () {
-            CodeDirectiveCollection coll = new CodeDirectiveCollection ();
-            coll.Add ((CodeDirective) null);
-        }
-
-        [Test]
-        public void Insert ()
+        public void Add()
         {
-            CodeDirective cd1 = new CodeDirective ();
-            CodeDirective cd2 = new CodeDirective ();
+            CodeDirective cd1 = new CodeDirective();
+            CodeDirective cd2 = new CodeDirective();
 
-            CodeDirectiveCollection coll = new CodeDirectiveCollection ();
-            coll.Add (cd1);
-            Assert.AreEqual (1, coll.Count, "#1");
-            Assert.AreEqual (0, coll.IndexOf (cd1), "#2");
-            coll.Insert (0, cd2);
-            Assert.AreEqual (2, coll.Count, "#3");
-            Assert.AreEqual (1, coll.IndexOf (cd1), "#4");
-            Assert.AreEqual (0, coll.IndexOf (cd2), "#5");
+            CodeDirectiveCollection coll = new CodeDirectiveCollection();
+            Assert.AreEqual(0, coll.Add(cd1), "#1");
+            Assert.AreEqual(1, coll.Count, "#2");
+            Assert.AreEqual(0, coll.IndexOf(cd1), "#3");
+
+            Assert.AreEqual(1, coll.Add(cd2), "#4");
+            Assert.AreEqual(2, coll.Count, "#5");
+            Assert.AreEqual(1, coll.IndexOf(cd2), "#6");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Insert_Null ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Add_Null()
         {
-            CodeDirectiveCollection coll = new CodeDirectiveCollection ();
-            coll.Insert (0, (CodeDirective) null);
+            CodeDirectiveCollection coll = new CodeDirectiveCollection();
+            coll.Add((CodeDirective)null);
         }
 
         [Test]
-        public void AddRange ()
+        public void Insert()
         {
-            CodeDirective cd1 = new CodeDirective ();
-            CodeDirective cd2 = new CodeDirective ();
-            CodeDirective cd3 = new CodeDirective ();
+            CodeDirective cd1 = new CodeDirective();
+            CodeDirective cd2 = new CodeDirective();
 
-            CodeDirectiveCollection coll1 = new CodeDirectiveCollection ();
-            coll1.Add (cd1);
-            coll1.Add (cd2);
-
-            CodeDirectiveCollection coll2 = new CodeDirectiveCollection ();
-            coll2.Add (cd3);
-            coll2.AddRange (coll1);
-            Assert.AreEqual (3, coll2.Count, "#1");
-            Assert.AreEqual (1, coll2.IndexOf (cd1), "#2");
-            Assert.AreEqual (2, coll2.IndexOf (cd2), "#3");
-            Assert.AreEqual (0, coll2.IndexOf (cd3), "#4");
-
-            CodeDirectiveCollection coll3 = new CodeDirectiveCollection ();
-            coll3.Add (cd3);
-            coll3.AddRange (new CodeDirective[] { cd1, cd2 });
-            Assert.AreEqual (3, coll2.Count, "#5");
-            Assert.AreEqual (1, coll2.IndexOf (cd1), "#6");
-            Assert.AreEqual (2, coll2.IndexOf (cd2), "#7");
-            Assert.AreEqual (0, coll2.IndexOf (cd3), "#8");
+            CodeDirectiveCollection coll = new CodeDirectiveCollection();
+            coll.Add(cd1);
+            Assert.AreEqual(1, coll.Count, "#1");
+            Assert.AreEqual(0, coll.IndexOf(cd1), "#2");
+            coll.Insert(0, cd2);
+            Assert.AreEqual(2, coll.Count, "#3");
+            Assert.AreEqual(1, coll.IndexOf(cd1), "#4");
+            Assert.AreEqual(0, coll.IndexOf(cd2), "#5");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void AddRange_Null_Array ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Insert_Null()
         {
-            CodeDirectiveCollection coll = new CodeDirectiveCollection ();
-            coll.AddRange ((CodeDirective[]) null);
+            CodeDirectiveCollection coll = new CodeDirectiveCollection();
+            coll.Insert(0, (CodeDirective)null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void AddRange_Null_Collection ()
+        public void AddRange()
         {
-            CodeDirectiveCollection coll = new CodeDirectiveCollection ();
-            coll.AddRange ((CodeDirectiveCollection) null);
+            CodeDirective cd1 = new CodeDirective();
+            CodeDirective cd2 = new CodeDirective();
+            CodeDirective cd3 = new CodeDirective();
+
+            CodeDirectiveCollection coll1 = new CodeDirectiveCollection();
+            coll1.Add(cd1);
+            coll1.Add(cd2);
+
+            CodeDirectiveCollection coll2 = new CodeDirectiveCollection();
+            coll2.Add(cd3);
+            coll2.AddRange(coll1);
+            Assert.AreEqual(3, coll2.Count, "#1");
+            Assert.AreEqual(1, coll2.IndexOf(cd1), "#2");
+            Assert.AreEqual(2, coll2.IndexOf(cd2), "#3");
+            Assert.AreEqual(0, coll2.IndexOf(cd3), "#4");
+
+            CodeDirectiveCollection coll3 = new CodeDirectiveCollection();
+            coll3.Add(cd3);
+            coll3.AddRange(new CodeDirective[] { cd1, cd2 });
+            Assert.AreEqual(3, coll2.Count, "#5");
+            Assert.AreEqual(1, coll2.IndexOf(cd1), "#6");
+            Assert.AreEqual(2, coll2.IndexOf(cd2), "#7");
+            Assert.AreEqual(0, coll2.IndexOf(cd3), "#8");
         }
 
         [Test]
-        public void AddRange_Self ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddRange_Null_Array()
         {
-            CodeDirectiveCollection coll = new CodeDirectiveCollection ();
-            coll.Add (new CodeDirective ());
-            Assert.AreEqual (1, coll.Count, "#1");
-            coll.AddRange (coll);
-            Assert.AreEqual (2, coll.Count, "#2");
+            CodeDirectiveCollection coll = new CodeDirectiveCollection();
+            coll.AddRange((CodeDirective[])null);
         }
 
         [Test]
-        public void Remove ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddRange_Null_Collection()
         {
-            CodeDirective cd1 = new CodeDirective ();
-            CodeDirective cd2 = new CodeDirective ();
-
-            CodeDirectiveCollection coll = new CodeDirectiveCollection ();
-            coll.Add (cd1);
-            coll.Add (cd2);
-            Assert.AreEqual (2, coll.Count, "#1");
-            Assert.AreEqual (0, coll.IndexOf (cd1), "#2");
-            Assert.AreEqual (1, coll.IndexOf (cd2), "#3");
-            coll.Remove (cd1);
-            Assert.AreEqual (1, coll.Count, "#4");
-            Assert.AreEqual (-1, coll.IndexOf (cd1), "#5");
-            Assert.AreEqual (0, coll.IndexOf (cd2), "#6");
+            CodeDirectiveCollection coll = new CodeDirectiveCollection();
+            coll.AddRange((CodeDirectiveCollection)null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void Remove_NotInCollection ()
+        public void AddRange_Self()
         {
-            CodeDirectiveCollection coll = new CodeDirectiveCollection ();
-            coll.Remove (new CodeDirective ());
+            CodeDirectiveCollection coll = new CodeDirectiveCollection();
+            coll.Add(new CodeDirective());
+            Assert.AreEqual(1, coll.Count, "#1");
+            coll.AddRange(coll);
+            Assert.AreEqual(2, coll.Count, "#2");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Remove_Null ()
+        public void Remove()
         {
-            CodeDirectiveCollection coll = new CodeDirectiveCollection ();
-            coll.Remove ((CodeDirective) null);
+            CodeDirective cd1 = new CodeDirective();
+            CodeDirective cd2 = new CodeDirective();
+
+            CodeDirectiveCollection coll = new CodeDirectiveCollection();
+            coll.Add(cd1);
+            coll.Add(cd2);
+            Assert.AreEqual(2, coll.Count, "#1");
+            Assert.AreEqual(0, coll.IndexOf(cd1), "#2");
+            Assert.AreEqual(1, coll.IndexOf(cd2), "#3");
+            coll.Remove(cd1);
+            Assert.AreEqual(1, coll.Count, "#4");
+            Assert.AreEqual(-1, coll.IndexOf(cd1), "#5");
+            Assert.AreEqual(0, coll.IndexOf(cd2), "#6");
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Remove_NotInCollection()
+        {
+            CodeDirectiveCollection coll = new CodeDirectiveCollection();
+            coll.Remove(new CodeDirective());
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Remove_Null()
+        {
+            CodeDirectiveCollection coll = new CodeDirectiveCollection();
+            coll.Remove((CodeDirective)null);
         }
     }
 }
-
-

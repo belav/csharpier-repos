@@ -6,12 +6,10 @@ using System.Linq.Expressions;
 
 class M
 {
-    public M (string s = "value")
+    public M(string s = "value") { }
+
+    public static void Main()
     {
-    }
-    
-    public static void Main ()
-    {
-        Expression<Action> e = () => new M ();
+        Expression<Action> e = () => new M();
     }
 }

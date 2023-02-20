@@ -14,22 +14,30 @@ namespace System.Reflection.Runtime.MethodInfos
 {
     internal sealed class OpenMethodInvoker : MethodInvoker
     {
-        protected sealed override object? Invoke(object? thisObject, object?[]? arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException)
+        protected sealed override object? Invoke(
+            object? thisObject,
+            object?[]? arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        )
         {
             throw new InvalidOperationException(SR.Arg_UnboundGenParam);
         }
 
-        public sealed override Delegate CreateDelegate(RuntimeTypeHandle delegateType, object target, bool isStatic, bool isVirtual, bool isOpen)
+        public sealed override Delegate CreateDelegate(
+            RuntimeTypeHandle delegateType,
+            object target,
+            bool isStatic,
+            bool isVirtual,
+            bool isOpen
+        )
         {
             throw new InvalidOperationException(SR.Arg_UnboundGenParam);
         }
 
         public sealed override IntPtr LdFtnResult
         {
-            get
-            {
-                throw new InvalidOperationException(SR.Arg_UnboundGenParam);
-            }
+            get { throw new InvalidOperationException(SR.Arg_UnboundGenParam); }
         }
     }
 }

@@ -15,7 +15,11 @@ namespace System.ServiceModel.Security
         string id;
         byte[] signatureValue;
 
-        public SignatureConfirmationElement(string id, byte[] signatureValue, SecurityVersion version)
+        public SignatureConfirmationElement(
+            string id,
+            byte[] signatureValue,
+            SecurityVersion version
+        )
         {
             if (id == null)
             {

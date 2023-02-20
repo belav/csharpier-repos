@@ -13,7 +13,6 @@ namespace SoapShared
     {
         private MemoryStream ms;
         private SoapFormatter sf;
-        
 
         public InternalSoapValuesTest()
         {
@@ -25,9 +24,9 @@ namespace SoapShared
         public void WriteReadData()
         {
             SerializedClass c = new SerializedClass();
-            
+
             SerializeDeserialize(c);
-            SerializeDeserialize(new SerializedClass[]{c,c});
+            SerializeDeserialize(new SerializedClass[] { c, c });
             SerializeDeserialize(c.str);
             SerializeDeserialize(c.m_bool);
             SerializeDeserialize(c.m_byte);
@@ -53,7 +52,7 @@ namespace SoapShared
             Serialize(obj, ms);
             ms.Position = 0;
             Object des = Deserialize(ms);
-            Assert.AreEqual (obj.GetType(), des.GetType());
+            Assert.AreEqual(obj.GetType(), des.GetType());
         }
 
         private void Serialize(object ob, Stream stream)
@@ -67,7 +66,7 @@ namespace SoapShared
             return obj;
         }
     }
-    
+
     [Serializable]
     class SerializedClass
     {

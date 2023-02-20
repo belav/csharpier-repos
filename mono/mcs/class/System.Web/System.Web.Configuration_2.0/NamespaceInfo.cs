@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,23 +42,27 @@ namespace System.Web.Configuration
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty namespaceProp;
 
-        static NamespaceInfo ()
+        static NamespaceInfo()
         {
-            namespaceProp = new ConfigurationProperty ("namespace", typeof (string), null,
-                                   TypeDescriptor.GetConverter (typeof (string)),
-                                   PropertyHelper.NonEmptyStringValidator,
-                                   ConfigurationPropertyOptions.None);
-            properties = new ConfigurationPropertyCollection ();
+            namespaceProp = new ConfigurationProperty(
+                "namespace",
+                typeof(string),
+                null,
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.None
+            );
+            properties = new ConfigurationPropertyCollection();
 
-            properties.Add (namespaceProp);
+            properties.Add(namespaceProp);
         }
 
-        public NamespaceInfo (string name)
+        public NamespaceInfo(string name)
         {
             Namespace = name;
         }
 
-        public override bool Equals (object namespaceInformation)
+        public override bool Equals(object namespaceInformation)
         {
             NamespaceInfo info = namespaceInformation as NamespaceInfo;
             if (info == null)
@@ -67,22 +71,26 @@ namespace System.Web.Configuration
             return (Namespace == info.Namespace);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return Namespace.GetHashCode ();
+            return Namespace.GetHashCode();
         }
 
-        [StringValidator (MinLength = 1)]
-        [ConfigurationProperty ("namespace", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public string Namespace {
-            get { return (string) base[namespaceProp]; }
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "namespace",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string Namespace
+        {
+            get { return (string)base[namespaceProp]; }
             set { base[namespaceProp] = value; }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
-
     }
 }
-

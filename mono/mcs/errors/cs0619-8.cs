@@ -4,5 +4,5 @@
 
 interface I
 {
-    int Foo (int arg1, ObsoleteStruct arg2);
+    int Foo(int arg1, ObsoleteStruct arg2);
 }

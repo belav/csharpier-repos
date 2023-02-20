@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,9 +37,11 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace System.Reflection {
-    [StructLayout (LayoutKind.Sequential)]
-    internal class MonoArrayMethod: MethodInfo {
+namespace System.Reflection
+{
+    [StructLayout(LayoutKind.Sequential)]
+    internal class MonoArrayMethod : MethodInfo
+    {
 #pragma warning disable 649
         internal RuntimeMethodHandle mhandle;
         internal Type parent;
@@ -48,108 +50,128 @@ namespace System.Reflection {
         internal string name;
         internal int table_idx;
         internal CallingConventions call_conv;
-#pragma warning restore 649        
+#pragma warning restore 649
 
-        internal MonoArrayMethod (Type arrayClass, string methodName, CallingConventions callingConvention, Type returnType, Type[] parameterTypes) {
+        internal MonoArrayMethod(
+            Type arrayClass,
+            string methodName,
+            CallingConventions callingConvention,
+            Type returnType,
+            Type[] parameterTypes
+        )
+        {
             name = methodName;
             parent = arrayClass;
             ret = returnType;
             parameters = (Type[])parameterTypes.Clone();
             call_conv = callingConvention;
         }
-        
+
         [MonoTODO("Always returns this")]
-        public override MethodInfo GetBaseDefinition() {
+        public override MethodInfo GetBaseDefinition()
+        {
             return this; /* FIXME */
         }
-        public override Type ReturnType {
-            get {
-                return ret;
-            }
+
+        public override Type ReturnType
+        {
+            get { return ret; }
         }
 
         [MonoTODO("Not implemented.  Always returns null")]
-        public override ICustomAttributeProvider ReturnTypeCustomAttributes { 
-            get {return null;}
+        public override ICustomAttributeProvider ReturnTypeCustomAttributes
+        {
+            get { return null; }
         }
-        
+
         [MonoTODO("Not implemented.  Always returns zero")]
-        public override MethodImplAttributes GetMethodImplementationFlags() {
+        public override MethodImplAttributes GetMethodImplementationFlags()
+        {
             return (MethodImplAttributes)0;
         }
 
         [MonoTODO("Not implemented.  Always returns an empty array")]
         public override ParameterInfo[] GetParameters()
         {
-            return GetParametersInternal ();            
+            return GetParametersInternal();
         }
 
-        internal override ParameterInfo[] GetParametersInternal ()
+        internal override ParameterInfo[] GetParametersInternal()
         {
             return EmptyArray<ParameterInfo>.Value;
-        }    
-        
-        [MonoTODO("Not implemented.  Always returns 0")]
-        internal override int GetParametersCount ()
-        {
-            return 0;
-        }        
-
-        [MonoTODO("Not implemented")]
-        public override Object Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture) {
-            throw new NotImplementedException ();
         }
 
-        public override RuntimeMethodHandle MethodHandle { 
-            get {return mhandle;} 
+        [MonoTODO("Not implemented.  Always returns 0")]
+        internal override int GetParametersCount()
+        {
+            return 0;
+        }
+
+        [MonoTODO("Not implemented")]
+        public override Object Invoke(
+            Object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            Object[] parameters,
+            CultureInfo culture
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public override RuntimeMethodHandle MethodHandle
+        {
+            get { return mhandle; }
         }
 
         [MonoTODO("Not implemented.  Always returns zero")]
-        public override MethodAttributes Attributes { 
-            get {
-                return (MethodAttributes)0;
-            } 
-        }
-        
-        public override Type ReflectedType {
-            get {
-                return parent;
-            }
-        }
-        public override Type DeclaringType {
-            get {
-                return parent;
-            }
-        }
-        public override string Name {
-            get {
-                return name;
-            }
-        }
-        
-        public override bool IsDefined (Type attributeType, bool inherit) {
-            return MonoCustomAttrs.IsDefined (this, attributeType, inherit);
+        public override MethodAttributes Attributes
+        {
+            get { return (MethodAttributes)0; }
         }
 
-        public override object[] GetCustomAttributes( bool inherit) {
-            return MonoCustomAttrs.GetCustomAttributes (this, inherit);
+        public override Type ReflectedType
+        {
+            get { return parent; }
         }
-        public override object[] GetCustomAttributes( Type attributeType, bool inherit) {
-            return MonoCustomAttrs.GetCustomAttributes (this, attributeType, inherit);
+        public override Type DeclaringType
+        {
+            get { return parent; }
+        }
+        public override string Name
+        {
+            get { return name; }
         }
 
-        public override string ToString () {
+        public override bool IsDefined(Type attributeType, bool inherit)
+        {
+            return MonoCustomAttrs.IsDefined(this, attributeType, inherit);
+        }
+
+        public override object[] GetCustomAttributes(bool inherit)
+        {
+            return MonoCustomAttrs.GetCustomAttributes(this, inherit);
+        }
+
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
+            return MonoCustomAttrs.GetCustomAttributes(this, attributeType, inherit);
+        }
+
+        public override string ToString()
+        {
             string parms = String.Empty;
-            ParameterInfo[] p = GetParameters ();
-            for (int i = 0; i < p.Length; ++i) {
+            ParameterInfo[] p = GetParameters();
+            for (int i = 0; i < p.Length; ++i)
+            {
                 if (i > 0)
                     parms = parms + ", ";
-                parms = parms + p [i].ParameterType.Name;
+                parms = parms + p[i].ParameterType.Name;
             }
             if (ReturnType != null)
-                return ReturnType.Name+" "+Name+"("+parms+")";
+                return ReturnType.Name + " " + Name + "(" + parms + ")";
             else
-                return "void "+Name+"("+parms+")";
+                return "void " + Name + "(" + parms + ")";
         }
     }
 }

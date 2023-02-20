@@ -17,10 +17,10 @@ namespace MonoTests.System.XmlSerialization
     public class XmlIncludeAttributeTests
     {
         [Test]
-        public void TypeDefault ()
+        public void TypeDefault()
         {
-            XmlIncludeAttribute attr = new XmlIncludeAttribute (null);
-            Assert.IsNull (attr.Type);
+            XmlIncludeAttribute attr = new XmlIncludeAttribute(null);
+            Assert.IsNull(attr.Type);
         }
     }
 }

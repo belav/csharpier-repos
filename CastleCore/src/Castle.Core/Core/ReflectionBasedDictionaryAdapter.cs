@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,8 +25,9 @@ namespace Castle.Core
     /// </summary>
     public sealed class ReflectionBasedDictionaryAdapter : IDictionary
     {
-        private readonly Dictionary<string, object> properties =
-            new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, object> properties = new Dictionary<string, object>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         /// <summary>
         ///   Initializes a new instance of the <see cref = "ReflectionBasedDictionaryAdapter" /> class.
@@ -169,9 +170,7 @@ namespace Castle.Core
         ///   <paramref name = "key" /> is null. </exception>
         /// <exception cref = "T:System.NotSupportedException">The <see cref = "T:System.Collections.IDictionary" /> object is read-only.-or- The <see
         ///    cref = "T:System.Collections.IDictionary" /> has a fixed size. </exception>
-        public void Remove(object key)
-        {
-        }
+        public void Remove(object key) { }
 
         /// <summary>
         ///   Returns an enumerator that iterates through a collection.
@@ -240,7 +239,9 @@ namespace Castle.Core
 
         private static IEnumerable<PropertyInfo> GetReadableProperties(Type targetType)
         {
-            return targetType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(IsReadable);
+            return targetType
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(IsReadable);
         }
 
         private static bool IsReadable(PropertyInfo property)

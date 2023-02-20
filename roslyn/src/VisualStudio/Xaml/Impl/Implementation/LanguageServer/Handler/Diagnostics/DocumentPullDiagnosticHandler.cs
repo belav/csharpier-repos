@@ -18,20 +18,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
 {
     [ExportStatelessXamlLspService(typeof(DocumentPullDiagnosticHandler)), Shared]
     [Method(VSInternalMethods.DocumentPullDiagnosticName)]
-    internal class DocumentPullDiagnosticHandler : AbstractPullDiagnosticHandler<VSInternalDocumentDiagnosticsParams, VSInternalDiagnosticReport>, ITextDocumentIdentifierHandler<VSInternalDocumentDiagnosticsParams, TextDocumentIdentifier?>
+    internal class DocumentPullDiagnosticHandler
+        : AbstractPullDiagnosticHandler<
+            VSInternalDocumentDiagnosticsParams,
+            VSInternalDiagnosticReport
+        >,
+            ITextDocumentIdentifierHandler<
+                VSInternalDocumentDiagnosticsParams,
+                TextDocumentIdentifier?
+            >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DocumentPullDiagnosticHandler(
-            IXamlPullDiagnosticService xamlPullDiagnosticService)
-            : base(xamlPullDiagnosticService)
-        { }
+        public DocumentPullDiagnosticHandler(IXamlPullDiagnosticService xamlPullDiagnosticService)
+            : base(xamlPullDiagnosticService) { }
 
-        public TextDocumentIdentifier? GetTextDocumentIdentifier(VSInternalDocumentDiagnosticsParams request)
-            => request.TextDocument;
+        public TextDocumentIdentifier? GetTextDocumentIdentifier(
+            VSInternalDocumentDiagnosticsParams request
+        ) => request.TextDocument;
 
-        protected override VSInternalDiagnosticReport CreateReport(TextDocumentIdentifier? identifier, VSDiagnostic[]? diagnostics, string? resultId)
-            => new VSInternalDiagnosticReport { Diagnostics = diagnostics, ResultId = resultId };
+        protected override VSInternalDiagnosticReport CreateReport(
+            TextDocumentIdentifier? identifier,
+            VSDiagnostic[]? diagnostics,
+            string? resultId
+        ) => new VSInternalDiagnosticReport { Diagnostics = diagnostics, ResultId = resultId };
 
         protected override ImmutableArray<Document> GetDocuments(RequestContext context)
         {
@@ -40,13 +50,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             // Note: context.Document may be null in the case where the client is asking about a document that we have
             // since removed from the workspace.  In this case, we don't really have anything to process.
             // GetPreviousResults will be used to properly realize this and notify the client that the doc is gone.
-            return context.Document == null ? ImmutableArray<Document>.Empty : ImmutableArray.Create(context.Document);
+            return context.Document == null
+                ? ImmutableArray<Document>.Empty
+                : ImmutableArray.Create(context.Document);
         }
 
-        protected override VSInternalDiagnosticParams[]? GetPreviousResults(VSInternalDocumentDiagnosticsParams diagnosticsParams)
-           => new[] { diagnosticsParams };
+        protected override VSInternalDiagnosticParams[]? GetPreviousResults(
+            VSInternalDocumentDiagnosticsParams diagnosticsParams
+        ) => new[] { diagnosticsParams };
 
-        protected override IProgress<VSInternalDiagnosticReport[]>? GetProgress(VSInternalDocumentDiagnosticsParams diagnosticsParams)
-            => diagnosticsParams.PartialResultToken;
+        protected override IProgress<VSInternalDiagnosticReport[]>? GetProgress(
+            VSInternalDocumentDiagnosticsParams diagnosticsParams
+        ) => diagnosticsParams.PartialResultToken;
     }
 }

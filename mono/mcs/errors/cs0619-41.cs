@@ -3,16 +3,9 @@
 
 using System;
 
-class X : I<Y>
-{
-}
+class X : I<Y> { }
 
-interface I<T>
-{
-
-}
+interface I<T> { }
 
 [Obsolete("ooo", true)]
-class Y
-{
-}
+class Y { }

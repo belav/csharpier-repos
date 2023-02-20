@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,47 +33,56 @@
 
 using System;
 
-namespace System.Threading {
-
+namespace System.Threading
+{
     // Used for queueing on a reader writer lock
-    internal class LockQueue {
-
+    internal class LockQueue
+    {
         private ReaderWriterLock rwlock;
         private int lockCount = 0;
 
-        public LockQueue (ReaderWriterLock rwlock)
+        public LockQueue(ReaderWriterLock rwlock)
         {
             this.rwlock = rwlock;
         }
 
-        public bool Wait (int timeout)
+        public bool Wait(int timeout)
         {
             bool _lock = false;
 
-            try {
-                lock (this) {
+            try
+            {
+                lock (this)
+                {
                     lockCount++;
-                    Monitor.Exit (rwlock);
+                    Monitor.Exit(rwlock);
                     _lock = true;
-                    return Monitor.Wait (this, timeout);
+                    return Monitor.Wait(this, timeout);
                 }
-            } finally {
-                if (_lock) {
-                    Monitor.Enter (rwlock);
+            }
+            finally
+            {
+                if (_lock)
+                {
+                    Monitor.Enter(rwlock);
                     lockCount--;
                 }
             }
         }
-        
+
         public bool IsEmpty
         {
-            get { lock (this) return (lockCount == 0); }
+            get
+            {
+                lock (this)
+                    return (lockCount == 0);
+            }
         }
 
-        public void Pulse ()
+        public void Pulse()
         {
-            lock (this) Monitor.Pulse (this);
+            lock (this)
+                Monitor.Pulse(this);
         }
     }
 }
-

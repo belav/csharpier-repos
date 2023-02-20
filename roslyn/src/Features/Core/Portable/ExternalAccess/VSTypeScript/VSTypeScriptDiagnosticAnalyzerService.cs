@@ -19,10 +19,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VSTypeScriptAnalyzerService(IDiagnosticAnalyzerService service)
-            => _service = service;
+        public VSTypeScriptAnalyzerService(IDiagnosticAnalyzerService service) =>
+            _service = service;
 
-        public void Reanalyze(Workspace workspace, IEnumerable<ProjectId>? projectIds = null, IEnumerable<DocumentId>? documentIds = null, bool highPriority = false)
-            => _service.Reanalyze(workspace, projectIds, documentIds, highPriority);
+        public void Reanalyze(
+            Workspace workspace,
+            IEnumerable<ProjectId>? projectIds = null,
+            IEnumerable<DocumentId>? documentIds = null,
+            bool highPriority = false
+        ) => _service.Reanalyze(workspace, projectIds, documentIds, highPriority);
     }
 }

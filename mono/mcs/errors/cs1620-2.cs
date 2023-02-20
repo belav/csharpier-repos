@@ -3,25 +3,18 @@
 
 public class X
 {
-    public void Foo (string[] b)
-    {
-    }
-    
-    public void Foo (ref string i)
-    {
-    }
-    
-    public void Foo (int i)
-    {
-    }
+    public void Foo(string[] b) { }
+
+    public void Foo(ref string i) { }
+
+    public void Foo(int i) { }
 }
 
 class D
 {
-    static void Main ()
+    static void Main()
     {
         X x = null;
-        x.Foo ("hola");
+        x.Foo("hola");
     }
 }
-

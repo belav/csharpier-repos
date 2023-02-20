@@ -2,19 +2,25 @@ using System;
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        try {
+        try
+        {
             bool x = true;
-            try {
-                throw new ApplicationException ();
-            } catch (NullReferenceException) when (x) {
+            try
+            {
+                throw new ApplicationException();
+            }
+            catch (NullReferenceException) when (x)
+            {
                 throw;
             }
 
             return 1;
-        } catch (ApplicationException) {
-            Console.WriteLine ("ok");
+        }
+        catch (ApplicationException)
+        {
+            Console.WriteLine("ok");
             return 0;
         }
     }

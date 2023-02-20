@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,63 +33,80 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Web
 {
-    [AttributeUsage (AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Method)]
     public sealed class WebGetAttribute : Attribute, IOperationBehavior
     {
-        WebAttributeInfo info = new WebAttributeInfo () { Method = "GET" };
+        WebAttributeInfo info = new WebAttributeInfo() { Method = "GET" };
 
-        internal WebAttributeInfo Info {
+        internal WebAttributeInfo Info
+        {
             get { return info; }
         }
 
-        public WebMessageBodyStyle BodyStyle {
+        public WebMessageBodyStyle BodyStyle
+        {
             get { return info.BodyStyle; }
             set { info.BodyStyle = value; }
         }
 
-        public bool IsBodyStyleSetExplicitly {
+        public bool IsBodyStyleSetExplicitly
+        {
             get { return info.IsBodyStyleSetExplicitly; }
         }
 
-        public bool IsRequestFormatSetExplicitly {
+        public bool IsRequestFormatSetExplicitly
+        {
             get { return info.IsRequestFormatSetExplicitly; }
         }
 
-        public bool IsResponseFormatSetExplicitly {
+        public bool IsResponseFormatSetExplicitly
+        {
             get { return info.IsResponseFormatSetExplicitly; }
         }
 
-        public WebMessageFormat RequestFormat {
+        public WebMessageFormat RequestFormat
+        {
             get { return info.RequestFormat; }
             set { info.RequestFormat = value; }
         }
 
-        public WebMessageFormat ResponseFormat {
-            get { return info.ResponseFormat ; }
+        public WebMessageFormat ResponseFormat
+        {
+            get { return info.ResponseFormat; }
             set { info.ResponseFormat = value; }
         }
 
-        public string UriTemplate {
+        public string UriTemplate
+        {
             get { return info.UriTemplate; }
             set { info.UriTemplate = value; }
         }
 
-        void IOperationBehavior.AddBindingParameters (OperationDescription operation, BindingParameterCollection parameters)
+        void IOperationBehavior.AddBindingParameters(
+            OperationDescription operation,
+            BindingParameterCollection parameters
+        )
         {
             // "it is a passive operation behavior"
         }
 
-        void IOperationBehavior.ApplyClientBehavior (OperationDescription operation, ClientOperation client)
+        void IOperationBehavior.ApplyClientBehavior(
+            OperationDescription operation,
+            ClientOperation client
+        )
         {
             // "it is a passive operation behavior"
         }
 
-        void IOperationBehavior.ApplyDispatchBehavior (OperationDescription operation, DispatchOperation service)
+        void IOperationBehavior.ApplyDispatchBehavior(
+            OperationDescription operation,
+            DispatchOperation service
+        )
         {
             // "it is a passive operation behavior"
         }
 
-        void IOperationBehavior.Validate (OperationDescription operation)
+        void IOperationBehavior.Validate(OperationDescription operation)
         {
             // "it is a passive operation behavior"
         }

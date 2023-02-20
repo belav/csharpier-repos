@@ -3,7 +3,7 @@
 
 public class Test
 {
-    public static int Main ()
+    public static int Main()
     {
         int v = 0;
         var s = $"{v:X }";

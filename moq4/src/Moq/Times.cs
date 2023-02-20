@@ -243,16 +243,16 @@ namespace Moq
         {
             return this.kind switch
             {
-                Kind.AtLeastOnce      =>  "AtLeastOnce",
-                Kind.AtLeast          => $"AtLeast({this.from})",
-                Kind.AtMost           => $"AtMost({this.to})",
-                Kind.AtMostOnce       =>  "AtMostOnce",
+                Kind.AtLeastOnce => "AtLeastOnce",
+                Kind.AtLeast => $"AtLeast({this.from})",
+                Kind.AtMost => $"AtMost({this.to})",
+                Kind.AtMostOnce => "AtMostOnce",
                 Kind.BetweenExclusive => $"Between({this.from - 1}, {this.to + 1}, Exclusive)",
                 Kind.BetweenInclusive => $"Between({this.from}, {this.to}, Inclusive)",
-                Kind.Exactly          => $"Exactly({this.from})",
-                Kind.Once             =>  "Once",
-                Kind.Never            =>  "Never",
-                _                     => throw new InvalidOperationException(),
+                Kind.Exactly => $"Exactly({this.from})",
+                Kind.Once => "Once",
+                Kind.Never => "Never",
+                _ => throw new InvalidOperationException(),
             };
         }
 
@@ -268,16 +268,16 @@ namespace Moq
 
             var message = this.kind switch
             {
-                Kind.AtLeastOnce      => Resources.NoMatchingCallsAtLeastOnce,
-                Kind.AtLeast          => Resources.NoMatchingCallsAtLeast,
-                Kind.AtMost           => Resources.NoMatchingCallsAtMost,
-                Kind.AtMostOnce       => Resources.NoMatchingCallsAtMostOnce,
+                Kind.AtLeastOnce => Resources.NoMatchingCallsAtLeastOnce,
+                Kind.AtLeast => Resources.NoMatchingCallsAtLeast,
+                Kind.AtMost => Resources.NoMatchingCallsAtMost,
+                Kind.AtMostOnce => Resources.NoMatchingCallsAtMostOnce,
                 Kind.BetweenExclusive => Resources.NoMatchingCallsBetweenExclusive,
                 Kind.BetweenInclusive => Resources.NoMatchingCallsBetweenInclusive,
-                Kind.Exactly          => Resources.NoMatchingCallsExactly,
-                Kind.Once             => Resources.NoMatchingCallsOnce,
-                Kind.Never            => Resources.NoMatchingCallsNever,
-                _                     => throw new InvalidOperationException(),
+                Kind.Exactly => Resources.NoMatchingCallsExactly,
+                Kind.Once => Resources.NoMatchingCallsOnce,
+                Kind.Never => Resources.NoMatchingCallsNever,
+                _ => throw new InvalidOperationException(),
             };
 
             return string.Format(CultureInfo.CurrentCulture, message, from, to, callCount);

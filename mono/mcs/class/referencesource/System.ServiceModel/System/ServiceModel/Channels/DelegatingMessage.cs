@@ -21,10 +21,7 @@ namespace System.ServiceModel.Channels
 
         public override bool IsEmpty
         {
-            get
-            {
-                return this.innerMessage.IsEmpty;
-            }
+            get { return this.innerMessage.IsEmpty; }
         }
 
         public override bool IsFault

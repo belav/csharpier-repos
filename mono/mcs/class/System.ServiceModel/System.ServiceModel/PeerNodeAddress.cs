@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,53 +33,61 @@ using System.Net;
 
 namespace System.ServiceModel
 {
-    [DataContract (Name = "PeerNodeAddress", Namespace = "http://schemas.microsoft.com/net/2006/05/peer")]
-    [KnownType (typeof (IPAddress []))]
+    [DataContract(
+        Name = "PeerNodeAddress",
+        Namespace = "http://schemas.microsoft.com/net/2006/05/peer"
+    )]
+    [KnownType(typeof(IPAddress[]))]
     public sealed class PeerNodeAddress
     {
         EndpointAddress endpoint;
         ReadOnlyCollection<IPAddress> peer_addresses;
 
-        private PeerNodeAddress ()
+        private PeerNodeAddress()
         {
             // It is for DataContract deserialization.
         }
 
-        public PeerNodeAddress (EndpointAddress endpointAddress,
-            ReadOnlyCollection<IPAddress> ipAddresses)
+        public PeerNodeAddress(
+            EndpointAddress endpointAddress,
+            ReadOnlyCollection<IPAddress> ipAddresses
+        )
         {
             if (endpointAddress == null)
-                throw new ArgumentNullException ("endpointAddress");
+                throw new ArgumentNullException("endpointAddress");
             if (ipAddresses == null)
-                throw new ArgumentNullException ("ipAddresses");
+                throw new ArgumentNullException("ipAddresses");
             this.endpoint = endpointAddress;
             peer_addresses = ipAddresses;
         }
 
-        public EndpointAddress EndpointAddress {
+        public EndpointAddress EndpointAddress
+        {
             get { return endpoint; }
         }
 
-        public ReadOnlyCollection<IPAddress> IPAddresses {
+        public ReadOnlyCollection<IPAddress> IPAddresses
+        {
             get { return peer_addresses; }
         }
 
-        [DataMember (Name = "EndpointAddress")]
-        EndpointAddress10 SerializedEndpoint {
-            get { return EndpointAddress10.FromEndpointAddress (endpoint); }
-            set { endpoint = value.ToEndpointAddress (); }
+        [DataMember(Name = "EndpointAddress")]
+        EndpointAddress10 SerializedEndpoint
+        {
+            get { return EndpointAddress10.FromEndpointAddress(endpoint); }
+            set { endpoint = value.ToEndpointAddress(); }
         }
 
-        [DataMember (Name = "IPAddresses")]
-        IPAddress [] SerializedIPAddresses {
-            get {
-                IPAddress [] arr = new IPAddress [peer_addresses.Count];
-                peer_addresses.CopyTo (arr, 0);
+        [DataMember(Name = "IPAddresses")]
+        IPAddress[] SerializedIPAddresses
+        {
+            get
+            {
+                IPAddress[] arr = new IPAddress[peer_addresses.Count];
+                peer_addresses.CopyTo(arr, 0);
                 return arr;
             }
-            set {
-                peer_addresses = new ReadOnlyCollection<IPAddress> (value);
-            }
+            set { peer_addresses = new ReadOnlyCollection<IPAddress>(value); }
         }
     }
 }

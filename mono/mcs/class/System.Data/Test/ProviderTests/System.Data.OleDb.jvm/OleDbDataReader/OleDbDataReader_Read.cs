@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,13 +27,12 @@ using System.Data.OleDb;
 
 using MonoTests.System.Data.Utils;
 
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
     [TestFixture]
-    public class OleDbDataReader_Read : ADONetTesterClass 
+    public class OleDbDataReader_Read : ADONetTesterClass
     {
         OleDbConnection con;
         OleDbCommand cmd;
@@ -45,14 +44,25 @@ namespace MonoTests.System.Data.OleDb
             BeginCase("Setup");
             try
             {
-                con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+                con = new OleDbConnection(
+                    MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+                );
                 cmd = new OleDbCommand("", con);
                 con.Open();
                 //prepare data
-                base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+                base.PrepareDataForTesting(
+                    MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+                );
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
         [TearDown]
@@ -73,12 +83,18 @@ namespace MonoTests.System.Data.OleDb
                 tc.run();
                 tc.TearDown();
             }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
 
         [Test]
-        public void CommandBehaviorSingleRow ()
+        public void CommandBehaviorSingleRow()
         {
             Exception exp = null;
 
@@ -87,14 +103,21 @@ namespace MonoTests.System.Data.OleDb
 
             try
             {
-                BeginCase ("CommandBehaviorSingleRow");
+                BeginCase("CommandBehaviorSingleRow");
                 int i = 0;
-                while (rdr.Read ())
+                while (rdr.Read())
                     i++;
                 Compare(i, 1);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
         [Test]
@@ -102,7 +125,8 @@ namespace MonoTests.System.Data.OleDb
         {
             Exception exp = null;
 
-            cmd.CommandText = "Select EmployeeID, LastName, FirstName, Title, BirthDate From Employees where EmployeeID in (100,200) order by EmployeeID asc";
+            cmd.CommandText =
+                "Select EmployeeID, LastName, FirstName, Title, BirthDate From Employees where EmployeeID in (100,200) order by EmployeeID asc";
             OleDbDataReader rdr = cmd.ExecuteReader();
 
             try
@@ -110,38 +134,64 @@ namespace MonoTests.System.Data.OleDb
                 BeginCase("first row");
                 bool read = rdr.Read();
                 Compare(read, true);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
-
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
                 BeginCase("first row - value");
                 object obj = rdr.GetValue(0);
                 Compare(obj.ToString(), "100");
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
-
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
                 BeginCase("Second row");
                 bool read = rdr.Read();
                 Compare(read, true);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
                 BeginCase("Second row - value");
                 object obj = rdr.GetValue(0);
                 Compare(obj.ToString(), "200");
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
@@ -149,21 +199,34 @@ namespace MonoTests.System.Data.OleDb
                 bool read = rdr.Read();
                 Compare(read, false);
                 rdr.Close();
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
                 BeginCase("Read return false");
-                cmd.CommandText= "select * from Orders where OrderID=-909";
+                cmd.CommandText = "select * from Orders where OrderID=-909";
                 rdr = cmd.ExecuteReader();
-                Compare(rdr.Read(),false);
+                Compare(rdr.Read(), false);
                 rdr.Close();
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
-
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
     }
 }

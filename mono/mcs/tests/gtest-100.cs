@@ -5,24 +5,21 @@ namespace C5
 {
     public interface ICollection<T>
     {
-        void Test<U> ();
+        void Test<U>();
     }
 
     public abstract class ArrayBase<T> : ICollection<T>
     {
-        void ICollection<T>.Test<U> ()
-        { }
+        void ICollection<T>.Test<U>() { }
     }
 
-    public class ArrayList<V> : ArrayBase<V>
-    {
-    }
+    public class ArrayList<V> : ArrayBase<V> { }
 }
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        C5.ArrayList<int> array = new C5.ArrayList<int> ();
+        C5.ArrayList<int> array = new C5.ArrayList<int>();
     }
 }

@@ -9,14 +9,14 @@ class op_Addition
             get { return op_Addition.Foo; }
         }
 
-        public static int operator + (Builder a, Builder b)
+        public static int operator +(Builder a, Builder b)
         {
             return 0;
         }
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        var x = new Builder ().Foo;
+        var x = new Builder().Foo;
     }
 }

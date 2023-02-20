@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,72 +35,65 @@ namespace System.Web.UI.WebControls.Adapters
 {
     public class MenuAdapter : WebControlAdapter, IPostBackEventHandler
     {
-        public MenuAdapter () 
-        {
-        }
-        
-        internal MenuAdapter (Menu c) : base (c)
-        {
-        }
+        public MenuAdapter() { }
 
-        protected internal override void OnInit (EventArgs e)
+        internal MenuAdapter(Menu c)
+            : base(c) { }
+
+        protected internal override void OnInit(EventArgs e)
         {
-            base.OnInit (e);
+            base.OnInit(e);
         }
 
         protected internal override void OnPreRender(EventArgs e)
         {
-            base.OnPreRender (e);
+            base.OnPreRender(e);
         }
 
-        protected virtual void RaisePostBackEvent (string eventArgument)
+        protected virtual void RaisePostBackEvent(string eventArgument)
         {
-            Control.RaisePostBackEvent (eventArgument);
+            Control.RaisePostBackEvent(eventArgument);
         }
 
-        protected override void RenderBeginTag (HtmlTextWriter writer)
+        protected override void RenderBeginTag(HtmlTextWriter writer)
         {
-            base.RenderBeginTag (writer);
+            base.RenderBeginTag(writer);
         }
 
-        protected override void RenderContents (HtmlTextWriter writer)
+        protected override void RenderContents(HtmlTextWriter writer)
         {
-            base.RenderContents (writer);
+            base.RenderContents(writer);
         }
 
-        protected override void RenderEndTag (HtmlTextWriter writer)
+        protected override void RenderEndTag(HtmlTextWriter writer)
         {
-            base.RenderEndTag (writer);
+            base.RenderEndTag(writer);
         }
 
-        protected internal virtual void RenderItem (HtmlTextWriter writer, 
-                                MenuItem item,
-                                int position)
+        protected internal virtual void RenderItem(
+            HtmlTextWriter writer,
+            MenuItem item,
+            int position
+        )
         {
-            Control.RenderItem (writer, item, position);
+            Control.RenderItem(writer, item, position);
         }
-      
-        protected internal override void LoadAdapterControlState (object state)
-        {
-        }
-            
-        protected internal override object SaveAdapterControlState ()
+
+        protected internal override void LoadAdapterControlState(object state) { }
+
+        protected internal override object SaveAdapterControlState()
         {
             return null;
         }
 
-        void System.Web.UI.IPostBackEventHandler.RaisePostBackEvent (string eventArgument)
+        void System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(string eventArgument)
         {
-            RaisePostBackEvent (eventArgument);
+            RaisePostBackEvent(eventArgument);
         }
 
         protected new Menu Control
         {
-            get {
-                return (Menu)control;
-            }
+            get { return (Menu)control; }
         }
     }
 }
-
-

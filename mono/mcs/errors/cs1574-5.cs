@@ -7,13 +7,13 @@ using System;
 /// <see cref="Goo"/> ... does not exist
 public class Test
 {
-    string Foo {
+    string Foo
+    {
         get { return null; }
     }
 }
 
 class X
 {
-    static void Main ()
-    { }
+    static void Main() { }
 }

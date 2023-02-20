@@ -4,31 +4,28 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
 {
     public class InterfaceUsedOnlyAsConstraintIsKept
     {
-        public static void Main ()
+        public static void Main()
         {
-            var a = new A ();
-            Helper (a);
+            var a = new A();
+            Helper(a);
         }
 
         [Kept]
-        static void Helper<T> (T arg) where T : IFoo
-        {
-        }
+        static void Helper<T>(T arg)
+            where T : IFoo { }
 
         [Kept]
         interface IFoo
         {
-            void Foo ();
+            void Foo();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptInterface (typeof (IFoo))]
+        [KeptMember(".ctor()")]
+        [KeptInterface(typeof(IFoo))]
         class A : IFoo
         {
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
         }
     }
 }

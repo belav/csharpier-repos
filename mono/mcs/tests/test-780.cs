@@ -3,19 +3,20 @@ using System;
 namespace MonoVirtuals
 {
     class X { }
+
     class Y : X { }
 
     class A
     {
-        public virtual int f (X o)
+        public virtual int f(X o)
         {
-            System.Console.WriteLine ("In A for X");
+            System.Console.WriteLine("In A for X");
             return 5;
         }
 
-        public virtual int f (Y o)
+        public virtual int f(Y o)
         {
-            System.Console.WriteLine ("In A for Y");
+            System.Console.WriteLine("In A for Y");
             return 10;
         }
 
@@ -23,7 +24,7 @@ namespace MonoVirtuals
         {
             get
             {
-                System.Console.WriteLine ("In A for X");
+                System.Console.WriteLine("In A for X");
                 return 5;
             }
         }
@@ -32,7 +33,7 @@ namespace MonoVirtuals
         {
             get
             {
-                System.Console.WriteLine ("In A for Y");
+                System.Console.WriteLine("In A for Y");
                 return 10;
             }
         }
@@ -40,42 +41,42 @@ namespace MonoVirtuals
 
     class B : A
     {
-        public override int f (X o)
+        public override int f(X o)
         {
-            base.f (o);
-            throw new ApplicationException ("should not be called");
+            base.f(o);
+            throw new ApplicationException("should not be called");
         }
 
         public override int this[X o]
         {
             get
             {
-                base.f (o);
-                throw new ApplicationException ("should not be called");
+                base.f(o);
+                throw new ApplicationException("should not be called");
             }
         }
     }
 
     class C : B
     {
-        public override int f (X o)
+        public override int f(X o)
         {
-            System.Console.WriteLine ("In C for X");
-            return base.f (o);
+            System.Console.WriteLine("In C for X");
+            return base.f(o);
         }
 
-        public override int f (Y o)
+        public override int f(Y o)
         {
-            System.Console.WriteLine ("In C for Y");
-            return base.f (o);
+            System.Console.WriteLine("In C for Y");
+            return base.f(o);
         }
 
         public override int this[X o]
         {
             get
             {
-                System.Console.WriteLine ("In C for X");
-                return base.f (o);
+                System.Console.WriteLine("In C for X");
+                return base.f(o);
             }
         }
 
@@ -83,19 +84,19 @@ namespace MonoVirtuals
         {
             get
             {
-                System.Console.WriteLine ("In C for Y");
-                return base.f (o);
+                System.Console.WriteLine("In C for Y");
+                return base.f(o);
             }
         }
     }
 
     class MainClass
     {
-        public static int Main ()
+        public static int Main()
         {
-            var o = new Y ();
-            var c = new C ();
-            if (c.f (o) != 10)
+            var o = new Y();
+            var c = new C();
+            if (c.f(o) != 10)
                 return 1;
 
             if (c[o] != 10)

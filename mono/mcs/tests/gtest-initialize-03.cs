@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections;
 
@@ -10,21 +8,22 @@ class Data
 
 public class Test
 {
-    static Data Prop {
-        set {
-        }
-    }
-    
-    public object Foo ()
+    static Data Prop
     {
-        return new Data () { Value = 3 };
+        set { }
     }
-    
-    public static void Main ()
+
+    public object Foo()
     {
-        Prop = new Data () { Value = 3 };
-        Data data = new Data () { Value = 6 };
-        Data a, b;
-        a = b = new Data () { Value = 3 };
+        return new Data() { Value = 3 };
+    }
+
+    public static void Main()
+    {
+        Prop = new Data() { Value = 3 };
+        Data data = new Data() { Value = 6 };
+        Data a,
+            b;
+        a = b = new Data() { Value = 3 };
     }
 }

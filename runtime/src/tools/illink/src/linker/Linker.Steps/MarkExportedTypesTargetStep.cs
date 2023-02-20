@@ -8,33 +8,51 @@ namespace Mono.Linker.Steps
 {
     public static class MarkExportedTypesTarget
     {
-        public static void ProcessAssembly (AssemblyDefinition assembly, LinkContext context)
+        public static void ProcessAssembly(AssemblyDefinition assembly, LinkContext context)
         {
             if (!assembly.MainModule.HasExportedTypes)
                 return;
 
             foreach (var type in assembly.MainModule.ExportedTypes)
-                InitializeExportedType (type, context, assembly);
+                InitializeExportedType(type, context, assembly);
         }
 
-        static void InitializeExportedType (ExportedType exportedType, LinkContext context, AssemblyDefinition assembly)
+        static void InitializeExportedType(
+            ExportedType exportedType,
+            LinkContext context,
+            AssemblyDefinition assembly
+        )
         {
-            if (!context.Annotations.IsMarked (exportedType))
+            if (!context.Annotations.IsMarked(exportedType))
                 return;
 
-            if (!context.Annotations.TryGetPreservedMembers (exportedType, out TypePreserveMembers members))
+            if (
+                !context.Annotations.TryGetPreservedMembers(
+                    exportedType,
+                    out TypePreserveMembers members
+                )
+            )
                 return;
 
-            TypeDefinition? type = context.TryResolve (exportedType);
-            if (type == null) {
+            TypeDefinition? type = context.TryResolve(exportedType);
+            if (type == null)
+            {
                 if (!context.IgnoreUnresolved)
-                    context.LogError (null, DiagnosticId.ExportedTypeCannotBeResolved, exportedType.Name);
+                    context.LogError(
+                        null,
+                        DiagnosticId.ExportedTypeCannotBeResolved,
+                        exportedType.Name
+                    );
 
                 return;
             }
 
-            context.Annotations.Mark (type, new DependencyInfo (DependencyKind.ExportedType, exportedType), new MessageOrigin (assembly));
-            context.Annotations.SetMembersPreserve (type, members);
+            context.Annotations.Mark(
+                type,
+                new DependencyInfo(DependencyKind.ExportedType, exportedType),
+                new MessageOrigin(assembly)
+            );
+            context.Annotations.SetMembersPreserve(type, members);
         }
     }
 }

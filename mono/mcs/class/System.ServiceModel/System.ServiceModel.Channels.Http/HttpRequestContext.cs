@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,14 +34,18 @@ namespace System.ServiceModel.Channels.Http
 {
     internal class HttpRequestContext : RequestContext
     {
-        public HttpRequestContext (HttpReplyChannel channel, HttpContextInfo context, Message request)
+        public HttpRequestContext(
+            HttpReplyChannel channel,
+            HttpContextInfo context,
+            Message request
+        )
         {
             if (channel == null)
-                throw new ArgumentNullException ("channel");
+                throw new ArgumentNullException("channel");
             if (context == null)
-                throw new ArgumentNullException ("context");
+                throw new ArgumentNullException("context");
             if (request == null)
-                throw new ArgumentNullException ("request");
+                throw new ArgumentNullException("request");
             this.channel = channel;
             this.context = context;
             this.request = request;
@@ -51,114 +55,123 @@ namespace System.ServiceModel.Channels.Http
         HttpReplyChannel channel;
         HttpContextInfo context;
 
-        public override Message RequestMessage {
+        public override Message RequestMessage
+        {
             get { return request; }
         }
 
-        public HttpReplyChannel Channel {
+        public HttpReplyChannel Channel
+        {
             get { return channel; }
         }
-        
-        public HttpContextInfo Context {
+
+        public HttpContextInfo Context
+        {
             get { return context; }
         }
 
-        public override IAsyncResult BeginReply (
-            Message msg, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReply(Message msg, AsyncCallback callback, object state)
         {
-            return BeginReply (msg,
-                Channel.DefaultSendTimeout,
-                callback, state);
+            return BeginReply(msg, Channel.DefaultSendTimeout, callback, state);
         }
 
-        Action<Message,TimeSpan> reply_delegate;
+        Action<Message, TimeSpan> reply_delegate;
 
-        public override IAsyncResult BeginReply (
-            Message msg, TimeSpan timeout,
-            AsyncCallback callback, object state)
+        public override IAsyncResult BeginReply(
+            Message msg,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (reply_delegate == null)
-                reply_delegate = new Action<Message,TimeSpan> (Reply);
-            return reply_delegate.BeginInvoke (msg, timeout, callback, state);
+                reply_delegate = new Action<Message, TimeSpan>(Reply);
+            return reply_delegate.BeginInvoke(msg, timeout, callback, state);
         }
 
-        public override void EndReply (IAsyncResult result)
+        public override void EndReply(IAsyncResult result)
         {
             if (result == null)
-                throw new ArgumentNullException ("result");
+                throw new ArgumentNullException("result");
             if (reply_delegate == null)
-                throw new InvalidOperationException ("reply operation has not started");
-            reply_delegate.EndInvoke (result);
+                throw new InvalidOperationException("reply operation has not started");
+            reply_delegate.EndInvoke(result);
         }
 
-        public override void Reply (Message msg)
+        public override void Reply(Message msg)
         {
-            Reply (msg, Channel.DefaultSendTimeout);
+            Reply(msg, Channel.DefaultSendTimeout);
         }
 
-        public override void Reply (Message msg, TimeSpan timeout)
+        public override void Reply(Message msg, TimeSpan timeout)
         {
-            InternalReply (msg, timeout);
+            InternalReply(msg, timeout);
         }
 
-        public override void Abort ()
+        public override void Abort()
         {
-            InternalAbort ();
+            InternalAbort();
         }
 
-        public override void Close ()
+        public override void Close()
         {
-            Close (Channel.DefaultSendTimeout);
+            Close(Channel.DefaultSendTimeout);
         }
 
-        public override void Close (TimeSpan timeout)
+        public override void Close(TimeSpan timeout)
         {
-            InternalClose (timeout);
+            InternalClose(timeout);
         }
-        
+
         // implementation internals
-        
-        protected virtual void InternalAbort ()
+
+        protected virtual void InternalAbort()
         {
-            Context.Abort ();
-        }
-        
-        protected virtual void InternalClose (TimeSpan timeout)
-        {
-            Context.Close ();
+            Context.Abort();
         }
 
-        protected virtual void InternalReply (Message msg, TimeSpan timeout)
+        protected virtual void InternalClose(TimeSpan timeout)
+        {
+            Context.Close();
+        }
+
+        protected virtual void InternalReply(Message msg, TimeSpan timeout)
         {
             if (msg == null)
-                throw new ArgumentNullException ("msg");
+                throw new ArgumentNullException("msg");
 
-            Logger.LogMessage (MessageLogSourceKind.TransportSend, ref msg, Channel.Source.Source.MaxReceivedMessageSize);
+            Logger.LogMessage(
+                MessageLogSourceKind.TransportSend,
+                ref msg,
+                Channel.Source.Source.MaxReceivedMessageSize
+            );
 
-            MemoryStream ms = new MemoryStream ();
-            Channel.Encoder.WriteMessage (msg, ms);
+            MemoryStream ms = new MemoryStream();
+            Channel.Encoder.WriteMessage(msg, ms);
             Context.Response.ContentType = Channel.Encoder.ContentType;
 
             string pname = HttpResponseMessageProperty.Name;
             bool suppressEntityBody = false;
-            if (msg.Properties.ContainsKey (pname)) {
-                HttpResponseMessageProperty hp = (HttpResponseMessageProperty) msg.Properties [pname];
-                string contentType = hp.Headers ["Content-Type"];
+            if (msg.Properties.ContainsKey(pname))
+            {
+                HttpResponseMessageProperty hp = (HttpResponseMessageProperty)msg.Properties[pname];
+                string contentType = hp.Headers["Content-Type"];
                 if (contentType != null)
                     Context.Response.ContentType = contentType;
-                Context.Response.Headers.Add (hp.Headers);
-                if (hp.StatusCode != default (HttpStatusCode))
-                    Context.Response.StatusCode = (int) hp.StatusCode;
+                Context.Response.Headers.Add(hp.Headers);
+                if (hp.StatusCode != default(HttpStatusCode))
+                    Context.Response.StatusCode = (int)hp.StatusCode;
                 Context.Response.StatusDescription = hp.StatusDescription;
                 if (hp.SuppressEntityBody)
                     suppressEntityBody = true;
             }
             if (msg.IsFault)
                 Context.Response.StatusCode = 500;
-            if (!suppressEntityBody) {
-                Context.Response.SetLength (ms.Length);
-                Context.Response.OutputStream.Write (ms.GetBuffer (), 0, (int) ms.Length);
-                Context.Response.OutputStream.Flush ();
+            if (!suppressEntityBody)
+            {
+                Context.Response.SetLength(ms.Length);
+                Context.Response.OutputStream.Write(ms.GetBuffer(), 0, (int)ms.Length);
+                Context.Response.OutputStream.Flush();
             }
             else
                 Context.Response.SuppressContent = true;

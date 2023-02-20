@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return default;
         }
 
-        public static RefKind GetRefKind(this ArgumentSyntax? argument)
-            => argument?.RefKindKeyword.Kind() switch
+        public static RefKind GetRefKind(this ArgumentSyntax? argument) =>
+            argument?.RefKindKeyword.Kind() switch
             {
                 SyntaxKind.RefKeyword => RefKind.Ref,
                 SyntaxKind.OutKeyword => RefKind.Out,
@@ -41,10 +41,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SemanticModel semanticModel,
             bool allowUncertainCandidates = false,
             bool allowParams = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
-            if (argument.Parent is not BaseArgumentListSyntax argumentList ||
-                argumentList.Parent is null)
+            if (
+                argument.Parent is not BaseArgumentListSyntax argumentList
+                || argumentList.Parent is null
+            )
             {
                 return null;
             }
@@ -79,14 +82,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 if (index < parameters.Length)
                 {
                     var parameter = parameters[index];
-                    if (argument.RefOrOutKeyword.Kind() == SyntaxKind.OutKeyword &&
-                        parameter.RefKind != RefKind.Out)
+                    if (
+                        argument.RefOrOutKeyword.Kind() == SyntaxKind.OutKeyword
+                        && parameter.RefKind != RefKind.Out
+                    )
                     {
                         continue;
                     }
 
-                    if (argument.RefOrOutKeyword.Kind() == SyntaxKind.RefKeyword &&
-                        parameter.RefKind != RefKind.Ref)
+                    if (
+                        argument.RefOrOutKeyword.Kind() == SyntaxKind.RefKeyword
+                        && parameter.RefKind != RefKind.Ref
+                    )
                     {
                         continue;
                     }

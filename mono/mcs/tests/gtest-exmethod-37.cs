@@ -2,35 +2,31 @@ using System;
 
 static class S
 {
-    public static void Extension (this A b, string s, bool n)
+    public static void Extension(this A b, string s, bool n)
     {
-        throw new ApplicationException ("wrong overload");
+        throw new ApplicationException("wrong overload");
     }
 }
 
 class A
 {
-    public void Extension (string s)
-    {
-    }
+    public void Extension(string s) { }
 }
 
 class Test
 {
-    static void TestMethod (Action<bool> arg)
-    {
-    }
+    static void TestMethod(Action<bool> arg) { }
 
-    static int TestMethod (Action<string> arg)
+    static int TestMethod(Action<string> arg)
     {
-        arg ("hola");
+        arg("hola");
         return 2;
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        var a = new A ();
-        if (TestMethod (a.Extension) != 2)
+        var a = new A();
+        if (TestMethod(a.Extension) != 2)
             return 1;
 
         return 0;

@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,70 +30,88 @@ namespace System.ServiceModel.Channels
 {
     internal abstract class InternalRequestContext : RequestContext
     {
-        protected InternalRequestContext (IDefaultCommunicationTimeouts timeouts)
+        protected InternalRequestContext(IDefaultCommunicationTimeouts timeouts)
         {
             this.timeouts = timeouts;
         }
 
         IDefaultCommunicationTimeouts timeouts;
 
-        public override IAsyncResult BeginReply (Message message, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReply(
+            Message message,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return BeginReply (message, timeouts.SendTimeout, callback, state);
+            return BeginReply(message, timeouts.SendTimeout, callback, state);
         }
 
-        Action<Message,TimeSpan> reply_delegate;
+        Action<Message, TimeSpan> reply_delegate;
 
-        public override IAsyncResult BeginReply (Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReply(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (message == null)
-                throw new ArgumentNullException ("message");
+                throw new ArgumentNullException("message");
             if (reply_delegate == null)
-                reply_delegate = new Action<Message,TimeSpan> (Reply);
-            return reply_delegate.BeginInvoke (message, timeout, callback, state);
+                reply_delegate = new Action<Message, TimeSpan>(Reply);
+            return reply_delegate.BeginInvoke(message, timeout, callback, state);
         }
 
-        public override void EndReply (IAsyncResult result)
+        public override void EndReply(IAsyncResult result)
         {
             if (result == null)
-                throw new ArgumentNullException ("result");
+                throw new ArgumentNullException("result");
             if (reply_delegate == null)
-                throw new InvalidOperationException ("Async reply operation has not started");
-            reply_delegate.EndInvoke (result);
+                throw new InvalidOperationException("Async reply operation has not started");
+            reply_delegate.EndInvoke(result);
         }
 
-        public override void Close ()
+        public override void Close()
         {
-            Close (timeouts.CloseTimeout);
+            Close(timeouts.CloseTimeout);
         }
 
-        public override void Reply (Message message)
+        public override void Reply(Message message)
         {
-            Reply (message, timeouts.SendTimeout);
+            Reply(message, timeouts.SendTimeout);
         }
     }
 
     public abstract class RequestContext : IDisposable
     {
         public abstract Message RequestMessage { get; }
-        public abstract void Abort ();
-        public abstract IAsyncResult BeginReply (Message message, AsyncCallback callback, object state);
-        public abstract IAsyncResult BeginReply (Message message, TimeSpan timeout, AsyncCallback callback, object state);
-        public abstract void Close ();
-        public abstract void Close (TimeSpan timeout);
-        public abstract void EndReply (IAsyncResult result);
-        public abstract void Reply (Message message);
-        public abstract void Reply (Message message, TimeSpan timeout);
+        public abstract void Abort();
+        public abstract IAsyncResult BeginReply(
+            Message message,
+            AsyncCallback callback,
+            object state
+        );
+        public abstract IAsyncResult BeginReply(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
+        public abstract void Close();
+        public abstract void Close(TimeSpan timeout);
+        public abstract void EndReply(IAsyncResult result);
+        public abstract void Reply(Message message);
+        public abstract void Reply(Message message, TimeSpan timeout);
 
-        protected virtual void Dispose (bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (disposing)
-                Close ();
+                Close();
         }
 
-        void IDisposable.Dispose ()
+        void IDisposable.Dispose()
         {
-            Dispose (true);
+            Dispose(true);
         }
     }
 }

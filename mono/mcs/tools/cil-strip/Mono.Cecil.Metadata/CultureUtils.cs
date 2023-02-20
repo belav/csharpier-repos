@@ -26,56 +26,54 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
+namespace Mono.Cecil.Metadata
+{
     using System;
     using System.Collections;
     using System.Globalization;
 
-    sealed class CultureUtils {
-
+    sealed class CultureUtils
+    {
         static IDictionary m_cultures;
 
-        CultureUtils ()
-        {
-        }
+        CultureUtils() { }
 
-        static void LoadCultures ()
+        static void LoadCultures()
         {
             if (m_cultures != null)
                 return;
 
 #if CF_1_0 || CF_2_0
-            CultureInfo [] cultures = new CultureInfo [0];
+            CultureInfo[] cultures = new CultureInfo[0];
 #else
-            CultureInfo [] cultures = CultureInfo.GetCultures (CultureTypes.AllCultures);
+            CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
 #endif
-            m_cultures = new Hashtable (cultures.Length + 2);
+            m_cultures = new Hashtable(cultures.Length + 2);
 
             foreach (CultureInfo ci in cultures)
-                if (!m_cultures.Contains (ci.Name))
-                    m_cultures.Add (ci.Name, ci);
+                if (!m_cultures.Contains(ci.Name))
+                    m_cultures.Add(ci.Name, ci);
 
-            if (!m_cultures.Contains (string.Empty))
-                m_cultures.Add (string.Empty, CultureInfo.InvariantCulture);
+            if (!m_cultures.Contains(string.Empty))
+                m_cultures.Add(string.Empty, CultureInfo.InvariantCulture);
 
-            m_cultures.Add ("neutral", CultureInfo.InvariantCulture);
+            m_cultures.Add("neutral", CultureInfo.InvariantCulture);
         }
 
-        public static bool IsValid (string culture)
+        public static bool IsValid(string culture)
         {
             if (culture == null)
-                throw new ArgumentNullException ("culture");
+                throw new ArgumentNullException("culture");
 
-            LoadCultures ();
+            LoadCultures();
 
-            return m_cultures.Contains (culture);
+            return m_cultures.Contains(culture);
         }
 
-        public static CultureInfo GetCultureInfo (string culture)
+        public static CultureInfo GetCultureInfo(string culture)
         {
-            if (IsValid (culture))
-                return m_cultures [culture] as CultureInfo;
+            if (IsValid(culture))
+                return m_cultures[culture] as CultureInfo;
 
             return CultureInfo.InvariantCulture;
         }

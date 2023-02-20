@@ -43,61 +43,72 @@ namespace Mono.Btls
         X509CertificateCollection collection;
         MonoBtlsX509TrustKind trust;
 
-        internal MonoBtlsX509LookupMonoCollection (X509CertificateCollection collection, MonoBtlsX509TrustKind trust)
+        internal MonoBtlsX509LookupMonoCollection(
+            X509CertificateCollection collection,
+            MonoBtlsX509TrustKind trust
+        )
         {
             this.collection = collection;
             this.trust = trust;
         }
 
-        void Initialize ()
+        void Initialize()
         {
             if (certificates != null)
                 return;
 
-            hashes = new long [collection.Count];
-            certificates = new MonoBtlsX509 [collection.Count];
-            for (int i = 0; i < collection.Count; i++) {
+            hashes = new long[collection.Count];
+            certificates = new MonoBtlsX509[collection.Count];
+            for (int i = 0; i < collection.Count; i++)
+            {
                 // Create new 'X509 *' instance since we need to modify it to add the
                 // trust settings.
-                var data = collection [i].GetRawCertData ();
-                certificates [i] = MonoBtlsX509.LoadFromData (data, MonoBtlsX509Format.DER);
-                certificates [i].AddExplicitTrust (trust);
-                hashes [i] = certificates [i].GetSubjectNameHash ();
+                var data = collection[i].GetRawCertData();
+                certificates[i] = MonoBtlsX509.LoadFromData(data, MonoBtlsX509Format.DER);
+                certificates[i].AddExplicitTrust(trust);
+                hashes[i] = certificates[i].GetSubjectNameHash();
             }
         }
 
-        protected override MonoBtlsX509 OnGetBySubject (MonoBtlsX509Name name)
+        protected override MonoBtlsX509 OnGetBySubject(MonoBtlsX509Name name)
         {
-            Initialize ();
+            Initialize();
 
-            var hash = name.GetHash ();
+            var hash = name.GetHash();
             MonoBtlsX509 found = null;
 
-            for (int i = 0; i < certificates.Length; i++) {
-                if (hashes [i] != hash)
+            for (int i = 0; i < certificates.Length; i++)
+            {
+                if (hashes[i] != hash)
                     continue;
-                found = certificates [i];
-                AddCertificate (found);
+                found = certificates[i];
+                AddCertificate(found);
             }
 
             return found;
         }
 
-        protected override void Close ()
+        protected override void Close()
         {
-            try {
-                if (certificates != null) {
-                    for (int i = 0; i < certificates.Length; i++) {
-                        if (certificates [i] != null) {
-                            certificates [i].Dispose ();
-                            certificates [i] = null;
+            try
+            {
+                if (certificates != null)
+                {
+                    for (int i = 0; i < certificates.Length; i++)
+                    {
+                        if (certificates[i] != null)
+                        {
+                            certificates[i].Dispose();
+                            certificates[i] = null;
                         }
                     }
                     certificates = null;
                     hashes = null;
                 }
-            } finally {
-                base.Close ();
+            }
+            finally
+            {
+                base.Close();
             }
         }
     }

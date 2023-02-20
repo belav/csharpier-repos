@@ -3,13 +3,13 @@
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        Foo (out int x);
-        Foo (out int x);
+        Foo(out int x);
+        Foo(out int x);
     }
 
-    static void Foo (out int arg)
+    static void Foo(out int arg)
     {
         arg = 2;
     }

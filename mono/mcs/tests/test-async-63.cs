@@ -4,81 +4,95 @@ using System.Threading.Tasks;
 class C
 {
     static int counter;
-    public static async Task TestSingleAwait (bool throwException)
+
+    public static async Task TestSingleAwait(bool throwException)
     {
-        try {
+        try
+        {
             if (throwException)
-                throw new ApplicationException ();
-        } catch (ApplicationException ex) {
-            Console.WriteLine ("x1a");
+                throw new ApplicationException();
+        }
+        catch (ApplicationException ex)
+        {
+            Console.WriteLine("x1a");
             ++counter;
-            await Call ();
-            Console.WriteLine ("x2a");
+            await Call();
+            Console.WriteLine("x2a");
             ++counter;
-        } catch {
+        }
+        catch
+        {
             throw;
         }
 
-        Console.WriteLine ("end");
+        Console.WriteLine("end");
     }
-    
-    public static async Task TestDoubleAwait (bool throwException)
+
+    public static async Task TestDoubleAwait(bool throwException)
     {
-        try {
+        try
+        {
             if (throwException)
-                throw new ApplicationException ();
-        } catch (ApplicationException ex) {
-            Console.WriteLine ("x1a");
+                throw new ApplicationException();
+        }
+        catch (ApplicationException ex)
+        {
+            Console.WriteLine("x1a");
             ++counter;
-            await Call ();
-            Console.WriteLine ("x2a");
+            await Call();
+            Console.WriteLine("x2a");
             ++counter;
-        } catch {
-            Console.WriteLine ("x1b");
+        }
+        catch
+        {
+            Console.WriteLine("x1b");
             counter += 4;
-            await Call ();
-            Console.WriteLine ("x2b");
+            await Call();
+            Console.WriteLine("x2b");
             counter += 7;
         }
 
-        Console.WriteLine ("end");
+        Console.WriteLine("end");
     }
 
-    static Task Call ()
+    static Task Call()
     {
-        return Task.Factory.StartNew (() => false);
+        return Task.Factory.StartNew(() => false);
     }
 
-    void HH ()
+    void HH()
     {
-        try {
-                throw new ApplicationException ();
-        } catch {
+        try
+        {
+            throw new ApplicationException();
+        }
+        catch
+        {
             throw;
         }
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        TestSingleAwait (true).Wait ();
-        Console.WriteLine (counter);
+        TestSingleAwait(true).Wait();
+        Console.WriteLine(counter);
         if (counter != 2)
             return 1;
 
-        TestSingleAwait (false).Wait ();
+        TestSingleAwait(false).Wait();
         if (counter != 2)
             return 2;
 
         counter = 0;
 
-        TestDoubleAwait (true).Wait ();
-        Console.WriteLine (counter);
+        TestDoubleAwait(true).Wait();
+        Console.WriteLine(counter);
         if (counter != 2)
             return 3;
 
-        TestDoubleAwait (false).Wait ();
+        TestDoubleAwait(false).Wait();
         if (counter != 2)
-            return 4;        
+            return 4;
 
         return 0;
     }

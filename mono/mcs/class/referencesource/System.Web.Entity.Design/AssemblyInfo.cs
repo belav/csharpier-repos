@@ -5,4 +5,4 @@
 //---------------------------------------------------------------------
 
 // Opts into loading designer-specific icons from the same assembly
-[assembly:System.Drawing.BitmapSuffixInSameAssembly]
+[assembly: System.Drawing.BitmapSuffixInSameAssembly]

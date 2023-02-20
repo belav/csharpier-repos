@@ -6,19 +6,19 @@ namespace GenericTest
     {
         public class InnerGeneric<U>
         {
-            public static string GetTypeNames ()
+            public static string GetTypeNames()
             {
-                return typeof (T).ToString () + " " + typeof (U).ToString ();
+                return typeof(T).ToString() + " " + typeof(U).ToString();
             }
         }
     }
 
     class Program
     {
-        public static int Main ()
+        public static int Main()
         {
-            string typeNames = OuterGeneric<int>.InnerGeneric<long>.GetTypeNames ();
-            Console.WriteLine (typeNames);
+            string typeNames = OuterGeneric<int>.InnerGeneric<long>.GetTypeNames();
+            Console.WriteLine(typeNames);
             return 0;
         }
     }

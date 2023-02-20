@@ -1,13 +1,14 @@
-
 using System;
 using System.Threading;
 
-public class Test {
+public class Test
+{
     static Object mon = new Object();
     static Object reply = new Object();
     static Object bogus = new Object();
-    
-    private void Thread_func() {
+
+    private void Thread_func()
+    {
         Console.WriteLine("thread: In a thread!");
 
         Thread.Sleep(10000);
@@ -27,12 +28,13 @@ public class Test {
         Console.WriteLine("thread: Pulsed reply");
         Monitor.Exit(reply);
     }
-    
-    public static int Main () {
-        Console.WriteLine ("main: Hello, World!");
+
+    public static int Main()
+    {
+        Console.WriteLine("main: Hello, World!");
 
         Test test = new Test();
-        Thread thr=new Thread(new ThreadStart(test.Thread_func));
+        Thread thr = new Thread(new ThreadStart(test.Thread_func));
         thr.Start();
 
         Monitor.Enter(mon);
@@ -76,8 +78,7 @@ public class Test {
 
         Monitor.Exit(bogus);
         Console.WriteLine("main: Exit bogus");
-        
+
         return 0;
     }
 }
-

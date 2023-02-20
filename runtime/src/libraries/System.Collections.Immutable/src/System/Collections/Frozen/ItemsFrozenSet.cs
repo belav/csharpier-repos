@@ -9,12 +9,14 @@ namespace System.Collections.Frozen
 {
     /// <summary>Provides a base class for frozen sets that store their values in a dedicated array.</summary>
     internal abstract class ItemsFrozenSet<T, TThisWrapper> : FrozenSetInternalBase<T, TThisWrapper>
-        where TThisWrapper : struct, FrozenSetInternalBase<T, TThisWrapper>.IGenericSpecializedWrapper
+        where TThisWrapper : struct,
+            FrozenSetInternalBase<T, TThisWrapper>.IGenericSpecializedWrapper
     {
         private protected readonly FrozenHashTable _hashTable;
         private protected readonly T[] _items;
 
-        protected ItemsFrozenSet(HashSet<T> source, IEqualityComparer<T> comparer) : base(comparer)
+        protected ItemsFrozenSet(HashSet<T> source, IEqualityComparer<T> comparer)
+            : base(comparer)
         {
             Debug.Assert(source.Count != 0);
 
@@ -26,7 +28,8 @@ namespace System.Collections.Frozen
             _hashTable = FrozenHashTable.Create(
                 entries,
                 o => o is null ? 0 : comparer.GetHashCode(o),
-                (index, item) => _items[index] = item);
+                (index, item) => _items[index] = item
+            );
         }
 
         /// <inheritdoc />

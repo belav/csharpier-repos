@@ -4,26 +4,22 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.Libraries
 {
     [SetupCompileAsLibrary]
-    [SetupLinkerArgument ("-a", "test.dll")]
+    [SetupLinkerArgument("-a", "test.dll")]
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     public class DefaultLibraryLinkBehavior
     {
         // Kept because by default libraries their action set to copy
         [Kept]
-        public static void Main ()
+        public static void Main()
         {
             // Main is needed for the test collector to find and treat as a test
         }
 
         [Kept]
-        public void UnusedPublicMethod ()
-        {
-        }
+        public void UnusedPublicMethod() { }
 
         [Kept]
-        private void UnusedPrivateMethod ()
-        {
-        }
+        private void UnusedPrivateMethod() { }
     }
 }

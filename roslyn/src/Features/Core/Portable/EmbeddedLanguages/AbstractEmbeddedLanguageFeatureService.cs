@@ -34,7 +34,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
         /// classifiers to be available.  The first service though that returns results for a string will 'win' and no
         /// other services will contribute.
         /// </summary>
-        private readonly ImmutableDictionary<string, ImmutableArray<Lazy<TService, EmbeddedLanguageMetadata>>> _identifierToServices;
+        private readonly ImmutableDictionary<
+            string,
+            ImmutableArray<Lazy<TService, EmbeddedLanguageMetadata>>
+        > _identifierToServices;
 
         /// <summary>
         /// Information about the embedded language.
@@ -50,15 +53,24 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             string languageName,
             EmbeddedLanguageInfo info,
             ISyntaxKinds syntaxKinds,
-            IEnumerable<Lazy<TService, EmbeddedLanguageMetadata>> allServices)
+            IEnumerable<Lazy<TService, EmbeddedLanguageMetadata>> allServices
+        )
         {
             // Order the classifiers to respect the [Order] annotations.
-            var orderedClassifiers = ExtensionOrderer.Order(allServices).Where(c => c.Metadata.Languages.Contains(languageName)).ToImmutableArray();
+            var orderedClassifiers = ExtensionOrderer
+                .Order(allServices)
+                .Where(c => c.Metadata.Languages.Contains(languageName))
+                .ToImmutableArray();
 
             // Grab out the services that handle unannotated literals and APIs.
-            _legacyServices = orderedClassifiers.WhereAsArray(c => c.Metadata.SupportsUnannotatedAPIs);
+            _legacyServices = orderedClassifiers.WhereAsArray(
+                c => c.Metadata.SupportsUnannotatedAPIs
+            );
 
-            using var _ = PooledDictionary<string, ArrayBuilder<Lazy<TService, EmbeddedLanguageMetadata>>>.GetInstance(out var map);
+            using var _ = PooledDictionary<
+                string,
+                ArrayBuilder<Lazy<TService, EmbeddedLanguageMetadata>>
+            >.GetInstance(out var map);
 
             foreach (var classifier in orderedClassifiers)
             {
@@ -70,10 +82,16 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
                 services.RemoveDuplicates();
 
             this._identifierToServices = map.ToImmutableDictionary(
-                kvp => kvp.Key, kvp => kvp.Value.ToImmutableAndFree(), StringComparer.OrdinalIgnoreCase);
+                kvp => kvp.Key,
+                kvp => kvp.Value.ToImmutableAndFree(),
+                StringComparer.OrdinalIgnoreCase
+            );
 
             Info = info;
-            _detector = new EmbeddedLanguageDetector(info, _identifierToServices.Keys.ToImmutableArray());
+            _detector = new EmbeddedLanguageDetector(
+                info,
+                _identifierToServices.Keys.ToImmutableArray()
+            );
 
             SyntaxTokenKinds.Add(syntaxKinds.CharacterLiteralToken);
             SyntaxTokenKinds.Add(syntaxKinds.StringLiteralToken);
@@ -89,12 +107,20 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
         protected ImmutableArray<Lazy<TService, EmbeddedLanguageMetadata>> GetServices(
             SemanticModel semanticModel,
             SyntaxToken token,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // First, see if this is a string annotated with either a comment or [StringSyntax] attribute. If
             // so, delegate to the first classifier we have registered for whatever language ID we find.
-            if (this._detector.IsEmbeddedLanguageToken(token, semanticModel, cancellationToken, out var identifier, out _) &&
-                _identifierToServices.TryGetValue(identifier, out var services))
+            if (
+                this._detector.IsEmbeddedLanguageToken(
+                    token,
+                    semanticModel,
+                    cancellationToken,
+                    out var identifier,
+                    out _
+                ) && _identifierToServices.TryGetValue(identifier, out var services)
+            )
             {
                 Contract.ThrowIfTrue(services.IsDefaultOrEmpty);
                 return services;

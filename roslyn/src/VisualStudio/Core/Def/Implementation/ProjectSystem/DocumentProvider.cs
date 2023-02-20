@@ -27,14 +27,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             Func<uint, IReadOnlyList<string>> getFolderNames,
             EventHandler updatedOnDiskHandler = null,
             EventHandler<bool> openedHandler = null,
-            EventHandler<bool> closingHandler = null)
+            EventHandler<bool> closingHandler = null
+        )
         {
-            return new ShimDocument(hostProject, DocumentId.CreateNewId(hostProject.Id), filePath, sourceCodeKind);
+            return new ShimDocument(
+                hostProject,
+                DocumentId.CreateNewId(hostProject.Id),
+                filePath,
+                sourceCodeKind
+            );
         }
 
         internal class ShimDocument : IVisualStudioHostDocument
         {
-            public ShimDocument(AbstractProject hostProject, DocumentId id, string filePath, SourceCodeKind sourceCodeKind = SourceCodeKind.Regular)
+            public ShimDocument(
+                AbstractProject hostProject,
+                DocumentId id,
+                string filePath,
+                SourceCodeKind sourceCodeKind = SourceCodeKind.Regular
+            )
             {
                 Project = hostProject;
                 Id = id ?? DocumentId.CreateNewId(hostProject.Id, filePath);

@@ -4,21 +4,17 @@ public class ZipEntry
 {
     DateTime cal = DateTime.Now;
 
-    public ZipEntry(string name)
+    public ZipEntry(string name) { }
+
+    public ZipEntry(ZipEntry e) { }
+
+    public DateTime DateTime
     {
+        get { return cal; }
     }
 
-    public ZipEntry(ZipEntry e)
+    public static int Main()
     {
-    }
-
-    public DateTime DateTime {
-        get {
-            return cal;
-        }
-    }
-
-    public static int Main () {
         // Compilation only test.
         return 0;
     }

@@ -15,11 +15,24 @@ namespace GHTTests
             // TODO: Add constructor logic here
             //
         }
+
         public static Array DSArray()
         {
-            return new string[] { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" } ;
+            return new string[]
+            {
+                "one",
+                "two",
+                "three",
+                "four",
+                "five",
+                "six",
+                "seven",
+                "eight",
+                "nine",
+                "ten"
+            };
         }
-        
+
         public static ArrayList DSArrayHash()
         {
             ArrayList list1 = new ArrayList();
@@ -30,12 +43,15 @@ namespace GHTTests
                 Hashtable hashtable1 = new Hashtable();
                 hashtable1.Add("number", enumerator1.Current.ToString());
                 hashtable1.Add("number_up", enumerator1.Current.ToString().ToUpper());
-                hashtable1.Add("number_number", enumerator1.Current.ToString() + "_" + enumerator1.Current.ToString());
+                hashtable1.Add(
+                    "number_number",
+                    enumerator1.Current.ToString() + "_" + enumerator1.Current.ToString()
+                );
                 list1.Add(hashtable1);
             }
             return list1;
         }
-        
+
         public static ArrayList DSArrayList()
         {
             ArrayList list1 = new ArrayList();
@@ -56,14 +72,17 @@ namespace GHTTests
         {
             return DSDataTable(0, 1);
         }
+
         public static DataTable DSDataTable(int startPage, int pages)
         {
             return DSDataTable(startPage, pages, "");
         }
+
         public static DataTable DSDataTable(int startPage, int pages, string text)
         {
             return DSDataTable(startPage, pages, text, true);
         }
+
         public static DataTable DSDataTable(int startPage, int pages, string text, bool numPages)
         {
             DataTable table2 = new DataTable("Customers");
@@ -73,7 +92,7 @@ namespace GHTTests
             column1.AutoIncrementSeed = 1;
             column1.AutoIncrementStep = 1;
             column1.Unique = true;
-            DataColumn[] columnArray1 = new DataColumn[] { column1 } ;
+            DataColumn[] columnArray1 = new DataColumn[] { column1 };
             table2.PrimaryKey = columnArray1;
             column1 = table2.Columns.Add("Name", typeof(string));
             column1.MaxLength = 100;
@@ -83,7 +102,7 @@ namespace GHTTests
             column1.DefaultValue = "nonexistent";
             ArrayList list1 = DSArrayList();
             IEnumerator enumerator1 = list1.GetEnumerator();
-            for (int i = startPage; i < startPage+pages; i++)
+            for (int i = startPage; i < startPage + pages; i++)
             {
                 enumerator1.Reset();
                 while (enumerator1.MoveNext())
@@ -114,7 +133,7 @@ namespace GHTTests
             column1.AutoIncrementSeed = 1;
             column1.AutoIncrementStep = 1;
             column1.Unique = true;
-            DataColumn[] columnArray1 = new DataColumn[] { column1 } ;
+            DataColumn[] columnArray1 = new DataColumn[] { column1 };
             table1.PrimaryKey = columnArray1;
             column1 = table1.Columns.Add("Name", typeof(string));
             column1.MaxLength = 14;
@@ -149,13 +168,10 @@ namespace GHTTests
                 row2["Total"] = num1 * num1;
                 table2.Rows.Add(row2);
                 num1++;
-            }
-            while (num1 <= 10);
-            columnArray1 = new DataColumn[] { column1 } ;
+            } while (num1 <= 10);
+            columnArray1 = new DataColumn[] { column1 };
             table2.PrimaryKey = columnArray1;
             return set1;
         }
-
-
     }
 }

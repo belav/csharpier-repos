@@ -3,14 +3,15 @@
 
 using System;
 
-public delegate void EventHandler (int i, int j);
+public delegate void EventHandler(int i, int j);
 
-public class Button {
-
+public class Button
+{
     public event EventHandler Click;
 
-    public void Connect<T> () where T : class
+    public void Connect<T>()
+        where T : class
     {
-        Click += default (T);
+        Click += default(T);
     }
 }

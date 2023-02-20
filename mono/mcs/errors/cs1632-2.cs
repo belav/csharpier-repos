@@ -5,10 +5,12 @@ using System;
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        while (true) {
-            Action a = () => {
+        while (true)
+        {
+            Action a = () =>
+            {
                 break;
             };
         }

@@ -1,6 +1,6 @@
 class Base
 {
-    public virtual (int, long rest) Foo ()
+    public virtual (int, long rest) Foo()
     {
         return (1, 2);
     }
@@ -8,12 +8,10 @@ class Base
 
 class Test : Base
 {
-    public override (int, long rest) Foo ()
+    public override (int, long rest) Foo()
     {
         return (3, 4);
     }
 
-    public static void Main ()
-    {    
-    }
+    public static void Main() { }
 }

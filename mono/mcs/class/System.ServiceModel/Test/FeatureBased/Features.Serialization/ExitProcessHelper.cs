@@ -10,8 +10,11 @@ using MonoTests.Features.Contracts;
 namespace MonoTests.Features.Serialization
 {
     [TestFixture]
-    public class ExitProcessHelper : TestFixtureBase<Proxy.MonoTests.Features.Client.ExitProcessHelperClient, ExitProcessHelperServer, MonoTests.Features.Contracts.IExitProcessHelper>
-    {
-    }
+    public class ExitProcessHelper
+        : TestFixtureBase<
+            Proxy.MonoTests.Features.Client.ExitProcessHelperClient,
+            ExitProcessHelperServer,
+            MonoTests.Features.Contracts.IExitProcessHelper
+        > { }
 }
 #endif

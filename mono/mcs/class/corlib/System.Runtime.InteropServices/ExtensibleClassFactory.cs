@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,34 +36,36 @@ using System.Reflection;
 
 namespace System.Runtime.InteropServices
 {
-    [ComVisible (true)]
+    [ComVisible(true)]
     public sealed class ExtensibleClassFactory
     {
-        static readonly Hashtable hashtable = new Hashtable ();
+        static readonly Hashtable hashtable = new Hashtable();
 
-        private ExtensibleClassFactory ()
-        {
-        }
+        private ExtensibleClassFactory() { }
 
-        internal static ObjectCreationDelegate GetObjectCreationCallback (Type t)
+        internal static ObjectCreationDelegate GetObjectCreationCallback(Type t)
         {
             return hashtable[t] as ObjectCreationDelegate;
         }
 
-        public static void RegisterObjectCreationCallback (ObjectCreationDelegate callback) {
+        public static void RegisterObjectCreationCallback(ObjectCreationDelegate callback)
+        {
             int i = 1;
-            StackTrace trace = new StackTrace (false);
-            while (i < trace.FrameCount) {
-                StackFrame frame = trace.GetFrame (i);
-                MethodBase m = frame.GetMethod ();
-                if (m.MemberType == MemberTypes.Constructor && m.IsStatic) {
-                    hashtable.Add (m.DeclaringType, callback);
+            StackTrace trace = new StackTrace(false);
+            while (i < trace.FrameCount)
+            {
+                StackFrame frame = trace.GetFrame(i);
+                MethodBase m = frame.GetMethod();
+                if (m.MemberType == MemberTypes.Constructor && m.IsStatic)
+                {
+                    hashtable.Add(m.DeclaringType, callback);
                     return;
                 }
                 i++;
             }
-            throw new System.InvalidOperationException (
-                "RegisterObjectCreationCallback must be called from .cctor of class derived from ComImport type.");
+            throw new System.InvalidOperationException(
+                "RegisterObjectCreationCallback must be called from .cctor of class derived from ComImport type."
+            );
         }
     }
 }

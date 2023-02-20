@@ -16,16 +16,19 @@ internal class Test_lifetime1
             _iMember = 123;
             Test_lifetime1.aExists = true;
         }
+
         ~A()
         {
             Console.WriteLine("~A");
             Test_lifetime1.aExists = false;
         }
+
         public bool F()
         {
             Console.WriteLine("A.F(): iMember = {0}", _iMember);
             return true;
         }
+
         private volatile int _iMember;
     }
 
@@ -66,7 +69,6 @@ internal class Test_lifetime1
         return 100;
     }
 
-
     public static int f3()
     {
         A a = new A();
@@ -101,10 +103,10 @@ internal class Test_lifetime1
         return 100;
     }
 
-
     private static int Main()
     {
-        if (f1() != 100) return -1;
+        if (f1() != 100)
+            return -1;
         CleanGC();
 
         // Testcase 2
@@ -117,10 +119,11 @@ internal class Test_lifetime1
             return -1;
         }
 
-        if (f2() != 100) return -1;
+        if (f2() != 100)
+            return -1;
         CleanGC();
 
-        // here JIT should know object a is not live anymore        
+        // here JIT should know object a is not live anymore
         // Testcase 4
         Console.WriteLine();
         Console.WriteLine("Testcase 4");
@@ -130,10 +133,11 @@ internal class Test_lifetime1
             return -1;
         }
 
-        if (f3() != 100) return -1;
+        if (f3() != 100)
+            return -1;
         CleanGC();
 
-        // here JIT should know object a is not live anymore        
+        // here JIT should know object a is not live anymore
         // Testcase 7
         Console.WriteLine();
         Console.WriteLine("Testcase 7");
@@ -144,8 +148,6 @@ internal class Test_lifetime1
         }
 
         CleanGC();
-
-
 
         Console.WriteLine("Test SUCCESS");
         return 100;

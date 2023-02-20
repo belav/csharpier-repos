@@ -3,63 +3,61 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.UnreachableBody
 {
-    [SetupLinkerArgument ("--enable-opt", "unreachablebodies")]
+    [SetupLinkerArgument("--enable-opt", "unreachablebodies")]
     public class OverrideOfAbstractAndInterfaceMethodWhenInterfaceRemoved2
     {
-        public static void Main ()
+        public static void Main()
         {
-            Foo f = HelperToMarkFooAndRequireBase ();
-            f.Method ();
+            Foo f = HelperToMarkFooAndRequireBase();
+            f.Method();
             // Use IBar in another method so that IBar can be removed from Foo
-            HelperToMarkIBar ();
+            HelperToMarkIBar();
         }
 
         [Kept]
-        static Foo HelperToMarkFooAndRequireBase ()
+        static Foo HelperToMarkFooAndRequireBase()
         {
             return null;
         }
 
         [Kept]
-        static IBar GetAnIBar ()
+        static IBar GetAnIBar()
         {
             return null;
         }
 
         [Kept]
-        static void HelperToMarkIBar ()
+        static void HelperToMarkIBar()
         {
-            GetAnIBar ().Method ();
+            GetAnIBar().Method();
         }
 
         [Kept]
         abstract class Base
         {
             [Kept]
-            public abstract void Method ();
+            public abstract void Method();
         }
 
         [Kept]
-        [KeptBaseType (typeof (Base))]
+        [KeptBaseType(typeof(Base))]
         class Foo : Base, IBar
         {
             [Kept]
             [ExpectBodyModified]
-            public override void Method ()
+            public override void Method()
             {
-                UsedByOverride ();
+                UsedByOverride();
             }
 
-            void UsedByOverride ()
-            {
-            }
+            void UsedByOverride() { }
         }
 
         [Kept]
         interface IBar
         {
             [Kept]
-            void Method ();
+            void Method();
         }
     }
 }

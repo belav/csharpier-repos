@@ -9,7 +9,7 @@ namespace Mono.Linker.Steps
 {
     public class ProcessReferencesStep : BaseStep
     {
-        protected override void Process ()
+        protected override void Process()
         {
             // Walk over all -reference inputs and resolve any that may need to be rooted.
 
@@ -26,50 +26,62 @@ namespace Mono.Linker.Steps
 
             // Note that we don't do the same for assemblies which may be resolved from input directories - such
             // assemblies will only be rooted if something loads them.
-            foreach (var assemblyPath in GetInputAssemblyPaths ()) {
-                var assemblyName = Path.GetFileNameWithoutExtension (assemblyPath);
+            foreach (var assemblyPath in GetInputAssemblyPaths())
+            {
+                var assemblyName = Path.GetFileNameWithoutExtension(assemblyPath);
 
                 // If there's no way that this reference could have the copy/save action,
                 // we don't need to load it up-front.
-                if (!MaybeIsFullyPreservedAssembly (assemblyName))
+                if (!MaybeIsFullyPreservedAssembly(assemblyName))
                     continue;
 
                 // For the remaining references, we need to resolve them (which looks for IsTrimmable attribute)
                 // to determine the action.
-                var assembly = Context.TryResolve (assemblyName);
-                if (assembly == null) {
-                    Context.LogError (null, DiagnosticId.ReferenceAssemblyCouldNotBeLoaded, assemblyPath);
+                var assembly = Context.TryResolve(assemblyName);
+                if (assembly == null)
+                {
+                    Context.LogError(
+                        null,
+                        DiagnosticId.ReferenceAssemblyCouldNotBeLoaded,
+                        assemblyPath
+                    );
                     continue;
                 }
 
                 // If the assigned action (now taking into account the IsTrimmable attribute) requires us
                 // to root the assembly, do so.
-                if (IsFullyPreservedAction (Annotations.GetAction (assembly)))
-                    Annotations.Mark (assembly.MainModule, new DependencyInfo (DependencyKind.AssemblyAction, assembly), new MessageOrigin (assembly));
+                if (IsFullyPreservedAction(Annotations.GetAction(assembly)))
+                    Annotations.Mark(
+                        assembly.MainModule,
+                        new DependencyInfo(DependencyKind.AssemblyAction, assembly),
+                        new MessageOrigin(assembly)
+                    );
             }
         }
 
-        IEnumerable<string> GetInputAssemblyPaths ()
+        IEnumerable<string> GetInputAssemblyPaths()
         {
-            var assemblies = new HashSet<string> ();
-            foreach (var referencePath in Context.Resolver.GetReferencePaths ()) {
-                var assemblyName = Path.GetFileNameWithoutExtension (referencePath);
-                if (assemblies.Add (assemblyName))
+            var assemblies = new HashSet<string>();
+            foreach (var referencePath in Context.Resolver.GetReferencePaths())
+            {
+                var assemblyName = Path.GetFileNameWithoutExtension(referencePath);
+                if (assemblies.Add(assemblyName))
                     yield return referencePath;
             }
         }
 
-        public static bool IsFullyPreservedAction (AssemblyAction action)
+        public static bool IsFullyPreservedAction(AssemblyAction action)
         {
             return action == AssemblyAction.Copy || action == AssemblyAction.Save;
         }
 
-        bool MaybeIsFullyPreservedAssembly (string assemblyName)
+        bool MaybeIsFullyPreservedAssembly(string assemblyName)
         {
-            if (Context.Actions.TryGetValue (assemblyName, out AssemblyAction action))
-                return IsFullyPreservedAction (action);
+            if (Context.Actions.TryGetValue(assemblyName, out AssemblyAction action))
+                return IsFullyPreservedAction(action);
 
-            return IsFullyPreservedAction (Context.DefaultAction) || IsFullyPreservedAction (Context.TrimAction);
+            return IsFullyPreservedAction(Context.DefaultAction)
+                || IsFullyPreservedAction(Context.TrimAction);
         }
     }
 }

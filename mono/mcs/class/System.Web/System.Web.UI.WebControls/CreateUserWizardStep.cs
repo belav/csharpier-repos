@@ -33,44 +33,46 @@ using System.Text;
 
 namespace System.Web.UI.WebControls
 {
-    [Browsable (false)]
+    [Browsable(false)]
     public sealed class CreateUserWizardStep : TemplatedWizardStep
     {
-        public CreateUserWizardStep ()
+        public CreateUserWizardStep() { }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        public override bool AllowReturn
         {
+            get { return ViewState.GetBool("AllowReturn", false); }
+            set { ViewState["AllowReturn"] = value; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
-        public override bool AllowReturn {
-            get { return ViewState.GetBool ("AllowReturn", false); }
-            set { ViewState ["AllowReturn"] = value; }
-        }
-
-        [LocalizableAttribute (true)]
-        public override string Title {
-            get {
-                object o = ViewState ["TitleText"];
-                return (o == null) ? Locale.GetText ("Sign Up for Your New Account") : (string) o;
+        [LocalizableAttribute(true)]
+        public override string Title
+        {
+            get
+            {
+                object o = ViewState["TitleText"];
+                return (o == null) ? Locale.GetText("Sign Up for Your New Account") : (string)o;
             }
-            set {
+            set
+            {
                 if (value == null)
-                    ViewState.Remove ("TitleText");
+                    ViewState.Remove("TitleText");
                 else
-                    ViewState ["TitleText"] = value;
+                    ViewState["TitleText"] = value;
             }
         }
 
-        // MSDN: If you attempt to change the StepType property to any value other than the Auto value of the WizardStepType enumeration, an 
+        // MSDN: If you attempt to change the StepType property to any value other than the Auto value of the WizardStepType enumeration, an
         // InvalidOperationException will be thrown.
-        [Filterable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
-        [ThemeableAttribute (false)]
-        public override WizardStepType StepType {
+        [Filterable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        [ThemeableAttribute(false)]
+        public override WizardStepType StepType
+        {
             get { return WizardStepType.Auto; }
-            set { throw new InvalidOperationException (); }
+            set { throw new InvalidOperationException(); }
         }
     }
 }
-

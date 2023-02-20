@@ -8,22 +8,22 @@ namespace System.ServiceModel.Dispatcher
 {
     internal class PostReceiveRequestHandler : BaseRequestProcessorHandler
     {
-        protected override bool ProcessRequest (MessageProcessingContext mrc)
+        protected override bool ProcessRequest(MessageProcessingContext mrc)
         {
-            EnsureInstanceContextOpen (mrc.InstanceContext);
-            AfterReceiveRequest (mrc);
+            EnsureInstanceContextOpen(mrc.InstanceContext);
+            AfterReceiveRequest(mrc);
             return false;
         }
 
-        void AfterReceiveRequest (MessageProcessingContext mrc)
+        void AfterReceiveRequest(MessageProcessingContext mrc)
         {
-            mrc.EventsHandler.AfterReceiveRequest ();
+            mrc.EventsHandler.AfterReceiveRequest();
         }
 
-        void EnsureInstanceContextOpen (InstanceContext ictx)
+        void EnsureInstanceContextOpen(InstanceContext ictx)
         {
             if (ictx.State != CommunicationState.Opened)
-                ictx.Open ();
+                ictx.Open();
         }
     }
 }

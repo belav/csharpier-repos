@@ -5,14 +5,12 @@ namespace Testing
 {
     public class Test
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         /// <summary>
         /// comment for unary operator
         /// </summary>
-        public static bool operator ! (Test t)
+        public static bool operator !(Test t)
         {
             return false;
         }
@@ -20,10 +18,9 @@ namespace Testing
         /// <summary>
         /// comment for binary operator
         /// </summary>
-        public static int operator + (Test t, int b)
+        public static int operator +(Test t, int b)
         {
             return b;
         }
     }
 }
-

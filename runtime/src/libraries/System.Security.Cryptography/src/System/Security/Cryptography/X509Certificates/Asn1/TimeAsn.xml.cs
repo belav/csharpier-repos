@@ -22,7 +22,9 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             {
                 if (usedTags.TryGetValue(tag, out string? existing))
                 {
-                    throw new InvalidOperationException($"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'");
+                    throw new InvalidOperationException(
+                        $"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'"
+                    );
                 }
 
                 usedTags.Add(tag, fieldName);
@@ -106,7 +108,6 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                 {
                     throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                 }
-
             }
             else
             {

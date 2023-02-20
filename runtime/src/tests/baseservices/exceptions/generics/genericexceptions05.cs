@@ -4,9 +4,7 @@ using System;
 using System.Globalization;
 using System.IO;
 
-class MyException : Exception
-{
-}
+class MyException : Exception { }
 
 public class Help
 {
@@ -15,11 +13,12 @@ public class Help
 
     public static Object s_object = new object();
 }
+
 public class A<T>
-where T: Exception
+    where T : Exception
 {
     public static void GenericFunctionWithFewArgs<X>()
-    where X: Exception
+        where X : Exception
     {
         try
         {
@@ -41,6 +40,7 @@ where T: Exception
         }
     }
 }
+
 public class GenericExceptions
 {
     public static void GenericFunctionWithFewArgs()
@@ -53,7 +53,10 @@ public class GenericExceptions
         Help.s_exceptionToThrow = new Exception();
         A<DivideByZeroException>.GenericFunctionWithFewArgs<MyException>();
     }
-    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     public static int Main()
     {
         try

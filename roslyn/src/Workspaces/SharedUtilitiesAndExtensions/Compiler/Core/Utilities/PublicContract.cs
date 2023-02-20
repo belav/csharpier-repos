@@ -20,11 +20,15 @@ namespace Microsoft.CodeAnalysis
     {
         // Guidance on inlining:
         // Inline implementation of condition checking but don't inline the code that is only executed on failure.
-        // This approach makes the common path efficient (both execution time and code size) 
+        // This approach makes the common path efficient (both execution time and code size)
         // while keeping the rarely executed code in a separate method.
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IEnumerable<T> RequireNonNullItems<T>([NotNull] IEnumerable<T>? sequence, string argumentName) where T : class
+        internal static IEnumerable<T> RequireNonNullItems<T>(
+            [NotNull] IEnumerable<T>? sequence,
+            string argumentName
+        )
+            where T : class
         {
             if (sequence == null)
             {
@@ -40,7 +44,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void RequireUniqueNonNullItems<T>([NotNull] IEnumerable<T>? sequence, string argumentName) where T : class
+        internal static void RequireUniqueNonNullItems<T>(
+            [NotNull] IEnumerable<T>? sequence,
+            string argumentName
+        )
+            where T : class
         {
             if (sequence == null)
             {
@@ -57,7 +65,11 @@ namespace Microsoft.CodeAnalysis
         /// Use to validate public API input for properties that are exposed as <see cref="IReadOnlyList{T}"/>.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IReadOnlyList<T> ToBoxedImmutableArrayWithNonNullItems<T>(IEnumerable<T>? sequence, string argumentName) where T : class
+        internal static IReadOnlyList<T> ToBoxedImmutableArrayWithNonNullItems<T>(
+            IEnumerable<T>? sequence,
+            string argumentName
+        )
+            where T : class
         {
             var list = sequence.ToBoxedImmutableArray();
 
@@ -70,11 +82,15 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Use to validate public API input for properties that are exposed as <see cref="IReadOnlyList{T}"/> and 
+        /// Use to validate public API input for properties that are exposed as <see cref="IReadOnlyList{T}"/> and
         /// whose items should be unique.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IReadOnlyList<T> ToBoxedImmutableArrayWithDistinctNonNullItems<T>(IEnumerable<T>? sequence, string argumentName) where T : class
+        internal static IReadOnlyList<T> ToBoxedImmutableArrayWithDistinctNonNullItems<T>(
+            IEnumerable<T>? sequence,
+            string argumentName
+        )
+            where T : class
         {
             var list = sequence.ToBoxedImmutableArray();
 
@@ -86,10 +102,14 @@ namespace Microsoft.CodeAnalysis
             return list;
         }
 
-        private static int IndexOfNullOrDuplicateItem<T>(this IEnumerable<T> sequence) where T : class
-            => (sequence is IReadOnlyList<T> list) ? IndexOfNullOrDuplicateItem(list) : EnumeratingIndexOfNullOrDuplicateItem(sequence);
+        private static int IndexOfNullOrDuplicateItem<T>(this IEnumerable<T> sequence)
+            where T : class =>
+            (sequence is IReadOnlyList<T> list)
+                ? IndexOfNullOrDuplicateItem(list)
+                : EnumeratingIndexOfNullOrDuplicateItem(sequence);
 
-        private static int EnumeratingIndexOfNullOrDuplicateItem<T>(IEnumerable<T> sequence) where T : class
+        private static int EnumeratingIndexOfNullOrDuplicateItem<T>(IEnumerable<T> sequence)
+            where T : class
         {
             using var _ = PooledHashSet<T>.GetInstance(out var set);
 
@@ -107,7 +127,8 @@ namespace Microsoft.CodeAnalysis
             return -1;
         }
 
-        private static int IndexOfNullOrDuplicateItem<T>(this IReadOnlyList<T> list) where T : class
+        private static int IndexOfNullOrDuplicateItem<T>(this IReadOnlyList<T> list)
+            where T : class
         {
             var length = list.Count;
 
@@ -135,12 +156,16 @@ namespace Microsoft.CodeAnalysis
             return -1;
         }
 
-        private static string MakeIndexedArgumentName(string argumentName, int index)
-            => $"{argumentName}[{index}]";
+        private static string MakeIndexedArgumentName(string argumentName, int index) =>
+            $"{argumentName}[{index}]";
 
         [DoesNotReturn]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void ThrowArgumentItemNullOrDuplicateException<T>(IEnumerable<T> sequence, string argumentName) where T : class
+        private static void ThrowArgumentItemNullOrDuplicateException<T>(
+            IEnumerable<T> sequence,
+            string argumentName
+        )
+            where T : class
         {
             var list = sequence.ToList();
             var index = list.IndexOfNullOrDuplicateItem();
@@ -148,13 +173,22 @@ namespace Microsoft.CodeAnalysis
             argumentName = MakeIndexedArgumentName(argumentName, index);
 
             throw (list[index] is null)
-                 ? new ArgumentNullException(argumentName)
-                 : new ArgumentException(CompilerExtensionsResources.Specified_sequence_has_duplicate_items, argumentName);
+                ? new ArgumentNullException(argumentName)
+                : new ArgumentException(
+                    CompilerExtensionsResources.Specified_sequence_has_duplicate_items,
+                    argumentName
+                );
         }
 
         [DoesNotReturn]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void ThrowArgumentItemNullException<T>(IEnumerable<T> sequence, string argumentName) where T : class
-            => throw new ArgumentNullException(MakeIndexedArgumentName(argumentName, sequence.IndexOf(null!)));
+        private static void ThrowArgumentItemNullException<T>(
+            IEnumerable<T> sequence,
+            string argumentName
+        )
+            where T : class =>
+            throw new ArgumentNullException(
+                MakeIndexedArgumentName(argumentName, sequence.IndexOf(null!))
+            );
     }
 }

@@ -26,12 +26,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System.Collections;
 
-    internal interface IAnnotationProvider {
-
+    internal interface IAnnotationProvider
+    {
         IDictionary Annotations { get; }
     }
 }

@@ -9,13 +9,15 @@ using Microsoft.AspNetCore.Mvc;
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {
     [ApiController]
-    public class DiagnosticsAreReturned_ForActionResultOfTReturningMethodWithoutAnyAttributes : ControllerBase
+    public class DiagnosticsAreReturned_ForActionResultOfTReturningMethodWithoutAnyAttributes
+        : ControllerBase
     {
         public ActionResult<string> Method(Guid? id)
         {
             if (id == null)
             {
-                return /*MM*/NotFound();
+                return /*MM*/
+                NotFound();
             }
 
             return "Hello world";

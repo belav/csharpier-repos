@@ -9,7 +9,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
 internal static class QPackHeaderWriter
 {
-    public static bool BeginEncodeHeaders(Http3HeadersEnumerator enumerator, Span<byte> buffer, ref int totalHeaderSize, out int length)
+    public static bool BeginEncodeHeaders(
+        Http3HeadersEnumerator enumerator,
+        Span<byte> buffer,
+        ref int totalHeaderSize,
+        out int length
+    )
     {
         bool hasValue = enumerator.MoveNext();
         Debug.Assert(hasValue == true);
@@ -24,7 +29,13 @@ internal static class QPackHeaderWriter
         return doneEncode;
     }
 
-    public static bool BeginEncodeHeaders(int statusCode, Http3HeadersEnumerator headersEnumerator, Span<byte> buffer, ref int totalHeaderSize, out int length)
+    public static bool BeginEncodeHeaders(
+        int statusCode,
+        Http3HeadersEnumerator headersEnumerator,
+        Span<byte> buffer,
+        ref int totalHeaderSize,
+        out int length
+    )
     {
         length = 0;
 
@@ -41,18 +52,41 @@ internal static class QPackHeaderWriter
             return true;
         }
 
-        bool done = Encode(headersEnumerator, buffer.Slice(statusCodeLength + 2), throwIfNoneEncoded: false, ref totalHeaderSize, out int headersLength);
+        bool done = Encode(
+            headersEnumerator,
+            buffer.Slice(statusCodeLength + 2),
+            throwIfNoneEncoded: false,
+            ref totalHeaderSize,
+            out int headersLength
+        );
         length += headersLength;
 
         return done;
     }
 
-    public static bool Encode(Http3HeadersEnumerator headersEnumerator, Span<byte> buffer, ref int totalHeaderSize, out int length)
+    public static bool Encode(
+        Http3HeadersEnumerator headersEnumerator,
+        Span<byte> buffer,
+        ref int totalHeaderSize,
+        out int length
+    )
     {
-        return Encode(headersEnumerator, buffer, throwIfNoneEncoded: true, ref totalHeaderSize, out length);
+        return Encode(
+            headersEnumerator,
+            buffer,
+            throwIfNoneEncoded: true,
+            ref totalHeaderSize,
+            out length
+        );
     }
 
-    private static bool Encode(Http3HeadersEnumerator headersEnumerator, Span<byte> buffer, bool throwIfNoneEncoded, ref int totalHeaderSize, out int length)
+    private static bool Encode(
+        Http3HeadersEnumerator headersEnumerator,
+        Span<byte> buffer,
+        bool throwIfNoneEncoded,
+        ref int totalHeaderSize,
+        out int length
+    )
     {
         length = 0;
 
@@ -69,25 +103,48 @@ internal static class QPackHeaderWriter
             int headerLength;
             if (matchedValue)
             {
-                if (!QPackEncoder.EncodeStaticIndexedHeaderField(staticTableId, buffer.Slice(length), out headerLength))
+                if (
+                    !QPackEncoder.EncodeStaticIndexedHeaderField(
+                        staticTableId,
+                        buffer.Slice(length),
+                        out headerLength
+                    )
+                )
                 {
                     if (length == 0 && throwIfNoneEncoded)
                     {
-                        throw new QPackEncodingException("TODO sync with corefx" /* CoreStrings.HPackErrorNotEnoughBuffer */);
+                        throw new QPackEncodingException(
+                            "TODO sync with corefx" /* CoreStrings.HPackErrorNotEnoughBuffer */
+                        );
                     }
                     return false;
                 }
             }
             else
             {
-                var valueEncoding = ReferenceEquals(headersEnumerator.EncodingSelector, KestrelServerOptions.DefaultHeaderEncodingSelector)
-                    ? null : headersEnumerator.EncodingSelector(name);
+                var valueEncoding = ReferenceEquals(
+                    headersEnumerator.EncodingSelector,
+                    KestrelServerOptions.DefaultHeaderEncodingSelector
+                )
+                    ? null
+                    : headersEnumerator.EncodingSelector(name);
 
-                if (!EncodeHeader(buffer.Slice(length), staticTableId, name, value, valueEncoding, out headerLength))
+                if (
+                    !EncodeHeader(
+                        buffer.Slice(length),
+                        staticTableId,
+                        name,
+                        value,
+                        valueEncoding,
+                        out headerLength
+                    )
+                )
                 {
                     if (length == 0 && throwIfNoneEncoded)
                     {
-                        throw new QPackEncodingException("TODO sync with corefx" /* CoreStrings.HPackErrorNotEnoughBuffer */);
+                        throw new QPackEncodingException(
+                            "TODO sync with corefx" /* CoreStrings.HPackErrorNotEnoughBuffer */
+                        );
                     }
                     return false;
                 }
@@ -101,11 +158,30 @@ internal static class QPackHeaderWriter
         return true;
     }
 
-    private static bool EncodeHeader(Span<byte> buffer, int staticTableId, string name, string value, Encoding? valueEncoding, out int headerLength)
+    private static bool EncodeHeader(
+        Span<byte> buffer,
+        int staticTableId,
+        string name,
+        string value,
+        Encoding? valueEncoding,
+        out int headerLength
+    )
     {
         return staticTableId == -1
-            ? QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReference(name, value, valueEncoding, buffer, out headerLength)
-            : QPackEncoder.EncodeLiteralHeaderFieldWithStaticNameReference(staticTableId, value, valueEncoding, buffer, out headerLength);
+            ? QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReference(
+                name,
+                value,
+                valueEncoding,
+                buffer,
+                out headerLength
+            )
+            : QPackEncoder.EncodeLiteralHeaderFieldWithStaticNameReference(
+                staticTableId,
+                value,
+                valueEncoding,
+                buffer,
+                out headerLength
+            );
     }
 
     private static int EncodeStatusCode(int statusCode, Span<byte> buffer)
@@ -122,7 +198,9 @@ internal static class QPackHeaderWriter
             buffer[0] = 0b01011111;
             buffer[1] = 0b00110000;
 
-            ReadOnlySpan<byte> statusBytes = System.Net.Http.HPack.StatusCodes.ToStatusBytes(statusCode);
+            ReadOnlySpan<byte> statusBytes = System.Net.Http.HPack.StatusCodes.ToStatusBytes(
+                statusCode
+            );
             buffer[2] = (byte)statusBytes.Length;
             statusBytes.CopyTo(buffer.Slice(3));
 

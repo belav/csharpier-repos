@@ -19,32 +19,32 @@ namespace MonoTests.System.Net.Mail
     {
         AttachmentCollection ac;
         Attachment a;
-        
+
         [SetUp]
-        public void GetReady ()
+        public void GetReady()
         {
-            ac = new MailMessage ("foo@bar.com", "foo@bar.com").Attachments;
-            a = Attachment.CreateAttachmentFromString ("test", new ContentType ("text/plain"));
+            ac = new MailMessage("foo@bar.com", "foo@bar.com").Attachments;
+            a = Attachment.CreateAttachmentFromString("test", new ContentType("text/plain"));
         }
 
         [Test]
-        public void InitialCount ()
+        public void InitialCount()
         {
-            Assert.IsTrue (ac.Count == 0);
+            Assert.IsTrue(ac.Count == 0);
         }
 
         [Test]
-        public void AddCount ()
+        public void AddCount()
         {
-            ac.Add (a);
-            Assert.IsTrue (ac.Count == 1);
+            ac.Add(a);
+            Assert.IsTrue(ac.Count == 1);
         }
 
         [Test]
-        public void RemoveCount ()
+        public void RemoveCount()
         {
-            ac.Remove (a);
-            Assert.IsTrue (ac.Count == 0);
+            ac.Remove(a);
+            Assert.IsTrue(ac.Count == 0);
         }
     }
 }

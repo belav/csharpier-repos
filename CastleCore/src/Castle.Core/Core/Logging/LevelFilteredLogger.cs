@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,9 +33,7 @@ namespace Castle.Core.Logging
         /// <summary>
         ///   Creates a new <c>LevelFilteredLogger</c>.
         /// </summary>
-        protected LevelFilteredLogger()
-        {
-        }
+        protected LevelFilteredLogger() { }
 
         protected LevelFilteredLogger(string name)
         {
@@ -47,7 +45,8 @@ namespace Castle.Core.Logging
             level = loggerLevel;
         }
 
-        protected LevelFilteredLogger(string loggerName, LoggerLevel loggerLevel) : this(loggerLevel)
+        protected LevelFilteredLogger(string loggerName, LoggerLevel loggerLevel)
+            : this(loggerLevel)
         {
             ChangeName(loggerName);
         }
@@ -65,7 +64,7 @@ namespace Castle.Core.Logging
         }
 
         /// <value>
-        ///   The name that this logger will be using. 
+        ///   The name that this logger will be using.
         ///   Defaults to <c>string.Empty</c>
         /// </value>
         public string Name
@@ -123,7 +122,11 @@ namespace Castle.Core.Logging
         {
             if (IsTraceEnabled)
             {
-                Log(LoggerLevel.Trace, string.Format(CultureInfo.CurrentCulture, format, args), null);
+                Log(
+                    LoggerLevel.Trace,
+                    string.Format(CultureInfo.CurrentCulture, format, args),
+                    null
+                );
             }
         }
 
@@ -137,7 +140,11 @@ namespace Castle.Core.Logging
         {
             if (IsTraceEnabled)
             {
-                Log(LoggerLevel.Trace, string.Format(CultureInfo.CurrentCulture, format, args), exception);
+                Log(
+                    LoggerLevel.Trace,
+                    string.Format(CultureInfo.CurrentCulture, format, args),
+                    exception
+                );
             }
         }
 
@@ -162,7 +169,12 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">The format provider to use</param>
         /// <param name = "format">Format string for the message to log</param>
         /// <param name = "args">Format arguments for the message to log</param>
-        public void TraceFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void TraceFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (IsTraceEnabled)
             {
@@ -241,7 +253,11 @@ namespace Castle.Core.Logging
                 return;
             }
 
-            Log(LoggerLevel.Debug, string.Format(CultureInfo.CurrentCulture, format, args), exception);
+            Log(
+                LoggerLevel.Debug,
+                string.Format(CultureInfo.CurrentCulture, format, args),
+                exception
+            );
         }
 
         /// <summary>
@@ -267,7 +283,12 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">The format provider to use</param>
         /// <param name = "format">Format string for the message to log</param>
         /// <param name = "args">Format arguments for the message to log</param>
-        public void DebugFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void DebugFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (!IsDebugEnabled)
             {
@@ -348,7 +369,11 @@ namespace Castle.Core.Logging
                 return;
             }
 
-            Log(LoggerLevel.Info, string.Format(CultureInfo.CurrentCulture, format, args), exception);
+            Log(
+                LoggerLevel.Info,
+                string.Format(CultureInfo.CurrentCulture, format, args),
+                exception
+            );
         }
 
         /// <summary>
@@ -374,7 +399,12 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">The format provider to use</param>
         /// <param name = "format">Format string for the message to log</param>
         /// <param name = "args">Format arguments for the message to log</param>
-        public void InfoFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void InfoFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (!IsInfoEnabled)
             {
@@ -455,7 +485,11 @@ namespace Castle.Core.Logging
                 return;
             }
 
-            Log(LoggerLevel.Warn, string.Format(CultureInfo.CurrentCulture, format, args), exception);
+            Log(
+                LoggerLevel.Warn,
+                string.Format(CultureInfo.CurrentCulture, format, args),
+                exception
+            );
         }
 
         /// <summary>
@@ -481,7 +515,12 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">The format provider to use</param>
         /// <param name = "format">Format string for the message to log</param>
         /// <param name = "args">Format arguments for the message to log</param>
-        public void WarnFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void WarnFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (!IsWarnEnabled)
             {
@@ -562,7 +601,11 @@ namespace Castle.Core.Logging
                 return;
             }
 
-            Log(LoggerLevel.Error, string.Format(CultureInfo.CurrentCulture, format, args), exception);
+            Log(
+                LoggerLevel.Error,
+                string.Format(CultureInfo.CurrentCulture, format, args),
+                exception
+            );
         }
 
         /// <summary>
@@ -588,7 +631,12 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">The format provider to use</param>
         /// <param name = "format">Format string for the message to log</param>
         /// <param name = "args">Format arguments for the message to log</param>
-        public void ErrorFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void ErrorFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (!IsErrorEnabled)
             {
@@ -669,7 +717,11 @@ namespace Castle.Core.Logging
                 return;
             }
 
-            Log(LoggerLevel.Fatal, string.Format(CultureInfo.CurrentCulture, format, args), exception);
+            Log(
+                LoggerLevel.Fatal,
+                string.Format(CultureInfo.CurrentCulture, format, args),
+                exception
+            );
         }
 
         /// <summary>
@@ -695,7 +747,12 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">The format provider to use</param>
         /// <param name = "format">Format string for the message to log</param>
         /// <param name = "args">Format arguments for the message to log</param>
-        public void FatalFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void FatalFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (!IsFatalEnabled)
             {
@@ -767,7 +824,12 @@ namespace Castle.Core.Logging
         ///   Implementors output the log content by implementing this method only.
         ///   Note that exception can be null
         /// </summary>
-        protected abstract void Log(LoggerLevel loggerLevel, string loggerName, string message, Exception exception);
+        protected abstract void Log(
+            LoggerLevel loggerLevel,
+            string loggerName,
+            string message,
+            Exception exception
+        );
 
         protected void ChangeName(string newName)
         {

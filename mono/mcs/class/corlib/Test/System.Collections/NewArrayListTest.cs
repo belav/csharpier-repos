@@ -1,5 +1,5 @@
 // NewArrayListTest.cs
-// 
+//
 // Unit tests for System.Collections.ArrayList
 //
 // Copyright (c) 2003 Thong (Tum) Nguyen [tum@veridicus.com]
@@ -7,9 +7,9 @@
 // Released under the MIT License:
 //
 // http://www.opensource.org/licenses/mit-license.html
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this
-// software and associated documentation files (the "Software"), to deal in the 
+// software and associated documentation files (the "Software"), to deal in the
 // Software without restriction, including without limitation the rights to use, copy,
 // modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 // and to permit persons to whom the Software is furnished to do so, subject to the
@@ -27,15 +27,15 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 //
-// Author's comment: Source code formatting has been changed by request to match 
+// Author's comment: Source code formatting has been changed by request to match
 // Mono's formatting style.  I personally use BSD-style formatting.
-// 
+//
 
 using System;
 using System.Collections;
 using NUnit.Framework;
 
-namespace MonoTests.System.Collections 
+namespace MonoTests.System.Collections
 {
     /// <summary>
     /// Some test cases for the new ArrayList implementation.
@@ -43,47 +43,47 @@ namespace MonoTests.System.Collections
     [TestFixture]
     public class NewArrayListTest
     {
-        private object[] c_TestData = new Object[] {0,1,2,3,4,5,6,7,8,9};
+        private object[] c_TestData = new Object[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-        private void VerifyContains(IList list, IList values, string message) 
+        private void VerifyContains(IList list, IList values, string message)
         {
-            if (values.Count != list.Count) 
+            if (values.Count != list.Count)
             {
-                Assert.Fail (message);
+                Assert.Fail(message);
             }
 
-            for (int i = 0; i < list.Count; i++) 
+            for (int i = 0; i < list.Count; i++)
             {
-                if (list[i] == null && values[i] == null) 
+                if (list[i] == null && values[i] == null)
                 {
                     continue;
                 }
 
-                if ((list[i] == null || values[i] == null) || !list[i].Equals(values[i])) 
+                if ((list[i] == null || values[i] == null) || !list[i].Equals(values[i]))
                 {
-                    Assert.Fail (message);
+                    Assert.Fail(message);
                 }
             }
         }
 
-        private void PrivateTestSort(ArrayList arrayList) 
-        {    
+        private void PrivateTestSort(ArrayList arrayList)
+        {
             Random random = new Random(1027);
 
             // Sort arrays of lengths up to 200
 
-            for (int i = 1; i < 200; i++) 
+            for (int i = 1; i < 200; i++)
             {
-                for (int j = 0; j < i; j++) 
+                for (int j = 0; j < i; j++)
                 {
                     arrayList.Add(random.Next(0, 1000));
                 }
 
                 arrayList.Sort();
 
-                for (int j = 1; j < i; j++) 
+                for (int j = 1; j < i; j++)
                 {
-                    if ((int)arrayList[j] < (int)arrayList[j - 1]) 
+                    if ((int)arrayList[j] < (int)arrayList[j - 1])
                     {
                         Assert.Fail("ArrayList.Sort()");
 
@@ -96,223 +96,208 @@ namespace MonoTests.System.Collections
         }
 
         [Test]
-        public void TestSortStandard() 
+        public void TestSortStandard()
         {
             PrivateTestSort(new ArrayList());
         }
 
         [Test]
-        public void TestSortSynchronized() 
+        public void TestSortSynchronized()
         {
             PrivateTestSort(ArrayList.Synchronized(new ArrayList()));
         }
 
         [Test]
-        public void TestSortAdapter() 
+        public void TestSortAdapter()
         {
             PrivateTestSort(ArrayList.Adapter(new ArrayList()));
         }
 
         [Test]
-        public void TestSortGetRange() 
+        public void TestSortGetRange()
         {
             PrivateTestSort(new ArrayList().GetRange(0, 0));
         }
 
-        private void PrivateTestIndexOf(ArrayList arrayList) 
+        private void PrivateTestIndexOf(ArrayList arrayList)
         {
             int x;
-            
+
             arrayList.AddRange(c_TestData);
 
-            for (int i = 0; i < 10; i++) 
-            {            
+            for (int i = 0; i < 10; i++)
+            {
                 x = arrayList.IndexOf(i);
                 Assert.IsTrue(x == i, "ArrayList.IndexOf(" + i + ")");
             }
 
-            try 
+            try
             {
                 arrayList.IndexOf(0, 10, 1);
                 Assert.Fail("ArrayList.IndexOf(0, 10, 1)");
             }
-            catch (ArgumentOutOfRangeException) 
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
 
-            try 
+            try
             {
                 arrayList.IndexOf(0, 0, -1);
                 Assert.Fail("ArrayList.IndexOf(0, 10, 1)");
             }
-            catch (ArgumentOutOfRangeException) 
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
 
-            try 
+            try
             {
                 arrayList.IndexOf(0, -1, -1);
                 Assert.Fail("ArrayList.IndexOf(0, 10, 1)");
             }
-            catch (ArgumentOutOfRangeException) 
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
 
-            try 
+            try
             {
-                arrayList.IndexOf(0, 9, 10);                
+                arrayList.IndexOf(0, 9, 10);
                 Assert.Fail("ArrayList.IndexOf(0, 10, 1)");
             }
-            catch (ArgumentOutOfRangeException) 
-            {                
-            }
+            catch (ArgumentOutOfRangeException) { }
 
-            try 
+            try
             {
-                arrayList.IndexOf(0, 0, 10);                
+                arrayList.IndexOf(0, 0, 10);
             }
-            catch (ArgumentOutOfRangeException) 
+            catch (ArgumentOutOfRangeException)
             {
                 Assert.Fail("ArrayList.IndexOf(0, 10, 1)");
             }
 
-            try 
+            try
             {
                 arrayList.IndexOf(0, 0, 11);
                 Assert.Fail("ArrayList.IndexOf(0, 10, 1)");
             }
-            catch (ArgumentOutOfRangeException) 
-            {                
-            }
+            catch (ArgumentOutOfRangeException) { }
 
             // LastIndexOf
 
-            for (int i = 0; i < 10; i++) 
+            for (int i = 0; i < 10; i++)
             {
                 x = arrayList.LastIndexOf(i);
 
                 Assert.IsTrue(x == i, "ArrayList.LastIndexOf(" + i + ")");
-            }            
+            }
 
-            try 
+            try
             {
                 arrayList.IndexOf(0, 10, 1);
 
                 Assert.Fail("ArrayList.LastIndexOf(0, 10, 1)");
             }
-            catch (ArgumentOutOfRangeException) 
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
 
-            try 
+            try
             {
                 arrayList.IndexOf(0, 0, -1);
 
                 Assert.Fail("ArrayList.LastIndexOf(0, 10, 1)");
             }
-            catch (ArgumentOutOfRangeException) 
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
 
-            try 
+            try
             {
                 arrayList.LastIndexOf(0, -1, -1);
 
                 Assert.Fail("ArrayList.LastIndexOf(0, 10, 1)");
             }
-            catch (ArgumentOutOfRangeException) 
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
 
-            try 
+            try
             {
-                arrayList.LastIndexOf(0, 9, 10);                
+                arrayList.LastIndexOf(0, 9, 10);
             }
-            catch (ArgumentOutOfRangeException) 
+            catch (ArgumentOutOfRangeException)
             {
                 Assert.Fail("ArrayList.LastIndexOf(0, 10, 1)");
             }
 
-            try 
+            try
             {
                 arrayList.LastIndexOf(0, 0, 10);
                 Assert.Fail("ArrayList.LastIndexOf(0, 10, 1)");
             }
-            catch (ArgumentOutOfRangeException) 
-            {                
-            }
+            catch (ArgumentOutOfRangeException) { }
 
-            try 
+            try
             {
                 arrayList.LastIndexOf(0, 0, 11);
                 Assert.Fail("ArrayList.LastIndexOf(0, 10, 1)");
             }
-            catch (ArgumentOutOfRangeException) 
-            {                
-            }
+            catch (ArgumentOutOfRangeException) { }
         }
 
-        private void PrivateTestAddRange(ArrayList arrayList) 
+        private void PrivateTestAddRange(ArrayList arrayList)
         {
             arrayList.AddRange(c_TestData);
             arrayList.AddRange(c_TestData);
 
-            VerifyContains(arrayList, new object[] {0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9}, "VerifyContains");
+            VerifyContains(
+                arrayList,
+                new object[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                "VerifyContains"
+            );
         }
 
         [Test]
-        public void TestAddRangeStandard() 
+        public void TestAddRangeStandard()
         {
             PrivateTestAddRange(new ArrayList());
         }
 
         [Test]
-        public void TestAddRangeSynchronized() 
+        public void TestAddRangeSynchronized()
         {
             PrivateTestAddRange(ArrayList.Synchronized(new ArrayList()));
         }
 
         [Test]
-        public void TestAddRangeAdapter() 
+        public void TestAddRangeAdapter()
         {
             PrivateTestAddRange(ArrayList.Adapter(new ArrayList()));
         }
 
         [Test]
-        public void TestAddRangeGetRange() 
+        public void TestAddRangeGetRange()
         {
             PrivateTestAddRange(new ArrayList().GetRange(0, 0));
         }
-        
+
         [Test]
-        public void TestIndexOfStandard() 
+        public void TestIndexOfStandard()
         {
             PrivateTestIndexOf(new ArrayList());
         }
 
         [Test]
-        public void TestIndexOfSynchronized() 
+        public void TestIndexOfSynchronized()
         {
             PrivateTestIndexOf(ArrayList.Synchronized(new ArrayList()));
         }
 
         [Test]
-        public void TestIndexOfAdapter() 
+        public void TestIndexOfAdapter()
         {
             PrivateTestIndexOf(ArrayList.Adapter(new ArrayList()));
         }
 
         [Test]
-        public void TestIndexOfGetRange() 
+        public void TestIndexOfGetRange()
         {
             PrivateTestIndexOf(new ArrayList().GetRange(0, 0));
         }
 
         [Test]
-        public void TestReadOnly() 
+        public void TestReadOnly()
         {
-            ArrayList arrayList, readOnlyList;
-            
+            ArrayList arrayList,
+                readOnlyList;
+
             arrayList = new ArrayList();
             readOnlyList = ArrayList.ReadOnly(arrayList);
 
@@ -323,231 +308,208 @@ namespace MonoTests.System.Collections
             arrayList.Add(10);
             Assert.IsTrue(readOnlyList.Count == 11, "readOnlyList.Count == 11");
 
-            try 
+            try
             {
                 readOnlyList.Add(0);
                 Assert.Fail("readOnlyList.Add(0)");
             }
-            catch (NotSupportedException) 
-            {
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
                 readOnlyList.AddRange(c_TestData);
 
                 Assert.Fail("readOnlyList.AddRange(c_TestData)");
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException) { }
+
+            try
             {
+                readOnlyList.BinarySearch(1);
             }
-            
-            try 
-            {
-                readOnlyList.BinarySearch(1);                
-            }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("readOnlyList.BinarySearch(1)");
-            }            
+            }
 
-            try 
+            try
             {
                 int x = readOnlyList.Capacity;
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("readOnlyList.Capacity");
             }
 
-            try 
+            try
             {
                 readOnlyList.Clear();
                 Assert.Fail("readOnlyList.Clear()");
             }
-            catch (NotSupportedException) 
-            {                
-            }
-            
-            try 
+            catch (NotSupportedException) { }
+
+            try
             {
-                readOnlyList.Clone();                
+                readOnlyList.Clone();
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("readOnlyList.Clone()");
-            }            
+            }
 
-            try 
+            try
             {
                 readOnlyList.Contains(1);
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("readOnlyList.Contains");
             }
 
-            try 
+            try
             {
                 readOnlyList.CopyTo(new object[readOnlyList.Count]);
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("readOnlyList.CopyTo(new Array(readOnlyList.Count))");
             }
 
-            try 
+            try
             {
-                foreach (object o in readOnlyList) 
+                foreach (object o in readOnlyList)
                 {
                     o.ToString();
                 }
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("readOnlyList.GetEnumerator()");
             }
 
-            try 
+            try
             {
-                readOnlyList.GetRange(0, 1);                
+                readOnlyList.GetRange(0, 1);
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("readOnlyList.GetRange(0, 1)");
             }
 
-            try 
+            try
             {
-                readOnlyList.IndexOf(1);                
+                readOnlyList.IndexOf(1);
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("readOnlyList.readOnlyList.IndexOf(1)");
             }
 
-            try 
+            try
             {
                 readOnlyList[0] = 0;
                 Assert.Fail("readOnlyList[0] = 0");
             }
-            catch (NotSupportedException) 
-            {
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
                 readOnlyList.IndexOf(0);
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("readOnlyList.IndexOf(0)");
             }
 
-            try 
+            try
             {
-                readOnlyList.InsertRange(0, new object[] {1,2});
+                readOnlyList.InsertRange(0, new object[] { 1, 2 });
 
                 Assert.Fail("readOnlyList.InsertRange(0, new object[] {1,2})");
             }
-            catch (NotSupportedException) 
-            {
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
                 readOnlyList.LastIndexOf(1111);
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("readOnlyList.LastIndexOf(1)");
             }
 
-            try 
+            try
             {
                 readOnlyList.Remove(1);
 
                 Assert.Fail("readOnlyList.Remove(1)");
             }
-            catch (NotSupportedException) 
-            {
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
                 readOnlyList.RemoveAt(1);
 
                 Assert.Fail("readOnlyList.RemoveAt(1)");
             }
-            catch (NotSupportedException) 
-            {
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
                 readOnlyList.RemoveRange(0, 1);
 
                 Assert.Fail("readOnlyList.RemoveRange(0, 1)");
             }
-            catch (NotSupportedException) 
-            {
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
                 readOnlyList.Reverse();
 
                 Assert.Fail("readOnlyList.Reverse()");
             }
-            catch (NotSupportedException) 
-            {                
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
-                readOnlyList.SetRange(0, new Object[] {0, 1});
+                readOnlyList.SetRange(0, new Object[] { 0, 1 });
 
                 Assert.Fail("readOnlyList.SetRange(0, new Object[] {0, 1})");
             }
-            catch (NotSupportedException) 
-            {                
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
                 readOnlyList.Sort();
 
                 Assert.Fail("readOnlyList.Sort()");
             }
-            catch (NotSupportedException) 
-            {
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
-                readOnlyList.ToArray();                
+                readOnlyList.ToArray();
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("readOnlyList.ToArray()");
             }
 
-            try 
+            try
             {
                 readOnlyList.TrimToSize();
 
                 Assert.Fail("readOnlyList.TrimToSize()");
             }
-            catch (NotSupportedException) 
-            {
-            }            
+            catch (NotSupportedException) { }
         }
 
         [Test]
-        public void TestFixedSize() 
+        public void TestFixedSize()
         {
-            ArrayList arrayList, fixedSizeList;
-            
+            ArrayList arrayList,
+                fixedSizeList;
+
             arrayList = new ArrayList();
             fixedSizeList = ArrayList.FixedSize(arrayList);
 
@@ -558,176 +520,160 @@ namespace MonoTests.System.Collections
             arrayList.Add(10);
             Assert.IsTrue(fixedSizeList.Count == 11, "fixedSizeList.Count == 11");
 
-            try 
+            try
             {
                 fixedSizeList.Add(0);
                 Assert.Fail("fixedSizeList.Add(0)");
             }
-            catch (NotSupportedException) 
-            {
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
                 fixedSizeList.Remove(0);
                 Assert.Fail("fixedSizeList.Remove(0)");
             }
-            catch (NotSupportedException) 
-            {                
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
                 fixedSizeList.RemoveAt(0);
                 Assert.Fail("fixedSizeList.RemoveAt(0)");
             }
-            catch (NotSupportedException) 
-            {
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
                 fixedSizeList.Clear();
                 Assert.Fail("fixedSizeList.Clear()");
             }
-            catch (NotSupportedException) 
-            {                
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
-                fixedSizeList[0] = 0;                
+                fixedSizeList[0] = 0;
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("fixedSizeList[0] = 0");
             }
 
-            try 
+            try
             {
                 fixedSizeList.Clear();
                 Assert.Fail("fixedSizeList.Clear()");
             }
-            catch (NotSupportedException) 
-            {
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
                 fixedSizeList.Contains(1);
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("fixedSizeList.Contains");
             }
 
-            try 
+            try
             {
                 int x = fixedSizeList.Count;
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("fixedSizeList.Count");
             }
 
-            try 
+            try
             {
                 fixedSizeList.GetRange(0, 1);
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("fixedSizeList.GetRange(0, 1)");
             }
 
-            try 
+            try
             {
                 fixedSizeList.IndexOf(0);
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("fixedSizeList.IndexOf(0)");
             }
 
-            try 
+            try
             {
-                fixedSizeList.InsertRange(0, new object[] {1,2});
+                fixedSizeList.InsertRange(0, new object[] { 1, 2 });
 
                 Assert.Fail("fixedSizeList.InsertRange(0, new object[] {1,2})");
             }
-            catch (NotSupportedException) 
-            {                
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
-                fixedSizeList.Reverse();                
+                fixedSizeList.Reverse();
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("fixedSizeList.Reverse()");
             }
 
-            try 
+            try
             {
-                fixedSizeList.SetRange(0, new Object[] {0, 1});
+                fixedSizeList.SetRange(0, new Object[] { 0, 1 });
             }
-            catch (NotSupportedException) 
-            {                
+            catch (NotSupportedException)
+            {
                 Assert.Fail("fixedSizeList.SetRange(0, new Object[] {0, 1})");
             }
 
-            try 
+            try
             {
                 fixedSizeList.Sort();
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("fixedSizeList.Sort()");
             }
 
-            try 
+            try
             {
-                fixedSizeList.ToArray();                
+                fixedSizeList.ToArray();
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("fixedSizeList.ToArray()");
             }
 
-            try 
+            try
             {
                 fixedSizeList.TrimToSize();
 
                 Assert.Fail("fixedSizeList.TrimToSize()");
             }
-            catch (NotSupportedException) 
-            {                
-            }
+            catch (NotSupportedException) { }
 
-            try 
+            try
             {
-                fixedSizeList.Clone();                
+                fixedSizeList.Clone();
             }
-            catch (NotSupportedException) 
+            catch (NotSupportedException)
             {
                 Assert.Fail("fixedSizeList.Clone()");
             }
-            
-            try 
+
+            try
             {
                 fixedSizeList.AddRange(c_TestData);
 
                 Assert.Fail("fixedSizeList.AddRange(c_TestData)");
             }
-            catch (NotSupportedException) 
-            {                
-            }            
+            catch (NotSupportedException) { }
         }
 
-        private void PrivateTestClone(ArrayList arrayList) 
-        {            
+        private void PrivateTestClone(ArrayList arrayList)
+        {
             ArrayList arrayList2;
-                        
+
             arrayList.AddRange(c_TestData);
 
             arrayList2 = (ArrayList)arrayList.Clone();
@@ -736,85 +682,97 @@ namespace MonoTests.System.Collections
         }
 
         [Test]
-        public void TestCloneStandard() 
+        public void TestCloneStandard()
         {
             PrivateTestClone(new ArrayList());
         }
 
         [Test]
-        public void TestCloneSynchronized() 
+        public void TestCloneSynchronized()
         {
             PrivateTestClone(ArrayList.Synchronized(new ArrayList()));
         }
 
         [Test]
-        public void TestCloneAdapter() 
+        public void TestCloneAdapter()
         {
             PrivateTestClone(ArrayList.Adapter(new ArrayList()));
         }
 
         [Test]
-        public void TestCloneGetRange() 
+        public void TestCloneGetRange()
         {
             PrivateTestClone(new ArrayList().GetRange(0, 0));
         }
 
-        private void PrivateTestCopyTo(ArrayList arrayList) 
+        private void PrivateTestCopyTo(ArrayList arrayList)
         {
             object[] array;
-            
+
             arrayList.AddRange(c_TestData);
 
             array = new Object[arrayList.Count];
 
             arrayList.CopyTo(array);
-            
-            VerifyContains(array, new object[] {0,1,2,3,4,5,6,7,8,9}, "ArrayList.CopyTo(array)");
+
+            VerifyContains(
+                array,
+                new object[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                "ArrayList.CopyTo(array)"
+            );
 
             array = new Object[3];
 
             arrayList.CopyTo(0, array, 0, 3);
-            
-            VerifyContains(array, new object[] {0,1,2}, "ArrayList.CopyTo(0, array, 0, 3)");
+
+            VerifyContains(array, new object[] { 0, 1, 2 }, "ArrayList.CopyTo(0, array, 0, 3)");
 
             array = new Object[4];
 
             arrayList.CopyTo(0, array, 1, 3);
-            
-            VerifyContains(array, new object[] {null,0, 1, 2}, "ArrayList.CopyTo(0, array, 1, 3)");
+
+            VerifyContains(
+                array,
+                new object[] { null, 0, 1, 2 },
+                "ArrayList.CopyTo(0, array, 1, 3)"
+            );
 
             array = new object[10];
 
             arrayList.CopyTo(3, array, 3, 5);
 
-            VerifyContains(array, new object[] {null, null, null, 3, 4, 5, 6, 7, null, null}, "VerifyContains(array, ...)");
+            VerifyContains(
+                array,
+                new object[] { null, null, null, 3, 4, 5, 6, 7, null, null },
+                "VerifyContains(array, ...)"
+            );
         }
 
         [Test]
-        public void TestCopyToStandard() 
+        public void TestCopyToStandard()
         {
             PrivateTestCopyTo(new ArrayList());
         }
 
         [Test]
-        public void TestCopyToSynchronized() 
+        public void TestCopyToSynchronized()
         {
             PrivateTestCopyTo(ArrayList.Synchronized(new ArrayList()));
         }
 
         [Test]
-        public void TestCopyToAdapter() 
+        public void TestCopyToAdapter()
         {
             PrivateTestCopyTo(ArrayList.Adapter(new ArrayList()));
         }
 
         [Test]
-        public void TestCopyToGetRange() 
+        public void TestCopyToGetRange()
         {
             PrivateTestCopyTo(new ArrayList().GetRange(0, 0));
         }
-        
-        private void PrivateTestSetCapacity(ArrayList arrayList) 
+
+        private void PrivateTestSetCapacity(ArrayList arrayList)
         {
             int x;
 
@@ -830,19 +788,19 @@ namespace MonoTests.System.Collections
         }
 
         [Test]
-        public void TestSetCapacity() 
+        public void TestSetCapacity()
         {
             PrivateTestSetCapacity(new ArrayList());
         }
 
         [Test]
-        public void TestSetCapacitySynchronized() 
+        public void TestSetCapacitySynchronized()
         {
             PrivateTestSetCapacity(ArrayList.Synchronized(new ArrayList()));
         }
-        
+
         [Test]
-        public void TestCapacityExpands() 
+        public void TestCapacityExpands()
         {
             ArrayList arrayList = new ArrayList(10);
 
@@ -854,21 +812,25 @@ namespace MonoTests.System.Collections
 
             Assert.IsTrue(arrayList.Capacity == 20, "arrayList.Capacity == 20");
 
-            VerifyContains(arrayList, new object[] {0,1,2,3,4,5,6,7,8,9,10}, "VerifyContains");
+            VerifyContains(
+                arrayList,
+                new object[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+                "VerifyContains"
+            );
         }
-        
-        private void PrivateTestBinarySearch(ArrayList arrayList) 
+
+        private void PrivateTestBinarySearch(ArrayList arrayList)
         {
             // Try searching with different size lists...
 
-            for (int x = 0; x < 10; x++) 
+            for (int x = 0; x < 10; x++)
             {
-                for (int i = 0; i < x; i++) 
+                for (int i = 0; i < x; i++)
                 {
                     arrayList.Add(i);
                 }
 
-                for (int i = 0; i < x; i++) 
+                for (int i = 0; i < x; i++)
                 {
                     int y;
 
@@ -879,70 +841,69 @@ namespace MonoTests.System.Collections
             arrayList.Clear();
             arrayList.Add(new object());
 
-            try 
+            try
             {
                 arrayList.BinarySearch(new object());
 
                 Assert.Fail("1: Binary search on object that doesn't support IComparable.");
             }
-            catch (ArgumentException) 
-            {                
-            }
-            catch (InvalidOperationException) 
+            catch (ArgumentException) { }
+            catch (InvalidOperationException)
             {
                 // LAMESPEC: ArrayList.BinarySearch() on MS.NET throws InvalidOperationException
             }
-            
-            try 
+
+            try
             {
                 arrayList.BinarySearch(1);
 
                 Assert.Fail("2: Binary search on incompatible object.");
             }
-            catch (ArgumentException) 
-            {                
-            }
-            catch (InvalidOperationException) 
+            catch (ArgumentException) { }
+            catch (InvalidOperationException)
             {
                 // LAMESPEC: ArrayList.BinarySearch() on MS.NET throws InvalidOperationException
             }
 
             arrayList.Clear();
 
-            for (int i = 0; i < 100; i++) 
+            for (int i = 0; i < 100; i++)
             {
                 arrayList.Add(1);
             }
 
             Assert.IsTrue(arrayList.BinarySearch(1) == 49, "BinarySearch should start in middle.");
-            Assert.IsTrue(arrayList.BinarySearch(0, 0, 0, Comparer.Default) == -1, "arrayList.BinarySearch(0, 0, 0, Comparer.Default)");
+            Assert.IsTrue(
+                arrayList.BinarySearch(0, 0, 0, Comparer.Default) == -1,
+                "arrayList.BinarySearch(0, 0, 0, Comparer.Default)"
+            );
         }
 
         [Test]
-        public void TestBinarySearchStandard() 
+        public void TestBinarySearchStandard()
         {
             PrivateTestBinarySearch(new ArrayList());
         }
 
         [Test]
-        public void TestBinarySearchSynchronized() 
+        public void TestBinarySearchSynchronized()
         {
             PrivateTestBinarySearch(ArrayList.Synchronized(new ArrayList()));
         }
 
         [Test]
-        public void TestBinarySearchAdapter() 
+        public void TestBinarySearchAdapter()
         {
             PrivateTestBinarySearch(ArrayList.Adapter(new ArrayList()));
         }
 
         [Test]
-        public void TestBinarySearchGetRange() 
+        public void TestBinarySearchGetRange()
         {
             PrivateTestBinarySearch(new ArrayList().GetRange(0, 0));
         }
-        
-        private void PrivateTestRemoveAt(ArrayList arrayList) 
+
+        private void PrivateTestRemoveAt(ArrayList arrayList)
         {
             arrayList.Add(1);
             arrayList.Add(2);
@@ -952,89 +913,87 @@ namespace MonoTests.System.Collections
 
             arrayList.Remove(2);
 
-            VerifyContains(arrayList, new object[] {1, 3, 4, 5},
-                "Remove element failed.");
+            VerifyContains(arrayList, new object[] { 1, 3, 4, 5 }, "Remove element failed.");
 
             arrayList.RemoveAt(0);
 
-            VerifyContains(arrayList, new object[] {3, 4, 5},
-                "RemoveAt at start failed.");
+            VerifyContains(arrayList, new object[] { 3, 4, 5 }, "RemoveAt at start failed.");
 
             arrayList.RemoveAt(2);
 
-            VerifyContains(arrayList, new object[] {3, 4},
-                "RemoveAt at end failed.");            
+            VerifyContains(arrayList, new object[] { 3, 4 }, "RemoveAt at end failed.");
         }
 
         [Test]
-        public void TestRemoveAtStandard() 
+        public void TestRemoveAtStandard()
         {
             PrivateTestRemoveAt(new ArrayList());
         }
 
         [Test]
-        public void TestRemoveAtSynchronized() 
+        public void TestRemoveAtSynchronized()
         {
             PrivateTestRemoveAt(ArrayList.Synchronized(new ArrayList()));
         }
 
         [Test]
-        public void TestRemoveAtAdapter() 
+        public void TestRemoveAtAdapter()
         {
             PrivateTestRemoveAt(ArrayList.Adapter(new ArrayList()));
         }
 
         [Test]
-        public void TestRemoveAtGetRange() 
+        public void TestRemoveAtGetRange()
         {
             PrivateTestRemoveAt(new ArrayList().GetRange(0, 0));
         }
 
-        private void PrivateTestRemoveRange(ArrayList arrayList) 
+        private void PrivateTestRemoveRange(ArrayList arrayList)
         {
             arrayList.AddRange(c_TestData);
 
             arrayList.RemoveRange(0, 3);
 
-            VerifyContains(arrayList, new object[] { 3, 4, 5, 6, 7, 8, 9 },
-                "RemoveRange at start failed.");
+            VerifyContains(
+                arrayList,
+                new object[] { 3, 4, 5, 6, 7, 8, 9 },
+                "RemoveRange at start failed."
+            );
 
             arrayList.RemoveRange(4, 3);
 
-            VerifyContains(arrayList, new object[] { 3, 4, 5, 6 },
-                "RemoveRange at start failed.");
+            VerifyContains(arrayList, new object[] { 3, 4, 5, 6 }, "RemoveRange at start failed.");
 
             arrayList.RemoveRange(2, 1);
 
-            VerifyContains(arrayList, new object[] { 3, 4, 6 },
-                "RemoveRange in middle failed.");
+            VerifyContains(arrayList, new object[] { 3, 4, 6 }, "RemoveRange in middle failed.");
         }
 
         [Test]
-        public void TestRemoveRangeStandard() 
+        public void TestRemoveRangeStandard()
         {
             PrivateTestRemoveRange(new ArrayList());
         }
 
         [Test]
-        public void TestRemoveRangeSynchronized() 
+        public void TestRemoveRangeSynchronized()
         {
             PrivateTestRemoveRange(ArrayList.Synchronized(new ArrayList()));
         }
 
         [Test]
-        public void TestRemoveRangeAdapter() 
+        public void TestRemoveRangeAdapter()
         {
             PrivateTestRemoveRange(ArrayList.Adapter(new ArrayList()));
         }
 
         [Test]
-        public void TestRemoveRangeGetRange() 
+        public void TestRemoveRangeGetRange()
         {
             PrivateTestRemoveRange(new ArrayList().GetRange(0, 0));
         }
 
-        private void PrivateTestInsert(ArrayList arrayList) 
+        private void PrivateTestInsert(ArrayList arrayList)
         {
             arrayList.Add(1);
             arrayList.Add(2);
@@ -1042,42 +1001,50 @@ namespace MonoTests.System.Collections
             arrayList.Add(4);
             arrayList.Insert(0, 1);
 
-            VerifyContains(arrayList, new object[] {1, 1, 2, 3, 4}, "Insert at beginning failed.");
+            VerifyContains(
+                arrayList,
+                new object[] { 1, 1, 2, 3, 4 },
+                "Insert at beginning failed."
+            );
 
             arrayList.Insert(5, 5);
 
-            VerifyContains(arrayList, new object[] {1, 1, 2, 3, 4, 5}, "Insert at end failed.");
+            VerifyContains(arrayList, new object[] { 1, 1, 2, 3, 4, 5 }, "Insert at end failed.");
 
             arrayList.Insert(3, 7);
 
-            VerifyContains(arrayList, new object[] {1, 1, 2, 7, 3, 4, 5}, "Insert in middle failed.");
+            VerifyContains(
+                arrayList,
+                new object[] { 1, 1, 2, 7, 3, 4, 5 },
+                "Insert in middle failed."
+            );
         }
 
         [Test]
-        public void TestInsertStandard() 
+        public void TestInsertStandard()
         {
             PrivateTestInsert(new ArrayList());
         }
 
         [Test]
-        public void TestInsertAdapter() 
+        public void TestInsertAdapter()
         {
             PrivateTestInsert(ArrayList.Adapter(new ArrayList()));
         }
 
         [Test]
-        public void TestInsertSynchronized() 
+        public void TestInsertSynchronized()
         {
             PrivateTestInsert(ArrayList.Synchronized(new ArrayList()));
         }
 
         [Test]
-        public void TestInsertGetRange() 
+        public void TestInsertGetRange()
         {
             PrivateTestInsert(new ArrayList().GetRange(0, 0));
         }
 
-        private void PrivateTestGetRange(ArrayList arrayList) 
+        private void PrivateTestGetRange(ArrayList arrayList)
         {
             ArrayList rangeList;
 
@@ -1087,57 +1054,61 @@ namespace MonoTests.System.Collections
 
             Assert.IsTrue(rangeList.Count == 5, "rangeList.Count == 5");
 
-            this.VerifyContains(rangeList, new object[] {3,4,5,6,7}, "1: VerifyContains(rangeList)");
+            this.VerifyContains(
+                rangeList,
+                new object[] { 3, 4, 5, 6, 7 },
+                "1: VerifyContains(rangeList)"
+            );
+
+            //FIXME: If items are removed from the Range, one may not iterate over it on .NET
+            /*
+                        rangeList.Remove(7);
+                        
+                        this.VerifyContains(a2, new object[] {3,4,5,6}, "2: VerifyContains(rangeList)");
             
-//FIXME: If items are removed from the Range, one may not iterate over it on .NET
-/*
-            rangeList.Remove(7);
+                        rangeList.RemoveAt(0);
             
-            this.VerifyContains(a2, new object[] {3,4,5,6}, "2: VerifyContains(rangeList)");
-
-            rangeList.RemoveAt(0);
-
-            this.VerifyContains(a3, new object[] {4,5,6}, "3: VerifyContains(rangeList)");
-
-            rangeList.Add(7);
-            rangeList.Add(6);
-            rangeList.Add(3);
-            rangeList.Add(11);
+                        this.VerifyContains(a3, new object[] {4,5,6}, "3: VerifyContains(rangeList)");
             
-            Assert.IsTrue(rangeList.LastIndexOf(6) == 4, "rangeList.LastIndexOf(6) == 4");
-
-            rangeList.Sort();
-
-            this.VerifyContains(arrayList, new object[] {0, 1, 2, 3, 4, 5, 6, 6, 7, 11, 8, 9}, "4: VerifyContains(rangeList)");
-*/
+                        rangeList.Add(7);
+                        rangeList.Add(6);
+                        rangeList.Add(3);
+                        rangeList.Add(11);
+                        
+                        Assert.IsTrue(rangeList.LastIndexOf(6) == 4, "rangeList.LastIndexOf(6) == 4");
+            
+                        rangeList.Sort();
+            
+                        this.VerifyContains(arrayList, new object[] {0, 1, 2, 3, 4, 5, 6, 6, 7, 11, 8, 9}, "4: VerifyContains(rangeList)");
+            */
         }
 
         [Test]
-        public void TestGetRangeStandard() 
+        public void TestGetRangeStandard()
         {
             PrivateTestGetRange(new ArrayList());
         }
 
         [Test]
-        public void TestGetRangeAdapter() 
+        public void TestGetRangeAdapter()
         {
             PrivateTestGetRange(ArrayList.Adapter(new ArrayList()));
         }
 
         [Test]
-        public void TestGetRangeSynchronized() 
+        public void TestGetRangeSynchronized()
         {
             PrivateTestGetRange(ArrayList.Synchronized(new ArrayList()));
         }
 
         [Test]
-        public void TestGetRangeGetRange() 
+        public void TestGetRangeGetRange()
         {
             PrivateTestGetRange(new ArrayList().GetRange(0, 0));
         }
 
-        private void PrivateTestEnumeratorWithRange(ArrayList arrayList) 
-        {            
+        private void PrivateTestEnumeratorWithRange(ArrayList arrayList)
+        {
             IEnumerator enumerator;
 
             arrayList.AddRange(c_TestData);
@@ -1147,10 +1118,10 @@ namespace MonoTests.System.Collections
             // Test with the range 1 - 3
 
             enumerator = arrayList.GetEnumerator(1, 3);
-            
+
             x = 1;
 
-            while (enumerator.MoveNext()) 
+            while (enumerator.MoveNext())
             {
                 Assert.IsTrue((int)enumerator.Current == x, "enumerator.Current == x");
 
@@ -1161,21 +1132,20 @@ namespace MonoTests.System.Collections
 
             x = 1;
 
-            while (enumerator.MoveNext()) 
+            while (enumerator.MoveNext())
             {
                 Assert.IsTrue((int)enumerator.Current == x, "enumerator.Current == x");
 
                 x++;
             }
-
 
             // Test with a range covering the whole list.
 
             enumerator = arrayList.GetEnumerator(0, arrayList.Count);
-            
+
             x = 0;
 
-            while (enumerator.MoveNext()) 
+            while (enumerator.MoveNext())
             {
                 Assert.IsTrue((int)enumerator.Current == x, "enumerator.Current == x");
 
@@ -1186,7 +1156,7 @@ namespace MonoTests.System.Collections
 
             x = 0;
 
-            while (enumerator.MoveNext()) 
+            while (enumerator.MoveNext())
             {
                 Assert.IsTrue((int)enumerator.Current == x, "enumerator.Current == x");
 
@@ -1200,35 +1170,35 @@ namespace MonoTests.System.Collections
             Assert.IsTrue(!enumerator.MoveNext(), "!enumerator.MoveNext()");
 
             enumerator.Reset();
-            
+
             Assert.IsTrue(!enumerator.MoveNext(), "!enumerator.MoveNext()");
         }
 
         [Test]
-        public void TestEnumeratorWithRangeStandard() 
+        public void TestEnumeratorWithRangeStandard()
         {
             PrivateTestEnumeratorWithRange(new ArrayList());
         }
 
         [Test]
-        public void TestEnumeratorWithRangeSynchronized() 
+        public void TestEnumeratorWithRangeSynchronized()
         {
             PrivateTestEnumeratorWithRange(ArrayList.Synchronized(new ArrayList()));
         }
 
         [Test]
-        public void TestEnumeratorWithRangeAdapter() 
+        public void TestEnumeratorWithRangeAdapter()
         {
             PrivateTestEnumeratorWithRange(ArrayList.Adapter(new ArrayList()));
         }
 
         [Test]
-        public void TestEnumeratorWithRangeGetRange() 
+        public void TestEnumeratorWithRangeGetRange()
         {
             PrivateTestEnumeratorWithRange(new ArrayList().GetRange(0, 0));
         }
 
-        private void PrivateTestEnumerator(ArrayList arrayList) 
+        private void PrivateTestEnumerator(ArrayList arrayList)
         {
             int x = 0;
 
@@ -1236,9 +1206,9 @@ namespace MonoTests.System.Collections
 
             x = 0;
 
-            foreach (object o in arrayList) 
+            foreach (object o in arrayList)
             {
-                if (!o.Equals(x)) 
+                if (!o.Equals(x))
                 {
                     Assert.Fail("Arraylist.GetEnumerator()");
 
@@ -1259,19 +1229,19 @@ namespace MonoTests.System.Collections
             // Invalidate the enumerator.
 
             arrayList.Add(10);
-            
-            try 
+
+            try
             {
                 // According to the spec this should still work even though the enumerator is invalid.
 
                 Assert.IsTrue((int)enumerator.Current == 0, "enumerator.Current == 0");
             }
-            catch (InvalidOperationException) 
+            catch (InvalidOperationException)
             {
                 Assert.IsTrue(false, "enumerator.Current should not fail.");
             }
 
-            try 
+            try
             {
                 // This should throw an InvalidOperationException.
 
@@ -1279,44 +1249,42 @@ namespace MonoTests.System.Collections
 
                 Assert.IsTrue(false, "enumerator.Current should fail.");
             }
-            catch (InvalidOperationException) 
-            {
-            }
+            catch (InvalidOperationException) { }
         }
 
         [Test]
-        public void TestEnumeratorStandard() 
+        public void TestEnumeratorStandard()
         {
             PrivateTestEnumerator(new ArrayList());
         }
 
         [Test]
-        public void TestEnumeratorSynchronized() 
+        public void TestEnumeratorSynchronized()
         {
             PrivateTestEnumerator(ArrayList.Synchronized(new ArrayList()));
         }
 
         [Test]
-        public void TestEnumeratorAdapter() 
+        public void TestEnumeratorAdapter()
         {
             PrivateTestEnumerator(ArrayList.Adapter(new ArrayList()));
         }
 
         [Test]
-        public void TestEnumeratorGetRange() 
+        public void TestEnumeratorGetRange()
         {
             PrivateTestEnumerator(new ArrayList().GetRange(0, 0));
         }
-        
-        private void PrivateTestReverse(ArrayList arrayList) 
-        {            
+
+        private void PrivateTestReverse(ArrayList arrayList)
+        {
             ArrayList arrayList2;
-            
-            for (int x = 1; x < 100; x ++) 
+
+            for (int x = 1; x < 100; x++)
             {
                 arrayList2 = (ArrayList)arrayList.Clone();
-                
-                for (int i = 0; i < x; i++) 
+
+                for (int i = 0; i < x; i++)
                 {
                     arrayList2.Add(i);
                 }
@@ -1327,28 +1295,31 @@ namespace MonoTests.System.Collections
 
                 // Check that reverse did reverse the adapter.
 
-                for (int i = 0; i < x; i++) 
+                for (int i = 0; i < x; i++)
                 {
-                    if ((int)arrayList2[i] != x - i - 1) 
+                    if ((int)arrayList2[i] != x - i - 1)
                     {
                         ok = false;
 
                         break;
-                    }                
+                    }
                 }
 
-                Assert.IsTrue (ok, String.Format("Reverse on arrayList failed on list with {0} items.", x));
+                Assert.IsTrue(
+                    ok,
+                    String.Format("Reverse on arrayList failed on list with {0} items.", x)
+                );
             }
         }
 
         [Test]
-        public void TestReverseStandard() 
+        public void TestReverseStandard()
         {
             PrivateTestReverse(new ArrayList());
         }
 
         [Test]
-        public void TestReverseAdapter() 
+        public void TestReverseAdapter()
         {
             ArrayList arrayList = new ArrayList();
             ArrayList adapter = ArrayList.Adapter(arrayList);
@@ -1359,56 +1330,60 @@ namespace MonoTests.System.Collections
         }
 
         [Test]
-        public void TestReverseSynchronized() 
+        public void TestReverseSynchronized()
         {
             PrivateTestReverse(ArrayList.Synchronized(new ArrayList()));
         }
 
         [Test]
-        public void TestReverseGetRange() 
+        public void TestReverseGetRange()
         {
-            PrivateTestReverse(new ArrayList().GetRange(0,0));
+            PrivateTestReverse(new ArrayList().GetRange(0, 0));
         }
 
         [Test]
-        public void TestIterator ()
+        public void TestIterator()
         {
-            ArrayList a = new ArrayList ();
-            a.Add (1);
-            a.Add (2);
-            a.Add (3);
+            ArrayList a = new ArrayList();
+            a.Add(1);
+            a.Add(2);
+            a.Add(3);
 
             int total = 0;
             foreach (int b in a)
                 total += b;
-            Assert.IsTrue (total == 6, "Count should be 6");
+            Assert.IsTrue(total == 6, "Count should be 6");
         }
 
         [Test]
-        public void TestIteratorObjects ()
+        public void TestIteratorObjects()
         {
-            ArrayList a = new ArrayList ();
-            a.Add (1);
-            a.Add (null);
-            a.Add (3);
+            ArrayList a = new ArrayList();
+            a.Add(1);
+            a.Add(null);
+            a.Add(3);
 
             int total = 0;
             int count = 0;
             bool found_null = false;
-            foreach (object b in a){
+            foreach (object b in a)
+            {
                 count++;
-                if (b == null){
+                if (b == null)
+                {
                     if (found_null)
-                        Assert.IsTrue (false, "Should only find one null");
+                        Assert.IsTrue(false, "Should only find one null");
                     found_null = true;
-                } else {
-                    total += (int) b;
+                }
+                else
+                {
+                    total += (int)b;
                 }
             }
-            
-            Assert.IsTrue (found_null, "Should fine one null");
-            Assert.IsTrue (total == 4, "Total should be 4");
-            Assert.IsTrue (count == 3, "Count should be 3");
+
+            Assert.IsTrue(found_null, "Should fine one null");
+            Assert.IsTrue(total == 4, "Total should be 4");
+            Assert.IsTrue(count == 3, "Count should be 3");
         }
     }
 }

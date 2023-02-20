@@ -11,8 +11,6 @@ namespace MonoTests.Common
         public int Column2 { get; set; }
         public string PrimaryKeyColumn1 { get; set; }
 
-        public FooNoDefaultsWithPrimaryKey ()
-        {
-        }
+        public FooNoDefaultsWithPrimaryKey() { }
     }
 }

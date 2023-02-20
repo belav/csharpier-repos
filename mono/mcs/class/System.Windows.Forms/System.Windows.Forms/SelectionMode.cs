@@ -27,7 +27,7 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Windows.Forms 
+namespace System.Windows.Forms
 {
     [ComVisible(true)]
     public enum SelectionMode
@@ -35,8 +35,6 @@ namespace System.Windows.Forms
         None = 0,
         One = 1,
         MultiSimple = 2,
-        MultiExtended = 3,    
-        
+        MultiExtended = 3,
     }
 }
-

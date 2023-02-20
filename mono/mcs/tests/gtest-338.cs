@@ -2,87 +2,87 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-class Test {
-
-    public static void Main ()
+class Test
+{
+    public static void Main()
     {
-        FooList<string> l = new FooList<string> ();
-        Foo<string> (l);
+        FooList<string> l = new FooList<string>();
+        Foo<string>(l);
     }
 
-    static void Foo<T> (IList<T> list)
+    static void Foo<T>(IList<T> list)
     {
         ICollection coll = list as ICollection;
         if (coll != null)
-            Console.WriteLine (coll.Count);
+            Console.WriteLine(coll.Count);
     }
 }
 
-public class FooList<T> : IList<T> {
-
-    public int IndexOf (T item)
+public class FooList<T> : IList<T>
+{
+    public int IndexOf(T item)
     {
-        throw new NotImplementedException ();
+        throw new NotImplementedException();
     }
 
-    public void Insert (int index, T item)
+    public void Insert(int index, T item)
     {
-        throw new NotImplementedException ();
+        throw new NotImplementedException();
     }
 
-    public void RemoveAt (int index)
+    public void RemoveAt(int index)
     {
-        throw new NotImplementedException ();
+        throw new NotImplementedException();
     }
 
-    public T this [int index]
+    public T this[int index]
     {
-        get { throw new NotImplementedException (); }
-        set { throw new NotImplementedException (); }
+        get { throw new NotImplementedException(); }
+        set { throw new NotImplementedException(); }
     }
 
-    public void Add (T item)
+    public void Add(T item)
     {
-        throw new NotImplementedException ();
+        throw new NotImplementedException();
     }
 
-    public void Clear ()
+    public void Clear()
     {
-        throw new NotImplementedException ();
+        throw new NotImplementedException();
     }
 
-    public bool Contains (T item)
+    public bool Contains(T item)
     {
-        throw new NotImplementedException ();
+        throw new NotImplementedException();
     }
 
-    public void CopyTo (T [] array, int arrayIndex)
+    public void CopyTo(T[] array, int arrayIndex)
     {
-        throw new NotImplementedException ();
+        throw new NotImplementedException();
     }
 
-    public bool Remove (T item)
+    public bool Remove(T item)
     {
-        throw new NotImplementedException ();
+        throw new NotImplementedException();
     }
 
     public int Count
     {
-        get { throw new NotImplementedException (); }
+        get { throw new NotImplementedException(); }
     }
 
     public bool IsReadOnly
     {
-        get { throw new NotImplementedException (); }
+        get { throw new NotImplementedException(); }
     }
 
-    IEnumerator<T> IEnumerable<T>.GetEnumerator ()
+    IEnumerator<T> IEnumerable<T>.GetEnumerator()
     {
-        throw new NotImplementedException ();
+        throw new NotImplementedException();
     }
 
-    public IEnumerator GetEnumerator ()
+    public IEnumerator GetEnumerator()
     {
-        throw new NotImplementedException ();
+        throw new NotImplementedException();
     }
 }

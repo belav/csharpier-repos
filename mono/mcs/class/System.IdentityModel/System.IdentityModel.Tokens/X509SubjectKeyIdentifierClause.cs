@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,40 +35,43 @@ namespace System.IdentityModel.Tokens
     public class X509SubjectKeyIdentifierClause : BinaryKeyIdentifierClause
     {
         [MonoTODO]
-        public X509SubjectKeyIdentifierClause (byte [] ski)
-            : base (null, ski, true)
+        public X509SubjectKeyIdentifierClause(byte[] ski)
+            : base(null, ski, true)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static bool CanCreateFrom (X509Certificate2 certificate)
+        public static bool CanCreateFrom(X509Certificate2 certificate)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public byte [] GetX509SubjectKeyIdentifier ()
+        public byte[] GetX509SubjectKeyIdentifier()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public bool Matches (X509Certificate2 certificate)
+        public bool Matches(X509Certificate2 certificate)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override string ToString ()
+        public override string ToString()
         {
-            return base.ToString ();
+            return base.ToString();
         }
 
         [MonoTODO]
-        public static bool TryCreateFrom (X509Certificate2 certificate, out X509SubjectKeyIdentifierClause keyIdentifierClause)
+        public static bool TryCreateFrom(
+            X509Certificate2 certificate,
+            out X509SubjectKeyIdentifierClause keyIdentifierClause
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

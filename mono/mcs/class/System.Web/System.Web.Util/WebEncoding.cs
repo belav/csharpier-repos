@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,11 +38,18 @@ namespace System.Web.Util
     {
         static bool cached;
         static GlobalizationSection sect;
-        static GlobalizationSection GlobalizationConfig {
-            get {
-                if (!cached) {
-                    try {
-                        sect = (GlobalizationSection) WebConfigurationManager.GetWebApplicationSection ("system.web/globalization");
+        static GlobalizationSection GlobalizationConfig
+        {
+            get
+            {
+                if (!cached)
+                {
+                    try
+                    {
+                        sect = (GlobalizationSection)
+                            WebConfigurationManager.GetWebApplicationSection(
+                                "system.web/globalization"
+                            );
                     }
                     catch { }
                     cached = true;
@@ -51,23 +58,34 @@ namespace System.Web.Util
             }
         }
 
-        static public Encoding FileEncoding {
-            get {
-                return GlobalizationConfig != null ? GlobalizationConfig.FileEncoding : Encoding.Default;
+        static public Encoding FileEncoding
+        {
+            get
+            {
+                return GlobalizationConfig != null
+                    ? GlobalizationConfig.FileEncoding
+                    : Encoding.Default;
             }
         }
 
-        static public Encoding ResponseEncoding {
-            get {
-                return GlobalizationConfig != null ? GlobalizationConfig.ResponseEncoding : Encoding.Default;
+        static public Encoding ResponseEncoding
+        {
+            get
+            {
+                return GlobalizationConfig != null
+                    ? GlobalizationConfig.ResponseEncoding
+                    : Encoding.Default;
             }
         }
 
-        static public Encoding RequestEncoding {
-            get {
-                return GlobalizationConfig != null ? GlobalizationConfig.RequestEncoding : Encoding.Default;
+        static public Encoding RequestEncoding
+        {
+            get
+            {
+                return GlobalizationConfig != null
+                    ? GlobalizationConfig.RequestEncoding
+                    : Encoding.Default;
             }
         }
     }
 }
-

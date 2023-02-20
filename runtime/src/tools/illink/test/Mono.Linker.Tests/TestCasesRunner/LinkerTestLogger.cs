@@ -9,24 +9,24 @@ namespace Mono.Linker.Tests.TestCasesRunner
     {
         readonly List<MessageContainer> MessageContainers;
 
-        public LinkerTestLogger ()
+        public LinkerTestLogger()
         {
-            MessageContainers = new List<MessageContainer> ();
+            MessageContainers = new List<MessageContainer>();
         }
 
-        public List<MessageContainer> GetLoggedMessages ()
+        public List<MessageContainer> GetLoggedMessages()
         {
             return MessageContainers;
         }
 
-        public void LogMessage (MessageContainer message)
+        public void LogMessage(MessageContainer message)
         {
             // This is to force Cecil to load all the information from the assembly
             // When the message is logged, the assembly is still opened by the linker and available
             // later on during validation, it may already be closed and Cecil's lazy loading might fail.
-            message.ToString ();
+            message.ToString();
 
-            MessageContainers.Add (message);
+            MessageContainers.Add(message);
         }
     }
 }

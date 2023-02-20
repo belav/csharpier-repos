@@ -16,14 +16,12 @@ namespace System.CommandLine.Parsing
         private protected List<Token>? _tokens;
         private LocalizationResources? _resources;
 
-        private protected SymbolResult(
-            Symbol symbol, 
-            SymbolResult? parent)
+        private protected SymbolResult(Symbol symbol, SymbolResult? parent)
         {
             Symbol = symbol ?? throw new ArgumentNullException(nameof(symbol));
 
             Parent = parent;
-            
+
             Root = parent?.Root;
         }
 
@@ -36,9 +34,11 @@ namespace System.CommandLine.Parsing
         /// <summary>
         /// Child symbol results in the parse tree.
         /// </summary>
-        public IReadOnlyList<SymbolResult> Children => _children is not null ? _children : Array.Empty<SymbolResult>();
+        public IReadOnlyList<SymbolResult> Children =>
+            _children is not null ? _children : Array.Empty<SymbolResult>();
 
-        internal void AddChild(SymbolResult symbolResult) => (_children ??= new()).Add(symbolResult);
+        internal void AddChild(SymbolResult symbolResult) =>
+            (_children ??= new()).Add(symbolResult);
 
         /// <summary>
         /// The parent symbol result in the parse tree.
@@ -127,14 +127,12 @@ namespace System.CommandLine.Parsing
         /// </summary>
         /// <param name="option">The option for which to find a result.</param>
         /// <returns>An option result if the option was matched by the parser or has a default value; otherwise, <c>null</c>.</returns>
-        public virtual OptionResult? FindResultFor(Option option) =>
-            Root?.FindResultFor(option);
+        public virtual OptionResult? FindResultFor(Option option) => Root?.FindResultFor(option);
 
         /// <inheritdoc cref="ParseResult.GetValue(Argument)"/>
         public T GetValue<T>(Argument<T> argument)
         {
-            if (FindResultFor(argument) is { } result &&
-                result.GetValueOrDefault<T>() is { } t)
+            if (FindResultFor(argument) is { } result && result.GetValueOrDefault<T>() is { } t)
             {
                 return t;
             }
@@ -145,8 +143,10 @@ namespace System.CommandLine.Parsing
         /// <inheritdoc cref="ParseResult.GetValue(Argument)"/>
         public object? GetValue(Argument argument)
         {
-            if (FindResultFor(argument) is { } result &&
-                result.GetValueOrDefault<object?>() is { } t)
+            if (
+                FindResultFor(argument) is { } result
+                && result.GetValueOrDefault<object?>() is { } t
+            )
             {
                 return t;
             }
@@ -157,8 +157,7 @@ namespace System.CommandLine.Parsing
         /// <inheritdoc cref="ParseResult.GetValue(Option)"/>
         public T? GetValue<T>(Option<T> option)
         {
-            if (FindResultFor(option) is { } result &&
-                result.GetValueOrDefault<T>() is { } t)
+            if (FindResultFor(option) is { } result && result.GetValueOrDefault<T>() is { } t)
             {
                 return t;
             }
@@ -169,8 +168,7 @@ namespace System.CommandLine.Parsing
         /// <inheritdoc cref="ParseResult.GetValue(Option)"/>
         public object? GetValue(Option option)
         {
-            if (FindResultFor(option) is { } result && 
-                result.GetValueOrDefault<object?>() is { } t)
+            if (FindResultFor(option) is { } result && result.GetValueOrDefault<object?>() is { } t)
             {
                 return t;
             }
@@ -181,6 +179,7 @@ namespace System.CommandLine.Parsing
         internal virtual bool UseDefaultValueFor(Argument argument) => false;
 
         /// <inheritdoc/>
-        public override string ToString() => $"{GetType().Name}: {this.Token()} {string.Join(" ", Tokens.Select(t => t.Value))}";
+        public override string ToString() =>
+            $"{GetType().Name}: {this.Token()} {string.Join(" ", Tokens.Select(t => t.Value))}";
     }
 }

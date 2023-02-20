@@ -5,28 +5,29 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Attributes.OnlyKeepUsed
 {
-    [SetupCSharpCompilerToUse ("csc")]
-    [SetupLinkerArgument ("--used-attrs-only", "true")]
+    [SetupCSharpCompilerToUse("csc")]
+    [SetupLinkerArgument("--used-attrs-only", "true")]
     public class NullableOnConstraints
     {
-        public static void Main ()
+        public static void Main()
         {
-            Test.Run ();
+            Test.Run();
         }
 
         [Kept]
-        [KeptInterface (typeof (I))]
+        [KeptInterface(typeof(I))]
         class Test : I
         {
             [Kept]
-            public static void Run ()
+            public static void Run()
             {
-                new C<Test> ();
-                Method<Test> ();
+                new C<Test>();
+                Method<Test>();
             }
 
             [Kept]
-            static T? Method<T> () where T : class, I?
+            static T? Method<T>()
+                where T : class, I?
             {
                 return default;
             }
@@ -34,13 +35,10 @@ namespace Mono.Linker.Tests.Cases.Attributes.OnlyKeepUsed
     }
 
     [Kept]
-    interface I
-    {
-    }
+    interface I { }
 
     [Kept]
-    [KeptMember (".ctor()")]
-    class C<T> where T : I?
-    {
-    }
+    [KeptMember(".ctor()")]
+    class C<T>
+        where T : I? { }
 }

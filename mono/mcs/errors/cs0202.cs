@@ -3,21 +3,19 @@
 
 public class Foo
 {
-        public class E {}
-            
-        public class P
+    public class E { }
+
+    public class P
+    {
+        public E[] GetEnumerator()
         {
-            public E[] GetEnumerator ()
-            {
-                return null;
-            }
+            return null;
         }
-       
-        public static void Main ()
-        {
-            P o = new P ();
-            foreach (P p in o)
-            {
-            }
-        }
+    }
+
+    public static void Main()
+    {
+        P o = new P();
+        foreach (P p in o) { }
+    }
 }

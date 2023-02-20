@@ -30,29 +30,34 @@ using System;
 
 using Mono.Cecil.Metadata;
 
-namespace Mono.Cecil {
-
-    internal sealed class MethodReturnType : ICustomAttributeProvider, IHasMarshalSpec, IHasConstant {
-
+namespace Mono.Cecil
+{
+    internal sealed class MethodReturnType : ICustomAttributeProvider, IHasMarshalSpec, IHasConstant
+    {
         MethodReference m_method;
         ParameterDefinition m_param;
 
         TypeReference m_returnType;
 
-        public MethodReference Method {
+        public MethodReference Method
+        {
             get { return m_method; }
             set { m_method = value; }
         }
 
-        public TypeReference ReturnType {
+        public TypeReference ReturnType
+        {
             get { return m_returnType; }
             set { m_returnType = value; }
         }
 
-        internal ParameterDefinition Parameter {
-            get {
-                if (m_param == null) {
-                    m_param = new ParameterDefinition (m_returnType);
+        internal ParameterDefinition Parameter
+        {
+            get
+            {
+                if (m_param == null)
+                {
+                    m_param = new ParameterDefinition(m_returnType);
                     m_param.Method = m_method;
                 }
 
@@ -61,41 +66,47 @@ namespace Mono.Cecil {
             set { m_param = value; }
         }
 
-        public MetadataToken MetadataToken {
+        public MetadataToken MetadataToken
+        {
             get { return Parameter.MetadataToken; }
             set { Parameter.MetadataToken = value; }
         }
 
-        public bool HasCustomAttributes {
+        public bool HasCustomAttributes
+        {
             get { return m_param != null && m_param.HasCustomAttributes; }
         }
 
-        public CustomAttributeCollection CustomAttributes {
+        public CustomAttributeCollection CustomAttributes
+        {
             get { return Parameter.CustomAttributes; }
         }
 
-        public bool HasConstant {
+        public bool HasConstant
+        {
             get { return m_param != null && m_param.HasConstant; }
         }
 
-        public object Constant {
+        public object Constant
+        {
             get { return Parameter.Constant; }
             set { Parameter.Constant = value; }
         }
 
-        public MarshalSpec MarshalSpec {
+        public MarshalSpec MarshalSpec
+        {
             get { return Parameter.MarshalSpec; }
             set { Parameter.MarshalSpec = value; }
         }
 
-        public MethodReturnType (TypeReference retType)
+        public MethodReturnType(TypeReference retType)
         {
             m_returnType = retType;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return String.Format ("[return: {0}]", m_returnType);
+            return String.Format("[return: {0}]", m_returnType);
         }
     }
 }

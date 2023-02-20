@@ -1,7 +1,9 @@
 using System.Threading.Tasks;
 
-namespace System.Net.Security.Tests {
-    internal static class TestConfiguration {
+namespace System.Net.Security.Tests
+{
+    internal static class TestConfiguration
+    {
         public const int PassingTestTimeoutMilliseconds = 4 * 60 * 1000;
         public const int FailingTestTimeoutMiliseconds = 250;
 
@@ -17,7 +19,7 @@ namespace System.Net.Security.Tests {
 
         public static bool SupportsNullEncryption => false;
 
-        public static Task WhenAllOrAnyFailedWithTimeout (params Task [] tasks)
-            => tasks.WhenAllOrAnyFailed (PassingTestTimeoutMilliseconds);
+        public static Task WhenAllOrAnyFailedWithTimeout(params Task[] tasks) =>
+            tasks.WhenAllOrAnyFailed(PassingTestTimeoutMilliseconds);
     }
 }

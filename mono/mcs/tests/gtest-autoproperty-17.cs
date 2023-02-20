@@ -7,12 +7,10 @@ class MainClass
         abstract public bool Condition { get; }
     }
 
-    class Baz: Bar
+    class Baz : Bar
     {
         public override bool Condition { get; } = true;
     }
 
-    public static void Main (string[] args)
-    {
-    }
+    public static void Main(string[] args) { }
 }

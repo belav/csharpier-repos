@@ -1,11 +1,11 @@
 class A
 {
-    public static bool operator > (A a, object b)
+    public static bool operator >(A a, object b)
     {
         return false;
     }
-    
-    public static bool operator < (A a, object b)
+
+    public static bool operator <(A a, object b)
     {
         return true;
     }
@@ -13,18 +13,19 @@ class A
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
-        return new C ().Test () ? 1 : 0;
+        return new C().Test() ? 1 : 0;
     }
-    
-    int? Id {
+
+    int? Id
+    {
         get { return 1; }
     }
-    
-    bool Test ()
+
+    bool Test()
     {
-        A a = new A ();
+        A a = new A();
         bool b = a > Id && a < Id;
         return b;
     }

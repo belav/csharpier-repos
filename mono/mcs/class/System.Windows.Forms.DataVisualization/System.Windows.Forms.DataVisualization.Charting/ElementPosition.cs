@@ -2,7 +2,7 @@
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
-// Copyright (C) 2009 Novell, Inc (http://www.novell.com) 
+// Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,11 +32,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
     public class ElementPosition : ChartElement
     {
         #region Constructors
-        public ElementPosition ()
-        {
-        }
+        public ElementPosition() { }
 
-        public ElementPosition (float x, float y, float width, float height)
+        public ElementPosition(float x, float y, float width, float height)
         {
             X = x;
             Y = y;
@@ -47,17 +45,26 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
         #region Public Properties
         public bool Auto { get; set; }
-        public float Bottom { get { return Y + Height; }  }
+        public float Bottom
+        {
+            get { return Y + Height; }
+        }
         public float Height { get; set; }
-        public float Right { get { return X + Width; } }
-        public SizeF Size { get { return new SizeF (Width, Height); } }
+        public float Right
+        {
+            get { return X + Width; }
+        }
+        public SizeF Size
+        {
+            get { return new SizeF(Width, Height); }
+        }
         public float Width { get; set; }
         public float X { get; set; }
         public float Y { get; set; }
         #endregion
 
         #region Public Methods
-        public void FromRectangleF (RectangleF rect)
+        public void FromRectangleF(RectangleF rect)
         {
             X = rect.X;
             Y = rect.Y;
@@ -65,15 +72,15 @@ namespace System.Windows.Forms.DataVisualization.Charting
             Height = rect.Height;
         }
 
-        public RectangleF ToRectangleF ()
+        public RectangleF ToRectangleF()
         {
-            return new RectangleF (X, Y, Width, Height);
+            return new RectangleF(X, Y, Width, Height);
         }
         #endregion
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return string.Format ("{0}, {1}, {2}, {3}", X, Y, Width, Height);
+            return string.Format("{0}, {1}, {2}, {3}", X, Y, Width, Height);
         }
     }
 }

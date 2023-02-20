@@ -20,7 +20,8 @@ public readonly struct JsonProjectionInfo
     public JsonProjectionInfo(
         int jsonColumnIndex,
         List<(IProperty?, int?, int?)> keyAccessInfo,
-        (string?, int?, int?)[] additionalPath)
+        (string?, int?, int?)[] additionalPath
+    )
     {
         JsonColumnIndex = jsonColumnIndex;
         KeyAccessInfo = keyAccessInfo;
@@ -54,7 +55,11 @@ public readonly struct JsonProjectionInfo
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </remarks>
-    public List<(IProperty? KeyProperty, int? ConstantKeyValue, int? KeyProjectionIndex)> KeyAccessInfo { get; }
+    public List<(
+        IProperty? KeyProperty,
+        int? ConstantKeyValue,
+        int? KeyProjectionIndex
+    )> KeyAccessInfo { get; }
 
     /// <summary>
     ///     List of additional path elements, only one of the values in the tuple is non-null
@@ -66,5 +71,9 @@ public readonly struct JsonProjectionInfo
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </remarks>
-    public (string? JsonPropertyName, int? ConstantArrayIndex, int? NonConstantArrayIndex)[] AdditionalPath { get; }
+    public (
+        string? JsonPropertyName,
+        int? ConstantArrayIndex,
+        int? NonConstantArrayIndex
+    )[] AdditionalPath { get; }
 }

@@ -9,6 +9,7 @@ namespace Test
     public class AA
     {
         static double m_dStatic3 = 273.31;
+
         public static int Main()
         {
             try
@@ -23,12 +24,8 @@ namespace Test
                     {
                         do
                         {
-                            do
-                            {
-                            } while (((bool)(param2[2])));
-                            do
-                            {
-                            } while (0.70 <= local3);
+                            do { } while (((bool)(param2[2])));
+                            do { } while (0.70 <= local3);
                         } while (param1[2]);
                     } while (param1[2]);
                 }

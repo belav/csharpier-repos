@@ -5,20 +5,18 @@ using System;
 
 class X
 {
-    int this [int v] {
-        get {
-            return 1;
-        }
-        set {            
-        }
+    int this[int v]
+    {
+        get { return 1; }
+        set { }
     }
 
-    public static void Main ()
+    public static void Main()
     {
         int v;
         X x = null;
 
         var r = x?[v = 2];
-        Console.WriteLine (v);
+        Console.WriteLine(v);
     }
 }

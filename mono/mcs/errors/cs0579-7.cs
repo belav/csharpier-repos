@@ -3,10 +3,11 @@
 
 using System;
 
-[assembly:CLSCompliant(true)]
+[assembly: CLSCompliant(true)]
 
-namespace DuplicateAttributes {
+namespace DuplicateAttributes
+{
     [CLSCompliant(true)]
-    [type:CLSCompliant(true)]
-    public class ClassA {}
+    [type: CLSCompliant(true)]
+    public class ClassA { }
 }

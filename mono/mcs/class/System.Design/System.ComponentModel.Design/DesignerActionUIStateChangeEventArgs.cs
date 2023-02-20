@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,17 +38,22 @@ namespace System.ComponentModel.Design
         object related_object;
         DesignerActionUIStateChangeType change_type;
 
-        public DesignerActionUIStateChangeEventArgs (object relatedObject, DesignerActionUIStateChangeType changeType)
+        public DesignerActionUIStateChangeEventArgs(
+            object relatedObject,
+            DesignerActionUIStateChangeType changeType
+        )
         {
             this.related_object = relatedObject;
             this.change_type = changeType;
         }
 
-        public DesignerActionUIStateChangeType ChangeType {
+        public DesignerActionUIStateChangeType ChangeType
+        {
             get { return change_type; }
         }
 
-        public Object RelatedObject {
+        public Object RelatedObject
+        {
             get { return related_object; }
         }
     }

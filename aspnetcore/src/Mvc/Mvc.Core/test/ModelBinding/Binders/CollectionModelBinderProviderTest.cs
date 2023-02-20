@@ -28,12 +28,10 @@ public class CollectionModelBinderProviderTest
     }
 
     [Theory]
-
     // These aren't ICollection<> - we can handle them by creating a List<>
     [InlineData(typeof(IEnumerable<int>))]
     [InlineData(typeof(IReadOnlyCollection<int>))]
     [InlineData(typeof(IReadOnlyList<int>))]
-
     // These are ICollection<> - we can handle them by adding items to the existing collection or
     // creating a new one.
     [InlineData(typeof(ICollection<int>))]

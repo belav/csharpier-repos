@@ -5,6 +5,4 @@
 /// <summary>
 ///  <typeparam name="T1" />
 /// </summary>
-class A
-{
-}
+class A { }

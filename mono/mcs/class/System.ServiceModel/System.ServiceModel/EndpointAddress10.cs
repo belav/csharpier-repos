@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,57 +40,64 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel
 {
-    [XmlSchemaProvider ("GetSchema")]
-    [XmlRoot ("EndpointReference", Namespace = "http://www.w3.org/2005/08/addressing")]
+    [XmlSchemaProvider("GetSchema")]
+    [XmlRoot("EndpointReference", Namespace = "http://www.w3.org/2005/08/addressing")]
 #if MOBILE
     internal class EndpointAddress10 : IXmlSerializable
 #else
     public class EndpointAddress10 : IXmlSerializable
 #endif
     {
-        static readonly Uri w3c_anonymous = new Uri (Constants.WsaAnonymousUri);
+        static readonly Uri w3c_anonymous = new Uri(Constants.WsaAnonymousUri);
         EndpointAddress address;
 
-        private EndpointAddress10 () // for serialization
-        {
-        }
+        private EndpointAddress10() // for serialization
+        { }
 
-        internal EndpointAddress10 (EndpointAddress address)
+        internal EndpointAddress10(EndpointAddress address)
         {
             this.address = address;
         }
-        
-        public static EndpointAddress10 FromEndpointAddress (EndpointAddress address)
+
+        public static EndpointAddress10 FromEndpointAddress(EndpointAddress address)
         {
-            return new EndpointAddress10 (address);
+            return new EndpointAddress10(address);
         }
 
-        public static XmlQualifiedName GetSchema (XmlSchemaSet xmlSchemaSet)
+        public static XmlQualifiedName GetSchema(XmlSchemaSet xmlSchemaSet)
         {
             if (xmlSchemaSet == null)
-                throw new ArgumentNullException ("xmlSchemaSet");
-            xmlSchemaSet.Add (XmlSchema.Read (typeof (EndpointAddress10).Assembly.GetManifestResourceStream ("ws-addr.xsd"), null));
-            return new XmlQualifiedName ("EndpointReferenceType", AddressingVersion.WSAddressing10.Namespace);
+                throw new ArgumentNullException("xmlSchemaSet");
+            xmlSchemaSet.Add(
+                XmlSchema.Read(
+                    typeof(EndpointAddress10).Assembly.GetManifestResourceStream("ws-addr.xsd"),
+                    null
+                )
+            );
+            return new XmlQualifiedName(
+                "EndpointReferenceType",
+                AddressingVersion.WSAddressing10.Namespace
+            );
         }
 
-        public EndpointAddress ToEndpointAddress ()
+        public EndpointAddress ToEndpointAddress()
         {
             return address;
         }
 
-        XmlSchema IXmlSerializable.GetSchema ()
+        XmlSchema IXmlSerializable.GetSchema()
         {
             return null;
         }
 
-        void IXmlSerializable.ReadXml (XmlReader reader)
+        void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            address = EndpointAddress.ReadFrom (AddressingVersion.WSAddressing10, reader);
+            address = EndpointAddress.ReadFrom(AddressingVersion.WSAddressing10, reader);
         }
 
-        void IXmlSerializable.WriteXml (XmlWriter writer)
+        void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            address.WriteContentsTo (AddressingVersion.WSAddressing10, writer);
+            address.WriteContentsTo(AddressingVersion.WSAddressing10, writer);
         }
     }
 }

@@ -4,11 +4,7 @@
 
 public partial class C
 {
-    partial void Foo ()
-    {
-    }
-    
-    public static void Main ()
-    {
-    }
+    partial void Foo() { }
+
+    public static void Main() { }
 }

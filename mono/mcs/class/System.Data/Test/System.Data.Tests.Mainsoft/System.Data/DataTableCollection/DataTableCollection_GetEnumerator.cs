@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,78 +34,75 @@ using GHTUtils.Base;
 
 namespace tests.system_data_dll.System_Data
 {
-[TestFixture]
-public class DataTableCollection_GetEnumerator : GHTBase
-{
-    public static void Main()
+    [TestFixture]
+    public class DataTableCollection_GetEnumerator : GHTBase
     {
-        DataTableCollection_GetEnumerator tc = new DataTableCollection_GetEnumerator();
-        Exception exp = null;
-        try
+        public static void Main()
         {
-            tc.BeginTest("DataTableCollection_GetEnumerator");
-            tc.run();
+            DataTableCollection_GetEnumerator tc = new DataTableCollection_GetEnumerator();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("DataTableCollection_GetEnumerator");
+                tc.run();
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
-        catch(Exception ex)
+
+        //Activate This Construntor to log All To Standard output
+        //public TestClass():base(true){}
+
+        //Activate this constructor to log Failures to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+
+
+        //Activate this constructor to log All to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+        //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+        public void run()
         {
-            exp = ex;
+            Exception exp = null;
+            try
+            {
+                BeginCase("DataTableCollection_GetEnumerator");
+                DataTableCollection_GetEnumerator1();
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
-        finally
+
+        [Test]
+        public void DataTableCollection_GetEnumerator1()
         {
-            tc.EndTest(exp);
+            DataSet ds = new DataSet();
+            ds.Tables.Add();
+            ds.Tables.Add();
+            int count = 0;
+
+            System.Collections.IEnumerator myEnumerator = ds.Tables.GetEnumerator();
+
+            while (myEnumerator.MoveNext())
+            {
+                Compare(((DataTable)myEnumerator.Current).TableName.Substring(0, 5), "Table");
+                count++;
+            }
+            Compare(count, 2);
         }
-        
     }
-
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
-
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("DataTableCollection_GetEnumerator");
-            DataTableCollection_GetEnumerator1();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
-    [Test]
-    public void DataTableCollection_GetEnumerator1()
-    {
-        DataSet ds = new DataSet();
-        ds.Tables.Add();
-        ds.Tables.Add();
-        int count=0;
-
-        System.Collections.IEnumerator myEnumerator = ds.Tables.GetEnumerator();
-
-        while (myEnumerator.MoveNext())
-        {
-            Compare( ((DataTable) myEnumerator.Current).TableName.Substring(0,5),"Table");
-            count++;
-        }
-        Compare(count,2);
-
-
-
-    }
-}
 }

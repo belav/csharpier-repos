@@ -28,23 +28,24 @@ internal abstract class StructuredAnalyzerConfigOptions : AnalyzerConfigOptions,
         public Implementation(AnalyzerConfigOptions options)
         {
             _options = options;
-            _lazyNamingStylePreferences = new Lazy<NamingStylePreferences>(() => EditorConfigNamingStyleParser.ParseDictionary(_options));
+            _lazyNamingStylePreferences = new Lazy<NamingStylePreferences>(
+                () => EditorConfigNamingStyleParser.ParseDictionary(_options)
+            );
         }
 
-        public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value)
-            => _options.TryGetValue(key, out value);
+        public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value) =>
+            _options.TryGetValue(key, out value);
 
-        public override IEnumerable<string> Keys
-            => _options.Keys;
+        public override IEnumerable<string> Keys => _options.Keys;
 
-        public override NamingStylePreferences GetNamingStylePreferences()
-            => _lazyNamingStylePreferences.Value;
+        public override NamingStylePreferences GetNamingStylePreferences() =>
+            _lazyNamingStylePreferences.Value;
     }
 
     private sealed class EmptyImplementation : StructuredAnalyzerConfigOptions
     {
-        public override NamingStylePreferences GetNamingStylePreferences()
-            => NamingStylePreferences.Empty;
+        public override NamingStylePreferences GetNamingStylePreferences() =>
+            NamingStylePreferences.Empty;
 
         public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value)
         {
@@ -52,27 +53,32 @@ internal abstract class StructuredAnalyzerConfigOptions : AnalyzerConfigOptions,
             return false;
         }
 
-        public override IEnumerable<string> Keys
-            => SpecializedCollections.EmptyEnumerable<string>();
+        public override IEnumerable<string> Keys =>
+            SpecializedCollections.EmptyEnumerable<string>();
     }
 
     public static readonly StructuredAnalyzerConfigOptions Empty = new EmptyImplementation();
 
     public abstract NamingStylePreferences GetNamingStylePreferences();
 
-    public static StructuredAnalyzerConfigOptions Create(ImmutableDictionary<string, string> options)
+    public static StructuredAnalyzerConfigOptions Create(
+        ImmutableDictionary<string, string> options
+    )
     {
         Contract.ThrowIfFalse(options.KeyComparer == KeyComparer);
         return new Implementation(new DictionaryAnalyzerConfigOptions(options));
     }
 
-    public static StructuredAnalyzerConfigOptions Create(AnalyzerConfigOptions options)
-        => new Implementation(options);
+    public static StructuredAnalyzerConfigOptions Create(AnalyzerConfigOptions options) =>
+        new Implementation(options);
 
-    public bool TryGetOption<T>(OptionKey2 optionKey, out T value)
-        => this.TryGetEditorConfigOption(optionKey.Option, out value);
+    public bool TryGetOption<T>(OptionKey2 optionKey, out T value) =>
+        this.TryGetEditorConfigOption(optionKey.Option, out value);
 
-    public static bool TryGetStructuredOptions(AnalyzerConfigOptions configOptions, [NotNullWhen(true)] out StructuredAnalyzerConfigOptions? options)
+    public static bool TryGetStructuredOptions(
+        AnalyzerConfigOptions configOptions,
+        [NotNullWhen(true)] out StructuredAnalyzerConfigOptions? options
+    )
     {
         if (configOptions is StructuredAnalyzerConfigOptions structuredOptions)
         {
@@ -97,14 +103,20 @@ internal abstract class StructuredAnalyzerConfigOptions : AnalyzerConfigOptions,
     // of Workspace layer's version of StructuredAnalyzerConfigOptions. This version of the type is not directly usable by Code Style code.
     // We create a clone of this instance typed to the Code Style's version of StructuredAnalyzerConfigOptions.
     // The conditional weak table maintains 1:1 correspondence between these instances.
-    // 
+    //
     // In addition, we also map Compiler created DictionaryAnalyzerConfigOptions to StructuredAnalyzerConfigOptions for analyzers that are invoked
     // from command line build.
 
-    private static readonly ConditionalWeakTable<AnalyzerConfigOptions, StructuredAnalyzerConfigOptions> s_codeStyleStructuredOptions = new();
+    private static readonly ConditionalWeakTable<
+        AnalyzerConfigOptions,
+        StructuredAnalyzerConfigOptions
+    > s_codeStyleStructuredOptions = new();
     private static readonly object s_codeStyleStructuredOptionsLock = new();
 
-    private static bool TryGetCorrespondingCodeStyleInstance(AnalyzerConfigOptions configOptions, [NotNullWhen(true)] out StructuredAnalyzerConfigOptions? options)
+    private static bool TryGetCorrespondingCodeStyleInstance(
+        AnalyzerConfigOptions configOptions,
+        [NotNullWhen(true)] out StructuredAnalyzerConfigOptions? options
+    )
     {
         if (s_codeStyleStructuredOptions.TryGetValue(configOptions, out options))
         {

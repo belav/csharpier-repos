@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,117 +33,130 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-    [DefaultEvent ("ValueChanged")]
-    [DefaultProperty ("Value")]
-    [Designer ("System.Web.UI.Design.WebControls.HiddenFieldDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-    [ControlValueProperty ("Value")]
+    [DefaultEvent("ValueChanged")]
+    [DefaultProperty("Value")]
+    [Designer(
+        "System.Web.UI.Design.WebControls.HiddenFieldDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    [ControlValueProperty("Value")]
     [NonVisualControl]
     [ParseChildren]
-    [PersistChildren (false)]
+    [PersistChildren(false)]
     [SupportsEventValidation]
     public class HiddenField : Control, IPostBackDataHandler
     {
-        static readonly object ValueChangedEvent = new object ();
+        static readonly object ValueChangedEvent = new object();
 
-        public event EventHandler ValueChanged {
-            add { Events.AddHandler (ValueChangedEvent, value); }
-            remove { Events.RemoveHandler (ValueChangedEvent, value); }
+        public event EventHandler ValueChanged
+        {
+            add { Events.AddHandler(ValueChangedEvent, value); }
+            remove { Events.RemoveHandler(ValueChangedEvent, value); }
         }
 
-        [DefaultValue ("")]
-        [Bindable (true)]
-        public virtual string Value {
-            get { return ViewState.GetString ("Value", String.Empty); }
-            set { ViewState ["Value"] = value; }
+        [DefaultValue("")]
+        [Bindable(true)]
+        public virtual string Value
+        {
+            get { return ViewState.GetString("Value", String.Empty); }
+            set { ViewState["Value"] = value; }
         }
 
-        [DefaultValue (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override bool EnableTheming {
+        [DefaultValue(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool EnableTheming
+        {
             get { return false; }
-            set { throw new NotSupportedException (); }
+            set { throw new NotSupportedException(); }
         }
 
-        [DefaultValue ("")]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override string SkinID {
+        [DefaultValue("")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override string SkinID
+        {
             get { return String.Empty; }
-            set { throw new NotSupportedException (); }
+            set { throw new NotSupportedException(); }
         }
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override void Focus ()
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override void Focus()
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        protected virtual void OnValueChanged (EventArgs e)
+        protected virtual void OnValueChanged(EventArgs e)
         {
-            EventHandler h = (EventHandler) Events [ValueChangedEvent];
+            EventHandler h = (EventHandler)Events[ValueChangedEvent];
             if (h != null)
-                h (this, e);
+                h(this, e);
         }
 
-        protected virtual bool LoadPostData (string postDataKey, System.Collections.Specialized.NameValueCollection postCollection)
+        protected virtual bool LoadPostData(
+            string postDataKey,
+            System.Collections.Specialized.NameValueCollection postCollection
+        )
         {
-            if (Value != postCollection [postDataKey]) {
-                Value = postCollection [postDataKey];
+            if (Value != postCollection[postDataKey])
+            {
+                Value = postCollection[postDataKey];
                 return true;
             }
             return false;
         }
 
-        protected virtual void RaisePostDataChangedEvent ()
+        protected virtual void RaisePostDataChangedEvent()
         {
-            ValidateEvent (UniqueID, String.Empty);
-            OnValueChanged (EventArgs.Empty);
+            ValidateEvent(UniqueID, String.Empty);
+            OnValueChanged(EventArgs.Empty);
         }
 
-        protected override ControlCollection CreateControlCollection ()
+        protected override ControlCollection CreateControlCollection()
         {
-            return new System.Web.UI.EmptyControlCollection (this);
+            return new System.Web.UI.EmptyControlCollection(this);
         }
 
-        protected internal override void OnPreRender (EventArgs e)
+        protected internal override void OnPreRender(EventArgs e)
         {
-            base.OnPreRender (e);
+            base.OnPreRender(e);
         }
 
-        protected internal override void Render (HtmlTextWriter writer)
+        protected internal override void Render(HtmlTextWriter writer)
         {
             Page page = Page;
             string uniqueid = UniqueID;
             if (page != null)
-                page.ClientScript.RegisterForEventValidation (uniqueid);
-            
-            writer.AddAttribute (HtmlTextWriterAttribute.Type, "hidden", false);
+                page.ClientScript.RegisterForEventValidation(uniqueid);
 
-            if (!String.IsNullOrEmpty (ClientID))
-                writer.AddAttribute (HtmlTextWriterAttribute.Id, ClientID);
+            writer.AddAttribute(HtmlTextWriterAttribute.Type, "hidden", false);
 
-            if (!String.IsNullOrEmpty (uniqueid))
-                writer.AddAttribute (HtmlTextWriterAttribute.Name, uniqueid);
+            if (!String.IsNullOrEmpty(ClientID))
+                writer.AddAttribute(HtmlTextWriterAttribute.Id, ClientID);
 
-            if (!String.IsNullOrEmpty (Value))
-                writer.AddAttribute (HtmlTextWriterAttribute.Value, Value);
+            if (!String.IsNullOrEmpty(uniqueid))
+                writer.AddAttribute(HtmlTextWriterAttribute.Name, uniqueid);
 
-            writer.RenderBeginTag (HtmlTextWriterTag.Input);
-            writer.RenderEndTag ();    
+            if (!String.IsNullOrEmpty(Value))
+                writer.AddAttribute(HtmlTextWriterAttribute.Value, Value);
+
+            writer.RenderBeginTag(HtmlTextWriterTag.Input);
+            writer.RenderEndTag();
         }
 
         #region IPostBackDataHandler Members
 
-        bool IPostBackDataHandler.LoadPostData (string postDataKey, System.Collections.Specialized.NameValueCollection postCollection)
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            System.Collections.Specialized.NameValueCollection postCollection
+        )
         {
-            return LoadPostData (postDataKey, postCollection);
+            return LoadPostData(postDataKey, postCollection);
         }
 
-        void IPostBackDataHandler.RaisePostDataChangedEvent ()
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
         {
-            RaisePostDataChangedEvent ();
+            RaisePostDataChangedEvent();
         }
 
         #endregion
     }
 }
-

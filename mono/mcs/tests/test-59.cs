@@ -3,9 +3,9 @@
 //
 using System;
 
-class X {
-
-    static int test_explicit ()
+class X
+{
+    static int test_explicit()
     {
         object x_int = 1;
         object x_uint_1 = 1u;
@@ -38,7 +38,7 @@ class X {
 
         if (!(x_ulong_2 is ulong))
             return 8;
-        
+
         if (!(x_ulong_3 is ulong))
             return 9;
 
@@ -49,10 +49,9 @@ class X {
             return 11;
 
         return 0;
-
     }
 
-    static int test_implicit ()
+    static int test_implicit()
     {
         object i_int = 1;
         object i_uint = 0x80000000;
@@ -70,16 +69,16 @@ class X {
 
         return 0;
     }
-    
-    public static int Main ()
+
+    public static int Main()
     {
         int v;
-        v = test_explicit ();
+        v = test_explicit();
 
         if (v != 0)
             return v;
 
-        v = test_implicit ();
+        v = test_implicit();
         if (v != 0)
             return 20 + v;
 
@@ -90,11 +89,10 @@ class X {
         if (l != 0L)
             ;
 
-
         // This was a compilation bug, error: 57522
         ulong myulog = 0L;
 
-        Console.WriteLine ("Tests pass");
+        Console.WriteLine("Tests pass");
         return 0;
     }
 }

@@ -6,11 +6,11 @@
 
 /*
  * Config related classes for HttpApplication
- * 
+ *
  */
 
-namespace System.Web.Configuration.Common {
-
+namespace System.Web.Configuration.Common
+{
     using System.Runtime.Serialization.Formatters;
     using System.Threading;
     using System.Runtime.InteropServices;
@@ -30,41 +30,70 @@ namespace System.Web.Configuration.Common {
     /*
      * Single Entry of request to class
      */
-    internal class ModulesEntry {
+    internal class ModulesEntry
+    {
         private String _name;
         private Type _type;
 
-        internal ModulesEntry(String name, String typeName, string propertyName, ConfigurationElement configElement) {
+        internal ModulesEntry(
+            String name,
+            String typeName,
+            string propertyName,
+            ConfigurationElement configElement
+        )
+        {
             _name = (name != null) ? name : String.Empty;
 
             // Don't check the APTCA bit for modules (VSWhidbey 467768, 550122)
             _type = SecureGetType(typeName, propertyName, configElement);
-            if (!typeof(IHttpModule).IsAssignableFrom(_type)) {
-                if (configElement == null) {
-                    throw new ConfigurationErrorsException(SR.GetString(SR.Type_not_module, typeName)); 
+            if (!typeof(IHttpModule).IsAssignableFrom(_type))
+            {
+                if (configElement == null)
+                {
+                    throw new ConfigurationErrorsException(
+                        SR.GetString(SR.Type_not_module, typeName)
+                    );
                 }
-                else {
-                    throw new ConfigurationErrorsException(SR.GetString(SR.Type_not_module, typeName),
-                              configElement.ElementInformation.Properties["type"].Source, configElement.ElementInformation.Properties["type"].LineNumber);
+                else
+                {
+                    throw new ConfigurationErrorsException(
+                        SR.GetString(SR.Type_not_module, typeName),
+                        configElement.ElementInformation.Properties["type"].Source,
+                        configElement.ElementInformation.Properties["type"].LineNumber
+                    );
                 }
             }
         }
 
-        internal static bool IsTypeMatch(Type type, String typeName) {
-            return(type.Name.Equals(typeName) || type.FullName.Equals(typeName));
+        internal static bool IsTypeMatch(Type type, String typeName)
+        {
+            return (type.Name.Equals(typeName) || type.FullName.Equals(typeName));
         }
 
-        internal String ModuleName {
+        internal String ModuleName
+        {
             get { return _name; }
         }
 
-        internal /*public*/ IHttpModule Create() {
+        internal /*public*/
+        IHttpModule Create()
+        {
             return (IHttpModule)HttpRuntime.CreateNonPublicInstance(_type);
         }
 
-        [PermissionSet(SecurityAction.Assert, Unrestricted=true)]
-        private Type SecureGetType(string typeName, string propertyName, ConfigurationElement configElement) {
-            return ConfigUtil.GetType(typeName, propertyName, configElement, false /*checkAptcaBit*/);
+        [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
+        private Type SecureGetType(
+            string typeName,
+            string propertyName,
+            ConfigurationElement configElement
+        )
+        {
+            return ConfigUtil.GetType(
+                typeName,
+                propertyName,
+                configElement,
+                false /*checkAptcaBit*/
+            );
         }
     }
 }

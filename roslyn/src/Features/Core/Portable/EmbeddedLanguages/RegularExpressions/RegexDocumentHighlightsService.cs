@@ -22,21 +22,30 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
     {
         private readonly RegexEmbeddedLanguage _language;
 
-        public RegexDocumentHighlightsService(RegexEmbeddedLanguage language)
-            => _language = language;
+        public RegexDocumentHighlightsService(RegexEmbeddedLanguage language) =>
+            _language = language;
 
         public async Task<ImmutableArray<DocumentHighlights>> GetDocumentHighlightsAsync(
-            Document document, int position, IImmutableSet<Document> documentsToSearch, DocumentHighlightingOptions options, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            IImmutableSet<Document> documentsToSearch,
+            DocumentHighlightingOptions options,
+            CancellationToken cancellationToken
+        )
         {
             if (!options.HighlightRelatedRegexComponentsUnderCursor)
             {
                 return default;
             }
 
-            var tree = await _language.TryGetTreeAtPositionAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var tree = await _language
+                .TryGetTreeAtPositionAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             return tree == null
                 ? default
-                : ImmutableArray.Create(new DocumentHighlights(document, GetHighlights(tree, position)));
+                : ImmutableArray.Create(
+                    new DocumentHighlights(document, GetHighlights(tree, position))
+                );
         }
 
         private ImmutableArray<HighlightSpan> GetHighlights(RegexTree tree, int positionInDocument)
@@ -52,7 +61,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
                 return default;
             }
 
-            // Nothing was on the right of the caret.  Return anything we were able to find on 
+            // Nothing was on the right of the caret.  Return anything we were able to find on
             // the left of the caret.
             var referencesOnTheLeft = GetReferences(tree, positionInDocument - 1);
             return referencesOnTheLeft;
@@ -70,7 +79,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             return FindReferenceHighlights(tree, ch);
         }
 
-        private ImmutableArray<HighlightSpan> FindReferenceHighlights(RegexTree tree, VirtualChar ch)
+        private ImmutableArray<HighlightSpan> FindReferenceHighlights(
+            RegexTree tree,
+            VirtualChar ch
+        )
         {
             var node = FindReferenceNode(tree.Root, ch);
             if (node == null)
@@ -100,16 +112,21 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
         }
 
         private static ImmutableArray<HighlightSpan> CreateHighlights(
-            RegexEscapeNode node, TextSpan captureSpan)
+            RegexEscapeNode node,
+            TextSpan captureSpan
+        )
         {
-            return ImmutableArray.Create(CreateHighlightSpan(node.GetSpan()), CreateHighlightSpan(captureSpan));
+            return ImmutableArray.Create(
+                CreateHighlightSpan(node.GetSpan()),
+                CreateHighlightSpan(captureSpan)
+            );
         }
 
-        private static HighlightSpan CreateHighlightSpan(TextSpan textSpan)
-            => new(textSpan, HighlightSpanKind.None);
+        private static HighlightSpan CreateHighlightSpan(TextSpan textSpan) =>
+            new(textSpan, HighlightSpanKind.None);
 
-        private static RegexToken GetCaptureToken(RegexEscapeNode node)
-            => node switch
+        private static RegexToken GetCaptureToken(RegexEscapeNode node) =>
+            node switch
             {
                 RegexBackreferenceEscapeNode backReference => backReference.NumberToken,
                 RegexCaptureEscapeNode captureEscape => captureEscape.CaptureToken,
@@ -119,9 +136,12 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
 
         private RegexEscapeNode FindReferenceNode(RegexNode node, VirtualChar virtualChar)
         {
-            if (node.Kind is RegexKind.BackreferenceEscape or
-                RegexKind.CaptureEscape or
-                RegexKind.KCaptureEscape)
+            if (
+                node.Kind
+                is RegexKind.BackreferenceEscape
+                    or RegexKind.CaptureEscape
+                    or RegexKind.KCaptureEscape
+            )
             {
                 if (node.Contains(virtualChar))
                 {

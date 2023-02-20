@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,12 +33,13 @@ using System.Security.Permissions;
 
 using System.Diagnostics;
 
-namespace MonoTests.System.Security.Permissions {
-
+namespace MonoTests.System.Security.Permissions
+{
     [TestFixture]
-    public class UrlIdentityPermissionTest {
-
-        static string[] GoodUrls = {
+    public class UrlIdentityPermissionTest
+    {
+        static string[] GoodUrls =
+        {
             "http://www.mono-project.com:80/",
             "http://www.mono-project.com/",
             "http://www.mono-project.com",
@@ -52,332 +53,355 @@ namespace MonoTests.System.Security.Permissions {
         };
 
         [Test]
-        public void PermissionState_None ()
+        public void PermissionState_None()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
             // that cause a NullReferenceException before 2.0
-            Assert.AreEqual (String.Empty, uip.Url, "Url");
-            SecurityElement se = uip.ToXml ();
+            Assert.AreEqual(String.Empty, uip.Url, "Url");
+            SecurityElement se = uip.ToXml();
             // only class and version are present
-            Assert.AreEqual (2, se.Attributes.Count, "Xml-Attributes");
-            Assert.IsNull (se.Children, "Xml-Children");
-            UrlIdentityPermission copy = (UrlIdentityPermission)uip.Copy ();
-            Assert.IsFalse (Object.ReferenceEquals (uip, copy), "ReferenceEquals");
+            Assert.AreEqual(2, se.Attributes.Count, "Xml-Attributes");
+            Assert.IsNull(se.Children, "Xml-Children");
+            UrlIdentityPermission copy = (UrlIdentityPermission)uip.Copy();
+            Assert.IsFalse(Object.ReferenceEquals(uip, copy), "ReferenceEquals");
         }
 
-
         [Test]
-        [Category ("NotWorking")]
-        public void PermissionStateUnrestricted ()
+        [Category("NotWorking")]
+        public void PermissionStateUnrestricted()
         {
             // In 2.0 Unrestricted are permitted for identity permissions
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.Unrestricted);
-            Assert.AreEqual (String.Empty, uip.Url, "Url");
-            SecurityElement se = uip.ToXml ();
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.Unrestricted);
+            Assert.AreEqual(String.Empty, uip.Url, "Url");
+            SecurityElement se = uip.ToXml();
             // only class and version are present
-            Assert.AreEqual (3, se.Attributes.Count, "Xml-Attributes");
-            Assert.IsNull (se.Children, "Xml-Children");
+            Assert.AreEqual(3, se.Attributes.Count, "Xml-Attributes");
+            Assert.IsNull(se.Children, "Xml-Children");
             // and they aren't equals to None
-            Assert.IsFalse (uip.Equals (new UrlIdentityPermission (PermissionState.None)));
-        }
-        [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void PermissionState_Bad ()
-        {
-            UrlIdentityPermission uip = new UrlIdentityPermission ((PermissionState)Int32.MinValue);
+            Assert.IsFalse(uip.Equals(new UrlIdentityPermission(PermissionState.None)));
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void UrlIdentityPermission_NullUrl ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void PermissionState_Bad()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (null);
+            UrlIdentityPermission uip = new UrlIdentityPermission((PermissionState)Int32.MinValue);
         }
 
         [Test]
-        public void Url ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void UrlIdentityPermission_NullUrl()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
-            foreach (string s in GoodUrls) {
+            UrlIdentityPermission uip = new UrlIdentityPermission(null);
+        }
+
+        [Test]
+        public void Url()
+        {
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
+            foreach (string s in GoodUrls)
+            {
                 uip.Url = s;
-                Assert.AreEqual (s, uip.Url, s);
+                Assert.AreEqual(s, uip.Url, s);
             }
         }
 
         [Test]
-        public void Url_Null ()
+        public void Url_Null()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
             uip.Url = null;
-            Assert.AreEqual (String.Empty, uip.Url, "Url");
+            Assert.AreEqual(String.Empty, uip.Url, "Url");
         }
 
         [Test]
-        public void Copy ()
+        public void Copy()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
-            foreach (string s in GoodUrls) {
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
+            foreach (string s in GoodUrls)
+            {
                 uip.Url = s;
-                UrlIdentityPermission copy = (UrlIdentityPermission)uip.Copy ();
+                UrlIdentityPermission copy = (UrlIdentityPermission)uip.Copy();
                 // Fx 1.0/1.1 adds a '/' at the end, while 2.0 keeps the original format
                 // so we only compare the start of the url
-                Assert.AreEqual (uip.Url, copy.Url, "Url");
+                Assert.AreEqual(uip.Url, copy.Url, "Url");
             }
         }
 
         [Test]
-        public void Copy_None ()
+        public void Copy_None()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
-            UrlIdentityPermission copy = (UrlIdentityPermission)uip.Copy ();
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
+            UrlIdentityPermission copy = (UrlIdentityPermission)uip.Copy();
         }
 
         [Test]
-        public void Intersect_Null ()
+        public void Intersect_Null()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
             // No intersection with null
-            foreach (string s in GoodUrls) {
+            foreach (string s in GoodUrls)
+            {
                 uip.Url = s;
-                Assert.IsNull (uip.Intersect (null), s);
+                Assert.IsNull(uip.Intersect(null), s);
             }
         }
-        [Category ("NotWorking")]
+
+        [Category("NotWorking")]
         [Test]
-        public void Intersect_None ()
+        public void Intersect_None()
         {
-            UrlIdentityPermission uip1 = new UrlIdentityPermission (PermissionState.None);
-            UrlIdentityPermission uip2 = new UrlIdentityPermission (PermissionState.None);
-            UrlIdentityPermission result = (UrlIdentityPermission)uip1.Intersect (uip2);
-            Assert.IsNull (result, "None N None");
-            foreach (string s in GoodUrls) {
+            UrlIdentityPermission uip1 = new UrlIdentityPermission(PermissionState.None);
+            UrlIdentityPermission uip2 = new UrlIdentityPermission(PermissionState.None);
+            UrlIdentityPermission result = (UrlIdentityPermission)uip1.Intersect(uip2);
+            Assert.IsNull(result, "None N None");
+            foreach (string s in GoodUrls)
+            {
                 uip1.Url = s;
                 // 1. Intersect None with Url
-                result = (UrlIdentityPermission)uip1.Intersect (uip2);
-                Assert.IsNull (result, "None N " + s);
+                result = (UrlIdentityPermission)uip1.Intersect(uip2);
+                Assert.IsNull(result, "None N " + s);
                 // 2. Intersect Url with None
-                result = (UrlIdentityPermission)uip2.Intersect (uip1);
-                Assert.IsNull (result, s + "N None");
+                result = (UrlIdentityPermission)uip2.Intersect(uip1);
+                Assert.IsNull(result, s + "N None");
             }
         }
 
         [Test]
-        public void Intersect_Self ()
+        public void Intersect_Self()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
-            foreach (string s in GoodUrls) {
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
+            foreach (string s in GoodUrls)
+            {
                 uip.Url = s;
-                UrlIdentityPermission result = (UrlIdentityPermission)uip.Intersect (uip);
+                UrlIdentityPermission result = (UrlIdentityPermission)uip.Intersect(uip);
                 // Fx 1.0/1.1 adds a '/' at the end, while 2.0 keeps the original format
                 // so we only compare the start of the url
-                Assert.IsTrue (result.Url.StartsWith (uip.Url), s);
+                Assert.IsTrue(result.Url.StartsWith(uip.Url), s);
             }
         }
 
         [Test]
-        public void Intersect_Different ()
+        public void Intersect_Different()
         {
-            UrlIdentityPermission uip1 = new UrlIdentityPermission (GoodUrls [0]);
-            UrlIdentityPermission uip2 = new UrlIdentityPermission (GoodUrls [1]);
-            UrlIdentityPermission result = (UrlIdentityPermission)uip1.Intersect (uip2);
-            Assert.IsNull (result, "Mono N Novell");
+            UrlIdentityPermission uip1 = new UrlIdentityPermission(GoodUrls[0]);
+            UrlIdentityPermission uip2 = new UrlIdentityPermission(GoodUrls[1]);
+            UrlIdentityPermission result = (UrlIdentityPermission)uip1.Intersect(uip2);
+            Assert.IsNull(result, "Mono N Novell");
         }
 
         [Test]
-        public void IsSubset_Null ()
+        public void IsSubset_Null()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
-            Assert.IsTrue (uip.IsSubsetOf (null), "Empty");
-            foreach (string s in GoodUrls) {
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
+            Assert.IsTrue(uip.IsSubsetOf(null), "Empty");
+            foreach (string s in GoodUrls)
+            {
                 uip.Url = s;
-                Assert.IsFalse (uip.IsSubsetOf (null), s);
+                Assert.IsFalse(uip.IsSubsetOf(null), s);
             }
         }
 
-        [Category ("NotWorking")]
+        [Category("NotWorking")]
         [Test]
-        public void IsSubset_None ()
+        public void IsSubset_None()
         {
             // IsSubset with none
             // a. source (this) is none -> target is never a subset
-            UrlIdentityPermission uip1 = new UrlIdentityPermission (PermissionState.None);
-            UrlIdentityPermission uip2 = new UrlIdentityPermission (PermissionState.None);
-            foreach (string s in GoodUrls) {
+            UrlIdentityPermission uip1 = new UrlIdentityPermission(PermissionState.None);
+            UrlIdentityPermission uip2 = new UrlIdentityPermission(PermissionState.None);
+            foreach (string s in GoodUrls)
+            {
                 uip1.Url = s;
-                Assert.IsFalse (uip1.IsSubsetOf (uip2), "target " + s);
+                Assert.IsFalse(uip1.IsSubsetOf(uip2), "target " + s);
             }
-            uip1 = new UrlIdentityPermission (PermissionState.None);
+            uip1 = new UrlIdentityPermission(PermissionState.None);
             // b. destination (target) is none -> target is always a subset
-            foreach (string s in GoodUrls) {
+            foreach (string s in GoodUrls)
+            {
                 uip2.Url = s;
-                Assert.IsFalse (uip2.IsSubsetOf (uip1), "source " + s);
+                Assert.IsFalse(uip2.IsSubsetOf(uip1), "source " + s);
             }
         }
 
         [Test]
-        public void IsSubset_Self ()
+        public void IsSubset_Self()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
-            Assert.IsTrue (uip.IsSubsetOf (uip), "None");
-            foreach (string s in GoodUrls) {
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
+            Assert.IsTrue(uip.IsSubsetOf(uip), "None");
+            foreach (string s in GoodUrls)
+            {
                 uip.Url = s;
-                Assert.IsTrue (uip.IsSubsetOf (uip), s);
+                Assert.IsTrue(uip.IsSubsetOf(uip), s);
             }
         }
 
         [Test]
-        public void IsSubset_Different ()
+        public void IsSubset_Different()
         {
-            UrlIdentityPermission uip1 = new UrlIdentityPermission (GoodUrls [0]);
-            UrlIdentityPermission uip2 = new UrlIdentityPermission (GoodUrls [1]);
-            Assert.IsFalse (uip1.IsSubsetOf (uip2), "Mono subset Novell");
-            Assert.IsFalse (uip2.IsSubsetOf (uip1), "Novell subset Mono");
+            UrlIdentityPermission uip1 = new UrlIdentityPermission(GoodUrls[0]);
+            UrlIdentityPermission uip2 = new UrlIdentityPermission(GoodUrls[1]);
+            Assert.IsFalse(uip1.IsSubsetOf(uip2), "Mono subset Novell");
+            Assert.IsFalse(uip2.IsSubsetOf(uip1), "Novell subset Mono");
         }
 
         [Test]
-        public void Union_Null ()
+        public void Union_Null()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
             // Union with null is a simple copy
-            foreach (string s in GoodUrls) {
+            foreach (string s in GoodUrls)
+            {
                 uip.Url = s;
-                UrlIdentityPermission union = (UrlIdentityPermission)uip.Union (null);
+                UrlIdentityPermission union = (UrlIdentityPermission)uip.Union(null);
                 // Fx 1.0/1.1 adds a '/' at the end, while 2.0 keeps the original format
                 // so we only compare the start of the url
-                Assert.IsTrue (union.Url.StartsWith (uip.Url), s);
+                Assert.IsTrue(union.Url.StartsWith(uip.Url), s);
             }
         }
 
         [Test]
-        public void Union_None ()
+        public void Union_None()
         {
             // Union with none is same
-            UrlIdentityPermission uip1 = new UrlIdentityPermission (PermissionState.None);
-            UrlIdentityPermission uip2 = new UrlIdentityPermission (PermissionState.None);
+            UrlIdentityPermission uip1 = new UrlIdentityPermission(PermissionState.None);
+            UrlIdentityPermission uip2 = new UrlIdentityPermission(PermissionState.None);
             // a. source (this) is none
-            foreach (string s in GoodUrls) {
+            foreach (string s in GoodUrls)
+            {
                 uip1.Url = s;
-                UrlIdentityPermission union = (UrlIdentityPermission)uip1.Union (uip2);
+                UrlIdentityPermission union = (UrlIdentityPermission)uip1.Union(uip2);
                 // Fx 1.0/1.1 adds a '/' at the end, while 2.0 keeps the original format
                 // so we only compare the start of the url
-                Assert.IsTrue (union.Url.StartsWith (uip1.Url), s);
+                Assert.IsTrue(union.Url.StartsWith(uip1.Url), s);
             }
-            uip1 = new UrlIdentityPermission (PermissionState.None);
+            uip1 = new UrlIdentityPermission(PermissionState.None);
             // b. destination (target) is none
-            foreach (string s in GoodUrls) {
+            foreach (string s in GoodUrls)
+            {
                 uip2.Url = s;
-                UrlIdentityPermission union = (UrlIdentityPermission)uip2.Union (uip1);
+                UrlIdentityPermission union = (UrlIdentityPermission)uip2.Union(uip1);
                 // Fx 1.0/1.1 adds a '/' at the end, while 2.0 keeps the original format
                 // so we only compare the start of the url
-                Assert.IsTrue (union.Url.StartsWith (uip2.Url), s);
+                Assert.IsTrue(union.Url.StartsWith(uip2.Url), s);
             }
         }
 
         [Test]
-        public void Union_Self ()
+        public void Union_Self()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
-            UrlIdentityPermission union = (UrlIdentityPermission)uip.Union (uip);
-            Assert.IsNull (union, "None U None"); 
-            foreach (string s in GoodUrls) {
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
+            UrlIdentityPermission union = (UrlIdentityPermission)uip.Union(uip);
+            Assert.IsNull(union, "None U None");
+            foreach (string s in GoodUrls)
+            {
                 uip.Url = s;
-                union = (UrlIdentityPermission)uip.Union (uip);
+                union = (UrlIdentityPermission)uip.Union(uip);
                 // Fx 1.0/1.1 adds a '/' at the end, while 2.0 keeps the original format
                 // so we only compare the start of the url
-                Assert.IsTrue (union.Url.StartsWith (uip.Url), s);
+                Assert.IsTrue(union.Url.StartsWith(uip.Url), s);
             }
         }
-        [Category ("NotWorking")]
+
+        [Category("NotWorking")]
         [Test]
-        public void Union_Different ()
+        public void Union_Different()
         {
-            UrlIdentityPermission uip1 = new UrlIdentityPermission (GoodUrls [0]);
-            UrlIdentityPermission uip2 = new UrlIdentityPermission (GoodUrls [1]);
-            UrlIdentityPermission result = (UrlIdentityPermission)uip1.Union (uip2);
-            Assert.IsNotNull (result, "Mono U Novell");
+            UrlIdentityPermission uip1 = new UrlIdentityPermission(GoodUrls[0]);
+            UrlIdentityPermission uip2 = new UrlIdentityPermission(GoodUrls[1]);
+            UrlIdentityPermission result = (UrlIdentityPermission)uip1.Union(uip2);
+            Assert.IsNotNull(result, "Mono U Novell");
             // new XML format is used to contain more than one site
-            SecurityElement se = result.ToXml ();
-            Assert.AreEqual (2, se.Children.Count, "Childs");
-            Assert.AreEqual (GoodUrls [0], (se.Children [0] as SecurityElement).Attribute ("Url"), "Url#1");
-            Assert.AreEqual (GoodUrls [1], (se.Children [1] as SecurityElement).Attribute ("Url"), "Url#2");
+            SecurityElement se = result.ToXml();
+            Assert.AreEqual(2, se.Children.Count, "Childs");
+            Assert.AreEqual(
+                GoodUrls[0],
+                (se.Children[0] as SecurityElement).Attribute("Url"),
+                "Url#1"
+            );
+            Assert.AreEqual(
+                GoodUrls[1],
+                (se.Children[1] as SecurityElement).Attribute("Url"),
+                "Url#2"
+            );
             // strangely it is still versioned as 'version="1"'.
-            Assert.AreEqual ("1", se.Attribute ("version"), "Version");
+            Assert.AreEqual("1", se.Attribute("version"), "Version");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void FromXml_Null ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FromXml_Null()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
-            uip.FromXml (null);
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
+            uip.FromXml(null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void FromXml_WrongTag ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void FromXml_WrongTag()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
-            SecurityElement se = uip.ToXml ();
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
+            SecurityElement se = uip.ToXml();
             se.Tag = "IMono";
-            uip.FromXml (se);
+            uip.FromXml(se);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void FromXml_WrongTagCase ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void FromXml_WrongTagCase()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
-            SecurityElement se = uip.ToXml ();
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
+            SecurityElement se = uip.ToXml();
             se.Tag = "IPERMISSION"; // instead of IPermission
-            uip.FromXml (se);
+            uip.FromXml(se);
         }
 
         [Test]
-        public void FromXml_WrongClass ()
+        public void FromXml_WrongClass()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
-            SecurityElement se = uip.ToXml ();
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
+            SecurityElement se = uip.ToXml();
 
-            SecurityElement w = new SecurityElement (se.Tag);
-            w.AddAttribute ("class", "Wrong" + se.Attribute ("class"));
-            w.AddAttribute ("version", se.Attribute ("version"));
-            uip.FromXml (w);
+            SecurityElement w = new SecurityElement(se.Tag);
+            w.AddAttribute("class", "Wrong" + se.Attribute("class"));
+            w.AddAttribute("version", se.Attribute("version"));
+            uip.FromXml(w);
             // doesn't care of the class name at that stage
             // anyway the class has already be created so...
         }
 
         [Test]
-        public void FromXml_NoClass ()
+        public void FromXml_NoClass()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
-            SecurityElement se = uip.ToXml ();
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
+            SecurityElement se = uip.ToXml();
 
-            SecurityElement w = new SecurityElement (se.Tag);
-            w.AddAttribute ("version", se.Attribute ("version"));
-            uip.FromXml (w);
+            SecurityElement w = new SecurityElement(se.Tag);
+            w.AddAttribute("version", se.Attribute("version"));
+            uip.FromXml(w);
             // doesn't even care of the class attribute presence
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void FromXml_WrongVersion ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void FromXml_WrongVersion()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
-            SecurityElement se = uip.ToXml ();
-            se.Attributes.Remove ("version");
-            se.Attributes.Add ("version", "2");
-            uip.FromXml (se);
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
+            SecurityElement se = uip.ToXml();
+            se.Attributes.Remove("version");
+            se.Attributes.Add("version", "2");
+            uip.FromXml(se);
         }
 
         [Test]
-        public void FromXml_NoVersion ()
+        public void FromXml_NoVersion()
         {
-            UrlIdentityPermission uip = new UrlIdentityPermission (PermissionState.None);
-            SecurityElement se = uip.ToXml ();
+            UrlIdentityPermission uip = new UrlIdentityPermission(PermissionState.None);
+            SecurityElement se = uip.ToXml();
 
-            SecurityElement w = new SecurityElement (se.Tag);
-            w.AddAttribute ("class", se.Attribute ("class"));
-            uip.FromXml (w);
+            SecurityElement w = new SecurityElement(se.Tag);
+            w.AddAttribute("class", se.Attribute("class"));
+            uip.FromXml(w);
         }
     }
 }

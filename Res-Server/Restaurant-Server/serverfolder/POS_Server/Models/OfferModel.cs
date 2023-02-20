@@ -23,7 +23,6 @@ namespace POS_Server.Models
 
         public long membershipOfferId { get; set; }
         public Nullable<long> membershipId { get; set; }
-       
 
         public Boolean canDelete { get; set; }
         public string forAgents { get; set; }

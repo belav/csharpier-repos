@@ -17,19 +17,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 {
     internal sealed class EmbeddedProperty : EmbeddedTypesManager.CommonEmbeddedProperty
     {
-        public EmbeddedProperty(PropertySymbolAdapter underlyingProperty, EmbeddedMethod getter, EmbeddedMethod setter) :
-            base(underlyingProperty, getter, setter)
-        {
-        }
+        public EmbeddedProperty(
+            PropertySymbolAdapter underlyingProperty,
+            EmbeddedMethod getter,
+            EmbeddedMethod setter
+        )
+            : base(underlyingProperty, getter, setter) { }
 
-        protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(PEModuleBuilder moduleBuilder)
+        protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
+            PEModuleBuilder moduleBuilder
+        )
         {
-            return UnderlyingProperty.AdaptedPropertySymbol.GetCustomAttributesToEmit(moduleBuilder);
+            return UnderlyingProperty.AdaptedPropertySymbol.GetCustomAttributesToEmit(
+                moduleBuilder
+            );
         }
 
         protected override ImmutableArray<EmbeddedParameter> GetParameters()
         {
-            return EmbeddedTypesManager.EmbedParameters(this, UnderlyingProperty.AdaptedPropertySymbol.Parameters);
+            return EmbeddedTypesManager.EmbedParameters(
+                this,
+                UnderlyingProperty.AdaptedPropertySymbol.Parameters
+            );
         }
 
         protected override bool IsRuntimeSpecial
@@ -39,18 +48,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
         protected override bool IsSpecialName
         {
-            get
-            {
-                return UnderlyingProperty.AdaptedPropertySymbol.HasSpecialName;
-            }
+            get { return UnderlyingProperty.AdaptedPropertySymbol.HasSpecialName; }
         }
 
         protected override Cci.ISignature UnderlyingPropertySignature
         {
-            get
-            {
-                return (Cci.ISignature)UnderlyingProperty;
-            }
+            get { return (Cci.ISignature)UnderlyingProperty; }
         }
 
         protected override EmbeddedType ContainingType
@@ -68,10 +71,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
         protected override string Name
         {
-            get
-            {
-                return UnderlyingProperty.AdaptedPropertySymbol.MetadataName;
-            }
+            get { return UnderlyingProperty.AdaptedPropertySymbol.MetadataName; }
         }
     }
 }

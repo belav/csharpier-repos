@@ -69,8 +69,12 @@ namespace System.Web.Mvc.Routing
             RouteValueDictionary defaults = new RouteValueDictionary();
             RouteValueDictionary constraints = new RouteValueDictionary();
 #endif
-            string standardRouteTemplate = InlineRouteTemplateParser.ParseRouteTemplate(template,
-                defaults, constraints, new DefaultInlineConstraintResolver());
+            string standardRouteTemplate = InlineRouteTemplateParser.ParseRouteTemplate(
+                template,
+                defaults,
+                constraints,
+                new DefaultInlineConstraintResolver()
+            );
             var parsedRoute = RouteParser.Parse(standardRouteTemplate);
             return RoutePrecedence.Compute(parsedRoute, constraints);
         }

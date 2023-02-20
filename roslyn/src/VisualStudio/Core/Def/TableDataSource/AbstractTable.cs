@@ -15,7 +15,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
     /// </summary>
     internal abstract class AbstractTable
     {
-        protected AbstractTable(Workspace workspace, ITableManagerProvider provider, string tableIdentifier)
+        protected AbstractTable(
+            Workspace workspace,
+            ITableManagerProvider provider,
+            string tableIdentifier
+        )
         {
             Workspace = workspace;
             this.TableManager = provider.GetTableManager(tableIdentifier);
@@ -29,8 +33,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         protected abstract void RemoveTableSourceIfNecessary(Solution solution);
         protected abstract void ShutdownSource();
 
-        protected void ConnectWorkspaceEvents()
-            => Workspace.WorkspaceChanged += OnWorkspaceChanged;
+        protected void ConnectWorkspaceEvents() => Workspace.WorkspaceChanged += OnWorkspaceChanged;
 
         private void OnWorkspaceChanged(object sender, WorkspaceChangeEventArgs e)
         {
@@ -88,7 +91,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             AddTableSource(source);
         }
 
-        protected void AddTableSource(ITableDataSource source)
-            => this.TableManager.AddSource(source, Columns);
+        protected void AddTableSource(ITableDataSource source) =>
+            this.TableManager.AddSource(source, Columns);
     }
 }

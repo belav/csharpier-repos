@@ -68,7 +68,9 @@ namespace Moq.Tests
         public void Setup_can_setup_simple_method()
         {
             bool doSomethingImplInvoked = false;
-            this.protectedMock.Setup(m => m.DoSomethingImpl()).Callback(() => doSomethingImplInvoked = true);
+            this.protectedMock
+                .Setup(m => m.DoSomethingImpl())
+                .Callback(() => doSomethingImplInvoked = true);
 
             this.mock.Object.DoSomething();
 
@@ -89,7 +91,9 @@ namespace Moq.Tests
         public void Setup_can_match_exact_arguments()
         {
             bool doSomethingImplInvoked = false;
-            this.protectedMock.Setup(m => m.DoSomethingImpl(1)).Callback(() => doSomethingImplInvoked = true);
+            this.protectedMock
+                .Setup(m => m.DoSomethingImpl(1))
+                .Callback(() => doSomethingImplInvoked = true);
 
             this.mock.Object.DoSomething(0);
             Assert.False(doSomethingImplInvoked);
@@ -102,7 +106,9 @@ namespace Moq.Tests
         public void Setup_can_involve_matchers()
         {
             bool doSomethingImplInvoked = false;
-            this.protectedMock.Setup(m => m.DoSomethingImpl(It.Is<int>(i => i == 1))).Callback(() => doSomethingImplInvoked = true);
+            this.protectedMock
+                .Setup(m => m.DoSomethingImpl(It.Is<int>(i => i == 1)))
+                .Callback(() => doSomethingImplInvoked = true);
 
             this.mock.Object.DoSomething(0);
             Assert.False(doSomethingImplInvoked);
@@ -117,12 +123,15 @@ namespace Moq.Tests
             var handledMessages = new List<string>();
 
             var mock = new Mock<MessageHandlerBase>();
-            mock.Protected().As<MessageHandlerBaseish>()
+            mock.Protected()
+                .As<MessageHandlerBaseish>()
                 .Setup(m => m.HandleImpl(It.IsAny<string>()))
-                .Callback((string message) =>
-                {
-                    handledMessages.Add(message);
-                });
+                .Callback(
+                    (string message) =>
+                    {
+                        handledMessages.Add(message);
+                    }
+                );
 
             mock.Object.Handle("Hello world.", 3);
 
@@ -204,7 +213,8 @@ namespace Moq.Tests
         [Fact]
         public void SetupSequence_TResult_can_setup_property()
         {
-            this.protectedMock.SetupSequence(m => m.ReadOnlyPropertyImpl)
+            this.protectedMock
+                .SetupSequence(m => m.ReadOnlyPropertyImpl)
                 .Returns(1)
                 .Throws(new InvalidOperationException())
                 .Returns(3);
@@ -224,10 +234,11 @@ namespace Moq.Tests
         [Fact]
         public void SetupSequence_can_setup_actions()
         {
-            this.protectedMock.SetupSequence(m => m.DoSomethingImpl())
+            this.protectedMock
+                .SetupSequence(m => m.DoSomethingImpl())
                 .Pass()
-                .Pass().
-                Throws(new InvalidOperationException());
+                .Pass()
+                .Throws(new InvalidOperationException());
 
             this.mock.Object.DoSomething();
             this.mock.Object.DoSomething();
@@ -243,7 +254,9 @@ namespace Moq.Tests
         [Fact]
         public void SetUpSet_should_setup_setters()
         {
-            this.protectedMock.SetupSet(fish => fish.ReadWritePropertyImpl = 999).Throws(ExpectedException.Instance);
+            this.protectedMock
+                .SetupSet(fish => fish.ReadWritePropertyImpl = 999)
+                .Throws(ExpectedException.Instance);
 
             mock.Object.ReadWriteProperty = 123;
 
@@ -254,7 +267,9 @@ namespace Moq.Tests
         public void SetUpSet_should_setup_setters_with_property_type()
         {
             int value = 0;
-            this.protectedMock.SetupSet<int>(fish => fish.ReadWritePropertyImpl = 999).Callback(i => value = i);
+            this.protectedMock
+                .SetupSet<int>(fish => fish.ReadWritePropertyImpl = 999)
+                .Callback(i => value = i);
 
             mock.Object.ReadWriteProperty = 123;
             Assert.Equal(0, value);
@@ -266,22 +281,25 @@ namespace Moq.Tests
         [Fact]
         public void SetUpSet_should_work_recursively()
         {
-            this.protectedMock.SetupSet(f => f.Nested.Value = 999).Throws(ExpectedException.Instance);
+            this.protectedMock
+                .SetupSet(f => f.Nested.Value = 999)
+                .Throws(ExpectedException.Instance);
 
             mock.Object.GetNested().Value = 1;
-            
+
             Assert.Throws<ExpectedException>(() => mock.Object.GetNested().Value = 999);
         }
 
         [Fact]
         public void SetUpSet_Should_Work_With_Indexers()
         {
-            this.protectedMock.SetupSet(
-                o => o[
-                    It.IsInRange(0, 5, Range.Inclusive),
-                    It.IsIn("Bad", "JustAsBad")
-                ] = It.Is<int>(i => i > 10)
-            ).Throws(ExpectedException.Instance);
+            this.protectedMock
+                .SetupSet(
+                    o =>
+                        o[It.IsInRange(0, 5, Range.Inclusive), It.IsIn("Bad", "JustAsBad")] =
+                            It.Is<int>(i => i > 10)
+                )
+                .Throws(ExpectedException.Instance);
 
             mock.Object.SetMultipleIndexer(1, "Ok", 999);
 
@@ -300,15 +318,14 @@ namespace Moq.Tests
         [Fact]
         public void VerifySet_Should_Work()
         {
-            void VerifySet(Times? times = null,string failMessage = null)
+            void VerifySet(Times? times = null, string failMessage = null)
             {
                 this.protectedMock.VerifySet(
-                o => o[
-                    It.IsInRange(0, 5, Moq.Range.Inclusive),
-                    It.IsIn("Bad", "JustAsBad")
-                ] = It.Is<int>(i => i > 10),
-                times,
-                failMessage
+                    o =>
+                        o[It.IsInRange(0, 5, Moq.Range.Inclusive), It.IsIn("Bad", "JustAsBad")] =
+                            It.Is<int>(i => i > 10),
+                    times,
+                    failMessage
                 );
             }
             VerifySet(Times.Never());
@@ -320,13 +337,15 @@ namespace Moq.Tests
 
             mock.Object.SetMultipleIndexer(1, "Bad", 999);
             VerifySet(); // AtLeastOnce
-            
+
             mock.Object.SetMultipleIndexer(1, "JustAsBad", 12);
             VerifySet(Times.Exactly(2));
 
             Assert.Throws<MockException>(() => VerifySet(Times.AtMostOnce()));
 
-            var mockException = Assert.Throws<MockException>(() => VerifySet(Times.AtMostOnce(),"custom fail message"));
+            var mockException = Assert.Throws<MockException>(
+                () => VerifySet(Times.AtMostOnce(), "custom fail message")
+            );
             Assert.StartsWith("custom fail message", mockException.Message);
         }
 
@@ -367,7 +386,11 @@ namespace Moq.Tests
 
             var exception = Record.Exception(() =>
             {
-                this.protectedMock.Verify(m => m.DoSomethingImpl(), Times.Exactly(3), "Wasn't called three times.");
+                this.protectedMock.Verify(
+                    m => m.DoSomethingImpl(),
+                    Times.Exactly(3),
+                    "Wasn't called three times."
+                );
             });
 
             Assert.IsType<MockException>(exception);
@@ -381,7 +404,9 @@ namespace Moq.Tests
 
             mock.Object.Handle("Hello world.", 3);
 
-            mock.Protected().As<MessageHandlerBaseish>().Verify(m => m.HandleImpl("Hello world."), Times.Exactly(3));
+            mock.Protected()
+                .As<MessageHandlerBaseish>()
+                .Verify(m => m.HandleImpl("Hello world."), Times.Exactly(3));
         }
 
         [Fact]
@@ -408,7 +433,11 @@ namespace Moq.Tests
         {
             var exception = Record.Exception(() =>
             {
-                this.protectedMock.VerifyGet(m => m.ReadOnlyPropertyImpl, Times.Once(), "Was not queried.");
+                this.protectedMock.VerifyGet(
+                    m => m.ReadOnlyPropertyImpl,
+                    Times.Once(),
+                    "Was not queried."
+                );
             });
 
             Assert.IsType<MockException>(exception);
@@ -423,9 +452,7 @@ namespace Moq.Tests
 
         public abstract class Foo
         {
-            protected Foo()
-            {
-            }
+            protected Foo() { }
 
             public int ReadOnlyProperty => this.ReadOnlyPropertyImpl;
 
@@ -477,15 +504,8 @@ namespace Moq.Tests
             private int _virtualSet;
             public virtual int VirtualSet
             {
-                get
-                {
-                    return _virtualSet;
-                }
-                protected set
-                {
-                    _virtualSet = value;
-                }
-
+                get { return _virtualSet; }
+                protected set { _virtualSet = value; }
             }
 
             public void SetVirtual(int value)
@@ -496,15 +516,8 @@ namespace Moq.Tests
             private int _virtualGet;
             public virtual int VirtualGet
             {
-                protected get
-                {
-                    return _virtualGet;
-                }
-                set
-                {
-                    _virtualGet = value;
-                }
-
+                protected get { return _virtualGet; }
+                set { _virtualGet = value; }
             }
 
             public int GetVirtual()

@@ -7,19 +7,15 @@ class C<T>
 
 class X
 {
-    public static void Main ()
+    public static void Main() { }
+
+    void Test<T>(T A)
     {
-    }
-    
-    void Test<T> (T A)
-    {
-        A<T> ();
-        
+        A<T>();
+
         object C;
         var c = C<int>.Foo;
     }
-    
-    static void A<U> ()
-    {
-    }
+
+    static void A<U>() { }
 }

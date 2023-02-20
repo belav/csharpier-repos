@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,7 +40,13 @@ namespace System.Windows.Forms
         private Size tool_tip_size;
 
         #region Public Constructors
-        public PopupEventArgs (IWin32Window associatedWindow, Control associatedControl, bool isBalloon, Size size) : base ()
+        public PopupEventArgs(
+            IWin32Window associatedWindow,
+            Control associatedControl,
+            bool isBalloon,
+            Size size
+        )
+            : base()
         {
             this.associated_window = associatedWindow;
             this.associated_control = associatedControl;
@@ -50,19 +56,23 @@ namespace System.Windows.Forms
         #endregion    // Public Constructors
 
         #region Public Instance Properties
-        public Control AssociatedControl {
+        public Control AssociatedControl
+        {
             get { return this.associated_control; }
         }
 
-        public IWin32Window AssociatedWindow {
+        public IWin32Window AssociatedWindow
+        {
             get { return this.associated_window; }
         }
-        
-        public bool IsBalloon {
+
+        public bool IsBalloon
+        {
             get { return this.is_balloon; }
         }
-        
-        public Size ToolTipSize {
+
+        public Size ToolTipSize
+        {
             get { return this.tool_tip_size; }
             set { this.tool_tip_size = value; }
         }

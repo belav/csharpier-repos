@@ -4,15 +4,15 @@
 using System;
 using System.Collections.Generic;
 
-public class Dictionary<K,V>
+public class Dictionary<K, V>
 {
-    public void Add (V key)
+    public void Add(V key)
     {
-        throw new InvalidOperationException ();
+        throw new InvalidOperationException();
     }
 
-    public void Add (V value)
+    public void Add(V value)
     {
-        throw new InvalidOperationException ();
+        throw new InvalidOperationException();
     }
 }

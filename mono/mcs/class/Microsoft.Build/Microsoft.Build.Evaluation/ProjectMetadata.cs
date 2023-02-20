@@ -35,15 +35,21 @@ namespace Microsoft.Build.Evaluation
 {
     public class ProjectMetadata
     {
-        internal ProjectMetadata (Project project, string itemType, IEnumerable<ProjectMetadata> existingMetadata, Action<ProjectMetadata> remover, ProjectMetadataElement xml)
+        internal ProjectMetadata(
+            Project project,
+            string itemType,
+            IEnumerable<ProjectMetadata> existingMetadata,
+            Action<ProjectMetadata> remover,
+            ProjectMetadataElement xml
+        )
         {
             this.xml = xml;
             this.project = project;
             item_type = itemType;
-            predecessor = existingMetadata.FirstOrDefault (m => m.Name == xml.Name);
+            predecessor = existingMetadata.FirstOrDefault(m => m.Name == xml.Name);
             if (predecessor != null)
-                remover (predecessor);
-            is_imported = Project.ProjectCollection.OngoingImports.Any ();
+                remover(predecessor);
+            is_imported = Project.ProjectCollection.OngoingImports.Any();
         }
 
         readonly Project project;
@@ -52,37 +58,44 @@ namespace Microsoft.Build.Evaluation
         readonly ProjectMetadata predecessor;
         readonly bool is_imported;
 
-        public string EvaluatedValue {
-            get { return project.ExpandString (xml.Value); }
+        public string EvaluatedValue
+        {
+            get { return project.ExpandString(xml.Value); }
         }
 
-        public bool IsImported {
+        public bool IsImported
+        {
             get { return is_imported; }
         }
 
-        public string ItemType {
+        public string ItemType
+        {
             get { return item_type; }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return xml.Name; }
         }
 
-        public ProjectMetadata Predecessor {
+        public ProjectMetadata Predecessor
+        {
             get { return predecessor; }
         }
 
-        public Project Project {
+        public Project Project
+        {
             get { return project; }
         }
 
-        public string UnevaluatedValue {
+        public string UnevaluatedValue
+        {
             get { return xml.Value; }
         }
 
-        public ProjectMetadataElement Xml {
+        public ProjectMetadataElement Xml
+        {
             get { return xml; }
         }
     }
 }
-

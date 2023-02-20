@@ -10,7 +10,6 @@ namespace System.Threading.Tasks.Tests
 {
     public class AsyncEnumerableToBlockingEnumerableTests
     {
-
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void EmptyAsyncEnumerable()
         {
@@ -144,7 +143,9 @@ namespace System.Threading.Tasks.Tests
             Assert.Equal(1, source.TotalGetAsyncEnumeratorCalls);
             Assert.Equal(1, source.TotalDisposeAsyncCalls);
 
-            static async IAsyncEnumerable<string> CreateSourceEnumerable([EnumeratorCancellation] CancellationToken cancellationToken = default)
+            static async IAsyncEnumerable<string> CreateSourceEnumerable(
+                [EnumeratorCancellation] CancellationToken cancellationToken = default
+            )
             {
                 while (true)
                 {
@@ -167,10 +168,15 @@ namespace System.Threading.Tasks.Tests
             public int TotalDisposeAsyncCalls { get; private set; }
             public int TotalMoveNextAsyncCalls { get; private set; }
 
-            public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+            public IAsyncEnumerator<T> GetAsyncEnumerator(
+                CancellationToken cancellationToken = default
+            )
             {
                 TotalGetAsyncEnumeratorCalls++;
-                return new InstrumentedAsyncEnumerator(this, _source.GetAsyncEnumerator(cancellationToken));
+                return new InstrumentedAsyncEnumerator(
+                    this,
+                    _source.GetAsyncEnumerator(cancellationToken)
+                );
             }
 
             private class InstrumentedAsyncEnumerator : IAsyncEnumerator<T>
@@ -178,7 +184,10 @@ namespace System.Threading.Tasks.Tests
                 private readonly InstrumentedAsyncEnumerable<T> _parent;
                 private readonly IAsyncEnumerator<T> _enumerator;
 
-                public InstrumentedAsyncEnumerator(InstrumentedAsyncEnumerable<T> parent, IAsyncEnumerator<T> enumerator)
+                public InstrumentedAsyncEnumerator(
+                    InstrumentedAsyncEnumerable<T> parent,
+                    IAsyncEnumerator<T> enumerator
+                )
                 {
                     _parent = parent;
                     _enumerator = enumerator;

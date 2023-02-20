@@ -12,7 +12,7 @@
            at MainApp.Main()
         Passed!
 
-    Any other outcome is a bug.        
+    Any other outcome is a bug.
 */
 
 using System;
@@ -20,7 +20,6 @@ using System.Runtime.CompilerServices;
 
 public class MainApp
 {
-
     static int one = 1;
     static int zero = 0;
     static int result;
@@ -55,9 +54,5 @@ public class MainApp
             Console.WriteLine("Failed.");
             return 101;
         }
-
     }
-
 }
-
-

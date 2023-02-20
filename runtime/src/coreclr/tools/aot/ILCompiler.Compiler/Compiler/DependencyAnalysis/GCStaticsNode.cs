@@ -27,7 +27,8 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
@@ -54,10 +55,17 @@ namespace ILCompiler.DependencyAnalysis
 
             if (factory.PreinitializationManager.HasEagerStaticConstructor(_type))
             {
-                dependencyList.Add(factory.EagerCctorIndirection(_type.GetStaticConstructor()), "Eager .cctor");
+                dependencyList.Add(
+                    factory.EagerCctorIndirection(_type.GetStaticConstructor()),
+                    "Eager .cctor"
+                );
             }
 
-            ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(ref dependencyList, factory, _type.Module);
+            ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(
+                ref dependencyList,
+                factory,
+                _type.Module
+            );
 
             dependencyList.Add(factory.GCStaticsRegion, "GCStatics Region");
 
@@ -69,7 +77,9 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool StaticDependenciesAreComputed => true;
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.DataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.DataSection;
+
         public override bool IsShareable => EETypeNode.IsTypeNodeShareable(_type);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
@@ -88,7 +98,11 @@ namespace ILCompiler.DependencyAnalysis
                 delta |= GCStaticRegionConstants.HasPreInitializedData;
 
             if (factory.Target.SupportsRelativePointers)
-                builder.EmitReloc(GetGCStaticEETypeNode(factory), RelocType.IMAGE_REL_BASED_RELPTR32, delta);
+                builder.EmitReloc(
+                    GetGCStaticEETypeNode(factory),
+                    RelocType.IMAGE_REL_BASED_RELPTR32,
+                    delta
+                );
             else
                 builder.EmitPointerReloc(GetGCStaticEETypeNode(factory), delta);
 

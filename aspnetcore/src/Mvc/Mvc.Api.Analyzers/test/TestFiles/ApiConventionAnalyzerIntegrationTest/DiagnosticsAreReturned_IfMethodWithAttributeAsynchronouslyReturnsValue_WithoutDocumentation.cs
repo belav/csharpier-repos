@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {
     [ApiController]
-    public class DiagnosticsAreReturned_IfMethodWithAttributeAsynchronouslyReturnsValue_WithoutDocumentation : ControllerBase
+    public class DiagnosticsAreReturned_IfMethodWithAttributeAsynchronouslyReturnsValue_WithoutDocumentation
+        : ControllerBase
     {
         [ProducesResponseType(404)]
-        public async Task<ActionResult<DiagnosticsAreReturned_IfMethodWithAttributeAsynchronouslyReturnsValue_WithoutDocumentationModel>> Method(int id)
+        public async Task<
+            ActionResult<DiagnosticsAreReturned_IfMethodWithAttributeAsynchronouslyReturnsValue_WithoutDocumentationModel>
+        > Method(int id)
         {
             await Task.Yield();
 
@@ -18,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 return NotFound();
             }
 
-            return /*MM*/new DiagnosticsAreReturned_IfMethodWithAttributeAsynchronouslyReturnsValue_WithoutDocumentationModel();
+            return /*MM*/
+            new DiagnosticsAreReturned_IfMethodWithAttributeAsynchronouslyReturnsValue_WithoutDocumentationModel();
         }
     }
 

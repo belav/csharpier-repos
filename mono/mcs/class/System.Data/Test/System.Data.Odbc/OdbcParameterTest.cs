@@ -39,36 +39,34 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.Odbc
 {
-
-        [TestFixture]
-        public class OdbcParameterTest
+    [TestFixture]
+    public class OdbcParameterTest
+    {
+        [Test]
+        public void OdbcTypeTest()
         {
-                [Test]
-                public void OdbcTypeTest ()
-                {
-            OdbcParameter param = new OdbcParameter ();
-            Assert.AreEqual (OdbcType.NVarChar, param.OdbcType, "#1");
+            OdbcParameter param = new OdbcParameter();
+            Assert.AreEqual(OdbcType.NVarChar, param.OdbcType, "#1");
 
             // change test
             param.OdbcType = OdbcType.Int;
-            Assert.AreEqual (OdbcType.Int, param.OdbcType, "#2");
+            Assert.AreEqual(OdbcType.Int, param.OdbcType, "#2");
 
-            param = new OdbcParameter ("test", 10);
-            Assert.AreEqual (OdbcType.NVarChar, param.OdbcType, "#3");
+            param = new OdbcParameter("test", 10);
+            Assert.AreEqual(OdbcType.NVarChar, param.OdbcType, "#3");
             param.OdbcType = OdbcType.Real;
-            Assert.AreEqual (OdbcType.Real, param.OdbcType, "#4");
-            Assert.AreEqual (10, param.Value, "#5");
+            Assert.AreEqual(OdbcType.Real, param.OdbcType, "#4");
+            Assert.AreEqual(10, param.Value, "#5");
 
-            param = new OdbcParameter ("test", OdbcType.NText);
-            Assert.AreEqual (null, param.Value, "#6");
-            Assert.AreEqual (OdbcType.NText, param.OdbcType, "#7");
+            param = new OdbcParameter("test", OdbcType.NText);
+            Assert.AreEqual(null, param.Value, "#6");
+            Assert.AreEqual(OdbcType.NText, param.OdbcType, "#7");
 
-            param = new OdbcParameter ("test", OdbcType.Binary);
-            Assert.AreEqual (null, param.Value, "#8");
-            Assert.AreEqual (OdbcType.Binary, param.OdbcType, "#9");
-                }
-
+            param = new OdbcParameter("test", OdbcType.Binary);
+            Assert.AreEqual(null, param.Value, "#8");
+            Assert.AreEqual(OdbcType.Binary, param.OdbcType, "#9");
         }
+    }
 }
 
 #endif

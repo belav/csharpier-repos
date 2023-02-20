@@ -32,7 +32,7 @@ namespace POS_Server.Models
         public string packageName { get; set; }
 
         // current info
- 
+
         public int branchCountNow { get; set; }
         public int posCountNow { get; set; }
         public int userCountNow { get; set; }
@@ -40,18 +40,17 @@ namespace POS_Server.Models
         public int customerCountNow { get; set; }
         public int itemCountNow { get; set; }
         public int saleinvCountNow { get; set; }
-       
+
         public int storeCountNow { get; set; }
-     
+
         public Nullable<System.DateTime> serverDateNow { get; set; }
 
-        public string customerName { get; set; }// 6- customer Name
-        public string customerLastName { get; set; }// 6- customer LastName
-        public string agentName { get; set; }// 5- Agent name 
-        public string agentAccountName { get; set; }//5- Agent AccountName
-        public string agentLastName { get; set; }//5- Agent LastName
+        public string customerName { get; set; } // 6- customer Name
+        public string customerLastName { get; set; } // 6- customer LastName
+        public string agentName { get; set; } // 5- Agent name
+        public string agentAccountName { get; set; } //5- Agent AccountName
+        public string agentLastName { get; set; } //5- Agent LastName
 
         public string isDemo { get; set; }
     }
-   
 }

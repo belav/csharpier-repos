@@ -11,14 +11,24 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 {
     internal static class SymbolSourceDocumentFinder
     {
-        public static HashSet<DocumentHandle> FindDocumentHandles(EntityHandle handle, MetadataReader dllReader, MetadataReader pdbReader)
+        public static HashSet<DocumentHandle> FindDocumentHandles(
+            EntityHandle handle,
+            MetadataReader dllReader,
+            MetadataReader pdbReader
+        )
         {
             var docList = new HashSet<DocumentHandle>();
 
             switch (handle.Kind)
             {
                 case HandleKind.MethodDefinition:
-                    ProcessMethodDef((MethodDefinitionHandle)handle, dllReader, pdbReader, docList, processDeclaringType: true);
+                    ProcessMethodDef(
+                        (MethodDefinitionHandle)handle,
+                        dllReader,
+                        pdbReader,
+                        docList,
+                        processDeclaringType: true
+                    );
                     break;
                 case HandleKind.TypeDefinition:
                     ProcessTypeDef((TypeDefinitionHandle)handle, dllReader, pdbReader, docList);
@@ -27,7 +37,12 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                     ProcessFieldDef((FieldDefinitionHandle)handle, dllReader, pdbReader, docList);
                     break;
                 case HandleKind.PropertyDefinition:
-                    ProcessPropertyDef((PropertyDefinitionHandle)handle, dllReader, pdbReader, docList);
+                    ProcessPropertyDef(
+                        (PropertyDefinitionHandle)handle,
+                        dllReader,
+                        pdbReader,
+                        docList
+                    );
                     break;
                 case HandleKind.EventDefinition:
                     ProcessEventDef((EventDefinitionHandle)handle, dllReader, pdbReader, docList);
@@ -37,7 +52,13 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             return docList;
         }
 
-        private static void ProcessMethodDef(MethodDefinitionHandle methodDefHandle, MetadataReader dllReader, MetadataReader pdbReader, HashSet<DocumentHandle> docList, bool processDeclaringType)
+        private static void ProcessMethodDef(
+            MethodDefinitionHandle methodDefHandle,
+            MetadataReader dllReader,
+            MetadataReader pdbReader,
+            HashSet<DocumentHandle> docList,
+            bool processDeclaringType
+        )
         {
             var mdi = pdbReader.GetMethodDebugInformation(methodDefHandle);
             if (!mdi.Document.IsNil)
@@ -69,23 +90,46 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             }
         }
 
-        private static void ProcessEventDef(EventDefinitionHandle eventDefHandle, MetadataReader dllReader, MetadataReader pdbReader, HashSet<DocumentHandle> docList)
+        private static void ProcessEventDef(
+            EventDefinitionHandle eventDefHandle,
+            MetadataReader dllReader,
+            MetadataReader pdbReader,
+            HashSet<DocumentHandle> docList
+        )
         {
             var eventDef = dllReader.GetEventDefinition(eventDefHandle);
             var accessors = eventDef.GetAccessors();
             if (!accessors.Adder.IsNil)
             {
-                ProcessMethodDef(accessors.Adder, dllReader, pdbReader, docList, processDeclaringType: true);
+                ProcessMethodDef(
+                    accessors.Adder,
+                    dllReader,
+                    pdbReader,
+                    docList,
+                    processDeclaringType: true
+                );
             }
 
             if (!accessors.Remover.IsNil)
             {
-                ProcessMethodDef(accessors.Remover, dllReader, pdbReader, docList, processDeclaringType: true);
+                ProcessMethodDef(
+                    accessors.Remover,
+                    dllReader,
+                    pdbReader,
+                    docList,
+                    processDeclaringType: true
+                );
             }
 
             if (!accessors.Raiser.IsNil)
             {
-                ProcessMethodDef(accessors.Raiser, dllReader, pdbReader, docList, processDeclaringType: true);
+                ProcessMethodDef(
+                    accessors.Raiser,
+                    dllReader,
+                    pdbReader,
+                    docList,
+                    processDeclaringType: true
+                );
             }
 
             foreach (var other in accessors.Others)
@@ -94,18 +138,35 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             }
         }
 
-        private static void ProcessPropertyDef(PropertyDefinitionHandle propertyDefHandle, MetadataReader dllReader, MetadataReader pdbReader, HashSet<DocumentHandle> docList)
+        private static void ProcessPropertyDef(
+            PropertyDefinitionHandle propertyDefHandle,
+            MetadataReader dllReader,
+            MetadataReader pdbReader,
+            HashSet<DocumentHandle> docList
+        )
         {
             var propertyDef = dllReader.GetPropertyDefinition(propertyDefHandle);
             var accessors = propertyDef.GetAccessors();
             if (!accessors.Getter.IsNil)
             {
-                ProcessMethodDef(accessors.Getter, dllReader, pdbReader, docList, processDeclaringType: true);
+                ProcessMethodDef(
+                    accessors.Getter,
+                    dllReader,
+                    pdbReader,
+                    docList,
+                    processDeclaringType: true
+                );
             }
 
             if (!accessors.Setter.IsNil)
             {
-                ProcessMethodDef(accessors.Setter, dllReader, pdbReader, docList, processDeclaringType: true);
+                ProcessMethodDef(
+                    accessors.Setter,
+                    dllReader,
+                    pdbReader,
+                    docList,
+                    processDeclaringType: true
+                );
             }
 
             foreach (var other in accessors.Others)
@@ -114,14 +175,25 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             }
         }
 
-        private static void ProcessFieldDef(FieldDefinitionHandle fieldDefHandle, MetadataReader dllReader, MetadataReader pdbReader, HashSet<DocumentHandle> docList)
+        private static void ProcessFieldDef(
+            FieldDefinitionHandle fieldDefHandle,
+            MetadataReader dllReader,
+            MetadataReader pdbReader,
+            HashSet<DocumentHandle> docList
+        )
         {
             var fieldDef = dllReader.GetFieldDefinition(fieldDefHandle);
             var typeDefHandle = fieldDef.GetDeclaringType();
             ProcessTypeDef(typeDefHandle, dllReader, pdbReader, docList);
         }
 
-        private static void ProcessTypeDef(TypeDefinitionHandle typeDefHandle, MetadataReader dllReader, MetadataReader pdbReader, HashSet<DocumentHandle> docList, bool processContainingType = true)
+        private static void ProcessTypeDef(
+            TypeDefinitionHandle typeDefHandle,
+            MetadataReader dllReader,
+            MetadataReader pdbReader,
+            HashSet<DocumentHandle> docList,
+            bool processContainingType = true
+        )
         {
             AddDocumentsFromTypeDefinitionDocuments(typeDefHandle, pdbReader, docList);
 
@@ -129,7 +201,13 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             var typeDef = dllReader.GetTypeDefinition(typeDefHandle);
             foreach (var methodDefHandle in typeDef.GetMethods())
             {
-                ProcessMethodDef(methodDefHandle, dllReader, pdbReader, docList, processDeclaringType: false);
+                ProcessMethodDef(
+                    methodDefHandle,
+                    dllReader,
+                    pdbReader,
+                    docList,
+                    processDeclaringType: false
+                );
             }
 
             if (processContainingType && typeDef.IsNested)
@@ -147,11 +225,21 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             var nestedTypes = typeDef.GetNestedTypes();
             foreach (var nestedType in nestedTypes)
             {
-                ProcessTypeDef(nestedType, dllReader, pdbReader, docList, processContainingType: false);
+                ProcessTypeDef(
+                    nestedType,
+                    dllReader,
+                    pdbReader,
+                    docList,
+                    processContainingType: false
+                );
             }
         }
 
-        private static void AddDocumentsFromTypeDefinitionDocuments(TypeDefinitionHandle typeDefHandle, MetadataReader pdbReader, HashSet<DocumentHandle> docList)
+        private static void AddDocumentsFromTypeDefinitionDocuments(
+            TypeDefinitionHandle typeDefHandle,
+            MetadataReader pdbReader,
+            HashSet<DocumentHandle> docList
+        )
         {
             var handles = pdbReader.GetCustomDebugInformation(typeDefHandle);
             foreach (var cdiHandle in handles)
@@ -165,7 +253,9 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                         var reader = pdbReader.GetBlobReader(cdi.Value);
                         while (reader.RemainingBytes > 0)
                         {
-                            docList.Add(MetadataTokens.DocumentHandle(reader.ReadCompressedInteger()));
+                            docList.Add(
+                                MetadataTokens.DocumentHandle(reader.ReadCompressedInteger())
+                            );
                         }
                     }
                 }

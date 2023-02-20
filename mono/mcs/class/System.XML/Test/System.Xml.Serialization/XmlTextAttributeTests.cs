@@ -17,20 +17,20 @@ namespace MonoTests.System.XmlSerialization
     public class XmlTextAttributeTests
     {
         [Test]
-        public void DataTypeDefault ()
+        public void DataTypeDefault()
         {
-            XmlTextAttribute attr = new XmlTextAttribute ();
-            Assert.AreEqual (string.Empty, attr.DataType, "#1");
+            XmlTextAttribute attr = new XmlTextAttribute();
+            Assert.AreEqual(string.Empty, attr.DataType, "#1");
 
             attr.DataType = null;
-            Assert.AreEqual (string.Empty, attr.DataType, "#2");
+            Assert.AreEqual(string.Empty, attr.DataType, "#2");
         }
 
         [Test]
-        public void TypeDefault ()
+        public void TypeDefault()
         {
-            XmlTextAttribute attr = new XmlTextAttribute ();
-            Assert.IsNull (attr.Type);
+            XmlTextAttribute attr = new XmlTextAttribute();
+            Assert.IsNull(attr.Type);
         }
     }
 }

@@ -20,44 +20,57 @@ namespace MonoTests.Commons.Xml.Relaxng
     public class RelaxngDatatypeProviderTests
     {
         [Test]
-        public void CustomTypeProvider ()
+        public void CustomTypeProvider()
         {
-            var datatypeLibrary = SetupMyDataProvider ();
-            XmlDocument xml = new XmlDocument ();
-            xml.LoadXml ("<root> <v1>mytype</v1> <v2>1</v2> </root>");
-            XmlDocument schemaXml = ReadDoc (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/463264.rng"));
-            XmlReader reader = new RelaxngValidatingReader (new XmlNodeReader (xml), new XmlNodeReader (schemaXml), datatypeLibrary);
-            while (reader.Read ())
+            var datatypeLibrary = SetupMyDataProvider();
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml("<root> <v1>mytype</v1> <v2>1</v2> </root>");
+            XmlDocument schemaXml = ReadDoc(
+                TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/463264.rng")
+            );
+            XmlReader reader = new RelaxngValidatingReader(
+                new XmlNodeReader(xml),
+                new XmlNodeReader(schemaXml),
+                datatypeLibrary
+            );
+            while (reader.Read())
                 ;
         }
 
         [Test]
-        public void Bug463267 ()
+        public void Bug463267()
         {
-            var datatypeLibrary = SetupMyDataProvider ();
-            XmlDocument xml = new XmlDocument ();
-            xml.LoadXml ("<root> <v2>1</v2> <v1>mytype</v1> </root>");
-            XmlDocument schemaXml = ReadDoc (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/463267.rng"));
-            XmlReader reader = new RelaxngValidatingReader (new XmlNodeReader (xml), new XmlNodeReader (schemaXml), datatypeLibrary);
-            while (reader.Read ())
+            var datatypeLibrary = SetupMyDataProvider();
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml("<root> <v2>1</v2> <v1>mytype</v1> </root>");
+            XmlDocument schemaXml = ReadDoc(
+                TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/463267.rng")
+            );
+            XmlReader reader = new RelaxngValidatingReader(
+                new XmlNodeReader(xml),
+                new XmlNodeReader(schemaXml),
+                datatypeLibrary
+            );
+            while (reader.Read())
                 ;
         }
 
-        RelaxngDatatypeProvider SetupMyDataProvider ()
+        RelaxngDatatypeProvider SetupMyDataProvider()
         {
-            var datatypeLibrary = new RelaxngMergedProvider ();
+            var datatypeLibrary = new RelaxngMergedProvider();
 
-            datatypeLibrary [MyRngTypeProvider.Namespace] = new MyRngTypeProvider();
-            datatypeLibrary ["http://www.w3.org/2001/XMLSchema-datatypes"] = XsdDatatypeProvider.Instance;
-            datatypeLibrary [System.Xml.Schema.XmlSchema.Namespace] = XsdDatatypeProvider.Instance;
-            datatypeLibrary [String.Empty] = RelaxngMergedProvider.DefaultProvider [string.Empty];
+            datatypeLibrary[MyRngTypeProvider.Namespace] = new MyRngTypeProvider();
+            datatypeLibrary["http://www.w3.org/2001/XMLSchema-datatypes"] =
+                XsdDatatypeProvider.Instance;
+            datatypeLibrary[System.Xml.Schema.XmlSchema.Namespace] = XsdDatatypeProvider.Instance;
+            datatypeLibrary[String.Empty] = RelaxngMergedProvider.DefaultProvider[string.Empty];
             return datatypeLibrary;
         }
 
-        XmlDocument ReadDoc (string s)
+        XmlDocument ReadDoc(string s)
         {
-            var d = new XmlDocument ();
-            d.Load (s);
+            var d = new XmlDocument();
+            d.Load(s);
             return d;
         }
     }
@@ -66,12 +79,16 @@ namespace MonoTests.Commons.Xml.Relaxng
     {
         public static readonly string Namespace = "http://tempuri.org/mytypes";
 
-        public override RelaxngDatatype GetDatatype(string name, string ns, RelaxngParamList parameters)
+        public override RelaxngDatatype GetDatatype(
+            string name,
+            string ns,
+            RelaxngParamList parameters
+        )
         {
             switch (name)
             {
-            case "mytype":
-                return new MyType();
+                case "mytype":
+                    return new MyType();
             }
             return null;
         }
@@ -79,22 +96,24 @@ namespace MonoTests.Commons.Xml.Relaxng
 
     class MyType : RelaxngDatatype
     {
-        public override string Name {
+        public override string Name
+        {
             get { return "mytype"; }
         }
 
-        public override string NamespaceURI {
+        public override string NamespaceURI
+        {
             get { return MyRngTypeProvider.Namespace; }
         }
 
-        public override object Parse (string text, System.Xml.XmlReader reader)
+        public override object Parse(string text, System.Xml.XmlReader reader)
         {
             return text;
         }
 
-        public override bool IsValid (string text, System.Xml.XmlReader reader)
+        public override bool IsValid(string text, System.Xml.XmlReader reader)
         {
-            return ((string) Parse (text, reader)) == "mytype";
+            return ((string)Parse(text, reader)) == "mytype";
         }
     }
 }

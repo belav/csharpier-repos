@@ -24,7 +24,7 @@ namespace System.Web.Razor
     /// This parser is designed to allow editors to avoid having to worry about incremental parsing.
     /// The CheckForStructureChanges method can be called with every change made by a user in an editor and
     /// the parser will provide a result indicating if it was able to incrementally reparse the document.
-    /// 
+    ///
     /// The general workflow for editors with this parser is:
     /// 0. User edits document
     /// 1. Editor builds TextChange structure describing the edit and providing a reference to the _updated_ text buffer
@@ -34,25 +34,25 @@ namespace System.Web.Razor
     ///   b.  If it can not, the Parser starts a background parse task and return PartialParseResult.Rejected
     /// NOTE: Additional flags can be applied to the PartialParseResult, see that enum for more details.  However,
     ///       the Accepted or Rejected flags will ALWAYS be present
-    /// 
+    ///
     /// A change can only be incrementally parsed if a single, unique, Span (see System.Web.Razor.Parser.SyntaxTree) in the syntax tree can
     /// be identified as owning the entire change.  For example, if a change overlaps with multiple spans, the change cannot be
     /// parsed incrementally and a full reparse is necessary.  A Span "owns" a change if the change occurs either a) entirely
     /// within it's boundaries or b) it is a pure insertion (see TextChange) at the end of a Span whose CanGrow flag (see Span) is
     /// true.
-    /// 
+    ///
     /// Even if a single unique Span owner can be identified, it's possible the edit will cause the Span to split or merge with other
     /// Spans, in which case, a full reparse is necessary to identify the extent of the changes to the tree.
-    /// 
+    ///
     /// When the RazorEditorParser returns Accepted, it updates CurrentParseTree immediately.  However, the editor is expected to
     /// update it's own data structures independently.  It can use CurrentParseTree to do this, as soon as the editor returns from
     /// CheckForStructureChanges, but it should (ideally) have logic for doing so without needing the new tree.
-    /// 
+    ///
     /// When Rejected is returned by CheckForStructureChanges, a background parse task has _already_ been started.  When that task
     /// finishes, the DocumentStructureChanged event will be fired containing the new generated code, parse tree and a reference to
-    /// the original TextChange that caused the reparse, to allow the editor to resolve the new tree against any changes made since 
+    /// the original TextChange that caused the reparse, to allow the editor to resolve the new tree against any changes made since
     /// calling CheckForStructureChanges.
-    /// 
+    ///
     /// If a call to CheckForStructureChanges occurs while a reparse is already in-progress, the reparse is cancelled IMMEDIATELY
     /// and Rejected is returned without attempting to reparse.  This means that if a conusmer calls CheckForStructureChanges, which
     /// returns Rejected, then calls it again before DocumentParseComplete is fired, it will only recieve one DocumentParseComplete
@@ -80,7 +80,10 @@ namespace System.Web.Razor
             }
             if (String.IsNullOrEmpty(sourceFileName))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "sourceFileName");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "sourceFileName"
+                );
             }
 
             Host = host;
@@ -103,12 +106,17 @@ namespace System.Web.Razor
             get { return _currentParseTree; }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Since this method is heavily affected by side-effects, particularly calls to CheckForStructureChanges, it should not be made into a property")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "Since this method is heavily affected by side-effects, particularly calls to CheckForStructureChanges, it should not be made into a property"
+        )]
         public virtual string GetAutoCompleteString()
         {
             if (_lastAutoCompleteSpan != null)
             {
-                AutoCompleteEditHandler editHandler = _lastAutoCompleteSpan.EditHandler as AutoCompleteEditHandler;
+                AutoCompleteEditHandler editHandler =
+                    _lastAutoCompleteSpan.EditHandler as AutoCompleteEditHandler;
                 if (editHandler != null)
                 {
                     return editHandler.AutoCompleteString;
@@ -135,13 +143,22 @@ namespace System.Web.Razor
             Stopwatch sw = new Stopwatch();
             sw.Start();
 #endif
-            RazorEditorTrace.TraceLine(RazorResources.Trace_EditorReceivedChange, Path.GetFileName(FileName), change);
+            RazorEditorTrace.TraceLine(
+                RazorResources.Trace_EditorReceivedChange,
+                Path.GetFileName(FileName),
+                change
+            );
             if (change.NewBuffer == null)
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentUICulture,
-                                                          RazorResources.Structure_Member_CannotBeNull,
-                                                          "Buffer",
-                                                          "TextChange"), "change");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentUICulture,
+                        RazorResources.Structure_Member_CannotBeNull,
+                        "Buffer",
+                        "TextChange"
+                    ),
+                    "change"
+                );
             }
 
             PartialParseResult result = PartialParseResult.Rejected;
@@ -175,7 +192,13 @@ namespace System.Web.Razor
             elapsedMs = sw.ElapsedMilliseconds;
             sw.Reset();
 #endif
-            RazorEditorTrace.TraceLine(RazorResources.Trace_EditorProcessedChange, Path.GetFileName(FileName), changeString, elapsedMs.HasValue ? elapsedMs.Value.ToString(CultureInfo.InvariantCulture) : "?", result.ToString());
+            RazorEditorTrace.TraceLine(
+                RazorResources.Trace_EditorProcessedChange,
+                Path.GetFileName(FileName),
+                changeString,
+                elapsedMs.HasValue ? elapsedMs.Value.ToString(CultureInfo.InvariantCulture) : "?",
+                result.ToString()
+            );
             return result;
         }
 
@@ -188,8 +211,18 @@ namespace System.Web.Razor
             GC.SuppressFinalize(this);
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_cancelTokenSource", Justification = "The cancellation token is owned by the worker thread, so it is disposed there")]
-        [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_changeReceived", Justification = "The change received event is owned by the worker thread, so it is disposed there")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2213:DisposableFieldsShouldBeDisposed",
+            MessageId = "_cancelTokenSource",
+            Justification = "The cancellation token is owned by the worker thread, so it is disposed there"
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2213:DisposableFieldsShouldBeDisposed",
+            MessageId = "_changeReceived",
+            Justification = "The change received event is owned by the worker thread, so it is disposed there"
+        )]
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -203,9 +236,15 @@ namespace System.Web.Razor
             PartialParseResult result = PartialParseResult.Rejected;
 
             // Try the last change owner
-            if (_lastChangeOwner != null && _lastChangeOwner.EditHandler.OwnsChange(_lastChangeOwner, change))
+            if (
+                _lastChangeOwner != null
+                && _lastChangeOwner.EditHandler.OwnsChange(_lastChangeOwner, change)
+            )
             {
-                EditResult editResult = _lastChangeOwner.EditHandler.ApplyChange(_lastChangeOwner, change);
+                EditResult editResult = _lastChangeOwner.EditHandler.ApplyChange(
+                    _lastChangeOwner,
+                    change
+                );
                 result = editResult.Result;
                 if (!editResult.Result.HasFlag(PartialParseResult.Rejected))
                 {
@@ -225,7 +264,10 @@ namespace System.Web.Razor
             }
             else if (_lastChangeOwner != null)
             {
-                EditResult editRes = _lastChangeOwner.EditHandler.ApplyChange(_lastChangeOwner, change);
+                EditResult editRes = _lastChangeOwner.EditHandler.ApplyChange(
+                    _lastChangeOwner,
+                    change
+                );
                 result = editRes.Result;
                 if (!editRes.Result.HasFlag(PartialParseResult.Rejected))
                 {
@@ -243,7 +285,11 @@ namespace System.Web.Razor
             return result;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are being caught here intentionally")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exceptions are being caught here intentionally"
+        )]
         private void OnDocumentParseComplete(DocumentParseCompleteEventArgs args)
         {
             using (_parser.SynchronizeMainThreadState())
@@ -262,7 +308,9 @@ namespace System.Web.Razor
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("[RzEd] Document Parse Complete Handler Threw: " + ex.ToString());
+                    Debug.WriteLine(
+                        "[RzEd] Document Parse Complete Handler Threw: " + ex.ToString()
+                    );
                 }
             }
         }
@@ -270,18 +318,26 @@ namespace System.Web.Razor
         [Conditional("DEBUG")]
         private static void VerifyFlagsAreValid(PartialParseResult result)
         {
-            Debug.Assert(result.HasFlag(PartialParseResult.Accepted) ||
-                         result.HasFlag(PartialParseResult.Rejected),
-                         "Partial Parse result does not have either of Accepted or Rejected flags set");
-            Debug.Assert(result.HasFlag(PartialParseResult.Rejected) ||
-                         !result.HasFlag(PartialParseResult.SpanContextChanged),
-                         "Partial Parse result was Accepted AND had SpanContextChanged flag set");
-            Debug.Assert(result.HasFlag(PartialParseResult.Rejected) ||
-                         !result.HasFlag(PartialParseResult.AutoCompleteBlock),
-                         "Partial Parse result was Accepted AND had AutoCompleteBlock flag set");
-            Debug.Assert(result.HasFlag(PartialParseResult.Accepted) ||
-                         !result.HasFlag(PartialParseResult.Provisional),
-                         "Partial Parse result was Rejected AND had Provisional flag set");
+            Debug.Assert(
+                result.HasFlag(PartialParseResult.Accepted)
+                    || result.HasFlag(PartialParseResult.Rejected),
+                "Partial Parse result does not have either of Accepted or Rejected flags set"
+            );
+            Debug.Assert(
+                result.HasFlag(PartialParseResult.Rejected)
+                    || !result.HasFlag(PartialParseResult.SpanContextChanged),
+                "Partial Parse result was Accepted AND had SpanContextChanged flag set"
+            );
+            Debug.Assert(
+                result.HasFlag(PartialParseResult.Rejected)
+                    || !result.HasFlag(PartialParseResult.AutoCompleteBlock),
+                "Partial Parse result was Accepted AND had AutoCompleteBlock flag set"
+            );
+            Debug.Assert(
+                result.HasFlag(PartialParseResult.Accepted)
+                    || !result.HasFlag(PartialParseResult.Provisional),
+                "Partial Parse result was Rejected AND had Provisional flag set"
+            );
         }
     }
 }

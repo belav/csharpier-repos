@@ -15,9 +15,10 @@ namespace Logger
 #endif
         {
             Type type = null;
-            System.Text.StringBuilder code = new StringBuilder ();
-            
-            try {
+            System.Text.StringBuilder code = new StringBuilder();
+
+            try
+            {
                 //if (args.Length >= 1 && args [0].ToLower () == "all") {
                 //        if (args.Length == 1) {
                 //                GenerateAll ();
@@ -27,61 +28,80 @@ namespace Logger
                 //                return 0;
                 //        }
                 //}
-                
-                if (args.Length != 2 && args.Length != 3) {
+
+                if (args.Length != 2 && args.Length != 3)
+                {
                     Console.WriteLine("Must supply at least two arguments: ");
-                    Console.WriteLine("\t Type to log ('all' to log all overrides and events for all types in System.Windows.Forms.dll)");
+                    Console.WriteLine(
+                        "\t Type to log ('all' to log all overrides and events for all types in System.Windows.Forms.dll)"
+                    );
                     Console.WriteLine("\t What to log [overrides|events|overridesevents]");
                     Console.WriteLine("\t [output filename]");
                     return 1;
                 }
-                
-                Assembly a = typeof(System.Windows.Forms.Control).Assembly;
-                type = a.GetType (args [0]);
-                
-                if (type == null)
-                    throw new Exception (String.Format("Type '{0}' not found.", args[0]));
 
-                code.Append ("// Automatically generated for assembly: " + a.FullName + Environment.NewLine);
-                code.Append ("// To regenerate:" + Environment.NewLine);
-                code.Append ("// mcs -r:System.Windows.Forms.dll LogGenerator.cs && mono LogGenerator.exe " + type.FullName + " " + args [1] + " " + (args.Length > 2 ? args [2] : " outfile.cs") + Environment.NewLine);
-                    
+                Assembly a = typeof(System.Windows.Forms.Control).Assembly;
+                type = a.GetType(args[0]);
+
+                if (type == null)
+                    throw new Exception(String.Format("Type '{0}' not found.", args[0]));
+
+                code.Append(
+                    "// Automatically generated for assembly: " + a.FullName + Environment.NewLine
+                );
+                code.Append("// To regenerate:" + Environment.NewLine);
+                code.Append(
+                    "// mcs -r:System.Windows.Forms.dll LogGenerator.cs && mono LogGenerator.exe "
+                        + type.FullName
+                        + " "
+                        + args[1]
+                        + " "
+                        + (args.Length > 2 ? args[2] : " outfile.cs")
+                        + Environment.NewLine
+                );
+
                 if (args[1] == "overrides" || args[1] == "overridesevents")
                 {
-                    code.Append (override_logger.GenerateLog (type));
+                    code.Append(override_logger.GenerateLog(type));
                 }
                 if (args[1] == "events" || args[1] == "overridesevents")
                 {
-                    code.Append (event_logger.GenerateLog (type));
+                    code.Append(event_logger.GenerateLog(type));
                 }
 
-                if (args.Length > 2) {
-                    using (System.IO.StreamWriter writer = new System.IO.StreamWriter(args[2], false))
+                if (args.Length > 2)
+                {
+                    using (
+                        System.IO.StreamWriter writer = new System.IO.StreamWriter(args[2], false)
+                    )
                     {
                         writer.Write(code);
                     }
-                } else {
+                }
+                else
+                {
                     Console.WriteLine(code);
                 }
 
                 return 0;
-            } catch (Exception ex) {
-                Console.WriteLine (ex.Message);
-                Console.WriteLine (ex.StackTrace);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
                 return 1;
             }
         }
-    
     }
 
     class override_logger
     {
-        public static string GenerateLog (Type type)
+        public static string GenerateLog(Type type)
         {
-            StringBuilder members = new StringBuilder ();
+            StringBuilder members = new StringBuilder();
 
             string code =
-@"
+                @"
 #region {0}OverrideLogger
 using System;
 using System.Collections;
@@ -108,7 +128,7 @@ namespace MonoTests.System.Windows.Forms
 ";
 
             string method_impl =
-@"
+                @"
         {1} override {2} {0}({3})
         {{
             {4};
@@ -117,7 +137,7 @@ namespace MonoTests.System.Windows.Forms
 ";
 
             string property_impl =
-@"
+                @"
         {1} override {2} {0}
         {{{3}{4}}}
 
@@ -139,21 +159,26 @@ namespace MonoTests.System.Windows.Forms
             }}
 ";
 
-
-            foreach (MemberInfo member in type.GetMembers (BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)) {
-                switch (member.MemberType) {
-                case MemberTypes.Constructor:
-                case MemberTypes.Event:
-                case MemberTypes.Field:
-                case MemberTypes.NestedType:
-                case MemberTypes.TypeInfo:
-                case MemberTypes.Custom:
-                    continue;
-                case MemberTypes.Property:
-                case MemberTypes.Method:
-                    break;
-                default:
-                    continue;
+            foreach (
+                MemberInfo member in type.GetMembers(
+                    BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
+                )
+            )
+            {
+                switch (member.MemberType)
+                {
+                    case MemberTypes.Constructor:
+                    case MemberTypes.Event:
+                    case MemberTypes.Field:
+                    case MemberTypes.NestedType:
+                    case MemberTypes.TypeInfo:
+                    case MemberTypes.Custom:
+                        continue;
+                    case MemberTypes.Property:
+                    case MemberTypes.Method:
+                        break;
+                    default:
+                        continue;
                 }
 
                 MethodInfo method = member as MethodInfo;
@@ -165,42 +190,87 @@ namespace MonoTests.System.Windows.Forms
                 string membercode;
                 string basecall;
 
-                if (method != null) {
-                    if (!getData (method, out returnType, out access, out parameters, ref message, out basecall, false))
+                if (method != null)
+                {
+                    if (
+                        !getData(
+                            method,
+                            out returnType,
+                            out access,
+                            out parameters,
+                            ref message,
+                            out basecall,
+                            false
+                        )
+                    )
                         continue;
-                    membercode = string.Format (method_impl, method.Name, access, returnType, parameters, message, basecall);
-
-                } else {
+                    membercode = string.Format(
+                        method_impl,
+                        method.Name,
+                        access,
+                        returnType,
+                        parameters,
+                        message,
+                        basecall
+                    );
+                }
+                else
+                {
                     string getstr = "";
                     string setstr = "";
 
-                    MethodInfo get = (property.CanRead ? property.GetGetMethod () : null);
+                    MethodInfo get = (property.CanRead ? property.GetGetMethod() : null);
 
                     if (get == null)
                         continue;
 
-                    if (!getData (get, out returnType, out access, out parameters, ref message, out basecall, true))
+                    if (
+                        !getData(
+                            get,
+                            out returnType,
+                            out access,
+                            out parameters,
+                            ref message,
+                            out basecall,
+                            true
+                        )
+                    )
                         continue;
 
-                    getstr = string.Format (get_impl, property.Name, message);
-                    setstr = string.Format (set_impl, property.Name, message);
+                    getstr = string.Format(get_impl, property.Name, message);
+                    setstr = string.Format(set_impl, property.Name, message);
 
                     if (!property.CanRead)
                         getstr = "";
                     if (!property.CanWrite)
                         setstr = "";
 
-                    membercode = string.Format (property_impl, property.Name, access, returnType, getstr, setstr);
+                    membercode = string.Format(
+                        property_impl,
+                        property.Name,
+                        access,
+                        returnType,
+                        getstr,
+                        setstr
+                    );
                 }
 
-                members.Append (membercode + "\n");
+                members.Append(membercode + "\n");
             }
-            code = String.Format (code, type.Name, members.ToString (), "");
+            code = String.Format(code, type.Name, members.ToString(), "");
 
             return code;
         }
 
-        static bool getData (MethodInfo method, out string returnType, out string access, out string parameters, ref string message, out string basecall, bool allow_specialname)
+        static bool getData(
+            MethodInfo method,
+            out string returnType,
+            out string access,
+            out string parameters,
+            ref string message,
+            out string basecall,
+            bool allow_specialname
+        )
         {
             returnType = "";
             access = "";
@@ -212,7 +282,7 @@ namespace MonoTests.System.Windows.Forms
                 return false;
             if (method.IsAssembly)
                 return false;
-                
+
             if (!method.IsVirtual)
                 return false;
             if (method.IsFinal)
@@ -229,8 +299,8 @@ namespace MonoTests.System.Windows.Forms
             if (method.Name == "GetLifetimeService")
                 return false;
 
-            returnType = method.ReturnType.FullName.Replace ("+", ".");
-            returnType = method.ReturnType.Name;//.Replace ("+", ".");
+            returnType = method.ReturnType.FullName.Replace("+", ".");
+            returnType = method.ReturnType.Name; //.Replace ("+", ".");
             if (returnType == "Void")
                 returnType = "void";
 
@@ -246,50 +316,63 @@ namespace MonoTests.System.Windows.Forms
             string msgParams = "";
             string baseParams = "";
             string formatParams = "";
-            ParameterInfo [] ps = method.GetParameters ();
+            ParameterInfo[] ps = method.GetParameters();
             parameters = "";
-            for (int i = 0; i < ps.Length; i++) {
-                ParameterInfo param = ps [i];
+            for (int i = 0; i < ps.Length; i++)
+            {
+                ParameterInfo param = ps[i];
 
-                if (parameters != "") {
+                if (parameters != "")
+                {
                     parameters += ", ";
                     msgParams += ", ";
                     formatParams += ", ";
                     baseParams += ", ";
                 }
-                
+
                 string parameterType;
-                
-                if (param.ParameterType.IsByRef) {
-                    parameterType = param.ParameterType.GetElementType ().Name + " ";//sparam.ParameterType.FullName.Replace ("+", ".") + " ";
+
+                if (param.ParameterType.IsByRef)
+                {
+                    parameterType = param.ParameterType.GetElementType().Name + " "; //sparam.ParameterType.FullName.Replace ("+", ".") + " ";
                     baseParams += "ref ";
                     parameters += "ref ";
-                } else {
+                }
+                else
+                {
                     parameterType = param.ParameterType.Name + " ";
                 }
-                                
+
                 parameters += parameterType;
 
                 string name;
                 if (param.Name != null && param.Name != "")
                     name = param.Name;
                 else
-                    name = "parameter" + (i + 1).ToString ();
+                    name = "parameter" + (i + 1).ToString();
 
                 parameters += param.Name + " ";
                 msgParams += param.Name;
                 baseParams += param.Name;
-                formatParams += param.Name + "=<{" + i.ToString () + "}>";
+                formatParams += param.Name + "=<{" + i.ToString() + "}>";
             }
-            
-            if (!method.IsAbstract) {
+
+            if (!method.IsAbstract)
+            {
                 basecall = "base." + method.Name + "(" + baseParams + ");";
                 if (returnType != "void")
                     basecall = "return " + basecall;
             }
             if (msgParams != "")
                 msgParams = ", " + msgParams;
-            message = "ShowLocation (string.Format(\"" + method.Name + " (" + formatParams + ") \"" + msgParams + "))";
+            message =
+                "ShowLocation (string.Format(\""
+                + method.Name
+                + " ("
+                + formatParams
+                + ") \""
+                + msgParams
+                + "))";
 
             return true;
         }
@@ -297,13 +380,13 @@ namespace MonoTests.System.Windows.Forms
 
     class event_logger
     {
-        public static string GenerateLog (Type type)
+        public static string GenerateLog(Type type)
         {
-            StringBuilder adders = new StringBuilder ();
-            StringBuilder handlers = new StringBuilder ();
+            StringBuilder adders = new StringBuilder();
+            StringBuilder handlers = new StringBuilder();
 
             string code =
-@"
+                @"
 #region {0}EventLogger
 using System;
 using System.Reflection;
@@ -333,29 +416,40 @@ namespace MonoTests.System.Windows.Forms
 ";
 
             string method =
-@"
+                @"
         void _obj_{0} ({1} sender, {2} e)
         {{
             ShowLocation ();
         }}
 ";
 
-            foreach (EventInfo ev in type.GetEvents ()) {
+            foreach (EventInfo ev in type.GetEvents())
+            {
                 string handler;
                 string adder;
 
-                ParameterInfo [] ps = ev.EventHandlerType.GetMethod ("Invoke").GetParameters ();
-                handler = string.Format (method, ev.Name, ps [0].ParameterType.Name, ps [1].ParameterType.Name);
-                adder = "\t\t_obj." + ev.Name + " += new " + ev.EventHandlerType.Name + " (_obj_" + ev.Name + ");";
+                ParameterInfo[] ps = ev.EventHandlerType.GetMethod("Invoke").GetParameters();
+                handler = string.Format(
+                    method,
+                    ev.Name,
+                    ps[0].ParameterType.Name,
+                    ps[1].ParameterType.Name
+                );
+                adder =
+                    "\t\t_obj."
+                    + ev.Name
+                    + " += new "
+                    + ev.EventHandlerType.Name
+                    + " (_obj_"
+                    + ev.Name
+                    + ");";
 
-                adders.Append (adder + Environment.NewLine);
-                handlers.Append (handler);
+                adders.Append(adder + Environment.NewLine);
+                handlers.Append(handler);
             }
-            code = String.Format (code, type.Name, adders.ToString (), handlers.ToString (), "");//type.Namespace + ".");
+            code = String.Format(code, type.Name, adders.ToString(), handlers.ToString(), ""); //type.Namespace + ".");
 
             return code;
         }
-
-
     }
 }

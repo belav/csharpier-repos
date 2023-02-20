@@ -4,12 +4,9 @@ using System;
 
 struct S
 {
-    public S (int i)
-    {
+    public S(int i) { }
 
-    }
-
-    public static implicit operator int (S s)
+    public static implicit operator int(S s)
     {
         return 1;
     }
@@ -17,52 +14,50 @@ struct S
 
 class C
 {
-    public static int A ()
+    public static int A()
     {
         return 1;
     }
 
-    public static int B (C c)
+    public static int B(C c)
     {
         return 2;
     }
 
-    public static C Test ()
+    public static C Test()
     {
-        return new C ();
+        return new C();
     }
 
-    public string Foo ()
+    public string Foo()
     {
         return null;
     }
 
-    void Test_1 ()
+    void Test_1()
     {
         Func<int> f = A;
 
-        var res = f () + f ();
+        var res = f() + f();
     }
 
-    void Test_2 ()
+    void Test_2()
     {
-        var s = new S (0);
+        var s = new S(0);
     }
 
-    void Test_3 ()
+    void Test_3()
     {
-        int i = new S () + new S ();
+        int i = new S() + new S();
     }
 
-    void Test_4 ()
+    void Test_4()
     {
-        Test ().Foo ();
+        Test().Foo();
     }
 
-    static int Main ()
+    static int Main()
     {
         return 0;
     }
 }
-
-

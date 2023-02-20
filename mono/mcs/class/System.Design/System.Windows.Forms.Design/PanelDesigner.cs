@@ -40,26 +40,29 @@ namespace System.Windows.Forms.Design
 {
     internal class PanelDesigner : ParentControlDesigner
     {
-        
-        public PanelDesigner ()
+        public PanelDesigner() { }
+
+        public override void Initialize(IComponent component)
         {
+            base.Initialize(component);
         }
 
-        public override void Initialize (IComponent component)
+        protected override void OnPaintAdornments(PaintEventArgs pe)
         {
-            base.Initialize (component);
-        }
+            base.OnPaintAdornments(pe);
 
-        protected override void OnPaintAdornments (PaintEventArgs pe) 
-        {
-            base.OnPaintAdornments (pe);
-
-            GraphicsState state = pe.Graphics.Save ();
-            pe.Graphics.TranslateTransform (this.Control.ClientRectangle.X,
-                            this.Control.ClientRectangle.Y);
-            ControlPaint.DrawBorder (pe.Graphics, Control.ClientRectangle, SystemColors.ControlDarkDark, 
-                         ButtonBorderStyle.Dashed);
-            pe.Graphics.Restore (state);
+            GraphicsState state = pe.Graphics.Save();
+            pe.Graphics.TranslateTransform(
+                this.Control.ClientRectangle.X,
+                this.Control.ClientRectangle.Y
+            );
+            ControlPaint.DrawBorder(
+                pe.Graphics,
+                Control.ClientRectangle,
+                SystemColors.ControlDarkDark,
+                ButtonBorderStyle.Dashed
+            );
+            pe.Graphics.Restore(state);
         }
     }
 }

@@ -3,41 +3,43 @@
 using System;
 using System.Threading;
 
-struct Gen<T> 
+struct Gen<T>
 {
     public void Target<U>()
-    {        
+    {
         //dummy line to avoid warnings
-        Test_thread09.Eval(typeof(U)!=null);    
+        Test_thread09.Eval(typeof(U) != null);
         Interlocked.Increment(ref Test_thread09.Xcounter);
     }
+
     public static void ThreadPoolTest<U>()
     {
         Thread[] threads = new Thread[Test_thread09.nThreads];
         Gen<T> obj = new Gen<T>();
 
         for (int i = 0; i < Test_thread09.nThreads; i++)
-        {    
-            threads[i]  = new Thread(new ThreadStart(obj.Target<U>));
+        {
+            threads[i] = new Thread(new ThreadStart(obj.Target<U>));
             threads[i].Start();
         }
 
         for (int i = 0; i < Test_thread09.nThreads; i++)
-        {    
+        {
             threads[i].Join();
         }
-        
-        Test_thread09.Eval(Test_thread09.Xcounter==Test_thread09.nThreads);
+
+        Test_thread09.Eval(Test_thread09.Xcounter == Test_thread09.nThreads);
         Test_thread09.Xcounter = 0;
     }
 }
 
 public class Test_thread09
 {
-    public static int nThreads =50;
+    public static int nThreads = 50;
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -46,16 +48,15 @@ public class Test_thread09
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
         Gen<int>.ThreadPoolTest<object>();
         Gen<double>.ThreadPoolTest<string>();
         Gen<string>.ThreadPoolTest<Guid>();
-        Gen<object>.ThreadPoolTest<int>(); 
-        Gen<Guid>.ThreadPoolTest<double>(); 
+        Gen<object>.ThreadPoolTest<int>();
+        Gen<Guid>.ThreadPoolTest<double>();
 
         if (result)
         {
@@ -68,6 +69,4 @@ public class Test_thread09
             return 1;
         }
     }
-}        
-
-
+}

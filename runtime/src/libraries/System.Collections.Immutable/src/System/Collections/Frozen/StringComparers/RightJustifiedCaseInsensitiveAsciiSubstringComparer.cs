@@ -13,10 +13,17 @@ namespace System.Collections.Frozen
     /// the data is always valid. This is ensured by precondition checks before
     /// a key is used to perform a dictionary lookup.
     /// </remarks>
-    internal sealed class RightJustifiedCaseInsensitiveAsciiSubstringComparer : SubstringComparerBase
+    internal sealed class RightJustifiedCaseInsensitiveAsciiSubstringComparer
+        : SubstringComparerBase
     {
-        public override bool Equals(string? x, string? y) => StringComparer.OrdinalIgnoreCase.Equals(x, y);
-        public override bool EqualsPartial(string? x, string? y) => x.AsSpan(x!.Length + Index, Count).Equals(y.AsSpan(y!.Length + Index, Count), StringComparison.OrdinalIgnoreCase);
-        public override int GetHashCode(string s) => GetHashCodeOrdinalIgnoreCaseAscii(s.AsSpan(s.Length + Index, Count));
+        public override bool Equals(string? x, string? y) =>
+            StringComparer.OrdinalIgnoreCase.Equals(x, y);
+
+        public override bool EqualsPartial(string? x, string? y) =>
+            x.AsSpan(x!.Length + Index, Count)
+                .Equals(y.AsSpan(y!.Length + Index, Count), StringComparison.OrdinalIgnoreCase);
+
+        public override int GetHashCode(string s) =>
+            GetHashCodeOrdinalIgnoreCaseAscii(s.AsSpan(s.Length + Index, Count));
     }
 }

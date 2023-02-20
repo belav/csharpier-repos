@@ -31,7 +31,10 @@ public class TimingMiddleware
 
             stopWatch.Stop();
             // Not yet supported in any browser dev tools
-            httpContext.Response.AppendTrailer("Server-Timing", $"app;dur={stopWatch.ElapsedMilliseconds}.0");
+            httpContext.Response.AppendTrailer(
+                "Server-Timing",
+                $"app;dur={stopWatch.ElapsedMilliseconds}.0"
+            );
         }
         else
         {

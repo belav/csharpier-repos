@@ -2,11 +2,10 @@ namespace BlazingPizza
 {
     public class LatLong
     {
-        public LatLong()
-        {
-        }
+        public LatLong() { }
 
-        public LatLong(double latitude, double longitude) : this()
+        public LatLong(double latitude, double longitude)
+            : this()
         {
             Latitude = latitude;
             Longitude = longitude;
@@ -21,7 +20,8 @@ namespace BlazingPizza
             // The Earth is flat, right? So no need for spherical interpolation.
             return new LatLong(
                 start.Latitude + (end.Latitude - start.Latitude) * proportion,
-                start.Longitude + (end.Longitude - start.Longitude) * proportion);
+                start.Longitude + (end.Longitude - start.Longitude) * proportion
+            );
         }
     }
 }

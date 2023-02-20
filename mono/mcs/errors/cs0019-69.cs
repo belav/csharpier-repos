@@ -3,19 +3,17 @@
 
 struct S
 {
-    public static implicit operator E (S s)
+    public static implicit operator E(S s)
     {
         return 0;
     }
 }
 
-public enum E
-{
-}
+public enum E { }
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         S s;
         S s2;

@@ -3,9 +3,10 @@
 
 class X
 {
-    static void Main ()
+    static void Main()
     {
-        if (delegate {} is int) {
+        if (delegate { } is int)
+        {
             return;
         }
     }

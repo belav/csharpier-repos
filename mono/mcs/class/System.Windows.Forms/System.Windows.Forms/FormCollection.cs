@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,40 +33,40 @@ namespace System.Windows.Forms
 {
     public class FormCollection : ReadOnlyCollectionBase
     {
-        public FormCollection () : base ()
-        {
-        }
-        
+        public FormCollection()
+            : base() { }
+
         #region Public Properties
-        public virtual Form this[int index] {
-            get { 
-                return (Form)base.InnerList[index];
-            }
+        public virtual Form this[int index]
+        {
+            get { return (Form)base.InnerList[index]; }
         }
 
-        public virtual Form this[string name] {
-            get {
+        public virtual Form this[string name]
+        {
+            get
+            {
                 foreach (Form f in base.InnerList)
                     if (f.Name == name)
                         return f;
-                            
+
                 return null;
             }
         }
         #endregion
-        
+
         #region Internal Add/Remove Methods
-        internal void Add (Form form)
+        internal void Add(Form form)
         {
-            if (base.InnerList.Contains (form))
+            if (base.InnerList.Contains(form))
                 return;
-            
-            base.InnerList.Add (form);
+
+            base.InnerList.Add(form);
         }
-        
-        internal void Remove (Form form)
+
+        internal void Remove(Form form)
         {
-            base.InnerList.Remove (form);
+            base.InnerList.Remove(form);
         }
         #endregion
     }

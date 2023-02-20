@@ -33,8 +33,14 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal("already_snake_case_ ", ConvertToCamelCase("already_snake_case_ "));
             Assert.Equal("isJSONProperty", ConvertToCamelCase("IsJSONProperty"));
             Assert.Equal("shoutinG_CASE", ConvertToCamelCase("SHOUTING_CASE"));
-            Assert.Equal("9999-12-31T23:59:59.9999999Z", ConvertToCamelCase("9999-12-31T23:59:59.9999999Z"));
-            Assert.Equal("hi!! This is text. Time to test.", ConvertToCamelCase("Hi!! This is text. Time to test."));
+            Assert.Equal(
+                "9999-12-31T23:59:59.9999999Z",
+                ConvertToCamelCase("9999-12-31T23:59:59.9999999Z")
+            );
+            Assert.Equal(
+                "hi!! This is text. Time to test.",
+                ConvertToCamelCase("Hi!! This is text. Time to test.")
+            );
             Assert.Equal("building", ConvertToCamelCase("BUILDING"));
             Assert.Equal("building Property", ConvertToCamelCase("BUILDING Property"));
             Assert.Equal("building Property", ConvertToCamelCase("Building Property"));

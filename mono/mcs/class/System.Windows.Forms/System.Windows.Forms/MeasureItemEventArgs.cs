@@ -34,43 +34,45 @@ namespace System.Windows.Forms
         private int index;
         private int itemHeight;
         private int itemWidth = 0;
-        
-        public MeasureItemEventArgs (Graphics graphics, int index)
+
+        public MeasureItemEventArgs(Graphics graphics, int index)
         {
             this.graphics = graphics;
             this.index = index;
             this.itemHeight = 0;
         }
-        
-        public MeasureItemEventArgs (Graphics graphics, int index, int itemHeight)
+
+        public MeasureItemEventArgs(Graphics graphics, int index, int itemHeight)
         {
             this.graphics = graphics;
             this.index = index;
             this.itemHeight = itemHeight;
         }
-        
-        #region Public Properties    
-            
-        public Graphics Graphics {
-            get { return graphics;}
-        }                        
-        
-        public int Index {
-            get { return index;}
-        }        
-        
-        public int ItemHeight {
-            get { return itemHeight;}
-            set { itemHeight = value;}
+
+        #region Public Properties
+
+        public Graphics Graphics
+        {
+            get { return graphics; }
         }
-        
-        public int ItemWidth {
-            get { return itemWidth;}
-            set { itemWidth = value;}
-        }        
-        
-        #endregion Public Properties        
+
+        public int Index
+        {
+            get { return index; }
+        }
+
+        public int ItemHeight
+        {
+            get { return itemHeight; }
+            set { itemHeight = value; }
+        }
+
+        public int ItemWidth
+        {
+            get { return itemWidth; }
+            set { itemWidth = value; }
+        }
+
+        #endregion Public Properties
     }
-
 }
-

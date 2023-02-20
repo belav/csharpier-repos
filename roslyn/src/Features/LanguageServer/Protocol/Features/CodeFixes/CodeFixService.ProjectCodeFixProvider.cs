@@ -12,12 +12,20 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     internal partial class CodeFixService
     {
         private class ProjectCodeFixProvider
-            : AbstractProjectExtensionProvider<ProjectCodeFixProvider, CodeFixProvider, ExportCodeFixProviderAttribute>
+            : AbstractProjectExtensionProvider<
+                ProjectCodeFixProvider,
+                CodeFixProvider,
+                ExportCodeFixProviderAttribute
+            >
         {
-            protected override ImmutableArray<string> GetLanguages(ExportCodeFixProviderAttribute exportAttribute)
-                => exportAttribute.Languages.ToImmutableArray();
+            protected override ImmutableArray<string> GetLanguages(
+                ExportCodeFixProviderAttribute exportAttribute
+            ) => exportAttribute.Languages.ToImmutableArray();
 
-            protected override bool TryGetExtensionsFromReference(AnalyzerReference reference, out ImmutableArray<CodeFixProvider> extensions)
+            protected override bool TryGetExtensionsFromReference(
+                AnalyzerReference reference,
+                out ImmutableArray<CodeFixProvider> extensions
+            )
             {
                 // check whether the analyzer reference knows how to return fixers directly.
                 if (reference is ICodeFixProviderFactory codeFixProviderFactory)

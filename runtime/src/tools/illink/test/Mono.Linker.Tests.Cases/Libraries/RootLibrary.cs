@@ -11,114 +11,82 @@ using Mono.Linker.Tests.Cases.Libraries.Dependencies;
 
 namespace Mono.Linker.Tests.Cases.Libraries
 {
-    [SetupCompileBefore ("copylibrary.dll", new[] { "Dependencies/CopyLibrary.cs" })]
-    [SetupLinkerAction ("copy", "copylibrary")]
-    [SetupLinkerArgument ("-a", "test.exe", "library")]
-    [SetupLinkerArgument ("--enable-opt", "ipconstprop")]
+    [SetupCompileBefore("copylibrary.dll", new[] { "Dependencies/CopyLibrary.cs" })]
+    [SetupLinkerAction("copy", "copylibrary")]
+    [SetupLinkerArgument("-a", "test.exe", "library")]
+    [SetupLinkerArgument("--enable-opt", "ipconstprop")]
     [VerifyMetadataNames]
     public class RootLibrary
     {
         private int field;
 
         [Kept]
-        public RootLibrary ()
+        public RootLibrary() { }
+
+        [Kept]
+        public static void Main()
         {
+            var t = typeof(SerializationTestPrivate);
+            t = typeof(SerializationTestNested.SerializationTestPrivate);
         }
 
         [Kept]
-        public static void Main ()
-        {
-            var t = typeof (SerializationTestPrivate);
-            t = typeof (SerializationTestNested.SerializationTestPrivate);
-        }
+        public void UnusedPublicMethod() { }
 
         [Kept]
-        public void UnusedPublicMethod ()
-        {
-        }
+        protected void UnusedProtectedMethod() { }
 
         [Kept]
-        protected void UnusedProtectedMethod ()
-        {
-        }
+        protected internal void UnusedProtectedInternalMethod() { }
+
+        protected private void UnusedProtectedPrivateMethod() { }
+
+        internal void UnusedInternalMethod() { }
+
+        private void UnusedPrivateMethod() { }
 
         [Kept]
-        protected internal void UnusedProtectedInternalMethod ()
-        {
-        }
-
-        protected private void UnusedProtectedPrivateMethod ()
-        {
-        }
-
-        internal void UnusedInternalMethod ()
-        {
-        }
-
-        private void UnusedPrivateMethod ()
-        {
-        }
+        [KeptAttributeAttribute(typeof(DynamicDependencyAttribute))]
+        [DynamicDependency(nameof(MethodWithDynamicDependencyTarget))]
+        public void MethodWithDynamicDependency() { }
 
         [Kept]
-        [KeptAttributeAttribute (typeof (DynamicDependencyAttribute))]
-        [DynamicDependency (nameof (MethodWithDynamicDependencyTarget))]
-        public void MethodWithDynamicDependency ()
-        {
-        }
-
-        [Kept]
-        private void MethodWithDynamicDependencyTarget ()
-        {
-        }
+        private void MethodWithDynamicDependencyTarget() { }
 
         [Kept]
         public class SerializationTest
         {
             [Kept]
-            private SerializationTest (SerializationInfo info, StreamingContext context)
-            {
-            }
+            private SerializationTest(SerializationInfo info, StreamingContext context) { }
         }
 
         [Kept]
         private class SerializationTestPrivate
         {
             [Kept]
-            private SerializationTestPrivate (SerializationInfo info, StreamingContext context)
-            {
-            }
+            private SerializationTestPrivate(SerializationInfo info, StreamingContext context) { }
 
-            public void NotUsed ()
-            {
-            }
+            public void NotUsed() { }
 
             [Kept]
             [OnSerializing]
-            [KeptAttributeAttribute (typeof (OnSerializingAttribute))]
-            private void OnSerializingMethod (StreamingContext context)
-            {
-            }
+            [KeptAttributeAttribute(typeof(OnSerializingAttribute))]
+            private void OnSerializingMethod(StreamingContext context) { }
 
             [Kept]
             [OnSerialized]
-            [KeptAttributeAttribute (typeof (OnSerializedAttribute))]
-            private void OnSerializedMethod (StreamingContext context)
-            {
-            }
+            [KeptAttributeAttribute(typeof(OnSerializedAttribute))]
+            private void OnSerializedMethod(StreamingContext context) { }
 
             [Kept]
             [OnDeserializing]
-            [KeptAttributeAttribute (typeof (OnDeserializingAttribute))]
-            private void OnDeserializingMethod (StreamingContext context)
-            {
-            }
+            [KeptAttributeAttribute(typeof(OnDeserializingAttribute))]
+            private void OnDeserializingMethod(StreamingContext context) { }
 
             [Kept]
             [OnDeserialized]
-            [KeptAttributeAttribute (typeof (OnDeserializedAttribute))]
-            private void OnDeserializedMethod (StreamingContext context)
-            {
-            }
+            [KeptAttributeAttribute(typeof(OnDeserializedAttribute))]
+            private void OnDeserializedMethod(StreamingContext context) { }
         }
 
         [Kept]
@@ -127,276 +95,280 @@ namespace Mono.Linker.Tests.Cases.Libraries
             internal class SerializationTestPrivate
             {
                 [Kept]
-                private SerializationTestPrivate (SerializationInfo info, StreamingContext context)
-                {
-                }
+                private SerializationTestPrivate(SerializationInfo info, StreamingContext context)
+                { }
 
-                public void NotUsed ()
-                {
-                }
+                public void NotUsed() { }
             }
 
-            public void NotUsed ()
-            {
-            }
+            public void NotUsed() { }
         }
 
         [Kept]
         public class SubstitutionsTest
         {
-            private static bool FalseProp { get { return false; } }
+            private static bool FalseProp
+            {
+                get { return false; }
+            }
 
             [Kept]
             [ExpectBodyModified]
-            public SubstitutionsTest ()
+            public SubstitutionsTest()
             {
                 if (FalseProp)
-                    LocalMethod ();
+                    LocalMethod();
             }
 
-            private void LocalMethod ()
-            {
-            }
+            private void LocalMethod() { }
         }
 
         [Kept]
-        [KeptInterface (typeof (I))]
+        [KeptInterface(typeof(I))]
         public class IfaceClass : I
         {
             [Kept]
-            public IfaceClass ()
-            {
-            }
+            public IfaceClass() { }
 
             [Kept]
-            public override string ToString ()
+            public override string ToString()
             {
                 return "test";
             }
         }
 
         [Kept]
-        public interface I
+        public interface I { }
+
+        [Kept]
+        [KeptInterface(typeof(IEnumerator))]
+        [KeptInterface(typeof(IPublicInterface))]
+        [KeptInterface(typeof(IPublicStaticInterface))]
+        [KeptInterface(typeof(IInternalInterface))]
+        [KeptInterface(typeof(IInternalStaticInterface))]
+        [KeptInterface(typeof(ICopyLibraryInterface))]
+        [KeptInterface(typeof(ICopyLibraryStaticInterface))]
+        public class UninstantiatedPublicClassWithInterface
+            : IPublicInterface,
+                IPublicStaticInterface,
+                IInternalInterface,
+                IInternalStaticInterface,
+                IEnumerator,
+                ICopyLibraryInterface,
+                ICopyLibraryStaticInterface
         {
+            internal UninstantiatedPublicClassWithInterface() { }
+
+            [Kept]
+            public void PublicInterfaceMethod() { }
+
+            [Kept]
+            void IPublicInterface.ExplicitImplementationPublicInterfaceMethod() { }
+
+            [Kept]
+            public static void PublicStaticInterfaceMethod() { }
+
+            [Kept]
+            static void IPublicStaticInterface.ExplicitImplementationPublicStaticInterfaceMethod() { }
+
+            [Kept]
+            public void InternalInterfaceMethod() { }
+
+            [Kept]
+            void IInternalInterface.ExplicitImplementationInternalInterfaceMethod() { }
+
+            [Kept]
+            public static void InternalStaticInterfaceMethod() { }
+
+            [Kept]
+            static void IInternalStaticInterface.ExplicitImplementationInternalStaticInterfaceMethod() { }
+
+            [Kept]
+            bool IEnumerator.MoveNext()
+            {
+                throw new PlatformNotSupportedException();
+            }
+
+            [Kept]
+            object IEnumerator.Current
+            {
+                [Kept]
+                get { throw new PlatformNotSupportedException(); }
+            }
+
+            [Kept]
+            void IEnumerator.Reset() { }
+
+            [Kept]
+            public void CopyLibraryInterfaceMethod() { }
+
+            [Kept]
+            void ICopyLibraryInterface.CopyLibraryExplicitImplementationInterfaceMethod() { }
+
+            [Kept]
+            public static void CopyLibraryStaticInterfaceMethod() { }
+
+            [Kept]
+            static void ICopyLibraryStaticInterface.CopyLibraryExplicitImplementationStaticInterfaceMethod() { }
         }
 
         [Kept]
-        [KeptInterface (typeof (IEnumerator))]
-        [KeptInterface (typeof (IPublicInterface))]
-        [KeptInterface (typeof (IPublicStaticInterface))]
-        [KeptInterface (typeof (IInternalInterface))]
-        [KeptInterface (typeof (IInternalStaticInterface))]
-        [KeptInterface (typeof (ICopyLibraryInterface))]
-        [KeptInterface (typeof (ICopyLibraryStaticInterface))]
-        public class UninstantiatedPublicClassWithInterface :
-            IPublicInterface,
-            IPublicStaticInterface,
-            IInternalInterface,
-            IInternalStaticInterface,
-            IEnumerator,
-            ICopyLibraryInterface,
-            ICopyLibraryStaticInterface
+        [KeptInterface(typeof(IInternalInterface))]
+        [KeptInterface(typeof(IFormattable))]
+        public class UninstantiatedPublicClassWithImplicitlyImplementedInterface
+            : IInternalInterface,
+                IFormattable
         {
-            internal UninstantiatedPublicClassWithInterface () { }
+            internal UninstantiatedPublicClassWithImplicitlyImplementedInterface() { }
 
             [Kept]
-            public void PublicInterfaceMethod () { }
+            public void InternalInterfaceMethod() { }
 
             [Kept]
-            void IPublicInterface.ExplicitImplementationPublicInterfaceMethod () { }
+            void IInternalInterface.ExplicitImplementationInternalInterfaceMethod() { }
 
             [Kept]
-            public static void PublicStaticInterfaceMethod () { }
-
-            [Kept]
-            static void IPublicStaticInterface.ExplicitImplementationPublicStaticInterfaceMethod () { }
-
-            [Kept]
-            public void InternalInterfaceMethod () { }
-
-            [Kept]
-            void IInternalInterface.ExplicitImplementationInternalInterfaceMethod () { }
-
-            [Kept]
-            public static void InternalStaticInterfaceMethod () { }
-
-            [Kept]
-            static void IInternalStaticInterface.ExplicitImplementationInternalStaticInterfaceMethod () { }
-
-            [Kept]
-            bool IEnumerator.MoveNext () { throw new PlatformNotSupportedException (); }
-
-            [Kept]
-            object IEnumerator.Current { [Kept] get { throw new PlatformNotSupportedException (); } }
-
-            [Kept]
-            void IEnumerator.Reset () { }
-
-            [Kept]
-            public void CopyLibraryInterfaceMethod () { }
-
-            [Kept]
-            void ICopyLibraryInterface.CopyLibraryExplicitImplementationInterfaceMethod () { }
-
-            [Kept]
-            public static void CopyLibraryStaticInterfaceMethod () { }
-
-            [Kept]
-            static void ICopyLibraryStaticInterface.CopyLibraryExplicitImplementationStaticInterfaceMethod () { }
-        }
-
-        [Kept]
-        [KeptInterface (typeof (IInternalInterface))]
-        [KeptInterface (typeof (IFormattable))]
-        public class UninstantiatedPublicClassWithImplicitlyImplementedInterface : IInternalInterface, IFormattable
-        {
-            internal UninstantiatedPublicClassWithImplicitlyImplementedInterface () { }
-
-            [Kept]
-            public void InternalInterfaceMethod () { }
-
-            [Kept]
-            void IInternalInterface.ExplicitImplementationInternalInterfaceMethod () { }
-
-            [Kept]
-            public string ToString (string format, IFormatProvider formatProvider)
+            public string ToString(string format, IFormatProvider formatProvider)
             {
                 return "formatted string";
             }
         }
 
         [Kept]
-        [KeptInterface (typeof (IEnumerator))]
-        [KeptInterface (typeof (IPublicInterface))]
-        [KeptInterface (typeof (IPublicStaticInterface))]
-        [KeptInterface (typeof (IInternalInterface))]
-        [KeptInterface (typeof (IInternalStaticInterface))]
-        [KeptInterface (typeof (ICopyLibraryInterface))]
-        [KeptInterface (typeof (ICopyLibraryStaticInterface))]
-        public class InstantiatedClassWithInterfaces :
-            IPublicInterface,
-            IPublicStaticInterface,
-            IInternalInterface,
-            IInternalStaticInterface,
-            IEnumerator,
-            ICopyLibraryInterface,
-            ICopyLibraryStaticInterface
+        [KeptInterface(typeof(IEnumerator))]
+        [KeptInterface(typeof(IPublicInterface))]
+        [KeptInterface(typeof(IPublicStaticInterface))]
+        [KeptInterface(typeof(IInternalInterface))]
+        [KeptInterface(typeof(IInternalStaticInterface))]
+        [KeptInterface(typeof(ICopyLibraryInterface))]
+        [KeptInterface(typeof(ICopyLibraryStaticInterface))]
+        public class InstantiatedClassWithInterfaces
+            : IPublicInterface,
+                IPublicStaticInterface,
+                IInternalInterface,
+                IInternalStaticInterface,
+                IEnumerator,
+                ICopyLibraryInterface,
+                ICopyLibraryStaticInterface
         {
             [Kept]
-            public InstantiatedClassWithInterfaces () { }
+            public InstantiatedClassWithInterfaces() { }
 
             [Kept]
-            public void PublicInterfaceMethod () { }
+            public void PublicInterfaceMethod() { }
 
             [Kept]
-            void IPublicInterface.ExplicitImplementationPublicInterfaceMethod () { }
+            void IPublicInterface.ExplicitImplementationPublicInterfaceMethod() { }
 
             [Kept]
-            public static void PublicStaticInterfaceMethod () { }
+            public static void PublicStaticInterfaceMethod() { }
 
             [Kept]
-            static void IPublicStaticInterface.ExplicitImplementationPublicStaticInterfaceMethod () { }
+            static void IPublicStaticInterface.ExplicitImplementationPublicStaticInterfaceMethod() { }
 
             [Kept]
-            public void InternalInterfaceMethod () { }
+            public void InternalInterfaceMethod() { }
 
             [Kept]
-            void IInternalInterface.ExplicitImplementationInternalInterfaceMethod () { }
+            void IInternalInterface.ExplicitImplementationInternalInterfaceMethod() { }
 
             [Kept]
-            public static void InternalStaticInterfaceMethod () { }
+            public static void InternalStaticInterfaceMethod() { }
 
             [Kept]
-            static void IInternalStaticInterface.ExplicitImplementationInternalStaticInterfaceMethod () { }
+            static void IInternalStaticInterface.ExplicitImplementationInternalStaticInterfaceMethod() { }
 
             [Kept]
-            bool IEnumerator.MoveNext () { throw new PlatformNotSupportedException (); }
+            bool IEnumerator.MoveNext()
+            {
+                throw new PlatformNotSupportedException();
+            }
 
             [Kept]
-            object IEnumerator.Current { [Kept] get { throw new PlatformNotSupportedException (); } }
+            object IEnumerator.Current
+            {
+                [Kept]
+                get { throw new PlatformNotSupportedException(); }
+            }
 
             [Kept]
-            void IEnumerator.Reset () { }
+            void IEnumerator.Reset() { }
 
             [Kept]
-            public void CopyLibraryInterfaceMethod () { }
+            public void CopyLibraryInterfaceMethod() { }
 
             [Kept]
-            void ICopyLibraryInterface.CopyLibraryExplicitImplementationInterfaceMethod () { }
+            void ICopyLibraryInterface.CopyLibraryExplicitImplementationInterfaceMethod() { }
 
             [Kept]
-            public static void CopyLibraryStaticInterfaceMethod () { }
+            public static void CopyLibraryStaticInterfaceMethod() { }
 
             [Kept]
-            static void ICopyLibraryStaticInterface.CopyLibraryExplicitImplementationStaticInterfaceMethod () { }
+            static void ICopyLibraryStaticInterface.CopyLibraryExplicitImplementationStaticInterfaceMethod() { }
         }
 
         [Kept]
-        [KeptInterface (typeof (IPrivateInterface))]
+        [KeptInterface(typeof(IPrivateInterface))]
         public class UninstantiatedPublicClassWithPrivateInterface : IPrivateInterface
         {
-            internal UninstantiatedPublicClassWithPrivateInterface () { }
+            internal UninstantiatedPublicClassWithPrivateInterface() { }
 
             [Kept]
-            void IPrivateInterface.PrivateInterfaceMethod () { }
+            void IPrivateInterface.PrivateInterfaceMethod() { }
         }
 
         [Kept]
         public interface IPublicInterface
         {
             [Kept]
-            void PublicInterfaceMethod ();
+            void PublicInterfaceMethod();
 
             [Kept]
-            void ExplicitImplementationPublicInterfaceMethod ();
+            void ExplicitImplementationPublicInterfaceMethod();
         }
 
         [Kept]
         public interface IPublicStaticInterface
         {
             [Kept]
-            static abstract void PublicStaticInterfaceMethod ();
+            static abstract void PublicStaticInterfaceMethod();
 
             [Kept]
-            static abstract void ExplicitImplementationPublicStaticInterfaceMethod ();
+            static abstract void ExplicitImplementationPublicStaticInterfaceMethod();
         }
 
         [Kept]
         internal interface IInternalInterface
         {
             [Kept]
-            void InternalInterfaceMethod ();
+            void InternalInterfaceMethod();
 
             [Kept]
-            void ExplicitImplementationInternalInterfaceMethod ();
+            void ExplicitImplementationInternalInterfaceMethod();
         }
 
         [Kept]
         internal interface IInternalStaticInterface
         {
             [Kept] // https://github.com/dotnet/linker/issues/2733
-            static abstract void InternalStaticInterfaceMethod ();
+            static abstract void InternalStaticInterfaceMethod();
 
             [Kept]
-            static abstract void ExplicitImplementationInternalStaticInterfaceMethod ();
+            static abstract void ExplicitImplementationInternalStaticInterfaceMethod();
         }
 
         [Kept]
         private interface IPrivateInterface
         {
             [Kept]
-            void PrivateInterfaceMethod ();
+            void PrivateInterfaceMethod();
         }
     }
 
     internal class RootLibrary_Internal
     {
-        protected RootLibrary_Internal (SerializationInfo info, StreamingContext context)
-        {
-        }
+        protected RootLibrary_Internal(SerializationInfo info, StreamingContext context) { }
 
-        internal void Unused ()
-        {
-        }
+        internal void Unused() { }
     }
 }

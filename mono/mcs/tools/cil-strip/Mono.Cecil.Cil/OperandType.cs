@@ -26,9 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Cil {
-
-    internal enum OperandType {
+namespace Mono.Cecil.Cil
+{
+    internal enum OperandType
+    {
         InlineBrTarget,
         InlineField,
         InlineI,

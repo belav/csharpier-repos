@@ -3,11 +3,12 @@
 
 public class Program
 {
-    public static void Main ()
+    public static void Main()
     {
-        switch (1) {
-            case 1: {}
-            default: {}
+        switch (1)
+        {
+            case 1: { }
+            default: { }
         }
     }
 }

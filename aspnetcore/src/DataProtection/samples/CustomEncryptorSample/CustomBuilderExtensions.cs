@@ -13,7 +13,8 @@ public static class CustomBuilderExtensions
 {
     public static IDataProtectionBuilder UseXmlEncryptor(
         this IDataProtectionBuilder builder,
-        Func<IServiceProvider, IXmlEncryptor> factory)
+        Func<IServiceProvider, IXmlEncryptor> factory
+    )
     {
         builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(serviceProvider =>
         {

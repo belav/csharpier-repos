@@ -1,11 +1,13 @@
 using System;
 
-class Base<T> where T : new ()
+class Base<T>
+    where T : new()
 {
-    protected readonly T field = new T ();
+    protected readonly T field = new T();
 }
 
-class Derived<T> : Base<T> where T : ICloneable, new ()
+class Derived<T> : Base<T>
+    where T : ICloneable, new()
 {
     public Derived()
     {
@@ -15,13 +17,13 @@ class Derived<T> : Base<T> where T : ICloneable, new ()
 
 class C : ICloneable
 {
-    public object Clone ()
+    public object Clone()
     {
         return null;
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        var a = new Derived<C> ();
+        var a = new Derived<C>();
     }
 }

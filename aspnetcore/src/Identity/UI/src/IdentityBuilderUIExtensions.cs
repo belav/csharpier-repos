@@ -42,13 +42,17 @@ public static class IdentityBuilderUIExtensions
                 // the same mechanism that MVC uses today.
                 // Finally, if for some reason we aren't able to find the assembly, we'll use our default value
                 // (Bootstrap5)
-                if (!TryResolveUIFramework(Assembly.GetEntryAssembly(), out var framework) &&
-                    !TryResolveUIFramework(GetApplicationAssembly(builder), out framework))
+                if (
+                    !TryResolveUIFramework(Assembly.GetEntryAssembly(), out var framework)
+                    && !TryResolveUIFramework(GetApplicationAssembly(builder), out framework)
+                )
                 {
                     framework = default;
                 }
 
-                var parts = new ConsolidatedAssemblyApplicationPartFactory().GetApplicationParts(typeof(IdentityBuilderUIExtensions).Assembly);
+                var parts = new ConsolidatedAssemblyApplicationPartFactory().GetApplicationParts(
+                    typeof(IdentityBuilderUIExtensions).Assembly
+                );
                 foreach (var part in parts)
                 {
                     apm.ApplicationParts.Add(part);
@@ -57,8 +61,8 @@ public static class IdentityBuilderUIExtensions
             });
 
         builder.Services.ConfigureOptions(
-            typeof(IdentityDefaultUIConfigureOptions<>)
-                .MakeGenericType(builder.UserType));
+            typeof(IdentityDefaultUIConfigureOptions<>).MakeGenericType(builder.UserType)
+        );
         builder.Services.TryAddTransient<IEmailSender, EmailSender>();
 
         return builder;
@@ -67,9 +71,12 @@ public static class IdentityBuilderUIExtensions
     private static Assembly? GetApplicationAssembly(IdentityBuilder builder)
     {
         // This is the same logic that MVC follows to find the application assembly.
-        var environment = builder.Services.Where(d => d.ServiceType == typeof(IWebHostEnvironment)).ToArray();
-        var applicationName = ((IWebHostEnvironment?)environment.LastOrDefault()?.ImplementationInstance)
-            ?.ApplicationName;
+        var environment = builder.Services
+            .Where(d => d.ServiceType == typeof(IWebHostEnvironment))
+            .ToArray();
+        var applicationName = (
+            (IWebHostEnvironment?)environment.LastOrDefault()?.ImplementationInstance
+        )?.ApplicationName;
 
         if (applicationName == null)
         {
@@ -83,8 +90,10 @@ public static class IdentityBuilderUIExtensions
     {
         uiFramework = default;
 
-        var metadata = assembly?.GetCustomAttributes<UIFrameworkAttribute>()
-            .SingleOrDefault()?.UIFramework; // Bootstrap5 is the default
+        var metadata = assembly
+            ?.GetCustomAttributes<UIFrameworkAttribute>()
+            .SingleOrDefault()
+            ?.UIFramework; // Bootstrap5 is the default
         if (metadata == null)
         {
             return false;
@@ -93,9 +102,13 @@ public static class IdentityBuilderUIExtensions
         // If we find the metadata there must be a valid framework here.
         if (!Enum.TryParse(metadata, ignoreCase: true, out uiFramework))
         {
-            var enumValues = string.Join(", ", Enum.GetNames(typeof(UIFramework)).Select(v => $"'{v}'"));
+            var enumValues = string.Join(
+                ", ",
+                Enum.GetNames(typeof(UIFramework)).Select(v => $"'{v}'")
+            );
             throw new InvalidOperationException(
-                $"Found an invalid value for the 'IdentityUIFrameworkVersion'. Valid values are {enumValues}");
+                $"Found an invalid value for the 'IdentityUIFrameworkVersion'. Valid values are {enumValues}"
+            );
         }
 
         return true;
@@ -117,7 +130,10 @@ public static class IdentityBuilderUIExtensions
                     switch (_framework)
                     {
                         case UIFramework.Bootstrap4:
-                            if (descriptor.Type?.FullName?.Contains("V5", StringComparison.Ordinal) is true)
+                            if (
+                                descriptor.Type?.FullName?.Contains("V5", StringComparison.Ordinal)
+                                is true
+                            )
                             {
                                 // Remove V5 views
                                 viewsToRemove.Add(descriptor);
@@ -125,11 +141,17 @@ public static class IdentityBuilderUIExtensions
                             else
                             {
                                 // Fix up paths to eliminate version subdir
-                                descriptor.RelativePath = descriptor.RelativePath.Replace("V4/", "");
+                                descriptor.RelativePath = descriptor.RelativePath.Replace(
+                                    "V4/",
+                                    ""
+                                );
                             }
                             break;
                         case UIFramework.Bootstrap5:
-                            if (descriptor.Type?.FullName?.Contains("V4", StringComparison.Ordinal) is true)
+                            if (
+                                descriptor.Type?.FullName?.Contains("V4", StringComparison.Ordinal)
+                                is true
+                            )
                             {
                                 // Remove V4 views
                                 viewsToRemove.Add(descriptor);
@@ -137,7 +159,10 @@ public static class IdentityBuilderUIExtensions
                             else
                             {
                                 // Fix up paths to eliminate version subdir
-                                descriptor.RelativePath = descriptor.RelativePath.Replace("V5/", "");
+                                descriptor.RelativePath = descriptor.RelativePath.Replace(
+                                    "V5/",
+                                    ""
+                                );
                             }
                             break;
                         default:
@@ -152,7 +177,8 @@ public static class IdentityBuilderUIExtensions
             }
         }
 
-        private static bool IsIdentityUIView(CompiledViewDescriptor desc) => desc.RelativePath.StartsWith("/Areas/Identity", StringComparison.OrdinalIgnoreCase) &&
-            desc.Type?.Assembly == typeof(IdentityBuilderUIExtensions).Assembly;
+        private static bool IsIdentityUIView(CompiledViewDescriptor desc) =>
+            desc.RelativePath.StartsWith("/Areas/Identity", StringComparison.OrdinalIgnoreCase)
+            && desc.Type?.Assembly == typeof(IdentityBuilderUIExtensions).Assembly;
     }
 }

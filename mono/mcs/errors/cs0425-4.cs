@@ -4,19 +4,19 @@ namespace Test
 {
     using System;
 
-    public interface IFoo
-    {
-    }
+    public interface IFoo { }
 
     public interface IBar
     {
-        void Method<T, V>() where T : IFoo where V : T;
+        void Method<T, V>()
+            where T : IFoo
+            where V : T;
     }
 
     public class Baz : IBar
     {
-        public void Method<T, V>() where T : IBar where V : T
-        {
-        }
+        public void Method<T, V>()
+            where T : IBar
+            where V : T { }
     }
 }

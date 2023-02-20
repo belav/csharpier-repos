@@ -11,17 +11,19 @@ class T1
     {
         try
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration (ConfigurationUserLevel.None);
+            Configuration config = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.None
+            );
 
-            AppSettingsSection appSettings = (AppSettingsSection) config.GetSection ("appSettings");
-            Console.Write ("appSettings is " + (appSettings == null ? "null" : "not null"));
+            AppSettingsSection appSettings = (AppSettingsSection)config.GetSection("appSettings");
+            Console.Write("appSettings is " + (appSettings == null ? "null" : "not null"));
 
-            Console.Write (" , ");
+            Console.Write(" , ");
 
-            AppSettingsSection AppSettings = (AppSettingsSection) config.GetSection ("AppSettings");
-            Console.Write ("AppSettings is " + (AppSettings == null ? "null" : "not null"));
+            AppSettingsSection AppSettings = (AppSettingsSection)config.GetSection("AppSettings");
+            Console.Write("AppSettings is " + (AppSettings == null ? "null" : "not null"));
 
-            Console.WriteLine ();
+            Console.WriteLine();
         }
         catch (Exception e)
         {

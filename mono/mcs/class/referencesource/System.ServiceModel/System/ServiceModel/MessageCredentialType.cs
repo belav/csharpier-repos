@@ -16,11 +16,13 @@ namespace System.ServiceModel
     {
         internal static bool IsDefined(MessageCredentialType value)
         {
-            return (value == MessageCredentialType.None ||
-                value == MessageCredentialType.UserName ||
-                value == MessageCredentialType.Windows ||
-                value == MessageCredentialType.Certificate ||
-                value == MessageCredentialType.IssuedToken);
+            return (
+                value == MessageCredentialType.None
+                || value == MessageCredentialType.UserName
+                || value == MessageCredentialType.Windows
+                || value == MessageCredentialType.Certificate
+                || value == MessageCredentialType.IssuedToken
+            );
         }
     }
 }

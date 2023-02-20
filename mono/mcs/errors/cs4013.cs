@@ -5,13 +5,15 @@ using System;
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         int i = 1;
-        TypedReference tr = __makeref (i);
+        TypedReference tr = __makeref(i);
         {
-            Action a = () => {    TypedReference tr2 = tr; };
+            Action a = () =>
+            {
+                TypedReference tr2 = tr;
+            };
         }
     }
 }
-

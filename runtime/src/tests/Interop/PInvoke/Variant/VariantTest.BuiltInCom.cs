@@ -11,11 +11,13 @@ partial class Test_VariantTest
 {
     public static int Main()
     {
-        bool builtInComDisabled=false;
-        var comConfig = AppContext.GetData("System.Runtime.InteropServices.BuiltInComInterop.IsSupported");
-        if(comConfig != null && !bool.Parse(comConfig.ToString()))
+        bool builtInComDisabled = false;
+        var comConfig = AppContext.GetData(
+            "System.Runtime.InteropServices.BuiltInComInterop.IsSupported"
+        );
+        if (comConfig != null && !bool.Parse(comConfig.ToString()))
         {
-            builtInComDisabled=true;
+            builtInComDisabled = true;
         }
 
         Console.WriteLine($"Built-in COM Disabled?: {builtInComDisabled}");

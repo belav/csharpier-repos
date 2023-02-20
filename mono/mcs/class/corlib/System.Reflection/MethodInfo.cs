@@ -21,8 +21,8 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Reflection {
-
+namespace System.Reflection
+{
     [Serializable]
 #if !MOBILE
     [ComVisible(true)]
@@ -34,33 +34,47 @@ namespace System.Reflection {
 #endif
     {
 #if !MOBILE
-        void _MethodInfo.GetIDsOfNames ([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId)
+        void _MethodInfo.GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        void _MethodInfo.GetTypeInfo (uint iTInfo, uint lcid, IntPtr ppTInfo)
+        void _MethodInfo.GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        void _MethodInfo.GetTypeInfoCount (out uint pcTInfo)
+        void _MethodInfo.GetTypeInfoCount(out uint pcTInfo)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        void _MethodInfo.Invoke (uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams,
-            IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr)
+        void _MethodInfo.Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        Type _MethodInfo.GetType ()
+        Type _MethodInfo.GetType()
         {
-            return GetType ();
+            return GetType();
         }
 #endif
 
-        internal virtual int GenericParameterCount => GetGenericArguments ().Length;
+        internal virtual int GenericParameterCount => GetGenericArguments().Length;
     }
 }

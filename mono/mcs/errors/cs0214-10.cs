@@ -4,13 +4,17 @@
 
 using System;
 
-class X {
-    public unsafe int* A { set { } }
-    
-    void Foo ()
+class X
+{
+    public unsafe int* A
+    {
+        set { }
+    }
+
+    void Foo()
     {
         A = null;
     }
 
-    static void Main () {}
+    static void Main() { }
 }

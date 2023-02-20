@@ -3,10 +3,11 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant (true)]
 
-public class CLSAttribute: Attribute {
-    [CLSCompliant (false)]
-    public CLSAttribute(string array) {
-    }
+[assembly: CLSCompliant(true)]
+
+public class CLSAttribute : Attribute
+{
+    [CLSCompliant(false)]
+    public CLSAttribute(string array) { }
 }

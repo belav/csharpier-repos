@@ -3,15 +3,14 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly: CLSCompliant (true)]
+
+[assembly: CLSCompliant(true)]
 
 public partial class C1
 {
-    [CLSCompliant (true)]
-    public interface I2 {}
+    [CLSCompliant(true)]
+    public interface I2 { }
 }
 
-[CLSCompliant (false)]
-public partial class C1
-{
-}
+[CLSCompliant(false)]
+public partial class C1 { }

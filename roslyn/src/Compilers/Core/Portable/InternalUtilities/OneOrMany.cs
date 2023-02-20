@@ -42,8 +42,7 @@ namespace Roslyn.Utilities
         }
 
         [MemberNotNullWhen(true, nameof(_one))]
-        private bool HasOne
-            => _many.IsDefault;
+        private bool HasOne => _many.IsDefault;
 
         public T this[int index]
         {
@@ -65,11 +64,9 @@ namespace Roslyn.Utilities
             }
         }
 
-        public int Count
-            => HasOne ? 1 : _many.Length;
+        public int Count => HasOne ? 1 : _many.Length;
 
-        public bool IsEmpty
-            => Count == 0;
+        public bool IsEmpty => Count == 0;
 
         public OneOrMany<T> Add(T one)
         {
@@ -127,16 +124,16 @@ namespace Roslyn.Utilities
 
         public OneOrMany<TResult> Select<TResult>(Func<T, TResult> selector)
         {
-            return HasOne ?
-                OneOrMany.Create(selector(_one)) :
-                OneOrMany.Create(_many.SelectAsArray(selector));
+            return HasOne
+                ? OneOrMany.Create(selector(_one))
+                : OneOrMany.Create(_many.SelectAsArray(selector));
         }
 
         public OneOrMany<TResult> Select<TResult, TArg>(Func<T, TArg, TResult> selector, TArg arg)
         {
-            return HasOne ?
-                OneOrMany.Create(selector(_one, arg)) :
-                OneOrMany.Create(_many.SelectAsArray(selector, arg));
+            return HasOne
+                ? OneOrMany.Create(selector(_one, arg))
+                : OneOrMany.Create(_many.SelectAsArray(selector, arg));
         }
 
         public T? FirstOrDefault(Func<T, bool> predicate)
@@ -175,8 +172,7 @@ namespace Roslyn.Utilities
             return default;
         }
 
-        public Enumerator GetEnumerator()
-            => new(this);
+        public Enumerator GetEnumerator() => new(this);
 
         internal struct Enumerator
         {
@@ -201,10 +197,8 @@ namespace Roslyn.Utilities
 
     internal static class OneOrMany
     {
-        public static OneOrMany<T> Create<T>(T one)
-            => new OneOrMany<T>(one);
+        public static OneOrMany<T> Create<T>(T one) => new OneOrMany<T>(one);
 
-        public static OneOrMany<T> Create<T>(ImmutableArray<T> many)
-            => new OneOrMany<T>(many);
+        public static OneOrMany<T> Create<T>(ImmutableArray<T> many) => new OneOrMany<T>(many);
     }
 }

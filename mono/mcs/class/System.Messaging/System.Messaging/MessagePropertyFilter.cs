@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,7 +33,7 @@ using System.ComponentModel;
 
 namespace System.Messaging
 {
-    [TypeConverter (typeof(ExpandableObjectConverter))]
+    [TypeConverter(typeof(ExpandableObjectConverter))]
     public class MessagePropertyFilter
     {
         private bool acknowledgeType = false;
@@ -81,370 +81,368 @@ namespace System.Messaging
         private bool useTracing = false;
 
         [MonoTODO]
-        public MessagePropertyFilter ()
-        {
+        public MessagePropertyFilter() { }
 
-        }
-
-        [DefaultValue (true)]
-        [MessagingDescription ("MsgAcknowledgeType")]
+        [DefaultValue(true)]
+        [MessagingDescription("MsgAcknowledgeType")]
         public bool AcknowledgeType
         {
             get { return acknowledgeType; }
             set { acknowledgeType = value; }
         }
 
-        [DefaultValue (true)]
-        [MessagingDescription ("MsgAcknowledgement")]
+        [DefaultValue(true)]
+        [MessagingDescription("MsgAcknowledgement")]
         public bool Acknowledgment
         {
             get { return acknowledgment; }
             set { acknowledgment = value; }
         }
 
-        [DefaultValue (true)]
-        [MessagingDescription ("MsgAdministrationQueue")]
+        [DefaultValue(true)]
+        [MessagingDescription("MsgAdministrationQueue")]
         public bool AdministrationQueue
         {
             get { return administrationQueue; }
             set { administrationQueue = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgAppSpecific")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgAppSpecific")]
         public bool AppSpecific
         {
             get { return appSpecific; }
             set { appSpecific = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgArrivedTime")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgArrivedTime")]
         public bool ArrivedTime
         {
             get { return arrivedTime; }
             set { arrivedTime = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgAttachSenderId")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgAttachSenderId")]
         public bool AttachSenderId
         {
             get { return attachSenderId; }
             set { attachSenderId = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgAuthenticated")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgAuthenticated")]
         public bool Authenticated
         {
             get { return authenticated; }
             set { authenticated = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgAuthenticationProviderName")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgAuthenticationProviderName")]
         public bool AuthenticationProviderName
         {
             get { return authenticationProviderName; }
             set { authenticationProviderName = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgAuthenticationProviderType")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgAuthenticationProviderType")]
         public bool AuthenticationProviderType
         {
             get { return authenticationProviderType; }
             set { authenticationProviderType = value; }
         }
 
-        [DefaultValue (true)]
-        [MessagingDescription ("MsgBody")]
+        [DefaultValue(true)]
+        [MessagingDescription("MsgBody")]
         public bool Body
         {
             get { return body; }
             set { body = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgConnectorType")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgConnectorType")]
         public bool ConnectorType
         {
             get { return connectorType; }
             set { connectorType = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgCorrelationId")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgCorrelationId")]
         public bool CorrelationId
         {
             get { return correlationId; }
             set { correlationId = value; }
         }
 
-        [DefaultValue (1024)]
-        [MessagingDescription ("MsgDefaultBodySize")]
+        [DefaultValue(1024)]
+        [MessagingDescription("MsgDefaultBodySize")]
         public int DefaultBodySize
         {
             get { return defaultBodySize; }
             set
             {
-                if (value < 0) 
-                    throw new ArgumentException ("DefaultBodySize");
+                if (value < 0)
+                    throw new ArgumentException("DefaultBodySize");
                 defaultBodySize = value;
             }
         }
 
-        [DefaultValue (255)]
-        [MessagingDescription ("MsgDefaultExtensionSize")]
+        [DefaultValue(255)]
+        [MessagingDescription("MsgDefaultExtensionSize")]
         public int DefaultExtensionSize
         {
             get { return defaultExtensionSize; }
             set
             {
-                if (value < 0) 
-                    throw new ArgumentException ("DefaultExtensionSize");
+                if (value < 0)
+                    throw new ArgumentException("DefaultExtensionSize");
                 defaultExtensionSize = value;
             }
         }
 
-        [DefaultValue (255)]
-        [MessagingDescription ("MsgDefaultLabelSize")]
+        [DefaultValue(255)]
+        [MessagingDescription("MsgDefaultLabelSize")]
         public int DefaultLabelSize
         {
             get { return defaultLabelSize; }
             set
             {
-                if (value < 0) throw new ArgumentException ("DefaultLabelSize");
+                if (value < 0)
+                    throw new ArgumentException("DefaultLabelSize");
                 defaultLabelSize = value;
             }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgDestinationQueue")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgDestinationQueue")]
         public bool DestinationQueue
         {
             get { return destinationQueue; }
             set { destinationQueue = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgDestinationSymmetricKey")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgDestinationSymmetricKey")]
         public bool DestinationSymmetricKey
         {
             get { return destinationSymmetricKey; }
             set { destinationSymmetricKey = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgDigitalSignature")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgDigitalSignature")]
         public bool DigitalSignature
         {
             get { return digitalSignature; }
             set { digitalSignature = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgEncryptionAlgorithm")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgEncryptionAlgorithm")]
         public bool EncryptionAlgorithm
         {
             get { return encryptionAlgorithm; }
             set { encryptionAlgorithm = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgExtension")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgExtension")]
         public bool Extension
         {
             get { return extension; }
             set { extension = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgHashAlgorithm")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgHashAlgorithm")]
         public bool HashAlgorithm
         {
             get { return hashAlgorithm; }
             set { hashAlgorithm = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgId")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgId")]
         public bool Id
         {
             get { return id; }
             set { id = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgIsFirstInTransaction")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgIsFirstInTransaction")]
         public bool IsFirstInTransaction
         {
             get { return isFirstInTransaction; }
             set { isFirstInTransaction = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgIsLastInTransaction")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgIsLastInTransaction")]
         public bool IsLastInTransaction
         {
             get { return isLastInTransaction; }
             set { isLastInTransaction = value; }
         }
 
-        [DefaultValue (true)]
-        [MessagingDescription ("MsgLabel")]
+        [DefaultValue(true)]
+        [MessagingDescription("MsgLabel")]
         public bool Label
         {
             get { return label; }
             set { label = value; }
         }
 
-        [DefaultValue (true)]
-        [MessagingDescription ("MsgMessageType")]
+        [DefaultValue(true)]
+        [MessagingDescription("MsgMessageType")]
         public bool MessageType
         {
             get { return messageType; }
             set { messageType = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgPriority")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgPriority")]
         public bool Priority
         {
             get { return priority; }
             set { priority = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgRecoverable")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgRecoverable")]
         public bool Recoverable
         {
             get { return recoverable; }
             set { recoverable = value; }
         }
 
-        [DefaultValue (true)]
-        [MessagingDescription ("MsgResponseQueue")]
+        [DefaultValue(true)]
+        [MessagingDescription("MsgResponseQueue")]
         public bool ResponseQueue
         {
             get { return responseQueue; }
             set { responseQueue = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgSenderCertificate")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgSenderCertificate")]
         public bool SenderCertificate
         {
             get { return senderCertificate; }
             set { senderCertificate = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgSenderId")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgSenderId")]
         public bool SenderId
         {
             get { return senderId; }
             set { senderId = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgSenderVersion")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgSenderVersion")]
         public bool SenderVersion
         {
             get { return senderVersion; }
             set { senderVersion = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgSentTime")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgSentTime")]
         public bool SentTime
         {
             get { return sentTime; }
             set { sentTime = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgSourceMachine")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgSourceMachine")]
         public bool SourceMachine
         {
             get { return sourceMachine; }
             set { sourceMachine = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgTimeToBeReceived")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgTimeToBeReceived")]
         public bool TimeToBeReceived
         {
             get { return timeToBeReceived; }
             set { timeToBeReceived = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgTimeToReachQueue")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgTimeToReachQueue")]
         public bool TimeToReachQueue
         {
             get { return timeToReachQueue; }
             set { timeToReachQueue = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgTransactionId")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgTransactionId")]
         public bool TransactionId
         {
             get { return transactionId; }
             set { transactionId = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgTransactionStatusQueue")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgTransactionStatusQueue")]
         public bool TransactionStatusQueue
         {
             get { return transactionStatusQueue; }
             set { transactionStatusQueue = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgUseAuthentication")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgUseAuthentication")]
         public bool UseAuthentication
         {
             get { return useAuthentication; }
             set { useAuthentication = value; }
         }
 
-        [DefaultValue (true)]
-        [MessagingDescription ("MsgUseDeadLetterQueue")]
+        [DefaultValue(true)]
+        [MessagingDescription("MsgUseDeadLetterQueue")]
         public bool UseDeadLetterQueue
         {
             get { return useDeadLetterQueue; }
             set { useDeadLetterQueue = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgUseEncryption")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgUseEncryption")]
         public bool UseEncryption
         {
             get { return useEncryption; }
             set { useEncryption = value; }
         }
 
-        [DefaultValue (true)]
-        [MessagingDescription ("MsgUseJournalQueue")]
+        [DefaultValue(true)]
+        [MessagingDescription("MsgUseJournalQueue")]
         public bool UseJournalQueue
         {
             get { return useJournalQueue; }
             set { useJournalQueue = value; }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgUseTracing")]
+        [DefaultValue(false)]
+        [MessagingDescription("MsgUseTracing")]
         public bool UseTracing
         {
             get { return useTracing; }
             set { useTracing = value; }
         }
 
-        public void ClearAll ()
+        public void ClearAll()
         {
             acknowledgeType = false;
             acknowledgment = false;
@@ -488,7 +486,7 @@ namespace System.Messaging
             useTracing = false;
         }
 
-        public void SetAll ()
+        public void SetAll()
         {
             acknowledgeType = true;
             acknowledgment = true;
@@ -533,20 +531,20 @@ namespace System.Messaging
         }
 
         [MonoTODO]
-        public void SetDefaults ()
+        public void SetDefaults()
         {
             acknowledgeType = false;
             acknowledgment = false;
-            administrationQueue = true;            //
+            administrationQueue = true; //
             appSpecific = false;
-            arrivedTime = true;                 //
+            arrivedTime = true; //
             attachSenderId = false;
             authenticated = false;
             authenticationProviderName = false;
             authenticationProviderType = false;
-            body = true;                        //
+            body = true; //
             connectorType = false;
-            correlationId = true;                //
+            correlationId = true; //
             defaultBodySize = 1024;
             defaultExtensionSize = 255;
             defaultLabelSize = 255;
@@ -556,18 +554,18 @@ namespace System.Messaging
             encryptionAlgorithm = false;
             extension = false;
             hashAlgorithm = false;
-            id = true;                            //
+            id = true; //
             isFirstInTransaction = false;
             isLastInTransaction = false;
-            label = true;                        //
+            label = true; //
             messageType = false;
             priority = false;
             recoverable = false;
-            responseQueue = true;                //
+            responseQueue = true; //
             senderCertificate = false;
             senderId = false;
             senderVersion = false;
-            sentTime = true;                    //
+            sentTime = true; //
             sourceMachine = false;
             timeToBeReceived = false;
             timeToReachQueue = false;

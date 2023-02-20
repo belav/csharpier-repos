@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,38 +34,34 @@ namespace System.ServiceModel.Channels
 {
     public sealed class AddressHeaderCollection : ReadOnlyCollection<AddressHeader>
     {
-        static readonly AddressHeader [] empty = new AddressHeader [0];
+        static readonly AddressHeader[] empty = new AddressHeader[0];
 
-        static IList<AddressHeader> GetList (IEnumerable<AddressHeader> arg)
+        static IList<AddressHeader> GetList(IEnumerable<AddressHeader> arg)
         {
             IList<AddressHeader> list = arg as IList<AddressHeader>;
-            return list != null ? list : new List<AddressHeader> (arg);
+            return list != null ? list : new List<AddressHeader>(arg);
         }
 
-        public AddressHeaderCollection ()
-            : base (empty)
-        {
-        }
+        public AddressHeaderCollection()
+            : base(empty) { }
 
-        public AddressHeaderCollection (IEnumerable<AddressHeader> addressHeaders)
-            : base (GetList (addressHeaders))
-        {
-        }
+        public AddressHeaderCollection(IEnumerable<AddressHeader> addressHeaders)
+            : base(GetList(addressHeaders)) { }
 
-        public void AddHeadersTo (Message message)
+        public void AddHeadersTo(Message message)
         {
             if (message == null)
-                throw new ArgumentNullException ("message");
+                throw new ArgumentNullException("message");
             foreach (AddressHeader header in this)
-                message.Headers.Add (header.ToMessageHeader ());
+                message.Headers.Add(header.ToMessageHeader());
         }
 
-        public AddressHeader FindHeader (string name, string ns)
+        public AddressHeader FindHeader(string name, string ns)
         {
             if (name == null)
-                throw new ArgumentNullException ("name");
+                throw new ArgumentNullException("name");
             if (ns == null)
-                throw new ArgumentNullException ("ns");
+                throw new ArgumentNullException("ns");
             foreach (AddressHeader header in this)
                 if (header.Name == name && header.Namespace == ns)
                     return header;
@@ -73,9 +69,9 @@ namespace System.ServiceModel.Channels
             return null;
         }
 
-        public AddressHeader[] FindAll (string name, string ns)
+        public AddressHeader[] FindAll(string name, string ns)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

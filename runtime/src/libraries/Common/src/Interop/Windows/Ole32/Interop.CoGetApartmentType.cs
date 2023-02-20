@@ -30,6 +30,9 @@ internal static partial class Interop
     internal static partial class Ole32
     {
         [LibraryImport(Interop.Libraries.Ole32)]
-        internal static partial int CoGetApartmentType(out APTTYPE pAptType, out APTTYPEQUALIFIER pAptQualifier);
+        internal static partial int CoGetApartmentType(
+            out APTTYPE pAptType,
+            out APTTYPEQUALIFIER pAptQualifier
+        );
     }
 }

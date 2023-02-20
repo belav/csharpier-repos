@@ -4,16 +4,16 @@ public class X
 {
     string field;
 
-    public static int Main ()
+    public static int Main()
     {
         X x = null;
 
-        try {
+        try
+        {
             var res = (x?.field).ToString()?.Length;
             return 1;
-        } catch (NullReferenceException) {
-
         }
+        catch (NullReferenceException) { }
 
         return 0;
     }

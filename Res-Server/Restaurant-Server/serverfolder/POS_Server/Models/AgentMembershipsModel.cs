@@ -17,13 +17,10 @@ namespace POS_Server.Models
         public Nullable<long> updateUserId { get; set; }
         public byte isActive { get; set; }
 
-
-
         public decimal Amount { get; set; }
-
 
         public bool canDelete { get; set; }
 
-        public MembershipsModel memberShip {get; set;}
+        public MembershipsModel memberShip { get; set; }
     }
 }

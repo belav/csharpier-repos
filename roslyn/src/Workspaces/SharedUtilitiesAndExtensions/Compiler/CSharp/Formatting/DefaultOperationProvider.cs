@@ -15,34 +15,50 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     {
         public static readonly DefaultOperationProvider Instance = new();
 
-        private DefaultOperationProvider()
-        {
-        }
+        private DefaultOperationProvider() { }
 
-        public override void AddSuppressOperations(List<SuppressOperation> list, SyntaxNode node, in NextSuppressOperationAction nextOperation)
-        {
-        }
+        public override void AddSuppressOperations(
+            List<SuppressOperation> list,
+            SyntaxNode node,
+            in NextSuppressOperationAction nextOperation
+        ) { }
 
-        public override void AddAnchorIndentationOperations(List<AnchorIndentationOperation> list, SyntaxNode node, in NextAnchorIndentationOperationAction nextOperation)
-        {
-        }
+        public override void AddAnchorIndentationOperations(
+            List<AnchorIndentationOperation> list,
+            SyntaxNode node,
+            in NextAnchorIndentationOperationAction nextOperation
+        ) { }
 
-        public override void AddIndentBlockOperations(List<IndentBlockOperation> list, SyntaxNode node, in NextIndentBlockOperationAction nextOperation)
-        {
-        }
+        public override void AddIndentBlockOperations(
+            List<IndentBlockOperation> list,
+            SyntaxNode node,
+            in NextIndentBlockOperationAction nextOperation
+        ) { }
 
-        public override void AddAlignTokensOperations(List<AlignTokensOperation> list, SyntaxNode node, in NextAlignTokensOperationAction nextOperation)
-        {
-        }
+        public override void AddAlignTokensOperations(
+            List<AlignTokensOperation> list,
+            SyntaxNode node,
+            in NextAlignTokensOperationAction nextOperation
+        ) { }
 
-        public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustNewLinesOperation nextOperation)
-            => null;
+        public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(
+            in SyntaxToken previousToken,
+            in SyntaxToken currentToken,
+            in NextGetAdjustNewLinesOperation nextOperation
+        ) => null;
 
         // return 1 space for every token pairs as a default operation
-        public override AdjustSpacesOperation GetAdjustSpacesOperation(in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustSpacesOperation nextOperation)
+        public override AdjustSpacesOperation GetAdjustSpacesOperation(
+            in SyntaxToken previousToken,
+            in SyntaxToken currentToken,
+            in NextGetAdjustSpacesOperation nextOperation
+        )
         {
             var space = currentToken.Kind() == SyntaxKind.EndOfFileToken ? 0 : 1;
-            return FormattingOperations.CreateAdjustSpacesOperation(space, AdjustSpacesOption.DefaultSpacesIfOnSingleLine);
+            return FormattingOperations.CreateAdjustSpacesOperation(
+                space,
+                AdjustSpacesOption.DefaultSpacesIfOnSingleLine
+            );
         }
     }
 }

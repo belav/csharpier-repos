@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 class C
 {
-    static Task Method ()
+    static Task Method()
     {
         return null;
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        Expression<Action<int>> a = async l => await Method ();
+        Expression<Action<int>> a = async l => await Method();
     }
 }

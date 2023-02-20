@@ -15,9 +15,7 @@ public struct S0
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void M25(int r0, int r1, int r2, int r3, S0 stkArg)
-    {
-    }
+    static void M25(int r0, int r1, int r2, int r3, S0 stkArg) { }
 }
 
 public class Runtime_60827

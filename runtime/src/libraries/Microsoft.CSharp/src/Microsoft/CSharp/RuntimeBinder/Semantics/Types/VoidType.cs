@@ -14,9 +14,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         public static readonly VoidType Instance = new VoidType();
 
         private VoidType()
-            : base(TypeKind.TK_VoidType)
-        {
-        }
+            : base(TypeKind.TK_VoidType) { }
 
         public override bool IsPredefType(PredefinedType pt) => pt == PredefinedType.PT_VOID;
     }

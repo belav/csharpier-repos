@@ -21,7 +21,12 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         public string DebuggeeSideVisualizerAssemblyName;
         public Guid ExtensionPartId;
 
-        public static DkmCustomUIVisualizerInfo Create(uint Id, string MenuName, string Description, string Metric)
+        public static DkmCustomUIVisualizerInfo Create(
+            uint Id,
+            string MenuName,
+            string Description,
+            string Metric
+        )
         {
             return new DkmCustomUIVisualizerInfo
             {
@@ -32,7 +37,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             };
         }
 
-        public static DkmCustomUIVisualizerInfo Create(uint Id,
+        public static DkmCustomUIVisualizerInfo Create(
+            uint Id,
             string MenuName,
             string Description,
             string Metric,
@@ -40,7 +46,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             string UISideVisualizerAssemblyName,
             DkmClrCustomVisualizerAssemblyLocation UISideVisualizerAssemblyLocation,
             string DebuggeeSideVisualizerTypeName,
-            string DebuggeeSideVisualizerAssemblyName)
+            string DebuggeeSideVisualizerAssemblyName
+        )
         {
             return new DkmCustomUIVisualizerInfo
             {
@@ -56,7 +63,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             };
         }
 
-        public static DkmCustomUIVisualizerInfo Create(uint Id,
+        public static DkmCustomUIVisualizerInfo Create(
+            uint Id,
             string MenuName,
             string Description,
             string Metric,
@@ -65,7 +73,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmClrCustomVisualizerAssemblyLocation UISideVisualizerAssemblyLocation,
             string DebuggeeSideVisualizerTypeName,
             string DebuggeeSideVisualizerAssemblyName,
-            Guid ExtensionPartId)
+            Guid ExtensionPartId
+        )
         {
             return new DkmCustomUIVisualizerInfo
             {

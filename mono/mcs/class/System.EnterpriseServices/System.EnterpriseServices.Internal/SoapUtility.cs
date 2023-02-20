@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,31 +32,40 @@ using System.Runtime.InteropServices;
 namespace System.EnterpriseServices.Internal
 {
     [Guid("5F9A955F-AA55-4127-A32B-33496AA8A44E")]
-    public sealed class SoapUtility : ISoapUtility {
-
+    public sealed class SoapUtility : ISoapUtility
+    {
         [MonoTODO]
-        public SoapUtility ()
+        public SoapUtility()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void GetServerBinPath (string rootWebServer, string inBaseUrl, string inVirtualRoot, out string binPath)
+        public void GetServerBinPath(
+            string rootWebServer,
+            string inBaseUrl,
+            string inVirtualRoot,
+            out string binPath
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void GetServerPhysicalPath (string rootWebServer, string inBaseUrl, string inVirtualRoot, out string physicalPath)
+        public void GetServerPhysicalPath(
+            string rootWebServer,
+            string inBaseUrl,
+            string inVirtualRoot,
+            out string physicalPath
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Present ()
+        public void Present()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-
     }
 }

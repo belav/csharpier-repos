@@ -10,9 +10,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     partial class SafePasswordHandle
     {
-        internal string Mono_DangerousGetString ()
+        internal string Mono_DangerousGetString()
         {
-            return Marshal.PtrToStringUni (DangerousGetHandle ());
+            return Marshal.PtrToStringUni(DangerousGetHandle());
         }
     }
 }

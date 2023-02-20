@@ -15,11 +15,17 @@ namespace Test
                 Int16 foo = 0;
                 for (int i = 0; i < 5; i++)
                 {
-                    checked { foo += 32000; }
+                    checked
+                    {
+                        foo += 32000;
+                    }
                     Console.WriteLine("foo=" + foo);
                 }
             }
-            catch (OverflowException) { return 100; }
+            catch (OverflowException)
+            {
+                return 100;
+            }
             return 1;
         }
     }

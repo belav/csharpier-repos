@@ -4,40 +4,36 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
 {
     public class ObjectCastedToSecondInterfaceHasMemberRemovedButInterfaceKept
     {
-        public static void Main ()
+        public static void Main()
         {
-            IFoo i = new A ();
-            i.Foo ();
-            var b = (IBar) i;
+            IFoo i = new A();
+            i.Foo();
+            var b = (IBar)i;
         }
 
         [Kept]
         interface IFoo
         {
             [Kept]
-            void Foo ();
+            void Foo();
         }
 
         [Kept]
         interface IBar
         {
-            void Bar ();
+            void Bar();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptInterface (typeof (IFoo))]
-        [KeptInterface (typeof (IBar))]
+        [KeptMember(".ctor()")]
+        [KeptInterface(typeof(IFoo))]
+        [KeptInterface(typeof(IBar))]
         class A : IBar, IFoo
         {
             [Kept]
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
 
-            public void Bar ()
-            {
-            }
+            public void Bar() { }
         }
     }
 }

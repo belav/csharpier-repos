@@ -12,7 +12,9 @@ namespace System.Net
     ///    </para>
     /// </devdoc>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ProtocolViolationException : InvalidOperationException, ISerializable
     {
         /// <devdoc>
@@ -20,9 +22,8 @@ namespace System.Net
         ///       Creates a new instance of the <see cref='System.Net.ProtocolViolationException'/>class.
         ///    </para>
         /// </devdoc>
-        public ProtocolViolationException() : base()
-        {
-        }
+        public ProtocolViolationException()
+            : base() { }
 
         /// <devdoc>
         ///    <para>
@@ -30,21 +31,27 @@ namespace System.Net
         ///       class with the specified message.
         ///    </para>
         /// </devdoc>
-        public ProtocolViolationException(string? message) : base(message)
-        {
-        }
+        public ProtocolViolationException(string? message)
+            : base(message) { }
 
-        protected ProtocolViolationException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-            : base(serializationInfo, streamingContext)
-        {
-        }
+        protected ProtocolViolationException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+            : base(serializationInfo, streamingContext) { }
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             base.GetObjectData(serializationInfo, streamingContext);
         }
 
-        public override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             base.GetObjectData(serializationInfo, streamingContext);
         }

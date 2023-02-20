@@ -2,7 +2,7 @@
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
         // TODO: check applied attributes
         return 0;

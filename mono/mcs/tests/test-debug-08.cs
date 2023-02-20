@@ -2,21 +2,19 @@
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         return;
     }
-    
-    void Foo ()
-    {
-    }
-    
-    int Foo2 ()
+
+    void Foo() { }
+
+    int Foo2()
     {
         return 7;
     }
-    
-    int Foo3 ()
+
+    int Foo3()
     {
         {
             {

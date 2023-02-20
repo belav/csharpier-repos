@@ -7,14 +7,12 @@ using System.Collections;
 
 public class B : A
 {
-    void test ()
+    void test() { }
+
+    public void AA()
     {
+        comparer += new D(test);
     }
-    
-    public void AA ()
-    {
-        comparer += new D (test);
-    }
-    
-    public static void Main () {}
+
+    public static void Main() { }
 }

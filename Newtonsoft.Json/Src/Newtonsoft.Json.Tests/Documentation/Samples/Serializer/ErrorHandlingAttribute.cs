@@ -96,11 +96,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""George Michael Bluth"",
   ""Age"": 16,
   ""Title"": ""Mister Manager""
-}", json);
+}",
+                json
+            );
         }
     }
 }

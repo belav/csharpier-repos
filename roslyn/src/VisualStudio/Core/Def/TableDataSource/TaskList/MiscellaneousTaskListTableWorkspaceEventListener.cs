@@ -14,8 +14,15 @@ using Microsoft.VisualStudio.Shell.TableManager;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
-    [ExportEventListener(WellKnownEventListeners.TaskListProvider, WorkspaceKind.MiscellaneousFiles), Shared]
-    internal sealed class MiscellaneousTaskListTableWorkspaceEventListener : IEventListener<ITaskListProvider>
+    [
+        ExportEventListener(
+            WellKnownEventListeners.TaskListProvider,
+            WorkspaceKind.MiscellaneousFiles
+        ),
+        Shared
+    ]
+    internal sealed class MiscellaneousTaskListTableWorkspaceEventListener
+        : IEventListener<ITaskListProvider>
     {
         internal const string IdentifierString = nameof(MiscellaneousTaskListTable);
 
@@ -24,18 +31,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MiscellaneousTaskListTableWorkspaceEventListener(IThreadingContext threadingContext, ITableManagerProvider tableManagerProvider)
+        public MiscellaneousTaskListTableWorkspaceEventListener(
+            IThreadingContext threadingContext,
+            ITableManagerProvider tableManagerProvider
+        )
         {
             _threadingContext = threadingContext;
             _tableManagerProvider = tableManagerProvider;
         }
 
-        public void StartListening(Workspace workspace, ITaskListProvider service)
-            => _ = new MiscellaneousTaskListTable(workspace, _threadingContext, service, _tableManagerProvider);
+        public void StartListening(Workspace workspace, ITaskListProvider service) =>
+            _ = new MiscellaneousTaskListTable(
+                workspace,
+                _threadingContext,
+                service,
+                _tableManagerProvider
+            );
 
         private sealed class MiscellaneousTaskListTable : VisualStudioBaseTaskListTable
         {
-            public MiscellaneousTaskListTable(Workspace workspace, IThreadingContext threadingContext, ITaskListProvider taskProvider, ITableManagerProvider provider)
+            public MiscellaneousTaskListTable(
+                Workspace workspace,
+                IThreadingContext threadingContext,
+                ITaskListProvider taskProvider,
+                ITableManagerProvider provider
+            )
                 : base(workspace, threadingContext, taskProvider, IdentifierString, provider)
             {
                 ConnectWorkspaceEvents();

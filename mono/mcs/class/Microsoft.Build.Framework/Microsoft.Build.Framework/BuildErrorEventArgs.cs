@@ -28,32 +28,88 @@
 
 using System;
 
-namespace Microsoft.Build.Framework {
+namespace Microsoft.Build.Framework
+{
     [Serializable]
-    public class BuildErrorEventArgs
-            : LazyFormattedBuildEventArgs {
-    
-        string    code;
-        int    columnNumber;
-        int    endColumnNumber;
-        int    endLineNumber;
-        string     file;
-        int    lineNumber;
-        string    subcategory;
+    public class BuildErrorEventArgs : LazyFormattedBuildEventArgs
+    {
+        string code;
+        int columnNumber;
+        int endColumnNumber;
+        int endLineNumber;
+        string file;
+        int lineNumber;
+        string subcategory;
         string projectFile;
 
-        protected BuildErrorEventArgs ()
+        protected BuildErrorEventArgs() { }
+
+        public BuildErrorEventArgs(
+            string subcategory,
+            string code,
+            string file,
+            int lineNumber,
+            int columnNumber,
+            int endLineNumber,
+            int endColumnNumber,
+            string message,
+            string helpKeyword,
+            string senderName
+        )
+            : base(message, helpKeyword, senderName)
         {
+            this.subcategory = subcategory;
+            this.code = code;
+            this.file = file;
+            this.lineNumber = lineNumber;
+            this.columnNumber = columnNumber;
+            this.endLineNumber = endLineNumber;
+            this.endColumnNumber = endColumnNumber;
         }
 
-        public BuildErrorEventArgs (string subcategory, string code,
-                        string file, int lineNumber,
-                        int columnNumber,
-                        int endLineNumber,
-                        int endColumnNumber,
-                        string message, string helpKeyword,
-                        string senderName)
-            : base (message, helpKeyword, senderName)
+        public BuildErrorEventArgs(
+            string subcategory,
+            string code,
+            string file,
+            int lineNumber,
+            int columnNumber,
+            int endLineNumber,
+            int endColumnNumber,
+            string message,
+            string helpKeyword,
+            string senderName,
+            DateTime eventTimestamp
+        )
+            : this(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName,
+                eventTimestamp,
+                new object[0]
+            ) { }
+
+        public BuildErrorEventArgs(
+            string subcategory,
+            string code,
+            string file,
+            int lineNumber,
+            int columnNumber,
+            int endLineNumber,
+            int endColumnNumber,
+            string message,
+            string helpKeyword,
+            string senderName,
+            DateTime eventTimestamp,
+            params object[] messageArgs
+        )
+            : base(message, helpKeyword, senderName, eventTimestamp, messageArgs)
         {
             this.subcategory = subcategory;
             this.code = code;
@@ -64,80 +120,45 @@ namespace Microsoft.Build.Framework {
             this.endColumnNumber = endColumnNumber;
         }
 
-        public BuildErrorEventArgs (string subcategory, string code,
-                string file, int lineNumber, int columnNumber,
-                int endLineNumber, int endColumnNumber, string message,
-                string helpKeyword, string senderName, DateTime eventTimestamp)
-            : this (subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword,
-                senderName, eventTimestamp, new object[0])
+        public string Code
         {
+            get { return code; }
         }
 
-        public BuildErrorEventArgs (string subcategory, string code,
-                string file, int lineNumber, int columnNumber, int endLineNumber,
-                int endColumnNumber, string message, string helpKeyword,
-                string senderName, DateTime eventTimestamp,
-                params object[] messageArgs)
-            : base (message, helpKeyword, senderName, eventTimestamp, messageArgs)
+        public int ColumnNumber
         {
-            this.subcategory = subcategory;
-            this.code = code;
-            this.file = file;
-            this.lineNumber = lineNumber;
-            this.columnNumber = columnNumber;
-            this.endLineNumber = endLineNumber;
-            this.endColumnNumber = endColumnNumber;
-
+            get { return columnNumber; }
         }
 
-        public string Code {
-            get {
-                return code;
-            }
+        public int EndColumnNumber
+        {
+            get { return endColumnNumber; }
         }
 
-        public int ColumnNumber {
-            get {
-                return columnNumber;
-            }
+        public int EndLineNumber
+        {
+            get { return endLineNumber; }
         }
 
-        public int EndColumnNumber {
-            get {
-                return endColumnNumber;
-            }
+        public string File
+        {
+            get { return file; }
         }
 
-        public int EndLineNumber {
-            get {
-                return endLineNumber;
-            }
+        public int LineNumber
+        {
+            get { return lineNumber; }
         }
 
-        public string File {
-            get {
-                return file;
-            }
+        public string Subcategory
+        {
+            get { return subcategory; }
         }
 
-        public int LineNumber {
-            get {
-                return lineNumber;
-            }
-        }
-        
-        public string Subcategory {
-            get {
-                return subcategory;
-            }
-        }
-
-        public string ProjectFile {
+        public string ProjectFile
+        {
             get { return projectFile; }
-            set {  projectFile = value; }
+            set { projectFile = value; }
         }
-
     }
 }
-

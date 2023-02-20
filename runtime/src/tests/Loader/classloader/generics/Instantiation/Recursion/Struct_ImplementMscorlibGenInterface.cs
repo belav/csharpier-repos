@@ -18,334 +18,369 @@ generic interfaces:
 
 using System;
 using System.Collections.Generic;
- using System.Collections;
+using System.Collections;
 
-public struct MyClassICollection : ICollection<MyClassICollection> 
+public struct MyClassICollection : ICollection<MyClassICollection>
 {
-        public int Count { get {return 1;} }
-
-        public bool IsReadOnly { get {return true;} }
-
-        public void Add(MyClassICollection item){}
-
-        public void Clear(){}
-
-        public bool Contains(MyClassICollection item) { return true;}
-        
-        public void CopyTo(MyClassICollection[] array, int arrayIndex){}
-        
-        public bool Remove(MyClassICollection item){ return true;}
-
-     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    public int Count
     {
-        return default(System.Collections.IEnumerator);    
+        get { return 1; }
     }
 
-     IEnumerator<MyClassICollection> System.Collections.Generic.IEnumerable<MyClassICollection>.GetEnumerator()
+    public bool IsReadOnly
+    {
+        get { return true; }
+    }
+
+    public void Add(MyClassICollection item) { }
+
+    public void Clear() { }
+
+    public bool Contains(MyClassICollection item)
+    {
+        return true;
+    }
+
+    public void CopyTo(MyClassICollection[] array, int arrayIndex) { }
+
+    public bool Remove(MyClassICollection item)
+    {
+        return true;
+    }
+
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    {
+        return default(System.Collections.IEnumerator);
+    }
+
+    IEnumerator<MyClassICollection> System.Collections.Generic.IEnumerable<MyClassICollection>.GetEnumerator()
     {
         return default(IEnumerator<MyClassICollection>);
     }
-    
 }
 
-public struct MyClassIComparer : IComparer<MyClassIComparer> 
+public struct MyClassIComparer : IComparer<MyClassIComparer>
 {
-    public int Compare(MyClassIComparer x, MyClassIComparer y){return 1;}
+    public int Compare(MyClassIComparer x, MyClassIComparer y)
+    {
+        return 1;
+    }
 }
 
-public struct MyClassIDictionary: IDictionary<MyClassIDictionary,MyClassIDictionary> 
+public struct MyClassIDictionary : IDictionary<MyClassIDictionary, MyClassIDictionary>
 {
-
-
-    bool System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.ContainsKey(MyClassIDictionary key)
+    bool System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.ContainsKey(
+        MyClassIDictionary key
+    )
     {
         return false;
     }
 
+    void System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.Add(
+        MyClassIDictionary key,
+        MyClassIDictionary value
+    ) { }
 
-    void System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.Add(MyClassIDictionary key, MyClassIDictionary value)
-    {}
-
-
-    bool System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.Remove(MyClassIDictionary key)
+    bool System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.Remove(
+        MyClassIDictionary key
+    )
     {
         return false;
     }
 
-    bool System.Collections.Generic.IDictionary<MyClassIDictionary,MyClassIDictionary>.TryGetValue(MyClassIDictionary key, out MyClassIDictionary value)
+    bool System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.TryGetValue(
+        MyClassIDictionary key,
+        out MyClassIDictionary value
+    )
     {
         value = new MyClassIDictionary();
         return false;
     }
 
-
-
-    ICollection<MyClassIDictionary> System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.Keys
+    ICollection<MyClassIDictionary> System.Collections.Generic.IDictionary<
+        MyClassIDictionary,
+        MyClassIDictionary
+    >.Keys
     {
-        get
-        {
-            return default(ICollection<MyClassIDictionary>);
-        }
+        get { return default(ICollection<MyClassIDictionary>); }
     }
 
-
-    ICollection<MyClassIDictionary> System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.Values
+    ICollection<MyClassIDictionary> System.Collections.Generic.IDictionary<
+        MyClassIDictionary,
+        MyClassIDictionary
+    >.Values
     {
-        get
-        {
-            return default(ICollection<MyClassIDictionary>);
-        }
+        get { return default(ICollection<MyClassIDictionary>); }
     }
 
-    MyClassIDictionary System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.this[MyClassIDictionary key]
+    MyClassIDictionary System.Collections.Generic.IDictionary<
+        MyClassIDictionary,
+        MyClassIDictionary
+    >.this[MyClassIDictionary key]
     {
-        get
-        {
-            return new MyClassIDictionary();
-        }
-        set{}
+        get { return new MyClassIDictionary(); }
+        set { }
     }
-
 
     #region ICollection<KeyValuePair<MyDictionary,Int32>> Members
 
-    void System.Collections.Generic.ICollection<KeyValuePair<MyClassIDictionary, MyClassIDictionary>>.Add(KeyValuePair<MyClassIDictionary, MyClassIDictionary> item)
+    void System.Collections.Generic.ICollection<
+        KeyValuePair<MyClassIDictionary, MyClassIDictionary>
+    >.Add(KeyValuePair<MyClassIDictionary, MyClassIDictionary> item) { }
+
+    void System.Collections.Generic.ICollection<
+        KeyValuePair<MyClassIDictionary, MyClassIDictionary>
+    >.Clear() { }
+
+    int System.Collections.Generic.ICollection<
+        KeyValuePair<MyClassIDictionary, MyClassIDictionary>
+    >.Count
     {
+        get { return 1; }
     }
 
-    void System.Collections.Generic.ICollection<KeyValuePair<MyClassIDictionary, MyClassIDictionary>>.Clear()
-    {}
-
-    
-    int System.Collections.Generic.ICollection<KeyValuePair<MyClassIDictionary, MyClassIDictionary>>.Count
+    bool System.Collections.Generic.ICollection<
+        KeyValuePair<MyClassIDictionary, MyClassIDictionary>
+    >.IsReadOnly
     {
-        get
-        {
-            return 1;
-        }
+        get { return false; }
     }
 
-    bool System.Collections.Generic.ICollection<KeyValuePair<MyClassIDictionary, MyClassIDictionary>>.IsReadOnly
-    {
-        get
-        {
-            return false;
-        }
-    }
+    void System.Collections.Generic.ICollection<
+        KeyValuePair<MyClassIDictionary, MyClassIDictionary>
+    >.CopyTo(KeyValuePair<MyClassIDictionary, MyClassIDictionary>[] array, int arrayIndex) { }
 
-    void System.Collections.Generic.ICollection<KeyValuePair<MyClassIDictionary, MyClassIDictionary>>.CopyTo(KeyValuePair<MyClassIDictionary,MyClassIDictionary>[] array, int arrayIndex)
-    {}
-
-
-    bool System.Collections.Generic.ICollection<KeyValuePair<MyClassIDictionary, MyClassIDictionary>>.Contains(KeyValuePair<MyClassIDictionary, MyClassIDictionary> item)
-    {
-        return false;
-    }
-
-    bool System.Collections.Generic.ICollection<KeyValuePair<MyClassIDictionary, MyClassIDictionary>>.Remove(KeyValuePair<MyClassIDictionary, MyClassIDictionary> item)
+    bool System.Collections.Generic.ICollection<
+        KeyValuePair<MyClassIDictionary, MyClassIDictionary>
+    >.Contains(KeyValuePair<MyClassIDictionary, MyClassIDictionary> item)
     {
         return false;
     }
 
-    IEnumerator<KeyValuePair<MyClassIDictionary, MyClassIDictionary>> System.Collections.Generic.IEnumerable<KeyValuePair<MyClassIDictionary, MyClassIDictionary>>.GetEnumerator()
+    bool System.Collections.Generic.ICollection<
+        KeyValuePair<MyClassIDictionary, MyClassIDictionary>
+    >.Remove(KeyValuePair<MyClassIDictionary, MyClassIDictionary> item)
+    {
+        return false;
+    }
+
+    IEnumerator<
+        KeyValuePair<MyClassIDictionary, MyClassIDictionary>
+    > System.Collections.Generic.IEnumerable<
+        KeyValuePair<MyClassIDictionary, MyClassIDictionary>
+    >.GetEnumerator()
     {
         return default(IEnumerator<KeyValuePair<MyClassIDictionary, MyClassIDictionary>>);
     }
 
     #endregion
 
-     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
     {
-        return default(System.Collections.IEnumerator);    
-        
+        return default(System.Collections.IEnumerator);
     }
-
 }
-
 
 public struct MyClassIEnumerable : IEnumerable<MyClassIEnumerable>
 {
-
-     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
     {
-        return default(System.Collections.IEnumerator);    
-        
+        return default(System.Collections.IEnumerator);
     }
 
-     IEnumerator<MyClassIEnumerable> System.Collections.Generic.IEnumerable<MyClassIEnumerable>.GetEnumerator()
+    IEnumerator<MyClassIEnumerable> System.Collections.Generic.IEnumerable<MyClassIEnumerable>.GetEnumerator()
     {
         return default(IEnumerator<MyClassIEnumerable>);
     }
-
 }
 
-public struct MyClassIEnumerator : IEnumerator <MyClassIEnumerator>
+public struct MyClassIEnumerator : IEnumerator<MyClassIEnumerator>
 {
-
-    public MyClassIEnumerator Current 
+    public MyClassIEnumerator Current
     {
-            get {return new MyClassIEnumerator();} 
+        get { return new MyClassIEnumerator(); }
     }
 
-    public bool MoveNext() { return true;}
-
-     public void Reset(){}
-
-     Object System.Collections.IEnumerator.Current 
-     {
-            get {return new Object();}
-        }
-
-     public void Dispose(){}
-            
-
-}
-
-
-public struct MyClassIEqualityComparer: IEqualityComparer<MyClassIEqualityComparer>
-{
-
-    
-    public bool Equals(MyClassIEqualityComparer x, MyClassIEqualityComparer y) { return true;}
-    
-       public int GetHashCode(MyClassIEqualityComparer obj) {return 1;}  
-}
-
-
-
-public struct MyClassIList:  IList<MyClassIList>
-{
-
-     public MyClassIList this[int index] 
-     {
-            get{return new MyClassIList();}
-            set{}
-        }
-    
-        public int IndexOf(MyClassIList item) {return 1;}
-    
-
-        public void Insert(int index, MyClassIList item) {}
-        
-        
-        public void RemoveAt(int index) {}
-
-
-    public int Count { get {return 1;} }
-
-        public bool IsReadOnly { get {return true;} }
-
-        public void Add(MyClassIList item){}
-
-        public void Clear(){}
-
-        public bool Contains(MyClassIList item) { return true;}
-        
-        public void CopyTo(MyClassIList[] array, int arrayIndex){}
-        
-        public bool Remove(MyClassIList item){ return true;}
-
-
-     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    public bool MoveNext()
     {
-        return default(System.Collections.IEnumerator);    
+        return true;
     }
 
-     IEnumerator<MyClassIList> System.Collections.Generic.IEnumerable<MyClassIList>.GetEnumerator()
+    public void Reset() { }
+
+    Object System.Collections.IEnumerator.Current
+    {
+        get { return new Object(); }
+    }
+
+    public void Dispose() { }
+}
+
+public struct MyClassIEqualityComparer : IEqualityComparer<MyClassIEqualityComparer>
+{
+    public bool Equals(MyClassIEqualityComparer x, MyClassIEqualityComparer y)
+    {
+        return true;
+    }
+
+    public int GetHashCode(MyClassIEqualityComparer obj)
+    {
+        return 1;
+    }
+}
+
+public struct MyClassIList : IList<MyClassIList>
+{
+    public MyClassIList this[int index]
+    {
+        get { return new MyClassIList(); }
+        set { }
+    }
+
+    public int IndexOf(MyClassIList item)
+    {
+        return 1;
+    }
+
+    public void Insert(int index, MyClassIList item) { }
+
+    public void RemoveAt(int index) { }
+
+    public int Count
+    {
+        get { return 1; }
+    }
+
+    public bool IsReadOnly
+    {
+        get { return true; }
+    }
+
+    public void Add(MyClassIList item) { }
+
+    public void Clear() { }
+
+    public bool Contains(MyClassIList item)
+    {
+        return true;
+    }
+
+    public void CopyTo(MyClassIList[] array, int arrayIndex) { }
+
+    public bool Remove(MyClassIList item)
+    {
+        return true;
+    }
+
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    {
+        return default(System.Collections.IEnumerator);
+    }
+
+    IEnumerator<MyClassIList> System.Collections.Generic.IEnumerable<MyClassIList>.GetEnumerator()
     {
         return default(IEnumerator<MyClassIList>);
     }
-
 }
 
-
-
-public struct MyClassIList2:  IList<MyClassIList>,  IList<int>
+public struct MyClassIList2 : IList<MyClassIList>, IList<int>
 {
-
-     MyClassIList System.Collections.Generic.IList<MyClassIList>.this[int index] 
-     {
-            get{return new MyClassIList();}
-            set{}
-        }
-
-      int System.Collections.Generic.IList<int>.this[int index] 
-     {
-            get{return 1;}
-            set{}
-        }
-    
-        public int IndexOf(MyClassIList item) {return 1;}
-    
-
-        public void Insert(int index, MyClassIList item) {}
-        
-        
-        public void RemoveAt(int index) {}
-
-
-    public int Count { get {return 1;} }
-
-        public bool IsReadOnly { get {return true;} }
-
-        public void Add(MyClassIList item){}
-
-        public void Clear(){}
-
-        public bool Contains(MyClassIList item) { return true;}
-        
-        public void CopyTo(MyClassIList[] array, int arrayIndex){}
-        
-        public bool Remove(MyClassIList item){ return true;}
-
-
-     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    MyClassIList System.Collections.Generic.IList<MyClassIList>.this[int index]
     {
-        return default(System.Collections.IEnumerator);    
+        get { return new MyClassIList(); }
+        set { }
     }
 
-     IEnumerator<MyClassIList> System.Collections.Generic.IEnumerable<MyClassIList>.GetEnumerator()
+    int System.Collections.Generic.IList<int>.this[int index]
+    {
+        get { return 1; }
+        set { }
+    }
+
+    public int IndexOf(MyClassIList item)
+    {
+        return 1;
+    }
+
+    public void Insert(int index, MyClassIList item) { }
+
+    public void RemoveAt(int index) { }
+
+    public int Count
+    {
+        get { return 1; }
+    }
+
+    public bool IsReadOnly
+    {
+        get { return true; }
+    }
+
+    public void Add(MyClassIList item) { }
+
+    public void Clear() { }
+
+    public bool Contains(MyClassIList item)
+    {
+        return true;
+    }
+
+    public void CopyTo(MyClassIList[] array, int arrayIndex) { }
+
+    public bool Remove(MyClassIList item)
+    {
+        return true;
+    }
+
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    {
+        return default(System.Collections.IEnumerator);
+    }
+
+    IEnumerator<MyClassIList> System.Collections.Generic.IEnumerable<MyClassIList>.GetEnumerator()
     {
         return default(IEnumerator<MyClassIList>);
     }
-
 
     // int
-      public int IndexOf(int item) {return 1;}
-    
+    public int IndexOf(int item)
+    {
+        return 1;
+    }
 
-        public void Insert(int index, int item) {}
-        
+    public void Insert(int index, int item) { }
 
-        public void Add(int item){}
+    public void Add(int item) { }
 
+    public bool Contains(int item)
+    {
+        return true;
+    }
 
-        public bool Contains(int item) { return true;}
-        
-        public void CopyTo(int[] array, int arrayIndex){}
-        
-        public bool Remove(int item){ return true;}
+    public void CopyTo(int[] array, int arrayIndex) { }
 
-     IEnumerator<int> System.Collections.Generic.IEnumerable<int>.GetEnumerator()
+    public bool Remove(int item)
+    {
+        return true;
+    }
+
+    IEnumerator<int> System.Collections.Generic.IEnumerable<int>.GetEnumerator()
     {
         return default(IEnumerator<int>);
     }
-
-
 }
-
 
 public class Test_Struct_ImplementMscorlibGenInterface
 {
     public static int Main()
     {
-        #pragma warning disable 219
-        
+#pragma warning disable 219
+
         try
         {
             Console.WriteLine("Test 1: Instantiate Struct : ICollection<Struct>");
             MyClassICollection obj1 = new MyClassICollection();
-            
+
             Console.WriteLine("Test 2: Instantiate Struct : IComparer<Struct>");
             MyClassIComparer obj2 = new MyClassIComparer();
 
@@ -376,8 +411,6 @@ public class Test_Struct_ImplementMscorlibGenInterface
             return 101;
         }
 
-        #pragma warning restore 219
-
+#pragma warning restore 219
     }
 }
-

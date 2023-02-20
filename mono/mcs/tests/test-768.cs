@@ -1,8 +1,6 @@
 namespace A.N
 {
-    class Wrong
-    {
-    }
+    class Wrong { }
 }
 
 namespace N
@@ -16,10 +14,10 @@ namespace N
 namespace X
 {
     using A;
-    
+
     public class TestClass
     {
-        public static void Main ()
+        public static void Main()
         {
             string s = N.C.value;
         }

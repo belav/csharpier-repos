@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,334 +43,370 @@ using System.Threading;
 
 namespace System.Web
 {
-        [TypeForwardedFrom ("System.Web.Abstractions, Version=3.5.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35")]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [TypeForwardedFrom(
+        "System.Web.Abstractions, Version=3.5.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public class HttpResponseWrapper : HttpResponseBase
     {
         HttpResponse w;
 
-        public HttpResponseWrapper (HttpResponse httpResponse)
+        public HttpResponseWrapper(HttpResponse httpResponse)
         {
             if (httpResponse == null)
-                throw new ArgumentNullException ("httpResponse");
+                throw new ArgumentNullException("httpResponse");
             w = httpResponse;
         }
 
-        public override bool Buffer {
+        public override bool Buffer
+        {
             get { return w.Buffer; }
             set { w.Buffer = value; }
         }
 
-        public override bool BufferOutput {
+        public override bool BufferOutput
+        {
             get { return w.BufferOutput; }
             set { w.BufferOutput = value; }
         }
 
-        public override HttpCachePolicyBase Cache {
-            get { return new HttpCachePolicyWrapper (w.Cache); }
+        public override HttpCachePolicyBase Cache
+        {
+            get { return new HttpCachePolicyWrapper(w.Cache); }
         }
 
-        public override string CacheControl {
+        public override string CacheControl
+        {
             get { return w.CacheControl; }
             set { w.CacheControl = value; }
         }
 
-        public override string Charset {
+        public override string Charset
+        {
             get { return w.Charset; }
             set { w.Charset = value; }
         }
 
-        public override CancellationToken ClientDisconnectedToken {
+        public override CancellationToken ClientDisconnectedToken
+        {
             get { return CancellationToken.None; }
         }
 
-        public override Encoding ContentEncoding {
+        public override Encoding ContentEncoding
+        {
             get { return w.ContentEncoding; }
             set { w.ContentEncoding = value; }
         }
 
-        public override string ContentType {
+        public override string ContentType
+        {
             get { return w.ContentType; }
             set { w.ContentType = value; }
         }
 
-        public override HttpCookieCollection Cookies {
+        public override HttpCookieCollection Cookies
+        {
             get { return w.Cookies; }
         }
 
-        public override int Expires {
+        public override int Expires
+        {
             get { return w.Expires; }
             set { w.Expires = value; }
         }
 
-        public override DateTime ExpiresAbsolute {
+        public override DateTime ExpiresAbsolute
+        {
             get { return w.ExpiresAbsolute; }
             set { w.ExpiresAbsolute = value; }
         }
 
-        public override Stream Filter {
+        public override Stream Filter
+        {
             get { return w.Filter; }
             set { w.Filter = value; }
         }
 
-        public override Encoding HeaderEncoding {
+        public override Encoding HeaderEncoding
+        {
             get { return w.HeaderEncoding; }
             set { w.HeaderEncoding = value; }
         }
 
-        public override NameValueCollection Headers {
+        public override NameValueCollection Headers
+        {
             get { return w.Headers; }
         }
 
-        public override bool IsClientConnected {
+        public override bool IsClientConnected
+        {
             get { return w.IsClientConnected; }
         }
 
-        public override bool IsRequestBeingRedirected {
+        public override bool IsRequestBeingRedirected
+        {
             get { return w.IsRequestBeingRedirected; }
         }
 
-        public override TextWriter Output {
+        public override TextWriter Output
+        {
             get { return w.Output; }
             set { w.Output = value; }
         }
 
-        public override Stream OutputStream {
+        public override Stream OutputStream
+        {
             get { return w.OutputStream; }
         }
 
-        public override string RedirectLocation {
+        public override string RedirectLocation
+        {
             get { return w.RedirectLocation; }
             set { w.RedirectLocation = value; }
         }
 
-        public override string Status {
+        public override string Status
+        {
             get { return w.Status; }
             set { w.Status = value; }
         }
 
-        public override int StatusCode {
+        public override int StatusCode
+        {
             get { return w.StatusCode; }
             set { w.StatusCode = value; }
         }
 
-        public override string StatusDescription {
+        public override string StatusDescription
+        {
             get { return w.StatusDescription; }
             set { w.StatusDescription = value; }
         }
 
-        public override int SubStatusCode {
+        public override int SubStatusCode
+        {
             get { return w.SubStatusCode; }
             set { w.SubStatusCode = value; }
         }
 
-        public override bool SuppressContent {
+        public override bool SuppressContent
+        {
             get { return w.SuppressContent; }
             set { w.SuppressContent = value; }
         }
 
-        public override bool SuppressFormsAuthenticationRedirect {
+        public override bool SuppressFormsAuthenticationRedirect
+        {
             get { return w.SuppressFormsAuthenticationRedirect; }
             set { w.SuppressFormsAuthenticationRedirect = value; }
         }
 
-        public override bool TrySkipIisCustomErrors {
+        public override bool TrySkipIisCustomErrors
+        {
             get { return w.TrySkipIisCustomErrors; }
             set { w.TrySkipIisCustomErrors = value; }
         }
 
-        public override void AddCacheDependency (params CacheDependency [] dependencies)
+        public override void AddCacheDependency(params CacheDependency[] dependencies)
         {
-            w.AddCacheDependency (dependencies);
+            w.AddCacheDependency(dependencies);
         }
 
-        public override void AddCacheItemDependencies (ArrayList cacheKeys)
+        public override void AddCacheItemDependencies(ArrayList cacheKeys)
         {
-            w.AddCacheItemDependencies (cacheKeys);
+            w.AddCacheItemDependencies(cacheKeys);
         }
 
-        public override void AddCacheItemDependencies (string [] cacheKeys)
+        public override void AddCacheItemDependencies(string[] cacheKeys)
         {
-            w.AddCacheItemDependencies (cacheKeys);
+            w.AddCacheItemDependencies(cacheKeys);
         }
 
-        public override void AddCacheItemDependency (string cacheKey)
+        public override void AddCacheItemDependency(string cacheKey)
         {
-            w.AddCacheItemDependency (cacheKey);
+            w.AddCacheItemDependency(cacheKey);
         }
 
-        public override void AddFileDependencies (ArrayList filenames)
+        public override void AddFileDependencies(ArrayList filenames)
         {
-            w.AddFileDependencies (filenames);
+            w.AddFileDependencies(filenames);
         }
 
-        public override void AddFileDependencies (string [] filenames)
+        public override void AddFileDependencies(string[] filenames)
         {
-            w.AddFileDependencies (filenames);
+            w.AddFileDependencies(filenames);
         }
 
-        public override void AddFileDependency (string filename)
+        public override void AddFileDependency(string filename)
         {
-            w.AddFileDependency (filename);
+            w.AddFileDependency(filename);
         }
 
-        public override void AddHeader (string name, string value)
+        public override void AddHeader(string name, string value)
         {
-            w.AddHeader (name, value);
+            w.AddHeader(name, value);
         }
 
-        public override void AppendCookie (HttpCookie cookie)
+        public override void AppendCookie(HttpCookie cookie)
         {
-            w.AppendCookie (cookie);
+            w.AppendCookie(cookie);
         }
 
-        public override void AppendHeader (string name, string value)
+        public override void AppendHeader(string name, string value)
         {
-            w.AppendHeader (name, value);
+            w.AppendHeader(name, value);
         }
 
-        public override void AppendToLog (string param)
+        public override void AppendToLog(string param)
         {
-            w.AppendToLog (param);
+            w.AppendToLog(param);
         }
 
-        public override string ApplyAppPathModifier (string virtualPath)
+        public override string ApplyAppPathModifier(string virtualPath)
         {
-            return w.ApplyAppPathModifier (virtualPath);
+            return w.ApplyAppPathModifier(virtualPath);
         }
 
-        public override void BinaryWrite (byte [] buffer)
+        public override void BinaryWrite(byte[] buffer)
         {
-            w.BinaryWrite (buffer);
+            w.BinaryWrite(buffer);
         }
 
-        public override void Clear ()
+        public override void Clear()
         {
-            w.Clear ();
+            w.Clear();
         }
 
-        public override void ClearContent ()
+        public override void ClearContent()
         {
-            w.ClearContent ();
+            w.ClearContent();
         }
 
-        public override void ClearHeaders ()
+        public override void ClearHeaders()
         {
-            w.ClearHeaders ();
+            w.ClearHeaders();
         }
 
-        public override void Close ()
+        public override void Close()
         {
-            w.Close ();
+            w.Close();
         }
 
-        public override void DisableKernelCache ()
+        public override void DisableKernelCache()
         {
-             w.DisableKernelCache ();
+            w.DisableKernelCache();
         }
 
-        public override void End ()
+        public override void End()
         {
-            w.End ();
+            w.End();
         }
 
-        public override void Flush ()
+        public override void Flush()
         {
-            w.Flush ();
+            w.Flush();
         }
 
-        public override void Pics (string value)
+        public override void Pics(string value)
         {
-            w.Pics (value);
+            w.Pics(value);
         }
 
-        public override void Redirect (string url)
+        public override void Redirect(string url)
         {
-            w.Redirect (url);
+            w.Redirect(url);
         }
 
-        public override void Redirect (string url, bool endResponse)
+        public override void Redirect(string url, bool endResponse)
         {
-            w.Redirect (url, endResponse);
-        }
-        public override void RedirectPermanent (string url)
-        {
-            w.RedirectPermanent (url);
+            w.Redirect(url, endResponse);
         }
 
-        public override void RedirectPermanent (string url, bool endResponse)
+        public override void RedirectPermanent(string url)
         {
-            w.RedirectPermanent (url, endResponse);
+            w.RedirectPermanent(url);
         }
 
-        public override void RemoveOutputCacheItem (string path, string providerName)
+        public override void RedirectPermanent(string url, bool endResponse)
         {
-            HttpResponse.RemoveOutputCacheItem (path, providerName);
-        }
-        public override void RemoveOutputCacheItem (string path)
-        {
-             HttpResponse.RemoveOutputCacheItem (path);
+            w.RedirectPermanent(url, endResponse);
         }
 
-        public override void SetCookie (HttpCookie cookie)
+        public override void RemoveOutputCacheItem(string path, string providerName)
         {
-            w.SetCookie (cookie);
+            HttpResponse.RemoveOutputCacheItem(path, providerName);
         }
 
-        public override void TransmitFile (string filename)
+        public override void RemoveOutputCacheItem(string path)
         {
-            w.TransmitFile (filename);
+            HttpResponse.RemoveOutputCacheItem(path);
         }
 
-        public override void TransmitFile (string filename, long offset, long length)
+        public override void SetCookie(HttpCookie cookie)
         {
-            w.TransmitFile (filename, offset, length);
+            w.SetCookie(cookie);
         }
 
-        public override void Write (char ch)
+        public override void TransmitFile(string filename)
         {
-            w.Write (ch);
+            w.TransmitFile(filename);
         }
 
-        public override void Write (object obj)
+        public override void TransmitFile(string filename, long offset, long length)
         {
-            w.Write (obj);
+            w.TransmitFile(filename, offset, length);
         }
 
-        public override void Write (string s)
+        public override void Write(char ch)
         {
-            w.Write (s);
+            w.Write(ch);
         }
 
-        public override void Write (char [] buffer, int index, int count)
+        public override void Write(object obj)
         {
-            w.Write (buffer, index, count);
+            w.Write(obj);
         }
 
-        public override void WriteFile (string filename)
+        public override void Write(string s)
         {
-            w.WriteFile (filename);
+            w.Write(s);
         }
 
-        public override void WriteFile (string filename, bool readIntoMemory)
+        public override void Write(char[] buffer, int index, int count)
         {
-            w.WriteFile (filename, readIntoMemory);
+            w.Write(buffer, index, count);
         }
 
-        public override void WriteFile (IntPtr fileHandle, long offset, long size)
+        public override void WriteFile(string filename)
         {
-            w.WriteFile (fileHandle, offset, size);
+            w.WriteFile(filename);
         }
 
-        public override void WriteFile (string filename, long offset, long size)
+        public override void WriteFile(string filename, bool readIntoMemory)
         {
-            w.WriteFile (filename, offset, size);
+            w.WriteFile(filename, readIntoMemory);
         }
 
-        public override void WriteSubstitution (HttpResponseSubstitutionCallback callback)
+        public override void WriteFile(IntPtr fileHandle, long offset, long size)
         {
-            w.WriteSubstitution (callback);
+            w.WriteFile(fileHandle, offset, size);
+        }
+
+        public override void WriteFile(string filename, long offset, long size)
+        {
+            w.WriteFile(filename, offset, size);
+        }
+
+        public override void WriteSubstitution(HttpResponseSubstitutionCallback callback)
+        {
+            w.WriteSubstitution(callback);
         }
     }
 }

@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,32 +35,35 @@ namespace System.ServiceModel.Channels
         public const string Name = "MsmqMessageProperty";
 
         [MonoTODO]
-        public static MsmqMessageProperty Get (Message message)
+        public static MsmqMessageProperty Get(Message message)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        int abort_count, move_count;
+        int abort_count,
+            move_count;
         DeliveryFailure? failure;
         DeliveryStatus? delivery_status;
 
-        internal MsmqMessageProperty ()
-        {
-        }
+        internal MsmqMessageProperty() { }
 
-        public int AbortCount {
+        public int AbortCount
+        {
             get { return abort_count; }
         }
 
-        public int MoveCount {
+        public int MoveCount
+        {
             get { return move_count; }
         }
 
-        public DeliveryFailure? DeliveryFailure {
+        public DeliveryFailure? DeliveryFailure
+        {
             get { return failure; }
         }
 
-        public DeliveryStatus? DeliveryStatus {
+        public DeliveryStatus? DeliveryStatus
+        {
             get { return delivery_status; }
         }
     }

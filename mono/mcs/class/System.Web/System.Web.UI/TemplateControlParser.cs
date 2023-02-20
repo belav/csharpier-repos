@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,9 +40,15 @@ using System.Web.Util;
 namespace System.Web.UI
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public abstract class TemplateControlParser : BaseTemplateParser 
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public abstract class TemplateControlParser : BaseTemplateParser
     {
         bool autoEventWireup = true;
         bool enableViewState = true;
@@ -50,168 +56,189 @@ namespace System.Web.UI
         ClientIDMode? clientIDMode;
         TextReader reader;
 
-        protected TemplateControlParser ()
+        protected TemplateControlParser()
         {
-            LoadConfigDefaults ();
+            LoadConfigDefaults();
         }
-        
-        internal override void LoadConfigDefaults ()
+
+        internal override void LoadConfigDefaults()
         {
-            base.LoadConfigDefaults ();
+            base.LoadConfigDefaults();
             PagesSection ps = PagesConfig;
             autoEventWireup = ps.AutoEventWireup;
             enableViewState = ps.EnableViewState;
             compilationMode = ps.CompilationMode;
         }
-        
-        internal override void ProcessMainAttributes (IDictionary atts)
-        {
-            autoEventWireup = GetBool (atts, "AutoEventWireup", autoEventWireup);
-            enableViewState = GetBool (atts, "EnableViewState", enableViewState);
 
-            string value = GetString (atts, "CompilationMode", compilationMode.ToString ());
-            if (!String.IsNullOrEmpty (value)) {
-                try {
-                    compilationMode = (CompilationMode) Enum.Parse (typeof (CompilationMode), value, true);
-                } catch (Exception ex) {
-                    ThrowParseException ("Invalid value of the CompilationMode attribute.", ex);
+        internal override void ProcessMainAttributes(IDictionary atts)
+        {
+            autoEventWireup = GetBool(atts, "AutoEventWireup", autoEventWireup);
+            enableViewState = GetBool(atts, "EnableViewState", enableViewState);
+
+            string value = GetString(atts, "CompilationMode", compilationMode.ToString());
+            if (!String.IsNullOrEmpty(value))
+            {
+                try
+                {
+                    compilationMode = (CompilationMode)
+                        Enum.Parse(typeof(CompilationMode), value, true);
+                }
+                catch (Exception ex)
+                {
+                    ThrowParseException("Invalid value of the CompilationMode attribute.", ex);
                 }
             }
-            
-            atts.Remove ("TargetSchema"); // Ignored
-            value = GetString (atts, "ClientIDMode", null);
-            if (!String.IsNullOrEmpty (value)) {
-                try {
-                    clientIDMode = (ClientIDMode) Enum.Parse (typeof (ClientIDMode), value, true);
-                } catch (Exception ex) {
-                    ThrowParseException ("Invalid value of the ClientIDMode attribute.", ex);
+
+            atts.Remove("TargetSchema"); // Ignored
+            value = GetString(atts, "ClientIDMode", null);
+            if (!String.IsNullOrEmpty(value))
+            {
+                try
+                {
+                    clientIDMode = (ClientIDMode)Enum.Parse(typeof(ClientIDMode), value, true);
+                }
+                catch (Exception ex)
+                {
+                    ThrowParseException("Invalid value of the ClientIDMode attribute.", ex);
                 }
             }
-            base.ProcessMainAttributes (atts);
+            base.ProcessMainAttributes(atts);
         }
 
-        internal object GetCompiledInstance ()
+        internal object GetCompiledInstance()
         {
-            Type type = CompileIntoType ();
+            Type type = CompileIntoType();
             if (type == null)
                 return null;
 
-            object ctrl = Activator.CreateInstance (type);
+            object ctrl = Activator.CreateInstance(type);
             if (ctrl == null)
                 return null;
 
-            HandleOptions (ctrl);
+            HandleOptions(ctrl);
             return ctrl;
         }
 
-        internal override void AddDirective (string directive, IDictionary atts)
+        internal override void AddDirective(string directive, IDictionary atts)
         {
-            int cmp = String.Compare ("Register", directive, true, Helpers.InvariantCulture);
-            if (cmp == 0) {
-                string tagprefix = GetString (atts, "TagPrefix", null);
-                if (tagprefix == null || tagprefix.Trim () == "")
-                    ThrowParseException ("No TagPrefix attribute found.");
+            int cmp = String.Compare("Register", directive, true, Helpers.InvariantCulture);
+            if (cmp == 0)
+            {
+                string tagprefix = GetString(atts, "TagPrefix", null);
+                if (tagprefix == null || tagprefix.Trim() == "")
+                    ThrowParseException("No TagPrefix attribute found.");
 
-                string ns = GetString (atts, "Namespace", null);
-                string assembly = GetString (atts, "Assembly", null);
+                string ns = GetString(atts, "Namespace", null);
+                string assembly = GetString(atts, "Assembly", null);
 
                 if (ns == null && assembly != null)
-                    ThrowParseException ("Need a Namespace attribute with Assembly.");
-                
-                if (ns != null) {
-                    if (atts.Count != 0)
-                        ThrowParseException ("Unknown attribute: " + GetOneKey (atts));
+                    ThrowParseException("Need a Namespace attribute with Assembly.");
 
-                    RegisterNamespace (tagprefix, ns, assembly);
+                if (ns != null)
+                {
+                    if (atts.Count != 0)
+                        ThrowParseException("Unknown attribute: " + GetOneKey(atts));
+
+                    RegisterNamespace(tagprefix, ns, assembly);
                     return;
                 }
 
-                string tagname = GetString (atts, "TagName", null);
-                string src = GetString (atts, "Src", null);
+                string tagname = GetString(atts, "TagName", null);
+                string src = GetString(atts, "Src", null);
 
                 if (tagname == null && src != null)
-                    ThrowParseException ("Need a TagName attribute with Src.");
+                    ThrowParseException("Need a TagName attribute with Src.");
 
                 if (tagname != null && src == null)
-                    ThrowParseException ("Need a Src attribute with TagName.");
+                    ThrowParseException("Need a Src attribute with TagName.");
 
-                RegisterCustomControl (tagprefix, tagname, src);
+                RegisterCustomControl(tagprefix, tagname, src);
                 return;
             }
 
-            cmp = String.Compare ("Reference", directive, true, Helpers.InvariantCulture);
-            if (cmp == 0) {
+            cmp = String.Compare("Reference", directive, true, Helpers.InvariantCulture);
+            if (cmp == 0)
+            {
                 string vp = null;
-                string page = GetString (atts, "Page", null);
+                string page = GetString(atts, "Page", null);
                 bool is_page = (page != null);
 
                 if (is_page)
                     vp = page;
 
                 bool dupe = false;
-                string control = GetString (atts, "Control", null);
+                string control = GetString(atts, "Control", null);
                 if (control != null)
                     if (is_page)
                         dupe = true;
                     else
                         vp = control;
-                
-                string virtualPath = GetString (atts, "VirtualPath", null);
+
+                string virtualPath = GetString(atts, "VirtualPath", null);
                 if (virtualPath != null)
                     if (vp != null)
                         dupe = true;
                     else
                         vp = virtualPath;
-                
-                if (vp == null)
-                    ThrowParseException ("Must provide one of the 'page', 'control' or 'virtualPath' attributes");
-                
-                if (dupe)
-                    ThrowParseException ("Only one attribute can be specified.");
 
-                vp = HostingEnvironment.VirtualPathProvider.CombineVirtualPaths (VirtualPath.Absolute, vp);
-                AddDependency (vp, false);
-                
+                if (vp == null)
+                    ThrowParseException(
+                        "Must provide one of the 'page', 'control' or 'virtualPath' attributes"
+                    );
+
+                if (dupe)
+                    ThrowParseException("Only one attribute can be specified.");
+
+                vp = HostingEnvironment.VirtualPathProvider.CombineVirtualPaths(
+                    VirtualPath.Absolute,
+                    vp
+                );
+                AddDependency(vp, false);
+
                 Type ctype;
-                ctype = BuildManager.GetCompiledType (vp);
-                
-                AddAssembly (ctype.Assembly, true);
+                ctype = BuildManager.GetCompiledType(vp);
+
+                AddAssembly(ctype.Assembly, true);
                 if (atts.Count != 0)
-                    ThrowParseException ("Unknown attribute: " + GetOneKey (atts));
+                    ThrowParseException("Unknown attribute: " + GetOneKey(atts));
 
                 return;
             }
 
-            base.AddDirective (directive, atts);
+            base.AddDirective(directive, atts);
         }
 
-        internal override void HandleOptions (object obj)
+        internal override void HandleOptions(object obj)
         {
-            base.HandleOptions (obj);
+            base.HandleOptions(obj);
 
             Control ctrl = obj as Control;
             ctrl.AutoEventWireup = autoEventWireup;
             ctrl.EnableViewState = enableViewState;
         }
 
-        internal bool AutoEventWireup {
+        internal bool AutoEventWireup
+        {
             get { return autoEventWireup; }
         }
 
-        internal bool EnableViewState {
+        internal bool EnableViewState
+        {
             get { return enableViewState; }
         }
-        
-        internal CompilationMode CompilationMode {
+
+        internal CompilationMode CompilationMode
+        {
             get { return compilationMode; }
-        }        
-        internal ClientIDMode? ClientIDMode {
+        }
+        internal ClientIDMode? ClientIDMode
+        {
             get { return clientIDMode; }
         }
-        internal override TextReader Reader {
+        internal override TextReader Reader
+        {
             get { return reader; }
             set { reader = value; }
         }
     }
 }
-

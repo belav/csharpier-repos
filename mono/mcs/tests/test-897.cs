@@ -2,24 +2,26 @@ using System;
 
 class X
 {
-    static int Foo ()
+    static int Foo()
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        try {
-            var b = Foo () is object;
+        try
+        {
+            var b = Foo() is object;
             return 1;
-        } catch (ApplicationException) {
         }
+        catch (ApplicationException) { }
 
-        try {
-            var b = Foo () as object;
+        try
+        {
+            var b = Foo() as object;
             return 2;
-        } catch (ApplicationException) {
         }
+        catch (ApplicationException) { }
 
         return 0;
     }

@@ -7,19 +7,17 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public abstract class ManyToManyQueryRelationalFixture : ManyToManyQueryFixtureBase
 {
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {
         base.OnModelCreating(modelBuilder, context);
 
         modelBuilder.Entity<EntityTableSharing1>().ToTable("TableSharing");
-        modelBuilder.Entity<EntityTableSharing2>(
-            b =>
-            {
-                b.HasOne<EntityTableSharing1>().WithOne().HasForeignKey<EntityTableSharing2>(e => e.Id);
-                b.ToTable("TableSharing");
-            });
+        modelBuilder.Entity<EntityTableSharing2>(b =>
+        {
+            b.HasOne<EntityTableSharing1>().WithOne().HasForeignKey<EntityTableSharing2>(e => e.Id);
+            b.ToTable("TableSharing");
+        });
     }
 }

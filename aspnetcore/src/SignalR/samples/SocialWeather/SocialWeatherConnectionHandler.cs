@@ -12,8 +12,11 @@ public class SocialWeatherConnectionHandler : ConnectionHandler
     private readonly FormatterResolver _formatterResolver;
     private readonly ILogger<SocialWeatherConnectionHandler> _logger;
 
-    public SocialWeatherConnectionHandler(PersistentConnectionLifeTimeManager lifetimeManager,
-        FormatterResolver formatterResolver, ILogger<SocialWeatherConnectionHandler> logger)
+    public SocialWeatherConnectionHandler(
+        PersistentConnectionLifeTimeManager lifetimeManager,
+        FormatterResolver formatterResolver,
+        ILogger<SocialWeatherConnectionHandler> logger
+    )
     {
         _lifetimeManager = lifetimeManager;
         _formatterResolver = formatterResolver;
@@ -30,7 +33,8 @@ public class SocialWeatherConnectionHandler : ConnectionHandler
     public async Task ProcessRequests(ConnectionContext connection)
     {
         var formatter = _formatterResolver.GetFormatter<WeatherReport>(
-            (string)connection.Items["format"]);
+            (string)connection.Items["format"]
+        );
 
         while (true)
         {

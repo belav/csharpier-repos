@@ -9,16 +9,21 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.RenameTracking
 {
-    [ExportLanguageService(typeof(IRenameTrackingLanguageHeuristicsService), LanguageNames.CSharp), Shared]
-    internal sealed class CSharpRenameTrackingLanguageHeuristicsService : IRenameTrackingLanguageHeuristicsService
+    [
+        ExportLanguageService(
+            typeof(IRenameTrackingLanguageHeuristicsService),
+            LanguageNames.CSharp
+        ),
+        Shared
+    ]
+    internal sealed class CSharpRenameTrackingLanguageHeuristicsService
+        : IRenameTrackingLanguageHeuristicsService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRenameTrackingLanguageHeuristicsService()
-        {
-        }
+        public CSharpRenameTrackingLanguageHeuristicsService() { }
 
-        public bool IsIdentifierValidForRenameTracking(string name)
-            => name is not "var" and not "dynamic" and not "_";
+        public bool IsIdentifierValidForRenameTracking(string name) =>
+            name is not "var" and not "dynamic" and not "_";
     }
 }

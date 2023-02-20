@@ -5,19 +5,13 @@ namespace A
 {
     public class T
     {
-        public class N
-        {
-
-        }
+        public class N { }
     }
 }
 
 namespace C
 {
-    struct N
-    {
-
-    }
+    struct N { }
 }
 
 namespace B
@@ -27,9 +21,9 @@ namespace B
 
     static class Program
     {
-        static void Main ()
+        static void Main()
         {
-            var u = new N ();
+            var u = new N();
         }
     }
 }

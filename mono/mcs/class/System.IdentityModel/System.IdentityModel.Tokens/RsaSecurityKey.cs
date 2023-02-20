@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,7 +35,7 @@ namespace System.IdentityModel.Tokens
 {
     public sealed class RsaSecurityKey : AsymmetricSecurityKey
     {
-        public RsaSecurityKey (RSA rsa)
+        public RsaSecurityKey(RSA rsa)
         {
             this.rsa = rsa;
         }
@@ -45,78 +45,83 @@ namespace System.IdentityModel.Tokens
         // AsymmetricSecurityKey implementation
 
         [MonoTODO]
-        public override AsymmetricAlgorithm GetAsymmetricAlgorithm (
-            string algorithm, bool requiresPrivateKey)
+        public override AsymmetricAlgorithm GetAsymmetricAlgorithm(
+            string algorithm,
+            bool requiresPrivateKey
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override HashAlgorithm GetHashAlgorithmForSignature (
-            string algorithm)
+        public override HashAlgorithm GetHashAlgorithmForSignature(string algorithm)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override AsymmetricSignatureDeformatter GetSignatureDeformatter (string algorithm)
+        public override AsymmetricSignatureDeformatter GetSignatureDeformatter(string algorithm)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override AsymmetricSignatureFormatter GetSignatureFormatter (string algorithm)
+        public override AsymmetricSignatureFormatter GetSignatureFormatter(string algorithm)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool HasPrivateKey ()
+        public override bool HasPrivateKey()
         {
             RSACryptoServiceProvider rcsp = rsa as RSACryptoServiceProvider;
             if (rcsp != null)
                 return !rcsp.PublicOnly;
-            try {
-                rcsp.ExportParameters (true);
+            try
+            {
+                rcsp.ExportParameters(true);
                 return true;
-            } catch (CryptographicException) {
+            }
+            catch (CryptographicException)
+            {
                 return false;
             }
         }
 
         // SecurityKey implementation
 
-        public override int KeySize {
+        public override int KeySize
+        {
             get { return rsa.KeySize; }
         }
 
         [MonoTODO]
-        public override byte [] DecryptKey (string algorithm, byte [] keyData)
+        public override byte[] DecryptKey(string algorithm, byte[] keyData)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override byte [] EncryptKey (string algorithm, byte [] keyData)
+        public override byte[] EncryptKey(string algorithm, byte[] keyData)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override bool IsAsymmetricAlgorithm (string algorithm)
+        public override bool IsAsymmetricAlgorithm(string algorithm)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override bool IsSupportedAlgorithm (string algorithm)
+        public override bool IsSupportedAlgorithm(string algorithm)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override bool IsSymmetricAlgorithm (string algorithm)
+        public override bool IsSymmetricAlgorithm(string algorithm)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

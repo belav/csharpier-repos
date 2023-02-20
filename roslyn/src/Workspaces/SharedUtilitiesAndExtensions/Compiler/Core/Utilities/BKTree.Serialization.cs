@@ -54,7 +54,11 @@ namespace Roslyn.Utilities
                     edges.Add(Edge.ReadFrom(reader));
                 }
 
-                return new BKTree(concatenatedLowerCaseWords, nodes.MoveToImmutable(), edges.MoveToImmutable());
+                return new BKTree(
+                    concatenatedLowerCaseWords,
+                    nodes.MoveToImmutable(),
+                    edges.MoveToImmutable()
+                );
             }
             catch
             {

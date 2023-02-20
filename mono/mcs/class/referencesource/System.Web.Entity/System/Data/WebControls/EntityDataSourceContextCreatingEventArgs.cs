@@ -17,7 +17,9 @@ namespace System.Web.UI.WebControls
     public class EntityDataSourceContextCreatingEventArgs : EventArgs
     {
         private ObjectContext _context;
+
         internal EntityDataSourceContextCreatingEventArgs() { }
+
         public ObjectContext Context
         {
             get { return _context; }

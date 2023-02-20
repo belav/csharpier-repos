@@ -12,7 +12,7 @@ class Test
             case 'A':
                 break;
 
-            case 'a': 
+            case 'a':
                 goto case 65;
         }
     }

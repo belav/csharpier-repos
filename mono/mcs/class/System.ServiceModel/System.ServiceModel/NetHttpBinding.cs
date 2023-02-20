@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,58 +26,58 @@
 using System;
 using System.ServiceModel.Channels;
 
-namespace System.ServiceModel {
+namespace System.ServiceModel
+{
     [MonoTODO]
-    public class NetHttpBinding : HttpBindingBase {
-        public NetHttpBinding ()
+    public class NetHttpBinding : HttpBindingBase
+    {
+        public NetHttpBinding()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public NetHttpBinding (BasicHttpSecurityMode securityMode)
+
+        public NetHttpBinding(BasicHttpSecurityMode securityMode)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public NetHttpBinding (string configurationName)
+
+        public NetHttpBinding(string configurationName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public NetHttpBinding (
-            BasicHttpSecurityMode securityMode, bool reliableSessionEnabled)
+
+        public NetHttpBinding(BasicHttpSecurityMode securityMode, bool reliableSessionEnabled)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         public NetHttpMessageEncoding MessageEncoding { get; set; }
         public OptionalReliableSession ReliableSession { get; set; }
         public BasicHttpSecurity Security { get; set; }
 
-        public WebSocketTransportSettings WebSocketSettings {
-            get { throw new NotImplementedException (); }
-        }
-        
-        public override string Scheme {
-            get { throw new NotImplementedException (); }
-        }
-        
-        public override BindingElementCollection CreateBindingElements ()
+        public WebSocketTransportSettings WebSocketSettings
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
-        
-        public bool ShouldSerializeReliableSession ()
+
+        public override string Scheme
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
-        
-        public bool ShouldSerializeSecurity ()
+
+        public override BindingElementCollection CreateBindingElements()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        
-        
+
+        public bool ShouldSerializeReliableSession()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ShouldSerializeSecurity()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

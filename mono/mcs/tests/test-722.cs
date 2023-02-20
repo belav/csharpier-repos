@@ -1,6 +1,4 @@
-interface IA
-{
-}
+interface IA { }
 
 interface IF : IA
 {
@@ -10,30 +8,30 @@ interface IF : IA
 struct S : IF
 {
     int prop;
-    
-    public S (int a)
+
+    public S(int a)
     {
         this.prop = 5;
     }
-    
-    public int Prop {
-        set {
-            prop = value;
-        }
+
+    public int Prop
+    {
+        set { prop = value; }
     }
-    
-    void M<T> (T ia) where T : struct, IA
+
+    void M<T>(T ia)
+        where T : struct, IA
     {
         ((IF)ia).Prop = 3;
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        S s = new S ();
+        S s = new S();
         object o = s;
         ((IF)((S)o)).Prop = 3;
-        
-        IA ia = new S ();
+
+        IA ia = new S();
         ((IF)ia).Prop = 3;
     }
 }

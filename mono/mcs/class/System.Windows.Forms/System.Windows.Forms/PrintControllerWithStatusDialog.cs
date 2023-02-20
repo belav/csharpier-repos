@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,8 +30,8 @@ using System.Reflection;
 
 namespace System.Windows.Forms
 {
-    
-    public class PrintControllerWithStatusDialog : PrintController {
+    public class PrintControllerWithStatusDialog : PrintController
+    {
         #region Local variables
         PrintController underlyingController;
         PrintingDialog dialog;
@@ -40,62 +40,77 @@ namespace System.Windows.Forms
 
         #region Public Constructors
 
-        public PrintControllerWithStatusDialog(PrintController underlyingController) {
+        public PrintControllerWithStatusDialog(PrintController underlyingController)
+        {
             this.underlyingController = underlyingController;
             dialog = new PrintingDialog();
             dialog.Text = "Printing";
         }
 
-        public PrintControllerWithStatusDialog(PrintController underlyingController, string dialogTitle) : this(underlyingController) {
+        public PrintControllerWithStatusDialog(
+            PrintController underlyingController,
+            string dialogTitle
+        )
+            : this(underlyingController)
+        {
             dialog.Text = dialogTitle;
         }
         #endregion // Public Constructors
-        
+
         #region    Protected Instance Methods
-        public override void OnEndPage(PrintDocument document, PrintPageEventArgs e) {
-            if (dialog.DialogResult == DialogResult.Cancel) {
+        public override void OnEndPage(PrintDocument document, PrintPageEventArgs e)
+        {
+            if (dialog.DialogResult == DialogResult.Cancel)
+            {
                 e.Cancel = true;
                 dialog.Hide();
                 return;
             }
-            underlyingController.OnEndPage (document, e);
+            underlyingController.OnEndPage(document, e);
         }
 
-        public override void OnEndPrint(PrintDocument document, PrintEventArgs e) {
+        public override void OnEndPrint(PrintDocument document, PrintEventArgs e)
+        {
             dialog.Hide();
-            underlyingController.OnEndPrint (document, e);
+            underlyingController.OnEndPrint(document, e);
         }
 
-        public override Graphics OnStartPage(PrintDocument document, PrintPageEventArgs e) {
-            if (dialog.DialogResult == DialogResult.Cancel) {
+        public override Graphics OnStartPage(PrintDocument document, PrintPageEventArgs e)
+        {
+            if (dialog.DialogResult == DialogResult.Cancel)
+            {
                 e.Cancel = true;
                 dialog.Hide();
                 return null;
             }
             dialog.LabelText = string.Format("Page {0} of document", ++currentPage);
-            return underlyingController.OnStartPage (document, e);
+            return underlyingController.OnStartPage(document, e);
         }
 
-        void Set_PrinterSettings_PrintFileName (PrinterSettings settings, string filename)
+        void Set_PrinterSettings_PrintFileName(PrinterSettings settings, string filename)
         {
             settings.PrintFileName = filename;
         }
 
-        public override void OnStartPrint(PrintDocument document, PrintEventArgs e) {
-            try {
+        public override void OnStartPrint(PrintDocument document, PrintEventArgs e)
+        {
+            try
+            {
                 currentPage = 0;
                 dialog.Show();
-                if (document.PrinterSettings.PrintToFile) {
-                    SaveFileDialog d = new SaveFileDialog ();
-                    if (d.ShowDialog () != DialogResult.OK)
+                if (document.PrinterSettings.PrintToFile)
+                {
+                    SaveFileDialog d = new SaveFileDialog();
+                    if (d.ShowDialog() != DialogResult.OK)
                         // Windows throws a Win32Exception here.
-                        throw new Exception ("The operation was canceled by the user");
-                    Set_PrinterSettings_PrintFileName (document.PrinterSettings, d.FileName);
+                        throw new Exception("The operation was canceled by the user");
+                    Set_PrinterSettings_PrintFileName(document.PrinterSettings, d.FileName);
                 }
-                underlyingController.OnStartPrint (document, e);
+                underlyingController.OnStartPrint(document, e);
             }
-            catch {
-                dialog.Hide ();
+            catch
+            {
+                dialog.Hide();
                 throw;
             }
         }
@@ -103,17 +118,20 @@ namespace System.Windows.Forms
         #endregion    // Protected Instance Methods
 
         #region Public Properties
-        public override bool IsPreview {
+        public override bool IsPreview
+        {
             get { return underlyingController.IsPreview; }
         }
         #endregion
-    
+
         #region Internal Class
-        class PrintingDialog : Form {
+        class PrintingDialog : Form
+        {
             private Button buttonCancel;
             private Label label;
 
-            public PrintingDialog() {
+            public PrintingDialog()
+            {
                 buttonCancel = new System.Windows.Forms.Button();
                 label = new System.Windows.Forms.Label();
                 SuspendLayout();
@@ -143,7 +161,8 @@ namespace System.Windows.Forms
                 ResumeLayout(false);
             }
 
-            public string LabelText {
+            public string LabelText
+            {
                 get { return label.Text; }
                 set { label.Text = value; }
             }

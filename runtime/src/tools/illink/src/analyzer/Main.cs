@@ -18,7 +18,7 @@ namespace LinkerAnalyzer
 {
     static class MainClass
     {
-        static void Main (string[] args)
+        static void Main(string[] args)
         {
             bool showUsage = true;
             bool showAllDeps = false;
@@ -34,59 +34,112 @@ namespace LinkerAnalyzer
             bool flatDeps = false;
             string linkedPath = null;
 
-            var optionsParser = new OptionSet () {
-                { "a|alldeps", "show all dependencies", v => { showAllDeps = v != null; } },
+            var optionsParser = new OptionSet()
+            {
+                {
+                    "a|alldeps",
+                    "show all dependencies",
+                    v =>
+                    {
+                        showAllDeps = v != null;
+                    }
+                },
                 { "h|help", "show this message and exit.", v => showUsage = v != null },
-                { "l|linkedpath=", "sets the linked assemblies directory path. Enables displaying size estimates.", v => { linkedPath = v; } },
-                { "r|rawdeps=", "show raw vertex dependencies. Raw vertex VALUE is in the raw format written by linker to the dependency XML file. VALUE can be regular expression", v => { showRawDeps = v != null; rawName = v; } },
+                {
+                    "l|linkedpath=",
+                    "sets the linked assemblies directory path. Enables displaying size estimates.",
+                    v =>
+                    {
+                        linkedPath = v;
+                    }
+                },
+                {
+                    "r|rawdeps=",
+                    "show raw vertex dependencies. Raw vertex VALUE is in the raw format written by linker to the dependency XML file. VALUE can be regular expression",
+                    v =>
+                    {
+                        showRawDeps = v != null;
+                        rawName = v;
+                    }
+                },
                 { "roots", "show root dependencies.", v => showRoots = v != null },
                 { "stat", "show statistic of loaded dependencies.", v => showStat = v != null },
-                { "tree", "reduce the dependency graph to the tree.", v => reduceToTree = v != null },
+                {
+                    "tree",
+                    "reduce the dependency graph to the tree.",
+                    v => reduceToTree = v != null
+                },
                 { "types", "show all types dependencies.", v => showTypes = v != null },
-                { "t|typedeps=", "show type dependencies. The VALUE can be regular expression", v => { showTypeDeps = v != null; typeName = v; } },
-                { "f|flat", "show all dependencies per vertex and their distance", v => flatDeps = v != null },
-                { "v|verbose", "be more verbose. Enables stat and roots options.", v => verbose = v != null },
+                {
+                    "t|typedeps=",
+                    "show type dependencies. The VALUE can be regular expression",
+                    v =>
+                    {
+                        showTypeDeps = v != null;
+                        typeName = v;
+                    }
+                },
+                {
+                    "f|flat",
+                    "show all dependencies per vertex and their distance",
+                    v => flatDeps = v != null
+                },
+                {
+                    "v|verbose",
+                    "be more verbose. Enables stat and roots options.",
+                    v => verbose = v != null
+                },
             };
 
-            if (args.Length > 0) {
+            if (args.Length > 0)
+            {
                 showUsage = false;
-                optionsParser.Parse (args);
+                optionsParser.Parse(args);
             }
 
-            if (showUsage) {
-                Console.WriteLine ("Usage:\n\n\tillinkanalyzer [Options] <linker-dependency-file.xml.gz>\n\nOptions:\n");
-                optionsParser.WriteOptionDescriptions (Console.Out);
-                Console.WriteLine ();
+            if (showUsage)
+            {
+                Console.WriteLine(
+                    "Usage:\n\n\tillinkanalyzer [Options] <linker-dependency-file.xml.gz>\n\nOptions:\n"
+                );
+                optionsParser.WriteOptionDescriptions(Console.Out);
+                Console.WriteLine();
                 return;
             }
 
             string dependencyFile = args[args.Length - 1];
 
-            ConsoleDependencyGraph deps = new ConsoleDependencyGraph () { Tree = reduceToTree, FlatDeps = flatDeps };
-            deps.Load (dependencyFile);
+            ConsoleDependencyGraph deps = new ConsoleDependencyGraph()
+            {
+                Tree = reduceToTree,
+                FlatDeps = flatDeps
+            };
+            deps.Load(dependencyFile);
 
-            if (linkedPath != null) {
-                deps.SpaceAnalyzer = new SpaceAnalyzer (linkedPath);
-                deps.SpaceAnalyzer.LoadAssemblies (verbose);
+            if (linkedPath != null)
+            {
+                deps.SpaceAnalyzer = new SpaceAnalyzer(linkedPath);
+                deps.SpaceAnalyzer.LoadAssemblies(verbose);
             }
 
-            if (verbose) {
+            if (verbose)
+            {
                 showStat = true;
                 showRoots = true;
             }
 
             if (showStat)
-                deps.ShowStat (verbose);
+                deps.ShowStat(verbose);
             if (showRoots)
-                deps.ShowRoots ();
+                deps.ShowRoots();
             if (showRawDeps)
-                deps.ShowRawDependencies (rawName);
+                deps.ShowRawDependencies(rawName);
             if (showTypeDeps)
-                deps.ShowTypeDependencies (typeName);
+                deps.ShowTypeDependencies(typeName);
             if (showAllDeps)
-                deps.ShowAllDependencies ();
+                deps.ShowAllDependencies();
             else if (showTypes)
-                deps.ShowTypesDependencies ();
+                deps.ShowTypesDependencies();
         }
     }
 }

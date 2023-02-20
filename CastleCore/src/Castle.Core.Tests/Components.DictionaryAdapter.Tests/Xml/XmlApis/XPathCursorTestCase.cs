@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -26,7 +26,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Iterate_WhenEmpty()
         {
-            var xml    = Xml("<X/>");
+            var xml = Xml("<X/>");
             var cursor = Cursor(xml, "A", CursorFlags.None);
 
             Assert.False(cursor.MoveNext());
@@ -35,7 +35,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Iterate_WhenAtEnd()
         {
-            var xml    = Xml("<X/>");
+            var xml = Xml("<X/>");
             var cursor = Cursor(xml, "A", CursorFlags.None);
             cursor.MoveNext();
 
@@ -45,7 +45,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Iterate_Element_WhenNoMatchExists()
         {
-            var xml    = Xml("<X A='?'> foo <Q/> bar </X>");
+            var xml = Xml("<X A='?'> foo <Q/> bar </X>");
             var cursor = Cursor(xml, "A", CursorFlags.None);
 
             Assert.False(cursor.MoveNext());
@@ -54,7 +54,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Iterate_Element_WhenOneMatchExists()
         {
-            var xml    = Xml("<X A='?'> <Q/> <A>1</A> <Q/> </X>");
+            var xml = Xml("<X A='?'> <Q/> <A>1</A> <Q/> </X>");
             var cursor = Cursor(xml, "A", CursorFlags.None);
 
             Assert.True(cursor.MoveNext());
@@ -66,7 +66,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Iterate_Element_WhenMultipleMatchesExist_InSingleMode()
         {
-            var xml    = Xml("<X A='?'> <Q/> <A>1</A> <Q/> <A>2</A> <Q/> </X>");
+            var xml = Xml("<X A='?'> <Q/> <A>1</A> <Q/> <A>2</A> <Q/> </X>");
             var cursor = Cursor(xml, "A", CursorFlags.None);
 
             Assert.False(cursor.MoveNext());
@@ -75,7 +75,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Iterate_Element_WhenMultipleMatchesExist_InMultipleMode()
         {
-            var xml    = Xml("<X A='?'> <Q/> <A>1</A> <Q/> <A>2</A> <Q/> </X>");
+            var xml = Xml("<X A='?'> <Q/> <A>1</A> <Q/> <A>2</A> <Q/> </X>");
             var cursor = Cursor(xml, "A", CursorFlags.Multiple);
 
             Assert.True(cursor.MoveNext());
@@ -90,7 +90,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Iterate_Attribute_WhenNoMatchExists()
         {
-            var xml    = Xml("<X Q='?'> <A>?</A> </X>");
+            var xml = Xml("<X Q='?'> <A>?</A> </X>");
             var cursor = Cursor(xml, "@A", CursorFlags.None);
 
             Assert.False(cursor.MoveNext());
@@ -99,7 +99,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Iterate_Attribute_WhenOneMatchExists()
         {
-            var xml    = Xml("<X Q='?' A='1' R='?'> <A>?</A> </X>");
+            var xml = Xml("<X Q='?' A='1' R='?'> <A>?</A> </X>");
             var cursor = Cursor(xml, "@A", CursorFlags.None);
 
             Assert.True(cursor.MoveNext());
@@ -111,7 +111,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Iterate_ComplexPath_WhenNoMatchExists()
         {
-            var xml    = Xml("<X A='?'> foo <Q/> bar </X>");
+            var xml = Xml("<X A='?'> foo <Q/> bar </X>");
             var cursor = Cursor(xml, "A/B/@C", CursorFlags.None);
 
             Assert.False(cursor.MoveNext());
@@ -120,7 +120,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Iterate_ComplexPath_WhenOneMatchExists()
         {
-            var xml    = Xml("<X A='?'> <Q/> <A><B C='1'/></A> <Q/> </X>");
+            var xml = Xml("<X A='?'> <Q/> <A><B C='1'/></A> <Q/> </X>");
             var cursor = Cursor(xml, "A/B/@C", CursorFlags.None);
 
             Assert.True(cursor.MoveNext());
@@ -132,7 +132,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Iterate_ComplexPath_WhenMultipleMatchesExist_InSingleMode()
         {
-            var xml    = Xml("<X A='?'> <Q/> <A><B C='1'/></A> <Q/> <A><B C='2'/></A> <Q/> </X>");
+            var xml = Xml("<X A='?'> <Q/> <A><B C='1'/></A> <Q/> <A><B C='2'/></A> <Q/> </X>");
             var cursor = Cursor(xml, "A/B/@C", CursorFlags.None);
 
             Assert.False(cursor.MoveNext());
@@ -141,7 +141,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Iterate_ComplexPath_WhenMultipleMatchesExist_InMultipleMode()
         {
-            var xml    = Xml("<X A='?'> <Q/> <A><B C='1'/></A> <Q/> <A><B C='2'/></A> <Q/> </X>");
+            var xml = Xml("<X A='?'> <Q/> <A><B C='1'/></A> <Q/> <A><B C='2'/></A> <Q/> </X>");
             var cursor = Cursor(xml, "A/B/@C", CursorFlags.Multiple);
 
             Assert.True(cursor.MoveNext());
@@ -156,7 +156,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Reset()
         {
-            var xml    = Xml("<X> <A>1</A> </X>");
+            var xml = Xml("<X> <A>1</A> </X>");
             var cursor = Cursor(xml, "A", CursorFlags.Multiple);
 
             Assert.True(cursor.MoveNext());
@@ -175,7 +175,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void MoveToEnd()
         {
-            var xml    = Xml("<X> <A>1</A> <A>2</A> </X>");
+            var xml = Xml("<X> <A>1</A> <A>2</A> </X>");
             var cursor = Cursor(xml, "A", CursorFlags.Multiple);
 
             cursor.MoveNext();
@@ -187,29 +187,27 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void MoveTo_NotXPathNode_Fails()
         {
-            var xml    = Xml("<X/>");
+            var xml = Xml("<X/>");
             var cursor = Cursor(xml, "A", CursorFlags.Multiple);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                cursor.MoveTo(new DummyXmlNode()));
+            Assert.Throws<InvalidOperationException>(() => cursor.MoveTo(new DummyXmlNode()));
         }
 
         [Test]
         public void MoveTo_NotARecognizedNode_Fails()
         {
-            var xml    = Xml("<X/>");
+            var xml = Xml("<X/>");
             var cursor = Cursor(xml, "A", CursorFlags.Multiple);
 
             var wrongNode = new XPathNode(Xml("<Q/>"), typeof(object), NamespaceSource.Instance);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                cursor.MoveTo(wrongNode));
+            Assert.Throws<InvalidOperationException>(() => cursor.MoveTo(wrongNode));
         }
 
         [Test]
         public void MoveTo_RecognizedNode_Succeeds_ForElement()
         {
-            var xml    = Xml("<X> <A>1</A> <A>2</A> </X>");
+            var xml = Xml("<X> <A>1</A> <A>2</A> </X>");
             var cursor = Cursor(xml, "A", CursorFlags.Multiple);
 
             cursor.MoveNext();
@@ -227,7 +225,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void MoveTo_RecognizedNode_Succeeds_ForAttribute()
         {
-            var xml    = Xml("<X A='1'/>");
+            var xml = Xml("<X A='1'/>");
             var cursor = Cursor(xml, "@A", CursorFlags.None);
 
             cursor.MoveNext();
@@ -244,7 +242,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void LocalNameAndNamespace_EmptyNamespace()
         {
-            var xml    = Xml("<X> <A>1</A> </X>");
+            var xml = Xml("<X> <A>1</A> </X>");
             var cursor = Cursor(xml, "A", CursorFlags.None);
 
             Assert.True(cursor.MoveNext());
@@ -255,7 +253,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void LocalNameAndNamespace_DefaultNamespace()
         {
-            var xml    = Xml("<X xmlns='ns'> <A>1</A> </X>");
+            var xml = Xml("<X xmlns='ns'> <A>1</A> </X>");
             var cursor = Cursor(xml, "p:A", CursorFlags.None);
 
             Assert.True(cursor.MoveNext());
@@ -266,7 +264,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void LocalNameAndNamespace_PrefixedNamespace()
         {
-            var xml    = Xml("<X xmlns:n='ns'> <n:A>1</n:A> </X>");
+            var xml = Xml("<X xmlns:n='ns'> <n:A>1</n:A> </X>");
             var cursor = Cursor(xml, "p:A", CursorFlags.None);
 
             Assert.True(cursor.MoveNext());
@@ -299,7 +297,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             return Cursor(parentNode, compiledPath, IncludedTypes, flags);
         }
 
-        protected abstract IXmlCursor Cursor(IXmlNode parent, CompiledXPath path, IXmlIncludedTypeMap includedTypes, CursorFlags flags);
+        protected abstract IXmlCursor Cursor(
+            IXmlNode parent,
+            CompiledXPath path,
+            IXmlIncludedTypeMap includedTypes,
+            CursorFlags flags
+        );
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -322,13 +325,17 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         }
 
         protected static MockXmlIncludedTypeMap IncludedTypes;
-        protected static readonly XmlIncludedType
-            TypeA = new XmlIncludedType("a", null, typeof(_TypeA)),
+        protected static readonly XmlIncludedType TypeA = new XmlIncludedType(
+                "a",
+                null,
+                typeof(_TypeA)
+            ),
             TypeB = new XmlIncludedType("b", null, typeof(_TypeB));
 
         protected static XmlContextBase Context;
 
-        private class _TypeA          { }
+        private class _TypeA { }
+
         private class _TypeB : _TypeA { }
     }
 }

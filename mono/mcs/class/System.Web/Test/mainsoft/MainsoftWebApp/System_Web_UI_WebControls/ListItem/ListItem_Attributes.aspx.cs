@@ -36,13 +36,13 @@ using System.Collections;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class ListItem_Attributes
-        : GHTBaseWeb 
+    public class ListItem_Attributes : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.ListBox ListBox1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -50,21 +50,20 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
         private void Page_Load(object sender, EventArgs e)
         {
-            HtmlForm form1 = (HtmlForm) (HtmlForm)this.FindControl("Form1");
+            HtmlForm form1 = (HtmlForm)(HtmlForm)this.FindControl("Form1");
             this.GHTTestBegin(form1);
             foreach (ListItem item1 in this.ListBox1.Items)
             {
@@ -74,7 +73,6 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTTestEnd();
         }
- 
 
         private void RunSubTests(ref AttributeCollection attributes)
         {
@@ -115,7 +113,15 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                     while (enumerator1.MoveNext())
                     {
                         string text2 = (string)(enumerator1.Current);
-                        string[] textArray1 = new string[] { text1, " ", text2, "=", attributes[text2], " " } ;
+                        string[] textArray1 = new string[]
+                        {
+                            text1,
+                            " ",
+                            text2,
+                            "=",
+                            attributes[text2],
+                            " "
+                        };
                         text1 = string.Concat(textArray1);
                     }
                 }
@@ -123,7 +129,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 {
                     if (enumerator1 is IDisposable)
                     {
-                        ((IDisposable) enumerator1).Dispose();
+                        ((IDisposable)enumerator1).Dispose();
                     }
                 }
                 text1 = text1 + "></AttributeContainer>";
@@ -138,7 +144,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTSubTestEnd();
         }
- 
+
         private void AddTitle(ref HtmlForm frm, string text)
         {
             Label label1 = new Label();
@@ -149,6 +155,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             label1.Font.Size = unit1;
             frm.Controls.Add(label1);
         }
- 
     }
 }

@@ -10,104 +10,109 @@ namespace System.Windows.Forms.Design
         private object _data = null;
         private string _format = null;
 
-        public ControlDataObject ()
+        public ControlDataObject()
         {
             _data = null;
             _format = null;
         }
 
-        public ControlDataObject (Control control)
+        public ControlDataObject(Control control)
         {
-            SetData (control);
+            SetData(control);
         }
 
-        public ControlDataObject (Control[] controls)
+        public ControlDataObject(Control[] controls)
         {
-            SetData (controls);
+            SetData(controls);
         }
 
-        public object GetData (Type format)
+        public object GetData(Type format)
         {
-            return this.GetData (format.ToString ());
+            return this.GetData(format.ToString());
         }
 
-        public object GetData (string format)
+        public object GetData(string format)
         {
-            return this.GetData (format, true);
+            return this.GetData(format, true);
         }
 
-        public object GetData (string format, bool autoConvert)
+        public object GetData(string format, bool autoConvert)
         {
-            if (format == _format) {
+            if (format == _format)
+            {
                 return _data;
             }
             return null;
         }
 
-        public bool GetDataPresent (Type format)
+        public bool GetDataPresent(Type format)
         {
-            return this.GetDataPresent (format.ToString());
+            return this.GetDataPresent(format.ToString());
         }
 
-        public bool GetDataPresent (string format)
+        public bool GetDataPresent(string format)
         {
-            return this.GetDataPresent (format, true);
+            return this.GetDataPresent(format, true);
         }
 
-        public bool GetDataPresent (string format, bool autoConvert)
+        public bool GetDataPresent(string format, bool autoConvert)
         {
-            if (format == _format) {
+            if (format == _format)
+            {
                 return true;
             }
             return false;
         }
 
-        public string[] GetFormats ()
+        public string[] GetFormats()
         {
-            return this.GetFormats (true);
+            return this.GetFormats(true);
         }
 
-        public string[] GetFormats (bool autoConvert)
+        public string[] GetFormats(bool autoConvert)
         {
             string[] formats = new string[2];
-            formats[0] = typeof (Control).ToString ();
-            formats[1] = typeof (Control[]).ToString ();
+            formats[0] = typeof(Control).ToString();
+            formats[1] = typeof(Control[]).ToString();
             return formats;
         }
 
-        public void SetData (object data)
+        public void SetData(object data)
         {
             if (data is Control)
-                this.SetData (typeof (Control), data);
+                this.SetData(typeof(Control), data);
             else if (data is Control[])
-                this.SetData (typeof (Control[]), data);
+                this.SetData(typeof(Control[]), data);
         }
 
-        public void SetData (Type format, object data)
+        public void SetData(Type format, object data)
         {
-            this.SetData (format.ToString (), data);
+            this.SetData(format.ToString(), data);
         }
 
-        public void SetData (string format, object data)
+        public void SetData(string format, object data)
         {
-            this.SetData (format, true, data);
+            this.SetData(format, true, data);
         }
 
-        public void SetData (string format, bool autoConvert, object data)
+        public void SetData(string format, bool autoConvert, object data)
         {
-            if (ValidateFormat (format)) {
+            if (ValidateFormat(format))
+            {
                 _data = data;
                 _format = format;
             }
         }
 
-        private bool ValidateFormat (string format)
+        private bool ValidateFormat(string format)
         {
             bool valid = false;
 
-            string[] formats = GetFormats ();
-            foreach (string f in formats) {
-                if (f == format) {
+            string[] formats = GetFormats();
+            foreach (string f in formats)
+            {
+                if (f == format)
+                {
                     valid = true;
                     break;
                 }
@@ -117,4 +122,3 @@ namespace System.Windows.Forms.Design
         }
     }
 }
-

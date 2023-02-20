@@ -2,25 +2,15 @@ class C
 {
     class O : M
     {
-        public override void Foo ()
-        {
-        }    
+        public override void Foo() { }
     }
-    
+
     class N
     {
-        public virtual void Foo ()
-        {
-        }
+        public virtual void Foo() { }
     }
-    
-    class M : N
-    {
-    }
-    
-    public static void Main ()
-    {
-    }
+
+    class M : N { }
+
+    public static void Main() { }
 }
-
-

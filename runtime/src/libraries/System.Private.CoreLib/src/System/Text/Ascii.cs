@@ -24,9 +24,14 @@ namespace System.Text
             nuint bufferLength = (uint)buffer.Length;
             fixed (byte* pBuffer = &MemoryMarshal.GetReference(buffer))
             {
-                nuint idxOfFirstNonAsciiElement = GetIndexOfFirstNonAsciiByte(pBuffer, bufferLength);
+                nuint idxOfFirstNonAsciiElement = GetIndexOfFirstNonAsciiByte(
+                    pBuffer,
+                    bufferLength
+                );
                 Debug.Assert(idxOfFirstNonAsciiElement <= bufferLength);
-                return (idxOfFirstNonAsciiElement == bufferLength) ? -1 : (int)idxOfFirstNonAsciiElement;
+                return (idxOfFirstNonAsciiElement == bufferLength)
+                    ? -1
+                    : (int)idxOfFirstNonAsciiElement;
             }
         }
 
@@ -46,9 +51,14 @@ namespace System.Text
             nuint bufferLength = (uint)buffer.Length;
             fixed (char* pBuffer = &MemoryMarshal.GetReference(buffer))
             {
-                nuint idxOfFirstNonAsciiElement = GetIndexOfFirstNonAsciiChar(pBuffer, bufferLength);
+                nuint idxOfFirstNonAsciiElement = GetIndexOfFirstNonAsciiChar(
+                    pBuffer,
+                    bufferLength
+                );
                 Debug.Assert(idxOfFirstNonAsciiElement <= bufferLength);
-                return (idxOfFirstNonAsciiElement == bufferLength) ? -1 : (int)idxOfFirstNonAsciiElement;
+                return (idxOfFirstNonAsciiElement == bufferLength)
+                    ? -1
+                    : (int)idxOfFirstNonAsciiElement;
             }
         }
 
@@ -58,7 +68,8 @@ namespace System.Text
         /// <param name="value">The value to inspect.</param>
         /// <returns>True if <paramref name="value"/> contains only ASCII bytes or is
         /// empty; False otherwise.</returns>
-        public static unsafe bool IsValid(ReadOnlySpan<byte> value) => GetIndexOfFirstNonAsciiByte(value) < 0;
+        public static unsafe bool IsValid(ReadOnlySpan<byte> value) =>
+            GetIndexOfFirstNonAsciiByte(value) < 0;
 
         /// <summary>
         /// Determines whether the provided value contains only ASCII chars.
@@ -66,7 +77,8 @@ namespace System.Text
         /// <param name="value">The value to inspect.</param>
         /// <returns>True if <paramref name="value"/> contains only ASCII chars or is
         /// empty; False otherwise.</returns>
-        public static unsafe bool IsValid(ReadOnlySpan<char> value) => GetIndexOfFirstNonAsciiChar(value) < 0;
+        public static unsafe bool IsValid(ReadOnlySpan<char> value) =>
+            GetIndexOfFirstNonAsciiChar(value) < 0;
 
         /// <summary>
         /// Determines whether the provided value is ASCII byte.

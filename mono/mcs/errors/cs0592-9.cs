@@ -3,14 +3,14 @@
 
 using System;
 
-[AttributeUsage (AttributeTargets.ReturnValue)]
-class SAttribute: Attribute {}
+[AttributeUsage(AttributeTargets.ReturnValue)]
+class SAttribute : Attribute { }
 
 public class C
 {
-    int Prop {
+    int Prop
+    {
         [param: S]
-        set {
-        }
+        set { }
     }
 }

@@ -1,8 +1,6 @@
 namespace Mono.Sms
 {
-    partial class Main
-    {
-    }
+    partial class Main { }
 }
 
 namespace Mono.Sms
@@ -11,23 +9,24 @@ namespace Mono.Sms
 
     public partial class Main
     {
-        public void Test ()
+        public void Test()
         {
-            Contacts frm = new Contacts ();
-            frm.ContactsEventHandler += delegate () {
-                Agenda.AddContact ();
+            Contacts frm = new Contacts();
+            frm.ContactsEventHandler += delegate()
+            {
+                Agenda.AddContact();
             };
         }
     }
 
     public partial class Contacts
     {
-        public void Test ()
+        public void Test()
         {
-            ContactsEventHandler ();
+            ContactsEventHandler();
         }
 
-        public delegate void ContactsHandler ();
+        public delegate void ContactsHandler();
         public event ContactsHandler ContactsEventHandler;
     }
 }
@@ -36,12 +35,8 @@ namespace Mono.Sms.Core
 {
     public class Agenda
     {
-        public static void AddContact ()
-        {
-        }
-        
-        public static void Main ()
-        {
-        }        
+        public static void AddContact() { }
+
+        public static void Main() { }
     }
 }

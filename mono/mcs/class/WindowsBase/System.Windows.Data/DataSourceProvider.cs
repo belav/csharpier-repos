@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,100 +27,112 @@ using System;
 using System.ComponentModel;
 using System.Windows.Threading;
 
-namespace System.Windows.Data {
-
+namespace System.Windows.Data
+{
     public abstract class DataSourceProvider : INotifyPropertyChanged, ISupportInitialize
     {
-        protected DataSourceProvider ()
+        protected DataSourceProvider()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public object Data {
-            get { throw new NotImplementedException (); }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public object Data
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        protected Dispatcher Dispatcher {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        protected Dispatcher Dispatcher
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        public Exception Error {
-            get { throw new NotImplementedException (); }
+        public Exception Error
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (true)]
-        public bool IsInitialLoadEnabled {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        [DefaultValue(true)]
+        public bool IsInitialLoadEnabled
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        protected bool IsRefreshDeferred {
-            get { throw new NotImplementedException (); }
+        protected bool IsRefreshDeferred
+        {
+            get { throw new NotImplementedException(); }
         }
 
         public event EventHandler DataChanged;
 
         protected virtual event PropertyChangedEventHandler PropertyChanged;
 
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged {
+        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
+        {
             add { PropertyChanged += value; }
             remove { PropertyChanged -= value; }
         }
 
-        protected virtual void BeginInit ()
+        protected virtual void BeginInit()
         {
-            throw new NotImplementedException ();
-        }
-        void ISupportInitialize.BeginInit ()
-        {
-            BeginInit ();
+            throw new NotImplementedException();
         }
 
-        protected virtual void EndInit ()
+        void ISupportInitialize.BeginInit()
         {
-            throw new NotImplementedException ();
-        }
-        void ISupportInitialize.EndInit ()
-        {
-            EndInit ();
+            BeginInit();
         }
 
-        protected virtual void BeginQuery ()
+        protected virtual void EndInit()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public virtual IDisposable DeferRefresh ()
+        void ISupportInitialize.EndInit()
         {
-            throw new NotImplementedException ();
+            EndInit();
         }
 
-        public void InitialLoad ()
+        protected virtual void BeginQuery()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected virtual void OnPropertyChanged (PropertyChangedEventArgs e)
+        public virtual IDisposable DeferRefresh()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected void OnQueryFinished (object newData)
+        public void InitialLoad()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected virtual void OnQueryFinished (object newData, Exception error, DispatcherOperationCallback completionWork, object callbackArguments)
+        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Refresh ()
+        protected void OnQueryFinished(object newData)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
+        }
+
+        protected virtual void OnQueryFinished(
+            object newData,
+            Exception error,
+            DispatcherOperationCallback completionWork,
+            object callbackArguments
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Refresh()
+        {
+            throw new NotImplementedException();
         }
     }
 }
-

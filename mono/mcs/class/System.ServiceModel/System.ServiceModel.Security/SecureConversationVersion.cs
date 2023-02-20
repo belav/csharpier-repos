@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,11 +31,21 @@ namespace System.ServiceModel.Security
 {
     public abstract class SecureConversationVersion
     {
-        static SecureConversationVersion ()
+        static SecureConversationVersion()
         {
-            var dic = new XmlDictionary ();
-            WSSecureConversation13 = new SecureConversationVersionImpl () { Prefix = dic.Add ("wsse"), Namespace = dic.Add ("http://schemas.xmlsoap.org/ws/2002/12/secext") };
-            WSSecureConversationFeb2005 = new SecureConversationVersionImpl () { Prefix = dic.Add ("wsse"), Namespace = dic.Add ("http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd") };
+            var dic = new XmlDictionary();
+            WSSecureConversation13 = new SecureConversationVersionImpl()
+            {
+                Prefix = dic.Add("wsse"),
+                Namespace = dic.Add("http://schemas.xmlsoap.org/ws/2002/12/secext")
+            };
+            WSSecureConversationFeb2005 = new SecureConversationVersionImpl()
+            {
+                Prefix = dic.Add("wsse"),
+                Namespace = dic.Add(
+                    "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+                )
+            };
             Default = WSSecureConversation13;
         }
 
@@ -48,7 +58,5 @@ namespace System.ServiceModel.Security
         public XmlDictionaryString Prefix { get; internal set; }
     }
 
-    class SecureConversationVersionImpl : SecureConversationVersion
-    {
-    }
+    class SecureConversationVersionImpl : SecureConversationVersion { }
 }

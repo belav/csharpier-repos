@@ -2,15 +2,15 @@ using System;
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        X x = new X ();
-        return x.Do ("a", "b", "c");
+        X x = new X();
+        return x.Do("a", "b", "c");
     }
 
     string str = "start";
 
-    string Foo ()
+    string Foo()
     {
         return "s";
     }
@@ -21,15 +21,15 @@ class X
         set { str = value; }
     }
 
-    string this [int i]
+    string this[int i]
     {
         get { return str; }
         set { str = value; }
     }
 
-    int Do (string a, string b, string c)
+    int Do(string a, string b, string c)
     {
-        str += Foo ();
+        str += Foo();
         if (str != "starts")
             return 1;
 
@@ -45,7 +45,7 @@ class X
         if (str != "startsa,b,caa,b,c")
             return 4;
 
-        this [0] += a + "," + b + "," + c;
+        this[0] += a + "," + b + "," + c;
         if (str != "startsa,b,caa,b,ca,b,c")
             return 5;
 

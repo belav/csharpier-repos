@@ -31,11 +31,19 @@ namespace System.Threading.Tests
                 Assert.True(lockTaken);
                 Assert.True(sl.IsHeld);
                 Assert.True(sl.IsHeldByCurrentThread);
-                Task.Factory.StartNew(() =>
-                {
-                    Assert.True(sl.IsHeld);
-                    Assert.False(sl.IsHeldByCurrentThread);
-                }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default).GetAwaiter().GetResult();
+                Task.Factory
+                    .StartNew(
+                        () =>
+                        {
+                            Assert.True(sl.IsHeld);
+                            Assert.False(sl.IsHeldByCurrentThread);
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    )
+                    .GetAwaiter()
+                    .GetResult();
                 sl.Exit();
             }
         }
@@ -69,7 +77,10 @@ namespace System.Threading.Tests
         /// <param name="threadsCount">Number of threads that call enter/exit</param>
         /// <returns>True if succeeded, false otherwise</returns>
         [OuterLoop]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(2, false)]
         [InlineData(128, false)]
         [InlineData(256, false)]
@@ -89,39 +100,41 @@ namespace System.Threading.Tests
 
             for (int i = 0; i < threadsCount; i++)
             {
-                threads[i] = Task.Run(delegate ()
-                {
-                    bool lockTaken = false;
-                    try
+                threads[i] = Task.Run(
+                    delegate()
                     {
-                        slock.Enter(ref lockTaken);
-                        //use semaphore to make sure that no other thread inside the critical section
-                        if (!semaphore.Wait(0))
+                        bool lockTaken = false;
+                        try
                         {
-                            // This mean that there is another thread in the critical section
-                            return;
+                            slock.Enter(ref lockTaken);
+                            //use semaphore to make sure that no other thread inside the critical section
+                            if (!semaphore.Wait(0))
+                            {
+                                // This mean that there is another thread in the critical section
+                                return;
+                            }
+                            succeeded++;
+                            if (slock.IsThreadOwnerTrackingEnabled && !slock.IsHeldByCurrentThread)
+                            {
+                                // lock is obtained successfully
+                                succeeded--;
+                            }
                         }
-                        succeeded++;
-                        if (slock.IsThreadOwnerTrackingEnabled && !slock.IsHeldByCurrentThread)
+                        catch
                         {
-                            // lock is obtained successfully
+                            // decrement the count in case of exception
                             succeeded--;
                         }
-                    }
-                    catch
-                    {
-                        // decrement the count in case of exception
-                        succeeded--;
-                    }
-                    finally
-                    {
-                        semaphore.Release();
-                        if (lockTaken)
+                        finally
                         {
-                            slock.Exit();
+                            semaphore.Release();
+                            if (lockTaken)
+                            {
+                                slock.Exit();
+                            }
                         }
                     }
-                });
+                );
             }
             // wait all threads
             for (int i = 0; i < threadsCount; i++)
@@ -139,7 +152,10 @@ namespace System.Threading.Tests
         /// <param name="threadsCount">Number of threads that call enter/exit</param>
         /// <returns>True if succeeded, false otherwise</returns>
         [OuterLoop]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(2, false)]
         [InlineData(128, false)]
         [InlineData(256, false)]
@@ -156,26 +172,27 @@ namespace System.Threading.Tests
                 int succeeded = 0;
                 int failed = 0;
 
-
                 // Run threads
                 for (int i = 0; i < threadsCount; i++)
                 {
-                    threads[i] = Task.Run(delegate ()
-                    {
-                        bool lockTaken = false;
-                        slock.TryEnter(ref lockTaken);
-                        if (lockTaken)
+                    threads[i] = Task.Run(
+                        delegate()
                         {
-                            // Increment succeeded counter
-                            Interlocked.Increment(ref succeeded);
-                            slock.Exit(useMemoryBarrier);
+                            bool lockTaken = false;
+                            slock.TryEnter(ref lockTaken);
+                            if (lockTaken)
+                            {
+                                // Increment succeeded counter
+                                Interlocked.Increment(ref succeeded);
+                                slock.Exit(useMemoryBarrier);
+                            }
+                            else
+                            {
+                                // Increment failed counter
+                                Interlocked.Increment(ref failed);
+                            }
                         }
-                        else
-                        {
-                            // Increment failed counter
-                            Interlocked.Increment(ref failed);
-                        }
-                    });
+                    );
                 }
                 // Wait all threads
                 for (int i = 0; i < threadsCount; i++)
@@ -193,7 +210,10 @@ namespace System.Threading.Tests
         /// <param name="threadsCount">Number of threads that call enter/exit</param>
         /// <returns>True if succeeded, false otherwise</returns>
         [OuterLoop]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(2, false)]
         [InlineData(128, false)]
         [InlineData(256, false)]
@@ -213,25 +233,30 @@ namespace System.Threading.Tests
                 // Run threads
                 for (int i = 0; i < threadsCount; i++)
                 {
-                    threads[i] = new Task(delegate (object x)
-                    {
-                        // Generate random timespan
-                        bool lockTaken = false;
-                        TimeSpan time = TimeSpan.FromMilliseconds(20);
-                        slock.TryEnter(time, ref lockTaken);
-                        if (lockTaken)
+                    threads[i] = new Task(
+                        delegate(object x)
                         {
-                            // add some delay in the critical section
-                            Task.WaitAll(Task.Delay(15));
-                            Interlocked.Increment(ref succeeded);
-                            slock.Exit(useMemoryBarrier);
-                        }
-                        else
-                        {
-                            // Failed to get the lock within the timeout
-                            Interlocked.Increment(ref failed);
-                        }
-                    }, i, CancellationToken.None, TaskCreationOptions.LongRunning);
+                            // Generate random timespan
+                            bool lockTaken = false;
+                            TimeSpan time = TimeSpan.FromMilliseconds(20);
+                            slock.TryEnter(time, ref lockTaken);
+                            if (lockTaken)
+                            {
+                                // add some delay in the critical section
+                                Task.WaitAll(Task.Delay(15));
+                                Interlocked.Increment(ref succeeded);
+                                slock.Exit(useMemoryBarrier);
+                            }
+                            else
+                            {
+                                // Failed to get the lock within the timeout
+                                Interlocked.Increment(ref failed);
+                            }
+                        },
+                        i,
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning
+                    );
                     threads[i].Start(TaskScheduler.Default);
                 }
                 // Wait all threads
@@ -259,7 +284,11 @@ namespace System.Threading.Tests
                 // Test recursive locks
                 slock.Enter(ref lockTaken);
                 Assert.True(lockTaken);
-                Assert.Throws<LockRecursionException>(() => { bool dummy = false; slock.Enter(ref dummy); });
+                Assert.Throws<LockRecursionException>(() =>
+                {
+                    bool dummy = false;
+                    slock.Enter(ref dummy);
+                });
 
                 slock.Exit();
                 Assert.False(slock.IsHeldByCurrentThread);
@@ -268,13 +297,21 @@ namespace System.Threading.Tests
 
             #region timeout > int.max
             // Test invalid argument handling, too long timeout
-            Assert.Throws<ArgumentOutOfRangeException>(() => { bool lt = false; slock.TryEnter(TimeSpan.MaxValue, ref lt); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                bool lt = false;
+                slock.TryEnter(TimeSpan.MaxValue, ref lt);
+            });
 
             #endregion timeout > int.max
 
             #region Timeout > int.max
             // Test invalid argument handling, timeout < -1
-            Assert.Throws<ArgumentOutOfRangeException>(() => { bool lt = false; slock.TryEnter(-2, ref lt); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                bool lt = false;
+                slock.TryEnter(-2, ref lt);
+            });
 
             #endregion Timeout > int.max
         }
@@ -310,7 +347,10 @@ namespace System.Threading.Tests
             // Failure Case: Enter didn't throw AE when isTaken is true
 
             slock = new SpinLock(false);
-            Assert.Throws<InvalidOperationException>(() => { bool iHeld = slock.IsHeldByCurrentThread; });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                bool iHeld = slock.IsHeldByCurrentThread;
+            });
             // Failure Case: IsHeldByCurrentThread didn't throw IOE when the thread tracking is disabled
         }
     }

@@ -5,7 +5,6 @@ using System.Threading;
 
 class Class1
 {
-
     static int Main(string[] args)
     {
         int rValue = 0;
@@ -45,7 +44,10 @@ public class ThreadSafe
     ManualResetEvent signal;
     public KrisClass Val = new KrisClass("hello world! ");
     private int numberOfIterations;
-    public ThreadSafe() : this(100) { }
+
+    public ThreadSafe()
+        : this(100) { }
+
     public ThreadSafe(int loops)
     {
         signal = new ManualResetEvent(false);
@@ -74,25 +76,24 @@ public class ThreadSafe
         {
             initialValue = Val;
             newValue = initialValue + addend;
-        }
-        while ((object)initialValue != Interlocked.CompareExchange<KrisClass>(
-            ref Val, newValue, initialValue));
+        } while (
+            (object)initialValue
+            != Interlocked.CompareExchange<KrisClass>(ref Val, newValue, initialValue)
+        );
 
         return newValue;
     }
 
     public KrisClass GetValue
     {
-        get
-        {
-            return Val;
-        }
+        get { return Val; }
     }
 }
 
 public class KrisClass
 {
     string retVal = string.Empty;
+
     public KrisClass(string setVal)
     {
         retVal = setVal;
@@ -100,10 +101,7 @@ public class KrisClass
 
     public string ClassVal
     {
-        get
-        {
-            return retVal;
-        }
+        get { return retVal; }
     }
 
     public static KrisClass operator +(KrisClass kc1, KrisClass kc2)

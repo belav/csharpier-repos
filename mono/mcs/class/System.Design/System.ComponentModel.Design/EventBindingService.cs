@@ -1,7 +1,7 @@
 //
 // System.ComponentModel.Design.EventBindingService
-// 
-// Authors:     
+//
+// Authors:
 //      Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2007 Ivan N. Zlatev
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,183 +37,208 @@ namespace System.ComponentModel.Design
 {
     public abstract class EventBindingService : IEventBindingService
     {
-
         private IServiceProvider _provider;
 
-        protected EventBindingService (IServiceProvider provider)
+        protected EventBindingService(IServiceProvider provider)
         {
             if (provider == null)
-                throw new ArgumentNullException ("provider");
+                throw new ArgumentNullException("provider");
             _provider = provider;
         }
-                    
-        protected abstract bool ShowCode (IComponent component, EventDescriptor e, string methodName);
-        protected abstract bool ShowCode (int lineNumber);
-        protected abstract bool ShowCode ();
-        protected abstract string CreateUniqueMethodName (IComponent component, EventDescriptor e);
-        protected abstract ICollection GetCompatibleMethods (EventDescriptor e);
 
-        protected virtual void FreeMethod (IComponent component, EventDescriptor e, string methodName)
-        {
-        }
+        protected abstract bool ShowCode(
+            IComponent component,
+            EventDescriptor e,
+            string methodName
+        );
+        protected abstract bool ShowCode(int lineNumber);
+        protected abstract bool ShowCode();
+        protected abstract string CreateUniqueMethodName(IComponent component, EventDescriptor e);
+        protected abstract ICollection GetCompatibleMethods(EventDescriptor e);
 
-        protected virtual void UseMethod (IComponent component, EventDescriptor e, string methodName)
-        {
-        }
+        protected virtual void FreeMethod(
+            IComponent component,
+            EventDescriptor e,
+            string methodName
+        ) { }
 
+        protected virtual void UseMethod(
+            IComponent component,
+            EventDescriptor e,
+            string methodName
+        ) { }
 
-        protected virtual void ValidateMethodName (string methodName)
-        {
-        }
- 
+        protected virtual void ValidateMethodName(string methodName) { }
 
-        protected object GetService (Type serviceType)
+        protected object GetService(Type serviceType)
         {
             if (_provider != null)
-                return _provider.GetService (serviceType);
+                return _provider.GetService(serviceType);
             return null;
         }
 
-#region IEventBindingService implementation
+        #region IEventBindingService implementation
 
-        string IEventBindingService.CreateUniqueMethodName (IComponent component, EventDescriptor eventDescriptor)
+        string IEventBindingService.CreateUniqueMethodName(
+            IComponent component,
+            EventDescriptor eventDescriptor
+        )
         {
             if (eventDescriptor == null)
-                throw new ArgumentNullException ("eventDescriptor");
+                throw new ArgumentNullException("eventDescriptor");
             if (component == null)
-                throw new ArgumentNullException ("component");
+                throw new ArgumentNullException("component");
 
-            return this.CreateUniqueMethodName (component, eventDescriptor);
+            return this.CreateUniqueMethodName(component, eventDescriptor);
         }
 
-        ICollection IEventBindingService.GetCompatibleMethods (EventDescriptor eventDescriptor)
+        ICollection IEventBindingService.GetCompatibleMethods(EventDescriptor eventDescriptor)
         {
             if (eventDescriptor == null)
-                throw new ArgumentNullException ("eventDescriptor");
+                throw new ArgumentNullException("eventDescriptor");
 
-            return this.GetCompatibleMethods (eventDescriptor);
+            return this.GetCompatibleMethods(eventDescriptor);
         }
 
-        EventDescriptor IEventBindingService.GetEvent (PropertyDescriptor property)
+        EventDescriptor IEventBindingService.GetEvent(PropertyDescriptor property)
         {
             if (property == null)
-                throw new ArgumentNullException ("property");
+                throw new ArgumentNullException("property");
 
             EventPropertyDescriptor eventPropDescriptor = property as EventPropertyDescriptor;
             if (eventPropDescriptor == null)
                 return null;
-            
+
             return eventPropDescriptor.InternalEventDescriptor;
         }
 
-        PropertyDescriptorCollection IEventBindingService.GetEventProperties (EventDescriptorCollection events)
+        PropertyDescriptorCollection IEventBindingService.GetEventProperties(
+            EventDescriptorCollection events
+        )
         {
             if (events == null)
-                throw new ArgumentNullException ("events");
+                throw new ArgumentNullException("events");
 
-            List<PropertyDescriptor> properties = new List <PropertyDescriptor>();
+            List<PropertyDescriptor> properties = new List<PropertyDescriptor>();
             foreach (EventDescriptor eventDescriptor in events)
-                properties.Add (((IEventBindingService)this).GetEventProperty (eventDescriptor));
-                
-            return new PropertyDescriptorCollection (properties.ToArray ());
+                properties.Add(((IEventBindingService)this).GetEventProperty(eventDescriptor));
+
+            return new PropertyDescriptorCollection(properties.ToArray());
         }
 
-        PropertyDescriptor IEventBindingService.GetEventProperty (EventDescriptor eventDescriptor)
+        PropertyDescriptor IEventBindingService.GetEventProperty(EventDescriptor eventDescriptor)
         {
-            if (eventDescriptor == null) 
-                throw new ArgumentNullException ("eventDescriptor");
+            if (eventDescriptor == null)
+                throw new ArgumentNullException("eventDescriptor");
 
-            return new EventPropertyDescriptor (eventDescriptor);
+            return new EventPropertyDescriptor(eventDescriptor);
         }
 
-        bool IEventBindingService.ShowCode (IComponent component, EventDescriptor eventDescriptor)
+        bool IEventBindingService.ShowCode(IComponent component, EventDescriptor eventDescriptor)
         {
             if (component == null)
-                throw new ArgumentNullException ("component");
+                throw new ArgumentNullException("component");
             if (eventDescriptor == null)
-                throw new ArgumentNullException ("eventDescriptor");
+                throw new ArgumentNullException("eventDescriptor");
 
-            return this.ShowCode (component, eventDescriptor, (string) ((IEventBindingService)this).GetEventProperty (eventDescriptor).GetValue (component));
+            return this.ShowCode(
+                component,
+                eventDescriptor,
+                (string)
+                    ((IEventBindingService)this)
+                        .GetEventProperty(eventDescriptor)
+                        .GetValue(component)
+            );
         }
 
-        bool IEventBindingService.ShowCode (int lineNumber)
+        bool IEventBindingService.ShowCode(int lineNumber)
         {
-            return this.ShowCode (lineNumber);
+            return this.ShowCode(lineNumber);
         }
 
-        bool IEventBindingService.ShowCode ()
+        bool IEventBindingService.ShowCode()
         {
-            return this.ShowCode ();
+            return this.ShowCode();
         }
-#endregion
-
+        #endregion
     }
 
     internal class EventPropertyDescriptor : PropertyDescriptor
     {
         private EventDescriptor _eventDescriptor;
-    
-        public EventPropertyDescriptor (EventDescriptor eventDescriptor)
-            : base (eventDescriptor)
+
+        public EventPropertyDescriptor(EventDescriptor eventDescriptor)
+            : base(eventDescriptor)
         {
             if (eventDescriptor == null)
-                throw new ArgumentNullException ("eventDescriptor");
+                throw new ArgumentNullException("eventDescriptor");
             _eventDescriptor = eventDescriptor;
         }
-        
-        public override bool CanResetValue (object component)
+
+        public override bool CanResetValue(object component)
         {
             return true;
         }
 
-        public override Type ComponentType {
+        public override Type ComponentType
+        {
             get { return _eventDescriptor.ComponentType; }
         }
 
-        public override bool IsReadOnly {
+        public override bool IsReadOnly
+        {
             get { return false; }
         }
 
-        public override Type PropertyType {
+        public override Type PropertyType
+        {
             get { return _eventDescriptor.EventType; }
         }
 
-        public override void ResetValue (object component)
+        public override void ResetValue(object component)
         {
-            this.SetValue (component, null);
+            this.SetValue(component, null);
         }
 
-        public override object GetValue (object component)
+        public override object GetValue(object component)
         {
-            if (component is IComponent && ((IComponent)component).Site != null) {
-                IDictionaryService dictionary = ((IComponent)component).Site.GetService (typeof (IDictionaryService)) as IDictionaryService;
+            if (component is IComponent && ((IComponent)component).Site != null)
+            {
+                IDictionaryService dictionary =
+                    ((IComponent)component).Site.GetService(typeof(IDictionaryService))
+                    as IDictionaryService;
                 if (dictionary != null)
-                    return dictionary.GetValue (base.Name);
+                    return dictionary.GetValue(base.Name);
             }
             return null;
         }
 
-        public override void SetValue (object component, object value)
+        public override void SetValue(object component, object value)
         {
-            if (component is IComponent && ((IComponent)component).Site != null) {
-                IDictionaryService dictionary = ((IComponent)component).Site.GetService (typeof (IDictionaryService)) as IDictionaryService;
+            if (component is IComponent && ((IComponent)component).Site != null)
+            {
+                IDictionaryService dictionary =
+                    ((IComponent)component).Site.GetService(typeof(IDictionaryService))
+                    as IDictionaryService;
                 if (dictionary != null)
-                    dictionary.SetValue (base.Name, value);
+                    dictionary.SetValue(base.Name, value);
             }
         }
 
-        public override bool ShouldSerializeValue (object component)
+        public override bool ShouldSerializeValue(object component)
         {
-            if (this.GetValue (component) != null)
+            if (this.GetValue(component) != null)
                 return true;
             return false;
         }
-        
-        public override TypeConverter Converter {
-            get { return TypeDescriptor.GetConverter (String.Empty); }
+
+        public override TypeConverter Converter
+        {
+            get { return TypeDescriptor.GetConverter(String.Empty); }
         }
-        
-        internal EventDescriptor InternalEventDescriptor {
+
+        internal EventDescriptor InternalEventDescriptor
+        {
             get { return _eventDescriptor; }
         }
     }

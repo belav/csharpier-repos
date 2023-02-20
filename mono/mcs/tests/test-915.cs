@@ -2,12 +2,12 @@ class ClassMain
 {
     static bool test = true;
 
-    public static void Main ()
+    public static void Main()
     {
-        if (true) {
+        if (true)
+        {
             const int test = 0;
         }
         test = false;
     }
 }
-

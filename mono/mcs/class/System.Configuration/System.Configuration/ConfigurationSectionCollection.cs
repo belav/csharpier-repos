@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,104 +40,109 @@ namespace System.Configuration
         SectionGroupInfo group;
         Configuration config;
         static readonly object lockObject = new object();
-         
-        internal ConfigurationSectionCollection (Configuration config, SectionGroupInfo group)
-            : base (StringComparer.Ordinal)
+
+        internal ConfigurationSectionCollection(Configuration config, SectionGroupInfo group)
+            : base(StringComparer.Ordinal)
         {
             this.config = config;
             this.group = group;
         }
-        
+
         public override NameObjectCollectionBase.KeysCollection Keys
         {
             get { return group.Sections.Keys; }
         }
-        
-        public override int Count 
+
+        public override int Count
         {
             get { return group.Sections.Count; }
         }
-    
-        public ConfigurationSection this [string name]
+
+        public ConfigurationSection this[string name]
         {
-            get {
-                ConfigurationSection sec = BaseGet (name) as ConfigurationSection;
-                if (sec == null) {
-                    SectionInfo secData = group.Sections [name] as SectionInfo;
-                    if (secData == null) return null;
-                    sec = config.GetSectionInstance (secData, true);
-                    if (sec == null) return null;
-                    lock(lockObject) {
-                        BaseSet (name, sec);
+            get
+            {
+                ConfigurationSection sec = BaseGet(name) as ConfigurationSection;
+                if (sec == null)
+                {
+                    SectionInfo secData = group.Sections[name] as SectionInfo;
+                    if (secData == null)
+                        return null;
+                    sec = config.GetSectionInstance(secData, true);
+                    if (sec == null)
+                        return null;
+                    lock (lockObject)
+                    {
+                        BaseSet(name, sec);
                     }
                 }
                 return sec;
             }
         }
-    
-        public ConfigurationSection this [int index]
+
+        public ConfigurationSection this[int index]
         {
-            get { return this [GetKey (index)]; }
+            get { return this[GetKey(index)]; }
         }
-        
-        public void Add (string name, ConfigurationSection section)
+
+        public void Add(string name, ConfigurationSection section)
         {
-            config.CreateSection (group, name, section);
+            config.CreateSection(group, name, section);
         }
-        
-        public void Clear ()
+
+        public void Clear()
         {
-            if (group.Sections != null) {
+            if (group.Sections != null)
+            {
                 foreach (ConfigInfo data in group.Sections)
-                    config.RemoveConfigInfo (data);
+                    config.RemoveConfigInfo(data);
             }
         }
-        
-        public void CopyTo (ConfigurationSection [] array, int index)
+
+        public void CopyTo(ConfigurationSection[] array, int index)
         {
-            for (int n=0; n<group.Sections.Count; n++)
-                array [n + index] = this [n];
+            for (int n = 0; n < group.Sections.Count; n++)
+                array[n + index] = this[n];
         }
-        
-        public ConfigurationSection Get (int index)
+
+        public ConfigurationSection Get(int index)
         {
-            return this [index];
+            return this[index];
         }
-        
-        public ConfigurationSection Get (string name)
+
+        public ConfigurationSection Get(string name)
         {
-            return this [name];
+            return this[name];
         }
-        
+
         public override IEnumerator GetEnumerator()
         {
             foreach (string key in group.Sections.AllKeys)
-                yield return this [key];
+                yield return this[key];
         }
-        
-        public string GetKey (int index)
+
+        public string GetKey(int index)
         {
-            return group.Sections.GetKey (index);
+            return group.Sections.GetKey(index);
         }
-        
-        public void Remove (string name)
+
+        public void Remove(string name)
         {
-            SectionInfo secData = group.Sections [name] as SectionInfo;
+            SectionInfo secData = group.Sections[name] as SectionInfo;
             if (secData != null)
-                config.RemoveConfigInfo (secData);
+                config.RemoveConfigInfo(secData);
         }
-        
-        public void RemoveAt (int index)
+
+        public void RemoveAt(int index)
         {
-            SectionInfo secData = group.Sections [index] as SectionInfo;
-            config.RemoveConfigInfo (secData);
+            SectionInfo secData = group.Sections[index] as SectionInfo;
+            config.RemoveConfigInfo(secData);
         }
 
         [MonoTODO]
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
-

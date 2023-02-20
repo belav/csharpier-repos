@@ -1,4 +1,3 @@
-
 // -----------------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------
@@ -21,9 +20,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private volatile int _isDisposed = 0;
 
         public DisposableReflectionComposablePart(ReflectionComposablePartDefinition definition)
-            : base(definition)
-        {
-        }
+            : base(definition) { }
 
         protected override void ReleaseInstanceIfNecessary(object instance)
         {

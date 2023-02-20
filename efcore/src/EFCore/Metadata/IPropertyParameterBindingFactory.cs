@@ -30,5 +30,6 @@ public interface IPropertyParameterBindingFactory
     ParameterBinding? FindParameter(
         IEntityType entityType,
         Type parameterType,
-        string parameterName);
+        string parameterName
+    );
 }

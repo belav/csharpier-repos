@@ -13,9 +13,7 @@ internal sealed class ConditionCollection : IEnumerable<Condition>
     public bool TrackAllCaptures { get; }
 
     public ConditionCollection()
-        : this(LogicalGrouping.MatchAll, trackAllCaptures: false)
-    {
-    }
+        : this(LogicalGrouping.MatchAll, trackAllCaptures: false) { }
 
     public ConditionCollection(LogicalGrouping grouping, bool trackAllCaptures)
     {
@@ -33,7 +31,9 @@ internal sealed class ConditionCollection : IEnumerable<Condition>
             {
                 return _conditions[index];
             }
-            throw new IndexOutOfRangeException($"Cannot access condition at index {index}. Only {_conditions.Count} conditions were captured.");
+            throw new IndexOutOfRangeException(
+                $"Cannot access condition at index {index}. Only {_conditions.Count} conditions were captured."
+            );
         }
     }
 

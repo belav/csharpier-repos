@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,39 +37,37 @@ namespace System.ServiceModel
     {
         // Static members
 
-        static TransactionProtocol wsat, oletx;
+        static TransactionProtocol wsat,
+            oletx;
 
-        static TransactionProtocol ()
+        static TransactionProtocol()
         {
-            wsat = new WSAtomicTransactionProtocol ();
-            oletx = new OleTransactionProtocol ();
+            wsat = new WSAtomicTransactionProtocol();
+            oletx = new OleTransactionProtocol();
         }
 
         // Thus Mono users should not depend on default transactions
-        public static TransactionProtocol Default {
+        public static TransactionProtocol Default
+        {
             get { return OleTransactions; }
         }
 
-        public static TransactionProtocol OleTransactions {
+        public static TransactionProtocol OleTransactions
+        {
             get { return oletx; }
         }
 
-        public static TransactionProtocol WSAtomicTransactionOctober2004 {
+        public static TransactionProtocol WSAtomicTransactionOctober2004
+        {
             get { return wsat; }
         }
 
         // Instance members
 
-        protected TransactionProtocol ()
-        {
-        }
+        protected TransactionProtocol() { }
 
-        class WSAtomicTransactionProtocol : TransactionProtocol
-        {
-        }
+        class WSAtomicTransactionProtocol : TransactionProtocol { }
 
-        class OleTransactionProtocol : TransactionProtocol
-        {
-        }
+        class OleTransactionProtocol : TransactionProtocol { }
     }
 }

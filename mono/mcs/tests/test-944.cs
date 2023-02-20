@@ -2,7 +2,7 @@
 
 public class Class2
 {
-    public static void Main ()
+    public static void Main()
     {
         var writer = new Class1();
         byte[] bytes = writer.Finalize();

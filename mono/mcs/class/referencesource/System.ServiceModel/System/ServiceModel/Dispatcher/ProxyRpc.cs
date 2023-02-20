@@ -27,7 +27,13 @@ namespace System.ServiceModel.Dispatcher
         internal readonly TimeoutHelper TimeoutHelper;
         EventTraceActivity eventTraceActivity;
 
-        internal ProxyRpc(ServiceChannel channel, ProxyOperationRuntime operation, string action, object[] inputs, TimeSpan timeout)
+        internal ProxyRpc(
+            ServiceChannel channel,
+            ProxyOperationRuntime operation,
+            string action,
+            object[] inputs,
+            TimeSpan timeout
+        )
         {
             this.Action = action;
             this.Activity = null;
@@ -55,12 +61,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 return this.eventTraceActivity;
             }
-
-            set
-            {
-                this.eventTraceActivity = value;
-            }
+            set { this.eventTraceActivity = value; }
         }
-
     }
 }

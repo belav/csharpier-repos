@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,157 +36,155 @@ using System.Web.UI.WebControls;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.WebControls {
+namespace MonoTests.System.Web.UI.WebControls
+{
+    public class TestTableSectionStyle : TableSectionStyle
+    {
+        public TestTableSectionStyle()
+            : base() { }
 
-    public class TestTableSectionStyle : TableSectionStyle {
-
-        public TestTableSectionStyle ()
-            : base ()
+        public bool Empty
         {
-        }
-
-        public bool Empty {
             get { return base.IsEmpty; }
         }
 
-        public StateBag StateBag {
+        public StateBag StateBag
+        {
             get { return base.ViewState; }
         }
     }
 
     [TestFixture]
-    public class TableSectionStyleTest {
-
-        private void DefaultProperties (TestTableSectionStyle tss)
+    public class TableSectionStyleTest
+    {
+        private void DefaultProperties(TestTableSectionStyle tss)
         {
-            Assert.AreEqual (0, tss.StateBag.Count, "ViewState.Count");
+            Assert.AreEqual(0, tss.StateBag.Count, "ViewState.Count");
 
-            Assert.IsTrue (tss.Visible, "Visible");
+            Assert.IsTrue(tss.Visible, "Visible");
 
-            Assert.AreEqual (0, tss.StateBag.Count, "ViewState.Count-2");
-            tss.Reset ();
-            Assert.AreEqual (0, tss.StateBag.Count, "Reset");
+            Assert.AreEqual(0, tss.StateBag.Count, "ViewState.Count-2");
+            tss.Reset();
+            Assert.AreEqual(0, tss.StateBag.Count, "Reset");
         }
 
-        private void NullProperties (TestTableSectionStyle tss)
+        private void NullProperties(TestTableSectionStyle tss)
         {
-            Assert.IsTrue (tss.Empty, "Empty");
+            Assert.IsTrue(tss.Empty, "Empty");
 
             tss.Visible = false;
-            Assert.IsFalse (tss.Visible, "Visible");
+            Assert.IsFalse(tss.Visible, "Visible");
 
-            Assert.IsTrue (tss.Empty, "!Empty"); // strange !!!
+            Assert.IsTrue(tss.Empty, "!Empty"); // strange !!!
 
-            Assert.AreEqual (1, tss.StateBag.Count, "ViewState.Count-1");
-            tss.Reset ();
-            
+            Assert.AreEqual(1, tss.StateBag.Count, "ViewState.Count-1");
+            tss.Reset();
+
             // strange results because TableSectionStyle doesn't override
             // Reset
-            Assert.AreEqual (1, tss.StateBag.Count, "Reset");
-            Assert.IsTrue (tss.Empty, "Empty/Reset");
+            Assert.AreEqual(1, tss.StateBag.Count, "Reset");
+            Assert.IsTrue(tss.Empty, "Empty/Reset");
         }
 
         [Test]
-        public void Constructor_Default ()
+        public void Constructor_Default()
         {
-            TestTableSectionStyle tss = new TestTableSectionStyle ();
-            DefaultProperties (tss);
-            NullProperties (tss);
+            TestTableSectionStyle tss = new TestTableSectionStyle();
+            DefaultProperties(tss);
+            NullProperties(tss);
         }
 
-        private TableSectionStyle GetTableSectionStyle ()
+        private TableSectionStyle GetTableSectionStyle()
         {
-            TableSectionStyle tss = new TableSectionStyle ();
+            TableSectionStyle tss = new TableSectionStyle();
             tss.Visible = false;
             return tss;
         }
 
-
         [Test]
-        public void CopyFrom_Null ()
+        public void CopyFrom_Null()
         {
-            TableSectionStyle tss = GetTableSectionStyle ();
-            tss.CopyFrom (null);
-            Assert.IsFalse (tss.Visible, "Visible");
+            TableSectionStyle tss = GetTableSectionStyle();
+            tss.CopyFrom(null);
+            Assert.IsFalse(tss.Visible, "Visible");
         }
 
         [Test]
-        public void CopyFrom_Self ()
+        public void CopyFrom_Self()
         {
-            TableSectionStyle tss = GetTableSectionStyle ();
-            tss.CopyFrom (tss);
-            Assert.IsFalse (tss.Visible, "Visible");
+            TableSectionStyle tss = GetTableSectionStyle();
+            tss.CopyFrom(tss);
+            Assert.IsFalse(tss.Visible, "Visible");
         }
 
         [Test]
-        public void CopyFrom_Empty ()
+        public void CopyFrom_Empty()
         {
-            TestTableSectionStyle tss = new TestTableSectionStyle ();
-            tss.CopyFrom (new TableSectionStyle ());
-            DefaultProperties (tss);
+            TestTableSectionStyle tss = new TestTableSectionStyle();
+            tss.CopyFrom(new TableSectionStyle());
+            DefaultProperties(tss);
         }
 
         [Test]
-        public void CopyFrom_IsEmpty ()
+        public void CopyFrom_IsEmpty()
         {
-            TestTableSectionStyle c = new TestTableSectionStyle ();
-            TableSectionStyle s = new TableSectionStyle ();
-            
+            TestTableSectionStyle c = new TestTableSectionStyle();
+            TableSectionStyle s = new TableSectionStyle();
+
             s.BorderWidth = Unit.Empty;
-            c.CopyFrom (s);
-            Assert.IsTrue (c.Empty, "A1");
-            
+            c.CopyFrom(s);
+            Assert.IsTrue(c.Empty, "A1");
+
             s.Visible = true;
-            c.CopyFrom (s);
+            c.CopyFrom(s);
             // BUG -- setting Visible doesn't change the "emptyness" of this class ;-)
-            Assert.IsTrue (c.Empty, "A2");
+            Assert.IsTrue(c.Empty, "A2");
         }
 
         [Test]
-        public void CopyFrom ()
+        public void CopyFrom()
         {
-            TableSectionStyle tss = GetTableSectionStyle ();
+            TableSectionStyle tss = GetTableSectionStyle();
             tss.Visible = true;
 
-            tss.CopyFrom (GetTableSectionStyle ());
+            tss.CopyFrom(GetTableSectionStyle());
             // BUG - CopyFrom isn't overriden !!!
-            Assert.IsTrue (tss.Visible, "Visible");
+            Assert.IsTrue(tss.Visible, "Visible");
         }
 
         [Test]
-        public void MergeWith_Null ()
+        public void MergeWith_Null()
         {
-            TableSectionStyle tss = GetTableSectionStyle ();
-            tss.MergeWith (null);
-            Assert.IsFalse (tss.Visible, "Visible");
+            TableSectionStyle tss = GetTableSectionStyle();
+            tss.MergeWith(null);
+            Assert.IsFalse(tss.Visible, "Visible");
         }
 
         [Test]
-        public void MergeWith_Self ()
+        public void MergeWith_Self()
         {
-            TableSectionStyle tss = GetTableSectionStyle ();
-            tss.MergeWith (tss);
-            Assert.IsFalse (tss.Visible, "Visible");
+            TableSectionStyle tss = GetTableSectionStyle();
+            tss.MergeWith(tss);
+            Assert.IsFalse(tss.Visible, "Visible");
         }
 
         [Test]
-        public void MergeWith_Empty ()
+        public void MergeWith_Empty()
         {
-            TestTableSectionStyle tss = new TestTableSectionStyle ();
-            tss.MergeWith (new TableSectionStyle ());
-            DefaultProperties (tss);
+            TestTableSectionStyle tss = new TestTableSectionStyle();
+            tss.MergeWith(new TableSectionStyle());
+            DefaultProperties(tss);
         }
 
         [Test]
-        public void MergeWith ()
+        public void MergeWith()
         {
-            TableSectionStyle tss = new TableSectionStyle ();
+            TableSectionStyle tss = new TableSectionStyle();
             tss.Visible = true;
 
-            tss.MergeWith (GetTableSectionStyle ());
+            tss.MergeWith(GetTableSectionStyle());
 
-            Assert.IsTrue (tss.Visible, "Visible");
+            Assert.IsTrue(tss.Visible, "Visible");
         }
     }
 }
-

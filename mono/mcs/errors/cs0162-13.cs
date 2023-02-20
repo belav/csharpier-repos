@@ -4,9 +4,10 @@
 
 class C
 {
-    static int Main () 
+    static int Main()
     {
-        while (!new bool {});
+        while (!new bool { })
+            ;
         return 1;
     }
 }

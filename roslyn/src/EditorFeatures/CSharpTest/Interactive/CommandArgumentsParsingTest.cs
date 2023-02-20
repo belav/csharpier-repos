@@ -17,12 +17,27 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.Interactive
             TestPath("blah", expected: null, validArg: true, readToEnd: false);
             TestPath(@"""blah""", expected: "blah", validArg: true, readToEnd: true);
             TestPath(@"""b\l\a\h""", expected: @"b\l\a\h", validArg: true, readToEnd: true);
-            TestPath(@"""b\l\a\h"" // comment", expected: @"b\l\a\h", validArg: true, readToEnd: true);
+            TestPath(
+                @"""b\l\a\h"" // comment",
+                expected: @"b\l\a\h",
+                validArg: true,
+                readToEnd: true
+            );
 
-            TestPath("\t   \"x\tx\"  \t  \r\n  \t  ", expected: "x\tx", validArg: true, readToEnd: true);
+            TestPath(
+                "\t   \"x\tx\"  \t  \r\n  \t  ",
+                expected: "x\tx",
+                validArg: true,
+                readToEnd: true
+            );
             TestPath(@"""b\l\a\h", expected: @"b\l\a\h", validArg: false);
             TestPath(@"""blah" + "\r\n" + @"""", expected: "blah", validArg: false);
-            TestPath(@"""blah""" + "\r\n" + @"""", expected: "blah", validArg: true, readToEnd: false);
+            TestPath(
+                @"""blah""" + "\r\n" + @"""",
+                expected: "blah",
+                validArg: true,
+                readToEnd: false
+            );
 
             TestPath(@"""blah//goo", expected: "blah//goo", validArg: false);
             TestPath(@"""blah//goo""", expected: "blah//goo", validArg: true);

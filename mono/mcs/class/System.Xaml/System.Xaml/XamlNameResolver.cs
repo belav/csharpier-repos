@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,135 +30,144 @@ namespace System.Xaml
 {
     internal class XamlNameResolver : IXamlNameResolver, IXamlNameProvider
     {
-        public XamlNameResolver ()
-        {
-        }
-        
+        public XamlNameResolver() { }
+
         public bool IsCollectingReferences { get; set; }
 
         internal class NamedObject
         {
-            public NamedObject (string name, object value, bool fullyInitialized)
+            public NamedObject(string name, object value, bool fullyInitialized)
             {
                 Name = name;
                 Value = value;
                 FullyInitialized = fullyInitialized;
             }
+
             public string Name { get; set; }
             public object Value { get; set; }
             public bool FullyInitialized { get; set; }
         }
 
-        Dictionary<string,NamedObject> objects = new Dictionary<string,NamedObject> ();
-        List<object> referenced = new List<object> ();
+        Dictionary<string, NamedObject> objects = new Dictionary<string, NamedObject>();
+        List<object> referenced = new List<object>();
 
         [MonoTODO]
-        public bool IsFixupTokenAvailable {
-            get { throw new NotImplementedException (); }
+        public bool IsFixupTokenAvailable
+        {
+            get { throw new NotImplementedException(); }
         }
 
         public event EventHandler OnNameScopeInitializationComplete;
 
-        internal void NameScopeInitializationCompleted (object sender)
+        internal void NameScopeInitializationCompleted(object sender)
         {
             if (OnNameScopeInitializationComplete != null)
-                OnNameScopeInitializationComplete (sender, EventArgs.Empty);
-            objects.Clear ();
+                OnNameScopeInitializationComplete(sender, EventArgs.Empty);
+            objects.Clear();
         }
-        
-        int saved_count, saved_referenced_count;
-        public void Save ()
+
+        int saved_count,
+            saved_referenced_count;
+
+        public void Save()
         {
             if (saved_count != 0)
-                throw new Exception ();
+                throw new Exception();
             saved_count = objects.Count;
             saved_referenced_count = referenced.Count;
         }
-        public void Restore ()
+
+        public void Restore()
         {
             while (saved_count < objects.Count)
-                objects.Remove (objects.Last ().Key);
-                referenced.Remove (objects.Last ().Key);
+                objects.Remove(objects.Last().Key);
+            referenced.Remove(objects.Last().Key);
             saved_count = 0;
-            referenced.RemoveRange (saved_referenced_count, referenced.Count - saved_referenced_count);
+            referenced.RemoveRange(
+                saved_referenced_count,
+                referenced.Count - saved_referenced_count
+            );
             saved_referenced_count = 0;
         }
 
-        internal void SetNamedObject (string name, object value, bool fullyInitialized)
+        internal void SetNamedObject(string name, object value, bool fullyInitialized)
         {
             if (value == null)
-                throw new ArgumentNullException ("value");
-            objects [name] = new NamedObject (name, value, fullyInitialized);
+                throw new ArgumentNullException("value");
+            objects[name] = new NamedObject(name, value, fullyInitialized);
         }
-        
-        internal bool Contains (string name)
+
+        internal bool Contains(string name)
         {
-            return objects.ContainsKey (name);
+            return objects.ContainsKey(name);
         }
-        
-        public string GetName (object value)
+
+        public string GetName(object value)
         {
             foreach (var no in objects.Values)
-                if (object.ReferenceEquals (no.Value, value))
+                if (object.ReferenceEquals(no.Value, value))
                     return no.Name;
             return null;
         }
 
-        internal void SaveAsReferenced (object val)
+        internal void SaveAsReferenced(object val)
         {
-            referenced.Add (val);
+            referenced.Add(val);
         }
-        
-        internal string GetReferencedName (object val)
+
+        internal string GetReferencedName(object val)
         {
-            if (!referenced.Contains (val))
+            if (!referenced.Contains(val))
                 return null;
-            return GetName (val);
-        }
-        
-        public object GetFixupToken (IEnumerable<string> names)
-        {
-            return new NameFixupRequired (names, false);
+            return GetName(val);
         }
 
-        public object GetFixupToken (IEnumerable<string> names, bool canAssignDirectly)
+        public object GetFixupToken(IEnumerable<string> names)
         {
-            return new NameFixupRequired (names, canAssignDirectly);
+            return new NameFixupRequired(names, false);
         }
 
-        public IEnumerable<KeyValuePair<string, object>> GetAllNamesAndValuesInScope ()
+        public object GetFixupToken(IEnumerable<string> names, bool canAssignDirectly)
+        {
+            return new NameFixupRequired(names, canAssignDirectly);
+        }
+
+        public IEnumerable<KeyValuePair<string, object>> GetAllNamesAndValuesInScope()
         {
             foreach (var pair in objects)
-                yield return new KeyValuePair<string,object> (pair.Key, pair.Value.Value);
+                yield return new KeyValuePair<string, object>(pair.Key, pair.Value.Value);
         }
 
-        public object Resolve (string name)
+        public object Resolve(string name)
         {
             NamedObject ret;
-            return objects.TryGetValue (name, out ret) ? ret.Value : null;
+            return objects.TryGetValue(name, out ret) ? ret.Value : null;
         }
 
-        public object Resolve (string name, out bool isFullyInitialized)
+        public object Resolve(string name, out bool isFullyInitialized)
         {
             NamedObject ret;
-            if (objects.TryGetValue (name, out ret)) {
+            if (objects.TryGetValue(name, out ret))
+            {
                 isFullyInitialized = ret.FullyInitialized;
                 return ret.Value;
-            } else {
+            }
+            else
+            {
                 isFullyInitialized = false;
                 return null;
             }
         }
     }
-    
+
     internal class NameFixupRequired
     {
-        public NameFixupRequired (IEnumerable<string> names, bool canAssignDirectly)
+        public NameFixupRequired(IEnumerable<string> names, bool canAssignDirectly)
         {
             CanAssignDirectly = canAssignDirectly;
-            Names = names.ToArray ();
+            Names = names.ToArray();
         }
-        
+
         public XamlType ParentType { get; set; }
         public XamlMember ParentMember { get; set; }
         public object ParentValue { get; set; }
@@ -167,4 +176,3 @@ namespace System.Xaml
         public IList<string> Names { get; set; }
     }
 }
-

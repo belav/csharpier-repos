@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         Expression<Func<object>> l = () => throw null;
     }

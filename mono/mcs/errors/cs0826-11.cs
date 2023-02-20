@@ -3,8 +3,8 @@
 
 class XX
 {
-    public static void Main ()
+    public static void Main()
     {
-        var m = new [] { (1, Main) };
+        var m = new[] { (1, Main) };
     }
 }

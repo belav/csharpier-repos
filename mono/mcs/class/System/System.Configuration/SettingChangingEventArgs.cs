@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,12 +33,14 @@ namespace System.Configuration
 {
     public class SettingChangingEventArgs : CancelEventArgs
     {
-        public SettingChangingEventArgs (string settingName, 
-                         string settingClass, 
-                         string settingKey, 
-                         object newValue, 
-                         bool cancel)
-            : base (cancel)
+        public SettingChangingEventArgs(
+            string settingName,
+            string settingClass,
+            string settingKey,
+            object newValue,
+            bool cancel
+        )
+            : base(cancel)
         {
             this.settingName = settingName;
             this.settingClass = settingClass;
@@ -46,28 +48,24 @@ namespace System.Configuration
             this.newValue = newValue;
         }
 
-        public string SettingName {
-            get {
-                return settingName;
-            }
+        public string SettingName
+        {
+            get { return settingName; }
         }
 
-        public string SettingClass {
-            get {
-                return settingClass;
-            }
+        public string SettingClass
+        {
+            get { return settingClass; }
         }
 
-        public string SettingKey {
-            get {
-                return settingKey;
-            }
+        public string SettingKey
+        {
+            get { return settingKey; }
         }
 
-        public object NewValue {
-            get {
-                return newValue;
-            }
+        public object NewValue
+        {
+            get { return newValue; }
         }
 
         string settingName;
@@ -75,6 +73,4 @@ namespace System.Configuration
         string settingKey;
         object newValue;
     }
-
 }
-

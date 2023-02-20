@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,63 +41,64 @@ namespace StandAloneTests.RequestValidator
 {
     class RequestValidatorCallSet
     {
-        List <Dictionary <string, object>> callSets;
+        List<Dictionary<string, object>> callSets;
 
-        public List <Dictionary <string, object>> CallSets {
-            get {
+        public List<Dictionary<string, object>> CallSets
+        {
+            get
+            {
                 if (callSets == null)
-                    callSets = new List <Dictionary <string, object>> ();
+                    callSets = new List<Dictionary<string, object>>();
 
                 return callSets;
             }
         }
 
-        public string Name {
-            get;
-            protected set;
-        }
-        
-        protected void RegisterCallSet (Dictionary <string, object> callSet) 
+        public string Name { get; protected set; }
+
+        protected void RegisterCallSet(Dictionary<string, object> callSet)
         {
             if (callSet == null || callSet.Count == 0)
                 return;
-            
-            CallSets.Add (callSet);
+
+            CallSets.Add(callSet);
         }
 
-        public bool ContainsCallSet (Dictionary <string, object> callSet)
+        public bool ContainsCallSet(Dictionary<string, object> callSet)
         {
             foreach (var dict in CallSets)
-                if (DictionariesEqual (dict, callSet))
+                if (DictionariesEqual(dict, callSet))
                     return true;
 
             return false;
         }
 
-        bool DictionariesEqual (Dictionary <string, object> first, Dictionary <string, object> second)
+        bool DictionariesEqual(Dictionary<string, object> first, Dictionary<string, object> second)
         {
             if (first == null ^ second == null)
                 return false;
-            
+
             if (first.Count != second.Count)
                 return false;
-            
-            object left, right;
-            foreach (string s in first.Keys) {
+
+            object left,
+                right;
+            foreach (string s in first.Keys)
+            {
                 if (s == "calledFrom")
                     continue;
-                
-                if (!second.TryGetValue (s, out left))
+
+                if (!second.TryGetValue(s, out left))
                     return false;
 
-                right = first [s];
+                right = first[s];
                 if (left == null ^ right == null)
                     return false;
 
                 if (left == null)
                     continue;
-                
-                if (!left.Equals (right))
+
+                if (!left.Equals(right))
                     return false;
             }
 
@@ -107,55 +108,60 @@ namespace StandAloneTests.RequestValidator
 
     static class RequestValidatorCallSetContainer
     {
-        public static List <RequestValidatorCallSet> CallSets {
-            get;
-            private set;
-        }
-        
-        static RequestValidatorCallSetContainer ()
+        public static List<RequestValidatorCallSet> CallSets { get; private set; }
+
+        static RequestValidatorCallSetContainer()
         {
-            CallSets  = new List <RequestValidatorCallSet> ();
+            CallSets = new List<RequestValidatorCallSet>();
         }
 
-        public static RequestValidatorCallSet GetCallSet (string name)
+        public static RequestValidatorCallSet GetCallSet(string name)
         {
             foreach (RequestValidatorCallSet cs in CallSets)
-                if (String.Compare (cs.Name, name, StringComparison.Ordinal) == 0)
+                if (String.Compare(cs.Name, name, StringComparison.Ordinal) == 0)
                     return cs;
 
             return null;
         }
-        
-        public static void Register (RequestValidatorCallSet callSet)
+
+        public static void Register(RequestValidatorCallSet callSet)
         {
-            CallSets.Add (callSet);
+            CallSets.Add(callSet);
         }
     }
 
-    [TestCase ("RequestValidator", "4.0 extensible request validation tests.")]
+    [TestCase("RequestValidator", "4.0 extensible request validation tests.")]
     public sealed class RequestValidatorTests : ITestCase
     {
-        public string PhysicalPath {
-            get { return Path.Combine (Consts.BasePhysicalDir, "RequestValidator"); }
+        public string PhysicalPath
+        {
+            get { return Path.Combine(Consts.BasePhysicalDir, "RequestValidator"); }
         }
-        
-        public string VirtualPath  {
+
+        public string VirtualPath
+        {
             get { return "/"; }
         }
 
-        public bool SetUp (List <TestRunItem> runItems)
+        public bool SetUp(List<TestRunItem> runItems)
         {
-            GeneratedCallSets.Register ();
+            GeneratedCallSets.Register();
 
-            runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx));
-            runItems.Add (new TestRunItem ("Default.aspx?key=invalid<script>value</script>", Default_Aspx_Script));
-            
+            runItems.Add(new TestRunItem("Default.aspx", Default_Aspx));
+            runItems.Add(
+                new TestRunItem(
+                    "Default.aspx?key=invalid<script>value</script>",
+                    Default_Aspx_Script
+                )
+            );
+
             return true;
         }
 
-        string SummarizeCallSet (Dictionary <string, object> callSet)
+        string SummarizeCallSet(Dictionary<string, object> callSet)
         {
-            return String.Format (@"                      URL: {0}
+            return String.Format(
+                @"                      URL: {0}
           Context present: {1}
                     Value: {2}
 Request validation source: {3}
@@ -163,46 +169,51 @@ Request validation source: {3}
  Validation failure index: {5}
              Return value: {6}
 ",
-                          callSet ["rawUrl"],
-                          callSet ["context"],
-                          callSet ["value"],
-                          (int)callSet ["requestValidationSource"],
-                          callSet ["collectionKey"],
-                          callSet ["validationFailureIndex"],
-                          callSet ["returnValue"]);
+                callSet["rawUrl"],
+                callSet["context"],
+                callSet["value"],
+                (int)callSet["requestValidationSource"],
+                callSet["collectionKey"],
+                callSet["validationFailureIndex"],
+                callSet["returnValue"]
+            );
         }
-        
-        void Default_Aspx (string result, TestRunItem runItem)
+
+        void Default_Aspx(string result, TestRunItem runItem)
         {
             if (runItem == null)
-                throw new ArgumentNullException ("runItem");
-            CompareCallSets (runItem, "000");
+                throw new ArgumentNullException("runItem");
+            CompareCallSets(runItem, "000");
         }
 
-        void Default_Aspx_Script (string result, TestRunItem runItem)
+        void Default_Aspx_Script(string result, TestRunItem runItem)
         {
             if (runItem == null)
-                throw new ArgumentNullException ("runItem");
+                throw new ArgumentNullException("runItem");
 
-            CompareCallSets (runItem, "001");
+            CompareCallSets(runItem, "001");
         }
 
-        void CompareCallSets (TestRunItem runItem, string name)
+        void CompareCallSets(TestRunItem runItem, string name)
         {
-            var dict = runItem.TestRunData as List <Dictionary <string, object>>;
+            var dict = runItem.TestRunData as List<Dictionary<string, object>>;
             if (dict == null || dict.Count == 0)
-                Assert.Fail ("No call data recorded.");
+                Assert.Fail("No call data recorded.");
 
-            RequestValidatorCallSet cs = RequestValidatorCallSetContainer.GetCallSet (name);
+            RequestValidatorCallSet cs = RequestValidatorCallSetContainer.GetCallSet(name);
             if (cs == null)
-                Assert.Fail ("Call set \"{0}\" not found.", name);
+                Assert.Fail("Call set \"{0}\" not found.", name);
 
-            foreach (Dictionary <string, object> calls in dict) {
-                if (!cs.ContainsCallSet (calls))
-                    Assert.Fail ("{0}: call sequence not found:{1}{2}", name, Environment.NewLine, SummarizeCallSet (calls));
+            foreach (Dictionary<string, object> calls in dict)
+            {
+                if (!cs.ContainsCallSet(calls))
+                    Assert.Fail(
+                        "{0}: call sequence not found:{1}{2}",
+                        name,
+                        Environment.NewLine,
+                        SummarizeCallSet(calls)
+                    );
             }
-            
         }
     }
 }
-

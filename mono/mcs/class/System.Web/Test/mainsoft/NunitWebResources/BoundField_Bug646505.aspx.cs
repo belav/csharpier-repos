@@ -12,48 +12,54 @@ namespace MonoBoundFieldCompatibilityIssue
         /// </summary>
         class CustomColumn : BoundField
         {
-            protected override void InitializeDataCell (DataControlFieldCell cell, DataControlRowState rowState)
+            protected override void InitializeDataCell(
+                DataControlFieldCell cell,
+                DataControlRowState rowState
+            )
             {
-                if ((rowState & DataControlRowState.Edit) != DataControlRowState.Normal) {
-                    TextBox textBox = new TextBox ();
-                    cell.Controls.Add (textBox);
+                if ((rowState & DataControlRowState.Edit) != DataControlRowState.Normal)
+                {
+                    TextBox textBox = new TextBox();
+                    cell.Controls.Add(textBox);
                     textBox.DataBinding += OnDataBindField;
-                } else
-                    base.InitializeDataCell (cell, rowState);
+                }
+                else
+                    base.InitializeDataCell(cell, rowState);
             }
         }
 
         #endregion
 
-        protected void Page_Load (object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack) return;
-            BindGridView ();
+            if (IsPostBack)
+                return;
+            BindGridView();
         }
 
-        protected void OnGridViewInit (object sender, EventArgs e)
+        protected void OnGridViewInit(object sender, EventArgs e)
         {
-            CustomColumn column = new CustomColumn (); 
+            CustomColumn column = new CustomColumn();
             column.DataField = BoundField.ThisExpression;
-            gridView.Columns.Add (column);
+            gridView.Columns.Add(column);
         }
 
-        protected void OnGridViewRowEditing (object sender, GridViewEditEventArgs e)
+        protected void OnGridViewRowEditing(object sender, GridViewEditEventArgs e)
         {
             gridView.EditIndex = e.NewEditIndex;
-            BindGridView ();
+            BindGridView();
         }
 
-        protected void OnGridViewEditCancelling (object sender, EventArgs e)
+        protected void OnGridViewEditCancelling(object sender, EventArgs e)
         {
             gridView.EditIndex = -1;
-            BindGridView ();
+            BindGridView();
         }
 
-        private void BindGridView ()
+        private void BindGridView()
         {
-            gridView.DataSource = new bool [2];
-            gridView.DataBind ();
+            gridView.DataSource = new bool[2];
+            gridView.DataBind();
         }
     }
 }

@@ -4,8 +4,6 @@
 class C
 {
     object stuff = stuff;
-    
-    public C (object stuff)
-    {
-    }
+
+    public C(object stuff) { }
 }

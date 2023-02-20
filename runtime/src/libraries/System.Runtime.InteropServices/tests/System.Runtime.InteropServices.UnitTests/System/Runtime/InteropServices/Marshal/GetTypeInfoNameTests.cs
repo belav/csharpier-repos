@@ -20,24 +20,36 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void GetTypeInfoName_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.GetTypeInfoName((ITypeInfo)null));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.GetTypeInfoName((ITypeInfo)null)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetTypeInfoName_NullTypeInfo_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("typeInfo", () => Marshal.GetTypeInfoName((ITypeInfo)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "typeInfo",
+                () => Marshal.GetTypeInfoName((ITypeInfo)null)
+            );
         }
 
         public class TypeInfo : ITypeInfo
         {
-            public void GetDocumentation(int index, out string strName, out string strDocString, out int dwHelpContext, out string strHelpFile)
+            public void GetDocumentation(
+                int index,
+                out string strName,
+                out string strDocString,
+                out int dwHelpContext,
+                out string strHelpFile
+            )
             {
                 strName = "strName";
                 strDocString = "strDocString";
                 dwHelpContext = 10;
                 strHelpFile = "strHelpFile";
             }
+
             public void GetTypeAttr(out IntPtr ppTypeAttr)
             {
                 throw new NotImplementedException();
@@ -78,12 +90,26 @@ namespace System.Runtime.InteropServices.Tests
                 throw new NotImplementedException();
             }
 
-            public void Invoke(object pvInstance, int memid, short wFlags, ref ComTypes.DISPPARAMS pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, out int puArgErr)
+            public void Invoke(
+                object pvInstance,
+                int memid,
+                short wFlags,
+                ref ComTypes.DISPPARAMS pDispParams,
+                IntPtr pVarResult,
+                IntPtr pExcepInfo,
+                out int puArgErr
+            )
             {
                 throw new NotImplementedException();
             }
 
-            public void GetDllEntry(int memid, ComTypes.INVOKEKIND invKind, IntPtr pBstrDllName, IntPtr pBstrName, IntPtr pwOrdinal)
+            public void GetDllEntry(
+                int memid,
+                ComTypes.INVOKEKIND invKind,
+                IntPtr pBstrDllName,
+                IntPtr pBstrName,
+                IntPtr pwOrdinal
+            )
             {
                 throw new NotImplementedException();
             }

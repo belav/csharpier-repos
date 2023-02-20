@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -49,76 +49,103 @@ namespace System.Web
         public const string Template_StackTraceName = "StackTrace";
         public const string Template_FullStackTraceName = "FullStackTrace";
         public const string Template_HtmlizedExceptionOriginName = "HtmlizedExceptionOrigin";
-        public const string Template_HtmlizedExceptionShortSourceName = "HtmlizedExceptionShortSource";
-        public const string Template_HtmlizedExceptionLongSourceName = "HtmlizedExceptionLongSource";
-        public const string Template_HtmlizedExceptionSourceFileName = "HtmlizedExceptionSourceFile";
-        public const string Template_HtmlizedExceptionErrorLinesName = "HtmlizedExceptionErrorLines";
-        public const string Template_HtmlizedExceptionCompilerOutputName = "HtmlizedExceptionCompilerOutput";
-        
-        List <ExceptionPageTemplateFragment> fragments;
+        public const string Template_HtmlizedExceptionShortSourceName =
+            "HtmlizedExceptionShortSource";
+        public const string Template_HtmlizedExceptionLongSourceName =
+            "HtmlizedExceptionLongSource";
+        public const string Template_HtmlizedExceptionSourceFileName =
+            "HtmlizedExceptionSourceFile";
+        public const string Template_HtmlizedExceptionErrorLinesName =
+            "HtmlizedExceptionErrorLines";
+        public const string Template_HtmlizedExceptionCompilerOutputName =
+            "HtmlizedExceptionCompilerOutput";
 
-        public List <ExceptionPageTemplateFragment> Fragments {
-            get {
+        List<ExceptionPageTemplateFragment> fragments;
+
+        public List<ExceptionPageTemplateFragment> Fragments
+        {
+            get
+            {
                 if (fragments == null)
-                    fragments = new List <ExceptionPageTemplateFragment> ();
+                    fragments = new List<ExceptionPageTemplateFragment>();
                 return fragments;
             }
         }
 
-        public abstract void Init ();
-        
-        void InitFragments (ExceptionPageTemplateValues values)
+        public abstract void Init();
+
+        void InitFragments(ExceptionPageTemplateValues values)
         {
-            foreach (ExceptionPageTemplateFragment fragment in fragments) {
+            foreach (ExceptionPageTemplateFragment fragment in fragments)
+            {
                 if (fragment == null)
                     continue;
 
-                fragment.Init (values);
+                fragment.Init(values);
             }
         }
-        
-        public string Render (ExceptionPageTemplateValues values, ExceptionPageTemplateType pageType)
+
+        public string Render(ExceptionPageTemplateValues values, ExceptionPageTemplateType pageType)
         {
             if (values == null)
-                throw new ArgumentNullException ("values");
-            var sb = new StringBuilder ();
+                throw new ArgumentNullException("values");
+            var sb = new StringBuilder();
 
-            Render (values, pageType, (string text) => {
-                sb.Append (text);
-            });
-            
-            return sb.ToString ();
+            Render(
+                values,
+                pageType,
+                (string text) =>
+                {
+                    sb.Append(text);
+                }
+            );
+
+            return sb.ToString();
         }
 
-        public void Render (HttpResponse response, ExceptionPageTemplateValues values, ExceptionPageTemplateType pageType)
+        public void Render(
+            HttpResponse response,
+            ExceptionPageTemplateValues values,
+            ExceptionPageTemplateType pageType
+        )
         {
             if (response == null)
                 return;
 
             if (values == null)
-                throw new ArgumentNullException ("values");
-            
-            Render (values, pageType, (string text) => {
-                response.Write (text);
-            });
+                throw new ArgumentNullException("values");
+
+            Render(
+                values,
+                pageType,
+                (string text) =>
+                {
+                    response.Write(text);
+                }
+            );
         }
 
-        void Render (ExceptionPageTemplateValues values, ExceptionPageTemplateType pageType, Action <string> writer)
+        void Render(
+            ExceptionPageTemplateValues values,
+            ExceptionPageTemplateType pageType,
+            Action<string> writer
+        )
         {
             if (fragments == null || fragments.Count == 0 || values.Count == 0)
                 return;
 
-            InitFragments (values);
+            InitFragments(values);
             string value;
-            foreach (ExceptionPageTemplateFragment fragment in fragments) {
+            foreach (ExceptionPageTemplateFragment fragment in fragments)
+            {
                 if (fragment == null || (fragment.ValidForPageType & pageType) == 0)
                     continue;
 
-                value = values.Get (fragment.Name);
-                if (value == null || !fragment.Visible (values))
+                value = values.Get(fragment.Name);
+                if (value == null || !fragment.Visible(values))
                     continue;
 
-                writer (fragment.ReplaceMacros (value, values));
+                writer(fragment.ReplaceMacros(value, values));
             }
         }
     }

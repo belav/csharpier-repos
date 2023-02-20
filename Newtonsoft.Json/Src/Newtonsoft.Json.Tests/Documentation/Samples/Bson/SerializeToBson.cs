@@ -75,7 +75,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Bson
             // MQAAAAJOYW1lAA8AAABNb3ZpZSBQcmVtaWVyZQAJU3RhcnREYXRlAED982M8AQAAAA==
             #endregion
 
-            Assert.AreEqual("MQAAAAJOYW1lAA8AAABNb3ZpZSBQcmVtaWVyZQAJU3RhcnREYXRlAED982M8AQAAAA==", data);
+            Assert.AreEqual(
+                "MQAAAAJOYW1lAA8AAABNb3ZpZSBQcmVtaWVyZQAJU3RhcnREYXRlAED982M8AQAAAA==",
+                data
+            );
         }
 #pragma warning restore 618
     }

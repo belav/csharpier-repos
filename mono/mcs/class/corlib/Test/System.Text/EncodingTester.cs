@@ -5,7 +5,7 @@
 //    Marcos Henrich  <marcos.henrich@xamarin.com>
 //
 // (C) 2014 Xamarin, Inc.
-// 
+//
 
 using NUnit.Framework;
 using System;
@@ -21,26 +21,29 @@ namespace MonoTests.System.Text
             DecoderFallbackBuffer buffer;
             private FallbackDelegate fallbackAction;
 
-            public DecoderTestFallbackBuffer (DecoderReplacementFallback fallback, FallbackDelegate fallbackAction)
+            public DecoderTestFallbackBuffer(
+                DecoderReplacementFallback fallback,
+                FallbackDelegate fallbackAction
+            )
             {
                 this.fallbackAction = fallbackAction;
-                buffer = new DecoderReplacementFallbackBuffer (fallback);
+                buffer = new DecoderReplacementFallbackBuffer(fallback);
             }
 
-            public override bool Fallback (byte [] bytesUnknown, int index)
+            public override bool Fallback(byte[] bytesUnknown, int index)
             {
-                fallbackAction (bytesUnknown, index);
-                return buffer.Fallback (bytesUnknown, index);
+                fallbackAction(bytesUnknown, index);
+                return buffer.Fallback(bytesUnknown, index);
             }
 
-            public override char GetNextChar ()
+            public override char GetNextChar()
             {
-                return buffer.GetNextChar ();
+                return buffer.GetNextChar();
             }
 
-            public override bool MovePrevious ()
+            public override bool MovePrevious()
             {
-                return buffer.MovePrevious ();
+                return buffer.MovePrevious();
             }
 
             public override int Remaining
@@ -48,9 +51,9 @@ namespace MonoTests.System.Text
                 get { return buffer.Remaining; }
             }
 
-            public override void Reset ()
+            public override void Reset()
             {
-                buffer.Reset ();
+                buffer.Reset();
             }
         }
 
@@ -59,15 +62,15 @@ namespace MonoTests.System.Text
             private DecoderReplacementFallback fallback;
             private FallbackDelegate fallbackAction;
 
-            public DecoderTestFallback (FallbackDelegate fallbackAction)
+            public DecoderTestFallback(FallbackDelegate fallbackAction)
             {
                 this.fallbackAction = fallbackAction;
             }
 
-            public override DecoderFallbackBuffer CreateFallbackBuffer ()
+            public override DecoderFallbackBuffer CreateFallbackBuffer()
             {
-                fallback = new DecoderReplacementFallback ();
-                return new DecoderTestFallbackBuffer (fallback, fallbackAction);
+                fallback = new DecoderReplacementFallback();
+                return new DecoderTestFallbackBuffer(fallback, fallbackAction);
             }
 
             public override int MaxCharCount
@@ -76,40 +79,48 @@ namespace MonoTests.System.Text
             }
         }
 
-        public delegate void FallbackDelegate (byte [] bytesUnknown, int index);
+        public delegate void FallbackDelegate(byte[] bytesUnknown, int index);
 
         Encoding encoding;
 
-        byte [][] expectedUnknownBytes;
+        byte[][] expectedUnknownBytes;
         int expectedUnknownBytesIndex;
 
-        public EncodingTester (string encodingName)
+        public EncodingTester(string encodingName)
         {
-            var decoderFallback = new DecoderTestFallback (this.DecoderFallback);
-            encoding = Encoding.GetEncoding (encodingName, new EncoderReplacementFallback(), decoderFallback);
+            var decoderFallback = new DecoderTestFallback(this.DecoderFallback);
+            encoding = Encoding.GetEncoding(
+                encodingName,
+                new EncoderReplacementFallback(),
+                decoderFallback
+            );
         }
 
-        private void DecoderFallback (byte [] bytesUnknown, int index)
+        private void DecoderFallback(byte[] bytesUnknown, int index)
         {
             if (expectedUnknownBytesIndex == expectedUnknownBytes.Length)
                 expectedUnknownBytesIndex = 0;
 
-            var expectedBytes = expectedUnknownBytes [expectedUnknownBytesIndex++];
-            Assert.AreEqual (expectedBytes, bytesUnknown);
+            var expectedBytes = expectedUnknownBytes[expectedUnknownBytesIndex++];
+            Assert.AreEqual(expectedBytes, bytesUnknown);
         }
 
-        public void TestDecoderFallback (byte [] data, string expectedString,  params byte [][] expectedUnknownBytes)
+        public void TestDecoderFallback(
+            byte[] data,
+            string expectedString,
+            params byte[][] expectedUnknownBytes
+        )
         {
             lock (this)
             {
                 this.expectedUnknownBytes = expectedUnknownBytes;
                 this.expectedUnknownBytesIndex = 0;
 
-                Assert.AreEqual (expectedString.Length, encoding.GetCharCount (data));
-                Assert.AreEqual (expectedUnknownBytesIndex, expectedUnknownBytes.Length);
+                Assert.AreEqual(expectedString.Length, encoding.GetCharCount(data));
+                Assert.AreEqual(expectedUnknownBytesIndex, expectedUnknownBytes.Length);
 
-                Assert.AreEqual (expectedString, encoding.GetString (data));
-                Assert.AreEqual (expectedUnknownBytesIndex, expectedUnknownBytes.Length);
+                Assert.AreEqual(expectedString, encoding.GetString(data));
+                Assert.AreEqual(expectedUnknownBytesIndex, expectedUnknownBytes.Length);
             }
         }
     }

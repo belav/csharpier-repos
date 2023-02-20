@@ -1,4 +1,3 @@
-
 using System;
 using System.Linq;
 using System.Threading;
@@ -9,44 +8,58 @@ class Driver
     {
         public volatile int i = 0;
 
-        public ThreadPoolLauncherObject ()
+        public ThreadPoolLauncherObject()
         {
-            ThreadPool.QueueUserWorkItem (_ => { for (int i = 0; i < 10 * 1000 * 1000; ++i); }, null);
+            ThreadPool.QueueUserWorkItem(
+                _ =>
+                {
+                    for (int i = 0; i < 10 * 1000 * 1000; ++i)
+                        ;
+                },
+                null
+            );
         }
     }
 
-    public static void Main ()
+    public static void Main()
     {
         int count = 0;
-        object o = new object ();
+        object o = new object();
 
-        foreach (var i in
-            Enumerable.Range (0, 100)
-                .AsParallel ().WithDegreeOfParallelism (Environment.ProcessorCount)
-                .Select (i => {
+        foreach (
+            var i in Enumerable
+                .Range(0, 100)
+                .AsParallel()
+                .WithDegreeOfParallelism(Environment.ProcessorCount)
+                .Select(i =>
+                {
                     AppDomain ad;
 
-                    ad = AppDomain.CreateDomain ("testdomain" + i);
-                    ad.CreateInstance (typeof (ThreadPoolLauncherObject).Assembly.FullName, typeof (ThreadPoolLauncherObject).FullName);
+                    ad = AppDomain.CreateDomain("testdomain" + i);
+                    ad.CreateInstance(
+                        typeof(ThreadPoolLauncherObject).Assembly.FullName,
+                        typeof(ThreadPoolLauncherObject).FullName
+                    );
 
-                    Thread.Sleep (10);
+                    Thread.Sleep(10);
 
-                    AppDomain.Unload (ad);
+                    AppDomain.Unload(ad);
 
                     return i;
                 })
-                .Select (i => {
-                    lock (o) {
+                .Select(i =>
+                {
+                    lock (o)
+                    {
                         count += 1;
 
-                        Console.Write (".");
+                        Console.Write(".");
                         if (count % 25 == 0)
-                            Console.WriteLine ();
+                            Console.WriteLine();
                     }
 
                     return i;
                 })
-        ) {
-        }
+        ) { }
     }
 }

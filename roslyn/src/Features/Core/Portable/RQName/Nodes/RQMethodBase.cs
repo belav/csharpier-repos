@@ -12,10 +12,9 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
             RQUnconstructedType containingType,
             RQMethodPropertyOrEventName memberName,
             int typeParameterCount,
-            IList<RQParameter> parameters)
-            : base(containingType, memberName, typeParameterCount, parameters)
-        {
-        }
+            IList<RQParameter> parameters
+        )
+            : base(containingType, memberName, typeParameterCount, parameters) { }
 
         protected override string RQKeyword
         {

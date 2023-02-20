@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// Call a non-virtual instance method of a zero-constructed value type 
+// Call a non-virtual instance method of a zero-constructed value type
 // The method accesses type's instance fields.
 
 using System;
@@ -11,7 +11,6 @@ public class FLAG
 {
     public static bool success = false;
 }
-
 
 public struct A
 {
@@ -25,21 +24,18 @@ public struct A
 
     public void methodA()
     {
-        i = 5;    
-        
+        i = 5;
     }
 }
-
 
 public class Test_CctorZeroVal03
 {
     public static int Main()
     {
-             
         try
-        {    
+        {
             A a = new A();
-            
+
             a.methodA();
 
             if (!FLAG.success)
@@ -58,7 +54,5 @@ public class Test_CctorZeroVal03
             Console.WriteLine("FAIL: Caught unexpected exception: " + e);
             return 102;
         }
-
-        
     }
 }

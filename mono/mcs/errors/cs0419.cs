@@ -4,6 +4,4 @@
 /// <summary>
 /// Exposes <see cref="System.String.Replace"/> to XSLT
 /// </summary>
-public class Test {
-}
-
+public class Test { }

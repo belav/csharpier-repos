@@ -4,37 +4,37 @@ namespace Bug
 {
     public class A : B
     {
-        public A ()
+        public A()
         {
-            var dingus = new B ();
+            var dingus = new B();
 
-            EventHandler a = delegate {
+            EventHandler a = delegate
+            {
                 int prop = dingus.Prop;
-                Test ();
+                Test();
             };
-            
-            a ();
+
+            a();
         }
 
-        void Test ()
-        {
-        }
+        void Test() { }
 
-        public static int Main ()
+        public static int Main()
         {
-            new A ();
+            new A();
             return 0;
         }
     }
 
     public class B
     {
-        public B ()
-        {
-        }
+        public B() { }
 
-        public int Prop { get { return 1; } }
+        public int Prop
+        {
+            get { return 1; }
+        }
     }
 
-    public delegate void EventHandler ();
+    public delegate void EventHandler();
 }

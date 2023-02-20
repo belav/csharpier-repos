@@ -3,15 +3,13 @@
 
 class A
 {
-    public static void Foo (bool test)
-    {
-    }
+    public static void Foo(bool test) { }
 }
 
 class B
 {
     public static void Main()
     {
-        A.Foo (1);
+        A.Foo(1);
     }
 }

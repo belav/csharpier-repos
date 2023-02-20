@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,254 +31,275 @@ using System.Collections;
 using System.Text;
 using Mono.Unix;
 
-namespace Mono.Unix {
-
+namespace Mono.Unix
+{
     public sealed class UnixPath
     {
-        private UnixPath () {}
+        private UnixPath() { }
 
         public static readonly char DirectorySeparatorChar = '/';
         public static readonly char AltDirectorySeparatorChar = '/';
         public static readonly char PathSeparator = ':';
         public static readonly char VolumeSeparatorChar = '/';
 
-        private static readonly char[] _InvalidPathChars = new char[]{};
+        private static readonly char[] _InvalidPathChars = new char[] { };
 
-        public static char[] GetInvalidPathChars ()
+        public static char[] GetInvalidPathChars()
         {
-            return (char[]) _InvalidPathChars.Clone ();
+            return (char[])_InvalidPathChars.Clone();
         }
 
-        public static string Combine (string path1, params string[] paths)
+        public static string Combine(string path1, params string[] paths)
         {
             if (path1 == null)
-                throw new ArgumentNullException ("path1");
+                throw new ArgumentNullException("path1");
             if (paths == null)
-                throw new ArgumentNullException ("paths");
-            if (path1.IndexOfAny (_InvalidPathChars) != -1)
-                throw new ArgumentException ("Illegal characters in path", "path1");
+                throw new ArgumentNullException("paths");
+            if (path1.IndexOfAny(_InvalidPathChars) != -1)
+                throw new ArgumentException("Illegal characters in path", "path1");
 
             int len = path1.Length;
             int start = -1;
-            for (int i = 0; i < paths.Length; ++i) {
-                if (paths [i] == null)
-                    throw new ArgumentNullException ("paths[" + i + "]");
-                if (paths [i].IndexOfAny (_InvalidPathChars) != -1)
-                    throw new ArgumentException ("Illegal characters in path", "paths[" + i + "]");
-                if (IsPathRooted (paths [i])) {
+            for (int i = 0; i < paths.Length; ++i)
+            {
+                if (paths[i] == null)
+                    throw new ArgumentNullException("paths[" + i + "]");
+                if (paths[i].IndexOfAny(_InvalidPathChars) != -1)
+                    throw new ArgumentException("Illegal characters in path", "paths[" + i + "]");
+                if (IsPathRooted(paths[i]))
+                {
                     len = 0;
                     start = i;
                 }
-                len += paths [i].Length + 1;
+                len += paths[i].Length + 1;
             }
 
-            StringBuilder sb = new StringBuilder (len);
-            if (start == -1) {
-                sb.Append (path1);
+            StringBuilder sb = new StringBuilder(len);
+            if (start == -1)
+            {
+                sb.Append(path1);
                 start = 0;
             }
             for (int i = start; i < paths.Length; ++i)
-                Combine (sb, paths [i]);
-            return sb.ToString ();
+                Combine(sb, paths[i]);
+            return sb.ToString();
         }
 
-        private static void Combine (StringBuilder path, string part)
+        private static void Combine(StringBuilder path, string part)
         {
-            if (path.Length > 0 && part.Length > 0) {
-                char end = path [path.Length-1];
-                if (end != DirectorySeparatorChar && 
-                        end != AltDirectorySeparatorChar && 
-                        end != VolumeSeparatorChar)
-                    path.Append (DirectorySeparatorChar);
+            if (path.Length > 0 && part.Length > 0)
+            {
+                char end = path[path.Length - 1];
+                if (
+                    end != DirectorySeparatorChar
+                    && end != AltDirectorySeparatorChar
+                    && end != VolumeSeparatorChar
+                )
+                    path.Append(DirectorySeparatorChar);
             }
-            path.Append (part);
+            path.Append(part);
         }
 
-        public static string GetDirectoryName (string path)
+        public static string GetDirectoryName(string path)
         {
-            CheckPath (path);
+            CheckPath(path);
 
-            int lastDir = path.LastIndexOf (DirectorySeparatorChar);
+            int lastDir = path.LastIndexOf(DirectorySeparatorChar);
             if (lastDir > 0)
-                return path.Substring (0, lastDir);
+                return path.Substring(0, lastDir);
             if (lastDir == 0)
                 return "/";
             return "";
         }
 
-        public static string GetFileName (string path)
+        public static string GetFileName(string path)
         {
             if (path == null || path.Length == 0)
                 return path;
 
-            int lastDir = path.LastIndexOf (DirectorySeparatorChar);
+            int lastDir = path.LastIndexOf(DirectorySeparatorChar);
             if (lastDir >= 0)
-                return path.Substring (lastDir+1);
+                return path.Substring(lastDir + 1);
 
             return path;
         }
 
-        public static string GetFullPath (string path)
+        public static string GetFullPath(string path)
         {
-            path = _GetFullPath (path);
-            return GetCanonicalPath (path);
+            path = _GetFullPath(path);
+            return GetCanonicalPath(path);
         }
 
-        private static string _GetFullPath (string path)
+        private static string _GetFullPath(string path)
         {
             if (path == null)
-                throw new ArgumentNullException ("path");
-            if (!IsPathRooted (path))
+                throw new ArgumentNullException("path");
+            if (!IsPathRooted(path))
                 path = UnixDirectoryInfo.GetCurrentDirectory() + DirectorySeparatorChar + path;
 
             return path;
         }
 
-        public static string GetCanonicalPath (string path)
+        public static string GetCanonicalPath(string path)
         {
-            string [] dirs;
+            string[] dirs;
             int lastIndex;
-            GetPathComponents (path, out dirs, out lastIndex);
-            string end = string.Join ("/", dirs, 0, lastIndex);
-            return IsPathRooted (path) ? "/" + end : end;
+            GetPathComponents(path, out dirs, out lastIndex);
+            string end = string.Join("/", dirs, 0, lastIndex);
+            return IsPathRooted(path) ? "/" + end : end;
         }
 
-        private static void GetPathComponents (string path, 
-            out string[] components, out int lastIndex)
+        private static void GetPathComponents(
+            string path,
+            out string[] components,
+            out int lastIndex
+        )
         {
-            string [] dirs = path.Split (DirectorySeparatorChar);
+            string[] dirs = path.Split(DirectorySeparatorChar);
             int target = 0;
-            for (int i = 0; i < dirs.Length; ++i) {
-                if (dirs [i] == "." || dirs [i] == string.Empty) continue;
-                else if (dirs [i] == "..") {
-                    if (target != 0) --target;
-                    else ++target;
+            for (int i = 0; i < dirs.Length; ++i)
+            {
+                if (dirs[i] == "." || dirs[i] == string.Empty)
+                    continue;
+                else if (dirs[i] == "..")
+                {
+                    if (target != 0)
+                        --target;
+                    else
+                        ++target;
                 }
                 else
-                    dirs [target++] = dirs [i];
+                    dirs[target++] = dirs[i];
             }
             components = dirs;
             lastIndex = target;
         }
 
-        public static string GetPathRoot (string path)
+        public static string GetPathRoot(string path)
         {
             if (path == null)
                 return null;
-            if (!IsPathRooted (path))
+            if (!IsPathRooted(path))
                 return "";
             return "/";
         }
 
-        public static string GetCompleteRealPath (string path)
+        public static string GetCompleteRealPath(string path)
         {
             if (path == null)
-                throw new ArgumentNullException ("path");
-            string [] dirs;
+                throw new ArgumentNullException("path");
+            string[] dirs;
             int lastIndex;
-            GetPathComponents (path, out dirs, out lastIndex);
-            StringBuilder realPath = new StringBuilder ();
-            if (dirs.Length > 0) {
-                string dir = IsPathRooted (path) ? "/" : "";
-                dir += dirs [0];
-                realPath.Append (GetRealPath (dir));
+            GetPathComponents(path, out dirs, out lastIndex);
+            StringBuilder realPath = new StringBuilder();
+            if (dirs.Length > 0)
+            {
+                string dir = IsPathRooted(path) ? "/" : "";
+                dir += dirs[0];
+                realPath.Append(GetRealPath(dir));
             }
-            for (int i = 1; i < lastIndex; ++i) {
-                realPath.Append ("/").Append (dirs [i]);
-                string p = GetRealPath (realPath.ToString());
-                realPath.Remove (0, realPath.Length);
-                realPath.Append (p);
+            for (int i = 1; i < lastIndex; ++i)
+            {
+                realPath.Append("/").Append(dirs[i]);
+                string p = GetRealPath(realPath.ToString());
+                realPath.Remove(0, realPath.Length);
+                realPath.Append(p);
             }
-            return realPath.ToString ();
+            return realPath.ToString();
         }
 
-        public static string GetRealPath (string path)
+        public static string GetRealPath(string path)
         {
-            do {
-                string name = ReadSymbolicLink (path);
+            do
+            {
+                string name = ReadSymbolicLink(path);
                 if (name == null)
                     return path;
-                if (IsPathRooted (name))
+                if (IsPathRooted(name))
                     path = name;
-                else {
-                    path = GetDirectoryName (path) + DirectorySeparatorChar + name;
-                    path = GetCanonicalPath (path);
+                else
+                {
+                    path = GetDirectoryName(path) + DirectorySeparatorChar + name;
+                    path = GetCanonicalPath(path);
                 }
             } while (true);
         }
 
         // Read the specified symbolic link.  If the file isn't a symbolic link,
         // return null; otherwise, return the contents of the symbolic link.
-        internal static string ReadSymbolicLink (string path)
+        internal static string ReadSymbolicLink(string path)
         {
-            string target = TryReadLink (path);
-            if (target == null) {
-                Native.Errno errno = Native.Stdlib.GetLastError ();
+            string target = TryReadLink(path);
+            if (target == null)
+            {
+                Native.Errno errno = Native.Stdlib.GetLastError();
                 if (errno != Native.Errno.EINVAL)
-                    UnixMarshal.ThrowExceptionForError (errno);
+                    UnixMarshal.ThrowExceptionForError(errno);
             }
             return target;
         }
 
-        public static string TryReadLink (string path)
+        public static string TryReadLink(string path)
         {
             byte[] buf = new byte[256];
-            do {
-                long r = Native.Syscall.readlink (path, buf);
+            do
+            {
+                long r = Native.Syscall.readlink(path, buf);
                 if (r < 0)
                     return null;
                 else if (r == buf.Length)
-                    buf = new byte[checked (buf.LongLength * 2)];
+                    buf = new byte[checked(buf.LongLength * 2)];
                 else
-                    return UnixEncoding.Instance.GetString (buf, 0, checked ((int) r));
+                    return UnixEncoding.Instance.GetString(buf, 0, checked((int)r));
             } while (true);
         }
 
-        public static string TryReadLinkAt (int dirfd, string path)
+        public static string TryReadLinkAt(int dirfd, string path)
         {
             byte[] buf = new byte[256];
-            do {
-                long r = Native.Syscall.readlinkat (dirfd, path, buf);
+            do
+            {
+                long r = Native.Syscall.readlinkat(dirfd, path, buf);
                 if (r < 0)
                     return null;
                 else if (r == buf.Length)
-                    buf = new byte[checked (buf.LongLength * 2)];
+                    buf = new byte[checked(buf.LongLength * 2)];
                 else
-                    return UnixEncoding.Instance.GetString (buf, 0, checked ((int) r));
+                    return UnixEncoding.Instance.GetString(buf, 0, checked((int)r));
             } while (true);
         }
 
-        public static string ReadLink (string path)
+        public static string ReadLink(string path)
         {
-            string target = TryReadLink (path);
+            string target = TryReadLink(path);
             if (target == null)
-                UnixMarshal.ThrowExceptionForLastError (); 
+                UnixMarshal.ThrowExceptionForLastError();
             return target;
         }
 
-        public static string ReadLinkAt (int dirfd, string path)
+        public static string ReadLinkAt(int dirfd, string path)
         {
-            string target = TryReadLinkAt (dirfd, path);
+            string target = TryReadLinkAt(dirfd, path);
             if (target == null)
-                UnixMarshal.ThrowExceptionForLastError (); 
+                UnixMarshal.ThrowExceptionForLastError();
             return target;
         }
 
-        public static bool IsPathRooted (string path)
+        public static bool IsPathRooted(string path)
         {
             if (path == null || path.Length == 0)
                 return false;
-            return path [0] == DirectorySeparatorChar;
+            return path[0] == DirectorySeparatorChar;
         }
 
-        internal static void CheckPath (string path)
+        internal static void CheckPath(string path)
         {
             if (path == null)
-                throw new ArgumentNullException ();
+                throw new ArgumentNullException();
             if (path.Length == 0)
-                throw new ArgumentException ("Path cannot contain a zero-length string", "path");
-            if (path.IndexOfAny (_InvalidPathChars) != -1)
-                throw new ArgumentException ("Invalid characters in path.", "path");
+                throw new ArgumentException("Path cannot contain a zero-length string", "path");
+            if (path.IndexOfAny(_InvalidPathChars) != -1)
+                throw new ArgumentException("Invalid characters in path.", "path");
         }
     }
 }

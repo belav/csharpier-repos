@@ -112,90 +112,90 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyBitwiseNotBool(bool value, bool useInterpreter)
         {
-            Expression<Func<bool>> e =
-                Expression.Lambda<Func<bool>>(
-                    Expression.Not(Expression.Constant(value, typeof(bool))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
+                Expression.Not(Expression.Constant(value, typeof(bool))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool> f = e.Compile(useInterpreter);
             Assert.Equal((bool)(!value), f());
         }
 
         private static void VerifyBitwiseNotByte(byte value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Not(Expression.Constant(value, typeof(byte))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Not(Expression.Constant(value, typeof(byte))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
             Assert.Equal(unchecked((byte)(~value)), f());
         }
 
         private static void VerifyBitwiseNotInt(int value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Not(Expression.Constant(value, typeof(int))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Not(Expression.Constant(value, typeof(int))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal((int)(~value), f());
         }
 
         private static void VerifyBitwiseNotLong(long value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Not(Expression.Constant(value, typeof(long))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Not(Expression.Constant(value, typeof(long))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
             Assert.Equal((long)(~value), f());
         }
 
         private static void VerifyBitwiseNotSByte(sbyte value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Not(Expression.Constant(value, typeof(sbyte))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Not(Expression.Constant(value, typeof(sbyte))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
             Assert.Equal((sbyte)(~value), f());
         }
 
         private static void VerifyBitwiseNotShort(short value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Not(Expression.Constant(value, typeof(short))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Not(Expression.Constant(value, typeof(short))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
             Assert.Equal((short)(~value), f());
         }
 
         private static void VerifyBitwiseNotUInt(uint value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Not(Expression.Constant(value, typeof(uint))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Not(Expression.Constant(value, typeof(uint))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
             Assert.Equal((uint)(~value), f());
         }
 
         private static void VerifyBitwiseNotULong(ulong value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Not(Expression.Constant(value, typeof(ulong))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Not(Expression.Constant(value, typeof(ulong))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
             Assert.Equal((ulong)(~value), f());
         }
 
         private static void VerifyBitwiseNotUShort(ushort value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Not(Expression.Constant(value, typeof(ushort))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Not(Expression.Constant(value, typeof(ushort))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
             Assert.Equal(unchecked((ushort)(~value)), f());
         }

@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,9 +55,9 @@ namespace System.Runtime.Remoting
         DynamicPropertyCollection _clientDynamicProperties;
         DynamicPropertyCollection _serverDynamicProperties;
 
-        // The ObjRef 
+        // The ObjRef
         protected ObjRef _objRef;
-        
+
         // This flag is set when the identity is removed from the uri table.
         // It is needed because in some scenarios the runtime may try to
         // dispose the identity twice.
@@ -68,14 +68,11 @@ namespace System.Runtime.Remoting
             _objectUri = objectUri;
         }
 
-        public abstract ObjRef CreateObjRef (Type requestedType);
+        public abstract ObjRef CreateObjRef(Type requestedType);
 
         public bool IsFromThisAppDomain
         {
-            get
-            {
-                return (_channelSink == null);
-            }
+            get { return (_channelSink == null); }
         }
 
         public IMessageSink ChannelSink
@@ -99,7 +96,7 @@ namespace System.Runtime.Remoting
         {
             get { return _objectUri != null; }
         }
-        
+
         public bool Disposed
         {
             get { return _disposed; }
@@ -108,40 +105,60 @@ namespace System.Runtime.Remoting
 
         public DynamicPropertyCollection ClientDynamicProperties
         {
-            get { 
-                if (_clientDynamicProperties == null) _clientDynamicProperties = new DynamicPropertyCollection();
-                return _clientDynamicProperties; 
+            get
+            {
+                if (_clientDynamicProperties == null)
+                    _clientDynamicProperties = new DynamicPropertyCollection();
+                return _clientDynamicProperties;
             }
         }
 
         public DynamicPropertyCollection ServerDynamicProperties
         {
-            get { 
-                if (_serverDynamicProperties == null) _serverDynamicProperties = new DynamicPropertyCollection();
-                return _serverDynamicProperties; 
+            get
+            {
+                if (_serverDynamicProperties == null)
+                    _serverDynamicProperties = new DynamicPropertyCollection();
+                return _serverDynamicProperties;
             }
         }
 
         public bool HasClientDynamicSinks
         {
-            get { return (_clientDynamicProperties != null && _clientDynamicProperties.HasProperties); }
+            get
+            {
+                return (_clientDynamicProperties != null && _clientDynamicProperties.HasProperties);
+            }
         }
 
         public bool HasServerDynamicSinks
         {
-            get { return (_serverDynamicProperties != null && _serverDynamicProperties.HasProperties); }
+            get
+            {
+                return (_serverDynamicProperties != null && _serverDynamicProperties.HasProperties);
+            }
         }
 
-        public void NotifyClientDynamicSinks  (bool start, IMessage req_msg, bool client_site, bool async)
+        public void NotifyClientDynamicSinks(
+            bool start,
+            IMessage req_msg,
+            bool client_site,
+            bool async
+        )
         {
-            if (_clientDynamicProperties != null && _clientDynamicProperties.HasProperties) 
-                _clientDynamicProperties.NotifyMessage (start, req_msg, client_site, async);
+            if (_clientDynamicProperties != null && _clientDynamicProperties.HasProperties)
+                _clientDynamicProperties.NotifyMessage(start, req_msg, client_site, async);
         }
 
-        public void NotifyServerDynamicSinks  (bool start, IMessage req_msg, bool client_site, bool async)
+        public void NotifyServerDynamicSinks(
+            bool start,
+            IMessage req_msg,
+            bool client_site,
+            bool async
+        )
         {
-            if (_serverDynamicProperties != null && _serverDynamicProperties.HasProperties) 
-                _serverDynamicProperties.NotifyMessage (start, req_msg, client_site, async);
+            if (_serverDynamicProperties != null && _serverDynamicProperties.HasProperties)
+                _serverDynamicProperties.NotifyMessage(start, req_msg, client_site, async);
         }
     }
 
@@ -149,7 +166,8 @@ namespace System.Runtime.Remoting
     {
         WeakReference _proxyReference;
 
-        public ClientIdentity (string objectUri, ObjRef objRef): base (objectUri)
+        public ClientIdentity(string objectUri, ObjRef objRef)
+            : base(objectUri)
         {
             _objRef = objRef;
             _envoySink = (_objRef.EnvoyInfo != null) ? _objRef.EnvoyInfo.EnvoySinks : null;
@@ -157,11 +175,11 @@ namespace System.Runtime.Remoting
 
         public MarshalByRefObject ClientProxy
         {
-            get    { return (MarshalByRefObject) _proxyReference?.Target; }
-            set { _proxyReference = new WeakReference (value); }
+            get { return (MarshalByRefObject)_proxyReference?.Target; }
+            set { _proxyReference = new WeakReference(value); }
         }
 
-        public override ObjRef CreateObjRef (Type requestedType)
+        public override ObjRef CreateObjRef(Type requestedType)
         {
             return _objRef;
         }

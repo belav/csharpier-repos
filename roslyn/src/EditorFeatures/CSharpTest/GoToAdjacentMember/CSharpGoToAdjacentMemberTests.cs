@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task ClassWithNoMembers()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
 $$
 }";
@@ -39,7 +40,8 @@ $$
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task BeforeClassWithMember()
         {
-            var code = @"$$
+            var code =
+                @"$$
 class C
 {
     [||]void M() { }
@@ -51,7 +53,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task AfterClassWithMember()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     [||]void M() { }
@@ -65,7 +68,8 @@ $$";
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task BetweenClasses()
         {
-            var code = @"
+            var code =
+                @"
 class C1
 {
     void M() { }
@@ -84,7 +88,8 @@ class C2
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task BetweenClassesPrevious()
         {
-            var code = @"
+            var code =
+                @"
 class C1
 {
     [||]void M() { }
@@ -103,7 +108,8 @@ class C2
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task FromFirstMemberToSecond()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     $$void M1() { }
@@ -116,7 +122,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task FromSecondToFirst()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     [||]void M1() { }
@@ -129,7 +136,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task NextWraps()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     [||]void M1() { }
@@ -142,7 +150,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task PreviousWraps()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     $$void M1() { }
@@ -155,7 +164,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task DescendsIntoNestedType()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     $$void M1() { }
@@ -172,7 +182,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task StopsAtConstructor()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     $$void M1() { }
@@ -184,7 +195,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task StopsAtDestructor()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     $$void M1() { }
@@ -196,7 +208,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task StopsAtOperator()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     $$void M1() { }
@@ -204,10 +217,12 @@ class C
 }";
             await AssertNavigatedAsync(code, next: true);
         }
+
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task StopsAtField()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     $$void M1() { }
@@ -219,7 +234,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task StopsAtFieldlikeEvent()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     $$void M1() { }
@@ -231,7 +247,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task StopsAtAutoProperty()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     $$void M1() { }
@@ -243,7 +260,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task StopsAtPropertyWithAccessors()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     $$void M1() { }
@@ -261,7 +279,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task SkipsPropertyAccessors()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M1() { }
@@ -281,7 +300,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task FromInsideAccessor()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M1() { }
@@ -301,7 +321,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task StopsAtIndexerWithAccessors()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     $$void M1() { }
@@ -319,7 +340,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task SkipsIndexerAccessors()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M1() { }
@@ -339,7 +361,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task StopsAtEventWithAddRemove()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     $$void M1() { }
@@ -357,7 +380,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task SkipsEventAddRemove()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M1() { }
@@ -377,7 +401,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task FromInsideMethod()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M1()
@@ -394,7 +419,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task NextFromBetweenMethods()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M1() { }
@@ -410,7 +436,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task PreviousFromBetweenMethods()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     [||]void M1() { }
@@ -426,7 +453,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task NextFromBetweenMethodsInTrailingTrivia()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M1()
@@ -442,7 +470,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task PreviousFromBetweenMethodsInTrailingTrivia()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     [||]void M1()
@@ -458,7 +487,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task StopsAtExpressionBodiedMember()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int M1() => $$42;
@@ -473,7 +503,8 @@ class C
         [WorkItem(10588, "https://github.com/dotnet/roslyn/issues/10588")]
         public async Task PreviousFromInsideCurrent()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     [||]void M1()
@@ -492,7 +523,8 @@ class C
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task NextInScript()
         {
-            var code = @"
+            var code =
+                @"
 $$void M1() { }
 
 [||]void M2() { }";
@@ -503,7 +535,8 @@ $$void M1() { }
         [Fact, WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task PrevInScript()
         {
-            var code = @"
+            var code =
+                @"
 [||]void M1() { }
 
 $$void M2() { }";

@@ -7,7 +7,8 @@ namespace System.Web.WebPages.Scope
 {
     public static class ScopeStorage
     {
-        private static readonly IScopeStorageProvider _defaultStorageProvider = new StaticScopeStorageProvider();
+        private static readonly IScopeStorageProvider _defaultStorageProvider =
+            new StaticScopeStorageProvider();
         private static IScopeStorageProvider _stateStorageProvider;
 
         public static IScopeStorageProvider CurrentProvider

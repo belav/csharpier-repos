@@ -6,7 +6,7 @@ namespace CS208
 {
     public class Foo
     {
-        public int Add (int a, int b)
+        public int Add(int a, int b)
         {
             return a + b;
         }
@@ -14,10 +14,10 @@ namespace CS208
 
     public class Bar
     {
-        unsafe static void Main ()
-        {            
-            Foo f = new Foo ();
-            void *s = &f;
+        unsafe static void Main()
+        {
+            Foo f = new Foo();
+            void* s = &f;
         }
     }
 }

@@ -14,14 +14,19 @@ namespace Microsoft.CodeAnalysis.Options.EditorConfig
 {
     internal static class EditorConfigDocumentOptionsProviderFactory
     {
-        public static IDocumentOptionsProvider Create()
-            => new EditorConfigDocumentOptionsProvider();
+        public static IDocumentOptionsProvider Create() =>
+            new EditorConfigDocumentOptionsProvider();
 
         private sealed class EditorConfigDocumentOptionsProvider : IDocumentOptionsProvider
         {
-            public async Task<IDocumentOptions?> GetOptionsForDocumentAsync(Document document, CancellationToken cancellationToken)
+            public async Task<IDocumentOptions?> GetOptionsForDocumentAsync(
+                Document document,
+                CancellationToken cancellationToken
+            )
             {
-                var options = await document.GetAnalyzerOptionsAsync(cancellationToken).ConfigureAwait(false);
+                var options = await document
+                    .GetAnalyzerOptionsAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 return new DocumentOptions(options);
             }
@@ -29,12 +34,16 @@ namespace Microsoft.CodeAnalysis.Options.EditorConfig
             private sealed class DocumentOptions : IDocumentOptions
             {
                 private readonly ImmutableDictionary<string, string> _options;
-                public DocumentOptions(ImmutableDictionary<string, string> options)
-                    => _options = options;
+
+                public DocumentOptions(ImmutableDictionary<string, string> options) =>
+                    _options = options;
 
                 public bool TryGetDocumentOption(OptionKey option, out object? value)
                 {
-                    var editorConfigPersistence = (IEditorConfigStorageLocation?)option.Option.StorageLocations.SingleOrDefault(static location => location is IEditorConfigStorageLocation);
+                    var editorConfigPersistence = (IEditorConfigStorageLocation?)
+                        option.Option.StorageLocations.SingleOrDefault(
+                            static location => location is IEditorConfigStorageLocation
+                        );
                     if (editorConfigPersistence == null)
                     {
                         value = null;
@@ -43,7 +52,11 @@ namespace Microsoft.CodeAnalysis.Options.EditorConfig
 
                     try
                     {
-                        return editorConfigPersistence.TryGetOption(_options.AsNullable(), option.Option.Type, out value);
+                        return editorConfigPersistence.TryGetOption(
+                            _options.AsNullable(),
+                            option.Option.Type,
+                            out value
+                        );
                     }
                     catch (Exception e) when (FatalError.ReportAndCatch(e))
                     {

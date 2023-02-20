@@ -5,7 +5,8 @@ internal class A
 {
     protected class B
     {
-        protected class Base {}
+        protected class Base { }
+
         public class Derived : Base { }
     }
 }

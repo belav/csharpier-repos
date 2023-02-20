@@ -20,131 +20,168 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParentheses
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
-    public partial class RemoveUnnecessaryPatternParenthesesTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class RemoveUnnecessaryPatternParenthesesTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public RemoveUnnecessaryPatternParenthesesTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpRemoveUnnecessaryPatternParenthesesDiagnosticAnalyzer(), new CSharpRemoveUnnecessaryParenthesesCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpRemoveUnnecessaryPatternParenthesesDiagnosticAnalyzer(),
+                new CSharpRemoveUnnecessaryParenthesesCodeFixProvider()
+            );
 
-        private async Task TestAsync(string initial, string expected, bool offeredWhenRequireForClarityIsEnabled, int index = 0)
+        private async Task TestAsync(
+            string initial,
+            string expected,
+            bool offeredWhenRequireForClarityIsEnabled,
+            int index = 0
+        )
         {
-            await TestInRegularAndScriptAsync(initial, expected, options: RemoveAllUnnecessaryParentheses, index: index);
+            await TestInRegularAndScriptAsync(
+                initial,
+                expected,
+                options: RemoveAllUnnecessaryParentheses,
+                index: index
+            );
 
             if (offeredWhenRequireForClarityIsEnabled)
             {
-                await TestInRegularAndScriptAsync(initial, expected, options: RequireAllParenthesesForClarity, index: index);
+                await TestInRegularAndScriptAsync(
+                    initial,
+                    expected,
+                    options: RequireAllParenthesesForClarity,
+                    index: index
+                );
             }
             else
             {
-                await TestMissingAsync(initial, parameters: new TestParameters(options: RequireAllParenthesesForClarity));
+                await TestMissingAsync(
+                    initial,
+                    parameters: new TestParameters(options: RequireAllParenthesesForClarity)
+                );
             }
         }
 
-        internal override bool ShouldSkipMessageDescriptionVerification(DiagnosticDescriptor descriptor)
-            => descriptor.ImmutableCustomTags().Contains(WellKnownDiagnosticTags.Unnecessary) && descriptor.DefaultSeverity == DiagnosticSeverity.Hidden;
+        internal override bool ShouldSkipMessageDescriptionVerification(
+            DiagnosticDescriptor descriptor
+        ) =>
+            descriptor.ImmutableCustomTags().Contains(WellKnownDiagnosticTags.Unnecessary)
+            && descriptor.DefaultSeverity == DiagnosticSeverity.Hidden;
 
         [Fact]
         public async Task TestArithmeticRequiredForClarity2()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is a or $$(b and c);
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is a or b and c;
     }
-}", parameters: new TestParameters(options: RequireArithmeticBinaryParenthesesForClarity));
+}",
+                parameters: new TestParameters(
+                    options: RequireArithmeticBinaryParenthesesForClarity
+                )
+            );
         }
 
         [Fact]
         public async Task TestLogicalRequiredForClarity1()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is a or $$(b and c);
     }
-}", new TestParameters(options: RequireOtherBinaryParenthesesForClarity));
+}",
+                new TestParameters(options: RequireOtherBinaryParenthesesForClarity)
+            );
         }
 
         [Fact]
         public async Task TestLogicalNotRequiredForClarityWhenPrecedenceStaysTheSame1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is a or $$(b or c);
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is a or b or c;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact]
         public async Task TestLogicalNotRequiredForClarityWhenPrecedenceStaysTheSame2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is $$(a or b) or c;
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is a or b or c;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact]
         public async Task TestAlwaysUnnecessaryForIsPattern()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is $$(a or b);
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is a or b;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact]
         public async Task TestAlwaysUnnecessaryForCasePattern()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -155,7 +192,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -165,14 +202,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                 return;
         }
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact]
         public async Task TestAlwaysUnnecessaryForSwitchArmPattern()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     int M(object o)
     {
@@ -182,7 +221,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         };
     }
 }",
-@"class C
+                @"class C
 {
     int M(object o)
     {
@@ -191,74 +230,82 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
             a or b => 0,
         };
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact]
         public async Task TestAlwaysUnnecessaryForSubPattern()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is { X: $$(a or b) };
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is { X: a or b };
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact]
         public async Task TestNotAlwaysUnnecessaryForUnaryPattern1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is a or $$(not b);
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is a or not b;
     }
-}", offeredWhenRequireForClarityIsEnabled: false);
+}",
+                offeredWhenRequireForClarityIsEnabled: false
+            );
         }
 
         [Fact]
         public async Task TestNotAlwaysUnnecessaryForUnaryPattern2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is $$(not a) or b;
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is not a or b;
     }
-}", offeredWhenRequireForClarityIsEnabled: false);
+}",
+                offeredWhenRequireForClarityIsEnabled: false
+            );
         }
 
         [Fact, WorkItem(52589, "https://github.com/dotnet/roslyn/issues/52589")]
         public async Task TestAlwaysNecessaryForDiscard()
         {
             await TestDiagnosticMissingAsync(
-@"
+                @"
 class C
 {
     void M(object o)
@@ -267,14 +314,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUnnecessaryForDiscardInSubpattern()
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     void M(object o)
@@ -284,7 +332,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(object o)
@@ -293,7 +341,9 @@ class C
         {
         }
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
     }
 }

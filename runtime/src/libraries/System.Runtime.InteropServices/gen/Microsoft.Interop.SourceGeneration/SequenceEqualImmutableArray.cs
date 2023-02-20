@@ -14,12 +14,13 @@ namespace Microsoft.Interop
     /// for many scenarios. This wrapper type allows us to use <see cref="ImmutableArray{T}" />s in our other record types without having to write an Equals method
     /// that we may forget to update if we add new elements to the record.
     /// </summary>
-    public readonly record struct SequenceEqualImmutableArray<T>(ImmutableArray<T> Array, IEqualityComparer<T> Comparer)
+    public readonly record struct SequenceEqualImmutableArray<T>(
+        ImmutableArray<T> Array,
+        IEqualityComparer<T> Comparer
+    )
     {
         public SequenceEqualImmutableArray(ImmutableArray<T> array)
-            : this(array, EqualityComparer<T>.Default)
-        {
-        }
+            : this(array, EqualityComparer<T>.Default) { }
 
         public bool Equals(SequenceEqualImmutableArray<T> other)
         {

@@ -10,15 +10,16 @@ unsafe struct Foo
 
 class Test
 {
-    public static int Main ()
+    public static int Main()
     {
-        var t = typeof (Foo);
-        var f = t.GetField ("FieldName");
-        var fbas = f.GetCustomAttributes (typeof (FixedBufferAttribute), true)[0] as FixedBufferAttribute;
+        var t = typeof(Foo);
+        var f = t.GetField("FieldName");
+        var fbas =
+            f.GetCustomAttributes(typeof(FixedBufferAttribute), true)[0] as FixedBufferAttribute;
         if (fbas.Length != 32)
             return 1;
 
-        var fixed_type = typeof (Foo).GetNestedTypes ()[0];
+        var fixed_type = typeof(Foo).GetNestedTypes()[0];
         if (fixed_type.StructLayoutAttribute.Pack != 8)
             return 2;
 

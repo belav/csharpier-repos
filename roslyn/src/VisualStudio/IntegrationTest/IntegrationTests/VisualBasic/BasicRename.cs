@@ -24,26 +24,45 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         private InlineRenameDialog_OutOfProc InlineRenameDialog => VisualStudio.InlineRenameDialog;
 
         public BasicRename(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicRename))
-        {
-        }
+            : base(instanceFactory, nameof(BasicRename)) { }
 
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync();
 
             // reset relevant global options to default values:
-            VisualStudio.Workspace.SetGlobalOption(WellKnownGlobalOption.InlineRenameSessionOptions_RenameInComments, language: null, value: false);
-            VisualStudio.Workspace.SetGlobalOption(WellKnownGlobalOption.InlineRenameSessionOptions_RenameInStrings, language: null, value: false);
-            VisualStudio.Workspace.SetGlobalOption(WellKnownGlobalOption.InlineRenameSessionOptions_RenameOverloads, language: null, value: false);
-            VisualStudio.Workspace.SetGlobalOption(WellKnownGlobalOption.InlineRenameSessionOptions_RenameFile, language: null, value: true);
-            VisualStudio.Workspace.SetGlobalOption(WellKnownGlobalOption.InlineRenameSessionOptions_PreviewChanges, language: null, value: false);
+            VisualStudio.Workspace.SetGlobalOption(
+                WellKnownGlobalOption.InlineRenameSessionOptions_RenameInComments,
+                language: null,
+                value: false
+            );
+            VisualStudio.Workspace.SetGlobalOption(
+                WellKnownGlobalOption.InlineRenameSessionOptions_RenameInStrings,
+                language: null,
+                value: false
+            );
+            VisualStudio.Workspace.SetGlobalOption(
+                WellKnownGlobalOption.InlineRenameSessionOptions_RenameOverloads,
+                language: null,
+                value: false
+            );
+            VisualStudio.Workspace.SetGlobalOption(
+                WellKnownGlobalOption.InlineRenameSessionOptions_RenameFile,
+                language: null,
+                value: true
+            );
+            VisualStudio.Workspace.SetGlobalOption(
+                WellKnownGlobalOption.InlineRenameSessionOptions_PreviewChanges,
+                language: null,
+                value: false
+            );
         }
 
         [WpfFact]
         public void VerifyLocalVariableRename()
         {
-            var markup = @"
+            var markup =
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -66,7 +85,8 @@ End Module";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Y, VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -80,7 +100,8 @@ Module Program
     Sub TestMethod(y As Integer)
 
     End Sub
-End Module");
+End Module"
+            );
         }
 
         [WpfFact]
@@ -89,7 +110,8 @@ End Module");
             // "variable" is intentionally misspelled as "varixable" and "this" is misspelled as
             // "thix" below to ensure we don't change instances of "x" in comments that are part of
             // larger words
-            var markup = @"
+            var markup =
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -114,7 +136,8 @@ End Module";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Y, VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -129,13 +152,15 @@ Module Program
         Dim y As Integer = 0
         y = 5
         TestMethod(y)
-End Module");
+End Module"
+            );
         }
 
         [WpfFact]
         public void VerifyLocalVariableRenameWithStringsUpdated()
         {
-            var markup = @"
+            var markup =
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -157,7 +182,8 @@ End Module";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Y, VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -168,13 +194,15 @@ Module Program
         y = 5
         Dim s = ""y xx y""
     End Sub
-End Module");
+End Module"
+            );
         }
 
         [WpfFact]
         public void VerifyOverloadsUpdated()
         {
-            var markup = @"
+            var markup =
+                @"
 Interface I
     Sub [|TestMethod|]$$(y As Integer)
     Sub [|TestMethod|](y As String)
@@ -195,7 +223,8 @@ End Class";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Y, VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Interface I
     Sub y(y As Integer)
     Sub y(y As String)
@@ -205,13 +234,15 @@ Public MustInherit Class A
     Implements I
     Public MustOverride Sub y(y As Integer) Implements I.y
     Public MustOverride Sub y(y As String) Implements I.y
-End Class");
+End Class"
+            );
         }
 
         [WpfFact, WorkItem(21657, "https://github.com/dotnet/roslyn/issues/21657")]
         public void VerifyAttributeRename()
         {
-            var markup = @"
+            var markup =
+                @"
 Import System;
 
 Public Class [|$$ustom|]Attribute 
@@ -225,18 +256,21 @@ End Class";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys("Custom", VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Import System;
 
 Public Class CustomAttribute
     Inherits Attribute
-End Class");
+End Class"
+            );
         }
 
         [WpfFact, WorkItem(21657, "https://github.com/dotnet/roslyn/issues/21657")]
         public void VerifyAttributeRenameWhileRenameClasss()
         {
-            var markup = @"
+            var markup =
+                @"
 Import System;
 
 Public Class [|$$ustom|]Attribute 
@@ -251,18 +285,22 @@ End Class";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys("Custom");
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Import System;
 
 Public Class Custom$$Attribute 
         Inherits Attribute
-End Class", true);
+End Class",
+                true
+            );
         }
 
         [WpfFact, WorkItem(21657, "https://github.com/dotnet/roslyn/issues/21657")]
         public void VerifyAttributeRenameWhileRenameAttribute()
         {
-            var markup = @"
+            var markup =
+                @"
 Import System;
 
 <[|$$ustom|]>
@@ -279,7 +317,8 @@ End Class";
             _ = VisualStudio.Editor.GetTagSpans(InlineRenameDialog.ValidRenameTag);
 
             VisualStudio.Editor.SendKeys("Custom");
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Import System;
 
 <Custom$$>
@@ -288,13 +327,16 @@ End Class
 
 Public Class CustomAttribute 
         Inherits Attribute
-End Class", true);
+End Class",
+                true
+            );
         }
 
         [WpfFact, WorkItem(21657, "https://github.com/dotnet/roslyn/issues/21657")]
         public void VerifyAttributeRenameWhileRenameAttributeClass()
         {
-            var markup = @"
+            var markup =
+                @"
 Import System;
 
 <ustom>
@@ -311,7 +353,8 @@ End Class";
             _ = VisualStudio.Editor.GetTagSpans(InlineRenameDialog.ValidRenameTag);
 
             VisualStudio.Editor.SendKeys("Custom");
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Import System;
 
 <Custom>
@@ -320,13 +363,16 @@ End Class
 
 Public Class Custom$$Attribute 
         Inherits Attribute
-End Class", true);
+End Class",
+                true
+            );
         }
 
         [WpfFact, WorkItem(21657, "https://github.com/dotnet/roslyn/issues/21657")]
         public void VerifyAttributeCapitalizedRename()
         {
-            var markup = @"
+            var markup =
+                @"
 Import System;
 
 Public Class [|$$ustom|]ATTRIBUTE
@@ -340,18 +386,21 @@ End Class";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys("Custom", VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Import System;
 
 Public Class CustomAttribute
     Inherits Attribute
-End Class");
+End Class"
+            );
         }
 
         [WpfFact, WorkItem(21657, "https://github.com/dotnet/roslyn/issues/21657")]
         public void VerifyAttributeNotCapitalizedRename()
         {
-            var markup = @"
+            var markup =
+                @"
 Import System;
 
 Public Class [|$$ustom|]attribute
@@ -365,12 +414,14 @@ End Class";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys("Custom", VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Import System;
 
 Public Class CustomAttribute
     Inherits Attribute
-End Class");
+End Class"
+            );
         }
     }
 }

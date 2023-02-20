@@ -35,12 +35,12 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI
 {
-    public class ValidationPropertyAttribute_ctor_S
-        : GHTBaseWeb 
+    public class ValidationPropertyAttribute_ctor_S : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -48,54 +48,53 @@ namespace GHTTests.System_Web_dll.System_Web_UI
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
 
-            GHTSubTestBegin("ValidationPropertyAttribute inherited into Custom Control"); 
-            try 
-            { 
-                MyTextBox2 myTextBox2 = new MyTextBox2(); 
-                myTextBox2.ID = "MyTextBox2"; 
-                GHTActiveSubTest.Controls.Add(myTextBox2); 
-                MyControl MyControl1 = new MyControl(); 
-                GHTActiveSubTest.Controls.Add(MyControl1); 
-                RegularExpressionValidator1.ControlToValidate = "MyTextBox2"; 
-                GHTSubTestAddResult(GHTActiveSubTest.ID); 
-            } 
-            catch (Exception ex) 
-            { 
-                GHTSubTestUnexpectedExceptionCaught(ex); 
-            } 
+            GHTSubTestBegin("ValidationPropertyAttribute inherited into Custom Control");
+            try
+            {
+                MyTextBox2 myTextBox2 = new MyTextBox2();
+                myTextBox2.ID = "MyTextBox2";
+                GHTActiveSubTest.Controls.Add(myTextBox2);
+                MyControl MyControl1 = new MyControl();
+                GHTActiveSubTest.Controls.Add(MyControl1);
+                RegularExpressionValidator1.ControlToValidate = "MyTextBox2";
+                GHTSubTestAddResult(GHTActiveSubTest.ID);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
             GHTSubTestEnd();
             GHTTestEnd();
         }
     }
-    public class MyTextBox2        : TextBox
+
+    public class MyTextBox2 : TextBox
     {
-        public MyTextBox2()
-        {
-        }
+        public MyTextBox2() { }
     }
+
     [System.Web.UI.ValidationPropertyAttribute("Message")]
-    public class MyControl        : System.Web.UI.Control
+    public class MyControl : System.Web.UI.Control
     {
         public MyControl()
         {
-            MyTextBox2 myTextBox2 = new MyTextBox2(); 
+            MyTextBox2 myTextBox2 = new MyTextBox2();
             this.Controls.Add(myTextBox2);
         }
     }

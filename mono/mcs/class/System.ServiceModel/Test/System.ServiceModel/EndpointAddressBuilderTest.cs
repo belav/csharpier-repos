@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,26 +41,28 @@ namespace MonoTests.System.ServiceModel
     public class EndpointAddressBuilderTest
     {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ToEndpointAddressWithoutReader ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ToEndpointAddressWithoutReader()
         {
-            new EndpointAddressBuilder ().ToEndpointAddress ();
+            new EndpointAddressBuilder().ToEndpointAddress();
         }
 
         [Test]
-        public void UsageExample ()
+        public void UsageExample()
         {
-            var eb = new EndpointAddressBuilder ();
-            var dr = XmlDictionaryReader.CreateDictionaryReader (XmlReader.Create (new StringReader ("<foo/>")));
-            eb.SetExtensionReader (dr);
-            Assert.AreEqual (ReadState.EndOfFile, dr.ReadState, "#1");
-            var xr = eb.GetReaderAtExtensions ();
-            xr.ReadOuterXml ();
-            xr = eb.GetReaderAtExtensions (); // do not return the same XmlReader
-            Assert.AreEqual (ReadState.Interactive, xr.ReadState, "#2");
-            xr.ReadOuterXml ();
-            eb.SetExtensionReader (null); // allowed
-            Assert.IsNull (eb.GetReaderAtExtensions (), "#3");
+            var eb = new EndpointAddressBuilder();
+            var dr = XmlDictionaryReader.CreateDictionaryReader(
+                XmlReader.Create(new StringReader("<foo/>"))
+            );
+            eb.SetExtensionReader(dr);
+            Assert.AreEqual(ReadState.EndOfFile, dr.ReadState, "#1");
+            var xr = eb.GetReaderAtExtensions();
+            xr.ReadOuterXml();
+            xr = eb.GetReaderAtExtensions(); // do not return the same XmlReader
+            Assert.AreEqual(ReadState.Interactive, xr.ReadState, "#2");
+            xr.ReadOuterXml();
+            eb.SetExtensionReader(null); // allowed
+            Assert.IsNull(eb.GetReaderAtExtensions(), "#3");
         }
     }
 }

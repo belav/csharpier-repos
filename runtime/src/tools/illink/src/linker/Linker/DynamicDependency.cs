@@ -13,35 +13,46 @@ namespace Mono.Linker
     /// TypeReference instead of a Type, and it has a reference to the original
     /// CustomAttribute for dependency tracing. It is also a place for helper
     /// methods related to the attribute.
-    [System.AttributeUsage (System.AttributeTargets.Constructor | System.AttributeTargets.Field | System.AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
+    [System.AttributeUsage(
+        System.AttributeTargets.Constructor
+            | System.AttributeTargets.Field
+            | System.AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     internal sealed class DynamicDependency : Attribute
     {
         public CustomAttribute? OriginalAttribute { get; private set; }
-        public DynamicDependency (string memberSignature)
+
+        public DynamicDependency(string memberSignature)
         {
             MemberSignature = memberSignature;
         }
 
-        public DynamicDependency (string memberSignature, TypeReference type)
+        public DynamicDependency(string memberSignature, TypeReference type)
         {
             MemberSignature = memberSignature;
             Type = type;
         }
 
-        public DynamicDependency (string memberSignature, string typeName, string assemblyName)
+        public DynamicDependency(string memberSignature, string typeName, string assemblyName)
         {
             MemberSignature = memberSignature;
             TypeName = typeName;
             AssemblyName = assemblyName;
         }
 
-        public DynamicDependency (DynamicallyAccessedMemberTypes memberTypes, TypeReference type)
+        public DynamicDependency(DynamicallyAccessedMemberTypes memberTypes, TypeReference type)
         {
             MemberTypes = memberTypes;
             Type = type;
         }
 
-        public DynamicDependency (DynamicallyAccessedMemberTypes memberTypes, string typeName, string assemblyName)
+        public DynamicDependency(
+            DynamicallyAccessedMemberTypes memberTypes,
+            string typeName,
+            string assemblyName
+        )
         {
             MemberTypes = memberTypes;
             TypeName = typeName;
@@ -60,7 +71,11 @@ namespace Mono.Linker
 
         public string? Condition { get; set; }
 
-        public static DynamicDependency? ProcessAttribute (LinkContext context, ICustomAttributeProvider provider, CustomAttribute customAttribute)
+        public static DynamicDependency? ProcessAttribute(
+            LinkContext context,
+            ICustomAttributeProvider provider,
+            CustomAttribute customAttribute
+        )
         {
             if (!(provider is IMemberDefinition member))
                 return null;
@@ -73,32 +88,52 @@ namespace Mono.Linker
             // if (!ShouldProcess (context, customAttribute))
             //     return null;
 
-            var dynamicDependency = GetDynamicDependency (customAttribute);
+            var dynamicDependency = GetDynamicDependency(customAttribute);
             if (dynamicDependency != null)
                 return dynamicDependency;
 
-            context.LogWarning (member, DiagnosticId.DynamicDependencyAttributeCouldNotBeAnalyzed);
+            context.LogWarning(member, DiagnosticId.DynamicDependencyAttributeCouldNotBeAnalyzed);
             return null;
         }
 
-        static DynamicDependency? GetDynamicDependency (CustomAttribute ca)
+        static DynamicDependency? GetDynamicDependency(CustomAttribute ca)
         {
             var args = ca.ConstructorArguments;
             if (args.Count < 1 || args.Count > 3)
                 return null;
 
-            DynamicDependency? result = args[0].Value switch {
-                string stringMemberSignature => args.Count switch {
-                    1 => new DynamicDependency (stringMemberSignature),
-                    2 when args[1].Value is TypeReference type => new DynamicDependency (stringMemberSignature, type),
-                    3 when args[1].Value is string typeName && args[2].Value is string assemblyName => new DynamicDependency (stringMemberSignature, typeName, assemblyName),
-                    _ => null,
-                },
-                int memberTypes => args.Count switch {
-                    2 when args[1].Value is TypeReference type => new DynamicDependency ((DynamicallyAccessedMemberTypes) memberTypes, type),
-                    3 when args[1].Value is string typeName && args[2].Value is string assemblyName => new DynamicDependency ((DynamicallyAccessedMemberTypes) memberTypes, typeName, assemblyName),
-                    _ => null,
-                },
+            DynamicDependency? result = args[0].Value switch
+            {
+                string stringMemberSignature
+                    => args.Count switch
+                    {
+                        1 => new DynamicDependency(stringMemberSignature),
+                        2 when args[1].Value is TypeReference type
+                            => new DynamicDependency(stringMemberSignature, type),
+                        3
+                            when args[1].Value is string typeName
+                                && args[2].Value is string assemblyName
+                            => new DynamicDependency(stringMemberSignature, typeName, assemblyName),
+                        _ => null,
+                    },
+                int memberTypes
+                    => args.Count switch
+                    {
+                        2 when args[1].Value is TypeReference type
+                            => new DynamicDependency(
+                                (DynamicallyAccessedMemberTypes)memberTypes,
+                                type
+                            ),
+                        3
+                            when args[1].Value is string typeName
+                                && args[2].Value is string assemblyName
+                            => new DynamicDependency(
+                                (DynamicallyAccessedMemberTypes)memberTypes,
+                                typeName,
+                                assemblyName
+                            ),
+                        _ => null,
+                    },
                 _ => null,
             };
 
@@ -108,22 +143,24 @@ namespace Mono.Linker
             return result;
         }
 
-        public static bool ShouldProcess (LinkContext context, CustomAttribute ca)
+        public static bool ShouldProcess(LinkContext context, CustomAttribute ca)
         {
-            if (ca.HasProperties && ca.Properties[0].Name == "Condition") {
+            if (ca.HasProperties && ca.Properties[0].Name == "Condition")
+            {
                 var condition = ca.Properties[0].Argument.Value as string;
-                switch (condition) {
-                case "":
-                case null:
-                    return true;
-                case "DEBUG":
-                    if (!context.KeepMembersForDebugger)
-                        return false;
+                switch (condition)
+                {
+                    case "":
+                    case null:
+                        return true;
+                    case "DEBUG":
+                        if (!context.KeepMembersForDebugger)
+                            return false;
 
-                    break;
-                default:
-                    // Don't have yet a way to match the general condition so everything is excluded
-                    return false;
+                        break;
+                    default:
+                        // Don't have yet a way to match the general condition so everything is excluded
+                        return false;
                 }
             }
             return true;

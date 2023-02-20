@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
             _viewModel = viewModel;
         }
 
-        private void SeverityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-            => _viewModel.SelectionChanged(SeverityComboBox.SelectedIndex);
+        private void SeverityComboBox_SelectionChanged(
+            object sender,
+            SelectionChangedEventArgs e
+        ) => _viewModel.SelectionChanged(SeverityComboBox.SelectedIndex);
     }
 }

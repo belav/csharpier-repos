@@ -32,154 +32,185 @@ using System.Collections.Generic;
 
 namespace System.Windows.Forms
 {
-
-    public static class ListBindingHelper 
+    public static class ListBindingHelper
     {
-        public static object GetList (object list)
+        public static object GetList(object list)
         {
             if (list is IListSource)
-                return ((IListSource) list).GetList ();
+                return ((IListSource)list).GetList();
             return list;
         }
 
-        public static object GetList (object dataSource, string dataMember)
+        public static object GetList(object dataSource, string dataMember)
         {
-            dataSource = GetList (dataSource);
+            dataSource = GetList(dataSource);
             if (dataSource == null || dataMember == null || dataMember.Length == 0)
                 return dataSource;
 
-            PropertyDescriptor property = GetListItemProperties (dataSource).Find (dataMember, true);
+            PropertyDescriptor property = GetListItemProperties(dataSource).Find(dataMember, true);
             if (property == null)
-                throw new ArgumentException ("dataMember");
+                throw new ArgumentException("dataMember");
 
             object item = null;
 
-            ICurrencyManagerProvider currencyManagerProvider = dataSource as ICurrencyManagerProvider;
-            if (currencyManagerProvider != null && currencyManagerProvider.CurrencyManager != null) {
+            ICurrencyManagerProvider currencyManagerProvider =
+                dataSource as ICurrencyManagerProvider;
+            if (currencyManagerProvider != null && currencyManagerProvider.CurrencyManager != null)
+            {
                 CurrencyManager currencyManager = currencyManagerProvider.CurrencyManager;
-                if (currencyManager != null && currencyManager.Count > 0 && currencyManager.Current != null)
+                if (
+                    currencyManager != null
+                    && currencyManager.Count > 0
+                    && currencyManager.Current != null
+                )
                     item = currencyManager.Current;
             }
 
-            if (item == null) {
-                if (dataSource is IEnumerable) {
-                    if (dataSource is IList) {
-                        IList list = (IList) dataSource;
+            if (item == null)
+            {
+                if (dataSource is IEnumerable)
+                {
+                    if (dataSource is IList)
+                    {
+                        IList list = (IList)dataSource;
                         item = list.Count > 0 ? list[0] : null;
-                    } else {
-                        IEnumerator e = ((IEnumerable) dataSource).GetEnumerator ();
-                        if (e != null && e.MoveNext ())
+                    }
+                    else
+                    {
+                        IEnumerator e = ((IEnumerable)dataSource).GetEnumerator();
+                        if (e != null && e.MoveNext())
                             item = e.Current;
                     }
-                } else {
+                }
+                else
+                {
                     item = dataSource;
                 }
             }
 
             if (item != null)
-                return property.GetValue (item);
+                return property.GetValue(item);
             return null;
         }
 
-        public static Type GetListItemType (object list)
+        public static Type GetListItemType(object list)
         {
-            return GetListItemType (list, String.Empty);
+            return GetListItemType(list, String.Empty);
         }
 
-        public static Type GetListItemType (object dataSource, string dataMember)
+        public static Type GetListItemType(object dataSource, string dataMember)
         {
             if (dataSource == null)
                 return null;
 
-            if (dataMember != null && dataMember.Length > 0) {
-                PropertyDescriptor property = GetProperty (dataSource, dataMember);
+            if (dataMember != null && dataMember.Length > 0)
+            {
+                PropertyDescriptor property = GetProperty(dataSource, dataMember);
                 if (property == null)
-                    return typeof (object);
+                    return typeof(object);
 
                 return property.PropertyType;
             }
 
             if (dataSource is Array)
-                return dataSource.GetType ().GetElementType ();
+                return dataSource.GetType().GetElementType();
 
             // IEnumerable seems to have higher precedence over IList
-            if (dataSource is IEnumerable) {
-                IEnumerator enumerator = ((IEnumerable) dataSource).GetEnumerator ();
-                if (enumerator.MoveNext () && enumerator.Current != null)
-                    return enumerator.Current.GetType ();
+            if (dataSource is IEnumerable)
+            {
+                IEnumerator enumerator = ((IEnumerable)dataSource).GetEnumerator();
+                if (enumerator.MoveNext() && enumerator.Current != null)
+                    return enumerator.Current.GetType();
 
-                if (dataSource is IList || dataSource.GetType () == typeof (IList<>)) {
-                    PropertyInfo property = GetPropertyByReflection (dataSource.GetType (), "Item");
+                if (dataSource is IList || dataSource.GetType() == typeof(IList<>))
+                {
+                    PropertyInfo property = GetPropertyByReflection(dataSource.GetType(), "Item");
                     if (property != null) // `Item' could be interface-explicit, and thus private
                         return property.PropertyType;
                 }
 
                 // fallback to object
-                return typeof (object);
+                return typeof(object);
             }
 
-            return dataSource.GetType ();
+            return dataSource.GetType();
         }
 
-        public static PropertyDescriptorCollection GetListItemProperties (object list)
+        public static PropertyDescriptorCollection GetListItemProperties(object list)
         {
-            return GetListItemProperties (list, null);
+            return GetListItemProperties(list, null);
         }
 
-        public static PropertyDescriptorCollection GetListItemProperties (object list, PropertyDescriptor [] listAccessors)
+        public static PropertyDescriptorCollection GetListItemProperties(
+            object list,
+            PropertyDescriptor[] listAccessors
+        )
         {
-            list = GetList (list);
+            list = GetList(list);
 
             if (list == null)
-                return new PropertyDescriptorCollection (null);
+                return new PropertyDescriptorCollection(null);
 
             if (list is ITypedList)
-                return ((ITypedList)list).GetItemProperties (listAccessors);
+                return ((ITypedList)list).GetItemProperties(listAccessors);
 
-            if (listAccessors == null || listAccessors.Length == 0) {
-                Type item_type = GetListItemType (list);
-                return TypeDescriptor.GetProperties (item_type, 
-                    new Attribute [] { new BrowsableAttribute (true) });
+            if (listAccessors == null || listAccessors.Length == 0)
+            {
+                Type item_type = GetListItemType(list);
+                return TypeDescriptor.GetProperties(
+                    item_type,
+                    new Attribute[] { new BrowsableAttribute(true) }
+                );
             }
 
             // Take into account only the first property
-            Type property_type = listAccessors [0].PropertyType;
-            if (typeof (IList).IsAssignableFrom (property_type) || typeof (IList<>).IsAssignableFrom (property_type)) {
-
-                PropertyInfo property = GetPropertyByReflection (property_type, "Item");
-                return TypeDescriptor.GetProperties (property.PropertyType);
+            Type property_type = listAccessors[0].PropertyType;
+            if (
+                typeof(IList).IsAssignableFrom(property_type)
+                || typeof(IList<>).IsAssignableFrom(property_type)
+            )
+            {
+                PropertyInfo property = GetPropertyByReflection(property_type, "Item");
+                return TypeDescriptor.GetProperties(property.PropertyType);
             }
 
-            return new PropertyDescriptorCollection (new PropertyDescriptor [0]);
+            return new PropertyDescriptorCollection(new PropertyDescriptor[0]);
         }
 
-        public static PropertyDescriptorCollection GetListItemProperties (object dataSource, string dataMember, 
-            PropertyDescriptor [] listAccessors)
+        public static PropertyDescriptorCollection GetListItemProperties(
+            object dataSource,
+            string dataMember,
+            PropertyDescriptor[] listAccessors
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public static string GetListName (object list, PropertyDescriptor [] listAccessors)
+        public static string GetListName(object list, PropertyDescriptor[] listAccessors)
         {
             if (list == null)
                 return String.Empty;
 
-            Type item_type = GetListItemType (list);
+            Type item_type = GetListItemType(list);
             return item_type.Name;
         }
 
-        static PropertyDescriptor GetProperty (object obj, string property_name)
+        static PropertyDescriptor GetProperty(object obj, string property_name)
         {
-            return TypeDescriptor.GetProperties (obj, 
-                                 new Attribute [] { new BrowsableAttribute (true) })[property_name];
+            return TypeDescriptor.GetProperties(
+                obj,
+                new Attribute[] { new BrowsableAttribute(true) }
+            )[property_name];
         }
 
-        // 
+        //
         // Need to use reflection as we need to bypass the TypeDescriptor.GetProperties () limitations
         //
-        static PropertyInfo GetPropertyByReflection (Type type, string property_name)
+        static PropertyInfo GetPropertyByReflection(Type type, string property_name)
         {
-            foreach (PropertyInfo prop in type.GetProperties (BindingFlags.Public | BindingFlags.Instance))
+            foreach (
+                PropertyInfo prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            )
                 if (prop.Name == property_name)
                     return prop;
 

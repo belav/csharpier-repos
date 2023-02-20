@@ -14,13 +14,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
     [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
     public class UseRecursivePatternsRefactoringFixAllTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new UseRecursivePatternsCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new UseRecursivePatternsCodeRefactoringProvider();
 
         [Fact]
         public async Task UseRecursivePatterns_FixAllInDocument()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 namespace NS
 {
     class C : B
@@ -69,7 +72,8 @@ namespace NS
         public static int SP1, SP2;
         public C m() { return null; }
     }
-}", @"
+}",
+                @"
 namespace NS
 {
     class C : B
@@ -118,13 +122,15 @@ namespace NS
         public static int SP1, SP2;
         public C m() { return null; }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task UseRecursivePatterns_FixAllInProject()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -210,7 +216,8 @@ namespace NS
         </Document>
     </Project>
 </Workspace>
-", @"
+",
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -295,13 +302,15 @@ namespace NS
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact]
         public async Task UseRecursivePatterns_FixAllInSolution()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -387,7 +396,8 @@ namespace NS
         </Document>
     </Project>
 </Workspace>
-", @"
+",
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -472,13 +482,15 @@ namespace NS
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact]
         public async Task UseRecursivePatterns_FixAllInContainingMember()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 namespace NS
 {
     class C : B
@@ -527,7 +539,8 @@ namespace NS
         public static int SP1, SP2;
         public C m() { return null; }
     }
-}", @"
+}",
+                @"
 namespace NS
 {
     class C : B
@@ -576,13 +589,15 @@ namespace NS
         public static int SP1, SP2;
         public C m() { return null; }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task UseRecursivePatterns_FixAllInContainingType()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 namespace NS
 {
     class C : B
@@ -634,7 +649,8 @@ namespace NS
         public static int SP1, SP2;
         public C m() { return null; }
     }
-}", @"
+}",
+                @"
 namespace NS
 {
     class C : B
@@ -686,7 +702,8 @@ namespace NS
         public static int SP1, SP2;
         public C m() { return null; }
     }
-}");
+}"
+            );
         }
     }
 }

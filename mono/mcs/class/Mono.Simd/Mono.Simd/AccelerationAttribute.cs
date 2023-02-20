@@ -27,13 +27,16 @@
 
 using System;
 
-
 namespace Mono.Simd
 {
-    [AttributeUsage (AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Property, Inherited=false)]
+    [AttributeUsage(
+        AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Property,
+        Inherited = false
+    )]
     public sealed class AccelerationAttribute : Attribute
     {
-        public AccelerationAttribute (AccelMode mode) {
+        public AccelerationAttribute(AccelMode mode)
+        {
             Mode = mode;
         }
 

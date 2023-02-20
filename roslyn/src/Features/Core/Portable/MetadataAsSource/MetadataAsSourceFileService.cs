@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         /// Set of providers that can be used to generate source for a symbol (for example, by decompiling, or by
         /// extracting it from a pdb).
         /// </summary>
-        private readonly ImmutableArray<Lazy<IMetadataAsSourceFileProvider, MetadataAsSourceFileProviderMetadata>> _providers;
+        private readonly ImmutableArray<
+            Lazy<IMetadataAsSourceFileProvider, MetadataAsSourceFileProviderMetadata>
+        > _providers;
 
         /// <summary>
         /// Workspace created the first time we generate any metadata for any symbol.
@@ -37,7 +39,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
         /// <summary>
         /// A lock to guard the mutex and filesystem data below.  We want to ensure we generate into that and clean that
-        /// up safely.  
+        /// up safely.
         /// </summary>
         private readonly SemaphoreSlim _gate = new(initialCount: 1);
 
@@ -51,14 +53,19 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MetadataAsSourceFileService([ImportMany] IEnumerable<Lazy<IMetadataAsSourceFileProvider, MetadataAsSourceFileProviderMetadata>> providers)
+        public MetadataAsSourceFileService(
+            [ImportMany]
+                IEnumerable<
+                Lazy<IMetadataAsSourceFileProvider, MetadataAsSourceFileProviderMetadata>
+            > providers
+        )
         {
             _providers = ExtensionOrderer.Order(providers).ToImmutableArray();
             _rootTemporaryPath = Path.Combine(Path.GetTempPath(), "MetadataAsSource");
         }
 
-        private static string CreateMutexName(string directoryName)
-            => "MetadataAsSource-" + directoryName;
+        private static string CreateMutexName(string directoryName) =>
+            "MetadataAsSource-" + directoryName;
 
         private string GetRootPathWithGuid_NoLock()
         {
@@ -78,7 +85,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             ISymbol symbol,
             bool signaturesOnly,
             MetadataAsSourceOptions options,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (sourceProject == null)
                 throw new ArgumentNullException(nameof(sourceProject));
@@ -87,25 +95,45 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 throw new ArgumentNullException(nameof(symbol));
 
             if (symbol.Kind == SymbolKind.Namespace)
-                throw new ArgumentException(FeaturesResources.symbol_cannot_be_a_namespace, nameof(symbol));
+                throw new ArgumentException(
+                    FeaturesResources.symbol_cannot_be_a_namespace,
+                    nameof(symbol)
+                );
 
             symbol = symbol.GetOriginalUnreducedDefinition();
 
             using (await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
-                _workspace ??= new MetadataAsSourceWorkspace(this, sourceWorkspace.Services.HostServices);
+                _workspace ??= new MetadataAsSourceWorkspace(
+                    this,
+                    sourceWorkspace.Services.HostServices
+                );
 
                 Contract.ThrowIfNull(_workspace);
                 var tempPath = GetRootPathWithGuid_NoLock();
 
                 // We don't want to track telemetry for signatures only requests, only where we try to show source
-                using var telemetryMessage = signaturesOnly ? null : new TelemetryMessage(cancellationToken);
+                using var telemetryMessage = signaturesOnly
+                    ? null
+                    : new TelemetryMessage(cancellationToken);
 
                 foreach (var lazyProvider in _providers)
                 {
                     var provider = lazyProvider.Value;
                     var providerTempPath = Path.Combine(tempPath, provider.GetType().Name);
-                    var result = await provider.GetGeneratedFileAsync(_workspace, sourceWorkspace, sourceProject, symbol, signaturesOnly, options, providerTempPath, telemetryMessage, cancellationToken).ConfigureAwait(false);
+                    var result = await provider
+                        .GetGeneratedFileAsync(
+                            _workspace,
+                            sourceWorkspace,
+                            sourceProject,
+                            symbol,
+                            signaturesOnly,
+                            options,
+                            providerTempPath,
+                            telemetryMessage,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     if (result is not null)
                     {
                         return result;
@@ -119,11 +147,16 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
         private static void AssertIsMainThread(MetadataAsSourceWorkspace workspace)
         {
-            var threadingService = workspace.Services.GetRequiredService<IWorkspaceThreadingServiceProvider>().Service;
+            var threadingService = workspace.Services
+                .GetRequiredService<IWorkspaceThreadingServiceProvider>()
+                .Service;
             Contract.ThrowIfFalse(threadingService.IsOnMainThread);
         }
 
-        public bool TryAddDocumentToWorkspace(string filePath, SourceTextContainer sourceTextContainer)
+        public bool TryAddDocumentToWorkspace(
+            string filePath,
+            SourceTextContainer sourceTextContainer
+        )
         {
             // If we haven't even created a MetadataAsSource workspace yet, then this file definitely cannot be added to
             // it. This happens when the MiscWorkspace calls in to just see if it can attach this document to the
@@ -138,7 +171,13 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                     if (!provider.IsValueCreated)
                         continue;
 
-                    if (provider.Value.TryAddDocumentToWorkspace(workspace, filePath, sourceTextContainer))
+                    if (
+                        provider.Value.TryAddDocumentToWorkspace(
+                            workspace,
+                            filePath,
+                            sourceTextContainer
+                        )
+                    )
                         return true;
                 }
             }
@@ -169,7 +208,10 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             return false;
         }
 
-        public bool ShouldCollapseOnOpen(string? filePath, BlockStructureOptions blockStructureOptions)
+        public bool ShouldCollapseOnOpen(
+            string? filePath,
+            BlockStructureOptions blockStructureOptions
+        )
         {
             if (filePath is null)
                 return false;
@@ -181,11 +223,10 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 try
                 {
                     throw new InvalidOperationException(
-                        $"'{nameof(ShouldCollapseOnOpen)}' should only be called once outlining has already confirmed that '{filePath}' is from the {nameof(MetadataAsSourceWorkspace)}");
+                        $"'{nameof(ShouldCollapseOnOpen)}' should only be called once outlining has already confirmed that '{filePath}' is from the {nameof(MetadataAsSourceWorkspace)}"
+                    );
                 }
-                catch (Exception ex) when (FatalError.ReportAndCatch(ex))
-                {
-                }
+                catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
 
                 return false;
             }
@@ -204,7 +245,11 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             return false;
         }
 
-        internal async Task<SymbolMappingResult?> MapSymbolAsync(Document document, SymbolKey symbolId, CancellationToken cancellationToken)
+        internal async Task<SymbolMappingResult?> MapSymbolAsync(
+            Document document,
+            SymbolKey symbolId,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(document.FilePath);
 
@@ -227,8 +272,14 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             if (project is null)
                 return null;
 
-            var compilation = await project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-            var resolutionResult = symbolId.Resolve(compilation, ignoreAssemblyKey: true, cancellationToken: cancellationToken);
+            var compilation = await project
+                .GetRequiredCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var resolutionResult = symbolId.Resolve(
+                compilation,
+                ignoreAssemblyKey: true,
+                cancellationToken: cancellationToken
+            );
             if (resolutionResult.Symbol == null)
                 return null;
 
@@ -268,10 +319,19 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                         var deletedEverything = true;
 
                         // Let's look through directories to delete.
-                        foreach (var directoryInfo in new DirectoryInfo(_rootTemporaryPath).EnumerateDirectories())
+                        foreach (
+                            var directoryInfo in new DirectoryInfo(
+                                _rootTemporaryPath
+                            ).EnumerateDirectories()
+                        )
                         {
                             // Is there a mutex for this one?
-                            if (Mutex.TryOpenExisting(CreateMutexName(directoryInfo.Name), out var acquiredMutex))
+                            if (
+                                Mutex.TryOpenExisting(
+                                    CreateMutexName(directoryInfo.Name),
+                                    out var acquiredMutex
+                                )
+                            )
                             {
                                 acquiredMutex.Dispose();
                                 deletedEverything = false;
@@ -287,9 +347,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                         }
                     }
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             }
         }
 
@@ -297,16 +355,19 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         {
             try
             {
-                foreach (var fileInfo in new DirectoryInfo(directoryPath).EnumerateFiles("*", SearchOption.AllDirectories))
+                foreach (
+                    var fileInfo in new DirectoryInfo(directoryPath).EnumerateFiles(
+                        "*",
+                        SearchOption.AllDirectories
+                    )
+                )
                 {
                     fileInfo.IsReadOnly = false;
                 }
 
                 Directory.Delete(directoryPath, recursive: true);
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
 
         public bool IsNavigableMetadataSymbol(ISymbol symbol)

@@ -4,20 +4,16 @@ namespace UiaAtkBridgeTest
 {
     class Test
     {
-        public static void Invoke (EventHandler d)
-        {
-        }
+        public static void Invoke(EventHandler d) { }
     }
 
     public class GailTester
     {
-        public void ThisCausesACrash<I> ()
+        public void ThisCausesACrash<I>()
         {
-            Test.Invoke (delegate { });
+            Test.Invoke(delegate { });
         }
-        
-        public static void Main ()
-        {
-        }
+
+        public static void Main() { }
     }
 }

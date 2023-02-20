@@ -30,7 +30,15 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         [DataMember(Order = 6)]
         public readonly bool IncludedInTargetTypeCompletion;
 
-        public SerializableImportCompletionItem(string symbolKeyData, string name, int arity, Glyph glyph, string containingNamespace, int additionalOverloadCount, bool includedInTargetTypeCompletion)
+        public SerializableImportCompletionItem(
+            string symbolKeyData,
+            string name,
+            int arity,
+            Glyph glyph,
+            string containingNamespace,
+            int additionalOverloadCount,
+            bool includedInTargetTypeCompletion
+        )
         {
             SymbolKeyData = symbolKeyData;
             Arity = arity;

@@ -17,7 +17,11 @@ namespace System.Runtime.CompilerServices
         /// Creates PDB symbol generator.
         /// </summary>
         /// <returns>PDB symbol generator.</returns>
-        [Obsolete(Obsoletions.CreatePdbGeneratorMessage, DiagnosticId = Obsoletions.CreatePdbGeneratorDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.CreatePdbGeneratorMessage,
+            DiagnosticId = Obsoletions.CreatePdbGeneratorDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static DebugInfoGenerator CreatePdbGenerator()
         {
             // Creating PDBs is not supported in .NET Core
@@ -30,9 +34,18 @@ namespace System.Runtime.CompilerServices
         /// <param name="method">The lambda being generated.</param>
         /// <param name="ilOffset">IL offset where to mark the sequence point.</param>
         /// <param name="sequencePoint">Debug information corresponding to the sequence point.</param>
-        public abstract void MarkSequencePoint(LambdaExpression method, int ilOffset, DebugInfoExpression sequencePoint);
+        public abstract void MarkSequencePoint(
+            LambdaExpression method,
+            int ilOffset,
+            DebugInfoExpression sequencePoint
+        );
 
-        internal virtual void MarkSequencePoint(LambdaExpression method, MethodBase methodBase, ILGenerator ilg, DebugInfoExpression sequencePoint)
+        internal virtual void MarkSequencePoint(
+            LambdaExpression method,
+            MethodBase methodBase,
+            ILGenerator ilg,
+            DebugInfoExpression sequencePoint
+        )
         {
             MarkSequencePoint(method, ilg.ILOffset, sequencePoint);
         }

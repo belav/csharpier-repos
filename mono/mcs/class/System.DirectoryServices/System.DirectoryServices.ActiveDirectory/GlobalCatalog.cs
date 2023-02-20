@@ -28,68 +28,80 @@ namespace System.DirectoryServices.ActiveDirectory
     [DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true)]
     public class GlobalCatalog : DomainController
     {
-        public static GlobalCatalog GetGlobalCatalog (DirectoryContext context)
+        public static GlobalCatalog GetGlobalCatalog(DirectoryContext context)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public new static GlobalCatalog FindOne (DirectoryContext context)
+        public new static GlobalCatalog FindOne(DirectoryContext context)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public new static GlobalCatalog FindOne (DirectoryContext context, string siteName)
+        public new static GlobalCatalog FindOne(DirectoryContext context, string siteName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public new static GlobalCatalog FindOne (DirectoryContext context, LocatorOptions flag)
+        public new static GlobalCatalog FindOne(DirectoryContext context, LocatorOptions flag)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public new static GlobalCatalog FindOne (DirectoryContext context, string siteName, LocatorOptions flag)
+        public new static GlobalCatalog FindOne(
+            DirectoryContext context,
+            string siteName,
+            LocatorOptions flag
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public new static GlobalCatalogCollection FindAll (DirectoryContext context)
+        public new static GlobalCatalogCollection FindAll(DirectoryContext context)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public new static GlobalCatalogCollection FindAll (DirectoryContext context, string siteName)
+        public new static GlobalCatalogCollection FindAll(DirectoryContext context, string siteName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true), DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
-        public override GlobalCatalog EnableGlobalCatalog ()
+        [
+            DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true),
+            DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)
+        ]
+        public override GlobalCatalog EnableGlobalCatalog()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public DomainController DisableGlobalCatalog ()
+        public DomainController DisableGlobalCatalog()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true), DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
-        public override bool IsGlobalCatalog ()
+        [
+            DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true),
+            DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)
+        ]
+        public override bool IsGlobalCatalog()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public ReadOnlyActiveDirectorySchemaPropertyCollection FindAllProperties ()
+        public ReadOnlyActiveDirectorySchemaPropertyCollection FindAllProperties()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true), DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
-        public override DirectorySearcher GetDirectorySearcher ()
+        [
+            DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true),
+            DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)
+        ]
+        public override DirectorySearcher GetDirectorySearcher()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-
     }
 }

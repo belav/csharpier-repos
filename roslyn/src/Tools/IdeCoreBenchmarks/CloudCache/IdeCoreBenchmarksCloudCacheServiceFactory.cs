@@ -22,7 +22,10 @@ namespace CloudCache
             Console.WriteLine($"Instantiated {nameof(IdeCoreBenchmarksCloudCacheServiceFactory)}");
         }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new MockCloudCachePersistentStorageService(workspaceServices.GetRequiredService<IPersistentStorageConfiguration>(), @"C:\github\roslyn");
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new MockCloudCachePersistentStorageService(
+                workspaceServices.GetRequiredService<IPersistentStorageConfiguration>(),
+                @"C:\github\roslyn"
+            );
     }
 }

@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-    public class HttpApplicationState_AllKeys
-        : GHTBaseWeb 
+    public class HttpApplicationState_AllKeys : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,20 +46,20 @@ namespace GHTTests.System_Web_dll.System_Web
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
         private void Page_Load(object sender, EventArgs e)
         {
-            HtmlForm form1 = (HtmlForm) (HtmlForm)this.FindControl("Form1");
+            HtmlForm form1 = (HtmlForm)(HtmlForm)this.FindControl("Form1");
             this.GHTTestBegin(form1);
             this.GHTSubTestBegin("GHTSubTest1");
             try
@@ -74,7 +73,9 @@ namespace GHTTests.System_Web_dll.System_Web
                 for (int num2 = 0; num2 < textArray4.Length; num2++)
                 {
                     string text1 = textArray4[num2];
-                    this.GHTSubTestAddResult((string)("(\"" + text1 + "\") = " + this.Application[text1]));
+                    this.GHTSubTestAddResult(
+                        (string)("(\"" + text1 + "\") = " + this.Application[text1])
+                    );
                 }
             }
             catch (Exception exception3)
@@ -95,7 +96,9 @@ namespace GHTTests.System_Web_dll.System_Web
                 for (int num1 = 0; num1 < textArray3.Length; num1++)
                 {
                     string text2 = textArray3[num1];
-                    this.GHTSubTestAddResult((string)("(\"" + text2 + "\") = " + this.Application[text2]));
+                    this.GHTSubTestAddResult(
+                        (string)("(\"" + text2 + "\") = " + this.Application[text2])
+                    );
                 }
             }
             catch (Exception exception4)

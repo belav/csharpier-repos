@@ -1,12 +1,10 @@
-// CS0019: Operator `!=' cannot be applied to operands of type `ulong?' and `int' 
+// CS0019: Operator `!=' cannot be applied to operands of type `ulong?' and `int'
 // Line: 8
 
 class C
 {
-    static void Test (ulong? x, int y)
+    static void Test(ulong? x, int y)
     {
-        if (x != y)
-        {
-        }
+        if (x != y) { }
     }
 }

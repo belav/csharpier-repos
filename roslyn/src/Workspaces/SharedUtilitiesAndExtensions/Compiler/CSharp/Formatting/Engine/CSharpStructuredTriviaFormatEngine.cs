@@ -18,10 +18,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             int initialColumn,
             SyntaxFormattingOptions options,
             ChainedFormattingRules formattingRules,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var root = trivia.GetStructure() ?? throw new ArgumentException();
-            var formatter = new CSharpStructuredTriviaFormatEngine(trivia, initialColumn, options, formattingRules, root.GetFirstToken(includeZeroWidth: true), root.GetLastToken(includeZeroWidth: true));
+            var formatter = new CSharpStructuredTriviaFormatEngine(
+                trivia,
+                initialColumn,
+                options,
+                formattingRules,
+                root.GetFirstToken(includeZeroWidth: true),
+                root.GetLastToken(includeZeroWidth: true)
+            );
             return formatter.Format(cancellationToken);
         }
 
@@ -31,22 +39,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxFormattingOptions options,
             ChainedFormattingRules formattingRules,
             SyntaxToken startToken,
-            SyntaxToken endToken)
-            : base(TreeData.Create(trivia, initialColumn),
-                   options,
-                   formattingRules,
-                   startToken,
-                   endToken)
-        {
-        }
+            SyntaxToken endToken
+        )
+            : base(
+                TreeData.Create(trivia, initialColumn),
+                options,
+                formattingRules,
+                startToken,
+                endToken
+            ) { }
 
         internal override IHeaderFacts HeaderFacts => CSharpHeaderFacts.Instance;
 
-        protected override AbstractTriviaDataFactory CreateTriviaFactory()
-            => new TriviaDataFactory(this.TreeData, this.Options);
+        protected override AbstractTriviaDataFactory CreateTriviaFactory() =>
+            new TriviaDataFactory(this.TreeData, this.Options);
 
-        protected override FormattingContext CreateFormattingContext(TokenStream tokenStream, CancellationToken cancellationToken)
-            => new(this, tokenStream);
+        protected override FormattingContext CreateFormattingContext(
+            TokenStream tokenStream,
+            CancellationToken cancellationToken
+        ) => new(this, tokenStream);
 
         protected override NodeOperations CreateNodeOperations(CancellationToken cancellationToken)
         {
@@ -54,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             return NodeOperations.Empty;
         }
 
-        protected override AbstractFormattingResult CreateFormattingResult(TokenStream tokenStream)
-            => new FormattingResult(this.TreeData, tokenStream, this.SpanToFormat);
+        protected override AbstractFormattingResult CreateFormattingResult(
+            TokenStream tokenStream
+        ) => new FormattingResult(this.TreeData, tokenStream, this.SpanToFormat);
     }
 }

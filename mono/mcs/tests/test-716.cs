@@ -1,9 +1,7 @@
 using System;
 using System.Reflection;
 
-struct S
-{
-}
+struct S { }
 
 struct SS
 {
@@ -13,16 +11,14 @@ struct SS
 struct SSS
 {
     static SSS Empty;
-    
-    static SSS ()
+
+    static SSS()
     {
-        Empty = new SSS ();
+        Empty = new SSS();
     }
 }
 
-class C
-{
-}
+class C { }
 
 class CC
 {
@@ -32,42 +28,42 @@ class CC
 class CCC
 {
     static CCC Empty;
-    
-    static CCC ()
+
+    static CCC()
     {
-        Empty = new CCC ();
+        Empty = new CCC();
     }
 }
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        Type t = typeof (S);
+        Type t = typeof(S);
         if ((t.Attributes & TypeAttributes.BeforeFieldInit) == 0)
             return 1;
 
-        t = typeof (SS);
+        t = typeof(SS);
         if ((t.Attributes & TypeAttributes.BeforeFieldInit) == 0)
             return 2;
-        
-        t = typeof (SSS);
+
+        t = typeof(SSS);
         if ((t.Attributes & TypeAttributes.BeforeFieldInit) != 0)
             return 3;
-        
-        t = typeof (C);
+
+        t = typeof(C);
         if ((t.Attributes & TypeAttributes.BeforeFieldInit) == 0)
             return 4;
 
-        t = typeof (CC);
+        t = typeof(CC);
         if ((t.Attributes & TypeAttributes.BeforeFieldInit) == 0)
             return 5;
-        
-        t = typeof (CCC);
+
+        t = typeof(CCC);
         if ((t.Attributes & TypeAttributes.BeforeFieldInit) != 0)
             return 6;
-        
-        Console.WriteLine ("OK");
+
+        Console.WriteLine("OK");
         return 0;
     }
 }

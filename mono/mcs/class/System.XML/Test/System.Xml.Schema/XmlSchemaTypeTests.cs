@@ -24,21 +24,56 @@ namespace MonoTests.System.Xml
     [TestFixture]
     public class XmlSchemaTypeTests
     {
-        string [] all_types = new string [] {
-            "string", "boolean", "float", "double", "decimal", 
-            "duration", "dateTime", "time", "date", "gYearMonth", 
-            "gYear", "gMonthDay", "gDay", "gMonth", "hexBinary", 
-            "base64Binary", "anyURI", "QName", "NOTATION", 
-            "normalizedString", "token", "language", "IDREFS",
-            "ENTITIES", "NMTOKEN", "NMTOKENS", "Name", "NCName",
-            "ID", "IDREF", "ENTITY", "integer",
-            "nonPositiveInteger", "negativeInteger", "long",
-            "int", "short", "byte", "nonNegativeInteger",
-            "unsignedLong", "unsignedInt", "unsignedShort",
-            "unsignedByte", "positiveInteger"
-            };
+        string[] all_types = new string[]
+        {
+            "string",
+            "boolean",
+            "float",
+            "double",
+            "decimal",
+            "duration",
+            "dateTime",
+            "time",
+            "date",
+            "gYearMonth",
+            "gYear",
+            "gMonthDay",
+            "gDay",
+            "gMonth",
+            "hexBinary",
+            "base64Binary",
+            "anyURI",
+            "QName",
+            "NOTATION",
+            "normalizedString",
+            "token",
+            "language",
+            "IDREFS",
+            "ENTITIES",
+            "NMTOKEN",
+            "NMTOKENS",
+            "Name",
+            "NCName",
+            "ID",
+            "IDREF",
+            "ENTITY",
+            "integer",
+            "nonPositiveInteger",
+            "negativeInteger",
+            "long",
+            "int",
+            "short",
+            "byte",
+            "nonNegativeInteger",
+            "unsignedLong",
+            "unsignedInt",
+            "unsignedShort",
+            "unsignedByte",
+            "positiveInteger"
+        };
 
-        XmlTypeCode [] type_codes = new XmlTypeCode [] {
+        XmlTypeCode[] type_codes = new XmlTypeCode[]
+        {
             XmlTypeCode.String,
             XmlTypeCode.Boolean,
             XmlTypeCode.Float,
@@ -82,18 +117,22 @@ namespace MonoTests.System.Xml
             XmlTypeCode.UnsignedInt,
             XmlTypeCode.UnsignedShort,
             XmlTypeCode.UnsignedByte,
-            XmlTypeCode.PositiveInteger};
+            XmlTypeCode.PositiveInteger
+        };
 
         [Test]
-        public void TypeCode ()
+        public void TypeCode()
         {
-            for (int i = 0; i < all_types.Length; i++) {
-                string name = all_types [i];
-                QName qname = new QName (name, XmlSchema.Namespace);
-                Assert.AreEqual (type_codes [i],
-                    XmlSchemaType.GetBuiltInSimpleType (qname).TypeCode, name);
+            for (int i = 0; i < all_types.Length; i++)
+            {
+                string name = all_types[i];
+                QName qname = new QName(name, XmlSchema.Namespace);
+                Assert.AreEqual(
+                    type_codes[i],
+                    XmlSchemaType.GetBuiltInSimpleType(qname).TypeCode,
+                    name
+                );
             }
         }
-
     }
 }

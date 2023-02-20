@@ -1,9 +1,7 @@
 // CS0540: `Foo.ISomeProp.SomeProperty': containing type does not implement interface `ISomeProp'
 // Line: 18
 
-public class SomeProperty
-{
-}
+public class SomeProperty { }
 
 public abstract class SomeAbstract : ISomeProp
 {
@@ -17,11 +15,15 @@ interface ISomeProp
 
 public class Foo : SomeAbstract
 {
-    SomeProperty ISomeProp.SomeProperty { get { return null; } }
-
-    public override SomeProperty SomeProperty { get { return null; } }
-
-    public static void Main ()
+    SomeProperty ISomeProp.SomeProperty
     {
+        get { return null; }
     }
+
+    public override SomeProperty SomeProperty
+    {
+        get { return null; }
+    }
+
+    public static void Main() { }
 }

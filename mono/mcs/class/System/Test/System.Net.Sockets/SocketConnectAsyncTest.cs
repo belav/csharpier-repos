@@ -18,116 +18,128 @@ namespace MonoTests.System.Net.Sockets
         Exception error;
 
         [TestFixtureSetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            readyEvent = new ManualResetEvent (false);
-            mainEvent = new ManualResetEvent (false);
+            readyEvent = new ManualResetEvent(false);
+            mainEvent = new ManualResetEvent(false);
         }
 
         [TestFixtureTearDown]
-        public void TearDown ()
+        public void TearDown()
         {
-            readyEvent.Close ();
-            mainEvent.Close ();
+            readyEvent.Close();
+            mainEvent.Close();
         }
 
         void StartServer()
         {
             readyEvent.Reset();
             mainEvent.Reset();
-            ThreadPool.QueueUserWorkItem (_ => DoWork ());
-            readyEvent.WaitOne ();
+            ThreadPool.QueueUserWorkItem(_ => DoWork());
+            readyEvent.WaitOne();
         }
 
         void StopServer()
         {
             if (serverSocket != null)
-                serverSocket.Close ();
+                serverSocket.Close();
         }
 
-        void DoWork ()
+        void DoWork()
         {
-            serverSocket = new Socket (
-                AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            serverSocket.Bind (new IPEndPoint (IPAddress.Loopback, 0));
-            serverSocket.Listen (1);
+            serverSocket = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
+            serverSocket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
+            serverSocket.Listen(1);
 
-            var async = new SocketAsyncEventArgs ();
-            async.Completed += (s,e) => OnAccepted (e);
+            var async = new SocketAsyncEventArgs();
+            async.Completed += (s, e) => OnAccepted(e);
 
-            readyEvent.Set ();
+            readyEvent.Set();
 
-            if (!serverSocket.AcceptAsync (async))
-                OnAccepted (async);
+            if (!serverSocket.AcceptAsync(async))
+                OnAccepted(async);
         }
 
-        void OnAccepted (SocketAsyncEventArgs e)
+        void OnAccepted(SocketAsyncEventArgs e)
         {
             var acceptSocket = e.AcceptSocket;
-            mainEvent.Set ();
+            mainEvent.Set();
         }
 
         [Test]
         [Category("NotWorking")]
-        public void Connect ()
+        public void Connect()
         {
             StartServer();
 
             EndPoint serverEndpoint = serverSocket.LocalEndPoint;
 
-            var m = new ManualResetEvent (false);
-            var e = new SocketAsyncEventArgs ();
+            var m = new ManualResetEvent(false);
+            var e = new SocketAsyncEventArgs();
 
-            clientSocket = new Socket (
-                AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            clientSocket = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             clientSocketAsyncArgs = new SocketAsyncEventArgs();
             clientSocketAsyncArgs.RemoteEndPoint = serverEndpoint;
-            clientSocketAsyncArgs.Completed += (s,o) => {
+            clientSocketAsyncArgs.Completed += (s, o) =>
+            {
                 if (o.SocketError != SocketError.Success)
-                    error = new SocketException ((int)o.SocketError);
-                m.Set ();
+                    error = new SocketException((int)o.SocketError);
+                m.Set();
             };
             bool res = clientSocket.ConnectAsync(clientSocketAsyncArgs);
-            if (res) {
-                if (!m.WaitOne (1500))
-                    throw new TimeoutException ();
+            if (res)
+            {
+                if (!m.WaitOne(1500))
+                    throw new TimeoutException();
             }
 
-            if (!mainEvent.WaitOne (1500))
-                throw new TimeoutException ();
+            if (!mainEvent.WaitOne(1500))
+                throw new TimeoutException();
             if (error != null)
                 throw error;
 
-            m.Reset ();
-            mainEvent.Reset ();
+            m.Reset();
+            mainEvent.Reset();
 
             StopServer();
 
             // Try again to non-listening endpoint, expect error
 
             error = null;
-            clientSocket = new Socket (
-                AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            clientSocketAsyncArgs = new SocketAsyncEventArgs ();
+            clientSocket = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
+            clientSocketAsyncArgs = new SocketAsyncEventArgs();
             clientSocketAsyncArgs.RemoteEndPoint = serverEndpoint;
-            clientSocketAsyncArgs.Completed += (s,o) => {
+            clientSocketAsyncArgs.Completed += (s, o) =>
+            {
                 if (o.SocketError != SocketError.Success)
-                    error = new SocketException ((int)o.SocketError);
-                m.Set ();
+                    error = new SocketException((int)o.SocketError);
+                m.Set();
             };
-            res = clientSocket.ConnectAsync (clientSocketAsyncArgs);
-            if (res) {
-                if (!m.WaitOne (1500))
-                    throw new TimeoutException ();
+            res = clientSocket.ConnectAsync(clientSocketAsyncArgs);
+            if (res)
+            {
+                if (!m.WaitOne(1500))
+                    throw new TimeoutException();
             }
 
-            Assert.IsTrue (error != null, "Connect - no error");
+            Assert.IsTrue(error != null, "Connect - no error");
             SocketException socketException = (SocketException)error;
-            Assert.IsTrue(socketException.ErrorCode == (int)SocketError.ConnectionRefused); 
-    
-            m.Reset ();
-            mainEvent.Reset ();
-        }
+            Assert.IsTrue(socketException.ErrorCode == (int)SocketError.ConnectionRefused);
 
+            m.Reset();
+            mainEvent.Reset();
+        }
     }
 }

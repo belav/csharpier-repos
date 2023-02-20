@@ -2,12 +2,12 @@ class Stack<T>
 {
     T[] t;
 
-    public Stack (int n)
+    public Stack(int n)
     {
-        t = new T [n];
+        t = new T[n];
     }
 
-    public object Test ()
+    public object Test()
     {
         // Boxing the type parameter to an object; note that we're
         // an array !
@@ -17,9 +17,9 @@ class Stack<T>
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        Stack<int> stack = new Stack<int> (5);
-        System.Console.WriteLine (stack.Test ());
+        Stack<int> stack = new Stack<int>(5);
+        System.Console.WriteLine(stack.Test());
     }
 }

@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             {
                 if (s_defaultServices == null)
                 {
-                    Interlocked.CompareExchange(ref s_defaultServices, MefHostServices.Create(DefaultAssemblies), null);
+                    Interlocked.CompareExchange(
+                        ref s_defaultServices,
+                        MefHostServices.Create(DefaultAssemblies),
+                        null
+                    );
                 }
 
                 return s_defaultServices;
@@ -33,7 +37,11 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             {
                 if (s_defaultAssemblies == null)
                 {
-                    ImmutableInterlocked.InterlockedCompareExchange(ref s_defaultAssemblies, CreateDefaultAssemblies(), default);
+                    ImmutableInterlocked.InterlockedCompareExchange(
+                        ref s_defaultAssemblies,
+                        CreateDefaultAssemblies(),
+                        default
+                    );
                 }
 
                 return s_defaultAssemblies;
@@ -48,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             };
 
             return MefHostServices.DefaultAssemblies.Concat(
-                MefHostServicesHelpers.LoadNearbyAssemblies(assemblyNames));
+                MefHostServicesHelpers.LoadNearbyAssemblies(assemblyNames)
+            );
         }
 
         internal readonly struct TestAccessor

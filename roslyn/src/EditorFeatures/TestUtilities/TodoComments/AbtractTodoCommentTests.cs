@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.TodoComments
 {
     public abstract class AbstractTodoCommentTests
     {
-        protected const string DefaultTokenList = "HACK:1|TODO:1|UNDONE:1|UnresolvedMergeConflict:0";
+        protected const string DefaultTokenList =
+            "HACK:1|TODO:1|UNDONE:1|UnresolvedMergeConflict:0";
 
         protected abstract TestWorkspace CreateWorkspace(string codeWithMarker);
 
@@ -28,7 +29,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.TodoComments
             using var workspace = CreateWorkspace(codeWithMarker);
 
             var tokenList = DefaultTokenList;
-            workspace.GlobalOptions.SetGlobalOption(new OptionKey(TodoCommentOptionsStorage.TokenList), tokenList);
+            workspace.GlobalOptions.SetGlobalOption(
+                new OptionKey(TodoCommentOptionsStorage.TokenList),
+                tokenList
+            );
 
             var hostDocument = workspace.Documents.First();
             var initialTextSnapshot = hostDocument.GetTextBuffer().CurrentSnapshot;
@@ -36,10 +40,19 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.TodoComments
 
             var document = workspace.CurrentSolution.GetDocument(documentId);
             var service = document.GetLanguageService<ITodoCommentService>();
-            var todoComments = await service.GetTodoCommentsAsync(document, TodoCommentDescriptor.Parse(tokenList), CancellationToken.None);
+            var todoComments = await service.GetTodoCommentsAsync(
+                document,
+                TodoCommentDescriptor.Parse(tokenList),
+                CancellationToken.None
+            );
 
             using var _ = ArrayBuilder<TodoCommentData>.GetInstance(out var converted);
-            await TodoComment.ConvertAsync(document, todoComments, converted, CancellationToken.None);
+            await TodoComment.ConvertAsync(
+                document,
+                todoComments,
+                converted,
+                CancellationToken.None
+            );
 
             var expectedLists = hostDocument.SelectedSpans;
             Assert.Equal(converted.Count, expectedLists.Count);

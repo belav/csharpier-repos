@@ -17,25 +17,25 @@ using System.Runtime.InteropServices;
 
 // General Information about the System.Data.OracleClient assembly
 
-[assembly: AssemblyTitle ("System.Data.OracleClient.dll")]
-[assembly: AssemblyDescription ("System.Data.OracleClient.dll")]
-[assembly: AssemblyDefaultAlias ("System.Data.OracleClient.dll")]
+[assembly: AssemblyTitle("System.Data.OracleClient.dll")]
+[assembly: AssemblyDescription("System.Data.OracleClient.dll")]
+[assembly: AssemblyDefaultAlias("System.Data.OracleClient.dll")]
 
-[assembly: AssemblyCompany (Consts.MonoCompany)]
-[assembly: AssemblyProduct (Consts.MonoProduct)]
-[assembly: AssemblyCopyright (Consts.MonoCopyright)]
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: SatelliteContractVersion (Consts.FxVersion)]
-[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: SatelliteContractVersion(Consts.FxVersion)]
+[assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
 
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: ComVisible (false)]
+[assembly: ComVisible(false)]
 
-    [assembly: CLSCompliant (true)]
-    [assembly: AssemblyDelaySign (true)]
+[assembly: CLSCompliant(true)]
+[assembly: AssemblyDelaySign(true)]
 
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
 [assembly: AllowPartiallyTrustedCallers]
-[assembly: ComCompatibleVersion (1, 0, 3300, 0)]
-[assembly: Dependency ("System.Data,", LoadHint.Always)]
+[assembly: ComCompatibleVersion(1, 0, 3300, 0)]
+[assembly: Dependency("System.Data,", LoadHint.Always)]

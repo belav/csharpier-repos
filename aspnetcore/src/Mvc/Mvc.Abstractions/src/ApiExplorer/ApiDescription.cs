@@ -30,7 +30,8 @@ public class ApiDescription
     /// <summary>
     /// Gets a list of <see cref="ApiParameterDescription"/> for this api.
     /// </summary>
-    public IList<ApiParameterDescription> ParameterDescriptions { get; } = new List<ApiParameterDescription>();
+    public IList<ApiParameterDescription> ParameterDescriptions { get; } =
+        new List<ApiParameterDescription>();
 
     /// <summary>
     /// Gets arbitrary metadata properties associated with the <see cref="ApiDescription"/>.

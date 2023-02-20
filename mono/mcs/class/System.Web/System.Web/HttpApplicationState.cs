@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.HttpApplicationState
 //
 // Author:
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,234 +33,291 @@ using System.Security.Permissions;
 namespace System.Web
 {
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public sealed class HttpApplicationState : NameObjectCollectionBase 
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public sealed class HttpApplicationState : NameObjectCollectionBase
     {
         HttpStaticObjectsCollection _AppObjects;
         HttpStaticObjectsCollection _SessionObjects;
 
-        ReaderWriterLockSlim _Lock; 
+        ReaderWriterLockSlim _Lock;
 
-        internal HttpApplicationState ()
+        internal HttpApplicationState()
         {
-            _Lock = new ReaderWriterLockSlim ();
+            _Lock = new ReaderWriterLockSlim();
         }
 
-        internal HttpApplicationState (HttpStaticObjectsCollection AppObj, HttpStaticObjectsCollection SessionObj)
+        internal HttpApplicationState(
+            HttpStaticObjectsCollection AppObj,
+            HttpStaticObjectsCollection SessionObj
+        )
         {
             _AppObjects = AppObj;
             _SessionObjects = SessionObj;
-            _Lock = new ReaderWriterLockSlim ();
+            _Lock = new ReaderWriterLockSlim();
         }
 
-        bool IsLockHeld {
+        bool IsLockHeld
+        {
             get { return _Lock.IsReadLockHeld || _Lock.IsWriteLockHeld; }
         }
-        
-        public void Add (string name, object value)
+
+        public void Add(string name, object value)
         {
             bool acquired = false;
-            try {
-                if (!IsLockHeld) {
-                    _Lock.EnterWriteLock ();
+            try
+            {
+                if (!IsLockHeld)
+                {
+                    _Lock.EnterWriteLock();
                     acquired = true;
                 }
-                BaseAdd (name, value);
-            } finally {
+                BaseAdd(name, value);
+            }
+            finally
+            {
                 if (acquired && IsLockHeld)
-                    _Lock.ExitWriteLock ();
+                    _Lock.ExitWriteLock();
             }
         }
 
-        public void Clear ()
+        public void Clear()
         {
             bool acquired = false;
-            try {
-                if (!IsLockHeld) {
-                    _Lock.EnterWriteLock ();
+            try
+            {
+                if (!IsLockHeld)
+                {
+                    _Lock.EnterWriteLock();
                     acquired = true;
                 }
-                BaseClear ();
-            } finally {
-                if (acquired && IsLockHeld)
-                    _Lock.ExitWriteLock ();
+                BaseClear();
             }
-        } 
+            finally
+            {
+                if (acquired && IsLockHeld)
+                    _Lock.ExitWriteLock();
+            }
+        }
 
-        public object Get (string name)
+        public object Get(string name)
         {
             object ret = null;
             bool acquired = false;
-            try {
-                if (!IsLockHeld) {
-                    _Lock.EnterReadLock ();
+            try
+            {
+                if (!IsLockHeld)
+                {
+                    _Lock.EnterReadLock();
                     acquired = true;
                 }
-                ret = BaseGet (name);
-            }  finally {
+                ret = BaseGet(name);
+            }
+            finally
+            {
                 if (acquired && IsLockHeld)
-                    _Lock.ExitReadLock ();
+                    _Lock.ExitReadLock();
             }
 
             return ret;
         }
 
-        public object Get (int index)
+        public object Get(int index)
         {
             bool acquired = false;
-            try {
-                if (!IsLockHeld) {
-                    _Lock.EnterReadLock ();
+            try
+            {
+                if (!IsLockHeld)
+                {
+                    _Lock.EnterReadLock();
                     acquired = true;
                 }
-                return BaseGet (index);
-            } finally {
-                if (acquired && IsLockHeld)
-                    _Lock.ExitReadLock ();
+                return BaseGet(index);
             }
-        }   
+            finally
+            {
+                if (acquired && IsLockHeld)
+                    _Lock.ExitReadLock();
+            }
+        }
 
-        public string GetKey (int index)
+        public string GetKey(int index)
         {
             bool acquired = false;
-            try {
-                if (!IsLockHeld) {
-                    _Lock.EnterReadLock ();
+            try
+            {
+                if (!IsLockHeld)
+                {
+                    _Lock.EnterReadLock();
                     acquired = true;
                 }
-                return BaseGetKey (index);
-            } finally {
-                if (acquired && IsLockHeld)
-                    _Lock.ExitReadLock ();
+                return BaseGetKey(index);
             }
-        }      
+            finally
+            {
+                if (acquired && IsLockHeld)
+                    _Lock.ExitReadLock();
+            }
+        }
 
-        public void Lock ()
+        public void Lock()
         {
             if (!_Lock.IsWriteLockHeld)
-                _Lock.EnterWriteLock ();
+                _Lock.EnterWriteLock();
         }
 
-        public void Remove (string name)
+        public void Remove(string name)
         {
             bool acquired = false;
-            try {
-                if (!IsLockHeld) {
-                    _Lock.EnterWriteLock ();
+            try
+            {
+                if (!IsLockHeld)
+                {
+                    _Lock.EnterWriteLock();
                     acquired = true;
                 }
-                BaseRemove (name);
-            } finally  {
+                BaseRemove(name);
+            }
+            finally
+            {
                 if (acquired && IsLockHeld)
-                    _Lock.ExitWriteLock ();
-            }      
+                    _Lock.ExitWriteLock();
+            }
         }
 
-        public void RemoveAll ()
+        public void RemoveAll()
         {
-            Clear ();
+            Clear();
         }
 
-        public void RemoveAt (int index)
-        {
-            bool acquired = false;
-            try {
-                if (!IsLockHeld) {
-                    _Lock.EnterWriteLock ();
-                    acquired = true;
-                }
-                BaseRemoveAt (index);
-            } finally  {
-                if (acquired && IsLockHeld)
-                    _Lock.ExitWriteLock ();
-            }      
-        }
-
-        public void Set (string name, object value)
+        public void RemoveAt(int index)
         {
             bool acquired = false;
-            try {
-                if (!IsLockHeld) {
-                    _Lock.EnterWriteLock ();
+            try
+            {
+                if (!IsLockHeld)
+                {
+                    _Lock.EnterWriteLock();
                     acquired = true;
                 }
-                BaseSet (name, value);
-            } finally  {
+                BaseRemoveAt(index);
+            }
+            finally
+            {
                 if (acquired && IsLockHeld)
-                    _Lock.ExitWriteLock ();
-            }      
-        }   
+                    _Lock.ExitWriteLock();
+            }
+        }
 
-        public void UnLock ()
+        public void Set(string name, object value)
+        {
+            bool acquired = false;
+            try
+            {
+                if (!IsLockHeld)
+                {
+                    _Lock.EnterWriteLock();
+                    acquired = true;
+                }
+                BaseSet(name, value);
+            }
+            finally
+            {
+                if (acquired && IsLockHeld)
+                    _Lock.ExitWriteLock();
+            }
+        }
+
+        public void UnLock()
         {
             if (_Lock.IsWriteLockHeld)
-                _Lock.ExitWriteLock ();
+                _Lock.ExitWriteLock();
         }
 
-        public string [] AllKeys {
-            get {
+        public string[] AllKeys
+        {
+            get
+            {
                 bool acquired = false;
-                try {
-                    if (!IsLockHeld) {
-                        _Lock.EnterReadLock ();
+                try
+                {
+                    if (!IsLockHeld)
+                    {
+                        _Lock.EnterReadLock();
                         acquired = true;
                     }
-                    return BaseGetAllKeys ();
-                } finally  {
+                    return BaseGetAllKeys();
+                }
+                finally
+                {
                     if (acquired && IsLockHeld)
-                        _Lock.ExitReadLock ();
+                        _Lock.ExitReadLock();
                 }
             }
         }
 
-        public HttpApplicationState Contents {
+        public HttpApplicationState Contents
+        {
             get { return this; }
         }
 
-        public override int Count {
-            get {
+        public override int Count
+        {
+            get
+            {
                 bool acquired = false;
-                try {
-                    if (!IsLockHeld) {
-                        _Lock.EnterReadLock ();
+                try
+                {
+                    if (!IsLockHeld)
+                    {
+                        _Lock.EnterReadLock();
                         acquired = true;
                     }
                     return base.Count;
-                } finally  {
+                }
+                finally
+                {
                     if (acquired && IsLockHeld)
-                        _Lock.ExitReadLock ();
-                }     
+                        _Lock.ExitReadLock();
+                }
             }
-        }   
-
-        public object this [string name] {
-            get { return Get (name); }
-            set { Set (name, value); }
         }
 
-        public object this [int index] {
-            get { return Get (index); }
+        public object this[string name]
+        {
+            get { return Get(name); }
+            set { Set(name, value); }
+        }
+
+        public object this[int index]
+        {
+            get { return Get(index); }
         }
 
         //  ASP Session based objects
-        internal HttpStaticObjectsCollection SessionObjects {
-            get {
+        internal HttpStaticObjectsCollection SessionObjects
+        {
+            get
+            {
                 if (_SessionObjects == null)
-                    _SessionObjects = new HttpStaticObjectsCollection ();
-                
+                    _SessionObjects = new HttpStaticObjectsCollection();
+
                 return _SessionObjects;
             }
         }
 
         //  ASP App based objects
-        public HttpStaticObjectsCollection StaticObjects {
-            get {
+        public HttpStaticObjectsCollection StaticObjects
+        {
+            get
+            {
                 if (_AppObjects == null)
-                    _AppObjects = new HttpStaticObjectsCollection ();
-                
+                    _AppObjects = new HttpStaticObjectsCollection();
+
                 return _AppObjects;
             }
         }
     }
 }
-

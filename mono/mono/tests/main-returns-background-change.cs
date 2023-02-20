@@ -1,15 +1,17 @@
-
 using System;
 using System.Threading;
 
-public class foo {
-    public static void Main() {
-        Thread thr=new Thread(new ThreadStart(foo.thread));
+public class foo
+{
+    public static void Main()
+    {
+        Thread thr = new Thread(new ThreadStart(foo.thread));
         thr.Start();
         Console.WriteLine("Main thread returns");
     }
 
-    public static void thread() {
+    public static void thread()
+    {
         Console.WriteLine("Thread running");
         Thread.Sleep(500);
         Console.WriteLine("Thread running");
@@ -20,7 +22,6 @@ public class foo {
         Console.WriteLine("Thread running");
         Thread.Sleep(500);
         Console.WriteLine("Thread running");
-        Environment.Exit (1);
+        Environment.Exit(1);
     }
 }
-

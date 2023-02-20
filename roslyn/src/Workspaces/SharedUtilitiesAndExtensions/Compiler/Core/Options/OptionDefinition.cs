@@ -40,7 +40,13 @@ namespace Microsoft.CodeAnalysis.Options
         /// </summary>
         public object? DefaultValue { get; }
 
-        public OptionDefinition(OptionGroup? group, string configName, object? defaultValue, OptionStorageMapping? storageMapping, bool isEditorConfigOption)
+        public OptionDefinition(
+            OptionGroup? group,
+            string configName,
+            object? defaultValue,
+            OptionStorageMapping? storageMapping,
+            bool isEditorConfigOption
+        )
         {
             ConfigName = configName;
             Group = group ?? OptionGroup.Default;
@@ -58,23 +64,19 @@ namespace Microsoft.CodeAnalysis.Options
 
         protected abstract IEditorConfigValueSerializer SerializerImpl { get; }
 
-        public override bool Equals(object? other)
-            => Equals(other as OptionDefinition);
+        public override bool Equals(object? other) => Equals(other as OptionDefinition);
 
-        public bool Equals(OptionDefinition? other)
-            => ConfigName == other?.ConfigName;
+        public bool Equals(OptionDefinition? other) => ConfigName == other?.ConfigName;
 
-        public override int GetHashCode()
-            => ConfigName.GetHashCode();
+        public override int GetHashCode() => ConfigName.GetHashCode();
 
-        public override string ToString()
-            => ConfigName;
+        public override string ToString() => ConfigName;
 
-        public static bool operator ==(OptionDefinition? left, OptionDefinition? right)
-            => ReferenceEquals(left, right) || left?.Equals(right) == true;
+        public static bool operator ==(OptionDefinition? left, OptionDefinition? right) =>
+            ReferenceEquals(left, right) || left?.Equals(right) == true;
 
-        public static bool operator !=(OptionDefinition? left, OptionDefinition? right)
-            => !(left == right);
+        public static bool operator !=(OptionDefinition? left, OptionDefinition? right) =>
+            !(left == right);
     }
 
     internal sealed class OptionDefinition<T> : OptionDefinition
@@ -88,17 +90,16 @@ namespace Microsoft.CodeAnalysis.Options
             OptionGroup? group,
             string configName,
             OptionStorageMapping? storageMapping,
-            bool isEditorConfigOption)
+            bool isEditorConfigOption
+        )
             : base(group, configName, defaultValue, storageMapping, isEditorConfigOption)
         {
             DefaultValue = defaultValue;
             Serializer = serializer ?? EditorConfigValueSerializer.Default<T>();
         }
 
-        public override Type Type
-            => typeof(T);
+        public override Type Type => typeof(T);
 
-        protected override IEditorConfigValueSerializer SerializerImpl
-            => Serializer;
+        protected override IEditorConfigValueSerializer SerializerImpl => Serializer;
     }
 }

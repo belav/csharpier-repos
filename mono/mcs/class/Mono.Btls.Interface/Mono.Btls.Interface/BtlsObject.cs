@@ -31,43 +31,47 @@ namespace Mono.Btls.Interface
     {
         MonoBtlsObject instance;
 
-        internal MonoBtlsObject Instance {
-            get {
+        internal MonoBtlsObject Instance
+        {
+            get
+            {
                 if (!IsValid)
-                    throw new ObjectDisposedException (GetType ().Name);
+                    throw new ObjectDisposedException(GetType().Name);
                 return instance;
             }
         }
 
-        internal BtlsObject (MonoBtlsObject instance)
+        internal BtlsObject(MonoBtlsObject instance)
         {
             this.instance = instance;
         }
 
-        public bool IsValid {
+        public bool IsValid
+        {
             get { return instance != null && instance.IsValid; }
         }
 
-        protected void Dispose (bool disposing)
+        protected void Dispose(bool disposing)
         {
-            if (disposing) {
-                if (instance != null) {
-                    instance.Dispose ();
+            if (disposing)
+            {
+                if (instance != null)
+                {
+                    instance.Dispose();
                     instance = null;
                 }
             }
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
-            GC.SuppressFinalize (this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        ~BtlsObject ()
+        ~BtlsObject()
         {
-            Dispose (false);
+            Dispose(false);
         }
     }
 }
-

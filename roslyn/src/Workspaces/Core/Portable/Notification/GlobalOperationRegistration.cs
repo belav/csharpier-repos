@@ -16,14 +16,21 @@ namespace Microsoft.CodeAnalysis.Notification
 
         private bool _done;
 
-        public GlobalOperationRegistration(AbstractGlobalOperationNotificationService service, string operation)
+        public GlobalOperationRegistration(
+            AbstractGlobalOperationNotificationService service,
+            string operation
+        )
         {
             _service = service;
             _done = false;
             this.Operation = operation;
 
             _source = new CancellationTokenSource();
-            _logging = Logger.LogBlock(FunctionId.GlobalOperationRegistration, operation, _source.Token);
+            _logging = Logger.LogBlock(
+                FunctionId.GlobalOperationRegistration,
+                operation,
+                _source.Token
+            );
         }
 
         public string Operation { get; }
@@ -34,8 +41,7 @@ namespace Microsoft.CodeAnalysis.Notification
         /// will log that we completed without cancellation.  If this has not been called, then <see cref="Dispose"/>
         /// will log that we were canceled.
         /// </summary>
-        public void Done()
-            => _done = true;
+        public void Done() => _done = true;
 
         public void Dispose()
         {

@@ -58,9 +58,7 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Creates an instance of an HtmlWeb class.
         /// </summary>
-        public HtmlWeb()
-        {
-        }
+        public HtmlWeb() { }
 
         /// <summary>
         /// Gets an HTML document from an Internet resource and saves it to the specified file.
@@ -71,7 +69,7 @@ namespace HtmlAgilityPack
         {
             Get(url, path, "GET");
         }
-            
+
         /// <summary>
         /// Gets an HTML document from an Internet resource and saves it to the specified file.
         /// </summary>
@@ -81,8 +79,7 @@ namespace HtmlAgilityPack
         public void Get(string url, string path, string method)
         {
             Uri uri = new Uri(url);
-            if ((uri.Scheme == Uri.UriSchemeHttps) ||
-                (uri.Scheme == Uri.UriSchemeHttp))
+            if ((uri.Scheme == Uri.UriSchemeHttps) || (uri.Scheme == Uri.UriSchemeHttp))
             {
                 Get(uri, method, path, null);
             }
@@ -112,14 +109,12 @@ namespace HtmlAgilityPack
         {
             Uri uri = new Uri(url);
             HtmlDocument doc;
-            if ((uri.Scheme == Uri.UriSchemeHttps) ||
-                (uri.Scheme == Uri.UriSchemeHttp))
+            if ((uri.Scheme == Uri.UriSchemeHttps) || (uri.Scheme == Uri.UriSchemeHttp))
             {
                 doc = LoadUrl(uri, method);
             }
             else
             {
-
                 if (uri.Scheme == Uri.UriSchemeFile)
                 {
                     doc = new HtmlDocument();
@@ -178,7 +173,10 @@ namespace HtmlAgilityPack
             }
             else
             {
-                cachePath = Path.Combine(_cachePath, (uri.Host + uri.AbsolutePath).Replace('/', '\\'));
+                cachePath = Path.Combine(
+                    _cachePath,
+                    (uri.Host + uri.AbsolutePath).Replace('/', '\\')
+                );
             }
             return cachePath;
         }
@@ -188,10 +186,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public bool FromCache
         {
-            get
-            {
-                return _fromCache;
-            }
+            get { return _fromCache; }
         }
 
         /// <summary>
@@ -199,10 +194,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public Uri ResponseUri
         {
-            get
-            {
-                return _responseUri;
-            }
+            get { return _responseUri; }
         }
 
         /// <summary>
@@ -211,15 +203,14 @@ namespace HtmlAgilityPack
         /// </summary>
         public bool CacheOnly
         {
-            get
-            {
-                return _cacheOnly;
-            }
+            get { return _cacheOnly; }
             set
             {
                 if ((value) && !UsingCache)
                 {
-                    throw new HtmlWebException("Cache is not enabled. Set UsingCache to true first.");
+                    throw new HtmlWebException(
+                        "Cache is not enabled. Set UsingCache to true first."
+                    );
                 }
                 _cacheOnly = value;
             }
@@ -230,14 +221,8 @@ namespace HtmlAgilityPack
         /// </summary>
         public bool UseCookies
         {
-            get
-            {
-                return _useCookies;
-            }
-            set
-            {
-                _useCookies = value;
-            }
+            get { return _useCookies; }
+            set { _useCookies = value; }
         }
 
         /// <summary>
@@ -245,10 +230,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int RequestDuration
         {
-            get
-            {
-                return _requestDuration;
-            }
+            get { return _requestDuration; }
         }
 
         /// <summary>
@@ -256,14 +238,8 @@ namespace HtmlAgilityPack
         /// </summary>
         public bool AutoDetectEncoding
         {
-            get
-            {
-                return _autoDetectEncoding;
-            }
-            set
-            {
-                _autoDetectEncoding = value;
-            }
+            get { return _autoDetectEncoding; }
+            set { _autoDetectEncoding = value; }
         }
 
         /// <summary>
@@ -271,10 +247,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public HttpStatusCode StatusCode
         {
-            get
-            {
-                return _statusCode;
-            }
+            get { return _statusCode; }
         }
 
         /// <summary>
@@ -282,10 +255,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int StreamBufferSize
         {
-            get
-            {
-                return _streamBufferSize;
-            }
+            get { return _streamBufferSize; }
             set
             {
                 if (_streamBufferSize <= 0)
@@ -336,7 +306,9 @@ namespace HtmlAgilityPack
             {
                 if (!File.Exists(cachePath))
                 {
-                    throw new HtmlWebException("File was not found at cache path: '" + cachePath + "'");
+                    throw new HtmlWebException(
+                        "File was not found at cache path: '" + cachePath + "'"
+                    );
                 }
 
                 if (path != null)
@@ -363,13 +335,13 @@ namespace HtmlAgilityPack
                 }
 
                 // dump cookie
-//                if (_useCookies)
-//                {
-//                    foreach(Cookie cookie in req.CookieContainer.GetCookies(req.RequestUri))
-//                    {
-//                        HtmlLibrary.Trace("Cookie " + cookie.Name + "=" + cookie.Value + " path=" + cookie.Path + " domain=" + cookie.Domain);
-//                    }
-//                }
+                //                if (_useCookies)
+                //                {
+                //                    foreach(Cookie cookie in req.CookieContainer.GetCookies(req.RequestUri))
+                //                    {
+                //                        HtmlLibrary.Trace("Cookie " + cookie.Name + "=" + cookie.Value + " path=" + cookie.Path + " domain=" + cookie.Domain);
+                //                    }
+                //                }
             }
 
             HttpWebResponse resp;
@@ -397,7 +369,7 @@ namespace HtmlAgilityPack
                     throw;
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 _requestDuration = Environment.TickCount - tc;
                 throw;
@@ -411,11 +383,11 @@ namespace HtmlAgilityPack
 
             _requestDuration = Environment.TickCount - tc;
             _responseUri = resp.ResponseUri;
-            
+
             bool html = IsHtmlContent(resp.ContentType);
             System.Text.Encoding respenc;
 
-            if ((resp.ContentEncoding != null) && (resp.ContentEncoding.Length>0))
+            if ((resp.ContentEncoding != null) && (resp.ContentEncoding.Length > 0))
             {
                 respenc = System.Text.Encoding.GetEncoding(resp.ContentEncoding);
             }
@@ -440,7 +412,9 @@ namespace HtmlAgilityPack
                 else
                 {
                     // this should *never* happen...
-                    throw new HtmlWebException("Server has send a NotModifed code, without cache enabled.");
+                    throw new HtmlWebException(
+                        "Server has send a NotModifed code, without cache enabled."
+                    );
                 }
             }
             Stream s = resp.GetResponseStream();
@@ -449,7 +423,12 @@ namespace HtmlAgilityPack
                 if (UsingCache)
                 {
                     // NOTE: LastModified does not contain milliseconds, so we remove them to the file
-                    SaveStream(s, cachePath, RemoveMilliseconds(resp.LastModified), _streamBufferSize);
+                    SaveStream(
+                        s,
+                        cachePath,
+                        RemoveMilliseconds(resp.LastModified),
+                        _streamBufferSize
+                    );
 
                     // save headers
                     SaveCacheHeaders(req.RequestUri, resp);
@@ -468,7 +447,7 @@ namespace HtmlAgilityPack
                     {
                         if (respenc != null)
                         {
-                            doc.Load(s,respenc);
+                            doc.Load(s, respenc);
                         }
                         else
                         {
@@ -487,7 +466,11 @@ namespace HtmlAgilityPack
             // we don't handle that here
             XmlDocument doc = new XmlDocument();
             doc.Load(GetCacheHeadersPath(requestUri));
-            XmlNode node = doc.SelectSingleNode("//h[translate(@n, 'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')='" + name.ToUpper() + "']");
+            XmlNode node = doc.SelectSingleNode(
+                "//h[translate(@n, 'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')='"
+                    + name.ToUpper()
+                    + "']"
+            );
             if (node == null)
             {
                 return def;
@@ -503,7 +486,7 @@ namespace HtmlAgilityPack
             XmlDocument doc = new XmlDocument();
             doc.LoadXml("<c></c>");
             XmlNode cache = doc.FirstChild;
-            foreach(string header in resp.Headers)
+            foreach (string header in resp.Headers)
             {
                 XmlNode entry = doc.CreateElement("h");
                 XmlAttribute att = doc.CreateAttribute("n");
@@ -519,7 +502,12 @@ namespace HtmlAgilityPack
             doc.Save(file);
         }
 
-        private static long SaveStream(Stream stream, string path, DateTime touchDate, int streamBufferSize)
+        private static long SaveStream(
+            Stream stream,
+            string path,
+            DateTime touchDate,
+            int streamBufferSize
+        )
         {
             FilePreparePath(path);
             FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
@@ -536,12 +524,11 @@ namespace HtmlAgilityPack
                 {
                     buffer = br.ReadBytes(streamBufferSize);
                     len += buffer.Length;
-                    if (buffer.Length>0)
+                    if (buffer.Length > 0)
                     {
                         bw.Write(buffer);
                     }
-                }
-                while (buffer.Length>0);
+                } while (buffer.Length > 0);
             }
             finally
             {
@@ -604,9 +591,9 @@ namespace HtmlAgilityPack
                 reg = reg.OpenSubKey(@"MIME\Database\Content Type\" + contentType, false);
                 ext = (string)reg.GetValue("Extension", def);
             }
-            catch(Exception)
+            catch (Exception)
             {
-                ext =  def;
+                ext = def;
             }
             return ext;
         }
@@ -630,9 +617,9 @@ namespace HtmlAgilityPack
                 reg = reg.OpenSubKey(extension, false);
                 contentType = (string)reg.GetValue("", def);
             }
-            catch(Exception)
+            catch (Exception)
             {
-                contentType =  def;
+                contentType = def;
             }
             return contentType;
         }
@@ -655,7 +642,12 @@ namespace HtmlAgilityPack
         /// <param name="xsltUrl">The URL that specifies the XSLT stylesheet to load.</param>
         /// <param name="xsltArgs">An XsltArgumentList containing the namespace-qualified arguments used as input to the transform.</param>
         /// <param name="writer">The XmlTextWriter to which you want to save.</param>
-        public void LoadHtmlAsXml(string htmlUrl, string xsltUrl, XsltArgumentList xsltArgs, XmlTextWriter writer)
+        public void LoadHtmlAsXml(
+            string htmlUrl,
+            string xsltUrl,
+            XsltArgumentList xsltArgs,
+            XmlTextWriter writer
+        )
         {
             LoadHtmlAsXml(htmlUrl, xsltUrl, xsltArgs, writer, null);
         }
@@ -668,7 +660,13 @@ namespace HtmlAgilityPack
         /// <param name="xsltArgs">An XsltArgumentList containing the namespace-qualified arguments used as input to the transform.</param>
         /// <param name="writer">The XmlTextWriter to which you want to save.</param>
         /// <param name="xmlPath">A file path where the temporary XML before transformation will be saved. Mostly used for debugging purposes.</param>
-        public void LoadHtmlAsXml(string htmlUrl, string xsltUrl, XsltArgumentList xsltArgs, XmlTextWriter writer, string xmlPath)
+        public void LoadHtmlAsXml(
+            string htmlUrl,
+            string xsltUrl,
+            XsltArgumentList xsltArgs,
+            XmlTextWriter writer,
+            string xmlPath
+        )
         {
             if (htmlUrl == null)
             {
@@ -687,7 +685,7 @@ namespace HtmlAgilityPack
             {
                 xsltArgs = new XsltArgumentList();
             }
-            
+
             // add some useful variables to the xslt doc
             xsltArgs.AddParam("url", "", htmlUrl);
             xsltArgs.AddParam("requestDuration", "", RequestDuration);
@@ -717,7 +715,12 @@ namespace HtmlAgilityPack
         /// <param name="xsltArgs">An XsltArgumentList containing the namespace-qualified arguments used as input to the transform.</param>
         /// <param name="type">The requested type.</param>
         /// <returns>An newly created instance.</returns>
-        public object CreateInstance(string htmlUrl, string xsltUrl, XsltArgumentList xsltArgs, Type type)
+        public object CreateInstance(
+            string htmlUrl,
+            string xsltUrl,
+            XsltArgumentList xsltArgs,
+            Type type
+        )
         {
             return CreateInstance(htmlUrl, xsltUrl, xsltArgs, type, null);
         }
@@ -731,7 +734,13 @@ namespace HtmlAgilityPack
         /// <param name="type">The requested type.</param>
         /// <param name="xmlPath">A file path where the temporary XML before transformation will be saved. Mostly used for debugging purposes.</param>
         /// <returns>An newly created instance.</returns>
-        public object CreateInstance(string htmlUrl, string xsltUrl, XsltArgumentList xsltArgs, Type type, string xmlPath)
+        public object CreateInstance(
+            string htmlUrl,
+            string xsltUrl,
+            XsltArgumentList xsltArgs,
+            Type type,
+            string xmlPath
+        )
         {
             StringWriter sw = new StringWriter();
             XmlTextWriter writer = new XmlTextWriter(sw);
@@ -759,7 +768,7 @@ namespace HtmlAgilityPack
             {
                 o = serializer.Deserialize(reader);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 throw new Exception(ex.ToString() + ", --- xml:" + sw.ToString());
             }
@@ -771,14 +780,8 @@ namespace HtmlAgilityPack
         /// </summary>
         public string CachePath
         {
-            get
-            {
-                return _cachePath;
-            }
-            set
-            {
-                _cachePath = value;
-            }
+            get { return _cachePath; }
+            set { _cachePath = value; }
         }
 
         /// <summary>
@@ -808,15 +811,13 @@ namespace HtmlAgilityPack
     /// <summary>
     /// Represents an exception thrown by the HtmlWeb utility class.
     /// </summary>
-    public class HtmlWebException: Exception
+    public class HtmlWebException : Exception
     {
         /// <summary>
         /// Creates an instance of the HtmlWebException.
         /// </summary>
         /// <param name="message">The exception's message.</param>
         public HtmlWebException(string message)
-            :base(message)
-        {
-        }
+            : base(message) { }
     }
 }

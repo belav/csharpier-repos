@@ -3,14 +3,13 @@
 
 using System;
 
-class X {
+class X
+{
     // Public properties and variables.
     public string Y;
 
     // Constructors.
-    public X()
-    {
-    }
+    public X() { }
 
     // Public static methods.
     public static void Main(string[] Arguments)
@@ -18,9 +17,3 @@ class X {
         X.Y = "";
     }
 }
-
-
-
-
-
-

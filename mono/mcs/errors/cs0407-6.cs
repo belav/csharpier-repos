@@ -10,7 +10,7 @@ class Program
         Action<dynamic> d = Foo;
     }
 
-    static int Foo (object o)
+    static int Foo(object o)
     {
         return 0;
     }

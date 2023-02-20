@@ -6,10 +6,10 @@ abstract class MethodWrapper
 
     internal void SetDeclaredExceptions(MapXml.Throws[] throws)
     {
-        if(throws != null)
+        if (throws != null)
         {
             declaredExceptions = new string[throws.Length];
-            for(int i = 0; i < throws.Length; i++)
+            for (int i = 0; i < throws.Length; i++)
             {
                 declaredExceptions[i] = throws[i].Class;
             }
@@ -17,18 +17,16 @@ abstract class MethodWrapper
     }
 }
 
-namespace MapXml {
-
+namespace MapXml
+{
     using System;
     using System.Xml.Serialization;
-    
+
     public class Throws
     {
         [XmlAttribute("class")]
         public string Class;
-            
-        public static void Main ()
-        {
-        }
+
+        public static void Main() { }
     }
 }

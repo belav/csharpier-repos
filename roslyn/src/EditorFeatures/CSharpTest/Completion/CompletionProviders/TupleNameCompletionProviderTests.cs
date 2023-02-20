@@ -21,98 +21,127 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         [Fact]
         public async Task AfterOpenParen()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 class Program
 {
     static void Main(string[] args)
     {
         (int word, int zword) t = ($$
     }
-}", "word", displayTextSuffix: ":");
+}",
+                "word",
+                displayTextSuffix: ":"
+            );
         }
 
         [Fact]
         public async Task AfterOpenParenWithBraceCompletion()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 class Program
 {
     static void Main(string[] args)
     {
         (int word, int zword) t = ($$)
     }
-}", "word", displayTextSuffix: ":");
+}",
+                "word",
+                displayTextSuffix: ":"
+            );
         }
 
         [Fact]
         public async Task AfterOpenParenInTupleExpression()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 class Program
 {
     static void Main(string[] args)
     {
         (int word, int zword) t = ($$, zword: 2
     }
-}", "word", displayTextSuffix: ":");
+}",
+                "word",
+                displayTextSuffix: ":"
+            );
         }
 
         [Fact]
         public async Task AfterOpenParenInTupleExpressionWithBraceCompletion()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 class Program
 {
     static void Main(string[] args)
     {
         (int word, int zword) t = ($$, zword: 2
     }
-}", "word", displayTextSuffix: ":");
+}",
+                "word",
+                displayTextSuffix: ":"
+            );
         }
 
         [Fact]
         public async Task AfterComma()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 class Program
 {
     static void Main(string[] args)
     {
         (int word, int zword) t = (1, $$
     }
-}", "zword", displayTextSuffix: ":");
+}",
+                "zword",
+                displayTextSuffix: ":"
+            );
         }
 
         [Fact]
         public async Task AfterCommaWithBraceCompletion()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 class Program
 {
     static void Main(string[] args)
     {
         (int word, int zword) t = (1, $$)
     }
-}", "zword", displayTextSuffix: ":");
+}",
+                "zword",
+                displayTextSuffix: ":"
+            );
         }
 
         [Fact]
         public async Task InTupleAsArgument()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 class Program
 {
     static void Main((int word, int zword) args)
     {
          Main(($$))
     }
-}", "word", displayTextSuffix: ":");
+}",
+                "word",
+                displayTextSuffix: ":"
+            );
         }
 
         [Fact]
         public async Task MultiplePossibleTuples()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void Main((int number, int znumber) args) { }
@@ -127,7 +156,8 @@ class Program
         [Fact]
         public async Task MultiplePossibleTuplesAfterComma()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void Main((int number, int znumber) args) { }
@@ -142,7 +172,8 @@ class Program
         [Fact]
         public async Task AtIndexGreaterThanNumberOfTupleElements()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -156,7 +187,8 @@ class Program
         [Fact]
         public async Task ConvertCastToTupleExpression()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void goo()

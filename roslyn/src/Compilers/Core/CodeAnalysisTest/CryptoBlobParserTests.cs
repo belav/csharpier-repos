@@ -53,7 +53,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Array.Reverse(expectedDQ);
             AssertEx.Equal(expectedDQ, privKey.DQ);
 
-            var expectedInverseQ = key.Skip(HEADER_LEN + MOD_LEN + HALF_LEN * 4).Take(HALF_LEN).ToArray();
+            var expectedInverseQ = key.Skip(HEADER_LEN + MOD_LEN + HALF_LEN * 4)
+                .Take(HALF_LEN)
+                .ToArray();
             Array.Reverse(expectedInverseQ);
             AssertEx.Equal(expectedInverseQ, privKey.InverseQ);
 
@@ -96,7 +98,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Array.Reverse(expectedDQ);
             AssertEx.Equal(expectedDQ, privKey.DQ);
 
-            var expectedInverseQ = key.Skip(HEADER_LEN + MOD_LEN + HALF_LEN * 4).Take(HALF_LEN).ToArray();
+            var expectedInverseQ = key.Skip(HEADER_LEN + MOD_LEN + HALF_LEN * 4)
+                .Take(HALF_LEN)
+                .ToArray();
             Array.Reverse(expectedInverseQ);
             AssertEx.Equal(expectedInverseQ, privKey.InverseQ);
 

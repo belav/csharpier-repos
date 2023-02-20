@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -16,7 +16,7 @@
 //  Purpose:    AxisName converter of the design-time CustomProperties
 //                property object.
 //
-//    Reviewed:    
+//    Reviewed:
 //
 //===================================================================
 
@@ -30,17 +30,17 @@ using System.Globalization;
 using System.Diagnostics.CodeAnalysis;
 
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting.Utilities;
-    using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting;
 #else
-    using System.Web.UI.DataVisualization.Charting.Utilities;
-    using System.Web.UI.DataVisualization.Charting;
+using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web.UI.DataVisualization.Charting;
 #endif
 
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
 namespace System.Web.UI.DataVisualization.Charting
 #endif
@@ -60,7 +60,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>Indicates if convertion is possible.</returns>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            if(sourceType == typeof(string))
+            if (sourceType == typeof(string))
             {
                 return true;
             }
@@ -76,7 +76,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>Indicates if convertion is possible.</returns>
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            if(destinationType == typeof(CustomProperties))
+            if (destinationType == typeof(CustomProperties))
             {
                 return true;
             }
@@ -92,9 +92,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="value">Value to convert.</param>
         /// <param name="destinationType">Convertion destination type.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) 
-        {  
-            if (destinationType == typeof(string)) 
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            if (destinationType == typeof(string))
             {
                 return ((CustomProperties)value).DataPointCustomProperties.CustomProperties;
             }
@@ -110,32 +115,45 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="culture">Culture information.</param>
         /// <param name="value">Value to convert from.</param>
         /// <returns>Indicates if convertion is possible.</returns>
-        [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily",
-            Justification = "Too large of a code change to justify making this change")]
-        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) 
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1800:DoNotCastUnnecessarily",
+            Justification = "Too large of a code change to justify making this change"
+        )]
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value
+        )
         {
             string stringValue = value as string;
-            if(stringValue != null && context != null && context.Instance != null) 
+            if (stringValue != null && context != null && context.Instance != null)
             {
                 // Create new custom attribute class with a reference to the DataPointCustomProperties
-                if(context.Instance is DataPointCustomProperties)
+                if (context.Instance is DataPointCustomProperties)
                 {
                     ((DataPointCustomProperties)context.Instance).CustomProperties = stringValue;
-                    CustomProperties newAttributes = new CustomProperties(((DataPointCustomProperties)context.Instance));
+                    CustomProperties newAttributes = new CustomProperties(
+                        ((DataPointCustomProperties)context.Instance)
+                    );
                     return newAttributes;
                 }
-
                 else if (context.Instance is CustomProperties)
                 {
-                    CustomProperties newAttributes = new CustomProperties(((CustomProperties)context.Instance).DataPointCustomProperties);
+                    CustomProperties newAttributes = new CustomProperties(
+                        ((CustomProperties)context.Instance).DataPointCustomProperties
+                    );
                     return newAttributes;
                 }
                 else if (context.Instance is IDataPointCustomPropertiesProvider)
                 {
-                    CustomProperties newAttributes = new CustomProperties(((IDataPointCustomPropertiesProvider)context.Instance).DataPointCustomProperties);
+                    CustomProperties newAttributes = new CustomProperties(
+                        (
+                            (IDataPointCustomPropertiesProvider)context.Instance
+                        ).DataPointCustomProperties
+                    );
                     return newAttributes;
                 }
-
                 else if (context.Instance is Array)
                 {
                     DataPointCustomProperties attributes = null;
@@ -156,7 +174,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             return base.ConvertFrom(context, culture, value);
         }
-    
+
         #endregion // String to/from convertion methods
 
         #region Property Descriptor Collection methods
@@ -179,34 +197,43 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="obj">An Object that specifies the type of array for which to get properties.</param>
         /// <param name="attributes">An array of type Attribute that is used as a filter.</param>
         /// <returns>A PropertyDescriptorCollection with the properties that are exposed for this data type, or a null reference (Nothing in Visual Basic) if there are no properties.</returns>
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object obj, Attribute[] attributes)
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext context,
+            object obj,
+            Attribute[] attributes
+        )
         {
             PropertyDescriptorCollection propCollection = new PropertyDescriptorCollection(null);
             CustomProperties attr = obj as CustomProperties;
-            if(attr != null && context != null)
+            if (attr != null && context != null)
             {
                 // Get series associated with custom attribute
-                Series series = (attr.DataPointCustomProperties is Series) ? ( (Series) attr.DataPointCustomProperties) : attr.DataPointCustomProperties.series;
-                if(series != null && 
-                    series.Common != null)
+                Series series =
+                    (attr.DataPointCustomProperties is Series)
+                        ? ((Series)attr.DataPointCustomProperties)
+                        : attr.DataPointCustomProperties.series;
+                if (series != null && series.Common != null)
                 {
                     // Loop through all registered custom properties
-                    CustomPropertyRegistry registry = (CustomPropertyRegistry)series.Common.container.GetService(typeof(CustomPropertyRegistry));
-                    foreach(CustomPropertyInfo attrInfo in registry.registeredCustomProperties)
+                    CustomPropertyRegistry registry = (CustomPropertyRegistry)
+                        series.Common.container.GetService(typeof(CustomPropertyRegistry));
+                    foreach (CustomPropertyInfo attrInfo in registry.registeredCustomProperties)
                     {
                         // Check if attribute description matches curent selection in property browser
-                        if(IsApplicableCustomProperty(attrInfo, context.Instance))
+                        if (IsApplicableCustomProperty(attrInfo, context.Instance))
                         {
                             // Get array of property properties
                             Attribute[] propAttributes = GetPropertyAttributes(attrInfo);
 
                             // Create property descriptor
-                            CustomAttributesPropertyDescriptor propertyDescriptor = new CustomAttributesPropertyDescriptor(
-                                typeof(CustomProperties),
-                                attrInfo.Name, 
-                                attrInfo.ValueType,
-                                propAttributes,
-                                attrInfo);
+                            CustomAttributesPropertyDescriptor propertyDescriptor =
+                                new CustomAttributesPropertyDescriptor(
+                                    typeof(CustomProperties),
+                                    attrInfo.Name,
+                                    attrInfo.ValueType,
+                                    propAttributes,
+                                    attrInfo
+                                );
 
                             // Add descriptor into the collection
                             propCollection.Add(propertyDescriptor);
@@ -214,19 +241,22 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
 
                     // Always add "UserDefined" property for all user defined custom properties
-                    Attribute[] propUserDefinedAttributes = new Attribute[] {
-                            new NotifyParentPropertyAttribute(true),
-                            new RefreshPropertiesAttribute(RefreshProperties.All),
-                            new DescriptionAttribute(SR.DescriptionAttributeUserDefined)
-                        };
+                    Attribute[] propUserDefinedAttributes = new Attribute[]
+                    {
+                        new NotifyParentPropertyAttribute(true),
+                        new RefreshPropertiesAttribute(RefreshProperties.All),
+                        new DescriptionAttribute(SR.DescriptionAttributeUserDefined)
+                    };
 
                     // Create property descriptor
-                    CustomAttributesPropertyDescriptor propertyUserDefinedDescriptor = new CustomAttributesPropertyDescriptor(
-                        typeof(CustomProperties),
-                        "UserDefined", 
-                        typeof(string),
-                        propUserDefinedAttributes,
-                        null);
+                    CustomAttributesPropertyDescriptor propertyUserDefinedDescriptor =
+                        new CustomAttributesPropertyDescriptor(
+                            typeof(CustomProperties),
+                            "UserDefined",
+                            typeof(string),
+                            propUserDefinedAttributes,
+                            null
+                        );
 
                     // Add descriptor into the collection
                     propCollection.Add(propertyUserDefinedDescriptor);
@@ -244,7 +274,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>True if custom attribute applies.</returns>
         private bool IsApplicableCustomProperty(CustomPropertyInfo attrInfo, object obj)
         {
-
             CustomProperties customProperties = obj as CustomProperties;
             if (customProperties != null)
             {
@@ -252,27 +281,29 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Check if custom attribute applies to the series or points
-            if( (IsDataPoint(obj) && attrInfo.AppliesToDataPoint) ||
-                (!IsDataPoint(obj) && attrInfo.AppliesToSeries) )
+            if (
+                (IsDataPoint(obj) && attrInfo.AppliesToDataPoint)
+                || (!IsDataPoint(obj) && attrInfo.AppliesToSeries)
+            )
             {
                 // Check if attribute do not apply to 3D or 2D chart types
-                if( (Is3DChartType(obj) && attrInfo.AppliesTo3D) ||
-                    (!Is3DChartType(obj) && attrInfo.AppliesTo2D) )
+                if (
+                    (Is3DChartType(obj) && attrInfo.AppliesTo3D)
+                    || (!Is3DChartType(obj) && attrInfo.AppliesTo2D)
+                )
                 {
-
                     // Check if custom attribute applies to the chart types selected
                     SeriesChartType[] chartTypes = GetSelectedChartTypes(obj);
-                    foreach(SeriesChartType chartType in chartTypes)
+                    foreach (SeriesChartType chartType in chartTypes)
                     {
-                        foreach(SeriesChartType attrChartType in attrInfo.AppliesToChartType)
+                        foreach (SeriesChartType attrChartType in attrInfo.AppliesToChartType)
                         {
-                            if(attrChartType == chartType)
+                            if (attrChartType == chartType)
                             {
                                 return true;
                             }
                         }
                     }
-
                 }
             }
 
@@ -287,13 +318,13 @@ namespace System.Web.UI.DataVisualization.Charting
         private bool IsDataPoint(object obj)
         {
             Series series = obj as Series;
-            if(series != null)
+            if (series != null)
             {
                 return false;
             }
 
             Array array = obj as Array;
-            if(array != null && array.Length > 0)
+            if (array != null && array.Length > 0)
             {
                 if (array.GetValue(0) is Series)
                 {
@@ -312,12 +343,12 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             // Get array of series
             Series[] seriesArray = GetSelectedSeries(obj);
-            
+
             // Loop through all series and check if its plotted on 3D chart area
-            foreach(Series series in seriesArray)
+            foreach (Series series in seriesArray)
             {
                 ChartArea chartArea = series.Chart.ChartAreas[series.ChartArea];
-                if(chartArea.Area3DStyle.Enable3D)
+                if (chartArea.Area3DStyle.Enable3D)
                 {
                     return true;
                 }
@@ -331,29 +362,35 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="obj">Selected objects.</param>
         /// <returns>Selected series array.</returns>
-        [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily",
-            Justification = "Too large of a code change to justify making this change")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1800:DoNotCastUnnecessarily",
+            Justification = "Too large of a code change to justify making this change"
+        )]
         private Series[] GetSelectedSeries(object obj)
         {
             // Get array of series
             Series[] seriesArray = new Series[0];
-            if(obj is Array && ((Array)obj).Length > 0)
+            if (obj is Array && ((Array)obj).Length > 0)
             {
-                if(((Array)obj).GetValue(0) is Series)
+                if (((Array)obj).GetValue(0) is Series)
                 {
                     seriesArray = new Series[((Array)obj).Length];
                     ((Array)obj).CopyTo(seriesArray, 0);
                 }
-                else if(((Array)obj).GetValue(0) is DataPointCustomProperties)
+                else if (((Array)obj).GetValue(0) is DataPointCustomProperties)
                 {
-                    seriesArray = new Series[] { ((DataPointCustomProperties)((Array)obj).GetValue(0)).series };
+                    seriesArray = new Series[]
+                    {
+                        ((DataPointCustomProperties)((Array)obj).GetValue(0)).series
+                    };
                 }
             }
-            else if(obj is Series)
+            else if (obj is Series)
             {
                 seriesArray = new Series[] { ((Series)obj) };
             }
-            else if(obj is DataPointCustomProperties)
+            else if (obj is DataPointCustomProperties)
             {
                 seriesArray = new Series[] { ((DataPointCustomProperties)obj).series };
             }
@@ -374,7 +411,7 @@ namespace System.Web.UI.DataVisualization.Charting
             // Create array of chart types
             int index = 0;
             SeriesChartType[] chartTypes = new SeriesChartType[seriesArray.Length];
-            foreach(Series series in seriesArray)
+            foreach (Series series in seriesArray)
             {
                 chartTypes[index++] = series.ChartType;
             }
@@ -397,11 +434,18 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             else if (attrInfo.DefaultValue is string)
             {
-                defaultValueAttribute = new DefaultValueAttribute(attrInfo.ValueType, (string)attrInfo.DefaultValue);
+                defaultValueAttribute = new DefaultValueAttribute(
+                    attrInfo.ValueType,
+                    (string)attrInfo.DefaultValue
+                );
             }
             else
             {
-                throw (new InvalidOperationException(SR.ExceptionCustomAttributeDefaultValueTypeInvalid));
+                throw (
+                    new InvalidOperationException(
+                        SR.ExceptionCustomAttributeDefaultValueTypeInvalid
+                    )
+                );
             }
             // Add all properties into the list
             ArrayList propList = new ArrayList();
@@ -419,7 +463,7 @@ namespace System.Web.UI.DataVisualization.Charting
             // Convert list to array
             int index = 0;
             Attribute[] propAttributes = new Attribute[propList.Count];
-            foreach(Attribute attr in propList)
+            foreach (Attribute attr in propList)
             {
                 propAttributes[index++] = attr;
             }
@@ -454,7 +498,7 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 return false;
             }
-            
+
             /// <summary>
             /// Returns a collection of standard values for the data type this type converter is designed for when provided with a format context.
             /// </summary>
@@ -462,12 +506,21 @@ namespace System.Web.UI.DataVisualization.Charting
             /// <returns>
             /// A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection"/> that holds a standard set of valid values, or null if the data type does not support a standard set of values.
             /// </returns>
-            public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+            public override StandardValuesCollection GetStandardValues(
+                ITypeDescriptorContext context
+            )
             {
                 ArrayList result = new ArrayList();
-                foreach (ChartTypes.ErrorBarType item in Enum.GetValues(typeof(ChartTypes.ErrorBarType)))
+                foreach (
+                    ChartTypes.ErrorBarType item in Enum.GetValues(typeof(ChartTypes.ErrorBarType))
+                )
                 {
-                    string itemStr = String.Format(CultureInfo.InvariantCulture, "{0}({1:N0})", item, ChartTypes.ErrorBarChart.DefaultErrorBarTypeValue(item));
+                    string itemStr = String.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}({1:N0})",
+                        item,
+                        ChartTypes.ErrorBarChart.DefaultErrorBarTypeValue(item)
+                    );
                     result.Add(itemStr);
                 }
                 return new StandardValuesCollection(result);
@@ -481,15 +534,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Custom properties inner property descriptor class.
         /// </summary>
-        protected class CustomAttributesPropertyDescriptor : TypeConverter.SimplePropertyDescriptor 
+        protected class CustomAttributesPropertyDescriptor : TypeConverter.SimplePropertyDescriptor
         {
             #region Fields
 
             // Property name
-            private    string                    _name = string.Empty;
+            private string _name = string.Empty;
 
             // Custom attribute information
-            private    CustomPropertyInfo        _customAttributeInfo = null;
+            private CustomPropertyInfo _customAttributeInfo = null;
 
             #endregion // Fields
 
@@ -503,12 +556,13 @@ namespace System.Web.UI.DataVisualization.Charting
             /// <param name="propertyType">Property type.</param>
             /// <param name="attributes">Property attributes.</param>
             /// <param name="customAttributeInfo">Custom attribute information.</param>
-            internal CustomAttributesPropertyDescriptor(  
+            internal CustomAttributesPropertyDescriptor(
                 Type componentType,
                 string name,
                 Type propertyType,
                 Attribute[] attributes,
-                CustomPropertyInfo customAttributeInfo) 
+                CustomPropertyInfo customAttributeInfo
+            )
                 : base(componentType, name, propertyType, attributes)
             {
                 this._name = name;
@@ -528,7 +582,7 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 // "UserDefined" property expose comma separated user defined properties
                 CustomProperties customAttr = component as CustomProperties;
-                if(this._name == "UserDefined")
+                if (this._name == "UserDefined")
                 {
                     return customAttr.GetUserDefinedCustomProperties();
                 }
@@ -538,9 +592,9 @@ namespace System.Web.UI.DataVisualization.Charting
 
                     // Check if custom attribute with this name is set
                     string stringValue = customAttr.DataPointCustomProperties[this._name];
-                    if(this._customAttributeInfo != null)
+                    if (this._customAttributeInfo != null)
                     {
-                        if(stringValue == null || stringValue.Length == 0)
+                        if (stringValue == null || stringValue.Length == 0)
                         {
                             val = GetValueFromString(this._customAttributeInfo.DefaultValue);
                         }
@@ -553,7 +607,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         val = stringValue;
                     }
-                    
+
                     return val;
                 }
             }
@@ -573,7 +627,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
                 // "UserDefined" property expose comma separated user defined properties
                 CustomProperties customAttr = component as CustomProperties;
-                if( this._name == "UserDefined" )
+                if (this._name == "UserDefined")
                 {
                     customAttr.SetUserDefinedAttributes(stringValue);
                 }
@@ -581,36 +635,45 @@ namespace System.Web.UI.DataVisualization.Charting
                 {
                     // Check if the new value is the same as DefaultValue
                     bool setAttributeValue = true;
-                    if( IsDefaultValue(stringValue) )
+                    if (IsDefaultValue(stringValue))
                     {
                         // Remove custom properties with default values from data point
                         // only when series do not have this attribute set.
-                        if( !(customAttr.DataPointCustomProperties is DataPoint) ||
-                            !((DataPoint)customAttr.DataPointCustomProperties).series.IsCustomPropertySet(this._name) ) 
+                        if (
+                            !(customAttr.DataPointCustomProperties is DataPoint)
+                            || !(
+                                (DataPoint)customAttr.DataPointCustomProperties
+                            ).series.IsCustomPropertySet(this._name)
+                        )
                         {
                             // Delete attribute
-                            if(customAttr.DataPointCustomProperties.IsCustomPropertySet(this._name))
+                            if (
+                                customAttr.DataPointCustomProperties.IsCustomPropertySet(this._name)
+                            )
                             {
-                                customAttr.DataPointCustomProperties.DeleteCustomProperty(this._name);
+                                customAttr.DataPointCustomProperties.DeleteCustomProperty(
+                                    this._name
+                                );
                                 setAttributeValue = false;
                             }
                         }
                     }
 
                     // Set custom attribute value
-                    if( setAttributeValue )
+                    if (setAttributeValue)
                     {
                         customAttr.DataPointCustomProperties[this._name] = stringValue;
                     }
                 }
-                customAttr.DataPointCustomProperties.CustomProperties = customAttr.DataPointCustomProperties.CustomProperties;
+                customAttr.DataPointCustomProperties.CustomProperties = customAttr
+                    .DataPointCustomProperties
+                    .CustomProperties;
 
                 IChangeTracking changeTracking = component as IChangeTracking;
                 if (changeTracking != null)
                 {
                     changeTracking.AcceptChanges();
                 }
-
             }
 
             /// <summary>
@@ -633,9 +696,9 @@ namespace System.Web.UI.DataVisualization.Charting
             public virtual object GetValueFromString(object obj)
             {
                 object result = null;
-                if(obj != null)
+                if (obj != null)
                 {
-                    if(this._customAttributeInfo.ValueType == obj.GetType() )
+                    if (this._customAttributeInfo.ValueType == obj.GetType())
                     {
                         return obj;
                     }
@@ -643,45 +706,67 @@ namespace System.Web.UI.DataVisualization.Charting
                     string stringValue = obj as string;
                     if (stringValue != null)
                     {
-                        if(this._customAttributeInfo.ValueType == typeof(string) )
+                        if (this._customAttributeInfo.ValueType == typeof(string))
                         {
                             result = stringValue;
                         }
-                        else if(this._customAttributeInfo.ValueType == typeof(float) )
+                        else if (this._customAttributeInfo.ValueType == typeof(float))
                         {
-                            result = float.Parse(stringValue, System.Globalization.CultureInfo.InvariantCulture);
+                            result = float.Parse(
+                                stringValue,
+                                System.Globalization.CultureInfo.InvariantCulture
+                            );
                         }
-                        else if(this._customAttributeInfo.ValueType == typeof(double) )
+                        else if (this._customAttributeInfo.ValueType == typeof(double))
                         {
-                            result = double.Parse(stringValue, System.Globalization.CultureInfo.InvariantCulture);
+                            result = double.Parse(
+                                stringValue,
+                                System.Globalization.CultureInfo.InvariantCulture
+                            );
                         }
-                        else if(this._customAttributeInfo.ValueType == typeof(int) )
+                        else if (this._customAttributeInfo.ValueType == typeof(int))
                         {
-                            result = int.Parse(stringValue, System.Globalization.CultureInfo.InvariantCulture);
+                            result = int.Parse(
+                                stringValue,
+                                System.Globalization.CultureInfo.InvariantCulture
+                            );
                         }
-                        else if(this._customAttributeInfo.ValueType == typeof(bool) )
+                        else if (this._customAttributeInfo.ValueType == typeof(bool))
                         {
                             result = bool.Parse(stringValue);
                         }
-                        else if(this._customAttributeInfo.ValueType == typeof(Color) )
+                        else if (this._customAttributeInfo.ValueType == typeof(Color))
                         {
                             ColorConverter colorConverter = new ColorConverter();
-                            result = (Color)colorConverter.ConvertFromString(null, System.Globalization.CultureInfo.InvariantCulture, stringValue);
+                            result = (Color)
+                                colorConverter.ConvertFromString(
+                                    null,
+                                    System.Globalization.CultureInfo.InvariantCulture,
+                                    stringValue
+                                );
                         }
-                        else if(this._customAttributeInfo.ValueType.IsEnum)
+                        else if (this._customAttributeInfo.ValueType.IsEnum)
                         {
-                            result = Enum.Parse(this._customAttributeInfo.ValueType, stringValue, true);
+                            result = Enum.Parse(
+                                this._customAttributeInfo.ValueType,
+                                stringValue,
+                                true
+                            );
                         }
                         else
                         {
-                            throw (new InvalidOperationException(SR.ExceptionCustomAttributeTypeUnsupported( this._customAttributeInfo.ValueType.ToString() )));
+                            throw (
+                                new InvalidOperationException(
+                                    SR.ExceptionCustomAttributeTypeUnsupported(
+                                        this._customAttributeInfo.ValueType.ToString()
+                                    )
+                                )
+                            );
                         }
-
                     }
                 }
                 return result;
             }
-
 
             /// <summary>
             /// Converts attribute value to string.
@@ -690,24 +775,32 @@ namespace System.Web.UI.DataVisualization.Charting
             /// <returns>Return attribute value converted to string.</returns>
             public string GetStringFromValue(object value)
             {
-                if(value is Color)
+                if (value is Color)
                 {
                     ColorConverter colorConverter = new ColorConverter();
-                    return colorConverter.ConvertToString(null, System.Globalization.CultureInfo.InvariantCulture, value);
+                    return colorConverter.ConvertToString(
+                        null,
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        value
+                    );
                 }
-                else if(value is float)
+                else if (value is float)
                 {
-                    return ((float)value).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    return ((float)value).ToString(
+                        System.Globalization.CultureInfo.InvariantCulture
+                    );
                 }
-                else if(value is double)
+                else if (value is double)
                 {
-                    return ((double)value).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    return ((double)value).ToString(
+                        System.Globalization.CultureInfo.InvariantCulture
+                    );
                 }
-                else if(value is int)
+                else if (value is int)
                 {
                     return ((int)value).ToString(System.Globalization.CultureInfo.InvariantCulture);
                 }
-                else if(value is bool)
+                else if (value is bool)
                 {
                     return ((bool)value).ToString();
                 }
@@ -720,102 +813,153 @@ namespace System.Web.UI.DataVisualization.Charting
             /// </summary>
             /// <param name="attrName">Attribute name.</param>
             /// <param name="value">Attribute value to validate.</param>
-            [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily",
-                Justification = "Too large of a code change to justify making this change")]
+            [SuppressMessage(
+                "Microsoft.Performance",
+                "CA1800:DoNotCastUnnecessarily",
+                Justification = "Too large of a code change to justify making this change"
+            )]
             public virtual void ValidateValue(string attrName, object value)
             {
                 // Check for validation rules
-                if(this._customAttributeInfo == null)
+                if (this._customAttributeInfo == null)
                 {
                     return;
                 }
 
                 // Check if property Min/Max value is provided
-                bool    outOfRange = false;
-                if(this._customAttributeInfo.MaxValue != null)
+                bool outOfRange = false;
+                if (this._customAttributeInfo.MaxValue != null)
                 {
-                    if(value.GetType() != this._customAttributeInfo.MaxValue.GetType())
+                    if (value.GetType() != this._customAttributeInfo.MaxValue.GetType())
                     {
-                        throw(new InvalidOperationException(SR.ExceptionCustomAttributeTypeOrMaximumPossibleValueInvalid( attrName ) ) );
+                        throw (
+                            new InvalidOperationException(
+                                SR.ExceptionCustomAttributeTypeOrMaximumPossibleValueInvalid(
+                                    attrName
+                                )
+                            )
+                        );
                     }
 
-                    if(value is float)
+                    if (value is float)
                     {
-                        if((float)value > (float)this._customAttributeInfo.MaxValue)
+                        if ((float)value > (float)this._customAttributeInfo.MaxValue)
                         {
                             outOfRange = true;
                         }
                     }
-                    else if(value is double)
+                    else if (value is double)
                     {
-                        if((double)value > (double)this._customAttributeInfo.MaxValue)
+                        if ((double)value > (double)this._customAttributeInfo.MaxValue)
                         {
                             outOfRange = true;
                         }
                     }
-                    else if(value is int)
+                    else if (value is int)
                     {
-                        if((int)value > (int)this._customAttributeInfo.MaxValue)
+                        if ((int)value > (int)this._customAttributeInfo.MaxValue)
                         {
                             outOfRange = true;
                         }
                     }
                     else
                     {
-                        throw (new InvalidOperationException(SR.ExceptionCustomAttributeTypeOrMinimumPossibleValueUnsupported(attrName)));
+                        throw (
+                            new InvalidOperationException(
+                                SR.ExceptionCustomAttributeTypeOrMinimumPossibleValueUnsupported(
+                                    attrName
+                                )
+                            )
+                        );
                     }
-
                 }
-            
+
                 // Check if property Min value is provided
-                if(this._customAttributeInfo.MinValue != null)
+                if (this._customAttributeInfo.MinValue != null)
                 {
-                    if(value.GetType() != this._customAttributeInfo.MinValue.GetType())
+                    if (value.GetType() != this._customAttributeInfo.MinValue.GetType())
                     {
-                        throw (new InvalidOperationException(SR.ExceptionCustomAttributeTypeOrMinimumPossibleValueInvalid( attrName ) ) );
+                        throw (
+                            new InvalidOperationException(
+                                SR.ExceptionCustomAttributeTypeOrMinimumPossibleValueInvalid(
+                                    attrName
+                                )
+                            )
+                        );
                     }
-                    
-                    if(value is float)
+
+                    if (value is float)
                     {
-                        if((float)value < (float)this._customAttributeInfo.MinValue)
+                        if ((float)value < (float)this._customAttributeInfo.MinValue)
                         {
                             outOfRange = true;
                         }
                     }
-                    else if(value is double)
+                    else if (value is double)
                     {
-                        if((double)value < (double)this._customAttributeInfo.MinValue)
+                        if ((double)value < (double)this._customAttributeInfo.MinValue)
                         {
                             outOfRange = true;
                         }
                     }
-                    else if(value is int)
+                    else if (value is int)
                     {
-                        if((int)value < (int)this._customAttributeInfo.MinValue)
+                        if ((int)value < (int)this._customAttributeInfo.MinValue)
                         {
                             outOfRange = true;
                         }
                     }
                     else
                     {
-                        throw(new InvalidOperationException(SR.ExceptionCustomAttributeTypeOrMinimumPossibleValueUnsupported(attrName)));
+                        throw (
+                            new InvalidOperationException(
+                                SR.ExceptionCustomAttributeTypeOrMinimumPossibleValueUnsupported(
+                                    attrName
+                                )
+                            )
+                        );
                     }
                 }
 
                 // Value out of range exception
-                if(outOfRange)
+                if (outOfRange)
                 {
-                    if(this._customAttributeInfo.MaxValue != null && this._customAttributeInfo.MinValue != null)
+                    if (
+                        this._customAttributeInfo.MaxValue != null
+                        && this._customAttributeInfo.MinValue != null
+                    )
                     {
-                        throw(new InvalidOperationException(SR.ExceptionCustomAttributeMustBeInRange(attrName, this._customAttributeInfo.MinValue.ToString(),this._customAttributeInfo.MaxValue.ToString() )));
+                        throw (
+                            new InvalidOperationException(
+                                SR.ExceptionCustomAttributeMustBeInRange(
+                                    attrName,
+                                    this._customAttributeInfo.MinValue.ToString(),
+                                    this._customAttributeInfo.MaxValue.ToString()
+                                )
+                            )
+                        );
                     }
-                    else if(this._customAttributeInfo.MinValue != null)
+                    else if (this._customAttributeInfo.MinValue != null)
                     {
-                        throw(new InvalidOperationException(SR.ExceptionCustomAttributeMustBeBiggerThenValue(attrName, this._customAttributeInfo.MinValue.ToString())));
+                        throw (
+                            new InvalidOperationException(
+                                SR.ExceptionCustomAttributeMustBeBiggerThenValue(
+                                    attrName,
+                                    this._customAttributeInfo.MinValue.ToString()
+                                )
+                            )
+                        );
                     }
-                    else if(this._customAttributeInfo.MaxValue != null)
+                    else if (this._customAttributeInfo.MaxValue != null)
                     {
-                        throw(new InvalidOperationException(SR.ExceptionCustomAttributeMustBeMoreThenValue(attrName, this._customAttributeInfo.MaxValue.ToString())));
+                        throw (
+                            new InvalidOperationException(
+                                SR.ExceptionCustomAttributeMustBeMoreThenValue(
+                                    attrName,
+                                    this._customAttributeInfo.MaxValue.ToString()
+                                )
+                            )
+                        );
                     }
                 }
             }
@@ -826,9 +970,8 @@ namespace System.Web.UI.DataVisualization.Charting
         #endregion // Custom Attributes Property Descriptor
     }
 
-
     /// <summary>
-    /// Property descriptor with ability to dynamically change properties 
+    /// Property descriptor with ability to dynamically change properties
     /// of the base property descriptor object.
     /// </summary>
     internal class DynamicPropertyDescriptor : PropertyDescriptor
@@ -836,12 +979,12 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Fields
 
         // Reference to the base property descriptor
-        private PropertyDescriptor    _basePropertyDescriptor = null; 
+        private PropertyDescriptor _basePropertyDescriptor = null;
 
         // Dynamic display name of the property
-        private string                _displayName = string.Empty;
+        private string _displayName = string.Empty;
 
-        #endregion // Fields 
+        #endregion // Fields
 
         #region Constructor
 
@@ -851,8 +994,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="basePropertyDescriptor">Base property descriptor.</param>
         /// <param name="displayName">New display name of the property.</param>
         public DynamicPropertyDescriptor(
-            PropertyDescriptor basePropertyDescriptor, 
-            string displayName)
+            PropertyDescriptor basePropertyDescriptor,
+            string displayName
+        )
             : base(basePropertyDescriptor)
         {
             this._displayName = displayName;
@@ -868,10 +1012,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public override Type ComponentType
         {
-            get 
-            { 
-                return _basePropertyDescriptor.ComponentType; 
-            }
+            get { return _basePropertyDescriptor.ComponentType; }
         }
 
         /// <summary>
@@ -881,7 +1022,7 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             get
             {
-                if(this._displayName.Length > 0)
+                if (this._displayName.Length > 0)
                 {
                     return this._displayName;
                 }
@@ -892,12 +1033,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Gets a value indicating whether this property is browsable.
         /// </summary>
-        public override bool IsBrowsable 
+        public override bool IsBrowsable
         {
-            get
-            {
-                return this._basePropertyDescriptor.IsBrowsable;
-            }
+            get { return this._basePropertyDescriptor.IsBrowsable; }
         }
 
         /// <summary>
@@ -905,10 +1043,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public override bool IsReadOnly
         {
-            get
-            {
-                return this._basePropertyDescriptor.IsReadOnly;
-            }
+            get { return this._basePropertyDescriptor.IsReadOnly; }
         }
 
         /// <summary>
@@ -916,10 +1051,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public override Type PropertyType
         {
-            get 
-            { 
-                return this._basePropertyDescriptor.PropertyType; 
-            }
+            get { return this._basePropertyDescriptor.PropertyType; }
         }
 
         #endregion // Properties

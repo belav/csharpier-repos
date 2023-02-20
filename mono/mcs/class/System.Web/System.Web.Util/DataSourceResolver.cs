@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,12 +35,13 @@
 using System.Collections;
 using System.ComponentModel;
 
-namespace System.Web.Util {
-    class DataSourceResolver 
+namespace System.Web.Util
+{
+    class DataSourceResolver
     {
-        DataSourceResolver () {}
+        DataSourceResolver() { }
 
-        public static IEnumerable ResolveDataSource (object o, string data_member) 
+        public static IEnumerable ResolveDataSource(object o, string data_member)
         {
             IEnumerable ds;
 
@@ -52,29 +53,31 @@ namespace System.Web.Util {
 
             if (ls == null)
                 return null;
-            
-            IList member_list = ls.GetList ();
-            if (! ls.ContainsListCollection)
+
+            IList member_list = ls.GetList();
+            if (!ls.ContainsListCollection)
                 return member_list;
 
             ITypedList tl = member_list as ITypedList;
             if (tl == null)
                 return null;
 
-            PropertyDescriptorCollection pd = tl.GetItemProperties (new PropertyDescriptor [0]);
-        
+            PropertyDescriptorCollection pd = tl.GetItemProperties(new PropertyDescriptor[0]);
+
             if (pd == null || pd.Count == 0)
-                throw new HttpException ("The selected data source did not contain any data members to bind to");
-        
-            PropertyDescriptor member_desc = data_member == "" ?
-                pd [0] :
-                pd.Find (data_member, true);
+                throw new HttpException(
+                    "The selected data source did not contain any data members to bind to"
+                );
+
+            PropertyDescriptor member_desc = data_member == "" ? pd[0] : pd.Find(data_member, true);
 
             if (member_desc != null)
-                ds = member_desc.GetValue (member_list [0]) as IEnumerable;
+                ds = member_desc.GetValue(member_list[0]) as IEnumerable;
 
             if (ds == null)
-                throw new HttpException ("A list corresponding to the selected DataMember was not found");
+                throw new HttpException(
+                    "A list corresponding to the selected DataMember was not found"
+                );
 
             return ds;
         }

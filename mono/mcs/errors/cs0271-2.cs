@@ -9,10 +9,10 @@ public class Test
     {
         public string B { protected get; set; }
     }
-    
-    static void Main ()
+
+    static void Main()
     {
-        A a = new A ();
+        A a = new A();
         a.B = "foo";
         string b = a.B;
     }

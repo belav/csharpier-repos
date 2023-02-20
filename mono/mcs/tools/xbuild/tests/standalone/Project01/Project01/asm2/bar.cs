@@ -1,7 +1,7 @@
 public class Bar
 {
-    public Bar ()
+    public Bar()
     {
-        Foo f = new Foo ();
+        Foo f = new Foo();
     }
 }

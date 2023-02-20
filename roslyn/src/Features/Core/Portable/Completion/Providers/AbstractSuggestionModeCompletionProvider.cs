@@ -12,16 +12,28 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal abstract class AbstractSuggestionModeCompletionProvider : LSPCompletionProvider
     {
-        protected abstract Task<CompletionItem?> GetSuggestionModeItemAsync(Document document, int position, TextSpan span, CompletionTrigger triggerInfo, CancellationToken cancellationToken);
+        protected abstract Task<CompletionItem?> GetSuggestionModeItemAsync(
+            Document document,
+            int position,
+            TextSpan span,
+            CompletionTrigger triggerInfo,
+            CancellationToken cancellationToken
+        );
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)
         {
             context.SuggestionModeItem = await GetSuggestionModeItemAsync(
-                context.Document, context.Position, context.CompletionListSpan, context.Trigger, context.CancellationToken).ConfigureAwait(false);
+                    context.Document,
+                    context.Position,
+                    context.CompletionListSpan,
+                    context.Trigger,
+                    context.CancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        protected static CompletionItem CreateEmptySuggestionModeItem()
-            => CreateSuggestionModeItem(displayText: null, description: null);
+        protected static CompletionItem CreateEmptySuggestionModeItem() =>
+            CreateSuggestionModeItem(displayText: null, description: null);
 
         public override ImmutableHashSet<char> TriggerCharacters => ImmutableHashSet<char>.Empty;
     }

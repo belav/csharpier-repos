@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,19 +43,21 @@ namespace System.Windows.Forms
 
         ListViewGroupCollection()
         {
-            list = new List<ListViewGroup> ();
+            list = new List<ListViewGroup>();
 
-            default_group = new ListViewGroup ("Default Group");
+            default_group = new ListViewGroup("Default Group");
             default_group.IsDefault = true;
         }
 
-        internal ListViewGroupCollection(ListView listViewOwner) : this()
+        internal ListViewGroupCollection(ListView listViewOwner)
+            : this()
         {
             list_view_owner = listViewOwner;
             default_group.ListViewOwner = listViewOwner;
         }
 
-        internal ListView ListViewOwner {
+        internal ListView ListViewOwner
+        {
             get { return list_view_owner; }
             set { list_view_owner = value; }
         }
@@ -73,18 +75,21 @@ namespace System.Windows.Forms
 
         public void CopyTo(Array array, int index)
         {
-            ((ICollection) list).CopyTo(array, index);
+            ((ICollection)list).CopyTo(array, index);
         }
 
-        public int Count {
+        public int Count
+        {
             get { return list.Count; }
         }
 
-        bool ICollection.IsSynchronized {
+        bool ICollection.IsSynchronized
+        {
             get { return true; }
         }
 
-        object ICollection.SyncRoot {
+        object ICollection.SyncRoot
+        {
             get { return this; }
         }
 
@@ -97,7 +102,7 @@ namespace System.Windows.Forms
             if (!(value is ListViewGroup))
                 throw new ArgumentException("value");
 
-            return Add((ListViewGroup)value);               
+            return Add((ListViewGroup)value);
         }
 
         public int Add(ListViewGroup group)
@@ -105,7 +110,7 @@ namespace System.Windows.Forms
             if (Contains(group))
                 return -1;
 
-            AddGroup (group);
+            AddGroup(group);
 
             if (this.list_view_owner != null)
                 list_view_owner.Redraw(true);
@@ -126,9 +131,9 @@ namespace System.Windows.Forms
             foreach (ListViewGroup group in list)
                 group.ListViewOwner = null;
 
-            list.Clear ();
+            list.Clear();
 
-            if(list_view_owner != null)
+            if (list_view_owner != null)
                 list_view_owner.Redraw(true);
         }
 
@@ -169,19 +174,21 @@ namespace System.Windows.Forms
             if (Contains(group))
                 return;
 
-                    CheckListViewItemsInGroup(group);
+            CheckListViewItemsInGroup(group);
             group.ListViewOwner = list_view_owner;
             list.Insert(index, group);
 
-            if(list_view_owner != null)
+            if (list_view_owner != null)
                 list_view_owner.Redraw(true);
         }
 
-        bool IList.IsFixedSize {
+        bool IList.IsFixedSize
+        {
             get { return false; }
         }
 
-        bool IList.IsReadOnly {
+        bool IList.IsReadOnly
+        {
             get { return false; }
         }
 
@@ -190,79 +197,87 @@ namespace System.Windows.Forms
             Remove((ListViewGroup)value);
         }
 
-        public void Remove (ListViewGroup group)
+        public void Remove(ListViewGroup group)
         {
-            int idx = list.IndexOf (group);
+            int idx = list.IndexOf(group);
             if (idx != -1)
-                RemoveAt (idx);
+                RemoveAt(idx);
         }
 
-        public void RemoveAt (int index)
+        public void RemoveAt(int index)
         {
             if (list.Count <= index || index < 0)
                 return;
 
-            ListViewGroup group = list [index];
+            ListViewGroup group = list[index];
             group.ListViewOwner = null;
 
-            list.RemoveAt (index);
+            list.RemoveAt(index);
             if (list_view_owner != null)
-                list_view_owner.Redraw (true);
+                list_view_owner.Redraw(true);
         }
 
-        object IList.this[int index] {
+        object IList.this[int index]
+        {
             get { return this[index]; }
-            set {
+            set
+            {
                 if (value is ListViewGroup)
                     this[index] = (ListViewGroup)value;
             }
         }
 
-        public ListViewGroup this[int index] {
-            get {
+        public ListViewGroup this[int index]
+        {
+            get
+            {
                 if (list.Count <= index || index < 0)
                     throw new ArgumentOutOfRangeException("index");
 
-                return list [index];
+                return list[index];
             }
-            set {
+            set
+            {
                 if (list.Count <= index || index < 0)
                     throw new ArgumentOutOfRangeException("index");
 
-                if (Contains (value))
+                if (Contains(value))
                     return;
 
                 if (value != null)
-                    CheckListViewItemsInGroup (value);
+                    CheckListViewItemsInGroup(value);
 
-                list [index] = value;
-                    
+                list[index] = value;
+
                 if (list_view_owner != null)
                     list_view_owner.Redraw(true);
             }
         }
 
-        public ListViewGroup this [string key] {
-            get {
-                int idx = IndexOfKey (key);
+        public ListViewGroup this[string key]
+        {
+            get
+            {
+                int idx = IndexOfKey(key);
                 if (idx != -1)
-                    return this [idx];
+                    return this[idx];
 
                 return null;
             }
-            set {
-                int idx = IndexOfKey (key);
+            set
+            {
+                int idx = IndexOfKey(key);
                 if (idx == -1)
                     return;
 
-                this [idx] = value;
+                this[idx] = value;
             }
         }
 
-        int IndexOfKey (string key)
+        int IndexOfKey(string key)
         {
             for (int i = 0; i < list.Count; i++)
-                if (list [i].Name == key)
+                if (list[i].Name == key)
                     return i;
 
             return -1;
@@ -273,49 +288,47 @@ namespace System.Windows.Forms
         public void AddRange(ListViewGroup[] groups)
         {
             foreach (ListViewGroup group in groups)
-                AddGroup (group);
+                AddGroup(group);
 
             if (list_view_owner != null)
-                list_view_owner.Redraw (true);
+                list_view_owner.Redraw(true);
         }
 
         public void AddRange(ListViewGroupCollection groups)
         {
             foreach (ListViewGroup group in groups)
-                AddGroup (group);
+                AddGroup(group);
 
             if (list_view_owner != null)
-                list_view_owner.Redraw (true);
+                list_view_owner.Redraw(true);
         }
 
-        internal ListViewGroup GetInternalGroup (int index) 
+        internal ListViewGroup GetInternalGroup(int index)
         {
             if (index == 0)
                 return default_group;
 
-            return list [index - 1];
+            return list[index - 1];
         }
 
-        internal int InternalCount {
-            get {
-                return list.Count + 1;
-            }
-        }
-
-        internal ListViewGroup DefaultGroup {
-            get {
-                return default_group;
-            }
-        }
-
-        void AddGroup (ListViewGroup group)
+        internal int InternalCount
         {
-            if (Contains (group))
+            get { return list.Count + 1; }
+        }
+
+        internal ListViewGroup DefaultGroup
+        {
+            get { return default_group; }
+        }
+
+        void AddGroup(ListViewGroup group)
+        {
+            if (Contains(group))
                 return;
 
-                    CheckListViewItemsInGroup (group);
+            CheckListViewItemsInGroup(group);
             group.ListViewOwner = list_view_owner;
-            list.Add (group);
+            list.Add(group);
         }
 
         private void CheckListViewItemsInGroup(ListViewGroup value)
@@ -324,8 +337,10 @@ namespace System.Windows.Forms
             foreach (ListViewItem item in value.Items)
             {
                 if (item.ListView != null && item.ListView != this.list_view_owner)
-                    throw new ArgumentException("ListViewItem belongs to a ListView control other than the one that owns this ListViewGroupCollection.",
-                        "ListViewGroup");
+                    throw new ArgumentException(
+                        "ListViewItem belongs to a ListView control other than the one that owns this ListViewGroupCollection.",
+                        "ListViewGroup"
+                    );
             }
         }
     }

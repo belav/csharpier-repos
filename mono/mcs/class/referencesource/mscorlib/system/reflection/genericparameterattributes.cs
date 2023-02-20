@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>WESU</OWNER>
-// 
+//
 
-namespace System.Reflection 
+namespace System.Reflection
 {
     [Flags()]
     public enum GenericParameterAttributes
@@ -21,4 +21,3 @@ namespace System.Reflection
         DefaultConstructorConstraint = 0x0010,
     }
 }
-

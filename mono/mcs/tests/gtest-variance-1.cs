@@ -6,21 +6,26 @@ interface IFoo<out T>
 class Foo : IFoo<string>
 {
     readonly string bar;
-    public Foo (string bar)
+
+    public Foo(string bar)
     {
         this.bar = bar;
     }
-    public string Bar { get { return bar; } }
+
+    public string Bar
+    {
+        get { return bar; }
+    }
 }
 
 public class Test
 {
-    public static int Main ()
+    public static int Main()
     {
         string bar = "Who is John Galt?";
         IFoo<string> foo = new Foo(bar);
         IFoo<object> foo2 = foo;
-        if (!foo2.Bar.Equals (bar))
+        if (!foo2.Bar.Equals(bar))
             return 1;
 
         foo2 = new Foo(bar);

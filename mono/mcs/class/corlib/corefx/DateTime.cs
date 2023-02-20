@@ -11,9 +11,9 @@ namespace System
 {
     partial struct DateTime
     {
-        public static DateTime UtcNow 
+        public static DateTime UtcNow
         {
-            get 
+            get
             {
                 long ticks = GetSystemTimeAsFileTime();
                 return new DateTime(((UInt64)(ticks + FileTimeOffset)) | KindUtc);

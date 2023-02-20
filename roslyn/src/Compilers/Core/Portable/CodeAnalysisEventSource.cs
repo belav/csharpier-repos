@@ -26,16 +26,52 @@ namespace Microsoft.CodeAnalysis
 
         private CodeAnalysisEventSource() { }
 
-        [Event(1, Keywords = Keywords.Performance, Level = EventLevel.Informational, Opcode = EventOpcode.Start, Task = Tasks.GeneratorDriverRunTime)]
+        [Event(
+            1,
+            Keywords = Keywords.Performance,
+            Level = EventLevel.Informational,
+            Opcode = EventOpcode.Start,
+            Task = Tasks.GeneratorDriverRunTime
+        )]
         internal void StartGeneratorDriverRunTime(string id) => WriteEvent(1, id);
 
-        [Event(2, Message = "Generators ran for {0} ticks", Keywords = Keywords.Performance, Level = EventLevel.Informational, Opcode = EventOpcode.Stop, Task = Tasks.GeneratorDriverRunTime)]
-        internal void StopGeneratorDriverRunTime(long elapsedTicks, string id) => WriteEvent(2, elapsedTicks, id);
+        [Event(
+            2,
+            Message = "Generators ran for {0} ticks",
+            Keywords = Keywords.Performance,
+            Level = EventLevel.Informational,
+            Opcode = EventOpcode.Stop,
+            Task = Tasks.GeneratorDriverRunTime
+        )]
+        internal void StopGeneratorDriverRunTime(long elapsedTicks, string id) =>
+            WriteEvent(2, elapsedTicks, id);
 
-        [Event(3, Keywords = Keywords.Performance, Level = EventLevel.Informational, Opcode = EventOpcode.Start, Task = Tasks.SingleGeneratorRunTime)]
-        internal void StartSingleGeneratorRunTime(string generatorName, string assemblyPath, string id) => WriteEvent(3, generatorName, assemblyPath, id);
+        [Event(
+            3,
+            Keywords = Keywords.Performance,
+            Level = EventLevel.Informational,
+            Opcode = EventOpcode.Start,
+            Task = Tasks.SingleGeneratorRunTime
+        )]
+        internal void StartSingleGeneratorRunTime(
+            string generatorName,
+            string assemblyPath,
+            string id
+        ) => WriteEvent(3, generatorName, assemblyPath, id);
 
-        [Event(4, Message = "Generator {0} ran for {2} ticks", Keywords = Keywords.Performance, Level = EventLevel.Informational, Opcode = EventOpcode.Stop, Task = Tasks.SingleGeneratorRunTime)]
-        internal void StopSingleGeneratorRunTime(string generatorName, string assemblyPath, long elapsedTicks, string id) => WriteEvent(4, generatorName, assemblyPath, elapsedTicks, id);
+        [Event(
+            4,
+            Message = "Generator {0} ran for {2} ticks",
+            Keywords = Keywords.Performance,
+            Level = EventLevel.Informational,
+            Opcode = EventOpcode.Stop,
+            Task = Tasks.SingleGeneratorRunTime
+        )]
+        internal void StopSingleGeneratorRunTime(
+            string generatorName,
+            string assemblyPath,
+            long elapsedTicks,
+            string id
+        ) => WriteEvent(4, generatorName, assemblyPath, elapsedTicks, id);
     }
 }

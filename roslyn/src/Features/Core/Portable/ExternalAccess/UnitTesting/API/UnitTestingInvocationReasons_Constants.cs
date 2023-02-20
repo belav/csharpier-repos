@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
                                     UnitTestingPredefinedInvocationReasons.DocumentAdded,
                                     UnitTestingPredefinedInvocationReasons.SyntaxChanged,
 #endif
-                                    UnitTestingPredefinedInvocationReasons.SemanticChanged));
+                    UnitTestingPredefinedInvocationReasons.SemanticChanged
+                )
+            );
 
         public static readonly UnitTestingInvocationReasons DocumentRemoved =
             new(
@@ -26,8 +28,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
                                     UnitTestingPredefinedInvocationReasons.DocumentRemoved,
                                     UnitTestingPredefinedInvocationReasons.SyntaxChanged,
 #endif
-                                    UnitTestingPredefinedInvocationReasons.SemanticChanged,
-                                    UnitTestingPredefinedInvocationReasons.HighPriority));
+                    UnitTestingPredefinedInvocationReasons.SemanticChanged,
+                    UnitTestingPredefinedInvocationReasons.HighPriority
+                )
+            );
 
 #if false // Not used in unit testing crawling
         public static readonly UnitTestingInvocationReasons ProjectParseOptionChanged =
@@ -41,11 +45,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         public static readonly UnitTestingInvocationReasons ProjectConfigurationChanged =
             new(
                 ImmutableHashSet.Create<string>(
-                                    UnitTestingPredefinedInvocationReasons.ProjectConfigurationChanged,
+                    UnitTestingPredefinedInvocationReasons.ProjectConfigurationChanged,
 #if false // Not used in unit testing crawling
                                     UnitTestingPredefinedInvocationReasons.SyntaxChanged,
 #endif
-                                    UnitTestingPredefinedInvocationReasons.SemanticChanged));
+                    UnitTestingPredefinedInvocationReasons.SemanticChanged
+                )
+            );
 
 #if false
         public static readonly UnitTestingInvocationReasons SolutionRemoved =
@@ -75,7 +81,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 #if false // Not used in unit testing crawling
                                     UnitTestingPredefinedInvocationReasons.SyntaxChanged,
 #endif
-                                    UnitTestingPredefinedInvocationReasons.SemanticChanged));
+                    UnitTestingPredefinedInvocationReasons.SemanticChanged
+                )
+            );
 
         public static readonly UnitTestingInvocationReasons AdditionalDocumentChanged =
             new(
@@ -83,7 +91,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 #if false // Not used in unit testing crawling
                                     UnitTestingPredefinedInvocationReasons.SyntaxChanged,
 #endif
-                                    UnitTestingPredefinedInvocationReasons.SemanticChanged));
+                    UnitTestingPredefinedInvocationReasons.SemanticChanged
+                )
+            );
 
 #if false // Not used in unit testing crawling
         public static readonly UnitTestingInvocationReasons SyntaxChanged =
@@ -95,7 +105,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         public static readonly UnitTestingInvocationReasons SemanticChanged =
             new(
                 ImmutableHashSet.Create<string>(
-                                    UnitTestingPredefinedInvocationReasons.SemanticChanged));
+                    UnitTestingPredefinedInvocationReasons.SemanticChanged
+                )
+            );
 
         public static readonly UnitTestingInvocationReasons Reanalyze =
             new(UnitTestingPredefinedInvocationReasons.Reanalyze);

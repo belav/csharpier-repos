@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,18 +34,17 @@ namespace System.Web.UI.Adapters
 {
     public abstract class ControlAdapter
     {
-        internal ControlAdapter (Control c)
+        internal ControlAdapter(Control c)
         {
             control = c;
         }
-        
-        protected ControlAdapter ()
-        {
-        }
 
-        protected HttpBrowserCapabilities Browser 
+        protected ControlAdapter() { }
+
+        protected HttpBrowserCapabilities Browser
         {
-            get {
+            get
+            {
                 Page page = Page;
 
                 if (page != null)
@@ -56,19 +55,20 @@ namespace System.Web.UI.Adapters
         }
 
         internal Control control;
-        
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        protected Control Control 
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        protected Control Control
         {
             get { return control; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
-        protected Page Page 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        protected Page Page
         {
-            get {
+            get
+            {
                 Control control = Control;
 
                 if (control != null)
@@ -77,12 +77,13 @@ namespace System.Web.UI.Adapters
                 return null;
             }
         }
-        
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
-        protected PageAdapter PageAdapter 
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        protected PageAdapter PageAdapter
         {
-            get {
+            get
+            {
                 Page page = Page;
 
                 if (page != null)
@@ -92,32 +93,28 @@ namespace System.Web.UI.Adapters
             }
         }
 
-        protected internal virtual void BeginRender (HtmlTextWriter writer)
+        protected internal virtual void BeginRender(HtmlTextWriter writer)
         {
             writer.BeginRender();
         }
 
-        protected internal virtual void CreateChildControls ()
+        protected internal virtual void CreateChildControls()
         {
             Control control = Control;
             if (control != null)
-                control.CreateChildControls ();
+                control.CreateChildControls();
         }
 
-        protected internal virtual void EndRender (HtmlTextWriter writer)
+        protected internal virtual void EndRender(HtmlTextWriter writer)
         {
-            writer.EndRender ();
+            writer.EndRender();
         }
 
-        protected internal virtual void LoadAdapterControlState (object state)
-        {
-        }
+        protected internal virtual void LoadAdapterControlState(object state) { }
 
-        protected internal virtual void LoadAdapterViewState (object state)
-        {
-        }
+        protected internal virtual void LoadAdapterViewState(object state) { }
 
-        protected internal virtual void OnInit (EventArgs e)
+        protected internal virtual void OnInit(EventArgs e)
         {
             Control control = Control;
 
@@ -125,7 +122,7 @@ namespace System.Web.UI.Adapters
                 control.OnInit(e);
         }
 
-        protected internal virtual void OnLoad (EventArgs e)
+        protected internal virtual void OnLoad(EventArgs e)
         {
             Control control = Control;
 
@@ -133,7 +130,7 @@ namespace System.Web.UI.Adapters
                 control.OnLoad(e);
         }
 
-        protected internal virtual void OnPreRender (EventArgs e)
+        protected internal virtual void OnPreRender(EventArgs e)
         {
             Control control = Control;
 
@@ -141,7 +138,7 @@ namespace System.Web.UI.Adapters
                 control.OnPreRender(e);
         }
 
-        protected internal virtual void OnUnload (EventArgs e)
+        protected internal virtual void OnUnload(EventArgs e)
         {
             Control control = Control;
 
@@ -149,31 +146,30 @@ namespace System.Web.UI.Adapters
                 control.OnUnload(e);
         }
 
-        protected internal virtual void Render (HtmlTextWriter writer)
+        protected internal virtual void Render(HtmlTextWriter writer)
         {
             Control control = Control;
 
             if (control != null)
-                control.Render (writer);
+                control.Render(writer);
         }
 
-        protected internal virtual void RenderChildren (HtmlTextWriter writer)
+        protected internal virtual void RenderChildren(HtmlTextWriter writer)
         {
             Control control = Control;
 
             if (control != null)
-                control.RenderChildren (writer);
+                control.RenderChildren(writer);
         }
 
-        protected internal virtual object SaveAdapterControlState ()
+        protected internal virtual object SaveAdapterControlState()
         {
             return null;
         }
 
-        protected internal virtual object SaveAdapterViewState ()
+        protected internal virtual object SaveAdapterViewState()
         {
             return null;
         }
     }
 }
-

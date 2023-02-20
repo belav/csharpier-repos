@@ -3,12 +3,10 @@
 
 class X
 {
-    public void Test ()
+    public void Test()
     {
-        Foo ();
+        Foo();
     }
 
-    public static void Foo (string Product = X.P)
-    {
-    }
+    public static void Foo(string Product = X.P) { }
 }

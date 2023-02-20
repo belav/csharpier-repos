@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,15 +31,21 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
-
-    [ComVisible (true)]
-    [AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
-             AttributeTargets.Struct | AttributeTargets.Constructor |
-             AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
+namespace System.Security.Permissions
+{
+    [ComVisible(true)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     [Serializable]
-    public sealed class FileIOPermissionAttribute : CodeAccessSecurityAttribute {
-
+    public sealed class FileIOPermissionAttribute : CodeAccessSecurityAttribute
+    {
         // Fields
         private string append;
         private string path;
@@ -49,96 +55,110 @@ namespace System.Security.Permissions {
         private FileIOPermissionAccess allLocalFiles;
         private string changeAccessControl;
         private string viewAccessControl;
+
         //private string viewAndModify;
 
         // Constructor
-        public FileIOPermissionAttribute (SecurityAction action) : base (action)
-        {
-        }
-        
+        public FileIOPermissionAttribute(SecurityAction action)
+            : base(action) { }
+
         // Properties
-        [Obsolete ("use newer properties")]
-        public string All {
-            get { throw new NotSupportedException ("All"); }
-            set {
-                append = value; 
-                path = value;
-                read = value;
-                write = value;
-            }
-        }
-
-        public string Append {
-            get { return append; }
-            set { append = value; }
-        }
-
-        public string PathDiscovery {
-            get { return path; }
-            set { path = value; }
-        }
-
-        public string Read {
-            get { return read; }
-            set { read = value; }
-        }                    
-        
-        public string Write {
-            get { return write; }
-            set { write = value; }
-        }
-
-        public FileIOPermissionAccess AllFiles {
-            get { return allFiles; }
-            set { allFiles = value; }
-        }
-
-        public FileIOPermissionAccess AllLocalFiles {
-            get { return allLocalFiles; }
-            set { allLocalFiles = value; }
-        }
-
-        public string ChangeAccessControl {
-            get { return changeAccessControl; }
-            set { changeAccessControl = value; }
-        }
-
-        public string ViewAccessControl {
-            get { return viewAccessControl; }
-            set { viewAccessControl = value; }
-        }
-
-        public string ViewAndModify {
-            get { throw new NotSupportedException (); }    // as documented
-            set {
+        [Obsolete("use newer properties")]
+        public string All
+        {
+            get { throw new NotSupportedException("All"); }
+            set
+            {
                 append = value;
                 path = value;
                 read = value;
                 write = value;
             }
         }
+
+        public string Append
+        {
+            get { return append; }
+            set { append = value; }
+        }
+
+        public string PathDiscovery
+        {
+            get { return path; }
+            set { path = value; }
+        }
+
+        public string Read
+        {
+            get { return read; }
+            set { read = value; }
+        }
+
+        public string Write
+        {
+            get { return write; }
+            set { write = value; }
+        }
+
+        public FileIOPermissionAccess AllFiles
+        {
+            get { return allFiles; }
+            set { allFiles = value; }
+        }
+
+        public FileIOPermissionAccess AllLocalFiles
+        {
+            get { return allLocalFiles; }
+            set { allLocalFiles = value; }
+        }
+
+        public string ChangeAccessControl
+        {
+            get { return changeAccessControl; }
+            set { changeAccessControl = value; }
+        }
+
+        public string ViewAccessControl
+        {
+            get { return viewAccessControl; }
+            set { viewAccessControl = value; }
+        }
+
+        public string ViewAndModify
+        {
+            get { throw new NotSupportedException(); } // as documented
+            set
+            {
+                append = value;
+                path = value;
+                read = value;
+                write = value;
+            }
+        }
+
         // Methods
-        public override IPermission CreatePermission ()
+        public override IPermission CreatePermission()
         {
 #if MOBILE
             return null;
 #else
             FileIOPermission perm = null;
             if (this.Unrestricted)
-                perm = new FileIOPermission (PermissionState.Unrestricted);
-            else {
-                perm = new FileIOPermission (PermissionState.None);
+                perm = new FileIOPermission(PermissionState.Unrestricted);
+            else
+            {
+                perm = new FileIOPermission(PermissionState.None);
                 if (append != null)
-                    perm.AddPathList (FileIOPermissionAccess.Append, append);
+                    perm.AddPathList(FileIOPermissionAccess.Append, append);
                 if (path != null)
-                    perm.AddPathList (FileIOPermissionAccess.PathDiscovery, path);
+                    perm.AddPathList(FileIOPermissionAccess.PathDiscovery, path);
                 if (read != null)
-                    perm.AddPathList (FileIOPermissionAccess.Read, read);
+                    perm.AddPathList(FileIOPermissionAccess.Read, read);
                 if (write != null)
-                    perm.AddPathList (FileIOPermissionAccess.Write, write);
+                    perm.AddPathList(FileIOPermissionAccess.Write, write);
             }
             return perm;
 #endif
         }
     }
-}       
+}

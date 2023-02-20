@@ -44,13 +44,33 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         [DataMember(Order = 4)]
         public readonly bool Strict;
 
-        public static UnitTestingSearchQuery ForType(string fullyQualifiedTypeName, bool strict = true)
-            => new(fullyQualifiedTypeName, methodName: null, methodArity: 0, methodParameterCount: 0, strict);
+        public static UnitTestingSearchQuery ForType(
+            string fullyQualifiedTypeName,
+            bool strict = true
+        ) =>
+            new(
+                fullyQualifiedTypeName,
+                methodName: null,
+                methodArity: 0,
+                methodParameterCount: 0,
+                strict
+            );
 
-        public static UnitTestingSearchQuery ForMethod(string fullyQualifiedTypeName, string methodName, int methodArity, int methodParameterCount, bool strict = true)
-            => new(fullyQualifiedTypeName, methodName, methodArity, methodParameterCount, strict);
+        public static UnitTestingSearchQuery ForMethod(
+            string fullyQualifiedTypeName,
+            string methodName,
+            int methodArity,
+            int methodParameterCount,
+            bool strict = true
+        ) => new(fullyQualifiedTypeName, methodName, methodArity, methodParameterCount, strict);
 
-        private UnitTestingSearchQuery(string fullyQualifiedTypeName, string? methodName, int methodArity, int methodParameterCount, bool strict)
+        private UnitTestingSearchQuery(
+            string fullyQualifiedTypeName,
+            string? methodName,
+            int methodArity,
+            int methodParameterCount,
+            bool strict
+        )
         {
             FullyQualifiedTypeName = fullyQualifiedTypeName;
             MethodName = methodName;

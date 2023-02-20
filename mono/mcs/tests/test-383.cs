@@ -4,22 +4,23 @@ public class X
 {
     public readonly int Data;
 
-        public X testme (out int x)
+    public X testme(out int x)
     {
-                x = 1;
+        x = 1;
         return this;
-        }
+    }
 
-        public X ()
+    public X()
     {
-                int x, y;
+        int x,
+            y;
 
-                y = this.testme (out x).Data;
-                Console.WriteLine("X is {0}", x);
-        }
+        y = this.testme(out x).Data;
+        Console.WriteLine("X is {0}", x);
+    }
 
-        public static void Main ()
+    public static void Main()
     {
-                X x = new X ();
-        }
+        X x = new X();
+    }
 }

@@ -4,5 +4,5 @@
 
 public sealed class A
 {
-    extern ~A ();
+    extern ~A();
 }

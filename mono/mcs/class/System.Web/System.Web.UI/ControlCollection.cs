@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,191 +30,213 @@
 using System.Collections;
 using System.Security.Permissions;
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public class ControlCollection : ICollection, IEnumerable
     {
         Control owner;
-        Control [] controls;
+        Control[] controls;
         int version;
         int count;
         bool readOnly;
-        
-        public ControlCollection (Control owner)
+
+        public ControlCollection(Control owner)
         {
             if (owner == null)
-                throw new ArgumentException ("owner");
+                throw new ArgumentException("owner");
 
             this.owner = owner;
         }
 
-        public virtual int Count {
+        public virtual int Count
+        {
             get { return count; }
         }
 
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return readOnly; }
         }
 
-        public bool  IsSynchronized {
+        public bool IsSynchronized
+        {
             get { return false; }
         }
 
-        public virtual Control this [int index] {
-            get {
+        public virtual Control this[int index]
+        {
+            get
+            {
                 if (index < 0 || index >= count)
-                    throw new ArgumentOutOfRangeException ("index");
+                    throw new ArgumentOutOfRangeException("index");
 
-                return controls [index];
+                return controls[index];
             }
         }
 
-        protected Control Owner {
+        protected Control Owner
+        {
             get { return owner; }
         }
 
-        public object SyncRoot {
+        public object SyncRoot
+        {
             get { return this; }
         }
 
-        void EnsureControls ()
+        void EnsureControls()
         {
-            if (controls == null) {
-                controls = new Control [5];
-            } else if (controls.Length < count + 1) {
+            if (controls == null)
+            {
+                controls = new Control[5];
+            }
+            else if (controls.Length < count + 1)
+            {
                 int n = controls.Length == 5 ? 3 : 2;
-                Control [] newControls = new Control [controls.Length * n];
-                Array.Copy (controls, 0, newControls, 0, controls.Length);
+                Control[] newControls = new Control[controls.Length * n];
+                Array.Copy(controls, 0, newControls, 0, controls.Length);
                 controls = newControls;
             }
         }
 
-        public virtual void Add (Control child)
+        public virtual void Add(Control child)
         {
             if (child == null)
-                throw new ArgumentNullException ("child");
+                throw new ArgumentNullException("child");
 
             if (readOnly)
-                throw new HttpException (Locale.GetText ("Collection is read-only."));
+                throw new HttpException(Locale.GetText("Collection is read-only."));
 
-            if (Object.ReferenceEquals (owner, child))
-                throw new HttpException (Locale.GetText ("Cannot add collection's owner."));
+            if (Object.ReferenceEquals(owner, child))
+                throw new HttpException(Locale.GetText("Cannot add collection's owner."));
 
-            EnsureControls ();
+            EnsureControls();
             version++;
-            controls [count++] = child;
-            owner.AddedControl (child, count - 1);
+            controls[count++] = child;
+            owner.AddedControl(child, count - 1);
         }
 
-        public virtual void AddAt (int index, Control child)
+        public virtual void AddAt(int index, Control child)
         {
             if (child == null) // maybe we should check for ! (child is Control)?
-                throw new ArgumentNullException ();
-            
+                throw new ArgumentNullException();
+
             if (index < -1 || index > count)
-                throw new ArgumentOutOfRangeException ();
+                throw new ArgumentOutOfRangeException();
 
             if (readOnly)
-                throw new HttpException (Locale.GetText ("Collection is read-only."));
+                throw new HttpException(Locale.GetText("Collection is read-only."));
 
-            if (Object.ReferenceEquals (owner, child))
-                throw new HttpException (Locale.GetText ("Cannot add collection's owner."));
+            if (Object.ReferenceEquals(owner, child))
+                throw new HttpException(Locale.GetText("Cannot add collection's owner."));
 
-            if (index == -1) {
-                Add (child);
+            if (index == -1)
+            {
+                Add(child);
                 return;
             }
 
-            EnsureControls ();
+            EnsureControls();
             version++;
-            Array.Copy (controls, index, controls, index + 1, count - index);
+            Array.Copy(controls, index, controls, index + 1, count - index);
             count++;
-            controls [index] = child;
-            owner.AddedControl (child, index);
+            controls[index] = child;
+            owner.AddedControl(child, index);
         }
 
-        public virtual void Clear ()
+        public virtual void Clear()
         {
             if (controls == null)
                 return;
 
             version++;
             for (int i = 0; i < count; i++)
-                owner.RemovedControl (controls [i]);
+                owner.RemovedControl(controls[i]);
 
             count = 0;
             if (owner != null)
-                owner.ResetChildNames ();
+                owner.ResetChildNames();
         }
 
-        public virtual bool Contains (Control c)
+        public virtual bool Contains(Control c)
         {
-            return (controls != null && Array.IndexOf (controls, c) != -1);
+            return (controls != null && Array.IndexOf(controls, c) != -1);
         }
 
-        public virtual void CopyTo (Array array, int index)
+        public virtual void CopyTo(Array array, int index)
         {
             if (controls == null)
                 return;
 
             // can't use controls.CopyTo (array, index);
-            // as we do not allocate it based on the true 
+            // as we do not allocate it based on the true
             // numbers of items we have in the collection
             // so we must re-implement Array.CopyTo :(
 
             if (array == null)
-                throw new ArgumentNullException ("array");
-            if (index + count > array.GetLowerBound (0) + array.GetLength (0))
-                throw new ArgumentException ();
+                throw new ArgumentNullException("array");
+            if (index + count > array.GetLowerBound(0) + array.GetLength(0))
+                throw new ArgumentException();
             if (array.Rank > 1)
-                throw new RankException (Locale.GetText ("Only single dimension arrays are supported."));
+                throw new RankException(
+                    Locale.GetText("Only single dimension arrays are supported.")
+                );
             if (index < 0)
-                throw new ArgumentOutOfRangeException ("index", Locale.GetText ("Value has to be >= 0."));
+                throw new ArgumentOutOfRangeException(
+                    "index",
+                    Locale.GetText("Value has to be >= 0.")
+                );
 
-            for (int i=0; i < count; i++)
-                array.SetValue (controls [i], i + index);
+            for (int i = 0; i < count; i++)
+                array.SetValue(controls[i], i + index);
         }
 
-        public virtual IEnumerator GetEnumerator ()
+        public virtual IEnumerator GetEnumerator()
         {
-            return new SimpleEnumerator (this);
+            return new SimpleEnumerator(this);
         }
 
-        public virtual int IndexOf (Control value)
+        public virtual int IndexOf(Control value)
         {
             if (controls == null || value == null)
                 return -1;
 
-            return Array.IndexOf (controls, value);
+            return Array.IndexOf(controls, value);
         }
 
-        public virtual void Remove (Control value)
+        public virtual void Remove(Control value)
         {
-            int idx = IndexOf (value);
+            int idx = IndexOf(value);
             if (idx == -1)
                 return;
-            RemoveAt (idx);
+            RemoveAt(idx);
         }
 
-        public virtual void RemoveAt (int index)
+        public virtual void RemoveAt(int index)
         {
             if (readOnly)
-                throw new HttpException ();
+                throw new HttpException();
 
             version++;
-            Control ctrl = controls [index];
+            Control ctrl = controls[index];
             count--;
             if (count - index > 0)
-                Array.Copy (controls, index + 1, controls, index, count - index);
+                Array.Copy(controls, index + 1, controls, index, count - index);
 
-            controls [count] = null;
-            owner.RemovedControl (ctrl);
+            controls[count] = null;
+            owner.RemovedControl(ctrl);
         }
-        
-        internal void SetReadonly (bool readOnly)
+
+        internal void SetReadonly(bool readOnly)
         {
             this.readOnly = readOnly;
         }
@@ -226,45 +248,51 @@ namespace System.Web.UI {
             int index;
             int version;
             object currentElement;
-                            
-            public SimpleEnumerator (ControlCollection coll)
+
+            public SimpleEnumerator(ControlCollection coll)
             {
                 this.coll = coll;
                 index = -1;
                 version = coll.version;
             }
-    
-            public bool MoveNext ()
+
+            public bool MoveNext()
             {
                 if (version != coll.version)
-                    throw new InvalidOperationException ("List has changed.");
-                
-                if (index >= -1 && ++index < coll.Count) {
-                    currentElement = coll [index];
+                    throw new InvalidOperationException("List has changed.");
+
+                if (index >= -1 && ++index < coll.Count)
+                {
+                    currentElement = coll[index];
                     return true;
-                } else {
+                }
+                else
+                {
                     index = -2;
                     return false;
                 }
             }
-    
-            public object Current {
-                get {
+
+            public object Current
+            {
+                get
+                {
                     if (index < 0)
-                        throw new InvalidOperationException (index == -1 ? "Enumerator not started" : "Enumerator ended");
-                    
+                        throw new InvalidOperationException(
+                            index == -1 ? "Enumerator not started" : "Enumerator ended"
+                        );
+
                     return currentElement;
                 }
             }
-    
-            public void Reset ()
+
+            public void Reset()
             {
                 if (version != coll.version)
-                    throw new InvalidOperationException ("List has changed.");
-                
+                    throw new InvalidOperationException("List has changed.");
+
                 index = -1;
             }
         }
     }
 }
-

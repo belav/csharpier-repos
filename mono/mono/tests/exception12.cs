@@ -1,28 +1,33 @@
 using System;
 
-public class Test {
-
-    public static int Main (string[] args) {
-
+public class Test
+{
+    public static int Main(string[] args)
+    {
         int c = 0;
-        try {
-            try {
+        try
+        {
+            try
+            {
                 c = 0;
-                        }
-            catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine("Exception: {0}", e.Message);
-                        }
-            finally { 
+            }
+            finally
+            {
                 Console.WriteLine("Finally... {0}", c++);
-                        }
+            }
         }
-        finally {
+        finally
+        {
             c++;
         }
-        
+
         if (c != 2)
             return 1;
-        
+
         return 0;
     }
 }

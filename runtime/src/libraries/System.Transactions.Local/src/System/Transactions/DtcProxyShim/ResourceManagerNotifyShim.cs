@@ -8,12 +8,8 @@ namespace System.Transactions.DtcProxyShim;
 
 internal sealed class ResourceManagerNotifyShim : NotificationShimBase, IResourceManagerSink
 {
-    internal ResourceManagerNotifyShim(
-        DtcProxyShimFactory shimFactory,
-        object enlistmentIdentifier)
-        : base(shimFactory, enlistmentIdentifier)
-    {
-    }
+    internal ResourceManagerNotifyShim(DtcProxyShimFactory shimFactory, object enlistmentIdentifier)
+        : base(shimFactory, enlistmentIdentifier) { }
 
     public void TMDown()
     {

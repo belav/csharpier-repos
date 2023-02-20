@@ -3,12 +3,10 @@
 
 class C
 {
-    static void LogFileLine (string file, string msg, params object [] args)
+    static void LogFileLine(string file, string msg, params object[] args) { }
+
+    public static void Main()
     {
-    }
-    
-    public static void Main ()
-    {
-        LogFileLine ("aaa");
+        LogFileLine("aaa");
     }
 }

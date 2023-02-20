@@ -1,9 +1,10 @@
 using System;
 using System.Runtime.InteropServices;
 
-[AttributeUsage (AttributeTargets.Method)]
-sealed class MonoPInvokeCallbackAttribute : Attribute {
-    public MonoPInvokeCallbackAttribute (Type t) {}
+[AttributeUsage(AttributeTargets.Method)]
+sealed class MonoPInvokeCallbackAttribute : Attribute
+{
+    public MonoPInvokeCallbackAttribute(Type t) { }
 }
 
 namespace TestApp
@@ -12,13 +13,16 @@ namespace TestApp
 
     class Driver
     {
-        [MonoPInvokeCallbackAttribute (typeof (MyDelegate))]
-        static char Test (int x) { return (char)x; }
+        [MonoPInvokeCallbackAttribute(typeof(MyDelegate))]
+        static char Test(int x)
+        {
+            return (char)x;
+        }
 
         static int Main()
         {
             MyDelegate m = Driver.Test;
-            Marshal.GetFunctionPointerForDelegate (m);
+            Marshal.GetFunctionPointerForDelegate(m);
             return 0;
         }
     }

@@ -5,21 +5,26 @@ using Mono.Linker.Tests.Cases.Reflection.Dependencies;
 
 namespace Mono.Linker.Tests.Cases.Reflection
 {
-    [SetupCompileBefore ("library.dll", new[] { "Dependencies/AssemblyDependency.cs" })]
-    [KeptAssembly ("library.dll")]
-    [KeptTypeInAssembly ("library.dll", "Mono.Linker.Tests.Cases.Reflection.Dependencies.AssemblyDependency/TypeThatIsUsedViaReflection")]
+    [SetupCompileBefore("library.dll", new[] { "Dependencies/AssemblyDependency.cs" })]
+    [KeptAssembly("library.dll")]
+    [KeptTypeInAssembly(
+        "library.dll",
+        "Mono.Linker.Tests.Cases.Reflection.Dependencies.AssemblyDependency/TypeThatIsUsedViaReflection"
+    )]
     public class TypeUsedViaReflectionInDifferentAssembly
     {
-        public static void Main ()
+        public static void Main()
         {
-            AssemblyDependency.UsedToKeepReferenceAtCompileTime ();
-            Helper ();
+            AssemblyDependency.UsedToKeepReferenceAtCompileTime();
+            Helper();
         }
 
         [Kept]
-        static Type Helper ()
+        static Type Helper()
         {
-            return Type.GetType ("Mono.Linker.Tests.Cases.Reflection.Dependencies.AssemblyDependency+TypeThatIsUsedViaReflection, library");
+            return Type.GetType(
+                "Mono.Linker.Tests.Cases.Reflection.Dependencies.AssemblyDependency+TypeThatIsUsedViaReflection, library"
+            );
         }
     }
 }

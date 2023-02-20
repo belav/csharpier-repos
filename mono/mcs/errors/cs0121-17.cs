@@ -7,19 +7,18 @@ using System.Linq.Expressions;
 
 class Test
 {
-    static int Foo<T, R> (T t, Expression<Func<T, R>> e)
+    static int Foo<T, R>(T t, Expression<Func<T, R>> e)
     {
         return 5;
     }
-    
-    static int Foo<T, R> (T t, Func<T, R> e)
+
+    static int Foo<T, R>(T t, Func<T, R> e)
     {
         return 0;
     }
 
-    static void Main ()
+    static void Main()
     {
-        Foo (1, i => i);
+        Foo(1, i => i);
     }
 }
-

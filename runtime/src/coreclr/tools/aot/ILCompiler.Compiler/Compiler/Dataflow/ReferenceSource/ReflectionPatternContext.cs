@@ -25,17 +25,21 @@ namespace Mono.Linker.Dataflow
 #endif
 
         public MessageOrigin Origin { get; init; }
-        public ICustomAttributeProvider? Source { get => Origin.Provider; }
+        public ICustomAttributeProvider? Source
+        {
+            get => Origin.Provider;
+        }
         public IMetadataTokenProvider MemberWithRequirements { get; init; }
         public Instruction? Instruction { get; init; }
         public bool ReportingEnabled { get; init; }
 
-        public ReflectionPatternContext (
+        public ReflectionPatternContext(
             LinkContext context,
             bool reportingEnabled,
             in MessageOrigin origin,
             IMetadataTokenProvider memberWithRequirements,
-            Instruction? instruction = null)
+            Instruction? instruction = null
+        )
         {
             _context = context;
             ReportingEnabled = reportingEnabled;
@@ -50,16 +54,16 @@ namespace Mono.Linker.Dataflow
         }
 
 #pragma warning disable CA1822
-        [Conditional ("DEBUG")]
-        public void AnalyzingPattern ()
+        [Conditional("DEBUG")]
+        public void AnalyzingPattern()
         {
 #if DEBUG
             _patternAnalysisAttempted = true;
 #endif
         }
 
-        [Conditional ("DEBUG")]
-        public void RecordHandledPattern ()
+        [Conditional("DEBUG")]
+        public void RecordHandledPattern()
         {
 #if DEBUG
             _patternReported = true;
@@ -67,39 +71,56 @@ namespace Mono.Linker.Dataflow
         }
 #pragma warning restore CA1822
 
-        public void RecordRecognizedPattern (IMetadataTokenProvider accessedItem, Action mark)
+        public void RecordRecognizedPattern(IMetadataTokenProvider accessedItem, Action mark)
         {
 #if DEBUG
             if (!_patternAnalysisAttempted)
-                throw new InvalidOperationException ($"Internal error: To correctly report all patterns, when starting to analyze a pattern the AnalyzingPattern must be called first. {Source} -> {MemberWithRequirements}");
+                throw new InvalidOperationException(
+                    $"Internal error: To correctly report all patterns, when starting to analyze a pattern the AnalyzingPattern must be called first. {Source} -> {MemberWithRequirements}"
+                );
 
             _patternReported = true;
 #endif
 
-            mark ();
+            mark();
 
             if (ReportingEnabled)
-                _context.ReflectionPatternRecorder.RecognizedReflectionAccessPattern (Source, Instruction, accessedItem);
+                _context.ReflectionPatternRecorder.RecognizedReflectionAccessPattern(
+                    Source,
+                    Instruction,
+                    accessedItem
+                );
         }
 
-        public void RecordUnrecognizedPattern (int messageCode, string message)
+        public void RecordUnrecognizedPattern(int messageCode, string message)
         {
 #if DEBUG
             if (!_patternAnalysisAttempted)
-                throw new InvalidOperationException ($"Internal error: To correctly report all patterns, when starting to analyze a pattern the AnalyzingPattern must be called first. {Source} -> {MemberWithRequirements}");
+                throw new InvalidOperationException(
+                    $"Internal error: To correctly report all patterns, when starting to analyze a pattern the AnalyzingPattern must be called first. {Source} -> {MemberWithRequirements}"
+                );
 
             _patternReported = true;
 #endif
 
             if (ReportingEnabled)
-                _context.ReflectionPatternRecorder.UnrecognizedReflectionAccessPattern (Origin, Source, Instruction, MemberWithRequirements, message, messageCode);
+                _context.ReflectionPatternRecorder.UnrecognizedReflectionAccessPattern(
+                    Origin,
+                    Source,
+                    Instruction,
+                    MemberWithRequirements,
+                    message,
+                    messageCode
+                );
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
 #if DEBUG
             if (_patternAnalysisAttempted && !_patternReported)
-                throw new InvalidOperationException ($"Internal error: A reflection pattern was analyzed, but no result was reported. {Source} -> {MemberWithRequirements}");
+                throw new InvalidOperationException(
+                    $"Internal error: A reflection pattern was analyzed, but no result was reported. {Source} -> {MemberWithRequirements}"
+                );
 #endif
         }
     }

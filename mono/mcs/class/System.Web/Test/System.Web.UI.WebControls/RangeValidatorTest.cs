@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,111 +41,124 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-
-    [TestFixture]    
-    public class RangeValidatorTest : ValidatorTest {
-        public class RangeValidatorTestClass : RangeValidator {
-            public RangeValidatorTestClass () {
+    [TestFixture]
+    public class RangeValidatorTest : ValidatorTest
+    {
+        public class RangeValidatorTestClass : RangeValidator
+        {
+            public RangeValidatorTestClass()
+            {
                 TrackViewState();
             }
 
-            public object SaveState () {
-                return SaveViewState ();
+            public object SaveState()
+            {
+                return SaveViewState();
             }
 
-            public void LoadState (object o) {
-                LoadViewState (o);
+            public void LoadState(object o)
+            {
+                LoadViewState(o);
             }
 
-            public void SetTrackingVS () {
-                TrackViewState ();
+            public void SetTrackingVS()
+            {
+                TrackViewState();
             }
 
-            public void CheckProperties () {
-                ControlPropertiesValid ();
+            public void CheckProperties()
+            {
+                ControlPropertiesValid();
             }
 
-            public bool DoEvaluateIsValid () {
-                return EvaluateIsValid ();
+            public bool DoEvaluateIsValid()
+            {
+                return EvaluateIsValid();
             }
 
-            public void CallInit() {
+            public void CallInit()
+            {
                 base.OnInit(EventArgs.Empty);
             }
 
-            public string Render () {
-                HtmlTextWriter    writer;
+            public string Render()
+            {
+                HtmlTextWriter writer;
 
                 writer = RangeValidatorTest.GetWriter();
-                base.Render (writer);
-                return writer.InnerWriter.ToString ();
+                base.Render(writer);
+                return writer.InnerWriter.ToString();
             }
 
-            public bool UpRender () {
+            public bool UpRender()
+            {
                 return base.RenderUplevel;
             }
         }
 
-        private static HtmlTextWriter GetWriter () {
-            StringWriter sw = new StringWriter ();
+        private static HtmlTextWriter GetWriter()
+        {
+            StringWriter sw = new StringWriter();
             sw.NewLine = "\n";
-            return new HtmlTextWriter (sw);
+            return new HtmlTextWriter(sw);
         }
 
         [Test]
-        public void State () {
+        public void State()
+        {
             RangeValidatorTestClass p;
             RangeValidatorTestClass p_copy;
-            object            state;
+            object state;
 
             p = new RangeValidatorTestClass();
 
-            Assert.AreEqual (p.ControlToValidate, String.Empty, "S1");
-            Assert.AreEqual (p.MinimumValue, String.Empty, "S2");
-            Assert.AreEqual (p.MaximumValue, String.Empty, "S3");
+            Assert.AreEqual(p.ControlToValidate, String.Empty, "S1");
+            Assert.AreEqual(p.MinimumValue, String.Empty, "S2");
+            Assert.AreEqual(p.MaximumValue, String.Empty, "S3");
 
             p.ControlToValidate = "TextBox";
-            Assert.AreEqual ("TextBox", p.ControlToValidate, "S4");
+            Assert.AreEqual("TextBox", p.ControlToValidate, "S4");
 
             p.MinimumValue = "123";
-            Assert.AreEqual ("123", p.MinimumValue, "S5");
+            Assert.AreEqual("123", p.MinimumValue, "S5");
 
             p.MaximumValue = "456";
-            Assert.AreEqual ("456", p.MaximumValue, "S6");
+            Assert.AreEqual("456", p.MaximumValue, "S6");
 
-            state = p.SaveState ();
+            state = p.SaveState();
 
-            p_copy = new RangeValidatorTestClass ();
-            p_copy.LoadState (state);
-            Assert.AreEqual ("TextBox", p.ControlToValidate, "S7");
-            Assert.AreEqual ("123", p.MinimumValue, "S8");
-            Assert.AreEqual ("456", p.MaximumValue, "S9");
+            p_copy = new RangeValidatorTestClass();
+            p_copy.LoadState(state);
+            Assert.AreEqual("TextBox", p.ControlToValidate, "S7");
+            Assert.AreEqual("123", p.MinimumValue, "S8");
+            Assert.AreEqual("456", p.MaximumValue, "S9");
         }
-            
+
         [Test]
-        public void Defaults ()
+        public void Defaults()
         {
             RangeValidatorTestClass p;
 
             p = new RangeValidatorTestClass();
 
-            Assert.AreEqual (String.Empty, p.ControlToValidate, "D1");
-            Assert.AreEqual (String.Empty, p.MinimumValue, "D2");
-            Assert.AreEqual (String.Empty, p.MaximumValue, "D3");
-            Assert.AreEqual (true, p.EnableClientScript, "D4");
-            Assert.AreEqual (false, p.UpRender(), "D5");
+            Assert.AreEqual(String.Empty, p.ControlToValidate, "D1");
+            Assert.AreEqual(String.Empty, p.MinimumValue, "D2");
+            Assert.AreEqual(String.Empty, p.MaximumValue, "D3");
+            Assert.AreEqual(true, p.EnableClientScript, "D4");
+            Assert.AreEqual(false, p.UpRender(), "D5");
         }
 
         [Test]
-        public void Render () {
+        public void Render()
+        {
             RangeValidatorTestClass p;
-            TextBox            t;
+            TextBox t;
 
             p = new RangeValidatorTestClass();
             StartValidationTest(p);
             p.Type = ValidationDataType.Integer;
 
-            Assert.AreEqual (false, p.UpRender(), "R0");
+            Assert.AreEqual(false, p.UpRender(), "R0");
 
             t = SetValidationTextBox("textbox", "3");
 
@@ -160,11 +173,11 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("<span style=\"color:Red;\">aw shucks</span>", p.Render(), "R1");
         }
 
-
         [Test]
-        public void ValidateRangeTest () {
+        public void ValidateRangeTest()
+        {
             RangeValidatorTestClass p;
-            TextBox            t;
+            TextBox t;
 
             p = new RangeValidatorTestClass();
 
@@ -193,9 +206,10 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(WebSpace.HttpException))]
-        public void Exception1Test () {
+        public void Exception1Test()
+        {
             RangeValidatorTestClass p;
-            TextBox            t;
+            TextBox t;
 
             p = new RangeValidatorTestClass();
             p.CheckProperties();
@@ -203,9 +217,10 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(WebSpace.HttpException))]
-        public void Exception2Test () {
+        public void Exception2Test()
+        {
             RangeValidatorTestClass p;
-            TextBox            t;
+            TextBox t;
 
             p = new RangeValidatorTestClass();
 
@@ -219,9 +234,10 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(WebSpace.HttpException))]
-        public void Exception3Test () {
+        public void Exception3Test()
+        {
             RangeValidatorTestClass p;
-            TextBox            t;
+            TextBox t;
 
             p = new RangeValidatorTestClass();
 
@@ -235,9 +251,10 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(WebSpace.HttpException))]
-        public void Exception4Test () {
+        public void Exception4Test()
+        {
             RangeValidatorTestClass p;
-            TextBox            t;
+            TextBox t;
 
             p = new RangeValidatorTestClass();
 
@@ -251,9 +268,10 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(WebSpace.HttpException))]
-        public void Exception5Test () {
+        public void Exception5Test()
+        {
             RangeValidatorTestClass p;
-            TextBox            t;
+            TextBox t;
 
             p = new RangeValidatorTestClass();
 
@@ -268,9 +286,10 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(WebSpace.HttpException))]
-        public void Exception6Test () {
+        public void Exception6Test()
+        {
             RangeValidatorTestClass p;
-            TextBox            t;
+            TextBox t;
 
             p = new RangeValidatorTestClass();
 
@@ -285,9 +304,10 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         //[ExpectedException(typeof(WebSpace.HttpException))]
-        public void NoException7Test () {
+        public void NoException7Test()
+        {
             RangeValidatorTestClass p;
-            TextBox            t;
+            TextBox t;
 
             p = new RangeValidatorTestClass();
 
@@ -302,9 +322,10 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(WebSpace.HttpException))]
-        public void Exception8Test () {
+        public void Exception8Test()
+        {
             RangeValidatorTestClass p;
-            TextBox            t;
+            TextBox t;
 
             p = new RangeValidatorTestClass();
 

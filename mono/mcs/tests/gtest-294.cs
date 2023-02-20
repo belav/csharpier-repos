@@ -1,31 +1,31 @@
-class A {}
-class B : A {}
+class A { }
+
+class B : A { }
 
 class X
 {
-    public static A Test (A a, B b)
+    public static A Test(A a, B b)
     {
         return b ?? a;
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        A a = new A ();
-        B b = new B ();
+        A a = new A();
+        B b = new B();
 
-        if (Test (a, b) != b)
+        if (Test(a, b) != b)
             return 1;
 
-        if (Test (null, b) != b)
+        if (Test(null, b) != b)
             return 2;
 
-        if (Test (a, null) != a)
+        if (Test(a, null) != a)
             return 3;
 
-        if (Test (null, null) != null)
+        if (Test(null, null) != null)
             return 4;
 
         return 0;
-
     }
 }

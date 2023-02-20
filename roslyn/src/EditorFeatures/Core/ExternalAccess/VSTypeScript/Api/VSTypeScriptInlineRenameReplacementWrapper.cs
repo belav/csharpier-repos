@@ -13,10 +13,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     {
         internal readonly InlineRenameReplacement UnderlyingObject;
 
-        public VSTypeScriptInlineRenameReplacementWrapper(InlineRenameReplacement underlyingObject)
-            => UnderlyingObject = underlyingObject;
+        public VSTypeScriptInlineRenameReplacementWrapper(
+            InlineRenameReplacement underlyingObject
+        ) => UnderlyingObject = underlyingObject;
 
-        public VSTypeScriptInlineRenameReplacementKind Kind => VSTypeScriptInlineRenameReplacementKindHelpers.ConvertFrom(UnderlyingObject.Kind);
+        public VSTypeScriptInlineRenameReplacementKind Kind =>
+            VSTypeScriptInlineRenameReplacementKindHelpers.ConvertFrom(UnderlyingObject.Kind);
         public TextSpan OriginalSpan => UnderlyingObject.OriginalSpan;
         public TextSpan NewSpan => UnderlyingObject.NewSpan;
     }

@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.SoapBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,12 +33,13 @@ using System.Web.Services.Configuration;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description {
-    [XmlFormatExtensionPrefix ("soap", "http://schemas.xmlsoap.org/wsdl/soap/")]
-    [XmlFormatExtensionPrefix ("soapenc", "http://schemas.xmlsoap.org/soap/encoding/")]
-    [XmlFormatExtension ("binding", "http://schemas.xmlsoap.org/wsdl/soap/", typeof (Binding))]
-    public class SoapBinding : ServiceDescriptionFormatExtension {
-
+namespace System.Web.Services.Description
+{
+    [XmlFormatExtensionPrefix("soap", "http://schemas.xmlsoap.org/wsdl/soap/")]
+    [XmlFormatExtensionPrefix("soapenc", "http://schemas.xmlsoap.org/soap/encoding/")]
+    [XmlFormatExtension("binding", "http://schemas.xmlsoap.org/wsdl/soap/", typeof(Binding))]
+    public class SoapBinding : ServiceDescriptionFormatExtension
+    {
         #region Fields
 
         public const string HttpTransport = "http://schemas.xmlsoap.org/soap/http";
@@ -52,21 +53,27 @@ namespace System.Web.Services.Description {
         #endregion // Fields
 
         #region Constructors
-        
-        public SoapBinding ()
+
+        public SoapBinding()
         {
             style = SoapBindingStyle.Document;
             transport = String.Empty;
         }
-        
+
         #endregion // Constructors
 
         #region Properties
 
-        public static XmlSchema Schema {
-            get {
-                if (schema == null) {
-                    schema = XmlSchema.Read (typeof (SoapBinding).Assembly.GetManifestResourceStream ("wsdl-1.1-soap.xsd"), null);
+        public static XmlSchema Schema
+        {
+            get
+            {
+                if (schema == null)
+                {
+                    schema = XmlSchema.Read(
+                        typeof(SoapBinding).Assembly.GetManifestResourceStream("wsdl-1.1-soap.xsd"),
+                        null
+                    );
                 }
                 return schema;
             }
@@ -75,19 +82,21 @@ namespace System.Web.Services.Description {
         // LAMESPEC: .NET says that the default value is SoapBindingStyle.Document but
         // reflection shows this attribute is SoapBindingStyle.Default
 
-        [DefaultValue (SoapBindingStyle.Document)]
-        [XmlAttribute ("style")]
-        public SoapBindingStyle Style {
+        [DefaultValue(SoapBindingStyle.Document)]
+        [XmlAttribute("style")]
+        public SoapBindingStyle Style
+        {
             get { return style; }
             set { style = value; }
         }
 
-        [XmlAttribute ("transport")]
-        public string Transport {
+        [XmlAttribute("transport")]
+        public string Transport
+        {
             get { return transport; }
             set { transport = value; }
         }
-    
+
         #endregion // Properties
     }
 }

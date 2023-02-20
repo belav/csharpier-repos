@@ -27,19 +27,20 @@ namespace MonoTests.Microsoft.VisualBasic
         CodeGeneratorOptions options;
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            provider = new VBCodeProvider ();
-            generator = provider.CreateGenerator ();
-            options = new CodeGeneratorOptions ();
+            provider = new VBCodeProvider();
+            generator = provider.CreateGenerator();
+            options = new CodeGeneratorOptions();
         }
 
         [Test]
-        public void TypeReferenceExpressionTest ()
+        public void TypeReferenceExpressionTest()
         {
             StringBuilder sb = new StringBuilder();
 
-            using (StringWriter sw = new StringWriter (sb)) {
+            using (StringWriter sw = new StringWriter(sb))
+            {
                 CodeThisReferenceExpression thisRef = new CodeThisReferenceExpression();
                 CodeFieldReferenceExpression parentField = new CodeFieldReferenceExpression();
                 parentField.TargetObject = thisRef;
@@ -48,14 +49,16 @@ namespace MonoTests.Microsoft.VisualBasic
                 CodeBinaryOperatorExpression expression = new CodeBinaryOperatorExpression(
                     parentField,
                     CodeBinaryOperatorType.IdentityInequality,
-                    new CodePrimitiveExpression(null));
+                    new CodePrimitiveExpression(null)
+                );
 
-                Assert.AreEqual ("(Not (Me.Parent) Is Nothing)", Generate (expression, sw), "#1");
-                sw.Close ();
+                Assert.AreEqual("(Not (Me.Parent) Is Nothing)", Generate(expression, sw), "#1");
+                sw.Close();
             }
 
             sb = new StringBuilder();
-            using (StringWriter sw = new StringWriter (sb)) {
+            using (StringWriter sw = new StringWriter(sb))
+            {
                 CodeThisReferenceExpression thisRef = new CodeThisReferenceExpression();
                 CodeFieldReferenceExpression parentField = new CodeFieldReferenceExpression();
                 parentField.TargetObject = thisRef;
@@ -64,17 +67,18 @@ namespace MonoTests.Microsoft.VisualBasic
                 CodeBinaryOperatorExpression expression = new CodeBinaryOperatorExpression(
                     new CodePrimitiveExpression(null),
                     CodeBinaryOperatorType.IdentityInequality,
-                    parentField);
+                    parentField
+                );
 
-                Assert.AreEqual ("(Not (Me.Parent) Is Nothing)", Generate (expression, sw), "#2");
-                sw.Close ();
+                Assert.AreEqual("(Not (Me.Parent) Is Nothing)", Generate(expression, sw), "#2");
+                sw.Close();
             }
         }
 
-        private string Generate (CodeExpression expression, StringWriter sw)
+        private string Generate(CodeExpression expression, StringWriter sw)
         {
-            generator.GenerateCodeFromExpression (expression, sw, options);
-            return sw.ToString ();
+            generator.GenerateCodeFromExpression(expression, sw, options);
+            return sw.ToString();
         }
     }
 }

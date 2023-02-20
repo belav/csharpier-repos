@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,24 +36,29 @@ using NUnit.Framework;
 
 namespace tests.system_data_dll.System_Data
 {
-    [TestFixture] public class DataTable_ImportRow_D : GHTBase
+    [TestFixture]
+    public class DataTable_ImportRow_D : GHTBase
     {
         public void SetUp()
         {
             Exception exp = null;
             BeginCase("Setup");
-            try
+            try { }
+            catch (Exception ex)
             {
+                exp = ex;
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
-        public void TearDown()
-        {
-        }
+        public void TearDown() { }
 
-        [Test] public void Main()
+        [Test]
+        public void Main()
         {
             DataTable_ImportRow_D tc = new DataTable_ImportRow_D();
             Exception exp = null;
@@ -64,7 +69,7 @@ namespace tests.system_data_dll.System_Data
                 tc.run();
                 tc.TearDown();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -77,30 +82,45 @@ namespace tests.system_data_dll.System_Data
         public void run()
         {
             Exception exp = null;
-        
-            DataTable dt1,dt2;
+
+            DataTable dt1,
+                dt2;
             dt1 = GHTUtils.DataProvider.CreateParentDataTable();
             dt2 = GHTUtils.DataProvider.CreateParentDataTable();
             DataRow dr = dt2.NewRow();
-            dr.ItemArray = new object[] {99,"",""};
+            dr.ItemArray = new object[] { 99, "", "" };
             dt2.Rows.Add(dr);
 
             try
             {
                 BeginCase("ImportRow - Values");
                 dt1.ImportRow(dr);
-                Compare( dt1.Rows[dt1.Rows.Count-1].ItemArray  , dr.ItemArray);
+                Compare(dt1.Rows[dt1.Rows.Count - 1].ItemArray, dr.ItemArray);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
                 BeginCase("ImportRow - DataRowState");
-                Compare( dt1.Rows[dt1.Rows.Count-1].RowState ,dr.RowState );
+                Compare(dt1.Rows[dt1.Rows.Count - 1].RowState, dr.RowState);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}                
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
     }
 }

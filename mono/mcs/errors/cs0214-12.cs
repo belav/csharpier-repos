@@ -4,12 +4,10 @@
 
 class C
 {
-    public static unsafe void Write (params int*[] args)
+    public static unsafe void Write(params int*[] args) { }
+
+    public static void Main()
     {
-    }
-    
-    public static void Main ()
-    {
-        Write ();
+        Write();
     }
 }

@@ -4,7 +4,7 @@
 
 class M
 {
-    public static void Main ()
+    public static void Main()
     {
         var a = 1;
     }

@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Host
     /// or <see cref="GetValueAsync"/> is called.  At that point, it will be dumped to secondary storage, and retrieved
     /// and weakly held from that point on in the future.
     /// </summary>
-    internal abstract class WeaklyCachedRecoverableValueSource<T> : ValueSource<T> where T : class
+    internal abstract class WeaklyCachedRecoverableValueSource<T> : ValueSource<T>
+        where T : class
     {
         // enforce saving in a queue so save's don't overload the thread pool.
         private static Task s_latestTask = Task.CompletedTask;
@@ -45,8 +46,7 @@ namespace Microsoft.CodeAnalysis.Host
         /// </summary>
         private WeakReference<T>? _weakReference;
 
-        public WeaklyCachedRecoverableValueSource(T initialValue)
-            => _initialValue = initialValue;
+        public WeaklyCachedRecoverableValueSource(T initialValue) => _initialValue = initialValue;
 
         /// <summary>
         /// Override this to save the state of the instance so it can be recovered.
@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Host
         /// </summary>
         protected abstract T Recover(CancellationToken cancellationToken);
 
-        private SemaphoreSlim Gate => LazyInitialization.EnsureInitialized(ref _lazyGate, SemaphoreSlimFactory.Instance);
+        private SemaphoreSlim Gate =>
+            LazyInitialization.EnsureInitialized(ref _lazyGate, SemaphoreSlimFactory.Instance);
 
         /// <summary>
         /// Attempts to get the value, but only through the weak reference.  This will only succeed *after* the value
@@ -93,8 +94,8 @@ namespace Microsoft.CodeAnalysis.Host
             return TryGetWeakValue(out value);
         }
 
-        public override bool TryGetValue([MaybeNullWhen(false)] out T value)
-            => TryGetStrongOrWeakValue(out value);
+        public override bool TryGetValue([MaybeNullWhen(false)] out T value) =>
+            TryGetStrongOrWeakValue(out value);
 
         public override T GetValue(CancellationToken cancellationToken)
         {
@@ -157,22 +158,24 @@ namespace Microsoft.CodeAnalysis.Host
                 using (s_taskGuard.DisposableWait())
                 {
                     // force all save tasks to be in sequence so we don't hog all the threads.
-                    s_latestTask = s_latestTask.SafeContinueWithFromAsync(async _ =>
-                    {
-                        // Now defer to our subclass to actually save the instance to secondary storage.
-                        await SaveAsync(instance, CancellationToken.None).ConfigureAwait(false);
+                    s_latestTask = s_latestTask.SafeContinueWithFromAsync(
+                        async _ =>
+                        {
+                            // Now defer to our subclass to actually save the instance to secondary storage.
+                            await SaveAsync(instance, CancellationToken.None).ConfigureAwait(false);
 
-                        // Only set _initialValue to null if the saveTask completed successfully. If the save did not complete,
-                        // we want to keep it around to service future requests.  Once we do clear out this value, then all
-                        // future request will either retrieve the value from the weak reference (if anyone else is holding onto
-                        // it), or will recover from underlying storage.
-                        _initialValue = null;
-                    },
-                    CancellationToken.None,
-                    // Ensure we run continuations asynchronously so that we don't start running the continuation while
-                    // holding s_taskGuard.
-                    TaskContinuationOptions.RunContinuationsAsynchronously,
-                    TaskScheduler.Default);
+                            // Only set _initialValue to null if the saveTask completed successfully. If the save did not complete,
+                            // we want to keep it around to service future requests.  Once we do clear out this value, then all
+                            // future request will either retrieve the value from the weak reference (if anyone else is holding onto
+                            // it), or will recover from underlying storage.
+                            _initialValue = null;
+                        },
+                        CancellationToken.None,
+                        // Ensure we run continuations asynchronously so that we don't start running the continuation while
+                        // holding s_taskGuard.
+                        TaskContinuationOptions.RunContinuationsAsynchronously,
+                        TaskScheduler.Default
+                    );
                 }
             }
         }

@@ -23,11 +23,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
         {
             private readonly VisualStudioWaitContext _waitContext;
 
-            public Callback(VisualStudioWaitContext waitContext)
-                => _waitContext = waitContext;
+            public Callback(VisualStudioWaitContext waitContext) => _waitContext = waitContext;
 
-            public void OnCanceled()
-                => _waitContext.OnCanceled();
+            public void OnCanceled() => _waitContext.OnCanceled();
         }
     }
 }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,21 +40,33 @@ namespace System.ServiceModel
 {
     internal class ServiceProxyGenerator : ProxyGeneratorBase
     {
-        public static Type CreateCallbackProxyType (DispatchRuntime dispatchRuntime, Type callbackType)
+        public static Type CreateCallbackProxyType(
+            DispatchRuntime dispatchRuntime,
+            Type callbackType
+        )
         {
             var ed = dispatchRuntime.EndpointDispatcher;
             var channelDispatcher = ed.ChannelDispatcher;
-            Type contractType = channelDispatcher != null ? channelDispatcher.Host.ImplementedContracts.Values.First (hcd => hcd.Name == ed.ContractName && hcd.Namespace == ed.ContractNamespace).ContractType : dispatchRuntime.Type;
+            Type contractType =
+                channelDispatcher != null
+                    ? channelDispatcher.Host.ImplementedContracts.Values
+                        .First(
+                            hcd =>
+                                hcd.Name == ed.ContractName && hcd.Namespace == ed.ContractNamespace
+                        )
+                        .ContractType
+                    : dispatchRuntime.Type;
 
-            var cd = ContractDescriptionGenerator.GetCallbackContract (contractType, callbackType);
+            var cd = ContractDescriptionGenerator.GetCallbackContract(contractType, callbackType);
             string modname = "dummy";
-            Type crtype = typeof (DuplexServiceRuntimeChannel);
+            Type crtype = typeof(DuplexServiceRuntimeChannel);
 
             // public class __clientproxy_MyContract : ClientRuntimeChannel, [ContractType]
-            CodeClass c = new CodeModule (modname).CreateClass (
+            CodeClass c = new CodeModule(modname).CreateClass(
                 "__callbackproxy_" + cd.Name,
                 crtype,
-                new Type [] {callbackType});
+                new Type[] { callbackType }
+            );
 
             //
             // public __callbackproxy_MyContract (
@@ -63,20 +75,24 @@ namespace System.ServiceModel
             // {
             // }
             //
-            Type [] ctorargs = new Type [] {typeof (IChannel), typeof (DispatchRuntime)};
-            CodeMethod ctor = c.CreateConstructor (
-                MethodAttributes.Public, ctorargs);
+            Type[] ctorargs = new Type[] { typeof(IChannel), typeof(DispatchRuntime) };
+            CodeMethod ctor = c.CreateConstructor(MethodAttributes.Public, ctorargs);
             CodeBuilder b = ctor.CodeBuilder;
-            MethodBase baseCtor = crtype.GetConstructors (
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance) [0];
-            if (baseCtor == null) throw new Exception ("INTERNAL ERROR: DuplexServiceRuntimeChannel.ctor() was not found.");
-            b.Call (
-                ctor.GetThis (),
+            MethodBase baseCtor = crtype.GetConstructors(
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            )[0];
+            if (baseCtor == null)
+                throw new Exception(
+                    "INTERNAL ERROR: DuplexServiceRuntimeChannel.ctor() was not found."
+                );
+            b.Call(
+                ctor.GetThis(),
                 baseCtor,
-                new CodeArgumentReference (typeof (IChannel), 1, "arg0"),
-                new CodeArgumentReference (typeof (DispatchRuntime), 2, "arg1"));
+                new CodeArgumentReference(typeof(IChannel), 1, "arg0"),
+                new CodeArgumentReference(typeof(DispatchRuntime), 2, "arg1")
+            );
 
-            return CreateProxyTypeOperations (crtype, c, cd);
+            return CreateProxyTypeOperations(crtype, c, cd);
         }
     }
 }

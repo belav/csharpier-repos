@@ -7,9 +7,7 @@ namespace Moq.Behaviors
     {
         public static readonly ReturnBase Instance = new ReturnBase();
 
-        private ReturnBase()
-        {
-        }
+        private ReturnBase() { }
 
         public override void Execute(Invocation invocation)
         {

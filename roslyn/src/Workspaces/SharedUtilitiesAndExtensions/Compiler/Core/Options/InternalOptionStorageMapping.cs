@@ -15,8 +15,7 @@ internal abstract class OptionStorageMapping
     /// </summary>
     public IOption2 InternalOption { get; }
 
-    public OptionStorageMapping(IOption2 internalOption)
-        => InternalOption = internalOption;
+    public OptionStorageMapping(IOption2 internalOption) => InternalOption = internalOption;
 
     /// <summary>
     /// Converts inernal option value representation to public.
@@ -26,5 +25,8 @@ internal abstract class OptionStorageMapping
     /// <summary>
     /// Returns a new internal value created by updating <paramref name="currentInternalValue"/> to <paramref name="newPublicValue"/>.
     /// </summary>
-    public abstract object? UpdateInternalOptionValue(object? currentInternalValue, object? newPublicValue);
+    public abstract object? UpdateInternalOptionValue(
+        object? currentInternalValue,
+        object? newPublicValue
+    );
 }

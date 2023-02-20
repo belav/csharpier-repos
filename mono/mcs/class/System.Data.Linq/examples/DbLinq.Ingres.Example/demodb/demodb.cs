@@ -31,21 +31,48 @@ public partial class Demodb : DbLinq.Ingres.IngresDataContext
     //}
 
     public Demodb(IDbConnection connection)
-        : base(connection)
+        : base(connection) { }
+
+    public Table<AdminAirline> AdminAirline
     {
+        get { return GetTable<AdminAirline>(); }
     }
-
-    public Table<AdminAirline> AdminAirline { get { return GetTable<AdminAirline>(); } }
-    public Table<AdminAirport> AdminAirport { get { return GetTable<AdminAirport>(); } }
-    public Table<AdminCountry> AdminCountry { get { return GetTable<AdminCountry>(); } }
-    public Table<AdminFlightDay> AdminFlightDay { get { return GetTable<AdminFlightDay>(); } }
-    public Table<AdminFullRoute> AdminFullRoute { get { return GetTable<AdminFullRoute>(); } }
-    public Table<AdminIietabF5f6> AdminIietabF5f6 { get { return GetTable<AdminIietabF5f6>(); } }
-    public Table<AdminRoute> AdminRoute { get { return GetTable<AdminRoute>(); } }
-    public Table<AdminTz> AdminTz { get { return GetTable<AdminTz>(); } }
-    public Table<AdminUserProfile> AdminUserProfile { get { return GetTable<AdminUserProfile>(); } }
-    public Table<AdminVersion> AdminVersion { get { return GetTable<AdminVersion>(); } }
-
+    public Table<AdminAirport> AdminAirport
+    {
+        get { return GetTable<AdminAirport>(); }
+    }
+    public Table<AdminCountry> AdminCountry
+    {
+        get { return GetTable<AdminCountry>(); }
+    }
+    public Table<AdminFlightDay> AdminFlightDay
+    {
+        get { return GetTable<AdminFlightDay>(); }
+    }
+    public Table<AdminFullRoute> AdminFullRoute
+    {
+        get { return GetTable<AdminFullRoute>(); }
+    }
+    public Table<AdminIietabF5f6> AdminIietabF5f6
+    {
+        get { return GetTable<AdminIietabF5f6>(); }
+    }
+    public Table<AdminRoute> AdminRoute
+    {
+        get { return GetTable<AdminRoute>(); }
+    }
+    public Table<AdminTz> AdminTz
+    {
+        get { return GetTable<AdminTz>(); }
+    }
+    public Table<AdminUserProfile> AdminUserProfile
+    {
+        get { return GetTable<AdminUserProfile>(); }
+    }
+    public Table<AdminVersion> AdminVersion
+    {
+        get { return GetTable<AdminVersion>(); }
+    }
 }
 
 [Table(Name = "admin.airline")]
@@ -68,14 +95,12 @@ public partial class AdminAirline : INotifyPropertyChanged
     #region string AlCcode
 
     private string alCcode;
+
     [Column(Storage = "alCcode", Name = "al_ccode", DbType = "NCHAR(2)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public string AlCcode
     {
-        get
-        {
-            return alCcode;
-        }
+        get { return alCcode; }
         set
         {
             if (value != alCcode)
@@ -91,14 +116,12 @@ public partial class AdminAirline : INotifyPropertyChanged
     #region string AlIatacode
 
     private string alIatacode;
+
     [Column(Storage = "alIatacode", Name = "al_iatacode", DbType = "NCHAR(2)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public string AlIatacode
     {
-        get
-        {
-            return alIatacode;
-        }
+        get { return alIatacode; }
         set
         {
             if (value != alIatacode)
@@ -114,14 +137,18 @@ public partial class AdminAirline : INotifyPropertyChanged
     #region string AlIcaocode
 
     private string alIcaocode;
-    [Column(Storage = "alIcaocode", Name = "al_icaocode", DbType = "NCHAR(3)", IsPrimaryKey = true, CanBeNull = false)]
+
+    [Column(
+        Storage = "alIcaocode",
+        Name = "al_icaocode",
+        DbType = "NCHAR(3)",
+        IsPrimaryKey = true,
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public string AlIcaocode
     {
-        get
-        {
-            return alIcaocode;
-        }
+        get { return alIcaocode; }
         set
         {
             if (value != alIcaocode)
@@ -137,14 +164,12 @@ public partial class AdminAirline : INotifyPropertyChanged
     #region  AlId
 
     private Int32 alId;
+
     [Column(Storage = "alId", Name = "al_id", DbType = "INTEGER(4)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public Int32 AlId
     {
-        get
-        {
-            return alId;
-        }
+        get { return alId; }
         set
         {
             if (value != alId)
@@ -160,14 +185,12 @@ public partial class AdminAirline : INotifyPropertyChanged
     #region string AlName
 
     private string alName;
+
     [Column(Storage = "alName", Name = "al_name", DbType = "NVARCHAR(60)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public string AlName
     {
-        get
-        {
-            return alName;
-        }
+        get { return alName; }
         set
         {
             if (value != alName)
@@ -198,7 +221,6 @@ public partial class AdminAirline : INotifyPropertyChanged
     }
 
     #endregion
-
 }
 
 [Table(Name = "admin.airport")]
@@ -221,14 +243,12 @@ public partial class AdminAirport : INotifyPropertyChanged
     #region string ApCcode
 
     private string apCcode;
+
     [Column(Storage = "apCcode", Name = "ap_ccode", DbType = "NCHAR(2)")]
     [DebuggerNonUserCode]
     public string ApCcode
     {
-        get
-        {
-            return apCcode;
-        }
+        get { return apCcode; }
         set
         {
             if (value != apCcode)
@@ -244,14 +264,18 @@ public partial class AdminAirport : INotifyPropertyChanged
     #region string ApIatacode
 
     private string apIatacode;
-    [Column(Storage = "apIatacode", Name = "ap_iatacode", DbType = "NCHAR(3)", IsPrimaryKey = true, CanBeNull = false)]
+
+    [Column(
+        Storage = "apIatacode",
+        Name = "ap_iatacode",
+        DbType = "NCHAR(3)",
+        IsPrimaryKey = true,
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public string ApIatacode
     {
-        get
-        {
-            return apIatacode;
-        }
+        get { return apIatacode; }
         set
         {
             if (value != apIatacode)
@@ -267,14 +291,12 @@ public partial class AdminAirport : INotifyPropertyChanged
     #region  ApId
 
     private Int32 apId;
+
     [Column(Storage = "apId", Name = "ap_id", DbType = "INTEGER(4)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public Int32 ApId
     {
-        get
-        {
-            return apId;
-        }
+        get { return apId; }
         set
         {
             if (value != apId)
@@ -290,14 +312,12 @@ public partial class AdminAirport : INotifyPropertyChanged
     #region string ApName
 
     private string apName;
+
     [Column(Storage = "apName", Name = "ap_name", DbType = "NVARCHAR(50)")]
     [DebuggerNonUserCode]
     public string ApName
     {
-        get
-        {
-            return apName;
-        }
+        get { return apName; }
         set
         {
             if (value != apName)
@@ -313,14 +333,12 @@ public partial class AdminAirport : INotifyPropertyChanged
     #region string ApPlace
 
     private string apPlace;
+
     [Column(Storage = "apPlace", Name = "ap_place", DbType = "NVARCHAR(30)")]
     [DebuggerNonUserCode]
     public string ApPlace
     {
-        get
-        {
-            return apPlace;
-        }
+        get { return apPlace; }
         set
         {
             if (value != apPlace)
@@ -351,7 +369,6 @@ public partial class AdminAirport : INotifyPropertyChanged
     }
 
     #endregion
-
 }
 
 [Table(Name = "admin.country")]
@@ -374,14 +391,18 @@ public partial class AdminCountry : INotifyPropertyChanged
     #region string CtCode
 
     private string ctCode;
-    [Column(Storage = "ctCode", Name = "ct_code", DbType = "NCHAR(2)", IsPrimaryKey = true, CanBeNull = false)]
+
+    [Column(
+        Storage = "ctCode",
+        Name = "ct_code",
+        DbType = "NCHAR(2)",
+        IsPrimaryKey = true,
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public string CtCode
     {
-        get
-        {
-            return ctCode;
-        }
+        get { return ctCode; }
         set
         {
             if (value != ctCode)
@@ -397,14 +418,12 @@ public partial class AdminCountry : INotifyPropertyChanged
     #region  CtId
 
     private Int32 ctId;
+
     [Column(Storage = "ctId", Name = "ct_id", DbType = "INTEGER(4)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public Int32 CtId
     {
-        get
-        {
-            return ctId;
-        }
+        get { return ctId; }
         set
         {
             if (value != ctId)
@@ -420,14 +439,12 @@ public partial class AdminCountry : INotifyPropertyChanged
     #region string CtName
 
     private string ctName;
+
     [Column(Storage = "ctName", Name = "ct_name", DbType = "NVARCHAR(50)")]
     [DebuggerNonUserCode]
     public string CtName
     {
-        get
-        {
-            return ctName;
-        }
+        get { return ctName; }
         set
         {
             if (value != ctName)
@@ -458,7 +475,6 @@ public partial class AdminCountry : INotifyPropertyChanged
     }
 
     #endregion
-
 }
 
 [Table(Name = "admin.flight_day")]
@@ -481,14 +497,18 @@ public partial class AdminFlightDay : INotifyPropertyChanged
     #region  DayCode
 
     private Int16 dayCode;
-    [Column(Storage = "dayCode", Name = "day_code", DbType = "INTEGER(2)", IsPrimaryKey = true, CanBeNull = false)]
+
+    [Column(
+        Storage = "dayCode",
+        Name = "day_code",
+        DbType = "INTEGER(2)",
+        IsPrimaryKey = true,
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public Int16 DayCode
     {
-        get
-        {
-            return dayCode;
-        }
+        get { return dayCode; }
         set
         {
             if (value != dayCode)
@@ -504,14 +524,18 @@ public partial class AdminFlightDay : INotifyPropertyChanged
     #region string DayMask
 
     private string dayMask;
-    [Column(Storage = "dayMask", Name = "day_mask", DbType = "NCHAR(7)", IsPrimaryKey = true, CanBeNull = false)]
+
+    [Column(
+        Storage = "dayMask",
+        Name = "day_mask",
+        DbType = "NCHAR(7)",
+        IsPrimaryKey = true,
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public string DayMask
     {
-        get
-        {
-            return dayMask;
-        }
+        get { return dayMask; }
         set
         {
             if (value != dayMask)
@@ -527,14 +551,12 @@ public partial class AdminFlightDay : INotifyPropertyChanged
     #region string DayName
 
     private string dayName;
+
     [Column(Storage = "dayName", Name = "day_name", DbType = "NCHAR(9)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public string DayName
     {
-        get
-        {
-            return dayName;
-        }
+        get { return dayName; }
         set
         {
             if (value != dayName)
@@ -565,7 +587,6 @@ public partial class AdminFlightDay : INotifyPropertyChanged
     }
 
     #endregion
-
 }
 
 [Table(Name = "admin.full_route")]
@@ -588,14 +609,12 @@ public partial class AdminFullRoute : INotifyPropertyChanged
     #region string AlCcode
 
     private string alCcode;
+
     [Column(Storage = "alCcode", Name = "al_ccode", DbType = "NCHAR(2)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public string AlCcode
     {
-        get
-        {
-            return alCcode;
-        }
+        get { return alCcode; }
         set
         {
             if (value != alCcode)
@@ -611,14 +630,12 @@ public partial class AdminFullRoute : INotifyPropertyChanged
     #region string AlIatacode
 
     private string alIatacode;
+
     [Column(Storage = "alIatacode", Name = "al_iatacode", DbType = "NCHAR(2)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public string AlIatacode
     {
-        get
-        {
-            return alIatacode;
-        }
+        get { return alIatacode; }
         set
         {
             if (value != alIatacode)
@@ -634,14 +651,12 @@ public partial class AdminFullRoute : INotifyPropertyChanged
     #region string AlName
 
     private string alName;
+
     [Column(Storage = "alName", Name = "al_name", DbType = "NVARCHAR(60)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public string AlName
     {
-        get
-        {
-            return alName;
-        }
+        get { return alName; }
         set
         {
             if (value != alName)
@@ -657,14 +672,12 @@ public partial class AdminFullRoute : INotifyPropertyChanged
     #region string RtAirline
 
     private string rtAirline;
+
     [Column(Storage = "rtAirline", Name = "rt_airline", DbType = "NCHAR(3)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public string RtAirline
     {
-        get
-        {
-            return rtAirline;
-        }
+        get { return rtAirline; }
         set
         {
             if (value != rtAirline)
@@ -680,14 +693,17 @@ public partial class AdminFullRoute : INotifyPropertyChanged
     #region System.DateTime RtArriveAt
 
     private DateTime rtArriveAt;
-    [Column(Storage = "rtArriveAt", Name = "rt_arrive_at", DbType = "INGRESDATE", CanBeNull = false)]
+
+    [Column(
+        Storage = "rtArriveAt",
+        Name = "rt_arrive_at",
+        DbType = "INGRESDATE",
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public DateTime RtArriveAt
     {
-        get
-        {
-            return rtArriveAt;
-        }
+        get { return rtArriveAt; }
         set
         {
             if (value != rtArriveAt)
@@ -703,14 +719,17 @@ public partial class AdminFullRoute : INotifyPropertyChanged
     #region  RtArriveOffset
 
     private Int16 rtArriveOffset;
-    [Column(Storage = "rtArriveOffset", Name = "rt_arrive_offset", DbType = "INTEGER(1)", CanBeNull = false)]
+
+    [Column(
+        Storage = "rtArriveOffset",
+        Name = "rt_arrive_offset",
+        DbType = "INTEGER(1)",
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public Int16 RtArriveOffset
     {
-        get
-        {
-            return rtArriveOffset;
-        }
+        get { return rtArriveOffset; }
         set
         {
             if (value != rtArriveOffset)
@@ -726,14 +745,12 @@ public partial class AdminFullRoute : INotifyPropertyChanged
     #region string RtArriveTo
 
     private string rtArriveTo;
+
     [Column(Storage = "rtArriveTo", Name = "rt_arrive_to", DbType = "NCHAR(3)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public string RtArriveTo
     {
-        get
-        {
-            return rtArriveTo;
-        }
+        get { return rtArriveTo; }
         set
         {
             if (value != rtArriveTo)
@@ -749,14 +766,17 @@ public partial class AdminFullRoute : INotifyPropertyChanged
     #region System.DateTime RtDepartAt
 
     private DateTime rtDepartAt;
-    [Column(Storage = "rtDepartAt", Name = "rt_depart_at", DbType = "INGRESDATE", CanBeNull = false)]
+
+    [Column(
+        Storage = "rtDepartAt",
+        Name = "rt_depart_at",
+        DbType = "INGRESDATE",
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public DateTime RtDepartAt
     {
-        get
-        {
-            return rtDepartAt;
-        }
+        get { return rtDepartAt; }
         set
         {
             if (value != rtDepartAt)
@@ -772,14 +792,17 @@ public partial class AdminFullRoute : INotifyPropertyChanged
     #region string RtDepartFrom
 
     private string rtDepartFrom;
-    [Column(Storage = "rtDepartFrom", Name = "rt_depart_from", DbType = "NCHAR(3)", CanBeNull = false)]
+
+    [Column(
+        Storage = "rtDepartFrom",
+        Name = "rt_depart_from",
+        DbType = "NCHAR(3)",
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public string RtDepartFrom
     {
-        get
-        {
-            return rtDepartFrom;
-        }
+        get { return rtDepartFrom; }
         set
         {
             if (value != rtDepartFrom)
@@ -795,14 +818,17 @@ public partial class AdminFullRoute : INotifyPropertyChanged
     #region string RtFlightDay
 
     private string rtFlightDay;
-    [Column(Storage = "rtFlightDay", Name = "rt_flight_day", DbType = "NCHAR(7)", CanBeNull = false)]
+
+    [Column(
+        Storage = "rtFlightDay",
+        Name = "rt_flight_day",
+        DbType = "NCHAR(7)",
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public string RtFlightDay
     {
-        get
-        {
-            return rtFlightDay;
-        }
+        get { return rtFlightDay; }
         set
         {
             if (value != rtFlightDay)
@@ -818,14 +844,17 @@ public partial class AdminFullRoute : INotifyPropertyChanged
     #region  RtFlightNum
 
     private Int32 rtFlightNum;
-    [Column(Storage = "rtFlightNum", Name = "rt_flight_num", DbType = "INTEGER(4)", CanBeNull = false)]
+
+    [Column(
+        Storage = "rtFlightNum",
+        Name = "rt_flight_num",
+        DbType = "INTEGER(4)",
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public Int32 RtFlightNum
     {
-        get
-        {
-            return rtFlightNum;
-        }
+        get { return rtFlightNum; }
         set
         {
             if (value != rtFlightNum)
@@ -838,7 +867,7 @@ public partial class AdminFullRoute : INotifyPropertyChanged
 
     #endregion
 
-    #warning L189 table admin.full_route has no primary key. Multiple C# objects will refer to the same row.
+#warning L189 table admin.full_route has no primary key. Multiple C# objects will refer to the same row.
 }
 
 [Table(Name = "admin.iietab_f5_f6")]
@@ -861,14 +890,18 @@ public partial class AdminIietabF5f6 : INotifyPropertyChanged
     #region string PerKey
 
     private string perKey;
-    [Column(Storage = "perKey", Name = "per_key", DbType = "CHAR(8)", IsPrimaryKey = true, CanBeNull = false)]
+
+    [Column(
+        Storage = "perKey",
+        Name = "per_key",
+        DbType = "CHAR(8)",
+        IsPrimaryKey = true,
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public string PerKey
     {
-        get
-        {
-            return perKey;
-        }
+        get { return perKey; }
         set
         {
             if (value != perKey)
@@ -884,14 +917,12 @@ public partial class AdminIietabF5f6 : INotifyPropertyChanged
     #region  PerNext
 
     private Int32 perNext;
+
     [Column(Storage = "perNext", Name = "per_next", DbType = "INTEGER(4)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public Int32 PerNext
     {
-        get
-        {
-            return perNext;
-        }
+        get { return perNext; }
         set
         {
             if (value != perNext)
@@ -907,14 +938,18 @@ public partial class AdminIietabF5f6 : INotifyPropertyChanged
     #region  PerSegment0
 
     private Int32 perSegment0;
-    [Column(Storage = "perSegment0", Name = "per_segment0", DbType = "INTEGER(4)", IsPrimaryKey = true, CanBeNull = false)]
+
+    [Column(
+        Storage = "perSegment0",
+        Name = "per_segment0",
+        DbType = "INTEGER(4)",
+        IsPrimaryKey = true,
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public Int32 PerSegment0
     {
-        get
-        {
-            return perSegment0;
-        }
+        get { return perSegment0; }
         set
         {
             if (value != perSegment0)
@@ -930,14 +965,18 @@ public partial class AdminIietabF5f6 : INotifyPropertyChanged
     #region  PerSegment1
 
     private Int32 perSegment1;
-    [Column(Storage = "perSegment1", Name = "per_segment1", DbType = "INTEGER(4)", IsPrimaryKey = true, CanBeNull = false)]
+
+    [Column(
+        Storage = "perSegment1",
+        Name = "per_segment1",
+        DbType = "INTEGER(4)",
+        IsPrimaryKey = true,
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public Int32 PerSegment1
     {
-        get
-        {
-            return perSegment1;
-        }
+        get { return perSegment1; }
         set
         {
             if (value != perSegment1)
@@ -953,14 +992,12 @@ public partial class AdminIietabF5f6 : INotifyPropertyChanged
     #region System.Byte[] PerValue
 
     private byte[] perValue;
+
     [Column(Storage = "perValue", Name = "per_value", DbType = "BYTE VARYING", CanBeNull = false)]
     [DebuggerNonUserCode]
     public byte[] PerValue
     {
-        get
-        {
-            return perValue;
-        }
+        get { return perValue; }
         set
         {
             if (value != perValue)
@@ -987,11 +1024,12 @@ public partial class AdminIietabF5f6 : INotifyPropertyChanged
         {
             return false;
         }
-        return PerKey.Equals(other.PerKey) && PerSegment0.Equals(other.PerSegment0) && PerSegment1.Equals(other.PerSegment1);
+        return PerKey.Equals(other.PerKey)
+            && PerSegment0.Equals(other.PerSegment0)
+            && PerSegment1.Equals(other.PerSegment1);
     }
 
     #endregion
-
 }
 
 [Table(Name = "admin.route")]
@@ -1014,14 +1052,18 @@ public partial class AdminRoute : INotifyPropertyChanged
     #region string RtAirline
 
     private string rtAirline;
-    [Column(Storage = "rtAirline", Name = "rt_airline", DbType = "NCHAR(3)", IsPrimaryKey = true, CanBeNull = false)]
+
+    [Column(
+        Storage = "rtAirline",
+        Name = "rt_airline",
+        DbType = "NCHAR(3)",
+        IsPrimaryKey = true,
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public string RtAirline
     {
-        get
-        {
-            return rtAirline;
-        }
+        get { return rtAirline; }
         set
         {
             if (value != rtAirline)
@@ -1037,14 +1079,17 @@ public partial class AdminRoute : INotifyPropertyChanged
     #region System.DateTime RtArriveAt
 
     private DateTime rtArriveAt;
-    [Column(Storage = "rtArriveAt", Name = "rt_arrive_at", DbType = "INGRESDATE", CanBeNull = false)]
+
+    [Column(
+        Storage = "rtArriveAt",
+        Name = "rt_arrive_at",
+        DbType = "INGRESDATE",
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public DateTime RtArriveAt
     {
-        get
-        {
-            return rtArriveAt;
-        }
+        get { return rtArriveAt; }
         set
         {
             if (value != rtArriveAt)
@@ -1060,14 +1105,17 @@ public partial class AdminRoute : INotifyPropertyChanged
     #region  RtArriveOffset
 
     private Int16 rtArriveOffset;
-    [Column(Storage = "rtArriveOffset", Name = "rt_arrive_offset", DbType = "INTEGER(1)", CanBeNull = false)]
+
+    [Column(
+        Storage = "rtArriveOffset",
+        Name = "rt_arrive_offset",
+        DbType = "INTEGER(1)",
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public Int16 RtArriveOffset
     {
-        get
-        {
-            return rtArriveOffset;
-        }
+        get { return rtArriveOffset; }
         set
         {
             if (value != rtArriveOffset)
@@ -1083,14 +1131,12 @@ public partial class AdminRoute : INotifyPropertyChanged
     #region string RtArriveTo
 
     private string rtArriveTo;
+
     [Column(Storage = "rtArriveTo", Name = "rt_arrive_to", DbType = "NCHAR(3)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public string RtArriveTo
     {
-        get
-        {
-            return rtArriveTo;
-        }
+        get { return rtArriveTo; }
         set
         {
             if (value != rtArriveTo)
@@ -1106,14 +1152,17 @@ public partial class AdminRoute : INotifyPropertyChanged
     #region System.DateTime RtDepartAt
 
     private DateTime rtDepartAt;
-    [Column(Storage = "rtDepartAt", Name = "rt_depart_at", DbType = "INGRESDATE", CanBeNull = false)]
+
+    [Column(
+        Storage = "rtDepartAt",
+        Name = "rt_depart_at",
+        DbType = "INGRESDATE",
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public DateTime RtDepartAt
     {
-        get
-        {
-            return rtDepartAt;
-        }
+        get { return rtDepartAt; }
         set
         {
             if (value != rtDepartAt)
@@ -1129,14 +1178,17 @@ public partial class AdminRoute : INotifyPropertyChanged
     #region string RtDepartFrom
 
     private string rtDepartFrom;
-    [Column(Storage = "rtDepartFrom", Name = "rt_depart_from", DbType = "NCHAR(3)", CanBeNull = false)]
+
+    [Column(
+        Storage = "rtDepartFrom",
+        Name = "rt_depart_from",
+        DbType = "NCHAR(3)",
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public string RtDepartFrom
     {
-        get
-        {
-            return rtDepartFrom;
-        }
+        get { return rtDepartFrom; }
         set
         {
             if (value != rtDepartFrom)
@@ -1152,14 +1204,18 @@ public partial class AdminRoute : INotifyPropertyChanged
     #region string RtFlightDay
 
     private string rtFlightDay;
-    [Column(Storage = "rtFlightDay", Name = "rt_flight_day", DbType = "NCHAR(7)", IsPrimaryKey = true, CanBeNull = false)]
+
+    [Column(
+        Storage = "rtFlightDay",
+        Name = "rt_flight_day",
+        DbType = "NCHAR(7)",
+        IsPrimaryKey = true,
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public string RtFlightDay
     {
-        get
-        {
-            return rtFlightDay;
-        }
+        get { return rtFlightDay; }
         set
         {
             if (value != rtFlightDay)
@@ -1175,14 +1231,18 @@ public partial class AdminRoute : INotifyPropertyChanged
     #region  RtFlightNum
 
     private Int32 rtFlightNum;
-    [Column(Storage = "rtFlightNum", Name = "rt_flight_num", DbType = "INTEGER(4)", IsPrimaryKey = true, CanBeNull = false)]
+
+    [Column(
+        Storage = "rtFlightNum",
+        Name = "rt_flight_num",
+        DbType = "INTEGER(4)",
+        IsPrimaryKey = true,
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public Int32 RtFlightNum
     {
-        get
-        {
-            return rtFlightNum;
-        }
+        get { return rtFlightNum; }
         set
         {
             if (value != rtFlightNum)
@@ -1198,14 +1258,12 @@ public partial class AdminRoute : INotifyPropertyChanged
     #region  RtId
 
     private Int32 rtId;
+
     [Column(Storage = "rtId", Name = "rt_id", DbType = "INTEGER(4)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public Int32 RtId
     {
-        get
-        {
-            return rtId;
-        }
+        get { return rtId; }
         set
         {
             if (value != rtId)
@@ -1232,11 +1290,12 @@ public partial class AdminRoute : INotifyPropertyChanged
         {
             return false;
         }
-        return RtAirline.Equals(other.RtAirline) && RtFlightDay.Equals(other.RtFlightDay) && RtFlightNum.Equals(other.RtFlightNum);
+        return RtAirline.Equals(other.RtAirline)
+            && RtFlightDay.Equals(other.RtFlightDay)
+            && RtFlightNum.Equals(other.RtFlightNum);
     }
 
     #endregion
-
 }
 
 [Table(Name = "admin.tz")]
@@ -1259,14 +1318,12 @@ public partial class AdminTz : INotifyPropertyChanged
     #region string TzCode
 
     private string tzCode;
+
     [Column(Storage = "tzCode", Name = "tz_code", DbType = "NCHAR(5)", IsPrimaryKey = true)]
     [DebuggerNonUserCode]
     public string TzCode
     {
-        get
-        {
-            return tzCode;
-        }
+        get { return tzCode; }
         set
         {
             if (value != tzCode)
@@ -1282,14 +1339,12 @@ public partial class AdminTz : INotifyPropertyChanged
     #region  TzId
 
     private Int32 tzId;
+
     [Column(Storage = "tzId", Name = "tz_id", DbType = "INTEGER(4)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public Int32 TzId
     {
-        get
-        {
-            return tzId;
-        }
+        get { return tzId; }
         set
         {
             if (value != tzId)
@@ -1305,14 +1360,12 @@ public partial class AdminTz : INotifyPropertyChanged
     #region string TzName
 
     private string tzName;
+
     [Column(Storage = "tzName", Name = "tz_name", DbType = "NCHAR(40)")]
     [DebuggerNonUserCode]
     public string TzName
     {
-        get
-        {
-            return tzName;
-        }
+        get { return tzName; }
         set
         {
             if (value != tzName)
@@ -1328,14 +1381,12 @@ public partial class AdminTz : INotifyPropertyChanged
     #region  TzUtcOffset
 
     private Decimal tzUtcOffset;
+
     [Column(Storage = "tzUtcOffset", Name = "tz_utc_offset", DbType = "DECIMAL(5, 2)")]
     [DebuggerNonUserCode]
     public Decimal TzUtcOffset
     {
-        get
-        {
-            return tzUtcOffset;
-        }
+        get { return tzUtcOffset; }
         set
         {
             if (value != tzUtcOffset)
@@ -1366,7 +1417,6 @@ public partial class AdminTz : INotifyPropertyChanged
     }
 
     #endregion
-
 }
 
 [Table(Name = "admin.user_profile")]
@@ -1389,14 +1439,12 @@ public partial class AdminUserProfile : INotifyPropertyChanged
     #region string UpAirport
 
     private string upAirport;
+
     [Column(Storage = "upAirport", Name = "up_airport", DbType = "NCHAR(3)")]
     [DebuggerNonUserCode]
     public string UpAirport
     {
-        get
-        {
-            return upAirport;
-        }
+        get { return upAirport; }
         set
         {
             if (value != upAirport)
@@ -1412,14 +1460,18 @@ public partial class AdminUserProfile : INotifyPropertyChanged
     #region string UpEmail
 
     private string upEmail;
-    [Column(Storage = "upEmail", Name = "up_email", DbType = "NVARCHAR(100)", IsPrimaryKey = true, CanBeNull = false)]
+
+    [Column(
+        Storage = "upEmail",
+        Name = "up_email",
+        DbType = "NVARCHAR(100)",
+        IsPrimaryKey = true,
+        CanBeNull = false
+    )]
     [DebuggerNonUserCode]
     public string UpEmail
     {
-        get
-        {
-            return upEmail;
-        }
+        get { return upEmail; }
         set
         {
             if (value != upEmail)
@@ -1435,14 +1487,12 @@ public partial class AdminUserProfile : INotifyPropertyChanged
     #region string UpFirst
 
     private string upFirst;
+
     [Column(Storage = "upFirst", Name = "up_first", DbType = "NVARCHAR(30)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public string UpFirst
     {
-        get
-        {
-            return upFirst;
-        }
+        get { return upFirst; }
         set
         {
             if (value != upFirst)
@@ -1458,14 +1508,12 @@ public partial class AdminUserProfile : INotifyPropertyChanged
     #region  UpId
 
     private Int32 upId;
+
     [Column(Storage = "upId", Name = "up_id", DbType = "INTEGER(4)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public Int32 UpId
     {
-        get
-        {
-            return upId;
-        }
+        get { return upId; }
         set
         {
             if (value != upId)
@@ -1481,14 +1529,12 @@ public partial class AdminUserProfile : INotifyPropertyChanged
     #region System.Byte[] UpImage
 
     private byte[] upImage;
+
     [Column(Storage = "upImage", Name = "up_image", DbType = "LONG BYTE")]
     [DebuggerNonUserCode]
     public byte[] UpImage
     {
-        get
-        {
-            return upImage;
-        }
+        get { return upImage; }
         set
         {
             if (value != upImage)
@@ -1504,14 +1550,12 @@ public partial class AdminUserProfile : INotifyPropertyChanged
     #region string UpLast
 
     private string upLast;
+
     [Column(Storage = "upLast", Name = "up_last", DbType = "NVARCHAR(30)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public string UpLast
     {
-        get
-        {
-            return upLast;
-        }
+        get { return upLast; }
         set
         {
             if (value != upLast)
@@ -1542,7 +1586,6 @@ public partial class AdminUserProfile : INotifyPropertyChanged
     }
 
     #endregion
-
 }
 
 [Table(Name = "admin.version")]
@@ -1565,14 +1608,12 @@ public partial class AdminVersion : INotifyPropertyChanged
     #region System.DateTime VerDate
 
     private DateTime verDate;
+
     [Column(Storage = "verDate", Name = "ver_date", DbType = "INGRESDATE", CanBeNull = false)]
     [DebuggerNonUserCode]
     public DateTime VerDate
     {
-        get
-        {
-            return verDate;
-        }
+        get { return verDate; }
         set
         {
             if (value != verDate)
@@ -1588,14 +1629,12 @@ public partial class AdminVersion : INotifyPropertyChanged
     #region  VerId
 
     private Int32 verId;
+
     [Column(Storage = "verId", Name = "ver_id", DbType = "INTEGER(4)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public Int32 VerId
     {
-        get
-        {
-            return verId;
-        }
+        get { return verId; }
         set
         {
             if (value != verId)
@@ -1611,14 +1650,12 @@ public partial class AdminVersion : INotifyPropertyChanged
     #region System.DateTime VerInstall
 
     private DateTime verInstall;
+
     [Column(Storage = "verInstall", Name = "ver_install", DbType = "INGRESDATE", CanBeNull = false)]
     [DebuggerNonUserCode]
     public DateTime VerInstall
     {
-        get
-        {
-            return verInstall;
-        }
+        get { return verInstall; }
         set
         {
             if (value != verInstall)
@@ -1634,14 +1671,12 @@ public partial class AdminVersion : INotifyPropertyChanged
     #region  VerMajor
 
     private Int32 verMajor;
+
     [Column(Storage = "verMajor", Name = "ver_major", DbType = "INTEGER(4)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public Int32 VerMajor
     {
-        get
-        {
-            return verMajor;
-        }
+        get { return verMajor; }
         set
         {
             if (value != verMajor)
@@ -1657,14 +1692,12 @@ public partial class AdminVersion : INotifyPropertyChanged
     #region  VerMinor
 
     private Int32 verMinor;
+
     [Column(Storage = "verMinor", Name = "ver_minor", DbType = "INTEGER(4)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public Int32 VerMinor
     {
-        get
-        {
-            return verMinor;
-        }
+        get { return verMinor; }
         set
         {
             if (value != verMinor)
@@ -1680,14 +1713,12 @@ public partial class AdminVersion : INotifyPropertyChanged
     #region  VerRelease
 
     private Int32 verRelease;
+
     [Column(Storage = "verRelease", Name = "ver_release", DbType = "INTEGER(4)", CanBeNull = false)]
     [DebuggerNonUserCode]
     public Int32 VerRelease
     {
-        get
-        {
-            return verRelease;
-        }
+        get { return verRelease; }
         set
         {
             if (value != verRelease)
@@ -1700,5 +1731,5 @@ public partial class AdminVersion : INotifyPropertyChanged
 
     #endregion
 
-    #warning L189 table admin.version has no primary key. Multiple C# objects will refer to the same row.
+#warning L189 table admin.version has no primary key. Multiple C# objects will refer to the same row.
 }

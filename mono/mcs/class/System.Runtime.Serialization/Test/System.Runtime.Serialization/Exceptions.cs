@@ -43,27 +43,35 @@ namespace MonoTests.System.Runtime.Serialization
         {
             public string Data;
 
-            public SerializableException (string data) {
+            public SerializableException(string data)
+            {
                 Data = data;
 
                 SerializeObjectState += HandleSerialization;
             }
 
-            private static void HandleSerialization (object exception, SafeSerializationEventArgs eventArgs) {
-                eventArgs.AddSerializedState (new SerializableExceptionState (exception));
+            private static void HandleSerialization(
+                object exception,
+                SafeSerializationEventArgs eventArgs
+            )
+            {
+                eventArgs.AddSerializedState(new SerializableExceptionState(exception));
             }
 
             [Serializable]
-            private class SerializableExceptionState : ISafeSerializationData {
+            private class SerializableExceptionState : ISafeSerializationData
+            {
                 private string Data;
 
-                public SerializableExceptionState (object _exception) {
+                public SerializableExceptionState(object _exception)
+                {
                     SerializableException exception = (SerializableException)_exception;
 
                     Data = exception.Data;
                 }
 
-                public void CompleteDeserialization (object _exception) {
+                public void CompleteDeserialization(object _exception)
+                {
                     SerializableException exception = (SerializableException)_exception;
                     exception.SerializeObjectState += HandleSerialization;
 
@@ -74,22 +82,24 @@ namespace MonoTests.System.Runtime.Serialization
 
         // Effectively tests SerializeObjectState handler support on System.Exception
         [Test]
-        public void Exception_SerializeObjectState () {
-            SerializableException exception = new SerializableException ("success");
+        public void Exception_SerializeObjectState()
+        {
+            SerializableException exception = new SerializableException("success");
             SerializableException deserializedException;
-            BinaryFormatter binaryFormatter = new BinaryFormatter ();
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-            using (MemoryStream memoryStream = new MemoryStream ())
+            using (MemoryStream memoryStream = new MemoryStream())
             {
-                binaryFormatter.Serialize (memoryStream, exception);
-                memoryStream.Flush ();
+                binaryFormatter.Serialize(memoryStream, exception);
+                memoryStream.Flush();
 
-                memoryStream.Seek (0, SeekOrigin.Begin);
+                memoryStream.Seek(0, SeekOrigin.Begin);
 
-                deserializedException = (SerializableException)binaryFormatter.Deserialize (memoryStream);
+                deserializedException = (SerializableException)
+                    binaryFormatter.Deserialize(memoryStream);
             }
 
-            Assert.AreEqual ("success", deserializedException.Data);
+            Assert.AreEqual("success", deserializedException.Data);
         }
     }
 }

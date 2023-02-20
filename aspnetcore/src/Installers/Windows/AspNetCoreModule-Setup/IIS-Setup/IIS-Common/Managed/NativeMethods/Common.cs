@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-// Any reference to Common.cs should also include Kernel32.cs because 
+// Any reference to Common.cs should also include Kernel32.cs because
 // SafeHandleZeroIsInvalid (from Common.cs) uses CloseHandle (from Kernel32.cs)
 namespace Microsoft.Web.Management.PInvoke
 {
@@ -19,8 +19,8 @@ namespace Microsoft.Web.Management.PInvoke
         ERROR_NOT_READY = 21,
         ERROR_SHARING_VIOLATION = 32,
         ERROR_FILE_EXISTS = 80,
-        ERROR_INVALID_PARAMETER = 87,       //  0x57
-        ERROR_INVALID_NAME = 123,           //  0x7b
+        ERROR_INVALID_PARAMETER = 87, //  0x57
+        ERROR_INVALID_NAME = 123, //  0x7b
         ERROR_BAD_PATHNAME = 161,
         ERROR_ALREADY_EXISTS = 183,
         ERROR_FILENAME_EXCED_RANGE = 206,
@@ -39,9 +39,7 @@ namespace Microsoft.Web.Management.PInvoke
     internal class SafeHandleZeroIsInvalid : SafeHandle
     {
         public SafeHandleZeroIsInvalid()
-            : base(IntPtr.Zero, true)
-        {
-        }
+            : base(IntPtr.Zero, true) { }
 
         public SafeHandleZeroIsInvalid(IntPtr newHandle)
             : base(IntPtr.Zero, true)
@@ -51,10 +49,7 @@ namespace Microsoft.Web.Management.PInvoke
 
         public override bool IsInvalid
         {
-            get
-            {
-                return this.handle == IntPtr.Zero;
-            }
+            get { return this.handle == IntPtr.Zero; }
         }
 
         protected override bool ReleaseHandle()
@@ -87,10 +82,7 @@ namespace Microsoft.Web.Management.PInvoke
 
         public override bool IsInvalid
         {
-            get
-            {
-                return this.handle == IntPtr.Zero;
-            }
+            get { return this.handle == IntPtr.Zero; }
         }
 
         public T GetCopyAs<T>()
@@ -100,10 +92,7 @@ namespace Microsoft.Web.Management.PInvoke
 
         public int Size
         {
-            get
-            {
-                return _size;
-            }
+            get { return _size; }
         }
 
         public static readonly HGlobalBuffer NULL = new HGlobalBuffer(0);

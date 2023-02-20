@@ -36,25 +36,28 @@ namespace MonoTests.System.Threading
     public class SemaphoreSlimTests
     {
         SemaphoreSlim sem;
-        
+
         [SetUp]
         public void Setup()
         {
-            sem = new SemaphoreSlim(5);            
-        }    
-        
+            sem = new SemaphoreSlim(5);
+        }
+
         [Test]
         public void CurrentCountMaxTestCase()
         {
-            using (var semMax = new SemaphoreSlim(5, 5)) {
+            using (var semMax = new SemaphoreSlim(5, 5))
+            {
                 semMax.Wait();
-                try {
+                try
+                {
                     semMax.Release(3);
-                    Assert.Fail ();
-                } catch (SemaphoreFullException) {}
+                    Assert.Fail();
+                }
+                catch (SemaphoreFullException) { }
             }
         }
-        
+
         [Test]
         public void CurrentCountTestCase()
         {
@@ -63,9 +66,9 @@ namespace MonoTests.System.Threading
             sem.Release();
             Assert.AreEqual(4, sem.CurrentCount);
         }
-        
+
         [Test]
-        [Category ("MultiThreaded")]
+        [Category("MultiThreaded")]
         public void WaitStressTest()
         {
             int count = -1;
@@ -73,22 +76,27 @@ namespace MonoTests.System.Threading
             int worker = 0;
             bool coherent = true;
 
-            ParallelTestHelper.ParallelStressTest (sem, delegate (SemaphoreSlim s) {
-                int index = Interlocked.Increment (ref count);
-                s.Wait ();
-                if (Interlocked.Increment (ref worker) > 5)
-                    coherent = false;
-                Thread.Sleep (40);
-                Interlocked.Decrement (ref worker);
-                s.Release ();
-                array[index] = true;
-            }, 7);
-            
-            bool result = array.Aggregate ((acc, e) => acc && e);
-            
-            Assert.IsTrue (result, "#1");
-            Assert.AreEqual (5, sem.CurrentCount, "#2");
-            Assert.IsTrue (coherent, "#3");
+            ParallelTestHelper.ParallelStressTest(
+                sem,
+                delegate(SemaphoreSlim s)
+                {
+                    int index = Interlocked.Increment(ref count);
+                    s.Wait();
+                    if (Interlocked.Increment(ref worker) > 5)
+                        coherent = false;
+                    Thread.Sleep(40);
+                    Interlocked.Decrement(ref worker);
+                    s.Release();
+                    array[index] = true;
+                },
+                7
+            );
+
+            bool result = array.Aggregate((acc, e) => acc && e);
+
+            Assert.IsTrue(result, "#1");
+            Assert.AreEqual(5, sem.CurrentCount, "#2");
+            Assert.IsTrue(coherent, "#3");
         }
     }
 }

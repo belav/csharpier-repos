@@ -17,7 +17,8 @@ namespace System.Web.Http.Controllers
     /// </summary>
     public class HttpControllerDescriptor
     {
-        private readonly ConcurrentDictionary<object, object> _properties = new ConcurrentDictionary<object, object>();
+        private readonly ConcurrentDictionary<object, object> _properties =
+            new ConcurrentDictionary<object, object>();
 
         private HttpConfiguration _configuration;
 
@@ -27,7 +28,11 @@ namespace System.Web.Http.Controllers
         private object[] _attributeCache;
         private object[] _declaredOnlyAttributeCache;
 
-        public HttpControllerDescriptor(HttpConfiguration configuration, string controllerName, Type controllerType)
+        public HttpControllerDescriptor(
+            HttpConfiguration configuration,
+            string controllerName,
+            Type controllerType
+        )
         {
             if (configuration == null)
             {
@@ -55,11 +60,9 @@ namespace System.Web.Http.Controllers
         /// Initializes a new instance of the <see cref="HttpControllerDescriptor"/> class.
         /// </summary>
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
-        public HttpControllerDescriptor()
-        {
-        }
+        public HttpControllerDescriptor() { }
 
-        // For unit testing purposes. 
+        // For unit testing purposes.
         internal HttpControllerDescriptor(HttpConfiguration configuration)
         {
             Initialize(configuration);
@@ -74,7 +77,7 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// Gets the configuration associated with the <see cref="HttpControllerDescriptor"/>. 
+        /// Gets the configuration associated with the <see cref="HttpControllerDescriptor"/>.
         /// </summary>
         public HttpConfiguration Configuration
         {
@@ -128,7 +131,8 @@ namespace System.Web.Http.Controllers
             }
 
             // Invoke the controller activator
-            IHttpControllerActivator activator = Configuration.Services.GetHttpControllerActivator();
+            IHttpControllerActivator activator =
+                Configuration.Services.GetHttpControllerActivator();
             IHttpController instance = activator.Create(request, this, ControllerType);
             return instance;
         }
@@ -138,7 +142,11 @@ namespace System.Web.Http.Controllers
         /// </summary>
         /// <remarks>The default implementation calls <see cref="GetCustomAttributes{IFilter}()"/>.</remarks>
         /// <returns>A collection of filters associated with this controller.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Filters can be built dynamically")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "Filters can be built dynamically"
+        )]
         public virtual Collection<IFilter> GetFilters()
         {
             return GetCustomAttributes<IFilter>();
@@ -150,7 +158,8 @@ namespace System.Web.Http.Controllers
         /// <remarks>The default implementation retrieves the matching set of attributes declared on <see cref="ControllerType"/>.</remarks>
         /// <typeparam name="T">Used to filter the collection of attributes. Use a value of <see cref="Object"/> to retrieve all attributes.</typeparam>
         /// <returns>A collection of attributes associated with this controller.</returns>
-        public virtual Collection<T> GetCustomAttributes<T>() where T : class
+        public virtual Collection<T> GetCustomAttributes<T>()
+            where T : class
         {
             return GetCustomAttributes<T>(inherit: true);
         }
@@ -162,12 +171,13 @@ namespace System.Web.Http.Controllers
         /// <typeparam name="T">Used to filter the collection of attributes. Use a value of <see cref="Object"/> to retrieve all attributes.</typeparam>
         /// <param name="inherit"><c>true</c> to search this controller's inheritance chain to find the attributes; otherwise, <c>false</c>.</param>
         /// <returns>A collection of attributes associated with this controller.</returns>
-        public virtual Collection<T> GetCustomAttributes<T>(bool inherit) where T : class
+        public virtual Collection<T> GetCustomAttributes<T>(bool inherit)
+            where T : class
         {
             object[] attributes;
-            // Getting custom attributes via reflection is slow. 
-            // But iterating over a object[] to pick out specific types is fast. 
-            // Furthermore, many different services may call to ask for different attributes, so we have multiple callers. 
+            // Getting custom attributes via reflection is slow.
+            // But iterating over a object[] to pick out specific types is fast.
+            // Furthermore, many different services may call to ask for different attributes, so we have multiple callers.
             // That means there's not a single cache for the callers, which means there's some value caching here.
             if (inherit)
             {
@@ -183,7 +193,9 @@ namespace System.Web.Http.Controllers
                 if (_declaredOnlyAttributeCache == null)
                 {
                     // Even in a race, we'll just ask for the custom attributes twice.
-                    _declaredOnlyAttributeCache = ControllerType.GetCustomAttributes(inherit: false);
+                    _declaredOnlyAttributeCache = ControllerType.GetCustomAttributes(
+                        inherit: false
+                    );
                 }
                 attributes = _declaredOnlyAttributeCache;
             }
@@ -191,7 +203,7 @@ namespace System.Web.Http.Controllers
             return new Collection<T>(TypeHelper.OfType<T>(attributes));
         }
 
-        // For unit tests for initializing mock objects. Controller may not have a type, so we can't do the normal Initialize() path. 
+        // For unit tests for initializing mock objects. Controller may not have a type, so we can't do the normal Initialize() path.
         internal void Initialize(HttpConfiguration configuration)
         {
             _configuration = configuration;
@@ -205,7 +217,10 @@ namespace System.Web.Http.Controllers
         }
 
         // Helper to invoke any Controller config attributes on this controller type or its base classes.
-        private static void InvokeAttributesOnControllerType(HttpControllerDescriptor controllerDescriptor, Type type)
+        private static void InvokeAttributesOnControllerType(
+            HttpControllerDescriptor controllerDescriptor,
+            Type type
+        )
         {
             Contract.Assert(controllerDescriptor != null);
 
@@ -226,7 +241,10 @@ namespace System.Web.Http.Controllers
                     var originalConfig = controllerDescriptor.Configuration;
                     var controllerSettings = new HttpControllerSettings(originalConfig);
                     controllerConfig.Initialize(controllerSettings, controllerDescriptor);
-                    controllerDescriptor.Configuration = HttpConfiguration.ApplyControllerSettings(controllerSettings, originalConfig);
+                    controllerDescriptor.Configuration = HttpConfiguration.ApplyControllerSettings(
+                        controllerSettings,
+                        originalConfig
+                    );
                 }
             }
         }

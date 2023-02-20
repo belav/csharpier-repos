@@ -40,21 +40,18 @@ namespace System.Collections.Concurrent
 #if INSIDE_MONO_PARALLEL
     public
 #endif
-    class ConcurrentOrderedList<T>: ICollection<T>, IEnumerable<T>
+    class ConcurrentOrderedList<T> : ICollection<T>, IEnumerable<T>
     {
         class Node
         {
             public T Data;
             public int Key;
             public Node Next;
-            public bool Marked;           
+            public bool Marked;
 
-            public Node ()
-            {
+            public Node() { }
 
-            }
-
-            public Node (Node wrapped)
+            public Node(Node wrapped)
             {
                 Marked = true;
                 Next = wrapped;
@@ -68,101 +65,104 @@ namespace System.Collections.Concurrent
 
         int count;
 
-        public ConcurrentOrderedList () : this (EqualityComparer<T>.Default)
-        {
-            
-        }
+        public ConcurrentOrderedList()
+            : this(EqualityComparer<T>.Default) { }
 
-        public ConcurrentOrderedList (IEqualityComparer<T> comparer)
+        public ConcurrentOrderedList(IEqualityComparer<T> comparer)
         {
             if (comparer == null)
-                throw new ArgumentNullException ("comparer");
+                throw new ArgumentNullException("comparer");
 
             this.comparer = comparer;
 
-            head = new Node ();
-            tail = new Node ();
+            head = new Node();
+            tail = new Node();
             head.Next = tail;
         }
 
-        public bool TryAdd (T data)
+        public bool TryAdd(T data)
         {
-            Node node = new Node ();
+            Node node = new Node();
             node.Data = data;
-            node.Key = comparer.GetHashCode (data);
+            node.Key = comparer.GetHashCode(data);
 
-            if (ListInsert (node)) {
-                Interlocked.Increment (ref count);
+            if (ListInsert(node))
+            {
+                Interlocked.Increment(ref count);
                 return true;
             }
 
             return false;
         }
 
-        public bool TryRemove (T data)
+        public bool TryRemove(T data)
         {
             T dummy;
-            return TryRemoveHash (comparer.GetHashCode (data), out dummy);
+            return TryRemoveHash(comparer.GetHashCode(data), out dummy);
         }
 
-        public bool TryRemoveHash (int key, out T data)
+        public bool TryRemoveHash(int key, out T data)
         {
-            if (ListDelete (key, out data)) {
-                Interlocked.Decrement (ref count);
+            if (ListDelete(key, out data))
+            {
+                Interlocked.Decrement(ref count);
                 return true;
             }
 
             return false;
         }
 
-        public bool TryPop (out T data)
+        public bool TryPop(out T data)
         {
-            return ListPop (out data);
+            return ListPop(out data);
         }
 
-        public bool Contains (T data)
+        public bool Contains(T data)
         {
-            return ContainsHash (comparer.GetHashCode (data));
+            return ContainsHash(comparer.GetHashCode(data));
         }
 
-        public bool ContainsHash (int key)
+        public bool ContainsHash(int key)
         {
             Node node;
 
-            if (!ListFind (key, out node))
+            if (!ListFind(key, out node))
                 return false;
 
             return true;
-
         }
 
-        public bool TryGetFromHash (int key, out T data)
+        public bool TryGetFromHash(int key, out T data)
         {
-            data = default (T);
+            data = default(T);
             Node node;
 
-            if (!ListFind (key, out node))
+            if (!ListFind(key, out node))
                 return false;
 
             data = node.Data;
             return true;
         }
 
-        public void Clear ()
+        public void Clear()
         {
             head.Next = tail;
         }
 
-        public void CopyTo (T[] array, int startIndex)
+        public void CopyTo(T[] array, int startIndex)
         {
             if (array == null)
-                throw new ArgumentNullException ("array");
+                throw new ArgumentNullException("array");
             if (startIndex < 0)
-                throw new ArgumentOutOfRangeException ("startIndex");
+                throw new ArgumentOutOfRangeException("startIndex");
             if (count > array.Length - startIndex)
-                throw new ArgumentException ("array", "The number of elements is greater than the available space from startIndex to the end of the destination array.");
+                throw new ArgumentException(
+                    "array",
+                    "The number of elements is greater than the available space from startIndex to the end of the destination array."
+                );
 
-            foreach (T item in this) {
+            foreach (T item in this)
+            {
                 if (startIndex >= array.Length)
                     break;
 
@@ -170,47 +170,54 @@ namespace System.Collections.Concurrent
             }
         }
 
-        public IEqualityComparer<T> Comparer {
-            get {
-                return comparer;
-            }
-        }
-
-        public int Count {
-            get {
-                return count;
-            }
-        }
-
-        Node ListSearch (int key, ref Node left)
+        public IEqualityComparer<T> Comparer
         {
-            Node leftNodeNext = null, rightNode = null;
+            get { return comparer; }
+        }
 
-            do {
+        public int Count
+        {
+            get { return count; }
+        }
+
+        Node ListSearch(int key, ref Node left)
+        {
+            Node leftNodeNext = null,
+                rightNode = null;
+
+            do
+            {
                 Node t = head;
                 Node tNext = t.Next;
-                do {
-                    if (!tNext.Marked) {
+                do
+                {
+                    if (!tNext.Marked)
+                    {
                         left = t;
                         leftNodeNext = tNext;
                     }
                     t = tNext.Marked ? tNext.Next : tNext;
                     if (t == tail)
                         break;
-                    
+
                     tNext = t.Next;
                 } while (tNext.Marked || t.Key < key);
 
                 rightNode = t;
-                
-                if (leftNodeNext == rightNode) {
+
+                if (leftNodeNext == rightNode)
+                {
                     if (rightNode != tail && rightNode.Next.Marked)
                         continue;
-                    else 
+                    else
                         return rightNode;
                 }
-                
-                if (Interlocked.CompareExchange (ref left.Next, rightNode, leftNodeNext) == leftNodeNext) {
+
+                if (
+                    Interlocked.CompareExchange(ref left.Next, rightNode, leftNodeNext)
+                    == leftNodeNext
+                )
+                {
                     if (rightNode != tail && rightNode.Next.Marked)
                         continue;
                     else
@@ -219,36 +226,51 @@ namespace System.Collections.Concurrent
             } while (true);
         }
 
-        bool ListDelete (int key, out T data)
+        bool ListDelete(int key, out T data)
         {
-            Node rightNode = null, rightNodeNext = null, leftNode = null;
-            data = default (T);
-            
-            do {
-                rightNode = ListSearch (key, ref leftNode);
+            Node rightNode = null,
+                rightNodeNext = null,
+                leftNode = null;
+            data = default(T);
+
+            do
+            {
+                rightNode = ListSearch(key, ref leftNode);
                 if (rightNode == tail || rightNode.Key != key)
                     return false;
 
                 data = rightNode.Data;
-                
+
                 rightNodeNext = rightNode.Next;
                 if (!rightNodeNext.Marked)
-                    if (Interlocked.CompareExchange (ref rightNode.Next, new Node (rightNodeNext), rightNodeNext) == rightNodeNext)
+                    if (
+                        Interlocked.CompareExchange(
+                            ref rightNode.Next,
+                            new Node(rightNodeNext),
+                            rightNodeNext
+                        ) == rightNodeNext
+                    )
                         break;
             } while (true);
-            
-            if (Interlocked.CompareExchange (ref leftNode.Next, rightNodeNext, rightNode) != rightNodeNext)
-                ListSearch (rightNode.Key, ref leftNode);
-            
+
+            if (
+                Interlocked.CompareExchange(ref leftNode.Next, rightNodeNext, rightNode)
+                != rightNodeNext
+            )
+                ListSearch(rightNode.Key, ref leftNode);
+
             return true;
         }
 
-        bool ListPop (out T data)
+        bool ListPop(out T data)
         {
-            Node rightNode = null, rightNodeNext = null, leftNode = head;
-            data = default (T);
+            Node rightNode = null,
+                rightNodeNext = null,
+                leftNode = head;
+            data = default(T);
 
-            do {
+            do
+            {
                 rightNode = head.Next;
                 if (rightNode == tail)
                     return false;
@@ -257,58 +279,72 @@ namespace System.Collections.Concurrent
 
                 rightNodeNext = rightNode.Next;
                 if (!rightNodeNext.Marked)
-                    if (Interlocked.CompareExchange (ref rightNode.Next, new Node (rightNodeNext), rightNodeNext) == rightNodeNext)
+                    if (
+                        Interlocked.CompareExchange(
+                            ref rightNode.Next,
+                            new Node(rightNodeNext),
+                            rightNodeNext
+                        ) == rightNodeNext
+                    )
                         break;
             } while (true);
 
-            if (Interlocked.CompareExchange (ref leftNode.Next, rightNodeNext, rightNode) != rightNodeNext)
-                ListSearch (rightNode.Key, ref leftNode);
+            if (
+                Interlocked.CompareExchange(ref leftNode.Next, rightNodeNext, rightNode)
+                != rightNodeNext
+            )
+                ListSearch(rightNode.Key, ref leftNode);
 
             return true;
         }
-        
-        bool ListInsert (Node newNode)
+
+        bool ListInsert(Node newNode)
         {
             int key = newNode.Key;
-            Node rightNode = null, leftNode = null;
-            
-            do {
-                rightNode = ListSearch (key, ref leftNode);
+            Node rightNode = null,
+                leftNode = null;
+
+            do
+            {
+                rightNode = ListSearch(key, ref leftNode);
                 if (rightNode != tail && rightNode.Key == key)
                     return false;
-                
+
                 newNode.Next = rightNode;
-                if (Interlocked.CompareExchange (ref leftNode.Next, newNode, rightNode) == rightNode)
+                if (Interlocked.CompareExchange(ref leftNode.Next, newNode, rightNode) == rightNode)
                     return true;
             } while (true);
         }
-        
-        bool ListFind (int key, out Node data)
+
+        bool ListFind(int key, out Node data)
         {
-            Node rightNode = null, leftNode = null;
+            Node rightNode = null,
+                leftNode = null;
             data = null;
-            
-            data = rightNode = ListSearch (key, ref leftNode);
-            
+
+            data = rightNode = ListSearch(key, ref leftNode);
+
             return rightNode != tail && rightNode.Key == key;
         }
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator ()
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            return GetEnumeratorInternal ();
+            return GetEnumeratorInternal();
         }
 
-        IEnumerator IEnumerable.GetEnumerator ()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumeratorInternal ();
+            return GetEnumeratorInternal();
         }
 
-        IEnumerator<T> GetEnumeratorInternal ()
+        IEnumerator<T> GetEnumeratorInternal()
         {
             Node node = head.Next;
 
-            while (node != tail) {
-                while (node.Marked) {
+            while (node != tail)
+            {
+                while (node.Marked)
+                {
                     node = node.Next;
                     if (node == tail)
                         yield break;
@@ -318,21 +354,19 @@ namespace System.Collections.Concurrent
             }
         }
 
-        bool ICollection<T>.IsReadOnly {
-            get {
-                return false;
-            }
+        bool ICollection<T>.IsReadOnly
+        {
+            get { return false; }
         }
 
-        void ICollection<T>.Add (T item)
+        void ICollection<T>.Add(T item)
         {
-            TryAdd (item);
+            TryAdd(item);
         }
 
-        bool ICollection<T>.Remove (T item)
+        bool ICollection<T>.Remove(T item)
         {
-            return TryRemove (item);
+            return TryRemove(item);
         }
     }
 }
-

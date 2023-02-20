@@ -3,9 +3,11 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
+
 [assembly: CLSCompliant(true)]
 
-public interface CLSInterface {
-        void Test(int a);
-        void Test(ref int b);
+public interface CLSInterface
+{
+    void Test(int a);
+    void Test(ref int b);
 }

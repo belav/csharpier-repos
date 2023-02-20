@@ -13,7 +13,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue;
 
 internal interface IActiveStatementTrackingService : IWorkspaceService
 {
-    ValueTask StartTrackingAsync(Solution solution, IActiveStatementSpanProvider spanProvider, CancellationToken cancellationToken);
+    ValueTask StartTrackingAsync(
+        Solution solution,
+        IActiveStatementSpanProvider spanProvider,
+        CancellationToken cancellationToken
+    );
 
     void EndTracking();
 
@@ -26,10 +30,19 @@ internal interface IActiveStatementTrackingService : IWorkspaceService
     /// Returns location of the tracking spans in the specified document snapshot (#line target document).
     /// </summary>
     /// <returns>Empty array if tracking spans are not available for the document.</returns>
-    ValueTask<ImmutableArray<ActiveStatementSpan>> GetSpansAsync(Solution solution, DocumentId? documentId, string filePath, CancellationToken cancellationToken);
+    ValueTask<ImmutableArray<ActiveStatementSpan>> GetSpansAsync(
+        Solution solution,
+        DocumentId? documentId,
+        string filePath,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Updates tracking spans with the latest positions of all active statements in the specified document snapshot (#line target document) and returns them.
     /// </summary>
-    ValueTask<ImmutableArray<ActiveStatementTrackingSpan>> GetAdjustedTrackingSpansAsync(TextDocument document, ITextSnapshot snapshot, CancellationToken cancellationToken);
+    ValueTask<ImmutableArray<ActiveStatementTrackingSpan>> GetAdjustedTrackingSpansAsync(
+        TextDocument document,
+        ITextSnapshot snapshot,
+        CancellationToken cancellationToken
+    );
 }

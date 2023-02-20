@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,25 +32,32 @@ namespace System.Web.Compilation
 {
     class Location : ILocation
     {
-        int beginLine, endLine, beginColumn, endColumn;
-        string fileName, plainText;
+        int beginLine,
+            endLine,
+            beginColumn,
+            endColumn;
+        string fileName,
+            plainText;
         ILocation location;
-        
-        public Location (ILocation location)
+
+        public Location(ILocation location)
         {
-            Init (location);
+            Init(location);
         }
 
-        public void Init (ILocation location)
+        public void Init(ILocation location)
         {
-            if (location == null) {
+            if (location == null)
+            {
                 beginLine = 0;
                 endLine = 0;
                 beginColumn = 0;
                 endColumn = 0;
                 fileName = null;
                 plainText = null;
-            } else {
+            }
+            else
+            {
                 beginLine = location.BeginLine;
                 endLine = location.EndLine;
                 beginColumn = location.BeginColumn;
@@ -61,38 +68,46 @@ namespace System.Web.Compilation
             this.location = location;
         }
 
-        public string Filename {
+        public string Filename
+        {
             get { return fileName; }
             set { fileName = value; }
         }
 
-        public int BeginLine {
+        public int BeginLine
+        {
             get { return beginLine; }
             set { beginLine = value; }
         }
 
-        public int EndLine {
+        public int EndLine
+        {
             get { return endLine; }
             set { endLine = value; }
         }
 
-        public int BeginColumn {
+        public int BeginColumn
+        {
             get { return beginColumn; }
             set { beginColumn = value; }
         }
 
-        public int EndColumn {
+        public int EndColumn
+        {
             get { return endColumn; }
             set { endColumn = value; }
         }
 
-        public string PlainText {
+        public string PlainText
+        {
             get { return plainText; }
             set { plainText = value; }
         }
 
-        public string FileText {
-            get {
+        public string FileText
+        {
+            get
+            {
                 if (location != null)
                     return location.FileText;
 
@@ -101,4 +116,3 @@ namespace System.Web.Compilation
         }
     }
 }
-

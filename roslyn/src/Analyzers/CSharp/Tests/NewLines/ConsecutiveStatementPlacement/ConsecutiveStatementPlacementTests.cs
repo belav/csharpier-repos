@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
 {
     using Verify = CSharpCodeFixVerifier<
         CSharpConsecutiveStatementPlacementDiagnosticAnalyzer,
-        ConsecutiveStatementPlacementCodeFixProvider>;
+        ConsecutiveStatementPlacementCodeFixProvider
+    >;
 
     public class ConsecutiveStatementPlacementTests
     {
@@ -21,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
         public async Task TestNotAfterPropertyBlock()
         {
             var code =
-@"
+                @"
 class C
 {
     int X { get; }
@@ -32,7 +33,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -40,7 +47,7 @@ class C
         public async Task TestNotAfterMethodBlock()
         {
             var code =
-@"
+                @"
 class C
 {
     void X() { }
@@ -51,7 +58,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -59,7 +72,7 @@ class C
         public async Task TestNotAfterStatementsOnSingleLine()
         {
             var code =
-@"
+                @"
 class C
 {
     void M()
@@ -72,7 +85,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -80,7 +99,7 @@ class C
         public async Task TestNotAfterStatementsOnSingleLineWithComment()
         {
             var code =
-@"
+                @"
 class C
 {
     void M()
@@ -93,7 +112,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -101,7 +126,7 @@ class C
         public async Task TestNotAfterStatementsOnMultipleLinesWithCommentBetween1()
         {
             var code =
-@"
+                @"
 class C
 {
     void M()
@@ -117,7 +142,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -125,7 +156,7 @@ class C
         public async Task TestNotAfterStatementsOnMultipleLinesWithCommentBetween2()
         {
             var code =
-@"
+                @"
 class C
 {
     void M()
@@ -141,7 +172,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -149,7 +186,7 @@ class C
         public async Task TestNotAfterStatementsWithSingleBlankLines()
         {
             var code =
-@"
+                @"
 class C
 {
     void M()
@@ -166,7 +203,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -174,7 +217,7 @@ class C
         public async Task TestNotAfterStatementsWithSingleBlankLinesWithSpaces()
         {
             var code =
-@"
+                @"
 class C
 {
     void M()
@@ -191,7 +234,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -199,7 +248,7 @@ class C
         public async Task TestNotAfterStatementsWithMultipleBlankLines()
         {
             var code =
-@"
+                @"
 class C
 {
     void M()
@@ -216,7 +265,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -224,7 +279,7 @@ class C
         public async Task TestNotAfterStatementsOnMultipleLinesWithPPDirectiveBetween1()
         {
             var code =
-@"
+                @"
 class C
 {
     void M()
@@ -241,7 +296,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -249,7 +310,7 @@ class C
         public async Task TestNotBetweenBlockAndElseClause()
         {
             var code =
-@"
+                @"
 class C
 {
     void M()
@@ -267,7 +328,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -275,7 +342,7 @@ class C
         public async Task TestNotBetweenBlockAndOuterBlocker()
         {
             var code =
-@"
+                @"
 class C
 {
     void M()
@@ -292,7 +359,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -300,7 +373,7 @@ class C
         public async Task TestNotBetweenBlockAndCase()
         {
             var code =
-@"
+                @"
 class C
 {
     void M()
@@ -321,7 +394,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -330,7 +409,8 @@ class C
         {
             await new Verify.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M()
@@ -341,7 +421,8 @@ class C
         return;
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M()
@@ -353,14 +434,21 @@ class C
         return;
     }
 }",
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotBetweenBlockAndStatement1_WhenOptionOff()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -376,7 +464,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.TrueWithSilentEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -385,7 +479,8 @@ class C
         {
             await new Verify.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M()
@@ -396,7 +491,8 @@ class C
         return;
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M()
@@ -408,7 +504,13 @@ class C
         return;
     }
 }",
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -417,7 +519,8 @@ class C
         {
             await new Verify.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M()
@@ -428,7 +531,8 @@ class C
         return;
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M()
@@ -440,7 +544,13 @@ class C
         return;
     }
 }",
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -449,7 +559,8 @@ class C
         {
             await new Verify.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M()
@@ -458,7 +569,8 @@ class C
         return;
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M()
@@ -468,7 +580,13 @@ class C
         return;
     }
 }",
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -477,7 +595,8 @@ class C
         {
             await new Verify.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M()
@@ -490,7 +609,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M()
@@ -504,7 +624,13 @@ class C
         }
     }
 }",
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -513,7 +639,8 @@ class C
         {
             await new Verify.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M()
@@ -528,7 +655,8 @@ class C
         return;
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M()
@@ -545,14 +673,21 @@ class C
         return;
     }
 }",
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestSA1513NegativeCases()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Linq;
 using System.Collections.Generic;
 public class Foo
@@ -915,7 +1050,13 @@ public class Foo
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -924,7 +1065,8 @@ public class Foo
         {
             await new Verify.Test
             {
-                TestCode = @"using System;
+                TestCode =
+                    @"using System;
 using System.Collections.Generic;
 public class Goo
 {
@@ -1010,7 +1152,8 @@ public class Goo
     }
 }
 ",
-                FixedCode = @"using System;
+                FixedCode =
+                    @"using System;
 using System.Collections.Generic;
 public class Goo
 {
@@ -1102,7 +1245,13 @@ public class Goo
     }
 }
 ",
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
     }

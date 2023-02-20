@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,44 +33,50 @@ using System.Security.Permissions;
 namespace System.Web.UI.HtmlControls
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [DefaultEvent ("ServerChange")]
-    [ValidationProperty ("Value")]
+    [DefaultEvent("ServerChange")]
+    [ValidationProperty("Value")]
     [SupportsEventValidation]
     public class HtmlInputPassword : HtmlInputText, IPostBackDataHandler
     {
-        public HtmlInputPassword ()
-            : base ("password")
-        {
-        }
+        public HtmlInputPassword()
+            : base("password") { }
 
-        protected override void RenderAttributes (HtmlTextWriter writer)
+        protected override void RenderAttributes(HtmlTextWriter writer)
         {
             // make sure we don't render the password
-            Attributes.Remove ("value");
+            Attributes.Remove("value");
 
-            base.RenderAttributes (writer);
+            base.RenderAttributes(writer);
         }
 
-        bool IPostBackDataHandler.LoadPostData (string postDataKey, NameValueCollection postCollection)
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
         {
-            string s = postCollection [postDataKey];
-            if (Attributes ["value"] != s) {
-                Attributes ["value"] = s;
+            string s = postCollection[postDataKey];
+            if (Attributes["value"] != s)
+            {
+                Attributes["value"] = s;
                 return true;
             }
             return false;
         }
 
-        void IPostBackDataHandler.RaisePostDataChangedEvent ()
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
         {
             // We registered in the base class
-            ValidateEvent (UniqueID, String.Empty);
-            OnServerChange (EventArgs.Empty);
+            ValidateEvent(UniqueID, String.Empty);
+            OnServerChange(EventArgs.Empty);
         }
     }
-
 }
-

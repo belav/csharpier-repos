@@ -16,9 +16,7 @@ public class OwnedEntityTypeAttributeConvention : EntityTypeAttributeConventionB
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public OwnedEntityTypeAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     Called after an entity type is added to the model if it has an attribute.
@@ -29,9 +27,13 @@ public class OwnedEntityTypeAttributeConvention : EntityTypeAttributeConventionB
     protected override void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
         OwnedAttribute attribute,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
-        entityTypeBuilder.ModelBuilder.Owned(entityTypeBuilder.Metadata.ClrType, fromDataAnnotation: true);
+        entityTypeBuilder.ModelBuilder.Owned(
+            entityTypeBuilder.Metadata.ClrType,
+            fromDataAnnotation: true
+        );
         if (!entityTypeBuilder.Metadata.IsInModel)
         {
             context.StopProcessing();

@@ -5,20 +5,29 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.DynamicDependencies
 {
-    [SetupCompileBefore ("library.dll", new[] { "Dependencies/DynamicDependencyMethodInAssemblyLibrary.cs" })]
+    [SetupCompileBefore(
+        "library.dll",
+        new[] { "Dependencies/DynamicDependencyMethodInAssemblyLibrary.cs" }
+    )]
     [ExpectedNoWarnings]
     public class DynamicDependencyMemberSignatureWildcard
     {
-        public static void Main ()
+        public static void Main()
         {
-            Dependency ();
+            Dependency();
         }
 
         [Kept]
-        [ExpectedWarning ("IL2037", "'*'", "'Mono.Linker.Tests.Cases.DynamicDependencies.Dependencies.DynamicDependencyMethodInAssemblyLibrary'")]
-        [DynamicDependency ("*", "Mono.Linker.Tests.Cases.DynamicDependencies.Dependencies.DynamicDependencyMethodInAssemblyLibrary", "library")]
-        static void Dependency ()
-        {
-        }
+        [ExpectedWarning(
+            "IL2037",
+            "'*'",
+            "'Mono.Linker.Tests.Cases.DynamicDependencies.Dependencies.DynamicDependencyMethodInAssemblyLibrary'"
+        )]
+        [DynamicDependency(
+            "*",
+            "Mono.Linker.Tests.Cases.DynamicDependencies.Dependencies.DynamicDependencyMethodInAssemblyLibrary",
+            "library"
+        )]
+        static void Dependency() { }
     }
 }

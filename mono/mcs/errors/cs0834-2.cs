@@ -5,9 +5,9 @@ using System.Linq.Expressions;
 
 class C
 {
-    delegate void D ();
-    
-    public void Foo ()
+    delegate void D();
+
+    public void Foo()
     {
         Expression<D> e = () => { };
     }

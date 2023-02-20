@@ -52,7 +52,9 @@ namespace Moq.Expressions.Visitors
                         string.Format(
                             CultureInfo.CurrentCulture,
                             Resources.UnsupportedExpression,
-                            node.ToStringFixed()));
+                            node.ToStringFixed()
+                        )
+                    );
             }
         }
 
@@ -67,7 +69,9 @@ namespace Moq.Expressions.Visitors
                 var argumentExtractor = Expression.Lambda<Func<object[]>>(
                     Expression.NewArrayInit(
                         typeof(object),
-                        node.Arguments.Select(a => Expression.Convert(a, typeof(object)))));
+                        node.Arguments.Select(a => Expression.Convert(a, typeof(object)))
+                    )
+                );
                 arguments = ExpressionCompiler.Instance.Compile(argumentExtractor).Invoke();
             }
             return node;

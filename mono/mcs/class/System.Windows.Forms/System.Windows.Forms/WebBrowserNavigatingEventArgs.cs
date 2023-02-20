@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,7 +36,7 @@ namespace System.Windows.Forms
         private string target_frame_name;
 
         #region Public Constructors
-        public WebBrowserNavigatingEventArgs (Uri url, string targetFrameName)
+        public WebBrowserNavigatingEventArgs(Uri url, string targetFrameName)
         {
             this.url = url;
             this.target_frame_name = targetFrameName;
@@ -44,11 +44,13 @@ namespace System.Windows.Forms
         #endregion    // Public Constructors
 
         #region Public Instance Properties
-        public Uri Url {
+        public Uri Url
+        {
             get { return this.url; }
         }
-        
-        public string TargetFrameName {
+
+        public string TargetFrameName
+        {
             get { return this.target_frame_name; }
         }
         #endregion    // Public Instance Properties

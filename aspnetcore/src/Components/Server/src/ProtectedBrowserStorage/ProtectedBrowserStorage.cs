@@ -16,8 +16,8 @@ public abstract class ProtectedBrowserStorage
     private readonly string _storeName;
     private readonly IJSRuntime _jsRuntime;
     private readonly IDataProtectionProvider _dataProtectionProvider;
-    private readonly ConcurrentDictionary<string, IDataProtector> _cachedDataProtectorsByPurpose
-        = new ConcurrentDictionary<string, IDataProtector>(StringComparer.Ordinal);
+    private readonly ConcurrentDictionary<string, IDataProtector> _cachedDataProtectorsByPurpose =
+        new ConcurrentDictionary<string, IDataProtector>(StringComparer.Ordinal);
 
     /// <summary>
     /// Constructs an instance of <see cref="ProtectedBrowserStorage"/>.
@@ -25,12 +25,18 @@ public abstract class ProtectedBrowserStorage
     /// <param name="storeName">The name of the store in which the data should be stored.</param>
     /// <param name="jsRuntime">The <see cref="IJSRuntime"/>.</param>
     /// <param name="dataProtectionProvider">The <see cref="IDataProtectionProvider"/>.</param>
-    private protected ProtectedBrowserStorage(string storeName, IJSRuntime jsRuntime, IDataProtectionProvider dataProtectionProvider)
+    private protected ProtectedBrowserStorage(
+        string storeName,
+        IJSRuntime jsRuntime,
+        IDataProtectionProvider dataProtectionProvider
+    )
     {
         // Performing data protection on the client would give users a false sense of security, so we'll prevent this.
         if (OperatingSystem.IsBrowser())
         {
-            throw new PlatformNotSupportedException($"{GetType()} cannot be used when running in a browser.");
+            throw new PlatformNotSupportedException(
+                $"{GetType()} cannot be used when running in a browser."
+            );
         }
 
         if (string.IsNullOrEmpty(storeName))
@@ -40,7 +46,9 @@ public abstract class ProtectedBrowserStorage
 
         _storeName = storeName;
         _jsRuntime = jsRuntime ?? throw new ArgumentNullException(nameof(jsRuntime));
-        _dataProtectionProvider = dataProtectionProvider ?? throw new ArgumentNullException(nameof(dataProtectionProvider));
+        _dataProtectionProvider =
+            dataProtectionProvider
+            ?? throw new ArgumentNullException(nameof(dataProtectionProvider));
     }
 
     /// <summary>
@@ -56,8 +64,8 @@ public abstract class ProtectedBrowserStorage
     /// <param name="key">A <see cref="string"/> value specifying the name of the storage slot to use.</param>
     /// <param name="value">A JSON-serializable value to be stored.</param>
     /// <returns>A <see cref="ValueTask"/> representing the completion of the operation.</returns>
-    public ValueTask SetAsync(string key, object value)
-        => SetAsync(CreatePurposeFromKey(key), key, value);
+    public ValueTask SetAsync(string key, object value) =>
+        SetAsync(CreatePurposeFromKey(key), key, value);
 
     /// <summary>
     /// Asynchronously stores the supplied data.
@@ -96,8 +104,8 @@ public abstract class ProtectedBrowserStorage
     /// </summary>
     /// <param name="key">A <see cref="string"/> value specifying the name of the storage slot to use.</param>
     /// <returns>A <see cref="ValueTask"/> representing the completion of the operation.</returns>
-    public ValueTask<ProtectedBrowserStorageResult<TValue>> GetAsync<TValue>(string key)
-        => GetAsync<TValue>(CreatePurposeFromKey(key), key);
+    public ValueTask<ProtectedBrowserStorageResult<TValue>> GetAsync<TValue>(string key) =>
+        GetAsync<TValue>(CreatePurposeFromKey(key), key);
 
     /// <summary>
     /// <para>
@@ -111,13 +119,19 @@ public abstract class ProtectedBrowserStorage
     /// </param>
     /// <param name="key">A <see cref="string"/> value specifying the name of the storage slot to use.</param>
     /// <returns>A <see cref="ValueTask"/> representing the completion of the operation.</returns>
-    public async ValueTask<ProtectedBrowserStorageResult<TValue>> GetAsync<TValue>(string purpose, string key)
+    public async ValueTask<ProtectedBrowserStorageResult<TValue>> GetAsync<TValue>(
+        string purpose,
+        string key
+    )
     {
         var protectedJson = await GetProtectedJsonAsync(key);
 
-        return protectedJson == null ?
-            new ProtectedBrowserStorageResult<TValue>(false, default) :
-            new ProtectedBrowserStorageResult<TValue>(true, Unprotect<TValue>(purpose, protectedJson));
+        return protectedJson == null
+            ? new ProtectedBrowserStorageResult<TValue>(false, default)
+            : new ProtectedBrowserStorageResult<TValue>(
+                true,
+                Unprotect<TValue>(purpose, protectedJson)
+            );
     }
 
     /// <summary>
@@ -127,8 +141,8 @@ public abstract class ProtectedBrowserStorage
     /// A <see cref="string"/> value specifying the name of the storage slot whose value should be deleted.
     /// </param>
     /// <returns>A <see cref="ValueTask"/> representing the completion of the operation.</returns>
-    public ValueTask DeleteAsync(string key)
-        => _jsRuntime.InvokeVoidAsync($"{_storeName}.removeItem", key);
+    public ValueTask DeleteAsync(string key) =>
+        _jsRuntime.InvokeVoidAsync($"{_storeName}.removeItem", key);
 
     private string Protect(string purpose, object value)
     {
@@ -143,24 +157,24 @@ public abstract class ProtectedBrowserStorage
         var protector = GetOrCreateCachedProtector(purpose);
         var json = protector.Unprotect(protectedJson);
 
-        return JsonSerializer.Deserialize<TValue>(json, options: JsonSerializerOptionsProvider.Options)!;
+        return JsonSerializer.Deserialize<TValue>(
+            json,
+            options: JsonSerializerOptionsProvider.Options
+        )!;
     }
 
-    private ValueTask SetProtectedJsonAsync(string key, string protectedJson)
-       => _jsRuntime.InvokeVoidAsync($"{_storeName}.setItem", key, protectedJson);
+    private ValueTask SetProtectedJsonAsync(string key, string protectedJson) =>
+        _jsRuntime.InvokeVoidAsync($"{_storeName}.setItem", key, protectedJson);
 
-    private ValueTask<string?> GetProtectedJsonAsync(string key)
-        => _jsRuntime.InvokeAsync<string?>($"{_storeName}.getItem", key);
+    private ValueTask<string?> GetProtectedJsonAsync(string key) =>
+        _jsRuntime.InvokeAsync<string?>($"{_storeName}.getItem", key);
 
     // IDataProtect isn't disposable, so we're fine holding these indefinitely.
     // Only a bounded number of them will be created, as the 'key' values should
     // come from a bounded set known at compile-time. There's no use case for
     // letting runtime data determine the 'key' values.
-    private IDataProtector GetOrCreateCachedProtector(string purpose)
-        => _cachedDataProtectorsByPurpose.GetOrAdd(
-            purpose,
-            _dataProtectionProvider.CreateProtector);
+    private IDataProtector GetOrCreateCachedProtector(string purpose) =>
+        _cachedDataProtectorsByPurpose.GetOrAdd(purpose, _dataProtectionProvider.CreateProtector);
 
-    private string CreatePurposeFromKey(string key)
-        => $"{GetType().FullName}:{_storeName}:{key}";
+    private string CreatePurposeFromKey(string key) => $"{GetType().FullName}:{_storeName}:{key}";
 }

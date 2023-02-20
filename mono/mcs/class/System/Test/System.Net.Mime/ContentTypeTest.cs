@@ -16,157 +16,160 @@ namespace MonoTests.System.Net.Mime
     public class ContentTypeTest
     {
         ContentType ct;
-        
+
         [SetUp]
-        public void GetReady ()
+        public void GetReady()
         {
-            ct = new ContentType ();
+            ct = new ContentType();
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ArgumentNullException ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ArgumentNullException()
         {
-            new ContentType (null);
+            new ContentType(null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void ArgumentException ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void ArgumentException()
         {
-            new ContentType ("");
+            new ContentType("");
         }
 
         [Test]
-        [ExpectedException (typeof (FormatException))]
-        public void FormatException ()
+        [ExpectedException(typeof(FormatException))]
+        public void FormatException()
         {
-            new ContentType ("attachment; foo=bar"); // missing '/'
+            new ContentType("attachment; foo=bar"); // missing '/'
         }
 
         [Test]
-        public void ArbitraryParameter ()
+        public void ArbitraryParameter()
         {
-            new ContentType ("application/xml; foo=bar");
+            new ContentType("application/xml; foo=bar");
         }
 
         [Test]
-        public void Boundary ()
+        public void Boundary()
         {
-            Assert.IsNull (ct.Boundary);
+            Assert.IsNull(ct.Boundary);
         }
 
         [Test]
-        public void CharSet ()
+        public void CharSet()
         {
-            Assert.IsNull (ct.CharSet);
+            Assert.IsNull(ct.CharSet);
         }
 
         [Test]
-        public void Equals ()
+        public void Equals()
         {
-            Assert.IsTrue (ct.Equals (new ContentType ()));
-            Assert.IsFalse (ct  == new ContentType ());
+            Assert.IsTrue(ct.Equals(new ContentType()));
+            Assert.IsFalse(ct == new ContentType());
         }
 
         [Test]
-        public void GetHashCodeTest ()
+        public void GetHashCodeTest()
         {
-            Assert.IsTrue (ct.GetHashCode () == new ContentType ().GetHashCode ());
+            Assert.IsTrue(ct.GetHashCode() == new ContentType().GetHashCode());
         }
 
         [Test]
-        public void MediaType ()
+        public void MediaType()
         {
-            Assert.IsTrue (ct.MediaType == "application/octet-stream");
+            Assert.IsTrue(ct.MediaType == "application/octet-stream");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void MediaTypeNullException ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void MediaTypeNullException()
         {
             ct.MediaType = null;
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void MediaTypeEmptyException ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void MediaTypeEmptyException()
         {
             ct.MediaType = "";
         }
 
         [Test]
-        [ExpectedException (typeof (FormatException))]
-        public void MediaTypeFormatException ()
+        [ExpectedException(typeof(FormatException))]
+        public void MediaTypeFormatException()
         {
             ct.MediaType = "application/x-myType;";
         }
 
         [Test]
-        public void Parameters ()
+        public void Parameters()
         {
-            ContentType dummy = new ContentType ();
-            Assert.IsTrue (dummy.Parameters.Count == 0);
+            ContentType dummy = new ContentType();
+            Assert.IsTrue(dummy.Parameters.Count == 0);
             dummy.CharSet = "us-ascii";
             dummy.Name = "test";
             dummy.Boundary = "-----boundary---0";
-            dummy.Parameters.Add ("foo", "bar");
-            Assert.IsTrue (dummy.Parameters.Count == 4);
-            Assert.IsTrue (dummy.Parameters["charset"] == "us-ascii");
-            Assert.IsTrue (dummy.Parameters["name"] == "test");
-            Assert.IsTrue (dummy.Parameters["boundary"] == "-----boundary---0");
-            Assert.IsTrue (dummy.Parameters["foo"] == "bar");
+            dummy.Parameters.Add("foo", "bar");
+            Assert.IsTrue(dummy.Parameters.Count == 4);
+            Assert.IsTrue(dummy.Parameters["charset"] == "us-ascii");
+            Assert.IsTrue(dummy.Parameters["name"] == "test");
+            Assert.IsTrue(dummy.Parameters["boundary"] == "-----boundary---0");
+            Assert.IsTrue(dummy.Parameters["foo"] == "bar");
         }
 
         [Test]
-        public void ToStringTest ()
+        public void ToStringTest()
         {
-            Assert.AreEqual ("application/octet-stream", ct.ToString ());
+            Assert.AreEqual("application/octet-stream", ct.ToString());
         }
 
         [Test]
-        public void ToStringTest2 ()
+        public void ToStringTest2()
         {
-            ContentType dummy = new ContentType ("text/plain; charset=us-ascii");
-            Assert.AreEqual ("text/plain; charset=us-ascii", dummy.ToString ());
+            ContentType dummy = new ContentType("text/plain; charset=us-ascii");
+            Assert.AreEqual("text/plain; charset=us-ascii", dummy.ToString());
         }
 
         [Test]
-        public void ToStringTest3 ()
+        public void ToStringTest3()
         {
-            ct.Parameters.Add ("foo", "bar");
-            Assert.AreEqual ("application/octet-stream; foo=bar", ct.ToString ());
+            ct.Parameters.Add("foo", "bar");
+            Assert.AreEqual("application/octet-stream; foo=bar", ct.ToString());
         }
 
         [Test]
-        public void ToStringTest4 ()
+        public void ToStringTest4()
         {
-            ct.Parameters.Add ("start", "urn:foo");
-            Assert.AreEqual ("application/octet-stream; start=\"urn:foo\"", ct.ToString ());
+            ct.Parameters.Add("start", "urn:foo");
+            Assert.AreEqual("application/octet-stream; start=\"urn:foo\"", ct.ToString());
         }
 
         [Test]
-        public void ToStringTest5 ()
+        public void ToStringTest5()
         {
-            ct.Parameters.Add ("start", "foo_bar");
-            Assert.AreEqual ("application/octet-stream; start=foo_bar", ct.ToString ());
-            ct.Parameters.Clear ();
-            ct.Parameters.Add ("start", "foo@bar");
-            Assert.AreEqual ("application/octet-stream; start=\"foo@bar\"", ct.ToString ());
+            ct.Parameters.Add("start", "foo_bar");
+            Assert.AreEqual("application/octet-stream; start=foo_bar", ct.ToString());
+            ct.Parameters.Clear();
+            ct.Parameters.Add("start", "foo@bar");
+            Assert.AreEqual("application/octet-stream; start=\"foo@bar\"", ct.ToString());
         }
 
         [Test]
-        public void ToStringTest6 ()
+        public void ToStringTest6()
         {
-            ct.Parameters.Add ("start", "urn:foo\"bar\"");
-            Assert.AreEqual ("application/octet-stream; start=\"urn:foo\\\"bar\\\"\"", ct.ToString ());
+            ct.Parameters.Add("start", "urn:foo\"bar\"");
+            Assert.AreEqual(
+                "application/octet-stream; start=\"urn:foo\\\"bar\\\"\"",
+                ct.ToString()
+            );
         }
 
         [Test]
-        public void EncodedChars ()
+        public void EncodedChars()
         {
-            ContentType ct = new ContentType ();
-            ct.Parameters.Add ("ASCII", "This is ASCII");
+            ContentType ct = new ContentType();
+            ct.Parameters.Add("ASCII", "This is ASCII");
         }
     }
 }

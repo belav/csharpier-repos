@@ -3,17 +3,18 @@
 using System.Reflection;
 using System;
 
-class C {        
-    public static int Main () 
+class C
+{
+    public static int Main()
     {
-        string [] s = typeof (C).Assembly.GetManifestResourceNames ();
-        if (s [0] != "TEST")
+        string[] s = typeof(C).Assembly.GetManifestResourceNames();
+        if (s[0] != "TEST")
             return 1;
-        
-        if (typeof (C).Assembly.GetManifestResourceStream ("TEST") == null)
+
+        if (typeof(C).Assembly.GetManifestResourceStream("TEST") == null)
             return 2;
 
-        Console.WriteLine ("OK");
+        Console.WriteLine("OK");
         return 0;
     }
 }

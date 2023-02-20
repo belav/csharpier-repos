@@ -3,14 +3,16 @@
 
 interface IFoo { }
 
-interface IGenericBase<T> {
-  void M<U>() where U : IGenericBase<T>;
+interface IGenericBase<T>
+{
+    void M<U>()
+        where U : IGenericBase<T>;
 }
 
-abstract class GenericBase<T> : IGenericBase<T> {
-  public virtual void M<U>() where U : IGenericBase<T> { }
+abstract class GenericBase<T> : IGenericBase<T>
+{
+    public virtual void M<U>()
+        where U : IGenericBase<T> { }
 }
 
-class Derived : GenericBase<IFoo>, IGenericBase<IFoo> {
-
-}
+class Derived : GenericBase<IFoo>, IGenericBase<IFoo> { }

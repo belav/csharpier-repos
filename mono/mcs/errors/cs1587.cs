@@ -4,5 +4,5 @@
 
 /// invalid comment placed on namespace.
 using System;
-enum Foo {
-}
+
+enum Foo { }

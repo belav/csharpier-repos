@@ -2,17 +2,15 @@
 
 public class Test
 {
-    public static void Main ()
+    public static void Main() { }
+
+    public void TestMethod()
     {
-    }
-    
-    public void TestMethod ()
-    {
-        SummaryInfo s = GetSummary ();
-        s.set_Property (0, null);
+        SummaryInfo s = GetSummary();
+        s.set_Property(0, null);
     }
 
-    static SummaryInfo GetSummary ()
+    static SummaryInfo GetSummary()
     {
         return null;
     }

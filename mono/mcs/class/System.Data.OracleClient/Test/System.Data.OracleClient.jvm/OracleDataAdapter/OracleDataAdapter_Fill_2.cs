@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,13 +27,13 @@ using System.Data.OracleClient;
 using NUnit.Framework;
 using MonoTests.System.Data.Utils;
 
-
 namespace MonoTests.System.Data.OracleClient
 {
     [TestFixture]
-    public class OracleDataAdapter_Fill_2 : ADONetTesterClass 
+    public class OracleDataAdapter_Fill_2 : ADONetTesterClass
     {
         private string nonUniqueId;
+
         public static void Main()
         {
             OracleDataAdapter_Fill_2 tc = new OracleDataAdapter_Fill_2();
@@ -43,42 +43,52 @@ namespace MonoTests.System.Data.OracleClient
                 tc.BeginTest("OracleDataAdapter_Fill_2");
                 tc.run();
             }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
 
         [Test]
         public void run()
         {
-            
-            
-            OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            OracleConnection con = new OracleConnection(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
             con.Open();
 
             //DoTestThis(con);
             DoTestTypes1(con);
             //Don't know how to access diffrent database
-            if ((ConnectedDataProvider.GetDbType(con) != DataBaseServer.DB2) && (ConnectedDataProvider.GetDbType(con) != DataBaseServer.PostgreSQL))
-            { 
+            if (
+                (ConnectedDataProvider.GetDbType(con) != DataBaseServer.DB2)
+                && (ConnectedDataProvider.GetDbType(con) != DataBaseServer.PostgreSQL)
+            )
+            {
                 DoTestTypes2(con);
                 DoTestTypes3(con);
             }
-            
-        //    DoTestTypes5(con);   //Table direct --> multipe tables
+
+            //    DoTestTypes5(con);   //Table direct --> multipe tables
             DoTestTypes6(con);
-            
-            if ((ConnectedDataProvider.GetDbType(con) != DataBaseServer.Oracle) && 
-                (ConnectedDataProvider.GetDbType(con) != DataBaseServer.PostgreSQL))
+
+            if (
+                (ConnectedDataProvider.GetDbType(con) != DataBaseServer.Oracle)
+                && (ConnectedDataProvider.GetDbType(con) != DataBaseServer.PostgreSQL)
+            )
             {
                 DoTestTypes7(con); //Diffrent owner
-                
             }
 
             DoTestTypes8(con); //Diffrent owner
 
             //TBD!!
             //DoTestTypes9(con);
-            
+
             if (ConnectedDataProvider.GetDbType(con) != DataBaseServer.PostgreSQL)
             {
                 DoTestTypes10(con);
@@ -88,7 +98,8 @@ namespace MonoTests.System.Data.OracleClient
             StoredProcedurePackageambiguity_InsidePackage(con);
             StoredProcedurePackageambiguity_OutsidePackage(con);
 
-            if (con.State == ConnectionState.Open) con.Close();
+            if (con.State == ConnectionState.Open)
+                con.Close();
         }
 
         //[Test]
@@ -96,51 +107,60 @@ namespace MonoTests.System.Data.OracleClient
         {
             Exception exp = null;
             OracleCommand cmd = new OracleCommand("GH_CREATETABLE", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                OracleDataAdapter da = new OracleDataAdapter(cmd);
-                DataSet ds = new DataSet();
+            cmd.CommandType = CommandType.StoredProcedure;
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+            DataSet ds = new DataSet();
 
-                try
+            try
+            {
+                BeginCase("Check effected rows after create table ddl in stored procedure.");
+                int RowsAffected;
+                RowsAffected = cmd.ExecuteNonQuery();
+                int ExpectedRowsAffected;
+                switch (ConnectedDataProvider.GetDbType(con))
                 {
-                    BeginCase("Check effected rows after create table ddl in stored procedure.");
-                    int RowsAffected;
-                    RowsAffected = cmd.ExecuteNonQuery();
-                    int ExpectedRowsAffected;
-                    switch (ConnectedDataProvider.GetDbType(con))
-                    {
-                        case DataBaseServer.SQLServer:
-                        case DataBaseServer.Sybase:
-                            ExpectedRowsAffected = 3;
-                            break;
-                        case DataBaseServer.Oracle:
-                            //In .NET the ExpectedRowsAffected is '1', where as in Java it is '-1', this gap is because of jdbc driver for oracle.
-                            ExpectedRowsAffected = -1;
+                    case DataBaseServer.SQLServer:
+                    case DataBaseServer.Sybase:
+                        ExpectedRowsAffected = 3;
+                        break;
+                    case DataBaseServer.Oracle:
+                        //In .NET the ExpectedRowsAffected is '1', where as in Java it is '-1', this gap is because of jdbc driver for oracle.
+                        ExpectedRowsAffected = -1;
 
-                            break;
-                        case DataBaseServer.DB2:
-                            ExpectedRowsAffected = -1;
-                            break;
-                        default:
-                            string errMsg = string.Format("GHT: Test not implemented for DB type: {0}", ConnectedDataProvider.GetDbType(con));
-                            throw new NotImplementedException(errMsg);
-                    }
-                    Compare(RowsAffected ,ExpectedRowsAffected);
+                        break;
+                    case DataBaseServer.DB2:
+                        ExpectedRowsAffected = -1;
+                        break;
+                    default:
+                        string errMsg = string.Format(
+                            "GHT: Test not implemented for DB type: {0}",
+                            ConnectedDataProvider.GetDbType(con)
+                        );
+                        throw new NotImplementedException(errMsg);
                 }
-                catch(Exception ex)    {exp = ex;}
-                finally    {EndCase(exp); exp = null;}
+                Compare(RowsAffected, ExpectedRowsAffected);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
-
 
         #region Select by full table name in the same catalog
         //[Test]
         public void DoTestTypes1(OracleConnection conn)
         {
             DataSet ds = new DataSet();
-            OracleCommand comm = new OracleCommand("",conn);
+            OracleCommand comm = new OracleCommand("", conn);
             OracleDataAdapter da = new OracleDataAdapter();
             da.SelectCommand = comm;
 
-            string tableName = getDbObjectName("Employees",conn);
+            string tableName = getDbObjectName("Employees", conn);
             int expectedRowsCount = 8;
 
             #region Select by full table name in the same catalog
@@ -150,26 +170,37 @@ namespace MonoTests.System.Data.OracleClient
             arr[0] = "LastName";
             arr[1] = "FirstName";
 
-            prepareTableForTest(conn,expectedRowsCount,"Employees","EmployeeID",arr);
-            comm.CommandText="select max(EmployeeID) from " + tableName;
+            prepareTableForTest(conn, expectedRowsCount, "Employees", "EmployeeID", arr);
+            comm.CommandText = "select max(EmployeeID) from " + tableName;
             // on some databases the max is on a field which is decimal
-            decimal maxEmployee = decimal.Parse(comm.ExecuteScalar().ToString()) - expectedRowsCount;
+            decimal maxEmployee =
+                decimal.Parse(comm.ExecuteScalar().ToString()) - expectedRowsCount;
 
-            comm.CommandText = "SELECT EmployeeID FROM " + tableName + " where EmployeeID > " +  maxEmployee.ToString() ;
+            comm.CommandText =
+                "SELECT EmployeeID FROM "
+                + tableName
+                + " where EmployeeID > "
+                + maxEmployee.ToString();
             da.Fill(ds);
 
             Exception exp = null;
             try
             {
                 BeginCase("Select by full table name in the same catalog");
-                Compare(ds.Tables[0].Rows.Count ,expectedRowsCount );
+                Compare(ds.Tables[0].Rows.Count, expectedRowsCount);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {cleanTableAfterTest(conn,"Employees","EmployeeID",Convert.ToInt32(maxEmployee));
-                EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                cleanTableAfterTest(conn, "Employees", "EmployeeID", Convert.ToInt32(maxEmployee));
+                EndCase(exp);
+                exp = null;
+            }
 
             #endregion //Select by full table name in the same catalog
-
         }
 
         #endregion
@@ -179,29 +210,35 @@ namespace MonoTests.System.Data.OracleClient
         public void DoTestTypes2(OracleConnection conn)
         {
             BeginCase("Select by full table name in the different catalog");
-            nonUniqueId = "48951_" +  TestCaseNumber.ToString(); 
-            Exception exp=null;
-            string tableName = getDbObjectName("Customers",conn,"GHTDB_EX");
+            nonUniqueId = "48951_" + TestCaseNumber.ToString();
+            Exception exp = null;
+            string tableName = getDbObjectName("Customers", conn, "GHTDB_EX");
             int expectedRowsCount = 5;
             DataSet ds = new DataSet();
-            OracleCommand comm = new OracleCommand("",conn);
+            OracleCommand comm = new OracleCommand("", conn);
             OracleDataAdapter da = new OracleDataAdapter();
             da.SelectCommand = comm;
 
-            insertIntoStandatTable(conn,tableName,expectedRowsCount,"CustomerID");
-        
-            comm.CommandText = "SELECT * FROM " + tableName + " where CustomerID='" + nonUniqueId + "'" ;
+            insertIntoStandatTable(conn, tableName, expectedRowsCount, "CustomerID");
+
+            comm.CommandText =
+                "SELECT * FROM " + tableName + " where CustomerID='" + nonUniqueId + "'";
             ds.Tables.Clear();
             da.Fill(ds);
 
             try
             {
-                
-                Compare(ds.Tables[0].Rows.Count ,expectedRowsCount );
+                Compare(ds.Tables[0].Rows.Count, expectedRowsCount);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;
-            cleanStandatTable(conn,tableName,"CustomerID");
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+                cleanStandatTable(conn, tableName, "CustomerID");
             }
         }
         #endregion
@@ -211,52 +248,57 @@ namespace MonoTests.System.Data.OracleClient
         public void DoTestTypes3(OracleConnection conn)
         {
             BeginCase("Call stored procedure in the different catalog");
-            nonUniqueId = "48951_" +  TestCaseNumber.ToString(); 
-            Exception exp =null;
+            nonUniqueId = "48951_" + TestCaseNumber.ToString();
+            Exception exp = null;
             DataSet ds = new DataSet();
-            OracleCommand comm = new OracleCommand("",conn);
+            OracleCommand comm = new OracleCommand("", conn);
             OracleDataAdapter da = new OracleDataAdapter();
             da.SelectCommand = comm;
 
-            string tableName = getDbObjectName("Customers",conn,"GHTDB_EX");
+            string tableName = getDbObjectName("Customers", conn, "GHTDB_EX");
             int expectedRowsCount = 5;
 
-            insertIntoStandatTable(conn,tableName,expectedRowsCount,"CustomerID");
+            insertIntoStandatTable(conn, tableName, expectedRowsCount, "CustomerID");
 
             comm.CommandType = CommandType.StoredProcedure;
-            comm.CommandText = getDbObjectName("GH_DUMMY",conn,"GHTDB_EX");
+            comm.CommandText = getDbObjectName("GH_DUMMY", conn, "GHTDB_EX");
 
-            comm.Parameters.Add(new OracleParameter("CustomerIDPrm",OracleType.Char));
-            comm.Parameters.Add(new OracleParameter("result",OracleType.Cursor)).Direction = ParameterDirection.Output;
+            comm.Parameters.Add(new OracleParameter("CustomerIDPrm", OracleType.Char));
+            comm.Parameters.Add(new OracleParameter("result", OracleType.Cursor)).Direction =
+                ParameterDirection.Output;
 
-            
             comm.Parameters[0].Value = nonUniqueId;
             ds.Tables.Clear();
-            
 
             try
             {
                 da.Fill(ds);
-                Compare(ds.Tables[0].Rows.Count ,expectedRowsCount );
+                Compare(ds.Tables[0].Rows.Count, expectedRowsCount);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;
-            cleanStandatTable(conn,tableName,"CustomerID"); }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+                cleanStandatTable(conn, tableName, "CustomerID");
+            }
         }
 
-#endregion // Call stored procedure in the different catalog
+        #endregion // Call stored procedure in the different catalog
 
         #region Select using Table direct - single table
         //[Test]
         public void DoTestTypes4(OracleConnection conn)
         {
-            
-            Exception exp =null;
+            Exception exp = null;
             DataSet ds = new DataSet();
-            OracleCommand comm = new OracleCommand("",conn);
+            OracleCommand comm = new OracleCommand("", conn);
             OracleDataAdapter da = new OracleDataAdapter();
             da.SelectCommand = comm;
-            string tableName = getDbObjectName("Customers",conn);
+            string tableName = getDbObjectName("Customers", conn);
             //int expectedRowsCount = 5;
 
             comm.CommandText = tableName;
@@ -269,23 +311,29 @@ namespace MonoTests.System.Data.OracleClient
             try
             {
                 BeginCase("Select using Table direct - single table");
-                Compare(ds.Tables[0].Rows.Count > 0 ,true );
+                Compare(ds.Tables[0].Rows.Count > 0, true);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
-#endregion // Select using Table direct - single table
+        #endregion // Select using Table direct - single table
 
         #region Select using Table direct - multiple tables
 
         //[Test]
         public void DoTestTypes5(OracleConnection conn)
         {
-
-            Exception exp =null;
+            Exception exp = null;
             DataSet ds = new DataSet();
-            OracleCommand comm = new OracleCommand("",conn);
+            OracleCommand comm = new OracleCommand("", conn);
             OracleDataAdapter da = new OracleDataAdapter();
             da.SelectCommand = comm;
             //string tableName = getDbObjectName("Customers",conn);
@@ -298,16 +346,23 @@ namespace MonoTests.System.Data.OracleClient
             try
             {
                 BeginCase("Select using Table direct - multiple tables");
-                int result =  + ds.Tables[1].Rows.Count + ds.Tables[2].Rows.Count;
-                Compare(ds.Tables[0].Rows.Count > 0  ,true );
-                Compare(ds.Tables[1].Rows.Count > 0  ,true );
-                Compare(ds.Tables[0].Rows.Count == ds.Tables[1].Rows.Count ,true );
+                int result = +ds.Tables[1].Rows.Count + ds.Tables[2].Rows.Count;
+                Compare(ds.Tables[0].Rows.Count > 0, true);
+                Compare(ds.Tables[1].Rows.Count > 0, true);
+                Compare(ds.Tables[0].Rows.Count == ds.Tables[1].Rows.Count, true);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
-#endregion // Select using Table direct - multiple tables
+        #endregion // Select using Table direct - multiple tables
 
 
         #region Test view
@@ -315,9 +370,9 @@ namespace MonoTests.System.Data.OracleClient
         //[Test]
         public void DoTestTypes6(OracleConnection conn)
         {
-            Exception exp =null;
+            Exception exp = null;
             DataSet ds = new DataSet();
-            OracleCommand comm = new OracleCommand("",conn);
+            OracleCommand comm = new OracleCommand("", conn);
             OracleDataAdapter da = new OracleDataAdapter();
             da.SelectCommand = comm;
             //string tableName = getDbObjectName("Customers",conn);
@@ -338,20 +393,24 @@ namespace MonoTests.System.Data.OracleClient
                     break;
             }
 
-
             ds.Tables.Clear();
             da.Fill(ds);
 
             try
             {
                 BeginCase("Testing view");
-                Compare(ds.Tables[0].Rows.Count >0,true);
-                Compare(ds.Tables[0].Columns.Count,2);
+                Compare(ds.Tables[0].Rows.Count > 0, true);
+                Compare(ds.Tables[0].Columns.Count, 2);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-
-
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
         #endregion
 
@@ -360,9 +419,9 @@ namespace MonoTests.System.Data.OracleClient
         //[Test]
         public void DoTestTypes7(OracleConnection conn)
         {
-            Exception exp =null;
+            Exception exp = null;
             DataSet ds = new DataSet();
-            OracleCommand comm = new OracleCommand("",conn);
+            OracleCommand comm = new OracleCommand("", conn);
             OracleDataAdapter da = new OracleDataAdapter();
             da.SelectCommand = comm;
             //string tableName = getDbObjectName("Customers",conn);
@@ -377,24 +436,38 @@ namespace MonoTests.System.Data.OracleClient
             try
             {
                 BeginCase("select table with diffrent owner - diffrent name");
-                Compare(ds.Tables[0].Rows.Count ,2);
+                Compare(ds.Tables[0].Rows.Count, 2);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
                 BeginCase("select table with diffrent owner - diffrent name --> negetive");
                 ds.Tables.Clear();
-                comm.CommandText = "select * from " + getDbObjectName("CategoriesNew",conn);
+                comm.CommandText = "select * from " + getDbObjectName("CategoriesNew", conn);
                 da.Fill(ds);
             }
             catch (OracleException ex)
             {
                 ExpectedExceptionCaught(ex);
             }
-            catch     {ExpectedExceptionNotCaught("OracleException"); }
-            finally    {EndCase(exp); exp = null;}
+            catch
+            {
+                ExpectedExceptionNotCaught("OracleException");
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             //Change back
 
@@ -408,9 +481,9 @@ namespace MonoTests.System.Data.OracleClient
         //[Test]
         public void DoTestTypes8(OracleConnection conn)
         {
-            Exception exp =null;
+            Exception exp = null;
             DataSet ds = new DataSet();
-            OracleCommand comm = new OracleCommand("",conn);
+            OracleCommand comm = new OracleCommand("", conn);
             OracleDataAdapter da = new OracleDataAdapter();
             da.SelectCommand = comm;
             //string tableName = getDbObjectName("Customers",conn);
@@ -425,11 +498,17 @@ namespace MonoTests.System.Data.OracleClient
             try
             {
                 BeginCase("Select table with diffrent owner same name");
-                Compare(ds.Tables[0].Rows.Count ,2);
+                Compare(ds.Tables[0].Rows.Count, 2);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
         #endregion
@@ -439,15 +518,15 @@ namespace MonoTests.System.Data.OracleClient
         //[Test]
         public void DoTestTypes9(OracleConnection conn)
         {
-            Exception exp =null;
+            Exception exp = null;
             DataSet ds = new DataSet();
             BeginCase("Select table with diffrent owner SP");
-            nonUniqueId = "48951" ;
+            nonUniqueId = "48951";
             int expectedRowsCount = 5;
-            OracleCommand comm = new OracleCommand("",conn);
+            OracleCommand comm = new OracleCommand("", conn);
             OracleDataAdapter da = new OracleDataAdapter();
             da.SelectCommand = comm;
-            string tableName = getDbObjectName("Employees",conn);
+            string tableName = getDbObjectName("Employees", conn);
             comm.CommandType = CommandType.StoredProcedure;
 
             //insertIntoStandatTable(conn,tableName,5,"EmployeeID");
@@ -455,22 +534,34 @@ namespace MonoTests.System.Data.OracleClient
             arr[0] = "LastName";
             arr[1] = "FirstName";
 
-            int maxValue = prepareTableForTest(conn,expectedRowsCount,"Employees","EmployeeID",arr);
+            int maxValue = prepareTableForTest(
+                conn,
+                expectedRowsCount,
+                "Employees",
+                "EmployeeID",
+                arr
+            );
 
-            comm.Parameters.Add("CustomerIdPrm",maxValue.ToString()); 
-            comm.Parameters.Add(new OracleParameter("result",OracleType.Cursor)).Direction = ParameterDirection.Output;
+            comm.Parameters.Add("CustomerIdPrm", maxValue.ToString());
+            comm.Parameters.Add(new OracleParameter("result", OracleType.Cursor)).Direction =
+                ParameterDirection.Output;
 
-            
             try
             {
                 comm.CommandText = "GHTDB_EX.GH_DUMMY";
                 da.Fill(ds);
-                Compare(ds.Tables[0].Rows.Count ,expectedRowsCount);
+                Compare(ds.Tables[0].Rows.Count, expectedRowsCount);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;
-            cleanTableAfterTest (conn,"Employees","EmployeeID",maxValue); }
-
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+                cleanTableAfterTest(conn, "Employees", "EmployeeID", maxValue);
+            }
         }
 
         #endregion
@@ -479,14 +570,14 @@ namespace MonoTests.System.Data.OracleClient
         //[Test]
         public void DoTestTypes10(OracleConnection conn)
         {
-            Exception exp =null;
+            Exception exp = null;
             DataSet ds = new DataSet();
             BeginCase("Select table with diffrent owner and diffrent structure");
-            nonUniqueId = "48951" ;
-            OracleCommand comm = new OracleCommand("",conn);
+            nonUniqueId = "48951";
+            OracleCommand comm = new OracleCommand("", conn);
             OracleDataAdapter da = new OracleDataAdapter();
             da.SelectCommand = comm;
-            string tableName = getDbObjectName("Categories",conn);
+            string tableName = getDbObjectName("Categories", conn);
             comm.CommandType = CommandType.Text;
             OracleDataReader reader = null;
 
@@ -496,7 +587,7 @@ namespace MonoTests.System.Data.OracleClient
                 reader = comm.ExecuteReader();
                 //da.Fill(ds);
             }
-            catch (Exception  ex) 
+            catch (Exception ex)
             {
                 EndCase(ex);
             }
@@ -505,20 +596,25 @@ namespace MonoTests.System.Data.OracleClient
                 reader.Close();
             }
 
-            comm.CommandText="select CategoryID,CategoryName  from  GHTDB_EX.Categories  where CategoryID = :a";
+            comm.CommandText =
+                "select CategoryID,CategoryName  from  GHTDB_EX.Categories  where CategoryID = :a";
 
-            comm.Parameters.Add("a","10");
+            comm.Parameters.Add("a", "10");
             da.Fill(ds);
 
             try
             {
-                Compare(ds.Tables[0].Rows.Count ,1);
+                Compare(ds.Tables[0].Rows.Count, 1);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    
+            catch (Exception ex)
             {
-                EndCase(exp); exp = null;}
-
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
         #endregion
@@ -546,13 +642,14 @@ namespace MonoTests.System.Data.OracleClient
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "ghtpkg.ghsp_inPkg";
                 cmd.Parameters.Add("CustomerIdPrm", "ALFKI");
-                cmd.Parameters.Add(new OracleParameter("result",OracleType.Cursor)).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("result", OracleType.Cursor)).Direction =
+                    ParameterDirection.Output;
                 da.SelectCommand = cmd;
 
                 da.Fill(ds);
                 Compare(ds.Tables[0].Rows.Count, 1);
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -565,6 +662,7 @@ namespace MonoTests.System.Data.OracleClient
                 EndCase(exp);
             }
         }
+
         //[Test(Description="Call a stored procedure ghsp_pkgAmbig from a package, where ghsp_pkgAmbig is defined both inside and outside of a package.")]
         public void StoredProcedurePackageambiguity_InsidePackage(OracleConnection con)
         {
@@ -578,7 +676,9 @@ namespace MonoTests.System.Data.OracleClient
             OracleDataReader rdr = null;
             try
             {
-                BeginCase("Call a stored procedure ghsp_pkgAmbig from a package, where ghsp_pkgAmbig is defined both inside and outside of a package.");
+                BeginCase(
+                    "Call a stored procedure ghsp_pkgAmbig from a package, where ghsp_pkgAmbig is defined both inside and outside of a package."
+                );
                 exp = null;
                 DataSet ds = new DataSet();
                 OracleDataAdapter da = new OracleDataAdapter();
@@ -586,13 +686,14 @@ namespace MonoTests.System.Data.OracleClient
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "ghtpkg.ghsp_pkgAmbig";
-                cmd.Parameters.Add(new OracleParameter("res",OracleType.Cursor)).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("res", OracleType.Cursor)).Direction =
+                    ParameterDirection.Output;
                 da.SelectCommand = cmd;
 
                 da.Fill(ds);
                 Compare(ds.Tables[0].Rows[0]["IN_PKG"], "TRUE");
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -605,6 +706,7 @@ namespace MonoTests.System.Data.OracleClient
                 EndCase(exp);
             }
         }
+
         //[Test(Description="Call a stored procedure ghsp_pkgAmbig not from a package, where ghsp_pkgAmbig is defined both inside and outside of a package.")]
         public void StoredProcedurePackageambiguity_OutsidePackage(OracleConnection con)
         {
@@ -618,7 +720,9 @@ namespace MonoTests.System.Data.OracleClient
             OracleDataReader rdr = null;
             try
             {
-                BeginCase("Call a stored procedure ghsp_pkgAmbig not from a package, where ghsp_pkgAmbig is defined both inside and outside of a package.");
+                BeginCase(
+                    "Call a stored procedure ghsp_pkgAmbig not from a package, where ghsp_pkgAmbig is defined both inside and outside of a package."
+                );
                 exp = null;
                 DataSet ds = new DataSet();
                 OracleDataAdapter da = new OracleDataAdapter();
@@ -626,13 +730,14 @@ namespace MonoTests.System.Data.OracleClient
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "ghsp_pkgAmbig";
-                cmd.Parameters.Add(new OracleParameter("res",OracleType.Cursor)).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("res", OracleType.Cursor)).Direction =
+                    ParameterDirection.Output;
                 da.SelectCommand = cmd;
 
                 da.Fill(ds);
                 Compare(ds.Tables[0].Rows[0]["IN_PKG"], "FALSE");
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -647,12 +752,12 @@ namespace MonoTests.System.Data.OracleClient
         }
         #endregion
 
-        private string getDbObjectName(string objectName,OracleConnection con)
+        private string getDbObjectName(string objectName, OracleConnection con)
         {
-            return getDbObjectName(objectName,con,string.Empty);
-            
+            return getDbObjectName(objectName, con, string.Empty);
         }
-        private string getDbObjectName(string objectName,OracleConnection con,string databaseName)
+
+        private string getDbObjectName(string objectName, OracleConnection con, string databaseName)
         {
             switch (ConnectedDataProvider.GetDbType(con))
             {
@@ -665,7 +770,7 @@ namespace MonoTests.System.Data.OracleClient
                     }
                     else
                     {
-                        return  databaseName +  ".dbo." + objectName;
+                        return databaseName + ".dbo." + objectName;
                     }
                 }
                 case DataBaseServer.PostgreSQL:
@@ -680,106 +785,137 @@ namespace MonoTests.System.Data.OracleClient
                     }
                     else
                     {
-                        return  databaseName.ToUpper() + "." + objectName.ToUpper();
+                        return databaseName.ToUpper() + "." + objectName.ToUpper();
                     }
-                    
                 }
-                case DataBaseServer.DB2: 
+                case DataBaseServer.DB2:
                 {
                     if (databaseName == string.Empty)
                     {
-                        return   "DB2ADMIN." + objectName;
+                        return "DB2ADMIN." + objectName;
                     }
                     else
                     {
-                        return  databaseName +  ".DB2ADMIN." + objectName;
+                        return databaseName + ".DB2ADMIN." + objectName;
                     }
-
-                    
-
                 }
                 default:
                 {
                     throw new NotImplementedException();
                 }
-
-
             }
-
         }
-
-
 
         /// <summary>
         /// This method will prepare table for test
         /// </summary>
-        private int prepareTableForTest(OracleConnection con,int recordsNumber,string baseTableName,string keyField
-            ,params string[] otherNonNullableFieldsName)
+        private int prepareTableForTest(
+            OracleConnection con,
+            int recordsNumber,
+            string baseTableName,
+            string keyField,
+            params string[] otherNonNullableFieldsName
+        )
         {
-            string tableName = getDbObjectName(baseTableName,con);
-            OracleCommand cmd = new OracleCommand("select max(" + keyField + ") from " + tableName,con);
+            string tableName = getDbObjectName(baseTableName, con);
+            OracleCommand cmd = new OracleCommand(
+                "select max(" + keyField + ") from " + tableName,
+                con
+            );
             string str_ret = cmd.ExecuteScalar().ToString();
-//            Console.WriteLine("ExecuteScalar:" + str_ret);
+            //            Console.WriteLine("ExecuteScalar:" + str_ret);
             // on some databases the max is on a field which is decimal
             decimal maxRecord = decimal.Parse(str_ret);
-            int resultCount = Convert.ToInt32(maxRecord)+recordsNumber;
+            int resultCount = Convert.ToInt32(maxRecord) + recordsNumber;
             string sqlStmt = string.Empty;
             string valueStmt = string.Empty;
 
             //Constrcut the statemnet once : --> TODO://Move this logic to seperate method
-            for(int i=0;i<otherNonNullableFieldsName.Length;i++)
+            for (int i = 0; i < otherNonNullableFieldsName.Length; i++)
             {
-                sqlStmt+= otherNonNullableFieldsName[i] + ",";
-                valueStmt+="'a',";
+                sqlStmt += otherNonNullableFieldsName[i] + ",";
+                valueStmt += "'a',";
             }
 
             //Trim the last ","
             if (otherNonNullableFieldsName.Length > 0)
             {
-                sqlStmt =  sqlStmt.Remove(sqlStmt.Length-1,1);
+                sqlStmt = sqlStmt.Remove(sqlStmt.Length - 1, 1);
                 sqlStmt = "," + sqlStmt;
 
-                valueStmt =  valueStmt.Remove(valueStmt.Length-1,1);
+                valueStmt = valueStmt.Remove(valueStmt.Length - 1, 1);
                 valueStmt = "," + valueStmt;
             }
-                
 
-            for (int index=Convert.ToInt32(maxRecord)+1;index<=resultCount;index++)
+            for (int index = Convert.ToInt32(maxRecord) + 1; index <= resultCount; index++)
             {
-                cmd.CommandText="Insert into " + tableName + " (" + keyField + sqlStmt + ") values ("
-                    + index + valueStmt + ")";
+                cmd.CommandText =
+                    "Insert into "
+                    + tableName
+                    + " ("
+                    + keyField
+                    + sqlStmt
+                    + ") values ("
+                    + index
+                    + valueStmt
+                    + ")";
                 cmd.ExecuteNonQuery();
             }
             return Convert.ToInt32(maxRecord);
-
         }
-        private void cleanTableAfterTest(OracleConnection con,string baseTableName, string keyField, int recordNumber)
+
+        private void cleanTableAfterTest(
+            OracleConnection con,
+            string baseTableName,
+            string keyField,
+            int recordNumber
+        )
         {
             string tableName = getDbObjectName(baseTableName, con);
-            OracleCommand cmd = new OracleCommand("delete from " + tableName + " where " + keyField + " > " + recordNumber  ,con);
+            OracleCommand cmd = new OracleCommand(
+                "delete from " + tableName + " where " + keyField + " > " + recordNumber,
+                con
+            );
             cmd.ExecuteNonQuery();
-
         }
 
-        private void insertIntoStandatTable(OracleConnection con,string tableName,int recordsNumber,string keyField)
+        private void insertIntoStandatTable(
+            OracleConnection con,
+            string tableName,
+            int recordsNumber,
+            string keyField
+        )
         {
-            OracleCommand cmd = new OracleCommand("delete from " + tableName + " where  "  + keyField + "= '" + nonUniqueId + "'",con);
+            OracleCommand cmd = new OracleCommand(
+                "delete from " + tableName + " where  " + keyField + "= '" + nonUniqueId + "'",
+                con
+            );
             cmd.ExecuteNonQuery();
 
-            for (int index=0;index<recordsNumber;index++)
+            for (int index = 0; index < recordsNumber; index++)
             {
-                cmd.CommandText = "Insert into " + tableName + "(" + keyField + ") values ('" + nonUniqueId  + "')";
+                cmd.CommandText =
+                    "Insert into "
+                    + tableName
+                    + "("
+                    + keyField
+                    + ") values ('"
+                    + nonUniqueId
+                    + "')";
                 cmd.ExecuteNonQuery();
             }
         }
-        private void cleanStandatTable(OracleConnection con,string tableName,string keyField)
-        {
-            OracleCommand cmd = new OracleCommand("delete from " + tableName + " where " + keyField + " = '" + nonUniqueId + "'",con);
-            cmd.ExecuteNonQuery();
 
+        private void cleanStandatTable(OracleConnection con, string tableName, string keyField)
+        {
+            OracleCommand cmd = new OracleCommand(
+                "delete from " + tableName + " where " + keyField + " = '" + nonUniqueId + "'",
+                con
+            );
+            cmd.ExecuteNonQuery();
         }
 
-        private void chageOwnerShip(OracleConnection con,string objectName,string newOwner)
+        private void chageOwnerShip(OracleConnection con, string objectName, string newOwner)
         {
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = con;
@@ -791,18 +927,16 @@ namespace MonoTests.System.Data.OracleClient
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandText = "[dbo].[sp_changeobjectowner]";
-                    cmd.Parameters.Add("@objname",objectName);
-                    cmd.Parameters.Add("@newowner",newOwner);
+                    cmd.Parameters.Add("@objname", objectName);
+                    cmd.Parameters.Add("@newowner", newOwner);
                     cmd.ExecuteNonQuery();
                     return;
-
                 }
                 default:
                 {
                     throw new NotImplementedException();
                 }
             }
-
         }
     }
 }

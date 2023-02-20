@@ -103,14 +103,8 @@ namespace System.Text.Json.Nodes
         /// </summary>
         public JsonNode? Parent
         {
-            get
-            {
-                return _parent;
-            }
-            internal set
-            {
-                _parent = value;
-            }
+            get { return _parent; }
+            internal set { _parent = value; }
         }
 
         /// <summary>
@@ -199,14 +193,8 @@ namespace System.Text.Json.Nodes
         /// </exception>
         public JsonNode? this[int index]
         {
-            get
-            {
-                return AsArray().GetItem(index);
-            }
-            set
-            {
-                AsArray().SetItem(index, value);
-            }
+            get { return AsArray().GetItem(index); }
+            set { AsArray().SetItem(index, value); }
         }
 
         /// <summary>
@@ -222,14 +210,8 @@ namespace System.Text.Json.Nodes
         /// </exception>
         public JsonNode? this[string propertyName]
         {
-            get
-            {
-                return AsObject().GetItem(propertyName);
-            }
-            set
-            {
-                AsObject().SetItem(propertyName, value);
-            }
+            get { return AsObject().GetItem(propertyName); }
+            set { AsObject().SetItem(propertyName, value); }
         }
 
         internal void AssignParent(JsonNode parent)

@@ -29,65 +29,69 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Cil {
-
+namespace Mono.Cecil.Cil
+{
     using System;
     using System.Collections;
 
     using Mono.Cecil.Cil;
 
-    internal sealed class VariableDefinitionCollection : CollectionBase, ICodeVisitable {
-
+    internal sealed class VariableDefinitionCollection : CollectionBase, ICodeVisitable
+    {
         IVariableDefinitionProvider m_container;
 
-        public VariableDefinition this [int index] {
-            get { return List [index] as VariableDefinition; }
-            set { List [index] = value; }
+        public VariableDefinition this[int index]
+        {
+            get { return List[index] as VariableDefinition; }
+            set { List[index] = value; }
         }
 
-        public IVariableDefinitionProvider Container {
+        public IVariableDefinitionProvider Container
+        {
             get { return m_container; }
         }
 
-        public VariableDefinitionCollection (IVariableDefinitionProvider container)
+        public VariableDefinitionCollection(IVariableDefinitionProvider container)
         {
             m_container = container;
         }
 
-        public void Add (VariableDefinition value)
+        public void Add(VariableDefinition value)
         {
-            List.Add (value);
+            List.Add(value);
         }
 
-        public bool Contains (VariableDefinition value)
+        public bool Contains(VariableDefinition value)
         {
-            return List.Contains (value);
+            return List.Contains(value);
         }
 
-        public int IndexOf (VariableDefinition value)
+        public int IndexOf(VariableDefinition value)
         {
-            return List.IndexOf (value);
+            return List.IndexOf(value);
         }
 
-        public void Insert (int index, VariableDefinition value)
+        public void Insert(int index, VariableDefinition value)
         {
-            List.Insert (index, value);
+            List.Insert(index, value);
         }
 
-        public void Remove (VariableDefinition value)
+        public void Remove(VariableDefinition value)
         {
-            List.Remove (value);
+            List.Remove(value);
         }
 
-        protected override void OnValidate (object o)
+        protected override void OnValidate(object o)
         {
-            if (! (o is VariableDefinition))
-                throw new ArgumentException ("Must be of type " + typeof (VariableDefinition).FullName);
+            if (!(o is VariableDefinition))
+                throw new ArgumentException(
+                    "Must be of type " + typeof(VariableDefinition).FullName
+                );
         }
 
-        public void Accept (ICodeVisitor visitor)
+        public void Accept(ICodeVisitor visitor)
         {
-            visitor.VisitVariableDefinitionCollection (this);
+            visitor.VisitVariableDefinitionCollection(this);
         }
     }
 }

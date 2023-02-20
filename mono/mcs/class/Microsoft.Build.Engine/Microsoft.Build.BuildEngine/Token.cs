@@ -4,7 +4,7 @@
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
 //   Jaroslaw Kowalski <jaak@jkowalski.net>
-// 
+//
 // (C) 2006 Marek Sieradzki
 // (C) 2004-2006 Jaroslaw Kowalski
 //
@@ -29,72 +29,98 @@
 
 using System;
 
-namespace Microsoft.Build.BuildEngine {
+namespace Microsoft.Build.BuildEngine
+{
+    internal class Token
+    {
+        string tokenValue;
+        TokenType tokenType;
 
-    internal class Token {
-    
-        string        tokenValue;
-        TokenType    tokenType;
-    
-        public Token (string tokenValue, TokenType tokenType, int position)
+        public Token(string tokenValue, TokenType tokenType, int position)
         {
             this.tokenValue = tokenValue;
             this.tokenType = tokenType;
             this.Position = position + 1;
         }
-        
-        public string Value {
+
+        public string Value
+        {
             get { return tokenValue; }
         }
-        
-        public TokenType Type {
+
+        public TokenType Type
+        {
             get { return tokenType; }
         }
 
         // this is 1-based
-        public int Position {
-            get; private set;
-        }
+        public int Position { get; private set; }
 
-        public static string TypeAsString (TokenType tokenType)
+        public static string TypeAsString(TokenType tokenType)
         {
-            switch (tokenType) {
-                case TokenType.Item:return "@";
-                case TokenType.Property:return "$";
-                case TokenType.Metadata:return "%";
-                case TokenType.Transform:return "->";
-                case TokenType.Less:return "<";
-                case TokenType.Greater:return ">";
-                case TokenType.LessOrEqual:return "<=";
-                case TokenType.GreaterOrEqual:return ">=";
-                case TokenType.Equal:return "=";
-                case TokenType.NotEqual:return "!=";
-                case TokenType.LeftParen:return "(";
-                case TokenType.RightParen:return ")";
-                case TokenType.Dot:return ".";
-                case TokenType.Comma:return ",";
-                case TokenType.Not:return "!";
-                case TokenType.And:return "and";
-                case TokenType.Or:return "or";
-                case TokenType.Apostrophe:return "'";
-                default: return tokenType.ToString ();
+            switch (tokenType)
+            {
+                case TokenType.Item:
+                    return "@";
+                case TokenType.Property:
+                    return "$";
+                case TokenType.Metadata:
+                    return "%";
+                case TokenType.Transform:
+                    return "->";
+                case TokenType.Less:
+                    return "<";
+                case TokenType.Greater:
+                    return ">";
+                case TokenType.LessOrEqual:
+                    return "<=";
+                case TokenType.GreaterOrEqual:
+                    return ">=";
+                case TokenType.Equal:
+                    return "=";
+                case TokenType.NotEqual:
+                    return "!=";
+                case TokenType.LeftParen:
+                    return "(";
+                case TokenType.RightParen:
+                    return ")";
+                case TokenType.Dot:
+                    return ".";
+                case TokenType.Comma:
+                    return ",";
+                case TokenType.Not:
+                    return "!";
+                case TokenType.And:
+                    return "and";
+                case TokenType.Or:
+                    return "or";
+                case TokenType.Apostrophe:
+                    return "'";
+                default:
+                    return tokenType.ToString();
             }
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             if (tokenType == TokenType.EOF || tokenType == TokenType.BOF)
-                return String.Format ("{0} at character position {1}", tokenType.ToString (), Position);
+                return String.Format(
+                    "{0} at character position {1}",
+                    tokenType.ToString(),
+                    Position
+                );
 
-            return String.Format ("\"{0}\" at character position {1}", tokenValue, Position);
+            return String.Format("\"{0}\" at character position {1}", tokenValue, Position);
         }
     }
-    
-    internal enum TokenType {
+
+    internal enum TokenType
+    {
         EOF,
         BOF,
         Number,
         String,
+
         //Keyword,
         Punct,
         WhiteSpace,
@@ -103,7 +129,8 @@ namespace Microsoft.Build.BuildEngine {
         Metadata,
         FunctionName,
         Transform,
-//        LiteralSubExpression,
+
+        //        LiteralSubExpression,
 
         FirstPunct,
 
@@ -121,7 +148,7 @@ namespace Microsoft.Build.BuildEngine {
         And,
         Or,
         Apostrophe,
-        
+
         LastPunct,
         Invalid,
     }

@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,50 +34,44 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Metadata;
 using System.Reflection;
 
-namespace System.Runtime.Remoting.Metadata {
-
-    [AttributeUsage (AttributeTargets.Field)]
-    [System.Runtime.InteropServices.ComVisible (true)]
+namespace System.Runtime.Remoting.Metadata
+{
+    [AttributeUsage(AttributeTargets.Field)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class SoapFieldAttribute : SoapAttribute
     {
         int _order;
         string _elementName;
         bool _isElement = false;
-        
-        public SoapFieldAttribute ()
+
+        public SoapFieldAttribute() { }
+
+        public int Order
         {
+            get { return _order; }
+            set { _order = value; }
         }
 
-        public int Order {
-            get {
-                return _order;
-            }
-
-            set {
-                _order = value;
-            }
-        }
-        
-        public string XmlElementName {
-            get {
-                return _elementName;
-            }
-
-            set {
+        public string XmlElementName
+        {
+            get { return _elementName; }
+            set
+            {
                 _isElement = value != null;
                 _elementName = value;
             }
         }
 
-        public bool IsInteropXmlElement ()
+        public bool IsInteropXmlElement()
         {
             return _isElement;
         }
-        
-        internal override void SetReflectionObject (object reflectionObject)
+
+        internal override void SetReflectionObject(object reflectionObject)
         {
-            FieldInfo f = (FieldInfo) reflectionObject;
-            if (_elementName == null) _elementName = f.Name;
+            FieldInfo f = (FieldInfo)reflectionObject;
+            if (_elementName == null)
+                _elementName = f.Name;
         }
     }
 }

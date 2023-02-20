@@ -5,7 +5,7 @@ using System.Linq;
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         dynamic d = null;
         var r = from x in d select x;

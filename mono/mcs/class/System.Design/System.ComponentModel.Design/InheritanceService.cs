@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,21 +35,20 @@ namespace System.ComponentModel.Design
     public class InheritanceService : IInheritanceService, IDisposable
     {
         [MonoTODO]
-        public InheritanceService()
-        {
-        }
+        public InheritanceService() { }
 
         [MonoTODO]
-        public void AddInheritedComponents (IComponent component,
-                            IContainer container)
+        public void AddInheritedComponents(IComponent component, IContainer container)
         {
             throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected virtual void AddInheritedComponents (Type type,
-                                   IComponent component,
-                                   IContainer container)
+        protected virtual void AddInheritedComponents(
+            Type type,
+            IComponent component,
+            IContainer container
+        )
         {
             throw new NotImplementedException();
         }
@@ -61,20 +60,19 @@ namespace System.ComponentModel.Design
         }
 
         [MonoTODO]
-        protected virtual void Dispose (bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public InheritanceAttribute GetInheritanceAttribute (IComponent component)
+        public InheritanceAttribute GetInheritanceAttribute(IComponent component)
         {
             throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected virtual bool IgnoreInheritedMember (MemberInfo member,
-                                  IComponent component)
+        protected virtual bool IgnoreInheritedMember(MemberInfo member, IComponent component)
         {
             throw new NotImplementedException();
         }

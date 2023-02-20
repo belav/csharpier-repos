@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,10 +23,9 @@
 
 using System;
 using System.Data;
-using System.Data.OleDb ;
+using System.Data.OleDb;
 
 using MonoTests.System.Data.Utils;
-
 
 using NUnit.Framework;
 
@@ -40,17 +39,20 @@ namespace MonoTests.System.Data.OleDb
         {
             Exception exp = null;
             BeginCase("Setup");
-            try
+            try { }
+            catch (Exception ex)
             {
+                exp = ex;
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
         [TearDown]
-        public void TearDown()
-        {
-        }
+        public void TearDown() { }
 
         public static void Main()
         {
@@ -63,8 +65,14 @@ namespace MonoTests.System.Data.OleDb
                 tc.run();
                 tc.TearDown();
             }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
 
         [Test]
@@ -72,16 +80,25 @@ namespace MonoTests.System.Data.OleDb
         {
             Exception exp = null;
 
-            OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            OleDbConnection con = new OleDbConnection(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
 
             try
             {
                 BeginCase("Close without open");
                 con.Close();
-                Compare(con.State , ConnectionState.Closed);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+                Compare(con.State, ConnectionState.Closed);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             con.Open();
 
@@ -89,23 +106,38 @@ namespace MonoTests.System.Data.OleDb
             {
                 BeginCase("Close after open");
                 con.Close();
-                Compare(con.State , ConnectionState.Closed);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+                Compare(con.State, ConnectionState.Closed);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
-            //An application can call Close more than one time. 
+            //An application can call Close more than one time.
             //No exception is generated.
             try
             {
                 BeginCase("Close again");
                 con.Close();
-                Compare(con.State , ConnectionState.Closed);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+                Compare(con.State, ConnectionState.Closed);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
-            if (con.State == ConnectionState.Open) con.Close();
+            if (con.State == ConnectionState.Open)
+                con.Close();
         }
     }
 }

@@ -4,7 +4,7 @@
 
 class X
 {
-    int Test ()
+    int Test()
     {
         var i = 1_0;
     }

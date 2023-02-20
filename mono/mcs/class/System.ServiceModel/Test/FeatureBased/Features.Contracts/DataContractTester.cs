@@ -7,19 +7,24 @@ using System.Runtime.Serialization;
 
 namespace MonoTests.Features.Contracts
 {
-    [ServiceContract (Namespace = "http://MonoTests.Integrative.Contracts")]
+    [ServiceContract(Namespace = "http://MonoTests.Integrative.Contracts")]
     public interface IDataContractTesterContract
     {
         [OperationContract]
-        ComplexPrimitiveClass Add (ComplexPrimitiveClass n1, ComplexPrimitiveClass n2);
+        ComplexPrimitiveClass Add(ComplexPrimitiveClass n1, ComplexPrimitiveClass n2);
 
         [OperationContract]
-        void AddByRef (ComplexPrimitiveClass n1, ComplexPrimitiveClass n2, out ComplexPrimitiveClass result);
+        void AddByRef(
+            ComplexPrimitiveClass n1,
+            ComplexPrimitiveClass n2,
+            out ComplexPrimitiveClass result
+        );
     }
 
     public class DataContractTester : IDataContractTesterContract
     {
-        public ComplexPrimitiveClass Add (ComplexPrimitiveClass n1, ComplexPrimitiveClass n2) {
+        public ComplexPrimitiveClass Add(ComplexPrimitiveClass n1, ComplexPrimitiveClass n2)
+        {
             n1._byte += n2._byte;
             n1._sbyte += n2._sbyte;
             n1._short += n2._short;
@@ -33,47 +38,51 @@ namespace MonoTests.Features.Contracts
             return n1;
         }
 
-        public void AddByRef (ComplexPrimitiveClass n1, ComplexPrimitiveClass n2, out ComplexPrimitiveClass result) {
-            result = Add (n1, n2);            
+        public void AddByRef(
+            ComplexPrimitiveClass n1,
+            ComplexPrimitiveClass n2,
+            out ComplexPrimitiveClass result
+        )
+        {
+            result = Add(n1, n2);
         }
     }
 
     #region Class Data
 
-    [DataContract (Namespace = "http://MonoTests.Features.Client")]
+    [DataContract(Namespace = "http://MonoTests.Features.Client")]
     public class ComplexPrimitiveClass
     {
-        [DataMember(Name="byteMember")]
+        [DataMember(Name = "byteMember")]
         public byte _byte = 1;
 
-        [DataMember (Name = "sbyteMember")]
+        [DataMember(Name = "sbyteMember")]
         public sbyte _sbyte = 1;
 
-        [DataMember (Name = "shortMember")]
+        [DataMember(Name = "shortMember")]
         public short _short = 1;
 
-        [DataMember (Name = "ushortMember")]
+        [DataMember(Name = "ushortMember")]
         public ushort _ushort = 1;
 
-        [DataMember (Name = "intMember")]
+        [DataMember(Name = "intMember")]
         public int _int = 1;
 
-        [DataMember (Name = "uintMember")]
+        [DataMember(Name = "uintMember")]
         public uint _uint = 1;
 
-        [DataMember (Name = "longMember")]
+        [DataMember(Name = "longMember")]
         public long _long = 1;
 
-        [DataMember (Name = "ulongMember")]
+        [DataMember(Name = "ulongMember")]
         public ulong _ulong = 1;
 
-        [DataMember (Name = "doubleMember")]
+        [DataMember(Name = "doubleMember")]
         public double _double = 1;
 
-        [DataMember (Name = "floatMember")]
+        [DataMember(Name = "floatMember")]
         public float _float = 1;
     }
 
     #endregion
-
 }

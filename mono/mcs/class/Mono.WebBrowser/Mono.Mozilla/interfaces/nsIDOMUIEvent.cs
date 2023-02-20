@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,84 +30,89 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Mono.Mozilla {
-
-    [Guid ("a6cf90c3-15b3-11d2-932e-00805f8add32")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMUIEvent : nsIDOMEvent {
-#region nsIDOMEvent
+namespace Mono.Mozilla
+{
+    [Guid("a6cf90c3-15b3-11d2-932e-00805f8add32")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDOMUIEvent : nsIDOMEvent
+    {
+        #region nsIDOMEvent
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getType (  /*DOMString*/ HandleRef ret);
-
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getTarget ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMEventTarget ret);
-
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getCurrentTarget ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMEventTarget ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getType( /*DOMString*/
+            HandleRef ret
+        );
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getEventPhase ( out ushort ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getTarget([MarshalAs(UnmanagedType.Interface)] out nsIDOMEventTarget ret);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getBubbles ( out bool ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCurrentTarget([MarshalAs(UnmanagedType.Interface)] out nsIDOMEventTarget ret);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getCancelable ( out bool ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getEventPhase(out ushort ret);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getTimeStamp ( out int ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getBubbles(out bool ret);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int stopPropagation ();
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCancelable(out bool ret);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int preventDefault ();
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getTimeStamp(out int ret);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int initEvent (
-                   /*DOMString*/ HandleRef eventTypeArg,
-                   bool canBubbleArg,
-                   bool cancelableArg);
-
-#endregion
-
-#region nsIDOMUIEvent
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getView ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMAbstractView ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int stopPropagation();
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getDetail ( out int ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int preventDefault();
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int initUIEvent (
-                   /*DOMString*/ HandleRef typeArg,
-                   bool canBubbleArg,
-                   bool cancelableArg,
-                [MarshalAs (UnmanagedType.Interface)]   nsIDOMAbstractView viewArg,
-                   int detailArg);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int initEvent(
+            /*DOMString*/HandleRef eventTypeArg,
+            bool canBubbleArg,
+            bool cancelableArg
+        );
 
-#endregion
+        #endregion
+
+        #region nsIDOMUIEvent
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getView([MarshalAs(UnmanagedType.Interface)] out nsIDOMAbstractView ret);
+
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getDetail(out int ret);
+
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int initUIEvent(
+            /*DOMString*/HandleRef typeArg,
+            bool canBubbleArg,
+            bool cancelableArg,
+            [MarshalAs(UnmanagedType.Interface)] nsIDOMAbstractView viewArg,
+            int detailArg
+        );
+
+        #endregion
     }
 
-
-    internal class nsDOMUIEvent {
-        public static nsIDOMUIEvent GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMUIEvent obj)
+    internal class nsDOMUIEvent
+    {
+        public static nsIDOMUIEvent GetProxy(Mono.WebBrowser.IWebBrowser control, nsIDOMUIEvent obj)
         {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMUIEvent).GUID, obj);
+            object o = Base.GetProxyForObject(control, typeof(nsIDOMUIEvent).GUID, obj);
             return o as nsIDOMUIEvent;
         }
     }

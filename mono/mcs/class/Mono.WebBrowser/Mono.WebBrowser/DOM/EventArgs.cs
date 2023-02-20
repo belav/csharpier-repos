@@ -32,8 +32,8 @@ namespace Mono.WebBrowser.DOM
         private DOM.INode node;
 
         #region Public Constructors
-        public NodeEventArgs (DOM.INode node)
-            : base ()
+        public NodeEventArgs(DOM.INode node)
+            : base()
         {
             this.node = node;
         }
@@ -45,31 +45,35 @@ namespace Mono.WebBrowser.DOM
             get { return this.node; }
         }
 
-        public IElement Element {
-            get {
+        public IElement Element
+        {
+            get
+            {
                 if (this.node is IElement)
-                    return (IElement) node;
+                    return (IElement)node;
                 return null;
             }
         }
 
-        public IDocument Document {
-            get {
+        public IDocument Document
+        {
+            get
+            {
                 if (this.node is IDocument)
-                    return (IDocument) node;
+                    return (IDocument)node;
                 return null;
             }
         }
         #endregion    // Public Instance Properties
     }
-    
+
     public class WindowEventArgs : EventArgs
     {
         private DOM.IWindow window;
 
         #region Public Constructors
-        public WindowEventArgs (DOM.IWindow window)
-            : base ()
+        public WindowEventArgs(DOM.IWindow window)
+            : base()
         {
             this.window = window;
         }
@@ -82,5 +86,4 @@ namespace Mono.WebBrowser.DOM
         }
         #endregion    // Public Instance Properties
     }
-    
 }

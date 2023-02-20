@@ -34,314 +34,323 @@ namespace MonoTests.System.Windows.Forms
     public class ColumnHeaderTest : TestHelper
     {
         [SetUp]
-        protected override void SetUp ()
+        protected override void SetUp()
         {
             columnReordered = 0;
-            base.SetUp ();
+            base.SetUp();
         }
 
         [Test]
-        public void DefaultValuesTest ()
+        public void DefaultValuesTest()
         {
-            ColumnHeader col = new ColumnHeader ();
+            ColumnHeader col = new ColumnHeader();
 
-            Assert.IsNull (col.ListView, "1");
-            Assert.AreEqual (-1, col.Index, "2");
-            Assert.AreEqual ("ColumnHeader", col.Text, "3");
-            Assert.AreEqual (HorizontalAlignment.Left, col.TextAlign, "4");
-            Assert.AreEqual (-1, col.DisplayIndex, "5");
-            Assert.AreEqual (-1, col.ImageIndex, "6");
-            Assert.AreEqual (String.Empty, col.ImageKey, "7");
-            Assert.IsNull (col.ImageList, "8");
-            Assert.AreEqual (String.Empty, col.Name, "9");
-            Assert.IsNull (col.Tag, "10");
+            Assert.IsNull(col.ListView, "1");
+            Assert.AreEqual(-1, col.Index, "2");
+            Assert.AreEqual("ColumnHeader", col.Text, "3");
+            Assert.AreEqual(HorizontalAlignment.Left, col.TextAlign, "4");
+            Assert.AreEqual(-1, col.DisplayIndex, "5");
+            Assert.AreEqual(-1, col.ImageIndex, "6");
+            Assert.AreEqual(String.Empty, col.ImageKey, "7");
+            Assert.IsNull(col.ImageList, "8");
+            Assert.AreEqual(String.Empty, col.Name, "9");
+            Assert.IsNull(col.Tag, "10");
         }
 
         [Test]
-        public void DisplayIndex_ListView_Created ()
+        public void DisplayIndex_ListView_Created()
         {
-            ColumnHeader colA = new ColumnHeader ();
-            ColumnHeader colB = new ColumnHeader ();
-            ColumnHeader colC = new ColumnHeader ();
-            ColumnHeader colD = new ColumnHeader ();
+            ColumnHeader colA = new ColumnHeader();
+            ColumnHeader colB = new ColumnHeader();
+            ColumnHeader colC = new ColumnHeader();
+            ColumnHeader colD = new ColumnHeader();
             colA.DisplayIndex = 2;
             colD.DisplayIndex = 0;
             colB.DisplayIndex = 3;
             colC.DisplayIndex = 1;
 
-            Form form = new Form ();
+            Form form = new Form();
             form.ShowInTaskbar = false;
-            ListView lv = new ListView ();
-            lv.ColumnReordered += new ColumnReorderedEventHandler (ColumnReordered);
+            ListView lv = new ListView();
+            lv.ColumnReordered += new ColumnReorderedEventHandler(ColumnReordered);
             lv.View = View.Details;
-            lv.Columns.Add (colA);
-            lv.Columns.Add (colB);
-            lv.Columns.Add (colC);
-            form.Controls.Add (lv);
-            form.Show ();
+            lv.Columns.Add(colA);
+            lv.Columns.Add(colB);
+            lv.Columns.Add(colC);
+            form.Controls.Add(lv);
+            form.Show();
 
-            Assert.AreEqual (0, colA.DisplayIndex, "#A1");
-            Assert.AreEqual (1, colB.DisplayIndex, "#A2");
-            Assert.AreEqual (2, colC.DisplayIndex, "#A3");
-            Assert.AreEqual (0, colD.DisplayIndex, "#A4");
-            Assert.AreEqual (0, columnReordered, "#A5");
+            Assert.AreEqual(0, colA.DisplayIndex, "#A1");
+            Assert.AreEqual(1, colB.DisplayIndex, "#A2");
+            Assert.AreEqual(2, colC.DisplayIndex, "#A3");
+            Assert.AreEqual(0, colD.DisplayIndex, "#A4");
+            Assert.AreEqual(0, columnReordered, "#A5");
 
             colC.DisplayIndex = 0;
-            Assert.AreEqual (1, colA.DisplayIndex, "#B1");
-            Assert.AreEqual (2, colB.DisplayIndex, "#B2");
-            Assert.AreEqual (0, colC.DisplayIndex, "#B3");
-            Assert.AreEqual (0, colD.DisplayIndex, "#B4");
-            Assert.AreEqual (0, columnReordered, "#B5");
+            Assert.AreEqual(1, colA.DisplayIndex, "#B1");
+            Assert.AreEqual(2, colB.DisplayIndex, "#B2");
+            Assert.AreEqual(0, colC.DisplayIndex, "#B3");
+            Assert.AreEqual(0, colD.DisplayIndex, "#B4");
+            Assert.AreEqual(0, columnReordered, "#B5");
 
             colC.DisplayIndex = 2;
-            Assert.AreEqual (0, colA.DisplayIndex, "#C1");
-            Assert.AreEqual (1, colB.DisplayIndex, "#C2");
-            Assert.AreEqual (2, colC.DisplayIndex, "#C3");
-            Assert.AreEqual (0, colD.DisplayIndex, "#C4");
-            Assert.AreEqual (0, columnReordered, "#C5");
+            Assert.AreEqual(0, colA.DisplayIndex, "#C1");
+            Assert.AreEqual(1, colB.DisplayIndex, "#C2");
+            Assert.AreEqual(2, colC.DisplayIndex, "#C3");
+            Assert.AreEqual(0, colD.DisplayIndex, "#C4");
+            Assert.AreEqual(0, columnReordered, "#C5");
 
             colB.DisplayIndex = 2;
-            Assert.AreEqual (0, colA.DisplayIndex, "#D1");
-            Assert.AreEqual (2, colB.DisplayIndex, "#D2");
-            Assert.AreEqual (1, colC.DisplayIndex, "#D3");
-            Assert.AreEqual (0, colD.DisplayIndex, "#D4");
-            Assert.AreEqual (0, columnReordered, "#D5");
+            Assert.AreEqual(0, colA.DisplayIndex, "#D1");
+            Assert.AreEqual(2, colB.DisplayIndex, "#D2");
+            Assert.AreEqual(1, colC.DisplayIndex, "#D3");
+            Assert.AreEqual(0, colD.DisplayIndex, "#D4");
+            Assert.AreEqual(0, columnReordered, "#D5");
 
             colD.DisplayIndex = 1;
-            lv.Columns.Add (colD);
+            lv.Columns.Add(colD);
 
-            Assert.AreEqual (0, colA.DisplayIndex, "#E1");
-            Assert.AreEqual (2, colB.DisplayIndex, "#E2");
-            Assert.AreEqual (1, colC.DisplayIndex, "#E3");
-            Assert.AreEqual (3, colD.DisplayIndex, "#E4");
-            Assert.AreEqual (0, columnReordered, "#E5");
-            
-            form.Close ();
+            Assert.AreEqual(0, colA.DisplayIndex, "#E1");
+            Assert.AreEqual(2, colB.DisplayIndex, "#E2");
+            Assert.AreEqual(1, colC.DisplayIndex, "#E3");
+            Assert.AreEqual(3, colD.DisplayIndex, "#E4");
+            Assert.AreEqual(0, columnReordered, "#E5");
+
+            form.Close();
         }
 
         [Test]
-        public void DisplayIndex_ListView_Disposed ()
+        public void DisplayIndex_ListView_Disposed()
         {
-            ListView lv = new ListView ();
+            ListView lv = new ListView();
             lv.View = View.Details;
-            ColumnHeader colA = new ColumnHeader ();
-            lv.Columns.Add (colA);
-            ColumnHeader colB = new ColumnHeader ();
-            lv.Columns.Add (colB);
-            ColumnHeader colC = new ColumnHeader ();
-            lv.Columns.Add (colC);
-            Assert.AreEqual (0, colA.DisplayIndex, "#A1");
-            Assert.AreEqual (1, colB.DisplayIndex, "#A2");
-            Assert.AreEqual (2, colC.DisplayIndex, "#A3");
+            ColumnHeader colA = new ColumnHeader();
+            lv.Columns.Add(colA);
+            ColumnHeader colB = new ColumnHeader();
+            lv.Columns.Add(colB);
+            ColumnHeader colC = new ColumnHeader();
+            lv.Columns.Add(colC);
+            Assert.AreEqual(0, colA.DisplayIndex, "#A1");
+            Assert.AreEqual(1, colB.DisplayIndex, "#A2");
+            Assert.AreEqual(2, colC.DisplayIndex, "#A3");
             colA.DisplayIndex = 2;
-            lv.Columns.Remove (colB);
-            lv.Dispose ();
-            Assert.AreEqual (1, colA.DisplayIndex, "#B1");
-            Assert.AreEqual (-1, colB.DisplayIndex, "#B2");
-            Assert.AreEqual (0, colC.DisplayIndex, "#B3");
+            lv.Columns.Remove(colB);
+            lv.Dispose();
+            Assert.AreEqual(1, colA.DisplayIndex, "#B1");
+            Assert.AreEqual(-1, colB.DisplayIndex, "#B2");
+            Assert.AreEqual(0, colC.DisplayIndex, "#B3");
             colA.DisplayIndex = 255;
-            Assert.AreEqual (255, colA.DisplayIndex, "#C1");
-            Assert.AreEqual (-1, colB.DisplayIndex, "#C2");
-            Assert.AreEqual (0, colC.DisplayIndex, "#C3");
+            Assert.AreEqual(255, colA.DisplayIndex, "#C1");
+            Assert.AreEqual(-1, colB.DisplayIndex, "#C2");
+            Assert.AreEqual(0, colC.DisplayIndex, "#C3");
         }
 
         [Test]
-        public void DisplayIndex_ListView_NotCreated ()
+        public void DisplayIndex_ListView_NotCreated()
         {
-            ColumnHeader colA = new ColumnHeader ();
+            ColumnHeader colA = new ColumnHeader();
             colA.DisplayIndex = -66;
-            Assert.AreEqual (-66, colA.DisplayIndex, "#A1");
+            Assert.AreEqual(-66, colA.DisplayIndex, "#A1");
             colA.DisplayIndex = 66;
-            Assert.AreEqual (66, colA.DisplayIndex, "#A2");
+            Assert.AreEqual(66, colA.DisplayIndex, "#A2");
 
-            ColumnHeader colB = new ColumnHeader ();
+            ColumnHeader colB = new ColumnHeader();
             colB.DisplayIndex = 0;
-            Assert.AreEqual (0, colB.DisplayIndex, "#A3");
+            Assert.AreEqual(0, colB.DisplayIndex, "#A3");
 
-            ColumnHeader colC = new ColumnHeader ();
+            ColumnHeader colC = new ColumnHeader();
             colC.DisplayIndex = 1;
-            Assert.AreEqual (1, colC.DisplayIndex, "#A4");
+            Assert.AreEqual(1, colC.DisplayIndex, "#A4");
 
-            ListView lv = new ListView ();
-            lv.ColumnReordered += new ColumnReorderedEventHandler (ColumnReordered);
+            ListView lv = new ListView();
+            lv.ColumnReordered += new ColumnReorderedEventHandler(ColumnReordered);
             lv.View = View.Details;
-            lv.Columns.Add (colA);
-            lv.Columns.Add (colB);
-            lv.Columns.Add (colC);
+            lv.Columns.Add(colA);
+            lv.Columns.Add(colB);
+            lv.Columns.Add(colC);
 
-            try {
+            try
+            {
                 colA.DisplayIndex = -1;
-                Assert.Fail ("#B1");
-            } catch (ArgumentOutOfRangeException ex) {
-                Assert.AreEqual (typeof (ArgumentOutOfRangeException), ex.GetType (), "#B2");
-                Assert.IsNull (ex.InnerException, "#B3");
-                Assert.IsNotNull (ex.Message, "#B4");
-                Assert.IsNotNull (ex.ParamName, "#B5");
-                Assert.AreEqual ("DisplayIndex", ex.ParamName, "#B6");
+                Assert.Fail("#B1");
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentOutOfRangeException), ex.GetType(), "#B2");
+                Assert.IsNull(ex.InnerException, "#B3");
+                Assert.IsNotNull(ex.Message, "#B4");
+                Assert.IsNotNull(ex.ParamName, "#B5");
+                Assert.AreEqual("DisplayIndex", ex.ParamName, "#B6");
             }
 
-            try {
+            try
+            {
                 colA.DisplayIndex = lv.Columns.Count;
-                Assert.Fail ("#C1");
-            } catch (ArgumentOutOfRangeException ex) {
-                Assert.AreEqual (typeof (ArgumentOutOfRangeException), ex.GetType (), "#C2");
-                Assert.IsNull (ex.InnerException, "#C3");
-                Assert.IsNotNull (ex.Message, "#C4");
-                Assert.IsNotNull (ex.ParamName, "#C5");
-                Assert.AreEqual ("DisplayIndex", ex.ParamName, "#C6");
+                Assert.Fail("#C1");
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentOutOfRangeException), ex.GetType(), "#C2");
+                Assert.IsNull(ex.InnerException, "#C3");
+                Assert.IsNotNull(ex.Message, "#C4");
+                Assert.IsNotNull(ex.ParamName, "#C5");
+                Assert.AreEqual("DisplayIndex", ex.ParamName, "#C6");
             }
 
-            Assert.AreEqual (0, colA.DisplayIndex, "#D1");
-            Assert.AreEqual (1, colB.DisplayIndex, "#D2");
-            Assert.AreEqual (2, colC.DisplayIndex, "#D3");
-            Assert.AreEqual (0, columnReordered, "#D4");
+            Assert.AreEqual(0, colA.DisplayIndex, "#D1");
+            Assert.AreEqual(1, colB.DisplayIndex, "#D2");
+            Assert.AreEqual(2, colC.DisplayIndex, "#D3");
+            Assert.AreEqual(0, columnReordered, "#D4");
         }
 
         [Test]
-        public void ImageIndex_Invalid ()
+        public void ImageIndex_Invalid()
         {
-            ColumnHeader col = new ColumnHeader ();
+            ColumnHeader col = new ColumnHeader();
             col.ImageIndex = 2;
-            try {
+            try
+            {
                 col.ImageIndex = -2;
-                Assert.Fail ("#1");
-            } catch (ArgumentOutOfRangeException ex) {
-                Assert.AreEqual (typeof (ArgumentOutOfRangeException), ex.GetType (), "#2");
-                Assert.IsNotNull (ex.Message, "#3");
-                Assert.IsNotNull (ex.ParamName, "#4");
-                Assert.AreEqual ("ImageIndex", ex.ParamName, "#5");
-                Assert.IsNull (ex.InnerException, "#6");
+                Assert.Fail("#1");
             }
-            Assert.AreEqual (2, col.ImageIndex, "#7");
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentOutOfRangeException), ex.GetType(), "#2");
+                Assert.IsNotNull(ex.Message, "#3");
+                Assert.IsNotNull(ex.ParamName, "#4");
+                Assert.AreEqual("ImageIndex", ex.ParamName, "#5");
+                Assert.IsNull(ex.InnerException, "#6");
+            }
+            Assert.AreEqual(2, col.ImageIndex, "#7");
         }
 
         [Test]
-        public void ImageKey ()
+        public void ImageKey()
         {
-            ColumnHeader col = new ColumnHeader ();
-            Assert.AreEqual (string.Empty, col.ImageKey, "#1");
+            ColumnHeader col = new ColumnHeader();
+            Assert.AreEqual(string.Empty, col.ImageKey, "#1");
             col.ImageKey = "test";
-            Assert.AreEqual ("test", col.ImageKey, "#2");
+            Assert.AreEqual("test", col.ImageKey, "#2");
             col.ImageKey = null;
-            Assert.AreEqual (string.Empty, col.ImageKey, "#3");
+            Assert.AreEqual(string.Empty, col.ImageKey, "#3");
         }
 
         [Test]
-        public void ImageKeyAndImageIndexInteraction ()
+        public void ImageKeyAndImageIndexInteraction()
         {
-            ColumnHeader col = new ColumnHeader ();
+            ColumnHeader col = new ColumnHeader();
             col.ImageIndex = 1;
-            Assert.AreEqual (1, col.ImageIndex, "#A1");
-            Assert.AreEqual (string.Empty, col.ImageKey, "#A2");
+            Assert.AreEqual(1, col.ImageIndex, "#A1");
+            Assert.AreEqual(string.Empty, col.ImageKey, "#A2");
             col.ImageKey = "test";
-            Assert.AreEqual (-1, col.ImageIndex, "#B1");
-            Assert.AreEqual ("test", col.ImageKey, "#B2");
+            Assert.AreEqual(-1, col.ImageIndex, "#B1");
+            Assert.AreEqual("test", col.ImageKey, "#B2");
             col.ImageIndex = 2;
-            Assert.AreEqual (2, col.ImageIndex, "#C1");
-            Assert.AreEqual (string.Empty, col.ImageKey, "#C2");
+            Assert.AreEqual(2, col.ImageIndex, "#C1");
+            Assert.AreEqual(string.Empty, col.ImageKey, "#C2");
             col.ImageKey = null;
-            Assert.AreEqual (-1, col.ImageIndex, "#D1");
-            Assert.AreEqual (string.Empty, col.ImageKey, "#D2");
+            Assert.AreEqual(-1, col.ImageIndex, "#D1");
+            Assert.AreEqual(string.Empty, col.ImageKey, "#D2");
         }
 
         [Test]
-        public void ImageList ()
+        public void ImageList()
         {
-            ColumnHeader col = new ColumnHeader ();
-            Assert.IsNull (col.ImageList, "#1");
+            ColumnHeader col = new ColumnHeader();
+            Assert.IsNull(col.ImageList, "#1");
 
-            ListView lv = new ListView ();
+            ListView lv = new ListView();
             lv.View = View.Details;
-            ImageList small = new ImageList ();
+            ImageList small = new ImageList();
             lv.SmallImageList = small;
-            ImageList large = new ImageList ();
+            ImageList large = new ImageList();
             lv.LargeImageList = large;
-            lv.Columns.Add (col);
-            Assert.IsNotNull (col.ImageList, "#2");
-            Assert.AreSame (small, col.ImageList, "#3");
+            lv.Columns.Add(col);
+            Assert.IsNotNull(col.ImageList, "#2");
+            Assert.AreSame(small, col.ImageList, "#3");
         }
 
         [Test]
-        public void ImageList_ListView_Disposed ()
+        public void ImageList_ListView_Disposed()
         {
-            ListView lv = new ListView ();
+            ListView lv = new ListView();
             lv.View = View.Details;
-            ImageList small = new ImageList ();
+            ImageList small = new ImageList();
             lv.SmallImageList = small;
-            ImageList large = new ImageList ();
+            ImageList large = new ImageList();
             lv.LargeImageList = large;
-            ColumnHeader col = new ColumnHeader ();
-            lv.Columns.Add (col);
-            lv.Dispose ();
-            Assert.IsNull (col.ImageList);
+            ColumnHeader col = new ColumnHeader();
+            lv.Columns.Add(col);
+            lv.Dispose();
+            Assert.IsNull(col.ImageList);
         }
 
         [Test]
-        public void Index_ListView_Disposed ()
+        public void Index_ListView_Disposed()
         {
-            ListView lv = new ListView ();
+            ListView lv = new ListView();
             lv.View = View.Details;
-            ColumnHeader colA = new ColumnHeader ();
-            lv.Columns.Add (colA);
-            ColumnHeader colB = new ColumnHeader ();
-            lv.Columns.Add (colB);
-            lv.Dispose ();
-            Assert.AreEqual (-1, colA.Index, "#1");
-            Assert.AreEqual (-1, colB.Index, "#2");
+            ColumnHeader colA = new ColumnHeader();
+            lv.Columns.Add(colA);
+            ColumnHeader colB = new ColumnHeader();
+            lv.Columns.Add(colB);
+            lv.Dispose();
+            Assert.AreEqual(-1, colA.Index, "#1");
+            Assert.AreEqual(-1, colB.Index, "#2");
         }
 
         [Test]
-        public void Name ()
+        public void Name()
         {
-            ColumnHeader col = new ColumnHeader ();
-            Assert.AreEqual (string.Empty, col.Name, "#1");
+            ColumnHeader col = new ColumnHeader();
+            Assert.AreEqual(string.Empty, col.Name, "#1");
             col.Name = "Address";
-            Assert.AreEqual ("Address", col.Name, "#2");
+            Assert.AreEqual("Address", col.Name, "#2");
             col.Name = null;
-            Assert.AreEqual (string.Empty, col.Name, "#3");
+            Assert.AreEqual(string.Empty, col.Name, "#3");
         }
 
         [Test]
-        public void Tag ()
+        public void Tag()
         {
-            ColumnHeader col = new ColumnHeader ();
-            Assert.IsNull (col.Tag, "#1");
+            ColumnHeader col = new ColumnHeader();
+            Assert.IsNull(col.Tag, "#1");
             col.Tag = "whatever";
-            Assert.AreEqual ("whatever", col.Tag, "#2");
+            Assert.AreEqual("whatever", col.Tag, "#2");
             col.Tag = null;
-            Assert.IsNull (col.Tag, "#3");
+            Assert.IsNull(col.Tag, "#3");
         }
 
         [Test]
-        public void Text_ListView_Disposed ()
+        public void Text_ListView_Disposed()
         {
-            ListView lv = new ListView ();
+            ListView lv = new ListView();
             lv.View = View.Details;
-            ColumnHeader col = new ColumnHeader ();
-            lv.Columns.Add (col);
-            lv.Dispose ();
+            ColumnHeader col = new ColumnHeader();
+            lv.Columns.Add(col);
+            lv.Dispose();
             col.Text = "whatever";
-            Assert.AreEqual ("whatever", col.Text);
+            Assert.AreEqual("whatever", col.Text);
         }
 
         [Test]
-        public void TextAlign_ListView_Disposed ()
+        public void TextAlign_ListView_Disposed()
         {
-            ListView lv = new ListView ();
+            ListView lv = new ListView();
             lv.View = View.Details;
-            ColumnHeader col = new ColumnHeader ();
-            lv.Columns.Add (col);
-            lv.Dispose ();
+            ColumnHeader col = new ColumnHeader();
+            lv.Columns.Add(col);
+            lv.Dispose();
             col.TextAlign = HorizontalAlignment.Right;
-            Assert.AreEqual (HorizontalAlignment.Right, col.TextAlign);
+            Assert.AreEqual(HorizontalAlignment.Right, col.TextAlign);
         }
 
         [Test]
-        public void ToStringTest ()
+        public void ToStringTest()
         {
-            ListView lv = new ListView ();
-            lv.SmallImageList = new ImageList ();
-            ColumnHeader col = new ColumnHeader ();
+            ListView lv = new ListView();
+            lv.SmallImageList = new ImageList();
+            ColumnHeader col = new ColumnHeader();
             col.DisplayIndex = 3;
             col.ImageIndex = 2;
             col.Name = "address_col";
@@ -349,82 +358,83 @@ namespace MonoTests.System.Windows.Forms
             col.Text = "Address";
             col.TextAlign = HorizontalAlignment.Right;
             col.Width = 30;
-            lv.Columns.Add (col);
-            Assert.AreEqual ("ColumnHeader: Text: Address", col.ToString ());
+            lv.Columns.Add(col);
+            Assert.AreEqual("ColumnHeader: Text: Address", col.ToString());
         }
 
         [Test]
-        [Category ("NotWorking")]
-        public void WidthDefault ()
+        [Category("NotWorking")]
+        public void WidthDefault()
         {
-            ColumnHeader col = new ColumnHeader ();
-            Assert.AreEqual (60, col.Width);
+            ColumnHeader col = new ColumnHeader();
+            Assert.AreEqual(60, col.Width);
         }
 
         [Test]
-        public void WidthTest ()
+        public void WidthTest()
         {
-            ColumnHeader col = new ColumnHeader ();
+            ColumnHeader col = new ColumnHeader();
             col.Text = "Column text";
 
-            ListView lv = new ListView ();
-            lv.Items.Add ("Item text");
+            ListView lv = new ListView();
+            lv.Items.Add("Item text");
             lv.View = View.Details;
-            lv.Columns.Add (col);
-            lv.CreateControl ();
+            lv.Columns.Add(col);
+            lv.CreateControl();
 
             col.Width = -1;
-            Assert.IsTrue (col.Width > 0, "#1");
+            Assert.IsTrue(col.Width > 0, "#1");
 
             col.Width = -2;
-            Assert.IsTrue (col.Width > 0, "#2");
+            Assert.IsTrue(col.Width > 0, "#2");
 
             bool eventRaised = false;
-            lv.ColumnWidthChanged += delegate (object sender, ColumnWidthChangedEventArgs e) {
-                Assert.AreEqual (e.ColumnIndex, 0, "#3");
+            lv.ColumnWidthChanged += delegate(object sender, ColumnWidthChangedEventArgs e)
+            {
+                Assert.AreEqual(e.ColumnIndex, 0, "#3");
                 eventRaised = true;
             };
             col.Width = 100;
-            Assert.IsTrue (eventRaised, "#4");
+            Assert.IsTrue(eventRaised, "#4");
         }
 
         [Test]
-        public void Width_ListView_Disposed ()
+        public void Width_ListView_Disposed()
         {
-            ListView lv = new ListView ();
+            ListView lv = new ListView();
             lv.View = View.Details;
-            ColumnHeader col = new ColumnHeader ();
-            lv.Columns.Add (col);
-            lv.Dispose ();
+            ColumnHeader col = new ColumnHeader();
+            lv.Columns.Add(col);
+            lv.Dispose();
             col.Width = 10;
-            Assert.AreEqual (10, col.Width);
+            Assert.AreEqual(10, col.Width);
         }
 
         // Ensure the last column is using all the free space to the right
         [Test]
-        public void Width_AutoResize_Expand ()
+        public void Width_AutoResize_Expand()
         {
-            ListView lv = new ListView ();
-            lv.BeginUpdate ();
+            ListView lv = new ListView();
+            lv.BeginUpdate();
             lv.View = View.Details;
-            ColumnHeader col1 = new ColumnHeader ("One");
-            ColumnHeader col2 = new ColumnHeader ("Two");
-            lv.Columns.AddRange (new ColumnHeader [] { col1, col2 });
-            lv.EndUpdate ();
+            ColumnHeader col1 = new ColumnHeader("One");
+            ColumnHeader col2 = new ColumnHeader("Two");
+            lv.Columns.AddRange(new ColumnHeader[] { col1, col2 });
+            lv.EndUpdate();
 
             col1.Width = 10;
             col2.Width = 10;
-            Assert.AreEqual (10, col1.Width, "#A1");
-            Assert.AreEqual (10, col2.Width, "#A2");
+            Assert.AreEqual(10, col1.Width, "#A1");
+            Assert.AreEqual(10, col2.Width, "#A2");
 
             // Need to create the handle in order to actually use the auto size feature
-            lv.CreateControl ();
+            lv.CreateControl();
 
             col2.Width = -2;
-            Assert.AreEqual (true, col2.Width == lv.ClientRectangle.Width - col1.Width, "#B1");
+            Assert.AreEqual(true, col2.Width == lv.ClientRectangle.Width - col1.Width, "#B1");
         }
 
-        public void ColumnReordered (object sender, ColumnReorderedEventArgs  e)
+        public void ColumnReordered(object sender, ColumnReorderedEventArgs e)
         {
             columnReordered++;
         }

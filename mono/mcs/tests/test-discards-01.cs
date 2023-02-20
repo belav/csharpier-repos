@@ -2,7 +2,7 @@ using System;
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         string s = null;
 
@@ -11,7 +11,7 @@ class X
             char _ = '4';
         }
 
-        _ = TestValue ();
+        _ = TestValue();
 
         _ = _ = s;
 
@@ -20,16 +20,16 @@ class X
 
         Func<object> l1 = () => _ = (_, _) = (1, s);
 
-        TryGetValue (out _);
+        TryGetValue(out _);
     }
 
-    static bool TryGetValue (out int arg)
+    static bool TryGetValue(out int arg)
     {
         arg = 3;
         return true;
     }
 
-    static int TestValue ()
+    static int TestValue()
     {
         return 4;
     }

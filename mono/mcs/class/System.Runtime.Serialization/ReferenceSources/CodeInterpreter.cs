@@ -10,8 +10,7 @@ namespace System.Runtime.Serialization
             return InternalConvert(arg, source, target, false);
         }
 
-
-        static bool CanConvert (TypeCode typeCode)
+        static bool CanConvert(TypeCode typeCode)
         {
             switch (typeCode)
             {
@@ -34,22 +33,36 @@ namespace System.Runtime.Serialization
 
         static object InternalConvert(object arg, Type source, Type target, bool isAddress)
         {
-
             if (target == source)
                 return arg;
             if (target.IsValueType)
             {
                 if (source.IsValueType)
                 {
-                    if (!CanConvert (Type.GetTypeCode (target)))
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.NoConversionPossibleTo, DataContract.GetClrTypeFullName(target))));
+                    if (!CanConvert(Type.GetTypeCode(target)))
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.GetString(
+                                    SR.NoConversionPossibleTo,
+                                    DataContract.GetClrTypeFullName(target)
+                                )
+                            )
+                        );
                     else
                         return target;
                 }
                 else if (source.IsAssignableFrom(target))
                     return arg;
                 else
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.IsNotAssignableFrom, DataContract.GetClrTypeFullName(target), DataContract.GetClrTypeFullName(source))));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.IsNotAssignableFrom,
+                                DataContract.GetClrTypeFullName(target),
+                                DataContract.GetClrTypeFullName(source)
+                            )
+                        )
+                    );
             }
             else if (target.IsAssignableFrom(source))
                 return arg;
@@ -58,26 +71,33 @@ namespace System.Runtime.Serialization
             else if (target.IsInterface || source.IsInterface)
                 return arg;
             else
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.IsNotAssignableFrom, DataContract.GetClrTypeFullName(target), DataContract.GetClrTypeFullName(source))));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(
+                            SR.IsNotAssignableFrom,
+                            DataContract.GetClrTypeFullName(target),
+                            DataContract.GetClrTypeFullName(source)
+                        )
+                    )
+                );
         }
 
-        public static object GetMember (MemberInfo memberInfo, object instance)
+        public static object GetMember(MemberInfo memberInfo, object instance)
         {
             var pi = memberInfo as PropertyInfo;
             if (pi != null)
-                return pi.GetValue (instance);
+                return pi.GetValue(instance);
             else
-                return ((FieldInfo) memberInfo).GetValue (instance);
+                return ((FieldInfo)memberInfo).GetValue(instance);
         }
 
-        public static void SetMember (MemberInfo memberInfo, object instance, object value)
+        public static void SetMember(MemberInfo memberInfo, object instance, object value)
         {
             var pi = memberInfo as PropertyInfo;
             if (pi != null)
-                pi.SetValue (instance, value);
+                pi.SetValue(instance, value);
             else
-                ((FieldInfo) memberInfo).SetValue (instance, value);
+                ((FieldInfo)memberInfo).SetValue(instance, value);
         }
     }
 }
-

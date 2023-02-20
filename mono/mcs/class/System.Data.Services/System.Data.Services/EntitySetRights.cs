@@ -38,7 +38,7 @@ namespace System.Data.Services
 
         ReadSingle = 1,
         ReadMultiple = 2,
-        
+
         WriteAppend = 4,
         WriteReplace = 8,
         WriteDelete = 16,

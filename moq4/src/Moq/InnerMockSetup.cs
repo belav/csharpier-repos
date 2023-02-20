@@ -13,7 +13,12 @@ namespace Moq
     {
         private readonly object returnValue;
 
-        public InnerMockSetup(Expression originalExpression, Mock mock, MethodExpectation expectation, object returnValue)
+        public InnerMockSetup(
+            Expression originalExpression,
+            Mock mock,
+            MethodExpectation expectation,
+            object returnValue
+        )
             : base(originalExpression, mock, expectation)
         {
             Debug.Assert(Awaitable.TryGetResultRecursive(returnValue) is IMocked);
@@ -46,8 +51,6 @@ namespace Moq
             }
         }
 
-        protected override void VerifySelf()
-        {
-        }
+        protected override void VerifySelf() { }
     }
 }

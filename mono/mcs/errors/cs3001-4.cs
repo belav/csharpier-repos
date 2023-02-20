@@ -3,16 +3,21 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant(true)]
+
+[assembly: CLSCompliant(true)]
 
 [CLSCompliant(false)]
-public interface IError{
+public interface IError { }
+
+public interface I
+{
+    void Error(out IError arg);
 }
 
-public interface I {
-        void Error(out IError arg);
-}
-
-public class c {
-        public void Error (out IError arg) { arg = null; }
+public class c
+{
+    public void Error(out IError arg)
+    {
+        arg = null;
+    }
 }

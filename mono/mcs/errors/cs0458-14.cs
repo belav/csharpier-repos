@@ -2,13 +2,11 @@
 // Line: 14
 // Compiler options: -warnaserror -warn:2
 
-public enum E
-{
-}
+public enum E { }
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         E? e = null;
         var res = e - null;

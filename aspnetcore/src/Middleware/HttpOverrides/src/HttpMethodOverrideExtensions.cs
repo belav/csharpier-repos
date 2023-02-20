@@ -35,7 +35,10 @@ public static class HttpMethodOverrideExtensions
     /// <param name="options">
     /// The <see cref="HttpMethodOverrideOptions"/> which indicates which form type specifies the override method.
     /// </param>
-    public static IApplicationBuilder UseHttpMethodOverride(this IApplicationBuilder builder, HttpMethodOverrideOptions options)
+    public static IApplicationBuilder UseHttpMethodOverride(
+        this IApplicationBuilder builder,
+        HttpMethodOverrideOptions options
+    )
     {
         if (builder == null)
         {

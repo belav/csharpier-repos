@@ -14,6 +14,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.GoToDefinition
         /// <summary>
         /// Finds the definitions for the symbol at the specific position in the document.
         /// </summary>
-        Task<ImmutableArray<FSharpNavigableItem>> FindDefinitionsAsync(Document document, int position, CancellationToken cancellationToken);
+        Task<ImmutableArray<FSharpNavigableItem>> FindDefinitionsAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

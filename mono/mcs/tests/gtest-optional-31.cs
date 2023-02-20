@@ -2,20 +2,20 @@ using System;
 
 class Test
 {
-    public static int M (bool b = false)
+    public static int M(bool b = false)
     {
-        Console.WriteLine ("PASS");
+        Console.WriteLine("PASS");
         return 0;
     }
 
-    public static int M (params string[] args)
+    public static int M(params string[] args)
     {
-        Console.WriteLine ("FAIL");
+        Console.WriteLine("FAIL");
         return 1;
     }
-    
-    public static int Main ()
+
+    public static int Main()
     {
-        return M ();
+        return M();
     }
 }

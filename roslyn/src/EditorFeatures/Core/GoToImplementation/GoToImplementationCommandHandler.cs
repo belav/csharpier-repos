@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.GoToImplementation
     [Export(typeof(ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(PredefinedCommandHandlerNames.GoToImplementation)]
-    internal sealed class GoToImplementationCommandHandler : AbstractGoToCommandHandler<IFindUsagesService, GoToImplementationCommandArgs>
+    internal sealed class GoToImplementationCommandHandler
+        : AbstractGoToCommandHandler<IFindUsagesService, GoToImplementationCommandArgs>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -34,22 +35,30 @@ namespace Microsoft.CodeAnalysis.GoToImplementation
             IStreamingFindUsagesPresenter streamingPresenter,
             IUIThreadOperationExecutor uiThreadOperationExecutor,
             IAsynchronousOperationListenerProvider listenerProvider,
-            IGlobalOptionService globalOptions)
-            : base(threadingContext,
-                   streamingPresenter,
-                   uiThreadOperationExecutor,
-                   listenerProvider.GetListener(FeatureAttribute.GoToImplementation),
-                   globalOptions)
-        {
-        }
+            IGlobalOptionService globalOptions
+        )
+            : base(
+                threadingContext,
+                streamingPresenter,
+                uiThreadOperationExecutor,
+                listenerProvider.GetListener(FeatureAttribute.GoToImplementation),
+                globalOptions
+            ) { }
 
         public override string DisplayName => EditorFeaturesResources.Go_To_Implementation;
 
-        protected override string ScopeDescription => EditorFeaturesResources.Locating_implementations;
+        protected override string ScopeDescription =>
+            EditorFeaturesResources.Locating_implementations;
         protected override FunctionId FunctionId => FunctionId.CommandHandler_GoToImplementation;
 
-        protected override Task FindActionAsync(IFindUsagesContext context, Document document, int caretPosition, CancellationToken cancellationToken)
-            => document.GetRequiredLanguageService<IFindUsagesService>()
-                       .FindImplementationsAsync(context, document, caretPosition, cancellationToken);
+        protected override Task FindActionAsync(
+            IFindUsagesContext context,
+            Document document,
+            int caretPosition,
+            CancellationToken cancellationToken
+        ) =>
+            document
+                .GetRequiredLanguageService<IFindUsagesService>()
+                .FindImplementationsAsync(context, document, caretPosition, cancellationToken);
     }
 }

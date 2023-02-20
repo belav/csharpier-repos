@@ -66,16 +66,17 @@ internal partial class ObjectResult : IResult
         }
 
         OnFormatting(httpContext);
-        return httpContext.Response.WriteAsJsonAsync(Value, Value.GetType(), options: null, contentType: ContentType);
+        return httpContext.Response.WriteAsJsonAsync(
+            Value,
+            Value.GetType(),
+            options: null,
+            contentType: ContentType
+        );
     }
 
-    protected virtual void OnFormatting(HttpContext httpContext)
-    {
-    }
+    protected virtual void OnFormatting(HttpContext httpContext) { }
 
-    protected virtual void ConfigureResponseHeaders(HttpContext httpContext)
-    {
-    }
+    protected virtual void ConfigureResponseHeaders(HttpContext httpContext) { }
 
     private void ApplyProblemDetailsDefaults(ProblemDetails problemDetails)
     {
@@ -90,9 +91,10 @@ internal partial class ObjectResult : IResult
             }
             else
             {
-                problemDetails.Status = problemDetails is HttpValidationProblemDetails ?
-                    StatusCodes.Status400BadRequest :
-                    StatusCodes.Status500InternalServerError;
+                problemDetails.Status =
+                    problemDetails is HttpValidationProblemDetails
+                        ? StatusCodes.Status400BadRequest
+                        : StatusCodes.Status500InternalServerError;
             }
         }
 
@@ -101,7 +103,12 @@ internal partial class ObjectResult : IResult
             StatusCode = problemDetails.Status;
         }
 
-        if (ProblemDetailsDefaults.Defaults.TryGetValue(problemDetails.Status.Value, out var defaults))
+        if (
+            ProblemDetailsDefaults.Defaults.TryGetValue(
+                problemDetails.Status.Value,
+                out var defaults
+            )
+        )
         {
             problemDetails.Title ??= defaults.Title;
             problemDetails.Type ??= defaults.Type;
@@ -116,7 +123,10 @@ internal partial class ObjectResult : IResult
             {
                 if (value is null)
                 {
-                    ObjectResultExecutingWithoutValue(logger, statusCode ?? StatusCodes.Status200OK);
+                    ObjectResultExecutingWithoutValue(
+                        logger,
+                        statusCode ?? StatusCodes.Status200OK
+                    );
                 }
                 else
                 {
@@ -126,10 +136,29 @@ internal partial class ObjectResult : IResult
             }
         }
 
-        [LoggerMessage(1, LogLevel.Information, "Writing value of type '{Type}' with status code '{StatusCode}'.", EventName = "ObjectResultExecuting", SkipEnabledCheck = true)]
-        private static partial void ObjectResultExecuting(ILogger logger, string type, int statusCode);
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Writing value of type '{Type}' with status code '{StatusCode}'.",
+            EventName = "ObjectResultExecuting",
+            SkipEnabledCheck = true
+        )]
+        private static partial void ObjectResultExecuting(
+            ILogger logger,
+            string type,
+            int statusCode
+        );
 
-        [LoggerMessage(2, LogLevel.Information, "Executing result with status code '{StatusCode}'.", EventName = "ObjectResultExecutingWithoutValue", SkipEnabledCheck = true)]
-        private static partial void ObjectResultExecutingWithoutValue(ILogger logger, int statusCode);
+        [LoggerMessage(
+            2,
+            LogLevel.Information,
+            "Executing result with status code '{StatusCode}'.",
+            EventName = "ObjectResultExecutingWithoutValue",
+            SkipEnabledCheck = true
+        )]
+        private static partial void ObjectResultExecutingWithoutValue(
+            ILogger logger,
+            int statusCode
+        );
     }
 }

@@ -29,85 +29,85 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System;
     using System.Collections;
 
     using Mono.Cecil.Cil;
 
-    internal sealed class FieldDefinitionCollection : CollectionBase, IReflectionVisitable {
-
+    internal sealed class FieldDefinitionCollection : CollectionBase, IReflectionVisitable
+    {
         TypeDefinition m_container;
 
-        public FieldDefinition this [int index] {
-            get { return List [index] as FieldDefinition; }
-            set { List [index] = value; }
+        public FieldDefinition this[int index]
+        {
+            get { return List[index] as FieldDefinition; }
+            set { List[index] = value; }
         }
 
-        public TypeDefinition Container {
+        public TypeDefinition Container
+        {
             get { return m_container; }
         }
 
-        public FieldDefinitionCollection (TypeDefinition container)
+        public FieldDefinitionCollection(TypeDefinition container)
         {
             m_container = container;
         }
 
-        public void Add (FieldDefinition value)
+        public void Add(FieldDefinition value)
         {
-            Attach (value);
+            Attach(value);
 
-            List.Add (value);
+            List.Add(value);
         }
 
-
-        public new void Clear ()
+        public new void Clear()
         {
             foreach (FieldDefinition item in this)
-                Detach (item);
+                Detach(item);
 
-            base.Clear ();
+            base.Clear();
         }
 
-        public bool Contains (FieldDefinition value)
+        public bool Contains(FieldDefinition value)
         {
-            return List.Contains (value);
+            return List.Contains(value);
         }
 
-        public int IndexOf (FieldDefinition value)
+        public int IndexOf(FieldDefinition value)
         {
-            return List.IndexOf (value);
+            return List.IndexOf(value);
         }
 
-        public void Insert (int index, FieldDefinition value)
+        public void Insert(int index, FieldDefinition value)
         {
-            Attach (value);
+            Attach(value);
 
-            List.Insert (index, value);
+            List.Insert(index, value);
         }
 
-        public void Remove (FieldDefinition value)
+        public void Remove(FieldDefinition value)
         {
-            List.Remove (value);
+            List.Remove(value);
 
-            Detach (value);
+            Detach(value);
         }
 
-
-        public new void RemoveAt (int index)
+        public new void RemoveAt(int index)
         {
-            FieldDefinition item = this [index];
-            Remove (item);
+            FieldDefinition item = this[index];
+            Remove(item);
         }
 
-        protected override void OnValidate (object o)
+        protected override void OnValidate(object o)
         {
-            if (! (o is FieldDefinition))
-                throw new ArgumentException ("Must be of type " + typeof (FieldDefinition).FullName);
+            if (!(o is FieldDefinition))
+                throw new ArgumentException("Must be of type " + typeof(FieldDefinition).FullName);
         }
 
-        public FieldDefinition GetField (string name)
+        public FieldDefinition GetField(string name)
         {
             foreach (FieldDefinition field in this)
                 if (field.Name == name)
@@ -116,22 +116,22 @@ namespace Mono.Cecil {
             return null;
         }
 
-        void Attach (MemberReference member)
+        void Attach(MemberReference member)
         {
             if (member.DeclaringType != null)
-                throw new ReflectionException ("Member already attached, clone it instead");
+                throw new ReflectionException("Member already attached, clone it instead");
 
             member.DeclaringType = m_container;
         }
 
-        void Detach (MemberReference member)
+        void Detach(MemberReference member)
         {
             member.DeclaringType = null;
         }
 
-        public void Accept (IReflectionVisitor visitor)
+        public void Accept(IReflectionVisitor visitor)
         {
-            visitor.VisitFieldDefinitionCollection (this);
+            visitor.VisitFieldDefinitionCollection(this);
         }
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,8 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class MsmqTransportSecurityElement
-         : ConfigurationElement
+    public sealed partial class MsmqTransportSecurityElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
@@ -65,75 +64,106 @@ namespace System.ServiceModel.Configuration
         static ConfigurationProperty msmq_protection_level;
         static ConfigurationProperty msmq_secure_hash_algorithm;
 
-        static MsmqTransportSecurityElement ()
+        static MsmqTransportSecurityElement()
         {
-            properties = new ConfigurationPropertyCollection ();
-            msmq_authentication_mode = new ConfigurationProperty ("msmqAuthenticationMode",
-                typeof (MsmqAuthenticationMode), "WindowsDomain", null/* FIXME: get converter for MsmqAuthenticationMode*/, null,
-                ConfigurationPropertyOptions.None);
+            properties = new ConfigurationPropertyCollection();
+            msmq_authentication_mode = new ConfigurationProperty(
+                "msmqAuthenticationMode",
+                typeof(MsmqAuthenticationMode),
+                "WindowsDomain",
+                null /* FIXME: get converter for MsmqAuthenticationMode*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            msmq_encryption_algorithm = new ConfigurationProperty ("msmqEncryptionAlgorithm",
-                typeof (MsmqEncryptionAlgorithm), "RC4Stream", null/* FIXME: get converter for MsmqEncryptionAlgorithm*/, null,
-                ConfigurationPropertyOptions.None);
+            msmq_encryption_algorithm = new ConfigurationProperty(
+                "msmqEncryptionAlgorithm",
+                typeof(MsmqEncryptionAlgorithm),
+                "RC4Stream",
+                null /* FIXME: get converter for MsmqEncryptionAlgorithm*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            msmq_protection_level = new ConfigurationProperty ("msmqProtectionLevel",
-                typeof (ProtectionLevel), "Sign", null/* FIXME: get converter for ProtectionLevel*/, null,
-                ConfigurationPropertyOptions.None);
+            msmq_protection_level = new ConfigurationProperty(
+                "msmqProtectionLevel",
+                typeof(ProtectionLevel),
+                "Sign",
+                null /* FIXME: get converter for ProtectionLevel*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            msmq_secure_hash_algorithm = new ConfigurationProperty ("msmqSecureHashAlgorithm",
-                typeof (MsmqSecureHashAlgorithm), "Sha1", null/* FIXME: get converter for MsmqSecureHashAlgorithm*/, null,
-                ConfigurationPropertyOptions.None);
+            msmq_secure_hash_algorithm = new ConfigurationProperty(
+                "msmqSecureHashAlgorithm",
+                typeof(MsmqSecureHashAlgorithm),
+                "Sha1",
+                null /* FIXME: get converter for MsmqSecureHashAlgorithm*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            properties.Add (msmq_authentication_mode);
-            properties.Add (msmq_encryption_algorithm);
-            properties.Add (msmq_protection_level);
-            properties.Add (msmq_secure_hash_algorithm);
+            properties.Add(msmq_authentication_mode);
+            properties.Add(msmq_encryption_algorithm);
+            properties.Add(msmq_protection_level);
+            properties.Add(msmq_secure_hash_algorithm);
         }
 
-        public MsmqTransportSecurityElement ()
-        {
-        }
-
+        public MsmqTransportSecurityElement() { }
 
         // Properties
 
-        [ConfigurationProperty ("msmqAuthenticationMode",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "WindowsDomain")]
-        public MsmqAuthenticationMode MsmqAuthenticationMode {
-            get { return (MsmqAuthenticationMode) base [msmq_authentication_mode]; }
-            set { base [msmq_authentication_mode] = value; }
+        [ConfigurationProperty(
+            "msmqAuthenticationMode",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "WindowsDomain"
+        )]
+        public MsmqAuthenticationMode MsmqAuthenticationMode
+        {
+            get { return (MsmqAuthenticationMode)base[msmq_authentication_mode]; }
+            set { base[msmq_authentication_mode] = value; }
         }
 
-        [ConfigurationProperty ("msmqEncryptionAlgorithm",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "RC4Stream")]
-        public MsmqEncryptionAlgorithm MsmqEncryptionAlgorithm {
-            get { return (MsmqEncryptionAlgorithm) base [msmq_encryption_algorithm]; }
-            set { base [msmq_encryption_algorithm] = value; }
+        [ConfigurationProperty(
+            "msmqEncryptionAlgorithm",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "RC4Stream"
+        )]
+        public MsmqEncryptionAlgorithm MsmqEncryptionAlgorithm
+        {
+            get { return (MsmqEncryptionAlgorithm)base[msmq_encryption_algorithm]; }
+            set { base[msmq_encryption_algorithm] = value; }
         }
 
-        [ConfigurationProperty ("msmqProtectionLevel",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Sign")]
-        public ProtectionLevel MsmqProtectionLevel {
-            get { return (ProtectionLevel) base [msmq_protection_level]; }
-            set { base [msmq_protection_level] = value; }
+        [ConfigurationProperty(
+            "msmqProtectionLevel",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "Sign"
+        )]
+        public ProtectionLevel MsmqProtectionLevel
+        {
+            get { return (ProtectionLevel)base[msmq_protection_level]; }
+            set { base[msmq_protection_level] = value; }
         }
 
-        [ConfigurationProperty ("msmqSecureHashAlgorithm",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Sha1")]
-        public MsmqSecureHashAlgorithm MsmqSecureHashAlgorithm {
-            get { return (MsmqSecureHashAlgorithm) base [msmq_secure_hash_algorithm]; }
-            set { base [msmq_secure_hash_algorithm] = value; }
+        [ConfigurationProperty(
+            "msmqSecureHashAlgorithm",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "Sha1"
+        )]
+        public MsmqSecureHashAlgorithm MsmqSecureHashAlgorithm
+        {
+            get { return (MsmqSecureHashAlgorithm)base[msmq_secure_hash_algorithm]; }
+            set { base[msmq_secure_hash_algorithm] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
-
-
     }
-
 }

@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,16 +27,15 @@ using System.Data.OleDb;
 
 using MonoTests.System.Data.Utils;
 
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
     [TestFixture]
-    public class OleDbDataReader_GetChars : ADONetTesterClass 
+    public class OleDbDataReader_GetChars : ADONetTesterClass
     {
         OleDbConnection con;
-        char [] Result;
+        char[] Result;
 
         [SetUp]
         public void SetUp()
@@ -46,20 +45,32 @@ namespace MonoTests.System.Data.OleDb
             try
             {
                 //prepare data
-                base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+                base.PrepareDataForTesting(
+                    MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+                );
 
-                con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+                con = new OleDbConnection(
+                    MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+                );
                 Result = new char[100];
                 con.Open();
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
         [TearDown]
         public void TearDown()
         {
-            if (con.State == ConnectionState.Open) con.Close();
+            if (con.State == ConnectionState.Open)
+                con.Close();
         }
 
         public static void Main()
@@ -73,8 +84,14 @@ namespace MonoTests.System.Data.OleDb
                 tc.run();
                 tc.TearDown();
             }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
 
         [Test]
@@ -83,37 +100,60 @@ namespace MonoTests.System.Data.OleDb
             Exception exp = null;
             long rdrResults = 0;
 
-            OleDbCommand cmd = new OleDbCommand("Select LastName From Employees Where EmployeeID = 100", con);
+            OleDbCommand cmd = new OleDbCommand(
+                "Select LastName From Employees Where EmployeeID = 100",
+                con
+            );
             OleDbDataReader rdr = cmd.ExecuteReader();
             rdr.Read();
 
             //LastName should be "Last100"
-    
+
             try
             {
                 BeginCase("check result length");
                 rdrResults = rdr.GetChars(0, 0, Result, 0, Result.Length);
-                Compare(rdrResults,(long)"Last100".Length  );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+                Compare(rdrResults, (long)"Last100".Length);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
                 BeginCase("check result - char[0]");
-                Compare(Result[0] ,'L');
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+                Compare(Result[0], 'L');
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
                 BeginCase("check result - char[last char index]");
-                Compare(Result["Last100".Length-1] ,'0');
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
-
+                Compare(Result["Last100".Length - 1], '0');
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
     }
 }

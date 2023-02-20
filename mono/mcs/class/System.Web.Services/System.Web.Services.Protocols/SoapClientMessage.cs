@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.SoapClientMessage.cs
 //
 // Authors:
@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,9 +33,10 @@
 using System.Web.Services;
 using System.Web.Services.Protocols;
 
-namespace System.Web.Services.Protocols {
-    public sealed class SoapClientMessage : SoapMessage {
-
+namespace System.Web.Services.Protocols
+{
+    public sealed class SoapClientMessage : SoapMessage
+    {
         #region Fields
 
         SoapHttpClientProtocol client;
@@ -45,7 +46,7 @@ namespace System.Web.Services.Protocols {
         //
         // Expose this one internally
         //
-        internal object [] Parameters;
+        internal object[] Parameters;
         #endregion
 
         #region Constructors
@@ -53,7 +54,12 @@ namespace System.Web.Services.Protocols {
         //
         // Constructs the SoapClientMessage
         //
-        internal SoapClientMessage (SoapHttpClientProtocol client, SoapMethodStubInfo msi, string url, object [] parameters)
+        internal SoapClientMessage(
+            SoapHttpClientProtocol client,
+            SoapMethodStubInfo msi,
+            string url,
+            object[] parameters
+        )
         {
             this.MethodStubInfo = msi;
             this.client = client;
@@ -63,32 +69,38 @@ namespace System.Web.Services.Protocols {
                 ContentType = "application/soap+xml";
         }
 
-        #endregion 
+        #endregion
 
         #region Properties
 
-        public override string Action {
+        public override string Action
+        {
             get { return MethodStubInfo.Action; }
         }
 
-        public SoapHttpClientProtocol Client {
+        public SoapHttpClientProtocol Client
+        {
             get { return client; }
         }
 
-        public override LogicalMethodInfo MethodInfo {
+        public override LogicalMethodInfo MethodInfo
+        {
             get { return MethodStubInfo.MethodInfo; }
         }
 
-        public override bool OneWay {
+        public override bool OneWay
+        {
             get { return MethodStubInfo.OneWay; }
         }
 
-        public override string Url {
+        public override string Url
+        {
             get { return url; }
         }
-        
+
         [System.Runtime.InteropServices.ComVisible(false)]
-        public override SoapProtocolVersion SoapVersion {
+        public override SoapProtocolVersion SoapVersion
+        {
             get { return client.SoapVersion; }
         }
 
@@ -96,14 +108,14 @@ namespace System.Web.Services.Protocols {
 
         #region Methods
 
-        protected override void EnsureInStage ()
+        protected override void EnsureInStage()
         {
-            EnsureStage (SoapMessageStage.BeforeSerialize);
+            EnsureStage(SoapMessageStage.BeforeSerialize);
         }
 
-        protected override void EnsureOutStage ()
+        protected override void EnsureOutStage()
         {
-            EnsureStage (SoapMessageStage.AfterDeserialize);
+            EnsureStage(SoapMessageStage.AfterDeserialize);
         }
 
         #endregion // Methods

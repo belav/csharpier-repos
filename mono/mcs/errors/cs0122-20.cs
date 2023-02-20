@@ -5,5 +5,5 @@ using C = A.B;
 
 class A
 {
-    class B {}
+    class B { }
 }

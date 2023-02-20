@@ -176,7 +176,10 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_HostAndHostWithWildcard_NoSubdomain()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:8080", "*.contoso.com:8080", });
+        var endpoint = CreateEndpoint(
+            "/hello",
+            hosts: new string[] { "contoso.com:8080", "*.contoso.com:8080", }
+        );
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "contoso.com:8080");
@@ -381,10 +384,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
         return builder.Build();
     }
 
-    internal static HttpContext CreateContext(
-        string path,
-        string host,
-        string scheme = null)
+    internal static HttpContext CreateContext(string path, string host, string scheme = null)
     {
         var httpContext = new DefaultHttpContext();
         if (host != null)
@@ -402,7 +402,8 @@ public abstract class HostMatcherPolicyIntegrationTestBase
         object defaults = null,
         object constraints = null,
         int order = 0,
-        string[] hosts = null)
+        string[] hosts = null
+    )
     {
         var metadata = new List<object>();
         if (hosts != null)
@@ -415,13 +416,15 @@ public abstract class HostMatcherPolicyIntegrationTestBase
             metadata.Add(new DynamicEndpointMetadata());
         }
 
-        var displayName = "endpoint: " + template + " " + string.Join(", ", hosts ?? new[] { "*:*" });
+        var displayName =
+            "endpoint: " + template + " " + string.Join(", ", hosts ?? new[] { "*:*" });
         return new RouteEndpoint(
             TestConstants.EmptyRequestDelegate,
             RoutePatternFactory.Parse(template, defaults, constraints),
             order,
             new EndpointMetadataCollection(metadata),
-            displayName);
+            displayName
+        );
     }
 
     internal (Matcher matcher, RouteEndpoint endpoint) CreateMatcher(string template)

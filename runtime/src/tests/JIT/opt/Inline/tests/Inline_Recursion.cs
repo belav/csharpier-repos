@@ -21,7 +21,6 @@ internal class MainApp
         return ret;
     }
 
-
     public static int A(int v)
     {
         int ret = 0;
@@ -52,5 +51,3 @@ internal class MainApp
         }
     }
 }
-
-

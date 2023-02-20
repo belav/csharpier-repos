@@ -129,7 +129,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var map = this.GetEmptyImmutableDictionary<string, int>().Add("five", 5).Add("six", 6);
             var builder = this.GetBuilder(map);
             CollectionAssertAreEquivalent(new[] { "five", "six" }, builder.Keys);
-            CollectionAssertAreEquivalent(new[] { "five", "six" }, ((IReadOnlyDictionary<string, int>)builder).Keys.ToArray());
+            CollectionAssertAreEquivalent(
+                new[] { "five", "six" },
+                ((IReadOnlyDictionary<string, int>)builder).Keys.ToArray()
+            );
         }
 
         [Fact]
@@ -138,7 +141,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var map = this.GetEmptyImmutableDictionary<string, int>().Add("five", 5).Add("six", 6);
             var builder = this.GetBuilder(map);
             CollectionAssertAreEquivalent(new[] { 5, 6 }, builder.Values);
-            CollectionAssertAreEquivalent(new[] { 5, 6 }, ((IReadOnlyDictionary<string, int>)builder).Values.ToArray());
+            CollectionAssertAreEquivalent(
+                new[] { 5, 6 },
+                ((IReadOnlyDictionary<string, int>)builder).Values.ToArray()
+            );
         }
 
         [Fact]
@@ -250,14 +256,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var entryArray = new DictionaryEntry[builder.Count + 1];
             collection.CopyTo(entryArray, 1);
             Assert.Equal(default(DictionaryEntry), entryArray[0]);
-            Assert.Equal(new DictionaryEntry[] { default, new DictionaryEntry("b", 2) }, entryArray);
+            Assert.Equal(
+                new DictionaryEntry[] { default, new DictionaryEntry("b", 2) },
+                entryArray
+            );
 
             Assert.False(collection.IsSynchronized);
             Assert.NotNull(collection.SyncRoot);
             Assert.Same(collection.SyncRoot, collection.SyncRoot);
         }
 
-        protected abstract bool TryGetKeyHelper<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TKey equalKey, out TKey actualKey)
+        protected abstract bool TryGetKeyHelper<TKey, TValue>(
+            IDictionary<TKey, TValue> dictionary,
+            TKey equalKey,
+            out TKey actualKey
+        )
             where TKey : notnull;
 
         /// <summary>
@@ -266,7 +279,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         /// <typeparam name="TKey">The type of key.</typeparam>
         /// <typeparam name="TValue">The type of value.</typeparam>
         /// <returns>The builder.</returns>
-        protected abstract IDictionary<TKey, TValue> GetBuilder<TKey, TValue>(IImmutableDictionary<TKey, TValue>? basis = null)
+        protected abstract IDictionary<TKey, TValue> GetBuilder<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue>? basis = null
+        )
             where TKey : notnull;
 
         /// <summary>
@@ -275,9 +290,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         /// <typeparam name="TKey">The type of key.</typeparam>
         /// <typeparam name="TValue">The type of value.</typeparam>
         /// <returns>The immutable dictionary.</returns>
-        protected abstract IImmutableDictionary<TKey, TValue> GetEmptyImmutableDictionary<TKey, TValue>()
+        protected abstract IImmutableDictionary<TKey, TValue> GetEmptyImmutableDictionary<
+            TKey,
+            TValue
+        >()
             where TKey : notnull;
 
-        protected abstract IImmutableDictionary<string, TValue> Empty<TValue>(StringComparer comparer);
+        protected abstract IImmutableDictionary<string, TValue> Empty<TValue>(
+            StringComparer comparer
+        );
     }
 }

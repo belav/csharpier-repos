@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,63 +36,64 @@ namespace System.DirectoryServices.Protocols
     [MonoTODO]
     public class DirectoryAttributeCollection : CollectionBase
     {
-        internal DirectoryAttributeCollection (DirectoryAttribute [] attributes)
+        internal DirectoryAttributeCollection(DirectoryAttribute[] attributes)
         {
-            list = new ArrayList (attributes);
+            list = new ArrayList(attributes);
         }
 
         ArrayList list;
 
-        public DirectoryAttribute this [int index] {
-            get { return (DirectoryAttribute) list [index]; }
-            set { list [index] = value; }
-        }
-
-        public int Add (DirectoryAttribute attribute)
+        public DirectoryAttribute this[int index]
         {
-            return list.Add (attribute);
+            get { return (DirectoryAttribute)list[index]; }
+            set { list[index] = value; }
         }
 
-        public void AddRange (DirectoryAttribute [] attributes)
+        public int Add(DirectoryAttribute attribute)
         {
-            list.AddRange (attributes);
+            return list.Add(attribute);
         }
 
-        public void AddRange (DirectoryAttributeCollection attributeCollection)
+        public void AddRange(DirectoryAttribute[] attributes)
         {
-            list.Add (attributeCollection.list);
+            list.AddRange(attributes);
         }
 
-        public bool Contains (DirectoryAttribute value)
+        public void AddRange(DirectoryAttributeCollection attributeCollection)
         {
-            return list.Contains (value);
+            list.Add(attributeCollection.list);
         }
 
-        public void CopyTo (DirectoryAttribute [] array, int index)
+        public bool Contains(DirectoryAttribute value)
         {
-            list.CopyTo (array, index);
+            return list.Contains(value);
         }
 
-        public int IndexOf (DirectoryAttribute value)
+        public void CopyTo(DirectoryAttribute[] array, int index)
         {
-            return list.IndexOf (value);
+            list.CopyTo(array, index);
         }
 
-        public void Insert (int index, DirectoryAttribute value)
+        public int IndexOf(DirectoryAttribute value)
         {
-            list.Insert (index, value);
+            return list.IndexOf(value);
         }
 
-        [MonoTODO ("verify")]
-        protected override void OnValidate (object value)
+        public void Insert(int index, DirectoryAttribute value)
+        {
+            list.Insert(index, value);
+        }
+
+        [MonoTODO("verify")]
+        protected override void OnValidate(object value)
         {
             if (!(value is DirectoryAttribute))
-                throw new ArgumentException ("value must be a DirectoryAttribute");
+                throw new ArgumentException("value must be a DirectoryAttribute");
         }
 
-        public void Remove (DirectoryAttribute value)
+        public void Remove(DirectoryAttribute value)
         {
-            list.Remove (value);
+            list.Remove(value);
         }
     }
 }

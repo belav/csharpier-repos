@@ -32,101 +32,120 @@ namespace MonoTests.System.Linq.Expressions
     public class ExpressionTest_Property
     {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Arg1Null ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Arg1Null()
         {
-            Expression.Property (null, "NoProperty");
+            Expression.Property(null, "NoProperty");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Arg2Null1 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Arg2Null1()
         {
-            Expression.Property (Expression.Constant (new MemberClass()), (string)null);
+            Expression.Property(Expression.Constant(new MemberClass()), (string)null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Arg2Null2 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Arg2Null2()
         {
-            Expression.Property (Expression.Constant (new MemberClass()), (PropertyInfo)null);
+            Expression.Property(Expression.Constant(new MemberClass()), (PropertyInfo)null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Arg2Null3 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Arg2Null3()
         {
-            Expression.Property (Expression.Constant (new MemberClass()), (MethodInfo)null);
+            Expression.Property(Expression.Constant(new MemberClass()), (MethodInfo)null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void NoProperty ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void NoProperty()
         {
-            Expression.Property (Expression.Constant (new MemberClass()), "NoProperty");
+            Expression.Property(Expression.Constant(new MemberClass()), "NoProperty");
         }
 
         [Test]
-        public void InstanceProperty1 ()
+        public void InstanceProperty1()
         {
-            MemberExpression expr = Expression.Property (Expression.Constant (new MemberClass()), "TestProperty1");
-            Assert.AreEqual (ExpressionType.MemberAccess, expr.NodeType, "Property#01");
-            Assert.AreEqual (typeof (int), expr.Type, "Property#02");
-            Assert.AreEqual ("value(MonoTests.System.Linq.Expressions.MemberClass).TestProperty1", expr.ToString(), "Property#03");
+            MemberExpression expr = Expression.Property(
+                Expression.Constant(new MemberClass()),
+                "TestProperty1"
+            );
+            Assert.AreEqual(ExpressionType.MemberAccess, expr.NodeType, "Property#01");
+            Assert.AreEqual(typeof(int), expr.Type, "Property#02");
+            Assert.AreEqual(
+                "value(MonoTests.System.Linq.Expressions.MemberClass).TestProperty1",
+                expr.ToString(),
+                "Property#03"
+            );
         }
 
         [Test]
-        public void InstanceProperty2 ()
+        public void InstanceProperty2()
         {
-            MemberExpression expr = Expression.Property (Expression.Constant (new MemberClass()), MemberClass.GetRoPropertyInfo());
-            Assert.AreEqual (ExpressionType.MemberAccess, expr.NodeType, "Property#04");
-            Assert.AreEqual (typeof (int), expr.Type, "Property#05");
-            Assert.AreEqual ("value(MonoTests.System.Linq.Expressions.MemberClass).TestProperty1", expr.ToString(), "Property#06");
+            MemberExpression expr = Expression.Property(
+                Expression.Constant(new MemberClass()),
+                MemberClass.GetRoPropertyInfo()
+            );
+            Assert.AreEqual(ExpressionType.MemberAccess, expr.NodeType, "Property#04");
+            Assert.AreEqual(typeof(int), expr.Type, "Property#05");
+            Assert.AreEqual(
+                "value(MonoTests.System.Linq.Expressions.MemberClass).TestProperty1",
+                expr.ToString(),
+                "Property#06"
+            );
         }
 
         [Test]
-        public void InstanceProperty3 ()
+        public void InstanceProperty3()
         {
             MethodInfo mi = typeof(MemberClass).GetMethod("get_TestProperty1");
 
-            MemberExpression expr = Expression.Property (Expression.Constant (new MemberClass()), mi);
-            Assert.AreEqual (ExpressionType.MemberAccess, expr.NodeType, "Property#07");
-            Assert.AreEqual (typeof (int), expr.Type, "Property#08");
-            Assert.AreEqual ("value(MonoTests.System.Linq.Expressions.MemberClass).TestProperty1", expr.ToString(), "Property#09");
-            Assert.AreEqual (MemberClass.GetRoPropertyInfo(), expr.Member, "Property#10");
+            MemberExpression expr = Expression.Property(Expression.Constant(new MemberClass()), mi);
+            Assert.AreEqual(ExpressionType.MemberAccess, expr.NodeType, "Property#07");
+            Assert.AreEqual(typeof(int), expr.Type, "Property#08");
+            Assert.AreEqual(
+                "value(MonoTests.System.Linq.Expressions.MemberClass).TestProperty1",
+                expr.ToString(),
+                "Property#09"
+            );
+            Assert.AreEqual(MemberClass.GetRoPropertyInfo(), expr.Member, "Property#10");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void StaticProperty1 ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void StaticProperty1()
         {
             // This will fail because access to a static field should be created using a PropertyInfo and
             // not an instance plus the field name.
-            Expression.Property (Expression.Constant (new MemberClass()), "StaticProperty");
+            Expression.Property(Expression.Constant(new MemberClass()), "StaticProperty");
         }
 
         [Test]
-        public void StaticProperty2 ()
+        public void StaticProperty2()
         {
-            MemberExpression expr = Expression.Property (null, MemberClass.GetStaticPropertyInfo());
-            Assert.AreEqual (ExpressionType.MemberAccess, expr.NodeType, "Property#11");
-            Assert.AreEqual (typeof (int), expr.Type, "Property#12");
-            Assert.AreEqual ("MemberClass.StaticProperty", expr.ToString(), "Property#13");
+            MemberExpression expr = Expression.Property(null, MemberClass.GetStaticPropertyInfo());
+            Assert.AreEqual(ExpressionType.MemberAccess, expr.NodeType, "Property#11");
+            Assert.AreEqual(typeof(int), expr.Type, "Property#12");
+            Assert.AreEqual("MemberClass.StaticProperty", expr.ToString(), "Property#13");
         }
 
         [Test]
-        public void StaticProperty3 ()
+        public void StaticProperty3()
         {
             MethodInfo mi = typeof(MemberClass).GetMethod("get_StaticProperty");
 
-            MemberExpression expr = Expression.Property (null, mi);
-            Assert.AreEqual (ExpressionType.MemberAccess, expr.NodeType, "Property#14");
-            Assert.AreEqual (typeof (int), expr.Type, "Property#15");
-            Assert.AreEqual ("MemberClass.StaticProperty", expr.ToString(), "Property#16");
-            Assert.AreEqual (MemberClass.GetStaticPropertyInfo(), expr.Member, "Property#17");
+            MemberExpression expr = Expression.Property(null, mi);
+            Assert.AreEqual(ExpressionType.MemberAccess, expr.NodeType, "Property#14");
+            Assert.AreEqual(typeof(int), expr.Type, "Property#15");
+            Assert.AreEqual("MemberClass.StaticProperty", expr.ToString(), "Property#16");
+            Assert.AreEqual(MemberClass.GetStaticPropertyInfo(), expr.Member, "Property#17");
         }
 
-        public class Foo {
+        public class Foo
+        {
             public string Prop { get; set; }
 
             public static string StatProp
@@ -136,61 +155,81 @@ namespace MonoTests.System.Linq.Expressions
         }
 
         [Test]
-        public void TestCompileGetInstanceProperty ()
+        public void TestCompileGetInstanceProperty()
         {
-            var p = Expression.Parameter (typeof (Foo), "foo");
-            var fooer = Expression.Lambda<Func<Foo, string>> (
-                Expression.Property (p, typeof (Foo).GetProperty ("Prop")), p).Compile ();
+            var p = Expression.Parameter(typeof(Foo), "foo");
+            var fooer = Expression
+                .Lambda<Func<Foo, string>>(
+                    Expression.Property(p, typeof(Foo).GetProperty("Prop")),
+                    p
+                )
+                .Compile();
 
-            Assert.AreEqual ("foo", fooer (new Foo { Prop = "foo" }));
+            Assert.AreEqual("foo", fooer(new Foo { Prop = "foo" }));
         }
 
         [Test]
-        public void TestCompileGetStaticProperty ()
+        public void TestCompileGetStaticProperty()
         {
-            var sf = Expression.Lambda<Func<string>> (
-                Expression.Property (null, typeof (Foo).GetProperty (
-                "StatProp", BindingFlags.Public | BindingFlags.Static))).Compile ();
+            var sf = Expression
+                .Lambda<Func<string>>(
+                    Expression.Property(
+                        null,
+                        typeof(Foo).GetProperty(
+                            "StatProp",
+                            BindingFlags.Public | BindingFlags.Static
+                        )
+                    )
+                )
+                .Compile();
 
-            Assert.AreEqual ("StaticFoo", sf ());
+            Assert.AreEqual("StaticFoo", sf());
         }
 
-        public struct Bar {
+        public struct Bar
+        {
             private string slot;
 
-            public string Prop {
+            public string Prop
+            {
                 get { return slot; }
                 set { slot = value; }
             }
 
-            public Bar (string slot)
+            public Bar(string slot)
             {
                 this.slot = slot;
             }
         }
 
         [Test]
-        public void TestCompileGetInstancePropertyOnStruct ()
+        public void TestCompileGetInstancePropertyOnStruct()
         {
-            var p = Expression.Parameter (typeof (Bar), "bar");
-            var barer = Expression.Lambda<Func<Bar, string>> (
-                Expression.Property (p, typeof (Bar).GetProperty ("Prop")), p).Compile ();
+            var p = Expression.Parameter(typeof(Bar), "bar");
+            var barer = Expression
+                .Lambda<Func<Bar, string>>(
+                    Expression.Property(p, typeof(Bar).GetProperty("Prop")),
+                    p
+                )
+                .Compile();
 
-            Assert.AreEqual ("bar", barer (new Bar ("bar")));
+            Assert.AreEqual("bar", barer(new Bar("bar")));
         }
 
-        public static int StaticProperty {
+        public static int StaticProperty
+        {
             get { return 42; }
         }
 
         [Test]
-        [Category ("NotDotNet")] // http://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=339351
-        [ExpectedException (typeof (ArgumentException))]
-        public void StaticPropertyWithInstanceArgument ()
+        [Category("NotDotNet")] // http://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=339351
+        [ExpectedException(typeof(ArgumentException))]
+        public void StaticPropertyWithInstanceArgument()
         {
-            Expression.Property (
-                Expression.Parameter (GetType (), "t"),
-                GetType ().GetProperty ("StaticProperty"));
+            Expression.Property(
+                Expression.Parameter(GetType(), "t"),
+                GetType().GetProperty("StaticProperty")
+            );
         }
     }
 }

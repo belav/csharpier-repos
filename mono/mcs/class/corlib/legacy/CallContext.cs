@@ -1,43 +1,41 @@
 namespace System.Runtime.Remoting.Messaging
 {
-#region Keep this code, it is used by nunit
-    public interface ILogicalThreadAffinative
-    {
-    }
-#endregion
+    #region Keep this code, it is used by nunit
+    public interface ILogicalThreadAffinative { }
+    #endregion
 
     class LogicalCallContext
     {
-        LogicalCallContext ()
+        LogicalCallContext()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
     }
 
     public sealed class CallContext
     {
-        CallContext ()
+        CallContext()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-#region Keep this code, it is used by the runtime
-        internal static object SetCurrentCallContext (LogicalCallContext ctx)
+        #region Keep this code, it is used by the runtime
+        internal static object SetCurrentCallContext(LogicalCallContext ctx)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
-#endregion
+        #endregion
 
-#region Keep this code, it is used by nunit
-        public static void SetData (String name, Object data)
+        #region Keep this code, it is used by nunit
+        public static void SetData(String name, Object data)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public static Object GetData (String name)
+        public static Object GetData(String name)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
-#endregion
+        #endregion
     }
 }

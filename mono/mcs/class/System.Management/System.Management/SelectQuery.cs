@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,87 +34,90 @@ namespace System.Management
     public class SelectQuery : WqlObjectQuery
     {
         [MonoTODO]
-        public SelectQuery ()
+        public SelectQuery()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public SelectQuery (string queryOrClassName)
+        public SelectQuery(string queryOrClassName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public SelectQuery (bool isSchemaQuery, string condition)
+        public SelectQuery(bool isSchemaQuery, string condition)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public SelectQuery (string className, string condition)
+        public SelectQuery(string className, string condition)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public SelectQuery (string className, string condition, string [] selectedProperties)
+        public SelectQuery(string className, string condition, string[] selectedProperties)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         // Properties
-        
+
         [MonoTODO]
-        public string ClassName {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public string ClassName
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public string Condition {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public string Condition
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public bool IsSchemaQuery {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public bool IsSchemaQuery
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public override string QueryString {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public override string QueryString
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public StringCollection SelectedProperties {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public StringCollection SelectedProperties
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         // Methods
-        
+
         [MonoTODO]
-        protected internal void BuildQuery ()
+        protected internal void BuildQuery()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public override object Clone ()
+        public override object Clone()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        protected internal override void ParseQuery (string query)
+        protected internal override void ParseQuery(string query)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
     }
 }
-

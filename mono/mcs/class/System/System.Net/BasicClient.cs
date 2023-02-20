@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,39 +29,44 @@
 //
 
 using System.Text;
+
 namespace System.Net
 {
     class BasicClient : IAuthenticationModule
     {
-        public Authorization Authenticate (string challenge, WebRequest webRequest, ICredentials credentials)
+        public Authorization Authenticate(
+            string challenge,
+            WebRequest webRequest,
+            ICredentials credentials
+        )
         {
             if (credentials == null || challenge == null)
                 return null;
 
-            string header = challenge.Trim ();
-            if (header.ToLower ().IndexOf ("basic", StringComparison.Ordinal) == -1)
+            string header = challenge.Trim();
+            if (header.ToLower().IndexOf("basic", StringComparison.Ordinal) == -1)
                 return null;
 
-            return InternalAuthenticate (webRequest, credentials);
+            return InternalAuthenticate(webRequest, credentials);
         }
 
-        static byte [] GetBytes (string str)
+        static byte[] GetBytes(string str)
         {
             int i = str.Length;
-            byte [] result = new byte [i];
+            byte[] result = new byte[i];
             for (--i; i >= 0; i--)
-                result [i] = (byte) str [i];
+                result[i] = (byte)str[i];
 
             return result;
         }
 
-        static Authorization InternalAuthenticate (WebRequest webRequest, ICredentials credentials)
+        static Authorization InternalAuthenticate(WebRequest webRequest, ICredentials credentials)
         {
             HttpWebRequest request = webRequest as HttpWebRequest;
             if (request == null || credentials == null)
                 return null;
 
-            NetworkCredential cred = credentials.GetCredential (request.AuthUri, "basic");
+            NetworkCredential cred = credentials.GetCredential(request.AuthUri, "basic");
             if (cred == null)
                 return null;
 
@@ -71,30 +76,31 @@ namespace System.Net
 
             string password = cred.Password;
             string domain = cred.Domain;
-            byte [] bytes;
+            byte[] bytes;
 
-            // If domain is set, MS sends "domain\user:password". 
-            if (domain == null || domain == "" || domain.Trim () == "")
-                bytes = GetBytes (userName + ":" + password);
+            // If domain is set, MS sends "domain\user:password".
+            if (domain == null || domain == "" || domain.Trim() == "")
+                bytes = GetBytes(userName + ":" + password);
             else
-                bytes = GetBytes (domain + "\\" + userName + ":" + password);
+                bytes = GetBytes(domain + "\\" + userName + ":" + password);
 
-            string auth = "Basic " + Convert.ToBase64String (bytes);
-            return new Authorization (auth);
+            string auth = "Basic " + Convert.ToBase64String(bytes);
+            return new Authorization(auth);
         }
 
-        public Authorization PreAuthenticate (WebRequest webRequest, ICredentials credentials)
+        public Authorization PreAuthenticate(WebRequest webRequest, ICredentials credentials)
         {
-            return InternalAuthenticate ( webRequest, credentials);
+            return InternalAuthenticate(webRequest, credentials);
         }
 
-        public string AuthenticationType {
+        public string AuthenticationType
+        {
             get { return "Basic"; }
         }
 
-        public bool CanPreAuthenticate {
+        public bool CanPreAuthenticate
+        {
             get { return true; }
         }
     }
 }
-

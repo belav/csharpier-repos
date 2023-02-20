@@ -7,7 +7,11 @@ namespace System.Diagnostics;
 
 public static class ProcessLoggingExtensions
 {
-    public static void StartAndCaptureOutAndErrToLogger(this Process process, string prefix, ILogger logger)
+    public static void StartAndCaptureOutAndErrToLogger(
+        this Process process,
+        string prefix,
+        ILogger logger
+    )
     {
         process.EnableRaisingEvents = true;
         process.OutputDataReceived += (_, dataArgs) =>

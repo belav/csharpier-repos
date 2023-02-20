@@ -14,75 +14,90 @@ using System.Net.NetworkInformation;
 
 namespace MonoTests.System.Net.NetworkInformation
 {
-
     [TestFixture]
     public class IPInterfacePropertiesTest
     {
         [Test]
 #if WASM
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void AtLeastOneUnicastAddress ()
+        public void AtLeastOneUnicastAddress()
         {
             int numUnicastAddresses = 0;
-            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces ();
+            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
             foreach (NetworkInterface adapter in adapters)
             {
-                IPInterfaceProperties adapterProperties = adapter.GetIPProperties ();
-                UnicastIPAddressInformationCollection unicastAddresses = adapterProperties.UnicastAddresses;
+                IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
+                UnicastIPAddressInformationCollection unicastAddresses =
+                    adapterProperties.UnicastAddresses;
                 numUnicastAddresses += unicastAddresses.Count;
             }
-            Assert.IsTrue (numUnicastAddresses > 0);
+            Assert.IsTrue(numUnicastAddresses > 0);
         }
 
         // Borrowed from IPInterfaceProperties.cs
-        bool HasOnlyDefaultGateway (string iface)
+        bool HasOnlyDefaultGateway(string iface)
         {
             int gwCount = 0;
             int defaultGwCount = 0;
 #if MONODROID
-            if (!File.Exists ("/proc/net/route"))
+            if (!File.Exists("/proc/net/route"))
                 return false;
-            try {
-                using (StreamReader reader = new StreamReader ("/proc/net/route")) {
+            try
+            {
+                using (StreamReader reader = new StreamReader("/proc/net/route"))
+                {
                     string line;
-                    reader.ReadLine (); // Ignore first line
-                    while ((line = reader.ReadLine ()) != null) {
-                        line = line.Trim ();
+                    reader.ReadLine(); // Ignore first line
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        line = line.Trim();
                         if (line.Length == 0)
                             continue;
 
-                        string [] parts = line.Split ('\t');
+                        string[] parts = line.Split('\t');
                         if (parts.Length < 3)
                             continue;
-                        string gw_address = parts [2].Trim ();
-                        byte [] ipbytes = new byte [4];
-                        if (gw_address.Length == 8 && iface.Equals (parts [0], StringComparison.OrdinalIgnoreCase)) {
-                            for (int i = 0; i < 4; i++) {
-                                if (!Byte.TryParse (gw_address.Substring (i * 2, 2), NumberStyles.HexNumber, null, out ipbytes [3 - i]))
+                        string gw_address = parts[2].Trim();
+                        byte[] ipbytes = new byte[4];
+                        if (
+                            gw_address.Length == 8
+                            && iface.Equals(parts[0], StringComparison.OrdinalIgnoreCase)
+                        )
+                        {
+                            for (int i = 0; i < 4; i++)
+                            {
+                                if (
+                                    !Byte.TryParse(
+                                        gw_address.Substring(i * 2, 2),
+                                        NumberStyles.HexNumber,
+                                        null,
+                                        out ipbytes[3 - i]
+                                    )
+                                )
                                     continue;
                             }
-                            IPAddress ip = new IPAddress (ipbytes);
-                            if (ip.Equals (IPAddress.Any))
+                            IPAddress ip = new IPAddress(ipbytes);
+                            if (ip.Equals(IPAddress.Any))
                                 defaultGwCount++;
                             else
                                 gwCount++;
                         }
                     }
                 }
-            } catch {
             }
+            catch { }
 #endif
             return gwCount == 0 && defaultGwCount > 0;
         }
-    
+
         [Test]
-        [Category ("InetAccess")]
-        public void AtLeastOneGatewayAddress ()
+        [Category("InetAccess")]
+        public void AtLeastOneGatewayAddress()
         {
             int numGatewayAddresses = 0;
-            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces ();
-            
+            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+
             // On Android (possibly on other systems too) it is possible that no gateway address is available and its lack is NOT an error
             // Here is a sample of /proc/net/route from Nexus 9 running Android 5.1.1 (IPInterfaceProperties parses that file on Linux)
             //
@@ -106,55 +121,59 @@ namespace MonoTests.System.Net.NetworkInformation
             //
             foreach (NetworkInterface adapter in adapters)
             {
-                IPInterfaceProperties adapterProperties = adapter.GetIPProperties ();
-                GatewayIPAddressInformationCollection gatewayAddresses = adapterProperties.GatewayAddresses;
-                numGatewayAddresses += HasOnlyDefaultGateway (adapter.Name) ? 1 : gatewayAddresses.Count;
+                IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
+                GatewayIPAddressInformationCollection gatewayAddresses =
+                    adapterProperties.GatewayAddresses;
+                numGatewayAddresses += HasOnlyDefaultGateway(adapter.Name)
+                    ? 1
+                    : gatewayAddresses.Count;
             }
-            
-            Assert.IsTrue (numGatewayAddresses > 0);
+
+            Assert.IsTrue(numGatewayAddresses > 0);
         }
-    
+
         [Test]
 #if WASM
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void DnsEnabled ()
+        public void DnsEnabled()
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                Assert.Ignore ("IsDnsEnabled is not necessarily enabled for all interfaces on windows.");
+                Assert.Ignore(
+                    "IsDnsEnabled is not necessarily enabled for all interfaces on windows."
+                );
 
-            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces ();
+            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
             foreach (NetworkInterface adapter in adapters)
             {
-                IPInterfaceProperties adapterProperties = adapter.GetIPProperties ();
-                Assert.IsTrue (adapterProperties.IsDnsEnabled);
+                IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
+                Assert.IsTrue(adapterProperties.IsDnsEnabled);
             }
         }
-    
+
         [Test]
 #if WASM
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
         // The code works as expected when part of a regular app. It fails when executed from within an NUnit test
         // Might be a problem with the test suite. To investigate.
         [Category("AndroidNotWorking")]
-        public void AtLeastOneDnsAddress ()
+        public void AtLeastOneDnsAddress()
         {
             int numDnsAddresses = 0;
-            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces ();
+            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
             foreach (NetworkInterface adapter in adapters)
             {
-                IPInterfaceProperties adapterProperties = adapter.GetIPProperties ();
+                IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
                 IPAddressCollection dnsAddresses = adapterProperties.DnsAddresses;
                 numDnsAddresses += dnsAddresses.Count;
             }
-            Console.WriteLine ("numDnsAddresses == {0}", numDnsAddresses);
+            Console.WriteLine("numDnsAddresses == {0}", numDnsAddresses);
             // reading /etc/resolve.conf does not work on iOS devices (but works on simulator)
             // ref: https://bugzilla.xamarin.com/show_bug.cgi?id=27707
 #if !MONOTOUCH
-            Assert.IsTrue (numDnsAddresses > 0);
+            Assert.IsTrue(numDnsAddresses > 0);
 #endif
         }
-    
     }
 }

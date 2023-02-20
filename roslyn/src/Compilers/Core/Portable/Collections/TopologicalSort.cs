@@ -27,11 +27,19 @@ namespace Microsoft.CodeAnalysis
         /// <param name="successors">A function mapping a node to its set of successors</param>
         /// <param name="result">A list of all reachable nodes, in which each node always precedes its successors</param>
         /// <returns>true if successful; false if not successful due to cycles in the graph</returns>
-        public static bool TryIterativeSort<TNode>(IEnumerable<TNode> nodes, Func<TNode, ImmutableArray<TNode>> successors, out ImmutableArray<TNode> result)
+        public static bool TryIterativeSort<TNode>(
+            IEnumerable<TNode> nodes,
+            Func<TNode, ImmutableArray<TNode>> successors,
+            out ImmutableArray<TNode> result
+        )
             where TNode : notnull
         {
             // First, count the predecessors of each node
-            PooledDictionary<TNode, int> predecessorCounts = PredecessorCounts(nodes, successors, out ImmutableArray<TNode> allNodes);
+            PooledDictionary<TNode, int> predecessorCounts = PredecessorCounts(
+                nodes,
+                successors,
+                out ImmutableArray<TNode> allNodes
+            );
 
             // Initialize the ready set with those nodes that have no predecessors
             var ready = ArrayBuilder<TNode>.GetInstance();
@@ -73,7 +81,8 @@ namespace Microsoft.CodeAnalysis
         private static PooledDictionary<TNode, int> PredecessorCounts<TNode>(
             IEnumerable<TNode> nodes,
             Func<TNode, ImmutableArray<TNode>> successors,
-            out ImmutableArray<TNode> allNodes)
+            out ImmutableArray<TNode> allNodes
+        )
             where TNode : notnull
         {
             var predecessorCounts = PooledDictionary<TNode, int>.GetInstance();

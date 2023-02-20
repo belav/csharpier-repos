@@ -26,83 +26,80 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class ActiveDirectorySubnetCollection : CollectionBase
     {
-        public ActiveDirectorySubnet this [int index] {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
+        public ActiveDirectorySubnet this[int index]
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        public int Add (ActiveDirectorySubnet subnet)
+        public int Add(ActiveDirectorySubnet subnet)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void AddRange (ActiveDirectorySubnet[] subnets)
+        public void AddRange(ActiveDirectorySubnet[] subnets)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void AddRange (ActiveDirectorySubnetCollection subnets)
+        public void AddRange(ActiveDirectorySubnetCollection subnets)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool Contains (ActiveDirectorySubnet subnet)
+        public bool Contains(ActiveDirectorySubnet subnet)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void CopyTo (ActiveDirectorySubnet[] array, int index)
+        public void CopyTo(ActiveDirectorySubnet[] array, int index)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public int IndexOf (ActiveDirectorySubnet subnet)
+        public int IndexOf(ActiveDirectorySubnet subnet)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Insert (int index, ActiveDirectorySubnet subnet)
+        public void Insert(int index, ActiveDirectorySubnet subnet)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Remove (ActiveDirectorySubnet subnet)
+        public void Remove(ActiveDirectorySubnet subnet)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnClear ()
+        protected override void OnClear()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnClearComplete ()
+        protected override void OnClearComplete()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnInsertComplete (int index, object value)
+        protected override void OnInsertComplete(int index, object value)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnRemoveComplete (int index, object value)
+        protected override void OnRemoveComplete(int index, object value)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnSetComplete (int index, object oldValue, object newValue)
+        protected override void OnSetComplete(int index, object oldValue, object newValue)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnValidate (object value)
+        protected override void OnValidate(object value)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

@@ -12,7 +12,13 @@ struct vc
     public int x;
     public int y;
     public int z;
-    public vc (int xx, int yy, int zz) { x = xx; y = yy; z = zz; }
+
+    public vc(int xx, int yy, int zz)
+    {
+        x = xx;
+        y = yy;
+        z = zz;
+    }
 }
 
 class child
@@ -28,14 +34,11 @@ class child
             return Pass;
         else
             return Fail;
-        
     }
 
-    [MethodImplAttribute(MethodImplOptions.NoInlining)] 
+    [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int mul4(ref int a)
     {
-        return a*1038;
+        return a * 1038;
     }
-   
 }
-

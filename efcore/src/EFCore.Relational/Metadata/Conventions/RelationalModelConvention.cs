@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
         public RelationalModelConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        )
         {
             Dependencies = dependencies;
             RelationalDependencies = relationalDependencies;
@@ -40,7 +41,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected virtual RelationalConventionSetBuilderDependencies RelationalDependencies { get; }
 
         /// <inheritdoc />
-        public virtual IModel ProcessModelFinalized(IModel model)
-            => RelationalModel.Add(model, RelationalDependencies.RelationalAnnotationProvider, designTime: true);
+        public virtual IModel ProcessModelFinalized(IModel model) =>
+            RelationalModel.Add(
+                model,
+                RelationalDependencies.RelationalAnnotationProvider,
+                designTime: true
+            );
     }
 }

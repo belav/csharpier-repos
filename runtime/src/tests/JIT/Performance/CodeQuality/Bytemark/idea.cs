@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 /*
 ** This program was translated to C# and adapted for xunit-performance.
-** New variants of several tests were added to compare class versus 
+** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
 
@@ -23,7 +23,7 @@
 ** are error-free.  Consequently, McGraw-HIll and BYTE Magazine make
 ** no claims in regard to the fitness of the source code, executable
 ** code, and documentation of the BYTEmark.
-** 
+**
 ** Furthermore, BYTE Magazine, McGraw-Hill, and all employees
 ** of McGraw-Hill cannot be held responsible for any damages resulting
 ** from the use of this code or the results obtained from using
@@ -64,9 +64,9 @@ public class IDEAEncryption : IDEAStruct
         char[] userkey = new char[8];
         long accumtime;
         double iterations;
-        byte[] plain1;               /* First plaintext buffer */
-        byte[] crypt1;               /* Encryption buffer */
-        byte[] plain2;               /* Second plaintext buffer */
+        byte[] plain1; /* First plaintext buffer */
+        byte[] crypt1; /* Encryption buffer */
+        byte[] plain2; /* Second plaintext buffer */
 
         /*
         ** Re-init random-number generator.
@@ -115,13 +115,11 @@ public class IDEAEncryption : IDEAStruct
             ** # of loops and increasing the loop count until we
             ** get a number of loops that we can use.
             */
-            for (this.loops = 100;
-                 this.loops < global.MAXIDEALOOPS;
-                 this.loops += 10)
-                if (DoIDEAIteration(plain1, crypt1, plain2,
-                                    this.arraysize,
-                                    this.loops,
-                                    Z, DK) > global.min_ticks)
+            for (this.loops = 100; this.loops < global.MAXIDEALOOPS; this.loops += 10)
+                if (
+                    DoIDEAIteration(plain1, crypt1, plain2, this.arraysize, this.loops, Z, DK)
+                    > global.min_ticks
+                )
                     break;
         }
 
@@ -133,9 +131,7 @@ public class IDEAEncryption : IDEAStruct
 
         do
         {
-            accumtime += DoIDEAIteration(plain1, crypt1, plain2,
-                                         this.arraysize,
-                                         this.loops, Z, DK);
+            accumtime += DoIDEAIteration(plain1, crypt1, plain2, this.arraysize, this.loops, Z, DK);
             iterations += (double)this.loops;
         } while (ByteMark.TicksToSecs(accumtime) < this.request_secs);
 
@@ -157,13 +153,15 @@ public class IDEAEncryption : IDEAStruct
     ** Actually, a single iteration is one encryption and one
     ** decryption.
     */
-    private static long DoIDEAIteration(byte[] plain1,
-                                 byte[] crypt1,
-                               byte[] plain2,
-                               int arraysize,
-                               int nloops,
-                               char[] Z,
-                               char[] DK)
+    private static long DoIDEAIteration(
+        byte[] plain1,
+        byte[] crypt1,
+        byte[] plain2,
+        int arraysize,
+        int nloops,
+        char[] Z,
+        char[] DK
+    )
     {
         int i;
         int j;
@@ -181,17 +179,22 @@ public class IDEAEncryption : IDEAStruct
         for (i = 0; i < nloops; i++)
         {
             for (j = 0; j < arraysize; j += 8)
-                cipher_idea(plain1, crypt1, j, Z);  /* Encrypt */
+                cipher_idea(plain1, crypt1, j, Z); /* Encrypt */
 
             for (j = 0; j < arraysize; j += 8)
-                cipher_idea(crypt1, plain2, j, DK);  /* Decrypt */
+                cipher_idea(crypt1, plain2, j, DK); /* Decrypt */
         }
 
         // Validate output
         for (j = 0; j < arraysize; j++)
             if (plain1[j] != plain2[j])
             {
-                string error = String.Format("IDEA: error at index {0} ({1} <> {2})!", j, (int)plain1[j], (int)plain2[j]);
+                string error = String.Format(
+                    "IDEA: error at index {0} ({1} <> {2})!",
+                    j,
+                    (int)plain1[j],
+                    (int)plain2[j]
+                );
                 throw new Exception(error);
             }
 
@@ -237,11 +240,13 @@ public class IDEAEncryption : IDEAStruct
     */
     private static char inv(char x)
     {
-        char t0, t1;
-        char q, y;
+        char t0,
+            t1;
+        char q,
+            y;
 
         if (x <= 1)
-            return (x);                 /* 0 and 1 are self-inverse */
+            return (x); /* 0 and 1 are self-inverse */
 
         t1 = (char)(0x10001 / x);
         y = (char)(0x10001 % x);
@@ -272,7 +277,8 @@ public class IDEAEncryption : IDEAStruct
     */
     private static void en_key_idea(char[] userkey, char[] Z)
     {
-        int i, j;
+        int i,
+            j;
 
         // NOTE: The temp variables (tmp,idx) were not in original C code.
         //         It may affect numbers a bit.
@@ -287,7 +293,9 @@ public class IDEAEncryption : IDEAStruct
         for (i = 0; j < global.KEYLEN; j++)
         {
             i++;
-            Z[i + 7 + idx] = unchecked((char)((Z[(i & 7) + idx] << 9) | (Z[((i + 1) & 7) + idx] >> 7)));
+            Z[i + 7 + idx] = unchecked(
+                (char)((Z[(i & 7) + idx] << 9) | (Z[((i + 1) & 7) + idx] >> 7))
+            );
             idx += (i & 8);
             i &= 7;
         }
@@ -304,7 +312,9 @@ public class IDEAEncryption : IDEAStruct
     {
         char[] TT = new char[global.KEYLEN];
         int j;
-        char t1, t2, t3;
+        char t1,
+            t2,
+            t3;
 
         short p = (short)global.KEYLEN;
 
@@ -377,14 +387,18 @@ public class IDEAEncryption : IDEAStruct
 
     private static void cipher_idea(byte[] xin, byte[] xout, int offset, char[] Z)
     {
-        char x1, x2, x3, x4, t1, t2;
+        char x1,
+            x2,
+            x3,
+            x4,
+            t1,
+            t2;
         int r = global.ROUNDS;
 
         // NOTE:  More local variables (AND AN ARG) were required by this
         //          function.  The original C code did not need/have these.
         int offset2 = offset;
         int idx = 0;
-
         // NOTE:  Because of big endian (and lack of pointers) I had to
         //          force two bytes into the chars instead of how original
         //          c code did it.

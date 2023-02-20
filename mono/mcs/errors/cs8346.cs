@@ -6,7 +6,7 @@ using System;
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         Span<int> stackSpan = stackalloc byte[1];
     }

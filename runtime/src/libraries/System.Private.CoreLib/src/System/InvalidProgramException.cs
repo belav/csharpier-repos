@@ -15,7 +15,9 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class InvalidProgramException : SystemException
     {
         public InvalidProgramException()
@@ -36,6 +38,7 @@ namespace System
             HResult = HResults.COR_E_INVALIDPROGRAM;
         }
 
-        private InvalidProgramException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        private InvalidProgramException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

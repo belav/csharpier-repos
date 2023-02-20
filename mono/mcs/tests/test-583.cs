@@ -1,6 +1,6 @@
 class Program
 {
-    public static int Main ()
+    public static int Main()
     {
         IExtContainer e = null;
         ObjectContainerBase b = null;
@@ -8,14 +8,8 @@ class Program
     }
 }
 
-public interface IContainer
-{
-}
+public interface IContainer { }
 
-public interface IExtContainer : IContainer
-{
-}
+public interface IExtContainer : IContainer { }
 
-public abstract class ObjectContainerBase : IContainer
-{
-}
+public abstract class ObjectContainerBase : IContainer { }

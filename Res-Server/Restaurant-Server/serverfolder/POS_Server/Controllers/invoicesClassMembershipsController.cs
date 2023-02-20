@@ -10,12 +10,14 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Web;
+
 namespace POS_Server.Controllers
 {
     [RoutePrefix("api/invoicesClassMemberships")]
     public class invoicesClassMembershipsController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         [HttpPost]
         [Route("GetAll")]
         public string GetAll(string token)
@@ -32,27 +34,28 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var List1 = entity.invoicesClassMemberships.ToList();
-                    var List = List1.Select(S => new invoicesClassMemberships
-                    {
-                        invClassMemberId = S.invClassMemberId,
-                        membershipId = S.membershipId,
-                        invClassId = S.invClassId,
-                        notes = S.notes,
-                        createDate = S.createDate,
-                        updateDate = S.updateDate,
-                        createUserId = S.createUserId,
-                        updateUserId = S.updateUserId,
-
-
-
-                    })
-                    .ToList();
+                    var List = List1
+                        .Select(
+                            S =>
+                                new invoicesClassMemberships
+                                {
+                                    invClassMemberId = S.invClassMemberId,
+                                    membershipId = S.membershipId,
+                                    invClassId = S.invClassId,
+                                    notes = S.notes,
+                                    createDate = S.createDate,
+                                    updateDate = S.updateDate,
+                                    createUserId = S.createUserId,
+                                    updateUserId = S.updateUserId,
+                                }
+                        )
+                        .ToList();
 
                     return TokenManager.GenerateToken(List);
-
                 }
             }
         }
+
         /*
    public long invClassMemberId { get; set; }
         public Nullable<long> membershipId { get; set; }
@@ -87,23 +90,23 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var bank = entity.invoicesClassMemberships
-                   .Where(S => S.invClassMemberId == invClassMemberId)
-                   .Select(S => new
-                   {
-                       S.invClassMemberId,
-                       S.membershipId,
-                       S.invClassId,
-                       S.notes,
-                       S.createDate,
-                       S.updateDate,
-                       S.createUserId,
-                       S.updateUserId,
-
-
-                   })
-                   .FirstOrDefault();
+                        .Where(S => S.invClassMemberId == invClassMemberId)
+                        .Select(
+                            S =>
+                                new
+                                {
+                                    S.invClassMemberId,
+                                    S.membershipId,
+                                    S.invClassId,
+                                    S.notes,
+                                    S.createDate,
+                                    S.updateDate,
+                                    S.createUserId,
+                                    S.updateUserId,
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(bank);
-
                 }
             }
         }
@@ -130,7 +133,10 @@ namespace POS_Server.Controllers
                     {
                         invClassMemberId = c.Value.Replace("\\", string.Empty);
                         invClassMemberId = invClassMemberId.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoicesClassMemberships>(invClassMemberId, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<invoicesClassMemberships>(
+                            invClassMemberId,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -162,18 +168,21 @@ namespace POS_Server.Controllers
                         var bankEntity = entity.Set<invoicesClassMemberships>();
                         if (newObject.invClassMemberId == 0)
                         {
-                            newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             newObject.updateUserId = newObject.createUserId;
                             tmpObject = bankEntity.Add(newObject);
                             entity.SaveChanges();
-                            message = tmpObject.invClassMemberId.ToString(); ;
+                            message = tmpObject.invClassMemberId.ToString();
+                            ;
                         }
                         else
                         {
-                            tmpObject = entity.invoicesClassMemberships.Where(p => p.invClassMemberId == newObject.invClassMemberId).FirstOrDefault();
+                            tmpObject = entity.invoicesClassMemberships
+                                .Where(p => p.invClassMemberId == newObject.invClassMemberId)
+                                .FirstOrDefault();
 
-                            tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             tmpObject.invClassMemberId = newObject.invClassMemberId;
                             tmpObject.membershipId = newObject.membershipId;
                             tmpObject.invClassId = newObject.invClassId;
@@ -183,17 +192,12 @@ namespace POS_Server.Controllers
                             tmpObject.createUserId = newObject.createUserId;
                             tmpObject.updateUserId = newObject.updateUserId;
 
-
-
-
                             entity.SaveChanges();
                             message = tmpObject.invClassMemberId.ToString();
-
                         }
                         return TokenManager.GenerateToken(message);
                     }
                 }
-
                 catch
                 {
                     message = "0";
@@ -240,8 +244,8 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
-                            invoicesClassMemberships objDelete = entity.invoicesClassMemberships.Find(invClassMemberId);
+                            invoicesClassMemberships objDelete =
+                                entity.invoicesClassMemberships.Find(invClassMemberId);
                             entity.invoicesClassMemberships.Remove(objDelete);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
@@ -258,11 +262,11 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
-                            invoicesClassMemberships objDelete = entity.invoicesClassMemberships.Find(invClassMemberId);
+                            invoicesClassMemberships objDelete =
+                                entity.invoicesClassMemberships.Find(invClassMemberId);
 
                             objDelete.updateUserId = userId;
-                            objDelete.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            objDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
                         }
@@ -274,6 +278,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         //update branches list by userId
         [HttpPost]
         [Route("UpdateInvclassByMembershipId")]
@@ -299,15 +304,16 @@ namespace POS_Server.Controllers
                     {
                         strObject = c.Value.Replace("\\", string.Empty);
                         strObject = strObject.Trim('"');
-                        newListObj = JsonConvert.DeserializeObject<List<invoicesClassMemberships>>(strObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        newListObj = JsonConvert.DeserializeObject<List<invoicesClassMemberships>>(
+                            strObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "membershipId")
                     {
                         membershipId = long.Parse(c.Value);
                     }
-                    else
-                  if (c.Type == "updateUserId")
+                    else if (c.Type == "updateUserId")
                     {
                         updateUserId = long.Parse(c.Value);
                     }
@@ -317,20 +323,22 @@ namespace POS_Server.Controllers
                 // delete old invoice items
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    items = entity.invoicesClassMemberships.Where(x => x.membershipId == membershipId).ToList();
+                    items = entity.invoicesClassMemberships
+                        .Where(x => x.membershipId == membershipId)
+                        .ToList();
                     if (items != null)
                     {
                         entity.invoicesClassMemberships.RemoveRange(items);
                         try
-                        { entity.SaveChanges(); }
+                        {
+                            entity.SaveChanges();
+                        }
                         catch (Exception ex)
                         {
                             message = "-2";
                             return TokenManager.GenerateToken(message);
                         }
                     }
-
-
                 }
                 try
                 {
@@ -338,17 +346,26 @@ namespace POS_Server.Controllers
                     {
                         for (int i = 0; i < newListObj.Count; i++)
                         {
-                            if (newListObj[i].updateUserId == 0 || newListObj[i].updateUserId == null)
+                            if (
+                                newListObj[i].updateUserId == 0
+                                || newListObj[i].updateUserId == null
+                            )
                             {
                                 Nullable<long> id = null;
                                 newListObj[i].updateUserId = id;
                             }
-                            if (newListObj[i].createUserId == 0 || newListObj[i].createUserId == null)
+                            if (
+                                newListObj[i].createUserId == 0
+                                || newListObj[i].createUserId == null
+                            )
                             {
                                 Nullable<long> id = null;
                                 newListObj[i].createUserId = id;
                             }
-                            if (newListObj[i].membershipId == 0 || newListObj[i].membershipId == null)
+                            if (
+                                newListObj[i].membershipId == 0
+                                || newListObj[i].membershipId == null
+                            )
                             {
                                 Nullable<long> id = null;
                                 newListObj[i].membershipId = id;
@@ -360,7 +377,7 @@ namespace POS_Server.Controllers
                             }
                             var branchEntity = entity.Set<invoicesClassMemberships>();
 
-                            newListObj[i].createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newListObj[i].createDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             newListObj[i].updateDate = newListObj[i].createDate;
                             newListObj[i].updateUserId = updateUserId;
                             newListObj[i].membershipId = membershipId;
@@ -369,11 +386,7 @@ namespace POS_Server.Controllers
                         }
 
                         entity.SaveChanges();
-
-
                     }
-
-
 
                     message = "1";
                     return TokenManager.GenerateToken(message);
@@ -383,10 +396,7 @@ namespace POS_Server.Controllers
                     message = "0";
                     return TokenManager.GenerateToken(message);
                 }
-
             }
-
         }
-
     }
 }

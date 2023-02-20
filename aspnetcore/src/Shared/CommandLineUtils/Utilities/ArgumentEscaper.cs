@@ -21,8 +21,8 @@ namespace Microsoft.Extensions.CommandLineUtils
         /// </remarks>
         /// <param name="args">The arguments to concatenate.</param>
         /// <returns>The escaped arguments, concatenated.</returns>
-        public static string EscapeAndConcatenate(IEnumerable<string> args)
-            => string.Join(" ", args.Select(EscapeSingleArg));
+        public static string EscapeAndConcatenate(IEnumerable<string> args) =>
+            string.Join(" ", args.Select(EscapeSingleArg));
 
         private static string EscapeSingleArg(string arg)
         {
@@ -103,7 +103,7 @@ namespace Microsoft.Extensions.CommandLineUtils
             return argument[0] == '"' && argument[argument.Length - 1] == '"';
         }
 
-        private static bool ContainsWhitespace(string argument)
-            => argument.IndexOfAny(new[] { ' ', '\t', '\n' }) >= 0;
+        private static bool ContainsWhitespace(string argument) =>
+            argument.IndexOfAny(new[] { ' ', '\t', '\n' }) >= 0;
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,38 +36,44 @@ namespace System.ComponentModel.Design
 {
     public abstract class ObjectSelectorEditor : UITypeEditor
     {
-        public ObjectSelectorEditor ()
-        {
-        }
+        public ObjectSelectorEditor() { }
 
-        public ObjectSelectorEditor (bool subObjectSelector)
+        public ObjectSelectorEditor(bool subObjectSelector)
         {
             SubObjectSelector = subObjectSelector;
         }
 
         [MonoTODO]
-        public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
+        public override object EditValue(
+            ITypeDescriptorContext context,
+            IServiceProvider provider,
+            object value
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool EqualsToValue (object value)
+        public bool EqualsToValue(object value)
         {
             return (currValue == value);
         }
 
         [MonoTODO]
-        protected virtual void FillTreeWithData (Selector selector, ITypeDescriptorContext context, IServiceProvider provider)
+        protected virtual void FillTreeWithData(
+            Selector selector,
+            ITypeDescriptorContext context,
+            IServiceProvider provider
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
         {
             return UITypeEditorEditStyle.DropDown;
         }
 
-        public virtual void SetValue (object value)
+        public virtual void SetValue(object value)
         {
             currValue = value;
         }
@@ -79,69 +85,69 @@ namespace System.ComponentModel.Design
         public class Selector : TreeView
         {
             [MonoTODO]
-            public Selector (ObjectSelectorEditor editor)
+            public Selector(ObjectSelectorEditor editor)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
             [MonoTODO]
-            public SelectorNode AddNode (string label, object value, SelectorNode parent)
+            public SelectorNode AddNode(string label, object value, SelectorNode parent)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
             [MonoTODO]
-            public void Clear ()
+            public void Clear()
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
             [MonoTODO]
-            protected void OnAfterSelect (object sender, TreeViewEventArgs e)
+            protected void OnAfterSelect(object sender, TreeViewEventArgs e)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
             [MonoTODO]
-            protected override void OnKeyDown (KeyEventArgs e)
+            protected override void OnKeyDown(KeyEventArgs e)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
             [MonoTODO]
-            protected override void OnKeyPress (KeyPressEventArgs e)
+            protected override void OnKeyPress(KeyPressEventArgs e)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
             [MonoTODO]
-            protected override void OnNodeMouseClick (TreeNodeMouseClickEventArgs e)
+            protected override void OnNodeMouseClick(TreeNodeMouseClickEventArgs e)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
             [MonoTODO]
-            public bool SetSelection (object value, TreeNodeCollection nodes)
+            public bool SetSelection(object value, TreeNodeCollection nodes)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
             [MonoTODO]
-            public void Start (IWindowsFormsEditorService edSvc, object value)
+            public void Start(IWindowsFormsEditorService edSvc, object value)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
             [MonoTODO]
-            public void Stop ()
+            public void Stop()
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
             [MonoTODO]
-            protected override void WndProc (ref Message m)
+            protected override void WndProc(ref Message m)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
             [MonoTODO]
@@ -150,13 +156,13 @@ namespace System.ComponentModel.Design
 
         public class SelectorNode : TreeNode
         {
-            public SelectorNode (string label, object value) : base (label)
+            public SelectorNode(string label, object value)
+                : base(label)
             {
                 this.value = value;
             }
 
             public object value;
         }
-
     }
 }

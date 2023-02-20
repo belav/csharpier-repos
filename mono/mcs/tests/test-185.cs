@@ -2,9 +2,10 @@ using System;
 
 class X
 {
-    public static int Test (int x)
+    public static int Test(int x)
     {
-        for (;;) {
+        for (; ; )
+        {
             if (x != 1)
                 x--;
             else
@@ -14,12 +15,12 @@ class X
         return 0;
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        if (Test (1) != 0)
+        if (Test(1) != 0)
             return 1;
 
-        if (Test (2) != 5)
+        if (Test(2) != 5)
             return 2;
 
         return 0;

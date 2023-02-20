@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,275 +34,277 @@ namespace System.ServiceModel.Channels
 {
     public abstract class Binding : IDefaultCommunicationTimeouts
     {
-        string name, ns;
-        TimeSpan open_timeout, close_timeout;
-        TimeSpan receive_timeout, send_timeout;
+        string name,
+            ns;
+        TimeSpan open_timeout,
+            close_timeout;
+        TimeSpan receive_timeout,
+            send_timeout;
 
-        protected Binding ()
+        protected Binding()
         {
-            Initialize ();
-            name = GetType ().Name;
+            Initialize();
+            name = GetType().Name;
             ns = "http://tempuri.org/";
         }
 
-        protected Binding (string name, string ns)
+        protected Binding(string name, string ns)
         {
             this.name = name;
             this.ns = ns;
-            Initialize ();
+            Initialize();
         }
 
-        public TimeSpan CloseTimeout {
+        public TimeSpan CloseTimeout
+        {
             get { return close_timeout; }
             set { close_timeout = value; }
         }
 
-        public TimeSpan OpenTimeout {
+        public TimeSpan OpenTimeout
+        {
             get { return open_timeout; }
             set { open_timeout = value; }
         }
 
-        public TimeSpan ReceiveTimeout {
+        public TimeSpan ReceiveTimeout
+        {
             get { return receive_timeout; }
             set { receive_timeout = value; }
         }
 
-        public TimeSpan SendTimeout {
+        public TimeSpan SendTimeout
+        {
             get { return send_timeout; }
             set { send_timeout = value; }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
             set { name = value; }
         }
 
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns; }
             set { ns = value; }
         }
 
         public abstract string Scheme { get; }
 
-        public MessageVersion MessageVersion {
-            get { return GetProperty<MessageVersion> (new BindingParameterCollection ()); }
+        public MessageVersion MessageVersion
+        {
+            get { return GetProperty<MessageVersion>(new BindingParameterCollection()); }
         }
 
-        BindingContext CreateContext (
-            BindingParameterCollection parameters)
+        BindingContext CreateContext(BindingParameterCollection parameters)
         {
             // FIXME: it seems that binding elements are
             // "validated" so that the last item is a transport.
-            return new BindingContext (
-                new CustomBinding (this), parameters);
+            return new BindingContext(new CustomBinding(this), parameters);
         }
 
-        BindingContext CreateContext (
+        BindingContext CreateContext(
             Uri listenUriBaseAddress,
             string listenUriRelativeAddress,
             ListenUriMode listenUriMode,
-            BindingParameterCollection parameters)
+            BindingParameterCollection parameters
+        )
         {
             // FIXME: it seems that binding elements are
             // "validated" so that the last item is a transport.
-            return new BindingContext (
-                new CustomBinding (this),
+            return new BindingContext(
+                new CustomBinding(this),
                 parameters,
                 listenUriBaseAddress,
                 listenUriRelativeAddress,
-                listenUriMode);
+                listenUriMode
+            );
         }
 
-        public IChannelFactory<TChannel>
-            BuildChannelFactory<TChannel> (
-            params object [] parameters)
+        public IChannelFactory<TChannel> BuildChannelFactory<TChannel>(params object[] parameters)
         {
-            BindingParameterCollection pl =
-                new BindingParameterCollection ();
+            BindingParameterCollection pl = new BindingParameterCollection();
             foreach (object o in parameters)
-                pl.Add (o);
-            return BuildChannelFactory<TChannel> (pl);
+                pl.Add(o);
+            return BuildChannelFactory<TChannel>(pl);
         }
 
-        public virtual IChannelFactory<TChannel>
-            BuildChannelFactory<TChannel> (
-            BindingParameterCollection parameters)
+        public virtual IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingParameterCollection parameters
+        )
         {
             if (parameters == null)
-                throw new ArgumentNullException ("parameters");
-            return CreateContext (parameters).BuildInnerChannelFactory<TChannel> ();
+                throw new ArgumentNullException("parameters");
+            return CreateContext(parameters).BuildInnerChannelFactory<TChannel>();
         }
 
 #if !MOBILE
-        public virtual IChannelListener<TChannel>
-            BuildChannelListener<TChannel> (
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
             Uri listenUriBaseAddress,
             string listenUriRelativeAddress,
             ListenUriMode listenUriMode,
-            params object [] parameters)
+            params object[] parameters
+        )
             where TChannel : class, IChannel
         {
-            BindingParameterCollection pl =
-                new BindingParameterCollection ();
+            BindingParameterCollection pl = new BindingParameterCollection();
             foreach (object o in parameters)
-                pl.Add (o);
-            return BuildChannelListener<TChannel> (
+                pl.Add(o);
+            return BuildChannelListener<TChannel>(
                 listenUriBaseAddress,
                 listenUriRelativeAddress,
                 listenUriMode,
-                pl);
+                pl
+            );
         }
 
-        public virtual IChannelListener<TChannel>
-            BuildChannelListener<TChannel> (
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
             Uri listenUriBaseAddress,
             string listenUriRelativeAddress,
             ListenUriMode listenUriMode,
-            BindingParameterCollection parameters)
+            BindingParameterCollection parameters
+        )
             where TChannel : class, IChannel
         {
             if (listenUriBaseAddress == null)
-                throw new ArgumentNullException ("listenUriBaseAddress");
+                throw new ArgumentNullException("listenUriBaseAddress");
             if (listenUriRelativeAddress == null)
-                throw new ArgumentNullException ("listenUriRelativeAddress");
+                throw new ArgumentNullException("listenUriRelativeAddress");
             if (parameters == null)
-                throw new ArgumentNullException ("parameters");
-            BindingContext ctx = CreateContext (listenUriBaseAddress,
+                throw new ArgumentNullException("parameters");
+            BindingContext ctx = CreateContext(
+                listenUriBaseAddress,
                 listenUriRelativeAddress,
                 listenUriMode,
-                parameters);
-            return ctx.BuildInnerChannelListener<TChannel> ();
+                parameters
+            );
+            return ctx.BuildInnerChannelListener<TChannel>();
         }
 
-        public virtual IChannelListener<TChannel>
-            BuildChannelListener<TChannel> (
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
             Uri listenUriBaseAddress,
-            params object [] parameters)
+            params object[] parameters
+        )
             where TChannel : class, IChannel
         {
-            BindingParameterCollection pl =
-                new BindingParameterCollection ();
+            BindingParameterCollection pl = new BindingParameterCollection();
             foreach (object o in parameters)
-                pl.Add (o);
-            return BuildChannelListener<TChannel> (listenUriBaseAddress, pl);
+                pl.Add(o);
+            return BuildChannelListener<TChannel>(listenUriBaseAddress, pl);
         }
 
-        public virtual IChannelListener<TChannel>
-            BuildChannelListener<TChannel> (
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
             Uri listenUriBaseAddress,
-            BindingParameterCollection parameters)
+            BindingParameterCollection parameters
+        )
             where TChannel : class, IChannel
         {
-            return BuildChannelListener<TChannel> (listenUriBaseAddress,
-                String.Empty, parameters);
+            return BuildChannelListener<TChannel>(listenUriBaseAddress, String.Empty, parameters);
         }
 
-        public virtual IChannelListener<TChannel>
-            BuildChannelListener<TChannel> (
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
             Uri listenUriBaseAddress,
             string listenUriRelativeAddress,
-            params object [] parameters)
+            params object[] parameters
+        )
             where TChannel : class, IChannel
         {
-            BindingParameterCollection pl =
-                new BindingParameterCollection ();
+            BindingParameterCollection pl = new BindingParameterCollection();
             foreach (object o in parameters)
-                pl.Add (o);
-            return BuildChannelListener<TChannel> (
-                listenUriBaseAddress, listenUriRelativeAddress, pl);
+                pl.Add(o);
+            return BuildChannelListener<TChannel>(
+                listenUriBaseAddress,
+                listenUriRelativeAddress,
+                pl
+            );
         }
 
-        public virtual IChannelListener<TChannel>
-            BuildChannelListener<TChannel> (
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
             Uri listenUriBaseAddress,
             string listenUriRelativeAddress,
-            BindingParameterCollection parameters)
+            BindingParameterCollection parameters
+        )
             where TChannel : class, IChannel
         {
-            return BuildChannelListener<TChannel> (
+            return BuildChannelListener<TChannel>(
                 listenUriBaseAddress,
                 listenUriRelativeAddress,
                 ListenUriMode.Explicit,
-                parameters);
+                parameters
+            );
         }
 
-        public virtual IChannelListener<TChannel>
-            BuildChannelListener<TChannel> (
-            params object [] parameters)
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            params object[] parameters
+        )
             where TChannel : class, IChannel
         {
-            BindingParameterCollection pl =
-                new BindingParameterCollection ();
+            BindingParameterCollection pl = new BindingParameterCollection();
             foreach (object o in parameters)
-                pl.Add (o);
-            return BuildChannelListener<TChannel> (pl);
+                pl.Add(o);
+            return BuildChannelListener<TChannel>(pl);
         }
 
-        public virtual IChannelListener<TChannel>
-            BuildChannelListener<TChannel> (
-            BindingParameterCollection parameters)
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingParameterCollection parameters
+        )
             where TChannel : class, IChannel
         {
             if (parameters == null)
-                throw new ArgumentNullException ("parameters");
-            return CreateContext (parameters).BuildInnerChannelListener<TChannel> ();
+                throw new ArgumentNullException("parameters");
+            return CreateContext(parameters).BuildInnerChannelListener<TChannel>();
         }
 #endif
 
-        public bool CanBuildChannelFactory<TChannel> (
-            params object [] parameters)
+        public bool CanBuildChannelFactory<TChannel>(params object[] parameters)
         {
-            BindingParameterCollection pl =
-                new BindingParameterCollection ();
+            BindingParameterCollection pl = new BindingParameterCollection();
             foreach (object o in parameters)
-                pl.Add (o);
-            return CanBuildChannelFactory<TChannel> (pl);
+                pl.Add(o);
+            return CanBuildChannelFactory<TChannel>(pl);
         }
 
-        public virtual bool CanBuildChannelFactory<TChannel> (
-            BindingParameterCollection parameters)
+        public virtual bool CanBuildChannelFactory<TChannel>(BindingParameterCollection parameters)
         {
             if (parameters == null)
-                throw new ArgumentNullException ("parameters");
-            return CreateContext (parameters).CanBuildInnerChannelFactory<TChannel> ();
+                throw new ArgumentNullException("parameters");
+            return CreateContext(parameters).CanBuildInnerChannelFactory<TChannel>();
         }
 
 #if !MOBILE
-        public bool CanBuildChannelListener<TChannel> (
-            params object [] parameters)
+        public bool CanBuildChannelListener<TChannel>(params object[] parameters)
             where TChannel : class, IChannel
         {
-            BindingParameterCollection pl =
-                new BindingParameterCollection ();
+            BindingParameterCollection pl = new BindingParameterCollection();
             foreach (object o in parameters)
-                pl.Add (o);
-            return CanBuildChannelListener<TChannel> (pl);
+                pl.Add(o);
+            return CanBuildChannelListener<TChannel>(pl);
         }
 
-        public virtual bool CanBuildChannelListener<TChannel> (
-            BindingParameterCollection parameters)
+        public virtual bool CanBuildChannelListener<TChannel>(BindingParameterCollection parameters)
             where TChannel : class, IChannel
         {
             if (parameters == null)
-                throw new ArgumentNullException ("parameters");
-            return CreateContext (parameters).CanBuildInnerChannelListener<TChannel> ();
+                throw new ArgumentNullException("parameters");
+            return CreateContext(parameters).CanBuildInnerChannelListener<TChannel>();
         }
 #endif
 
-        public abstract BindingElementCollection CreateBindingElements ();
+        public abstract BindingElementCollection CreateBindingElements();
 
-        public T GetProperty<T> (BindingParameterCollection parameters)
+        public T GetProperty<T>(BindingParameterCollection parameters)
             where T : class
         {
             if (parameters == null)
-                throw new ArgumentNullException ("parameters");
-            return CreateContext (parameters).GetInnerProperty<T> ();
+                throw new ArgumentNullException("parameters");
+            return CreateContext(parameters).GetInnerProperty<T>();
         }
 
-        private void Initialize ()
+        private void Initialize()
         {
-            IDefaultCommunicationTimeouts t =
-                DefaultCommunicationTimeouts.Instance;
+            IDefaultCommunicationTimeouts t = DefaultCommunicationTimeouts.Instance;
             open_timeout = t.OpenTimeout;
             close_timeout = t.CloseTimeout;
             receive_timeout = t.ReceiveTimeout;

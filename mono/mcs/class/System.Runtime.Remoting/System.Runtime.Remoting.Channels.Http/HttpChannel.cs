@@ -1,11 +1,11 @@
 //
 // HttpChannel.cs
-// 
+//
 // Author:
 //   Michael Hutchinson <mhutchinson@novell.com>
-// 
+//
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,10 +31,13 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Channels.Http
 {
-
-    public class HttpChannel : BaseChannelWithProperties,
-        IChannel, IChannelReceiver, IChannelReceiverHook, IChannelSender
-        , ISecurableChannel
+    public class HttpChannel
+        : BaseChannelWithProperties,
+            IChannel,
+            IChannelReceiver,
+            IChannelReceiverHook,
+            IChannelSender,
+            ISecurableChannel
     {
         HttpClientChannel client;
         HttpServerChannel server;
@@ -42,28 +45,31 @@ namespace System.Runtime.Remoting.Channels.Http
 
         #region Constructors
 
-        public HttpChannel ()
+        public HttpChannel()
         {
-            client = new HttpClientChannel ();
-            server = new HttpServerChannel ();
+            client = new HttpClientChannel();
+            server = new HttpServerChannel();
         }
 
-        public HttpChannel (int port)
+        public HttpChannel(int port)
         {
-            client = new HttpClientChannel ();
-            server = new HttpServerChannel (port);
+            client = new HttpClientChannel();
+            server = new HttpServerChannel(port);
         }
 
-        public HttpChannel (IDictionary properties,
+        public HttpChannel(
+            IDictionary properties,
             IClientChannelSinkProvider clientSinkProvider,
-            IServerChannelSinkProvider serverSinkProvider)
+            IServerChannelSinkProvider serverSinkProvider
+        )
         {
-            if (properties != null && properties.Contains ("name")) {
+            if (properties != null && properties.Contains("name"))
+            {
                 this.name = (string)properties["name"];
             }
 
-            client = new HttpClientChannel (properties, clientSinkProvider);
-            server = new HttpServerChannel (properties, serverSinkProvider);
+            client = new HttpClientChannel(properties, clientSinkProvider);
+            server = new HttpServerChannel(properties, serverSinkProvider);
         }
 
         #endregion
@@ -85,10 +91,9 @@ namespace System.Runtime.Remoting.Channels.Http
         {
             get
             {
-                return new AggregateDictionary (new IDictionary[] {
-                    client.Properties,
-                    server.Properties
-                });
+                return new AggregateDictionary(
+                    new IDictionary[] { client.Properties, server.Properties }
+                );
             }
         }
 
@@ -106,59 +111,64 @@ namespace System.Runtime.Remoting.Channels.Http
             get { return server.ChannelPriority; }
         }
 
-        public string Parse (string url, out string objectURI)
+        public string Parse(string url, out string objectURI)
         {
-            return ParseInternal (url, out objectURI);
+            return ParseInternal(url, out objectURI);
         }
 
-        internal static string ParseInternal (string url, out string objectURI)
+        internal static string ParseInternal(string url, out string objectURI)
         {
             if (url == null)
-                throw new ArgumentNullException ("url");
-            
+                throw new ArgumentNullException("url");
+
             // format: "http://host:port/path/to/object"
             objectURI = null;
-            
+
             // url needs to be at least "http:" or "https:"
-            if (url.Length < 5 ||
-                (url[0] != 'H' && url[0] != 'h') ||
-                (url[1] != 'T' && url[1] != 't') ||
-                (url[2] != 'T' && url[2] != 't') ||
-                (url[3] != 'P' && url[3] != 'p'))
+            if (
+                url.Length < 5
+                || (url[0] != 'H' && url[0] != 'h')
+                || (url[1] != 'T' && url[1] != 't')
+                || (url[2] != 'T' && url[2] != 't')
+                || (url[3] != 'P' && url[3] != 'p')
+            )
                 return null;
-            
+
             int protolen;
-            if (url[4] == 'S' || url[4] == 's') {
+            if (url[4] == 'S' || url[4] == 's')
+            {
                 if (url.Length < 6)
                     return null;
-                
+
                 protolen = 5;
-            } else {
+            }
+            else
+            {
                 protolen = 4;
             }
-            
+
             if (url[protolen] != ':')
                 return null;
-            
+
             // "http:" and "https:" are acceptable inputs
             if (url.Length == protolen + 1)
                 return url;
-            
+
             // protocol must be followed by "//"
             if (url.Length < protolen + 3 || url[protolen + 1] != '/' || url[protolen + 2] != '/')
                 return null;
-            
+
             // "http://" and "https://" are acceptable inputs
             if (url.Length == protolen + 3)
                 return url;
-            
-            int slash = url.IndexOf ('/', protolen + 3);
+
+            int slash = url.IndexOf('/', protolen + 3);
             if (slash == -1)
                 return url;
-                
-            objectURI = url.Substring (slash);
 
-            return url.Substring (0, slash);
+            objectURI = url.Substring(slash);
+
+            return url.Substring(0, slash);
         }
 
         #endregion
@@ -170,28 +180,28 @@ namespace System.Runtime.Remoting.Channels.Http
             get { return server.ChannelData; }
         }
 
-        public string[] GetUrlsForUri (string objectURI)
+        public string[] GetUrlsForUri(string objectURI)
         {
-            return server.GetUrlsForUri (objectURI);
+            return server.GetUrlsForUri(objectURI);
         }
 
-        public void StartListening (object data)
+        public void StartListening(object data)
         {
-            server.StartListening (data);
+            server.StartListening(data);
         }
 
-        public void StopListening (object data)
+        public void StopListening(object data)
         {
-            server.StopListening (data);
+            server.StopListening(data);
         }
 
         #endregion
 
         #region IChannelReceiverHook
 
-        public void AddHookChannelUri (string channelUri)
+        public void AddHookChannelUri(string channelUri)
         {
-            server.AddHookChannelUri (channelUri);
+            server.AddHookChannelUri(channelUri);
         }
 
         public string ChannelScheme
@@ -214,9 +224,13 @@ namespace System.Runtime.Remoting.Channels.Http
 
         #region IChannelSender (: IChannel)
 
-        public IMessageSink CreateMessageSink (string url, object remoteChannelData, out string objectURI)
+        public IMessageSink CreateMessageSink(
+            string url,
+            object remoteChannelData,
+            out string objectURI
+        )
         {
-            return client.CreateMessageSink (url, remoteChannelData, out objectURI);
+            return client.CreateMessageSink(url, remoteChannelData, out objectURI);
         }
 
         #endregion

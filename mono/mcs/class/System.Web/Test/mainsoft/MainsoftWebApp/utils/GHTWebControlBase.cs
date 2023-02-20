@@ -3,10 +3,10 @@
 //   Rafael Mizrahi   <rafim@mainsoft.com>
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Vladimir Krasnov <vladimirk@mainsoft.com>
-//   
-// 
+//
+//
 // Copyright (c) 2002-2005 Mainsoft Corporation.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,17 +41,11 @@ namespace GHTTests
         #region "Properties"
         protected new WebControl TestedControl
         {
-            get
-            {
-                return (WebControl) m_cToTest;
-            }
+            get { return (WebControl)m_cToTest; }
         }
         public new Type[] TypesToTest
         {
-            get
-            {
-                return (System.Type[])(m_derivedTypes.ToArray(typeof(System.Type)));
-            }
+            get { return (System.Type[])(m_derivedTypes.ToArray(typeof(System.Type))); }
         }
         #endregion
 
@@ -59,10 +53,9 @@ namespace GHTTests
         /// <summary>
         /// Initializes all the derived types that need to be tested.
         /// </summary>
-        protected override  void InitTypes()
+        protected override void InitTypes()
         {
             m_derivedTypes = new ArrayList();
-
 
             //System.Web.UI.WebControls basic:
             m_derivedTypes.Add(typeof(System.Web.UI.WebControls.Button));

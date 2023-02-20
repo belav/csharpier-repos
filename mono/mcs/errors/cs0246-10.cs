@@ -6,7 +6,5 @@ using Nonexistant;
 
 class X
 {
-    static void Main () {
-    }
+    static void Main() { }
 }
-

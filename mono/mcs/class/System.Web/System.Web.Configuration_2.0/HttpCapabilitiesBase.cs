@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,27 +33,28 @@ using System.Web.UI;
 
 namespace System.Web.Configuration
 {
-    public partial class HttpCapabilitiesBase: IFilterResolutionService
+    public partial class HttpCapabilitiesBase : IFilterResolutionService
     {
         internal IDictionary capabilities;
 
-        public HttpCapabilitiesBase () { }
+        public HttpCapabilitiesBase() { }
 
-        public virtual string this [string key]
+        public virtual string this[string key]
         {
-            get { return capabilities [key] as string; }
+            get { return capabilities[key] as string; }
         }
 
-        internal static string GetUserAgentForDetection (HttpRequest request)
+        internal static string GetUserAgentForDetection(HttpRequest request)
         {
             string ua = null;
             if (request.Context.CurrentHandler is System.Web.UI.Page)
-                ua = ((System.Web.UI.Page) request.Context.CurrentHandler).ClientTarget;
-            
-            if (String.IsNullOrEmpty (ua)) {
+                ua = ((System.Web.UI.Page)request.Context.CurrentHandler).ClientTarget;
+
+            if (String.IsNullOrEmpty(ua))
+            {
                 ua = request.ClientTarget;
 
-                if (String.IsNullOrEmpty (ua))
+                if (String.IsNullOrEmpty(ua))
                     ua = request.UserAgent;
             }
 
@@ -63,76 +64,84 @@ namespace System.Web.Configuration
         static HttpBrowserCapabilities GetHttpBrowserCapabilitiesFromBrowscapini(string ua)
         {
             HttpBrowserCapabilities bcap = new HttpBrowserCapabilities();
-            bcap.capabilities = CapabilitiesLoader.GetCapabilities (ua);
+            bcap.capabilities = CapabilitiesLoader.GetCapabilities(ua);
             return bcap;
         }
-        
-        public static HttpCapabilitiesBase GetConfigCapabilities (string configKey, HttpRequest request)
+
+        public static HttpCapabilitiesBase GetConfigCapabilities(
+            string configKey,
+            HttpRequest request
+        )
         {
-            string ua = GetUserAgentForDetection (request);
+            string ua = GetUserAgentForDetection(request);
             HttpBrowserCapabilities bcap = GetHttpBrowserCapabilitiesFromBrowscapini(ua);
             GetConfigCapabilities_called = true;
             if (HttpApplicationFactory.AppBrowsersFiles.Length > 0)
-                bcap = HttpApplicationFactory.CapabilitiesProcessor.Process(request, bcap.Capabilities);
+                bcap = HttpApplicationFactory.CapabilitiesProcessor.Process(
+                    request,
+                    bcap.Capabilities
+                );
             bcap.useragent = ua;
-            bcap.Init ();
+            bcap.Init();
             return bcap;
         }
 
         // Used by unit tests to determine whether GetConfigCapabilities was called.
         static internal bool GetConfigCapabilities_called;
 
-        protected virtual void Init ()
+        protected virtual void Init() { }
+
+        int IFilterResolutionService.CompareFilters(string filter1, string filter2)
         {
+            throw new NotImplementedException();
         }
 
-        int IFilterResolutionService.CompareFilters (string filter1, string filter2)
+        bool IFilterResolutionService.EvaluateFilter(string filterName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        bool IFilterResolutionService.EvaluateFilter (string filterName)
+        public void AddBrowser(string browserName) { }
+
+        public HtmlTextWriter CreateHtmlTextWriter(TextWriter w)
         {
-            throw new NotImplementedException ();
-        }
-        
-        public void AddBrowser (string browserName)
-        {
+            return (HtmlTextWriter)Activator.CreateInstance(TagWriter, new object[] { w });
         }
 
-        public HtmlTextWriter CreateHtmlTextWriter (TextWriter w)
+        public void DisableOptimizedCacheKey()
         {
-            return (HtmlTextWriter) Activator.CreateInstance (TagWriter, new object[] {w});
-        }
-
-        public void DisableOptimizedCacheKey ()
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         IDictionary adapters = null;
-        public IDictionary Adapters {
-            get {
-                if (!Get (HaveAdapters)) {
+        public IDictionary Adapters
+        {
+            get
+            {
+                if (!Get(HaveAdapters))
+                {
                     adapters = GetAdapters();
-                    Set (HaveAdapters);
+                    Set(HaveAdapters);
                 }
 
                 return adapters;
             }
         }
-        
-        internal virtual IDictionary GetAdapters ()
+
+        internal virtual IDictionary GetAdapters()
         {
             return new Hashtable();
         }
 
         bool canCombineFormsInDeck;
-        public virtual bool CanCombineFormsInDeck {
-            get {
-                if (!Get (HaveCanCombineFormsInDeck)) {
-                    canCombineFormsInDeck = ReadBoolean ("cancombineformsindeck");
-                    Set (HaveCanCombineFormsInDeck);
+        public virtual bool CanCombineFormsInDeck
+        {
+            get
+            {
+                if (!Get(HaveCanCombineFormsInDeck))
+                {
+                    canCombineFormsInDeck = ReadBoolean("cancombineformsindeck");
+                    Set(HaveCanCombineFormsInDeck);
                 }
 
                 return canCombineFormsInDeck;
@@ -140,11 +149,14 @@ namespace System.Web.Configuration
         }
 
         bool canInitiateVoiceCall;
-        public virtual bool CanInitiateVoiceCall {
-            get {
-                if (!Get (HaveCanInitiateVoiceCall)) {
-                    canInitiateVoiceCall = ReadBoolean ("caninitiatevoicecall");
-                    Set (HaveCanInitiateVoiceCall);
+        public virtual bool CanInitiateVoiceCall
+        {
+            get
+            {
+                if (!Get(HaveCanInitiateVoiceCall))
+                {
+                    canInitiateVoiceCall = ReadBoolean("caninitiatevoicecall");
+                    Set(HaveCanInitiateVoiceCall);
                 }
 
                 return canInitiateVoiceCall;
@@ -152,11 +164,16 @@ namespace System.Web.Configuration
         }
 
         bool canRenderAfterInputOrSelectElement;
-        public virtual bool CanRenderAfterInputOrSelectElement {
-            get {
-                if (!Get (HaveCanRenderAfterInputOrSelectElement)) {
-                    canRenderAfterInputOrSelectElement = ReadBoolean ("canrenderafterinputorselectelement");
-                    Set (HaveCanRenderAfterInputOrSelectElement);
+        public virtual bool CanRenderAfterInputOrSelectElement
+        {
+            get
+            {
+                if (!Get(HaveCanRenderAfterInputOrSelectElement))
+                {
+                    canRenderAfterInputOrSelectElement = ReadBoolean(
+                        "canrenderafterinputorselectelement"
+                    );
+                    Set(HaveCanRenderAfterInputOrSelectElement);
                 }
 
                 return canRenderAfterInputOrSelectElement;
@@ -164,11 +181,14 @@ namespace System.Web.Configuration
         }
 
         bool canRenderEmptySelects;
-        public virtual bool CanRenderEmptySelects {
-            get {
-                if (!Get (HaveCanRenderEmptySelects)) {
-                    canRenderEmptySelects = ReadBoolean ("canrenderemptyselects");
-                    Set (HaveCanRenderEmptySelects);
+        public virtual bool CanRenderEmptySelects
+        {
+            get
+            {
+                if (!Get(HaveCanRenderEmptySelects))
+                {
+                    canRenderEmptySelects = ReadBoolean("canrenderemptyselects");
+                    Set(HaveCanRenderEmptySelects);
                 }
 
                 return canRenderEmptySelects;
@@ -176,11 +196,16 @@ namespace System.Web.Configuration
         }
 
         bool canRenderInputAndSelectElementsTogether;
-        public virtual bool CanRenderInputAndSelectElementsTogether {
-            get {
-                if (!Get (HaveCanRenderInputAndSelectElementsTogether)) {
-                    canRenderInputAndSelectElementsTogether = ReadBoolean ("canrenderinputandselectelementstogether");
-                    Set (HaveCanRenderInputAndSelectElementsTogether);
+        public virtual bool CanRenderInputAndSelectElementsTogether
+        {
+            get
+            {
+                if (!Get(HaveCanRenderInputAndSelectElementsTogether))
+                {
+                    canRenderInputAndSelectElementsTogether = ReadBoolean(
+                        "canrenderinputandselectelementstogether"
+                    );
+                    Set(HaveCanRenderInputAndSelectElementsTogether);
                 }
 
                 return canRenderInputAndSelectElementsTogether;
@@ -188,11 +213,14 @@ namespace System.Web.Configuration
         }
 
         bool canRenderMixedSelects;
-        public virtual bool CanRenderMixedSelects {
-            get {
-                if (!Get (HaveCanRenderMixedSelects)) {
-                    canRenderMixedSelects = ReadBoolean ("canrendermixedselects");
-                    Set (HaveCanRenderMixedSelects);
+        public virtual bool CanRenderMixedSelects
+        {
+            get
+            {
+                if (!Get(HaveCanRenderMixedSelects))
+                {
+                    canRenderMixedSelects = ReadBoolean("canrendermixedselects");
+                    Set(HaveCanRenderMixedSelects);
                 }
 
                 return canRenderMixedSelects;
@@ -200,11 +228,16 @@ namespace System.Web.Configuration
         }
 
         bool canRenderOneventAndPrevElementsTogether;
-        public virtual bool CanRenderOneventAndPrevElementsTogether {
-            get {
-                if (!Get (HaveCanRenderOneventAndPrevElementsTogether)) {
-                    canRenderOneventAndPrevElementsTogether = ReadBoolean ("canrenderoneventandprevelementstogether");
-                    Set (HaveCanRenderOneventAndPrevElementsTogether);
+        public virtual bool CanRenderOneventAndPrevElementsTogether
+        {
+            get
+            {
+                if (!Get(HaveCanRenderOneventAndPrevElementsTogether))
+                {
+                    canRenderOneventAndPrevElementsTogether = ReadBoolean(
+                        "canrenderoneventandprevelementstogether"
+                    );
+                    Set(HaveCanRenderOneventAndPrevElementsTogether);
                 }
 
                 return canRenderOneventAndPrevElementsTogether;
@@ -212,11 +245,14 @@ namespace System.Web.Configuration
         }
 
         bool canRenderPostBackCards;
-        public virtual bool CanRenderPostBackCards {
-            get {
-                if (!Get (HaveCanRenderPostBackCards)) {
-                    canRenderPostBackCards = ReadBoolean ("canrenderpostbackcards");
-                    Set (HaveCanRenderPostBackCards);
+        public virtual bool CanRenderPostBackCards
+        {
+            get
+            {
+                if (!Get(HaveCanRenderPostBackCards))
+                {
+                    canRenderPostBackCards = ReadBoolean("canrenderpostbackcards");
+                    Set(HaveCanRenderPostBackCards);
                 }
 
                 return canRenderPostBackCards;
@@ -224,11 +260,16 @@ namespace System.Web.Configuration
         }
 
         bool canRenderSetvarZeroWithMultiSelectionList;
-        public virtual bool CanRenderSetvarZeroWithMultiSelectionList {
-            get {
-                if (!Get (HaveCanRenderSetvarZeroWithMultiSelectionList)) {
-                    canRenderSetvarZeroWithMultiSelectionList = ReadBoolean ("canrendersetvarzerowithmultiselectionlist");
-                    Set (HaveCanRenderSetvarZeroWithMultiSelectionList);
+        public virtual bool CanRenderSetvarZeroWithMultiSelectionList
+        {
+            get
+            {
+                if (!Get(HaveCanRenderSetvarZeroWithMultiSelectionList))
+                {
+                    canRenderSetvarZeroWithMultiSelectionList = ReadBoolean(
+                        "canrendersetvarzerowithmultiselectionlist"
+                    );
+                    Set(HaveCanRenderSetvarZeroWithMultiSelectionList);
                 }
 
                 return canRenderSetvarZeroWithMultiSelectionList;
@@ -236,11 +277,14 @@ namespace System.Web.Configuration
         }
 
         bool canSendMail;
-        public virtual bool CanSendMail {
-            get {
-                if (!Get (HaveCanSendMail)) {
-                    canSendMail = ReadBoolean ("cansendmail");
-                    Set (HaveCanSendMail);
+        public virtual bool CanSendMail
+        {
+            get
+            {
+                if (!Get(HaveCanSendMail))
+                {
+                    canSendMail = ReadBoolean("cansendmail");
+                    Set(HaveCanSendMail);
                 }
 
                 return canSendMail;
@@ -250,22 +294,27 @@ namespace System.Web.Configuration
         public IDictionary Capabilities
         {
             get { return capabilities; }
-            set {
+            set
+            {
                 //value comes with duplicated keys, so we filter them out
-                capabilities = new Hashtable (value.Keys.Count, StringComparer.OrdinalIgnoreCase);
-                foreach (object key in value.Keys) {
-                    if (!capabilities.Contains (key))
-                        capabilities.Add (key, value [key]);
+                capabilities = new Hashtable(value.Keys.Count, StringComparer.OrdinalIgnoreCase);
+                foreach (object key in value.Keys)
+                {
+                    if (!capabilities.Contains(key))
+                        capabilities.Add(key, value[key]);
                 }
             }
         }
 
         int defaultSubmitButtonLimit;
-        public virtual int DefaultSubmitButtonLimit {
-            get {
-                if (!Get (HaveDefaultSubmitButtonLimit)) {
-                    defaultSubmitButtonLimit = ReadInt32 ("defaultsubmitbuttonlimit");
-                    Set (HaveDefaultSubmitButtonLimit);
+        public virtual int DefaultSubmitButtonLimit
+        {
+            get
+            {
+                if (!Get(HaveDefaultSubmitButtonLimit))
+                {
+                    defaultSubmitButtonLimit = ReadInt32("defaultsubmitbuttonlimit");
+                    Set(HaveDefaultSubmitButtonLimit);
                 }
 
                 return defaultSubmitButtonLimit;
@@ -273,11 +322,14 @@ namespace System.Web.Configuration
         }
 
         int gatewayMajorVersion;
-        public virtual int GatewayMajorVersion {
-            get {
-                if (!Get (HaveGatewayMajorVersion)) {
-                    gatewayMajorVersion = ReadInt32 ("gatewaymajorversion");
-                    Set (HaveGatewayMajorVersion);
+        public virtual int GatewayMajorVersion
+        {
+            get
+            {
+                if (!Get(HaveGatewayMajorVersion))
+                {
+                    gatewayMajorVersion = ReadInt32("gatewaymajorversion");
+                    Set(HaveGatewayMajorVersion);
                 }
 
                 return gatewayMajorVersion;
@@ -285,11 +337,14 @@ namespace System.Web.Configuration
         }
 
         Double gatewayMinorVersion;
-        public virtual Double GatewayMinorVersion {
-            get {
-                if (!Get (HaveGatewayMinorVersion)) {
-                    gatewayMinorVersion = ReadDouble ("gatewayminorversion");
-                    Set (HaveGatewayMinorVersion);
+        public virtual Double GatewayMinorVersion
+        {
+            get
+            {
+                if (!Get(HaveGatewayMinorVersion))
+                {
+                    gatewayMinorVersion = ReadDouble("gatewayminorversion");
+                    Set(HaveGatewayMinorVersion);
                 }
 
                 return gatewayMinorVersion;
@@ -297,11 +352,14 @@ namespace System.Web.Configuration
         }
 
         string gatewayVersion;
-        public virtual string GatewayVersion {
-            get {
-                if (!Get (HaveGatewayVersion)) {
-                    gatewayVersion = ReadString ("gatewayversion");
-                    Set (HaveGatewayVersion);
+        public virtual string GatewayVersion
+        {
+            get
+            {
+                if (!Get(HaveGatewayVersion))
+                {
+                    gatewayVersion = ReadString("gatewayversion");
+                    Set(HaveGatewayVersion);
                 }
 
                 return gatewayVersion;
@@ -309,11 +367,14 @@ namespace System.Web.Configuration
         }
 
         bool hasBackButton;
-        public virtual bool HasBackButton {
-            get {
-                if (!Get (HaveHasBackButton)) {
-                    hasBackButton = ReadBoolean ("hasbackbutton");
-                    Set (HaveHasBackButton);
+        public virtual bool HasBackButton
+        {
+            get
+            {
+                if (!Get(HaveHasBackButton))
+                {
+                    hasBackButton = ReadBoolean("hasbackbutton");
+                    Set(HaveHasBackButton);
                 }
 
                 return hasBackButton;
@@ -321,43 +382,56 @@ namespace System.Web.Configuration
         }
 
         bool hidesRightAlignedMultiselectScrollbars;
-        public virtual bool HidesRightAlignedMultiselectScrollbars {
-            get {
-                if (!Get (HaveHidesRightAlignedMultiselectScrollbars)) {
-                    hidesRightAlignedMultiselectScrollbars = ReadBoolean ("hidesrightalignedmultiselectscrollbars");
-                    Set (HaveHidesRightAlignedMultiselectScrollbars);
+        public virtual bool HidesRightAlignedMultiselectScrollbars
+        {
+            get
+            {
+                if (!Get(HaveHidesRightAlignedMultiselectScrollbars))
+                {
+                    hidesRightAlignedMultiselectScrollbars = ReadBoolean(
+                        "hidesrightalignedmultiselectscrollbars"
+                    );
+                    Set(HaveHidesRightAlignedMultiselectScrollbars);
                 }
-                
+
                 return hidesRightAlignedMultiselectScrollbars;
             }
         }
 
         string htmlTextWriter;
-        public string HtmlTextWriter {
-            get {
-                if (!Get (HaveHtmlTextWriter)) {
-                    htmlTextWriter = ReadString ("htmlTextWriter");
-                    Set (HaveHtmlTextWriter);
+        public string HtmlTextWriter
+        {
+            get
+            {
+                if (!Get(HaveHtmlTextWriter))
+                {
+                    htmlTextWriter = ReadString("htmlTextWriter");
+                    Set(HaveHtmlTextWriter);
                 }
 
                 return htmlTextWriter;
             }
-            set {
-                Set (HaveHtmlTextWriter);
+            set
+            {
+                Set(HaveHtmlTextWriter);
                 htmlTextWriter = value;
             }
         }
 
-        public string Id {
+        public string Id
+        {
             get { return this.Browser; }
         }
 
         string inputType;
-        public virtual string InputType {
-            get {
-                if (!Get (HaveInputType)) {
-                    inputType = ReadString ("inputtype");
-                    Set (HaveInputType);
+        public virtual string InputType
+        {
+            get
+            {
+                if (!Get(HaveInputType))
+                {
+                    inputType = ReadString("inputtype");
+                    Set(HaveInputType);
                 }
 
                 return inputType;
@@ -365,11 +439,14 @@ namespace System.Web.Configuration
         }
 
         bool isColor;
-        public virtual bool IsColor {
-            get {
-                if (!Get (HaveIsColor)) {
-                    isColor = ReadBoolean ("iscolor");
-                    Set (HaveIsColor);
+        public virtual bool IsColor
+        {
+            get
+            {
+                if (!Get(HaveIsColor))
+                {
+                    isColor = ReadBoolean("iscolor");
+                    Set(HaveIsColor);
                 }
 
                 return isColor;
@@ -377,11 +454,14 @@ namespace System.Web.Configuration
         }
 
         bool isMobileDevice;
-        public virtual bool IsMobileDevice {
-            get {
-                if (!Get (HaveIsMobileDevice)) {
-                    isMobileDevice = ReadBoolean ("ismobiledevice");
-                    Set (HaveIsMobileDevice);
+        public virtual bool IsMobileDevice
+        {
+            get
+            {
+                if (!Get(HaveIsMobileDevice))
+                {
+                    isMobileDevice = ReadBoolean("ismobiledevice");
+                    Set(HaveIsMobileDevice);
                 }
 
                 return isMobileDevice;
@@ -389,11 +469,14 @@ namespace System.Web.Configuration
         }
 
         Version jscriptVersion;
-        public Version JScriptVersion {
-            get {
-                if (!Get (HaveJScriptVersion)) {
-                    jscriptVersion = ReadVersion ("jscriptversion");
-                    Set (HaveJScriptVersion);
+        public Version JScriptVersion
+        {
+            get
+            {
+                if (!Get(HaveJScriptVersion))
+                {
+                    jscriptVersion = ReadVersion("jscriptversion");
+                    Set(HaveJScriptVersion);
                 }
 
                 return jscriptVersion;
@@ -401,11 +484,14 @@ namespace System.Web.Configuration
         }
 
         int maximumHrefLength;
-        public virtual int MaximumHrefLength {
-            get {
-                if (!Get (HaveMaximumHrefLength)) {
-                    maximumHrefLength = ReadInt32 ("maximumhreflength");
-                    Set (HaveMaximumHrefLength);
+        public virtual int MaximumHrefLength
+        {
+            get
+            {
+                if (!Get(HaveMaximumHrefLength))
+                {
+                    maximumHrefLength = ReadInt32("maximumhreflength");
+                    Set(HaveMaximumHrefLength);
                 }
 
                 return maximumHrefLength;
@@ -413,11 +499,14 @@ namespace System.Web.Configuration
         }
 
         int maximumRenderedPageSize;
-        public virtual int MaximumRenderedPageSize {
-            get {
-                if (!Get (HaveMaximumRenderedPageSize)) {
-                    maximumRenderedPageSize = ReadInt32 ("maximumrenderedpagesize");
-                    Set (HaveMaximumRenderedPageSize);
+        public virtual int MaximumRenderedPageSize
+        {
+            get
+            {
+                if (!Get(HaveMaximumRenderedPageSize))
+                {
+                    maximumRenderedPageSize = ReadInt32("maximumrenderedpagesize");
+                    Set(HaveMaximumRenderedPageSize);
                 }
 
                 return maximumRenderedPageSize;
@@ -425,11 +514,14 @@ namespace System.Web.Configuration
         }
 
         int maximumSoftkeyLabelLength;
-        public virtual int MaximumSoftkeyLabelLength {
-            get {
-                if (!Get (HaveMaximumSoftkeyLabelLength)) {
-                    maximumSoftkeyLabelLength = ReadInt32 ("maximumsoftkeylabellength");
-                    Set (HaveMaximumSoftkeyLabelLength);
+        public virtual int MaximumSoftkeyLabelLength
+        {
+            get
+            {
+                if (!Get(HaveMaximumSoftkeyLabelLength))
+                {
+                    maximumSoftkeyLabelLength = ReadInt32("maximumsoftkeylabellength");
+                    Set(HaveMaximumSoftkeyLabelLength);
                 }
 
                 return maximumSoftkeyLabelLength;
@@ -437,11 +529,14 @@ namespace System.Web.Configuration
         }
 
         string minorVersionString;
-        public string MinorVersionString {
-            get {
-                if (!Get (HaveMinorVersionString)) {
-                    minorVersionString = ReadString ("minorversionstring");
-                    Set (HaveMinorVersionString);
+        public string MinorVersionString
+        {
+            get
+            {
+                if (!Get(HaveMinorVersionString))
+                {
+                    minorVersionString = ReadString("minorversionstring");
+                    Set(HaveMinorVersionString);
                 }
 
                 return minorVersionString;
@@ -449,11 +544,14 @@ namespace System.Web.Configuration
         }
 
         string mobileDeviceManufacturer;
-        public virtual string MobileDeviceManufacturer {
-            get {
-                if (!Get (HaveMobileDeviceManufacturer)) {
-                    mobileDeviceManufacturer = ReadString ("mobiledevicemanufacturer");
-                    Set (HaveMobileDeviceManufacturer);
+        public virtual string MobileDeviceManufacturer
+        {
+            get
+            {
+                if (!Get(HaveMobileDeviceManufacturer))
+                {
+                    mobileDeviceManufacturer = ReadString("mobiledevicemanufacturer");
+                    Set(HaveMobileDeviceManufacturer);
                 }
 
                 return mobileDeviceManufacturer;
@@ -461,11 +559,14 @@ namespace System.Web.Configuration
         }
 
         string mobileDeviceModel;
-        public virtual string MobileDeviceModel {
-            get {
-                if (!Get (HaveMobileDeviceModel)) {
-                    mobileDeviceModel = ReadString ("mobiledevicemodel");
-                    Set (HaveMobileDeviceModel);
+        public virtual string MobileDeviceModel
+        {
+            get
+            {
+                if (!Get(HaveMobileDeviceModel))
+                {
+                    mobileDeviceModel = ReadString("mobiledevicemodel");
+                    Set(HaveMobileDeviceModel);
                 }
 
                 return mobileDeviceModel;
@@ -473,11 +574,14 @@ namespace System.Web.Configuration
         }
 
         int numberOfSoftkeys;
-        public virtual int NumberOfSoftkeys {
-            get {
-                if (!Get (HaveNumberOfSoftkeys)) {
-                    numberOfSoftkeys = ReadInt32 ("numberofsoftkeys");
-                    Set (HaveNumberOfSoftkeys);
+        public virtual int NumberOfSoftkeys
+        {
+            get
+            {
+                if (!Get(HaveNumberOfSoftkeys))
+                {
+                    numberOfSoftkeys = ReadInt32("numberofsoftkeys");
+                    Set(HaveNumberOfSoftkeys);
                 }
 
                 return numberOfSoftkeys;
@@ -485,11 +589,14 @@ namespace System.Web.Configuration
         }
 
         string preferredImageMime;
-        public virtual string PreferredImageMime {
-            get {
-                if (!Get (HavePreferredImageMime)) {
-                    preferredImageMime = ReadString ("preferredimagemime");
-                    Set (HavePreferredImageMime);
+        public virtual string PreferredImageMime
+        {
+            get
+            {
+                if (!Get(HavePreferredImageMime))
+                {
+                    preferredImageMime = ReadString("preferredimagemime");
+                    Set(HavePreferredImageMime);
                 }
 
                 return preferredImageMime;
@@ -497,11 +604,14 @@ namespace System.Web.Configuration
         }
 
         string preferredRenderingMime;
-        public virtual string PreferredRenderingMime {
-            get {
-                if (!Get (HavePreferredRenderingMime)) {
-                    preferredRenderingMime = ReadString ("preferredrenderingmime");
-                    Set (HavePreferredRenderingMime);
+        public virtual string PreferredRenderingMime
+        {
+            get
+            {
+                if (!Get(HavePreferredRenderingMime))
+                {
+                    preferredRenderingMime = ReadString("preferredrenderingmime");
+                    Set(HavePreferredRenderingMime);
                 }
 
                 return preferredRenderingMime;
@@ -509,11 +619,14 @@ namespace System.Web.Configuration
         }
 
         string preferredRenderingType;
-        public virtual string PreferredRenderingType {
-            get {
-                if (!Get (HavePreferredRenderingType)) {
-                    preferredRenderingType = ReadString ("preferredrenderingtype");
-                    Set (HavePreferredRenderingType);
+        public virtual string PreferredRenderingType
+        {
+            get
+            {
+                if (!Get(HavePreferredRenderingType))
+                {
+                    preferredRenderingType = ReadString("preferredrenderingtype");
+                    Set(HavePreferredRenderingType);
                 }
 
                 return preferredRenderingType;
@@ -521,11 +634,14 @@ namespace System.Web.Configuration
         }
 
         string preferredRequestEncoding;
-        public virtual string PreferredRequestEncoding {
-            get {
-                if (!Get (HavePreferredRequestEncoding)) {
-                    preferredRequestEncoding = ReadString ("preferredrequestencoding");
-                    Set (HavePreferredRequestEncoding);
+        public virtual string PreferredRequestEncoding
+        {
+            get
+            {
+                if (!Get(HavePreferredRequestEncoding))
+                {
+                    preferredRequestEncoding = ReadString("preferredrequestencoding");
+                    Set(HavePreferredRequestEncoding);
                 }
 
                 return preferredRequestEncoding;
@@ -533,11 +649,14 @@ namespace System.Web.Configuration
         }
 
         string preferredResponseEncoding;
-        public virtual string PreferredResponseEncoding {
-            get {
-                if (!Get (HavePreferredResponseEncoding)) {
-                    preferredResponseEncoding = ReadString ("preferredresponseencoding");
-                    Set (HavePreferredResponseEncoding);
+        public virtual string PreferredResponseEncoding
+        {
+            get
+            {
+                if (!Get(HavePreferredResponseEncoding))
+                {
+                    preferredResponseEncoding = ReadString("preferredresponseencoding");
+                    Set(HavePreferredResponseEncoding);
                 }
 
                 return preferredResponseEncoding;
@@ -545,11 +664,16 @@ namespace System.Web.Configuration
         }
 
         bool rendersBreakBeforeWmlSelectAndInput;
-        public virtual bool RendersBreakBeforeWmlSelectAndInput {
-            get {
-                if (!Get (HaveRendersBreakBeforeWmlSelectAndInput)) {
-                    rendersBreakBeforeWmlSelectAndInput = ReadBoolean ("rendersbreakbeforewmlselectandinput");
-                    Set (HaveRendersBreakBeforeWmlSelectAndInput);
+        public virtual bool RendersBreakBeforeWmlSelectAndInput
+        {
+            get
+            {
+                if (!Get(HaveRendersBreakBeforeWmlSelectAndInput))
+                {
+                    rendersBreakBeforeWmlSelectAndInput = ReadBoolean(
+                        "rendersbreakbeforewmlselectandinput"
+                    );
+                    Set(HaveRendersBreakBeforeWmlSelectAndInput);
                 }
 
                 return rendersBreakBeforeWmlSelectAndInput;
@@ -557,11 +681,14 @@ namespace System.Web.Configuration
         }
 
         bool rendersBreaksAfterHtmlLists;
-        public virtual bool RendersBreaksAfterHtmlLists {
-            get {
-                if (!Get (HaveRendersBreaksAfterHtmlLists)) {
-                    rendersBreaksAfterHtmlLists = ReadBoolean ("rendersbreaksafterhtmllists");
-                    Set (HaveRendersBreaksAfterHtmlLists);
+        public virtual bool RendersBreaksAfterHtmlLists
+        {
+            get
+            {
+                if (!Get(HaveRendersBreaksAfterHtmlLists))
+                {
+                    rendersBreaksAfterHtmlLists = ReadBoolean("rendersbreaksafterhtmllists");
+                    Set(HaveRendersBreaksAfterHtmlLists);
                 }
 
                 return rendersBreaksAfterHtmlLists;
@@ -569,11 +696,14 @@ namespace System.Web.Configuration
         }
 
         bool rendersBreaksAfterWmlAnchor;
-        public virtual bool RendersBreaksAfterWmlAnchor {
-            get {
-                if (!Get (HaveRendersBreaksAfterWmlAnchor)) {
-                    rendersBreaksAfterWmlAnchor = ReadBoolean ("rendersbreaksafterwmlanchor");
-                    Set (HaveRendersBreaksAfterWmlAnchor);
+        public virtual bool RendersBreaksAfterWmlAnchor
+        {
+            get
+            {
+                if (!Get(HaveRendersBreaksAfterWmlAnchor))
+                {
+                    rendersBreaksAfterWmlAnchor = ReadBoolean("rendersbreaksafterwmlanchor");
+                    Set(HaveRendersBreaksAfterWmlAnchor);
                 }
 
                 return rendersBreaksAfterWmlAnchor;
@@ -581,11 +711,14 @@ namespace System.Web.Configuration
         }
 
         bool rendersBreaksAfterWmlInput;
-        public virtual bool RendersBreaksAfterWmlInput {
-            get {
-                if (!Get (HaveRendersBreaksAfterWmlInput)) {
-                    rendersBreaksAfterWmlInput = ReadBoolean ("rendersbreaksafterwmlinput");
-                    Set (HaveRendersBreaksAfterWmlInput);
+        public virtual bool RendersBreaksAfterWmlInput
+        {
+            get
+            {
+                if (!Get(HaveRendersBreaksAfterWmlInput))
+                {
+                    rendersBreaksAfterWmlInput = ReadBoolean("rendersbreaksafterwmlinput");
+                    Set(HaveRendersBreaksAfterWmlInput);
                 }
 
                 return rendersBreaksAfterWmlInput;
@@ -593,11 +726,14 @@ namespace System.Web.Configuration
         }
 
         bool rendersWmlDoAcceptsInline;
-        public virtual bool RendersWmlDoAcceptsInline {
-            get {
-                if (!Get (HaveRendersWmlDoAcceptsInline)) {
-                    rendersWmlDoAcceptsInline = ReadBoolean ("renderswmldoacceptsinline");
-                    Set (HaveRendersWmlDoAcceptsInline);
+        public virtual bool RendersWmlDoAcceptsInline
+        {
+            get
+            {
+                if (!Get(HaveRendersWmlDoAcceptsInline))
+                {
+                    rendersWmlDoAcceptsInline = ReadBoolean("renderswmldoacceptsinline");
+                    Set(HaveRendersWmlDoAcceptsInline);
                 }
 
                 return rendersWmlDoAcceptsInline;
@@ -605,11 +741,14 @@ namespace System.Web.Configuration
         }
 
         bool rendersWmlSelectsAsMenuCards;
-        public virtual bool RendersWmlSelectsAsMenuCards {
-            get {
-                if (!Get (HaveRendersWmlSelectsAsMenuCards)) {
-                    rendersWmlSelectsAsMenuCards = ReadBoolean ("renderswmlselectsasmenucards");
-                    Set (HaveRendersWmlSelectsAsMenuCards);
+        public virtual bool RendersWmlSelectsAsMenuCards
+        {
+            get
+            {
+                if (!Get(HaveRendersWmlSelectsAsMenuCards))
+                {
+                    rendersWmlSelectsAsMenuCards = ReadBoolean("renderswmlselectsasmenucards");
+                    Set(HaveRendersWmlSelectsAsMenuCards);
                 }
 
                 return rendersWmlSelectsAsMenuCards;
@@ -617,11 +756,14 @@ namespace System.Web.Configuration
         }
 
         string requiredMetaTagNameValue;
-        public virtual string RequiredMetaTagNameValue {
-            get {
-                if (!Get (HaveRequiredMetaTagNameValue)) {
-                    requiredMetaTagNameValue = ReadString ("requiredmetatagnamevalue");
-                    Set (HaveRequiredMetaTagNameValue);
+        public virtual string RequiredMetaTagNameValue
+        {
+            get
+            {
+                if (!Get(HaveRequiredMetaTagNameValue))
+                {
+                    requiredMetaTagNameValue = ReadString("requiredmetatagnamevalue");
+                    Set(HaveRequiredMetaTagNameValue);
                 }
 
                 return requiredMetaTagNameValue;
@@ -629,11 +771,16 @@ namespace System.Web.Configuration
         }
 
         bool requiresAttributeColonSubstitution;
-        public virtual bool RequiresAttributeColonSubstitution {
-            get {
-                if (!Get (HaveRequiresAttributeColonSubstitution)) {
-                    requiresAttributeColonSubstitution = ReadBoolean ("requiresattributecolonsubstitution");
-                    Set (HaveRequiresAttributeColonSubstitution);
+        public virtual bool RequiresAttributeColonSubstitution
+        {
+            get
+            {
+                if (!Get(HaveRequiresAttributeColonSubstitution))
+                {
+                    requiresAttributeColonSubstitution = ReadBoolean(
+                        "requiresattributecolonsubstitution"
+                    );
+                    Set(HaveRequiresAttributeColonSubstitution);
                 }
 
                 return requiresAttributeColonSubstitution;
@@ -641,11 +788,14 @@ namespace System.Web.Configuration
         }
 
         bool requiresContentTypeMetaTag;
-        public virtual bool RequiresContentTypeMetaTag {
-            get {
-                if (!Get (HaveRequiresContentTypeMetaTag)) {
-                    requiresContentTypeMetaTag = ReadBoolean ("requiresContentTypeMetaTag");
-                    Set (HaveRequiresContentTypeMetaTag);
+        public virtual bool RequiresContentTypeMetaTag
+        {
+            get
+            {
+                if (!Get(HaveRequiresContentTypeMetaTag))
+                {
+                    requiresContentTypeMetaTag = ReadBoolean("requiresContentTypeMetaTag");
+                    Set(HaveRequiresContentTypeMetaTag);
                 }
 
                 return requiresContentTypeMetaTag;
@@ -653,11 +803,14 @@ namespace System.Web.Configuration
         }
 
         bool requiresControlStateInSession;
-        public bool RequiresControlStateInSession {
-            get {
-                if (!Get (HaveRequiresControlStateInSession)) {
-                    requiresControlStateInSession = ReadBoolean ("requiresControlStateInSession");
-                    Set (HaveRequiresControlStateInSession);
+        public bool RequiresControlStateInSession
+        {
+            get
+            {
+                if (!Get(HaveRequiresControlStateInSession))
+                {
+                    requiresControlStateInSession = ReadBoolean("requiresControlStateInSession");
+                    Set(HaveRequiresControlStateInSession);
                 }
 
                 return requiresControlStateInSession;
@@ -665,11 +818,14 @@ namespace System.Web.Configuration
         }
 
         bool requiresDBCSCharacter;
-        public virtual bool RequiresDBCSCharacter {
-            get {
-                if (!Get (HaveRequiresDBCSCharacter)) {
-                    requiresDBCSCharacter = ReadBoolean ("requiresdbcscharacter");
-                    Set (HaveRequiresDBCSCharacter);
+        public virtual bool RequiresDBCSCharacter
+        {
+            get
+            {
+                if (!Get(HaveRequiresDBCSCharacter))
+                {
+                    requiresDBCSCharacter = ReadBoolean("requiresdbcscharacter");
+                    Set(HaveRequiresDBCSCharacter);
                 }
 
                 return requiresDBCSCharacter;
@@ -677,11 +833,16 @@ namespace System.Web.Configuration
         }
 
         bool requiresHtmlAdaptiveErrorReporting;
-        public virtual bool RequiresHtmlAdaptiveErrorReporting {
-            get {
-                if (!Get (HaveRequiresHtmlAdaptiveErrorReporting)) {
-                    requiresHtmlAdaptiveErrorReporting = ReadBoolean ("requireshtmladaptiveerrorreporting");
-                    Set (HaveRequiresHtmlAdaptiveErrorReporting);
+        public virtual bool RequiresHtmlAdaptiveErrorReporting
+        {
+            get
+            {
+                if (!Get(HaveRequiresHtmlAdaptiveErrorReporting))
+                {
+                    requiresHtmlAdaptiveErrorReporting = ReadBoolean(
+                        "requireshtmladaptiveerrorreporting"
+                    );
+                    Set(HaveRequiresHtmlAdaptiveErrorReporting);
                 }
 
                 return requiresHtmlAdaptiveErrorReporting;
@@ -689,11 +850,14 @@ namespace System.Web.Configuration
         }
 
         bool requiresLeadingPageBreak;
-        public virtual bool RequiresLeadingPageBreak {
-            get {
-                if (!Get (HaveRequiresLeadingPageBreak)) {
-                    requiresLeadingPageBreak = ReadBoolean ("requiresleadingpagebreak");
-                    Set (HaveRequiresLeadingPageBreak);
+        public virtual bool RequiresLeadingPageBreak
+        {
+            get
+            {
+                if (!Get(HaveRequiresLeadingPageBreak))
+                {
+                    requiresLeadingPageBreak = ReadBoolean("requiresleadingpagebreak");
+                    Set(HaveRequiresLeadingPageBreak);
                 }
 
                 return requiresLeadingPageBreak;
@@ -701,11 +865,14 @@ namespace System.Web.Configuration
         }
 
         bool requiresNoBreakInFormatting;
-        public virtual bool RequiresNoBreakInFormatting {
-            get {
-                if (!Get (HaveRequiresNoBreakInFormatting)) {
-                    requiresNoBreakInFormatting = ReadBoolean ("requiresnobreakinformatting");
-                    Set (HaveRequiresNoBreakInFormatting);
+        public virtual bool RequiresNoBreakInFormatting
+        {
+            get
+            {
+                if (!Get(HaveRequiresNoBreakInFormatting))
+                {
+                    requiresNoBreakInFormatting = ReadBoolean("requiresnobreakinformatting");
+                    Set(HaveRequiresNoBreakInFormatting);
                 }
 
                 return requiresNoBreakInFormatting;
@@ -713,11 +880,14 @@ namespace System.Web.Configuration
         }
 
         bool requiresOutputOptimization;
-        public virtual bool RequiresOutputOptimization {
-            get {
-                if (!Get (HaveRequiresOutputOptimization)) {
-                    requiresOutputOptimization = ReadBoolean ("requiresoutputoptimization");
-                    Set (HaveRequiresOutputOptimization);
+        public virtual bool RequiresOutputOptimization
+        {
+            get
+            {
+                if (!Get(HaveRequiresOutputOptimization))
+                {
+                    requiresOutputOptimization = ReadBoolean("requiresoutputoptimization");
+                    Set(HaveRequiresOutputOptimization);
                 }
 
                 return requiresOutputOptimization;
@@ -725,11 +895,16 @@ namespace System.Web.Configuration
         }
 
         bool requiresPhoneNumbersAsPlainText;
-        public virtual bool RequiresPhoneNumbersAsPlainText {
-            get {
-                if (!Get (HaveRequiresPhoneNumbersAsPlainText)) {
-                    requiresPhoneNumbersAsPlainText = ReadBoolean ("requiresphonenumbersasplaintext");
-                    Set (HaveRequiresPhoneNumbersAsPlainText);
+        public virtual bool RequiresPhoneNumbersAsPlainText
+        {
+            get
+            {
+                if (!Get(HaveRequiresPhoneNumbersAsPlainText))
+                {
+                    requiresPhoneNumbersAsPlainText = ReadBoolean(
+                        "requiresphonenumbersasplaintext"
+                    );
+                    Set(HaveRequiresPhoneNumbersAsPlainText);
                 }
 
                 return requiresPhoneNumbersAsPlainText;
@@ -737,11 +912,16 @@ namespace System.Web.Configuration
         }
 
         bool requiresSpecialViewStateEncoding;
-        public virtual bool RequiresSpecialViewStateEncoding {
-            get {
-                if (!Get (HaveRequiresSpecialViewStateEncoding)) {
-                    requiresSpecialViewStateEncoding = ReadBoolean ("requiresspecialviewstateencoding");
-                    Set (HaveRequiresSpecialViewStateEncoding);
+        public virtual bool RequiresSpecialViewStateEncoding
+        {
+            get
+            {
+                if (!Get(HaveRequiresSpecialViewStateEncoding))
+                {
+                    requiresSpecialViewStateEncoding = ReadBoolean(
+                        "requiresspecialviewstateencoding"
+                    );
+                    Set(HaveRequiresSpecialViewStateEncoding);
                 }
 
                 return requiresSpecialViewStateEncoding;
@@ -749,11 +929,14 @@ namespace System.Web.Configuration
         }
 
         bool requiresUniqueFilePathSuffix;
-        public virtual bool RequiresUniqueFilePathSuffix {
-            get {
-                if (!Get (HaveRequiresUniqueFilePathSuffix)) {
-                    requiresUniqueFilePathSuffix = ReadBoolean ("requiresuniquefilepathsuffix");
-                    Set (HaveRequiresUniqueFilePathSuffix);
+        public virtual bool RequiresUniqueFilePathSuffix
+        {
+            get
+            {
+                if (!Get(HaveRequiresUniqueFilePathSuffix))
+                {
+                    requiresUniqueFilePathSuffix = ReadBoolean("requiresuniquefilepathsuffix");
+                    Set(HaveRequiresUniqueFilePathSuffix);
                 }
 
                 return requiresUniqueFilePathSuffix;
@@ -761,11 +944,16 @@ namespace System.Web.Configuration
         }
 
         bool requiresUniqueHtmlCheckboxNames;
-        public virtual bool RequiresUniqueHtmlCheckboxNames {
-            get {
-                if (!Get (HaveRequiresUniqueHtmlCheckboxNames)) {
-                    requiresUniqueHtmlCheckboxNames = ReadBoolean ("requiresuniquehtmlcheckboxnames");
-                    Set (HaveRequiresUniqueHtmlCheckboxNames);
+        public virtual bool RequiresUniqueHtmlCheckboxNames
+        {
+            get
+            {
+                if (!Get(HaveRequiresUniqueHtmlCheckboxNames))
+                {
+                    requiresUniqueHtmlCheckboxNames = ReadBoolean(
+                        "requiresuniquehtmlcheckboxnames"
+                    );
+                    Set(HaveRequiresUniqueHtmlCheckboxNames);
                 }
 
                 return requiresUniqueHtmlCheckboxNames;
@@ -773,11 +961,14 @@ namespace System.Web.Configuration
         }
 
         bool requiresUniqueHtmlInputNames;
-        public virtual bool RequiresUniqueHtmlInputNames {
-            get {
-                if (!Get (HaveRequiresUniqueHtmlInputNames)) {
-                    requiresUniqueHtmlInputNames = ReadBoolean ("requiresuniquehtmlinputnames");
-                    Set (HaveRequiresUniqueHtmlInputNames);
+        public virtual bool RequiresUniqueHtmlInputNames
+        {
+            get
+            {
+                if (!Get(HaveRequiresUniqueHtmlInputNames))
+                {
+                    requiresUniqueHtmlInputNames = ReadBoolean("requiresuniquehtmlinputnames");
+                    Set(HaveRequiresUniqueHtmlInputNames);
                 }
 
                 return requiresUniqueHtmlInputNames;
@@ -785,11 +976,16 @@ namespace System.Web.Configuration
         }
 
         bool requiresUrlEncodedPostfieldValues;
-        public virtual bool RequiresUrlEncodedPostfieldValues {
-            get {
-                if (!Get (HaveRequiresUrlEncodedPostfieldValues)) {
-                    requiresUrlEncodedPostfieldValues = ReadBoolean ("requiresurlencodedpostfieldvalues");
-                    Set (HaveRequiresUrlEncodedPostfieldValues);
+        public virtual bool RequiresUrlEncodedPostfieldValues
+        {
+            get
+            {
+                if (!Get(HaveRequiresUrlEncodedPostfieldValues))
+                {
+                    requiresUrlEncodedPostfieldValues = ReadBoolean(
+                        "requiresurlencodedpostfieldvalues"
+                    );
+                    Set(HaveRequiresUrlEncodedPostfieldValues);
                 }
 
                 return requiresUrlEncodedPostfieldValues;
@@ -797,11 +993,14 @@ namespace System.Web.Configuration
         }
 
         int screenBitDepth;
-        public virtual int ScreenBitDepth {
-            get {
-                if (!Get (HaveScreenBitDepth)) {
-                    screenBitDepth = ReadInt32 ("screenbitdepth");
-                    Set (HaveScreenBitDepth);
+        public virtual int ScreenBitDepth
+        {
+            get
+            {
+                if (!Get(HaveScreenBitDepth))
+                {
+                    screenBitDepth = ReadInt32("screenbitdepth");
+                    Set(HaveScreenBitDepth);
                 }
 
                 return screenBitDepth;
@@ -809,11 +1008,14 @@ namespace System.Web.Configuration
         }
 
         int screenCharactersHeight;
-        public virtual int ScreenCharactersHeight {
-            get {
-                if (!Get (HaveScreenCharactersHeight)) {
-                    screenCharactersHeight = ReadInt32 ("screencharactersheight");
-                    Set (HaveScreenCharactersHeight);
+        public virtual int ScreenCharactersHeight
+        {
+            get
+            {
+                if (!Get(HaveScreenCharactersHeight))
+                {
+                    screenCharactersHeight = ReadInt32("screencharactersheight");
+                    Set(HaveScreenCharactersHeight);
                 }
 
                 return screenCharactersHeight;
@@ -821,11 +1023,14 @@ namespace System.Web.Configuration
         }
 
         int screenCharactersWidth;
-        public virtual int ScreenCharactersWidth {
-            get {
-                if (!Get (HaveScreenCharactersWidth)) {
-                    screenCharactersWidth = ReadInt32 ("screencharacterswidth");
-                    Set (HaveScreenCharactersWidth);
+        public virtual int ScreenCharactersWidth
+        {
+            get
+            {
+                if (!Get(HaveScreenCharactersWidth))
+                {
+                    screenCharactersWidth = ReadInt32("screencharacterswidth");
+                    Set(HaveScreenCharactersWidth);
                 }
 
                 return screenCharactersWidth;
@@ -833,11 +1038,14 @@ namespace System.Web.Configuration
         }
 
         int screenPixelsHeight;
-        public virtual int ScreenPixelsHeight {
-            get {
-                if (!Get (HaveScreenPixelsHeight)) {
-                    screenPixelsHeight = ReadInt32 ("screenpixelsheight");
-                    Set (HaveScreenPixelsHeight);
+        public virtual int ScreenPixelsHeight
+        {
+            get
+            {
+                if (!Get(HaveScreenPixelsHeight))
+                {
+                    screenPixelsHeight = ReadInt32("screenpixelsheight");
+                    Set(HaveScreenPixelsHeight);
                 }
 
                 return screenPixelsHeight;
@@ -845,11 +1053,14 @@ namespace System.Web.Configuration
         }
 
         int screenPixelsWidth;
-        public virtual int ScreenPixelsWidth {
-            get {
-                if (!Get (HaveScreenPixelsWidth)) {
-                    screenPixelsWidth = ReadInt32 ("screenpixelswidth");
-                    Set (HaveScreenPixelsWidth);
+        public virtual int ScreenPixelsWidth
+        {
+            get
+            {
+                if (!Get(HaveScreenPixelsWidth))
+                {
+                    screenPixelsWidth = ReadInt32("screenpixelswidth");
+                    Set(HaveScreenPixelsWidth);
                 }
 
                 return screenPixelsWidth;
@@ -857,11 +1068,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsAccesskeyAttribute;
-        public virtual bool SupportsAccesskeyAttribute {
-            get {
-                if (!Get (HaveSupportsAccesskeyAttribute)) {
-                    supportsAccesskeyAttribute = ReadBoolean ("supportsaccesskeyattribute");
-                    Set (HaveSupportsAccesskeyAttribute);
+        public virtual bool SupportsAccesskeyAttribute
+        {
+            get
+            {
+                if (!Get(HaveSupportsAccesskeyAttribute))
+                {
+                    supportsAccesskeyAttribute = ReadBoolean("supportsaccesskeyattribute");
+                    Set(HaveSupportsAccesskeyAttribute);
                 }
 
                 return supportsAccesskeyAttribute;
@@ -869,11 +1083,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsBodyColor;
-        public virtual bool SupportsBodyColor {
-            get {
-                if (!Get (HaveSupportsBodyColor)) {
-                    supportsBodyColor = ReadBoolean ("supportsbodycolor");
-                    Set (HaveSupportsBodyColor);
+        public virtual bool SupportsBodyColor
+        {
+            get
+            {
+                if (!Get(HaveSupportsBodyColor))
+                {
+                    supportsBodyColor = ReadBoolean("supportsbodycolor");
+                    Set(HaveSupportsBodyColor);
                 }
 
                 return supportsBodyColor;
@@ -881,11 +1098,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsBold;
-        public virtual bool SupportsBold {
-            get {
-                if (!Get (HaveSupportsBold)) {
-                    supportsBold = ReadBoolean ("supportsbold");
-                    Set (HaveSupportsBold);
+        public virtual bool SupportsBold
+        {
+            get
+            {
+                if (!Get(HaveSupportsBold))
+                {
+                    supportsBold = ReadBoolean("supportsbold");
+                    Set(HaveSupportsBold);
                 }
 
                 return supportsBold;
@@ -893,11 +1113,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsCacheControlMetaTag;
-        public virtual bool SupportsCacheControlMetaTag {
-            get {
-                if (!Get (HaveSupportsCacheControlMetaTag)) {
-                    supportsCacheControlMetaTag = ReadBoolean ("supportscachecontrolmetatag");
-                    Set (HaveSupportsCacheControlMetaTag);
+        public virtual bool SupportsCacheControlMetaTag
+        {
+            get
+            {
+                if (!Get(HaveSupportsCacheControlMetaTag))
+                {
+                    supportsCacheControlMetaTag = ReadBoolean("supportscachecontrolmetatag");
+                    Set(HaveSupportsCacheControlMetaTag);
                 }
 
                 return supportsCacheControlMetaTag;
@@ -905,11 +1128,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsCallback;
-        public virtual bool SupportsCallback {
-            get {
-                if (!Get (HaveSupportsCallback)) {
-                    supportsCallback = ReadBoolean ("supportscallback");
-                    Set (HaveSupportsCallback);
+        public virtual bool SupportsCallback
+        {
+            get
+            {
+                if (!Get(HaveSupportsCallback))
+                {
+                    supportsCallback = ReadBoolean("supportscallback");
+                    Set(HaveSupportsCallback);
                 }
 
                 return supportsCallback;
@@ -917,11 +1143,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsCss;
-        public virtual bool SupportsCss {
-            get {
-                if (!Get (HaveSupportsCss)) {
-                    supportsCss = ReadBoolean ("supportscss");
-                    Set (HaveSupportsCss);
+        public virtual bool SupportsCss
+        {
+            get
+            {
+                if (!Get(HaveSupportsCss))
+                {
+                    supportsCss = ReadBoolean("supportscss");
+                    Set(HaveSupportsCss);
                 }
 
                 return supportsCss;
@@ -929,11 +1158,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsDivAlign;
-        public virtual bool SupportsDivAlign {
-            get {
-                if (!Get (HaveSupportsDivAlign)) {
-                    supportsDivAlign = ReadBoolean ("supportsdivalign");
-                    Set (HaveSupportsDivAlign);
+        public virtual bool SupportsDivAlign
+        {
+            get
+            {
+                if (!Get(HaveSupportsDivAlign))
+                {
+                    supportsDivAlign = ReadBoolean("supportsdivalign");
+                    Set(HaveSupportsDivAlign);
                 }
 
                 return supportsDivAlign;
@@ -941,11 +1173,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsDivNoWrap;
-        public virtual bool SupportsDivNoWrap {
-            get {
-                if (!Get (HaveSupportsDivNoWrap)) {
-                    supportsDivNoWrap = ReadBoolean ("supportsdivnowrap");
-                    Set (HaveRequiresDBCSCharacter);
+        public virtual bool SupportsDivNoWrap
+        {
+            get
+            {
+                if (!Get(HaveSupportsDivNoWrap))
+                {
+                    supportsDivNoWrap = ReadBoolean("supportsdivnowrap");
+                    Set(HaveRequiresDBCSCharacter);
                 }
 
                 return supportsDivNoWrap;
@@ -953,11 +1188,16 @@ namespace System.Web.Configuration
         }
 
         bool supportsEmptyStringInCookieValue;
-        public virtual bool SupportsEmptyStringInCookieValue {
-            get {
-                if (!Get (HaveSupportsEmptyStringInCookieValue)) {
-                    supportsEmptyStringInCookieValue = ReadBoolean ("supportsemptystringincookievalue");
-                    Set (HaveSupportsEmptyStringInCookieValue);
+        public virtual bool SupportsEmptyStringInCookieValue
+        {
+            get
+            {
+                if (!Get(HaveSupportsEmptyStringInCookieValue))
+                {
+                    supportsEmptyStringInCookieValue = ReadBoolean(
+                        "supportsemptystringincookievalue"
+                    );
+                    Set(HaveSupportsEmptyStringInCookieValue);
                 }
 
                 return supportsEmptyStringInCookieValue;
@@ -965,11 +1205,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsFontColor;
-        public virtual bool SupportsFontColor {
-            get {
-                if (!Get (HaveSupportsFontColor)) {
-                    supportsFontColor = ReadBoolean ("supportsfontcolor");
-                    Set (HaveSupportsFontColor);
+        public virtual bool SupportsFontColor
+        {
+            get
+            {
+                if (!Get(HaveSupportsFontColor))
+                {
+                    supportsFontColor = ReadBoolean("supportsfontcolor");
+                    Set(HaveSupportsFontColor);
                 }
 
                 return supportsFontColor;
@@ -977,11 +1220,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsFontName;
-        public virtual bool SupportsFontName {
-            get {
-                if (!Get (HaveSupportsFontName)) {
-                    supportsFontName = ReadBoolean ("supportsfontname");
-                    Set (HaveSupportsFontName);
+        public virtual bool SupportsFontName
+        {
+            get
+            {
+                if (!Get(HaveSupportsFontName))
+                {
+                    supportsFontName = ReadBoolean("supportsfontname");
+                    Set(HaveSupportsFontName);
                 }
 
                 return supportsFontName;
@@ -989,11 +1235,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsFontSize;
-        public virtual bool SupportsFontSize {
-            get {
-                if (!Get (HaveSupportsFontSize)) {
-                    supportsFontSize = ReadBoolean ("supportsfontsize");
-                    Set (HaveSupportsFontSize);
+        public virtual bool SupportsFontSize
+        {
+            get
+            {
+                if (!Get(HaveSupportsFontSize))
+                {
+                    supportsFontSize = ReadBoolean("supportsfontsize");
+                    Set(HaveSupportsFontSize);
                 }
 
                 return supportsFontSize;
@@ -1001,11 +1250,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsImageSubmit;
-        public virtual bool SupportsImageSubmit {
-            get {
-                if (!Get (HaveSupportsImageSubmit)) {
-                    supportsImageSubmit = ReadBoolean ("supportsimagesubmit");
-                    Set (HaveSupportsImageSubmit);
+        public virtual bool SupportsImageSubmit
+        {
+            get
+            {
+                if (!Get(HaveSupportsImageSubmit))
+                {
+                    supportsImageSubmit = ReadBoolean("supportsimagesubmit");
+                    Set(HaveSupportsImageSubmit);
                 }
 
                 return supportsImageSubmit;
@@ -1013,11 +1265,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsIModeSymbols;
-        public virtual bool SupportsIModeSymbols {
-            get {
-                if (!Get (HaveSupportsIModeSymbols)) {
-                    supportsIModeSymbols = ReadBoolean ("supportsimodesymbols");
-                    Set (HaveSupportsIModeSymbols);
+        public virtual bool SupportsIModeSymbols
+        {
+            get
+            {
+                if (!Get(HaveSupportsIModeSymbols))
+                {
+                    supportsIModeSymbols = ReadBoolean("supportsimodesymbols");
+                    Set(HaveSupportsIModeSymbols);
                 }
 
                 return supportsIModeSymbols;
@@ -1025,11 +1280,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsInputIStyle;
-        public virtual bool SupportsInputIStyle {
-            get {
-                if (!Get (HaveSupportsInputIStyle)) {
-                    supportsInputIStyle = ReadBoolean ("supportsinputistyle");
-                    Set (HaveSupportsInputIStyle);
+        public virtual bool SupportsInputIStyle
+        {
+            get
+            {
+                if (!Get(HaveSupportsInputIStyle))
+                {
+                    supportsInputIStyle = ReadBoolean("supportsinputistyle");
+                    Set(HaveSupportsInputIStyle);
                 }
 
                 return supportsInputIStyle;
@@ -1037,11 +1295,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsInputMode;
-        public virtual bool SupportsInputMode {
-            get {
-                if (!Get (HaveSupportsInputMode)) {
-                    supportsInputMode = ReadBoolean ("supportsinputmode");
-                    Set (HaveSupportsInputMode);
+        public virtual bool SupportsInputMode
+        {
+            get
+            {
+                if (!Get(HaveSupportsInputMode))
+                {
+                    supportsInputMode = ReadBoolean("supportsinputmode");
+                    Set(HaveSupportsInputMode);
                 }
 
                 return supportsInputMode;
@@ -1049,11 +1310,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsItalic;
-        public virtual bool SupportsItalic {
-            get {
-                if (!Get (HaveSupportsItalic)) {
-                    supportsItalic = ReadBoolean ("supportsitalic");
-                    Set (HaveSupportsItalic);
+        public virtual bool SupportsItalic
+        {
+            get
+            {
+                if (!Get(HaveSupportsItalic))
+                {
+                    supportsItalic = ReadBoolean("supportsitalic");
+                    Set(HaveSupportsItalic);
                 }
 
                 return supportsItalic;
@@ -1061,11 +1325,16 @@ namespace System.Web.Configuration
         }
 
         bool supportsJPhoneMultiMediaAttributes;
-        public virtual bool SupportsJPhoneMultiMediaAttributes {
-            get {
-                if (!Get (HaveSupportsJPhoneMultiMediaAttributes)) {
-                    supportsJPhoneMultiMediaAttributes = ReadBoolean ("supportsjphonemultimediaattributes");
-                    Set (HaveSupportsJPhoneMultiMediaAttributes);
+        public virtual bool SupportsJPhoneMultiMediaAttributes
+        {
+            get
+            {
+                if (!Get(HaveSupportsJPhoneMultiMediaAttributes))
+                {
+                    supportsJPhoneMultiMediaAttributes = ReadBoolean(
+                        "supportsjphonemultimediaattributes"
+                    );
+                    Set(HaveSupportsJPhoneMultiMediaAttributes);
                 }
 
                 return supportsJPhoneMultiMediaAttributes;
@@ -1073,11 +1342,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsJPhoneSymbols;
-        public virtual bool SupportsJPhoneSymbols {
-            get {
-                if (!Get (HaveSupportsJPhoneSymbols)) {
-                    supportsJPhoneSymbols = ReadBoolean ("supportsjphonesymbols");
-                    Set (HaveSupportsJPhoneSymbols);
+        public virtual bool SupportsJPhoneSymbols
+        {
+            get
+            {
+                if (!Get(HaveSupportsJPhoneSymbols))
+                {
+                    supportsJPhoneSymbols = ReadBoolean("supportsjphonesymbols");
+                    Set(HaveSupportsJPhoneSymbols);
                 }
 
                 return supportsJPhoneSymbols;
@@ -1085,11 +1357,16 @@ namespace System.Web.Configuration
         }
 
         bool supportsQueryStringInFormAction;
-        public virtual bool SupportsQueryStringInFormAction {
-            get {
-                if (!Get (HaveSupportsQueryStringInFormAction)) {
-                    supportsQueryStringInFormAction = ReadBoolean ("supportsquerystringinformaction");
-                    Set (HaveSupportsQueryStringInFormAction);
+        public virtual bool SupportsQueryStringInFormAction
+        {
+            get
+            {
+                if (!Get(HaveSupportsQueryStringInFormAction))
+                {
+                    supportsQueryStringInFormAction = ReadBoolean(
+                        "supportsquerystringinformaction"
+                    );
+                    Set(HaveSupportsQueryStringInFormAction);
                 }
 
                 return supportsQueryStringInFormAction;
@@ -1097,11 +1374,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsRedirectWithCookie;
-        public virtual bool SupportsRedirectWithCookie {
-            get {
-                if (!Get (HaveSupportsRedirectWithCookie)) {
-                    supportsRedirectWithCookie = ReadBoolean ("supportsredirectwithcookie");
-                    Set (HaveSupportsRedirectWithCookie);
+        public virtual bool SupportsRedirectWithCookie
+        {
+            get
+            {
+                if (!Get(HaveSupportsRedirectWithCookie))
+                {
+                    supportsRedirectWithCookie = ReadBoolean("supportsredirectwithcookie");
+                    Set(HaveSupportsRedirectWithCookie);
                 }
 
                 return supportsRedirectWithCookie;
@@ -1109,11 +1389,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsSelectMultiple;
-        public virtual bool SupportsSelectMultiple {
-            get {
-                if (!Get (HaveSupportsSelectMultiple)) {
-                    supportsSelectMultiple = ReadBoolean ("supportsselectmultiple");
-                    Set (HaveSupportsSelectMultiple);
+        public virtual bool SupportsSelectMultiple
+        {
+            get
+            {
+                if (!Get(HaveSupportsSelectMultiple))
+                {
+                    supportsSelectMultiple = ReadBoolean("supportsselectmultiple");
+                    Set(HaveSupportsSelectMultiple);
                 }
 
                 return supportsSelectMultiple;
@@ -1121,11 +1404,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsUncheck;
-        public virtual bool SupportsUncheck {
-            get {
-                if (!Get (HaveSupportsUncheck)) {
-                    supportsUncheck = ReadBoolean ("supportsuncheck");
-                    Set (HaveSupportsUncheck);
+        public virtual bool SupportsUncheck
+        {
+            get
+            {
+                if (!Get(HaveSupportsUncheck))
+                {
+                    supportsUncheck = ReadBoolean("supportsuncheck");
+                    Set(HaveSupportsUncheck);
                 }
 
                 return supportsUncheck;
@@ -1133,11 +1419,14 @@ namespace System.Web.Configuration
         }
 
         bool supportsXmlHttp;
-        public virtual bool SupportsXmlHttp {
-            get {
-                if (!Get (HaveSupportsXmlHttp)) {
-                    supportsXmlHttp = ReadBoolean ("supportsxmlhttp");
-                    Set (HaveSupportsXmlHttp);
+        public virtual bool SupportsXmlHttp
+        {
+            get
+            {
+                if (!Get(HaveSupportsXmlHttp))
+                {
+                    supportsXmlHttp = ReadBoolean("supportsxmlhttp");
+                    Set(HaveSupportsXmlHttp);
                 }
 
                 return supportsXmlHttp;
@@ -1145,22 +1434,25 @@ namespace System.Web.Configuration
         }
 
         bool useOptimizedCacheKey;
-        public bool UseOptimizedCacheKey {
-            get {
-                if (!Get (HaveUseOptimizedCacheKey)) {
-                    useOptimizedCacheKey = ReadBoolean ("useoptimizedcachekey");
-                    Set (HaveUseOptimizedCacheKey);
+        public bool UseOptimizedCacheKey
+        {
+            get
+            {
+                if (!Get(HaveUseOptimizedCacheKey))
+                {
+                    useOptimizedCacheKey = ReadBoolean("useoptimizedcachekey");
+                    Set(HaveUseOptimizedCacheKey);
                 }
 
                 return useOptimizedCacheKey;
             }
         }
-        
+
         static HttpCapabilitiesProvider _provider = new HttpCapabilitiesDefaultProvider();
-        public static HttpCapabilitiesProvider BrowserCapabilitiesProvider { 
+        public static HttpCapabilitiesProvider BrowserCapabilitiesProvider
+        {
             get { return _provider; }
             set { _provider = value; }
         }
     }
 }
-

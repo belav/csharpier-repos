@@ -4,11 +4,12 @@
 
 using System;
 
-class C<T> where T : class
+class C<T>
+    where T : class
 {
-    public static void Foo ()
+    public static void Foo()
     {
         S<T> s;
-        Console.WriteLine (s);
+        Console.WriteLine(s);
     }
 }

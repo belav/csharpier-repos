@@ -6,13 +6,12 @@ using System;
 
 public class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        MyAssembly01::GlobalClass.JustForFirst ();
-        MyAssembly02::GlobalClass.JustForSecond ();
-        
-        MyAssembly01::Namespace1.MyClass1.JustForFirst ();
-        MyAssembly02::Namespace1.MyClass1.JustForSecond ();
+        MyAssembly01::GlobalClass.JustForFirst();
+        MyAssembly02::GlobalClass.JustForSecond();
+
+        MyAssembly01::Namespace1.MyClass1.JustForFirst();
+        MyAssembly02::Namespace1.MyClass1.JustForSecond();
     }
 }
-

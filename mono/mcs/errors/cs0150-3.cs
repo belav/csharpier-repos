@@ -3,7 +3,7 @@
 
 public class C
 {
-    void Test ()
+    void Test()
     {
         var zCoords = new double[uint.MaxValue] { 0 };
     }

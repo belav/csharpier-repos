@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class Hoge<T>
 {
-    public static implicit operator Hoge<T> (T value)
+    public static implicit operator Hoge<T>(T value)
     {
         return null;
     }
@@ -14,9 +14,9 @@ public class Hoge<T>
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
-        IList<int> x = new List<int> ();
+        IList<int> x = new List<int>();
         Hoge<IList<int>> hoge = x;
     }
 }

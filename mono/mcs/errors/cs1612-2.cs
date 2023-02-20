@@ -2,24 +2,24 @@
 // Line: 9
 
 using System;
-class X {
-    static void Main ()
+
+class X
+{
+    static void Main()
     {
-
         P.x = 10;
-        Console.WriteLine ("Got: " + P.x);
+        Console.WriteLine("Got: " + P.x);
     }
 
-    static G P {
-     get {
-        return g;
-     }
+    static G P
+    {
+        get { return g; }
     }
 
-    static G g = new G ();
+    static G g = new G();
 
-    struct G {
+    struct G
+    {
         public int x;
     }
 }
-        

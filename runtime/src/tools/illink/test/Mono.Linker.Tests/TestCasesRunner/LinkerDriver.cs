@@ -11,24 +11,26 @@ namespace Mono.Linker.Tests.TestCasesRunner
         {
             readonly LinkerCustomizations _customization;
 
-            public TestDriver (Queue<string> args, LinkerCustomizations customizations) : base (args)
+            public TestDriver(Queue<string> args, LinkerCustomizations customizations)
+                : base(args)
             {
                 _customization = customizations;
             }
 
-            protected override LinkContext GetDefaultContext (Pipeline pipeline, ILogger logger)
+            protected override LinkContext GetDefaultContext(Pipeline pipeline, ILogger logger)
             {
-                LinkContext context = base.GetDefaultContext (pipeline, logger);
-                _customization.CustomizeLinkContext (context);
+                LinkContext context = base.GetDefaultContext(pipeline, logger);
+                _customization.CustomizeLinkContext(context);
                 return context;
             }
         }
 
-        public virtual void Link (string[] args, LinkerCustomizations customizations, ILogger logger)
+        public virtual void Link(string[] args, LinkerCustomizations customizations, ILogger logger)
         {
-            Driver.ProcessResponseFile (args, out var queue);
-            using (var driver = new TestDriver (queue, customizations)) {
-                driver.Run (logger);
+            Driver.ProcessResponseFile(args, out var queue);
+            using (var driver = new TestDriver(queue, customizations))
+            {
+                driver.Run(logger);
             }
         }
     }

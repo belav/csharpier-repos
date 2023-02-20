@@ -2,8 +2,7 @@
 // Line: 7
 // Compiler options: -langversion:7.2
 
- class C
- {
+class C
+{
     private string S2 { get; private protected set; }
- }
-
+}

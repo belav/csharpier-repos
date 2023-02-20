@@ -6,13 +6,10 @@ using System.Linq;
 
 class Test
 {
-    public static int Main ()
+    public static int Main()
     {
-        int[] int_array = new int [] { 0, 1 };
-        
-        var e = from int i in int_array
-            let v = true
-            where v = false
-            select v;
+        int[] int_array = new int[] { 0, 1 };
+
+        var e = from int i in int_array let v = true where v = false select v;
     }
 }

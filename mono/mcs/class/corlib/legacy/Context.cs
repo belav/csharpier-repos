@@ -3,10 +3,10 @@ using System.Runtime.InteropServices;
 
 namespace System.Runtime.Remoting.Contexts
 {
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     public sealed class Context
     {
-#region Keep this code, it is used by the runtime
+        #region Keep this code, it is used by the runtime
 #pragma warning disable 169, 414
         int domain_id;
         int context_id;
@@ -17,12 +17,12 @@ namespace System.Runtime.Remoting.Contexts
         static object[] local_slots;
 #pragma warning restore 169, 414
 
-        internal bool NeedsContextSink => throw new PlatformNotSupportedException ();
-#endregion
+        internal bool NeedsContextSink => throw new PlatformNotSupportedException();
+        #endregion
 
-        Context ()
+        Context()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
     }
 }

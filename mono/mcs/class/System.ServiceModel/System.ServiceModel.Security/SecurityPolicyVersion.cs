@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,10 +30,18 @@ namespace System.ServiceModel.Security
 {
     public abstract class SecurityPolicyVersion
     {
-        static SecurityPolicyVersion ()
+        static SecurityPolicyVersion()
         {
-            WSSecurityPolicy11 = new SecurityPolicyVersionImpl () { Prefix = "wsp", Namespace = "http://schemas.xmlsoap.org/ws/2004/09/policy" };
-            WSSecurityPolicy12 = new SecurityPolicyVersionImpl () { Prefix = "wsp", Namespace = "http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" };
+            WSSecurityPolicy11 = new SecurityPolicyVersionImpl()
+            {
+                Prefix = "wsp",
+                Namespace = "http://schemas.xmlsoap.org/ws/2004/09/policy"
+            };
+            WSSecurityPolicy12 = new SecurityPolicyVersionImpl()
+            {
+                Prefix = "wsp",
+                Namespace = "http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+            };
         }
 
         public static SecurityPolicyVersion WSSecurityPolicy11 { get; private set; }
@@ -43,7 +51,5 @@ namespace System.ServiceModel.Security
         public string Prefix { get; internal set; }
     }
 
-    class SecurityPolicyVersionImpl : SecurityPolicyVersion
-    {
-    }
+    class SecurityPolicyVersionImpl : SecurityPolicyVersion { }
 }

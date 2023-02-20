@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,37 +34,37 @@ namespace System.ServiceModel.Discovery
 {
     public class AnnouncementEndpoint : ServiceEndpoint
     {
-        public AnnouncementEndpoint ()
-            : this (DiscoveryVersion.WSDiscovery11)
-        {
-        }
+        public AnnouncementEndpoint()
+            : this(DiscoveryVersion.WSDiscovery11) { }
 
-        public AnnouncementEndpoint (DiscoveryVersion discoveryVersion)
-            : this (discoveryVersion, null, null)
+        public AnnouncementEndpoint(DiscoveryVersion discoveryVersion)
+            : this(discoveryVersion, null, null)
         {
             if (discoveryVersion == null)
-                throw new ArgumentNullException ("discoveryVersion");
+                throw new ArgumentNullException("discoveryVersion");
             DiscoveryVersion = discoveryVersion;
-            
+
             IsSystemEndpoint = true;
         }
 
-        public AnnouncementEndpoint (Binding binding, EndpointAddress address)
-            : this (DiscoveryVersion.WSDiscovery11, binding, address)
-        {
-        }
+        public AnnouncementEndpoint(Binding binding, EndpointAddress address)
+            : this(DiscoveryVersion.WSDiscovery11, binding, address) { }
 
-        public AnnouncementEndpoint (DiscoveryVersion discoveryVersion, Binding binding, EndpointAddress address)
-            : base (GetContract (discoveryVersion), binding, address)
+        public AnnouncementEndpoint(
+            DiscoveryVersion discoveryVersion,
+            Binding binding,
+            EndpointAddress address
+        )
+            : base(GetContract(discoveryVersion), binding, address)
         {
             DiscoveryVersion = discoveryVersion;
         }
 
-        static ContractDescription GetContract (DiscoveryVersion discoveryVersion)
+        static ContractDescription GetContract(DiscoveryVersion discoveryVersion)
         {
             if (discoveryVersion == null)
-                throw new ArgumentNullException ("discoveryVersion");
-            return ContractDescription.GetContract (discoveryVersion.AnnouncementContractType);
+                throw new ArgumentNullException("discoveryVersion");
+            return ContractDescription.GetContract(discoveryVersion.AnnouncementContractType);
         }
 
         public DiscoveryVersion DiscoveryVersion { get; private set; }

@@ -4,39 +4,41 @@ using Mono.Linker.Steps;
 
 class PreserveMethodsSubStep : BaseStep
 {
-
-    protected override void Process ()
+    protected override void Process()
     {
-        foreach (var assembly in Context.GetAssemblies ()) {
+        foreach (var assembly in Context.GetAssemblies())
+        {
             foreach (var type in assembly.MainModule.Types)
-                ProcessType (type);
+                ProcessType(type);
         }
     }
 
-    void ProcessType (TypeDefinition type)
+    void ProcessType(TypeDefinition type)
     {
-        if (type.HasNestedTypes) {
+        if (type.HasNestedTypes)
+        {
             foreach (var nested in type.NestedTypes)
-                ProcessType (nested);
+                ProcessType(nested);
         }
 
-
-        foreach (var method in type.Methods) {
+        foreach (var method in type.Methods)
+        {
             if (method.Name == "PreservedForType")
-                Annotations.AddPreservedMethod (type, method);
+                Annotations.AddPreservedMethod(type, method);
 
-            ProcessMethod (method);
+            ProcessMethod(method);
         }
     }
 
-    public void ProcessMethod (MethodDefinition method)
+    public void ProcessMethod(MethodDefinition method)
     {
         if (method.Name == "MarkedMethod")
-            Annotations.Mark (method);
+            Annotations.Mark(method);
 
-        foreach (var m in method.DeclaringType.Methods) {
+        foreach (var m in method.DeclaringType.Methods)
+        {
             if (m.Name == $"PreservedForMethod_{method.Name}")
-                Annotations.AddPreservedMethod (method, m);
+                Annotations.AddPreservedMethod(method, m);
         }
     }
 }

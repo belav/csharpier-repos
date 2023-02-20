@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
         public override ImmutableArray<IRequestHandler> CreateRequestHandlers()
         {
-            return ImmutableArray.Create<IRequestHandler>(new WorkspacePullDiagnosticHandler(_diagnosticService));
+            return ImmutableArray.Create<IRequestHandler>(
+                new WorkspacePullDiagnosticHandler(_diagnosticService)
+            );
         }
     }
 }

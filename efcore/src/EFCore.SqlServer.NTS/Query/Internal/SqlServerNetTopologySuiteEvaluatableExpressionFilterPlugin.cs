@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class SqlServerNetTopologySuiteEvaluatableExpressionFilterPlugin : IEvaluatableExpressionFilterPlugin
+public class SqlServerNetTopologySuiteEvaluatableExpressionFilterPlugin
+    : IEvaluatableExpressionFilterPlugin
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -19,8 +20,11 @@ public class SqlServerNetTopologySuiteEvaluatableExpressionFilterPlugin : IEvalu
     /// </summary>
     public virtual bool IsEvaluatableExpression(Expression expression)
     {
-        if (expression is MethodCallExpression methodCallExpression
-            && methodCallExpression.Method.DeclaringType == typeof(SqlServerNetTopologySuiteDbFunctionsExtensions))
+        if (
+            expression is MethodCallExpression methodCallExpression
+            && methodCallExpression.Method.DeclaringType
+                == typeof(SqlServerNetTopologySuiteDbFunctionsExtensions)
+        )
         {
             return false;
         }

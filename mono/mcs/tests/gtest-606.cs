@@ -2,8 +2,8 @@
 
 class X
 {
-    static void Main()
+    static void Main()
     {
         SD<int, int>.S.E f;
-    } 
+    }
 }

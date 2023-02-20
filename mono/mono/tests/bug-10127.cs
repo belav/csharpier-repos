@@ -5,10 +5,12 @@ using System.Runtime.InteropServices;
 
 namespace WeakReferenceTest
 {
-    public static class Cache {
+    public static class Cache
+    {
         static GCHandle[] table = new GCHandle[1024 * 1024];
 
-        public static T Probe<T>(int hc) where T : class
+        public static T Probe<T>(int hc)
+            where T : class
         {
             int index = hc & (table.Length - 1);
             lock (table)
@@ -20,19 +22,20 @@ namespace WeakReferenceTest
             }
         }
 
-        public static T Add<T>(T obj, int hc) where T : class 
+        public static T Add<T>(T obj, int hc)
+            where T : class
         {
             int index = hc & (table.Length - 1);
             lock (table)
             {
-                table[index] = GCHandle.Alloc (obj, GCHandleType.Weak);
+                table[index] = GCHandle.Alloc(obj, GCHandleType.Weak);
             }
             return obj;
         }
-
     }
 
-    public class Tester {
+    public class Tester
+    {
         public static readonly int seed = unchecked(DateTime.Now.Ticks.GetHashCode());
 
         Random rand = new Random(seed);
@@ -49,41 +52,43 @@ namespace WeakReferenceTest
 
         void Work()
         {
-            do {
-
-                var item = rand.Next ();
+            do
+            {
+                var item = rand.Next();
                 var probed = Cache.Probe<object>(item.GetHashCode());
 
-                if (probed == null) {
+                if (probed == null)
+                {
                     Cache.Add<object>(item, item.GetHashCode());
                 }
 
-                if (rand.NextDouble() <= 0.1) {
+                if (rand.NextDouble() <= 0.1)
+                {
                     GC.Collect();
                 }
-
             } while (alive);
         }
 
-        public void Stop ()
+        public void Stop()
         {
             alive = false;
         }
-
     }
 
     class MainClass
     {
-        public static void Main (string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("Starting cache testers");
             Console.WriteLine("Thread seed: " + Tester.seed);
             List<Tester> testers = new List<Tester>();
-            for (int count = 0; count < 10; count++) {
+            for (int count = 0; count < 10; count++)
+            {
                 testers.Add(new Tester());
             }
 
-            foreach (var tester in testers) {
+            foreach (var tester in testers)
+            {
                 tester.Start();
             }
 
@@ -94,7 +99,7 @@ namespace WeakReferenceTest
 
             foreach (var tester in testers)
             {
-                tester.Stop ();
+                tester.Stop();
             }
         }
     }

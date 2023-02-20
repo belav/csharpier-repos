@@ -22,13 +22,19 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         /// function has not been removed due to the hard-dependency on this particular signature in Venus' templates.
         /// </summary>
         [Obsolete]
-        void AddReferenceToCodeDirectory([MarshalAs(UnmanagedType.LPWStr)] string assemblyFileName, ICSharpProjectRoot project);
+        void AddReferenceToCodeDirectory(
+            [MarshalAs(UnmanagedType.LPWStr)] string assemblyFileName,
+            ICSharpProjectRoot project
+        );
 
         /// <summary>
         /// Called by the venus project system to tell the project site to remove a live reference to an existing C#
         /// code directory.
         /// </summary>
-        void RemoveReferenceToCodeDirectory([MarshalAs(UnmanagedType.LPWStr)] string assemblyFileName, ICSharpProjectRoot project);
+        void RemoveReferenceToCodeDirectory(
+            [MarshalAs(UnmanagedType.LPWStr)] string assemblyFileName,
+            ICSharpProjectRoot project
+        );
 
         /// <summary> NOTE: This is not called by any project system in Dev11 according
         /// to http://bang/.  Remove?
@@ -40,7 +46,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         /// Not calling this when a file is updated on disk means code sense
         /// will not be up to date wrt to the changes on disk.
         /// </summary>
-        void OnDiskFileUpdated([MarshalAs(UnmanagedType.LPWStr)] string filename, ref System.Runtime.InteropServices.ComTypes.FILETIME pFT);
+        void OnDiskFileUpdated(
+            [MarshalAs(UnmanagedType.LPWStr)] string filename,
+            ref System.Runtime.InteropServices.ComTypes.FILETIME pFT
+        );
 
         /// <summary>Called when aliases for an import are changed</summary>
         /// <param name="project">the project whose aliases we are changing</param>
@@ -48,9 +57,29 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         /// <param name="currentAliasesCount">number of elements in the currentAliases array</param>
         /// <param name="currentAliases">the previous aliases for this import</param>
         /// <param name="previousAliases">the current aliases for this import</param>
-        void OnCodeDirectoryAliasesChanged(ICSharpProjectRoot project,
-            int previousAliasesCount, [In, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 1)] string[] previousAliases,
-             int currentAliasesCount, [In, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 3)] string[] currentAliases);
+        void OnCodeDirectoryAliasesChanged(
+            ICSharpProjectRoot project,
+            int previousAliasesCount,
+            [
+                In,
+                MarshalAs(
+                    UnmanagedType.LPArray,
+                    ArraySubType = UnmanagedType.LPWStr,
+                    SizeParamIndex = 1
+                )
+            ]
+                string[] previousAliases,
+            int currentAliasesCount,
+            [
+                In,
+                MarshalAs(
+                    UnmanagedType.LPArray,
+                    ArraySubType = UnmanagedType.LPWStr,
+                    SizeParamIndex = 3
+                )
+            ]
+                string[] currentAliases
+        );
 
         /// <summary>
         /// Called by the project system to tell the project site to create a live reference to an existing C# code
@@ -63,6 +92,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         /// called prior to this call)</param>
         /// <param name="optionID">Indicates whether the reference is a regular reference or one that needs to be
         /// embedded into the target assembly (as indicated to the compiler through /link compiler option).</param>
-        void AddReferenceToCodeDirectoryEx([MarshalAs(UnmanagedType.LPWStr)] string assemblyFileName, ICSharpProjectRoot project, CompilerOptions optionID);
+        void AddReferenceToCodeDirectoryEx(
+            [MarshalAs(UnmanagedType.LPWStr)] string assemblyFileName,
+            ICSharpProjectRoot project,
+            CompilerOptions optionID
+        );
     }
 }

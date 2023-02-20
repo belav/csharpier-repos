@@ -13,7 +13,12 @@ namespace System.Reflection.Runtime.MethodInfos
     //
     internal sealed class CustomMethodInvoker : MethodInvoker
     {
-        public CustomMethodInvoker(Type thisType, Type[] parameterTypes, InvokerOptions options, CustomMethodInvokerAction action)
+        public CustomMethodInvoker(
+            Type thisType,
+            Type[] parameterTypes,
+            InvokerOptions options,
+            CustomMethodInvokerAction action
+        )
         {
             _action = action;
             _options = options;
@@ -21,7 +26,12 @@ namespace System.Reflection.Runtime.MethodInfos
             _parameterTypes = parameterTypes;
         }
 
-        protected sealed override object? Invoke(object? thisObject, object?[]? arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException)
+        protected sealed override object? Invoke(
+            object? thisObject,
+            object?[]? arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        )
         {
             // This does not handle optional parameters. None of the methods we use custom invocation for have them.
             if (!(thisObject == null && 0 != (_options & InvokerOptions.AllowNullThis)))
@@ -34,7 +44,11 @@ namespace System.Reflection.Runtime.MethodInfos
             object[] convertedArguments = new object[argCount];
             for (int i = 0; i < convertedArguments.Length; i++)
             {
-                convertedArguments[i] = RuntimeAugments.CheckArgument(arguments[i], _parameterTypes[i].TypeHandle, binderBundle);
+                convertedArguments[i] = RuntimeAugments.CheckArgument(
+                    arguments[i],
+                    _parameterTypes[i].TypeHandle,
+                    binderBundle
+                );
             }
             object result;
             try
@@ -48,13 +62,23 @@ namespace System.Reflection.Runtime.MethodInfos
             return result;
         }
 
-        public sealed override Delegate CreateDelegate(RuntimeTypeHandle delegateType, object target, bool isStatic, bool isVirtual, bool isOpen)
+        public sealed override Delegate CreateDelegate(
+            RuntimeTypeHandle delegateType,
+            object target,
+            bool isStatic,
+            bool isVirtual,
+            bool isOpen
+        )
         {
-            if (_thisType.IsConstructedGenericType && _thisType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            if (
+                _thisType.IsConstructedGenericType
+                && _thisType.GetGenericTypeDefinition() == typeof(Nullable<>)
+            )
             {
                 if (isOpen)
                 {
-                    return DynamicDelegateAugments.CreateObjectArrayDelegate(Type.GetTypeFromHandle(delegateType),
+                    return DynamicDelegateAugments.CreateObjectArrayDelegate(
+                        Type.GetTypeFromHandle(delegateType),
                         (args) =>
                         {
                             object[] arguments;
@@ -69,7 +93,8 @@ namespace System.Reflection.Runtime.MethodInfos
                             }
 
                             return _action(args[0], arguments, _thisType);
-                        });
+                        }
+                    );
                 }
                 else
                 {

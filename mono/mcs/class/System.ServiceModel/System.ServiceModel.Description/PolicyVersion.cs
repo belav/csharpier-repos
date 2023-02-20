@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,32 +34,40 @@ namespace System.ServiceModel.Description
 {
     public sealed class PolicyVersion
     {
-        static PolicyVersion _policy12 = new PolicyVersion ("http://schemas.xmlsoap.org/ws/2004/09/policy");
-        static PolicyVersion _policy15 = new PolicyVersion ("http://www.w3.org/ns/ws-policy");
+        static PolicyVersion _policy12 = new PolicyVersion(
+            "http://schemas.xmlsoap.org/ws/2004/09/policy"
+        );
+        static PolicyVersion _policy15 = new PolicyVersion("http://www.w3.org/ns/ws-policy");
 
         readonly string _namespace;
 
-        private PolicyVersion (string @namespace) {
+        private PolicyVersion(string @namespace)
+        {
             _namespace = @namespace;
         }
 
-        public static PolicyVersion Default {
+        public static PolicyVersion Default
+        {
             get { return _policy12; }
         }
 
-        public static PolicyVersion Policy12 {
+        public static PolicyVersion Policy12
+        {
             get { return _policy12; }
         }
 
-        public static PolicyVersion Policy15 {
+        public static PolicyVersion Policy15
+        {
             get { return _policy15; }
         }
 
-        public string Namespace {
+        public string Namespace
+        {
             get { return _namespace; }
         }
 
-        public override string ToString () {
+        public override string ToString()
+        {
             return Namespace;
         }
     }

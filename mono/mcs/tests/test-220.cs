@@ -9,7 +9,6 @@ using System.Collections.Specialized;
 
 namespace MonoBUG
 {
-
     public class Bug
     {
         public static int Main(string[] args)
@@ -21,14 +20,13 @@ namespace MonoBUG
             l.Add(f1);
             l.Add(f2);
 
-            foreach (Foo f in l) {
-            }
+            foreach (Foo f in l) { }
 
             if (FooList.foo_current_called != true)
                 return 1;
             if (FooList.ienumerator_current_called != false)
                 return 2;
-            Console.WriteLine ("Test passes");
+            Console.WriteLine("Test passes");
             return 0;
         }
     }
@@ -36,86 +34,84 @@ namespace MonoBUG
     public class Foo
     {
         private string m_name;
-        
+
         public Foo(string name)
         {
             m_name = name;
         }
-        
-        public string Name {
+
+        public string Name
+        {
             get { return m_name; }
         }
     }
 
     [Serializable()]
-    public class FooList : DictionaryBase  
+    public class FooList : DictionaryBase
     {
         public static bool foo_current_called = false;
         public static bool ienumerator_current_called = false;
-            
-        public FooList() 
-        {
-        }
-        
-        public void Add(Foo value) 
+
+        public FooList() { }
+
+        public void Add(Foo value)
         {
             Dictionary.Add(value.Name, value);
         }
-        
-        public new FooEnumerator GetEnumerator() 
+
+        public new FooEnumerator GetEnumerator()
         {
             return new FooEnumerator(this);
         }
-        
-        public class FooEnumerator : object, IEnumerator 
+
+        public class FooEnumerator : object, IEnumerator
         {
-            
             private IEnumerator baseEnumerator;
-            
+
             private IEnumerable temp;
-            
-            public FooEnumerator(FooList mappings) 
+
+            public FooEnumerator(FooList mappings)
             {
-                this.temp = (IEnumerable) (mappings);
+                this.temp = (IEnumerable)(mappings);
                 this.baseEnumerator = temp.GetEnumerator();
             }
-            
-            public Foo Current 
+
+            public Foo Current
             {
-                get 
+                get
                 {
                     Console.WriteLine("Foo Current()");
                     foo_current_called = true;
-                    return (Foo) ((DictionaryEntry) (baseEnumerator.Current)).Value;
+                    return (Foo)((DictionaryEntry)(baseEnumerator.Current)).Value;
                 }
             }
-            
-            object IEnumerator.Current 
+
+            object IEnumerator.Current
             {
-                get 
+                get
                 {
                     Console.WriteLine("object IEnumerator.Current()");
                     ienumerator_current_called = true;
                     return baseEnumerator.Current;
                 }
             }
-            
-            public bool MoveNext() 
+
+            public bool MoveNext()
             {
                 return baseEnumerator.MoveNext();
             }
-            
-            bool IEnumerator.MoveNext() 
+
+            bool IEnumerator.MoveNext()
             {
                 return baseEnumerator.MoveNext();
             }
-            
-            public void Reset() 
+
+            public void Reset()
             {
                 baseEnumerator.Reset();
             }
-            
-            void IEnumerator.Reset() 
+
+            void IEnumerator.Reset()
             {
                 baseEnumerator.Reset();
             }

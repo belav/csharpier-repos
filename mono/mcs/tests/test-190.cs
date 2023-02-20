@@ -4,7 +4,7 @@ class A
 
     class B : A
     {
-        void Test ()
+        void Test()
         {
             foo = 3;
         }
@@ -12,12 +12,11 @@ class A
 
     class C
     {
-        void Test (A a)
+        void Test(A a)
         {
             a.foo = 4;
         }
     }
 
-    public static void Main ()
-    { }
+    public static void Main() { }
 }

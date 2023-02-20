@@ -36,8 +36,10 @@ public static class DatabaseColumnExtensions
         var table = column.Table;
 
         return table.PrimaryKey?.Columns.Contains(column) == true
-            || (table.UniqueConstraints.Any(uc => uc.Columns.Contains(column))
-                || table.Indexes.Any(uc => uc.Columns.Contains(column)));
+            || (
+                table.UniqueConstraints.Any(uc => uc.Columns.Contains(column))
+                || table.Indexes.Any(uc => uc.Columns.Contains(column))
+            );
     }
 
     /// <summary>
@@ -46,7 +48,7 @@ public static class DatabaseColumnExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool IsRowVersion(this DatabaseColumn column)
-        => column.ValueGenerated == ValueGenerated.OnAddOrUpdate
-            && (bool?)column[ScaffoldingAnnotationNames.ConcurrencyToken] == true;
+    public static bool IsRowVersion(this DatabaseColumn column) =>
+        column.ValueGenerated == ValueGenerated.OnAddOrUpdate
+        && (bool?)column[ScaffoldingAnnotationNames.ConcurrencyToken] == true;
 }

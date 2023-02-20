@@ -2,8 +2,6 @@ namespace Mono.Linker.Tests.Cases.LinkXml.Dependencies.EmbeddedLinkXmlPreservesA
 {
     public class Library2 : Base
     {
-        public override void VirtualMethodFromBase ()
-        {
-        }
+        public override void VirtualMethodFromBase() { }
     }
 }

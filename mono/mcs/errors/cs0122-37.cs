@@ -3,16 +3,12 @@
 
 public class Test
 {
-    protected void Method ()
-    {
-    }
+    protected void Method() { }
 
-    private void Method (int i)
-    {
-    }
+    private void Method(int i) { }
 }
 
 public class C
 {
-    string str = nameof (Test.Method);
+    string str = nameof(Test.Method);
 }

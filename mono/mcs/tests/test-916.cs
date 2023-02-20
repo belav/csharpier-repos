@@ -2,18 +2,17 @@ public class Foo
 {
     public static class Nested
     {
-        static int bar ()
+        static int bar()
         {
             return 0;
         }
-        
-        public static void Main ()
+
+        public static void Main()
         {
-            var i = bar ();
+            var i = bar();
             {
                 bool bar = false;
             }
-        } 
+        }
     }
 }
-

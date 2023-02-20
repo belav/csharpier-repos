@@ -25,22 +25,27 @@
 
 using System;
 
-namespace System.Windows.Forms {
-
-    public class StatusBarPanelClickEventArgs : MouseEventArgs {
-
+namespace System.Windows.Forms
+{
+    public class StatusBarPanelClickEventArgs : MouseEventArgs
+    {
         private StatusBarPanel panel;
 
-        public StatusBarPanelClickEventArgs (StatusBarPanel statusBarPanel,
-                MouseButtons button, int clicks, int x, int y) :
-            base (button, clicks, x, y, 0)
+        public StatusBarPanelClickEventArgs(
+            StatusBarPanel statusBarPanel,
+            MouseButtons button,
+            int clicks,
+            int x,
+            int y
+        )
+            : base(button, clicks, x, y, 0)
         {
             this.panel = statusBarPanel;
         }
 
-        public StatusBarPanel StatusBarPanel {
+        public StatusBarPanel StatusBarPanel
+        {
             get { return panel; }
         }
     }
 }
-

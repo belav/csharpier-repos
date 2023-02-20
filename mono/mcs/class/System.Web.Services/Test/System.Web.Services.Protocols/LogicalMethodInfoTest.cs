@@ -26,32 +26,35 @@ namespace MonoTests.System.Web.Services.Protocol
     public class LogicalMethodInfoTest
     {
         [Test]
-        public void BeginEndMethodInfo ()
+        public void BeginEndMethodInfo()
         {
-            LogicalMethodInfo [] ll = LogicalMethodInfo.Create (
-            new MethodInfo [] {
-            typeof (FooService).GetMethod ("BeginEcho"),
-            typeof (FooService).GetMethod ("EndEcho")});
-            Assert.AreEqual (1, ll.Length, "#1");
-            LogicalMethodInfo l = ll [0];
-            Assert.IsNull (l.MethodInfo, "#2");
-            Assert.IsNotNull (l.BeginMethodInfo, "#3");
-            Assert.IsNotNull (l.EndMethodInfo, "#4");
+            LogicalMethodInfo[] ll = LogicalMethodInfo.Create(
+                new MethodInfo[]
+                {
+                    typeof(FooService).GetMethod("BeginEcho"),
+                    typeof(FooService).GetMethod("EndEcho")
+                }
+            );
+            Assert.AreEqual(1, ll.Length, "#1");
+            LogicalMethodInfo l = ll[0];
+            Assert.IsNull(l.MethodInfo, "#2");
+            Assert.IsNotNull(l.BeginMethodInfo, "#3");
+            Assert.IsNotNull(l.EndMethodInfo, "#4");
         }
 
         class FooService : WebService
         {
-            public string Echo (string arg)
+            public string Echo(string arg)
             {
                 return arg;
             }
 
-            public IAsyncResult BeginEcho (string arg, AsyncCallback cb, object state)
+            public IAsyncResult BeginEcho(string arg, AsyncCallback cb, object state)
             {
                 return null;
             }
 
-            public string EndEcho (IAsyncResult result)
+            public string EndEcho(IAsyncResult result)
             {
                 return null;
             }

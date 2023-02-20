@@ -45,12 +45,15 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_Constructor()
         {
-            var json = @"[
+            var json =
+                @"[
                             {
                                 ""Inners"": [""hi"",""bye""]
                             }
                         ]";
-            ImmutableArray<Outer> result = JsonConvert.DeserializeObject<ImmutableArray<Outer>>(json);
+            ImmutableArray<Outer> result = JsonConvert.DeserializeObject<ImmutableArray<Outer>>(
+                json
+            );
 
             Assert.AreEqual(1, result.Length);
             Assert.AreEqual(2, result[0].Inners.Value.Length);
@@ -61,12 +64,15 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_Property()
         {
-            var json = @"[
+            var json =
+                @"[
                             {
                                 ""Inners"": [""hi"",""bye""]
                             }
                         ]";
-            ImmutableArray<OuterProperty> result = JsonConvert.DeserializeObject<ImmutableArray<OuterProperty>>(json);
+            ImmutableArray<OuterProperty> result = JsonConvert.DeserializeObject<
+                ImmutableArray<OuterProperty>
+            >(json);
 
             Assert.AreEqual(1, result.Length);
             Assert.AreEqual(2, result[0].Inners.Value.Length);

@@ -4,5 +4,5 @@
 
 class Test
 {
-    public static void Error (params in int args) {}
+    public static void Error(params in int args) { }
 }

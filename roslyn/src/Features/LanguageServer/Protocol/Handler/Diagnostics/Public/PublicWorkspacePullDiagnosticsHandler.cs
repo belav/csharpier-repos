@@ -18,104 +18,158 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics.Public;
 // A document diagnostic partial report is defined as having the first literal send = WorkspaceDiagnosticReport followed
 // by n WorkspaceDiagnosticReportPartialResult literals.
 // See https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#workspace_diagnostic
-using WorkspaceDiagnosticPartialReport = SumType<WorkspaceDiagnosticReport, WorkspaceDiagnosticReportPartialResult>;
+using WorkspaceDiagnosticPartialReport = SumType<
+    WorkspaceDiagnosticReport,
+    WorkspaceDiagnosticReportPartialResult
+>;
 
 [Method(Methods.WorkspaceDiagnosticName)]
-internal class PublicWorkspacePullDiagnosticsHandler : AbstractPullDiagnosticHandler<WorkspaceDiagnosticParams, WorkspaceDiagnosticPartialReport, WorkspaceDiagnosticReport?>
+internal class PublicWorkspacePullDiagnosticsHandler
+    : AbstractPullDiagnosticHandler<
+        WorkspaceDiagnosticParams,
+        WorkspaceDiagnosticPartialReport,
+        WorkspaceDiagnosticReport?
+    >
 {
     public PublicWorkspacePullDiagnosticsHandler(
         IDiagnosticAnalyzerService analyzerService,
         EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
-        IGlobalOptionService globalOptions)
-        : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions)
-    {
-    }
+        IGlobalOptionService globalOptions
+    )
+        : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions) { }
 
     /// <summary>
     /// Public API doesn't support categories (yet).
     /// </summary>
-    protected override string? GetDiagnosticCategory(WorkspaceDiagnosticParams diagnosticsParams)
-        => null;
+    protected override string? GetDiagnosticCategory(WorkspaceDiagnosticParams diagnosticsParams) =>
+        null;
 
     protected override DiagnosticTag[] ConvertTags(DiagnosticData diagnosticData)
     {
         return ConvertTags(diagnosticData, potentialDuplicate: false);
     }
 
-    protected override WorkspaceDiagnosticPartialReport CreateReport(TextDocumentIdentifier identifier, VisualStudio.LanguageServer.Protocol.Diagnostic[] diagnostics, string resultId)
-        => new WorkspaceDiagnosticPartialReport(new WorkspaceDiagnosticReport
-        {
-            Items = new SumType<WorkspaceFullDocumentDiagnosticReport, WorkspaceUnchangedDocumentDiagnosticReport>[]
+    protected override WorkspaceDiagnosticPartialReport CreateReport(
+        TextDocumentIdentifier identifier,
+        VisualStudio.LanguageServer.Protocol.Diagnostic[] diagnostics,
+        string resultId
+    ) =>
+        new WorkspaceDiagnosticPartialReport(
+            new WorkspaceDiagnosticReport
             {
-                new WorkspaceFullDocumentDiagnosticReport
+                Items = new SumType<
+                    WorkspaceFullDocumentDiagnosticReport,
+                    WorkspaceUnchangedDocumentDiagnosticReport
+                >[]
                 {
-                    Uri = identifier.Uri,
-                    Items = diagnostics,
-                    // The documents provided by workspace reports are never open, so we return null.
-                    Version = null,
-                    ResultId = resultId
+                    new WorkspaceFullDocumentDiagnosticReport
+                    {
+                        Uri = identifier.Uri,
+                        Items = diagnostics,
+                        // The documents provided by workspace reports are never open, so we return null.
+                        Version = null,
+                        ResultId = resultId
+                    }
                 }
             }
-        });
+        );
 
-    protected override WorkspaceDiagnosticPartialReport CreateRemovedReport(TextDocumentIdentifier identifier)
-        => new WorkspaceDiagnosticPartialReport(new WorkspaceDiagnosticReport
-        {
-            Items = new SumType<WorkspaceFullDocumentDiagnosticReport, WorkspaceUnchangedDocumentDiagnosticReport>[]
+    protected override WorkspaceDiagnosticPartialReport CreateRemovedReport(
+        TextDocumentIdentifier identifier
+    ) =>
+        new WorkspaceDiagnosticPartialReport(
+            new WorkspaceDiagnosticReport
             {
-                new WorkspaceFullDocumentDiagnosticReport
+                Items = new SumType<
+                    WorkspaceFullDocumentDiagnosticReport,
+                    WorkspaceUnchangedDocumentDiagnosticReport
+                >[]
                 {
-                    Uri = identifier.Uri,
-                    Items = Array.Empty<VisualStudio.LanguageServer.Protocol.Diagnostic>(),
-                    // The documents provided by workspace reports are never open, so we return null.
-                    Version = null,
-                    ResultId = null,
+                    new WorkspaceFullDocumentDiagnosticReport
+                    {
+                        Uri = identifier.Uri,
+                        Items = Array.Empty<VisualStudio.LanguageServer.Protocol.Diagnostic>(),
+                        // The documents provided by workspace reports are never open, so we return null.
+                        Version = null,
+                        ResultId = null,
+                    }
                 }
             }
-        });
+        );
 
-    protected override WorkspaceDiagnosticPartialReport CreateUnchangedReport(TextDocumentIdentifier identifier, string resultId)
-        => new WorkspaceDiagnosticPartialReport(new WorkspaceDiagnosticReport
-        {
-            Items = new SumType<WorkspaceFullDocumentDiagnosticReport, WorkspaceUnchangedDocumentDiagnosticReport>[]
+    protected override WorkspaceDiagnosticPartialReport CreateUnchangedReport(
+        TextDocumentIdentifier identifier,
+        string resultId
+    ) =>
+        new WorkspaceDiagnosticPartialReport(
+            new WorkspaceDiagnosticReport
             {
-                new WorkspaceUnchangedDocumentDiagnosticReport
+                Items = new SumType<
+                    WorkspaceFullDocumentDiagnosticReport,
+                    WorkspaceUnchangedDocumentDiagnosticReport
+                >[]
                 {
-                    Uri = identifier.Uri,
-                    // The documents provided by workspace reports are never open, so we return null.
-                    Version = null,
-                    ResultId = resultId,
+                    new WorkspaceUnchangedDocumentDiagnosticReport
+                    {
+                        Uri = identifier.Uri,
+                        // The documents provided by workspace reports are never open, so we return null.
+                        Version = null,
+                        ResultId = resultId,
+                    }
                 }
             }
-        });
+        );
 
-    protected override WorkspaceDiagnosticReport? CreateReturn(BufferedProgress<WorkspaceDiagnosticPartialReport> progress)
+    protected override WorkspaceDiagnosticReport? CreateReturn(
+        BufferedProgress<WorkspaceDiagnosticPartialReport> progress
+    )
     {
         var progressValues = progress.GetValues();
         return new WorkspaceDiagnosticReport
         {
-            Items = progressValues != null
-            ? progressValues.SelectMany(report => report.Match(r => r.Items, partial => partial.Items)).ToArray()
-            : Array.Empty<SumType<WorkspaceFullDocumentDiagnosticReport, WorkspaceUnchangedDocumentDiagnosticReport>>(),
+            Items =
+                progressValues != null
+                    ? progressValues
+                        .SelectMany(report => report.Match(r => r.Items, partial => partial.Items))
+                        .ToArray()
+                    : Array.Empty<
+                        SumType<
+                            WorkspaceFullDocumentDiagnosticReport,
+                            WorkspaceUnchangedDocumentDiagnosticReport
+                        >
+                    >(),
         };
     }
 
-    protected override ValueTask<ImmutableArray<IDiagnosticSource>> GetOrderedDiagnosticSourcesAsync(
-        WorkspaceDiagnosticParams diagnosticParams, RequestContext context, CancellationToken cancellationToken)
+    protected override ValueTask<
+        ImmutableArray<IDiagnosticSource>
+    > GetOrderedDiagnosticSourcesAsync(
+        WorkspaceDiagnosticParams diagnosticParams,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         // Task list items are not reported through the public LSP diagnostic API.
-        return WorkspacePullDiagnosticHandler.GetDiagnosticSourcesAsync(context, GlobalOptions, cancellationToken);
+        return WorkspacePullDiagnosticHandler.GetDiagnosticSourcesAsync(
+            context,
+            GlobalOptions,
+            cancellationToken
+        );
     }
 
-    protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(WorkspaceDiagnosticParams diagnosticsParams)
+    protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(
+        WorkspaceDiagnosticParams diagnosticsParams
+    )
     {
-        return diagnosticsParams.PreviousResultId.Select(id => new PreviousPullResult
-        {
-            PreviousResultId = id.Value,
-            TextDocument = new TextDocumentIdentifier
-            {
-                Uri = id.Uri
-            }
-        }).ToImmutableArray();
+        return diagnosticsParams.PreviousResultId
+            .Select(
+                id =>
+                    new PreviousPullResult
+                    {
+                        PreviousResultId = id.Value,
+                        TextDocument = new TextDocumentIdentifier { Uri = id.Uri }
+                    }
+            )
+            .ToImmutableArray();
     }
 }

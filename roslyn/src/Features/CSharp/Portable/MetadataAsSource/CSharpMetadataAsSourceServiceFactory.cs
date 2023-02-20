@@ -17,11 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMetadataAsSourceServiceFactory()
-        {
-        }
+        public CSharpMetadataAsSourceServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices provider)
-            => CSharpMetadataAsSourceService.Instance;
+        public ILanguageService CreateLanguageService(HostLanguageServices provider) =>
+            CSharpMetadataAsSourceService.Instance;
     }
 }

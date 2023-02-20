@@ -2,14 +2,14 @@ using System;
 
 static class Crash
 {
-    static X GetFoo ()
+    static X GetFoo()
     {
         return null;
     }
 
-    static int Main ()
+    static int Main()
     {
-        int res = (GetFoo ()?.ToLower ()).ToUpper ();
+        int res = (GetFoo()?.ToLower()).ToUpper();
         if (res != 0)
             return 1;
 
@@ -19,19 +19,17 @@ static class Crash
 
 class X
 {
-    public Y ToLower ()
+    public Y ToLower()
     {
-        throw new ApplicationException ("should not be called");
+        throw new ApplicationException("should not be called");
     }
 }
 
-class Y
-{
-}
+class Y { }
 
 static class SS
 {
-    public static int ToUpper (this Y y)
+    public static int ToUpper(this Y y)
     {
         if (y != null)
             return 1;

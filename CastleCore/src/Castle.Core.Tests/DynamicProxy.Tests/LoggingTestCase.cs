@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,8 +37,13 @@ namespace Castle.DynamicProxy.Tests
             generator.CreateClassProxy<EmptyClass>();
 
             // Assert
-            Assert.True(logger.RecordedMessage(LoggerLevel.Debug, "No cached proxy type was found for target type " +
-                "Castle.DynamicProxy.Tests.Classes.EmptyClass."));
+            Assert.True(
+                logger.RecordedMessage(
+                    LoggerLevel.Debug,
+                    "No cached proxy type was found for target type "
+                        + "Castle.DynamicProxy.Tests.Classes.EmptyClass."
+                )
+            );
         }
 
         [Test]
@@ -53,8 +58,13 @@ namespace Castle.DynamicProxy.Tests
             generator.CreateClassProxy<EmptyClass>();
 
             // Assert
-            Assert.True(logger.RecordedMessage(LoggerLevel.Debug, "Found cached proxy type Castle.Proxies.EmptyClassProxy " +
-                "for target type Castle.DynamicProxy.Tests.Classes.EmptyClass."));
+            Assert.True(
+                logger.RecordedMessage(
+                    LoggerLevel.Debug,
+                    "Found cached proxy type Castle.Proxies.EmptyClassProxy "
+                        + "for target type Castle.DynamicProxy.Tests.Classes.EmptyClass."
+                )
+            );
         }
 
         [Test]
@@ -69,8 +79,13 @@ namespace Castle.DynamicProxy.Tests
             generator.CreateInterfaceProxyWithoutTarget<IEmptyInterface>();
 
             // Assert
-            Assert.True(logger.RecordedMessage(LoggerLevel.Debug, "Found cached proxy type Castle.Proxies.IEmptyInterfaceProxy " +
-                "for target type Castle.DynamicProxy.Tests.LoggingTestCase+IEmptyInterface."));
+            Assert.True(
+                logger.RecordedMessage(
+                    LoggerLevel.Debug,
+                    "Found cached proxy type Castle.Proxies.IEmptyInterfaceProxy "
+                        + "for target type Castle.DynamicProxy.Tests.LoggingTestCase+IEmptyInterface."
+                )
+            );
         }
 
         [Test]
@@ -81,15 +96,18 @@ namespace Castle.DynamicProxy.Tests
             ProxyGenerator generator = new ProxyGenerator { Logger = logger };
 
             // Act
-            ProxyGenerationOptions options = new ProxyGenerationOptions {
-                Hook = new EmptyHook()
-            };
+            ProxyGenerationOptions options = new ProxyGenerationOptions { Hook = new EmptyHook() };
             generator.CreateClassProxy(typeof(EmptyClass), options);
 
             // Assert
-            Assert.True(logger.RecordedMessage(LoggerLevel.Warn, "The IProxyGenerationHook type " +
-                "Castle.DynamicProxy.Tests.LoggingTestCase+EmptyHook does not override both Equals and GetHashCode. " +
-                "If these are not correctly overridden caching will fail to work causing performance problems."));
+            Assert.True(
+                logger.RecordedMessage(
+                    LoggerLevel.Warn,
+                    "The IProxyGenerationHook type "
+                        + "Castle.DynamicProxy.Tests.LoggingTestCase+EmptyHook does not override both Equals and GetHashCode. "
+                        + "If these are not correctly overridden caching will fail to work causing performance problems."
+                )
+            );
         }
 
         [Test]
@@ -103,17 +121,25 @@ namespace Castle.DynamicProxy.Tests
             generator.CreateClassProxy<NonVirtualMethodClass>();
 
             // Assert
-            Assert.True(logger.RecordedMessage(LoggerLevel.Debug, "Excluded non-overridable method ClassMethod on " +
-                "Castle.DynamicProxy.Tests.LoggingTestCase+NonVirtualMethodClass because it cannot be intercepted."));
-            Assert.True(logger.RecordedMessage(LoggerLevel.Debug, "Excluded non-overridable method InterfaceMethod on " +
-                "Castle.DynamicProxy.Tests.LoggingTestCase+NonVirtualMethodClass because it cannot be intercepted."));
+            Assert.True(
+                logger.RecordedMessage(
+                    LoggerLevel.Debug,
+                    "Excluded non-overridable method ClassMethod on "
+                        + "Castle.DynamicProxy.Tests.LoggingTestCase+NonVirtualMethodClass because it cannot be intercepted."
+                )
+            );
+            Assert.True(
+                logger.RecordedMessage(
+                    LoggerLevel.Debug,
+                    "Excluded non-overridable method InterfaceMethod on "
+                        + "Castle.DynamicProxy.Tests.LoggingTestCase+NonVirtualMethodClass because it cannot be intercepted."
+                )
+            );
         }
 
         #region Test Types
 
-        public interface IEmptyInterface
-        {
-        }
+        public interface IEmptyInterface { }
 
         public interface ISingleMethodInterface
         {
@@ -122,20 +148,14 @@ namespace Castle.DynamicProxy.Tests
 
         public class NonVirtualMethodClass : ISingleMethodInterface
         {
-            public void ClassMethod()
-            {
-            }
+            public void ClassMethod() { }
 
-            public void InterfaceMethod()
-            {
-            }
+            public void InterfaceMethod() { }
         }
 
         public class ClassWithInterfaceMethodExplicitlyImplemented : ISingleMethodInterface
         {
-            void ISingleMethodInterface.InterfaceMethod()
-            {
-            }
+            void ISingleMethodInterface.InterfaceMethod() { }
         }
 
         public class EmptyHook : IProxyGenerationHook
@@ -145,13 +165,9 @@ namespace Castle.DynamicProxy.Tests
                 return true;
             }
 
-            public void NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
-            {
-            }
+            public void NonProxyableMemberNotification(Type type, MemberInfo memberInfo) { }
 
-            public void MethodsInspected()
-            {
-            }
+            public void MethodsInspected() { }
         }
 
         #endregion
@@ -198,7 +214,12 @@ namespace Castle.DynamicProxy.Tests
             throw new NotSupportedException();
         }
 
-        public void TraceFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void TraceFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             throw new NotSupportedException();
         }
@@ -233,7 +254,12 @@ namespace Castle.DynamicProxy.Tests
             throw new NotImplementedException();
         }
 
-        public void DebugFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void DebugFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             throw new NotImplementedException();
         }
@@ -268,7 +294,12 @@ namespace Castle.DynamicProxy.Tests
             throw new NotImplementedException();
         }
 
-        public void InfoFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void InfoFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             throw new NotImplementedException();
         }
@@ -303,7 +334,12 @@ namespace Castle.DynamicProxy.Tests
             throw new NotImplementedException();
         }
 
-        public void WarnFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void WarnFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             throw new NotImplementedException();
         }
@@ -338,7 +374,12 @@ namespace Castle.DynamicProxy.Tests
             throw new NotImplementedException();
         }
 
-        public void ErrorFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void ErrorFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             throw new NotImplementedException();
         }
@@ -373,7 +414,12 @@ namespace Castle.DynamicProxy.Tests
             throw new NotImplementedException();
         }
 
-        public void FatalFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void FatalFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             throw new NotImplementedException();
         }

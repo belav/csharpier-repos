@@ -19,19 +19,23 @@ namespace Internal.Reflection.Execution.MethodInvokers
     internal sealed class StaticMethodInvoker : MethodInvokerWithMethodInvokeInfo
     {
         public StaticMethodInvoker(MethodInvokeInfo methodInvokeInfo)
-            : base(methodInvokeInfo)
-        {
-        }
+            : base(methodInvokeInfo) { }
 
         [DebuggerGuidedStepThroughAttribute]
-        protected sealed override object? Invoke(object? thisObject, object?[]? arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException)
+        protected sealed override object? Invoke(
+            object? thisObject,
+            object?[]? arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        )
         {
             object? result = MethodInvokeInfo.Invoke(
                 null, // this pointer is ignored for static methods
                 MethodInvokeInfo.LdFtnResult,
                 arguments,
                 binderBundle,
-                wrapInTargetInvocationException);
+                wrapInTargetInvocationException
+            );
             System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }

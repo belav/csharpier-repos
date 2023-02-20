@@ -11,7 +11,10 @@ namespace System.Workflow.Activities
 {
     internal interface IDirectoryOperation
     {
-        void GetResult(DirectoryEntry rootEntry, DirectoryEntry currentEntry, List<DirectoryEntry> response);
+        void GetResult(
+            DirectoryEntry rootEntry,
+            DirectoryEntry currentEntry,
+            List<DirectoryEntry> response
+        );
     }
-
 }

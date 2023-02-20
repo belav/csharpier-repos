@@ -3,25 +3,23 @@ using System;
 class X
 {
     static int counter;
-    static int Index ()
+
+    static int Index()
     {
         if (counter++ != 0)
-            throw new ApplicationException ();
-        
+            throw new ApplicationException();
+
         return 1;
     }
-    
+
     int? indexer;
-    int? this [int index] {
-        get {
-            return indexer;
-        }
-        set {
-            indexer = value;
-        }
-    }    
-    
-    static int Test ()
+    int? this[int index]
+    {
+        get { return indexer; }
+        set { indexer = value; }
+    }
+
+    static int Test()
     {
         int? a = 5;
         int? b = a++;
@@ -50,48 +48,48 @@ class X
             return 6;
         if (d != 15)
             return 7;
-        
+
         var s = new short?[] { 3, 2, 1 };
         counter = 0;
-        var r = s [Index ()]++;
+        var r = s[Index()]++;
         if (counter != 1)
             return 8;
-        
+
         if (r != 2)
             return 9;
-        
+
         if (s[1] != 3)
             return 10;
 
         counter = 0;
-        s [Index ()]++;
+        s[Index()]++;
         if (counter != 1)
             return 11;
-        
+
         if (s[1] != 4)
             return 12;
-            
-        X x = new X ();
+
+        X x = new X();
         x.indexer = 6;
         counter = 0;
-        var r2 = x[Index ()]--;
+        var r2 = x[Index()]--;
         if (counter != 1)
             return 13;
-            
+
         if (r2 != 6)
             return 14;
-        
+
         if (x.indexer != 5)
             return 15;
 
         return 0;
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        int result = Test ();
+        int result = Test();
         if (result != 0)
-            Console.WriteLine ("ERROR: {0}", result);
+            Console.WriteLine("ERROR: {0}", result);
         return result;
     }
 }

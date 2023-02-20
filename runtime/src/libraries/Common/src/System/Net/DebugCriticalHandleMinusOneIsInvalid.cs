@@ -14,15 +14,21 @@ namespace System.Net
     {
         private string _trace;
 
-        protected DebugCriticalHandleMinusOneIsInvalid() : base()
+        protected DebugCriticalHandleMinusOneIsInvalid()
+            : base()
         {
-            _trace = "WARNING! GC-ed  >>" + this.GetType().FullName + "<< (should be explicitly closed) \r\n";
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "Creating SafeHandle");
+            _trace =
+                "WARNING! GC-ed  >>"
+                + this.GetType().FullName
+                + "<< (should be explicitly closed) \r\n";
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, "Creating SafeHandle");
         }
 
         ~DebugCriticalHandleMinusOneIsInvalid()
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, _trace);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, _trace);
         }
     }
 #endif // DEBUG

@@ -54,10 +54,22 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
         {
             Verify(OneOrMany.Create(ImmutableArray.Create(1, 2, 3)).Add(4), 1, 2, 3, 4);
             Verify(OneOrMany.Create(ImmutableArray.Create(1, 2, 3, 4)), 1, 2, 3, 4);
-            Verify(OneOrMany.Create(ImmutableArray<int>.Empty).Add(1).Add(2).Add(3).Add(4), 1, 2, 3, 4);
+            Verify(
+                OneOrMany.Create(ImmutableArray<int>.Empty).Add(1).Add(2).Add(3).Add(4),
+                1,
+                2,
+                3,
+                4
+            );
             Verify(new OneOrMany<int>(ImmutableArray.Create(1, 2, 3)).Add(4), 1, 2, 3, 4);
             Verify(new OneOrMany<int>(ImmutableArray.Create(1, 2, 3, 4)), 1, 2, 3, 4);
-            Verify(new OneOrMany<int>(ImmutableArray<int>.Empty).Add(1).Add(2).Add(3).Add(4), 1, 2, 3, 4);
+            Verify(
+                new OneOrMany<int>(ImmutableArray<int>.Empty).Add(1).Add(2).Add(3).Add(4),
+                1,
+                2,
+                3,
+                4
+            );
             Verify(OneOrMany.Create(ImmutableArray.Create(1)).Add(4), 1, 4);
             Verify(OneOrMany.Create(ImmutableArray.Create(1)), 1);
         }
@@ -104,8 +116,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
             Assert.Equal(0, OneOrMany.Create(ImmutableArray<int>.Empty).FirstOrDefault(i => i > 2));
             Assert.Equal(1, OneOrMany.Create(ImmutableArray.Create(1)).FirstOrDefault(i => i < 2));
             Assert.Equal(0, OneOrMany.Create(ImmutableArray.Create(1)).FirstOrDefault(i => i > 2));
-            Assert.Equal(1, OneOrMany.Create(ImmutableArray.Create(1, 3)).FirstOrDefault(i => i < 2));
-            Assert.Equal(3, OneOrMany.Create(ImmutableArray.Create(1, 3)).FirstOrDefault(i => i > 2));
+            Assert.Equal(
+                1,
+                OneOrMany.Create(ImmutableArray.Create(1, 3)).FirstOrDefault(i => i < 2)
+            );
+            Assert.Equal(
+                3,
+                OneOrMany.Create(ImmutableArray.Create(1, 3)).FirstOrDefault(i => i > 2)
+            );
         }
 
         [Fact]
@@ -118,7 +136,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
             Assert.Throws<IndexOutOfRangeException>(() => single[-1]);
             Assert.Throws<IndexOutOfRangeException>(() => quad[5]);
             Assert.Throws<IndexOutOfRangeException>(() => quad[-1]);
-            Assert.Throws<ArgumentNullException>(() => OneOrMany.Create(default(ImmutableArray<int>)));
+            Assert.Throws<ArgumentNullException>(
+                () => OneOrMany.Create(default(ImmutableArray<int>))
+            );
         }
     }
 }

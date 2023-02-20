@@ -18,20 +18,20 @@ namespace MonoTests.System.XmlSerialization
     public class SoapSchemaMemberTests
     {
         [Test]
-        public void MemberNameDefault ()
+        public void MemberNameDefault()
         {
-            SoapSchemaMember member = new SoapSchemaMember ();
-            Assert.AreEqual (string.Empty, member.MemberName);
+            SoapSchemaMember member = new SoapSchemaMember();
+            Assert.AreEqual(string.Empty, member.MemberName);
 
             member.MemberName = null;
-            Assert.AreEqual (string.Empty, member.MemberName);
+            Assert.AreEqual(string.Empty, member.MemberName);
         }
 
         [Test]
-        public void MemberTypeDefault ()
+        public void MemberTypeDefault()
         {
-            SoapSchemaMember member = new SoapSchemaMember ();
-            Assert.AreEqual (XmlQualifiedName.Empty, member.MemberType);
+            SoapSchemaMember member = new SoapSchemaMember();
+            Assert.AreEqual(XmlQualifiedName.Empty, member.MemberType);
         }
     }
 }

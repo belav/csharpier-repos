@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,64 +37,64 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public string NonSerializableContent { get; set; }
         public string SerializableContent { get; set; }
 
-
         [MonoTODO]
-        protected string GetContentString (SerializationContents content, bool serializable)
+        protected string GetContentString(SerializationContents content, bool serializable)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Load (Stream stream)
+        public void Load(Stream stream)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Load (string fileName)
+        public void Load(string fileName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Load (TextReader reader)
+        public void Load(TextReader reader)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Load (XmlReader reader)
+        public void Load(XmlReader reader)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Reset ()
+        public void Reset()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Save (Stream stream)
+        public void Save(Stream stream)
         {
-            throw new NotImplementedException ();
-        }
-        [MonoTODO]
-        public void Save (string fileName)
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Save (TextWriter writer)
+        public void Save(string fileName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Save (XmlWriter writer)
+        public void Save(TextWriter writer)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Save(XmlWriter writer)
+        {
+            throw new NotImplementedException();
         }
     }
 }

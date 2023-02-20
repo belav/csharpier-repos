@@ -3,7 +3,7 @@
 
 class Test
 {
-    ref int Foo ()
+    ref int Foo()
     {
         return ref 2;
     }

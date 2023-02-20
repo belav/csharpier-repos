@@ -4,18 +4,12 @@
 using System;
 
 class A<T>
-    where T: IComparable
-{
-}
+    where T : IComparable { }
 
-class B<U,V>
-    where V: A<U>
-{
-}
+class B<U, V>
+    where V : A<U> { }
 
 class Driver
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

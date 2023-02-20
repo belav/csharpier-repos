@@ -9,13 +9,12 @@ internal sealed class ConnectionManager
 {
     private long _lastConnectionId = long.MinValue;
 
-    private readonly ConcurrentDictionary<long, ConnectionReference> _connectionReferences = new ConcurrentDictionary<long, ConnectionReference>();
+    private readonly ConcurrentDictionary<long, ConnectionReference> _connectionReferences =
+        new ConcurrentDictionary<long, ConnectionReference>();
     private readonly KestrelTrace _trace;
 
     public ConnectionManager(KestrelTrace trace, long? upgradedConnectionLimit)
-        : this(trace, GetCounter(upgradedConnectionLimit))
-    {
-    }
+        : this(trace, GetCounter(upgradedConnectionLimit)) { }
 
     public ConnectionManager(KestrelTrace trace, ResourceCounter upgradedConnections)
     {
@@ -73,8 +72,6 @@ internal sealed class ConnectionManager
         }
     }
 
-    private static ResourceCounter GetCounter(long? number)
-        => number.HasValue
-            ? ResourceCounter.Quota(number.Value)
-            : ResourceCounter.Unlimited;
+    private static ResourceCounter GetCounter(long? number) =>
+        number.HasValue ? ResourceCounter.Quota(number.Value) : ResourceCounter.Unlimited;
 }

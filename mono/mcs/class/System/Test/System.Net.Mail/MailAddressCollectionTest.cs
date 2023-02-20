@@ -19,32 +19,32 @@ namespace MonoTests.System.Net.Mail
     {
         MailAddressCollection ac;
         MailAddress a;
-        
+
         [SetUp]
-        public void GetReady ()
+        public void GetReady()
         {
-            ac = new MailAddressCollection ();
-            a = new MailAddress ("foo@bar.com");
+            ac = new MailAddressCollection();
+            a = new MailAddress("foo@bar.com");
         }
 
         [Test]
-        public void InitialCount ()
+        public void InitialCount()
         {
-            Assert.IsTrue (ac.Count == 0);
+            Assert.IsTrue(ac.Count == 0);
         }
 
         [Test]
-        public void AddCount ()
+        public void AddCount()
         {
-            ac.Add (a);
-            Assert.IsTrue (ac.Count == 1);
+            ac.Add(a);
+            Assert.IsTrue(ac.Count == 1);
         }
 
         [Test]
-        public void RemoveCount ()
+        public void RemoveCount()
         {
-            ac.Remove (a);
-            Assert.IsTrue (ac.Count == 0);
+            ac.Remove(a);
+            Assert.IsTrue(ac.Count == 0);
         }
     }
 }

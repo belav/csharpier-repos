@@ -6,9 +6,10 @@ namespace System.Runtime.Caching
 {
     class ExpiresEntryRef
     {
-        public static ExpiresEntryRef INVALID = new ExpiresEntryRef ();
+        public static ExpiresEntryRef INVALID = new ExpiresEntryRef();
 
-        public bool IsInvalid {
+        public bool IsInvalid
+        {
             get { return this == INVALID; }
         }
     }
@@ -17,10 +18,10 @@ namespace System.Runtime.Caching
     {
         public int Compare(MemoryCacheEntry entry1, MemoryCacheEntry entry2)
         {
-            return DateTime.Compare (entry1.UtcAbsExp , entry2.UtcAbsExp);
+            return DateTime.Compare(entry1.UtcAbsExp, entry2.UtcAbsExp);
         }
 
-        public DateTime GetDateTime (MemoryCacheEntry entry)
+        public DateTime GetDateTime(MemoryCacheEntry entry)
         {
             return entry.UtcAbsExp;
         }
@@ -28,54 +29,54 @@ namespace System.Runtime.Caching
 
     class CacheExpires : CacheEntryCollection
     {
-
-        public static TimeSpan MIN_UPDATE_DELTA = new TimeSpan (0, 0, 1);
-        public static TimeSpan EXPIRATIONS_INTERVAL = new TimeSpan (0, 0, 20);
-        public static CacheExpiresHelper helper = new CacheExpiresHelper ();
+        public static TimeSpan MIN_UPDATE_DELTA = new TimeSpan(0, 0, 1);
+        public static TimeSpan EXPIRATIONS_INTERVAL = new TimeSpan(0, 0, 20);
+        public static CacheExpiresHelper helper = new CacheExpiresHelper();
 
         Timer timer;
 
-        public CacheExpires (MemoryCacheStore store)
-            : base (store, helper)
+        public CacheExpires(MemoryCacheStore store)
+            : base(store, helper) { }
+
+        public new void Add(MemoryCacheEntry entry)
         {
+            entry.ExpiresEntryRef = new ExpiresEntryRef();
+            base.Add(entry);
         }
 
-        public new void Add (MemoryCacheEntry entry)
+        public new void Remove(MemoryCacheEntry entry)
         {
-            entry.ExpiresEntryRef = new ExpiresEntryRef ();
-            base.Add (entry);
-        }
-
-        public new void Remove (MemoryCacheEntry entry)
-        {
-            base.Remove (entry);
+            base.Remove(entry);
             entry.ExpiresEntryRef = ExpiresEntryRef.INVALID;
         }
 
-        public void UtcUpdate (MemoryCacheEntry entry, DateTime utcAbsExp)
+        public void UtcUpdate(MemoryCacheEntry entry, DateTime utcAbsExp)
         {
-            base.Remove (entry);
+            base.Remove(entry);
             entry.UtcAbsExp = utcAbsExp;
-            base.Add (entry);
+            base.Add(entry);
         }
 
-        public void EnableExpirationTimer (bool enable)
+        public void EnableExpirationTimer(bool enable)
         {
-            if (enable) {
+            if (enable)
+            {
                 if (timer != null)
                     return;
 
-                var period = (int) EXPIRATIONS_INTERVAL.TotalMilliseconds;
-                timer = new Timer ((o) => FlushExpiredItems (true), null, period, period);
-            } else {
-                timer.Dispose ();
+                var period = (int)EXPIRATIONS_INTERVAL.TotalMilliseconds;
+                timer = new Timer((o) => FlushExpiredItems(true), null, period, period);
+            }
+            else
+            {
+                timer.Dispose();
                 timer = null;
             }
         }
 
-        public int FlushExpiredItems (bool blockInsert)
+        public int FlushExpiredItems(bool blockInsert)
         {
-            return base.FlushItems (DateTime.UtcNow, CacheEntryRemovedReason.Expired, blockInsert);
+            return base.FlushItems(DateTime.UtcNow, CacheEntryRemovedReason.Expired, blockInsert);
         }
     }
 }

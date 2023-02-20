@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             int metadataLength,
             IntPtr metadataAddress,
             object symReader,
-            bool includeLocalSignatures)
+            bool includeLocalSignatures
+        )
         {
             _metadataOpt = metadata;
             ModuleVersionId = moduleVersionId;
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         public static unsafe ModuleInstance Create(
             PEMemoryBlock metadata,
             Guid moduleVersionId,
-            ISymUnmanagedReader symReader = null)
+            ISymUnmanagedReader symReader = null
+        )
         {
             return Create((IntPtr)metadata.Pointer, metadata.Length, moduleVersionId, symReader);
         }
@@ -53,7 +55,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             IntPtr metadataAddress,
             int metadataLength,
             Guid moduleVersionId,
-            ISymUnmanagedReader symReader = null)
+            ISymUnmanagedReader symReader = null
+        )
         {
             return new ModuleInstance(
                 metadata: null,
@@ -61,7 +64,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                 metadataLength: metadataLength,
                 metadataAddress: metadataAddress,
                 symReader: symReader,
-                includeLocalSignatures: false);
+                includeLocalSignatures: false
+            );
         }
 
         public static ModuleInstance Create(PortableExecutableReference reference)
@@ -70,19 +74,31 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             return Create(reference.GetMetadata(), symReader: null, includeLocalSignatures: false);
         }
 
-        public static ModuleInstance Create(ImmutableArray<byte> assemblyImage, ISymUnmanagedReader symReader, bool includeLocalSignatures = true)
+        public static ModuleInstance Create(
+            ImmutableArray<byte> assemblyImage,
+            ISymUnmanagedReader symReader,
+            bool includeLocalSignatures = true
+        )
         {
             // create a new instance of metadata, the resulting object takes an ownership:
-            return Create(AssemblyMetadata.CreateFromImage(assemblyImage), symReader, includeLocalSignatures);
+            return Create(
+                AssemblyMetadata.CreateFromImage(assemblyImage),
+                symReader,
+                includeLocalSignatures
+            );
         }
 
         private static unsafe ModuleInstance Create(
             Metadata metadata,
             object symReader,
-            bool includeLocalSignatures)
+            bool includeLocalSignatures
+        )
         {
             var assemblyMetadata = metadata as AssemblyMetadata;
-            var moduleMetadata = (assemblyMetadata == null) ? (ModuleMetadata)metadata : assemblyMetadata.GetModules()[0];
+            var moduleMetadata =
+                (assemblyMetadata == null)
+                    ? (ModuleMetadata)metadata
+                    : assemblyMetadata.GetModules()[0];
 
             var moduleId = moduleMetadata.Module.GetModuleVersionIdOrThrow();
             var metadataBlock = moduleMetadata.Module.PEReaderOpt.GetMetadata();
@@ -93,16 +109,21 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                 metadataBlock.Length,
                 (IntPtr)metadataBlock.Pointer,
                 symReader,
-                includeLocalSignatures);
+                includeLocalSignatures
+            );
         }
 
         public void Dispose() => _metadataOpt?.Dispose();
 
-        public MetadataReference GetReference() => (_metadataOpt as AssemblyMetadata)?.GetReference() ?? ((ModuleMetadata)_metadataOpt).GetReference();
+        public MetadataReference GetReference() =>
+            (_metadataOpt as AssemblyMetadata)?.GetReference()
+            ?? ((ModuleMetadata)_metadataOpt).GetReference();
 
-        internal MetadataBlock MetadataBlock => new MetadataBlock(ModuleVersionId, Guid.Empty, MetadataAddress, MetadataLength);
+        internal MetadataBlock MetadataBlock =>
+            new MetadataBlock(ModuleVersionId, Guid.Empty, MetadataAddress, MetadataLength);
 
-        internal unsafe MetadataReader GetMetadataReader() => new MetadataReader((byte*)MetadataAddress, MetadataLength);
+        internal unsafe MetadataReader GetMetadataReader() =>
+            new MetadataReader((byte*)MetadataAddress, MetadataLength);
 
         internal int GetLocalSignatureToken(MethodDefinitionHandle methodHandle)
         {
@@ -111,7 +132,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                 return 0;
             }
 
-            var moduleMetadata = (_metadataOpt as AssemblyMetadata)?.GetModules()[0] ?? (ModuleMetadata)_metadataOpt;
+            var moduleMetadata =
+                (_metadataOpt as AssemblyMetadata)?.GetModules()[0] ?? (ModuleMetadata)_metadataOpt;
             var methodIL = moduleMetadata.Module.GetMethodBodyOrThrow(methodHandle);
             var localSignatureHandle = methodIL.LocalSignature;
             return moduleMetadata.MetadataReader.GetToken(localSignatureHandle);

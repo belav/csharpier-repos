@@ -1,5 +1,5 @@
 //
-// OracleType.cs 
+// OracleType.cs
 //
 // Part of the Mono class libraries at
 // mcs/class/System.Data.OracleClient/System.Data.OracleClient
@@ -16,7 +16,8 @@
 
 using System;
 
-namespace System.Data.OracleClient {
+namespace System.Data.OracleClient
+{
     public enum OracleType
     {
         BFile = 0x01,

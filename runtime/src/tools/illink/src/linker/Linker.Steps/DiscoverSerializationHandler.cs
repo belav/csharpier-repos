@@ -14,122 +14,164 @@ namespace Mono.Linker.Steps
     public class DiscoverSerializationHandler : IMarkHandler
     {
         LinkContext? _context;
-        LinkContext Context {
-            get {
-                Debug.Assert (_context != null);
+        LinkContext Context
+        {
+            get
+            {
+                Debug.Assert(_context != null);
                 return _context;
             }
         }
 
-        public void Initialize (LinkContext context, MarkContext markContext)
+        public void Initialize(LinkContext context, MarkContext markContext)
         {
             _context = context;
-            markContext.RegisterMarkTypeAction (ProcessType);
-            markContext.RegisterMarkMethodAction (CheckForSerializerActivation);
+            markContext.RegisterMarkTypeAction(ProcessType);
+            markContext.RegisterMarkMethodAction(CheckForSerializerActivation);
         }
 
-        void CheckForSerializerActivation (MethodDefinition method)
+        void CheckForSerializerActivation(MethodDefinition method)
         {
             var type = method.DeclaringType;
 
-            if (!Context.SerializationMarker.IsActive (SerializerKind.DataContractSerializer) &&
-                method.IsConstructor && !method.IsStatic &&
-                ((type.Namespace == "System.Runtime.Serialization" && type.Name == "DataContractSerializer") ||
-                (type.Namespace == "System.Runtime.Serialization.Json" && type.Name == "DataContractJsonSerializer"))) {
-
-                Context.SerializationMarker.Activate (SerializerKind.DataContractSerializer);
+            if (
+                !Context.SerializationMarker.IsActive(SerializerKind.DataContractSerializer)
+                && method.IsConstructor
+                && !method.IsStatic
+                && (
+                    (
+                        type.Namespace == "System.Runtime.Serialization"
+                        && type.Name == "DataContractSerializer"
+                    )
+                    || (
+                        type.Namespace == "System.Runtime.Serialization.Json"
+                        && type.Name == "DataContractJsonSerializer"
+                    )
+                )
+            )
+            {
+                Context.SerializationMarker.Activate(SerializerKind.DataContractSerializer);
             }
 
-            if (!Context.SerializationMarker.IsActive (SerializerKind.XmlSerializer) &&
-                method.IsConstructor && !method.IsStatic &&
-                type.Namespace == "System.Xml.Serialization" &&
-                type.Name == "XmlSerializer") {
-
-                Context.SerializationMarker.Activate (SerializerKind.XmlSerializer);
+            if (
+                !Context.SerializationMarker.IsActive(SerializerKind.XmlSerializer)
+                && method.IsConstructor
+                && !method.IsStatic
+                && type.Namespace == "System.Xml.Serialization"
+                && type.Name == "XmlSerializer"
+            )
+            {
+                Context.SerializationMarker.Activate(SerializerKind.XmlSerializer);
             }
         }
 
-        void ProcessType (TypeDefinition type)
+        void ProcessType(TypeDefinition type)
         {
-            ProcessAttributeProvider (type);
+            ProcessAttributeProvider(type);
 
-            if (type.HasFields) {
+            if (type.HasFields)
+            {
                 foreach (var field in type.Fields)
-                    ProcessAttributeProvider (field);
+                    ProcessAttributeProvider(field);
             }
 
-            if (type.HasProperties) {
+            if (type.HasProperties)
+            {
                 foreach (var property in type.Properties)
-                    ProcessAttributeProvider (property);
+                    ProcessAttributeProvider(property);
             }
 
-            if (type.HasMethods) {
+            if (type.HasMethods)
+            {
                 foreach (var method in type.Methods)
-                    ProcessAttributeProvider (method);
+                    ProcessAttributeProvider(method);
             }
 
-            if (type.HasEvents) {
-                foreach (var @event in type.Events) {
-                    ProcessAttributeProvider (@event);
+            if (type.HasEvents)
+            {
+                foreach (var @event in type.Events)
+                {
+                    ProcessAttributeProvider(@event);
                 }
             }
         }
 
-        void ProcessAttributeProvider (ICustomAttributeProvider provider)
+        void ProcessAttributeProvider(ICustomAttributeProvider provider)
         {
             if (!provider.HasCustomAttributes)
                 return;
 
             var serializedFor = SerializerKind.None;
 
-            foreach (var attribute in provider.CustomAttributes) {
-                if (IsPreservedSerializationAttribute (provider, attribute, out SerializerKind serializerKind))
+            foreach (var attribute in provider.CustomAttributes)
+            {
+                if (
+                    IsPreservedSerializationAttribute(
+                        provider,
+                        attribute,
+                        out SerializerKind serializerKind
+                    )
+                )
                     serializedFor |= serializerKind;
             }
 
             if (serializedFor == SerializerKind.None)
                 return;
 
-            if (serializedFor.HasFlag (SerializerKind.DataContractSerializer))
-                Context.SerializationMarker.TrackForSerialization (provider, SerializerKind.DataContractSerializer);
-            if (serializedFor.HasFlag (SerializerKind.XmlSerializer))
-                Context.SerializationMarker.TrackForSerialization (provider, SerializerKind.XmlSerializer);
+            if (serializedFor.HasFlag(SerializerKind.DataContractSerializer))
+                Context.SerializationMarker.TrackForSerialization(
+                    provider,
+                    SerializerKind.DataContractSerializer
+                );
+            if (serializedFor.HasFlag(SerializerKind.XmlSerializer))
+                Context.SerializationMarker.TrackForSerialization(
+                    provider,
+                    SerializerKind.XmlSerializer
+                );
         }
 
-        static bool IsPreservedSerializationAttribute (ICustomAttributeProvider provider, CustomAttribute attribute, out SerializerKind serializerKind)
+        static bool IsPreservedSerializationAttribute(
+            ICustomAttributeProvider provider,
+            CustomAttribute attribute,
+            out SerializerKind serializerKind
+        )
         {
             TypeReference attributeType = attribute.Constructor.DeclaringType;
             serializerKind = SerializerKind.None;
 
-            switch (attributeType.Namespace) {
+            switch (attributeType.Namespace)
+            {
+                // http://bugzilla.xamarin.com/show_bug.cgi?id=1415
+                // http://msdn.microsoft.com/en-us/library/system.runtime.serialization.datamemberattribute.aspx
+                case "System.Runtime.Serialization":
+                    var serialized = false;
+                    if (provider is PropertyDefinition or FieldDefinition or EventDefinition)
+                        serialized = attributeType.Name == "DataMemberAttribute";
+                    else if (provider is TypeDefinition)
+                        serialized = attributeType.Name == "DataContractAttribute";
 
-            // http://bugzilla.xamarin.com/show_bug.cgi?id=1415
-            // http://msdn.microsoft.com/en-us/library/system.runtime.serialization.datamemberattribute.aspx
-            case "System.Runtime.Serialization":
-                var serialized = false;
-                if (provider is PropertyDefinition or FieldDefinition or EventDefinition)
-                    serialized = attributeType.Name == "DataMemberAttribute";
-                else if (provider is TypeDefinition)
-                    serialized = attributeType.Name == "DataContractAttribute";
+                    if (serialized)
+                    {
+                        serializerKind = SerializerKind.DataContractSerializer;
+                        return true;
+                    }
+                    break;
 
-                if (serialized) {
-                    serializerKind = SerializerKind.DataContractSerializer;
-                    return true;
-                }
-                break;
-
-            // http://msdn.microsoft.com/en-us/library/83y7df3e.aspx
-            case "System.Xml.Serialization":
-                var attributeName = attributeType.Name;
-                if (attributeName.StartsWith ("Xml", StringComparison.Ordinal)
-                    && attributeName.EndsWith ("Attribute", StringComparison.Ordinal)
-                    && attributeName != "XmlIgnoreAttribute") {
-                    serializerKind = SerializerKind.XmlSerializer;
-                    return true;
-                }
-                break;
-
-            };
+                // http://msdn.microsoft.com/en-us/library/83y7df3e.aspx
+                case "System.Xml.Serialization":
+                    var attributeName = attributeType.Name;
+                    if (
+                        attributeName.StartsWith("Xml", StringComparison.Ordinal)
+                        && attributeName.EndsWith("Attribute", StringComparison.Ordinal)
+                        && attributeName != "XmlIgnoreAttribute"
+                    )
+                    {
+                        serializerKind = SerializerKind.XmlSerializer;
+                        return true;
+                    }
+                    break;
+            }
+            ;
 
             return false;
         }

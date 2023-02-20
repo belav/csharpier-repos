@@ -7,17 +7,25 @@ using System.Reflection;
 using System.ComponentModel;
 using System.Text;
 
-namespace XmlNormalizer {
+namespace XmlNormalizer
+{
     /// <summary>
     /// Summary description for Class1.
     /// </summary>
-    class XmlNormalizer {
-        class OptionLetterAttribute:Attribute{
+    class XmlNormalizer
+    {
+        class OptionLetterAttribute : Attribute
+        {
             char _c;
-            public OptionLetterAttribute(char c):base(){
+
+            public OptionLetterAttribute(char c)
+                : base()
+            {
                 _c = c;
             }
-            public override string ToString() {
+
+            public override string ToString()
+            {
                 return _c.ToString();
             }
         }
@@ -33,78 +41,95 @@ namespace XmlNormalizer {
 
         [OptionLetter('w')]
         [Description("remove white space")]
-        public bool RemoveWhiteSpace {
-            get {return _removeWhiteSpace;}
-            set {_removeWhiteSpace=value;}
+        public bool RemoveWhiteSpace
+        {
+            get { return _removeWhiteSpace; }
+            set { _removeWhiteSpace = value; }
         }
+
         [OptionLetter('s')]
         [Description("sort attributes")]
-        public bool SortAttributes {
-            get {return _sortAttributes;}
-            set {_sortAttributes=value;}
+        public bool SortAttributes
+        {
+            get { return _sortAttributes; }
+            set { _sortAttributes = value; }
         }
+
         [OptionLetter('a')]
         [Description("remove attributes")]
-        public bool RemoveAttributes {
-            get {return _removeAttributes;}
-            set {_removeAttributes=value;}
+        public bool RemoveAttributes
+        {
+            get { return _removeAttributes; }
+            set { _removeAttributes = value; }
         }
+
         [OptionLetter('p')]
         [Description("remove namespaces and prefixes")]
-        public bool RemoveNamespacesAndPrefixes {
-            get {return _removeNamespacesAndPrefixes;}
-            set {_removeNamespacesAndPrefixes=value;}
+        public bool RemoveNamespacesAndPrefixes
+        {
+            get { return _removeNamespacesAndPrefixes; }
+            set { _removeNamespacesAndPrefixes = value; }
         }
+
         [OptionLetter('t')]
         [Description("remove text nodes")]
-        public bool RemoveText {
-            get {return _removeText;}
-            set {_removeText=value;}
+        public bool RemoveText
+        {
+            get { return _removeText; }
+            set { _removeText = value; }
         }
+
         [OptionLetter('n')]
         [Description("remove all except element nodes")]
-        public bool RemoveAll {
-            get {return _removeAll;}
-            set {_removeAll=value;}
+        public bool RemoveAll
+        {
+            get { return _removeAll; }
+            set { _removeAll = value; }
         }
+
         [OptionLetter('x')]
         [Description("insert newlines before elements")]
-        public bool NewLines {
-            get {return _newLines;}
-            set {_newLines=value;}
+        public bool NewLines
+        {
+            get { return _newLines; }
+            set { _newLines = value; }
         }
+
         [OptionLetter('m')]
         [Description("minimal normalizing")]
-        public bool MinimalNormalizing {
-            get {return false;}
+        public bool MinimalNormalizing
+        {
+            get { return false; }
         }
 
-        public XmlNormalizer ()
-            :this ("") {
-        }
+        public XmlNormalizer()
+            : this("") { }
 
-        public XmlNormalizer (string options) {
+        public XmlNormalizer(string options)
+        {
             ParseOptions(options);
         }
 
-        public void Process(TextReader rd) {
-            doc=new XmlDocument();
+        public void Process(TextReader rd)
+        {
+            doc = new XmlDocument();
             doc.PreserveWhitespace = true;
 
             string fileContents = rd.ReadToEnd();
-            
-            try {
-                doc.LoadXml (fileContents);
+
+            try
+            {
+                doc.LoadXml(fileContents);
             }
-            catch (Exception x) {
-                StringBuilder sb = new StringBuilder ();
-                sb.Append ("<NormalizerRoot>");
-                sb.Append (fileContents);
-                sb.Append ("</NormalizerRoot>");
-                doc.LoadXml (sb.ToString ());
+            catch (Exception x)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("<NormalizerRoot>");
+                sb.Append(fileContents);
+                sb.Append("</NormalizerRoot>");
+                doc.LoadXml(sb.ToString());
             }
 
-        
             if (RemoveText)
                 RemoveWhiteSpace = true;
 
@@ -115,47 +140,56 @@ namespace XmlNormalizer {
 
             CopyNodes(newDoc, doc, newDoc);
 
-            doc=newDoc;
+            doc = newDoc;
         }
 
-        void CopyNodes (XmlDocument newDoc, XmlNode fromParent, XmlNode toParent) {
+        void CopyNodes(XmlDocument newDoc, XmlNode fromParent, XmlNode toParent)
+        {
             if (fromParent.HasChildNodes)
                 foreach (XmlNode c in fromParent.ChildNodes)
-                    CopyNode (newDoc, c, toParent);
+                    CopyNode(newDoc, c, toParent);
 
-            if (fromParent.Attributes != null) {
-                string [] keys = new string [fromParent.Attributes.Count];
+            if (fromParent.Attributes != null)
+            {
+                string[] keys = new string[fromParent.Attributes.Count];
 
-                for (int i=0; i<fromParent.Attributes.Count; i++) {
+                for (int i = 0; i < fromParent.Attributes.Count; i++)
+                {
                     keys[i] = fromParent.Attributes[i].Name;
                 }
-                if (SortAttributes){ 
+                if (SortAttributes)
+                {
                     Array.Sort(keys);
                 }
-                for (int i=0; i<keys.Length; i++) {
-                    CopyNode (newDoc, fromParent.Attributes[keys[i]], toParent);
+                for (int i = 0; i < keys.Length; i++)
+                {
+                    CopyNode(newDoc, fromParent.Attributes[keys[i]], toParent);
                 }
             }
         }
 
-        void CopyNode (XmlDocument newDoc, XmlNode from, XmlNode toParent) {
+        void CopyNode(XmlDocument newDoc, XmlNode from, XmlNode toParent)
+        {
             if (RemoveAll && from.NodeType != XmlNodeType.Element)
                 return;
 
             XmlNode child = null;
             bool newLineNode = false;
-            
-            switch (from.NodeType) {
-                case XmlNodeType.Element: 
+
+            switch (from.NodeType)
+            {
+                case XmlNodeType.Element:
                     newLineNode = true;
                     if (RemoveNamespacesAndPrefixes)
-                        child = newDoc.CreateElement (from.LocalName);
-                    else {
+                        child = newDoc.CreateElement(from.LocalName);
+                    else
+                    {
                         XmlElement e = from as XmlElement;
-                        child = newDoc.CreateElement (e.Prefix, e.LocalName, e.NamespaceURI);
+                        child = newDoc.CreateElement(e.Prefix, e.LocalName, e.NamespaceURI);
                     }
                     break;
-                case XmlNodeType.Attribute: {
+                case XmlNodeType.Attribute:
+                {
                     if (RemoveAttributes)
                         return;
 
@@ -166,68 +200,78 @@ namespace XmlNormalizer {
                     XmlAttribute a;
 
                     if (RemoveNamespacesAndPrefixes)
-                        a = newDoc.CreateAttribute (fromAttr.LocalName);
+                        a = newDoc.CreateAttribute(fromAttr.LocalName);
                     else
-                        a = newDoc.CreateAttribute (fromAttr.Prefix, fromAttr.LocalName, fromAttr.NamespaceURI);
-                    
+                        a = newDoc.CreateAttribute(
+                            fromAttr.Prefix,
+                            fromAttr.LocalName,
+                            fromAttr.NamespaceURI
+                        );
+
                     toParent.Attributes.Append(a);
-                    CopyNodes (newDoc, from, a);
+                    CopyNodes(newDoc, from, a);
                     return;
                 }
                 case XmlNodeType.CDATA:
                     newLineNode = true;
-                    child = newDoc.CreateCDataSection ((from as XmlCDataSection).Data);
+                    child = newDoc.CreateCDataSection((from as XmlCDataSection).Data);
                     break;
                 case XmlNodeType.Comment:
                     if (RemoveWhiteSpace)
                         return;
                     newLineNode = true;
-                    child = newDoc.CreateComment ((from as XmlComment).Data);
+                    child = newDoc.CreateComment((from as XmlComment).Data);
                     break;
                 case XmlNodeType.ProcessingInstruction:
                     newLineNode = true;
                     XmlProcessingInstruction pi = from as XmlProcessingInstruction;
-                    child = newDoc.CreateProcessingInstruction (pi.Target, pi.Data);
+                    child = newDoc.CreateProcessingInstruction(pi.Target, pi.Data);
                     break;
                 case XmlNodeType.DocumentType:
                     newLineNode = true;
-                    toParent.AppendChild (from.CloneNode (true));
+                    toParent.AppendChild(from.CloneNode(true));
                     return;
                 case XmlNodeType.EntityReference:
-                    child = newDoc.CreateEntityReference ((from as XmlEntityReference).Name);
+                    child = newDoc.CreateEntityReference((from as XmlEntityReference).Name);
                     break;
                 case XmlNodeType.SignificantWhitespace:
                     if (RemoveWhiteSpace)
                         return;
-                    child = newDoc.CreateSignificantWhitespace (from.Value);
+                    child = newDoc.CreateSignificantWhitespace(from.Value);
                     break;
                 case XmlNodeType.Text:
                     if (RemoveText)
                         return;
                     newLineNode = true;
-                    child = newDoc.CreateTextNode (from.Value);
+                    child = newDoc.CreateTextNode(from.Value);
                     break;
                 case XmlNodeType.Whitespace:
                     if (RemoveWhiteSpace)
                         return;
-                    child = newDoc.CreateWhitespace (from.Value);
+                    child = newDoc.CreateWhitespace(from.Value);
                     break;
                 case XmlNodeType.XmlDeclaration:
                     newLineNode = true;
                     XmlDeclaration d = from as XmlDeclaration;
-                    XmlDeclaration d1 = newDoc.CreateXmlDeclaration (d.Version, d.Encoding, d.Standalone);
+                    XmlDeclaration d1 = newDoc.CreateXmlDeclaration(
+                        d.Version,
+                        d.Encoding,
+                        d.Standalone
+                    );
                     newDoc.InsertBefore(d1, newDoc.DocumentElement);
                     return;
             }
-            if (NewLines && newLineNode && toParent.NodeType != XmlNodeType.Attribute) {
+            if (NewLines && newLineNode && toParent.NodeType != XmlNodeType.Attribute)
+            {
                 XmlSignificantWhitespace s = newDoc.CreateSignificantWhitespace("\r\n");
-                toParent.AppendChild (s);
+                toParent.AppendChild(s);
             }
             toParent.AppendChild(child);
-            CopyNodes (newDoc, from, child);
+            CopyNodes(newDoc, from, child);
         }
 
-        public void ParseOptions (string options) {
+        public void ParseOptions(string options)
+        {
             _removeWhiteSpace = false;
             _sortAttributes = false;
             _removeAttributes = false;
@@ -235,113 +279,143 @@ namespace XmlNormalizer {
             _removeText = false;
             _removeAll = false;
             _newLines = false;
-            foreach (PropertyInfo pi in typeof (XmlNormalizer).GetProperties()) {
-                string option = pi.GetCustomAttributes(typeof(OptionLetterAttribute),true)[0].ToString();
+            foreach (PropertyInfo pi in typeof(XmlNormalizer).GetProperties())
+            {
+                string option = pi.GetCustomAttributes(typeof(OptionLetterAttribute), true)[
+                    0
+                ].ToString();
                 if (options.IndexOf(option) == -1)
                     continue;
-                pi.GetSetMethod().Invoke (this, new object [] {true});
+                pi.GetSetMethod().Invoke(this, new object[] { true });
             }
         }
 
-        public static Hashtable GetOptions() {
+        public static Hashtable GetOptions()
+        {
             Hashtable h = new Hashtable();
 
-            foreach (PropertyInfo pi in typeof (XmlNormalizer).GetProperties()) {
-                string option = pi.GetCustomAttributes(typeof(OptionLetterAttribute),true)[0].ToString();
-                string descr = (pi.GetCustomAttributes(typeof(DescriptionAttribute), true)[0] as DescriptionAttribute).Description;
+            foreach (PropertyInfo pi in typeof(XmlNormalizer).GetProperties())
+            {
+                string option = pi.GetCustomAttributes(typeof(OptionLetterAttribute), true)[
+                    0
+                ].ToString();
+                string descr = (
+                    pi.GetCustomAttributes(typeof(DescriptionAttribute), true)[0]
+                    as DescriptionAttribute
+                ).Description;
                 h[option] = descr;
             }
             return h;
         }
 
-        public void Output(XmlWriter wr) {
+        public void Output(XmlWriter wr)
+        {
             doc.WriteTo(wr);
         }
 
-        public void Output(TextWriter wr) {
-            Output (new XmlTextWriter (wr));
+        public void Output(TextWriter wr)
+        {
+            Output(new XmlTextWriter(wr));
         }
-        
-        void ProcessFile (string inputfile, string outputfile) {
+
+        void ProcessFile(string inputfile, string outputfile)
+        {
             StreamWriter wr = null;
             StreamReader rd = null;
-            try {
-                wr = new StreamWriter (outputfile);
-                rd = new StreamReader (inputfile);
-                ProcessFile (rd, wr);
-            } catch (Exception) {
+            try
+            {
+                wr = new StreamWriter(outputfile);
+                rd = new StreamReader(inputfile);
+                ProcessFile(rd, wr);
+            }
+            catch (Exception)
+            {
                 if (wr != null)
-                    wr.Close ();
+                    wr.Close();
                 if (rd != null)
-                    rd.Close ();
+                    rd.Close();
                 wr = null;
                 rd = null;
-                File.Copy (inputfile, outputfile, true);
-            } finally {
+                File.Copy(inputfile, outputfile, true);
+            }
+            finally
+            {
                 if (wr != null)
-                    wr.Close ();
+                    wr.Close();
                 if (rd != null)
-                    rd.Close ();
+                    rd.Close();
             }
         }
 
-        void ProcessFile (TextReader input, TextWriter output) {
-            XmlTextWriter xwr = new XmlTextWriter (output);
-            
-            Process (input);
-            Output (xwr);
+        void ProcessFile(TextReader input, TextWriter output)
+        {
+            XmlTextWriter xwr = new XmlTextWriter(output);
+
+            Process(input);
+            Output(xwr);
         }
-        
-        void ProcessDirectory (string inputdir, string outputdir) {
-            if (!Directory.Exists (outputdir))
-                Directory.CreateDirectory (outputdir);
+
+        void ProcessDirectory(string inputdir, string outputdir)
+        {
+            if (!Directory.Exists(outputdir))
+                Directory.CreateDirectory(outputdir);
             DirectoryInfo idi = new DirectoryInfo(inputdir);
-            foreach (FileInfo fi in idi.GetFiles()) {
+            foreach (FileInfo fi in idi.GetFiles())
+            {
                 string outputfile = Path.Combine(outputdir, fi.Name);
-                ProcessFile (fi.FullName, outputfile);
+                ProcessFile(fi.FullName, outputfile);
             }
             foreach (DirectoryInfo di in idi.GetDirectories())
-                ProcessDirectory (di.FullName, Path.Combine(outputdir, di.Name));
+                ProcessDirectory(di.FullName, Path.Combine(outputdir, di.Name));
         }
+
 #if !XML_NORMALIZER_NO_MAIN
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static int Main(string[] args) {
-            if (args.Length < 2 || args[0].Length < 2 || args[0][0] != '-') {
+        static int Main(string[] args)
+        {
+            if (args.Length < 2 || args[0].Length < 2 || args[0][0] != '-')
+            {
                 PrintUsage();
                 return 1;
             }
-            XmlNormalizer norm = new XmlNormalizer (args[0].Substring(1));
-            if (File.Exists(args[1])) {
-                if (args.Length != 2) {
+            XmlNormalizer norm = new XmlNormalizer(args[0].Substring(1));
+            if (File.Exists(args[1]))
+            {
+                if (args.Length != 2)
+                {
                     PrintUsage();
                     return 1;
                 }
-                norm.ProcessFile(new StreamReader (args[1]), Console.Out);
+                norm.ProcessFile(new StreamReader(args[1]), Console.Out);
             }
-            else if (Directory.Exists (args[1])) {
-                if (args.Length != 3) {
+            else if (Directory.Exists(args[1]))
+            {
+                if (args.Length != 3)
+                {
                     PrintUsage();
                     return 1;
                 }
-                norm.ProcessDirectory (args[1], args[2]);
+                norm.ProcessDirectory(args[1], args[2]);
             }
-            else {
+            else
+            {
                 Console.Error.WriteLine("Path not found: {0}", args[1]);
                 return 2;
             }
             return 0;
         }
-        static void PrintUsage () {
+
+        static void PrintUsage()
+        {
             Console.Error.WriteLine("Usage: xmlnorm -<flags> <inputfile>");
             Console.Error.WriteLine("Or: xmlnorm -<flags> <inputdir> <outputdir>");
             Console.Error.WriteLine("\tFlags:");
             foreach (DictionaryEntry de in XmlNormalizer.GetOptions())
-                Console.Error.WriteLine ("\t{0}\t{1}", de.Key, de.Value);
+                Console.Error.WriteLine("\t{0}\t{1}", de.Key, de.Value);
         }
 #endif
     }
-
 }

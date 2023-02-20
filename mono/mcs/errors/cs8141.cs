@@ -3,12 +3,12 @@
 
 public interface I<T>
 {
-    T Test ();
+    T Test();
 }
 
 public class C : I<(int a, int b)>
 {
-    public (int c, int d) Test ()
+    public (int c, int d) Test()
     {
         return (1, 2);
     }

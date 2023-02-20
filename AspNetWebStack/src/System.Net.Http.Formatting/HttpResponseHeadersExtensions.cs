@@ -17,12 +17,12 @@ namespace System.Net.Http
         private const string SetCookie = "Set-Cookie";
 
         /// <summary>
-        /// Adds cookies to a response. Each <c>Set-Cookie</c> header is 
+        /// Adds cookies to a response. Each <c>Set-Cookie</c> header is
         /// represented as one <see cref="CookieHeaderValue"/> instance. A <see cref="CookieHeaderValue"/>
         /// contains information about the domain, path, and other cookie information as well as one or
         /// more <see cref="CookieState"/> instances. Each <see cref="CookieState"/> instance contains
-        /// a cookie name and whatever cookie state is associate with that name. The state is in the form of a 
-        /// <see cref="System.Collections.Specialized.NameValueCollection"/> which on the wire is encoded as HTML Form URL-encoded data. 
+        /// a cookie name and whatever cookie state is associate with that name. The state is in the form of a
+        /// <see cref="System.Collections.Specialized.NameValueCollection"/> which on the wire is encoded as HTML Form URL-encoded data.
         /// This representation allows for multiple related "cookies" to be carried within the same
         /// <c>Cookie</c> header while still providing separation between each cookie state. A sample
         /// <c>Cookie</c> header is shown below. In this example, there are two <see cref="CookieState"/>
@@ -34,7 +34,10 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="headers">The response headers</param>
         /// <param name="cookies">The cookie values to add to the response.</param>
-        public static void AddCookies(this HttpResponseHeaders headers, IEnumerable<CookieHeaderValue> cookies)
+        public static void AddCookies(
+            this HttpResponseHeaders headers,
+            IEnumerable<CookieHeaderValue> cookies
+        )
         {
             if (headers == null)
             {

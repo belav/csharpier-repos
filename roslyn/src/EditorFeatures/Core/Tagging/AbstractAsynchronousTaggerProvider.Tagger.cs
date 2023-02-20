@@ -32,11 +32,11 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 remove => _tagSource.TagsChanged -= value;
             }
 
-            public void Dispose()
-                => _tagSource.OnTaggerDisposed(this);
+            public void Dispose() => _tagSource.OnTaggerDisposed(this);
 
-            public IEnumerable<ITagSpan<TTag>> GetTags(NormalizedSnapshotSpanCollection requestedSpans)
-                => _tagSource.GetTags(requestedSpans);
+            public IEnumerable<ITagSpan<TTag>> GetTags(
+                NormalizedSnapshotSpanCollection requestedSpans
+            ) => _tagSource.GetTags(requestedSpans);
         }
     }
 }

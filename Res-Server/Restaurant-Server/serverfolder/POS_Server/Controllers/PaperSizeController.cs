@@ -10,7 +10,6 @@ using POS_Server.Models.VM;
 using System.Security.Claims;
 using System.Web;
 
-
 using Newtonsoft.Json.Converters;
 
 namespace POS_Server.Controllers
@@ -19,60 +18,52 @@ namespace POS_Server.Controllers
     public class PaperSizeController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller>
         [HttpPost]
         [Route("GetAll")]
-      public string   GetAll(string token)
+        public string GetAll(string token)
         {
-
             // public ResponseVM GetPurinv(string token)
 
             //long mainBranchId, long userId    DateTime? date=new DateTime?();
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
             }
             else
             {
-
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
-                        var list = (from S in entity.paperSize
-                                    select new
-                                    {
-                                        S.sizeId,
-                                        S.paperSize1,
-                                        S.printfor,
-                                        S.sizeValue,
-
-                                    }).ToList();
+                        var list = (
+                            from S in entity.paperSize
+                            select new
+                            {
+                                S.sizeId,
+                                S.paperSize1,
+                                S.printfor,
+                                S.sizeValue,
+                            }
+                        ).ToList();
 
                         return TokenManager.GenerateToken(list);
-                     
-
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
 
-
-            //       
-            //        
+            //
+            //
             //        string token = "";
 
 
@@ -114,8 +105,8 @@ namespace POS_Server.Controllers
         //[Route("GetByID")]
         //public IHttpActionResult GetByID(int sizeId)
         //{
-        //   
-        //    
+        //
+        //
         //    string token = "";
         //    if (headers.Contains("APIKey"))
         //    {
@@ -152,14 +143,12 @@ namespace POS_Server.Controllers
         // add or update location
         [HttpPost]
         [Route("Save")]
-      public string   Save(string token)
+        public string Save(string token)
         {
             string message = "";
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -175,13 +164,15 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObj = JsonConvert.DeserializeObject<paperSize>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObj = JsonConvert.DeserializeObject<paperSize>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObj != null)
                 {
-
                     try
                     {
                         paperSize tmpObject;
@@ -190,17 +181,15 @@ namespace POS_Server.Controllers
                             var locationEntity = entity.Set<paperSize>();
                             if (newObj.sizeId == 0)
                             {
-
-
-
                                 locationEntity.Add(newObj);
                                 entity.SaveChanges();
                                 message = newObj.sizeId.ToString();
                             }
                             else
                             {
-                                tmpObject = entity.paperSize.Where(p => p.sizeId == newObj.sizeId).FirstOrDefault();
-
+                                tmpObject = entity.paperSize
+                                    .Where(p => p.sizeId == newObj.sizeId)
+                                    .FirstOrDefault();
 
                                 tmpObject.paperSize1 = newObj.paperSize1;
                                 tmpObject.printfor = newObj.printfor;
@@ -210,21 +199,17 @@ namespace POS_Server.Controllers
 
                                 message = tmpObject.sizeId.ToString();
                             }
-
-
                         }
                         return TokenManager.GenerateToken(message);
                     }
                     catch
                     {
                         message = "0";
-                      return TokenManager.GenerateToken(message);
+                        return TokenManager.GenerateToken(message);
                     }
-                  
                 }
 
-              return TokenManager.GenerateToken(message);
-
+                return TokenManager.GenerateToken(message);
             }
 
             //var re = Request;
@@ -287,8 +272,8 @@ namespace POS_Server.Controllers
         //[Route("Delete")]
         //public string Delete(int sizeId)
         //{
-           
-            
+
+
         //    string token = "";
         //    int message = 0;
         //    if (headers.Contains("APIKey"))
@@ -322,8 +307,5 @@ namespace POS_Server.Controllers
         //    else
         //        return "-3";
         //}
-
-
-
     }
 }

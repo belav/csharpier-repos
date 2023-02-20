@@ -27,8 +27,6 @@ namespace Mono
 {
     interface ISystemDependencyProvider
     {
-        ISystemCertificateProvider CertificateProvider {
-            get;
-        }
+        ISystemCertificateProvider CertificateProvider { get; }
     }
 }

@@ -4,9 +4,9 @@
 
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        var b = new B ();
+        var b = new B();
         b.value = null;
     }
 }

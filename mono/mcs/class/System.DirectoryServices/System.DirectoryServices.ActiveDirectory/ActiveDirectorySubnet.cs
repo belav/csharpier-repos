@@ -27,72 +27,61 @@ namespace System.DirectoryServices.ActiveDirectory
     [DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true)]
     public class ActiveDirectorySubnet : IDisposable
     {
-        public string Name {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public ActiveDirectorySite Site {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public string Location {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public static ActiveDirectorySubnet FindByName (DirectoryContext context, string subnetName)
+        public string Name
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public ActiveDirectorySubnet (DirectoryContext context, string subnetName)
+        public ActiveDirectorySite Site
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        public ActiveDirectorySubnet (DirectoryContext context, string subnetName, string siteName) : this(context, subnetName)
+        public string Location
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        public void Save ()
+        public static ActiveDirectorySubnet FindByName(DirectoryContext context, string subnetName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Delete ()
+        public ActiveDirectorySubnet(DirectoryContext context, string subnetName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override string ToString ()
+        public ActiveDirectorySubnet(DirectoryContext context, string subnetName, string siteName)
+            : this(context, subnetName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public DirectoryEntry GetDirectoryEntry ()
+        public void Save()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Dispose ()
+        public void Delete()
         {
-
+            throw new NotImplementedException();
         }
 
-        protected virtual void Dispose (bool disposing)
+        public override string ToString()
         {
+            throw new NotImplementedException();
         }
+
+        public DirectoryEntry GetDirectoryEntry()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose() { }
+
+        protected virtual void Dispose(bool disposing) { }
     }
 }

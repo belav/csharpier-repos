@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -50,88 +50,108 @@ namespace System.Security.Cryptography.X509Certificates
         bool readCertData;
         CertificateData certData;
 
-        void EnsureCertData ()
+        void EnsureCertData()
         {
             if (readCertData)
                 return;
 
-            ThrowIfContextInvalid ();
-            certData = new CertificateData (GetRawCertData ());
+            ThrowIfContextInvalid();
+            certData = new CertificateData(GetRawCertData());
             readCertData = true;
         }
 
-        protected abstract byte[] GetRawCertData ();
+        protected abstract byte[] GetRawCertData();
 
-        public sealed override bool Archived {
-            get {
-                return false;
-            }
-            set {
-                throw new PlatformNotSupportedException (
-                    SR.Format (SR.Cryptography_Unix_X509_PropertyNotSettable, nameof (Archived)));
+        public sealed override bool Archived
+        {
+            get { return false; }
+            set
+            {
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.Cryptography_Unix_X509_PropertyNotSettable, nameof(Archived))
+                );
             }
         }
 
-        public sealed override string KeyAlgorithm {
-            get {
-                EnsureCertData ();
+        public sealed override string KeyAlgorithm
+        {
+            get
+            {
+                EnsureCertData();
                 return certData.PublicKeyAlgorithm.AlgorithmId;
             }
         }
 
-        public sealed override byte[] KeyAlgorithmParameters {
-            get {
-                EnsureCertData ();
+        public sealed override byte[] KeyAlgorithmParameters
+        {
+            get
+            {
+                EnsureCertData();
                 return certData.PublicKeyAlgorithm.Parameters;
             }
         }
 
-        public sealed override byte[] PublicKeyValue {
-            get {
-                EnsureCertData ();
+        public sealed override byte[] PublicKeyValue
+        {
+            get
+            {
+                EnsureCertData();
                 return certData.PublicKey;
             }
         }
 
-        public sealed override byte[] SerialNumber {
-            get {
-                EnsureCertData ();
+        public sealed override byte[] SerialNumber
+        {
+            get
+            {
+                EnsureCertData();
                 return certData.SerialNumber;
             }
         }
 
-        public sealed override string SignatureAlgorithm {
-            get {
-                EnsureCertData ();
+        public sealed override string SignatureAlgorithm
+        {
+            get
+            {
+                EnsureCertData();
                 return certData.SignatureAlgorithm.AlgorithmId;
             }
         }
 
-        public sealed override string FriendlyName {
+        public sealed override string FriendlyName
+        {
             get { return ""; }
-            set {
-                throw new PlatformNotSupportedException (
-                    SR.Format (SR.Cryptography_Unix_X509_PropertyNotSettable, nameof (FriendlyName)));
+            set
+            {
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.Cryptography_Unix_X509_PropertyNotSettable, nameof(FriendlyName))
+                );
             }
         }
 
-        public sealed override int Version {
-            get {
-                EnsureCertData ();
+        public sealed override int Version
+        {
+            get
+            {
+                EnsureCertData();
                 return certData.Version + 1;
             }
         }
 
-        public sealed override X500DistinguishedName SubjectName {
-            get {
-                EnsureCertData ();
+        public sealed override X500DistinguishedName SubjectName
+        {
+            get
+            {
+                EnsureCertData();
                 return certData.Subject;
             }
         }
 
-        public sealed override X500DistinguishedName IssuerName {
-            get {
-                EnsureCertData ();
+        public sealed override X500DistinguishedName IssuerName
+        {
+            get
+            {
+                EnsureCertData();
                 return certData.Issuer;
             }
         }
@@ -140,118 +160,143 @@ namespace System.Security.Cryptography.X509Certificates
 
         public sealed override string Issuer => IssuerName.Name;
 
-        public sealed override string LegacySubject => SubjectName.Decode (X500DistinguishedNameFlags.None);
+        public sealed override string LegacySubject =>
+            SubjectName.Decode(X500DistinguishedNameFlags.None);
 
-        public sealed override string LegacyIssuer => IssuerName.Decode (X500DistinguishedNameFlags.None);
+        public sealed override string LegacyIssuer =>
+            IssuerName.Decode(X500DistinguishedNameFlags.None);
 
-        public sealed override byte[] RawData {
-            get {
-                EnsureCertData ();
+        public sealed override byte[] RawData
+        {
+            get
+            {
+                EnsureCertData();
                 return certData.RawData;
             }
         }
 
-        public sealed override byte[] Thumbprint {
-            get {
-                EnsureCertData ();
+        public sealed override byte[] Thumbprint
+        {
+            get
+            {
+                EnsureCertData();
 
-                using (SHA1 hash = SHA1.Create ()) {
-                    return hash.ComputeHash (certData.RawData);
+                using (SHA1 hash = SHA1.Create())
+                {
+                    return hash.ComputeHash(certData.RawData);
                 }
             }
         }
 
-        public sealed override string GetNameInfo (X509NameType nameType, bool forIssuer)
+        public sealed override string GetNameInfo(X509NameType nameType, bool forIssuer)
         {
-            EnsureCertData ();
-            return certData.GetNameInfo (nameType, forIssuer);
+            EnsureCertData();
+            return certData.GetNameInfo(nameType, forIssuer);
         }
 
-        public sealed override IEnumerable<X509Extension> Extensions {
-            get {
-                EnsureCertData ();
+        public sealed override IEnumerable<X509Extension> Extensions
+        {
+            get
+            {
+                EnsureCertData();
                 return certData.Extensions;
             }
         }
 
-        public sealed override DateTime NotAfter {
-            get {
-                EnsureCertData ();
-                return certData.NotAfter.ToLocalTime ();
+        public sealed override DateTime NotAfter
+        {
+            get
+            {
+                EnsureCertData();
+                return certData.NotAfter.ToLocalTime();
             }
         }
 
-        public sealed override DateTime NotBefore {
-            get {
-                EnsureCertData ();
-                return certData.NotBefore.ToLocalTime ();
+        public sealed override DateTime NotBefore
+        {
+            get
+            {
+                EnsureCertData();
+                return certData.NotBefore.ToLocalTime();
             }
         }
 
-        public sealed override void AppendPrivateKeyInfo (StringBuilder sb)
+        public sealed override void AppendPrivateKeyInfo(StringBuilder sb)
         {
             if (!HasPrivateKey)
                 return;
 
             // There's nothing really to say about the key, just acknowledge there is one.
-            sb.AppendLine ();
-            sb.AppendLine ();
-            sb.AppendLine ("[Private Key]");
+            sb.AppendLine();
+            sb.AppendLine();
+            sb.AppendLine("[Private Key]");
         }
 
-        public override void Reset ()
+        public override void Reset()
         {
             readCertData = false;
         }
 
-        public sealed override byte[] Export (X509ContentType contentType, SafePasswordHandle password)
+        public sealed override byte[] Export(
+            X509ContentType contentType,
+            SafePasswordHandle password
+        )
         {
-            ThrowIfContextInvalid ();
+            ThrowIfContextInvalid();
 
-            Debug.Assert (password != null);
-            switch (contentType) {
-            case X509ContentType.Cert:
-                return RawData;
-            case X509ContentType.Pkcs12:
-                return ExportPkcs12 (password);
-            case X509ContentType.Pkcs7:
-                return ExportPkcs12 ((string)null);
-            case X509ContentType.SerializedCert:
-            case X509ContentType.SerializedStore:
-                throw new PlatformNotSupportedException (SR.Cryptography_Unix_X509_SerializedExport);
-            default:
-                throw new CryptographicException (SR.Cryptography_X509_InvalidContentType);
+            Debug.Assert(password != null);
+            switch (contentType)
+            {
+                case X509ContentType.Cert:
+                    return RawData;
+                case X509ContentType.Pkcs12:
+                    return ExportPkcs12(password);
+                case X509ContentType.Pkcs7:
+                    return ExportPkcs12((string)null);
+                case X509ContentType.SerializedCert:
+                case X509ContentType.SerializedStore:
+                    throw new PlatformNotSupportedException(
+                        SR.Cryptography_Unix_X509_SerializedExport
+                    );
+                default:
+                    throw new CryptographicException(SR.Cryptography_X509_InvalidContentType);
             }
         }
 
-        byte[] ExportPkcs12 (SafePasswordHandle password)
+        byte[] ExportPkcs12(SafePasswordHandle password)
         {
             if (password == null || password.IsInvalid)
-                return ExportPkcs12 ((string)null);
-            var passwordString = password.Mono_DangerousGetString ();
-            return ExportPkcs12 (passwordString);
+                return ExportPkcs12((string)null);
+            var passwordString = password.Mono_DangerousGetString();
+            return ExportPkcs12(passwordString);
         }
 
-        byte[] ExportPkcs12 (string password)
+        byte[] ExportPkcs12(string password)
         {
-            var pfx = new MX.PKCS12 ();
-            try {
-                var attrs = new Hashtable ();
-                var localKeyId = new ArrayList ();
-                localKeyId.Add (new byte[] { 1, 0, 0, 0 });
-                attrs.Add (MX.PKCS9.localKeyId, localKeyId);
+            var pfx = new MX.PKCS12();
+            try
+            {
+                var attrs = new Hashtable();
+                var localKeyId = new ArrayList();
+                localKeyId.Add(new byte[] { 1, 0, 0, 0 });
+                attrs.Add(MX.PKCS9.localKeyId, localKeyId);
                 if (password != null)
                     pfx.Password = password;
-                pfx.AddCertificate (new MX.X509Certificate (RawData), attrs);
-                if (IntermediateCertificates != null) {
+                pfx.AddCertificate(new MX.X509Certificate(RawData), attrs);
+                if (IntermediateCertificates != null)
+                {
                     for (int i = 0; i < IntermediateCertificates.Count; i++)
-                        pfx.AddCertificate (new MX.X509Certificate (IntermediateCertificates[i].RawData));
+                        pfx.AddCertificate(
+                            new MX.X509Certificate(IntermediateCertificates[i].RawData)
+                        );
                 }
                 var privateKey = PrivateKey;
                 if (privateKey != null)
-                    pfx.AddPkcs8ShroudedKeyBag (privateKey, attrs);
-                return pfx.GetBytes ();
-            } finally {
+                    pfx.AddPkcs8ShroudedKeyBag(privateKey, attrs);
+                return pfx.GetBytes();
+            }
+            finally
+            {
                 pfx.Password = null;
             }
         }

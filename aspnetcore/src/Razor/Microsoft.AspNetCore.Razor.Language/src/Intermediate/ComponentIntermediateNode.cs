@@ -9,15 +9,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 public sealed class ComponentIntermediateNode : IntermediateNode
 {
-    public IEnumerable<ComponentAttributeIntermediateNode> Attributes => Children.OfType<ComponentAttributeIntermediateNode>();
+    public IEnumerable<ComponentAttributeIntermediateNode> Attributes =>
+        Children.OfType<ComponentAttributeIntermediateNode>();
 
-    public IEnumerable<ReferenceCaptureIntermediateNode> Captures => Children.OfType<ReferenceCaptureIntermediateNode>();
+    public IEnumerable<ReferenceCaptureIntermediateNode> Captures =>
+        Children.OfType<ReferenceCaptureIntermediateNode>();
 
     public IEnumerable<SetKeyIntermediateNode> SetKeys => Children.OfType<SetKeyIntermediateNode>();
 
     public IEnumerable<SplatIntermediateNode> Splats => Children.OfType<SplatIntermediateNode>();
 
-    public IEnumerable<ComponentChildContentIntermediateNode> ChildContents => Children.OfType<ComponentChildContentIntermediateNode>();
+    public IEnumerable<ComponentChildContentIntermediateNode> ChildContents =>
+        Children.OfType<ComponentChildContentIntermediateNode>();
 
     public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
 
@@ -28,7 +31,8 @@ public sealed class ComponentIntermediateNode : IntermediateNode
     /// </summary>
     public string ChildContentParameterName { get; set; }
 
-    public IEnumerable<ComponentTypeArgumentIntermediateNode> TypeArguments => Children.OfType<ComponentTypeArgumentIntermediateNode>();
+    public IEnumerable<ComponentTypeArgumentIntermediateNode> TypeArguments =>
+        Children.OfType<ComponentTypeArgumentIntermediateNode>();
 
     public string TagName { get; set; }
 
@@ -40,7 +44,10 @@ public sealed class ComponentIntermediateNode : IntermediateNode
     /// Gets a dictionary (or null) that advertises any type arguments that are available
     /// for use by descendants within the same tree.
     /// </summary>
-    public Dictionary<string, CascadingGenericTypeParameter> ProvidesCascadingGenericTypes { get; set; }
+    public Dictionary<
+        string,
+        CascadingGenericTypeParameter
+    > ProvidesCascadingGenericTypes { get; set; }
 
     public string TypeName { get; set; }
 

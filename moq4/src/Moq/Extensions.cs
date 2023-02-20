@@ -24,7 +24,11 @@ namespace Moq
             return property.CanRead(out getter, out _);
         }
 
-        public static bool CanRead(this PropertyInfo property, out MethodInfo getter, out PropertyInfo getterProperty)
+        public static bool CanRead(
+            this PropertyInfo property,
+            out MethodInfo getter,
+            out PropertyInfo getterProperty
+        )
         {
             if (property.CanRead)
             {
@@ -47,10 +51,12 @@ namespace Moq
                 var baseSetter = setter.GetBaseDefinition();
                 if (baseSetter != setter)
                 {
-                    var baseProperty =
-                        baseSetter
-                        .DeclaringType
-                        .GetMember(property.Name, MemberTypes.Property, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                    var baseProperty = baseSetter.DeclaringType
+                        .GetMember(
+                            property.Name,
+                            MemberTypes.Property,
+                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                        )
                         .Cast<PropertyInfo>()
                         .First(p => p.GetSetMethod(nonPublic: true) == baseSetter);
                     return baseProperty.CanRead(out getter, out getterProperty);
@@ -67,7 +73,11 @@ namespace Moq
             return property.CanWrite(out setter, out _);
         }
 
-        public static bool CanWrite(this PropertyInfo property, out MethodInfo setter, out PropertyInfo setterProperty)
+        public static bool CanWrite(
+            this PropertyInfo property,
+            out MethodInfo setter,
+            out PropertyInfo setterProperty
+        )
         {
             if (property.CanWrite)
             {
@@ -90,10 +100,12 @@ namespace Moq
                 var baseGetter = getter.GetBaseDefinition();
                 if (baseGetter != getter)
                 {
-                    var baseProperty =
-                        baseGetter
-                        .DeclaringType
-                        .GetMember(property.Name, MemberTypes.Property, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                    var baseProperty = baseGetter.DeclaringType
+                        .GetMember(
+                            property.Name,
+                            MemberTypes.Property,
+                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                        )
                         .Cast<PropertyInfo>()
                         .First(p => p.GetGetMethod(nonPublic: true) == baseGetter);
                     return baseProperty.CanWrite(out setter, out setterProperty);
@@ -151,7 +163,10 @@ namespace Moq
             }
         }
 
-        public static object InvokePreserveStack(this Delegate del, IReadOnlyList<object> args = null)
+        public static object InvokePreserveStack(
+            this Delegate del,
+            IReadOnlyList<object> args = null
+        )
         {
             try
             {
@@ -240,7 +255,8 @@ namespace Moq
         {
             if (type.IsTypeMatcher())
             {
-                var attr = (TypeMatcherAttribute)Attribute.GetCustomAttribute(type, typeof(TypeMatcherAttribute));
+                var attr = (TypeMatcherAttribute)
+                    Attribute.GetCustomAttribute(type, typeof(TypeMatcherAttribute));
                 typeMatcherType = attr.Type ?? type;
                 Guard.ImplementsTypeMatcherProtocol(typeMatcherType);
                 return true;
@@ -297,7 +313,12 @@ namespace Moq
             return type.GetMember(name).OfType<MethodInfo>();
         }
 
-        public static bool CompareTo<TTypes, TOtherTypes>(this TTypes types, TOtherTypes otherTypes, bool exact, bool considerTypeMatchers)
+        public static bool CompareTo<TTypes, TOtherTypes>(
+            this TTypes types,
+            TOtherTypes otherTypes,
+            bool exact,
+            bool considerTypeMatchers
+        )
             where TTypes : IReadOnlyList<Type>
             where TOtherTypes : IReadOnlyList<Type>
         {
@@ -338,7 +359,12 @@ namespace Moq
 
         public static string GetParameterTypeList(this MethodInfo method)
         {
-            return new StringBuilder().AppendCommaSeparated(method.GetParameters(), StringBuilderExtensions.AppendParameterType).ToString();
+            return new StringBuilder()
+                .AppendCommaSeparated(
+                    method.GetParameters(),
+                    StringBuilderExtensions.AppendParameterType
+                )
+                .ToString();
         }
 
         public static ParameterTypes GetParameterTypes(this MethodInfo method)
@@ -346,11 +372,18 @@ namespace Moq
             return new ParameterTypes(method.GetParameters());
         }
 
-        public static bool CompareParameterTypesTo<TOtherTypes>(this Delegate function, TOtherTypes otherTypes)
+        public static bool CompareParameterTypesTo<TOtherTypes>(
+            this Delegate function,
+            TOtherTypes otherTypes
+        )
             where TOtherTypes : IReadOnlyList<Type>
         {
             var method = function.GetMethodInfo();
-            if (method.GetParameterTypes().CompareTo(otherTypes, exact: false, considerTypeMatchers: false))
+            if (
+                method
+                    .GetParameterTypes()
+                    .CompareTo(otherTypes, exact: false, considerTypeMatchers: false)
+            )
             {
                 // the backing method for the literal delegate is compatible, DynamicInvoke(...) will succeed
                 return true;
@@ -361,7 +394,12 @@ namespace Moq
             // an instance delegate invocation is created for an extension method (bundled with a receiver)
             // or at times for DLR code generation paths because the CLR is optimized for instance methods.
             var invokeMethod = GetInvokeMethodFromUntypedDelegateCallback(function);
-            if (invokeMethod != null && invokeMethod.GetParameterTypes().CompareTo(otherTypes, exact: false, considerTypeMatchers: false))
+            if (
+                invokeMethod != null
+                && invokeMethod
+                    .GetParameterTypes()
+                    .CompareTo(otherTypes, exact: false, considerTypeMatchers: false)
+            )
             {
                 // the Invoke(...) method is compatible instead. DynamicInvoke(...) will succeed.
                 return true;
@@ -378,7 +416,12 @@ namespace Moq
             // However, there is not a requirement for 'public', or for it to be unambiguous.
             try
             {
-                return callback.GetType().GetMethod("Invoke", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                return callback
+                    .GetType()
+                    .GetMethod(
+                        "Invoke",
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                    );
             }
             catch (AmbiguousMatchException)
             {
@@ -478,14 +521,20 @@ namespace Moq
 
         public static IEnumerable<Mock> FindAllInnerMocks(this SetupCollection setups)
         {
-            return setups.FindAll(setup => !setup.IsConditional)
-                         .SelectMany(setup => setup.InnerMocks)
-                         .Where(innerMock => innerMock != null);
+            return setups
+                .FindAll(setup => !setup.IsConditional)
+                .SelectMany(setup => setup.InnerMocks)
+                .Where(innerMock => innerMock != null);
         }
 
-        public static Mock FindLastInnerMock(this SetupCollection setups, Func<Setup, bool> predicate)
+        public static Mock FindLastInnerMock(
+            this SetupCollection setups,
+            Func<Setup, bool> predicate
+        )
         {
-            return setups.FindLast(setup => !setup.IsConditional && predicate(setup))?.InnerMocks.SingleOrDefault();
+            return setups
+                .FindLast(setup => !setup.IsConditional && predicate(setup))
+                ?.InnerMocks.SingleOrDefault();
         }
     }
 }

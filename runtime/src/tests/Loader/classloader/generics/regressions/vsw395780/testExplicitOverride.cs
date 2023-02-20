@@ -21,8 +21,6 @@ public class C : I<String>
     }
 }
 
-
-
 public class Test_testExplicitOverride
 {
     public static int Main()
@@ -49,6 +47,5 @@ public class Test_testExplicitOverride
             Console.WriteLine("FAIL: Caugh unexpected exception: " + e);
             return 101;
         }
-
     }
 }

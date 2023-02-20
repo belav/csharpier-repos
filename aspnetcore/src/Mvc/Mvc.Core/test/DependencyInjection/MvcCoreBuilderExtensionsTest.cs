@@ -36,11 +36,15 @@ public class MvcCoreBuilderExtensionsTest
         // Arrange
         var manager = new ApplicationPartManager();
         var builder = new MvcCoreBuilder(Mock.Of<IServiceCollection>(), manager);
-        var assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Test"), AssemblyBuilderAccess.Run);
+        var assembly = AssemblyBuilder.DefineDynamicAssembly(
+            new AssemblyName("Test"),
+            AssemblyBuilderAccess.Run
+        );
 
-        var attribute = new CustomAttributeBuilder(typeof(ProvideApplicationPartFactoryAttribute).GetConstructor(
-            new[] { typeof(Type) }),
-            new[] { typeof(TestApplicationPartFactory) });
+        var attribute = new CustomAttributeBuilder(
+            typeof(ProvideApplicationPartFactoryAttribute).GetConstructor(new[] { typeof(Type) }),
+            new[] { typeof(TestApplicationPartFactory) }
+        );
 
         assembly.SetCustomAttribute(attribute);
 
@@ -58,7 +62,8 @@ public class MvcCoreBuilderExtensionsTest
         // Arrange
         var builder = new MvcCoreBuilder(
             Mock.Of<IServiceCollection>(),
-            new ApplicationPartManager());
+            new ApplicationPartManager()
+        );
 
         var part = new TestApplicationPart();
 
@@ -70,19 +75,19 @@ public class MvcCoreBuilderExtensionsTest
 
         // Assert
         Assert.Same(result, builder);
-        Assert.Equal(new ApplicationPart[] { part }, builder.PartManager.ApplicationParts.ToArray());
+        Assert.Equal(
+            new ApplicationPart[] { part },
+            builder.PartManager.ApplicationParts.ToArray()
+        );
     }
 
     [Fact]
     public void ConfigureApiBehaviorOptions_InvokesSetupAction()
     {
         // Arrange
-        var serviceCollection = new ServiceCollection()
-            .AddOptions();
+        var serviceCollection = new ServiceCollection().AddOptions();
 
-        var builder = new MvcCoreBuilder(
-            serviceCollection,
-            new ApplicationPartManager());
+        var builder = new MvcCoreBuilder(serviceCollection, new ApplicationPartManager());
 
         var part = new TestApplicationPart();
 
@@ -93,8 +98,8 @@ public class MvcCoreBuilderExtensionsTest
         });
 
         // Assert
-        var options = serviceCollection.
-            BuildServiceProvider()
+        var options = serviceCollection
+            .BuildServiceProvider()
             .GetRequiredService<IOptions<ApiBehaviorOptions>>()
             .Value;
         Assert.True(options.SuppressMapClientErrors);

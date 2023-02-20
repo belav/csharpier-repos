@@ -5,6 +5,6 @@ namespace Mono.Linker.Tests.Cases.Attributes.Dependencies
     [DynamicInterfaceCastableImplementation]
     public interface IReferencedAssemblyImpl : IReferencedAssembly
     {
-        void Foo () { }
+        void Foo() { }
     }
 }

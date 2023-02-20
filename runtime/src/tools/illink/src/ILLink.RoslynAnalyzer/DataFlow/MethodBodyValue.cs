@@ -16,18 +16,18 @@ namespace ILLink.RoslynAnalyzer.DataFlow
 
         public ControlFlowGraph ControlFlowGraph { get; }
 
-        public MethodBodyValue (IMethodSymbol method, ControlFlowGraph cfg)
+        public MethodBodyValue(IMethodSymbol method, ControlFlowGraph cfg)
         {
             Method = method;
             ControlFlowGraph = cfg;
         }
 
-        public bool Equals (MethodBodyValue other)
+        public bool Equals(MethodBodyValue other)
         {
-            if (!ReferenceEquals (Method, other.Method))
+            if (!ReferenceEquals(Method, other.Method))
                 return false;
 
-            Debug.Assert (ControlFlowGraph == other.ControlFlowGraph);
+            Debug.Assert(ControlFlowGraph == other.ControlFlowGraph);
             return true;
         }
     }

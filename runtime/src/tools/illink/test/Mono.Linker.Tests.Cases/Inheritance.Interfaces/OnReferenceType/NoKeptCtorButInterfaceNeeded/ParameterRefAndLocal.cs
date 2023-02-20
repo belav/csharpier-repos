@@ -4,34 +4,32 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
 {
     public class ParameterRefAndLocal
     {
-        public static void Main ()
+        public static void Main()
         {
             Foo f = null;
-            Helper (ref f);
+            Helper(ref f);
         }
 
         [Kept]
-        static void Helper (ref Foo f)
+        static void Helper(ref Foo f)
         {
             IFoo i = f;
-            i.Method ();
+            i.Method();
         }
 
         [Kept]
         interface IFoo
         {
             [Kept]
-            void Method ();
+            void Method();
         }
 
         [Kept]
-        [KeptInterface (typeof (IFoo))]
+        [KeptInterface(typeof(IFoo))]
         class Foo : IFoo
         {
             [Kept]
-            public void Method ()
-            {
-            }
+            public void Method() { }
         }
     }
 }

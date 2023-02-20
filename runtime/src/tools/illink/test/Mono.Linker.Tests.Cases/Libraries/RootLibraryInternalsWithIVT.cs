@@ -3,47 +3,36 @@ using Mono.Linker.Tests.Cases.Expectations.Assertions;
 using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 #if RootLibraryInternalsWithIVT
-[assembly: InternalsVisibleToAttribute ("somename")]
+[assembly: InternalsVisibleToAttribute("somename")]
 
-[assembly: KeptAttributeAttribute (typeof (InternalsVisibleToAttribute))]
+[assembly: KeptAttributeAttribute(typeof(InternalsVisibleToAttribute))]
+
 #endif
 
 namespace Mono.Linker.Tests.Cases.Libraries
 {
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     [SetupLinkerLinkPublicAndFamily]
-    [Define ("RootLibraryInternalsWithIVT")]
+    [Define("RootLibraryInternalsWithIVT")]
     public class RootLibraryInternalsWithIVT
     {
         [Kept]
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
-        public void UnusedPublicMethod ()
-        {
-        }
+        public void UnusedPublicMethod() { }
 
         [Kept]
-        protected void UnusedProtectedMethod ()
-        {
-        }
+        protected void UnusedProtectedMethod() { }
 
         [Kept]
-        protected internal void UnusedProtectedInternalMethod ()
-        {
-        }
+        protected internal void UnusedProtectedInternalMethod() { }
 
         [Kept]
-        internal void UnunsedInternalMethod ()
-        {
-        }
+        internal void UnunsedInternalMethod() { }
 
-        private void UnusedPrivateMethod ()
-        {
-        }
+        private void UnusedPrivateMethod() { }
     }
 
 #if RootLibraryInternalsWithIVT
@@ -51,7 +40,7 @@ namespace Mono.Linker.Tests.Cases.Libraries
     internal interface InternalIface
     {
         [Kept]
-        void Foo ();
+        void Foo();
     }
 #endif
 }

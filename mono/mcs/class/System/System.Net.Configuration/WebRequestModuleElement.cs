@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,7 +36,7 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
     public sealed class WebRequestModuleElement : ConfigurationElement
     {
@@ -50,49 +50,56 @@ namespace System.Net.Configuration
 
         #region Constructors
 
-        static WebRequestModuleElement ()
+        static WebRequestModuleElement()
         {
-            prefixProp = new ConfigurationProperty ("prefix", typeof (string), null, ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired);
-            typeProp = new ConfigurationProperty ("type", typeof (string));
-            properties = new ConfigurationPropertyCollection ();
+            prefixProp = new ConfigurationProperty(
+                "prefix",
+                typeof(string),
+                null,
+                ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired
+            );
+            typeProp = new ConfigurationProperty("type", typeof(string));
+            properties = new ConfigurationPropertyCollection();
 
-            properties.Add (prefixProp);
-            properties.Add (typeProp);
+            properties.Add(prefixProp);
+            properties.Add(typeProp);
         }
 
-        public WebRequestModuleElement ()
-        {
-        }
+        public WebRequestModuleElement() { }
 
-        public WebRequestModuleElement (string prefix, string type)
+        public WebRequestModuleElement(string prefix, string type)
         {
             base[typeProp] = type;
             Prefix = prefix;
         }
 
-        public WebRequestModuleElement (string prefix, Type type)
-            : this (prefix, type.FullName)
-        {
-        }
+        public WebRequestModuleElement(string prefix, Type type)
+            : this(prefix, type.FullName) { }
 
         #endregion // Constructors
 
         #region Properties
 
-        [ConfigurationProperty ("prefix", Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired)]
-        public string Prefix {
-            get { return (string) base [prefixProp]; }
-            set { base [prefixProp] = value; }
+        [ConfigurationProperty(
+            "prefix",
+            Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired
+        )]
+        public string Prefix
+        {
+            get { return (string)base[prefixProp]; }
+            set { base[prefixProp] = value; }
         }
 
-        [ConfigurationProperty ("type")]
-        [TypeConverter (typeof (TypeConverter))]
-        public Type Type {
-            get { return Type.GetType ((string) base [typeProp]); }
-            set { base [typeProp] = value.FullName; }
+        [ConfigurationProperty("type")]
+        [TypeConverter(typeof(TypeConverter))]
+        public Type Type
+        {
+            get { return Type.GetType((string)base[typeProp]); }
+            set { base[typeProp] = value.FullName; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 

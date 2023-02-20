@@ -3,6 +3,7 @@
 //
 
 using System;
+
 namespace A
 {
     internal class B
@@ -248,4 +249,3 @@ namespace A
         }
     }
 }
-

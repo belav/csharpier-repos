@@ -19,73 +19,77 @@ namespace System.Windows
             EndOfLine
         }
 
-        public NumericListTokenizer (string str, IFormatProvider formatProvider)
+        public NumericListTokenizer(string str, IFormatProvider formatProvider)
         {
-            _str = str ?? throw new ArgumentNullException (nameof(str));
-            _separator = GetSeparator (formatProvider ?? throw new ArgumentNullException (nameof(formatProvider)));
+            _str = str ?? throw new ArgumentNullException(nameof(str));
+            _separator = GetSeparator(
+                formatProvider ?? throw new ArgumentNullException(nameof(formatProvider))
+            );
         }
 
-        public static char GetSeparator (IFormatProvider formatProvider)
+        public static char GetSeparator(IFormatProvider formatProvider)
         {
             // By convention, string representations of target classes always use ';' as a separator
             // if the decimal number separator is ','. Otherwise, the separator is ','.
-            return NumberFormatInfo.GetInstance (formatProvider).NumberDecimalSeparator != "," ? ',' : ';';
+            return NumberFormatInfo.GetInstance(formatProvider).NumberDecimalSeparator != ","
+                ? ','
+                : ';';
         }
 
-        private Symbol GetCurrentSymbol ()
+        private Symbol GetCurrentSymbol()
         {
             if (_position >= _str.Length)
                 return Symbol.EndOfLine;
             if (_str[_position] == _separator)
                 return Symbol.Separator;
-            if (char.IsWhiteSpace (_str, _position))
+            if (char.IsWhiteSpace(_str, _position))
                 return Symbol.Whitspace;
             return Symbol.Token;
         }
 
-        private void SkipAllWhitespaces ()
+        private void SkipAllWhitespaces()
         {
-            while (GetCurrentSymbol () == Symbol.Whitspace)
+            while (GetCurrentSymbol() == Symbol.Whitspace)
             {
                 _position++;
             }
         }
 
-        private void SkipNextDelimeter ()
+        private void SkipNextDelimeter()
         {
-            SkipAllWhitespaces ();
-            switch (GetCurrentSymbol ())
+            SkipAllWhitespaces();
+            switch (GetCurrentSymbol())
             {
                 case Symbol.Token:
                     return;
                 case Symbol.Separator:
                     _position++;
-                    SkipAllWhitespaces ();
+                    SkipAllWhitespaces();
                     return;
                 default:
-                    throw new InvalidOperationException ("Separator not found");
+                    throw new InvalidOperationException("Separator not found");
             }
         }
 
-        public bool HasNoMoreTokens ()
+        public bool HasNoMoreTokens()
         {
-            SkipAllWhitespaces ();
-            return GetCurrentSymbol () == Symbol.EndOfLine;
+            SkipAllWhitespaces();
+            return GetCurrentSymbol() == Symbol.EndOfLine;
         }
 
-        public string GetNextToken ()
+        public string GetNextToken()
         {
             var length = 0;
             if (_position == 0)
             {
-                SkipAllWhitespaces ();
+                SkipAllWhitespaces();
             }
             else
             {
-                SkipNextDelimeter ();
+                SkipNextDelimeter();
             }
 
-            while (GetCurrentSymbol () == Symbol.Token)
+            while (GetCurrentSymbol() == Symbol.Token)
             {
                 _position++;
                 length++;
@@ -93,10 +97,10 @@ namespace System.Windows
 
             if (length == 0)
             {
-                throw new InvalidOperationException ("Next token not found");
+                throw new InvalidOperationException("Next token not found");
             }
 
-            return _str.Substring (_position - length, length);
+            return _str.Substring(_position - length, length);
         }
     }
 }

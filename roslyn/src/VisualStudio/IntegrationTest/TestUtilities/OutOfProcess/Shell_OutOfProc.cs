@@ -17,10 +17,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             _inProc = CreateInProcComponent<Shell_InProc>(visualStudioInstance);
         }
 
-        public IntPtr GetHWnd()
-            => _inProc.GetHWnd();
+        public IntPtr GetHWnd() => _inProc.GetHWnd();
 
-        public bool IsUIContextActive(Guid context)
-            => _inProc.IsUIContextActive(context);
+        public bool IsUIContextActive(Guid context) => _inProc.IsUIContextActive(context);
     }
 }

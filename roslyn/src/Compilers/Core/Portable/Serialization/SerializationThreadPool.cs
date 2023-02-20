@@ -11,11 +11,13 @@ namespace Roslyn.Utilities
 {
     internal static class SerializationThreadPool
     {
-        public static Task<object?> RunOnBackgroundThreadAsync(Func<object?> start)
-            => ImmediateBackgroundThreadPool.QueueAsync(start);
+        public static Task<object?> RunOnBackgroundThreadAsync(Func<object?> start) =>
+            ImmediateBackgroundThreadPool.QueueAsync(start);
 
-        public static Task<object?> RunOnBackgroundThreadAsync(Func<object?, object?> start, object? obj)
-            => ImmediateBackgroundThreadPool.QueueAsync(start, obj);
+        public static Task<object?> RunOnBackgroundThreadAsync(
+            Func<object?, object?> start,
+            object? obj
+        ) => ImmediateBackgroundThreadPool.QueueAsync(start, obj);
 
         /// <summary>
         /// Naive thread pool focused on reducing the latency to execution of chunky work items as much as possible.
@@ -32,7 +34,11 @@ namespace Roslyn.Utilities
             private static readonly TimeSpan s_idleTimeout = TimeSpan.FromSeconds(1);
 
             /// <summary>The queue of work items. Also used as a lock to protect all relevant state.</summary>
-            private static readonly Queue<(Delegate function, object? state, TaskCompletionSource<object?> tcs)> s_queue = new();
+            private static readonly Queue<(
+                Delegate function,
+                object? state,
+                TaskCompletionSource<object?> tcs
+            )> s_queue = new();
 
             /// <summary>The number of threads currently waiting in <c>tryDequeue</c> for work to arrive.</summary>
             private static int s_availableThreads = 0;
@@ -43,19 +49,25 @@ namespace Roslyn.Utilities
             /// always end in the <see cref="TaskStatus.RanToCompletion"/> state; if the delegate throws
             /// an exception, it'll be allowed to propagate on the thread, crashing the process.
             /// </summary>
-            public static Task<object?> QueueAsync(Func<object?> threadStart) => QueueAsync(threadStart, state: null);
+            public static Task<object?> QueueAsync(Func<object?> threadStart) =>
+                QueueAsync(threadStart, state: null);
 
             /// <summary>
             /// Queues a <see cref="Func{T, TResult}"/> delegate and associated state to be executed immediately on
             /// another thread, and returns a <see cref="Task"/> that represents its eventual completion.
             /// </summary>
-            public static Task<object?> QueueAsync(Func<object?, object?> threadStart, object? state) => QueueAsync((Delegate)threadStart, state);
+            public static Task<object?> QueueAsync(
+                Func<object?, object?> threadStart,
+                object? state
+            ) => QueueAsync((Delegate)threadStart, state);
 
             private static Task<object?> QueueAsync(Delegate threadStart, object? state)
             {
                 // Create the TaskCompletionSource used to represent this work. 'RunContinuationsAsynchronously' ensures
                 // continuations do not also run on the threads created by 'createThread'.
-                var tcs = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+                var tcs = new TaskCompletionSource<object?>(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
 
                 // Queue the work for a thread to pick up. If no thread is immediately available, it will create one.
                 enqueue((threadStart, state, tcs));
@@ -97,7 +109,9 @@ namespace Roslyn.Utilities
                     t.Start();
                 }
 
-                static void enqueue((Delegate function, object? state, TaskCompletionSource<object?> tcs) item)
+                static void enqueue(
+                    (Delegate function, object? state, TaskCompletionSource<object?> tcs) item
+                )
                 {
                     // Enqueue the work. If there are currently fewer threads waiting
                     // for work than there are work items in the queue, create another
@@ -121,7 +135,9 @@ namespace Roslyn.Utilities
                     createThread();
                 }
 
-                static bool tryDequeue(out (Delegate function, object? state, TaskCompletionSource<object?> tcs) item)
+                static bool tryDequeue(
+                    out (Delegate function, object? state, TaskCompletionSource<object?> tcs) item
+                )
                 {
                     // Dequeues the next item if one is available. Before checking,
                     // the available thread count is increased, so that enqueuers can

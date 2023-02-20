@@ -4,30 +4,40 @@ using Mono.Linker.Tests.Cases.Resources.Dependencies;
 
 namespace Mono.Linker.Tests.Cases.Resources
 {
-    [SetupCompileResource ("Dependencies/EmbeddedLinkXmlFileWithTypePreserve1.xml", "ILLink.Descriptors.xml")]
-    [SetupCompileBefore ("library.dll",
+    [SetupCompileResource(
+        "Dependencies/EmbeddedLinkXmlFileWithTypePreserve1.xml",
+        "ILLink.Descriptors.xml"
+    )]
+    [SetupCompileBefore(
+        "library.dll",
         new string[] { "Dependencies/EmbeddedLinkXmlFileWithTypePreserve_Lib.cs" },
-        resources: new object[] {
-            new string[] { "Dependencies/EmbeddedLinkXmlFileWithTypePreserve2.xml", "ILLink.Descriptors.xml" }
-    })]
-    [IgnoreDescriptors (false)]
-    [KeptAssembly ("library.dll")]
+        resources: new object[]
+        {
+            new string[]
+            {
+                "Dependencies/EmbeddedLinkXmlFileWithTypePreserve2.xml",
+                "ILLink.Descriptors.xml"
+            }
+        }
+    )]
+    [IgnoreDescriptors(false)]
+    [KeptAssembly("library.dll")]
     public class EmbeddedLinkXmlFileWithTypePreserve
     {
-        public static void Main ()
+        public static void Main()
         {
-            EmbeddedLinkXmlFileWithTypePreserve_Lib.Method ();
+            EmbeddedLinkXmlFileWithTypePreserve_Lib.Method();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class PreservedType
         {
             [Kept]
             static bool field;
 
             [Kept]
-            static void Method () { }
+            static void Method() { }
         }
     }
 }

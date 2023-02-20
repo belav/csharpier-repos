@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,7 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.UI 
+namespace System.Web.UI
 {
     public sealed class SkinBuilder : ControlBuilder
     {
@@ -35,10 +35,12 @@ namespace System.Web.UI
         //string themePath;
         Control control;
 
-        public SkinBuilder (ThemeProvider provider,
-                    Control control,
-                    ControlBuilder skinBuilder,
-                    string themePath)
+        public SkinBuilder(
+            ThemeProvider provider,
+            Control control,
+            ControlBuilder skinBuilder,
+            string themePath
+        )
         {
             //this.provider = provider;
             this.control = control;
@@ -46,10 +48,9 @@ namespace System.Web.UI
             //this.themePath = themePath;
         }
 
-        public Control ApplyTheme ()
+        public Control ApplyTheme()
         {
             return control;
         }
     }
-
 }

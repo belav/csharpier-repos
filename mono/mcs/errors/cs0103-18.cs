@@ -3,8 +3,8 @@
 
 class C
 {
-    void Test ()
+    void Test()
     {
-        _.ToString ();
+        _.ToString();
     }
 }

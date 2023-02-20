@@ -9,10 +9,10 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
 {
     internal readonly record struct GeneratorOptions(
         SymbolDescriptionOptions SymbolDescriptionOptions,
-        BlockStructureOptions BlockStructureOptions)
+        BlockStructureOptions BlockStructureOptions
+    )
     {
         public static readonly GeneratorOptions Default =
-            new(SymbolDescriptionOptions.Default,
-                BlockStructureOptions.Default);
+            new(SymbolDescriptionOptions.Default, BlockStructureOptions.Default);
     }
 }

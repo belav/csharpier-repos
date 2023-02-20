@@ -2,6 +2,4 @@
 // Line: 5
 // Compiler options: -r:CS1683-lib.dll
 
-public class TestClass : A
-{
-}
+public class TestClass : A { }

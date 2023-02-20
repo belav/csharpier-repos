@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,98 +37,103 @@ namespace System.Diagnostics
 {
     public class PerformanceCounterInstaller : ComponentInstaller
     {
-        public PerformanceCounterInstaller ()
+        public PerformanceCounterInstaller() { }
+
+        [MonoTODO]
+        public override void CopyFromComponent(IComponent component)
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override void CopyFromComponent (IComponent component)
+        public override void Install(IDictionary stateSaver)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override void Install (IDictionary stateSaver)
+        public override void Rollback(IDictionary savedState)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override void Rollback (IDictionary savedState)
+        public override void Uninstall(IDictionary savedState)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoTODO]
-        public override void Uninstall (IDictionary savedState)
+        [DefaultValue("")]
+        public string CategoryHelp
         {
-            throw new NotImplementedException ();
-        }
-
-        [DefaultValue ("")]
-        public string CategoryHelp {
-            get {
-                return _categoryHelp;
-            }
-            set {
+            get { return _categoryHelp; }
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("value");
+                    throw new ArgumentNullException("value");
 
                 _categoryHelp = value;
             }
         }
 
-        [DefaultValue ("")]
-        [TypeConverter ("System.Diagnostics.Design.StringValueConverter, " + Consts.AssemblySystem_Design)]
-        public string CategoryName {
-            get {
-                return _categoryName;
-            }
-            set {
+        [DefaultValue("")]
+        [TypeConverter(
+            "System.Diagnostics.Design.StringValueConverter, " + Consts.AssemblySystem_Design
+        )]
+        public string CategoryName
+        {
+            get { return _categoryName; }
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("value");
+                    throw new ArgumentNullException("value");
 
                 _categoryName = value;
             }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public CounterCreationDataCollection Counters {
-            get {
-                return _counters;
-            }
+        public CounterCreationDataCollection Counters
+        {
+            get { return _counters; }
         }
 
-        [DefaultValue (UninstallAction.Remove)]
-        public UninstallAction UninstallAction {
-            get {
-                return _uninstallAction;
-            }
-            set {
+        [DefaultValue(UninstallAction.Remove)]
+        public UninstallAction UninstallAction
+        {
+            get { return _uninstallAction; }
+            set
+            {
                 if (!Enum.IsDefined(typeof(UninstallAction), value))
-                    // LAMESPEC, the docs do not mention this, but 
+                    // LAMESPEC, the docs do not mention this, but
                     // this exception is indeed thrown for invalid
                     // values
-                    throw new InvalidEnumArgumentException("value", 
-                        (int) value, typeof(UninstallAction));
+                    throw new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(UninstallAction)
+                    );
 
                 _uninstallAction = value;
             }
         }
 
-        [ComVisible (false)]
-        [DefaultValue (PerformanceCounterCategoryType.Unknown)]
-        public PerformanceCounterCategoryType CategoryType {
-            get {
-                return _categoryType;
-            }
-            set {
+        [ComVisible(false)]
+        [DefaultValue(PerformanceCounterCategoryType.Unknown)]
+        public PerformanceCounterCategoryType CategoryType
+        {
+            get { return _categoryType; }
+            set
+            {
                 if (!Enum.IsDefined(typeof(PerformanceCounterCategoryType), value))
-                    // LAMESPEC, the docs do not mention this, but 
+                    // LAMESPEC, the docs do not mention this, but
                     // this exception is indeed thrown for invalid
                     // values
-                    throw new InvalidEnumArgumentException("value", 
-                        (int) value, typeof(PerformanceCounterCategoryType));
+                    throw new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(PerformanceCounterCategoryType)
+                    );
 
                 _categoryType = value;
             }
@@ -136,7 +141,7 @@ namespace System.Diagnostics
 
         private string _categoryHelp = string.Empty;
         private string _categoryName = string.Empty;
-        private CounterCreationDataCollection _counters = new CounterCreationDataCollection ();
+        private CounterCreationDataCollection _counters = new CounterCreationDataCollection();
         private UninstallAction _uninstallAction = UninstallAction.Remove;
         private PerformanceCounterCategoryType _categoryType;
     }

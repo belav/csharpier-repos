@@ -32,14 +32,15 @@ namespace System.Web
 {
     internal sealed class HttpNotFoundHandler : IHttpHandler
     {
-        public void ProcessRequest (HttpContext context)
+        public void ProcessRequest(HttpContext context)
         {
             string path = context.Request.Path;
 
-            throw new HttpException (404, "Path '" + path + "' was not found.", path);
+            throw new HttpException(404, "Path '" + path + "' was not found.", path);
         }
 
-        public bool IsReusable {
+        public bool IsReusable
+        {
             get { return true; }
         }
     }

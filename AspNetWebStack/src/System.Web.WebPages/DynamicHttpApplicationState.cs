@@ -33,7 +33,9 @@ namespace System.Web.WebPages
         {
             if (indexes == null || indexes.Length != 1)
             {
-                throw new ArgumentException(WebPageResources.DynamicDictionary_InvalidNumberOfIndexes);
+                throw new ArgumentException(
+                    WebPageResources.DynamicDictionary_InvalidNumberOfIndexes
+                );
             }
 
             result = null;
@@ -48,10 +50,12 @@ namespace System.Web.WebPages
             }
             else
             {
-                // HttpApplicationState only supports keys of type string and int when getting values, so any attempt 
+                // HttpApplicationState only supports keys of type string and int when getting values, so any attempt
                 // to use other types will result in an error. We throw an exception here to explain to the user what is wrong.
                 // Returning false will instead cause a runtime binder exception which might be confusing to the user.
-                throw new ArgumentException(WebPageResources.DynamicHttpApplicationState_UseOnlyStringOrIntToGet);
+                throw new ArgumentException(
+                    WebPageResources.DynamicHttpApplicationState_UseOnlyStringOrIntToGet
+                );
             }
             return true;
         }
@@ -60,7 +64,9 @@ namespace System.Web.WebPages
         {
             if (indexes == null || indexes.Length != 1)
             {
-                throw new ArgumentException(WebPageResources.DynamicDictionary_InvalidNumberOfIndexes);
+                throw new ArgumentException(
+                    WebPageResources.DynamicDictionary_InvalidNumberOfIndexes
+                );
             }
 
             string key = indexes[0] as string;
@@ -71,10 +77,12 @@ namespace System.Web.WebPages
             }
             else
             {
-                // HttpApplicationState only supports keys of type string when setting values, so any attempt 
+                // HttpApplicationState only supports keys of type string when setting values, so any attempt
                 // to use other types will result in an error. We throw an exception here to explain to the user what is wrong.
                 // Returning false will instead cause a runtime binder error which might be confusing to the user.
-                throw new ArgumentException(WebPageResources.DynamicHttpApplicationState_UseOnlyStringToSet);
+                throw new ArgumentException(
+                    WebPageResources.DynamicHttpApplicationState_UseOnlyStringToSet
+                );
             }
         }
     }

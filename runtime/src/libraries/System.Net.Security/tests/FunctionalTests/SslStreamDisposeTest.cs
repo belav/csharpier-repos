@@ -18,7 +18,14 @@ namespace System.Net.Security.Tests
         public async Task DisposeAsync_NotConnected_ClosesStream()
         {
             bool disposed = false;
-            var stream = new SslStream(new DelegateStream(disposeFunc: _ => disposed = true), false, delegate { return true; });
+            var stream = new SslStream(
+                new DelegateStream(disposeFunc: _ => disposed = true),
+                false,
+                delegate
+                {
+                    return true;
+                }
+            );
 
             Assert.False(disposed);
             await stream.DisposeAsync();
@@ -32,14 +39,31 @@ namespace System.Net.Security.Tests
             var trackingStream1 = new CallTrackingStream(stream1);
             var trackingStream2 = new CallTrackingStream(stream2);
 
-            var clientStream = new SslStream(trackingStream1, false, delegate { return true; });
-            var serverStream = new SslStream(trackingStream2, false, delegate { return true; });
+            var clientStream = new SslStream(
+                trackingStream1,
+                false,
+                delegate
+                {
+                    return true;
+                }
+            );
+            var serverStream = new SslStream(
+                trackingStream2,
+                false,
+                delegate
+                {
+                    return true;
+                }
+            );
 
             using (X509Certificate2 certificate = Configuration.Certificates.GetServerCertificate())
             {
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                    clientStream.AuthenticateAsClientAsync(certificate.GetNameInfo(X509NameType.SimpleName, false)),
-                    serverStream.AuthenticateAsServerAsync(certificate));
+                    clientStream.AuthenticateAsClientAsync(
+                        certificate.GetNameInfo(X509NameType.SimpleName, false)
+                    ),
+                    serverStream.AuthenticateAsServerAsync(certificate)
+                );
             }
 
             Assert.Equal(0, trackingStream1.TimesCalled(nameof(Stream.DisposeAsync)));

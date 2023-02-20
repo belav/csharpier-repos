@@ -15,7 +15,9 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class MissingMethodException : MissingMemberException
     {
         public MissingMethodException()
@@ -44,13 +46,11 @@ namespace System
         }
 
         protected MissingMethodException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
         public override string Message =>
-            ClassName == null ?
-                base.Message :
-                SR.Format(SR.MissingMethod_Name, ClassName, MemberName);
+            ClassName == null
+                ? base.Message
+                : SR.Format(SR.MissingMethod_Name, ClassName, MemberName);
     }
 }

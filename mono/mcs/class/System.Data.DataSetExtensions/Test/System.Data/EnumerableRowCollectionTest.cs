@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,11 +41,13 @@ namespace MonoTests.System.Data
     public class EnumerableRowCollectionTest
     {
         [Test]
-        public void QueryWhere ()
+        public void QueryWhere()
         {
-            var ds = new DataSet ();
-            ds.ReadXml (TestResourceHelper.GetFullPathOfResource ("Test/System.Data/testdataset1.xml"));
-            var table = ds.Tables [0];
+            var ds = new DataSet();
+            ds.ReadXml(
+                TestResourceHelper.GetFullPathOfResource("Test/System.Data/testdataset1.xml")
+            );
+            var table = ds.Tables[0];
             /* schema generated as ...
             var table = ds.Tables.Add ("ScoreList");
             table.Columns.Add ("ID", typeof (int));
@@ -54,154 +56,190 @@ namespace MonoTests.System.Data
             table.Columns.Add ("Score", typeof (int));
             ds.WriteXml ("Test/System.Data/testdataset1.xsd", XmlWriteMode.WriteSchema);
             */
-            var q = from line in table.AsEnumerable ()
-                where line.Field<int> ("Score") > 80
+            var q =
+                from line in table.AsEnumerable()
+                where line.Field<int>("Score") > 80
                 select line;
             bool iterated = false;
-            foreach (var line in q) {
+            foreach (var line in q)
+            {
                 if (iterated)
-                    Assert.Fail ("should match only one raw");
-                Assert.AreEqual (100, line ["Score"], "#1");
+                    Assert.Fail("should match only one raw");
+                Assert.AreEqual(100, line["Score"], "#1");
                 iterated = true;
             }
         }
 
         [Test]
-        public void QueryWhereSelect ()
+        public void QueryWhereSelect()
         {
-            var ds = new DataSet ();
-            ds.ReadXml (TestResourceHelper.GetFullPathOfResource ("Test/System.Data/testdataset1.xml"));
-            var table = ds.Tables [0];
-            var q = from line in table.AsEnumerable ()
-                where line.Field<int> ("Score") > 80
-                select new {
-                    StudentID = line.Field<int> ("ID"),
-                    StudentName = line.Field<string> ("Name"),
-                    StudentScore = line.Field<int> ("Score") };
+            var ds = new DataSet();
+            ds.ReadXml(
+                TestResourceHelper.GetFullPathOfResource("Test/System.Data/testdataset1.xml")
+            );
+            var table = ds.Tables[0];
+            var q =
+                from line in table.AsEnumerable()
+                where line.Field<int>("Score") > 80
+                select new
+                {
+                    StudentID = line.Field<int>("ID"),
+                    StudentName = line.Field<string>("Name"),
+                    StudentScore = line.Field<int>("Score")
+                };
             bool iterated = false;
-            foreach (var ql in q) {
+            foreach (var ql in q)
+            {
                 if (iterated)
-                    Assert.Fail ("should match only one raw");
-                Assert.AreEqual (100, ql.StudentScore, "#1");
+                    Assert.Fail("should match only one raw");
+                Assert.AreEqual(100, ql.StudentScore, "#1");
                 iterated = true;
             }
         }
 
         [Test]
-        public void QueryWhereSelectOrderBy ()
+        public void QueryWhereSelectOrderBy()
         {
-            var ds = new DataSet ();
-            ds.ReadXml (TestResourceHelper.GetFullPathOfResource ("Test/System.Data/testdataset1.xml"));
-            var table = ds.Tables [0];
-            var q = from line in table.AsEnumerable ()
-                where line.Field<int> ("Score") >= 80
-                orderby line.Field<int> ("ID")
-                select new {
-                    StudentID = line.Field<int> ("ID"),
-                    StudentName = line.Field<string> ("Name"),
-                    StudentScore = line.Field<int> ("Score") };
+            var ds = new DataSet();
+            ds.ReadXml(
+                TestResourceHelper.GetFullPathOfResource("Test/System.Data/testdataset1.xml")
+            );
+            var table = ds.Tables[0];
+            var q =
+                from line in table.AsEnumerable()
+                where line.Field<int>("Score") >= 80
+                orderby line.Field<int>("ID")
+                select new
+                {
+                    StudentID = line.Field<int>("ID"),
+                    StudentName = line.Field<string>("Name"),
+                    StudentScore = line.Field<int>("Score")
+                };
             int prevID = -1;
-            foreach (var ql in q) {
-                switch (prevID) {
-                case -1:
-                    Assert.AreEqual (1, ql.StudentID, "#1");
-                    break;
-                case 1:
-                    Assert.AreEqual (4, ql.StudentID, "#2");
-                    break;
-                default:
-                    Assert.Fail ("should match only one raw");
-                    break;
+            foreach (var ql in q)
+            {
+                switch (prevID)
+                {
+                    case -1:
+                        Assert.AreEqual(1, ql.StudentID, "#1");
+                        break;
+                    case 1:
+                        Assert.AreEqual(4, ql.StudentID, "#2");
+                        break;
+                    default:
+                        Assert.Fail("should match only one raw");
+                        break;
                 }
                 prevID = ql.StudentID;
             }
         }
 
         [Test]
-        public void QueryWhereSelectOrderByDescending ()
+        public void QueryWhereSelectOrderByDescending()
         {
-            var ds = new DataSet ();
-            ds.ReadXml (TestResourceHelper.GetFullPathOfResource ("Test/System.Data/testdataset1.xml"));
-            var table = ds.Tables [0];
-            var q = from line in table.AsEnumerable ()
-                where line.Field<int> ("Score") >= 80
-                orderby line.Field<int> ("ID") descending
-                select new {
-                    StudentID = line.Field<int> ("ID"),
-                    StudentName = line.Field<string> ("Name"),
-                    StudentScore = line.Field<int> ("Score") };
+            var ds = new DataSet();
+            ds.ReadXml(
+                TestResourceHelper.GetFullPathOfResource("Test/System.Data/testdataset1.xml")
+            );
+            var table = ds.Tables[0];
+            var q =
+                from line in table.AsEnumerable()
+                where line.Field<int>("Score") >= 80
+                orderby line.Field<int>("ID") descending
+                select new
+                {
+                    StudentID = line.Field<int>("ID"),
+                    StudentName = line.Field<string>("Name"),
+                    StudentScore = line.Field<int>("Score")
+                };
             int prevID = -1;
-            foreach (var ql in q) {
-                switch (prevID) {
-                case -1:
-                    Assert.AreEqual (4, ql.StudentID, "#1");
-                    break;
-                case 4:
-                    Assert.AreEqual (1, ql.StudentID, "#2");
-                    break;
-                default:
-                    Assert.Fail ("should match only one raw, ID: " + ql.StudentID);
-                    break;
+            foreach (var ql in q)
+            {
+                switch (prevID)
+                {
+                    case -1:
+                        Assert.AreEqual(4, ql.StudentID, "#1");
+                        break;
+                    case 4:
+                        Assert.AreEqual(1, ql.StudentID, "#2");
+                        break;
+                    default:
+                        Assert.Fail("should match only one raw, ID: " + ql.StudentID);
+                        break;
                 }
                 prevID = ql.StudentID;
             }
         }
 
         [Test]
-        public void ThenBy ()
+        public void ThenBy()
         {
-            var ds = new DataSet ();
-            ds.ReadXml (TestResourceHelper.GetFullPathOfResource ("Test/System.Data/testdataset1.xml"));
-            var table = ds.Tables [0];
-            var q = from line in table.AsEnumerable ()
-                where line.Field<int> ("Score") >= 80
-                orderby line.Field<bool> ("Gender"), line.Field<int> ("ID")
-                select new {
-                    StudentID = line.Field<int> ("ID"),
-                    StudentName = line.Field<string> ("Name"),
-                    StudentScore = line.Field<int> ("Score") };
+            var ds = new DataSet();
+            ds.ReadXml(
+                TestResourceHelper.GetFullPathOfResource("Test/System.Data/testdataset1.xml")
+            );
+            var table = ds.Tables[0];
+            var q =
+                from line in table.AsEnumerable()
+                where line.Field<int>("Score") >= 80
+                orderby line.Field<bool>("Gender"), line.Field<int>("ID")
+                select new
+                {
+                    StudentID = line.Field<int>("ID"),
+                    StudentName = line.Field<string>("Name"),
+                    StudentScore = line.Field<int>("Score")
+                };
             int prevID = -1;
-            foreach (var ql in q) {
-                switch (prevID) {
-                case -1:
-                    Assert.AreEqual (1, ql.StudentID, "#1");
-                    break;
-                case 1:
-                    Assert.AreEqual (4, ql.StudentID, "#2");
-                    break;
-                default:
-                    Assert.Fail ("should match only one raw, ID: " + ql.StudentID);
-                    break;
+            foreach (var ql in q)
+            {
+                switch (prevID)
+                {
+                    case -1:
+                        Assert.AreEqual(1, ql.StudentID, "#1");
+                        break;
+                    case 1:
+                        Assert.AreEqual(4, ql.StudentID, "#2");
+                        break;
+                    default:
+                        Assert.Fail("should match only one raw, ID: " + ql.StudentID);
+                        break;
                 }
                 prevID = ql.StudentID;
             }
         }
 
         [Test]
-        public void ThenByDescending ()
+        public void ThenByDescending()
         {
-            var ds = new DataSet ();
-            ds.ReadXml (TestResourceHelper.GetFullPathOfResource ("Test/System.Data/testdataset1.xml"));
-            var table = ds.Tables [0];
-            var q = from line in table.AsEnumerable ()
-                where line.Field<int> ("Score") >= 80
-                orderby line.Field<bool> ("Gender"), line.Field<int> ("ID") descending
-                select new {
-                    StudentID = line.Field<int> ("ID"),
-                    StudentName = line.Field<string> ("Name"),
-                    StudentScore = line.Field<int> ("Score") };
+            var ds = new DataSet();
+            ds.ReadXml(
+                TestResourceHelper.GetFullPathOfResource("Test/System.Data/testdataset1.xml")
+            );
+            var table = ds.Tables[0];
+            var q =
+                from line in table.AsEnumerable()
+                where line.Field<int>("Score") >= 80
+                orderby line.Field<bool>("Gender"), line.Field<int>("ID") descending
+                select new
+                {
+                    StudentID = line.Field<int>("ID"),
+                    StudentName = line.Field<string>("Name"),
+                    StudentScore = line.Field<int>("Score")
+                };
             int prevID = -1;
-            foreach (var ql in q) {
-                switch (prevID) {
-                case -1:
-                    Assert.AreEqual (4, ql.StudentID, "#1");
-                    break;
-                case 4:
-                    Assert.AreEqual (1, ql.StudentID, "#2");
-                    break;
-                default:
-                    Assert.Fail ("should match only one raw, ID: " + ql.StudentID);
-                    break;
+            foreach (var ql in q)
+            {
+                switch (prevID)
+                {
+                    case -1:
+                        Assert.AreEqual(4, ql.StudentID, "#1");
+                        break;
+                    case 4:
+                        Assert.AreEqual(1, ql.StudentID, "#2");
+                        break;
+                    default:
+                        Assert.Fail("should match only one raw, ID: " + ql.StudentID);
+                        break;
                 }
                 prevID = ql.StudentID;
             }

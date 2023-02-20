@@ -4,8 +4,8 @@
 
 class E
 {
-   public unsafe void Method (int i)
-   {
-       long* p = stackalloc long; 
-   }
+    public unsafe void Method(int i)
+    {
+        long* p = stackalloc long;
+    }
 }

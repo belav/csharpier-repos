@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,41 +37,46 @@ namespace System.ServiceModel.Dispatcher
 {
     public sealed class DispatchOperation
     {
-        internal class DispatchOperationCollection :
-            SynchronizedKeyedCollection<string, DispatchOperation>
+        internal class DispatchOperationCollection
+            : SynchronizedKeyedCollection<string, DispatchOperation>
         {
-            protected override string GetKeyForItem (DispatchOperation o)
+            protected override string GetKeyForItem(DispatchOperation o)
             {
                 return o.Name;
             }
         }
 
         DispatchRuntime parent;
-        string name, action, reply_action;
-        bool serialize_reply = true, deserialize_request = true,
-            is_oneway, is_terminating,
-            release_after_call, release_before_call,
-            tx_auto_complete, tx_required,
+        string name,
+            action,
+            reply_action;
+        bool serialize_reply = true,
+            deserialize_request = true,
+            is_oneway,
+            is_terminating,
+            release_after_call,
+            release_before_call,
+            tx_auto_complete,
+            tx_required,
             auto_dispose_params = true;
         IDispatchMessageFormatter formatter;
 #if !MOBILE
         ImpersonationOption impersonation;
         IOperationInvoker invoker;
-        SynchronizedCollection<IParameterInspector> inspectors
-            = new SynchronizedCollection<IParameterInspector> ();
-        SynchronizedCollection<FaultContractInfo> fault_contract_infos
-            = new SynchronizedCollection<FaultContractInfo> ();
-        SynchronizedCollection<ICallContextInitializer> ctx_initializers
-            = new SynchronizedCollection<ICallContextInitializer> ();
+        SynchronizedCollection<IParameterInspector> inspectors =
+            new SynchronizedCollection<IParameterInspector>();
+        SynchronizedCollection<FaultContractInfo> fault_contract_infos =
+            new SynchronizedCollection<FaultContractInfo>();
+        SynchronizedCollection<ICallContextInitializer> ctx_initializers =
+            new SynchronizedCollection<ICallContextInitializer>();
 #endif
 
-        public DispatchOperation (DispatchRuntime parent,
-            string name, string action)
+        public DispatchOperation(DispatchRuntime parent, string name, string action)
         {
             if (parent == null)
-                throw new ArgumentNullException ("parent");
+                throw new ArgumentNullException("parent");
             if (name == null)
-                throw new ArgumentNullException ("name");
+                throw new ArgumentNullException("name");
             // action could be null
 
             is_oneway = true;
@@ -80,151 +85,190 @@ namespace System.ServiceModel.Dispatcher
             this.action = action;
         }
 
-        public DispatchOperation (DispatchRuntime parent,
-            string name, string action, string replyAction)
-            : this (parent, name, action)
+        public DispatchOperation(
+            DispatchRuntime parent,
+            string name,
+            string action,
+            string replyAction
+        )
+            : this(parent, name, action)
         {
             // replyAction could be null
             is_oneway = false;
             reply_action = replyAction;
         }
 
-        public string Action {
+        public string Action
+        {
             get { return action; }
         }
 
 #if !MOBILE
-        public SynchronizedCollection<ICallContextInitializer> CallContextInitializers {
+        public SynchronizedCollection<ICallContextInitializer> CallContextInitializers
+        {
             get { return ctx_initializers; }
         }
 
-        public SynchronizedCollection<FaultContractInfo> FaultContractInfos {
+        public SynchronizedCollection<FaultContractInfo> FaultContractInfos
+        {
             get { return fault_contract_infos; }
         }
 
-        [MonoTODO ("not considered")]
-        public ImpersonationOption Impersonation {
+        [MonoTODO("not considered")]
+        public ImpersonationOption Impersonation
+        {
             get { return impersonation; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 impersonation = value;
             }
         }
 
-        public IOperationInvoker Invoker {
+        public IOperationInvoker Invoker
+        {
             get { return invoker; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 invoker = value;
             }
         }
 
-        public bool IsTerminating {
+        public bool IsTerminating
+        {
             get { return is_terminating; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 is_terminating = value;
             }
         }
 
-        public SynchronizedCollection<IParameterInspector> ParameterInspectors {
+        public SynchronizedCollection<IParameterInspector> ParameterInspectors
+        {
             get { return inspectors; }
         }
 
-        public bool ReleaseInstanceAfterCall {
+        public bool ReleaseInstanceAfterCall
+        {
             get { return release_after_call; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 release_after_call = value;
             }
         }
 
-        public bool ReleaseInstanceBeforeCall {
+        public bool ReleaseInstanceBeforeCall
+        {
             get { return release_before_call; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 release_before_call = value;
             }
         }
 
-        public string ReplyAction {
+        public string ReplyAction
+        {
             get { return reply_action; }
         }
 
-        public bool TransactionAutoComplete {
+        public bool TransactionAutoComplete
+        {
             get { return tx_auto_complete; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 tx_auto_complete = value;
             }
         }
 
-        public bool TransactionRequired {
+        public bool TransactionRequired
+        {
             get { return tx_required; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 tx_required = value;
             }
         }
 #endif
 
-        public bool AutoDisposeParameters {
+        public bool AutoDisposeParameters
+        {
             get { return auto_dispose_params; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 auto_dispose_params = value;
             }
         }
 
-        public bool DeserializeRequest {
+        public bool DeserializeRequest
+        {
             get { return deserialize_request; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 deserialize_request = value;
             }
         }
 
-        public IDispatchMessageFormatter Formatter {
+        public IDispatchMessageFormatter Formatter
+        {
             get { return formatter; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 formatter = value;
             }
         }
 
-        public bool IsOneWay {
+        public bool IsOneWay
+        {
             get { return is_oneway; }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
         }
 
-        public DispatchRuntime Parent {
+        public DispatchRuntime Parent
+        {
             get { return parent; }
         }
 
-        public bool SerializeReply {
+        public bool SerializeReply
+        {
             get { return serialize_reply; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 serialize_reply = value;
             }
         }
 
-        void ThrowIfOpened ()
+        void ThrowIfOpened()
         {
 #if !MOBILE && !XAMMAC_4_5
             // FIXME: get callback client runtime status when ChannelDispatcher is not available.
-            var state = Parent.ChannelDispatcher != null ? Parent.ChannelDispatcher.State : CommunicationState.Created; // Parent.CallbackClientRuntime.ChannelFactory.State;
-            switch (state) {
-            case CommunicationState.Created:
-            case CommunicationState.Opening:
-                return;
+            var state =
+                Parent.ChannelDispatcher != null
+                    ? Parent.ChannelDispatcher.State
+                    : CommunicationState.Created; // Parent.CallbackClientRuntime.ChannelFactory.State;
+            switch (state)
+            {
+                case CommunicationState.Created:
+                case CommunicationState.Opening:
+                    return;
             }
-            throw new InvalidOperationException ("Cannot change this property after the service host is opened");
+            throw new InvalidOperationException(
+                "Cannot change this property after the service host is opened"
+            );
 #endif
         }
-
     }
 }

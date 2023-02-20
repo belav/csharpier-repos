@@ -3,7 +3,7 @@ using System;
 
 class Test
 {
-    static void Main () {}
+    static void Main() { }
 
     /// <summary>
     /// some summary
@@ -19,8 +19,7 @@ class Test
     // <see cref="T:System.Text.RegularExpressions"/> .. csc incorrectly allows it
     // <see cref="System.Text.RegularExpressions.Regex[]"/> ... csc does not allow it.
     //
-    public void foo2() {
-    }
+    public void foo2() { }
 
     /// <summary>
     /// <see cref="String.Format(string, object[])" />.
@@ -30,6 +29,5 @@ class Test
     /// </summary>
     /// <param name="line">The formatting string.</param>
     /// <param name="args">The object array to write into format string.</param>
-    public void foo3(string line, params object[] args) {
-    }
+    public void foo3(string line, params object[] args) { }
 }

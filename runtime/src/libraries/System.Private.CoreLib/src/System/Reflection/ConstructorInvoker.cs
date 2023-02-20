@@ -18,12 +18,18 @@ namespace System.Reflection
         {
             _method = constructorInfo;
 
-            if (LocalAppContextSwitches.ForceInterpretedInvoke && !LocalAppContextSwitches.ForceEmitInvoke)
+            if (
+                LocalAppContextSwitches.ForceInterpretedInvoke
+                && !LocalAppContextSwitches.ForceEmitInvoke
+            )
             {
                 // Always use the native invoke; useful for testing.
                 _strategyDetermined = true;
             }
-            else if (LocalAppContextSwitches.ForceEmitInvoke && !LocalAppContextSwitches.ForceInterpretedInvoke)
+            else if (
+                LocalAppContextSwitches.ForceEmitInvoke
+                && !LocalAppContextSwitches.ForceInterpretedInvoke
+            )
             {
                 // Always use emit invoke (if IsDynamicCodeCompiled == true); useful for testing.
                 _invoked = true;
@@ -33,7 +39,11 @@ namespace System.Reflection
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public unsafe object? InlinedInvoke(object? obj, IntPtr* args, BindingFlags invokeAttr)
         {
-            if (_invokeFunc != null && (invokeAttr & BindingFlags.DoNotWrapExceptions) != 0 && obj == null)
+            if (
+                _invokeFunc != null
+                && (invokeAttr & BindingFlags.DoNotWrapExceptions) != 0
+                && obj == null
+            )
             {
                 return _invokeFunc(target: null, args);
             }

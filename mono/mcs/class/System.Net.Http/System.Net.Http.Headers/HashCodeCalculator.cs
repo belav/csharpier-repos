@@ -32,15 +32,17 @@ namespace System.Net.Http.Headers
 {
     static class HashCodeCalculator
     {
-        public static int Calculate<T> (ICollection<T> list)
+        public static int Calculate<T>(ICollection<T> list)
         {
             if (list == null)
                 return 0;
 
             int hash = 17;
-            foreach (var item in list) {
-                unchecked {
-                    hash = hash * 29 + item.GetHashCode ();
+            foreach (var item in list)
+            {
+                unchecked
+                {
+                    hash = hash * 29 + item.GetHashCode();
                 }
             }
 

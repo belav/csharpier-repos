@@ -9,7 +9,14 @@ namespace System.Runtime.CompilerServices
     /// <summary>
     /// Indicates that the use of <see cref="System.ValueTuple"/> on a member is meant to be treated as a tuple with element names.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue | AttributeTargets.Class | AttributeTargets.Struct )]
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Parameter
+            | AttributeTargets.Property
+            | AttributeTargets.ReturnValue
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+    )]
     public sealed class TupleElementNamesAttribute : Attribute
     {
         private readonly string[] _transformNames;
@@ -19,7 +26,7 @@ namespace System.Runtime.CompilerServices
         /// </summary>
         /// <param name="transformNames">
         /// Specifies, in a prefix traversal of a type's
-        /// construction, which <see cref="System.ValueType"/> occurrences are meant to 
+        /// construction, which <see cref="System.ValueType"/> occurrences are meant to
         /// carry element names.
         /// </param>
         /// <remarks>

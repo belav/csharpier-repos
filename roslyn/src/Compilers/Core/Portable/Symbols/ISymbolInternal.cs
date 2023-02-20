@@ -27,6 +27,7 @@ namespace Microsoft.CodeAnalysis.Symbols
 
 #nullable disable // Skipped for now https://github.com/dotnet/roslyn/issues/39166
         Compilation DeclaringCompilation { get; }
+
 #nullable enable
 
         /// <summary>
@@ -82,13 +83,13 @@ namespace Microsoft.CodeAnalysis.Symbols
 
         /// <summary>
         /// Returns true if this symbol was automatically created by the compiler, and does not have
-        /// an explicit corresponding source code declaration. 
-        /// </summary> 
+        /// an explicit corresponding source code declaration.
+        /// </summary>
         /// <remarks>
         /// This is intended for symbols that are ordinary symbols in the language sense, and may be
         /// used by code, but that are simply declared implicitly rather than with explicit language
         /// syntax.
-        /// 
+        ///
         /// <para>
         /// Examples include (this list is not exhaustive):
         /// <list type="bullet">

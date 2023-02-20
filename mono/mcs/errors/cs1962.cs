@@ -3,8 +3,8 @@
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        object t = typeof (dynamic);
+        object t = typeof(dynamic);
     }
 }

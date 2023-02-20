@@ -81,7 +81,11 @@ public static class HttpRequestRewindExtensions
     /// environment variable, if any. If that environment variable is not defined, these files are written to the
     /// current user's temporary folder. Files are automatically deleted at the end of their associated requests.
     /// </remarks>
-    public static void EnableBuffering(this HttpRequest request, int bufferThreshold, long bufferLimit)
+    public static void EnableBuffering(
+        this HttpRequest request,
+        int bufferThreshold,
+        long bufferLimit
+    )
     {
         BufferingHelper.EnableRewind(request, bufferThreshold, bufferLimit);
     }

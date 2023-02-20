@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,40 +54,45 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class HttpDigestClientElement
-         : ConfigurationElement
+    public sealed partial class HttpDigestClientElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty impersonation_level;
 
-        static HttpDigestClientElement ()
+        static HttpDigestClientElement()
         {
-            properties = new ConfigurationPropertyCollection ();
-            impersonation_level = new ConfigurationProperty ("impersonationLevel",
-                typeof (TokenImpersonationLevel), "Identification", null, null,
-                ConfigurationPropertyOptions.None);
+            properties = new ConfigurationPropertyCollection();
+            impersonation_level = new ConfigurationProperty(
+                "impersonationLevel",
+                typeof(TokenImpersonationLevel),
+                "Identification",
+                null,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            properties.Add (impersonation_level);
+            properties.Add(impersonation_level);
         }
 
-        public HttpDigestClientElement ()
-        {
-        }
+        public HttpDigestClientElement() { }
 
         // Properties
 
-        [ConfigurationProperty ("impersonationLevel",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = TokenImpersonationLevel.Identification)]
-        public TokenImpersonationLevel ImpersonationLevel {
-            get { return (TokenImpersonationLevel) base [impersonation_level]; }
-            set { base [impersonation_level] = value; }
+        [ConfigurationProperty(
+            "impersonationLevel",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = TokenImpersonationLevel.Identification
+        )]
+        public TokenImpersonationLevel ImpersonationLevel
+        {
+            get { return (TokenImpersonationLevel)base[impersonation_level]; }
+            set { base[impersonation_level] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
     }
-
 }

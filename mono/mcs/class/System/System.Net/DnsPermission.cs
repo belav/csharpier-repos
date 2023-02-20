@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,99 +31,107 @@ using System.Collections;
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Net {
-
+namespace System.Net
+{
     [Serializable]
-    public sealed class DnsPermission : CodeAccessPermission, IUnrestrictedPermission {
-
+    public sealed class DnsPermission : CodeAccessPermission, IUnrestrictedPermission
+    {
         private const int version = 1;
 
         // Fields
         bool m_noRestriction;
-        
+
         // Constructors
-        public DnsPermission (PermissionState state)
-            : base () 
-        {                        
+        public DnsPermission(PermissionState state)
+            : base()
+        {
             m_noRestriction = (state == PermissionState.Unrestricted);
         }
-        
+
         // Methods
-                
-        public override IPermission Copy ()
+
+        public override IPermission Copy()
         {
-            return new DnsPermission (m_noRestriction ? PermissionState.Unrestricted : PermissionState.None);        
+            return new DnsPermission(
+                m_noRestriction ? PermissionState.Unrestricted : PermissionState.None
+            );
         }
-        
-        public override IPermission Intersect (IPermission target)
+
+        public override IPermission Intersect(IPermission target)
         {
-            DnsPermission dp = Cast (target);
+            DnsPermission dp = Cast(target);
             if (dp == null)
                 return null;
-            if (IsUnrestricted () && dp.IsUnrestricted ())
-                return new DnsPermission (PermissionState.Unrestricted);
+            if (IsUnrestricted() && dp.IsUnrestricted())
+                return new DnsPermission(PermissionState.Unrestricted);
             return null;
         }
-        
-        public override bool IsSubsetOf (IPermission target) 
-        {
-            DnsPermission dp = Cast (target);
-            if (dp == null)
-                return IsEmpty ();
 
-            return (dp.IsUnrestricted () || (m_noRestriction == dp.m_noRestriction));
+        public override bool IsSubsetOf(IPermission target)
+        {
+            DnsPermission dp = Cast(target);
+            if (dp == null)
+                return IsEmpty();
+
+            return (dp.IsUnrestricted() || (m_noRestriction == dp.m_noRestriction));
         }
 
-        public bool IsUnrestricted () 
+        public bool IsUnrestricted()
         {
             return this.m_noRestriction;
         }
 
-        public override SecurityElement ToXml ()
+        public override SecurityElement ToXml()
         {
-            SecurityElement se = PermissionHelper.Element (typeof (DnsPermission), version);
+            SecurityElement se = PermissionHelper.Element(typeof(DnsPermission), version);
             if (m_noRestriction)
-                se.AddAttribute ("Unrestricted", "true");                
+                se.AddAttribute("Unrestricted", "true");
             return se;
         }
-        
-        public override void FromXml (SecurityElement securityElement)
+
+        public override void FromXml(SecurityElement securityElement)
         {
-            PermissionHelper.CheckSecurityElement (securityElement, "securityElement", version, version);
-        
-            // LAMESPEC: it says to throw an ArgumentNullException in this case                
+            PermissionHelper.CheckSecurityElement(
+                securityElement,
+                "securityElement",
+                version,
+                version
+            );
+
+            // LAMESPEC: it says to throw an ArgumentNullException in this case
             if (securityElement.Tag != "IPermission")
-                throw new ArgumentException ("securityElement");
-                
-            this.m_noRestriction = PermissionHelper.IsUnrestricted (securityElement);
-        }        
-        
-        public override IPermission Union (IPermission target) 
+                throw new ArgumentException("securityElement");
+
+            this.m_noRestriction = PermissionHelper.IsUnrestricted(securityElement);
+        }
+
+        public override IPermission Union(IPermission target)
         {
-            DnsPermission dp = Cast (target);
+            DnsPermission dp = Cast(target);
             if (dp == null)
-                return Copy ();
-            if (IsUnrestricted () || dp.IsUnrestricted ())
-                return new DnsPermission (PermissionState.Unrestricted);
+                return Copy();
+            if (IsUnrestricted() || dp.IsUnrestricted())
+                return new DnsPermission(PermissionState.Unrestricted);
             else
-                return new DnsPermission (PermissionState.None);
+                return new DnsPermission(PermissionState.None);
         }
 
         // Internal helpers methods
 
-        private bool IsEmpty ()
+        private bool IsEmpty()
         {
             return !m_noRestriction;
         }
 
-        private DnsPermission Cast (IPermission target)
+        private DnsPermission Cast(IPermission target)
         {
             if (target == null)
                 return null;
 
             DnsPermission dp = (target as DnsPermission);
-            if (dp == null) {
-                PermissionHelper.ThrowInvalidPermission (target, typeof (DnsPermission));
+            if (dp == null)
+            {
+                PermissionHelper.ThrowInvalidPermission(target, typeof(DnsPermission));
             }
 
             return dp;

@@ -5,12 +5,9 @@
 using System;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo ("MyAssemblyName")]
+[assembly: InternalsVisibleTo("MyAssemblyName")]
 
 public class Test
 {
-    static void Main ()
-    {
-    }
+    static void Main() { }
 }
-

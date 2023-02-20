@@ -5,9 +5,9 @@ using System;
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        Action a = () => {};
-        bool b = a () == null;
+        Action a = () => { };
+        bool b = a() == null;
     }
 }

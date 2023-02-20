@@ -10,42 +10,45 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Routing.Configuration
 {
-    [ConfigurationCollection (typeof (BackupEndpointElement))]
+    [ConfigurationCollection(typeof(BackupEndpointElement))]
     public class BackupEndpointCollection : ConfigurationElementCollection
     {
-        [ConfigurationProperty ("name", DefaultValue = null, Options = ConfigurationPropertyOptions.IsRequired)]
-        public string Name {
-            get { return (string) base ["name"]; }
-            set { base ["name"] = value; }
+        [ConfigurationProperty(
+            "name",
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string Name
+        {
+            get { return (string)base["name"]; }
+            set { base["name"] = value; }
         }
 
-        public BackupEndpointCollection ()
+        public BackupEndpointCollection() { }
+
+        public void Add(BackupEndpointElement element)
         {
+            BaseAdd(element);
         }
 
-        public void Add (BackupEndpointElement element)
+        public void Clear()
         {
-            BaseAdd (element);
+            BaseClear();
         }
 
-        public void Clear ()
+        protected override ConfigurationElement CreateNewElement()
         {
-            BaseClear ();
+            return new BackupEndpointElement();
         }
 
-        protected override ConfigurationElement CreateNewElement ()
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            return new BackupEndpointElement ();
+            return ((BackupEndpointElement)element).EndpointName;
         }
 
-        protected override object GetElementKey (ConfigurationElement element)
+        public void Remove(BackupEndpointElement element)
         {
-            return ((BackupEndpointElement) element).EndpointName;
-        }
-
-        public void Remove (BackupEndpointElement element)
-        {
-            BaseRemove (element);
+            BaseRemove(element);
         }
     }
 }

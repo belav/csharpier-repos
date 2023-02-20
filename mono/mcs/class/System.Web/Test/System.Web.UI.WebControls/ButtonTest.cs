@@ -41,267 +41,278 @@ using MonoTests.stand_alone.WebHarness;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-    class PokerButton : Button {
-        public PokerButton ()
+    class PokerButton : Button
+    {
+        public PokerButton()
         {
-            TrackViewState ();
+            TrackViewState();
         }
 
-        public object SaveState ()
+        public object SaveState()
         {
-            return SaveViewState ();
+            return SaveViewState();
         }
 
-        public void LoadState (object o)
+        public void LoadState(object o)
         {
-            LoadViewState (o);
+            LoadViewState(o);
         }
 
-        public string Render ()
+        public string Render()
         {
-            StringWriter sw = new StringWriter ();
+            StringWriter sw = new StringWriter();
             sw.NewLine = "\n";
-            HtmlTextWriter writer = new HtmlTextWriter (sw);
-            base.Render (writer);
-            return writer.InnerWriter.ToString ();
-        }        
-        public new PostBackOptions GetPostBackOptions ()
-        {
-            return base.GetPostBackOptions ();
+            HtmlTextWriter writer = new HtmlTextWriter(sw);
+            base.Render(writer);
+            return writer.InnerWriter.ToString();
         }
 
-        public new void OnPreRender (EventArgs e)
+        public new PostBackOptions GetPostBackOptions()
         {
-            base.OnPreRender (e);
+            return base.GetPostBackOptions();
         }
 
-        public new void RaisePostBackEvent (string eventArgument)
+        public new void OnPreRender(EventArgs e)
         {
-            base.RaisePostBackEvent (eventArgument);
+            base.OnPreRender(e);
+        }
+
+        public new void RaisePostBackEvent(string eventArgument)
+        {
+            base.RaisePostBackEvent(eventArgument);
         }
     }
-
 
     [TestFixture]
     public class ButtonTest
     {
         [TestFixtureSetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            WebTest.CopyResource (GetType (), "ButtonColor_Bug325489.aspx", "ButtonColor_Bug325489.aspx");
+            WebTest.CopyResource(
+                GetType(),
+                "ButtonColor_Bug325489.aspx",
+                "ButtonColor_Bug325489.aspx"
+            );
         }
 
         [Test]
-        public void ButtonColor_Bug325489 ()
+        public void ButtonColor_Bug325489()
         {
-            WebTest t = new WebTest ("ButtonColor_Bug325489.aspx");
-            string origHtml = @"<input type=""submit"" name=""button1"" value="""" id=""button1"" style=""background-color:#316AC5;"" />";
-            string html = t.Run ();
-            string renderedHtml = HtmlDiff.GetControlFromPageHtml (html);
+            WebTest t = new WebTest("ButtonColor_Bug325489.aspx");
+            string origHtml =
+                @"<input type=""submit"" name=""button1"" value="""" id=""button1"" style=""background-color:#316AC5;"" />";
+            string html = t.Run();
+            string renderedHtml = HtmlDiff.GetControlFromPageHtml(html);
 
-            HtmlDiff.AssertAreEqual (origHtml, renderedHtml, "#A1");
-        }
-        
-        [Test]
-        public void Button_DefaultValues ()
-        {
-            Button b = new Button ();
-            Assert.AreEqual (true, b.CausesValidation, "CausesValidation");
-            Assert.AreEqual (string.Empty, b.CommandArgument, "CommandArgument");
-            Assert.AreEqual (string.Empty, b.CommandName, "CommandName");            
-            Assert.AreEqual (string.Empty, b.ValidationGroup, "ValidationGroup");
-            Assert.AreEqual (string.Empty, b.OnClientClick, "OnClientClick");
-            Assert.AreEqual (string.Empty, b.PostBackUrl, "PostBackUrl");
-            Assert.AreEqual (true, b.UseSubmitBehavior, "UseSubmitBehavior");
+            HtmlDiff.AssertAreEqual(origHtml, renderedHtml, "#A1");
         }
 
         [Test]
-        public void AssignProperties ()
+        public void Button_DefaultValues()
         {
-            Button b = new Button ();
-            Assert.AreEqual (string.Empty, b.OnClientClick, "OnClientClick#1");
+            Button b = new Button();
+            Assert.AreEqual(true, b.CausesValidation, "CausesValidation");
+            Assert.AreEqual(string.Empty, b.CommandArgument, "CommandArgument");
+            Assert.AreEqual(string.Empty, b.CommandName, "CommandName");
+            Assert.AreEqual(string.Empty, b.ValidationGroup, "ValidationGroup");
+            Assert.AreEqual(string.Empty, b.OnClientClick, "OnClientClick");
+            Assert.AreEqual(string.Empty, b.PostBackUrl, "PostBackUrl");
+            Assert.AreEqual(true, b.UseSubmitBehavior, "UseSubmitBehavior");
+        }
+
+        [Test]
+        public void AssignProperties()
+        {
+            Button b = new Button();
+            Assert.AreEqual(string.Empty, b.OnClientClick, "OnClientClick#1");
             b.OnClientClick = "Test()";
-            Assert.AreEqual ("Test()", b.OnClientClick, "OnClientClick#2");
-            Assert.AreEqual (string.Empty, b.PostBackUrl, "PostBackUrl");
+            Assert.AreEqual("Test()", b.OnClientClick, "OnClientClick#2");
+            Assert.AreEqual(string.Empty, b.PostBackUrl, "PostBackUrl");
             b.PostBackUrl = "Test";
-            Assert.AreEqual ("Test", b.PostBackUrl, "PostBackUrl");
-            Assert.AreEqual (true, b.UseSubmitBehavior, "UseSubmitBehavior#1");
+            Assert.AreEqual("Test", b.PostBackUrl, "PostBackUrl");
+            Assert.AreEqual(true, b.UseSubmitBehavior, "UseSubmitBehavior#1");
             b.UseSubmitBehavior = false;
-            Assert.AreEqual (false, b.UseSubmitBehavior, "UseSubmitBehavior#2");
-            Assert.AreEqual (string.Empty, b.ValidationGroup, "ValidationGroup#1");
+            Assert.AreEqual(false, b.UseSubmitBehavior, "UseSubmitBehavior#2");
+            Assert.AreEqual(string.Empty, b.ValidationGroup, "ValidationGroup#1");
             b.ValidationGroup = "test";
-            Assert.AreEqual ("test", b.ValidationGroup, "ValidationGroup#2");
+            Assert.AreEqual("test", b.ValidationGroup, "ValidationGroup#2");
         }
 
         [Test]
-        public void Button_ViewState ()
+        public void Button_ViewState()
         {
-            PokerButton p = new PokerButton ();
+            PokerButton p = new PokerButton();
 
-            Assert.AreEqual (p.Text, "", "A1");
+            Assert.AreEqual(p.Text, "", "A1");
             p.Text = "Hello";
-            Assert.AreEqual (p.Text, "Hello", "A2");
+            Assert.AreEqual(p.Text, "Hello", "A2");
 
             p.ValidationGroup = "VG1";
             p.UseSubmitBehavior = false;
             p.OnClientClick = "ClientClick()";
             p.PostBackUrl = "PostBackUrl";
-            Assert.AreEqual (p.ValidationGroup, "VG1", "A3");
-            Assert.AreEqual (false, p.UseSubmitBehavior, "ViewState_UseSubmitBehavior#original");
-            Assert.AreEqual ("ClientClick()", p.OnClientClick, "ViewState_OnClientClick#original");
-            Assert.AreEqual ("PostBackUrl", p.PostBackUrl, "ViewState_PostBackUrl#original");
+            Assert.AreEqual(p.ValidationGroup, "VG1", "A3");
+            Assert.AreEqual(false, p.UseSubmitBehavior, "ViewState_UseSubmitBehavior#original");
+            Assert.AreEqual("ClientClick()", p.OnClientClick, "ViewState_OnClientClick#original");
+            Assert.AreEqual("PostBackUrl", p.PostBackUrl, "ViewState_PostBackUrl#original");
 
-            object state = p.SaveState ();
+            object state = p.SaveState();
 
-            PokerButton copy = new PokerButton ();
-            copy.LoadState (state);
-            Assert.AreEqual (copy.Text, "Hello", "A4");
+            PokerButton copy = new PokerButton();
+            copy.LoadState(state);
+            Assert.AreEqual(copy.Text, "Hello", "A4");
 
-            Assert.AreEqual (copy.ValidationGroup, "VG1", "A5");
-            Assert.AreEqual (false, copy.UseSubmitBehavior, "ViewState_UseSubmitBehavior#copy");
-            Assert.AreEqual ("ClientClick()", p.OnClientClick, "ViewState_OnClientClick#copy");
-            Assert.AreEqual ("PostBackUrl", p.PostBackUrl, "ViewState_PostBackUrl#copy");
+            Assert.AreEqual(copy.ValidationGroup, "VG1", "A5");
+            Assert.AreEqual(false, copy.UseSubmitBehavior, "ViewState_UseSubmitBehavior#copy");
+            Assert.AreEqual("ClientClick()", p.OnClientClick, "ViewState_OnClientClick#copy");
+            Assert.AreEqual("PostBackUrl", p.PostBackUrl, "ViewState_PostBackUrl#copy");
         }
 
         [Test]
-        public void Button_Render ()
+        public void Button_Render()
         {
-            StringWriter sw = new StringWriter ();
-            HtmlTextWriter tw = new HtmlTextWriter (sw);
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter tw = new HtmlTextWriter(sw);
 
-            Button b = new Button ();
+            Button b = new Button();
             b.Text = "Hello";
-            b.RenderControl (tw);
-            
-            Assert.AreEqual (true, sw.ToString().IndexOf ("value=\"Hello\"") != -1, "A4");
-            Assert.AreEqual (true, sw.ToString().IndexOf ("<input") != -1, "A5");
-            Assert.AreEqual (true, sw.ToString().IndexOf ("type=\"submit\"") != -1, "A6");
+            b.RenderControl(tw);
+
+            Assert.AreEqual(true, sw.ToString().IndexOf("value=\"Hello\"") != -1, "A4");
+            Assert.AreEqual(true, sw.ToString().IndexOf("<input") != -1, "A5");
+            Assert.AreEqual(true, sw.ToString().IndexOf("type=\"submit\"") != -1, "A6");
         }
 
         [Test]
-        public void IgnoresChildren ()
+        public void IgnoresChildren()
         {
-            Button b = new  Button ();
-            b.Controls.Add (new LiteralControl ("hola"));
-            Assert.AreEqual (1, b.Controls.Count, "controls");
-            StringWriter sw = new StringWriter ();
-            HtmlTextWriter tw = new HtmlTextWriter (sw);
-            b.RenderControl (tw);
-            string str = tw.ToString ();
-            Assert.AreEqual (-1, str.IndexOf ("hola"), "hola");
+            Button b = new Button();
+            b.Controls.Add(new LiteralControl("hola"));
+            Assert.AreEqual(1, b.Controls.Count, "controls");
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter tw = new HtmlTextWriter(sw);
+            b.RenderControl(tw);
+            string str = tw.ToString();
+            Assert.AreEqual(-1, str.IndexOf("hola"), "hola");
         }
 
         [Test]
-        public void Button_Render2 () {
-            StringWriter sw = new StringWriter ();
-            HtmlTextWriter tw = new HtmlTextWriter (sw);
-            
-            Button b = new Button ();
+        public void Button_Render2()
+        {
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter tw = new HtmlTextWriter(sw);
+
+            Button b = new Button();
             b.ID = "MyButton";
             b.Text = "Hello";
             b.UseSubmitBehavior = false;
             b.Enabled = false;
             b.ToolTip = "Hello_ToolTip";
-            b.RenderControl (tw);
-            
-            string strTarget = "<input type=\"button\" name=\"MyButton\" value=\"Hello\" id=\"MyButton\" disabled=\"disabled\" title=\"Hello_ToolTip\" />";
+            b.RenderControl(tw);
+
+            string strTarget =
+                "<input type=\"button\" name=\"MyButton\" value=\"Hello\" id=\"MyButton\" disabled=\"disabled\" title=\"Hello_ToolTip\" />";
             string str = sw.ToString();
-            HtmlDiff.AssertAreEqual (strTarget, str, "Button_Render2");
+            HtmlDiff.AssertAreEqual(strTarget, str, "Button_Render2");
         }
 
         [Test]
-        public void GetPostBackOptions ()
+        public void GetPostBackOptions()
         {
-            PokerButton b = new PokerButton ();
-            PostBackOptions opt = b.GetPostBackOptions ();
-            Assert.AreEqual (typeof (PokerButton), opt.TargetControl.GetType (), "GetPostBackOptions#1");
+            PokerButton b = new PokerButton();
+            PostBackOptions opt = b.GetPostBackOptions();
+            Assert.AreEqual(
+                typeof(PokerButton),
+                opt.TargetControl.GetType(),
+                "GetPostBackOptions#1"
+            );
         }
 
         [Test]
-        public void OnPreRender ()
+        public void OnPreRender()
         {
-            PokerButton b = new PokerButton ();
-            b.PreRender += new EventHandler (b_PreRender);
-            Assert.AreEqual (false, eventPreRender, "Before PreRender");
-            b.OnPreRender (new EventArgs ());
-            Assert.AreEqual (true, eventPreRender, "After PreRender");
+            PokerButton b = new PokerButton();
+            b.PreRender += new EventHandler(b_PreRender);
+            Assert.AreEqual(false, eventPreRender, "Before PreRender");
+            b.OnPreRender(new EventArgs());
+            Assert.AreEqual(true, eventPreRender, "After PreRender");
         }
 
         bool eventPreRender;
-        void b_PreRender (object sender, EventArgs e)
+
+        void b_PreRender(object sender, EventArgs e)
         {
             eventPreRender = true;
         }
 
         [Test]
         [Category("NunitWeb")]
-        public void PostBackUrl ()
+        public void PostBackUrl()
         {
-            WebTest t = new WebTest (PageInvoker.CreateOnLoad (PostBackUrl_Load));
-            string html = t.Run ();
-            if (html.IndexOf ("onclick") == -1)
-                Assert.Fail ("Button Postback script not created fail");
-            if (html.IndexOf ("MyPageWithMaster.aspx") == -1)
-                Assert.Fail ("Link to postback page not created fail");
-            if (html.IndexOf ("__PREVIOUSPAGE") == -1)
-                Assert.Fail ("Previos page hidden control not created fail");
+            WebTest t = new WebTest(PageInvoker.CreateOnLoad(PostBackUrl_Load));
+            string html = t.Run();
+            if (html.IndexOf("onclick") == -1)
+                Assert.Fail("Button Postback script not created fail");
+            if (html.IndexOf("MyPageWithMaster.aspx") == -1)
+                Assert.Fail("Link to postback page not created fail");
+            if (html.IndexOf("__PREVIOUSPAGE") == -1)
+                Assert.Fail("Previos page hidden control not created fail");
         }
 
-        public static void PostBackUrl_Load (Page p)
+        public static void PostBackUrl_Load(Page p)
         {
-            PokerButton b = new PokerButton ();
+            PokerButton b = new PokerButton();
             b.PostBackUrl = "~/MyPageWithMaster.aspx";
-            p.Form.Controls.Add (b);
+            p.Form.Controls.Add(b);
         }
 
         [Test]
-        public void RaisePostBackEvent ()
+        public void RaisePostBackEvent()
         {
-            Page p = new Page ();
-            PokerButton b = new PokerButton ();
-            b.Click += new EventHandler (b_Click);
-            p.Controls.Add (b);
-            Assert.AreEqual (false, eventRaisePostBackEvent, "RaisePostBackEvent#1");
-            b.RaisePostBackEvent ("Click");
-            Assert.AreEqual (true, eventRaisePostBackEvent, "RaisePostBackEvent#2");
+            Page p = new Page();
+            PokerButton b = new PokerButton();
+            b.Click += new EventHandler(b_Click);
+            p.Controls.Add(b);
+            Assert.AreEqual(false, eventRaisePostBackEvent, "RaisePostBackEvent#1");
+            b.RaisePostBackEvent("Click");
+            Assert.AreEqual(true, eventRaisePostBackEvent, "RaisePostBackEvent#2");
         }
 
         bool eventRaisePostBackEvent;
-        void b_Click (object sender, EventArgs e)
+
+        void b_Click(object sender, EventArgs e)
         {
             eventRaisePostBackEvent = true;
         }
 
         [Test]
-        [Category ("NunitWeb")]
-        public void UseSubmitBehavior ()
+        [Category("NunitWeb")]
+        public void UseSubmitBehavior()
         {
-            WebTest t = new WebTest (PageInvoker.CreateOnLoad (UseSubmitBehavior_Load));
-            string html = t.Run ();
-            if (html.IndexOf ("onclick") == -1)
-                Assert.Fail ("Button Postback script not created fail");
+            WebTest t = new WebTest(PageInvoker.CreateOnLoad(UseSubmitBehavior_Load));
+            string html = t.Run();
+            if (html.IndexOf("onclick") == -1)
+                Assert.Fail("Button Postback script not created fail");
         }
 
-        public static void UseSubmitBehavior_Load (Page p)
+        public static void UseSubmitBehavior_Load(Page p)
         {
-            PokerButton b = new PokerButton ();
+            PokerButton b = new PokerButton();
             b.UseSubmitBehavior = false;
-            p.Controls.Add (b);
+            p.Controls.Add(b);
         }
 
         [Test]
-        public void ValidationGroup ()
+        public void ValidationGroup()
         {
-            // Client side. 
+            // Client side.
         }
 
         [TestFixtureTearDown]
-        public void TearDown ()
+        public void TearDown()
         {
-            WebTest.Unload ();
+            WebTest.Unload();
         }
-
     }
 }
-
-

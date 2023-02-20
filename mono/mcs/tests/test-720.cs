@@ -6,7 +6,7 @@ namespace N
 {
     class Program
     {
-        public static void Main ()
+        public static void Main()
         {
             Parent pr = new Child();
             ((Child)pr).OnExample();
@@ -22,9 +22,11 @@ namespace N
     public class Child : Parent
     {
         public override event ExampleHandler Example;
+
         public void OnExample()
         {
-            if (Example != null) Example();
+            if (Example != null)
+                Example();
         }
     }
 }

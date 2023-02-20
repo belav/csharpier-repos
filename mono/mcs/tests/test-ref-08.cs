@@ -4,49 +4,37 @@ namespace ClassLibrary1
 {
     public class C
     {
-
         class B
         {
             int v;
             public ref int this[int index]
             {
-                get
-                {
-                    return ref v;
-                }
+                get { return ref v; }
             }
         }
 
-
-        class Gen<T> where T : struct
+        class Gen<T>
+            where T : struct
         {
             T v;
             public ref T this[int index]
             {
-                get
-                {
-                    return ref v;
-                }
+                get { return ref v; }
             }
         }
 
-        struct Val
-        {
-        }
+        struct Val { }
 
         class BB
         {
             Val v;
             public ref Val this[int index]
             {
-                get
-                {
-                    return ref v;
-                }
+                get { return ref v; }
             }
         }
 
-        void MM ()
+        void MM()
         {
             var bbb = new BB();
             Val v1 = bbb[0];
@@ -57,6 +45,7 @@ namespace ClassLibrary1
         }
 
         static int[] a = new int[1];
+
         public static void Main()
         {
             var bb = new B();
@@ -74,10 +63,7 @@ namespace ClassLibrary1
 
             bbb[3] = v2;
 
-
             bbb[3] = bbb[2];
-
-
 
             var ggg = new Gen<Val>();
             ggg[0] = new Val();
@@ -88,7 +74,6 @@ namespace ClassLibrary1
             var g2 = ggg[2];
 
             ggg[3] = v2;
-
 
             ggg[3] = ggg[2];
         }

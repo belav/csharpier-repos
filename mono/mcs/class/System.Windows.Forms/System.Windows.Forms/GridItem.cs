@@ -39,7 +39,7 @@ namespace System.Windows.Forms
         #endregion Fields
 
         #region    Constructors
-        protected GridItem() 
+        protected GridItem()
         {
             expanded = false;
         }
@@ -48,66 +48,40 @@ namespace System.Windows.Forms
         #region Public Instance Properties
         public virtual bool Expandable
         {
-            get {
-                return GridItems.Count > 1;
-            }
+            get { return GridItems.Count > 1; }
         }
 
         public virtual bool Expanded
         {
-            get {
-                return expanded;
-            }
-
-            set {
-                expanded = value;
-            }
+            get { return expanded; }
+            set { expanded = value; }
         }
 
-        public abstract GridItemCollection GridItems
+        public abstract GridItemCollection GridItems { get; }
+
+        public abstract GridItemType GridItemType { get; }
+
+        public abstract string Label { get; }
+
+        public abstract GridItem Parent { get; }
+
+        public abstract PropertyDescriptor PropertyDescriptor { get; }
+
+        [Localizable(false)]
+        [Bindable(true)]
+        [DefaultValue(null)]
+        [TypeConverter(typeof(StringConverter))]
+        public Object Tag
         {
-            get;
-        }
-
-        public abstract GridItemType GridItemType
-        {
-            get;
-        }
-
-        public abstract string Label
-        {
-            get;
-        }
-
-
-        public abstract GridItem Parent
-        {
-            get;
-        }
-
-
-        public abstract PropertyDescriptor PropertyDescriptor
-        {
-            get;
-        }
-
-        [Localizable (false)]
-        [Bindable (true)]
-        [DefaultValue (null)]
-        [TypeConverter (typeof (StringConverter))]
-        public Object Tag {
             get { return this.tag; }
             set { this.tag = value; }
         }
 
-        public abstract object Value
-        {
-            get;
-        }
+        public abstract object Value { get; }
         #endregion
 
         #region Public Instance Methods
-        public abstract bool Select ();
+        public abstract bool Select();
         #endregion    // Public Instance Methods
     }
 }

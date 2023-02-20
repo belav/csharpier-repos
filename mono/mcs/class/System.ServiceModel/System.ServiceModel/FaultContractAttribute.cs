@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,46 +29,55 @@ using System.Net.Security;
 
 namespace System.ServiceModel
 {
-    [AttributeUsage (AttributeTargets.Method, Inherited = false, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = true)]
     public sealed class FaultContractAttribute : Attribute
     {
-        string action, name, ns;
+        string action,
+            name,
+            ns;
         Type detail_type;
         ProtectionLevel protection_level;
         bool has_protection_level;
 
-        public FaultContractAttribute (Type detailType)
+        public FaultContractAttribute(Type detailType)
         {
             detail_type = detailType;
         }
 
-        public string Action {
+        public string Action
+        {
             get { return action; }
             set { action = value; }
         }
 
-        public Type DetailType {
+        public Type DetailType
+        {
             get { return detail_type; }
         }
 
-        public bool HasProtectionLevel {
+        public bool HasProtectionLevel
+        {
             get { return has_protection_level; }
         }
 
-        public ProtectionLevel ProtectionLevel {
+        public ProtectionLevel ProtectionLevel
+        {
             get { return protection_level; }
-            set {
+            set
+            {
                 protection_level = value;
                 has_protection_level = true;
             }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
             set { name = value; }
         }
 
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns; }
             set { ns = value; }
         }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,27 +41,37 @@ namespace Mono.MonoConfig
         FeatureTarget target;
         Section sections;
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
         }
 
-        public string FileName {
-            get {
-                if (!String.IsNullOrEmpty (fileName))
+        public string FileName
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(fileName))
                     return fileName;
                 return Name;
             }
         }
-        
-        public FeatureTarget Target {
+
+        public FeatureTarget Target
+        {
             get { return target; }
         }
 
-        public Section Sections {
+        public Section Sections
+        {
             get { return sections; }
         }
 
-        public DefaultConfigFile (string name, string fileName, FeatureTarget target, Section sections)
+        public DefaultConfigFile(
+            string name,
+            string fileName,
+            FeatureTarget target,
+            Section sections
+        )
         {
             this.name = name;
             this.fileName = fileName;
@@ -70,7 +80,7 @@ namespace Mono.MonoConfig
         }
     }
 
-    public delegate void OverwriteFileEventHandler (object sender, OverwriteFileEventArgs e);
+    public delegate void OverwriteFileEventHandler(object sender, OverwriteFileEventArgs e);
 
     public sealed class OverwriteFileEventArgs : System.EventArgs
     {
@@ -78,25 +88,34 @@ namespace Mono.MonoConfig
         string path;
         FeatureTarget target;
         bool overwrite;
-        
-        public string Name {
+
+        public string Name
+        {
             get { return name; }
         }
 
-        public string Path {
+        public string Path
+        {
             get { return path; }
         }
 
-        public FeatureTarget Target {
+        public FeatureTarget Target
+        {
             get { return target; }
         }
 
-        public bool Overwrite {
+        public bool Overwrite
+        {
             get { return overwrite; }
             set { overwrite = value; }
         }
-        
-        public OverwriteFileEventArgs (string name, string path, FeatureTarget target, bool overwrite)
+
+        public OverwriteFileEventArgs(
+            string name,
+            string path,
+            FeatureTarget target,
+            bool overwrite
+        )
         {
             this.name = name;
             this.path = path;
@@ -104,181 +123,228 @@ namespace Mono.MonoConfig
             this.overwrite = overwrite;
         }
     }
-    
-    public class DefaultConfigFileNodeHandler : IDocumentNodeHandler, IDefaultConfigFileContainer, IStorageConsumer
+
+    public class DefaultConfigFileNodeHandler
+        : IDocumentNodeHandler,
+            IDefaultConfigFileContainer,
+            IStorageConsumer
     {
         string name;
         string fileName;
         FeatureTarget target;
         Section sections;
-        Dictionary <string, DefaultConfigFile> storage;
+        Dictionary<string, DefaultConfigFile> storage;
 
         public event OverwriteFileEventHandler OverwriteFile;
-        
-        public void ReadConfiguration (XPathNavigator nav)
-        {
-            name = Helpers.GetRequiredNonEmptyAttribute (nav, "name");
-            target = Helpers.ConvertEnum <FeatureTarget> (Helpers.GetRequiredNonEmptyAttribute (nav, "target"), "target");
-            fileName = Helpers.GetOptionalAttribute (nav, "fileName");
-            
-            if (String.IsNullOrEmpty (fileName))
-                fileName = name;
-            
-            sections = new Section ();
-            Helpers.BuildSectionTree (nav.Select ("./section[string-length (@name) > 0]"), sections);
-        }
-        
-        public void StoreConfiguration ()
-        {
-            AssertStorage ();
 
-            DefaultConfigFile dcf = new DefaultConfigFile (name, fileName, target, sections);
-            if (storage.ContainsKey (name))
-                storage [name] = dcf;
+        public void ReadConfiguration(XPathNavigator nav)
+        {
+            name = Helpers.GetRequiredNonEmptyAttribute(nav, "name");
+            target = Helpers.ConvertEnum<FeatureTarget>(
+                Helpers.GetRequiredNonEmptyAttribute(nav, "target"),
+                "target"
+            );
+            fileName = Helpers.GetOptionalAttribute(nav, "fileName");
+
+            if (String.IsNullOrEmpty(fileName))
+                fileName = name;
+
+            sections = new Section();
+            Helpers.BuildSectionTree(nav.Select("./section[string-length (@name) > 0]"), sections);
+        }
+
+        public void StoreConfiguration()
+        {
+            AssertStorage();
+
+            DefaultConfigFile dcf = new DefaultConfigFile(name, fileName, target, sections);
+            if (storage.ContainsKey(name))
+                storage[name] = dcf;
             else
-                storage.Add (name, dcf);
+                storage.Add(name, dcf);
 
             name = null;
             fileName = null;
             sections = null;
         }
 
-        public void SetStorage (object storage)
+        public void SetStorage(object storage)
         {
-            this.storage = storage as Dictionary <string, DefaultConfigFile>;
+            this.storage = storage as Dictionary<string, DefaultConfigFile>;
             if (this.storage == null)
-                throw new ApplicationException ("Invalid storage type");
+                throw new ApplicationException("Invalid storage type");
         }
 
-        public ICollection <string> DefaultConfigFiles {
-            get {
-                AssertStorage ();
-                
+        public ICollection<string> DefaultConfigFiles
+        {
+            get
+            {
+                AssertStorage();
+
                 if (storage.Count == 0)
                     return null;
 
-                List <string> ret = new List <string>(storage.Count);
+                List<string> ret = new List<string>(storage.Count);
                 DefaultConfigFile dcf;
-                
-                foreach (KeyValuePair <string, DefaultConfigFile> kvp in storage) {
+
+                foreach (KeyValuePair<string, DefaultConfigFile> kvp in storage)
+                {
                     dcf = kvp.Value;
-                    ret.Add (String.Format ("{0} (Target: {1}; Output file: {2})",
-                                kvp.Key, dcf.Target, dcf.FileName));
+                    ret.Add(
+                        String.Format(
+                            "{0} (Target: {1}; Output file: {2})",
+                            kvp.Key,
+                            dcf.Target,
+                            dcf.FileName
+                        )
+                    );
                 }
 
                 return ret;
             }
         }
-        
-        public bool HasDefaultConfigFile (string name, FeatureTarget target)
-        {
-            AssertStorage ();
 
-            if (storage.ContainsKey (name)) {
-                DefaultConfigFile dcf = storage [name];
+        public bool HasDefaultConfigFile(string name, FeatureTarget target)
+        {
+            AssertStorage();
+
+            if (storage.ContainsKey(name))
+            {
+                DefaultConfigFile dcf = storage[name];
                 if (dcf == null)
                     return false;
 
                 if (target != FeatureTarget.Any && dcf.Target != target)
                     return false;
-                
+
                 return true;
             }
-        
+
             return false;
         }
-        
-        public void WriteDefaultConfigFile (string name, FeatureTarget target, string path, IDefaultContainer[] defaults)
+
+        public void WriteDefaultConfigFile(
+            string name,
+            FeatureTarget target,
+            string path,
+            IDefaultContainer[] defaults
+        )
         {
-            AssertStorage ();
+            AssertStorage();
 
             DefaultConfigFile dcf;
-            if (!storage.ContainsKey (name) || (dcf = storage [name]) == null)
-                throw new ApplicationException (
-                    String.Format ("Definition of the '{0}' default config file not found.", name));
+            if (!storage.ContainsKey(name) || (dcf = storage[name]) == null)
+                throw new ApplicationException(
+                    String.Format("Definition of the '{0}' default config file not found.", name)
+                );
 
             if (target != FeatureTarget.Any && dcf.Target != target)
-                throw new ApplicationException (
-                    String.Format ("Config file '{0}' can be generated only for the '{1}' target",
-                               name, target));
+                throw new ApplicationException(
+                    String.Format(
+                        "Config file '{0}' can be generated only for the '{1}' target",
+                        name,
+                        target
+                    )
+                );
 
-            string targetFile = Path.Combine (path, dcf.FileName);
-            if (File.Exists (targetFile)) {
-                OverwriteFileEventArgs args = new OverwriteFileEventArgs (
+            string targetFile = Path.Combine(path, dcf.FileName);
+            if (File.Exists(targetFile))
+            {
+                OverwriteFileEventArgs args = new OverwriteFileEventArgs(
                     dcf.FileName,
                     path,
                     target,
                     true
                 );
 
-                OnOverwriteFile (args);
+                OnOverwriteFile(args);
                 if (!args.Overwrite)
                     return;
             }
 
-            try {
-                if (!Directory.Exists (path))
-                    Directory.CreateDirectory (path);
-            } catch (Exception ex) {
-                throw new ApplicationException (
-                    String.Format ("Could not create directory '{0}'", path),
-                    ex);
+            try
+            {
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException(
+                    String.Format("Could not create directory '{0}'", path),
+                    ex
+                );
             }
 
-            XmlDocument doc = new XmlDocument ();
-            PopulateDocument (name, target, doc, dcf, defaults);
-            Helpers.SaveXml (doc, targetFile);
+            XmlDocument doc = new XmlDocument();
+            PopulateDocument(name, target, doc, dcf, defaults);
+            Helpers.SaveXml(doc, targetFile);
         }
 
-        void OnOverwriteFile (OverwriteFileEventArgs args)
+        void OnOverwriteFile(OverwriteFileEventArgs args)
         {
             if (OverwriteFile == null)
                 return;
 
-            OverwriteFile (this, args);
+            OverwriteFile(this, args);
         }
-        
-        void PopulateDocument (string name, FeatureTarget target, XmlDocument doc, DefaultConfigFile dcf,
-                       IDefaultContainer[] defaults)
+
+        void PopulateDocument(
+            string name,
+            FeatureTarget target,
+            XmlDocument doc,
+            DefaultConfigFile dcf,
+            IDefaultContainer[] defaults
+        )
         {
-            List <Section> children = dcf.Sections != null ? dcf.Sections.Children : null;
+            List<Section> children = dcf.Sections != null ? dcf.Sections.Children : null;
             if (children == null || children.Count == 0)
                 return;
 
-            PopulateDocument (name, target, doc, doc, defaults, children);
+            PopulateDocument(name, target, doc, doc, defaults, children);
         }
 
-        void PopulateDocument (string name, FeatureTarget target, XmlDocument doc, XmlNode parent,
-                       IDefaultContainer[] defaults, List <Section> children)
+        void PopulateDocument(
+            string name,
+            FeatureTarget target,
+            XmlDocument doc,
+            XmlNode parent,
+            IDefaultContainer[] defaults,
+            List<Section> children
+        )
         {
             if (defaults == null || defaults.Length == 0)
                 return;
-            
+
             XmlNode node;
             XmlDocument tmp;
-            
-            foreach (Section s in children) {
-                tmp = Helpers.FindDefault (defaults, s.DefaultBlockName, target);
+
+            foreach (Section s in children)
+            {
+                tmp = Helpers.FindDefault(defaults, s.DefaultBlockName, target);
                 if (tmp == null)
                     continue;
-                
-                node = doc.ImportNode (tmp.DocumentElement.FirstChild, true);
-                try {
-                    PopulateDocument (name, target, doc, node, defaults, s.Children);
-                } catch (Exception ex) {
-                    throw new ApplicationException (
-                        String.Format ("Error building default config file '{0}'", name),
-                        ex);
+
+                node = doc.ImportNode(tmp.DocumentElement.FirstChild, true);
+                try
+                {
+                    PopulateDocument(name, target, doc, node, defaults, s.Children);
+                }
+                catch (Exception ex)
+                {
+                    throw new ApplicationException(
+                        String.Format("Error building default config file '{0}'", name),
+                        ex
+                    );
                 }
 
-                parent.AppendChild (node);
+                parent.AppendChild(node);
             }
         }
-        
-        void AssertStorage ()
+
+        void AssertStorage()
         {
             if (storage == null)
-                throw new ApplicationException ("No storage attached");
+                throw new ApplicationException("No storage attached");
         }
     }
 }

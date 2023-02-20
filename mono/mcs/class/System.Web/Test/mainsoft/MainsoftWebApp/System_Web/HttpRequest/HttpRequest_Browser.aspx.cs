@@ -40,11 +40,9 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-    public class HttpRequest_Browser
-        : GHTBaseWeb 
+    public class HttpRequest_Browser : GHTBaseWeb
     {
-
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
@@ -65,12 +63,14 @@ namespace GHTTests.System_Web_dll.System_Web
             }
             catch (Exception ex)
             {
-                this.GHTSubTestAddResult("unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
+                this.GHTSubTestAddResult(
+                    "unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
             }
             this.GHTSubTestEnd();
 
             // ===================================
-            // testing if the objects return is from the 
+            // testing if the objects return is from the
             // correct type
             // ===================================
             this.GHTSubTestBegin("Request.Browser2");
@@ -81,7 +81,9 @@ namespace GHTTests.System_Web_dll.System_Web
             }
             catch (Exception ex)
             {
-                this.GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
+                this.GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
             }
             this.GHTSubTestEnd();
 
@@ -99,7 +101,9 @@ namespace GHTTests.System_Web_dll.System_Web
             }
             catch (Exception ex)
             {
-                GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
             }
 
             GHTSubTestEnd();
@@ -114,11 +118,15 @@ namespace GHTTests.System_Web_dll.System_Web
             try
             {
                 HttpBrowserCapabilities brw = Request.Browser;
-                GHTSubTestAddResult(brw.MajorVersion.ToString() + "." + brw.MinorVersion.ToString());
+                GHTSubTestAddResult(
+                    brw.MajorVersion.ToString() + "." + brw.MinorVersion.ToString()
+                );
             }
             catch (Exception ex)
             {
-                GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
             }
 
             GHTSubTestEnd();
@@ -134,13 +142,13 @@ namespace GHTTests.System_Web_dll.System_Web
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
-        {    
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion

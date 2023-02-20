@@ -3,8 +3,8 @@
 
 public class Program
 {
-    static void Main ()
+    static void Main()
     {
-        Program b = default (Program) + default (Program);
+        Program b = default(Program) + default(Program);
     }
 }

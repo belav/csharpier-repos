@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,50 +34,51 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 
-namespace MonoCasTests.System.Web.UI {
-
+namespace MonoCasTests.System.Web.UI
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class LosFormatterCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class LosFormatterCas : AspNetHostingMinimal
+    {
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor0_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor0_Deny_Unrestricted()
         {
-            LosFormatter lf = new LosFormatter ();
+            LosFormatter lf = new LosFormatter();
 
-            MemoryStream ms = new MemoryStream ();
-            lf.Serialize (ms, "mono");
+            MemoryStream ms = new MemoryStream();
+            lf.Serialize(ms, "mono");
             ms.Position = 0;
-            Assert.IsNotNull (lf.Deserialize (ms), "Deserialize(Stream)");
+            Assert.IsNotNull(lf.Deserialize(ms), "Deserialize(Stream)");
 
-            StringWriter sw = new StringWriter ();
-            lf.Serialize (sw, "mono");
-            string s = sw.ToString ();
-            StringReader sr = new StringReader (s);
-            Assert.IsNotNull (lf.Deserialize (sr), "Deserialize(TextReader)");
+            StringWriter sw = new StringWriter();
+            lf.Serialize(sw, "mono");
+            string s = sw.ToString();
+            StringReader sr = new StringReader(s);
+            Assert.IsNotNull(lf.Deserialize(sr), "Deserialize(TextReader)");
 
-            Assert.IsNotNull (lf.Deserialize (s), "Deserialize(string)");
+            Assert.IsNotNull(lf.Deserialize(s), "Deserialize(string)");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void CtorBoolString_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void CtorBoolString_Deny_Unrestricted()
         {
-            LosFormatter lf = new LosFormatter (true, String.Empty);
+            LosFormatter lf = new LosFormatter(true, String.Empty);
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void CtorBoolByteArray_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void CtorBoolByteArray_Deny_Unrestricted()
         {
-            LosFormatter lf = new LosFormatter (true, (byte[])null);
+            LosFormatter lf = new LosFormatter(true, (byte[])null);
         }
 
         // LinkDemand
 
-        public override Type Type {
-            get { return typeof (LosFormatter); }
+        public override Type Type
+        {
+            get { return typeof(LosFormatter); }
         }
     }
 }

@@ -3,25 +3,34 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.LinkXml.FeatureExclude
 {
-    [TestCaseRequirements (TestRunCharacteristics.TargetingNetFramework, "--exclude-feature is not supported on .NET Core")]
-    [SetupLinkerArgument ("--exclude-feature", "one")]
-    [SetupLinkerDescriptorFile ("OnProperty.xml")]
+    [TestCaseRequirements(
+        TestRunCharacteristics.TargetingNetFramework,
+        "--exclude-feature is not supported on .NET Core"
+    )]
+    [SetupLinkerArgument("--exclude-feature", "one")]
+    [SetupLinkerDescriptorFile("OnProperty.xml")]
     public class OnProperty
     {
-        public static void Main ()
+        public static void Main()
         {
-            new Foo (); // Used to avoid lazy body marking
+            new Foo(); // Used to avoid lazy body marking
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class Foo
         {
             public int FeatureOne { get; set; }
 
             [Kept]
             [KeptBackingField]
-            public int FeatureTwo { [Kept] get; [Kept] set; }
+            public int FeatureTwo
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
         }
     }
 }

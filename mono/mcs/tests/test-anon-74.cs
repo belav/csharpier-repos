@@ -9,8 +9,15 @@ static class Foo
 
     public static void Main(string[] args)
     {
-        Baz(delegate() {
-            return new string[,] { { "aa" } , { "bb" } };
-        });
+        Baz(
+            delegate()
+            {
+                return new string[,]
+                {
+                    { "aa" },
+                    { "bb" }
+                };
+            }
+        );
     }
 }

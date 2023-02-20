@@ -22,10 +22,11 @@ namespace Microsoft.CodeAnalysis
         ///     the average function.
         /// </exception>
         [DebuggerStepThrough]
-        public static void EnsureSufficientExecutionStack (int recursionDepth)
+        public static void EnsureSufficientExecutionStack(int recursionDepth)
         {
-            if (recursionDepth > MaxUncheckedRecursionDepth) {
-                RuntimeHelpers.EnsureSufficientExecutionStack ();
+            if (recursionDepth > MaxUncheckedRecursionDepth)
+            {
+                RuntimeHelpers.EnsureSufficientExecutionStack();
             }
         }
     }

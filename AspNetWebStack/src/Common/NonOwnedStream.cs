@@ -14,9 +14,7 @@ namespace System.Web.Http
     /// </remarks>
     internal class NonOwnedStream : Stream
     {
-        protected NonOwnedStream()
-        {
-        }
+        protected NonOwnedStream() { }
 
         public NonOwnedStream(Stream innerStream)
         {
@@ -28,17 +26,9 @@ namespace System.Web.Http
             InnerStream = innerStream;
         }
 
-        protected Stream InnerStream
-        {
-            get;
-            set;
-        }
+        protected Stream InnerStream { get; set; }
 
-        protected bool IsDisposed
-        {
-            get;
-            private set;
-        }
+        protected bool IsDisposed { get; private set; }
 
         public override bool CanRead
         {
@@ -158,13 +148,25 @@ namespace System.Web.Http
             }
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             ThrowIfDisposed();
             return InnerStream.BeginRead(buffer, offset, count, callback, state);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             ThrowIfDisposed();
             return InnerStream.BeginWrite(buffer, offset, count, callback, state);
@@ -178,7 +180,11 @@ namespace System.Web.Http
             base.Close();
         }
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfDisposed();
             return InnerStream.CopyToAsync(destination, bufferSize, cancellationToken);
@@ -189,9 +195,10 @@ namespace System.Web.Http
         // Not overriding Stream.CreateWaitHandle.
 
         [SuppressMessage(
-            "Microsoft.Usage", 
+            "Microsoft.Usage",
             "CA2215:Dispose methods should call base class dispose",
-            Justification = "We're intentionally preventing a double dispose here.")]
+            Justification = "We're intentionally preventing a double dispose here."
+        )]
         protected override void Dispose(bool disposing)
         {
             // Note that we do NOT call _innerStream.Dispose or Close here, as that would actually close the original
@@ -242,7 +249,12 @@ namespace System.Web.Http
             return InnerStream.Read(buffer, offset, count);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfDisposed();
             return InnerStream.ReadAsync(buffer, offset, count, cancellationToken);
@@ -274,7 +286,12 @@ namespace System.Web.Http
             InnerStream.Write(buffer, offset, count);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfDisposed();
             return InnerStream.WriteAsync(buffer, offset, count, cancellationToken);

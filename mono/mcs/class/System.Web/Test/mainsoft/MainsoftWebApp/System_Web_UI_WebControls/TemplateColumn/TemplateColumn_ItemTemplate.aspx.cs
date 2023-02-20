@@ -37,15 +37,15 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class TemplateColumn_ItemTemplate
-        : GHTBaseWeb 
+    public class TemplateColumn_ItemTemplate : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.DataGrid DataGrid1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
         protected System.Web.UI.WebControls.DataGrid DataGrid2;
         protected GHTWebControls.GHTSubTest Ghtsubtest2;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -53,15 +53,14 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
@@ -83,8 +82,8 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 container = (DataGridItem)lc.NamingContainer;
                 lc.Text = DataBinder.Eval(container.DataItem, "Name") + "</div>";
             }
-
         }
+
         public class t_EmptyLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -93,8 +92,8 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 l.Text = "";
                 container.Controls.Add(l);
             }
-
         }
+
         public class t_PlainTextLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -103,8 +102,8 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 l.Text = "Plain text template create at run time";
                 container.Controls.Add(l);
             }
-
         }
+
         public class t_HtmlLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -113,8 +112,8 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 l.Text = "<div><b><i>Html template created at run time</i></b></div>";
                 container.Controls.Add(l);
             }
-
         }
+
         public class t_ControlLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -123,11 +122,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 l.Value = "Control template";
                 container.Controls.Add(l);
             }
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -135,14 +133,19 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestBegin(frm);
 
             GHTActiveSubTest = GHTSubTest1;
-            try 
+            try
             {
                 DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable();
-                System.Web.UI.WebControls.TemplateColumn c1 = new System.Web.UI.WebControls.TemplateColumn();
-                System.Web.UI.WebControls.TemplateColumn c2 = new System.Web.UI.WebControls.TemplateColumn();
-                System.Web.UI.WebControls.TemplateColumn c3 = new System.Web.UI.WebControls.TemplateColumn();
-                System.Web.UI.WebControls.TemplateColumn c4 = new System.Web.UI.WebControls.TemplateColumn();
-                System.Web.UI.WebControls.TemplateColumn c5 = new System.Web.UI.WebControls.TemplateColumn();
+                System.Web.UI.WebControls.TemplateColumn c1 =
+                    new System.Web.UI.WebControls.TemplateColumn();
+                System.Web.UI.WebControls.TemplateColumn c2 =
+                    new System.Web.UI.WebControls.TemplateColumn();
+                System.Web.UI.WebControls.TemplateColumn c3 =
+                    new System.Web.UI.WebControls.TemplateColumn();
+                System.Web.UI.WebControls.TemplateColumn c4 =
+                    new System.Web.UI.WebControls.TemplateColumn();
+                System.Web.UI.WebControls.TemplateColumn c5 =
+                    new System.Web.UI.WebControls.TemplateColumn();
 
                 c1.ItemTemplate = new t_EmptyLitTemplate();
                 c2.ItemTemplate = new t_PlainTextLitTemplate();
@@ -155,20 +158,22 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 DataGrid1.Columns.Add(c3);
                 DataGrid1.Columns.Add(c4);
                 DataGrid1.Columns.Add(c5);
-                DataGrid1.DataBind();;
+                DataGrid1.DataBind();
+                ;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = Ghtsubtest2;
-            try 
+            try
             {
                 DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable();
-                DataGrid2.DataBind();;
+                DataGrid2.DataBind();
+                ;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

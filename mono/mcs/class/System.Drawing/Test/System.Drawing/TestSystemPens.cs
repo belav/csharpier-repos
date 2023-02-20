@@ -1,6 +1,6 @@
 // Tests for System.Drawing.SystemPens.cs
 //
-// Author: 
+// Author:
 //     Ravindra (rkumar@novell.com)
 //
 
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,327 +37,366 @@ using System.Security.Permissions;
 namespace MonoTests.System.Drawing
 {
     [TestFixture]
-    [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+    [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
     public class SystemPensTest
     {
         [TearDown]
-        public void TearDown () {}
+        public void TearDown() { }
 
         [SetUp]
-        public void SetUp () {}
+        public void SetUp() { }
 
         [Test]
-        public void TestActiveCaptionText ()
+        public void TestActiveCaptionText()
         {
             Pen pen;
             pen = SystemPens.ActiveCaptionText;
-            CheckProperties (pen, "P1", SystemColors.ActiveCaptionText);
-            CheckMethods (pen, "M1");
+            CheckProperties(pen, "P1", SystemColors.ActiveCaptionText);
+            CheckMethods(pen, "M1");
         }
 
         [Test]
-        public void TestControl ()
+        public void TestControl()
         {
             Pen pen;
             pen = SystemPens.Control;
-            CheckProperties (pen, "P2", SystemColors.Control);
-            CheckMethods (pen, "M2");
+            CheckProperties(pen, "P2", SystemColors.Control);
+            CheckMethods(pen, "M2");
         }
 
         [Test]
-        public void TestControlDark ()
+        public void TestControlDark()
         {
             Pen pen;
             pen = SystemPens.ControlDark;
-            CheckProperties (pen, "P3", SystemColors.ControlDark);
-            CheckMethods (pen, "M3");
+            CheckProperties(pen, "P3", SystemColors.ControlDark);
+            CheckMethods(pen, "M3");
         }
 
         [Test]
-        public void TestControlDarkDark ()
+        public void TestControlDarkDark()
         {
             Pen pen;
             pen = SystemPens.ControlDarkDark;
-            CheckProperties (pen, "P4", SystemColors.ControlDarkDark);
-            CheckMethods (pen, "M4");
+            CheckProperties(pen, "P4", SystemColors.ControlDarkDark);
+            CheckMethods(pen, "M4");
         }
 
         [Test]
-        public void TestControlLight ()
+        public void TestControlLight()
         {
             Pen pen;
             pen = SystemPens.ControlLight;
-            CheckProperties (pen, "P5", SystemColors.ControlLight);
-            CheckMethods (pen, "M5");
+            CheckProperties(pen, "P5", SystemColors.ControlLight);
+            CheckMethods(pen, "M5");
         }
 
         [Test]
-        public void TestControlLightLight ()
+        public void TestControlLightLight()
         {
             Pen pen;
             pen = SystemPens.ControlLightLight;
-            CheckProperties (pen, "P6", SystemColors.ControlLightLight);
-            CheckMethods (pen, "M6");
+            CheckProperties(pen, "P6", SystemColors.ControlLightLight);
+            CheckMethods(pen, "M6");
         }
 
         [Test]
-        public void TestControlText ()
+        public void TestControlText()
         {
             Pen pen;
             pen = SystemPens.ControlText;
-            CheckProperties (pen, "P7", SystemColors.ControlText);
-            CheckMethods (pen, "M7");
+            CheckProperties(pen, "P7", SystemColors.ControlText);
+            CheckMethods(pen, "M7");
         }
 
         [Test]
-        public void TestGrayText ()
+        public void TestGrayText()
         {
             Pen pen;
             pen = SystemPens.GrayText;
-            CheckProperties (pen, "P8", SystemColors.GrayText);
-            CheckMethods (pen, "M8");
+            CheckProperties(pen, "P8", SystemColors.GrayText);
+            CheckMethods(pen, "M8");
         }
 
         [Test]
-        public void TestHighlight ()
+        public void TestHighlight()
         {
             Pen pen;
             pen = SystemPens.Highlight;
-            CheckProperties (pen, "P9", SystemColors.Highlight);
-            CheckMethods (pen, "M9");
+            CheckProperties(pen, "P9", SystemColors.Highlight);
+            CheckMethods(pen, "M9");
         }
 
         [Test]
-        public void TestHighlightText ()
+        public void TestHighlightText()
         {
             Pen pen;
             pen = SystemPens.HighlightText;
-            CheckProperties (pen, "P10", SystemColors.HighlightText);
-            CheckMethods (pen, "M10");
+            CheckProperties(pen, "P10", SystemColors.HighlightText);
+            CheckMethods(pen, "M10");
         }
 
         [Test]
-        public void TestInactiveCaptionText ()
+        public void TestInactiveCaptionText()
         {
             Pen pen;
             pen = SystemPens.InactiveCaptionText;
-            CheckProperties (pen, "P11", SystemColors.InactiveCaptionText);
-            CheckMethods (pen, "M11");
+            CheckProperties(pen, "P11", SystemColors.InactiveCaptionText);
+            CheckMethods(pen, "M11");
         }
 
         [Test]
-        public void TestInfoText ()
+        public void TestInfoText()
         {
             Pen pen;
             pen = SystemPens.InfoText;
-            CheckProperties (pen, "P12", SystemColors.InfoText);
-            CheckMethods (pen, "M12");
+            CheckProperties(pen, "P12", SystemColors.InfoText);
+            CheckMethods(pen, "M12");
         }
 
         [Test]
-        public void TestMenuText ()
+        public void TestMenuText()
         {
             Pen pen;
             pen = SystemPens.MenuText;
-            CheckProperties (pen, "P13", SystemColors.MenuText);
-            CheckMethods (pen, "M13");
+            CheckProperties(pen, "P13", SystemColors.MenuText);
+            CheckMethods(pen, "M13");
         }
 
         [Test]
-        public void TestWindowFrame ()
+        public void TestWindowFrame()
         {
             Pen pen;
             pen = SystemPens.WindowFrame;
-            CheckProperties (pen, "P14", SystemColors.WindowFrame);
-            CheckMethods (pen, "M14");
+            CheckProperties(pen, "P14", SystemColors.WindowFrame);
+            CheckMethods(pen, "M14");
         }
 
         [Test]
-        public void TestWindowText ()
+        public void TestWindowText()
         {
             Pen pen;
             pen = SystemPens.WindowText;
-            CheckProperties (pen, "P15", SystemColors.WindowText);
-            CheckMethods (pen, "M15");
+            CheckProperties(pen, "P15", SystemColors.WindowText);
+            CheckMethods(pen, "M15");
         }
 
         [Test]
-        public void TestFromSystemColor ()
+        public void TestFromSystemColor()
         {
             Pen pen;
 
-            pen = SystemPens.FromSystemColor (SystemColors.MenuText);
-            CheckProperties (pen, "P16", SystemColors.MenuText);
-            CheckMethods (pen, "M16");
+            pen = SystemPens.FromSystemColor(SystemColors.MenuText);
+            CheckProperties(pen, "P16", SystemColors.MenuText);
+            CheckMethods(pen, "M16");
 
-            try {
-                pen = SystemPens.FromSystemColor (Color.Red);
-                Assert.Fail ("M17: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, "M17");
+            try
+            {
+                pen = SystemPens.FromSystemColor(Color.Red);
+                Assert.Fail("M17: must throw ArgumentException");
+            }
+            catch (ArgumentException)
+            {
+                Assert.IsTrue(true, "M17");
             }
         }
 
         // helper test functions
-        void CheckProperties (Pen pen, String tag, Color sysColor)
+        void CheckProperties(Pen pen, String tag, Color sysColor)
         {
             // Try modifying properties of a SystemPen.
             // ArgumentException must be thrown.
 
-            Assert.IsTrue (pen.Color.IsSystemColor, tag + "#1");
-            Assert.AreEqual (sysColor, pen.Color, tag + "#1");
+            Assert.IsTrue(pen.Color.IsSystemColor, tag + "#1");
+            Assert.AreEqual(sysColor, pen.Color, tag + "#1");
 
-            try {
+            try
+            {
                 pen.Alignment = PenAlignment.Center;
-                Assert.Fail (tag + "#2: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#2");
+                Assert.Fail(tag + "#2: must throw ArgumentException");
+            }
+            catch (ArgumentException)
+            {
+                Assert.IsTrue(true, tag + "#2");
             }
 
-            try {
+            try
+            {
                 pen.Brush = new SolidBrush(Color.Red);
-                Assert.Fail (tag + "#3: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#3");
+                Assert.Fail(tag + "#3: must throw ArgumentException");
+            }
+            catch (ArgumentException)
+            {
+                Assert.IsTrue(true, tag + "#3");
             }
 
-            try {
+            try
+            {
                 pen.Color = Color.Red;
-                Assert.Fail (tag + "#4: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#4");
+                Assert.Fail(tag + "#4: must throw ArgumentException");
+            }
+            catch (ArgumentException)
+            {
+                Assert.IsTrue(true, tag + "#4");
             }
 
-            try {
+            try
+            {
                 pen.Color = sysColor;
-                Assert.Fail (tag + "#5" + ": must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#5");
+                Assert.Fail(tag + "#5" + ": must throw ArgumentException");
             }
-/*
-            try {
-                // NotImplemented
-                pen.CompoundArray = new float[2];
-                Assert.Fail (tag + "#6: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#6");
+            catch (ArgumentException)
+            {
+                Assert.IsTrue(true, tag + "#5");
             }
-
-            try {
-                // NotImplemented
-                pen.CustomEndCap = null;
-                Assert.Fail (tag + "#7: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#7");
-            }
-
-            try {
-                // NotImplemented
-                pen.CustomStartCap = null;
-                Assert.Fail (tag + "#8: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#8");
-            }
-
-            try {
-                // NotImplemented
-                pen.DashCap = DashCap.Flat;
-                Assert.Fail (tag + "#9: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#9");
-            }
-*/
-            try {
+            /*
+                        try {
+                            // NotImplemented
+                            pen.CompoundArray = new float[2];
+                            Assert.Fail (tag + "#6: must throw ArgumentException");
+                        } catch (ArgumentException) {
+                            Assert.IsTrue (true, tag + "#6");
+                        }
+            
+                        try {
+                            // NotImplemented
+                            pen.CustomEndCap = null;
+                            Assert.Fail (tag + "#7: must throw ArgumentException");
+                        } catch (ArgumentException) {
+                            Assert.IsTrue (true, tag + "#7");
+                        }
+            
+                        try {
+                            // NotImplemented
+                            pen.CustomStartCap = null;
+                            Assert.Fail (tag + "#8: must throw ArgumentException");
+                        } catch (ArgumentException) {
+                            Assert.IsTrue (true, tag + "#8");
+                        }
+            
+                        try {
+                            // NotImplemented
+                            pen.DashCap = DashCap.Flat;
+                            Assert.Fail (tag + "#9: must throw ArgumentException");
+                        } catch (ArgumentException) {
+                            Assert.IsTrue (true, tag + "#9");
+                        }
+            */
+            try
+            {
                 pen.DashOffset = 5.5F;
-                Assert.Fail (tag + "#10: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#10");
+                Assert.Fail(tag + "#10: must throw ArgumentException");
+            }
+            catch (ArgumentException)
+            {
+                Assert.IsTrue(true, tag + "#10");
             }
 
-            try {
+            try
+            {
                 pen.DashPattern = null;
-                Assert.Fail (tag + "#11: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#11");
+                Assert.Fail(tag + "#11: must throw ArgumentException");
+            }
+            catch (ArgumentException)
+            {
+                Assert.IsTrue(true, tag + "#11");
             }
 
-            try {
+            try
+            {
                 pen.DashStyle = DashStyle.Dot; // hangs!prob
-                Assert.Fail (tag + "#12: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#12");
+                Assert.Fail(tag + "#12: must throw ArgumentException");
             }
-/*
-            try {
-                // NotImplemented
-                pen.EndCap = LineCap.Round;
-                Assert.Fail (tag + "#13: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#13");
+            catch (ArgumentException)
+            {
+                Assert.IsTrue(true, tag + "#12");
             }
-*/
-            try {
+            /*
+                        try {
+                            // NotImplemented
+                            pen.EndCap = LineCap.Round;
+                            Assert.Fail (tag + "#13: must throw ArgumentException");
+                        } catch (ArgumentException) {
+                            Assert.IsTrue (true, tag + "#13");
+                        }
+            */
+            try
+            {
                 pen.LineJoin = LineJoin.Round;
-                Assert.Fail (tag + "#14: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#14");
+                Assert.Fail(tag + "#14: must throw ArgumentException");
+            }
+            catch (ArgumentException)
+            {
+                Assert.IsTrue(true, tag + "#14");
             }
 
-            try {
+            try
+            {
                 pen.MiterLimit = 0.1f;
-                Assert.Fail (tag + "#15: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#15");
+                Assert.Fail(tag + "#15: must throw ArgumentException");
             }
-/*
-            try {
-                // NotImplemented
-                pen.StartCap = LineCap.Square;
-                Assert.Fail (tag + "#16: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#16");
+            catch (ArgumentException)
+            {
+                Assert.IsTrue(true, tag + "#15");
             }
-*/
-            try {
-                pen.Transform = new Matrix (); //Matrix hangs!problem
-                Assert.Fail (tag + "#17: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#17");
+            /*
+                        try {
+                            // NotImplemented
+                            pen.StartCap = LineCap.Square;
+                            Assert.Fail (tag + "#16: must throw ArgumentException");
+                        } catch (ArgumentException) {
+                            Assert.IsTrue (true, tag + "#16");
+                        }
+            */
+            try
+            {
+                pen.Transform = new Matrix(); //Matrix hangs!problem
+                Assert.Fail(tag + "#17: must throw ArgumentException");
+            }
+            catch (ArgumentException)
+            {
+                Assert.IsTrue(true, tag + "#17");
             }
 
-            try {
+            try
+            {
                 pen.Width = 0.5F;
-                Assert.Fail (tag + "#18: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#18");
+                Assert.Fail(tag + "#18: must throw ArgumentException");
+            }
+            catch (ArgumentException)
+            {
+                Assert.IsTrue(true, tag + "#18");
             }
         }
 
-        void CheckMethods (Pen pen, String tag)
+        void CheckMethods(Pen pen, String tag)
         {
             // Try modifying a SystemPen by calling methods.
             // ArgumentException must be thrown in some cases.
-/*
-            try {
-                // NotImplemented
-                pen.SetLineCap (LineCap.Flat, LineCap.Round, DashCap.Triangle);
-                Assert.Fail (tag + "#1: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (tag + "#1", true);
-            }
-*/
-            pen.ResetTransform ();
-            pen.RotateTransform (90);
-            pen.ScaleTransform (2, 1);
-            pen.TranslateTransform (10, 20);
-            pen.MultiplyTransform (new Matrix ());
-            pen.Clone ();
+            /*
+                        try {
+                            // NotImplemented
+                            pen.SetLineCap (LineCap.Flat, LineCap.Round, DashCap.Triangle);
+                            Assert.Fail (tag + "#1: must throw ArgumentException");
+                        } catch (ArgumentException) {
+                            Assert.IsTrue (tag + "#1", true);
+                        }
+            */
+            pen.ResetTransform();
+            pen.RotateTransform(90);
+            pen.ScaleTransform(2, 1);
+            pen.TranslateTransform(10, 20);
+            pen.MultiplyTransform(new Matrix());
+            pen.Clone();
 
-            try {
-                pen.Dispose ();
-                Assert.Fail (tag + "#8: must throw ArgumentException");
-            } catch (ArgumentException) {
-                Assert.IsTrue (true, tag + "#8");
+            try
+            {
+                pen.Dispose();
+                Assert.Fail(tag + "#8: must throw ArgumentException");
+            }
+            catch (ArgumentException)
+            {
+                Assert.IsTrue(true, tag + "#8");
             }
         }
     }

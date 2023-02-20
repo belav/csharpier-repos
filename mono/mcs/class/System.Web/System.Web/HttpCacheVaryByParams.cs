@@ -1,5 +1,5 @@
 //
-// System.Web.HttpVaryByParams.cs 
+// System.Web.HttpVaryByParams.cs
 //
 // Author:
 //    Chris Toshok (toshok@novell.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,39 +34,41 @@ using System.Text;
 
 namespace System.Web
 {
-
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public sealed class HttpCacheVaryByParams
     {
         bool ignore_parms;
         Hashtable parms;
 
-        public
-        HttpCacheVaryByParams ()
+        public HttpCacheVaryByParams()
         {
             /* the parameter names are meant to be case insensitive */
-            parms = new Hashtable (StringComparer.InvariantCultureIgnoreCase);
+            parms = new Hashtable(StringComparer.InvariantCultureIgnoreCase);
         }
 
-        internal string[] GetParamNames ()
+        internal string[] GetParamNames()
         {
             string[] names;
 
-            names = new string [parms.Count];
+            names = new string[parms.Count];
 
-            parms.Keys.CopyTo (names, 0);
+            parms.Keys.CopyTo(names, 0);
 
             return names;
         }
 
-        internal string GetResponseHeaderValue ()
+        internal string GetResponseHeaderValue()
         {
-            StringBuilder builder = new StringBuilder ();
+            StringBuilder builder = new StringBuilder();
 
-            foreach (string parm in parms.Keys) {
-                builder.Append (parm);
-                builder.Append ("; ");
+            foreach (string parm in parms.Keys)
+            {
+                builder.Append(parm);
+                builder.Append("; ");
             }
 
             if (builder.Length == 0)
@@ -75,34 +77,33 @@ namespace System.Web
             return builder.ToString();
         }
 
-        public bool IgnoreParams {
-            get {
-                return ignore_parms;
-            }
-            set {
-                ignore_parms = value;
-            }
+        public bool IgnoreParams
+        {
+            get { return ignore_parms; }
+            set { ignore_parms = value; }
         }
 
-        public bool this [ string header ] {
-            get {
+        public bool this[string header]
+        {
+            get
+            {
                 if (header == null)
-                    throw new ArgumentNullException ();
+                    throw new ArgumentNullException();
 
-                return parms.Contains (header);
+                return parms.Contains(header);
             }
-            set {
+            set
+            {
                 if (header == null)
-                    throw new ArgumentNullException ();
+                    throw new ArgumentNullException();
 
                 ignore_parms = false;
                 if (value)
-                    if (!parms.Contains (header))
-                        parms.Add (header, true);
-                else
-                    parms.Remove (header);
+                    if (!parms.Contains(header))
+                        parms.Add(header, true);
+                    else
+                        parms.Remove(header);
             }
         }
     }
-
 }

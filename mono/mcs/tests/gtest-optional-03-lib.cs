@@ -1,8 +1,6 @@
 // Compiler options: -t:library
 
-public struct S
-{
-}
+public struct S { }
 
 public enum E
 {
@@ -11,39 +9,40 @@ public enum E
 
 public class B
 {
-    public static string TestString (string s = "mono")
+    public static string TestString(string s = "mono")
     {
         return s;
     }
 
-    public static B TestB (B b = null)
+    public static B TestB(B b = null)
     {
         return b;
     }
 
-    public static T Test<T> (T t = default (T))
+    public static T Test<T>(T t = default(T))
     {
         return t;
     }
 
-    public static ulong TestNew (ulong s = new ulong ())
+    public static ulong TestNew(ulong s = new ulong())
     {
         return s;
     }
 
-    public static decimal TestDecimal (int i, decimal d = decimal.MinValue)
+    public static decimal TestDecimal(int i, decimal d = decimal.MinValue)
     {
         return d;
     }
-    
-    public static E TestEnum (E e = E.Value)
+
+    public static E TestEnum(E e = E.Value)
     {
         return e;
     }
-    
+
     byte ch;
-    public byte this [int id, byte v = 1+5] {
+    public byte this[int id, byte v = 1 + 5]
+    {
         get { return v; }
-        set { ch = value; } 
+        set { ch = value; }
     }
 }

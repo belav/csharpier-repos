@@ -35,18 +35,23 @@ public class NotMappedMemberAttributeConvention : IEntityTypeAddedConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
 
         var entityType = entityTypeBuilder.Metadata;
-        var members = entityType.GetRuntimeProperties().Values.Cast<MemberInfo>()
+        var members = entityType
+            .GetRuntimeProperties()
+            .Values.Cast<MemberInfo>()
             .Concat(entityType.GetRuntimeFields().Values);
 
         foreach (var member in members)
         {
-            if (Attribute.IsDefined(member, typeof(NotMappedAttribute), inherit: true)
-                && ShouldIgnore(member))
+            if (
+                Attribute.IsDefined(member, typeof(NotMappedAttribute), inherit: true)
+                && ShouldIgnore(member)
+            )
             {
                 entityTypeBuilder.Ignore(member.GetSimpleMemberName(), fromDataAnnotation: true);
             }
@@ -58,6 +63,5 @@ public class NotMappedMemberAttributeConvention : IEntityTypeAddedConvention
     /// </summary>
     /// <param name="memberInfo">The member.</param>
     /// <returns><see langword="true" /> if the member should be ignored.</returns>
-    protected virtual bool ShouldIgnore(MemberInfo memberInfo)
-        => true;
+    protected virtual bool ShouldIgnore(MemberInfo memberInfo) => true;
 }

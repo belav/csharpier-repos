@@ -41,51 +41,47 @@ namespace System.Diagnostics.Tracing
             internal int Reserved { get; set; }
         }
 
-        protected EventSource ()
+        protected EventSource()
         {
             this.Name = this.GetType().Name;
         }
 
-        protected EventSource (bool throwOnEventWriteErrors)
-            : this ()
-        {
-        }
+        protected EventSource(bool throwOnEventWriteErrors)
+            : this() { }
 
-        protected EventSource (EventSourceSettings settings)
-            : this ()
+        protected EventSource(EventSourceSettings settings)
+            : this()
         {
             this.Settings = settings;
         }
 
-        protected EventSource (EventSourceSettings settings, params string[] traits)
-            : this (settings)
-        {
-        }
+        protected EventSource(EventSourceSettings settings, params string[] traits)
+            : this(settings) { }
 
-        public EventSource (string eventSourceName)
+        public EventSource(string eventSourceName)
         {
             this.Name = eventSourceName;
         }
 
-        public EventSource (string eventSourceName, EventSourceSettings config)
-            : this (eventSourceName)
+        public EventSource(string eventSourceName, EventSourceSettings config)
+            : this(eventSourceName)
         {
             this.Settings = config;
         }
 
-        public EventSource (string eventSourceName, EventSourceSettings config, params string[] traits)
-            : this (eventSourceName, config)
-        {
-        }
+        public EventSource(
+            string eventSourceName,
+            EventSourceSettings config,
+            params string[] traits
+        )
+            : this(eventSourceName, config) { }
 
-        internal EventSource (Guid eventSourceGuid, string eventSourceName)
-            : this (eventSourceName)
-        {
-        }
+        internal EventSource(Guid eventSourceGuid, string eventSourceName)
+            : this(eventSourceName) { }
 
-        ~EventSource ()
+        ~EventSource()
         {
-            Dispose (false);
+            Dispose(false);
         }
 
         public Exception ConstructionException
@@ -103,275 +99,269 @@ namespace System.Diagnostics.Tracing
             get { return Guid.Empty; }
         }
 
-        public string Name
-        {
-            get;
-            private set;
-        }
+        public string Name { get; private set; }
 
-        public EventSourceSettings Settings
-        {
-            get;
-            private set;
-        }
+        public EventSourceSettings Settings { get; private set; }
 
-        public bool IsEnabled ()
+        public bool IsEnabled()
         {
             return false;
         }
 
-        public bool IsEnabled (EventLevel level, EventKeywords keywords)
+        public bool IsEnabled(EventLevel level, EventKeywords keywords)
         {
             return false;
         }
 
-        public bool IsEnabled (EventLevel level, EventKeywords keywords, EventChannel channel)
+        public bool IsEnabled(EventLevel level, EventKeywords keywords, EventChannel channel)
         {
             return false;
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
-            GC.SuppressFinalize (this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        public string GetTrait (string key)
+        public string GetTrait(string key)
         {
             return null;
         }
 
-        public void Write (string eventName)
+        public void Write(string eventName) { }
+
+        public void Write(string eventName, EventSourceOptions options) { }
+
+        public void Write<T>(string eventName, T data) { }
+
+        public void Write<T>(string eventName, EventSourceOptions options, T data) { }
+
+        [CLSCompliant(false)]
+        public void Write<T>(string eventName, ref EventSourceOptions options, ref T data) { }
+
+        public void Write<T>(
+            string eventName,
+            ref EventSourceOptions options,
+            ref Guid activityId,
+            ref Guid relatedActivityId,
+            ref T data
+        ) { }
+
+        protected virtual void Dispose(bool disposing) { }
+
+        protected virtual void OnEventCommand(EventCommandEventArgs command) { }
+
+        internal void ReportOutOfBandMessage(string msg, bool flush) { }
+
+        protected void WriteEvent(int eventId)
         {
+            WriteEvent(eventId, new object[] { });
         }
 
-        public void Write (string eventName, EventSourceOptions options)
+        protected void WriteEvent(int eventId, byte[] arg1)
         {
+            WriteEvent(eventId, new object[] { arg1 });
         }
 
-        public void Write<T> (string eventName, T data)
+        protected void WriteEvent(int eventId, int arg1)
         {
+            WriteEvent(eventId, new object[] { arg1 });
         }
 
-        public void Write<T> (string eventName, EventSourceOptions options, T data)
+        protected void WriteEvent(int eventId, string arg1)
         {
+            WriteEvent(eventId, new object[] { arg1 });
         }
 
-        [CLSCompliant (false)]
-        public void Write<T> (string eventName, ref EventSourceOptions options, ref T data)
+        protected void WriteEvent(int eventId, int arg1, int arg2)
         {
+            WriteEvent(eventId, new object[] { arg1, arg2 });
         }
 
-        public void Write<T> (string eventName, ref EventSourceOptions options, ref Guid activityId, ref Guid relatedActivityId, ref T data)
+        protected void WriteEvent(int eventId, int arg1, int arg2, int arg3)
         {
+            WriteEvent(eventId, new object[] { arg1, arg2, arg3 });
         }
 
-        protected virtual void Dispose (bool disposing)
+        protected void WriteEvent(int eventId, int arg1, string arg2)
         {
+            WriteEvent(eventId, new object[] { arg1, arg2 });
         }
 
-        protected virtual void OnEventCommand (EventCommandEventArgs command)
+        protected void WriteEvent(int eventId, long arg1)
         {
+            WriteEvent(eventId, new object[] { arg1 });
         }
 
-        internal void ReportOutOfBandMessage (string msg, bool flush)
+        protected void WriteEvent(int eventId, long arg1, byte[] arg2)
         {
+            WriteEvent(eventId, new object[] { arg1, arg2 });
         }
 
-        protected void WriteEvent (int eventId)
+        protected void WriteEvent(int eventId, long arg1, long arg2)
         {
-            WriteEvent (eventId, new object[] { } );
+            WriteEvent(eventId, new object[] { arg1, arg2 });
         }
 
-        protected void WriteEvent (int eventId, byte[] arg1)
+        protected void WriteEvent(int eventId, long arg1, long arg2, long arg3)
         {
-            WriteEvent (eventId, new object[] { arg1 } );
+            WriteEvent(eventId, new object[] { arg1, arg2, arg3 });
         }
 
-        protected void WriteEvent (int eventId, int arg1)
+        protected void WriteEvent(int eventId, long arg1, string arg2)
         {
-            WriteEvent (eventId, new object[] { arg1 } );
+            WriteEvent(eventId, new object[] { arg1, arg2 });
         }
 
-        protected void WriteEvent (int eventId, string arg1)
+        protected void WriteEvent(int eventId, params object[] args) { }
+
+        protected void WriteEvent(int eventId, string arg1, int arg2)
         {
-            WriteEvent (eventId, new object[] { arg1 } );
+            WriteEvent(eventId, new object[] { arg1, arg2 });
         }
 
-        protected void WriteEvent (int eventId, int arg1, int arg2)
+        protected void WriteEvent(int eventId, string arg1, int arg2, int arg3)
         {
-            WriteEvent (eventId, new object[] { arg1, arg2 } );
+            WriteEvent(eventId, new object[] { arg1, arg2, arg3 });
         }
 
-        protected void WriteEvent (int eventId, int arg1, int arg2, int arg3)
+        protected void WriteEvent(int eventId, string arg1, long arg2)
         {
-            WriteEvent (eventId, new object[] { arg1, arg2, arg3 } );
+            WriteEvent(eventId, new object[] { arg1, arg2 });
         }
 
-        protected void WriteEvent (int eventId, int arg1, string arg2)
+        protected void WriteEvent(int eventId, string arg1, string arg2)
         {
-            WriteEvent (eventId, new object[] { arg1, arg2 } );
+            WriteEvent(eventId, new object[] { arg1, arg2 });
         }
 
-        protected void WriteEvent (int eventId, long arg1)
+        protected void WriteEvent(int eventId, string arg1, string arg2, string arg3)
         {
-            WriteEvent (eventId, new object[] { arg1 } );
+            WriteEvent(eventId, new object[] { arg1, arg2, arg3 });
         }
 
-        protected void WriteEvent (int eventId, long arg1, byte[] arg2)
-        {
-            WriteEvent (eventId, new object[] { arg1, arg2 } );
-        }
+        [CLSCompliant(false)]
+        protected unsafe void WriteEventCore(int eventId, int eventDataCount, EventData* data) { }
 
-        protected void WriteEvent (int eventId, long arg1, long arg2)
-        {
-            WriteEvent (eventId, new object[] { arg1, arg2 } );
-        }
+        protected unsafe void WriteEventWithRelatedActivityId(
+            int eventId,
+            Guid relatedActivityId,
+            params object[] args
+        ) { }
 
-        protected void WriteEvent (int eventId, long arg1, long arg2, long arg3)
-        {
-            WriteEvent (eventId, new object[] { arg1, arg2, arg3 } );
-        }
+        [CLSCompliant(false)]
+        protected unsafe void WriteEventWithRelatedActivityIdCore(
+            int eventId,
+            Guid* relatedActivityId,
+            int eventDataCount,
+            EventSource.EventData* data
+        ) { }
 
-        protected void WriteEvent (int eventId, long arg1, string arg2)
-        {
-            WriteEvent (eventId, new object[] { arg1, arg2 } );
-        }
-
-        protected void WriteEvent (int eventId, params object[] args)
-        {
-        }
-
-        protected void WriteEvent (int eventId, string arg1, int arg2)
-        {
-            WriteEvent (eventId, new object[] { arg1, arg2 } );
-        }
-
-        protected void WriteEvent (int eventId, string arg1, int arg2, int arg3)
-        {
-            WriteEvent (eventId, new object[] { arg1, arg2, arg3 } );
-        }
-
-        protected void WriteEvent (int eventId, string arg1, long arg2)
-        {
-            WriteEvent (eventId, new object[] { arg1, arg2 } );
-        }
-
-        protected void WriteEvent (int eventId, string arg1, string arg2)
-        {
-            WriteEvent (eventId, new object[] { arg1, arg2 } );
-        }
-
-        protected void WriteEvent (int eventId, string arg1, string arg2, string arg3)
-        {
-            WriteEvent (eventId, new object[] { arg1, arg2, arg3 } );
-        }
-
-        [CLSCompliant (false)]
-        protected unsafe void WriteEventCore (int eventId, int eventDataCount, EventData* data)
-        {
-        }
-
-        protected unsafe void WriteEventWithRelatedActivityId (int eventId, Guid relatedActivityId, params object[] args)
-        {
-        }
-
-        [CLSCompliant (false)]
-        protected unsafe void WriteEventWithRelatedActivityIdCore (int eventId, Guid* relatedActivityId, int eventDataCount, EventSource.EventData* data)
-        {
-        }
-
-//        [MonoTODO]
+        //        [MonoTODO]
         public event EventHandler<EventCommandEventArgs> EventCommandExecuted
         {
 #if WASM
-            add { throw new PlatformNotSupportedException (); }
-            remove { throw new PlatformNotSupportedException (); }
+            add { throw new PlatformNotSupportedException(); }
+            remove { throw new PlatformNotSupportedException(); }
 #else
-            add { throw new NotImplementedException (); }
-            remove { throw new NotImplementedException (); }
+            add { throw new NotImplementedException(); }
+            remove { throw new NotImplementedException(); }
 #endif
         }
 
-//        [MonoTODO]
-        public static string GenerateManifest (Type eventSourceType, string assemblyPathToIncludeInManifest)
+        //        [MonoTODO]
+        public static string GenerateManifest(
+            Type eventSourceType,
+            string assemblyPathToIncludeInManifest
+        )
         {
 #if WASM
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
 #else
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
 #endif
         }
 
-//        [MonoTODO]
-        public static string GenerateManifest (Type eventSourceType, string assemblyPathToIncludeInManifest, EventManifestOptions flags)
+        //        [MonoTODO]
+        public static string GenerateManifest(
+            Type eventSourceType,
+            string assemblyPathToIncludeInManifest,
+            EventManifestOptions flags
+        )
         {
 #if WASM
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
 #else
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
 #endif
         }
 
-//        [MonoTODO]
-        public static Guid GetGuid (Type eventSourceType)
+        //        [MonoTODO]
+        public static Guid GetGuid(Type eventSourceType)
         {
 #if WASM
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
 #else
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
 #endif
         }
 
-//        [MonoTODO]
-        public static string GetName (Type eventSourceType)
+        //        [MonoTODO]
+        public static string GetName(Type eventSourceType)
         {
 #if WASM
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
 #else
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
 #endif
         }
 
-//        [MonoTODO]
-        public static IEnumerable<EventSource> GetSources ()
+        //        [MonoTODO]
+        public static IEnumerable<EventSource> GetSources()
         {
 #if WASM
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
 #else
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
 #endif
         }
 
-//        [MonoTODO]
-        public static void SendCommand (EventSource eventSource, EventCommand command, IDictionary<string, string> commandArguments)
+        //        [MonoTODO]
+        public static void SendCommand(
+            EventSource eventSource,
+            EventCommand command,
+            IDictionary<string, string> commandArguments
+        )
         {
 #if WASM
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
 #else
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
 #endif
         }
 
-//        [MonoTODO]
-        public static void SetCurrentThreadActivityId (Guid activityId)
+        //        [MonoTODO]
+        public static void SetCurrentThreadActivityId(Guid activityId)
         {
 #if WASM
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
 #else
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
 #endif
         }
 
-//        [MonoTODO]
-        public static void SetCurrentThreadActivityId (Guid activityId, out Guid oldActivityThatWillContinue)
+        //        [MonoTODO]
+        public static void SetCurrentThreadActivityId(
+            Guid activityId,
+            out Guid oldActivityThatWillContinue
+        )
         {
 #if WASM
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
 #else
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
 #endif
         }
     }
 }
-

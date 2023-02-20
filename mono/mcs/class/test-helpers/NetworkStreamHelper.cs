@@ -22,14 +22,14 @@ namespace System.Net.Sockets
          * Without System.dll internals being visible, the compiler would correctly resolve the call using the
          * API reference, but we need this custom extension for the tests.
          */
-        internal static ValueTask<int> ReadAsync (this NetworkStream stream, Memory<byte> buffer)
+        internal static ValueTask<int> ReadAsync(this NetworkStream stream, Memory<byte> buffer)
         {
-            return stream.ReadAsync (buffer, default);
+            return stream.ReadAsync(buffer, default);
         }
 
-        internal static ValueTask WriteAsync (this NetworkStream stream, ReadOnlyMemory<byte> buffer)
+        internal static ValueTask WriteAsync(this NetworkStream stream, ReadOnlyMemory<byte> buffer)
         {
-            return stream.WriteAsync (buffer, default);
+            return stream.WriteAsync(buffer, default);
         }
     }
 }

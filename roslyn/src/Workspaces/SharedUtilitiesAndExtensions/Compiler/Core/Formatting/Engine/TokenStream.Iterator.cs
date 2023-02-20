@@ -12,20 +12,25 @@ namespace Microsoft.CodeAnalysis.Formatting
     {
         // gain of having hand written iterator seems about 50-100ms over auto generated one.
         // not sure whether it is worth it. but I already wrote it to test, so going to just keep it.
-        private class Iterator : IEnumerable<(int index, SyntaxToken currentToken, SyntaxToken nextToken)>
+        private class Iterator
+            : IEnumerable<(int index, SyntaxToken currentToken, SyntaxToken nextToken)>
         {
             private readonly SegmentedList<SyntaxToken> _tokensIncludingZeroWidth;
 
-            public Iterator(SegmentedList<SyntaxToken> tokensIncludingZeroWidth)
-                => _tokensIncludingZeroWidth = tokensIncludingZeroWidth;
+            public Iterator(SegmentedList<SyntaxToken> tokensIncludingZeroWidth) =>
+                _tokensIncludingZeroWidth = tokensIncludingZeroWidth;
 
-            public IEnumerator<(int index, SyntaxToken currentToken, SyntaxToken nextToken)> GetEnumerator()
-                => new Enumerator(_tokensIncludingZeroWidth);
+            public IEnumerator<(
+                int index,
+                SyntaxToken currentToken,
+                SyntaxToken nextToken
+            )> GetEnumerator() => new Enumerator(_tokensIncludingZeroWidth);
 
-            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-                => GetEnumerator();
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() =>
+                GetEnumerator();
 
-            private struct Enumerator : IEnumerator<(int index, SyntaxToken currentToken, SyntaxToken nextToken)>
+            private struct Enumerator
+                : IEnumerator<(int index, SyntaxToken currentToken, SyntaxToken nextToken)>
             {
                 private readonly SegmentedList<SyntaxToken> _tokensIncludingZeroWidth;
                 private readonly int _maxCount;
@@ -42,15 +47,17 @@ namespace Microsoft.CodeAnalysis.Formatting
                     _current = default;
                 }
 
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
 
                 public bool MoveNext()
                 {
                     if (_index < _maxCount)
                     {
-                        _current = (_index, _tokensIncludingZeroWidth[_index], _tokensIncludingZeroWidth[_index + 1]);
+                        _current = (
+                            _index,
+                            _tokensIncludingZeroWidth[_index],
+                            _tokensIncludingZeroWidth[_index + 1]
+                        );
                         _index++;
                         return true;
                     }
@@ -65,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                     return false;
                 }
 
-                public (int index, SyntaxToken currentToken, SyntaxToken nextToken) Current => _current;
+                public (int index, SyntaxToken currentToken, SyntaxToken nextToken) Current =>
+                    _current;
 
                 object System.Collections.IEnumerator.Current
                 {

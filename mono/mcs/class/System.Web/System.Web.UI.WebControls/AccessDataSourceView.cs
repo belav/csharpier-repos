@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,46 +38,59 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public class AccessDataSourceView : SqlDataSourceView
     {
         OleDbConnection oleConnection;
         OleDbCommand oleCommand;
         AccessDataSource dataSource;
-        public AccessDataSourceView (AccessDataSource owner, string name, HttpContext context)
-            : base (owner, name, context)
+
+        public AccessDataSourceView(AccessDataSource owner, string name, HttpContext context)
+            : base(owner, name, context)
         {
             dataSource = owner;
-            oleConnection = new OleDbConnection (owner.ConnectionString);
+            oleConnection = new OleDbConnection(owner.ConnectionString);
         }
 
-        [MonoTODO ("Handle arguments")]
-        protected internal override IEnumerable ExecuteSelect (
-                        DataSourceSelectArguments arguments)
+        [MonoTODO("Handle arguments")]
+        protected internal override IEnumerable ExecuteSelect(DataSourceSelectArguments arguments)
         {
-            oleCommand = new OleDbCommand (this.SelectCommand, oleConnection);
-            SqlDataSourceSelectingEventArgs cmdEventArgs = new SqlDataSourceSelectingEventArgs (oleCommand, arguments);
-            OnSelecting (cmdEventArgs);
-            IEnumerable enums = null; 
+            oleCommand = new OleDbCommand(this.SelectCommand, oleConnection);
+            SqlDataSourceSelectingEventArgs cmdEventArgs = new SqlDataSourceSelectingEventArgs(
+                oleCommand,
+                arguments
+            );
+            OnSelecting(cmdEventArgs);
+            IEnumerable enums = null;
             Exception exception = null;
             OleDbDataReader reader = null;
-            try {
-                System.IO.File.OpenRead (dataSource.DataFile).Close ();
-                oleConnection.Open ();
-                reader = (OleDbDataReader)oleCommand.ExecuteReader ();
-            
+            try
+            {
+                System.IO.File.OpenRead(dataSource.DataFile).Close();
+                oleConnection.Open();
+                reader = (OleDbDataReader)oleCommand.ExecuteReader();
+
                 //enums = reader.GetEnumerator ();
-                throw new NotImplementedException("OleDbDataReader doesnt implements GetEnumerator method yet");
-            } catch (Exception e) {
+                throw new NotImplementedException(
+                    "OleDbDataReader doesnt implements GetEnumerator method yet"
+                );
+            }
+            catch (Exception e)
+            {
                 exception = e;
             }
-            SqlDataSourceStatusEventArgs statusEventArgs = 
-                new SqlDataSourceStatusEventArgs (oleCommand, reader.RecordsAffected, exception);
-            OnSelected (statusEventArgs);
-            if (exception !=null)
+            SqlDataSourceStatusEventArgs statusEventArgs = new SqlDataSourceStatusEventArgs(
+                oleCommand,
+                reader.RecordsAffected,
+                exception
+            );
+            OnSelected(statusEventArgs);
+            if (exception != null)
                 throw exception;
-            return enums;            
-        }                        
-    }    
+            return enums;
+        }
+    }
 }
-

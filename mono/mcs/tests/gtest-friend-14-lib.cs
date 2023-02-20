@@ -14,9 +14,7 @@ namespace N
             public string sa;
             public string sb;
         }
-        
-        internal static void Init (IList<C.S> arg)
-        {
-        }
+
+        internal static void Init(IList<C.S> arg) { }
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,60 +38,64 @@ namespace System.ServiceModel.Description
     public sealed class ServiceAuthorizationBehavior : IServiceBehavior
     {
         bool impersonate;
-        PrincipalPermissionMode perm_mode =
-            PrincipalPermissionMode.UseWindowsGroups; // funky default value
+        PrincipalPermissionMode perm_mode = PrincipalPermissionMode.UseWindowsGroups; // funky default value
         RoleProvider role_provider;
         ServiceAuthorizationManager svc_auth_manager;
         ReadOnlyCollection<IAuthorizationPolicy> ext_auth_policies;
 
-        public ServiceAuthorizationBehavior ()
-        {
-        }
+        public ServiceAuthorizationBehavior() { }
 
-        public ReadOnlyCollection<IAuthorizationPolicy> ExternalAuthorizationPolicies {
+        public ReadOnlyCollection<IAuthorizationPolicy> ExternalAuthorizationPolicies
+        {
             get { return ext_auth_policies; }
             set { ext_auth_policies = value; }
         }
 
-        public bool ImpersonateCallerForAllOperations {
+        public bool ImpersonateCallerForAllOperations
+        {
             get { return impersonate; }
             set { impersonate = value; }
         }
 
-        public PrincipalPermissionMode PrincipalPermissionMode {
+        public PrincipalPermissionMode PrincipalPermissionMode
+        {
             get { return perm_mode; }
             set { perm_mode = value; }
         }
 
-        public RoleProvider RoleProvider {
+        public RoleProvider RoleProvider
+        {
             get { return role_provider; }
             set { role_provider = value; }
         }
 
-        public ServiceAuthorizationManager ServiceAuthorizationManager {
+        public ServiceAuthorizationManager ServiceAuthorizationManager
+        {
             get { return svc_auth_manager; }
             set { svc_auth_manager = value; }
         }
 
-        void IServiceBehavior.AddBindingParameters (
+        void IServiceBehavior.AddBindingParameters(
             ServiceDescription description,
             ServiceHostBase serviceHostBase,
             Collection<ServiceEndpoint> endpoints,
-            BindingParameterCollection parameters)
-        {
-        }
+            BindingParameterCollection parameters
+        ) { }
 
-        void IServiceBehavior.ApplyDispatchBehavior (
+        void IServiceBehavior.ApplyDispatchBehavior(
             ServiceDescription description,
-            ServiceHostBase serviceHostBase)
+            ServiceHostBase serviceHostBase
+        )
         {
-            foreach (var cdb in serviceHostBase.ChannelDispatchers) {
+            foreach (var cdb in serviceHostBase.ChannelDispatchers)
+            {
                 var cd = cdb as ChannelDispatcher;
                 if (cd == null) // non-ChannelDispatcher ChannelDispatcherBase instance.
                     continue;
-                foreach (var ed in cd.Endpoints) {
+                foreach (var ed in cd.Endpoints)
+                {
                     var dr = ed.DispatchRuntime;
-                    if (ExternalAuthorizationPolicies !=null)
+                    if (ExternalAuthorizationPolicies != null)
                         dr.ExternalAuthorizationPolicies = ExternalAuthorizationPolicies;
                     dr.ImpersonateCallerForAllOperations = ImpersonateCallerForAllOperations;
                     dr.PrincipalPermissionMode = PrincipalPermissionMode;
@@ -104,10 +108,9 @@ namespace System.ServiceModel.Description
         }
 
         [MonoTODO]
-        void IServiceBehavior.Validate (
+        void IServiceBehavior.Validate(
             ServiceDescription description,
-            ServiceHostBase serviceHostBase)
-        {
-        }
+            ServiceHostBase serviceHostBase
+        ) { }
     }
 }

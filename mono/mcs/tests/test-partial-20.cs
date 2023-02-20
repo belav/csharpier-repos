@@ -1,8 +1,6 @@
 using System;
 
-partial class A
-{
-}
+partial class A { }
 
 partial class A
 {
@@ -11,25 +9,22 @@ partial class A
 
 partial class B
 {
-    public static int F = 4;    
+    public static int F = 4;
 }
 
-partial class B
-{
-}
-
+partial class B { }
 
 public class C
 {
-    public static int Main ()
+    public static int Main()
     {
         if (A.F != 3)
             return 1;
-        
+
         if (B.F != 4)
             return 2;
-        
-        Console.WriteLine ("OK");
+
+        Console.WriteLine("OK");
         return 0;
     }
 }

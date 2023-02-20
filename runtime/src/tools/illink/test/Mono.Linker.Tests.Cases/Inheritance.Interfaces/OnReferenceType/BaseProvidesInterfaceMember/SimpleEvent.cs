@@ -2,25 +2,23 @@ using Mono.Linker.Tests.Cases.Expectations.Assertions;
 
 namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.BaseProvidesInterfaceMember
 {
-    [KeptDelegateCacheField ("0", nameof (EventMethod))]
+    [KeptDelegateCacheField("0", nameof(EventMethod))]
     public class SimpleEvent
     {
-        public static void Main ()
+        public static void Main()
         {
-            IFoo f = new FooWithBase ();
+            IFoo f = new FooWithBase();
             f.Foo += EventMethod;
         }
 
         [Kept]
-        static void EventMethod ()
-        {
-        }
+        static void EventMethod() { }
 
         [Kept]
-        [KeptMember ("Invoke()")]
-        [KeptMember (".ctor(System.Object,System.IntPtr)")]
-        [KeptBaseType (typeof (System.MulticastDelegate))]
-        delegate void CustomDelegate ();
+        [KeptMember("Invoke()")]
+        [KeptMember(".ctor(System.Object,System.IntPtr)")]
+        [KeptBaseType(typeof(System.MulticastDelegate))]
+        delegate void CustomDelegate();
 
         [Kept]
         interface IFoo
@@ -32,7 +30,7 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.BasePro
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class BaseFoo
         {
             [Kept]
@@ -43,11 +41,9 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.BasePro
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (BaseFoo))]
-        [KeptInterface (typeof (IFoo))]
-        class FooWithBase : BaseFoo, IFoo
-        {
-        }
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(BaseFoo))]
+        [KeptInterface(typeof(IFoo))]
+        class FooWithBase : BaseFoo, IFoo { }
     }
 }

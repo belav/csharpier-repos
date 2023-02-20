@@ -99,7 +99,8 @@ namespace System.Text.Json.Serialization.Tests
 
     public class UsaCustomer : Customer, ITestClass
     {
-        public UsaCustomer() : base()
+        public UsaCustomer()
+            : base()
         {
             Address = new UsaAddress();
         }
@@ -124,36 +125,66 @@ namespace System.Text.Json.Serialization.Tests
 
     public class ObjectWithObjectProperties
     {
-        public object /*Address*/ Address { get; set; }
-        public object /*List<string>*/ List { get; set; }
-        public object /*string[]*/ Array { get; set; }
-        public object /*IEnumerable of strings*/ IEnumerable { get; set; }
-        public object /*IList of strings */ IList { get; set; }
-        public object /*ICollection of strings */ ICollection { get; set; }
-        public object /*IEnumerable<string>*/ IEnumerableT { get; set; }
-        public object /*IList<string>*/ IListT { get; set; }
-        public object /*ICollection<string>*/ ICollectionT { get; set; }
-        public object /*IReadOnlyCollection<string>*/ IReadOnlyCollectionT { get; set; }
-        public object /*IReadOnlyList<string>*/ IReadOnlyListT { get; set; }
-        public object /*ISet<string>*/ ISetT { get; set; }
-        public object /*Stack<string>*/ StackT { get; set; }
-        public object /*Queue<string>*/ QueueT { get; set; }
-        public object /*HashSet<string>*/ HashSetT { get; set; }
-        public object /*LinkedList<string>*/ LinkedListT { get; set; }
-        public object /*SortedSet<string>*/ SortedSetT { get; set; }
-        public object /*ImmutableArray<string>*/ ImmutableArrayT { get; set; }
-        public object /*IImmutableList<string>*/ IImmutableListT { get; set; }
-        public object /*IImmutableStack<string>*/ IImmutableStackT { get; set; }
-        public object /*IImmutableQueue<string>*/ IImmutableQueueT { get; set; }
-        public object /*IImmutableSet<string>*/ IImmutableSetT { get; set; }
-        public object /*ImmutableHashSet<string>*/ ImmutableHashSetT { get; set; }
-        public object /*ImmutableList<string>*/ ImmutableListT { get; set; }
-        public object /*ImmutableStack<string>*/ ImmutableStackT { get; set; }
-        public object /*ImmutableQueue<string>*/ ImmutableQueueT { get; set; }
-        public object /*ImmutableSortedSet<string>*/ ImmutableSortedSetT { get; set; }
-        public object /*int?*/ NullableInt { get; set; }
-        public object /*object*/ Object { get; set; }
-        public object /*int?[]*/ NullableIntArray { get; set; }
+        public object /*Address*/
+        Address { get; set; }
+        public object /*List<string>*/
+        List { get; set; }
+        public object /*string[]*/
+        Array { get; set; }
+        public object /*IEnumerable of strings*/
+        IEnumerable { get; set; }
+        public object /*IList of strings */
+        IList { get; set; }
+        public object /*ICollection of strings */
+        ICollection { get; set; }
+        public object /*IEnumerable<string>*/
+        IEnumerableT { get; set; }
+        public object /*IList<string>*/
+        IListT { get; set; }
+        public object /*ICollection<string>*/
+        ICollectionT { get; set; }
+        public object /*IReadOnlyCollection<string>*/
+        IReadOnlyCollectionT { get; set; }
+        public object /*IReadOnlyList<string>*/
+        IReadOnlyListT { get; set; }
+        public object /*ISet<string>*/
+        ISetT { get; set; }
+        public object /*Stack<string>*/
+        StackT { get; set; }
+        public object /*Queue<string>*/
+        QueueT { get; set; }
+        public object /*HashSet<string>*/
+        HashSetT { get; set; }
+        public object /*LinkedList<string>*/
+        LinkedListT { get; set; }
+        public object /*SortedSet<string>*/
+        SortedSetT { get; set; }
+        public object /*ImmutableArray<string>*/
+        ImmutableArrayT { get; set; }
+        public object /*IImmutableList<string>*/
+        IImmutableListT { get; set; }
+        public object /*IImmutableStack<string>*/
+        IImmutableStackT { get; set; }
+        public object /*IImmutableQueue<string>*/
+        IImmutableQueueT { get; set; }
+        public object /*IImmutableSet<string>*/
+        IImmutableSetT { get; set; }
+        public object /*ImmutableHashSet<string>*/
+        ImmutableHashSetT { get; set; }
+        public object /*ImmutableList<string>*/
+        ImmutableListT { get; set; }
+        public object /*ImmutableStack<string>*/
+        ImmutableStackT { get; set; }
+        public object /*ImmutableQueue<string>*/
+        ImmutableQueueT { get; set; }
+        public object /*ImmutableSortedSet<string>*/
+        ImmutableSortedSetT { get; set; }
+        public object /*int?*/
+        NullableInt { get; set; }
+        public object /*object*/
+        Object { get; set; }
+        public object /*int?[]*/
+        NullableIntArray { get; set; }
 
         public ObjectWithObjectProperties()
         {
@@ -185,7 +216,9 @@ namespace System.Text.Json.Serialization.Tests
             ImmutableListT = ImmutableList.CreateRange(new List<string> { "Hello", "World" });
             ImmutableStackT = ImmutableStack.CreateRange(new List<string> { "Hello", "World" });
             ImmutableQueueT = ImmutableQueue.CreateRange(new List<string> { "Hello", "World" });
-            ImmutableSortedSetT = ImmutableSortedSet.CreateRange(new List<string> { "Hello", "World" });
+            ImmutableSortedSetT = ImmutableSortedSet.CreateRange(
+                new List<string> { "Hello", "World" }
+            );
 
             NullableInt = new int?(42);
             Object = new object();

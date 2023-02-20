@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,216 +33,230 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Mono.Unix;
 
-namespace Mono.Unix {
-
+namespace Mono.Unix
+{
     public sealed class UnixDirectoryInfo : UnixFileSystemInfo
     {
-        public UnixDirectoryInfo (string path)
-            : base (path)
-        {
-        }
+        public UnixDirectoryInfo(string path)
+            : base(path) { }
 
-        internal UnixDirectoryInfo (string path, Native.Stat stat)
-            : base (path, stat)
-        {
-        }
+        internal UnixDirectoryInfo(string path, Native.Stat stat)
+            : base(path, stat) { }
 
-        public override string Name {
-            get {
-                string r = UnixPath.GetFileName (FullPath);
+        public override string Name
+        {
+            get
+            {
+                string r = UnixPath.GetFileName(FullPath);
                 if (r == null || r.Length == 0)
                     return FullPath;
                 return r;
             }
         }
 
-        public UnixDirectoryInfo Parent {
-            get {
+        public UnixDirectoryInfo Parent
+        {
+            get
+            {
                 if (FullPath == "/")
                     return this;
-                string dirname = UnixPath.GetDirectoryName (FullPath);
+                string dirname = UnixPath.GetDirectoryName(FullPath);
                 if (dirname == "")
-                    throw new InvalidOperationException ("Do not know parent directory for path `" + FullPath + "'");
-                return new UnixDirectoryInfo (dirname);
+                    throw new InvalidOperationException(
+                        "Do not know parent directory for path `" + FullPath + "'"
+                    );
+                return new UnixDirectoryInfo(dirname);
             }
         }
 
-        public UnixDirectoryInfo Root {
-            get {
-                string root = UnixPath.GetPathRoot (FullPath);
+        public UnixDirectoryInfo Root
+        {
+            get
+            {
+                string root = UnixPath.GetPathRoot(FullPath);
                 if (root == null)
                     return null;
-                return new UnixDirectoryInfo (root);
+                return new UnixDirectoryInfo(root);
             }
         }
 
-        [CLSCompliant (false)]
-        public void Create (Mono.Unix.Native.FilePermissions mode)
+        [CLSCompliant(false)]
+        public void Create(Mono.Unix.Native.FilePermissions mode)
         {
-            int r = Mono.Unix.Native.Syscall.mkdir (FullPath, mode);
-            UnixMarshal.ThrowExceptionForLastErrorIf (r);
-            base.Refresh ();
+            int r = Mono.Unix.Native.Syscall.mkdir(FullPath, mode);
+            UnixMarshal.ThrowExceptionForLastErrorIf(r);
+            base.Refresh();
         }
 
-        public void Create (FileAccessPermissions mode)
+        public void Create(FileAccessPermissions mode)
         {
-            Create ((Native.FilePermissions) mode);
+            Create((Native.FilePermissions)mode);
         }
 
-        public void Create ()
+        public void Create()
         {
-            Mono.Unix.Native.FilePermissions mode = 
-                Mono.Unix.Native.FilePermissions.ACCESSPERMS;
-            Create (mode);
+            Mono.Unix.Native.FilePermissions mode = Mono.Unix.Native.FilePermissions.ACCESSPERMS;
+            Create(mode);
         }
 
-        public override void Delete ()
+        public override void Delete()
         {
-            Delete (false);
+            Delete(false);
         }
 
-        public void Delete (bool recursive)
+        public void Delete(bool recursive)
         {
-            if (recursive) {
-                foreach (UnixFileSystemInfo e in GetFileSystemEntries ()) {
+            if (recursive)
+            {
+                foreach (UnixFileSystemInfo e in GetFileSystemEntries())
+                {
                     UnixDirectoryInfo d = e as UnixDirectoryInfo;
                     if (d != null)
-                        d.Delete (true);
+                        d.Delete(true);
                     else
-                        e.Delete ();
+                        e.Delete();
                 }
             }
-            int r = Native.Syscall.rmdir (FullPath);
-            UnixMarshal.ThrowExceptionForLastErrorIf (r);
-            base.Refresh ();
+            int r = Native.Syscall.rmdir(FullPath);
+            UnixMarshal.ThrowExceptionForLastErrorIf(r);
+            base.Refresh();
         }
 
-        public Native.Dirent[] GetEntries ()
+        public Native.Dirent[] GetEntries()
         {
-            IntPtr dirp = Native.Syscall.opendir (FullPath);
+            IntPtr dirp = Native.Syscall.opendir(FullPath);
             if (dirp == IntPtr.Zero)
-                UnixMarshal.ThrowExceptionForLastError ();
+                UnixMarshal.ThrowExceptionForLastError();
 
             bool complete = false;
-            try {
-                Native.Dirent[] entries = GetEntries (dirp);
+            try
+            {
+                Native.Dirent[] entries = GetEntries(dirp);
                 complete = true;
                 return entries;
             }
-            finally {
-                int r = Native.Syscall.closedir (dirp);
+            finally
+            {
+                int r = Native.Syscall.closedir(dirp);
                 // don't throw an exception if an exception is in progress
                 if (complete)
-                    UnixMarshal.ThrowExceptionForLastErrorIf (r);
+                    UnixMarshal.ThrowExceptionForLastErrorIf(r);
             }
         }
 
-        private static Native.Dirent[] GetEntries (IntPtr dirp)
+        private static Native.Dirent[] GetEntries(IntPtr dirp)
         {
-            ArrayList entries = new ArrayList ();
+            ArrayList entries = new ArrayList();
 
             int r;
             IntPtr result;
-            do {
-                Native.Dirent d = new Native.Dirent ();
-                r = Native.Syscall.readdir_r (dirp, d, out result);
+            do
+            {
+                Native.Dirent d = new Native.Dirent();
+                r = Native.Syscall.readdir_r(dirp, d, out result);
                 if (r == 0 && result != IntPtr.Zero)
                     // don't include current & parent dirs
                     if (d.d_name != "." && d.d_name != "..")
-                        entries.Add (d);
-            } while  (r == 0 && result != IntPtr.Zero);
+                        entries.Add(d);
+            } while (r == 0 && result != IntPtr.Zero);
             if (r != 0)
-                UnixMarshal.ThrowExceptionForLastErrorIf (r);
+                UnixMarshal.ThrowExceptionForLastErrorIf(r);
 
-            return (Native.Dirent[]) entries.ToArray (typeof(Native.Dirent));
+            return (Native.Dirent[])entries.ToArray(typeof(Native.Dirent));
         }
 
-        public Native.Dirent[] GetEntries (Regex regex)
+        public Native.Dirent[] GetEntries(Regex regex)
         {
-            IntPtr dirp = Native.Syscall.opendir (FullPath);
+            IntPtr dirp = Native.Syscall.opendir(FullPath);
             if (dirp == IntPtr.Zero)
-                UnixMarshal.ThrowExceptionForLastError ();
+                UnixMarshal.ThrowExceptionForLastError();
 
-            try {
-                return GetEntries (dirp, regex);
+            try
+            {
+                return GetEntries(dirp, regex);
             }
-            finally {
-                int r = Native.Syscall.closedir (dirp);
-                UnixMarshal.ThrowExceptionForLastErrorIf (r);
+            finally
+            {
+                int r = Native.Syscall.closedir(dirp);
+                UnixMarshal.ThrowExceptionForLastErrorIf(r);
             }
         }
 
-        private static Native.Dirent[] GetEntries (IntPtr dirp, Regex regex)
+        private static Native.Dirent[] GetEntries(IntPtr dirp, Regex regex)
         {
-            ArrayList entries = new ArrayList ();
+            ArrayList entries = new ArrayList();
 
             int r;
             IntPtr result;
-            do {
-                Native.Dirent d = new Native.Dirent ();
-                r = Native.Syscall.readdir_r (dirp, d, out result);
-                if (r == 0 && result != IntPtr.Zero && regex.Match (d.d_name).Success) {
+            do
+            {
+                Native.Dirent d = new Native.Dirent();
+                r = Native.Syscall.readdir_r(dirp, d, out result);
+                if (r == 0 && result != IntPtr.Zero && regex.Match(d.d_name).Success)
+                {
                     // don't include current & parent dirs
                     if (d.d_name != "." && d.d_name != "..")
-                        entries.Add (d);
+                        entries.Add(d);
                 }
-            } while  (r == 0 && result != IntPtr.Zero);
+            } while (r == 0 && result != IntPtr.Zero);
             if (r != 0)
-                UnixMarshal.ThrowExceptionForLastError ();
+                UnixMarshal.ThrowExceptionForLastError();
 
-            return (Native.Dirent[]) entries.ToArray (typeof(Native.Dirent));
+            return (Native.Dirent[])entries.ToArray(typeof(Native.Dirent));
         }
 
-        public Native.Dirent[] GetEntries (string regex)
+        public Native.Dirent[] GetEntries(string regex)
         {
-            Regex re = new Regex (regex);
-            return GetEntries (re);
+            Regex re = new Regex(regex);
+            return GetEntries(re);
         }
 
-        public UnixFileSystemInfo[] GetFileSystemEntries ()
+        public UnixFileSystemInfo[] GetFileSystemEntries()
         {
-            Native.Dirent[] dentries = GetEntries ();
-            return GetFileSystemEntries (dentries);
+            Native.Dirent[] dentries = GetEntries();
+            return GetFileSystemEntries(dentries);
         }
 
-        private UnixFileSystemInfo[] GetFileSystemEntries (Native.Dirent[] dentries)
+        private UnixFileSystemInfo[] GetFileSystemEntries(Native.Dirent[] dentries)
         {
             UnixFileSystemInfo[] entries = new UnixFileSystemInfo[dentries.Length];
             for (int i = 0; i != entries.Length; ++i)
-                entries [i] = UnixFileSystemInfo.GetFileSystemEntry (
-                        UnixPath.Combine (FullPath, dentries[i].d_name));
+                entries[i] = UnixFileSystemInfo.GetFileSystemEntry(
+                    UnixPath.Combine(FullPath, dentries[i].d_name)
+                );
             return entries;
         }
 
-        public UnixFileSystemInfo[] GetFileSystemEntries (Regex regex)
+        public UnixFileSystemInfo[] GetFileSystemEntries(Regex regex)
         {
-            Native.Dirent[] dentries = GetEntries (regex);
-            return GetFileSystemEntries (dentries);
+            Native.Dirent[] dentries = GetEntries(regex);
+            return GetFileSystemEntries(dentries);
         }
 
-        public UnixFileSystemInfo[] GetFileSystemEntries (string regex)
+        public UnixFileSystemInfo[] GetFileSystemEntries(string regex)
         {
-            Regex re = new Regex (regex);
-            return GetFileSystemEntries (re);
+            Regex re = new Regex(regex);
+            return GetFileSystemEntries(re);
         }
 
-        public static string GetCurrentDirectory ()
+        public static string GetCurrentDirectory()
         {
-            StringBuilder buf = new StringBuilder (16);
+            StringBuilder buf = new StringBuilder(16);
             IntPtr r = IntPtr.Zero;
-            do {
+            do
+            {
                 buf.Capacity *= 2;
-                r = Native.Syscall.getcwd (buf, (ulong) buf.Capacity);
+                r = Native.Syscall.getcwd(buf, (ulong)buf.Capacity);
             } while (r == IntPtr.Zero && Native.Syscall.GetLastError() == Native.Errno.ERANGE);
             if (r == IntPtr.Zero)
-                UnixMarshal.ThrowExceptionForLastError ();
-            return buf.ToString ();
+                UnixMarshal.ThrowExceptionForLastError();
+            return buf.ToString();
         }
 
-        public static void SetCurrentDirectory (string path)
+        public static void SetCurrentDirectory(string path)
         {
-            int r = Native.Syscall.chdir (path);
-            UnixMarshal.ThrowExceptionForLastErrorIf (r);
+            int r = Native.Syscall.chdir(path);
+            UnixMarshal.ThrowExceptionForLastErrorIf(r);
         }
     }
 }

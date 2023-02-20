@@ -17,7 +17,8 @@ namespace System.Net.Test.Common
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
             SslProtocols.Tls12 | SslProtocols.Tls11 | SslProtocols.Tls;
 
-        public const SslProtocols NonTls13Protocols = SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12;
+        public const SslProtocols NonTls13Protocols =
+            SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12;
 #pragma warning restore SYSLIB0039
 
         public static SslProtocols SupportedSslProtocols
@@ -66,7 +67,11 @@ namespace System.Net.Test.Common
                 foreach (SslProtocols protocol in Enum.GetValues(typeof(SslProtocols)))
                 {
 #pragma warning disable 0618 // SSL2/3 are deprecated
-                    if (protocol != SslProtocols.None && protocol != SslProtocols.Default && (protocol & SupportedSslProtocols) == protocol)
+                    if (
+                        protocol != SslProtocols.None
+                        && protocol != SslProtocols.Default
+                        && (protocol & SupportedSslProtocols) == protocol
+                    )
                     {
                         yield return new object[] { protocol };
                     }

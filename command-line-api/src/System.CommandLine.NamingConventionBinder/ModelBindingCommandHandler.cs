@@ -26,28 +26,34 @@ public class ModelBindingCommandHandler : ICommandHandler
     internal ModelBindingCommandHandler(
         MethodInfo handlerMethodInfo,
         IMethodDescriptor methodDescriptor,
-        object? invocationTarget)
+        object? invocationTarget
+    )
     {
-        _handlerMethodInfo = handlerMethodInfo ?? throw new ArgumentNullException(nameof(handlerMethodInfo));
+        _handlerMethodInfo =
+            handlerMethodInfo ?? throw new ArgumentNullException(nameof(handlerMethodInfo));
         _invocationTargetBinder = _handlerMethodInfo.IsStatic
-                                      ? null
-                                      : new ModelBinder(_handlerMethodInfo.ReflectedType);
-        _methodDescriptor = methodDescriptor ?? throw new ArgumentNullException(nameof(methodDescriptor));
+            ? null
+            : new ModelBinder(_handlerMethodInfo.ReflectedType);
+        _methodDescriptor =
+            methodDescriptor ?? throw new ArgumentNullException(nameof(methodDescriptor));
         _invocationTarget = invocationTarget;
     }
 
     internal ModelBindingCommandHandler(
         MethodInfo handlerMethodInfo,
-        IMethodDescriptor methodDescriptor)
-        : this(handlerMethodInfo, methodDescriptor, null)
-    { }
+        IMethodDescriptor methodDescriptor
+    )
+        : this(handlerMethodInfo, methodDescriptor, null) { }
 
     internal ModelBindingCommandHandler(
         Delegate handlerDelegate,
-        IMethodDescriptor methodDescriptor)
+        IMethodDescriptor methodDescriptor
+    )
     {
-        _handlerDelegate = handlerDelegate ?? throw new ArgumentNullException(nameof(handlerDelegate));
-        _methodDescriptor = methodDescriptor ?? throw new ArgumentNullException(nameof(methodDescriptor));
+        _handlerDelegate =
+            handlerDelegate ?? throw new ArgumentNullException(nameof(handlerDelegate));
+        _methodDescriptor =
+            methodDescriptor ?? throw new ArgumentNullException(nameof(methodDescriptor));
     }
 
     /// <summary>
@@ -63,18 +69,17 @@ public class ModelBindingCommandHandler : ICommandHandler
             _invokeArgumentBindingSources,
             bindingContext,
             _methodDescriptor.ParameterDescriptors,
-            false);
+            false
+        );
 
-        var invocationArguments = boundValues
-                                  .Select(x => x.Value)
-                                  .ToArray();
+        var invocationArguments = boundValues.Select(x => x.Value).ToArray();
 
         object result;
         if (_handlerDelegate is null)
         {
-            var invocationTarget = _invocationTarget ?? 
-                                   bindingContext.GetService(_handlerMethodInfo!.ReflectedType);
-            if(invocationTarget is { })
+            var invocationTarget =
+                _invocationTarget ?? bindingContext.GetService(_handlerMethodInfo!.ReflectedType);
+            if (invocationTarget is { })
             {
                 _invocationTargetBinder?.UpdateInstance(invocationTarget, bindingContext);
             }
@@ -97,7 +102,8 @@ public class ModelBindingCommandHandler : ICommandHandler
     /// <param name="argument">The argument whose parsed result will be the source of the bound value.</param>
     public void BindParameter(ParameterInfo param, Argument argument)
     {
-        var _ = argument ?? throw new InvalidOperationException("You must specify an argument to bind");
+        var _ =
+            argument ?? throw new InvalidOperationException("You must specify an argument to bind");
         BindValueSource(param, new SpecificSymbolValueSource(argument));
     }
 
@@ -122,12 +128,12 @@ public class ModelBindingCommandHandler : ICommandHandler
         _invokeArgumentBindingSources.Add(paramDesc, valueSource);
     }
 
-    private ParameterDescriptor? FindParameterDescriptor(ParameterInfo? param)
-        => param is null
-               ? null
-               : _methodDescriptor.ParameterDescriptors
-                                  .FirstOrDefault(x => x.ValueName == param.Name &&
-                                                       x.ValueType == param.ParameterType);
+    private ParameterDescriptor? FindParameterDescriptor(ParameterInfo? param) =>
+        param is null
+            ? null
+            : _methodDescriptor.ParameterDescriptors.FirstOrDefault(
+                x => x.ValueName == param.Name && x.ValueType == param.ParameterType
+            );
 
     /// <inheritdoc />
     public int Invoke(InvocationContext context) => InvokeAsync(context).GetAwaiter().GetResult();

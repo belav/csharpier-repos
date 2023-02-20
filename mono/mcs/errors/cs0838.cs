@@ -6,8 +6,13 @@ using System.Linq.Expressions;
 
 class C
 {
-    void Foo ()
+    void Foo()
     {
-        Expression<Func<char [,]>> e = () => new char [,] { { 'x', 'y' }, { 'a', 'b' }};
+        Expression<Func<char[,]>> e = () =>
+            new char[,]
+            {
+                { 'x', 'y' },
+                { 'a', 'b' }
+            };
     }
 }

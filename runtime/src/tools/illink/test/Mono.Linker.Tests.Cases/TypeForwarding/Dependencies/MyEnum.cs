@@ -7,7 +7,5 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding.Dependencies
         C
     }
 
-    public class UsedToReferenceForwarderAssembly
-    {
-    }
+    public class UsedToReferenceForwarderAssembly { }
 }

@@ -13,60 +13,60 @@ using System;
 using Gtk;
 using GtkSharp;
 
-namespace Mono.GtkSharp.Goodies 
+namespace Mono.GtkSharp.Goodies
 {
-    public class FileSelectionEventArgs 
+    public class FileSelectionEventArgs
     {
         private string filename;
 
-        public FileSelectionEventArgs (string filename) 
+        public FileSelectionEventArgs(string filename)
         {
             this.filename = filename;
         }
 
-        public string Filename {
-            get {
-                return filename;
-            }
+        public string Filename
+        {
+            get { return filename; }
         }
     }
 
-    public delegate void FileSelectionEventHandler (object sender, FileSelectionEventArgs e);
+    public delegate void FileSelectionEventHandler(object sender, FileSelectionEventArgs e);
 
-    public class FileSelectionDialog 
+    public class FileSelectionDialog
     {
         FileSelection window = null;
         ToggleButton toggle_button = null;
         CheckButton check_button = null;
 
         public event FileSelectionEventHandler fh;
-        
-        public FileSelectionDialog (string title, FileSelectionEventHandler fileSelectedHandler) 
+
+        public FileSelectionDialog(string title, FileSelectionEventHandler fileSelectedHandler)
         {
-            window = new FileSelection (title);
-            window.OkButton.Clicked += new EventHandler (OnFileSelectionOk);
-            window.CancelButton.Clicked += new EventHandler (OnFileSelectionCancel);
-            if(fileSelectedHandler == null)
-                throw new Exception ("FileSelectionDialog fileSelectedHandler is null");
+            window = new FileSelection(title);
+            window.OkButton.Clicked += new EventHandler(OnFileSelectionOk);
+            window.CancelButton.Clicked += new EventHandler(OnFileSelectionCancel);
+            if (fileSelectedHandler == null)
+                throw new Exception("FileSelectionDialog fileSelectedHandler is null");
             fh = fileSelectedHandler;
 
-            window.ShowAll ();
+            window.ShowAll();
         }
 
-        void OnFileSelectionOk(object o, EventArgs args) 
+        void OnFileSelectionOk(object o, EventArgs args)
         {
-            Gtk.Button fsbutton = (Gtk.Button) o;
+            Gtk.Button fsbutton = (Gtk.Button)o;
             string filename = window.Filename;
-            FileSelectionEventArgs fa = new FileSelectionEventArgs (filename);
-            if (fh != null) {
-                fh (this, fa); 
+            FileSelectionEventArgs fa = new FileSelectionEventArgs(filename);
+            if (fh != null)
+            {
+                fh(this, fa);
             }
-            window.Destroy ();
+            window.Destroy();
         }
 
-        void OnFileSelectionCancel (object o, EventArgs args) 
+        void OnFileSelectionCancel(object o, EventArgs args)
         {
-            window.Destroy ();
+            window.Destroy();
         }
     }
 }

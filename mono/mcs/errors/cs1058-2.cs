@@ -4,14 +4,14 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: RuntimeCompatibility (WrapNonExceptionThrows=true)]
+[assembly: RuntimeCompatibility(WrapNonExceptionThrows = true)]
 
 class C
 {
-   static void Main() 
-   {
-      try {}
-      catch (System.Exception) { }
-      catch {}
-   }
+    static void Main()
+    {
+        try { }
+        catch (System.Exception) { }
+        catch { }
+    }
 }

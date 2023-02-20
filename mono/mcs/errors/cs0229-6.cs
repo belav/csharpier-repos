@@ -8,9 +8,7 @@ class A
 {
     public class N
     {
-        public static void Foo ()
-        {
-        }
+        public static void Foo() { }
     }
 }
 
@@ -21,8 +19,8 @@ class B
 
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        N.Foo ();
+        N.Foo();
     }
 }

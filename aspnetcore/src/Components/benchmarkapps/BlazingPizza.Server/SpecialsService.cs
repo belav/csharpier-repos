@@ -35,7 +35,8 @@ namespace BlazingPizza.Server
                 {
                     Id = 4,
                     Name = "Buffalo chicken",
-                    Description = "Spicy chicken, hot sauce and bleu cheese, guaranteed to warm you up",
+                    Description =
+                        "Spicy chicken, hot sauce and bleu cheese, guaranteed to warm you up",
                     BasePrice = 12,
                     ImageUrl = "img/pizzas/meaty.jpg",
                 },

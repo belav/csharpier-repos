@@ -9,23 +9,15 @@ namespace System.Formats.Asn1
     public class AsnContentException : Exception
     {
         public AsnContentException()
-            : base(SR.ContentException_DefaultMessage)
-        {
-        }
+            : base(SR.ContentException_DefaultMessage) { }
 
         public AsnContentException(string? message)
-            : base(message ?? SR.ContentException_DefaultMessage)
-        {
-        }
+            : base(message ?? SR.ContentException_DefaultMessage) { }
 
         public AsnContentException(string? message, Exception? inner)
-            : base(message ?? SR.ContentException_DefaultMessage, inner)
-        {
-        }
+            : base(message ?? SR.ContentException_DefaultMessage, inner) { }
 
         protected AsnContentException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

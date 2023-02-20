@@ -17,7 +17,11 @@ internal class TestSecurityTokenValidator : ISecurityTokenValidator
         return true;
     }
 
-    public ClaimsPrincipal ValidateToken(string securityToken, TokenValidationParameters validationParameters, out SecurityToken validatedToken)
+    public ClaimsPrincipal ValidateToken(
+        string securityToken,
+        TokenValidationParameters validationParameters,
+        out SecurityToken validatedToken
+    )
     {
         if (!string.IsNullOrEmpty(securityToken) && securityToken.Contains("ThisIsAValidToken"))
         {

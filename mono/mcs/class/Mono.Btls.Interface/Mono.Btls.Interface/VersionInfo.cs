@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+
 namespace Mono.Btls.Interface
 {
     public static class VersionInfo
@@ -31,4 +32,3 @@ namespace Mono.Btls.Interface
         public const string Version = "1.0.0";
     }
 }
-

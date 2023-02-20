@@ -11,5 +11,5 @@ class A<T>
 
 class X
 {
-    string s = nameof (A<>.B);
+    string s = nameof(A<>.B);
 }

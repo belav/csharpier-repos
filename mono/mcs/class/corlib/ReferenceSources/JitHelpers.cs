@@ -1,21 +1,23 @@
-
-namespace System.Runtime.CompilerServices {
-
+namespace System.Runtime.CompilerServices
+{
     internal static class JitHelpers
     {
-        static internal T UnsafeCast<T>(Object o) where T : class
+        static internal T UnsafeCast<T>(Object o)
+            where T : class
         {
-            return Array.UnsafeMov<object, T> (o);
+            return Array.UnsafeMov<object, T>(o);
         }
 
-        static internal int UnsafeEnumCast<T>(T val) where T : struct
+        static internal int UnsafeEnumCast<T>(T val)
+            where T : struct
         {
-            return Array.UnsafeMov<T, int> (val);
+            return Array.UnsafeMov<T, int>(val);
         }
 
-        static internal long UnsafeEnumCastLong<T>(T val) where T : struct
+        static internal long UnsafeEnumCastLong<T>(T val)
+            where T : struct
         {
-            return Array.UnsafeMov<T, long> (val);
+            return Array.UnsafeMov<T, long>(val);
         }
     }
 }

@@ -3,16 +3,14 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
-    [KeptMember (".ctor()")]
-    [SetupLinkerDescriptorFile ("AssemblyWithPreserveAll.xml")]
+    [KeptMember(".ctor()")]
+    [SetupLinkerDescriptorFile("AssemblyWithPreserveAll.xml")]
     public class AssemblyWithPreserveAll
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class UnusedType
         {
             [Kept]
@@ -20,18 +18,20 @@ namespace Mono.Linker.Tests.Cases.LinkXml
 
             [Kept]
             [KeptBackingField]
-            public int UnusedProperty { [Kept] get; [Kept] set; }
-
-            [Kept]
-            public void UnusedMethod ()
+            public int UnusedProperty
             {
+                [Kept]
+                get;
+                [Kept]
+                set;
             }
 
             [Kept]
-            [KeptMember (".ctor()")]
-            class UnusedNestedType
-            {
-            }
+            public void UnusedMethod() { }
+
+            [Kept]
+            [KeptMember(".ctor()")]
+            class UnusedNestedType { }
         }
     }
 }

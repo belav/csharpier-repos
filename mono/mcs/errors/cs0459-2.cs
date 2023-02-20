@@ -5,10 +5,11 @@
 class C
 {
     static int i;
-    
-    public static unsafe void Test ()
+
+    public static unsafe void Test()
     {
-        fixed (int* a = &i) {
+        fixed (int* a = &i)
+        {
             int** x = &a;
         }
     }

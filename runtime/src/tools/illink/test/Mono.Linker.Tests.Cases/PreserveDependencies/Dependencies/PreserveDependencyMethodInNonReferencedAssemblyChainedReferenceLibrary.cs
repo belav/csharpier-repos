@@ -1,10 +1,11 @@
 namespace Mono.Linker.Tests.Cases.PreserveDependencies.Dependencies
 {
-    public class PreserveDependencyMethodInNonReferencedAssemblyChainedReferenceLibrary : PreserveDependencyMethodInNonReferencedAssemblyBase
+    public class PreserveDependencyMethodInNonReferencedAssemblyChainedReferenceLibrary
+        : PreserveDependencyMethodInNonReferencedAssemblyBase
     {
-        public override string Method ()
+        public override string Method()
         {
-            PreserveDependencyMethodInNonReferencedAssemblyChainedLibrary.Dependency ();
+            PreserveDependencyMethodInNonReferencedAssemblyChainedLibrary.Dependency();
             return "Dependency";
         }
     }

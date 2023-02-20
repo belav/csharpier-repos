@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,29 +55,27 @@ namespace System.Configuration
         public virtual object Create(object parent, object context, XmlNode section)
         {
             Hashtable settingsCollection;
-            
+
             if (parent == null)
-                settingsCollection = new Hashtable ();
+                settingsCollection = new Hashtable();
             else
-                settingsCollection = (Hashtable) parent;
+                settingsCollection = (Hashtable)parent;
 
 #if (XML_DEP)
             //Get all of the ChildNodes in the XML section.
-            if(section.HasChildNodes)
+            if (section.HasChildNodes)
             {
                 throw (new ConfigurationException("Child Nodes not allowed."));
             }
-            
-            
+
             //Get the attributes for the childNode
             XmlAttributeCollection xmlAttributes = section.Attributes;
 
-            for(int i=0; i < xmlAttributes.Count; i++)
+            for (int i = 0; i < xmlAttributes.Count; i++)
             {
                 settingsCollection.Add(xmlAttributes[i].Name, xmlAttributes[i].Value);
             }
-#endif            
-            
+#endif
             return settingsCollection;
         }
     }

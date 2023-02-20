@@ -20,32 +20,32 @@ namespace MonoTests.System.Web.Services.Description
         BindingCollection bc;
 
         [SetUp]
-        public void InitializeBindingCollection ()
+        public void InitializeBindingCollection()
         {
             // workaround for internal constructor
-            ServiceDescription desc = new ServiceDescription ();
+            ServiceDescription desc = new ServiceDescription();
             bc = desc.Bindings;
         }
 
         [Test]
         public void TestDefaultProperties()
         {
-            Assert.IsNull (bc["hello"]);
-            Assert.AreEqual (0, bc.Count);
+            Assert.IsNull(bc["hello"]);
+            Assert.AreEqual(0, bc.Count);
         }
-        
+
         [Test]
-        public void TestAddBinding ()
+        public void TestAddBinding()
         {
             const string bindingName = "testBinding";
-            
-            Binding b = new Binding ();
-            b.Name = bindingName;
-            
-            bc.Add (b);
 
-            Assert.AreEqual (1, bc.Count);
-            Assert.AreEqual (b, bc[bindingName]);
+            Binding b = new Binding();
+            b.Name = bindingName;
+
+            bc.Add(b);
+
+            Assert.AreEqual(1, bc.Count);
+            Assert.AreEqual(b, bc[bindingName]);
         }
     }
 }

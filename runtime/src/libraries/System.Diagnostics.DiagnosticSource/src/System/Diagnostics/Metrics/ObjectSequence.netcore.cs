@@ -41,7 +41,6 @@ namespace System.Diagnostics.Metrics
 
     internal partial struct ObjectSequenceMany : IEquatable<ObjectSequenceMany>, IObjectSequence
     {
-
         public Span<object?> AsSpan()
         {
             return _values.AsSpan();

@@ -3,12 +3,12 @@
 
 public struct Foo
 {
-    public static implicit operator int? (Foo f)
+    public static implicit operator int?(Foo f)
     {
         return 1;
     }
 
-    public static implicit operator bool? (Foo f)
+    public static implicit operator bool?(Foo f)
     {
         return false;
     }
@@ -16,7 +16,7 @@ public struct Foo
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         Foo f;
         Foo f2;

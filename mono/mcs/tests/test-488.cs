@@ -1,20 +1,30 @@
 using System.Collections;
 
-class P {
+class P
+{
     public int x;
 }
 
-struct Q {
+struct Q
+{
     public P p;
-    public Q (P p) { this.p = p; }
+
+    public Q(P p)
+    {
+        this.p = p;
+    }
 }
 
-class Test {
-    static IEnumerable foo () { return null; }
-
-    public static void Main ()
+class Test
+{
+    static IEnumerable foo()
     {
-        IEnumerable f = foo ();
+        return null;
+    }
+
+    public static void Main()
+    {
+        IEnumerable f = foo();
         if (f != null)
             foreach (P p in f)
                 p.x = 0;

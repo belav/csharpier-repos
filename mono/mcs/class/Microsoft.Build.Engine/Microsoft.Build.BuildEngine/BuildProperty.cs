@@ -4,7 +4,7 @@
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
 //   Ankit Jain (jankit@novell.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 // Copyright 2009 Novell, Inc (http://www.novell.com)
 //
@@ -36,33 +36,31 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Mono.XBuild.Utilities;
 
-namespace Microsoft.Build.BuildEngine {
-    public class BuildProperty {
-    
-        XmlElement    propertyElement;
-        string        finalValue;
-        bool        isImported;
-        string        value;
-        string        name;
-        Project        parentProject;
-        PropertyType    propertyType;
-        bool        converting;
+namespace Microsoft.Build.BuildEngine
+{
+    public class BuildProperty
+    {
+        XmlElement propertyElement;
+        string finalValue;
+        bool isImported;
+        string value;
+        string name;
+        Project parentProject;
+        PropertyType propertyType;
+        bool converting;
 
-        BuildProperty ()
-        {
-        }
+        BuildProperty() { }
 
-        public BuildProperty (string propertyName, string propertyValue)
-            : this (propertyName, propertyValue, PropertyType.Normal)
+        public BuildProperty(string propertyName, string propertyValue)
+            : this(propertyName, propertyValue, PropertyType.Normal)
         {
             if (propertyName == null)
-                throw new ArgumentNullException ("propertyName");
+                throw new ArgumentNullException("propertyName");
             if (propertyValue == null)
-                throw new ArgumentNullException ("propertyValue");
+                throw new ArgumentNullException("propertyValue");
         }
 
-        internal BuildProperty (string propertyName,
-                string propertyValue, PropertyType propertyType)
+        internal BuildProperty(string propertyName, string propertyValue, PropertyType propertyType)
         {
             this.name = propertyName;
             this.value = propertyValue;
@@ -71,44 +69,49 @@ namespace Microsoft.Build.BuildEngine {
             this.isImported = false;
         }
 
-        internal BuildProperty (Project parentProject, XmlElement propertyElement)
+        internal BuildProperty(Project parentProject, XmlElement propertyElement)
         {
             if (propertyElement == null)
-                throw new ArgumentNullException ("propertyElement");
+                throw new ArgumentNullException("propertyElement");
 
             this.propertyElement = propertyElement;
             this.propertyType = PropertyType.Normal;
             this.parentProject = parentProject;
             this.name = propertyElement.Name;
-            this.value = MSBuildUtils.UnescapeFromXml (propertyElement.InnerXml);
+            this.value = MSBuildUtils.UnescapeFromXml(propertyElement.InnerXml);
             this.isImported = false;
         }
 
         [MonoTODO]
-        public BuildProperty Clone (bool deepClone)
+        public BuildProperty Clone(bool deepClone)
         {
-            if (deepClone) {
-                if (FromXml) 
-                    throw new NotImplementedException ();
-                else
-                    return (BuildProperty) this.MemberwiseClone ();
-            } else {
+            if (deepClone)
+            {
                 if (FromXml)
-                    throw new NotImplementedException ();
+                    throw new NotImplementedException();
                 else
-                    throw new InvalidOperationException ("A shallow clone of this object cannot be created.");
+                    return (BuildProperty)this.MemberwiseClone();
+            }
+            else
+            {
+                if (FromXml)
+                    throw new NotImplementedException();
+                else
+                    throw new InvalidOperationException(
+                        "A shallow clone of this object cannot be created."
+                    );
             }
         }
 
-        public static explicit operator string (BuildProperty propertyToCast)
+        public static explicit operator string(BuildProperty propertyToCast)
         {
             if (propertyToCast == null)
                 return String.Empty;
             else
-                return propertyToCast.ToString ();
+                return propertyToCast.ToString();
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             if (finalValue != null)
                 return finalValue;
@@ -116,15 +119,19 @@ namespace Microsoft.Build.BuildEngine {
                 return Value;
         }
 
-        internal void Evaluate ()
+        internal void Evaluate()
         {
-            BuildProperty evaluated = new BuildProperty (Name, Value);
+            BuildProperty evaluated = new BuildProperty(Name, Value);
 
             // In evaluate phase, properties are not expanded
-            evaluated.finalValue = Expression.ParseAs<string> (Value, ParseOptions.None, 
-                parentProject, ExpressionOptions.DoNotExpandItemRefs);
+            evaluated.finalValue = Expression.ParseAs<string>(
+                Value,
+                ParseOptions.None,
+                parentProject,
+                ExpressionOptions.DoNotExpandItemRefs
+            );
 
-            parentProject.EvaluatedProperties.AddProperty (evaluated);
+            parentProject.EvaluatedProperties.AddProperty(evaluated);
         }
 
         // during property's eval phase, this is never reached, as PropertyReference
@@ -135,113 +142,143 @@ namespace Microsoft.Build.BuildEngine {
         //
         // during non-eval, expand: true
         // So, its always true here
-        internal string ConvertToString (Project project, ExpressionOptions options)
+        internal string ConvertToString(Project project, ExpressionOptions options)
         {
-            if (converting) {
+            if (converting)
+            {
                 // found ref to @this while trying to ConvertToString
                 // for @this!
                 return FinalValue;
             }
 
             converting = true;
-            try {
-                Expression exp = new Expression ();
+            try
+            {
+                Expression exp = new Expression();
 
                 // in non-evaluation phase, properties are always expanded
-                exp.Parse (FinalValue, options == ExpressionOptions.ExpandItemRefs ?
-                            ParseOptions.AllowItems : ParseOptions.None);
-                return (string) exp.ConvertTo (project, typeof (string), options);
-            } finally {
+                exp.Parse(
+                    FinalValue,
+                    options == ExpressionOptions.ExpandItemRefs
+                        ? ParseOptions.AllowItems
+                        : ParseOptions.None
+                );
+                return (string)exp.ConvertTo(project, typeof(string), options);
+            }
+            finally
+            {
                 converting = false;
             }
         }
 
-        internal ITaskItem[] ConvertToITaskItemArray (Project project, ExpressionOptions options)
+        internal ITaskItem[] ConvertToITaskItemArray(Project project, ExpressionOptions options)
         {
-            if (converting) {
+            if (converting)
+            {
                 // found ref to @this while trying to ConvertToITaskItemArray
                 // for @this!
-                ITaskItem []items = new ITaskItem [1];
-                items [0] = new TaskItem (FinalValue);
+                ITaskItem[] items = new ITaskItem[1];
+                items[0] = new TaskItem(FinalValue);
                 return items;
             }
 
             converting = true;
-            try {
-                Expression exp = new Expression ();
+            try
+            {
+                Expression exp = new Expression();
 
                 // in non-evaluation phase, properties are always expanded
-                exp.Parse (FinalValue, ParseOptions.Split | (options == ExpressionOptions.ExpandItemRefs ?
-                            ParseOptions.AllowItems : ParseOptions.None));
-                return (ITaskItem[]) exp.ConvertTo (project, typeof (ITaskItem[]), options);
-            } finally {
+                exp.Parse(
+                    FinalValue,
+                    ParseOptions.Split
+                        | (
+                            options == ExpressionOptions.ExpandItemRefs
+                                ? ParseOptions.AllowItems
+                                : ParseOptions.None
+                        )
+                );
+                return (ITaskItem[])exp.ConvertTo(project, typeof(ITaskItem[]), options);
+            }
+            finally
+            {
                 converting = false;
             }
         }
 
-        internal bool FromXml {
-            get {
-                return propertyElement != null;
-            }
+        internal bool FromXml
+        {
+            get { return propertyElement != null; }
         }
-    
-        public string Condition {
-            get {
+
+        public string Condition
+        {
+            get
+            {
                 if (FromXml)
-                    return propertyElement.GetAttribute ("Condition");
+                    return propertyElement.GetAttribute("Condition");
                 else
                     return String.Empty;
             }
-            set {
+            set
+            {
                 if (FromXml)
-                    propertyElement.SetAttribute ("Condition", value);
+                    propertyElement.SetAttribute("Condition", value);
                 else
-                    throw new InvalidOperationException ("Cannot set a condition on an object not represented by an XML element in the project file.");
+                    throw new InvalidOperationException(
+                        "Cannot set a condition on an object not represented by an XML element in the project file."
+                    );
             }
         }
 
-        public string FinalValue {
-            get {
+        public string FinalValue
+        {
+            get
+            {
                 if (finalValue == null)
                     return this.@value;
                 else
                     return finalValue;
             }
         }
-        
-        public bool IsImported {
+
+        public bool IsImported
+        {
             get { return isImported; }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
         }
 
-        public string Value {
-            get {
-                return value;
-            }
-            set {
+        public string Value
+        {
+            get { return value; }
+            set
+            {
                 this.@value = value;
-                if (FromXml) {
+                if (FromXml)
+                {
                     propertyElement.InnerXml = value;
-                } else {
+                }
+                else
+                {
                     finalValue = value;
                 }
             }
         }
 
-        internal PropertyType PropertyType {
-            get {
-                return propertyType;
-            }
+        internal PropertyType PropertyType
+        {
+            get { return propertyType; }
         }
 
-        internal XmlElement XmlElement {
+        internal XmlElement XmlElement
+        {
             get { return propertyElement; }
         }
 
-        internal IEnumerable<string> GetAttributes ()
+        internal IEnumerable<string> GetAttributes()
         {
             if (!FromXml)
                 yield break;
@@ -250,7 +287,8 @@ namespace Microsoft.Build.BuildEngine {
         }
     }
 
-    internal enum PropertyType {
+    internal enum PropertyType
+    {
         Reserved,
         Global,
         Normal,

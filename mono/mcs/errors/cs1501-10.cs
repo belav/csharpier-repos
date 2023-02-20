@@ -3,13 +3,11 @@
 
 class C
 {
-    static void TestCall (byte b, int a)
-    {
-    }
+    static void TestCall(byte b, int a) { }
 
-    public static void Main ()
+    public static void Main()
     {
         dynamic d = 0;
-        TestCall (d);
+        TestCall(d);
     }
 }

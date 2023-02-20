@@ -14,14 +14,21 @@ namespace System.ServiceModel.Security.Tokens
         string algorithm;
         SecurityKeyIdentifierClause reference;
         SecurityToken resolved_token; // store resolved one.
-        int? generation, offset, length;
+        int? generation,
+            offset,
+            length;
+
         // properties
-        string id, name, label;
-        byte [] nonce;
+        string id,
+            name,
+            label;
+        byte[] nonce;
         ReadOnlyCollection<SecurityKey> keys;
         ReferenceList reflist;
 
-        public DerivedKeySecurityToken (string id, string algorithm,
+        public DerivedKeySecurityToken(
+            string id,
+            string algorithm,
             SecurityKeyIdentifierClause reference,
             SymmetricSecurityKey referencedKey,
             string name,
@@ -29,7 +36,8 @@ namespace System.ServiceModel.Security.Tokens
             int? offset,
             int? length,
             string label,
-            byte [] nonce)
+            byte[] nonce
+        )
         {
             algorithm = algorithm ?? SecurityAlgorithms.Psha1KeyDerivation;
 
@@ -43,79 +51,92 @@ namespace System.ServiceModel.Security.Tokens
             this.name = name;
             this.label = label;
 
-            SecurityKey key = new InMemorySymmetricSecurityKey (
-                referencedKey.GenerateDerivedKey (
+            SecurityKey key = new InMemorySymmetricSecurityKey(
+                referencedKey.GenerateDerivedKey(
                     algorithm,
-                    Encoding.UTF8.GetBytes (label ?? Constants.WsscDefaultLabel),
+                    Encoding.UTF8.GetBytes(label ?? Constants.WsscDefaultLabel),
                     nonce,
                     (length ?? 32) * 8,
-                    offset ?? 0));
-            keys = new ReadOnlyCollection<SecurityKey> (
-                new SecurityKey [] {key});
+                    offset ?? 0
+                )
+            );
+            keys = new ReadOnlyCollection<SecurityKey>(new SecurityKey[] { key });
         }
 
-        public override string Id {
+        public override string Id
+        {
             get { return id; }
         }
 
-        public override ReadOnlyCollection<SecurityKey> SecurityKeys {
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys
+        {
             get { return keys; }
         }
 
-        public override DateTime ValidFrom {
+        public override DateTime ValidFrom
+        {
             get { return resolved_token.ValidFrom; }
         }
 
-        public override DateTime ValidTo {
+        public override DateTime ValidTo
+        {
             get { return resolved_token.ValidTo; }
         }
 
-        internal ReferenceList ReferenceList {
+        internal ReferenceList ReferenceList
+        {
             get { return reflist; }
             set { reflist = value; }
         }
 
-        public SecurityKeyIdentifierClause TokenReference {
+        public SecurityKeyIdentifierClause TokenReference
+        {
             get { return reference; }
         }
 
-        public int? Generation {
+        public int? Generation
+        {
             get { return generation; }
         }
 
-        public int? Length {
+        public int? Length
+        {
             get { return length; }
         }
 
-        public int? Offset {
+        public int? Offset
+        {
             get { return offset; }
         }
 
-        public string Label {
+        public string Label
+        {
             get { return label; }
         }
 
-        public byte [] Nonce {
+        public byte[] Nonce
+        {
             get { return nonce; }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
         }
 
-        public override bool MatchesKeyIdentifierClause (
-            SecurityKeyIdentifierClause keyIdentifierClause)
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
-            LocalIdKeyIdentifierClause l = keyIdentifierClause
-                as LocalIdKeyIdentifierClause;
+            LocalIdKeyIdentifierClause l = keyIdentifierClause as LocalIdKeyIdentifierClause;
             return l != null && l.LocalId == Id;
         }
 
-        public override SecurityKey ResolveKeyIdentifierClause (
-            SecurityKeyIdentifierClause keyIdentifierClause)
+        public override SecurityKey ResolveKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
-            return MatchesKeyIdentifierClause (keyIdentifierClause) ?
-                keys [0] : null;
+            return MatchesKeyIdentifierClause(keyIdentifierClause) ? keys[0] : null;
         }
     }
 }

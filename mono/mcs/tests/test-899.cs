@@ -7,9 +7,9 @@ class Test
         object o;
         lock (o = new object())
         {
-            Console.WriteLine (o);
+            Console.WriteLine(o);
         }
 
-        Console.WriteLine (o);
+        Console.WriteLine(o);
     }
 }

@@ -14,12 +14,13 @@ namespace ILLink.Shared.TrimAnalysis
     /// </summary>
     internal sealed partial record SystemReflectionMethodBaseValue : SingleValue
     {
-        public SystemReflectionMethodBaseValue (MethodProxy representedMethod) => RepresentedMethod = representedMethod;
+        public SystemReflectionMethodBaseValue(MethodProxy representedMethod) =>
+            RepresentedMethod = representedMethod;
 
         public readonly MethodProxy RepresentedMethod;
 
-        public override SingleValue DeepCopy () => this; // This value is immutable
+        public override SingleValue DeepCopy() => this; // This value is immutable
 
-        public override string ToString () => this.ValueToString (RepresentedMethod);
+        public override string ToString() => this.ValueToString(RepresentedMethod);
     }
 }

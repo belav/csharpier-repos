@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
             SyntaxNode bodyOpt,
 #endif
             UnitTestingInvocationReasons reasons,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         Task AnalyzeProjectAsync(
             Project project,
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
             bool semanticsChanged,
 #endif
             UnitTestingInvocationReasons reasons,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         Task RemoveDocumentAsync(DocumentId documentId, CancellationToken cancellationToken);
 

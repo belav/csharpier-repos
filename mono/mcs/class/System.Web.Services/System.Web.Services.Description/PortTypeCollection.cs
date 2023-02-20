@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.PortTypeCollection.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,35 +28,38 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services.Description {
-    public sealed class PortTypeCollection : ServiceDescriptionBaseCollection {
-
+namespace System.Web.Services.Description
+{
+    public sealed class PortTypeCollection : ServiceDescriptionBaseCollection
+    {
         #region Constructors
 
-        internal PortTypeCollection (ServiceDescription serviceDescription)
-            : base (serviceDescription)
-        {
-        }
+        internal PortTypeCollection(ServiceDescription serviceDescription)
+            : base(serviceDescription) { }
 
         #endregion // Constructors
 
         #region Properties
 
-        public PortType this [int index] {
-            get { 
+        public PortType this[int index]
+        {
+            get
+            {
                 if (index < 0 || index > Count)
-                    throw new ArgumentOutOfRangeException ();
+                    throw new ArgumentOutOfRangeException();
 
-                return (PortType) List[index]; 
+                return (PortType)List[index];
             }
-                        set { List [index] = value; }
+            set { List[index] = value; }
         }
 
-        public PortType this [string name] {
-            get { 
-                int index = IndexOf ((PortType) Table[name]);
+        public PortType this[string name]
+        {
+            get
+            {
+                int index = IndexOf((PortType)Table[name]);
                 if (index >= 0)
-                    return this[index]; 
+                    return this[index];
                 return null;
             }
         }
@@ -65,49 +68,49 @@ namespace System.Web.Services.Description {
 
         #region Methods
 
-        public int Add (PortType portType) 
+        public int Add(PortType portType)
         {
-            Insert (Count, portType);    
+            Insert(Count, portType);
             return (Count - 1);
         }
 
-        public bool Contains (PortType portType)
+        public bool Contains(PortType portType)
         {
-            return List.Contains (portType);
+            return List.Contains(portType);
         }
 
-        public void CopyTo (PortType[] array, int index) 
+        public void CopyTo(PortType[] array, int index)
         {
-            List.CopyTo (array, index);
+            List.CopyTo(array, index);
         }
 
-        protected override string GetKey (object value) 
+        protected override string GetKey(object value)
         {
             if (!(value is PortType))
-                throw new InvalidCastException ();
-            return ((PortType) value).Name;
+                throw new InvalidCastException();
+            return ((PortType)value).Name;
         }
 
-        public int IndexOf (PortType portType)
+        public int IndexOf(PortType portType)
         {
-            return List.IndexOf (portType);
+            return List.IndexOf(portType);
         }
 
-        public void Insert (int index, PortType portType)
+        public void Insert(int index, PortType portType)
         {
-            List.Insert (index, portType);
+            List.Insert(index, portType);
         }
-    
-        public void Remove (PortType portType)
+
+        public void Remove(PortType portType)
         {
-            List.Remove (portType);
+            List.Remove(portType);
         }
-            
-        protected override void SetParent (object value, object parent)
+
+        protected override void SetParent(object value, object parent)
         {
-            ((PortType) value).SetParent ((ServiceDescription) parent); 
+            ((PortType)value).SetParent((ServiceDescription)parent);
         }
-            
+
         #endregion // Methods
     }
 }

@@ -54,120 +54,158 @@ namespace Mono.AppleTls
 {
     static partial class MonoCertificatePal
     {
-        public static SafeSecIdentityHandle ImportIdentity (X509Certificate2 certificate)
+        public static SafeSecIdentityHandle ImportIdentity(X509Certificate2 certificate)
         {
             if (certificate == null)
-                throw new ArgumentNullException (nameof (certificate));
+                throw new ArgumentNullException(nameof(certificate));
             if (!certificate.HasPrivateKey)
-                throw new InvalidOperationException ("Need X509Certificate2 with a private key.");
+                throw new InvalidOperationException("Need X509Certificate2 with a private key.");
 
-            return ItemImport (certificate) ?? new SafeSecIdentityHandle ();
+            return ItemImport(certificate) ?? new SafeSecIdentityHandle();
         }
 
-        [DllImport (AppleTlsContext.SecurityLibrary)]
-        extern static SecStatusCode SecItemImport (
-            /* CFDataRef */ IntPtr importedData,
-            /* CFStringRef */ IntPtr fileNameOrExtension, // optional
-            /* SecExternalFormat* */ ref SecExternalFormat inputFormat, // optional, IN/OUT
-            /* SecExternalItemType* */ ref SecExternalItemType itemType, // optional, IN/OUT
-            /* SecItemImportExportFlags */ SecItemImportExportFlags flags,
-            /* const SecItemImportExportKeyParameters* */ IntPtr keyParams, // optional
-            /* SecKeychainRef */ IntPtr importKeychain, // optional
-            /* CFArrayRef* */ out IntPtr outItems);
+        [DllImport(AppleTlsContext.SecurityLibrary)]
+        extern static SecStatusCode SecItemImport(
+            /* CFDataRef */IntPtr importedData,
+            /* CFStringRef */IntPtr fileNameOrExtension, // optional
+            /* SecExternalFormat* */ref SecExternalFormat inputFormat, // optional, IN/OUT
+            /* SecExternalItemType* */ref SecExternalItemType itemType, // optional, IN/OUT
+            /* SecItemImportExportFlags */SecItemImportExportFlags flags,
+            /* const SecItemImportExportKeyParameters* */IntPtr keyParams, // optional
+            /* SecKeychainRef */IntPtr importKeychain, // optional
+            /* CFArrayRef* */out IntPtr outItems
+        );
 
-        static public CFArray ItemImport (byte[] buffer, string password)
+        static public CFArray ItemImport(byte[] buffer, string password)
         {
-            using (var data = CFData.FromData (buffer))
-            using (var pwstring = CFString.Create (password)) {
-                SecItemImportExportKeyParameters keyParams = new SecItemImportExportKeyParameters ();
+            using (var data = CFData.FromData(buffer))
+            using (var pwstring = CFString.Create(password))
+            {
+                SecItemImportExportKeyParameters keyParams = new SecItemImportExportKeyParameters();
                 keyParams.passphrase = pwstring.Handle;
 
-                return ItemImport (data, SecExternalFormat.PKCS12, SecExternalItemType.Aggregate, SecItemImportExportFlags.None, keyParams);
+                return ItemImport(
+                    data,
+                    SecExternalFormat.PKCS12,
+                    SecExternalItemType.Aggregate,
+                    SecItemImportExportFlags.None,
+                    keyParams
+                );
             }
         }
 
-        static CFArray ItemImport (CFData data, SecExternalFormat format, SecExternalItemType itemType,
-                       SecItemImportExportFlags flags = SecItemImportExportFlags.None,
-                       SecItemImportExportKeyParameters? keyParams = null)
+        static CFArray ItemImport(
+            CFData data,
+            SecExternalFormat format,
+            SecExternalItemType itemType,
+            SecItemImportExportFlags flags = SecItemImportExportFlags.None,
+            SecItemImportExportKeyParameters? keyParams = null
+        )
         {
-            return ItemImport (data, ref format, ref itemType, flags, keyParams);
+            return ItemImport(data, ref format, ref itemType, flags, keyParams);
         }
 
-        static CFArray ItemImport (CFData data, ref SecExternalFormat format, ref SecExternalItemType itemType,
-                       SecItemImportExportFlags flags = SecItemImportExportFlags.None,
-                       SecItemImportExportKeyParameters? keyParams = null)
+        static CFArray ItemImport(
+            CFData data,
+            ref SecExternalFormat format,
+            ref SecExternalItemType itemType,
+            SecItemImportExportFlags flags = SecItemImportExportFlags.None,
+            SecItemImportExportKeyParameters? keyParams = null
+        )
         {
             IntPtr keyParamsPtr = IntPtr.Zero;
-            if (keyParams != null) {
-                keyParamsPtr = Marshal.AllocHGlobal (Marshal.SizeOf (keyParams.Value));
+            if (keyParams != null)
+            {
+                keyParamsPtr = Marshal.AllocHGlobal(Marshal.SizeOf(keyParams.Value));
                 if (keyParamsPtr == IntPtr.Zero)
-                    throw new OutOfMemoryException ();
-                Marshal.StructureToPtr (keyParams.Value, keyParamsPtr, false);
+                    throw new OutOfMemoryException();
+                Marshal.StructureToPtr(keyParams.Value, keyParamsPtr, false);
             }
 
             IntPtr result;
-            var status = SecItemImport (data.Handle, IntPtr.Zero, ref format, ref itemType, flags, keyParamsPtr, IntPtr.Zero, out result);
+            var status = SecItemImport(
+                data.Handle,
+                IntPtr.Zero,
+                ref format,
+                ref itemType,
+                flags,
+                keyParamsPtr,
+                IntPtr.Zero,
+                out result
+            );
 
             if (keyParamsPtr != IntPtr.Zero)
-                Marshal.FreeHGlobal (keyParamsPtr);
+                Marshal.FreeHGlobal(keyParamsPtr);
 
             if (status != SecStatusCode.Success)
-                throw new NotSupportedException (status.ToString ());
+                throw new NotSupportedException(status.ToString());
 
-            return new CFArray (result, true);
+            return new CFArray(result, true);
         }
 
-        [DllImport (AppleTlsContext.SecurityLibrary)]
-        extern static /* SecIdentityRef */ IntPtr SecIdentityCreate (
-            /* CFAllocatorRef */ IntPtr allocator,
-            /* SecCertificateRef */ IntPtr certificate,
-            /* SecKeyRef */ IntPtr privateKey);
+        [DllImport(AppleTlsContext.SecurityLibrary)]
+        extern static /* SecIdentityRef */
+        IntPtr SecIdentityCreate(
+            /* CFAllocatorRef */IntPtr allocator,
+            /* SecCertificateRef */IntPtr certificate,
+            /* SecKeyRef */IntPtr privateKey
+        );
 
-        static public SafeSecIdentityHandle ItemImport (X509Certificate2 certificate)
+        static public SafeSecIdentityHandle ItemImport(X509Certificate2 certificate)
         {
             if (!certificate.HasPrivateKey)
-                throw new NotSupportedException ();
+                throw new NotSupportedException();
 
-            using (var key = ImportPrivateKey (certificate))
-            using (var cert = MonoCertificatePal.FromOtherCertificate (certificate)) {
-                var identity = SecIdentityCreate (IntPtr.Zero, cert.DangerousGetHandle (), key.DangerousGetHandle ());
-                if (!MonoCertificatePal.IsSecIdentity (identity))
-                    throw new InvalidOperationException ();
+            using (var key = ImportPrivateKey(certificate))
+            using (var cert = MonoCertificatePal.FromOtherCertificate(certificate))
+            {
+                var identity = SecIdentityCreate(
+                    IntPtr.Zero,
+                    cert.DangerousGetHandle(),
+                    key.DangerousGetHandle()
+                );
+                if (!MonoCertificatePal.IsSecIdentity(identity))
+                    throw new InvalidOperationException();
 
-                return new SafeSecIdentityHandle (identity, true);
+                return new SafeSecIdentityHandle(identity, true);
             }
         }
 
-        static byte[] ExportKey (RSA key)
+        static byte[] ExportKey(RSA key)
         {
 #if MONO_FEATURE_BTLS
-            using (var btlsKey = MonoBtlsKey.CreateFromRSAPrivateKey (key))
-                return btlsKey.GetBytes (true);
+            using (var btlsKey = MonoBtlsKey.CreateFromRSAPrivateKey(key))
+                return btlsKey.GetBytes(true);
 #else
-            return PKCS8.PrivateKeyInfo.Encode (key);
+            return PKCS8.PrivateKeyInfo.Encode(key);
 #endif
         }
 
-        static SafeSecKeyRefHandle ImportPrivateKey (X509Certificate2 certificate)
+        static SafeSecKeyRefHandle ImportPrivateKey(X509Certificate2 certificate)
         {
             if (!certificate.HasPrivateKey)
-                throw new NotSupportedException ();
+                throw new NotSupportedException();
 
             CFArray items;
-            using (var data = CFData.FromData (ExportKey ((RSA)certificate.PrivateKey)))
-                items = ItemImport (data, SecExternalFormat.OpenSSL, SecExternalItemType.PrivateKey);
+            using (var data = CFData.FromData(ExportKey((RSA)certificate.PrivateKey)))
+                items = ItemImport(data, SecExternalFormat.OpenSSL, SecExternalItemType.PrivateKey);
 
-            try {
+            try
+            {
                 if (items.Count != 1)
-                    throw new InvalidOperationException ("Private key import failed.");
+                    throw new InvalidOperationException("Private key import failed.");
 
                 var imported = items[0];
-                if (!MonoCertificatePal.IsSecKey (imported))
-                    throw new InvalidOperationException ("Private key import doesn't return SecKey.");
+                if (!MonoCertificatePal.IsSecKey(imported))
+                    throw new InvalidOperationException(
+                        "Private key import doesn't return SecKey."
+                    );
 
-                return new SafeSecKeyRefHandle (imported, items.Handle);
-            } finally {
-                items.Dispose ();
+                return new SafeSecKeyRefHandle(imported, items.Handle);
+            }
+            finally
+            {
+                items.Dispose();
             }
         }
 
@@ -199,21 +237,21 @@ namespace Mono.AppleTls
         enum SecItemImportExportFlags : int
         {
             None,
-            PemArmour = 0x00000001,   /* exported blob is PEM formatted */
+            PemArmour = 0x00000001, /* exported blob is PEM formatted */
         }
 
         // Native struct; don't change
-        [StructLayout (LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         struct SecItemImportExportKeyParameters
         {
-            public int version;            /* SEC_KEY_IMPORT_EXPORT_PARAMS_VERSION */
-            public int flags;              /* SecKeyImportExportFlags bits */
-            public IntPtr passphrase;      /* SecExternalFormat.PKCS12 only.  Legal types are CFStringRef and CFDataRef. */
+            public int version; /* SEC_KEY_IMPORT_EXPORT_PARAMS_VERSION */
+            public int flags; /* SecKeyImportExportFlags bits */
+            public IntPtr passphrase; /* SecExternalFormat.PKCS12 only.  Legal types are CFStringRef and CFDataRef. */
 
             IntPtr alertTitle;
             IntPtr alertPrompt;
 
-            public IntPtr accessRef;       /* SecAccessRef */
+            public IntPtr accessRef; /* SecAccessRef */
 
             IntPtr keyUsage;
             IntPtr keyAttributes;

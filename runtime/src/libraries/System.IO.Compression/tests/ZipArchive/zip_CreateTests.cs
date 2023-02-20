@@ -13,7 +13,10 @@ namespace System.IO.Compression.Tests
         {
             MemoryStream ms = new MemoryStream();
             ZipArchive z = new ZipArchive(ms, ZipArchiveMode.Create);
-            Assert.Throws<NotSupportedException>(() => { var x = z.Entries; }); //"Entries not applicable on Create"
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                var x = z.Entries;
+            }); //"Entries not applicable on Create"
             Assert.Throws<NotSupportedException>(() => z.GetEntry("dirka")); //"GetEntry not applicable on Create"
 
             ZipArchiveEntry e = z.CreateEntry("hey");
@@ -23,11 +26,20 @@ namespace System.IO.Compression.Tests
             Assert.Throws<NotSupportedException>(() => s.ReadByte()); //"Can't read on new entry"
             Assert.Throws<NotSupportedException>(() => s.Seek(0, SeekOrigin.Begin)); //"Can't seek on new entry"
             Assert.Throws<NotSupportedException>(() => s.Position = 0); //"Can't set position on new entry"
-            Assert.Throws<NotSupportedException>(() => { var x = s.Length; }); //"Can't get length on new entry"
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                var x = s.Length;
+            }); //"Can't get length on new entry"
 
             Assert.Throws<IOException>(() => e.LastWriteTime = new DateTimeOffset()); //"Can't get LastWriteTime on new entry"
-            Assert.Throws<InvalidOperationException>(() => { var x = e.Length; }); //"Can't get length on new entry"
-            Assert.Throws<InvalidOperationException>(() => { var x = e.CompressedLength; }); //"can't get CompressedLength on new entry"
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var x = e.Length;
+            }); //"Can't get length on new entry"
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var x = e.CompressedLength;
+            }); //"can't get CompressedLength on new entry"
 
             Assert.Throws<IOException>(() => z.CreateEntry("bad"));
             s.Dispose();
@@ -36,8 +48,14 @@ namespace System.IO.Compression.Tests
 
             Assert.Throws<IOException>(() => e.Open());
             Assert.Throws<IOException>(() => e.LastWriteTime = new DateTimeOffset());
-            Assert.Throws<InvalidOperationException>(() => { var x = e.Length; });
-            Assert.Throws<InvalidOperationException>(() => { var x = e.CompressedLength; });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var x = e.Length;
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var x = e.CompressedLength;
+            });
 
             ZipArchiveEntry e1 = z.CreateEntry("e1");
             ZipArchiveEntry e2 = z.CreateEntry("e2");
@@ -58,14 +76,30 @@ namespace System.IO.Compression.Tests
         [InlineData("normal", true, false)]
         [InlineData("small", false, true)]
         [InlineData("normal", false, true)]
-        public static async Task CreateNormal_Seekable(string folder, bool useSpansForWriting, bool writeInChunks)
+        public static async Task CreateNormal_Seekable(
+            string folder,
+            bool useSpansForWriting,
+            bool writeInChunks
+        )
         {
             using (var s = new MemoryStream())
             {
                 var testStream = new WrappedStream(s, false, true, true, null);
-                await CreateFromDir(zfolder(folder), testStream, ZipArchiveMode.Create, useSpansForWriting, writeInChunks);
+                await CreateFromDir(
+                    zfolder(folder),
+                    testStream,
+                    ZipArchiveMode.Create,
+                    useSpansForWriting,
+                    writeInChunks
+                );
 
-                IsZipSameAsDir(s, zfolder(folder), ZipArchiveMode.Read, requireExplicit: true, checkTimes: true);
+                IsZipSameAsDir(
+                    s,
+                    zfolder(folder),
+                    ZipArchiveMode.Read,
+                    requireExplicit: true,
+                    checkTimes: true
+                );
             }
         }
 
@@ -81,7 +115,13 @@ namespace System.IO.Compression.Tests
                 var testStream = new WrappedStream(s, false, true, false, null);
                 await CreateFromDir(zfolder(folder), testStream, ZipArchiveMode.Create);
 
-                IsZipSameAsDir(s, zfolder(folder), ZipArchiveMode.Read, requireExplicit: true, checkTimes: true);
+                IsZipSameAsDir(
+                    s,
+                    zfolder(folder),
+                    ZipArchiveMode.Read,
+                    requireExplicit: true,
+                    checkTimes: true
+                );
             }
         }
 
@@ -93,7 +133,13 @@ namespace System.IO.Compression.Tests
                 var testStream = new WrappedStream(s, false, true, true, null);
                 await CreateFromDir(zfolder("unicode"), testStream, ZipArchiveMode.Create);
 
-                IsZipSameAsDir(s, zfolder("unicode"), ZipArchiveMode.Read, requireExplicit: true, checkTimes: true);
+                IsZipSameAsDir(
+                    s,
+                    zfolder("unicode"),
+                    ZipArchiveMode.Read,
+                    requireExplicit: true,
+                    checkTimes: true
+                );
             }
         }
 
@@ -105,7 +151,13 @@ namespace System.IO.Compression.Tests
                 var testStream = new WrappedStream(s, false, true, false, null);
                 await CreateFromDir(zfolder("unicode"), testStream, ZipArchiveMode.Create);
 
-                IsZipSameAsDir(s, zfolder("unicode"), ZipArchiveMode.Read, requireExplicit: true, checkTimes: true);
+                IsZipSameAsDir(
+                    s,
+                    zfolder("unicode"),
+                    ZipArchiveMode.Read,
+                    requireExplicit: true,
+                    checkTimes: true
+                );
             }
         }
 
@@ -118,8 +170,13 @@ namespace System.IO.Compression.Tests
                 var testFileContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
                 using (var zip = new ZipArchive(testStream, ZipArchiveMode.Create))
                 {
-                    var utf8WithoutBom = new Text.UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
-                    ZipArchiveEntry newEntry = zip.CreateEntry(testfilename, CompressionLevel.NoCompression);
+                    var utf8WithoutBom = new Text.UTF8Encoding(
+                        encoderShouldEmitUTF8Identifier: false
+                    );
+                    ZipArchiveEntry newEntry = zip.CreateEntry(
+                        testfilename,
+                        CompressionLevel.NoCompression
+                    );
                     using (var writer = new StreamWriter(newEntry.Open(), utf8WithoutBom))
                     {
                         writer.Write(testFileContent);
@@ -134,9 +191,13 @@ namespace System.IO.Compression.Tests
                     Assert.Equal(uncompressedSize, compressedSize);
                     byte filenamelength = fileContent[26];
                     Assert.Equal(testfilename.Length, filenamelength);
-                    string readFileName = ReadStringFromSpan(fileContent.AsSpan(30, filenamelength));
+                    string readFileName = ReadStringFromSpan(
+                        fileContent.AsSpan(30, filenamelength)
+                    );
                     Assert.Equal(testfilename, readFileName);
-                    string readFileContent = ReadStringFromSpan(fileContent.AsSpan(30 + filenamelength, testFileContent.Length));
+                    string readFileContent = ReadStringFromSpan(
+                        fileContent.AsSpan(30 + filenamelength, testFileContent.Length)
+                    );
                     Assert.Equal(testFileContent, readFileContent);
                 }
             }
@@ -181,7 +242,11 @@ namespace System.IO.Compression.Tests
         [InlineData(UnicodeFileName, AsciiFileName, true)]
         [InlineData(AsciiFileName, UnicodeFileName, true)]
         [InlineData(AsciiFileName, AsciiFileName, false)]
-        public static void CreateNormal_VerifyUnicodeFileNameAndComment(string fileName, string entryComment, bool isUnicodeFlagExpected)
+        public static void CreateNormal_VerifyUnicodeFileNameAndComment(
+            string fileName,
+            string entryComment,
+            bool isUnicodeFlagExpected
+        )
         {
             using var ms = new MemoryStream();
             using var archive = new ZipArchive(ms, ZipArchiveMode.Create);
@@ -213,7 +278,12 @@ namespace System.IO.Compression.Tests
             return Text.Encoding.UTF8.GetString(input.ToArray());
         }
 
-        private static void CreateEntry(ZipArchive archive, string fileName, string fileContents, string entryComment = null)
+        private static void CreateEntry(
+            ZipArchive archive,
+            string fileName,
+            string fileContents,
+            string entryComment = null
+        )
         {
             ZipArchiveEntry entry = archive.CreateEntry(fileName);
             using StreamWriter writer = new StreamWriter(entry.Open());
@@ -228,7 +298,10 @@ namespace System.IO.Compression.Tests
             Assert.Equal(0, fileBytes[7]);
         }
 
-        private static void AssertUnicodeFileNameAndComment(MemoryStream memoryStream, bool isUnicodeFlagExpected)
+        private static void AssertUnicodeFileNameAndComment(
+            MemoryStream memoryStream,
+            bool isUnicodeFlagExpected
+        )
         {
             byte[] fileBytes = memoryStream.ToArray();
             Assert.Equal(0, fileBytes[6]);

@@ -14,19 +14,31 @@ namespace Moq
 {
     internal static partial class StringBuilderExtensions
     {
-        public static StringBuilder Append(this StringBuilder stringBuilder, string str, int startIndex)
+        public static StringBuilder Append(
+            this StringBuilder stringBuilder,
+            string str,
+            int startIndex
+        )
         {
             return stringBuilder.Append(str, startIndex, str.Length - startIndex);
         }
 
-        public static StringBuilder AppendCommaSeparated<T>(this StringBuilder stringBuilder, string prefix, IEnumerable<T> source, Func<StringBuilder, T, StringBuilder> append, string suffix)
+        public static StringBuilder AppendCommaSeparated<T>(
+            this StringBuilder stringBuilder,
+            string prefix,
+            IEnumerable<T> source,
+            Func<StringBuilder, T, StringBuilder> append,
+            string suffix
+        )
         {
-            return stringBuilder.Append(prefix)
-                                .AppendCommaSeparated(source, append)
-                                .Append(suffix);
+            return stringBuilder.Append(prefix).AppendCommaSeparated(source, append).Append(suffix);
         }
 
-        public static StringBuilder AppendCommaSeparated<T>(this StringBuilder stringBuilder, IEnumerable<T> source, Func<StringBuilder, T, StringBuilder> append)
+        public static StringBuilder AppendCommaSeparated<T>(
+            this StringBuilder stringBuilder,
+            IEnumerable<T> source,
+            Func<StringBuilder, T, StringBuilder> append
+        )
         {
             bool appendComma = false;
             foreach (var item in source)
@@ -42,7 +54,12 @@ namespace Moq
             return stringBuilder;
         }
 
-        public static StringBuilder AppendIndented(this StringBuilder stringBuilder, string str, int count = 1, char indentChar = ' ')
+        public static StringBuilder AppendIndented(
+            this StringBuilder stringBuilder,
+            string str,
+            int count = 1,
+            char indentChar = ' '
+        )
         {
             var i = 0;
             while (i < str.Length)
@@ -63,13 +80,22 @@ namespace Moq
             return stringBuilder;
         }
 
-        public static StringBuilder AppendNameOf(this StringBuilder stringBuilder, MethodBase method, bool includeGenericArgumentList)
+        public static StringBuilder AppendNameOf(
+            this StringBuilder stringBuilder,
+            MethodBase method,
+            bool includeGenericArgumentList
+        )
         {
             stringBuilder.Append(method.Name);
 
             if (includeGenericArgumentList && method.IsGenericMethod)
             {
-                stringBuilder.AppendCommaSeparated("<", method.GetGenericArguments(), AppendNameOf, ">");
+                stringBuilder.AppendCommaSeparated(
+                    "<",
+                    method.GetGenericArguments(),
+                    AppendNameOf,
+                    ">"
+                );
             }
 
             return stringBuilder;
@@ -82,18 +108,25 @@ namespace Moq
             return stringBuilder.AppendFormattedName(type);
         }
 
-        public static StringBuilder AppendParameterType(this StringBuilder stringBuilder, ParameterInfo parameter)
+        public static StringBuilder AppendParameterType(
+            this StringBuilder stringBuilder,
+            ParameterInfo parameter
+        )
         {
             var parameterType = parameter.ParameterType;
 
             if (parameterType.IsByRef)
             {
-                stringBuilder.Append((parameter.Attributes & (ParameterAttributes.In | ParameterAttributes.Out)) switch
-                {
-                    ParameterAttributes.In  => "in ",
-                    ParameterAttributes.Out => "out ",
-                    _                       => "ref ",
-                });
+                stringBuilder.Append(
+                    (
+                        parameter.Attributes & (ParameterAttributes.In | ParameterAttributes.Out)
+                    ) switch
+                    {
+                        ParameterAttributes.In => "in ",
+                        ParameterAttributes.Out => "out ",
+                        _ => "ref ",
+                    }
+                );
 
                 parameterType = parameterType.GetElementType();
             }
@@ -128,7 +161,13 @@ namespace Moq
             {
                 stringBuilder.AppendNameOf(obj.GetType()).Append('.').Append(obj);
             }
-            else if (obj.GetType().IsArray || (obj.GetType().IsConstructedGenericType && obj.GetType().GetGenericTypeDefinition() == typeof(List<>)))
+            else if (
+                obj.GetType().IsArray
+                || (
+                    obj.GetType().IsConstructedGenericType
+                    && obj.GetType().GetGenericTypeDefinition() == typeof(List<>)
+                )
+            )
             {
                 stringBuilder.Append('[');
                 const int maxCount = 10;

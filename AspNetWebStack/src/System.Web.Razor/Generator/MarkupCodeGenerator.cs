@@ -16,7 +16,11 @@ namespace System.Web.Razor.Generator
 
             if (context.Host.EnableInstrumentation)
             {
-                context.AddContextCall(target, context.Host.GeneratedClassContext.BeginContextMethodName, isLiteral: true);
+                context.AddContextCall(
+                    target,
+                    context.Host.GeneratedClassContext.BeginContextMethodName,
+                    isLiteral: true
+                );
             }
 
             if (!String.IsNullOrEmpty(target.Content) && !context.Host.DesignTimeMode)
@@ -25,13 +29,17 @@ namespace System.Web.Razor.Generator
                 {
                     if (!String.IsNullOrEmpty(context.TargetWriterName))
                     {
-                        cw.WriteStartMethodInvoke(context.Host.GeneratedClassContext.WriteLiteralToMethodName);
+                        cw.WriteStartMethodInvoke(
+                            context.Host.GeneratedClassContext.WriteLiteralToMethodName
+                        );
                         cw.WriteSnippet(context.TargetWriterName);
                         cw.WriteParameterSeparator();
                     }
                     else
                     {
-                        cw.WriteStartMethodInvoke(context.Host.GeneratedClassContext.WriteLiteralMethodName);
+                        cw.WriteStartMethodInvoke(
+                            context.Host.GeneratedClassContext.WriteLiteralMethodName
+                        );
                     }
                     cw.WriteStringLiteral(target.Content);
                     cw.WriteEndMethodInvoke();
@@ -42,7 +50,11 @@ namespace System.Web.Razor.Generator
 
             if (context.Host.EnableInstrumentation)
             {
-                context.AddContextCall(target, context.Host.GeneratedClassContext.EndContextMethodName, isLiteral: true);
+                context.AddContextCall(
+                    target,
+                    context.Host.GeneratedClassContext.EndContextMethodName,
+                    isLiteral: true
+                );
             }
         }
 

@@ -11,9 +11,9 @@ namespace ILLink.RoslynAnalyzer.Tests.Interop.PInvoke
         protected override string TestSuiteName => "Interop/PInvoke/Individual";
 
         [Fact]
-        public Task CanOutputPInvokes ()
+        public Task CanOutputPInvokes()
         {
-            return RunTest ();
+            return RunTest();
         }
     }
 }

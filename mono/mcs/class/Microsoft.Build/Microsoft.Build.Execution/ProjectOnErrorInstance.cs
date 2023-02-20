@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,7 +31,7 @@ namespace Microsoft.Build.Execution
 {
     public class ProjectOnErrorInstance : ProjectTargetInstanceChild
     {
-        internal ProjectOnErrorInstance (ProjectOnErrorElement xml)
+        internal ProjectOnErrorInstance(ProjectOnErrorElement xml)
         {
             condition = xml.Condition;
             ExecuteTargets = xml.ExecuteTargetsAttribute;
@@ -40,29 +40,29 @@ namespace Microsoft.Build.Execution
             ExecuteTargetsLocation = xml.ExecuteTargetsAttributeLocation;
             location = xml.Location;
         }
-        
+
         readonly string condition;
-        
-        public override string Condition {
+
+        public override string Condition
+        {
             get { return condition; }
         }
 
         public string ExecuteTargets { get; private set; }
-        
-        readonly ElementLocation condition_location, location;
-        
-        public
-        override ElementLocation ConditionLocation {
+
+        readonly ElementLocation condition_location,
+            location;
+
+        public override ElementLocation ConditionLocation
+        {
             get { return condition_location; }
         }
 
-        public
-        ElementLocation ExecuteTargetsLocation { get; private set; }
+        public ElementLocation ExecuteTargetsLocation { get; private set; }
 
-        public
-        override ElementLocation Location {
+        public override ElementLocation Location
+        {
             get { return location; }
         }
     }
 }
-

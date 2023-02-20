@@ -12,25 +12,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class UsingKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public UsingKeywordRecommender()
-            : base(SyntaxKind.UsingKeyword)
-        {
-        }
+            : base(SyntaxKind.UsingKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             // cases:
             //  using (goo) { }
             //  using Goo;
             //  using Goo = Bar;
             //  await using (goo) { }
-            return
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                IsUsingDirectiveContext(context, forGlobalKeyword: false, cancellationToken) ||
-                context.IsAwaitStatementContext(position, cancellationToken);
+            return context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || IsUsingDirectiveContext(context, forGlobalKeyword: false, cancellationToken)
+                || context.IsAwaitStatementContext(position, cancellationToken);
         }
 
-        internal static bool IsUsingDirectiveContext(CSharpSyntaxContext context, bool forGlobalKeyword, CancellationToken cancellationToken)
+        internal static bool IsUsingDirectiveContext(
+            CSharpSyntaxContext context,
+            bool forGlobalKeyword,
+            CancellationToken cancellationToken
+        )
         {
             // cases:
             // root: |
@@ -100,8 +105,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 return IsValidContextAtTheRoot(context, originalToken, cancellationToken);
             }
 
-            if ((token.Kind() == SyntaxKind.OpenBraceToken && token.Parent.IsKind(SyntaxKind.NamespaceDeclaration))
-                || (token.Kind() == SyntaxKind.SemicolonToken && token.Parent.IsKind(SyntaxKind.FileScopedNamespaceDeclaration)))
+            if (
+                (
+                    token.Kind() == SyntaxKind.OpenBraceToken
+                    && token.Parent.IsKind(SyntaxKind.NamespaceDeclaration)
+                )
+                || (
+                    token.Kind() == SyntaxKind.SemicolonToken
+                    && token.Parent.IsKind(SyntaxKind.FileScopedNamespaceDeclaration)
+                )
+            )
             {
                 // a child using can't come before externs
                 var nextToken = originalToken.GetNextToken(includeSkipped: true);
@@ -120,7 +133,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             // |
             if (token.Kind() == SyntaxKind.SemicolonToken)
             {
-                if (token.Parent is (kind: SyntaxKind.ExternAliasDirective or SyntaxKind.UsingDirective))
+                if (
+                    token.Parent is
+
+                    (kind: SyntaxKind.ExternAliasDirective or SyntaxKind.UsingDirective)
+                )
                 {
                     return true;
                 }
@@ -143,19 +160,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     {
                         return true;
                     }
-                    else if (token.Kind() == SyntaxKind.IdentifierToken && SyntaxFacts.GetContextualKeywordKind((string)token.Value!) == SyntaxKind.GlobalKeyword)
+                    else if (
+                        token.Kind() == SyntaxKind.IdentifierToken
+                        && SyntaxFacts.GetContextualKeywordKind((string)token.Value!)
+                            == SyntaxKind.GlobalKeyword
+                    )
                     {
                         return IsValidContextAtTheRoot(context, originalToken, cancellationToken);
                     }
                 }
-                else if (previousToken.Kind() == SyntaxKind.SemicolonToken &&
-                    previousToken.Parent is (kind: SyntaxKind.ExternAliasDirective or SyntaxKind.UsingDirective))
+                else if (
+                    previousToken.Kind() == SyntaxKind.SemicolonToken
+                    && previousToken.Parent
+                        is
+                        (kind: SyntaxKind.ExternAliasDirective or SyntaxKind.UsingDirective)
+                )
                 {
                     if (token.Kind() == SyntaxKind.GlobalKeyword)
                     {
                         return true;
                     }
-                    else if (token.Kind() == SyntaxKind.IdentifierToken && SyntaxFacts.GetContextualKeywordKind((string)token.Value!) == SyntaxKind.GlobalKeyword)
+                    else if (
+                        token.Kind() == SyntaxKind.IdentifierToken
+                        && SyntaxFacts.GetContextualKeywordKind((string)token.Value!)
+                            == SyntaxKind.GlobalKeyword
+                    )
                     {
                         return true;
                     }
@@ -164,12 +193,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
             return false;
 
-            static bool IsValidContextAtTheRoot(CSharpSyntaxContext context, SyntaxToken originalToken, CancellationToken cancellationToken)
+            static bool IsValidContextAtTheRoot(
+                CSharpSyntaxContext context,
+                SyntaxToken originalToken,
+                CancellationToken cancellationToken
+            )
             {
                 // a using can't come before externs
                 var nextToken = originalToken.GetNextToken(includeSkipped: true);
-                if (nextToken.Kind() == SyntaxKind.ExternKeyword ||
-                    ((CompilationUnitSyntax)context.SyntaxTree.GetRoot(cancellationToken)).Externs.Count > 0)
+                if (
+                    nextToken.Kind() == SyntaxKind.ExternKeyword
+                    || ((CompilationUnitSyntax)context.SyntaxTree.GetRoot(cancellationToken))
+                        .Externs
+                        .Count > 0
+                )
                 {
                     return false;
                 }

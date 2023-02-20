@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,61 +35,65 @@ namespace System.IdentityModel.Tokens
 {
     public class RsaSecurityToken : SecurityToken
     {
-        public RsaSecurityToken (RSA rsa)
-            : this (rsa, new UniqueId ().ToString ())
-        {
-        }
+        public RsaSecurityToken(RSA rsa)
+            : this(rsa, new UniqueId().ToString()) { }
 
-        public RsaSecurityToken (RSA rsa, string id)
+        public RsaSecurityToken(RSA rsa, string id)
         {
             if (rsa == null)
-                throw new ArgumentNullException ("rsa");
+                throw new ArgumentNullException("rsa");
             this.rsa = rsa;
             this.id = id;
         }
 
         RSA rsa;
         string id;
-        DateTime valid_from = DateTime.Now.ToUniversalTime ();
+        DateTime valid_from = DateTime.Now.ToUniversalTime();
 
-        public override DateTime ValidFrom {
+        public override DateTime ValidFrom
+        {
             get { return valid_from; }
         }
 
-        public override DateTime ValidTo {
-            get { return DateTime.MaxValue.AddDays (-1); }
+        public override DateTime ValidTo
+        {
+            get { return DateTime.MaxValue.AddDays(-1); }
         }
 
-        public override string Id {
+        public override string Id
+        {
             get { return id; }
         }
 
-        public RSA Rsa {
+        public RSA Rsa
+        {
             get { return rsa; }
         }
 
         [MonoTODO]
-        public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-            get { throw new NotImplementedException (); }
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys
+        {
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public override bool CanCreateKeyIdentifierClause<T> ()
+        public override bool CanCreateKeyIdentifierClause<T>()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override T CreateKeyIdentifierClause<T> ()
+        public override T CreateKeyIdentifierClause<T>()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override bool MatchesKeyIdentifierClause (
-            SecurityKeyIdentifierClause keyIdentifierClause)
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

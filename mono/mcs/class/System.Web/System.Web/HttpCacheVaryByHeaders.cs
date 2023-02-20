@@ -1,5 +1,5 @@
 //
-// System.Web.HttpVaryByHeaders.cs 
+// System.Web.HttpVaryByHeaders.cs
 //
 // Author:
 //    Chris Toshok (toshok@novell.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,10 @@ using System.Security.Permissions;
 namespace System.Web
 {
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public sealed class HttpCacheVaryByHeaders
     {
         /* I would have much rather seen this class just use the
@@ -66,113 +69,123 @@ namespace System.Web
 
         Hashtable fields;
 
-        public
-        HttpCacheVaryByHeaders ()
+        public HttpCacheVaryByHeaders()
         {
             /* the field names are meant to be case insensitive */
-            fields = new Hashtable (StringComparer.InvariantCultureIgnoreCase);
+            fields = new Hashtable(StringComparer.InvariantCultureIgnoreCase);
         }
 
-        internal string[] GetHeaderNames (bool omitVaryStar)
+        internal string[] GetHeaderNames(bool omitVaryStar)
         {
             string[] names;
 
-            if (vary_by_unspecified && !omitVaryStar) {
+            if (vary_by_unspecified && !omitVaryStar)
+            {
                 names = new string[1];
                 names[0] = "*";
             }
-            else {
-                int builtin_count = ((vary_by_accept ? 1 : 0)
-                             + (vary_by_user_agent ? 1 : 0)
-                             + (vary_by_user_charset ? 1 : 0)
-                             + (vary_by_user_language ? 1 : 0));
+            else
+            {
+                int builtin_count = (
+                    (vary_by_accept ? 1 : 0)
+                    + (vary_by_user_agent ? 1 : 0)
+                    + (vary_by_user_charset ? 1 : 0)
+                    + (vary_by_user_language ? 1 : 0)
+                );
 
-                names = new string [fields.Count + builtin_count];
+                names = new string[fields.Count + builtin_count];
 
                 int i = 0;
-                if (vary_by_accept) names[i++] = "Accept";
-                if (vary_by_user_agent) names[i++] = "User-Agent";
-                if (vary_by_user_charset) names[i++] = "Accept-Charset";
-                if (vary_by_user_language) names[i++] = "Accept-Language";
+                if (vary_by_accept)
+                    names[i++] = "Accept";
+                if (vary_by_user_agent)
+                    names[i++] = "User-Agent";
+                if (vary_by_user_charset)
+                    names[i++] = "Accept-Charset";
+                if (vary_by_user_language)
+                    names[i++] = "Accept-Language";
 
-                fields.Keys.CopyTo (names, builtin_count);
+                fields.Keys.CopyTo(names, builtin_count);
             }
 
             return names;
         }
 
-        public bool AcceptTypes {
-            get {
-                return vary_by_accept;
-            }
-            set {
+        public bool AcceptTypes
+        {
+            get { return vary_by_accept; }
+            set
+            {
                 vary_by_unspecified = false;
                 vary_by_accept = value;
             }
         }
 
-        public bool UserAgent {
-            get {
-                return vary_by_user_agent;
-            }
-            set {
+        public bool UserAgent
+        {
+            get { return vary_by_user_agent; }
+            set
+            {
                 vary_by_unspecified = false;
                 vary_by_user_agent = value;
             }
         }
 
-        public bool UserCharSet {
-            get {
-                return vary_by_user_charset;
-            }
-            set {
+        public bool UserCharSet
+        {
+            get { return vary_by_user_charset; }
+            set
+            {
                 vary_by_unspecified = false;
                 vary_by_user_charset = value;
             }
         }
 
-        public bool UserLanguage {
-            get {
-                return vary_by_user_language;
-            }
-            set {
+        public bool UserLanguage
+        {
+            get { return vary_by_user_language; }
+            set
+            {
                 vary_by_unspecified = false;
                 vary_by_user_language = value;
             }
         }
 
-        public bool this [ string header ] {
-            get {
+        public bool this[string header]
+        {
+            get
+            {
                 if (header == null)
-                    throw new ArgumentNullException ();
+                    throw new ArgumentNullException();
 
-                return fields.Contains (header);
+                return fields.Contains(header);
             }
-            set {
+            set
+            {
                 if (header == null)
-                    throw new ArgumentNullException ();
+                    throw new ArgumentNullException();
 
                 vary_by_unspecified = false;
                 if (value)
-                    if (!fields.Contains (header))
-                        fields.Add (header, true);
-                else
-                    fields.Remove (header);
+                    if (!fields.Contains(header))
+                        fields.Add(header, true);
+                    else
+                        fields.Remove(header);
             }
         }
 
-        public void VaryByUnspecifiedParameters ()
+        public void VaryByUnspecifiedParameters()
         {
             fields.Clear();
 
             vary_by_unspecified =
-              vary_by_accept = 
-              vary_by_user_agent =
-              vary_by_user_charset =
-              vary_by_user_language = false;
+                vary_by_accept =
+                vary_by_user_agent =
+                vary_by_user_charset =
+                vary_by_user_language =
+                    false;
 
             vary_by_unspecified = true;
         }
     }
-
 }

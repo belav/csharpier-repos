@@ -42,17 +42,17 @@ namespace MonoTests.System.Threading.Tasks
         {
             public object AsyncState
             {
-                get { throw new NotImplementedException (); }
+                get { throw new NotImplementedException(); }
             }
 
             public WaitHandle AsyncWaitHandle
             {
-                get { throw new NotImplementedException (); }
+                get { throw new NotImplementedException(); }
             }
 
             public bool CompletedSynchronously
             {
-                get { throw new NotImplementedException (); }
+                get { throw new NotImplementedException(); }
             }
 
             public bool IsCompleted
@@ -63,24 +63,21 @@ namespace MonoTests.System.Threading.Tasks
 
         class TestAsyncResult : IAsyncResult
         {
-            WaitHandle wh = new ManualResetEvent (true);
+            WaitHandle wh = new ManualResetEvent(true);
 
             public object AsyncState
             {
-                get { throw new NotImplementedException (); }
+                get { throw new NotImplementedException(); }
             }
 
             public WaitHandle AsyncWaitHandle
             {
-                get
-                {
-                    return wh;
-                }
+                get { return wh; }
             }
 
             public bool CompletedSynchronously
             {
-                get { throw new NotImplementedException (); }
+                get { throw new NotImplementedException(); }
             }
 
             public bool IsCompleted
@@ -91,189 +88,219 @@ namespace MonoTests.System.Threading.Tasks
 
         class TestAsyncResultCompletedSynchronously : IAsyncResult
         {
-            public object AsyncState {
-                get {
-                    throw new NotImplementedException ();
-                }
+            public object AsyncState
+            {
+                get { throw new NotImplementedException(); }
             }
 
-            public WaitHandle AsyncWaitHandle {
-                get {
-                    throw new NotImplementedException ();
-                }
+            public WaitHandle AsyncWaitHandle
+            {
+                get { throw new NotImplementedException(); }
             }
 
-            public bool CompletedSynchronously {
-                get {
-                    return true;
-                }
+            public bool CompletedSynchronously
+            {
+                get { return true; }
             }
 
-            public bool IsCompleted {
-                get {
-                    throw new NotImplementedException ();
-                }
+            public bool IsCompleted
+            {
+                get { throw new NotImplementedException(); }
             }
         }
-        
 
         [SetUp]
-        public void Setup ()
-        {
-        }
-        
-        [Test]
-        public void ConstructorTest ()
-        {
-            try {
-                new TaskFactory<int> (TaskCreationOptions.None, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.LongRunning);
-                Assert.Fail ("#1");
-            } catch (ArgumentOutOfRangeException) {
-            }
-
-            try {
-                new TaskFactory<int> (TaskCreationOptions.None, TaskContinuationOptions.OnlyOnRanToCompletion);
-                Assert.Fail ("#2");
-            } catch (ArgumentOutOfRangeException) {
-            }
-
-            try {
-                new TaskFactory<int> (TaskCreationOptions.None, TaskContinuationOptions.NotOnRanToCompletion);
-                Assert.Fail ("#3");
-            } catch (ArgumentOutOfRangeException) {
-            }
-        }
+        public void Setup() { }
 
         [Test]
-        public void NoDefaultScheduler ()
+        public void ConstructorTest()
         {
-            var tf = new TaskFactory<object> ();
-            Assert.IsNull (tf.Scheduler, "#1");
-        }
-
-        [Test]
-        public void FromAsync_ArgumentsCheck ()
-        {
-            var factory = new TaskFactory<object> ();
-
-            var result = new CompletedAsyncResult ();
-            try {
-                factory.FromAsync (null, l => 1);
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException) {
+            try
+            {
+                new TaskFactory<int>(
+                    TaskCreationOptions.None,
+                    TaskContinuationOptions.ExecuteSynchronously
+                        | TaskContinuationOptions.LongRunning
+                );
+                Assert.Fail("#1");
             }
+            catch (ArgumentOutOfRangeException) { }
 
-            try {
-                factory.FromAsync (result, null);
-                Assert.Fail ("#2");
-            } catch (ArgumentNullException) {
+            try
+            {
+                new TaskFactory<int>(
+                    TaskCreationOptions.None,
+                    TaskContinuationOptions.OnlyOnRanToCompletion
+                );
+                Assert.Fail("#2");
             }
+            catch (ArgumentOutOfRangeException) { }
 
-            try {
-                factory.FromAsync (result, l => 1, TaskCreationOptions.LongRunning);
-                Assert.Fail ("#3");
-            } catch (ArgumentOutOfRangeException) {
+            try
+            {
+                new TaskFactory<int>(
+                    TaskCreationOptions.None,
+                    TaskContinuationOptions.NotOnRanToCompletion
+                );
+                Assert.Fail("#3");
             }
-
-            try {
-                factory.FromAsync (result, l => 1, TaskCreationOptions.PreferFairness);
-                Assert.Fail ("#4");
-            } catch (ArgumentOutOfRangeException) {
-            }
-
-            try {
-                factory.FromAsync (result, l => 1, TaskCreationOptions.None, null);
-                Assert.Fail ("#5");
-            } catch (ArgumentNullException) {
-            }
-
-            try {
-                factory.FromAsync (null, l => 1, null, TaskCreationOptions.None);
-                Assert.Fail ("#6");
-            } catch (ArgumentNullException) {
-            }
+            catch (ArgumentOutOfRangeException) { }
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsync_SimpleAsyncResult ()
+        public void NoDefaultScheduler()
         {
-            var result = new TestAsyncResult ();
-
-            var factory = new TaskFactory<int> ();
-            var task = factory.FromAsync (result, l => 5);
-
-            Assert.IsTrue (task.Wait (1000), "#1");
-            Assert.AreEqual (5, task.Result, "#2");
+            var tf = new TaskFactory<object>();
+            Assert.IsNull(tf.Scheduler, "#1");
         }
 
-        IAsyncResult BeginGetTestAsyncResultCompletedSynchronously (AsyncCallback cb, object obj)
+        [Test]
+        public void FromAsync_ArgumentsCheck()
         {
-            return new TestAsyncResultCompletedSynchronously ();
+            var factory = new TaskFactory<object>();
+
+            var result = new CompletedAsyncResult();
+            try
+            {
+                factory.FromAsync(null, l => 1);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException) { }
+
+            try
+            {
+                factory.FromAsync(result, null);
+                Assert.Fail("#2");
+            }
+            catch (ArgumentNullException) { }
+
+            try
+            {
+                factory.FromAsync(result, l => 1, TaskCreationOptions.LongRunning);
+                Assert.Fail("#3");
+            }
+            catch (ArgumentOutOfRangeException) { }
+
+            try
+            {
+                factory.FromAsync(result, l => 1, TaskCreationOptions.PreferFairness);
+                Assert.Fail("#4");
+            }
+            catch (ArgumentOutOfRangeException) { }
+
+            try
+            {
+                factory.FromAsync(result, l => 1, TaskCreationOptions.None, null);
+                Assert.Fail("#5");
+            }
+            catch (ArgumentNullException) { }
+
+            try
+            {
+                factory.FromAsync(null, l => 1, null, TaskCreationOptions.None);
+                Assert.Fail("#6");
+            }
+            catch (ArgumentNullException) { }
         }
 
-        string EndGetTestAsyncResultCompletedSynchronously (IAsyncResult res)
+        [Test]
+        [Category("MultiThreaded")]
+        public void FromAsync_SimpleAsyncResult()
+        {
+            var result = new TestAsyncResult();
+
+            var factory = new TaskFactory<int>();
+            var task = factory.FromAsync(result, l => 5);
+
+            Assert.IsTrue(task.Wait(1000), "#1");
+            Assert.AreEqual(5, task.Result, "#2");
+        }
+
+        IAsyncResult BeginGetTestAsyncResultCompletedSynchronously(AsyncCallback cb, object obj)
+        {
+            return new TestAsyncResultCompletedSynchronously();
+        }
+
+        string EndGetTestAsyncResultCompletedSynchronously(IAsyncResult res)
         {
             return "1";
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsync_CompletedSynchronously ()
+        [Category("MultiThreaded")]
+        public void FromAsync_CompletedSynchronously()
         {
-            var factory = new TaskFactory<string> ();
-            var task = factory.FromAsync (BeginGetTestAsyncResultCompletedSynchronously, EndGetTestAsyncResultCompletedSynchronously, null);
+            var factory = new TaskFactory<string>();
+            var task = factory.FromAsync(
+                BeginGetTestAsyncResultCompletedSynchronously,
+                EndGetTestAsyncResultCompletedSynchronously,
+                null
+            );
 
-            Assert.IsTrue (task.Wait (1000), "#1");
-            Assert.AreEqual ("1", task.Result, "#2");
+            Assert.IsTrue(task.Wait(1000), "#1");
+            Assert.AreEqual("1", task.Result, "#2");
         }
 
-        IAsyncResult BeginGetTestAsyncResultCompletedSynchronously2 (AsyncCallback cb, object obj)
+        IAsyncResult BeginGetTestAsyncResultCompletedSynchronously2(AsyncCallback cb, object obj)
         {
-            var result = new TestAsyncResultCompletedSynchronously ();
-            cb (result);
+            var result = new TestAsyncResultCompletedSynchronously();
+            cb(result);
             return result;
         }
-        
-        string EndGetTestAsyncResultCompletedSynchronously2 (IAsyncResult res)
+
+        string EndGetTestAsyncResultCompletedSynchronously2(IAsyncResult res)
         {
             return "1";
         }
-        
+
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsync_CompletedSynchronously_with_Callback ()
+        [Category("MultiThreaded")]
+        public void FromAsync_CompletedSynchronously_with_Callback()
         {
-            var factory = new TaskFactory<string> ();
-            var task = factory.FromAsync (BeginGetTestAsyncResultCompletedSynchronously2, EndGetTestAsyncResultCompletedSynchronously2, null);
-            
-            Assert.IsTrue (task.Wait (1000), "#1");
-            Assert.AreEqual ("1", task.Result, "#2");
+            var factory = new TaskFactory<string>();
+            var task = factory.FromAsync(
+                BeginGetTestAsyncResultCompletedSynchronously2,
+                EndGetTestAsyncResultCompletedSynchronously2,
+                null
+            );
+
+            Assert.IsTrue(task.Wait(1000), "#1");
+            Assert.AreEqual("1", task.Result, "#2");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void StartNewCancelled ()
+        [Category("MultiThreaded")]
+        public void StartNewCancelled()
         {
-            var ct = new CancellationToken (true);
-            var factory = new TaskFactory<int> ();
+            var ct = new CancellationToken(true);
+            var factory = new TaskFactory<int>();
 
-            var task = factory.StartNew (() => { Assert.Fail ("Should never be called"); return 1; }, ct);
-            try {
-                task.Start ();
-                Assert.Fail ("#1");
-            } catch (InvalidOperationException) {
+            var task = factory.StartNew(
+                () =>
+                {
+                    Assert.Fail("Should never be called");
+                    return 1;
+                },
+                ct
+            );
+            try
+            {
+                task.Start();
+                Assert.Fail("#1");
+            }
+            catch (InvalidOperationException) { }
+
+            try
+            {
+                task.Wait();
+                Assert.Fail("#2");
+            }
+            catch (AggregateException e)
+            {
+                Assert.That(e.InnerException, Is.TypeOf(typeof(TaskCanceledException)), "#3");
             }
 
-            try {
-                task.Wait ();
-                Assert.Fail ("#2");
-            } catch (AggregateException e) {
-                Assert.That (e.InnerException, Is.TypeOf (typeof (TaskCanceledException)), "#3");
-            }
-
-            Assert.IsTrue (task.IsCanceled, "#4");
+            Assert.IsTrue(task.IsCanceled, "#4");
         }
     }
 }
-

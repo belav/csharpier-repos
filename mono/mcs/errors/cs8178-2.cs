@@ -7,14 +7,12 @@ class X
 {
     int x;
 
-    async Task Test ()
+    async Task Test()
     {
-        Foo (ref this [await Task.FromResult (1)]);
+        Foo(ref this[await Task.FromResult(1)]);
     }
 
-    ref int this [int arg] => ref x;
+    ref int this[int arg] => ref x;
 
-    static void Foo (ref int arg)
-    {
-    }
+    static void Foo(ref int arg) { }
 }

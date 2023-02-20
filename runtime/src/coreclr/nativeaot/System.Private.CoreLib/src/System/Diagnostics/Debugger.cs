@@ -22,10 +22,7 @@ namespace System.Diagnostics
 
         public static bool IsAttached
         {
-            get
-            {
-                return _isDebuggerAttached;
-            }
+            get { return _isDebuggerAttached; }
         }
 
         public static bool Launch()

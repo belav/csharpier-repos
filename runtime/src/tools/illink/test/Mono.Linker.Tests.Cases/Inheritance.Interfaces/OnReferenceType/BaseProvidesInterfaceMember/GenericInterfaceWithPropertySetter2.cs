@@ -4,39 +4,45 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.BasePro
 {
     public class GenericInterfaceWithPropertySetter2
     {
-        public static void Main ()
+        public static void Main()
         {
-            IFoo<object> f = new FooWithBase ();
+            IFoo<object> f = new FooWithBase();
             var tmp = f.Property;
         }
 
         [Kept]
-        class GenericType<T>
-        {
-        }
+        class GenericType<T> { }
 
         [Kept]
         interface IFoo<T>
         {
             [Kept]
-            GenericType<T> Property { [Kept] get; set; }
+            GenericType<T> Property
+            {
+                [Kept]
+                get;
+                set;
+            }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class BaseFoo
         {
             [Kept]
             [KeptBackingField]
-            public GenericType<object> Property { [Kept] get; set; }
+            public GenericType<object> Property
+            {
+                [Kept]
+                get;
+                set;
+            }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (BaseFoo))]
-        [KeptInterface (typeof (IFoo<object>))]
-        class FooWithBase : BaseFoo, IFoo<object>
-        {
-        }
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(BaseFoo))]
+        [KeptInterface(typeof(IFoo<object>))]
+        class FooWithBase : BaseFoo, IFoo<object> { }
     }
 }

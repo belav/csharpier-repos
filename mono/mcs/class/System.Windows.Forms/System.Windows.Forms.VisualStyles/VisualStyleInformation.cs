@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,8 +33,10 @@ namespace System.Windows.Forms.VisualStyles
     public static class VisualStyleInformation
     {
         #region Public Static Properties
-        public static string Author {
-            get {
+        public static string Author
+        {
+            get
+            {
                 if (!VisualStyleRenderer.IsSupported)
                     return string.Empty;
 
@@ -42,8 +44,10 @@ namespace System.Windows.Forms.VisualStyles
             }
         }
 
-        public static string ColorScheme {
-            get {
+        public static string ColorScheme
+        {
+            get
+            {
                 if (!VisualStyleRenderer.IsSupported)
                     return string.Empty;
 
@@ -51,8 +55,10 @@ namespace System.Windows.Forms.VisualStyles
             }
         }
 
-        public static string Company {
-            get {
+        public static string Company
+        {
+            get
+            {
                 if (!VisualStyleRenderer.IsSupported)
                     return string.Empty;
 
@@ -61,8 +67,10 @@ namespace System.Windows.Forms.VisualStyles
         }
 
         [MonoTODO(@"Cannot get this to return the same as MS's...")]
-        public static Color ControlHighlightHot {
-            get {
+        public static Color ControlHighlightHot
+        {
+            get
+            {
                 if (!VisualStyleRenderer.IsSupported)
                     return SystemColors.ButtonHighlight;
 
@@ -70,8 +78,10 @@ namespace System.Windows.Forms.VisualStyles
             }
         }
 
-        public static string Copyright {
-            get {
+        public static string Copyright
+        {
+            get
+            {
                 if (!VisualStyleRenderer.IsSupported)
                     return string.Empty;
 
@@ -79,8 +89,10 @@ namespace System.Windows.Forms.VisualStyles
             }
         }
 
-        public static string Description {
-            get {
+        public static string Description
+        {
+            get
+            {
                 if (!VisualStyleRenderer.IsSupported)
                     return string.Empty;
 
@@ -88,8 +100,10 @@ namespace System.Windows.Forms.VisualStyles
             }
         }
 
-        public static string DisplayName {
-            get {
+        public static string DisplayName
+        {
+            get
+            {
                 if (!VisualStyleRenderer.IsSupported)
                     return string.Empty;
 
@@ -97,23 +111,26 @@ namespace System.Windows.Forms.VisualStyles
             }
         }
 
-        public static bool IsEnabledByUser {
-            get {
-                if (!VisualStyleInformation.IsSupportedByOS) 
+        public static bool IsEnabledByUser
+        {
+            get
+            {
+                if (!VisualStyleInformation.IsSupportedByOS)
                     return false;
-                
-                return (VisualStyles.UxThemeIsAppThemed () && VisualStyles.UxThemeIsThemeActive ());
+
+                return (VisualStyles.UxThemeIsAppThemed() && VisualStyles.UxThemeIsThemeActive());
             }
         }
- 
-        public static bool IsSupportedByOS {
-            get {
-                return VisualStyles.VisualStyleInformationIsSupportedByOS;
-            }
+
+        public static bool IsSupportedByOS
+        {
+            get { return VisualStyles.VisualStyleInformationIsSupportedByOS; }
         }
- 
-        public static int MinimumColorDepth {
-            get {
+
+        public static int MinimumColorDepth
+        {
+            get
+            {
                 if (!VisualStyleRenderer.IsSupported)
                     return 0;
 
@@ -121,8 +138,10 @@ namespace System.Windows.Forms.VisualStyles
             }
         }
 
-        public static string Size {
-            get {
+        public static string Size
+        {
+            get
+            {
                 if (!VisualStyleRenderer.IsSupported)
                     return string.Empty;
 
@@ -130,8 +149,10 @@ namespace System.Windows.Forms.VisualStyles
             }
         }
 
-        public static bool SupportsFlatMenus {
-            get {
+        public static bool SupportsFlatMenus
+        {
+            get
+            {
                 if (!VisualStyleRenderer.IsSupported)
                     return false;
 
@@ -140,8 +161,10 @@ namespace System.Windows.Forms.VisualStyles
         }
 
         [MonoTODO(@"Cannot get this to return the same as MS's...")]
-        public static Color TextControlBorder {
-            get {
+        public static Color TextControlBorder
+        {
+            get
+            {
                 if (!VisualStyleRenderer.IsSupported)
                     return SystemColors.ControlDarkDark;
 
@@ -149,8 +172,10 @@ namespace System.Windows.Forms.VisualStyles
             }
         }
 
-        public static string Url {
-            get {
+        public static string Url
+        {
+            get
+            {
                 if (!VisualStyleRenderer.IsSupported)
                     return string.Empty;
 
@@ -158,8 +183,10 @@ namespace System.Windows.Forms.VisualStyles
             }
         }
 
-        public static string Version {
-            get {
+        public static string Version
+        {
+            get
+            {
                 if (!VisualStyleRenderer.IsSupported)
                     return string.Empty;
 
@@ -169,10 +196,9 @@ namespace System.Windows.Forms.VisualStyles
         #endregion
 
         #region Private Static Properties
-        static IVisualStyles VisualStyles {
-            get {
-                return VisualStylesEngine.Instance;
-            }
+        static IVisualStyles VisualStyles
+        {
+            get { return VisualStylesEngine.Instance; }
         }
         #endregion
     }

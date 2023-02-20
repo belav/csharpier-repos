@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,20 +30,24 @@ using System;
 using System.IO;
 using System.Collections;
 
-namespace System.Resources {
-    public class ResXResourceSet : ResourceSet {
+namespace System.Resources
+{
+    public class ResXResourceSet : ResourceSet
+    {
         #region Local Variables
 
         #endregion    // Local Variables
 
         #region Public Constructors
-        public ResXResourceSet(Stream stream) {
+        public ResXResourceSet(Stream stream)
+        {
             this.Reader = new ResXResourceReader(stream);
             this.Table = new Hashtable();
             this.ReadResources();
         }
 
-        public ResXResourceSet(string fileName) {
+        public ResXResourceSet(string fileName)
+        {
             this.Reader = new ResXResourceReader(fileName);
             this.Table = new Hashtable();
             this.ReadResources();
@@ -51,11 +55,13 @@ namespace System.Resources {
         #endregion    // Public Constructors
 
         #region Public Instance Methods
-        public override Type GetDefaultReader() {
+        public override Type GetDefaultReader()
+        {
             return typeof(ResXResourceReader);
         }
 
-        public override Type GetDefaultWriter() {
+        public override Type GetDefaultWriter()
+        {
             return typeof(ResXResourceWriter);
         }
         #endregion    // Public Instance Methods

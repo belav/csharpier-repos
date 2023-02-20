@@ -18,15 +18,19 @@ namespace ILLink.Shared.TrimAnalysis
 
         public ParameterProxy Parameter { get; }
 
-        public override IEnumerable<string> GetDiagnosticArgumentsForAnnotationMismatch ()
-            => Parameter.GetDiagnosticArgumentsForAnnotationMismatch ();
+        public override IEnumerable<string> GetDiagnosticArgumentsForAnnotationMismatch() =>
+            Parameter.GetDiagnosticArgumentsForAnnotationMismatch();
 
-        public override string ToString ()
-            => this.ValueToString (Parameter.Method.Method, Parameter.Index, DynamicallyAccessedMemberTypes);
+        public override string ToString() =>
+            this.ValueToString(
+                Parameter.Method.Method,
+                Parameter.Index,
+                DynamicallyAccessedMemberTypes
+            );
 
-        public bool IsThisParameter () => _overrideIsThis || Parameter.IsImplicitThis;
+        public bool IsThisParameter() => _overrideIsThis || Parameter.IsImplicitThis;
 
-        public override SingleValue DeepCopy () => this; // This value is immutable
+        public override SingleValue DeepCopy() => this; // This value is immutable
 
         public ParameterIndex Index => Parameter.Index;
     }

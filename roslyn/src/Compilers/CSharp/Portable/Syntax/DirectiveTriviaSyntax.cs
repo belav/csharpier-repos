@@ -64,7 +64,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             }
         }
 
-        public DirectiveTriviaSyntax? GetNextDirective(Func<DirectiveTriviaSyntax, bool>? predicate = null)
+        public DirectiveTriviaSyntax? GetNextDirective(
+            Func<DirectiveTriviaSyntax, bool>? predicate = null
+        )
         {
             var token = (SyntaxToken)this.ParentTrivia.Token;
             bool next = false;
@@ -82,7 +84,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                                 return d;
                             }
                         }
-                        else if (tr.UnderlyingNode == this.Green && tr.SpanStart == this.SpanStart && (object)d == this)
+                        else if (
+                            tr.UnderlyingNode == this.Green
+                            && tr.SpanStart == this.SpanStart
+                            && (object)d == this
+                        )
                         {
                             next = true;
                         }
@@ -95,7 +101,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             return null;
         }
 
-        public DirectiveTriviaSyntax? GetPreviousDirective(Func<DirectiveTriviaSyntax, bool>? predicate = null)
+        public DirectiveTriviaSyntax? GetPreviousDirective(
+            Func<DirectiveTriviaSyntax, bool>? predicate = null
+        )
         {
             var token = (SyntaxToken)this.ParentTrivia.Token;
             bool next = false;
@@ -113,7 +121,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                                 return d;
                             }
                         }
-                        else if (tr.UnderlyingNode == this.Green && tr.SpanStart == this.SpanStart && (object)d == this)
+                        else if (
+                            tr.UnderlyingNode == this.Green
+                            && tr.SpanStart == this.SpanStart
+                            && (object)d == this
+                        )
                         {
                             next = true;
                         }
@@ -354,6 +366,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             return null;
         }
 
-        private static readonly Func<SyntaxToken, bool> s_hasDirectivesFunction = t => t.ContainsDirectives;
+        private static readonly Func<SyntaxToken, bool> s_hasDirectivesFunction = t =>
+            t.ContainsDirectives;
     }
 }

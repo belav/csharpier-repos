@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,7 +35,12 @@ namespace System.Windows.Forms
         private int start_index;
 
         #region Public Constructors
-        public ListViewVirtualItemsSelectionRangeChangedEventArgs (int startIndex, int endIndex, bool isSelected) : base ()
+        public ListViewVirtualItemsSelectionRangeChangedEventArgs(
+            int startIndex,
+            int endIndex,
+            bool isSelected
+        )
+            : base()
         {
             this.start_index = startIndex;
             this.end_index = endIndex;
@@ -44,15 +49,18 @@ namespace System.Windows.Forms
         #endregion    // Public Constructors
 
         #region Public Instance Properties
-        public int StartIndex {
+        public int StartIndex
+        {
             get { return this.start_index; }
         }
 
-        public bool IsSelected {
+        public bool IsSelected
+        {
             get { return this.is_selected; }
         }
 
-        public int EndIndex {
+        public int EndIndex
+        {
             get { return this.end_index; }
         }
         #endregion    // Public Instance Properties

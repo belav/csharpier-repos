@@ -55,7 +55,11 @@ namespace System.Text.Json.Serialization.Metadata
 
         public JsonPropertyInfo MatchingProperty { get; private set; } = null!;
 
-        public virtual void Initialize(JsonParameterInfoValues parameterInfo, JsonPropertyInfo matchingProperty, JsonSerializerOptions options)
+        public virtual void Initialize(
+            JsonParameterInfoValues parameterInfo,
+            JsonPropertyInfo matchingProperty,
+            JsonSerializerOptions options
+        )
         {
             MatchingProperty = matchingProperty;
             ClrInfo = parameterInfo;
@@ -77,7 +81,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonParameterInfo CreateIgnoredParameterPlaceholder(
             JsonParameterInfoValues parameterInfo,
             JsonPropertyInfo matchingProperty,
-            bool sourceGenMode)
+            bool sourceGenMode
+        )
         {
             JsonParameterInfo jsonParameterInfo = new JsonParameterInfo<sbyte>();
             jsonParameterInfo.ClrInfo = parameterInfo;
@@ -100,7 +105,12 @@ namespace System.Text.Json.Serialization.Metadata
                 Type parameterType = parameterInfo.ParameterType;
 
                 DefaultValueHolder holder;
-                if (matchingProperty.Options.TryGetTypeInfoCached(parameterType, out JsonTypeInfo? typeInfo))
+                if (
+                    matchingProperty.Options.TryGetTypeInfoCached(
+                        parameterType,
+                        out JsonTypeInfo? typeInfo
+                    )
+                )
                 {
                     holder = typeInfo.DefaultValueHolder;
                 }

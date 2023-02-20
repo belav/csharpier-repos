@@ -36,14 +36,12 @@ namespace Mono.Threading
     {
         public SpinLock Lock;
 
-        public SpinLockWrapper () : this (false)
-        {
+        public SpinLockWrapper()
+            : this(false) { }
 
-        }
-
-        public SpinLockWrapper (bool enableTracking)
+        public SpinLockWrapper(bool enableTracking)
         {
-            Lock = new SpinLock (enableTracking);
+            Lock = new SpinLock(enableTracking);
         }
     }
 }

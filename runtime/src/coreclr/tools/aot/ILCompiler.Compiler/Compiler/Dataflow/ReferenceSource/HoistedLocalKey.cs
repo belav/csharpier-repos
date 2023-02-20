@@ -15,16 +15,16 @@ namespace Mono.Linker.Dataflow
     {
         readonly FieldDefinition Field;
 
-        public HoistedLocalKey (FieldDefinition field)
+        public HoistedLocalKey(FieldDefinition field)
         {
-            Debug.Assert (CompilerGeneratedState.IsHoistedLocal (field));
+            Debug.Assert(CompilerGeneratedState.IsHoistedLocal(field));
             Field = field;
         }
 
-        public bool Equals (HoistedLocalKey other) => Field.Equals (other.Field);
+        public bool Equals(HoistedLocalKey other) => Field.Equals(other.Field);
 
-        public override bool Equals (object? obj) => obj is HoistedLocalKey other && Equals (other);
+        public override bool Equals(object? obj) => obj is HoistedLocalKey other && Equals(other);
 
-        public override int GetHashCode () => Field.GetHashCode ();
+        public override int GetHashCode() => Field.GetHashCode();
     }
 }

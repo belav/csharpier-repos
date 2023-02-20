@@ -6,15 +6,18 @@ using System.Collections.Generic;
 
 class Multiple
 {
-    public static void Main ()
+    public static void Main()
     {
-        var q = from x in new [] { "a", "b", "c" } select x;
+        var q = from x in new[] { "a", "b", "c" } select x;
     }
 }
 
 static class Y
 {
-    public static IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+    public static IEnumerable<TResult> Select<TSource, TResult>(
+        this IEnumerable<TSource> source,
+        Func<TSource, TResult> selector
+    )
     {
         return null;
     }
@@ -22,7 +25,10 @@ static class Y
 
 static class X
 {
-    public static IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+    public static IEnumerable<TResult> Select<TSource, TResult>(
+        this IEnumerable<TSource> source,
+        Func<TSource, TResult> selector
+    )
     {
         return null;
     }

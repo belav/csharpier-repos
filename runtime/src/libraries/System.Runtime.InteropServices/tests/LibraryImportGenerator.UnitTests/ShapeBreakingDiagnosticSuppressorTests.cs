@@ -23,7 +23,8 @@ namespace LibraryImportGenerator.UnitTests
         [Fact]
         public async Task StatefulValueMarshallerMethodsThatDoNotUseInstanceState_SuppressesDiagnostic()
         {
-            await VerifySuppressorAsync("""
+            await VerifySuppressorAsync(
+                """
                 using System;
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices.Marshalling;
@@ -58,20 +59,54 @@ namespace LibraryImportGenerator.UnitTests
                     }
                 }
                 """,
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(0),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(1),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(2),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(3),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(4),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(5),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(6),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(7));
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(0),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(1),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(2),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(3),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(4),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(5),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(6),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(7)
+            );
         }
 
         [Fact]
         public async Task StatefulLinearCollectionMarshallerMethodsThatDoNotUseInstanceState_SuppressesDiagnostic()
         {
-            await VerifySuppressorAsync("""
+            await VerifySuppressorAsync(
+                """
                 using System;
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices.Marshalling;
@@ -107,21 +142,59 @@ namespace LibraryImportGenerator.UnitTests
                     }
                 }
                 """,
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(0),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(1),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(2),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(3),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(4),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(5),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(6),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(7),
-                SuppressedDiagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression, DiagnosticSeverity.Info).WithLocation(8));
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(0),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(1),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(2),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(3),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(4),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(5),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(6),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(7),
+                SuppressedDiagnostic(
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(8)
+            );
         }
 
         [Fact]
         public async Task MethodWithShapeMatchingNameButDifferingSignature_DoesNotSuppressDiagnostic()
         {
-            await VerifySuppressorAsync("""
+            await VerifySuppressorAsync(
+                """
                 using System.Runtime.InteropServices.Marshalling;
 
                 struct S
@@ -138,7 +211,14 @@ namespace LibraryImportGenerator.UnitTests
                     }
                 }
                 """,
-                Diagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression.SuppressedDiagnosticId, DiagnosticSeverity.Info).WithLocation(0));
+                Diagnostic(
+                        ShapeBreakingDiagnosticSuppressor
+                            .MarkMethodsAsStaticSuppression
+                            .SuppressedDiagnosticId,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(0)
+            );
         }
 
         [Fact]
@@ -149,7 +229,8 @@ namespace LibraryImportGenerator.UnitTests
             // Since we're going to recommend people make their marshallers nested types of their entry-point type,
             // this limitation isn't unreasonable. If the user isn't following our best practices, then they're going
             // to have a worse dev experience.
-            await VerifySuppressorAsync("""
+            await VerifySuppressorAsync(
+                """
                 using System.Runtime.InteropServices.Marshalling;
 
                 struct S
@@ -167,31 +248,48 @@ namespace LibraryImportGenerator.UnitTests
                     public void {|#0:Free|}() {}
                 }
                 """,
-                Diagnostic(ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression.SuppressedDiagnosticId, DiagnosticSeverity.Info).WithLocation(0));
+                Diagnostic(
+                        ShapeBreakingDiagnosticSuppressor
+                            .MarkMethodsAsStaticSuppression
+                            .SuppressedDiagnosticId,
+                        DiagnosticSeverity.Info
+                    )
+                    .WithLocation(0)
+            );
         }
 
-        private static DiagnosticResult Diagnostic(string id, DiagnosticSeverity originalDiagnosticSeverity)
+        private static DiagnosticResult Diagnostic(
+            string id,
+            DiagnosticSeverity originalDiagnosticSeverity
+        )
         {
             return new DiagnosticResult(id, originalDiagnosticSeverity);
         }
 
-        private static DiagnosticResult SuppressedDiagnostic(SuppressionDescriptor descriptor, DiagnosticSeverity originalDiagnosticSeverity)
+        private static DiagnosticResult SuppressedDiagnostic(
+            SuppressionDescriptor descriptor,
+            DiagnosticSeverity originalDiagnosticSeverity
+        )
         {
-            return new DiagnosticResult(descriptor.SuppressedDiagnosticId, originalDiagnosticSeverity).WithIsSuppressed(true);
+            return new DiagnosticResult(
+                descriptor.SuppressedDiagnosticId,
+                originalDiagnosticSeverity
+            ).WithIsSuppressed(true);
         }
 
-        private static async Task VerifySuppressorAsync(string source, params DiagnosticResult[] expected)
+        private static async Task VerifySuppressorAsync(
+            string source,
+            params DiagnosticResult[] expected
+        )
         {
-            var test = new Test
-            {
-                TestCode = source,
-            };
+            var test = new Test { TestCode = source, };
 
             test.ExpectedDiagnostics.AddRange(expected);
             await test.RunAsync(CancellationToken.None);
         }
 
-        private class Test : CSharpCodeFixVerifier<EmptyDiagnosticAnalyzer, EmptyCodeFixProvider>.Test
+        private class Test
+            : CSharpCodeFixVerifier<EmptyDiagnosticAnalyzer, EmptyCodeFixProvider>.Test
         {
             public Test()
             {
@@ -199,6 +297,7 @@ namespace LibraryImportGenerator.UnitTests
                 // This check doesn't work when we set up the CompilationWithAnalyzers object to report suppressed diagnostics
                 TestBehaviors |= TestBehaviors.SkipSuppressionCheck;
             }
+
             protected override IEnumerable<DiagnosticAnalyzer> GetDiagnosticAnalyzers()
             {
                 return new DiagnosticAnalyzer[]
@@ -210,7 +309,12 @@ namespace LibraryImportGenerator.UnitTests
                 };
             }
 
-            protected override CompilationWithAnalyzers CreateCompilationWithAnalyzers(Compilation compilation, ImmutableArray<DiagnosticAnalyzer> analyzers, AnalyzerOptions options, CancellationToken cancellationToken)
+            protected override CompilationWithAnalyzers CreateCompilationWithAnalyzers(
+                Compilation compilation,
+                ImmutableArray<DiagnosticAnalyzer> analyzers,
+                AnalyzerOptions options,
+                CancellationToken cancellationToken
+            )
             {
                 return new CompilationWithAnalyzers(
                     compilation,
@@ -220,7 +324,9 @@ namespace LibraryImportGenerator.UnitTests
                         onAnalyzerException: null,
                         concurrentAnalysis: true,
                         logAnalyzerExecutionTime: true,
-                        reportSuppressedDiagnostics: true)); // We're specifically testing a DiagnosticSuppressor here, so we want to test that we find suppressed diagnostics.
+                        reportSuppressedDiagnostics: true
+                    )
+                ); // We're specifically testing a DiagnosticSuppressor here, so we want to test that we find suppressed diagnostics.
             }
         }
     }

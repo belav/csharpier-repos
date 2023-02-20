@@ -14,9 +14,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal sealed class CSDiagnostic : DiagnosticWithInfo
     {
         internal CSDiagnostic(DiagnosticInfo info, Location location, bool isSuppressed = false)
-            : base(info, location, isSuppressed)
-        {
-        }
+            : base(info, location, isSuppressed) { }
 
         public override string ToString()
         {
@@ -42,7 +40,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (this.Severity != severity)
             {
-                return new CSDiagnostic(this.Info.GetInstanceWithSeverity(severity), this.Location, this.IsSuppressed);
+                return new CSDiagnostic(
+                    this.Info.GetInstanceWithSeverity(severity),
+                    this.Location,
+                    this.IsSuppressed
+                );
             }
 
             return this;

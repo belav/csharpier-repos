@@ -10,7 +10,7 @@ namespace MonoTests.Common
         public string Column1 { get; set; }
         public int Column2 { get; set; }
 
-        public FooNoPrimaryColumns ()
+        public FooNoPrimaryColumns()
         {
             Column1 = "hello";
             Column2 = 123;

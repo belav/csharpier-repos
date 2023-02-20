@@ -3,10 +3,9 @@
 // Compiler options: -warnaserror
 
 using System;
-[assembly:CLSCompliant (true)]
 
-public interface CLSInterface {
-}
+[assembly: CLSCompliant(true)]
 
-public class clsInterface: CLSInterface {
-}
+public interface CLSInterface { }
+
+public class clsInterface : CLSInterface { }

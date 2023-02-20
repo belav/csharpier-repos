@@ -1,9 +1,7 @@
 // CS0534: `Foo' does not implement inherited abstract member `SomeAbstract.SomeProperty.get'
 // Line: 13
 
-public class SomeProperty
-{
-}
+public class SomeProperty { }
 
 public abstract class SomeAbstract
 {
@@ -12,6 +10,8 @@ public abstract class SomeAbstract
 
 public class Foo : SomeAbstract
 {
-    public static SomeProperty SomeProperty { get { return null; } }
+    public static SomeProperty SomeProperty
+    {
+        get { return null; }
+    }
 }
-

@@ -4,7 +4,6 @@ using System.Security;
 using System;
 using System.Runtime.InteropServices; // For SafeHandle
 
-
 [SecurityCritical]
 public class MySafeHandle : SafeHandle
 {
@@ -24,7 +23,12 @@ public class MySafeHandle : SafeHandle
         handle = handleValue;
         if (handle != handleValue)
         {
-            throw new Exception("Handle value is not assigned correctly, handleValue = " + handleValue + ", Handle = " + handle.ToString());
+            throw new Exception(
+                "Handle value is not assigned correctly, handleValue = "
+                    + handleValue
+                    + ", Handle = "
+                    + handle.ToString()
+            );
         }
     }
 
@@ -75,7 +79,10 @@ public class SafeHandleHandle
 
             if (null == msf)
             {
-                TestLibrary.TestFramework.LogError("001.1", "Failed to allocate a new safe handle instance");
+                TestLibrary.TestFramework.LogError(
+                    "001.1",
+                    "Failed to allocate a new safe handle instance"
+                );
                 retVal = false;
             }
         }
@@ -89,13 +96,14 @@ public class SafeHandleHandle
         return retVal;
     }
 
-
     [SecuritySafeCritical]
     public bool PosTest2()
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest2: Verify the handle is a protected value, and can set a value");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest2: Verify the handle is a protected value, and can set a value"
+        );
 
         try
         {
@@ -105,8 +113,13 @@ public class SafeHandleHandle
 
             if (null == msf)
             {
-                TestLibrary.TestFramework.LogError("002.1", "Failed to allocate a new safe handle instance");
-                TestLibrary.TestFramework.LogInformation("[LOCAL VARIABLES] randValue = " + randValue);
+                TestLibrary.TestFramework.LogError(
+                    "002.1",
+                    "Failed to allocate a new safe handle instance"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    "[LOCAL VARIABLES] randValue = " + randValue
+                );
                 retVal = false;
             }
         }

@@ -17,25 +17,36 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
     {
         public static SyntaxNode TryGetMethodDeclarationBody(SyntaxNode node)
         {
-            static SyntaxNode BlockOrExpression(BlockSyntax blockBodyOpt, ArrowExpressionClauseSyntax expressionBodyOpt)
-                => (SyntaxNode)blockBodyOpt ?? expressionBodyOpt?.Expression;
+            static SyntaxNode BlockOrExpression(
+                BlockSyntax blockBodyOpt,
+                ArrowExpressionClauseSyntax expressionBodyOpt
+            ) => (SyntaxNode)blockBodyOpt ?? expressionBodyOpt?.Expression;
 
             SyntaxNode result;
             switch (node.Kind())
             {
                 case SyntaxKind.MethodDeclaration:
                     var methodDeclaration = (MethodDeclarationSyntax)node;
-                    result = BlockOrExpression(methodDeclaration.Body, methodDeclaration.ExpressionBody);
+                    result = BlockOrExpression(
+                        methodDeclaration.Body,
+                        methodDeclaration.ExpressionBody
+                    );
                     break;
 
                 case SyntaxKind.ConversionOperatorDeclaration:
                     var conversionDeclaration = (ConversionOperatorDeclarationSyntax)node;
-                    result = BlockOrExpression(conversionDeclaration.Body, conversionDeclaration.ExpressionBody);
+                    result = BlockOrExpression(
+                        conversionDeclaration.Body,
+                        conversionDeclaration.ExpressionBody
+                    );
                     break;
 
                 case SyntaxKind.OperatorDeclaration:
                     var operatorDeclaration = (OperatorDeclarationSyntax)node;
-                    result = BlockOrExpression(operatorDeclaration.Body, operatorDeclaration.ExpressionBody);
+                    result = BlockOrExpression(
+                        operatorDeclaration.Body,
+                        operatorDeclaration.ExpressionBody
+                    );
                     break;
 
                 case SyntaxKind.SetAccessorDeclaration:
@@ -44,17 +55,26 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 case SyntaxKind.RemoveAccessorDeclaration:
                 case SyntaxKind.GetAccessorDeclaration:
                     var accessorDeclaration = (AccessorDeclarationSyntax)node;
-                    result = BlockOrExpression(accessorDeclaration.Body, accessorDeclaration.ExpressionBody);
+                    result = BlockOrExpression(
+                        accessorDeclaration.Body,
+                        accessorDeclaration.ExpressionBody
+                    );
                     break;
 
                 case SyntaxKind.ConstructorDeclaration:
                     var constructorDeclaration = (ConstructorDeclarationSyntax)node;
-                    result = BlockOrExpression(constructorDeclaration.Body, constructorDeclaration.ExpressionBody);
+                    result = BlockOrExpression(
+                        constructorDeclaration.Body,
+                        constructorDeclaration.ExpressionBody
+                    );
                     break;
 
                 case SyntaxKind.DestructorDeclaration:
                     var destructorDeclaration = (DestructorDeclarationSyntax)node;
-                    result = BlockOrExpression(destructorDeclaration.Body, destructorDeclaration.ExpressionBody);
+                    result = BlockOrExpression(
+                        destructorDeclaration.Body,
+                        destructorDeclaration.ExpressionBody
+                    );
                     break;
 
                 case SyntaxKind.PropertyDeclaration:
@@ -66,8 +86,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     // We associate the body of expression-bodied property/indexer with the ArrowExpressionClause
                     // since that's the syntax node associated with the getter symbol.
                     // The property/indexer itself is considered to not have a body unless the property has an initializer.
-                    result = node.Parent.Kind() is SyntaxKind.PropertyDeclaration or SyntaxKind.IndexerDeclaration ?
-                        ((ArrowExpressionClauseSyntax)node).Expression : null;
+                    result = node.Parent.Kind()
+                        is SyntaxKind.PropertyDeclaration
+                            or SyntaxKind.IndexerDeclaration
+                        ? ((ArrowExpressionClauseSyntax)node).Expression
+                        : null;
                     break;
 
                 default:
@@ -126,10 +149,17 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             Debug.Assert(false);
         }
 
-        public static bool ContainsGlobalStatements(this CompilationUnitSyntax compilationUnit)
-            => compilationUnit.Members.Count > 0 && compilationUnit.Members[0] is GlobalStatementSyntax;
+        public static bool ContainsGlobalStatements(this CompilationUnitSyntax compilationUnit) =>
+            compilationUnit.Members.Count > 0
+            && compilationUnit.Members[0] is GlobalStatementSyntax;
 
-        public static void FindLeafNodeAndPartner(SyntaxNode leftRoot, int leftPosition, SyntaxNode rightRoot, out SyntaxNode leftNode, out SyntaxNode rightNodeOpt)
+        public static void FindLeafNodeAndPartner(
+            SyntaxNode leftRoot,
+            int leftPosition,
+            SyntaxNode rightRoot,
+            out SyntaxNode leftNode,
+            out SyntaxNode rightNodeOpt
+        )
         {
             leftNode = leftRoot;
             rightNodeOpt = rightRoot;
@@ -140,7 +170,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     rightNodeOpt = null;
                 }
 
-                var leftChild = leftNode.ChildThatContainsPosition(leftPosition, out var childIndex);
+                var leftChild = leftNode.ChildThatContainsPosition(
+                    leftPosition,
+                    out var childIndex
+                );
                 if (leftChild.IsToken)
                 {
                     return;
@@ -163,7 +196,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             }
         }
 
-        public static SyntaxNode FindPartner(SyntaxNode leftRoot, SyntaxNode rightRoot, SyntaxNode leftNode)
+        public static SyntaxNode FindPartner(
+            SyntaxNode leftRoot,
+            SyntaxNode rightRoot,
+            SyntaxNode leftNode
+        )
         {
             // Finding a partner of a zero-width node is complicated and not supported atm:
             Debug.Assert(leftNode.FullSpan.Length > 0);
@@ -177,7 +214,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             while (leftNode != originalLeftNode)
             {
                 Debug.Assert(leftNode.RawKind == rightNode.RawKind);
-                var leftChild = leftNode.ChildThatContainsPosition(leftPosition, out var childIndex);
+                var leftChild = leftNode.ChildThatContainsPosition(
+                    leftPosition,
+                    out var childIndex
+                );
 
                 // Can only happen when searching for zero-width node.
                 Debug.Assert(!leftChild.IsToken);
@@ -189,8 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             return rightNode;
         }
 
-        public static bool Any(TypeParameterListSyntax listOpt)
-            => listOpt != null && listOpt.ChildNodesAndTokens().Count != 0;
+        public static bool Any(TypeParameterListSyntax listOpt) =>
+            listOpt != null && listOpt.ChildNodesAndTokens().Count != 0;
 
         public static SyntaxNode TryGetEffectiveGetterBody(SyntaxNode declaration)
         {
@@ -207,14 +247,19 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             return null;
         }
 
-        public static SyntaxNode TryGetEffectiveGetterBody(ArrowExpressionClauseSyntax propertyBody, AccessorListSyntax accessorList)
+        public static SyntaxNode TryGetEffectiveGetterBody(
+            ArrowExpressionClauseSyntax propertyBody,
+            AccessorListSyntax accessorList
+        )
         {
             if (propertyBody != null)
             {
                 return propertyBody.Expression;
             }
 
-            var firstGetter = accessorList?.Accessors.Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration)).FirstOrDefault();
+            var firstGetter = accessorList?.Accessors
+                .Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration))
+                .FirstOrDefault();
             if (firstGetter == null)
             {
                 return null;
@@ -246,14 +291,18 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
         public static bool HasBackingField(PropertyDeclarationSyntax property)
         {
-            if (property.Modifiers.Any(SyntaxKind.AbstractKeyword) ||
-                property.Modifiers.Any(SyntaxKind.ExternKeyword))
+            if (
+                property.Modifiers.Any(SyntaxKind.AbstractKeyword)
+                || property.Modifiers.Any(SyntaxKind.ExternKeyword)
+            )
             {
                 return false;
             }
 
             return property.ExpressionBody == null
-                && property.AccessorList.Accessors.Any(e => e.Body == null && e.ExpressionBody == null);
+                && property.AccessorList.Accessors.Any(
+                    e => e.Body == null && e.ExpressionBody == null
+                );
         }
 
         /// <summary>
@@ -276,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             return declaration switch
             {
                 MethodDeclarationSyntax method => method.Modifiers.Any(SyntaxKind.AsyncKeyword),
-                LocalFunctionStatementSyntax localFunction => localFunction.Modifiers.Any(SyntaxKind.AsyncKeyword),
+                LocalFunctionStatementSyntax localFunction
+                    => localFunction.Modifiers.Any(SyntaxKind.AsyncKeyword),
                 _ => false
             };
         }
@@ -292,11 +342,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         /// <see cref="VariableDeclaratorSyntax"/> for await using declarators.
         /// <see cref="UsingStatementSyntax"/> for await using statements.
         /// </returns>
-        public static IEnumerable<SyntaxNode> GetSuspensionPoints(SyntaxNode body)
-            => body.DescendantNodesAndSelf(LambdaUtilities.IsNotLambda).Where(SyntaxBindingUtilities.BindsToResumableStateMachineState);
+        public static IEnumerable<SyntaxNode> GetSuspensionPoints(SyntaxNode body) =>
+            body.DescendantNodesAndSelf(LambdaUtilities.IsNotLambda)
+                .Where(SyntaxBindingUtilities.BindsToResumableStateMachineState);
 
-        // Presence of yield break or yield return indicates state machine, but yield break does not bind to a resumable state. 
-        public static bool IsIterator(SyntaxNode body)
-            => body.DescendantNodesAndSelf(LambdaUtilities.IsNotLambda).Any(n => n is YieldStatementSyntax);
+        // Presence of yield break or yield return indicates state machine, but yield break does not bind to a resumable state.
+        public static bool IsIterator(SyntaxNode body) =>
+            body.DescendantNodesAndSelf(LambdaUtilities.IsNotLambda)
+                .Any(n => n is YieldStatementSyntax);
     }
 }

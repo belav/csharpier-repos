@@ -29,65 +29,67 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System;
     using System.Collections;
 
     using Mono.Cecil.Cil;
 
-    internal sealed class ResourceCollection : CollectionBase, IReflectionStructureVisitable {
-
+    internal sealed class ResourceCollection : CollectionBase, IReflectionStructureVisitable
+    {
         ModuleDefinition m_container;
 
-        public Resource this [int index] {
-            get { return List [index] as Resource; }
-            set { List [index] = value; }
+        public Resource this[int index]
+        {
+            get { return List[index] as Resource; }
+            set { List[index] = value; }
         }
 
-        public ModuleDefinition Container {
+        public ModuleDefinition Container
+        {
             get { return m_container; }
         }
 
-        public ResourceCollection (ModuleDefinition container)
+        public ResourceCollection(ModuleDefinition container)
         {
             m_container = container;
         }
 
-        public void Add (Resource value)
+        public void Add(Resource value)
         {
-            List.Add (value);
+            List.Add(value);
         }
 
-        public bool Contains (Resource value)
+        public bool Contains(Resource value)
         {
-            return List.Contains (value);
+            return List.Contains(value);
         }
 
-        public int IndexOf (Resource value)
+        public int IndexOf(Resource value)
         {
-            return List.IndexOf (value);
+            return List.IndexOf(value);
         }
 
-        public void Insert (int index, Resource value)
+        public void Insert(int index, Resource value)
         {
-            List.Insert (index, value);
+            List.Insert(index, value);
         }
 
-        public void Remove (Resource value)
+        public void Remove(Resource value)
         {
-            List.Remove (value);
+            List.Remove(value);
         }
 
-        protected override void OnValidate (object o)
+        protected override void OnValidate(object o)
         {
-            if (! (o is Resource))
-                throw new ArgumentException ("Must be of type " + typeof (Resource).FullName);
+            if (!(o is Resource))
+                throw new ArgumentException("Must be of type " + typeof(Resource).FullName);
         }
 
-        public void Accept (IReflectionStructureVisitor visitor)
+        public void Accept(IReflectionStructureVisitor visitor)
         {
-            visitor.VisitResourceCollection (this);
+            visitor.VisitResourceCollection(this);
         }
     }
 }

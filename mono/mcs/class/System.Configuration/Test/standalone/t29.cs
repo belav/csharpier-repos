@@ -13,10 +13,11 @@ class T1
         {
             NameValueCollection AppSettings = ConfigurationManager.AppSettings;
         }
-        catch (ConfigurationErrorsException e) {
-            Console.WriteLine ("configuration exception thrown.");
+        catch (ConfigurationErrorsException e)
+        {
+            Console.WriteLine("configuration exception thrown.");
             return;
         }
-        Console.WriteLine ("configuration exception not thrown.");
+        Console.WriteLine("configuration exception not thrown.");
     }
 }

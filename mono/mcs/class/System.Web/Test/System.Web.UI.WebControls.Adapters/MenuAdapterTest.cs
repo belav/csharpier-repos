@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,7 +39,6 @@ using System.Web.UI.WebControls.Adapters;
 using System.Web.Configuration;
 using MonoTests.SystemWeb.Framework;
 
-
 namespace MonoTests.System.Web.UI.WebControls.Adapters
 {
     [TestFixture]
@@ -53,63 +52,71 @@ namespace MonoTests.System.Web.UI.WebControls.Adapters
         EventArgs e;
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            p = new Page ();
-            c = new MyMenu ();
+            p = new Page();
+            c = new MyMenu();
             c.RenderingMode = MenuRenderingMode.Table;
-            a = new MyMenuAdapter (c);
+            a = new MyMenuAdapter(c);
             p.Controls.Add(c);
-            sw = new StringWriter ();
-            w = new HtmlTextWriter (sw);
+            sw = new StringWriter();
+            w = new HtmlTextWriter(sw);
             e = new EventArgs();
         }
-        
+
         [Test]
-        public void OnInit ()
+        public void OnInit()
         {
-            a.OnInit (e);
-            Assert.IsTrue (p.RequiresControlState (c), "OnInit #1");
-            Assert.AreEqual (e, c.on_init_arg, "OnInit #2");
+            a.OnInit(e);
+            Assert.IsTrue(p.RequiresControlState(c), "OnInit #1");
+            Assert.AreEqual(e, c.on_init_arg, "OnInit #2");
         }
 
         [Test]
-        public void OnPreRender ()
+        public void OnPreRender()
         {
-            a.OnPreRender (e);
-            Assert.AreEqual (e, c.on_pre_render_arg, "OnPreRender #1");
+            a.OnPreRender(e);
+            Assert.AreEqual(e, c.on_pre_render_arg, "OnPreRender #1");
         }
 
         [Test]
-        public void RaisePostBackEvent ()
+        public void RaisePostBackEvent()
         {
-            ((IPostBackEventHandler)a).RaisePostBackEvent ("eventArg");
-            Assert.AreEqual ("eventArg", c.raise_post_back_event_arg, "RaisePostBackEvent #1");
-        }
-        
-        [Test]
-        public void RenderBeginTag ()
-        {
-            a.RenderBeginTag (w);
-            Assert.AreEqual ("RenderBeginTag\n", sw.ToString ().Replace ("\r", ""), "RenderBeginTag #1");
+            ((IPostBackEventHandler)a).RaisePostBackEvent("eventArg");
+            Assert.AreEqual("eventArg", c.raise_post_back_event_arg, "RaisePostBackEvent #1");
         }
 
         [Test]
-        public void RenderContentsTag ()
+        public void RenderBeginTag()
         {
-            a.RenderContents (w);
-            Assert.AreEqual ("RenderContents\n", sw.ToString ().Replace ("\r", ""), "RenderContents #1");
+            a.RenderBeginTag(w);
+            Assert.AreEqual(
+                "RenderBeginTag\n",
+                sw.ToString().Replace("\r", ""),
+                "RenderBeginTag #1"
+            );
         }
 
         [Test]
-        public void RenderEndTag ()
+        public void RenderContentsTag()
         {
-            a.RenderEndTag (w);
-            Assert.AreEqual ("RenderEndTag\n", sw.ToString ().Replace ("\r", ""), "RenderEndTag #1");
+            a.RenderContents(w);
+            Assert.AreEqual(
+                "RenderContents\n",
+                sw.ToString().Replace("\r", ""),
+                "RenderContents #1"
+            );
         }
 
         [Test]
-        public void RenderItem ()
+        public void RenderEndTag()
+        {
+            a.RenderEndTag(w);
+            Assert.AreEqual("RenderEndTag\n", sw.ToString().Replace("\r", ""), "RenderEndTag #1");
+        }
+
+        [Test]
+        public void RenderItem()
         {
             MenuItem item = new MenuItem("menu item text");
 
@@ -117,101 +124,100 @@ namespace MonoTests.System.Web.UI.WebControls.Adapters
             // then RenderItem will eventually attempt to register for event validation,
             // which can only be done during the Render phase.
             item.NavigateUrl = "http://example.com/";
-            a.RenderItem (w, item, 0);
-            Assert.IsTrue (sw.ToString ().IndexOf("menu item text") != -1, "RenderItem #1");
+            a.RenderItem(w, item, 0);
+            Assert.IsTrue(sw.ToString().IndexOf("menu item text") != -1, "RenderItem #1");
         }
 
         [Test]
-        public void Control ()
+        public void Control()
         {
-            Assert.AreEqual (c, a.Control, "Control #1");
+            Assert.AreEqual(c, a.Control, "Control #1");
         }
-        
 
+        #region Support classes
 
-#region Support classes
-        
         class MyMenu : Menu
         {
-        
             internal EventArgs on_init_arg;
-            protected internal override void OnInit (EventArgs e)
+
+            protected internal override void OnInit(EventArgs e)
             {
                 on_init_arg = e;
-                base.OnInit (e);
+                base.OnInit(e);
             }
 
             internal EventArgs on_pre_render_arg;
-            protected internal override void OnPreRender (EventArgs e)
+
+            protected internal override void OnPreRender(EventArgs e)
             {
                 on_pre_render_arg = e;
-                base.OnPreRender (e);
+                base.OnPreRender(e);
             }
 
             internal string raise_post_back_event_arg;
-            protected internal override void RaisePostBackEvent (string eventArgument)
+
+            protected internal override void RaisePostBackEvent(string eventArgument)
             {
                 raise_post_back_event_arg = eventArgument;
             }
 
-            public override void RenderBeginTag (HtmlTextWriter w)
+            public override void RenderBeginTag(HtmlTextWriter w)
             {
                 w.WriteLine("RenderBeginTag");
             }
 
-            protected internal override void RenderContents (HtmlTextWriter w)
+            protected internal override void RenderContents(HtmlTextWriter w)
             {
                 w.WriteLine("RenderContents");
             }
 
-            public override void RenderEndTag (HtmlTextWriter w)
+            public override void RenderEndTag(HtmlTextWriter w)
             {
                 w.WriteLine("RenderEndTag");
             }
-
         }
 
         class MyMenuAdapter : SystemWebTestShim.MenuAdapter
         {
-            internal MyMenuAdapter (Menu c) : base (c)
+            internal MyMenuAdapter(Menu c)
+                : base(c) { }
+
+            internal new void OnInit(EventArgs e)
             {
+                base.OnInit(e);
             }
 
-            internal new void OnInit (EventArgs e)
+            internal new void OnPreRender(EventArgs e)
             {
-                base.OnInit (e);
+                base.OnPreRender(e);
             }
 
-            internal new void OnPreRender (EventArgs e)
+            new internal void RenderBeginTag(HtmlTextWriter w)
             {
-                base.OnPreRender (e);
+                base.RenderBeginTag(w);
             }
 
-            new internal void RenderBeginTag (HtmlTextWriter w)
+            new internal void RenderContents(HtmlTextWriter w)
             {
-                base.RenderBeginTag (w);
+                base.RenderContents(w);
             }
 
-            new internal void RenderContents (HtmlTextWriter w)
+            new internal void RenderEndTag(HtmlTextWriter w)
             {
-                base.RenderContents (w);
+                base.RenderEndTag(w);
             }
 
-            new internal void RenderEndTag (HtmlTextWriter w)
+            new internal Menu Control
             {
-                base.RenderEndTag (w);
-            }
-
-            new internal Menu Control {
                 get { return base.Control; }
             }
 
-            internal new void RenderItem (HtmlTextWriter w, MenuItem mi, int i)
+            internal new void RenderItem(HtmlTextWriter w, MenuItem mi, int i)
             {
-                base.RenderItem (w, mi, i);
+                base.RenderItem(w, mi, i);
             }
         }
-        
-#endregion
+
+        #endregion
     }
 }

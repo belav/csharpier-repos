@@ -3,11 +3,9 @@
 
 using System;
 
-class Stack<T> : Attribute
-{ }
+class Stack<T> : Attribute { }
 
 class X
 {
-    static void Main ()
-    { }
+    static void Main() { }
 }

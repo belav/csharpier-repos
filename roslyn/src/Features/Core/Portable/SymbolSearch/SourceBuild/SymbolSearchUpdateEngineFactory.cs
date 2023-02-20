@@ -19,8 +19,11 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         public static ValueTask<ISymbolSearchUpdateEngine> CreateEngineAsync(
             Workspace workspace,
             ISymbolSearchLogService logService,
-            CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult<ISymbolSearchUpdateEngine>(SymbolSearchUpdateNoOpEngine.Instance);
+            CancellationToken cancellationToken
+        ) =>
+            ValueTaskFactory.FromResult<ISymbolSearchUpdateEngine>(
+                SymbolSearchUpdateNoOpEngine.Instance
+            );
     }
 }
 #endif

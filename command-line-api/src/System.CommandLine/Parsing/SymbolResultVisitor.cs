@@ -55,28 +55,16 @@ namespace System.CommandLine.Parsing
             }
         }
 
-        protected virtual void VisitOptionResult(OptionResult optionResult)
-        {
-        }
+        protected virtual void VisitOptionResult(OptionResult optionResult) { }
 
-        protected virtual void VisitCommandResult(CommandResult commandResult)
-        {
-        }
+        protected virtual void VisitCommandResult(CommandResult commandResult) { }
 
-        protected virtual void VisitArgumentResult(ArgumentResult argumentResult)
-        {
-        }
+        protected virtual void VisitArgumentResult(ArgumentResult argumentResult) { }
 
-        protected virtual void VisitRootCommandResult(RootCommandResult rootCommandResult)
-        {
-        }
+        protected virtual void VisitRootCommandResult(RootCommandResult rootCommandResult) { }
 
-        protected virtual void Start(SymbolResult node)
-        {
-        }
+        protected virtual void Start(SymbolResult node) { }
 
-        protected virtual void Stop(SymbolResult node)
-        {
-        }
+        protected virtual void Stop(SymbolResult node) { }
     }
 }

@@ -3,8 +3,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
-namespace MonoTests.Helpers {
-
+namespace MonoTests.Helpers
+{
     /// <summary>
     /// Represents a temporary directory.  Creating an instance creates a directory at the specified path,
     /// and disposing the instance deletes the directory.
@@ -14,36 +14,34 @@ namespace MonoTests.Helpers {
         /// <summary>Gets the created directory's path.</summary>
         public string Path { get; private set; }
 
-        public TempDirectory ()
-            : this (CreateTemporaryDirectory ())
-        {
-        }
+        public TempDirectory()
+            : this(CreateTemporaryDirectory()) { }
 
-        public TempDirectory (string path)
+        public TempDirectory(string path)
         {
             Path = path;
         }
 
-        ~TempDirectory ()
+        ~TempDirectory()
         {
-            Dispose ();
+            Dispose();
         }
 
         public void Dispose()
         {
-            GC.SuppressFinalize (this);
-            DeleteDirectory (Path);
+            GC.SuppressFinalize(this);
+            DeleteDirectory(Path);
         }
 
         // Tries to recursively delete the specified path.
         // Doesn't throw exceptions if path is null, empty, or doesn't exist.
-        public static void DeleteDirectory (string path)
+        public static void DeleteDirectory(string path)
         {
-            if (string.IsNullOrEmpty (path))
+            if (string.IsNullOrEmpty(path))
                 return;
 
-            if (Directory.Exists (path))
-                Directory.Delete (path, true);
+            if (Directory.Exists(path))
+                Directory.Delete(path, true);
         }
 
         // Creates a unique temporary directory.
@@ -53,15 +51,18 @@ namespace MonoTests.Helpers {
         //
         // This method is only meant for testing code, not production code (it
         // will leave some temporary directories behind).
-        static string CreateTemporaryDirectory ()
+        static string CreateTemporaryDirectory()
         {
             var name = string.Empty;
-            var calling_method = new StackFrame (2).GetMethod ();
+            var calling_method = new StackFrame(2).GetMethod();
             if (calling_method != null)
                 name = calling_method.DeclaringType.FullName + "_" + calling_method.Name + "_";
 
-            var rv = global::System.IO.Path.Combine (global::System.IO.Path.GetTempPath (), name + Guid.NewGuid ().ToString ());
-            Directory.CreateDirectory (rv);
+            var rv = global::System.IO.Path.Combine(
+                global::System.IO.Path.GetTempPath(),
+                name + Guid.NewGuid().ToString()
+            );
+            Directory.CreateDirectory(rv);
             return rv;
         }
     }

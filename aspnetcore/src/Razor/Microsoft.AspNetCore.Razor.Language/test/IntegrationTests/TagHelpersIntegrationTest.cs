@@ -15,11 +15,12 @@ public class TagHelpersIntegrationTest : IntegrationTestBase
         // Arrange
         var descriptors = new[]
         {
-                CreateTagHelperDescriptor(
-                    tagName: "input",
-                    typeName: "InputTagHelper",
-                    assemblyName: "TestAssembly")
-            };
+            CreateTagHelperDescriptor(
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly"
+            )
+        };
 
         var projectEngine = CreateProjectEngine(builder => builder.AddTagHelpers(descriptors));
         var projectItem = CreateProjectItemFromFile();
@@ -37,18 +38,17 @@ public class TagHelpersIntegrationTest : IntegrationTestBase
         // Arrange
         var descriptors = new[]
         {
-                CreateTagHelperDescriptor(
-                    tagName: "input",
-                    typeName: "InputTagHelper",
-                    assemblyName: "TestAssembly",
-                    attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                    {
-                        builder => builder
-                            .Name("bound")
-                            .PropertyName("FooProp")
-                            .TypeName("System.String"),
-                    })
-            };
+            CreateTagHelperDescriptor(
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly",
+                attributes: new Action<BoundAttributeDescriptorBuilder>[]
+                {
+                    builder =>
+                        builder.Name("bound").PropertyName("FooProp").TypeName("System.String"),
+                }
+            )
+        };
 
         var projectEngine = CreateProjectEngine(builder => builder.AddTagHelpers(descriptors));
         var projectItem = CreateProjectItemFromFile();
@@ -66,26 +66,27 @@ public class TagHelpersIntegrationTest : IntegrationTestBase
         // Arrange
         var descriptors = new[]
         {
-                CreateTagHelperDescriptor(
-                    tagName: "p",
-                    typeName: "PTagHelper",
-                    assemblyName: "TestAssembly"),
-                CreateTagHelperDescriptor(
-                    tagName: "form",
-                    typeName: "FormTagHelper",
-                    assemblyName: "TestAssembly"),
-                CreateTagHelperDescriptor(
-                    tagName: "input",
-                    typeName: "InputTagHelper",
-                    assemblyName: "TestAssembly",
-                    attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                    {
-                        builder => builder
-                            .Name("value")
-                            .PropertyName("FooProp")
-                            .TypeName("System.String"),
-                    })
-            };
+            CreateTagHelperDescriptor(
+                tagName: "p",
+                typeName: "PTagHelper",
+                assemblyName: "TestAssembly"
+            ),
+            CreateTagHelperDescriptor(
+                tagName: "form",
+                typeName: "FormTagHelper",
+                assemblyName: "TestAssembly"
+            ),
+            CreateTagHelperDescriptor(
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly",
+                attributes: new Action<BoundAttributeDescriptorBuilder>[]
+                {
+                    builder =>
+                        builder.Name("value").PropertyName("FooProp").TypeName("System.String"),
+                }
+            )
+        };
 
         var projectEngine = CreateProjectEngine(builder => builder.AddTagHelpers(descriptors));
         var projectItem = CreateProjectItemFromFile();
@@ -103,7 +104,8 @@ public class TagHelpersIntegrationTest : IntegrationTestBase
         string tagName,
         string typeName,
         string assemblyName,
-        IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null)
+        IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null
+    )
     {
         var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
         builder.TypeName(typeName);

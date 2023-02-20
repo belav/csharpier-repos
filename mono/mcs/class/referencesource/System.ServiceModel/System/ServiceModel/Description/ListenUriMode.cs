@@ -16,8 +16,7 @@ namespace System.ServiceModel.Description
     {
         static public bool IsDefined(ListenUriMode mode)
         {
-            return mode == ListenUriMode.Explicit
-                || mode == ListenUriMode.Unique;
+            return mode == ListenUriMode.Explicit || mode == ListenUriMode.Unique;
         }
     }
 }

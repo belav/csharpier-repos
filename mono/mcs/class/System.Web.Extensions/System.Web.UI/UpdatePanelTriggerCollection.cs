@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,52 +38,51 @@ namespace System.Web.UI
     {
         UpdatePanel _owner;
         bool initialized;
-        
-        public UpdatePanelTriggerCollection (UpdatePanel owner)
+
+        public UpdatePanelTriggerCollection(UpdatePanel owner)
         {
             _owner = owner;
         }
 
-        public UpdatePanel Owner {
-            get {
-                return _owner;
-            }
+        public UpdatePanel Owner
+        {
+            get { return _owner; }
         }
 
-        protected override void ClearItems ()
+        protected override void ClearItems()
         {
-            base.ClearItems ();
+            base.ClearItems();
         }
 
-        protected override void InsertItem (int index, UpdatePanelTrigger item)
+        protected override void InsertItem(int index, UpdatePanelTrigger item)
         {
-            base.InsertItem (index, item);
+            base.InsertItem(index, item);
             item.Owner = Owner;
 
             if (!initialized || item == null)
                 return;
 
-            item.Initialize ();
+            item.Initialize();
         }
 
-        protected override void RemoveItem (int index)
+        protected override void RemoveItem(int index)
         {
-            base.RemoveItem (index);
+            base.RemoveItem(index);
         }
-        
-        protected override void SetItem (int index, UpdatePanelTrigger item)
+
+        protected override void SetItem(int index, UpdatePanelTrigger item)
         {
-            base.SetItem (index, item);
+            base.SetItem(index, item);
             item.Owner = Owner;
         }
 
-        internal void Initialize ()
+        internal void Initialize()
         {
             if (initialized)
                 return;
 
             for (int i = 0; i < Count; i++)
-                this [i].Initialize ();
+                this[i].Initialize();
 
             initialized = true;
         }

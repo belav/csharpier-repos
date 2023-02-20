@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,35 +30,42 @@ using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Text;
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
     [DefaultProperty("Text")]
     [DefaultEvent("MouseDoubleClick")]
-    [Designer ("System.Windows.Forms.Design.NotifyIconDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+    [Designer(
+        "System.Windows.Forms.Design.NotifyIconDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
     [ToolboxItemFilter("System.Windows.Forms", ToolboxItemFilterType.Allow)]
-    public sealed class NotifyIcon : Component {
+    public sealed class NotifyIcon : Component
+    {
         #region Local Variables
-        private ContextMenu        context_menu;
-        private Icon            icon;
-        private Bitmap            icon_bitmap;
-        private string            text;
-        private bool            visible;
-        private NotifyIconWindow    window;
-        private bool            systray_active;
-        private ToolTip            tooltip;
-        private bool            double_click;
+        private ContextMenu context_menu;
+        private Icon icon;
+        private Bitmap icon_bitmap;
+        private string text;
+        private bool visible;
+        private NotifyIconWindow window;
+        private bool systray_active;
+        private ToolTip tooltip;
+        private bool double_click;
         private string balloon_text;
         private string balloon_title;
         private ToolTipIcon balloon_icon;
-        private ContextMenuStrip    context_menu_strip;
-        private object            tag;
+        private ContextMenuStrip context_menu_strip;
+        private object tag;
         #endregion    // Local Variables
 
         #region NotifyIconWindow Class
-        internal class NotifyIconWindow : Form {
-            NotifyIcon    owner;
-            Rectangle    rect;
+        internal class NotifyIconWindow : Form
+        {
+            NotifyIcon owner;
+            Rectangle rect;
 
-            public NotifyIconWindow(NotifyIcon owner) {
+            public NotifyIconWindow(NotifyIcon owner)
+            {
                 this.owner = owner;
                 is_visible = false;
                 rect = new Rectangle(0, 0, 1, 1);
@@ -71,15 +78,17 @@ namespace System.Windows.Forms {
 
                 // Events that need to be sent to our parent
                 DoubleClick += new EventHandler(HandleDoubleClick);
-                MouseDown +=new MouseEventHandler(HandleMouseDown);
-                MouseUp +=new MouseEventHandler(HandleMouseUp);
-                MouseMove +=new MouseEventHandler(HandleMouseMove);
+                MouseDown += new MouseEventHandler(HandleMouseDown);
+                MouseUp += new MouseEventHandler(HandleMouseUp);
+                MouseMove += new MouseEventHandler(HandleMouseMove);
                 ContextMenu = owner.context_menu;
                 ContextMenuStrip = owner.context_menu_strip;
             }
 
-            protected override CreateParams CreateParams {
-                get {
+            protected override CreateParams CreateParams
+            {
+                get
+                {
                     CreateParams cp;
 
                     cp = base.CreateParams;
@@ -94,179 +103,271 @@ namespace System.Windows.Forms {
                 }
             }
 
-            protected override void WndProc(ref Message m) {
-                switch((Msg)m.Msg) {
-                        //
-                        //  NotifyIcon does CONTEXTMENU on mouse up, not down
-                        //  so we swallow the message here, and handle it on our own
-                        // 
-                        case Msg.WM_CONTEXTMENU:
+            protected override void WndProc(ref Message m)
+            {
+                switch ((Msg)m.Msg)
+                {
+                    //
+                    //  NotifyIcon does CONTEXTMENU on mouse up, not down
+                    //  so we swallow the message here, and handle it on our own
+                    //
+                    case Msg.WM_CONTEXTMENU:
                         return;
 
-                    case Msg.WM_USER: {
-                        switch ((Msg)m.LParam.ToInt32()) {
-                            case Msg.WM_LBUTTONDOWN: {
-                                owner.OnMouseDown (new MouseEventArgs(MouseButtons.Left, 1, Control.MousePosition.X, Control.MousePosition.Y, 0));
+                    case Msg.WM_USER:
+                    {
+                        switch ((Msg)m.LParam.ToInt32())
+                        {
+                            case Msg.WM_LBUTTONDOWN:
+                            {
+                                owner.OnMouseDown(
+                                    new MouseEventArgs(
+                                        MouseButtons.Left,
+                                        1,
+                                        Control.MousePosition.X,
+                                        Control.MousePosition.Y,
+                                        0
+                                    )
+                                );
                                 return;
                             }
 
-                            case Msg.WM_LBUTTONUP: {
-                                owner.OnMouseUp (new MouseEventArgs(MouseButtons.Left, 1, Control.MousePosition.X, Control.MousePosition.Y, 0));
+                            case Msg.WM_LBUTTONUP:
+                            {
+                                owner.OnMouseUp(
+                                    new MouseEventArgs(
+                                        MouseButtons.Left,
+                                        1,
+                                        Control.MousePosition.X,
+                                        Control.MousePosition.Y,
+                                        0
+                                    )
+                                );
                                 return;
                             }
 
-                            case Msg.WM_LBUTTONDBLCLK: {
-                                owner.OnDoubleClick (EventArgs.Empty);
-                                owner.OnMouseDoubleClick (new MouseEventArgs (MouseButtons.Left, 2, Control.MousePosition.X, Control.MousePosition.Y, 0));
+                            case Msg.WM_LBUTTONDBLCLK:
+                            {
+                                owner.OnDoubleClick(EventArgs.Empty);
+                                owner.OnMouseDoubleClick(
+                                    new MouseEventArgs(
+                                        MouseButtons.Left,
+                                        2,
+                                        Control.MousePosition.X,
+                                        Control.MousePosition.Y,
+                                        0
+                                    )
+                                );
                                 return;
                             }
 
-                            case Msg.WM_MOUSEMOVE: {
-                                owner.OnMouseMove (new MouseEventArgs(MouseButtons.None, 1, Control.MousePosition.X, Control.MousePosition.Y, 0));
+                            case Msg.WM_MOUSEMOVE:
+                            {
+                                owner.OnMouseMove(
+                                    new MouseEventArgs(
+                                        MouseButtons.None,
+                                        1,
+                                        Control.MousePosition.X,
+                                        Control.MousePosition.Y,
+                                        0
+                                    )
+                                );
                                 return;
                             }
 
-                            case Msg.WM_RBUTTONDOWN: {
-                                owner.OnMouseDown (new MouseEventArgs(MouseButtons.Right, 1, Control.MousePosition.X, Control.MousePosition.Y, 0));
+                            case Msg.WM_RBUTTONDOWN:
+                            {
+                                owner.OnMouseDown(
+                                    new MouseEventArgs(
+                                        MouseButtons.Right,
+                                        1,
+                                        Control.MousePosition.X,
+                                        Control.MousePosition.Y,
+                                        0
+                                    )
+                                );
                                 return;
                             }
 
-                            case Msg.WM_RBUTTONUP: {
-                                owner.OnMouseUp (new MouseEventArgs(MouseButtons.Right, 1, Control.MousePosition.X, Control.MousePosition.Y, 0));
+                            case Msg.WM_RBUTTONUP:
+                            {
+                                owner.OnMouseUp(
+                                    new MouseEventArgs(
+                                        MouseButtons.Right,
+                                        1,
+                                        Control.MousePosition.X,
+                                        Control.MousePosition.Y,
+                                        0
+                                    )
+                                );
                                 return;
                             }
 
-                            case Msg.WM_RBUTTONDBLCLK: {
-                                owner.OnDoubleClick (EventArgs.Empty);
-                                owner.OnMouseDoubleClick (new MouseEventArgs (MouseButtons.Left, 2, Control.MousePosition.X, Control.MousePosition.Y, 0));
+                            case Msg.WM_RBUTTONDBLCLK:
+                            {
+                                owner.OnDoubleClick(EventArgs.Empty);
+                                owner.OnMouseDoubleClick(
+                                    new MouseEventArgs(
+                                        MouseButtons.Left,
+                                        2,
+                                        Control.MousePosition.X,
+                                        Control.MousePosition.Y,
+                                        0
+                                    )
+                                );
                                 return;
                             }
 
-                            case Msg.NIN_BALLOONUSERCLICK: {
-                                owner.OnBalloonTipClicked (EventArgs.Empty);
+                            case Msg.NIN_BALLOONUSERCLICK:
+                            {
+                                owner.OnBalloonTipClicked(EventArgs.Empty);
                                 return;
                             }
 
-                            case Msg.NIN_BALLOONSHOW: {
-                                owner.OnBalloonTipShown (EventArgs.Empty);
+                            case Msg.NIN_BALLOONSHOW:
+                            {
+                                owner.OnBalloonTipShown(EventArgs.Empty);
                                 return;
                             }
 
                             case Msg.NIN_BALLOONHIDE:
-                            case Msg.NIN_BALLOONTIMEOUT: {
-                                owner.OnBalloonTipClosed (EventArgs.Empty);
+                            case Msg.NIN_BALLOONTIMEOUT:
+                            {
+                                owner.OnBalloonTipClosed(EventArgs.Empty);
                                 return;
                             }
                         }
                         return;
                     }
                 }
-                base.WndProc (ref m);
+                base.WndProc(ref m);
             }
 
-            internal void CalculateIconRect() {
-                int        x;
-                int        y;
-                int        size;
+            internal void CalculateIconRect()
+            {
+                int x;
+                int y;
+                int size;
 
                 // Icons are always square. Try to center them in the window
-                if (ClientRectangle.Width < ClientRectangle.Height) {
+                if (ClientRectangle.Width < ClientRectangle.Height)
+                {
                     size = ClientRectangle.Width;
-                } else {
+                }
+                else
+                {
                     size = ClientRectangle.Height;
                 }
                 x = this.ClientRectangle.Width / 2 - size / 2;
                 y = this.ClientRectangle.Height / 2 - size / 2;
                 rect = new Rectangle(x, y, size, size);
 
-                Bounds = new Rectangle (0, 0, size, size);
+                Bounds = new Rectangle(0, 0, size, size);
             }
 
-            internal override void OnPaintInternal (PaintEventArgs e) {
-                if (owner.icon != null) {
+            internal override void OnPaintInternal(PaintEventArgs e)
+            {
+                if (owner.icon != null)
+                {
                     // At least in Gnome, the background of the panel is the same as the Menu, so we go for it
                     // instead of (most of the time) plain white.
-                    e.Graphics.FillRectangle(ThemeEngine.Current.ResPool.GetSolidBrush(SystemColors.Menu), rect);
-                    e.Graphics.DrawImage(owner.icon_bitmap,
-                                 rect,
-                                 new Rectangle (0, 0, owner.icon_bitmap.Width, owner.icon_bitmap.Height),
-                                 GraphicsUnit.Pixel);
-
+                    e.Graphics.FillRectangle(
+                        ThemeEngine.Current.ResPool.GetSolidBrush(SystemColors.Menu),
+                        rect
+                    );
+                    e.Graphics.DrawImage(
+                        owner.icon_bitmap,
+                        rect,
+                        new Rectangle(0, 0, owner.icon_bitmap.Width, owner.icon_bitmap.Height),
+                        GraphicsUnit.Pixel
+                    );
                 }
             }
 
-            internal void InternalRecreateHandle () {
-                base.RecreateHandle ();
-            }
-
-            private void HandleSizeChanged(object sender, EventArgs e) {
-                owner.Recalculate ();
-            }
-
-            private void HandleDoubleClick (object sender, EventArgs e)
+            internal void InternalRecreateHandle()
             {
-                owner.OnDoubleClick (e);
-                owner.OnMouseDoubleClick (new MouseEventArgs (MouseButtons.Left, 2, Control.MousePosition.X, Control.MousePosition.Y, 0));
+                base.RecreateHandle();
             }
 
-            private void HandleMouseDown (object sender, MouseEventArgs e)
+            private void HandleSizeChanged(object sender, EventArgs e)
             {
-                owner.OnMouseDown (e);
+                owner.Recalculate();
             }
 
-            private void HandleMouseUp (object sender, MouseEventArgs e)
+            private void HandleDoubleClick(object sender, EventArgs e)
             {
-                owner.OnMouseUp (e);
+                owner.OnDoubleClick(e);
+                owner.OnMouseDoubleClick(
+                    new MouseEventArgs(
+                        MouseButtons.Left,
+                        2,
+                        Control.MousePosition.X,
+                        Control.MousePosition.Y,
+                        0
+                    )
+                );
             }
 
-            private void HandleMouseMove (object sender, MouseEventArgs e)
+            private void HandleMouseDown(object sender, MouseEventArgs e)
             {
-                owner.OnMouseMove (e);
+                owner.OnMouseDown(e);
+            }
+
+            private void HandleMouseUp(object sender, MouseEventArgs e)
+            {
+                owner.OnMouseUp(e);
+            }
+
+            private void HandleMouseMove(object sender, MouseEventArgs e)
+            {
+                owner.OnMouseMove(e);
             }
         }
         #endregion    // NotifyIconWindow Class
-        
+
         #region NotifyIconBalloonWindow Class
-        internal class BalloonWindow : Form 
+        internal class BalloonWindow : Form
         {
             private IntPtr owner;
             private Timer timer;
-            
+
             private string title;
             private string text;
             private ToolTipIcon icon;
 
-            public BalloonWindow (IntPtr owner)
+            public BalloonWindow(IntPtr owner)
             {
                 this.owner = owner;
-                
+
                 StartPosition = FormStartPosition.Manual;
                 FormBorderStyle = FormBorderStyle.None;
 
-                MouseDown += new MouseEventHandler (HandleMouseDown);
-                
-                timer = new Timer ();
+                MouseDown += new MouseEventHandler(HandleMouseDown);
+
+                timer = new Timer();
                 timer.Enabled = false;
-                timer.Tick += new EventHandler (HandleTimer);
+                timer.Tick += new EventHandler(HandleTimer);
             }
 
-            public IntPtr OwnerHandle {
-                get {
-                    return owner;
-                }
-            }
-            
-            protected override void Dispose (bool disposing)
+            public IntPtr OwnerHandle
             {
-                if (disposing) {
+                get { return owner; }
+            }
+
+            protected override void Dispose(bool disposing)
+            {
+                if (disposing)
+                {
                     timer.Stop();
                     timer.Dispose();
                 }
-                base.Dispose (disposing);
+                base.Dispose(disposing);
             }
 
-            protected override CreateParams CreateParams {
-                get {
+            protected override CreateParams CreateParams
+            {
+                get
+                {
                     CreateParams cp;
 
                     cp = base.CreateParams;
@@ -274,33 +375,36 @@ namespace System.Windows.Forms {
                     cp.Style = (int)WindowStyles.WS_POPUP;
                     cp.Style |= (int)WindowStyles.WS_CLIPSIBLINGS;
 
-                    cp.ExStyle = (int)(WindowExStyles.WS_EX_TOOLWINDOW | WindowExStyles.WS_EX_TOPMOST);
+                    cp.ExStyle = (int)(
+                        WindowExStyles.WS_EX_TOOLWINDOW | WindowExStyles.WS_EX_TOPMOST
+                    );
 
                     return cp;
                 }
             }
 
-            public new void Close () {
-                base.Close ();
-                XplatUI.SendMessage (owner, Msg.WM_USER, IntPtr.Zero, (IntPtr) Msg.NIN_BALLOONHIDE);
-            }
-            
-            protected override void OnShown (EventArgs e)
+            public new void Close()
             {
-                base.OnShown (e);
-                timer.Start ();
-            }
-            
-            protected override void OnPaint (PaintEventArgs e) 
-            {
-                ThemeEngine.Current.DrawBalloonWindow (e.Graphics, ClientRectangle, this);
-                base.OnPaint (e);
+                base.Close();
+                XplatUI.SendMessage(owner, Msg.WM_USER, IntPtr.Zero, (IntPtr)Msg.NIN_BALLOONHIDE);
             }
 
-            private void Recalculate () 
+            protected override void OnShown(EventArgs e)
             {
-                Rectangle rect = ThemeEngine.Current.BalloonWindowRect (this);
-                
+                base.OnShown(e);
+                timer.Start();
+            }
+
+            protected override void OnPaint(PaintEventArgs e)
+            {
+                ThemeEngine.Current.DrawBalloonWindow(e.Graphics, ClientRectangle, this);
+                base.OnPaint(e);
+            }
+
+            private void Recalculate()
+            {
+                Rectangle rect = ThemeEngine.Current.BalloonWindowRect(this);
+
                 Left = rect.Left;
                 Top = rect.Top;
                 Width = rect.Width;
@@ -313,22 +417,34 @@ namespace System.Windows.Forms {
             //    Close ();
             //}
 
-            private void HandleMouseDown (object sender, MouseEventArgs e)
+            private void HandleMouseDown(object sender, MouseEventArgs e)
             {
-                XplatUI.SendMessage (owner, Msg.WM_USER, IntPtr.Zero, (IntPtr) Msg.NIN_BALLOONUSERCLICK);
-                base.Close ();
+                XplatUI.SendMessage(
+                    owner,
+                    Msg.WM_USER,
+                    IntPtr.Zero,
+                    (IntPtr)Msg.NIN_BALLOONUSERCLICK
+                );
+                base.Close();
             }
 
-            private void HandleTimer (object sender, EventArgs e)
+            private void HandleTimer(object sender, EventArgs e)
             {
-                timer.Stop ();
-                XplatUI.SendMessage (owner, Msg.WM_USER, IntPtr.Zero, (IntPtr) Msg.NIN_BALLOONTIMEOUT);
-                base.Close ();
+                timer.Stop();
+                XplatUI.SendMessage(
+                    owner,
+                    Msg.WM_USER,
+                    IntPtr.Zero,
+                    (IntPtr)Msg.NIN_BALLOONTIMEOUT
+                );
+                base.Close();
             }
-            
-            internal StringFormat Format {
-                get {
-                    StringFormat format = new StringFormat ();
+
+            internal StringFormat Format
+            {
+                get
+                {
+                    StringFormat format = new StringFormat();
                     format.Alignment = StringAlignment.Near;
                     format.HotkeyPrefix = HotkeyPrefix.Hide;
 
@@ -336,42 +452,50 @@ namespace System.Windows.Forms {
                 }
             }
 
-            public new ToolTipIcon Icon {
+            public new ToolTipIcon Icon
+            {
                 get { return this.icon; }
-                set { 
+                set
+                {
                     if (value == this.icon)
                         return;
 
                     this.icon = value;
-                    Recalculate ();
+                    Recalculate();
                 }
             }
 
-            public string Title {
+            public string Title
+            {
                 get { return this.title; }
-                set { 
+                set
+                {
                     if (value == this.title)
                         return;
 
                     this.title = value;
-                    Recalculate ();
+                    Recalculate();
                 }
             }
 
-            public override string Text {
+            public override string Text
+            {
                 get { return this.text; }
-                set { 
+                set
+                {
                     if (value == this.text)
                         return;
 
                     this.text = value;
-                    Recalculate ();
+                    Recalculate();
                 }
             }
-            
-            public int Timeout {
+
+            public int Timeout
+            {
                 get { return timer.Interval; }
-                set {
+                set
+                {
                     // Some systems theres a limitiation in timeout, WinXP is between 10k and 30k.
                     if (value < 10000)
                         timer.Interval = 10000;
@@ -385,7 +509,8 @@ namespace System.Windows.Forms {
         #endregion  // NotifyIconBalloonWindow Class
 
         #region Public Constructors
-        public NotifyIcon() {
+        public NotifyIcon()
+        {
             window = new NotifyIconWindow(this);
             systray_active = false;
 
@@ -393,123 +518,138 @@ namespace System.Windows.Forms {
             balloon_text = "";
         }
 
-        public NotifyIcon(System.ComponentModel.IContainer container) : this() {
-        }
+        public NotifyIcon(System.ComponentModel.IContainer container)
+            : this() { }
         #endregion    // Public Constructors
 
         #region Public Methods
-        public void ShowBalloonTip (int timeout)
+        public void ShowBalloonTip(int timeout)
         {
             ShowBalloonTip(timeout, balloon_title, balloon_text, balloon_icon);
         }
 
-        public void ShowBalloonTip(int timeout, string tipTitle, string tipText, ToolTipIcon tipIcon)
+        public void ShowBalloonTip(
+            int timeout,
+            string tipTitle,
+            string tipText,
+            ToolTipIcon tipIcon
+        )
         {
             XplatUI.SystrayBalloon(window.Handle, timeout, tipTitle, tipText, tipIcon);
         }
         #endregion Public Methods
-        
+
         #region Private Methods
-        private void OnBalloonTipClicked (EventArgs e)
+        private void OnBalloonTipClicked(EventArgs e)
         {
-            EventHandler eh = (EventHandler)(Events [BalloonTipClickedEvent]);
+            EventHandler eh = (EventHandler)(Events[BalloonTipClickedEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
 
-        private void OnBalloonTipClosed (EventArgs e)
+        private void OnBalloonTipClosed(EventArgs e)
         {
-            EventHandler eh = (EventHandler)(Events [BalloonTipClosedEvent]);
+            EventHandler eh = (EventHandler)(Events[BalloonTipClosedEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
 
-        private void OnBalloonTipShown (EventArgs e)
+        private void OnBalloonTipShown(EventArgs e)
         {
-            EventHandler eh = (EventHandler)(Events [BalloonTipShownEvent]);
+            EventHandler eh = (EventHandler)(Events[BalloonTipShownEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
 
-        private void OnClick (EventArgs e)
+        private void OnClick(EventArgs e)
         {
-            EventHandler eh = (EventHandler)(Events [ClickEvent]);
+            EventHandler eh = (EventHandler)(Events[ClickEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
 
-        private void OnDoubleClick (EventArgs e)
+        private void OnDoubleClick(EventArgs e)
         {
             double_click = true;
-            EventHandler eh = (EventHandler)(Events [DoubleClickEvent]);
+            EventHandler eh = (EventHandler)(Events[DoubleClickEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
 
-        private void OnMouseClick (MouseEventArgs e)
+        private void OnMouseClick(MouseEventArgs e)
         {
             MouseEventHandler eh = (MouseEventHandler)(Events[MouseClickEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
-        
-        private void OnMouseDoubleClick (MouseEventArgs e)
+
+        private void OnMouseDoubleClick(MouseEventArgs e)
         {
             MouseEventHandler eh = (MouseEventHandler)(Events[MouseDoubleClickEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
 
-        private void OnMouseDown (MouseEventArgs e)
+        private void OnMouseDown(MouseEventArgs e)
         {
-            MouseEventHandler eh = (MouseEventHandler)(Events [MouseDownEvent]);
+            MouseEventHandler eh = (MouseEventHandler)(Events[MouseDownEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
 
-        private void OnMouseUp (MouseEventArgs e)
+        private void OnMouseUp(MouseEventArgs e)
         {
-            if ((e.Button & MouseButtons.Right) == MouseButtons.Right) {
-                if (context_menu != null) {
-                    XplatUI.SetForegroundWindow (window.Handle);
-                    context_menu.Show (window, new Point(e.X, e.Y));
+            if ((e.Button & MouseButtons.Right) == MouseButtons.Right)
+            {
+                if (context_menu != null)
+                {
+                    XplatUI.SetForegroundWindow(window.Handle);
+                    context_menu.Show(window, new Point(e.X, e.Y));
                 }
-                else if (context_menu_strip != null) {
-                    XplatUI.SetForegroundWindow (window.Handle);
-                    context_menu_strip.Show (window, new Point (e.X, e.Y), ToolStripDropDownDirection.AboveLeft);
+                else if (context_menu_strip != null)
+                {
+                    XplatUI.SetForegroundWindow(window.Handle);
+                    context_menu_strip.Show(
+                        window,
+                        new Point(e.X, e.Y),
+                        ToolStripDropDownDirection.AboveLeft
+                    );
                 }
             }
 
-            MouseEventHandler eh = (MouseEventHandler)(Events [MouseUpEvent]);
+            MouseEventHandler eh = (MouseEventHandler)(Events[MouseUpEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
 
-            if (!double_click) {
-                OnClick (EventArgs.Empty);
-                OnMouseClick (e);
+            if (!double_click)
+            {
+                OnClick(EventArgs.Empty);
+                OnMouseClick(e);
                 double_click = false;
             }
         }
 
-        private void OnMouseMove (MouseEventArgs e)
+        private void OnMouseMove(MouseEventArgs e)
         {
-            MouseEventHandler eh = (MouseEventHandler)(Events [MouseMoveEvent]);
+            MouseEventHandler eh = (MouseEventHandler)(Events[MouseMoveEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
 
-        private void Recalculate () 
+        private void Recalculate()
         {
-            window.CalculateIconRect ();
+            window.CalculateIconRect();
 
-            if (!Visible || (text == string.Empty && icon == null)) {
-                HideSystray ();
-            } else {
-
+            if (!Visible || (text == string.Empty && icon == null))
+            {
+                HideSystray();
+            }
+            else
+            {
                 if (systray_active)
-                    UpdateSystray ();
+                    UpdateSystray();
                 else
-                    ShowSystray ();
+                    ShowSystray();
             }
         }
 
@@ -526,7 +666,8 @@ namespace System.Windows.Forms {
 
         private void HideSystray()
         {
-            if (!systray_active) {
+            if (!systray_active)
+            {
                 return;
             }
 
@@ -536,11 +677,13 @@ namespace System.Windows.Forms {
 
         private void UpdateSystray()
         {
-            if (icon_bitmap != null) {
+            if (icon_bitmap != null)
+            {
                 icon_bitmap.Dispose();
             }
 
-            if (icon != null) {
+            if (icon != null)
+            {
                 icon_bitmap = icon.ToBitmap();
             }
 
@@ -550,63 +693,74 @@ namespace System.Windows.Forms {
         #endregion    // Private Methods
 
         #region Public Instance Properties
-        [DefaultValue ("None")]
-        public ToolTipIcon BalloonTipIcon {
+        [DefaultValue("None")]
+        public ToolTipIcon BalloonTipIcon
+        {
             get { return this.balloon_icon; }
-            set {
+            set
+            {
                 if (value == this.balloon_icon)
                     return;
-            
+
                 this.balloon_icon = value;
             }
         }
 
         [Localizable(true)]
-        [DefaultValue ("")]
-        [Editor ("System.ComponentModel.Design.MultilineStringEditor, " + Consts.AssemblySystem_Design,
-             "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        public string BalloonTipText {
+        [DefaultValue("")]
+        [Editor(
+            "System.ComponentModel.Design.MultilineStringEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        public string BalloonTipText
+        {
             get { return this.balloon_text; }
-            set {
+            set
+            {
                 if (value == this.balloon_text)
                     return;
-                
+
                 this.balloon_text = value;
             }
         }
-         
+
         [Localizable(true)]
-        [DefaultValue ("")]
-        public string BalloonTipTitle {
+        [DefaultValue("")]
+        public string BalloonTipTitle
+        {
             get { return this.balloon_title; }
-            set {
+            set
+            {
                 if (value == this.balloon_title)
                     return;
-    
+
                 this.balloon_title = value;
             }
         }
-        
-        [DefaultValue(null)]
-        [Browsable (false)]
-        public ContextMenu ContextMenu {
-            get {
-                return context_menu;
-            }
 
-            set {
-                if (context_menu != value) {
+        [DefaultValue(null)]
+        [Browsable(false)]
+        public ContextMenu ContextMenu
+        {
+            get { return context_menu; }
+            set
+            {
+                if (context_menu != value)
+                {
                     context_menu = value;
                     window.ContextMenu = value;
                 }
             }
         }
 
-        [DefaultValue (null)]
-        public ContextMenuStrip ContextMenuStrip {
+        [DefaultValue(null)]
+        public ContextMenuStrip ContextMenuStrip
+        {
             get { return this.context_menu_strip; }
-            set {
-                if (this.context_menu_strip != value) {
+            set
+            {
+                if (this.context_menu_strip != value)
+                {
                     this.context_menu_strip = value;
                     window.ContextMenuStrip = value;
                 }
@@ -615,65 +769,75 @@ namespace System.Windows.Forms {
 
         [Localizable(true)]
         [DefaultValue(null)]
-        public Icon Icon {
-            get {
-                return icon;
-            }
-
-            set {
-                if (icon != value) {
+        public Icon Icon
+        {
+            get { return icon; }
+            set
+            {
+                if (icon != value)
+                {
                     icon = value;
-                    Recalculate ();
+                    Recalculate();
                 }
             }
         }
 
-        [Localizable (false)]
-        [Bindable (true)]
-        [TypeConverter (typeof (StringConverter))]
-        [DefaultValue (null)]
-        public object Tag {
+        [Localizable(false)]
+        [Bindable(true)]
+        [TypeConverter(typeof(StringConverter))]
+        [DefaultValue(null)]
+        public object Tag
+        {
             get { return this.tag; }
             set { this.tag = value; }
         }
 
-        [DefaultValue ("")]
-        [Editor ("System.ComponentModel.Design.MultilineStringEditor, " + Consts.AssemblySystem_Design,
-             typeof (System.Drawing.Design.UITypeEditor))]
-        [Localizable (true)]
-        public string Text {
-            get {
-                return text;
-            }
-
-            set {
-                if (text != value) {
-                    if (value.Length >= 64) {
-                        throw new ArgumentException("ToolTip length must be less than 64 characters long", "Text");
+        [DefaultValue("")]
+        [Editor(
+            "System.ComponentModel.Design.MultilineStringEditor, " + Consts.AssemblySystem_Design,
+            typeof(System.Drawing.Design.UITypeEditor)
+        )]
+        [Localizable(true)]
+        public string Text
+        {
+            get { return text; }
+            set
+            {
+                if (text != value)
+                {
+                    if (value.Length >= 64)
+                    {
+                        throw new ArgumentException(
+                            "ToolTip length must be less than 64 characters long",
+                            "Text"
+                        );
                     }
                     text = value;
-                    Recalculate ();
+                    Recalculate();
                 }
             }
         }
 
         [Localizable(true)]
         [DefaultValue(false)]
-        public bool Visible {
-            get {
-                return visible;
-            }
-
-            set {
-                if (visible != value) {
+        public bool Visible
+        {
+            get { return visible; }
+            set
+            {
+                if (visible != value)
+                {
                     visible = value;
 
                     // Let our control know, too
                     window.is_visible = value;
 
-                    if (visible) {
-                        ShowSystray ();
-                    } else {
+                    if (visible)
+                    {
+                        ShowSystray();
+                    }
+                    else
+                    {
                         HideSystray();
                     }
                 }
@@ -682,89 +846,101 @@ namespace System.Windows.Forms {
         #endregion    // Public Instance Properties
 
         #region Protected Instance Methods
-        protected override void Dispose(bool disposing) {
+        protected override void Dispose(bool disposing)
+        {
             if (visible)
                 HideSystray();
 
-            if (icon_bitmap != null) {
+            if (icon_bitmap != null)
+            {
                 icon_bitmap.Dispose();
             }
 
             if (disposing)
                 icon = null;
 
-            base.Dispose (disposing);
+            base.Dispose(disposing);
         }
 
         #endregion    // Protected Instance Methods
 
         #region Events
-        static object ClickEvent = new object ();
-        static object DoubleClickEvent = new object ();
-        static object MouseDownEvent = new object ();
-        static object MouseMoveEvent = new object ();
-        static object MouseUpEvent = new object ();
-        static object BalloonTipClickedEvent = new object ();
-        static object BalloonTipClosedEvent = new object ();
-        static object BalloonTipShownEvent = new object ();
-        static object MouseClickEvent = new object ();
-        static object MouseDoubleClickEvent = new object ();
+        static object ClickEvent = new object();
+        static object DoubleClickEvent = new object();
+        static object MouseDownEvent = new object();
+        static object MouseMoveEvent = new object();
+        static object MouseUpEvent = new object();
+        static object BalloonTipClickedEvent = new object();
+        static object BalloonTipClosedEvent = new object();
+        static object BalloonTipShownEvent = new object();
+        static object MouseClickEvent = new object();
+        static object MouseDoubleClickEvent = new object();
 
         [MWFCategory("Action")]
-        public event EventHandler BalloonTipClicked {
-            add { Events.AddHandler (BalloonTipClickedEvent, value); }
-            remove { Events.RemoveHandler (BalloonTipClickedEvent, value); }
-        }
-
-        [MWFCategory("Action")]
-        public event EventHandler BalloonTipClosed {
-            add { Events.AddHandler (BalloonTipClosedEvent, value); }
-            remove { Events.RemoveHandler (BalloonTipClosedEvent, value); }
+        public event EventHandler BalloonTipClicked
+        {
+            add { Events.AddHandler(BalloonTipClickedEvent, value); }
+            remove { Events.RemoveHandler(BalloonTipClickedEvent, value); }
         }
 
         [MWFCategory("Action")]
-        public event EventHandler BalloonTipShown {
-            add { Events.AddHandler (BalloonTipShownEvent, value); }
-            remove { Events.RemoveHandler (BalloonTipShownEvent, value); }
+        public event EventHandler BalloonTipClosed
+        {
+            add { Events.AddHandler(BalloonTipClosedEvent, value); }
+            remove { Events.RemoveHandler(BalloonTipClosedEvent, value); }
         }
 
         [MWFCategory("Action")]
-        public event MouseEventHandler MouseClick {
-            add { Events.AddHandler (MouseClickEvent, value); }
-            remove { Events.RemoveHandler (MouseClickEvent, value); }
-        }
-
-        [MWFCategory ("Action")]
-        public event MouseEventHandler MouseDoubleClick {
-            add { Events.AddHandler (MouseDoubleClickEvent, value); }
-            remove { Events.RemoveHandler (MouseDoubleClickEvent, value); }
+        public event EventHandler BalloonTipShown
+        {
+            add { Events.AddHandler(BalloonTipShownEvent, value); }
+            remove { Events.RemoveHandler(BalloonTipShownEvent, value); }
         }
 
         [MWFCategory("Action")]
-        public event EventHandler Click {
-            add { Events.AddHandler (ClickEvent, value); }
-            remove { Events.RemoveHandler (ClickEvent, value); }
+        public event MouseEventHandler MouseClick
+        {
+            add { Events.AddHandler(MouseClickEvent, value); }
+            remove { Events.RemoveHandler(MouseClickEvent, value); }
         }
 
         [MWFCategory("Action")]
-        public event EventHandler DoubleClick {
-            add { Events.AddHandler (DoubleClickEvent, value); }
-            remove { Events.RemoveHandler (DoubleClickEvent, value); }
+        public event MouseEventHandler MouseDoubleClick
+        {
+            add { Events.AddHandler(MouseDoubleClickEvent, value); }
+            remove { Events.RemoveHandler(MouseDoubleClickEvent, value); }
         }
 
-        public event MouseEventHandler MouseDown {
-            add { Events.AddHandler (MouseDownEvent, value); }
-            remove { Events.RemoveHandler (MouseDownEvent, value); }
+        [MWFCategory("Action")]
+        public event EventHandler Click
+        {
+            add { Events.AddHandler(ClickEvent, value); }
+            remove { Events.RemoveHandler(ClickEvent, value); }
         }
 
-        public event MouseEventHandler MouseMove {
-            add { Events.AddHandler (MouseMoveEvent, value); }
-            remove { Events.RemoveHandler (MouseMoveEvent, value); }
+        [MWFCategory("Action")]
+        public event EventHandler DoubleClick
+        {
+            add { Events.AddHandler(DoubleClickEvent, value); }
+            remove { Events.RemoveHandler(DoubleClickEvent, value); }
         }
 
-        public event MouseEventHandler MouseUp {
-            add { Events.AddHandler (MouseUpEvent, value); }
-            remove { Events.RemoveHandler (MouseUpEvent, value); }
+        public event MouseEventHandler MouseDown
+        {
+            add { Events.AddHandler(MouseDownEvent, value); }
+            remove { Events.RemoveHandler(MouseDownEvent, value); }
+        }
+
+        public event MouseEventHandler MouseMove
+        {
+            add { Events.AddHandler(MouseMoveEvent, value); }
+            remove { Events.RemoveHandler(MouseMoveEvent, value); }
+        }
+
+        public event MouseEventHandler MouseUp
+        {
+            add { Events.AddHandler(MouseUpEvent, value); }
+            remove { Events.RemoveHandler(MouseUpEvent, value); }
         }
 
         #endregion    // Events

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
 
-public delegate void Del ();
+public delegate void Del();
 
 public class Class0
 {
@@ -19,9 +19,7 @@ public class Class1
     public event Del Evt3;
 }
 
-public class Class2
-{
-}
+public class Class2 { }
 
 public class Class3
 {
@@ -32,8 +30,5 @@ public class Class3
 
 public class Class
 {
-    public static void Main ()
-    {
-    
-    }
+    public static void Main() { }
 }

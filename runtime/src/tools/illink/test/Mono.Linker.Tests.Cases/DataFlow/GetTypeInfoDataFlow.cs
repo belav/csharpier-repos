@@ -13,40 +13,42 @@ namespace Mono.Linker.Tests.Cases.DataFlow
     [ExpectedNoWarnings]
     class GetTypeInfoDataFlow
     {
-        public static void Main ()
+        public static void Main()
         {
-            TestNoAnnotations (typeof (TestType));
-            TestWithAnnotations (typeof (TestType));
-            TestWithNull ();
-            TestWithNoValue ();
+            TestNoAnnotations(typeof(TestType));
+            TestWithAnnotations(typeof(TestType));
+            TestWithNull();
+            TestWithNoValue();
         }
 
-        [ExpectedWarning ("IL2067", nameof (DataFlowTypeExtensions.RequiresPublicMethods))]
-        static void TestNoAnnotations (Type t)
+        [ExpectedWarning("IL2067", nameof(DataFlowTypeExtensions.RequiresPublicMethods))]
+        static void TestNoAnnotations(Type t)
         {
-            t.GetTypeInfo ().RequiresPublicMethods ();
-            t.GetTypeInfo ().RequiresNone ();
+            t.GetTypeInfo().RequiresPublicMethods();
+            t.GetTypeInfo().RequiresNone();
         }
 
-        [ExpectedWarning ("IL2067", nameof (DataFlowTypeExtensions.RequiresPublicFields))]
-        static void TestWithAnnotations ([DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)] Type t)
+        [ExpectedWarning("IL2067", nameof(DataFlowTypeExtensions.RequiresPublicFields))]
+        static void TestWithAnnotations(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type t
+        )
         {
-            t.GetTypeInfo ().RequiresPublicMethods ();
-            t.GetTypeInfo ().RequiresPublicFields ();
-            t.GetTypeInfo ().RequiresNone ();
+            t.GetTypeInfo().RequiresPublicMethods();
+            t.GetTypeInfo().RequiresPublicFields();
+            t.GetTypeInfo().RequiresNone();
         }
 
-        static void TestWithNull ()
+        static void TestWithNull()
         {
             Type t = null;
-            t.GetTypeInfo ().RequiresPublicMethods ();
+            t.GetTypeInfo().RequiresPublicMethods();
         }
 
-        static void TestWithNoValue ()
+        static void TestWithNoValue()
         {
             Type t = null;
-            Type noValue = Type.GetTypeFromHandle (t.TypeHandle);
-            noValue.GetTypeInfo ().RequiresPublicMethods ();
+            Type noValue = Type.GetTypeFromHandle(t.TypeHandle);
+            noValue.GetTypeInfo().RequiresPublicMethods();
         }
 
         class TestType { }

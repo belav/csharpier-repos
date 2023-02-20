@@ -6,8 +6,6 @@ namespace System.ComponentModel.EventBasedAsync.Tests
     public class TestException : Exception
     {
         public TestException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
     }
 }

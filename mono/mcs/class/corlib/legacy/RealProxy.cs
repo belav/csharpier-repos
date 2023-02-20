@@ -1,4 +1,3 @@
-
 using System;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Contexts;
@@ -7,32 +6,32 @@ using System.Runtime.InteropServices;
 
 namespace System.Runtime.Remoting.Proxies
 {
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     internal class TransparentProxy
     {
-#region Keep this code, it is used by the runtime
+        #region Keep this code, it is used by the runtime
 #pragma warning disable 169, 649
         public RealProxy _rp;
         Mono.RuntimeRemoteClassHandle _class;
         bool _custom_type_info;
 
-        internal object LoadRemoteFieldNew (IntPtr classPtr, IntPtr fieldPtr)
+        internal object LoadRemoteFieldNew(IntPtr classPtr, IntPtr fieldPtr)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        internal void StoreRemoteField (IntPtr classPtr, IntPtr fieldPtr, object arg)
+        internal void StoreRemoteField(IntPtr classPtr, IntPtr fieldPtr, object arg)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 #pragma warning restore 169, 649
-#endregion
+        #endregion
     }
 
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     public abstract class RealProxy
     {
-#region Keep this code, it is used by the runtime
+        #region Keep this code, it is used by the runtime
 #pragma warning disable 169, 649
         Type class_to_proxy;
         internal Context _targetContext;
@@ -43,23 +42,27 @@ namespace System.Runtime.Remoting.Proxies
         Object _objTP;
         object _stubData;
 
-        internal object GetAppDomainTarget ()
+        internal object GetAppDomainTarget()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        internal static object PrivateInvoke (RealProxy rp, IMessage msg, out Exception exc,
-                              out object [] out_args)
+        internal static object PrivateInvoke(
+            RealProxy rp,
+            IMessage msg,
+            out Exception exc,
+            out object[] out_args
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
 #pragma warning disable 169, 649
-#endregion
+        #endregion
 
-        RealProxy ()
+        RealProxy()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
     }
 }

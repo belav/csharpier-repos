@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore.TestModels.StoreValueGenerationModel;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-public abstract class StoreValueGenerationTriggerSqlServerFixture : StoreValueGenerationSqlServerFixtureBase
+public abstract class StoreValueGenerationTriggerSqlServerFixture
+    : StoreValueGenerationSqlServerFixtureBase
 {
     protected override void Seed(StoreValueGenerationContext context)
     {
@@ -22,7 +23,8 @@ FOR INSERT, UPDATE, DELETE AS
 BEGIN
     IF @@ROWCOUNT = 0
         return
-END");
+END"
+            );
         }
     }
 
@@ -32,7 +34,9 @@ END");
 
         foreach (var entity in modelBuilder.Model.GetEntityTypes())
         {
-            modelBuilder.Entity(entity.Name).ToTable(b => b.HasTrigger(entity.GetTableName() + "_Trigger"));
+            modelBuilder
+                .Entity(entity.Name)
+                .ToTable(b => b.HasTrigger(entity.GetTableName() + "_Trigger"));
         }
     }
 }

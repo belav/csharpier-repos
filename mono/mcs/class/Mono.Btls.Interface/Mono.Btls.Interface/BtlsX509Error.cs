@@ -24,12 +24,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+
 namespace Mono.Btls.Interface
 {
     // Keep in sync with NativeBoringX509Error
     public enum BtlsX509Error
     {
         OK = 0,
+
         /* illegal error (for uninitialized values, to avoid X509_V_OK): 1 */
 
         UNABLE_TO_GET_ISSUER_CERT = 2,
@@ -59,6 +61,7 @@ namespace Mono.Btls.Interface
         INVALID_PURPOSE = 26,
         CERT_UNTRUSTED = 27,
         CERT_REJECTED = 28,
+
         /* These are 'informational' when looking for issuer cert */
         SUBJECT_ISSUER_MISMATCH = 29,
         AKID_SKID_MISMATCH = 30,
@@ -107,4 +110,3 @@ namespace Mono.Btls.Interface
         APPLICATION_VERIFICATION = 50
     }
 }
-

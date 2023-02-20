@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,7 +27,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void AutomaticDefaultConstructorGeneration()
         {
-            ClassEmitter emitter = new ClassEmitter(generator.ProxyBuilder.ModuleScope, "Foo", typeof (object), Type.EmptyTypes);
+            ClassEmitter emitter = new ClassEmitter(
+                generator.ProxyBuilder.ModuleScope,
+                "Foo",
+                typeof(object),
+                Type.EmptyTypes
+            );
             Type t = emitter.BuildType();
             Activator.CreateInstance(t);
         }
@@ -35,8 +40,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void AutomaticDefaultConstructorGenerationWithClosedGenericType()
         {
-            ClassEmitter emitter = new ClassEmitter(generator.ProxyBuilder.ModuleScope, "Foo", typeof (List<object>),
-                                                    Type.EmptyTypes);
+            ClassEmitter emitter = new ClassEmitter(
+                generator.ProxyBuilder.ModuleScope,
+                "Foo",
+                typeof(List<object>),
+                Type.EmptyTypes
+            );
             Type t = emitter.BuildType();
             Activator.CreateInstance(t);
         }
@@ -44,34 +53,62 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void StaticMethodArguments()
         {
-            ClassEmitter emitter = new ClassEmitter(generator.ProxyBuilder.ModuleScope, "Foo", typeof (List<object>),
-                                                    Type.EmptyTypes);
-            MethodEmitter methodEmitter = emitter.CreateMethod("StaticMethod", MethodAttributes.Public | MethodAttributes.Static,
-                                                               typeof (string), typeof (string));
+            ClassEmitter emitter = new ClassEmitter(
+                generator.ProxyBuilder.ModuleScope,
+                "Foo",
+                typeof(List<object>),
+                Type.EmptyTypes
+            );
+            MethodEmitter methodEmitter = emitter.CreateMethod(
+                "StaticMethod",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(string),
+                typeof(string)
+            );
             methodEmitter.CodeBuilder.AddStatement(new ReturnStatement(methodEmitter.Arguments[0]));
             Type t = emitter.BuildType();
-            Assert.AreEqual("five", t.GetMethod("StaticMethod").Invoke(null, new object[] {"five"}));
+            Assert.AreEqual(
+                "five",
+                t.GetMethod("StaticMethod").Invoke(null, new object[] { "five" })
+            );
         }
 
         [Test]
         public void InstanceMethodArguments()
         {
-            ClassEmitter emitter = new ClassEmitter(generator.ProxyBuilder.ModuleScope, "Foo", typeof (List<object>),
-                                                    Type.EmptyTypes);
-            MethodEmitter methodEmitter = emitter.CreateMethod("InstanceMethod", MethodAttributes.Public,
-                                                               typeof (string), typeof (string));
+            ClassEmitter emitter = new ClassEmitter(
+                generator.ProxyBuilder.ModuleScope,
+                "Foo",
+                typeof(List<object>),
+                Type.EmptyTypes
+            );
+            MethodEmitter methodEmitter = emitter.CreateMethod(
+                "InstanceMethod",
+                MethodAttributes.Public,
+                typeof(string),
+                typeof(string)
+            );
             methodEmitter.CodeBuilder.AddStatement(new ReturnStatement(methodEmitter.Arguments[0]));
             Type t = emitter.BuildType();
             object instance = Activator.CreateInstance(t);
-            Assert.AreEqual("six", t.GetMethod("InstanceMethod").Invoke(instance, new object[] {"six"}));
+            Assert.AreEqual(
+                "six",
+                t.GetMethod("InstanceMethod").Invoke(instance, new object[] { "six" })
+            );
         }
 
         [Test]
         public void ForceUnsignedFalseWithSignedTypes()
         {
             const bool shouldBeSigned = true;
-            ClassEmitter emitter = new ClassEmitter(generator.ProxyBuilder.ModuleScope, "Foo", typeof (object), Type.EmptyTypes,
-                                                    TypeAttributes.Public, false);
+            ClassEmitter emitter = new ClassEmitter(
+                generator.ProxyBuilder.ModuleScope,
+                "Foo",
+                typeof(object),
+                Type.EmptyTypes,
+                TypeAttributes.Public,
+                false
+            );
             Type t = emitter.BuildType();
             Assert.AreEqual(shouldBeSigned, StrongNameUtil.IsAssemblySigned(t.Assembly));
         }
@@ -79,8 +116,14 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void ForceUnsignedTrueWithSignedTypes()
         {
-            ClassEmitter emitter = new ClassEmitter(generator.ProxyBuilder.ModuleScope, "Foo", typeof (object), Type.EmptyTypes,
-                                                    TypeAttributes.Public, true);
+            ClassEmitter emitter = new ClassEmitter(
+                generator.ProxyBuilder.ModuleScope,
+                "Foo",
+                typeof(object),
+                Type.EmptyTypes,
+                TypeAttributes.Public,
+                true
+            );
             Type t = emitter.BuildType();
             Assert.IsFalse(StrongNameUtil.IsAssemblySigned(t.Assembly));
         }
@@ -88,32 +131,66 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void CreateFieldWithAttributes()
         {
-            ClassEmitter emitter = new ClassEmitter(generator.ProxyBuilder.ModuleScope, "Foo", typeof (object), Type.EmptyTypes);
-            emitter.CreateField("myField", typeof (string), FieldAttributes.FamANDAssem | FieldAttributes.InitOnly);
+            ClassEmitter emitter = new ClassEmitter(
+                generator.ProxyBuilder.ModuleScope,
+                "Foo",
+                typeof(object),
+                Type.EmptyTypes
+            );
+            emitter.CreateField(
+                "myField",
+                typeof(string),
+                FieldAttributes.FamANDAssem | FieldAttributes.InitOnly
+            );
             Type t = emitter.BuildType();
             FieldInfo field = t.GetField("myField", BindingFlags.NonPublic | BindingFlags.Instance);
             Assert.IsNotNull(field);
-            Assert.AreEqual(FieldAttributes.FamANDAssem | FieldAttributes.InitOnly, field.Attributes);
+            Assert.AreEqual(
+                FieldAttributes.FamANDAssem | FieldAttributes.InitOnly,
+                field.Attributes
+            );
         }
 
         [Test]
         public void CreateStaticFieldWithAttributes()
         {
-            ClassEmitter emitter = new ClassEmitter(generator.ProxyBuilder.ModuleScope, "Foo", typeof (object), Type.EmptyTypes);
-            emitter.CreateStaticField("myField", typeof (string), FieldAttributes.FamANDAssem | FieldAttributes.InitOnly);
+            ClassEmitter emitter = new ClassEmitter(
+                generator.ProxyBuilder.ModuleScope,
+                "Foo",
+                typeof(object),
+                Type.EmptyTypes
+            );
+            emitter.CreateStaticField(
+                "myField",
+                typeof(string),
+                FieldAttributes.FamANDAssem | FieldAttributes.InitOnly
+            );
             Type t = emitter.BuildType();
             FieldInfo field = t.GetField("myField", BindingFlags.NonPublic | BindingFlags.Static);
             Assert.IsNotNull(field);
-            Assert.AreEqual(FieldAttributes.Static | FieldAttributes.FamANDAssem | FieldAttributes.InitOnly, field.Attributes);
+            Assert.AreEqual(
+                FieldAttributes.Static | FieldAttributes.FamANDAssem | FieldAttributes.InitOnly,
+                field.Attributes
+            );
         }
 
         [Test]
         public void UsingClassEmitterForInterfaces()
         {
-            ClassEmitter emitter = new ClassEmitter(generator.ProxyBuilder.ModuleScope, "IFoo", null, Type.EmptyTypes, 
-                TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public, false);
-            emitter.CreateMethod("MyMethod", MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual,
-                                 typeof(void), Type.EmptyTypes);
+            ClassEmitter emitter = new ClassEmitter(
+                generator.ProxyBuilder.ModuleScope,
+                "IFoo",
+                null,
+                Type.EmptyTypes,
+                TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public,
+                false
+            );
+            emitter.CreateMethod(
+                "MyMethod",
+                MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual,
+                typeof(void),
+                Type.EmptyTypes
+            );
             Type t = emitter.BuildType();
             Assert.IsTrue(t.IsInterface);
             MethodInfo method = t.GetMethod("MyMethod");
@@ -124,49 +201,91 @@ namespace Castle.DynamicProxy.Tests
         public void NoBaseTypeForInterfaces()
         {
             DisableVerification();
-            ClassEmitter emitter = new ClassEmitter (generator.ProxyBuilder.ModuleScope, "IFoo", null, Type.EmptyTypes,
-                TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public, false);
+            ClassEmitter emitter = new ClassEmitter(
+                generator.ProxyBuilder.ModuleScope,
+                "IFoo",
+                null,
+                Type.EmptyTypes,
+                TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public,
+                false
+            );
 
-            Assert.Throws<InvalidOperationException>(delegate {
+            Assert.Throws<InvalidOperationException>(
+                delegate
+                {
 #pragma warning disable 219
-                Type t = emitter.BaseType;
+                    Type t = emitter.BaseType;
 #pragma warning restore 219
-            });
+                }
+            );
         }
 
         [Test]
         public void NoDefaultCtorForInterfaces()
         {
             DisableVerification();
-            ClassEmitter emitter = new ClassEmitter(generator.ProxyBuilder.ModuleScope, "IFoo", null, Type.EmptyTypes,
-                TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public, false);
+            ClassEmitter emitter = new ClassEmitter(
+                generator.ProxyBuilder.ModuleScope,
+                "IFoo",
+                null,
+                Type.EmptyTypes,
+                TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public,
+                false
+            );
 
-            Assert.Throws<InvalidOperationException>(delegate {
-                emitter.CreateDefaultConstructor();
-            });
+            Assert.Throws<InvalidOperationException>(
+                delegate
+                {
+                    emitter.CreateDefaultConstructor();
+                }
+            );
         }
 
         [Test]
         public void NoCustomCtorForInterfaces()
         {
             DisableVerification();
-            ClassEmitter emitter = new ClassEmitter(generator.ProxyBuilder.ModuleScope, "IFoo", null, Type.EmptyTypes,
-                TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public, false);
+            ClassEmitter emitter = new ClassEmitter(
+                generator.ProxyBuilder.ModuleScope,
+                "IFoo",
+                null,
+                Type.EmptyTypes,
+                TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public,
+                false
+            );
 
-            Assert.Throws<InvalidOperationException>(delegate {
-                emitter.CreateConstructor();
-            });
+            Assert.Throws<InvalidOperationException>(
+                delegate
+                {
+                    emitter.CreateConstructor();
+                }
+            );
         }
 
         [Test]
         public void NestedInterface()
         {
-            ClassEmitter outerEmitter = new ClassEmitter(generator.ProxyBuilder.ModuleScope, "IOuter", null, Type.EmptyTypes, 
-                TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public, false);
-            NestedClassEmitter innerEmitter = new NestedClassEmitter(outerEmitter, "IInner", 
-                TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.NestedPublic, null, Type.EmptyTypes);
-            innerEmitter.CreateMethod("MyMethod", MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual,
-                                      typeof(void), Type.EmptyTypes);
+            ClassEmitter outerEmitter = new ClassEmitter(
+                generator.ProxyBuilder.ModuleScope,
+                "IOuter",
+                null,
+                Type.EmptyTypes,
+                TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public,
+                false
+            );
+            NestedClassEmitter innerEmitter = new NestedClassEmitter(
+                outerEmitter,
+                "IInner",
+                TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.NestedPublic,
+                null,
+                Type.EmptyTypes
+            );
+            innerEmitter.CreateMethod(
+                "MyMethod",
+                MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual,
+                typeof(void),
+                Type.EmptyTypes
+            );
             Type inner = innerEmitter.BuildType();
             Type outer = outerEmitter.BuildType();
             Assert.IsTrue(inner.IsInterface);

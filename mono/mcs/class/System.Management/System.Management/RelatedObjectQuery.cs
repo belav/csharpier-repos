@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,111 +33,136 @@ namespace System.Management
     public class RelatedObjectQuery : WqlObjectQuery
     {
         [MonoTODO]
-        public RelatedObjectQuery ()
+        public RelatedObjectQuery()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public RelatedObjectQuery (string queryOrSourceObject)
+        public RelatedObjectQuery(string queryOrSourceObject)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public RelatedObjectQuery (string sourceObject, string relatedClass)
+        public RelatedObjectQuery(string sourceObject, string relatedClass)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public RelatedObjectQuery (bool isSchemaQuery, string sourceObject, string relatedClass, string relationshipClass, string relatedQualifier, string relationshipQualifier, string relatedRole, string thisRole)
+        public RelatedObjectQuery(
+            bool isSchemaQuery,
+            string sourceObject,
+            string relatedClass,
+            string relationshipClass,
+            string relatedQualifier,
+            string relationshipQualifier,
+            string relatedRole,
+            string thisRole
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public RelatedObjectQuery (string sourceObject, string relatedClass, string relationshipClass, string relatedQualifier, string relationshipQualifier, string relatedRole, string thisRole, bool classDefinitionsOnly)
+        public RelatedObjectQuery(
+            string sourceObject,
+            string relatedClass,
+            string relationshipClass,
+            string relatedQualifier,
+            string relationshipQualifier,
+            string relatedRole,
+            string thisRole,
+            bool classDefinitionsOnly
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         // Properties
-        
+
         [MonoTODO]
-        public bool ClassDefinitionsOnly {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public bool ClassDefinitionsOnly
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public bool IsSchemaQuery {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public bool IsSchemaQuery
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public string RelatedClass {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public string RelatedClass
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public string RelatedQualifier {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public string RelatedQualifier
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public string RelatedRole {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public string RelatedRole
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public string RelationshipClass {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public string RelationshipClass
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public string RelationshipQualifier {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public string RelationshipQualifier
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public string SourceObject {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public string SourceObject
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
+
         [MonoTODO]
-        public string ThisRole {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public string ThisRole
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         // Methods
-        
+
         [MonoTODO]
-        protected internal void BuildQuery ()
+        protected internal void BuildQuery()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public override object Clone ()
+        public override object Clone()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        protected internal override void ParseQuery (string query)
+        protected internal override void ParseQuery(string query)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
     }
 }
-

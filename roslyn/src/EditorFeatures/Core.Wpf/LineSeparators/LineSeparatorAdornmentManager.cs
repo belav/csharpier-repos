@@ -15,13 +15,24 @@ namespace Microsoft.CodeAnalysis.Editor.LineSeparators
 {
     internal class LineSeparatorAdornmentManager : AbstractAdornmentManager<LineSeparatorTag>
     {
-        public LineSeparatorAdornmentManager(IThreadingContext threadingContext, IWpfTextView textView,
-            IViewTagAggregatorFactoryService tagAggregatorFactoryService, IAsynchronousOperationListener asyncListener, string adornmentLayerName)
-            : base(threadingContext, textView, tagAggregatorFactoryService, asyncListener, adornmentLayerName)
-        {
-        }
+        public LineSeparatorAdornmentManager(
+            IThreadingContext threadingContext,
+            IWpfTextView textView,
+            IViewTagAggregatorFactoryService tagAggregatorFactoryService,
+            IAsynchronousOperationListener asyncListener,
+            string adornmentLayerName
+        )
+            : base(
+                threadingContext,
+                textView,
+                tagAggregatorFactoryService,
+                asyncListener,
+                adornmentLayerName
+            ) { }
 
-        protected override void AddAdornmentsToAdornmentLayer_CallOnlyOnUIThread(NormalizedSnapshotSpanCollection changedSpanCollection)
+        protected override void AddAdornmentsToAdornmentLayer_CallOnlyOnUIThread(
+            NormalizedSnapshotSpanCollection changedSpanCollection
+        )
         {
             // this method should only run on UI thread as we do WPF here.
             Contract.ThrowIfFalse(TextView.VisualElement.Dispatcher.CheckAccess());
@@ -45,7 +56,13 @@ namespace Microsoft.CodeAnalysis.Editor.LineSeparators
                         continue;
                     }
 
-                    if (!TryMapToSingleSnapshotSpan(tagMappingSpan.Span, TextView.TextSnapshot, out var span))
+                    if (
+                        !TryMapToSingleSnapshotSpan(
+                            tagMappingSpan.Span,
+                            TextView.TextSnapshot,
+                            out var span
+                        )
+                    )
                     {
                         continue;
                     }
@@ -61,13 +78,19 @@ namespace Microsoft.CodeAnalysis.Editor.LineSeparators
                             visualSpan: span,
                             tag: tag,
                             adornment: graphicsResult.VisualElement,
-                            removedCallback: delegate { graphicsResult.Dispose(); });
+                            removedCallback: delegate
+                            {
+                                graphicsResult.Dispose();
+                            }
+                        );
                     }
                 }
             }
         }
 
-        protected override void RemoveAdornmentFromAdornmentLayer_CallOnlyOnUIThread(SnapshotSpan span)
+        protected override void RemoveAdornmentFromAdornmentLayer_CallOnlyOnUIThread(
+            SnapshotSpan span
+        )
         {
             AdornmentLayer.RemoveAdornmentsByVisualSpan(span);
         }

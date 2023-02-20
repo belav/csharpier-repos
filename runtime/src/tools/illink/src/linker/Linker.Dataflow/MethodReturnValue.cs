@@ -8,7 +8,6 @@ using Mono.Cecil;
 using Mono.Linker.Dataflow;
 using TypeDefinition = Mono.Cecil.TypeDefinition;
 
-
 namespace ILLink.Shared.TrimAnalysis
 {
     /// <summary>
@@ -16,7 +15,11 @@ namespace ILLink.Shared.TrimAnalysis
     /// </summary>
     partial record MethodReturnValue : IValueWithStaticType
     {
-        public MethodReturnValue (TypeDefinition? staticType, MethodDefinition method, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes)
+        public MethodReturnValue(
+            TypeDefinition? staticType,
+            MethodDefinition method,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
+        )
         {
             StaticType = staticType;
             Method = method;
@@ -27,13 +30,14 @@ namespace ILLink.Shared.TrimAnalysis
 
         public override DynamicallyAccessedMemberTypes DynamicallyAccessedMemberTypes { get; }
 
-        public override IEnumerable<string> GetDiagnosticArgumentsForAnnotationMismatch ()
-            => new string[] { DiagnosticUtilities.GetMethodSignatureDisplayName (Method) };
+        public override IEnumerable<string> GetDiagnosticArgumentsForAnnotationMismatch() =>
+            new string[] { DiagnosticUtilities.GetMethodSignatureDisplayName(Method) };
 
         public TypeDefinition? StaticType { get; }
 
-        public override SingleValue DeepCopy () => this; // This value is immutable
+        public override SingleValue DeepCopy() => this; // This value is immutable
 
-        public override string ToString () => this.ValueToString (Method, DynamicallyAccessedMemberTypes);
+        public override string ToString() =>
+            this.ValueToString(Method, DynamicallyAccessedMemberTypes);
     }
 }

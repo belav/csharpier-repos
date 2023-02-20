@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -138,14 +138,14 @@ namespace Castle.DynamicProxy.Tests
             var process = new Process
             {
                 StartInfo =
-                    {
-                        FileName = FindPeVerify.PeVerifyPath,
-                        RedirectStandardOutput = true,
-                        UseShellExecute = false,
-                        WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory,
-                        Arguments = "\"" + assemblyPath + "\" /VERBOSE",
-                        CreateNoWindow = true
-                    }
+                {
+                    FileName = FindPeVerify.PeVerifyPath,
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory,
+                    Arguments = "\"" + assemblyPath + "\" /VERBOSE",
+                    CreateNoWindow = true
+                }
             };
             process.Start();
             var processOutput = process.StandardOutput.ReadToEnd();
@@ -156,7 +156,10 @@ namespace Castle.DynamicProxy.Tests
             if (process.ExitCode != 0)
             {
                 Console.WriteLine(processOutput);
-                Assert.Fail("PeVerify reported error(s): " + Environment.NewLine + processOutput, result);
+                Assert.Fail(
+                    "PeVerify reported error(s): " + Environment.NewLine + processOutput,
+                    result
+                );
             }
         }
 
@@ -164,9 +167,7 @@ namespace Castle.DynamicProxy.Tests
         public bool IsVerificationPossible => false;
 
         [TearDown]
-        public virtual void TearDown()
-        {
-        }
+        public virtual void TearDown() { }
 #endif // FEATURE_ASSEMBLYBUILDER_SAVE
     }
 }

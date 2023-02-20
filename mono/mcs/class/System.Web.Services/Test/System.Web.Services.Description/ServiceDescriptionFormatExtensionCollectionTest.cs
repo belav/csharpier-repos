@@ -19,35 +19,33 @@ namespace MonoTests.System.Web.Services.Description
     public class ServiceDescriptionFormatExtensionCollectionTest
     {
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void Add ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void Add()
         {
             ServiceDescriptionFormatExtensionCollection c =
-                new ServiceDescriptionFormatExtensionCollection (new ServiceDescription ());
+                new ServiceDescriptionFormatExtensionCollection(new ServiceDescription());
 
-            c.Add (0);
+            c.Add(0);
         }
 
         [Test]
-        public void Add2 ()
+        public void Add2()
         {
             ServiceDescriptionFormatExtensionCollection c =
-                new ServiceDescriptionFormatExtensionCollection (new ServiceDescription ());
+                new ServiceDescriptionFormatExtensionCollection(new ServiceDescription());
 
-            c.Add (new XmlDocument ().CreateElement ("foo"));
+            c.Add(new XmlDocument().CreateElement("foo"));
         }
 
-        class MySoapBinding : SoapBinding
-        {
-        }
+        class MySoapBinding : SoapBinding { }
 
         [Test]
-        public void Find ()
+        public void Find()
         {
             ServiceDescriptionFormatExtensionCollection c =
-                new ServiceDescriptionFormatExtensionCollection (new ServiceDescription ());
-            c.Add (new MySoapBinding ());
-            Assert.IsNotNull (c.Find (typeof (SoapBinding)));
+                new ServiceDescriptionFormatExtensionCollection(new ServiceDescription());
+            c.Add(new MySoapBinding());
+            Assert.IsNotNull(c.Find(typeof(SoapBinding)));
         }
     }
 }

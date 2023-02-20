@@ -7,14 +7,12 @@ class X
 {
     public delegate bool Function(int arg1, int arg2);
 
-    static void Main ()
+    static void Main()
     {
-        Delegate [] d = new Delegate [] {
-            new Function (f1),
-        };
+        Delegate[] d = new Delegate[] { new Function(f1), };
     }
 
-    static bool f1 (int a, object b)
+    static bool f1(int a, object b)
     {
         return false;
     }

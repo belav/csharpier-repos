@@ -8,7 +8,7 @@ namespace TopNS
 {
     class Foo
     {
-        Foo (string foo)
+        Foo(string foo)
         {
             /** incorrect doccomment*/
         }

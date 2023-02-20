@@ -8,32 +8,22 @@ namespace Testing
     /// </summary>
     public class Test
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 
     /// <summary>
     /// Incorrect comment markup. See <see cref="T:Testing.Test" /> too.
     /// </incorrect>
-    public class Test2
-    {
-    }
+    public class Test2 { }
 
     /**
         <summary>
         another Java-style documentation style
         </summary>
     */
-    public class Test3
-    {
-    }
+    public class Test3 { }
 
-        /// indentation level test <seealso
-        ///    cref="T:Testing.Test" />.
-public class Test4
-{
+    /// indentation level test <seealso
+    ///    cref="T:Testing.Test" />.
+    public class Test4 { }
 }
-
-}
-

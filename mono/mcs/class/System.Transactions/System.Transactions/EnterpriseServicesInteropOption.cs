@@ -12,10 +12,10 @@
 
 namespace System.Transactions
 {
-    public enum EnterpriseServicesInteropOption {
+    public enum EnterpriseServicesInteropOption
+    {
         None,
         Automatic,
         Full
     }
 }
-

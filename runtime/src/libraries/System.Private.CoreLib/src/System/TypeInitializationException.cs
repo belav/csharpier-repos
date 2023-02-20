@@ -18,7 +18,9 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class TypeInitializationException : SystemException
     {
         private readonly string? _typeName;
@@ -31,20 +33,26 @@ namespace System
             HResult = HResults.COR_E_TYPEINITIALIZATION;
         }
 
-
         public TypeInitializationException(string? fullTypeName, Exception? innerException)
-            : this(fullTypeName, SR.Format(SR.TypeInitialization_Type, fullTypeName), innerException)
-        {
-        }
+            : this(
+                fullTypeName,
+                SR.Format(SR.TypeInitialization_Type, fullTypeName),
+                innerException
+            ) { }
 
         // This is called from within the runtime.  I believe this is necessary
         // for Interop only, though it's not particularly useful.
-        internal TypeInitializationException(string? message) : base(message)
+        internal TypeInitializationException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_TYPEINITIALIZATION;
         }
 
-        internal TypeInitializationException(string? fullTypeName, string? message, Exception? innerException)
+        internal TypeInitializationException(
+            string? fullTypeName,
+            string? message,
+            Exception? innerException
+        )
             : base(message, innerException)
         {
             _typeName = fullTypeName;

@@ -1,5 +1,5 @@
 //
-// OracleInfoMessageEventArgs.cs 
+// OracleInfoMessageEventArgs.cs
 //
 // Part of the Mono class libraries at
 // mcs/class/System.Data.OracleClient/System.Data.OracleClient
@@ -19,7 +19,7 @@ using System.IO;
 using System.Data.SqlTypes;
 using System.Data.OracleClient.Oci;
 
-namespace System.Data.OracleClient 
+namespace System.Data.OracleClient
 {
     public sealed class OracleInfoMessageEventArgs : EventArgs
     {
@@ -32,7 +32,7 @@ namespace System.Data.OracleClient
 
         #region Constructors
 
-        internal OracleInfoMessageEventArgs (OciErrorInfo info)
+        internal OracleInfoMessageEventArgs(OciErrorInfo info)
         {
             code = info.ErrorCode;
             message = info.ErrorMessage;
@@ -42,24 +42,27 @@ namespace System.Data.OracleClient
 
         #region Properties
 
-        public int Code {
+        public int Code
+        {
             get { return code; }
         }
 
-        public string Message {
+        public string Message
+        {
             get { return message; }
         }
 
-        public string Source {
+        public string Source
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
         #endregion // Properties
 
         #region Methods
 
-        public override string ToString ()
+        public override string ToString()
         {
             return Message;
         }

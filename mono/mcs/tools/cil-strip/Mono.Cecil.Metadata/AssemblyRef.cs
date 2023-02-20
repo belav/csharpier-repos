@@ -29,43 +29,44 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
+namespace Mono.Cecil.Metadata
+{
     using Mono.Cecil;
 
-    internal sealed class AssemblyRefTable : IMetadataTable {
-
+    internal sealed class AssemblyRefTable : IMetadataTable
+    {
         public const int RId = 0x23;
 
         RowCollection m_rows;
 
-        public AssemblyRefRow this [int index] {
-            get { return m_rows [index] as AssemblyRefRow; }
-            set { m_rows [index] = value; }
+        public AssemblyRefRow this[int index]
+        {
+            get { return m_rows[index] as AssemblyRefRow; }
+            set { m_rows[index] = value; }
         }
 
-        public RowCollection Rows {
+        public RowCollection Rows
+        {
             get { return m_rows; }
             set { m_rows = value; }
         }
 
-        public int Id {
+        public int Id
+        {
             get { return RId; }
         }
 
-        internal AssemblyRefTable ()
-        {
-        }
+        internal AssemblyRefTable() { }
 
-        public void Accept (IMetadataTableVisitor visitor)
+        public void Accept(IMetadataTableVisitor visitor)
         {
-            visitor.VisitAssemblyRefTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
+            visitor.VisitAssemblyRefTable(this);
+            this.Rows.Accept(visitor.GetRowVisitor());
         }
     }
 
-    internal sealed class AssemblyRefRow : IMetadataRow {
-
+    internal sealed class AssemblyRefRow : IMetadataRow
+    {
         public ushort MajorVersion;
         public ushort MinorVersion;
         public ushort BuildNumber;
@@ -76,13 +77,11 @@ namespace Mono.Cecil.Metadata {
         public uint Culture;
         public uint HashValue;
 
-        internal AssemblyRefRow ()
-        {
-        }
+        internal AssemblyRefRow() { }
 
-        public void Accept (IMetadataRowVisitor visitor)
+        public void Accept(IMetadataRowVisitor visitor)
         {
-            visitor.VisitAssemblyRefRow (this);
+            visitor.VisitAssemblyRefRow(this);
         }
     }
 }

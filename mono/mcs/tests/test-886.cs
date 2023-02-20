@@ -1,6 +1,6 @@
 public class A
 {
-    public static A Get ()
+    public static A Get()
     {
         return null;
     }
@@ -8,14 +8,14 @@ public class A
 
 public class Test
 {
-    void M ()
+    void M()
     {
-        A A = A.Get ();
+        A A = A.Get();
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        var t = new Test ();
-        t.M ();
+        var t = new Test();
+        t.M();
     }
 }

@@ -3,10 +3,10 @@
 //   Rafael Mizrahi   <rafim@mainsoft.com>
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Vladimir Krasnov <vladimirk@mainsoft.com>
-//   
-// 
+//
+//
 // Copyright (c) 2002-2005 Mainsoft Corporation.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,7 +37,7 @@ using System.Web.UI.HtmlControls;
 using GHTWebControls;
 using System.Drawing;
 using System.Data;
- 
+
 namespace GHTTests
 {
     /// <summary>
@@ -97,6 +97,7 @@ namespace GHTTests
             }
             #endregion
         }
+
         protected void ListControl_ClearSelection(Type ctrlType)
         {
             #region "No item selected"
@@ -130,12 +131,13 @@ namespace GHTTests
             }
             #endregion
         }
+
         protected void ListControl_DataMember(Type ctrlType)
         {
             InitDataSet();
             #region "Existing Table"
             GHTListContorlSubTestBegin(ctrlType, "Existing table");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_dsData;
@@ -170,7 +172,7 @@ namespace GHTTests
             #endregion
             #region "DataSource is not a dataset - set"
             GHTListContorlSubTestBegin(ctrlType, "DataSource is not a dataset");
-            
+
             try
             {
                 InitArray();
@@ -191,7 +193,7 @@ namespace GHTTests
             InitArray();
             #region "DataSource that implements IEnumerable"
             GHTListContorlSubTestBegin(ctrlType, "DataSource that implements IEnumerable");
-            
+
             try
             {
                 IEnumerable dataSource = m_items;
@@ -207,7 +209,7 @@ namespace GHTTests
             #endregion
             #region "DataSource that implements IListSource"
             GHTListContorlSubTestBegin(ctrlType, "DataSource that implements IListSource");
-            
+
             try
             {
                 IListSource dataSource = m_dsData;
@@ -223,8 +225,11 @@ namespace GHTTests
             GHTSubTestEnd();
             #endregion
             #region "DataSource that does not implement IListSource or IEnumerable"
-            GHTListContorlSubTestBegin(ctrlType, "DataSource that does not implement IListSource or IEnumerable");
-            
+            GHTListContorlSubTestBegin(
+                ctrlType,
+                "DataSource that does not implement IListSource or IEnumerable"
+            );
+
             try
             {
                 DataItem dataSource = new DataItem(1, "aaa");
@@ -255,7 +260,7 @@ namespace GHTTests
             InitDataSet();
             #region "string.empty - user defined items"
             GHTListContorlSubTestBegin(ctrlType, "string.empty");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -270,27 +275,27 @@ namespace GHTTests
             GHTSubTestEnd();
             #endregion
 
-//The result is ToString of DataRow which is default Object.ToString()
-//In Java we get @addres at the end.
-//            #region "string.empty - bound to a table"
-//            GHTListContorlSubTestBegin(ctrlType, "string.empty - bound to a table");
-//            
-//            try
-//            {
-//                m_lcToTest.DataSource = m_dsData;
-//                m_lcToTest.DataTextField = string.Empty;
-//                m_lcToTest.DataBind();
-//            }
-//            catch (Exception ex)
-//            {
-//                GHTSubTestUnexpectedExceptionCaught(ex);
-//            }
-//
-//            GHTSubTestEnd();
-//            #endregion
+            //The result is ToString of DataRow which is default Object.ToString()
+            //In Java we get @addres at the end.
+            //            #region "string.empty - bound to a table"
+            //            GHTListContorlSubTestBegin(ctrlType, "string.empty - bound to a table");
+            //
+            //            try
+            //            {
+            //                m_lcToTest.DataSource = m_dsData;
+            //                m_lcToTest.DataTextField = string.Empty;
+            //                m_lcToTest.DataBind();
+            //            }
+            //            catch (Exception ex)
+            //            {
+            //                GHTSubTestUnexpectedExceptionCaught(ex);
+            //            }
+            //
+            //            GHTSubTestEnd();
+            //            #endregion
             #region "Name of an items property"
             GHTListContorlSubTestBegin(ctrlType, "Name of an items property");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -306,7 +311,7 @@ namespace GHTTests
             #endregion
             #region "Name of an item non-existing property"
             GHTListContorlSubTestBegin(ctrlType, "Name of an item non-existing property");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -327,7 +332,7 @@ namespace GHTTests
             #endregion
             #region "Name of a column"
             GHTListContorlSubTestBegin(ctrlType, "Name of a column");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_dsData;
@@ -343,7 +348,7 @@ namespace GHTTests
             #endregion
             #region "Name of a non-existing column"
             GHTListContorlSubTestBegin(ctrlType, "Name of a non-existing column");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_dsData;
@@ -369,7 +374,7 @@ namespace GHTTests
             InitArray();
             #region "string.empty"
             GHTListContorlSubTestBegin(ctrlType, "string.empty");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -386,7 +391,7 @@ namespace GHTTests
             #endregion
             #region "Valid format"
             GHTListContorlSubTestBegin(ctrlType, "Valid format");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -403,7 +408,7 @@ namespace GHTTests
             #endregion
             #region "Invalid format"
             GHTListContorlSubTestBegin(ctrlType, "Invalid format");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -429,7 +434,7 @@ namespace GHTTests
         {
             InitArray();
             GHTListContorlSubTestBegin(ctrlType, "Type & contents");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -437,9 +442,12 @@ namespace GHTTests
                 m_lcToTest.DataValueField = "Id";
                 m_lcToTest.DataBind();
                 //Check the type:
-                Compare(m_lcToTest.Items.GetType().ToString(), typeof(ListItemCollection).ToString());
+                Compare(
+                    m_lcToTest.Items.GetType().ToString(),
+                    typeof(ListItemCollection).ToString()
+                );
                 //Check all the items.
-                for (int i=0; i<7; i++)
+                for (int i = 0; i < 7; i++)
                 {
                     Compare(m_lcToTest.Items[i].Text, m_items[i].Name);
                     Compare(m_lcToTest.Items[i].Value.ToString(), m_items[i].Id.ToString());
@@ -459,7 +467,7 @@ namespace GHTTests
             InitDataSet();
             #region "string.empty - user defined items"
             GHTListContorlSubTestBegin(ctrlType, "string.empty");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -475,11 +483,11 @@ namespace GHTTests
             #endregion
             #region "string.empty - bound to a table"
             GHTListContorlSubTestBegin(ctrlType, "string.empty - bound to a table");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_dsData;
-                m_lcToTest.DataValueField= string.Empty;
+                m_lcToTest.DataValueField = string.Empty;
                 m_lcToTest.DataTextField = "char Column";
                 m_lcToTest.DataBind();
             }
@@ -492,7 +500,7 @@ namespace GHTTests
             #endregion
             #region "Name of an items property"
             GHTListContorlSubTestBegin(ctrlType, "Name of an items property");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -508,7 +516,7 @@ namespace GHTTests
             #endregion
             #region "Name of an item non-existing property"
             GHTListContorlSubTestBegin(ctrlType, "Name of an item non-existing property");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -529,7 +537,7 @@ namespace GHTTests
             #endregion
             #region "Name of a column"
             GHTListContorlSubTestBegin(ctrlType, "Name of a column");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_dsData;
@@ -545,7 +553,7 @@ namespace GHTTests
             #endregion
             #region "Name of a non-existing column"
             GHTListContorlSubTestBegin(ctrlType, "Name of a non-existing column");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_dsData;
@@ -565,12 +573,13 @@ namespace GHTTests
             GHTSubTestEnd();
             #endregion
         }
+
         protected void ListControl_SelectedIndex(Type ctrlType)
         {
             InitArray();
             #region "None selected"
             GHTListContorlSubTestBegin(ctrlType, "None selected");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -585,7 +594,7 @@ namespace GHTTests
             #endregion
             #region "valid value"
             GHTListContorlSubTestBegin(ctrlType, "valid value");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -600,7 +609,7 @@ namespace GHTTests
             #endregion
             #region "Invalid value - above length of items."
             GHTListContorlSubTestBegin(ctrlType, "Invalid value - above length of items.");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -619,7 +628,7 @@ namespace GHTTests
             #endregion
             #region "Invalid value - below -1."
             GHTListContorlSubTestBegin(ctrlType, "Invalid value - below -1.");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -643,7 +652,7 @@ namespace GHTTests
             InitArray();
             #region "None selected"
             GHTListContorlSubTestBegin(ctrlType, "None selected");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -666,14 +675,14 @@ namespace GHTTests
             #endregion
             #region "Single Item selected"
             GHTListContorlSubTestBegin(ctrlType, "valid value");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
                 m_lcToTest.DataTextField = "Name";
                 m_lcToTest.DataBind();
                 m_lcToTest.SelectedIndex = 5;
-                Compare(m_lcToTest.SelectedItem.Text, m_items[5].Name );
+                Compare(m_lcToTest.SelectedItem.Text, m_items[5].Name);
             }
             catch (Exception ex)
             {
@@ -698,7 +707,7 @@ namespace GHTTests
                 m_lcToTest.Items[2].Selected = true;
                 m_lcToTest.Items[4].Selected = true;
                 m_lcToTest.Items[6].Selected = true;
-                Compare(m_lcToTest.SelectedItem.Text, m_items[2].Name );
+                Compare(m_lcToTest.SelectedItem.Text, m_items[2].Name);
             }
             catch (Exception ex)
             {
@@ -713,7 +722,7 @@ namespace GHTTests
             InitArray();
             #region "None selected - get"
             GHTListContorlSubTestBegin(ctrlType, "None selected - get");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -729,7 +738,7 @@ namespace GHTTests
             #endregion
             #region "valid value - get"
             GHTListContorlSubTestBegin(ctrlType, "valid value - get");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -745,7 +754,7 @@ namespace GHTTests
             #endregion
             #region "valid value - set"
             GHTListContorlSubTestBegin(ctrlType, "valid value - set");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -760,7 +769,7 @@ namespace GHTTests
             #endregion
             #region "Invalid value - set"
             GHTListContorlSubTestBegin(ctrlType, "Invalid value - set");
-            
+
             try
             {
                 m_lcToTest.DataSource = m_items;
@@ -786,9 +795,8 @@ namespace GHTTests
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public GHTListControlBase()
-        {
-        }
+        public GHTListControlBase() { }
+
         /// <summary>
         /// Static constructor.
         /// Initializes the static field m_types[].
@@ -798,14 +806,11 @@ namespace GHTTests
             initTypes();
         }
         #endregion
-        
+
         #region "properties"
         public static Type[] TestedTypes
         {
-            get
-            {
-                return (Type[])(m_types.ToArray(typeof(Type)));
-            }
+            get { return (Type[])(m_types.ToArray(typeof(Type))); }
         }
         #endregion
 
@@ -819,7 +824,8 @@ namespace GHTTests
         /// <summary>
         /// Holds all the types that are derived from ListControl, and should be tested.
         /// </summary>
-        private  static readonly  ArrayList m_types = new ArrayList();
+        private static readonly ArrayList m_types = new ArrayList();
+
         /// <summary>
         /// Two data set to use while testing.
         /// Initialize this dataset using InitDataSet()
@@ -846,6 +852,7 @@ namespace GHTTests
             m_types.Add(typeof(RadioButtonList));
             m_types.Add(typeof(CheckBoxList));
         }
+
         /// <summary>
         /// Creates new sub test and adds a new ListControl to it.
         /// </summary>
@@ -859,7 +866,7 @@ namespace GHTTests
             GHTSubTestBegin(description);
             GHTActiveSubTest.Controls.Add(m_lcToTest);
         }
-        
+
         /// <summary>
         /// Initializes both m_dtFirst, and m_dtSecond with names ("First", "Second"), columns, and data.
         /// </summary>
@@ -875,17 +882,17 @@ namespace GHTTests
             m_dtSecond.Columns.Add("byte Column", typeof(bool));
             m_dtSecond.Columns.Add("time Column", typeof(DateTime));
 
-            for (int i=0; i<10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 DataRow dr1 = m_dtFirst.NewRow();
                 dr1["int Column"] = i;
-                dr1["bool Column"] = ( i % 2  == 0 ) ? true : false;
+                dr1["bool Column"] = (i % 2 == 0) ? true : false;
                 dr1["char Column"] = (char)(i + 'a');
                 m_dtFirst.Rows.Add(dr1);
 
                 DataRow dr2 = m_dtSecond.NewRow();
                 dr2["double Column"] = double.Epsilon * i;
-                dr2["byte Column"] = (byte)( i % 10);
+                dr2["byte Column"] = (byte)(i % 10);
                 dr2["time Column"] = DateTime.Now;
                 m_dtSecond.Rows.Add(dr2);
             }
@@ -895,16 +902,18 @@ namespace GHTTests
             m_dsData.Tables.Add(m_dtSecond);
         }
 
-
         private void InitArray()
         {
-            m_items = new DataItem[] {    new DataItem(1, "aaa"),
-                                                                                    new DataItem(2, "bbb"),
-                                                                                    new DataItem(3, "ccc"),
-                                                                                    new DataItem(4, "ddd"),
-                                                                                    new DataItem(5, "eee"),
-                                                                                    new DataItem(6, "fff"),
-                                                                                    new DataItem(7, "ggg")};
+            m_items = new DataItem[]
+            {
+                new DataItem(1, "aaa"),
+                new DataItem(2, "bbb"),
+                new DataItem(3, "ccc"),
+                new DataItem(4, "ddd"),
+                new DataItem(5, "eee"),
+                new DataItem(6, "fff"),
+                new DataItem(7, "ggg")
+            };
         }
 
         /// <summary>
@@ -923,29 +932,15 @@ namespace GHTTests
 
             public int Id
             {
-                get
-                {
-                    return id;
-                }
-                set
-                {
-                    id = value;
-                }
+                get { return id; }
+                set { id = value; }
             }
 
             public string Name
             {
-                get
-                {
-                    return name;
-                }
-                set
-                {
-                    name = value;
-                }
-
+                get { return name; }
+                set { name = value; }
             }
-
 
             public override string ToString()
             {
@@ -953,6 +948,5 @@ namespace GHTTests
             }
         }
     }
-    #endregion
-
+        #endregion
 }

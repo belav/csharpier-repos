@@ -4,19 +4,21 @@
 
 using System;
 
-class C {
-    public enum Flags {
-        Removed    = 0,
-        Public    = 1
+class C
+{
+    public enum Flags
+    {
+        Removed = 0,
+        Public = 1
     }
 
-    public Flags    _enumFlags;
-        
+    public Flags _enumFlags;
+
     internal void Close()
-    {    
+    {
         if ((Flags.Removed & _enumFlags) != (Flags.Removed & _enumFlags))
-            Console.WriteLine ("error");
+            Console.WriteLine("error");
     }
 
-    static void Main () {}
+    static void Main() { }
 }

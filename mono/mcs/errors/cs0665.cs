@@ -4,11 +4,10 @@
 
 class Test
 {
-    public void Foo (bool x)
+    public void Foo(bool x)
     {
         bool b;
         if (b = true)
-            System.Console.WriteLine (b);
+            System.Console.WriteLine(b);
     }
 }
-

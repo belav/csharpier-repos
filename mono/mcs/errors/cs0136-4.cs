@@ -3,11 +3,13 @@
 
 class C
 {
-    public void Foo (int i, int v)
+    public void Foo(int i, int v)
     {
-        switch (i) {
+        switch (i)
+        {
             case 1:
-                if (v > 0) {
+                if (v > 0)
+                {
                     int res = 1;
                 }
                 break;

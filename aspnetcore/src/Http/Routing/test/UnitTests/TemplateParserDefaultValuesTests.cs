@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Routing.Tests;
 
 public class TemplateParserDefaultValuesTests
 {
-    private static readonly IInlineConstraintResolver _inlineConstraintResolver = GetInlineConstraintResolver();
+    private static readonly IInlineConstraintResolver _inlineConstraintResolver =
+        GetInlineConstraintResolver();
 
     [Fact]
     public void InlineDefaultValueSpecified_InlineValueIsUsed()
@@ -20,10 +21,12 @@ public class TemplateParserDefaultValuesTests
         var routeBuilder = CreateRouteBuilder();
 
         // Act
-        routeBuilder.MapRoute("mockName",
+        routeBuilder.MapRoute(
+            "mockName",
             "{controller}/{action}/{id:int=12}",
             defaults: null,
-            constraints: null);
+            constraints: null
+        );
 
         // Assert
         var defaults = ((Route)routeBuilder.Routes[0]).Defaults;
@@ -39,10 +42,7 @@ public class TemplateParserDefaultValuesTests
         var routeBuilder = CreateRouteBuilder();
 
         // Act
-        routeBuilder.MapRoute("mockName",
-            template,
-            defaults: null,
-            constraints: null);
+        routeBuilder.MapRoute("mockName", template, defaults: null, constraints: null);
 
         // Assert
         var defaults = ((Route)routeBuilder.Routes[0]).Defaults;
@@ -57,19 +57,25 @@ public class TemplateParserDefaultValuesTests
 
         // Act & Assert
         var ex = Assert.Throws<RouteCreationException>(
-                            () => routeBuilder.MapRoute("mockName",
-                                                        "{controller}/{action}/{id:int=12}",
-                                                        defaults: new { id = 13 },
-                                                        constraints: null));
+            () =>
+                routeBuilder.MapRoute(
+                    "mockName",
+                    "{controller}/{action}/{id:int=12}",
+                    defaults: new { id = 13 },
+                    constraints: null
+                )
+        );
 
-        var message = "An error occurred while creating the route with name 'mockName' and template" +
-            " '{controller}/{action}/{id:int=12}'.";
+        var message =
+            "An error occurred while creating the route with name 'mockName' and template"
+            + " '{controller}/{action}/{id:int=12}'.";
         Assert.Equal(message, ex.Message);
 
         Assert.NotNull(ex.InnerException);
-        message = "The route parameter 'id' has both an inline default value and an explicit default" +
-            " value specified. A route parameter cannot contain an inline default value when" +
-            " a default value is specified explicitly. Consider removing one of them.";
+        message =
+            "The route parameter 'id' has both an inline default value and an explicit default"
+            + " value specified. A route parameter cannot contain an inline default value when"
+            + " a default value is specified explicitly. Consider removing one of them.";
         Assert.Equal(message, ex.InnerException.Message);
     }
 
@@ -82,13 +88,18 @@ public class TemplateParserDefaultValuesTests
 
         // Act & Assert
         var ex = Assert.Throws<RouteCreationException>(
-                            () => routeBuilder.MapRoute("mockName",
-                                                        "{controller}/{action}/{id:int=?}",
-                                                        defaults: new { id = 13 },
-                                                        constraints: null));
+            () =>
+                routeBuilder.MapRoute(
+                    "mockName",
+                    "{controller}/{action}/{id:int=?}",
+                    defaults: new { id = 13 },
+                    constraints: null
+                )
+        );
 
-        var message = "An error occurred while creating the route with name 'mockName' and template" +
-            " '{controller}/{action}/{id:int=?}'.";
+        var message =
+            "An error occurred while creating the route with name 'mockName' and template"
+            + " '{controller}/{action}/{id:int=?}'.";
         Assert.Equal(message, ex.Message);
 
         Assert.NotNull(ex.InnerException);
@@ -110,11 +121,13 @@ public class TemplateParserDefaultValuesTests
                 "mockName",
                 "{controller}/{action}/{id:int=12?}",
                 defaults: new { id = 13 },
-                constraints: null);
+                constraints: null
+            );
         });
 
-        var message = "An error occurred while creating the route with name 'mockName' and template" +
-            " '{controller}/{action}/{id:int=12?}'.";
+        var message =
+            "An error occurred while creating the route with name 'mockName' and template"
+            + " '{controller}/{action}/{id:int=12?}'.";
         Assert.Equal(message, ex.Message);
 
         Assert.NotNull(ex.InnerException);

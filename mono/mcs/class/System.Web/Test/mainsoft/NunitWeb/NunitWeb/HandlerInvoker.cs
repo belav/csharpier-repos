@@ -8,7 +8,7 @@ namespace MonoTests.SystemWeb.Framework
     /// </summary>
     /// <seealso cref="HandlerInvoker"/>
     /// <seealso cref="System.Web.IHttpHandler.ProcessRequest"/>
-    public delegate void HandlerDelegate ();
+    public delegate void HandlerDelegate();
 
     /// <summary>
     /// This invoker calls a single user delegate of type <see cref="HandlerDelegate"/>.
@@ -21,17 +21,18 @@ namespace MonoTests.SystemWeb.Framework
     /// <seealso cref="System.Web.UI.Page"/>
     /// <seealso cref="PageInvoker"/>
     [Serializable]
-    public class HandlerInvoker:BaseInvoker
+    public class HandlerInvoker : BaseInvoker
     {
         HandlerDelegate callback;
+
         /// <summary>
         /// Create a new invoker with the given callback
         /// </summary>
         /// <param name="callback">The callback that is invoked during <System.Web.IHttpHandler.ProcessRequest/>.</param>
-        public HandlerInvoker (HandlerDelegate callback)
+        public HandlerInvoker(HandlerDelegate callback)
         {
             if (callback == null)
-                throw new ArgumentNullException ();
+                throw new ArgumentNullException();
             this.callback = callback;
         }
 
@@ -39,10 +40,10 @@ namespace MonoTests.SystemWeb.Framework
         /// Overriden to call the user provided delegate.
         /// </summary>
         /// <param name="parameters">Ignored.</param>
-        public override void DoInvoke (params object []parameters)
+        public override void DoInvoke(params object[] parameters)
         {
-            base.DoInvoke (parameters);
-            callback ();
+            base.DoInvoke(parameters);
+            callback();
         }
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace MonoTests.SystemWeb.Framework
         /// </summary>
         /// <returns>The default URL.</returns>
         /// <seealso cref="System.Web.IHttpHandler"/>
-        public override string GetDefaultUrl ()
+        public override string GetDefaultUrl()
         {
             return StandardUrl.FAKE_PAGE;
         }

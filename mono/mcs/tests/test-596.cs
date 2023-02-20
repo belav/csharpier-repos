@@ -7,7 +7,7 @@ enum E
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         E dt = E.A;
         IntPtr ip = (IntPtr)dt;

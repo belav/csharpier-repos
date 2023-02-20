@@ -1,6 +1,6 @@
-// 
-// OciStatementType.cs 
-//  
+//
+// OciStatementType.cs
+//
 // Part of managed C#/.NET library System.Data.OracleClient.dll
 //
 // Part of the Mono class libraries at
@@ -8,17 +8,19 @@
 //
 // Assembly: System.Data.OracleClient.dll
 // Namespace: System.Data.OracleClient.Oci
-// 
-// Author: 
+//
+// Author:
 //     Tim Coleman <tim@timcoleman.com>
-//         
+//
 // Copyright (C) Tim Coleman, 2003
-// 
+//
 
 using System;
 
-namespace System.Data.OracleClient.Oci {
-    internal enum OciStatementType {
+namespace System.Data.OracleClient.Oci
+{
+    internal enum OciStatementType
+    {
         Default = 0x00,
         Select = 0x01,
         Update = 0x02,

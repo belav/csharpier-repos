@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,20 +41,21 @@ namespace System.Web.UI.WebControls
             int startIndex;
             int end;
             IList list;
-            
-            public object Current {
-                get { return list [startIndex + index]; }
+
+            public object Current
+            {
+                get { return list[startIndex + index]; }
             }
-            
-            public ListEnumerator (IList list, int startIndex, int end)
+
+            public ListEnumerator(IList list, int startIndex, int end)
             {
                 this.list = list;
                 this.index = -1;
                 this.startIndex = startIndex;
                 this.end = startIndex + end;
             }
-            
-            public bool MoveNext ()
+
+            public bool MoveNext()
             {
                 index++;
                 return (startIndex + index) < end;
@@ -63,7 +64,7 @@ namespace System.Web.UI.WebControls
             // See:
             // http://msdn.microsoft.com/en-us/library/system.web.ui.webcontrols.listviewpageddatasource.getenumerator.aspx
             // (Note 1)
-            public void Reset ()
+            public void Reset()
             {
                 index = -1;
             }
@@ -76,60 +77,61 @@ namespace System.Web.UI.WebControls
             int end;
             ICollection collection;
             IEnumerator enumerator;
-            
-            public object Current {
-                get {
+
+            public object Current
+            {
+                get
+                {
                     if (enumerator != null)
                         return enumerator.Current;
 
                     return null;
                 }
             }
-            
-            public CollectionEnumerator (ICollection collection, int startIndex, int end)
+
+            public CollectionEnumerator(ICollection collection, int startIndex, int end)
             {
                 this.collection = collection;
                 this.index = -1;
                 this.startIndex = startIndex;
                 this.end = end;
             }
-            
-            public bool MoveNext ()
+
+            public bool MoveNext()
             {
-                if (enumerator == null) {
-                    enumerator = collection.GetEnumerator ();
+                if (enumerator == null)
+                {
+                    enumerator = collection.GetEnumerator();
                     for (int i = 0; i < startIndex; i++)
-                        enumerator.MoveNext ();
+                        enumerator.MoveNext();
                 }
-                
+
                 index++;
-                enumerator.MoveNext ();
+                enumerator.MoveNext();
                 return (startIndex + index) < end;
             }
 
             // See:
             // http://msdn.microsoft.com/en-us/library/system.web.ui.webcontrols.listviewpageddatasource.getenumerator.aspx
             // (Note 1)
-            public void Reset ()
+            public void Reset()
             {
                 index = -1;
                 enumerator = null;
             }
         }
-        
-        public ListViewPagedDataSource ()
+
+        public ListViewPagedDataSource()
         {
             StartRowIndex = 0;
             MaximumRows = 0;
             AllowServerPaging = false;
             TotalRowCount = 0;
         }
-        
-        public void CopyTo (Array array, int index)
-        {
-        }
-        
-        public IEnumerator GetEnumerator ()
+
+        public void CopyTo(Array array, int index) { }
+
+        public IEnumerator GetEnumerator()
         {
             IEnumerable ds = DataSource;
 
@@ -138,37 +140,40 @@ namespace System.Web.UI.WebControls
 
             IList list = ds as IList;
             if (list != null)
-                return new ListEnumerator (list, AllowServerPaging ? 0 : StartRowIndex, Count);
+                return new ListEnumerator(list, AllowServerPaging ? 0 : StartRowIndex, Count);
 
             ICollection collection = ds as ICollection;
             if (collection != null)
-                return new CollectionEnumerator (collection, AllowServerPaging ? 0 : StartRowIndex, Count);
-            
-            return ds.GetEnumerator ();
+                return new CollectionEnumerator(
+                    collection,
+                    AllowServerPaging ? 0 : StartRowIndex,
+                    Count
+                );
+
+            return ds.GetEnumerator();
         }
-        
-        public PropertyDescriptorCollection GetItemProperties (PropertyDescriptor [] listAccessors)
+
+        public PropertyDescriptorCollection GetItemProperties(PropertyDescriptor[] listAccessors)
         {
             IEnumerable ds = DataSource;
 
             if (ds == null || !(ds is ITypedList))
                 return null;
 
-            return ((ITypedList) ds).GetItemProperties (listAccessors);
+            return ((ITypedList)ds).GetItemProperties(listAccessors);
         }
-        
-        public string GetListName (PropertyDescriptor [] listAccessors)
+
+        public string GetListName(PropertyDescriptor[] listAccessors)
         {
             return String.Empty;
         }
-        
-        public bool AllowServerPaging {
-            get;
-            set;
-        }
-        
-        public int Count {
-            get {
+
+        public bool AllowServerPaging { get; set; }
+
+        public int Count
+        {
+            get
+            {
                 IEnumerable ds = DataSource;
                 if (ds == null)
                     return 0;
@@ -183,62 +188,58 @@ namespace System.Web.UI.WebControls
                 return DataSourceCount - StartRowIndex;
             }
         }
-        
-        public IEnumerable DataSource {
-            get;
-            set;
-        }
-        
-        public int DataSourceCount {
-            get {
+
+        public IEnumerable DataSource { get; set; }
+
+        public int DataSourceCount
+        {
+            get
+            {
                 IEnumerable ds = DataSource;
                 if (ds == null)
                     return 0;
 
                 if (!(ds is ICollection))
-                    throw new InvalidOperationException ("The data source object does not implement the System.Collections..::.ICollection interface.");
+                    throw new InvalidOperationException(
+                        "The data source object does not implement the System.Collections..::.ICollection interface."
+                    );
 
                 if (IsServerPagingEnabled)
-                    return TotalRowCount;                
+                    return TotalRowCount;
 
-                return ((ICollection) ds).Count;
+                return ((ICollection)ds).Count;
             }
         }
-        
-        public bool IsReadOnly {
+
+        public bool IsReadOnly
+        {
             get { return false; }
-        }
-        
-        public bool IsServerPagingEnabled {
-            get { return AllowServerPaging; }
-        }
-        
-        public bool IsSynchronized {
-            get { return false; }
-        }
-        
-        public int MaximumRows {
-            get;
-            set;
-        }
-        
-        public int StartRowIndex {
-            get;
-            set;
-        }
-        
-        public object SyncRoot {
-            get { return this; }
-        }
-        
-        public int TotalRowCount {
-            get;
-            set;
         }
 
-        bool OnLastPage {
+        public bool IsServerPagingEnabled
+        {
+            get { return AllowServerPaging; }
+        }
+
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
+
+        public int MaximumRows { get; set; }
+
+        public int StartRowIndex { get; set; }
+
+        public object SyncRoot
+        {
+            get { return this; }
+        }
+
+        public int TotalRowCount { get; set; }
+
+        bool OnLastPage
+        {
             get { return ((StartRowIndex + MaximumRows) >= DataSourceCount); }
         }
-        
     }
 }

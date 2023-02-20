@@ -37,45 +37,50 @@ using System.ServiceModel.Description;
 using WS = System.Web.Services.Description;
 using QName = System.Xml.XmlQualifiedName;
 
-namespace System.ServiceModel.Channels {
-
-    public class TransportBindingElementImporter : IWsdlImportExtension, IPolicyImportExtension {
+namespace System.ServiceModel.Channels
+{
+    public class TransportBindingElementImporter : IWsdlImportExtension, IPolicyImportExtension
+    {
         #region IWsdlImportExtension implementation
 
-        public void BeforeImport (WS.ServiceDescriptionCollection wsdlDocuments, XmlSchemaSet xmlSchemas,
-                                  ICollection<XmlElement> policy)
-        {
-        }
+        public void BeforeImport(
+            WS.ServiceDescriptionCollection wsdlDocuments,
+            XmlSchemaSet xmlSchemas,
+            ICollection<XmlElement> policy
+        ) { }
 
-        public void ImportContract (WsdlImporter importer, WsdlContractConversionContext contractContext)
-        {
-        }
+        public void ImportContract(
+            WsdlImporter importer,
+            WsdlContractConversionContext contractContext
+        ) { }
 
-        public void ImportEndpoint (WsdlImporter importer, WsdlEndpointConversionContext context)
+        public void ImportEndpoint(WsdlImporter importer, WsdlEndpointConversionContext context)
         {
             // Only import the binding, not the endpoint.
             if (context.WsdlPort == null)
                 return;
-            
-            DoImportEndpoint (context);
+
+            DoImportEndpoint(context);
         }
 
-        bool DoImportEndpoint (WsdlEndpointConversionContext context)
+        bool DoImportEndpoint(WsdlEndpointConversionContext context)
         {
             WS.SoapAddressBinding address = null;
-            foreach (var extension in context.WsdlPort.Extensions) {
+            foreach (var extension in context.WsdlPort.Extensions)
+            {
                 var check = extension as WS.SoapAddressBinding;
-                if (check != null) {
+                if (check != null)
+                {
                     address = check;
                     break;
                 }
             }
-            
+
             if (address == null)
                 return false;
-            
-            context.Endpoint.Address = new EndpointAddress (address.Location);
-            context.Endpoint.ListenUri = new Uri (address.Location);
+
+            context.Endpoint.Address = new EndpointAddress(address.Location);
+            context.Endpoint.ListenUri = new Uri(address.Location);
             context.Endpoint.ListenUriMode = ListenUriMode.Explicit;
             return true;
         }
@@ -84,71 +89,80 @@ namespace System.ServiceModel.Channels {
 
         #region IPolicyImportExtension implementation
 
-        public void ImportPolicy (MetadataImporter importer, PolicyConversionContext context)
+        public void ImportPolicy(MetadataImporter importer, PolicyConversionContext context)
         {
             var customCtx = context as CustomPolicyConversionContext;
             var customBinding = context.Endpoint.Binding as CustomBinding;
             if ((customCtx == null) || (customBinding == null))
                 // FIXME: Should we allow this ?
-                throw new InvalidOperationException ();
+                throw new InvalidOperationException();
 
-            var soapHttp = StandardBindingImporter.GetHttpSoapBinding (customCtx.WsdlBinding);
-            if (soapHttp != null) {
-                if (!ImportHttpPolicy (importer, customCtx, soapHttp))
-                    context.BindingElements.Add (new HttpTransportBindingElement ());
+            var soapHttp = StandardBindingImporter.GetHttpSoapBinding(customCtx.WsdlBinding);
+            if (soapHttp != null)
+            {
+                if (!ImportHttpPolicy(importer, customCtx, soapHttp))
+                    context.BindingElements.Add(new HttpTransportBindingElement());
                 return;
             }
 
-            var soapTcp = StandardBindingImporter.GetTcpSoapBinding (customCtx.WsdlBinding);
-            if (soapTcp != null) {
-                if (!ImportTcpPolicy (importer, customCtx, soapTcp))
-                    context.BindingElements.Add (new TcpTransportBindingElement ());
+            var soapTcp = StandardBindingImporter.GetTcpSoapBinding(customCtx.WsdlBinding);
+            if (soapTcp != null)
+            {
+                if (!ImportTcpPolicy(importer, customCtx, soapTcp))
+                    context.BindingElements.Add(new TcpTransportBindingElement());
                 return;
             }
         }
 
         #endregion
 
-        bool ImportHttpAuthScheme (MetadataImporter importer,
-                                   HttpTransportBindingElement bindingElement,
-                                   PolicyConversionContext context)
+        bool ImportHttpAuthScheme(
+            MetadataImporter importer,
+            HttpTransportBindingElement bindingElement,
+            PolicyConversionContext context
+        )
         {
-            var assertions = context.GetBindingAssertions ();
+            var assertions = context.GetBindingAssertions();
             var authSchemes = AuthenticationSchemes.None;
 
             var httpsTransport = bindingElement as HttpsTransportBindingElement;
-            bool certificate = httpsTransport != null ?
-                httpsTransport.RequireClientCertificate : false;
+            bool certificate =
+                httpsTransport != null ? httpsTransport.RequireClientCertificate : false;
 
-            var authElements = PolicyImportHelper.FindAssertionByNS (
-                assertions, PolicyImportHelper.HttpAuthNS);
-            foreach (XmlElement authElement in authElements) {
-                assertions.Remove (authElement);
+            var authElements = PolicyImportHelper.FindAssertionByNS(
+                assertions,
+                PolicyImportHelper.HttpAuthNS
+            );
+            foreach (XmlElement authElement in authElements)
+            {
+                assertions.Remove(authElement);
 
-                if (certificate) {
-                    importer.AddWarning (
-                        "Invalid authentication assertion while " +
-                        "using client certificate: {0}", authElement.OuterXml);
+                if (certificate)
+                {
+                    importer.AddWarning(
+                        "Invalid authentication assertion while " + "using client certificate: {0}",
+                        authElement.OuterXml
+                    );
                     return false;
                 }
 
-                switch (authElement.LocalName) {
-                case "BasicAuthentication":
-                    authSchemes |= AuthenticationSchemes.Basic;
-                    break;
-                case "NtlmAuthentication":
-                    authSchemes |= AuthenticationSchemes.Ntlm;
-                    break;
-                case "DigestAuthentication":
-                    authSchemes |= AuthenticationSchemes.Digest;
-                    break;
-                case "NegotiateAuthentication":
-                    authSchemes |= AuthenticationSchemes.Negotiate;
-                    break;
-                default:
-                    importer.AddWarning (
-                        "Invalid policy assertion: {0}", authElement.OuterXml);
-                    return false;
+                switch (authElement.LocalName)
+                {
+                    case "BasicAuthentication":
+                        authSchemes |= AuthenticationSchemes.Basic;
+                        break;
+                    case "NtlmAuthentication":
+                        authSchemes |= AuthenticationSchemes.Ntlm;
+                        break;
+                    case "DigestAuthentication":
+                        authSchemes |= AuthenticationSchemes.Digest;
+                        break;
+                    case "NegotiateAuthentication":
+                        authSchemes |= AuthenticationSchemes.Negotiate;
+                        break;
+                    default:
+                        importer.AddWarning("Invalid policy assertion: {0}", authElement.OuterXml);
+                        return false;
                 }
             }
 
@@ -156,191 +170,246 @@ namespace System.ServiceModel.Channels {
             return true;
         }
 
-        bool ImportWindowsTransportSecurity (MetadataImporter importer,
-                                             PolicyConversionContext context,
-                                             XmlElement policyElement)
+        bool ImportWindowsTransportSecurity(
+            MetadataImporter importer,
+            PolicyConversionContext context,
+            XmlElement policyElement
+        )
         {
-            var protectionLevel = PolicyImportHelper.GetElement (
-                importer, policyElement, "ProtectionLevel",
-                PolicyImportHelper.FramingPolicyNS, true);
-            if (protectionLevel == null) {
-                importer.AddWarning (
-                    "Invalid policy assertion: {0}", policyElement.OuterXml);
+            var protectionLevel = PolicyImportHelper.GetElement(
+                importer,
+                policyElement,
+                "ProtectionLevel",
+                PolicyImportHelper.FramingPolicyNS,
+                true
+            );
+            if (protectionLevel == null)
+            {
+                importer.AddWarning("Invalid policy assertion: {0}", policyElement.OuterXml);
                 return false;
             }
 
-            var element = new WindowsStreamSecurityBindingElement ();
+            var element = new WindowsStreamSecurityBindingElement();
 
-            switch (protectionLevel.InnerText.ToLowerInvariant ()) {
-            case "none":
-                element.ProtectionLevel = ProtectionLevel.None;
-                break;
-            case "sign":
-                element.ProtectionLevel = ProtectionLevel.Sign;
-                break;
-            case "encryptandsign":
-                element.ProtectionLevel = ProtectionLevel.EncryptAndSign;
-                break;
-            default:
-                importer.AddWarning (
-                    "Invalid policy assertion: {0}", protectionLevel.OuterXml);
-                return false;
+            switch (protectionLevel.InnerText.ToLowerInvariant())
+            {
+                case "none":
+                    element.ProtectionLevel = ProtectionLevel.None;
+                    break;
+                case "sign":
+                    element.ProtectionLevel = ProtectionLevel.Sign;
+                    break;
+                case "encryptandsign":
+                    element.ProtectionLevel = ProtectionLevel.EncryptAndSign;
+                    break;
+                default:
+                    importer.AddWarning("Invalid policy assertion: {0}", protectionLevel.OuterXml);
+                    return false;
             }
 
-            context.BindingElements.Add (element);
+            context.BindingElements.Add(element);
             return true;
         }
 
-        bool ImportTransport (MetadataImporter importer, TransportBindingElement bindingElement,
-                              XmlElement transportPolicy)
+        bool ImportTransport(
+            MetadataImporter importer,
+            TransportBindingElement bindingElement,
+            XmlElement transportPolicy
+        )
         {
-            XmlElement algorithmSuite, layout;
-            if (!PolicyImportHelper.FindPolicyElement (
-                importer, transportPolicy,
-                new QName ("AlgorithmSuite", PolicyImportHelper.SecurityPolicyNS),
-                false, true, out algorithmSuite) ||
-                !PolicyImportHelper.FindPolicyElement (
-                importer, transportPolicy,
-                new QName ("Layout", PolicyImportHelper.SecurityPolicyNS),
-                false, true, out layout))
+            XmlElement algorithmSuite,
+                layout;
+            if (
+                !PolicyImportHelper.FindPolicyElement(
+                    importer,
+                    transportPolicy,
+                    new QName("AlgorithmSuite", PolicyImportHelper.SecurityPolicyNS),
+                    false,
+                    true,
+                    out algorithmSuite
+                )
+                || !PolicyImportHelper.FindPolicyElement(
+                    importer,
+                    transportPolicy,
+                    new QName("Layout", PolicyImportHelper.SecurityPolicyNS),
+                    false,
+                    true,
+                    out layout
+                )
+            )
                 return false;
 
             bool foundUnknown = false;
-            foreach (var node in transportPolicy.ChildNodes) {
+            foreach (var node in transportPolicy.ChildNodes)
+            {
                 var e = node as XmlElement;
                 if (e == null)
                     continue;
-                importer.AddWarning ("Unknown policy assertion: {0}", e.OuterXml);
+                importer.AddWarning("Unknown policy assertion: {0}", e.OuterXml);
                 foundUnknown = true;
             }
 
             return !foundUnknown;
         }
 
-        bool GetTransportToken (MetadataImporter importer, XmlElement transportPolicy,
-                                out XmlElement transportToken)
+        bool GetTransportToken(
+            MetadataImporter importer,
+            XmlElement transportPolicy,
+            out XmlElement transportToken
+        )
         {
-            return PolicyImportHelper.FindPolicyElement (
-                importer, transportPolicy,
-                new QName ("TransportToken", PolicyImportHelper.SecurityPolicyNS),
-                false, true, out transportToken);
+            return PolicyImportHelper.FindPolicyElement(
+                importer,
+                transportPolicy,
+                new QName("TransportToken", PolicyImportHelper.SecurityPolicyNS),
+                false,
+                true,
+                out transportToken
+            );
         }
 
-        bool ImportHttpTransport (MetadataImporter importer, PolicyConversionContext context,
-                                  XmlElement transportPolicy,
-                                  out HttpTransportBindingElement bindingElement)
+        bool ImportHttpTransport(
+            MetadataImporter importer,
+            PolicyConversionContext context,
+            XmlElement transportPolicy,
+            out HttpTransportBindingElement bindingElement
+        )
         {
             XmlElement transportToken;
-            if (!GetTransportToken (importer, transportPolicy, out transportToken)) {
+            if (!GetTransportToken(importer, transportPolicy, out transportToken))
+            {
                 bindingElement = null;
                 return false;
             }
 
-            if (transportToken == null) {
-                bindingElement = new HttpTransportBindingElement ();
+            if (transportToken == null)
+            {
+                bindingElement = new HttpTransportBindingElement();
                 return true;
             }
-            
+
             bool error;
-            var tokenElementList = PolicyImportHelper.GetPolicyElements (transportToken, out error);
-            if (error || (tokenElementList.Count != 1)) {
-                importer.AddWarning ("Invalid policy assertion: {0}", transportToken.OuterXml);
+            var tokenElementList = PolicyImportHelper.GetPolicyElements(transportToken, out error);
+            if (error || (tokenElementList.Count != 1))
+            {
+                importer.AddWarning("Invalid policy assertion: {0}", transportToken.OuterXml);
                 bindingElement = null;
                 return false;
             }
 
-            var tokenElement = tokenElementList [0];
-            if (!PolicyImportHelper.SecurityPolicyNS.Equals (tokenElement.NamespaceURI) ||
-                !tokenElement.LocalName.Equals ("HttpsToken")) {
-                importer.AddWarning ("Invalid policy assertion: {0}", tokenElement.OuterXml);
+            var tokenElement = tokenElementList[0];
+            if (
+                !PolicyImportHelper.SecurityPolicyNS.Equals(tokenElement.NamespaceURI)
+                || !tokenElement.LocalName.Equals("HttpsToken")
+            )
+            {
+                importer.AddWarning("Invalid policy assertion: {0}", tokenElement.OuterXml);
                 bindingElement = null;
                 return false;
             }
 
-            var httpsTransport = new HttpsTransportBindingElement ();
+            var httpsTransport = new HttpsTransportBindingElement();
             bindingElement = httpsTransport;
 
-            var certAttr = tokenElement.GetAttribute ("RequireClientCertificate");
-            if (!String.IsNullOrEmpty (certAttr))
-                httpsTransport.RequireClientCertificate = Boolean.Parse (certAttr);
+            var certAttr = tokenElement.GetAttribute("RequireClientCertificate");
+            if (!String.IsNullOrEmpty(certAttr))
+                httpsTransport.RequireClientCertificate = Boolean.Parse(certAttr);
             return true;
         }
 
-        bool ImportTcpTransport (MetadataImporter importer, PolicyConversionContext context,
-                                 XmlElement transportPolicy)
+        bool ImportTcpTransport(
+            MetadataImporter importer,
+            PolicyConversionContext context,
+            XmlElement transportPolicy
+        )
         {
             XmlElement transportToken;
-            if (!GetTransportToken (importer, transportPolicy, out transportToken))
+            if (!GetTransportToken(importer, transportPolicy, out transportToken))
                 return false;
 
             if (transportToken == null)
                 return true;
 
             bool error;
-            var tokenElementList = PolicyImportHelper.GetPolicyElements (transportToken, out error);
-            if (error || (tokenElementList.Count != 1)) {
-                importer.AddWarning ("Invalid policy assertion: {0}", transportToken.OuterXml);
+            var tokenElementList = PolicyImportHelper.GetPolicyElements(transportToken, out error);
+            if (error || (tokenElementList.Count != 1))
+            {
+                importer.AddWarning("Invalid policy assertion: {0}", transportToken.OuterXml);
                 return false;
             }
 
-            var tokenElement = tokenElementList [0];
-            if (!PolicyImportHelper.FramingPolicyNS.Equals (tokenElement.NamespaceURI)) {
-                importer.AddWarning ("Invalid policy assertion: {0}", tokenElement.OuterXml);
+            var tokenElement = tokenElementList[0];
+            if (!PolicyImportHelper.FramingPolicyNS.Equals(tokenElement.NamespaceURI))
+            {
+                importer.AddWarning("Invalid policy assertion: {0}", tokenElement.OuterXml);
                 return false;
             }
 
-            if (tokenElement.LocalName.Equals ("WindowsTransportSecurity")) {
-                if (!ImportWindowsTransportSecurity (importer, context, tokenElement))
+            if (tokenElement.LocalName.Equals("WindowsTransportSecurity"))
+            {
+                if (!ImportWindowsTransportSecurity(importer, context, tokenElement))
                     return false;
-            } else if (tokenElement.LocalName.Equals ("SslTransportSecurity")) {
-                context.BindingElements.Add (new SslStreamSecurityBindingElement ());
+            }
+            else if (tokenElement.LocalName.Equals("SslTransportSecurity"))
+            {
+                context.BindingElements.Add(new SslStreamSecurityBindingElement());
             }
 
             return true;
         }
 
-        bool ImportHttpPolicy (MetadataImporter importer, PolicyConversionContext context,
-                               WS.SoapBinding soap)
+        bool ImportHttpPolicy(
+            MetadataImporter importer,
+            PolicyConversionContext context,
+            WS.SoapBinding soap
+        )
         {
             HttpTransportBindingElement httpTransport;
-            var assertions = context.GetBindingAssertions ();
-            var transportPolicy = PolicyImportHelper.GetTransportBindingPolicy (assertions);
-            if (transportPolicy != null) {
-                if (!ImportHttpTransport (importer, context, transportPolicy, out httpTransport))
+            var assertions = context.GetBindingAssertions();
+            var transportPolicy = PolicyImportHelper.GetTransportBindingPolicy(assertions);
+            if (transportPolicy != null)
+            {
+                if (!ImportHttpTransport(importer, context, transportPolicy, out httpTransport))
                     return false;
-                if (!ImportTransport (importer, httpTransport, transportPolicy))
+                if (!ImportTransport(importer, httpTransport, transportPolicy))
                     return false;
-            } else {
-                httpTransport = new HttpTransportBindingElement ();
+            }
+            else
+            {
+                httpTransport = new HttpTransportBindingElement();
             }
 
-            if (!ImportHttpAuthScheme (importer, httpTransport, context))
+            if (!ImportHttpAuthScheme(importer, httpTransport, context))
                 return false;
 
-            context.BindingElements.Add (httpTransport);
+            context.BindingElements.Add(httpTransport);
             return true;
         }
 
-        bool ImportTcpPolicy (MetadataImporter importer, PolicyConversionContext context,
-                              WS.Soap12Binding soap)
+        bool ImportTcpPolicy(
+            MetadataImporter importer,
+            PolicyConversionContext context,
+            WS.Soap12Binding soap
+        )
         {
-            var assertions = context.GetBindingAssertions ();
+            var assertions = context.GetBindingAssertions();
 
-            var tcpTransport = new TcpTransportBindingElement ();
+            var tcpTransport = new TcpTransportBindingElement();
 
-            var transportPolicy = PolicyImportHelper.GetTransportBindingPolicy (assertions);
-            if (transportPolicy != null) {
-                if (!ImportTcpTransport (importer, context, transportPolicy))
+            var transportPolicy = PolicyImportHelper.GetTransportBindingPolicy(assertions);
+            if (transportPolicy != null)
+            {
+                if (!ImportTcpTransport(importer, context, transportPolicy))
                     return false;
-                if (!ImportTransport (importer, tcpTransport, transportPolicy))
+                if (!ImportTransport(importer, tcpTransport, transportPolicy))
                     return false;
             }
 
-            var streamed = PolicyImportHelper.GetStreamedMessageFramingPolicy (assertions);
+            var streamed = PolicyImportHelper.GetStreamedMessageFramingPolicy(assertions);
             if (streamed != null)
                 tcpTransport.TransferMode = TransferMode.Streamed;
-            
-            context.BindingElements.Add (tcpTransport);
+
+            context.BindingElements.Add(tcpTransport);
             return true;
         }
     }

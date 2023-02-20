@@ -16,8 +16,7 @@ public class AuthorizationBuilder
     /// Initializes a new instance of <see cref="AuthorizationBuilder"/>.
     /// </summary>
     /// <param name="services">The services being configured.</param>
-    public AuthorizationBuilder(IServiceCollection services)
-        => Services = services;
+    public AuthorizationBuilder(IServiceCollection services) => Services = services;
 
     /// <summary>
     /// The services being configured.
@@ -81,7 +80,10 @@ public class AuthorizationBuilder
     /// <param name="name">The name of the policy.</param>
     /// <param name="configurePolicy">The delegate that will be used to build the policy.</param>
     /// <returns>The builder.</returns>
-    public virtual AuthorizationBuilder AddPolicy(string name, Action<AuthorizationPolicyBuilder> configurePolicy)
+    public virtual AuthorizationBuilder AddPolicy(
+        string name,
+        Action<AuthorizationPolicyBuilder> configurePolicy
+    )
     {
         Services.Configure<AuthorizationOptions>(o => o.AddPolicy(name, configurePolicy));
         return this;
@@ -105,7 +107,10 @@ public class AuthorizationBuilder
     /// <param name="name">The name of the DefaultPolicy.</param>
     /// <param name="configurePolicy">The delegate that will be used to build the DefaultPolicy.</param>
     /// <returns>The builder.</returns>
-    public virtual AuthorizationBuilder AddDefaultPolicy(string name, Action<AuthorizationPolicyBuilder> configurePolicy)
+    public virtual AuthorizationBuilder AddDefaultPolicy(
+        string name,
+        Action<AuthorizationPolicyBuilder> configurePolicy
+    )
     {
         if (configurePolicy == null)
         {
@@ -135,7 +140,10 @@ public class AuthorizationBuilder
     /// <param name="name">The name of the Fallback policy.</param>
     /// <param name="configurePolicy">The delegate that will be used to build the Fallback policy.</param>
     /// <returns>The builder.</returns>
-    public virtual AuthorizationBuilder AddFallbackPolicy(string name, Action<AuthorizationPolicyBuilder> configurePolicy)
+    public virtual AuthorizationBuilder AddFallbackPolicy(
+        string name,
+        Action<AuthorizationPolicyBuilder> configurePolicy
+    )
     {
         if (configurePolicy == null)
         {

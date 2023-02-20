@@ -45,7 +45,8 @@ public abstract class InputFormatter : IInputFormatter, IApiRequestFormatMetadat
         {
             var message = Resources.FormatFormatter_NoMediaTypes(
                 GetType().FullName,
-                nameof(SupportedMediaTypes));
+                nameof(SupportedMediaTypes)
+            );
 
             throw new InvalidOperationException(message);
         }
@@ -99,7 +100,9 @@ public abstract class InputFormatter : IInputFormatter, IApiRequestFormatMetadat
             throw new ArgumentNullException(nameof(context));
         }
 
-        var canHaveBody = context.HttpContext.Features.Get<IHttpRequestBodyDetectionFeature>()?.CanHaveBody;
+        var canHaveBody = context.HttpContext.Features
+            .Get<IHttpRequestBodyDetectionFeature>()
+            ?.CanHaveBody;
         // In case the feature is not registered
         canHaveBody ??= context.HttpContext.Request.ContentLength != 0;
 
@@ -124,13 +127,17 @@ public abstract class InputFormatter : IInputFormatter, IApiRequestFormatMetadat
     public abstract Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context);
 
     /// <inheritdoc />
-    public virtual IReadOnlyList<string>? GetSupportedContentTypes(string contentType, Type objectType)
+    public virtual IReadOnlyList<string>? GetSupportedContentTypes(
+        string contentType,
+        Type objectType
+    )
     {
         if (SupportedMediaTypes.Count == 0)
         {
             var message = Resources.FormatFormatter_NoMediaTypes(
                 GetType().FullName,
-                nameof(SupportedMediaTypes));
+                nameof(SupportedMediaTypes)
+            );
 
             throw new InvalidOperationException(message);
         }

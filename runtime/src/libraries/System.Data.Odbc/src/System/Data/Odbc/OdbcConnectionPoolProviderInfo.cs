@@ -19,7 +19,7 @@ namespace System.Data.Odbc
         private bool _isV3Driver;
         private int _supportedSQLTypes;
         private int _testedSQLTypes;
-        private int _restrictedSQLBindTypes;   // These, otherwise supported types, are not available for binding
+        private int _restrictedSQLBindTypes; // These, otherwise supported types, are not available for binding
 
         // flags for unsupported Attributes
         private bool _noCurrentCatalog;
@@ -31,6 +31,7 @@ namespace System.Data.Odbc
 
         // SSS_WARNINGS_OFF
         private bool _noSqlCASSColumnKey;
+
         // SSS_WARNINGS_ON
 
         // flags for unsupported Functions
@@ -38,52 +39,36 @@ namespace System.Data.Odbc
 
         internal string? DriverName
         {
-            get
-            {
-                return _driverName;
-            }
-            set
-            {
-                _driverName = value;
-            }
+            get { return _driverName; }
+            set { _driverName = value; }
         }
 
         internal string? DriverVersion
         {
-            get
-            {
-                return _driverVersion;
-            }
-            set
-            {
-                _driverVersion = value;
-            }
+            get { return _driverVersion; }
+            set { _driverVersion = value; }
         }
 
         internal bool HasQuoteChar
         {
             // the value is set together with the QuoteChar (see set_QuoteChar);
-            get
-            {
-                return _hasQuoteChar;
-            }
+            get { return _hasQuoteChar; }
         }
 
         internal bool HasEscapeChar
         {
             // the value is set together with the EscapeChar (see set_EscapeChar);
-            get
-            {
-                return _hasEscapeChar;
-            }
+            get { return _hasEscapeChar; }
         }
-
 
         internal string QuoteChar
         {
             get
             {
-                Debug.Assert(_quoteChar != null, "QuoteChar getter called but no quote char was set");
+                Debug.Assert(
+                    _quoteChar != null,
+                    "QuoteChar getter called but no quote char was set"
+                );
                 return _quoteChar;
             }
             set
@@ -95,10 +80,7 @@ namespace System.Data.Odbc
 
         internal char EscapeChar
         {
-            get
-            {
-                return _escapeChar;
-            }
+            get { return _escapeChar; }
             set
             {
                 _escapeChar = value;
@@ -108,138 +90,71 @@ namespace System.Data.Odbc
 
         internal bool IsV3Driver
         {
-            get
-            {
-                return _isV3Driver;
-            }
-            set
-            {
-                _isV3Driver = value;
-            }
+            get { return _isV3Driver; }
+            set { _isV3Driver = value; }
         }
 
         internal int SupportedSQLTypes
         {
-            get
-            {
-                return _supportedSQLTypes;
-            }
-            set
-            {
-                _supportedSQLTypes = value;
-            }
+            get { return _supportedSQLTypes; }
+            set { _supportedSQLTypes = value; }
         }
 
         internal int TestedSQLTypes
         {
-            get
-            {
-                return _testedSQLTypes;
-            }
-            set
-            {
-                _testedSQLTypes = value;
-            }
+            get { return _testedSQLTypes; }
+            set { _testedSQLTypes = value; }
         }
 
         internal int RestrictedSQLBindTypes
         {
-            get
-            {
-                return _restrictedSQLBindTypes;
-            }
-            set
-            {
-                _restrictedSQLBindTypes = value;
-            }
+            get { return _restrictedSQLBindTypes; }
+            set { _restrictedSQLBindTypes = value; }
         }
-
 
         internal bool NoCurrentCatalog
         {
-            get
-            {
-                return _noCurrentCatalog;
-            }
-            set
-            {
-                _noCurrentCatalog = value;
-            }
+            get { return _noCurrentCatalog; }
+            set { _noCurrentCatalog = value; }
         }
 
         internal bool NoConnectionDead
         {
-            get
-            {
-                return _noConnectionDead;
-            }
-            set
-            {
-                _noConnectionDead = value;
-            }
+            get { return _noConnectionDead; }
+            set { _noConnectionDead = value; }
         }
-
 
         internal bool NoQueryTimeout
         {
-            get
-            {
-                return _noQueryTimeout;
-            }
-            set
-            {
-                _noQueryTimeout = value;
-            }
+            get { return _noQueryTimeout; }
+            set { _noQueryTimeout = value; }
         }
 
         internal bool NoSqlSoptSSNoBrowseTable
         {
-            get
-            {
-                return _noSqlSoptSSNoBrowseTable;
-            }
-            set
-            {
-                _noSqlSoptSSNoBrowseTable = value;
-            }
+            get { return _noSqlSoptSSNoBrowseTable; }
+            set { _noSqlSoptSSNoBrowseTable = value; }
         }
 
         internal bool NoSqlSoptSSHiddenColumns
         {
-            get
-            {
-                return _noSqlSoptSSHiddenColumns;
-            }
-            set
-            {
-                _noSqlSoptSSHiddenColumns = value;
-            }
+            get { return _noSqlSoptSSHiddenColumns; }
+            set { _noSqlSoptSSHiddenColumns = value; }
         }
 
         // SSS_WARNINGS_OFF
         internal bool NoSqlCASSColumnKey
         {
-            get
-            {
-                return _noSqlCASSColumnKey;
-            }
-            set
-            {
-                _noSqlCASSColumnKey = value;
-            }
+            get { return _noSqlCASSColumnKey; }
+            set { _noSqlCASSColumnKey = value; }
         }
+
         // SSS_WARNINGS_ON
 
         internal bool NoSqlPrimaryKeys
         {
-            get
-            {
-                return _noSqlPrimaryKeys;
-            }
-            set
-            {
-                _noSqlPrimaryKeys = value;
-            }
+            get { return _noSqlPrimaryKeys; }
+            set { _noSqlPrimaryKeys = value; }
         }
     }
 }

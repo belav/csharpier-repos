@@ -8,10 +8,15 @@ internal static partial class Interop
 {
     internal static partial class Crypto
     {
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_CheckX509Hostname", StringMarshalling = StringMarshalling.Utf8)]
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_CheckX509Hostname",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
         internal static partial int CheckX509Hostname(
             IntPtr x509,
             string hostname,
-            int cchHostname);
+            int cchHostname
+        );
     }
 }

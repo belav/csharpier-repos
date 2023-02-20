@@ -5,13 +5,11 @@
 using System;
 using System.Collections;
 
-class Data
-{
-}
+class Data { }
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
         var c = new ArrayList { 1, Count = 1 };
     }

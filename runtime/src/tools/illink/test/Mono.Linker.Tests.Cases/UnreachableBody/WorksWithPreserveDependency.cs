@@ -4,34 +4,33 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.UnreachableBody
 {
-    [SetupLinkerArgument ("--enable-opt", "unreachablebodies")]
-    [SetupCompileBefore ("FakeSystemAssembly.dll", new[] { "../PreserveDependencies/Dependencies/PreserveDependencyAttribute.cs" })]
+    [SetupLinkerArgument("--enable-opt", "unreachablebodies")]
+    [SetupCompileBefore(
+        "FakeSystemAssembly.dll",
+        new[] { "../PreserveDependencies/Dependencies/PreserveDependencyAttribute.cs" }
+    )]
     public class WorksWithPreserveDependency
     {
-        public static void Main ()
+        public static void Main()
         {
-            Foo.StaticMethod ();
+            Foo.StaticMethod();
         }
 
         [Kept]
         class Foo
         {
             [Kept]
-            [PreserveDependency ("InstanceMethod()")]
-            public static void StaticMethod ()
-            {
-            }
+            [PreserveDependency("InstanceMethod()")]
+            public static void StaticMethod() { }
 
             [Kept]
             [ExpectBodyModified]
-            public void InstanceMethod ()
+            public void InstanceMethod()
             {
-                UsedByMethod ();
+                UsedByMethod();
             }
 
-            void UsedByMethod ()
-            {
-            }
+            void UsedByMethod() { }
         }
     }
 }

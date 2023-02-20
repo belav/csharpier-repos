@@ -18,24 +18,30 @@ namespace System.ServiceModel.Discovery
             this.discoveryService = discoveryService;
         }
 
-        InstanceContext IInstanceContextProvider.GetExistingInstanceContext(Message message, IContextChannel channel)
+        InstanceContext IInstanceContextProvider.GetExistingInstanceContext(
+            Message message,
+            IContextChannel channel
+        )
         {
             // per call instance context
             return null;
         }
 
-        void IInstanceContextProvider.InitializeInstanceContext(InstanceContext instanceContext, Message message, IContextChannel channel)
-        {
-        }
+        void IInstanceContextProvider.InitializeInstanceContext(
+            InstanceContext instanceContext,
+            Message message,
+            IContextChannel channel
+        ) { }
 
         bool IInstanceContextProvider.IsIdle(InstanceContext instanceContext)
         {
             return true;
         }
 
-        void IInstanceContextProvider.NotifyIdle(InstanceContextIdleCallback callback, InstanceContext instanceContext)
-        {
-        }
+        void IInstanceContextProvider.NotifyIdle(
+            InstanceContextIdleCallback callback,
+            InstanceContext instanceContext
+        ) { }
 
         object IInstanceProvider.GetInstance(InstanceContext instanceContext, Message message)
         {
@@ -47,8 +53,6 @@ namespace System.ServiceModel.Discovery
             return this.discoveryService;
         }
 
-        void IInstanceProvider.ReleaseInstance(InstanceContext instanceContext, object instance)
-        {
-        }
+        void IInstanceProvider.ReleaseInstance(InstanceContext instanceContext, object instance) { }
     }
 }

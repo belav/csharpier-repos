@@ -4,7 +4,8 @@
 struct A
 {
     public int a;
-    public A (int foo)
+
+    public A(int foo)
     {
         a = foo;
     }
@@ -12,13 +13,11 @@ struct A
 
 class X
 {
-    static void test_output (A a)
+    static void test_output(A a) { }
+
+    static void test5(out A a)
     {
-    }
-    
-    static void test5 (out A a)
-    {
-        test_output (a);
-        a = new A (5);
+        test_output(a);
+        a = new A(5);
     }
 }

@@ -22,12 +22,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             }
         }
 
-        public RecordDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken keyword, SyntaxToken identifier,
-            TypeParameterListSyntax? typeParameterList, ParameterListSyntax? parameterList, BaseListSyntax? baseList, SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses,
-            SyntaxToken openBraceToken, SyntaxList<MemberDeclarationSyntax> members, SyntaxToken closeBraceToken, SyntaxToken semicolonToken)
+        public RecordDeclarationSyntax Update(
+            SyntaxList<AttributeListSyntax> attributeLists,
+            SyntaxTokenList modifiers,
+            SyntaxToken keyword,
+            SyntaxToken identifier,
+            TypeParameterListSyntax? typeParameterList,
+            ParameterListSyntax? parameterList,
+            BaseListSyntax? baseList,
+            SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses,
+            SyntaxToken openBraceToken,
+            SyntaxList<MemberDeclarationSyntax> members,
+            SyntaxToken closeBraceToken,
+            SyntaxToken semicolonToken
+        )
         {
-            return Update(attributeLists, modifiers, keyword, this.ClassOrStructKeyword, identifier,
-                typeParameterList, parameterList, baseList, constraintClauses, openBraceToken, members, closeBraceToken, semicolonToken);
+            return Update(
+                attributeLists,
+                modifiers,
+                keyword,
+                this.ClassOrStructKeyword,
+                identifier,
+                typeParameterList,
+                parameterList,
+                baseList,
+                constraintClauses,
+                openBraceToken,
+                members,
+                closeBraceToken,
+                semicolonToken
+            );
         }
     }
 }
@@ -36,30 +60,98 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public partial class SyntaxFactory
     {
-        public static RecordDeclarationSyntax RecordDeclaration(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken keyword, SyntaxToken identifier,
-            TypeParameterListSyntax? typeParameterList, ParameterListSyntax? parameterList, BaseListSyntax? baseList, SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses,
-            SyntaxToken openBraceToken, SyntaxList<MemberDeclarationSyntax> members, SyntaxToken closeBraceToken, SyntaxToken semicolonToken)
+        public static RecordDeclarationSyntax RecordDeclaration(
+            SyntaxList<AttributeListSyntax> attributeLists,
+            SyntaxTokenList modifiers,
+            SyntaxToken keyword,
+            SyntaxToken identifier,
+            TypeParameterListSyntax? typeParameterList,
+            ParameterListSyntax? parameterList,
+            BaseListSyntax? baseList,
+            SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses,
+            SyntaxToken openBraceToken,
+            SyntaxList<MemberDeclarationSyntax> members,
+            SyntaxToken closeBraceToken,
+            SyntaxToken semicolonToken
+        )
         {
-            return RecordDeclaration(SyntaxKind.RecordDeclaration, attributeLists, modifiers, keyword, classOrStructKeyword: default, identifier,
-                typeParameterList, parameterList, baseList, constraintClauses, openBraceToken, members, closeBraceToken, semicolonToken);
+            return RecordDeclaration(
+                SyntaxKind.RecordDeclaration,
+                attributeLists,
+                modifiers,
+                keyword,
+                classOrStructKeyword: default,
+                identifier,
+                typeParameterList,
+                parameterList,
+                baseList,
+                constraintClauses,
+                openBraceToken,
+                members,
+                closeBraceToken,
+                semicolonToken
+            );
         }
 
-        public static RecordDeclarationSyntax RecordDeclaration(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken keyword, SyntaxToken identifier,
-            TypeParameterListSyntax typeParameterList, ParameterListSyntax parameterList, BaseListSyntax baseList, SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses, SyntaxList<MemberDeclarationSyntax> members)
+        public static RecordDeclarationSyntax RecordDeclaration(
+            SyntaxList<AttributeListSyntax> attributeLists,
+            SyntaxTokenList modifiers,
+            SyntaxToken keyword,
+            SyntaxToken identifier,
+            TypeParameterListSyntax typeParameterList,
+            ParameterListSyntax parameterList,
+            BaseListSyntax baseList,
+            SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses,
+            SyntaxList<MemberDeclarationSyntax> members
+        )
         {
-            return RecordDeclaration(SyntaxKind.RecordDeclaration, attributeLists, modifiers, keyword, classOrStructKeyword: default, identifier,
-                typeParameterList, parameterList, baseList, constraintClauses, openBraceToken: default, members, closeBraceToken: default, semicolonToken: default);
+            return RecordDeclaration(
+                SyntaxKind.RecordDeclaration,
+                attributeLists,
+                modifiers,
+                keyword,
+                classOrStructKeyword: default,
+                identifier,
+                typeParameterList,
+                parameterList,
+                baseList,
+                constraintClauses,
+                openBraceToken: default,
+                members,
+                closeBraceToken: default,
+                semicolonToken: default
+            );
         }
 
-        public static RecordDeclarationSyntax RecordDeclaration(SyntaxToken keyword, string identifier)
+        public static RecordDeclarationSyntax RecordDeclaration(
+            SyntaxToken keyword,
+            string identifier
+        )
         {
             return RecordDeclaration(keyword, SyntaxFactory.Identifier(identifier));
         }
 
-        public static RecordDeclarationSyntax RecordDeclaration(SyntaxToken keyword, SyntaxToken identifier)
+        public static RecordDeclarationSyntax RecordDeclaration(
+            SyntaxToken keyword,
+            SyntaxToken identifier
+        )
         {
-            return RecordDeclaration(SyntaxKind.RecordDeclaration, attributeLists: default, modifiers: default, keyword, classOrStructKeyword: default, identifier,
-                typeParameterList: null, parameterList: null, baseList: null, constraintClauses: default, openBraceToken: default, members: default, closeBraceToken: default, semicolonToken: default);
+            return RecordDeclaration(
+                SyntaxKind.RecordDeclaration,
+                attributeLists: default,
+                modifiers: default,
+                keyword,
+                classOrStructKeyword: default,
+                identifier,
+                typeParameterList: null,
+                parameterList: null,
+                baseList: null,
+                constraintClauses: default,
+                openBraceToken: default,
+                members: default,
+                closeBraceToken: default,
+                semicolonToken: default
+            );
         }
     }
 }

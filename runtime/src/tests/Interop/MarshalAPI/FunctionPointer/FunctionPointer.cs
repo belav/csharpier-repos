@@ -26,7 +26,8 @@ public partial class FunctionPtr
             VoidDelegate md = new VoidDelegate(VoidVoidMethod);
             IntPtr fcnptr = Marshal.GetFunctionPointerForDelegate<VoidDelegate>(md);
 
-            VoidDelegate del = (VoidDelegate)Marshal.GetDelegateForFunctionPointer(fcnptr, typeof(VoidDelegate));
+            VoidDelegate del = (VoidDelegate)
+                Marshal.GetDelegateForFunctionPointer(fcnptr, typeof(VoidDelegate));
             Assert.Equal(md.Target, del.Target);
             Assert.Equal(md.Method, del.Method);
         }
@@ -34,7 +35,8 @@ public partial class FunctionPtr
         // Native FcnPtr -> Delegate
         {
             IntPtr fcnptr = FunctionPointerNative.GetVoidVoidFcnPtr();
-            VoidDelegate del = (VoidDelegate)Marshal.GetDelegateForFunctionPointer(fcnptr, typeof(VoidDelegate));
+            VoidDelegate del = (VoidDelegate)
+                Marshal.GetDelegateForFunctionPointer(fcnptr, typeof(VoidDelegate));
             Assert.Equal(null, del.Target);
             Assert.Equal("Invoke", del.Method.Name);
 

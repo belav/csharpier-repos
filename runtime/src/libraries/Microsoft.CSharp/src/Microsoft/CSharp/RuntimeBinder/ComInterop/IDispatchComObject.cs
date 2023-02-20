@@ -77,7 +77,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     internal sealed class IDispatchComObject : ComObject, IDynamicMetaObjectProvider
     {
         private ComTypeDesc _comTypeDesc;
-        private static readonly Dictionary<Guid, ComTypeDesc> s_cacheComTypeDesc = new Dictionary<Guid, ComTypeDesc>();
+        private static readonly Dictionary<Guid, ComTypeDesc> s_cacheComTypeDesc =
+            new Dictionary<Guid, ComTypeDesc>();
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         internal IDispatchComObject(IDispatch rcw)
@@ -124,7 +125,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 new string[] { name },
                 1,
                 0,
-                dispIds);
+                dispIds
+            );
 
             dispId = dispIds[0];
             return hresult;
@@ -155,7 +157,13 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             {
                 string name = "[PROPERTYGET, DISPID(0)]";
 
-                _comTypeDesc.EnsureGetItem(new ComMethodDesc(name, ComDispIds.DISPID_VALUE, ComTypes.INVOKEKIND.INVOKE_PROPERTYGET));
+                _comTypeDesc.EnsureGetItem(
+                    new ComMethodDesc(
+                        name,
+                        ComDispIds.DISPID_VALUE,
+                        ComTypes.INVOKEKIND.INVOKE_PROPERTYGET
+                    )
+                );
                 methodDesc = _comTypeDesc.GetItem;
             }
 
@@ -188,7 +196,13 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             {
                 string name = "[PROPERTYPUT, DISPID(0)]";
 
-                _comTypeDesc.EnsureSetItem(new ComMethodDesc(name, ComDispIds.DISPID_VALUE, ComTypes.INVOKEKIND.INVOKE_PROPERTYPUT));
+                _comTypeDesc.EnsureSetItem(
+                    new ComMethodDesc(
+                        name,
+                        ComDispIds.DISPID_VALUE,
+                        ComTypes.INVOKEKIND.INVOKE_PROPERTYPUT
+                    )
+                );
                 methodDesc = _comTypeDesc.SetItem;
             }
 
@@ -218,7 +232,11 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
             if (hresult == ComHresults.S_OK)
             {
-                ComMethodDesc cmd = new ComMethodDesc(name, dispId, ComTypes.INVOKEKIND.INVOKE_FUNC);
+                ComMethodDesc cmd = new ComMethodDesc(
+                    name,
+                    dispId,
+                    ComTypes.INVOKEKIND.INVOKE_FUNC
+                );
                 _comTypeDesc.AddFunc(name, cmd);
                 method = cmd;
                 return true;
@@ -230,11 +248,19 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 return false;
             }
 
-            throw Error.CouldNotGetDispId(name, string.Format(CultureInfo.InvariantCulture, "0x{0:X})", hresult));
+            throw Error.CouldNotGetDispId(
+                name,
+                string.Format(CultureInfo.InvariantCulture, "0x{0:X})", hresult)
+            );
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        internal bool TryGetPropertySetterExplicit(string name, out ComMethodDesc method, Type limitType, bool holdsNull)
+        internal bool TryGetPropertySetterExplicit(
+            string name,
+            out ComMethodDesc method,
+            Type limitType,
+            bool holdsNull
+        )
         {
             EnsureScanDefinedMethods();
 
@@ -244,10 +270,18 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             {
                 // we do not know whether we have put or putref here
                 // and we will not guess and pretend we found both.
-                ComMethodDesc put = new ComMethodDesc(name, dispId, ComTypes.INVOKEKIND.INVOKE_PROPERTYPUT);
+                ComMethodDesc put = new ComMethodDesc(
+                    name,
+                    dispId,
+                    ComTypes.INVOKEKIND.INVOKE_PROPERTYPUT
+                );
                 _comTypeDesc.AddPut(name, put);
 
-                ComMethodDesc putref = new ComMethodDesc(name, dispId, ComTypes.INVOKEKIND.INVOKE_PROPERTYPUTREF);
+                ComMethodDesc putref = new ComMethodDesc(
+                    name,
+                    dispId,
+                    ComTypes.INVOKEKIND.INVOKE_PROPERTYPUTREF
+                );
                 _comTypeDesc.AddPutRef(name, putref);
 
                 if (ComBinderHelpers.PreferPut(limitType, holdsNull))
@@ -267,7 +301,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 return false;
             }
 
-            throw Error.CouldNotGetDispId(name, string.Format(CultureInfo.InvariantCulture, "0x{0:X})", hresult));
+            throw Error.CouldNotGetDispId(
+                name,
+                string.Format(CultureInfo.InvariantCulture, "0x{0:X})", hresult)
+            );
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -320,15 +357,23 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             return members.ToArray();
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         DynamicMetaObject IDynamicMetaObjectProvider.GetMetaObject(Expression parameter)
         {
             EnsureScanDefinedMethods();
             return new IDispatchMetaObject(parameter, this);
         }
 
-        private static void GetFuncDescForDescIndex(ComTypes.ITypeInfo typeInfo, int funcIndex, out ComTypes.FUNCDESC funcDesc, out IntPtr funcDescHandle)
+        private static void GetFuncDescForDescIndex(
+            ComTypes.ITypeInfo typeInfo,
+            int funcIndex,
+            out ComTypes.FUNCDESC funcDesc,
+            out IntPtr funcDescHandle
+        )
         {
             IntPtr pFuncDesc;
             typeInfo.GetFuncDesc(funcIndex, out pFuncDesc);
@@ -339,12 +384,16 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 throw Error.CannotRetrieveTypeInformation();
             }
 
-            funcDesc = (ComTypes.FUNCDESC)Marshal.PtrToStructure(pFuncDesc, typeof(ComTypes.FUNCDESC));
+            funcDesc = (ComTypes.FUNCDESC)
+                Marshal.PtrToStructure(pFuncDesc, typeof(ComTypes.FUNCDESC));
             funcDescHandle = pFuncDesc;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         private void EnsureScanDefinedEvents()
         {
             // _comTypeDesc.Events is null if we have not yet attempted
@@ -355,7 +404,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             }
 
             // check type info in the type descriptions cache
-            ComTypes.ITypeInfo typeInfo = ComRuntimeHelpers.GetITypeInfoFromIDispatch(DispatchObject);
+            ComTypes.ITypeInfo typeInfo = ComRuntimeHelpers.GetITypeInfoFromIDispatch(
+                DispatchObject
+            );
             if (typeInfo == null)
             {
                 _comTypeDesc = ComTypeDesc.CreateEmptyTypeDesc();
@@ -368,8 +419,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             {
                 lock (s_cacheComTypeDesc)
                 {
-                    if (s_cacheComTypeDesc.TryGetValue(typeAttr.guid, out _comTypeDesc) &&
-                        _comTypeDesc.Events != null)
+                    if (
+                        s_cacheComTypeDesc.TryGetValue(typeAttr.guid, out _comTypeDesc)
+                        && _comTypeDesc.Events != null
+                    )
                     {
                         return;
                     }
@@ -397,12 +450,17 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             {
                 events = new Dictionary<string, ComEventDesc>();
 
-                ComTypes.TYPEATTR classTypeAttr = ComRuntimeHelpers.GetTypeAttrForTypeInfo(classTypeInfo);
+                ComTypes.TYPEATTR classTypeAttr = ComRuntimeHelpers.GetTypeAttrForTypeInfo(
+                    classTypeInfo
+                );
                 for (int i = 0; i < classTypeAttr.cImplTypes; i++)
                 {
                     classTypeInfo.GetRefTypeOfImplType(i, out int hRefType);
 
-                    classTypeInfo.GetRefTypeInfo(hRefType, out ComTypes.ITypeInfo interfaceTypeInfo);
+                    classTypeInfo.GetRefTypeInfo(
+                        hRefType,
+                        out ComTypes.ITypeInfo interfaceTypeInfo
+                    );
 
                     classTypeInfo.GetImplTypeFlags(i, out ComTypes.IMPLTYPEFLAGS flags);
                     if ((flags & ComTypes.IMPLTYPEFLAGS.IMPLTYPEFLAG_FSOURCE) != 0)
@@ -432,9 +490,14 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             }
         }
 
-        private static void ScanSourceInterface(ComTypes.ITypeInfo sourceTypeInfo, ref Dictionary<string, ComEventDesc> events)
+        private static void ScanSourceInterface(
+            ComTypes.ITypeInfo sourceTypeInfo,
+            ref Dictionary<string, ComEventDesc> events
+        )
         {
-            ComTypes.TYPEATTR sourceTypeAttribute = ComRuntimeHelpers.GetTypeAttrForTypeInfo(sourceTypeInfo);
+            ComTypes.TYPEATTR sourceTypeAttribute = ComRuntimeHelpers.GetTypeAttrForTypeInfo(
+                sourceTypeInfo
+            );
 
             for (int index = 0; index < sourceTypeAttribute.cFuncs; index++)
             {
@@ -442,7 +505,12 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
                 try
                 {
-                    GetFuncDescForDescIndex(sourceTypeInfo, index, out ComTypes.FUNCDESC funcDesc, out funcDescHandleToRelease);
+                    GetFuncDescForDescIndex(
+                        sourceTypeInfo,
+                        index,
+                        out ComTypes.FUNCDESC funcDesc,
+                        out funcDescHandleToRelease
+                    );
 
                     // we are not interested in hidden or restricted functions for now.
                     if ((funcDesc.wFuncFlags & (int)ComTypes.FUNCFLAGS.FUNCFLAG_FHIDDEN) != 0)
@@ -482,7 +550,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private static ComTypes.ITypeInfo GetCoClassTypeInfo(object rcw, ComTypes.ITypeInfo typeInfo)
+        private static ComTypes.ITypeInfo GetCoClassTypeInfo(
+            object rcw,
+            ComTypes.ITypeInfo typeInfo
+        )
         {
             Debug.Assert(typeInfo != null);
 
@@ -524,8 +595,11 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             return typeInfoCoClass;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         private void EnsureScanDefinedMethods()
         {
             if (_comTypeDesc?.Funcs != null)
@@ -533,7 +607,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 return;
             }
 
-            ComTypes.ITypeInfo typeInfo = ComRuntimeHelpers.GetITypeInfoFromIDispatch(DispatchObject);
+            ComTypes.ITypeInfo typeInfo = ComRuntimeHelpers.GetITypeInfoFromIDispatch(
+                DispatchObject
+            );
             if (typeInfo == null)
             {
                 _comTypeDesc = ComTypeDesc.CreateEmptyTypeDesc();
@@ -546,8 +622,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             {
                 lock (s_cacheComTypeDesc)
                 {
-                    if (s_cacheComTypeDesc.TryGetValue(typeAttr.guid, out _comTypeDesc) &&
-                        _comTypeDesc.Funcs != null)
+                    if (
+                        s_cacheComTypeDesc.TryGetValue(typeAttr.guid, out _comTypeDesc)
+                        && _comTypeDesc.Funcs != null
+                    )
                     {
                         return;
                     }
@@ -568,7 +646,12 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
                 try
                 {
-                    GetFuncDescForDescIndex(typeInfo, definedFuncIndex, out ComTypes.FUNCDESC funcDesc, out funcDescHandleToRelease);
+                    GetFuncDescForDescIndex(
+                        typeInfo,
+                        definedFuncIndex,
+                        out ComTypes.FUNCDESC funcDesc,
+                        out funcDescHandleToRelease
+                    );
 
                     if ((funcDesc.wFuncFlags & (int)ComTypes.FUNCFLAGS.FUNCFLAG_FRESTRICTED) != 0)
                     {
@@ -647,18 +730,23 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        internal bool TryGetPropertySetter(string name, out ComMethodDesc method, Type limitType, bool holdsNull)
+        internal bool TryGetPropertySetter(
+            string name,
+            out ComMethodDesc method,
+            Type limitType,
+            bool holdsNull
+        )
         {
             EnsureScanDefinedMethods();
 
             if (ComBinderHelpers.PreferPut(limitType, holdsNull))
             {
-                return _comTypeDesc.TryGetPut(name, out method) ||
-                    _comTypeDesc.TryGetPutRef(name, out method);
+                return _comTypeDesc.TryGetPut(name, out method)
+                    || _comTypeDesc.TryGetPutRef(name, out method);
             }
 
-            return _comTypeDesc.TryGetPutRef(name, out method) ||
-                _comTypeDesc.TryGetPut(name, out method);
+            return _comTypeDesc.TryGetPutRef(name, out method)
+                || _comTypeDesc.TryGetPut(name, out method);
         }
     }
 }

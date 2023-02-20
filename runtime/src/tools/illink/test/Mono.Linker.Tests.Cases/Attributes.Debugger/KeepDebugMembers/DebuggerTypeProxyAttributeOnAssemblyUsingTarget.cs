@@ -4,36 +4,51 @@ using Mono.Linker.Tests.Cases.Expectations.Assertions;
 using Mono.Linker.Tests.Cases.Expectations.Helpers;
 using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
-[assembly: KeptAttributeAttribute (typeof (DebuggerTypeProxyAttribute))]
-[assembly: DebuggerTypeProxy (typeof (DebuggerTypeProxyAttributeOnAssemblyUsingTarget.Foo.FooDebugView), Target = typeof (DebuggerTypeProxyAttributeOnAssemblyUsingTarget.Foo))]
+[assembly: KeptAttributeAttribute(typeof(DebuggerTypeProxyAttribute))]
+[assembly: DebuggerTypeProxy(
+    typeof(DebuggerTypeProxyAttributeOnAssemblyUsingTarget.Foo.FooDebugView),
+    Target = typeof(DebuggerTypeProxyAttributeOnAssemblyUsingTarget.Foo)
+)]
 
 namespace Mono.Linker.Tests.Cases.Attributes.Debugger.KeepDebugMembers
 {
-    [SetupLinkerTrimMode ("link")]
+    [SetupLinkerTrimMode("link")]
 #if !NETCOREAPP
-    [SetupLinkerKeepDebugMembers ("true")]
+    [SetupLinkerKeepDebugMembers("true")]
 #endif
 
     // Can be removed once this bug is fixed https://bugzilla.xamarin.com/show_bug.cgi?id=58168
-    [SkipPeVerify (SkipPeVerifyForToolchian.Pedump)]
-
-    [KeptMemberInAssembly (PlatformAssemblies.CoreLib, typeof (DebuggerTypeProxyAttribute), ".ctor(System.Type)")]
-    [KeptMemberInAssembly (PlatformAssemblies.CoreLib, typeof (DebuggerTypeProxyAttribute), "set_Target(System.Type)")]
+    [SkipPeVerify(SkipPeVerifyForToolchian.Pedump)]
+    [KeptMemberInAssembly(
+        PlatformAssemblies.CoreLib,
+        typeof(DebuggerTypeProxyAttribute),
+        ".ctor(System.Type)"
+    )]
+    [KeptMemberInAssembly(
+        PlatformAssemblies.CoreLib,
+        typeof(DebuggerTypeProxyAttribute),
+        "set_Target(System.Type)"
+    )]
     public class DebuggerTypeProxyAttributeOnAssemblyUsingTarget
     {
-        public static void Main ()
+        public static void Main()
         {
-            var foo = new Foo ();
+            var foo = new Foo();
             foo.Property = 1;
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class Foo
         {
             [Kept]
             [KeptBackingField]
-            public int Property { get; [Kept] set; }
+            public int Property
+            {
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             internal class FooDebugView
@@ -42,7 +57,7 @@ namespace Mono.Linker.Tests.Cases.Attributes.Debugger.KeepDebugMembers
                 private Foo _foo;
 
                 [Kept]
-                public FooDebugView (Foo foo)
+                public FooDebugView(Foo foo)
                 {
                     _foo = foo;
                 }

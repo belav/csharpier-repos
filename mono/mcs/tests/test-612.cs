@@ -12,13 +12,16 @@
 //
 // Fixes: #360354
 //
-public class   Abcdefghijklmnopqrstuvwxyz {
+public class Abcdefghijklmnopqrstuvwxyz
+{
     static public int Zyxwvutsrqp = 1;
 }
 
-public class OO {
+public class OO
+{
     bool b;
-    void D ()
+
+    void D()
     {
         b = Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz;
         b = Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz;
@@ -273,82 +276,80 @@ public class OO {
         b = Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz;
         b = Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz;
     }
-    
 }
 
-public class Zyxwvutsrqp {
+public class Zyxwvutsrqp
+{
     static public int Abcdefghijklmnopqrstuvwxyz = 2;
 }
 
 public class XXX
 {
-        public bool IsAltered()
-        {
-            if (
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz ||
-        Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz)
-        
-                return true;
+    public bool IsAltered()
+    {
+        if (
+            Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+            || Abcdefghijklmnopqrstuvwxyz.Zyxwvutsrqp != Zyxwvutsrqp.Abcdefghijklmnopqrstuvwxyz
+        )
+
+            return true;
         return false;
     }
 
-    public static void Main ()
-    {
-    }
-    
+    public static void Main() { }
 }

@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.OperationCollection.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,25 +28,26 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services.Description {
-    public sealed class OperationCollection : ServiceDescriptionBaseCollection {
-
+namespace System.Web.Services.Description
+{
+    public sealed class OperationCollection : ServiceDescriptionBaseCollection
+    {
         #region Constructors
 
-        internal OperationCollection (PortType portType) 
-            : base (portType)
-        {
-        }
+        internal OperationCollection(PortType portType)
+            : base(portType) { }
 
         #endregion // Constructors
 
         #region Properties
 
-        public Operation this [int index] {
-            get { 
+        public Operation this[int index]
+        {
+            get
+            {
                 if (index < 0 || index > Count)
-                    throw new ArgumentOutOfRangeException ();
-                return (Operation) List[index]; 
+                    throw new ArgumentOutOfRangeException();
+                return (Operation)List[index];
             }
             set { List[index] = value; }
         }
@@ -55,23 +56,23 @@ namespace System.Web.Services.Description {
 
         #region Methods
 
-        public int Add (Operation operation) 
+        public int Add(Operation operation)
         {
-            Insert (Count, operation);
+            Insert(Count, operation);
             return (Count - 1);
         }
 
-        public bool Contains (Operation operation)
+        public bool Contains(Operation operation)
         {
-            return List.Contains (operation);
+            return List.Contains(operation);
         }
 
-        public void CopyTo (Operation[] array, int index) 
+        public void CopyTo(Operation[] array, int index)
         {
-            List.CopyTo (array, index);
+            List.CopyTo(array, index);
         }
 
-        internal Operation Find (string name)
+        internal Operation Find(string name)
         {
             foreach (Operation op in List)
                 if (op.Name == name)
@@ -79,26 +80,26 @@ namespace System.Web.Services.Description {
             return null;
         }
 
-        public int IndexOf (Operation operation)
+        public int IndexOf(Operation operation)
         {
-            return List.IndexOf (operation);
+            return List.IndexOf(operation);
         }
 
-        public void Insert (int index, Operation operation)
+        public void Insert(int index, Operation operation)
         {
-            List.Insert (index, operation);
-        }
-    
-        public void Remove (Operation operation)
-        {
-            List.Remove (operation);
+            List.Insert(index, operation);
         }
 
-        protected override void SetParent (object value, object parent)
+        public void Remove(Operation operation)
         {
-            ((Operation) value).SetParent ((PortType) parent);
+            List.Remove(operation);
         }
-            
+
+        protected override void SetParent(object value, object parent)
+        {
+            ((Operation)value).SetParent((PortType)parent);
+        }
+
         #endregion // Methods
     }
 }

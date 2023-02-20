@@ -2,20 +2,18 @@ using System;
 
 class X
 {
-    public void Test (int g, out int results)
+    public void Test(int g, out int results)
     {
-        if ((results = Foo (g > 0 ? 1 : 2)) != 4)
+        if ((results = Foo(g > 0 ? 1 : 2)) != 4)
         {
-            Console.WriteLine (results);
+            Console.WriteLine(results);
         }
     }
 
-    int Foo (object o)
+    int Foo(object o)
     {
         return 4;
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

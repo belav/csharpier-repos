@@ -13,18 +13,21 @@ namespace Mono.Linker.Tests.Cases.Reflection
 {
     class AsType
     {
-        public static void Main ()
+        public static void Main()
         {
-            _ = typeof (TypeUsedWithAsType).GetTypeInfo ().AsType ().GetMethod (nameof (TypeUsedWithAsType.Method));
+            _ = typeof(TypeUsedWithAsType)
+                .GetTypeInfo()
+                .AsType()
+                .GetMethod(nameof(TypeUsedWithAsType.Method));
         }
 
         [Kept]
         static class TypeUsedWithAsType
         {
             [Kept]
-            public static void Method () { }
+            public static void Method() { }
 
-            public static void OtherMethod () { }
+            public static void OtherMethod() { }
         }
     }
 }

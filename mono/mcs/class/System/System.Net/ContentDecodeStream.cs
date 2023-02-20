@@ -39,54 +39,56 @@ namespace System.Net
             Deflate
         }
 
-        public static ContentDecodeStream Create (
-            WebOperation operation, Stream innerStream, Mode mode)
+        public static ContentDecodeStream Create(
+            WebOperation operation,
+            Stream innerStream,
+            Mode mode
+        )
         {
             Stream decodeStream;
             if (mode == Mode.GZip)
-                decodeStream = new GZipStream (innerStream, CompressionMode.Decompress);
+                decodeStream = new GZipStream(innerStream, CompressionMode.Decompress);
             else
-                decodeStream = new DeflateStream (innerStream, CompressionMode.Decompress);
-            return new ContentDecodeStream (operation, decodeStream, innerStream);
+                decodeStream = new DeflateStream(innerStream, CompressionMode.Decompress);
+            return new ContentDecodeStream(operation, decodeStream, innerStream);
         }
 
-        Stream OriginalInnerStream {
-            get;
-        }
+        Stream OriginalInnerStream { get; }
 
-        ContentDecodeStream (WebOperation operation, Stream decodeStream,
-                             Stream originalInnerStream)
-            : base (operation, decodeStream)
+        ContentDecodeStream(WebOperation operation, Stream decodeStream, Stream originalInnerStream)
+            : base(operation, decodeStream)
         {
             /*
              * We pass the GZipStream/DeflateStream to the base .ctor,
              * so it can Dispose() it when we're done.
-             * 
+             *
              * Save the original inner stream here for FinishReading().
              */
             OriginalInnerStream = originalInnerStream;
         }
 
-        protected override Task<int> ProcessReadAsync (
-            byte[] buffer, int offset, int size,
-            CancellationToken cancellationToken)
+        protected override Task<int> ProcessReadAsync(
+            byte[] buffer,
+            int offset,
+            int size,
+            CancellationToken cancellationToken
+        )
         {
-            return InnerStream.ReadAsync (buffer, offset, size, cancellationToken);
+            return InnerStream.ReadAsync(buffer, offset, size, cancellationToken);
         }
 
-        internal override Task FinishReading (CancellationToken cancellationToken)
+        internal override Task FinishReading(CancellationToken cancellationToken)
         {
             /*
              * Call FinishReading() on the original inner stream.
-             * 
+             *
              * Since GZipStream/DeflateStream knows the exact number of
              * bytes that it wants to receive from it, it may not have
              * read the chunk trailer yet.
              */
             if (OriginalInnerStream is WebReadStream innerReadStream)
-                return innerReadStream.FinishReading (cancellationToken);
+                return innerReadStream.FinishReading(cancellationToken);
             return Task.CompletedTask;
         }
     }
 }
-

@@ -9,7 +9,7 @@ enum E
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
         E e = E.V;
         object o = null + e;

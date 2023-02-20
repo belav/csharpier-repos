@@ -10,27 +10,39 @@ namespace TestMonoWeb
     {
         HttpApplication _app;
 
-        public void Init(HttpApplication app) {
+        public void Init(HttpApplication app)
+        {
             app.AddOnPreRequestHandlerExecuteAsync(
-                new BeginEventHandler(this.BeginPreHandlerExecute), 
-                new EndEventHandler(this.EndPreHandlerExecute));
+                new BeginEventHandler(this.BeginPreHandlerExecute),
+                new EndEventHandler(this.EndPreHandlerExecute)
+            );
 
             _app = app;
         }
 
-        IAsyncResult BeginPreHandlerExecute(Object source, EventArgs e, AsyncCallback cb, Object extraData) {
-            ((HttpApplication) source).Context.Response.Write("AsyncModule.BeginPreHandlerExecute()<br>\n");
+        IAsyncResult BeginPreHandlerExecute(
+            Object source,
+            EventArgs e,
+            AsyncCallback cb,
+            Object extraData
+        )
+        {
+            ((HttpApplication)source).Context.Response.Write(
+                "AsyncModule.BeginPreHandlerExecute()<br>\n"
+            );
 
             AsynchOperation asynch = new AsynchOperation(cb, _app.Context, extraData);
             asynch.StartAsyncWork();
             return asynch;
         }
-        
-        void EndPreHandlerExecute(IAsyncResult ar) {
-            ((AsynchOperation) ar).Context.Response.Write("AsyncModule.EndPreHandlerExecute()<br>\n");
-        }        
 
-        public void Dispose() {
+        void EndPreHandlerExecute(IAsyncResult ar)
+        {
+            ((AsynchOperation)ar).Context.Response.Write(
+                "AsyncModule.EndPreHandlerExecute()<br>\n"
+            );
         }
+
+        public void Dispose() { }
     }
 }

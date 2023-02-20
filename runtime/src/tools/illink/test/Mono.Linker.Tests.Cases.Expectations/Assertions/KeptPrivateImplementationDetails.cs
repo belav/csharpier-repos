@@ -5,13 +5,13 @@ using System;
 
 namespace Mono.Linker.Tests.Cases.Expectations.Assertions
 {
-    [AttributeUsage (AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class)]
     public sealed class KeptPrivateImplementationDetailsAttribute : KeptAttribute
     {
-        public KeptPrivateImplementationDetailsAttribute (string methodName)
+        public KeptPrivateImplementationDetailsAttribute(string methodName)
         {
-            if (string.IsNullOrEmpty (methodName))
-                throw new ArgumentException ("Value cannot be null or empty.", nameof (methodName));
+            if (string.IsNullOrEmpty(methodName))
+                throw new ArgumentException("Value cannot be null or empty.", nameof(methodName));
         }
     }
 }

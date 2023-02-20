@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             : base(hostServices, WorkspaceKind.Interactive)
         {
             // register work coordinator for this workspace
-            _registrationService = Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            _registrationService =
+                Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
             _registrationService.Register(this);
         }
 
@@ -33,11 +34,10 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             base.Dispose(finalize);
         }
 
-        public override bool CanOpenDocuments
-            => true;
+        public override bool CanOpenDocuments => true;
 
-        public override bool CanApplyChange(ApplyChangesKind feature)
-            => feature == ApplyChangesKind.ChangeDocument;
+        public override bool CanApplyChange(ApplyChangesKind feature) =>
+            feature == ApplyChangesKind.ChangeDocument;
 
         public void OpenDocument(DocumentId documentId, SourceTextContainer textContainer)
         {
@@ -56,7 +56,15 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             Contract.ThrowIfNull(_openTextContainer);
 
             ITextSnapshot appliedText;
-            using (var edit = _openTextContainer.GetTextBuffer().CreateEdit(EditOptions.DefaultMinimalChange, reiteratedVersionNumber: null, editTag: null))
+            using (
+                var edit = _openTextContainer
+                    .GetTextBuffer()
+                    .CreateEdit(
+                        EditOptions.DefaultMinimalChange,
+                        reiteratedVersionNumber: null,
+                        editTag: null
+                    )
+            )
             {
                 var oldText = _openTextContainer.CurrentText;
                 var changes = newText.GetTextChanges(oldText);
@@ -69,7 +77,11 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                 appliedText = edit.Apply();
             }
 
-            OnDocumentTextChanged(document, appliedText.AsText(), PreservationMode.PreserveIdentity);
+            OnDocumentTextChanged(
+                document,
+                appliedText.AsText(),
+                PreservationMode.PreserveIdentity
+            );
         }
 
         /// <summary>
@@ -80,7 +92,10 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             ClearOpenDocuments();
 
             var emptySolution = CreateSolution(SolutionId.CreateNewId("InteractiveSolution"));
-            SetCurrentSolution(solution => emptySolution.WithAnalyzerReferences(solution.AnalyzerReferences), WorkspaceChangeKind.SolutionCleared);
+            SetCurrentSolution(
+                solution => emptySolution.WithAnalyzerReferences(solution.AnalyzerReferences),
+                WorkspaceChangeKind.SolutionCleared
+            );
         }
     }
 }

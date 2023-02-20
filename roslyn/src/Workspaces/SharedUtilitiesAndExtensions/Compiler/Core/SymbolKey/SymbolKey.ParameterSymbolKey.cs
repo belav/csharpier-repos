@@ -19,7 +19,10 @@ namespace Microsoft.CodeAnalysis
             }
 
             protected sealed override SymbolKeyResolution Resolve(
-                SymbolKeyReader reader, IParameterSymbol? contextualSymbol, out string? failureReason)
+                SymbolKeyReader reader,
+                IParameterSymbol? contextualSymbol,
+                out string? failureReason
+            )
             {
                 var metadataName = reader.ReadRequiredString();
 
@@ -27,11 +30,14 @@ namespace Microsoft.CodeAnalysis
                 // types to guide how the outer parts of the member may resolve.  We can use contextual typing for the
                 // *signature* portion of the member though.
                 var containingSymbolResolution = reader.ReadSymbolKey(
-                    contextualSymbol?.ContainingSymbol, out var containingSymbolFailureReason);
+                    contextualSymbol?.ContainingSymbol,
+                    out var containingSymbolFailureReason
+                );
 
                 if (containingSymbolFailureReason != null)
                 {
-                    failureReason = $"({nameof(ParameterSymbolKey)} {nameof(containingSymbolResolution)} failed -> {containingSymbolFailureReason})";
+                    failureReason =
+                        $"({nameof(ParameterSymbolKey)} {nameof(containingSymbolResolution)} failed -> {containingSymbolFailureReason})";
                     return default;
                 }
 
@@ -59,7 +65,9 @@ namespace Microsoft.CodeAnalysis
                             // So, in this case, to resolve the parameter, we go have to map the event,
                             // then find the delegate it returns, then find the parameter in the delegate's
                             // 'Invoke' method.
-                            var delegateInvoke = (eventSymbol.Type as INamedTypeSymbol)?.DelegateInvokeMethod;
+                            var delegateInvoke = (
+                                eventSymbol.Type as INamedTypeSymbol
+                            )?.DelegateInvokeMethod;
 
                             if (delegateInvoke != null)
                             {
@@ -70,12 +78,19 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                return CreateResolution(result, $"({nameof(ParameterSymbolKey)} '{metadataName}' not found)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(ParameterSymbolKey)} '{metadataName}' not found)",
+                    out failureReason
+                );
             }
 
             private static void Resolve(
-                PooledArrayBuilder<IParameterSymbol> result, SymbolKeyReader reader,
-                string metadataName, ImmutableArray<IParameterSymbol> parameters)
+                PooledArrayBuilder<IParameterSymbol> result,
+                SymbolKeyReader reader,
+                string metadataName,
+                ImmutableArray<IParameterSymbol> parameters
+            )
             {
                 foreach (var parameter in parameters)
                 {

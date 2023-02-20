@@ -8,9 +8,7 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability.Dependencies
 {
     public class RequiresOnAttributeCtorAttribute : Attribute
     {
-        [RequiresUnreferencedCode ("Message from attribute's ctor.")]
-        public RequiresOnAttributeCtorAttribute ()
-        {
-        }
+        [RequiresUnreferencedCode("Message from attribute's ctor.")]
+        public RequiresOnAttributeCtorAttribute() { }
     }
 }

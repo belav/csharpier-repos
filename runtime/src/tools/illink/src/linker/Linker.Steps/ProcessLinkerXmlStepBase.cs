@@ -10,7 +10,7 @@ namespace Mono.Linker.Steps
         protected readonly string _xmlDocumentLocation;
         protected readonly Stream _documentStream;
 
-        public ProcessLinkerXmlStepBase (Stream documentStream, string xmlDocumentLocation)
+        public ProcessLinkerXmlStepBase(Stream documentStream, string xmlDocumentLocation)
         {
             _documentStream = documentStream;
             _xmlDocumentLocation = xmlDocumentLocation;

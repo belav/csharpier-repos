@@ -1,4 +1,3 @@
-
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -7,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,21 +26,21 @@ using System.Threading;
 namespace IBM.Data.DB2
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <remarks>One connection pool per connectionstring</remarks>
     internal sealed class DB2ConnectionPool
     {
-        private ArrayList    openFreeConnections; // list of pooled connections sorted by age. First connection is present at index 'connectionsUsableOffset'
-        private Queue        openFreeMinimalAllocated;
-        private int            connectionsOpen;    // total number of connections open (in pool, an in use by application)
-        private int            connectionsInUse;    // total connection in use by application
-        private int            connectionsUsableOffset; // Offset to the first pooled connection in 'openFreeConnections'
-        private Timer        timer;
-        public string        databaseProductName;
-        public string        databaseVersion;
-        public int            majorVersion;
-        public int            minorVersion;
+        private ArrayList openFreeConnections; // list of pooled connections sorted by age. First connection is present at index 'connectionsUsableOffset'
+        private Queue openFreeMinimalAllocated;
+        private int connectionsOpen; // total number of connections open (in pool, an in use by application)
+        private int connectionsInUse; // total connection in use by application
+        private int connectionsUsableOffset; // Offset to the first pooled connection in 'openFreeConnections'
+        private Timer timer;
+        public string databaseProductName;
+        public string databaseVersion;
+        public int majorVersion;
+        public int minorVersion;
 
         private DB2ConnectionSettings connectionSettings;
 
@@ -59,24 +58,37 @@ namespace IBM.Data.DB2
         public DB2OpenConnection GetOpenConnection(DB2Connection db2Conn)
         {
             DB2OpenConnection connection = null;
-            lock(openFreeConnections.SyncRoot)
+            lock (openFreeConnections.SyncRoot)
             {
-                if((connectionSettings.ConnectionPoolSizeMax > 0) &&
-                    (connectionsOpen >= connectionSettings.ConnectionPoolSizeMax))
+                if (
+                    (connectionSettings.ConnectionPoolSizeMax > 0)
+                    && (connectionsOpen >= connectionSettings.ConnectionPoolSizeMax)
+                )
                 {
                     throw new ArgumentException("Maximum connections reached for connectionstring");
                 }
 
-                while(connectionsOpen > connectionsInUse)
+                while (connectionsOpen > connectionsInUse)
                 {
-                    connection = (DB2OpenConnection)openFreeConnections[openFreeConnections.Count - 1];
+                    connection = (DB2OpenConnection)
+                        openFreeConnections[openFreeConnections.Count - 1];
                     openFreeConnections.RemoveAt(openFreeConnections.Count - 1);
 
                     // check if connection is dead
                     int isDead;
-                    short sqlRet = DB2CLIWrapper.SQLGetConnectAttr(connection.DBHandle, DB2Constants.SQL_ATTR_CONNECTION_DEAD, out isDead, 0, IntPtr.Zero);
-                    if(((sqlRet == DB2Constants.SQL_SUCCESS_WITH_INFO) || (sqlRet == DB2Constants.SQL_SUCCESS)) &&
-                        (isDead == DB2Constants.SQL_CD_FALSE))
+                    short sqlRet = DB2CLIWrapper.SQLGetConnectAttr(
+                        connection.DBHandle,
+                        DB2Constants.SQL_ATTR_CONNECTION_DEAD,
+                        out isDead,
+                        0,
+                        IntPtr.Zero
+                    );
+                    if (
+                        (
+                            (sqlRet == DB2Constants.SQL_SUCCESS_WITH_INFO)
+                            || (sqlRet == DB2Constants.SQL_SUCCESS)
+                        ) && (isDead == DB2Constants.SQL_CD_FALSE)
+                    )
                     {
                         connectionsInUse++;
                         break;
@@ -87,18 +99,17 @@ namespace IBM.Data.DB2
                         connection.Dispose();
                         connection = null;
                     }
-
                 }
-                if(connectionsOpen == connectionsInUse)
+                if (connectionsOpen == connectionsInUse)
                 {
-                    if(timer != null)
+                    if (timer != null)
                     {
                         timer.Dispose();
                         timer = null;
                     }
                 }
             }
-            if(connection == null)
+            if (connection == null)
             {
                 openFreeConnections.Clear();
                 connectionsUsableOffset = 0;
@@ -113,18 +124,22 @@ namespace IBM.Data.DB2
 
         private void DisposeTimedoutConnections(object state)
         {
-            lock(openFreeConnections.SyncRoot)
+            lock (openFreeConnections.SyncRoot)
             {
-                if(timer != null)
+                if (timer != null)
                 {
                     TimeSpan timeToDispose = TimeSpan.Zero;
                     DB2OpenConnection connection;
-                    while(connectionsOpen > connectionsInUse)
+                    while (connectionsOpen > connectionsInUse)
                     {
-                        connection = (DB2OpenConnection)openFreeConnections[connectionsUsableOffset];
+                        connection = (DB2OpenConnection)
+                            openFreeConnections[connectionsUsableOffset];
                         timeToDispose = connection.poolDisposalTime.Subtract(DateTime.Now);
-                        if((timeToDispose.Ticks < 0) ||                                 // time to die
-                            (timeToDispose > connectionSettings.ConnectionLifeTime)) // messing with system clock
+                        if (
+                            (timeToDispose.Ticks < 0)
+                            || // time to die
+                            (timeToDispose > connectionSettings.ConnectionLifeTime)
+                        ) // messing with system clock
                         {
                             connection.Dispose();
                             openFreeConnections[connectionsUsableOffset] = null;
@@ -136,9 +151,10 @@ namespace IBM.Data.DB2
                             break;
                         }
                     }
-                    if(connectionsOpen > connectionsInUse)
+                    if (connectionsOpen > connectionsInUse)
                     {
-                        connection = (DB2OpenConnection)openFreeConnections[connectionsUsableOffset];
+                        connection = (DB2OpenConnection)
+                            openFreeConnections[connectionsUsableOffset];
                         timer.Change(timeToDispose, new TimeSpan(-1));
                     }
                     else
@@ -147,8 +163,10 @@ namespace IBM.Data.DB2
                         timer = null;
                     }
                 }
-                if((connectionsUsableOffset > (openFreeConnections.Capacity / 2)) &&
-                    (connectionsOpen > connectionsInUse))
+                if (
+                    (connectionsUsableOffset > (openFreeConnections.Capacity / 2))
+                    && (connectionsOpen > connectionsInUse)
+                )
                 {
                     openFreeConnections.RemoveRange(0, connectionsUsableOffset); // cleanup once in a while
                     connectionsUsableOffset = 0;
@@ -158,13 +176,19 @@ namespace IBM.Data.DB2
 
         public void AddToFreeConnections(DB2OpenConnection connection)
         {
-            lock(openFreeConnections.SyncRoot)
+            lock (openFreeConnections.SyncRoot)
             {
-                connection.poolDisposalTime = DateTime.Now.Add(connectionSettings.ConnectionLifeTime);
-                if(timer == null)
+                connection.poolDisposalTime = DateTime.Now.Add(
+                    connectionSettings.ConnectionLifeTime
+                );
+                if (timer == null)
                 {
-                    timer = new Timer(new TimerCallback(DisposeTimedoutConnections), null, 
-                        connectionSettings.ConnectionLifeTime, new TimeSpan(-1));
+                    timer = new Timer(
+                        new TimerCallback(DisposeTimedoutConnections),
+                        null,
+                        connectionSettings.ConnectionLifeTime,
+                        new TimeSpan(-1)
+                    );
                 }
                 connectionsInUse--;
                 openFreeConnections.Add(connection);
@@ -173,7 +197,7 @@ namespace IBM.Data.DB2
 
         public void OpenConnectionFinalized()
         {
-            lock(openFreeConnections.SyncRoot)
+            lock (openFreeConnections.SyncRoot)
             {
                 connectionsOpen--;
                 connectionsInUse--;
@@ -199,10 +223,11 @@ namespace IBM.Data.DB2
         {
             DB2Environment environment = DB2Environment.Instance;
 
-            lock(environment.connectionPools.SyncRoot)
+            lock (environment.connectionPools.SyncRoot)
             {
-                DB2ConnectionPool pool = (DB2ConnectionPool)environment.connectionPools[connectionSettings.ConnectionString];
-                if(pool == null)
+                DB2ConnectionPool pool = (DB2ConnectionPool)
+                    environment.connectionPools[connectionSettings.ConnectionString];
+                if (pool == null)
                 {
                     pool = new DB2ConnectionPool(connectionSettings);
                     environment.connectionPools.Add(connectionSettings.ConnectionString, pool);

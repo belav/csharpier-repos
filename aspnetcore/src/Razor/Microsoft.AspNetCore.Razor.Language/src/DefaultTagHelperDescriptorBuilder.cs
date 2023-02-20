@@ -142,7 +142,9 @@ internal class DefaultTagHelperDescriptorBuilder : TagHelperDescriptorBuilder
         var allowedChildTags = Array.Empty<AllowedChildTagDescriptor>();
         if (_allowedChildTags != null)
         {
-            var allowedChildTagsSet = new HashSet<AllowedChildTagDescriptor>(AllowedChildTagDescriptorComparer.Default);
+            var allowedChildTagsSet = new HashSet<AllowedChildTagDescriptor>(
+                AllowedChildTagDescriptorComparer.Default
+            );
             for (var i = 0; i < _allowedChildTags.Count; i++)
             {
                 allowedChildTagsSet.Add(_allowedChildTags[i].Build());
@@ -154,7 +156,9 @@ internal class DefaultTagHelperDescriptorBuilder : TagHelperDescriptorBuilder
         var tagMatchingRules = Array.Empty<TagMatchingRuleDescriptor>();
         if (_tagMatchingRuleBuilders != null)
         {
-            var tagMatchingRuleSet = new HashSet<TagMatchingRuleDescriptor>(TagMatchingRuleDescriptorComparer.Default);
+            var tagMatchingRuleSet = new HashSet<TagMatchingRuleDescriptor>(
+                TagMatchingRuleDescriptorComparer.Default
+            );
             for (var i = 0; i < _tagMatchingRuleBuilders.Count; i++)
             {
                 tagMatchingRuleSet.Add(_tagMatchingRuleBuilders[i].Build());
@@ -166,7 +170,9 @@ internal class DefaultTagHelperDescriptorBuilder : TagHelperDescriptorBuilder
         var attributes = Array.Empty<BoundAttributeDescriptor>();
         if (_attributeBuilders != null)
         {
-            var attributeSet = new HashSet<BoundAttributeDescriptor>(BoundAttributeDescriptorComparer.Default);
+            var attributeSet = new HashSet<BoundAttributeDescriptor>(
+                BoundAttributeDescriptorComparer.Default
+            );
             for (var i = 0; i < _attributeBuilders.Count; i++)
             {
                 attributeSet.Add(_attributeBuilders[i].Build());
@@ -187,7 +193,8 @@ internal class DefaultTagHelperDescriptorBuilder : TagHelperDescriptorBuilder
             attributes,
             allowedChildTags,
             new Dictionary<string, string>(_metadata),
-            diagnostics.ToArray());
+            diagnostics.ToArray()
+        );
 
         return descriptor;
     }

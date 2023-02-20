@@ -19,7 +19,8 @@ namespace System.Runtime.InteropServices.JavaScript
                 return;
             }
             GCHandle? promiseGCHandle = promise.AsyncState as GCHandle?;
-            if (promiseGCHandle == null) throw new InvalidOperationException("Expected Task converted from JS Promise");
+            if (promiseGCHandle == null)
+                throw new InvalidOperationException("Expected Task converted from JS Promise");
 
             _CancelPromise((IntPtr)promiseGCHandle.Value);
         }

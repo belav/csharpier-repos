@@ -147,9 +147,7 @@ namespace Newtonsoft.Json.Tests
             XAssert.True(false, message);
         }
 
-        public static void Pass()
-        {
-        }
+        public static void Pass() { }
 
         public static void IsTrue(bool condition, string message = null)
         {
@@ -221,7 +219,12 @@ namespace Newtonsoft.Json.Tests
         protected string GetOffset(DateTime d, DateFormatHandling dateFormatHandling)
         {
             char[] chars = new char[8];
-            int pos = DateTimeUtils.WriteDateTimeOffset(chars, 0, DateTime.SpecifyKind(d, DateTimeKind.Local).GetUtcOffset(), dateFormatHandling);
+            int pos = DateTimeUtils.WriteDateTimeOffset(
+                chars,
+                0,
+                DateTime.SpecifyKind(d, DateTimeKind.Local).GetUtcOffset(),
+                dateFormatHandling
+            );
 
             return new string(chars, 0, pos);
         }
@@ -351,7 +354,10 @@ namespace Newtonsoft.Json.Tests
 
     public static class StringAssert
     {
-        private static readonly Regex Regex = new Regex(@"\r\n|\n\r|\n|\r", RegexOptions.CultureInvariant);
+        private static readonly Regex Regex = new Regex(
+            @"\r\n|\n\r|\n|\r",
+            RegexOptions.CultureInvariant
+        );
 
         public static void AreEqual(string expected, string actual)
         {
@@ -389,7 +395,11 @@ namespace Newtonsoft.Json.Tests
             {
                 action();
 
-                Assert.Fail("Exception of type " + typeof(TException).Name + " expected. No exception thrown.");
+                Assert.Fail(
+                    "Exception of type "
+                        + typeof(TException).Name
+                        + " expected. No exception thrown."
+                );
                 return null;
             }
             catch (TException ex)
@@ -406,23 +416,48 @@ namespace Newtonsoft.Json.Tests
                     }
                 }
 
-                throw new Exception("Unexpected exception message." + Environment.NewLine + "Expected one of: " + string.Join(Environment.NewLine, possibleMessages) + Environment.NewLine + "Got: " + ex.Message + Environment.NewLine + Environment.NewLine + ex);
+                throw new Exception(
+                    "Unexpected exception message."
+                        + Environment.NewLine
+                        + "Expected one of: "
+                        + string.Join(Environment.NewLine, possibleMessages)
+                        + Environment.NewLine
+                        + "Got: "
+                        + ex.Message
+                        + Environment.NewLine
+                        + Environment.NewLine
+                        + ex
+                );
             }
             catch (Exception ex)
             {
-                throw new Exception(string.Format("Exception of type {0} expected; got exception of type {1}.", typeof(TException).Name, ex.GetType().Name), ex);
+                throw new Exception(
+                    string.Format(
+                        "Exception of type {0} expected; got exception of type {1}.",
+                        typeof(TException).Name,
+                        ex.GetType().Name
+                    ),
+                    ex
+                );
             }
         }
 
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
-        public static async Task<TException> ThrowsAsync<TException>(Func<Task> action, params string[] possibleMessages)
+        public static async Task<TException> ThrowsAsync<TException>(
+            Func<Task> action,
+            params string[] possibleMessages
+        )
             where TException : Exception
         {
             try
             {
                 await action();
 
-                Assert.Fail("Exception of type " + typeof(TException).Name + " expected. No exception thrown.");
+                Assert.Fail(
+                    "Exception of type "
+                        + typeof(TException).Name
+                        + " expected. No exception thrown."
+                );
                 return null;
             }
             catch (TException ex)
@@ -439,14 +474,31 @@ namespace Newtonsoft.Json.Tests
                     }
                 }
 
-                throw new Exception("Unexpected exception message." + Environment.NewLine + "Expected one of: " + string.Join(Environment.NewLine, possibleMessages) + Environment.NewLine + "Got: " + ex.Message + Environment.NewLine + Environment.NewLine + ex);
+                throw new Exception(
+                    "Unexpected exception message."
+                        + Environment.NewLine
+                        + "Expected one of: "
+                        + string.Join(Environment.NewLine, possibleMessages)
+                        + Environment.NewLine
+                        + "Got: "
+                        + ex.Message
+                        + Environment.NewLine
+                        + Environment.NewLine
+                        + ex
+                );
             }
             catch (Exception ex)
             {
-                throw new Exception(string.Format("Exception of type {0} expected; got exception of type {1}.", typeof(TException).Name, ex.GetType().Name), ex);
+                throw new Exception(
+                    string.Format(
+                        "Exception of type {0} expected; got exception of type {1}.",
+                        typeof(TException).Name,
+                        ex.GetType().Name
+                    ),
+                    ex
+                );
             }
         }
 #endif
-
     }
 }

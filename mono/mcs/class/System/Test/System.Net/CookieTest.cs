@@ -15,95 +15,92 @@ using System.Net;
 
 namespace MonoTests.System.Net
 {
-
     [TestFixture]
     public class CookieTest
     {
         [Test]
-        public void PublicFields ()
+        public void PublicFields()
         {
-            Cookie c = new Cookie ();
-            Assert.AreEqual (string.Empty, c.Name, "#A1");
-            Assert.AreEqual (string.Empty, c.Value, "#A2");
-            Assert.AreEqual (string.Empty, c.Domain, "#A3");
-            Assert.AreEqual (string.Empty, c.Port, "#A4");
-            Assert.AreEqual (string.Empty, c.Comment, "#A5");
-            Assert.AreEqual (null, c.CommentUri, "#A6");
-            Assert.IsFalse (c.Discard, "#A7");
-            Assert.IsFalse (c.Expired, "#A8");
-            Assert.AreEqual (DateTime.MinValue, c.Expires, "#A9");
-            Assert.IsFalse (c.HttpOnly, "#A10");
-            Assert.AreEqual (string.Empty, c.Path, "#A11");
-            Assert.IsFalse (c.Secure, "#A12");
-            Assert.AreEqual (0, c.Version, "#A13");
-            Assert.AreEqual (string.Empty, c.ToString (), "#A14");
+            Cookie c = new Cookie();
+            Assert.AreEqual(string.Empty, c.Name, "#A1");
+            Assert.AreEqual(string.Empty, c.Value, "#A2");
+            Assert.AreEqual(string.Empty, c.Domain, "#A3");
+            Assert.AreEqual(string.Empty, c.Port, "#A4");
+            Assert.AreEqual(string.Empty, c.Comment, "#A5");
+            Assert.AreEqual(null, c.CommentUri, "#A6");
+            Assert.IsFalse(c.Discard, "#A7");
+            Assert.IsFalse(c.Expired, "#A8");
+            Assert.AreEqual(DateTime.MinValue, c.Expires, "#A9");
+            Assert.IsFalse(c.HttpOnly, "#A10");
+            Assert.AreEqual(string.Empty, c.Path, "#A11");
+            Assert.IsFalse(c.Secure, "#A12");
+            Assert.AreEqual(0, c.Version, "#A13");
+            Assert.AreEqual(string.Empty, c.ToString(), "#A14");
 
             c.Expires = DateTime.Now;
-            Assert.IsTrue (c.Expired, "#A15");
+            Assert.IsTrue(c.Expired, "#A15");
 
             c.Port = null;
-            Assert.AreEqual (string.Empty, c.Port, "#A16");
+            Assert.AreEqual(string.Empty, c.Port, "#A16");
 
             c.Value = null;
-            Assert.AreEqual (string.Empty, c.Value, "#A17");
+            Assert.AreEqual(string.Empty, c.Value, "#A17");
         }
 
         [Test]
-        public void Constructors ()
+        public void Constructors()
         {
-            Cookie c = new Cookie ("somename", null, null, null);
+            Cookie c = new Cookie("somename", null, null, null);
             try
             {
-                c = new Cookie (null, null, null, null);
-                Assert.Fail ("#1: Name cannot be null");
+                c = new Cookie(null, null, null, null);
+                Assert.Fail("#1: Name cannot be null");
             }
-            catch (CookieException)
-            {
-            }
+            catch (CookieException) { }
         }
 
         [Test]
-        public void Name ()
+        public void Name()
         {
-            Cookie c = new Cookie ("SomeName", "SomeValue");
-            Assert.AreEqual (c.Name, "SomeName", "#1");
+            Cookie c = new Cookie("SomeName", "SomeValue");
+            Assert.AreEqual(c.Name, "SomeName", "#1");
             try
             {
                 c.Name = null;
-                Assert.Fail ("#2a");
+                Assert.Fail("#2a");
             }
             catch (CookieException)
             {
-                Assert.AreEqual ("SomeName", c.Name, "#2b");
+                Assert.AreEqual("SomeName", c.Name, "#2b");
             }
             try
             {
                 c.Name = "";
-                Assert.Fail ("#2c");
+                Assert.Fail("#2c");
             }
             catch (CookieException)
             {
-                Assert.AreEqual ("SomeName", c.Name, "#2d");
+                Assert.AreEqual("SomeName", c.Name, "#2d");
             }
             try
             {
                 c.Name = " ";
-                Assert.Fail ("#2e");
+                Assert.Fail("#2e");
             }
             catch (CookieException)
             {
-                // bah! this fails, yet the name is changed.. 
+                // bah! this fails, yet the name is changed..
                 // inconsistent with previous test
-                Assert.AreEqual (String.Empty, c.Name, "#2f");
+                Assert.AreEqual(String.Empty, c.Name, "#2f");
             }
             try
             {
                 c.Name = "xxx\r\n";
-                Assert.Fail ("#2g");
+                Assert.Fail("#2g");
             }
             catch (CookieException)
             {
-                Assert.AreEqual (String.Empty, c.Name, "#2h");
+                Assert.AreEqual(String.Empty, c.Name, "#2h");
             }
             try
             {
@@ -111,50 +108,50 @@ namespace MonoTests.System.Net
             }
             catch (CookieException)
             {
-                Assert.Fail ("#2i");
+                Assert.Fail("#2i");
             }
             try
             {
                 c.Name = "$omeName";
-                Assert.Fail ("#3a: Name cannot start with '$' character");
+                Assert.Fail("#3a: Name cannot start with '$' character");
             }
             catch (CookieException)
             {
-                Assert.AreEqual (String.Empty, c.Name, "#3b");
+                Assert.AreEqual(String.Empty, c.Name, "#3b");
             }
             c.Name = "SomeName$";
-            Assert.AreEqual (c.Name, "SomeName$", "#4");
+            Assert.AreEqual(c.Name, "SomeName$", "#4");
             try
             {
                 c.Name = "Some=Name";
-                Assert.Fail ("#5a: Name cannot contain '=' character");
+                Assert.Fail("#5a: Name cannot contain '=' character");
             }
             catch (CookieException)
             {
-                Assert.AreEqual (String.Empty, c.Name, "#5b");
+                Assert.AreEqual(String.Empty, c.Name, "#5b");
             }
             c.Name = "domain";
-            Assert.AreEqual (c.Name, "domain", "#6");
+            Assert.AreEqual(c.Name, "domain", "#6");
         }
 
         [Test]
-        public void Path ()
+        public void Path()
         {
-            Cookie c = new Cookie ();
+            Cookie c = new Cookie();
             c.Path = "/Whatever";
-            Assert.AreEqual ("/Whatever", c.Path, "#1");
+            Assert.AreEqual("/Whatever", c.Path, "#1");
             c.Path = null;
-            Assert.AreEqual (string.Empty, c.Path, "#2");
+            Assert.AreEqual(string.Empty, c.Path, "#2");
             c.Path = "ok";
-            Assert.AreEqual ("ok", c.Path, "#3");
+            Assert.AreEqual("ok", c.Path, "#3");
             c.Path = string.Empty;
-            Assert.AreEqual (string.Empty, c.Path, "#4");
+            Assert.AreEqual(string.Empty, c.Path, "#4");
         }
 
         [Test]
-        public void Value ()
+        public void Value()
         {
-            // LAMESPEC: According to .Net specs the Value property should not accept 
+            // LAMESPEC: According to .Net specs the Value property should not accept
             // the semicolon and comma characters, yet it does
             /*
             Cookie c = new Cookie("SomeName", "SomeValue");
@@ -174,42 +171,38 @@ namespace MonoTests.System.Net
         }
 
         [Test]
-        public void Port ()
+        public void Port()
         {
-            Cookie c = new Cookie ("SomeName", "SomeValue");
+            Cookie c = new Cookie("SomeName", "SomeValue");
             try
             {
                 c.Port = "123";
-                Assert.Fail ("#1: port must start and end with double quotes");
+                Assert.Fail("#1: port must start and end with double quotes");
             }
-            catch (CookieException)
-            {
-            }
+            catch (CookieException) { }
             try
             {
-                Assert.AreEqual (0, c.Version, "#6.1");
+                Assert.AreEqual(0, c.Version, "#6.1");
                 c.Port = "\"123\"";
-                Assert.AreEqual (1, c.Version, "#6.2");
+                Assert.AreEqual(1, c.Version, "#6.2");
             }
             catch (CookieException)
             {
-                Assert.Fail ("#2");
+                Assert.Fail("#2");
             }
             try
             {
                 c.Port = "\"123;124\"";
-                Assert.Fail ("#3");
+                Assert.Fail("#3");
             }
-            catch (CookieException)
-            {
-            }
+            catch (CookieException) { }
             try
             {
                 c.Port = "\"123,123,124\"";
             }
             catch (CookieException)
             {
-                Assert.Fail ("#4");
+                Assert.Fail("#4");
             }
             try
             {
@@ -217,46 +210,54 @@ namespace MonoTests.System.Net
             }
             catch (CookieException)
             {
-                Assert.Fail ("#5");
+                Assert.Fail("#5");
             }
         }
 
         [Test]
-        public void Equals ()
+        public void Equals()
         {
-            Cookie c1 = new Cookie ("NAME", "VALUE", "PATH", "DOMAIN");
-            Cookie c2 = new Cookie ("name", "value", "path", "domain");
-            Assert.IsTrue (!c1.Equals (c2), "#1");
+            Cookie c1 = new Cookie("NAME", "VALUE", "PATH", "DOMAIN");
+            Cookie c2 = new Cookie("name", "value", "path", "domain");
+            Assert.IsTrue(!c1.Equals(c2), "#1");
             c2.Value = "VALUE";
             c2.Path = "PATH";
-            Assert.IsTrue (c1.Equals (c2), "#2");
+            Assert.IsTrue(c1.Equals(c2), "#2");
             c2.Version = 1;
-            Assert.IsTrue (!c1.Equals (c2), "#3");
+            Assert.IsTrue(!c1.Equals(c2), "#3");
         }
 
         [Test]
-        public void ToStringTest ()
+        public void ToStringTest()
         {
-            Cookie c1 = new Cookie ("NAME", "VALUE", "/", "example.com");
-            Assert.AreEqual ("NAME=VALUE", c1.ToString (), "#A1");
+            Cookie c1 = new Cookie("NAME", "VALUE", "/", "example.com");
+            Assert.AreEqual("NAME=VALUE", c1.ToString(), "#A1");
 
-            Cookie c2 = new Cookie ();
-            Assert.AreEqual (string.Empty, c2.ToString (), "#A2");
+            Cookie c2 = new Cookie();
+            Assert.AreEqual(string.Empty, c2.ToString(), "#A2");
 
             Cookie c3 = new Cookie("NAME", "VALUE");
-            Assert.AreEqual ("NAME=VALUE", c3.ToString (), "#A3");
+            Assert.AreEqual("NAME=VALUE", c3.ToString(), "#A3");
 
-            Cookie c4 = new Cookie ("NAME", "VALUE", "/", "example.com");
+            Cookie c4 = new Cookie("NAME", "VALUE", "/", "example.com");
             c4.Version = 1;
-            Assert.AreEqual ("$Version=1; NAME=VALUE; $Path=/; $Domain=example.com", c4.ToString (), "#A4");
+            Assert.AreEqual(
+                "$Version=1; NAME=VALUE; $Path=/; $Domain=example.com",
+                c4.ToString(),
+                "#A4"
+            );
 
-            Cookie c5 = new Cookie ("NAME", "VALUE", "/", "example.com");
+            Cookie c5 = new Cookie("NAME", "VALUE", "/", "example.com");
             c5.Port = "\"8080\"";
-            Assert.AreEqual ("$Version=1; NAME=VALUE; $Path=/; $Domain=example.com; $Port=\"8080\"", c5.ToString (), "#A5");
+            Assert.AreEqual(
+                "$Version=1; NAME=VALUE; $Path=/; $Domain=example.com; $Port=\"8080\"",
+                c5.ToString(),
+                "#A5"
+            );
 
-            Cookie c6 = new Cookie ("NAME", "VALUE");
+            Cookie c6 = new Cookie("NAME", "VALUE");
             c6.Version = 1;
-            Assert.AreEqual ("$Version=1; NAME=VALUE", c6.ToString (), "#A6");
+            Assert.AreEqual("$Version=1; NAME=VALUE", c6.ToString(), "#A6");
         }
     }
 }

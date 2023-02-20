@@ -1,8 +1,9 @@
 using foo = System;
 
-class X {
-    public static void Main ()
+class X
+{
+    public static void Main()
     {
-        foo::Console.WriteLine ("hello");
+        foo::Console.WriteLine("hello");
     }
 }

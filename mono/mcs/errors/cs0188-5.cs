@@ -3,9 +3,9 @@
 
 struct Sample
 {
-    public Sample (int arg)
+    public Sample(int arg)
     {
-        text = base.ToString ();
+        text = base.ToString();
     }
 
     internal string text;

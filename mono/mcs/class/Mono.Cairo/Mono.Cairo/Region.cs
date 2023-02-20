@@ -25,172 +25,180 @@ using System.Runtime.InteropServices;
 
 namespace Cairo
 {
-
     [StructLayout(LayoutKind.Sequential)]
-    public struct RectangleInt {
+    public struct RectangleInt
+    {
         public int X;
         public int Y;
         public int Width;
         public int Height;
     }
 
-    public enum RegionOverlap {
+    public enum RegionOverlap
+    {
         In,
         Out,
         Part,
     }
 
-    public class Region : IDisposable {
-
+    public class Region : IDisposable
+    {
         IntPtr handle;
-        public IntPtr Handle {
+        public IntPtr Handle
+        {
             get { return handle; }
         }
 
         [Obsolete]
-        public Region (IntPtr handle) : this (handle, false) {}
+        public Region(IntPtr handle)
+            : this(handle, false) { }
 
-        public Region (IntPtr handle, bool owned)
+        public Region(IntPtr handle, bool owned)
         {
             this.handle = handle;
             if (!owned)
-                NativeMethods.cairo_region_reference (handle);
+                NativeMethods.cairo_region_reference(handle);
             if (CairoDebug.Enabled)
-                CairoDebug.OnAllocated (handle);
+                CairoDebug.OnAllocated(handle);
         }
 
-        public Region () : this (NativeMethods.cairo_region_create () , true)
+        public Region()
+            : this(NativeMethods.cairo_region_create(), true) { }
+
+        public Region(RectangleInt rect)
         {
+            handle = NativeMethods.cairo_region_create_rectangle(ref rect);
         }
 
-        public Region (RectangleInt rect)
+        public Region(RectangleInt[] rects)
         {
-            handle = NativeMethods.cairo_region_create_rectangle (ref rect);
+            handle = NativeMethods.cairo_region_create_rectangles(rects, rects.Length);
         }
 
-        public Region (RectangleInt[] rects)
+        public Region Copy()
         {
-            handle = NativeMethods.cairo_region_create_rectangles (rects, rects.Length);
+            return new Region(NativeMethods.cairo_region_copy(Handle), true);
         }
 
-        public Region Copy ()
+        ~Region()
         {
-            return new Region (NativeMethods.cairo_region_copy (Handle), true);
+            Dispose(false);
         }
 
-        ~Region ()
+        public void Dispose()
         {
-            Dispose (false);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        public void Dispose ()
-        {
-            Dispose (true);
-            GC.SuppressFinalize (this);
-        }
-
-        protected virtual void Dispose (bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!disposing || CairoDebug.Enabled)
-                CairoDebug.OnDisposed<Region> (handle, disposing);
+                CairoDebug.OnDisposed<Region>(handle, disposing);
 
-            if (!disposing|| handle == IntPtr.Zero)
+            if (!disposing || handle == IntPtr.Zero)
                 return;
 
-            NativeMethods.cairo_region_destroy (Handle);
+            NativeMethods.cairo_region_destroy(Handle);
             handle = IntPtr.Zero;
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
-            return (obj is Region) && NativeMethods.cairo_region_equal (Handle, (obj as Region).Handle);
+            return (obj is Region)
+                && NativeMethods.cairo_region_equal(Handle, (obj as Region).Handle);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return Handle.GetHashCode ();
+            return Handle.GetHashCode();
         }
 
-        public Status Status {
-            get { return NativeMethods.cairo_region_status (Handle); }
+        public Status Status
+        {
+            get { return NativeMethods.cairo_region_status(Handle); }
         }
 
-        public RectangleInt Extents {
-            get {
+        public RectangleInt Extents
+        {
+            get
+            {
                 RectangleInt result;
-                NativeMethods.cairo_region_get_extents (Handle, out result);
+                NativeMethods.cairo_region_get_extents(Handle, out result);
                 return result;
             }
         }
 
-        public int NumRectangles {
-            get { return NativeMethods.cairo_region_num_rectangles (Handle); }
+        public int NumRectangles
+        {
+            get { return NativeMethods.cairo_region_num_rectangles(Handle); }
         }
 
-        public RectangleInt GetRectangle (int nth)
+        public RectangleInt GetRectangle(int nth)
         {
             RectangleInt val;
-            NativeMethods.cairo_region_get_rectangle (Handle, nth, out val);
+            NativeMethods.cairo_region_get_rectangle(Handle, nth, out val);
             return val;
         }
 
-        public bool IsEmpty {
-            get { return NativeMethods.cairo_region_is_empty (Handle); }
+        public bool IsEmpty
+        {
+            get { return NativeMethods.cairo_region_is_empty(Handle); }
         }
 
-        public RegionOverlap ContainsPoint (RectangleInt rectangle)
+        public RegionOverlap ContainsPoint(RectangleInt rectangle)
         {
-            return NativeMethods.cairo_region_contains_rectangle (Handle, ref rectangle);
+            return NativeMethods.cairo_region_contains_rectangle(Handle, ref rectangle);
         }
 
-        public bool ContainsPoint (int x, int y)
+        public bool ContainsPoint(int x, int y)
         {
-            return NativeMethods.cairo_region_contains_point (Handle, x, y);
+            return NativeMethods.cairo_region_contains_point(Handle, x, y);
         }
 
-        public void Translate (int dx, int dy)
+        public void Translate(int dx, int dy)
         {
-            NativeMethods.cairo_region_translate (Handle, dx, dy);
+            NativeMethods.cairo_region_translate(Handle, dx, dy);
         }
 
-        public Status Subtract (Region other)
+        public Status Subtract(Region other)
         {
-            return NativeMethods.cairo_region_subtract (Handle, other.Handle);
+            return NativeMethods.cairo_region_subtract(Handle, other.Handle);
         }
 
-        public Status SubtractRectangle (RectangleInt rectangle)
+        public Status SubtractRectangle(RectangleInt rectangle)
         {
-            return NativeMethods.cairo_region_subtract_rectangle (Handle, ref rectangle);
+            return NativeMethods.cairo_region_subtract_rectangle(Handle, ref rectangle);
         }
 
-        public Status Intersect (Region other)
+        public Status Intersect(Region other)
         {
-            return NativeMethods.cairo_region_intersect (Handle, other.Handle);
+            return NativeMethods.cairo_region_intersect(Handle, other.Handle);
         }
 
-        public Status IntersectRectangle (RectangleInt rectangle)
+        public Status IntersectRectangle(RectangleInt rectangle)
         {
-            return NativeMethods.cairo_region_intersect_rectangle (Handle, ref rectangle);
+            return NativeMethods.cairo_region_intersect_rectangle(Handle, ref rectangle);
         }
 
-        public Status Union (Region other)
+        public Status Union(Region other)
         {
-            return NativeMethods.cairo_region_union (Handle, other.Handle);
+            return NativeMethods.cairo_region_union(Handle, other.Handle);
         }
 
-        public Status UnionRectangle (RectangleInt rectangle)
+        public Status UnionRectangle(RectangleInt rectangle)
         {
-            return NativeMethods.cairo_region_union_rectangle (Handle, ref rectangle);
+            return NativeMethods.cairo_region_union_rectangle(Handle, ref rectangle);
         }
 
-        public Status Xor (Region other)
+        public Status Xor(Region other)
         {
-            return NativeMethods.cairo_region_xor (Handle, other.Handle);
+            return NativeMethods.cairo_region_xor(Handle, other.Handle);
         }
 
-        public Status XorRectangle (RectangleInt rectangle)
+        public Status XorRectangle(RectangleInt rectangle)
         {
-            return NativeMethods.cairo_region_xor_rectangle (Handle, ref rectangle);
+            return NativeMethods.cairo_region_xor_rectangle(Handle, ref rectangle);
         }
     }
 }

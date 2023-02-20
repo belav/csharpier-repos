@@ -34,76 +34,58 @@ namespace Microsoft.Build.Utilities
 {
     public abstract class Task : ITask
     {
-        IBuildEngine        buildEngine;
-        string            helpKeywordPrefix;
-        ITaskHost        hostObject;
-        TaskLoggingHelper    log;
-        
+        IBuildEngine buildEngine;
+        string helpKeywordPrefix;
+        ITaskHost hostObject;
+        TaskLoggingHelper log;
+
         protected Task()
-            : this (null, null)
-        {
-        }
+            : this(null, null) { }
 
         protected Task(ResourceManager taskResources)
-            : this (taskResources, null)
-        {
-        }
+            : this(taskResources, null) { }
 
-        protected Task(ResourceManager taskResources,
-                   string helpKeywordPrefix)
+        protected Task(ResourceManager taskResources, string helpKeywordPrefix)
         {
-            log = new TaskLoggingHelper (this);
+            log = new TaskLoggingHelper(this);
             log.TaskResources = taskResources;
             this.helpKeywordPrefix = helpKeywordPrefix;
         }
 
         public abstract bool Execute();
 
-        public IBuildEngine BuildEngine    {
-            get {
-                return buildEngine;
-            }
-            set {
-                buildEngine = value;
-            }
+        public IBuildEngine BuildEngine
+        {
+            get { return buildEngine; }
+            set { buildEngine = value; }
         }
 
-        public IBuildEngine2 BuildEngine2 {
+        public IBuildEngine2 BuildEngine2
+        {
             get { return buildEngine as IBuildEngine2; }
         }
 
-        protected string HelpKeywordPrefix {
-            get {
-                return helpKeywordPrefix;
-            }
-            set {
-                helpKeywordPrefix = value;
-            }
+        protected string HelpKeywordPrefix
+        {
+            get { return helpKeywordPrefix; }
+            set { helpKeywordPrefix = value; }
         }
 
-        public ITaskHost HostObject {
-            get {
-                return hostObject;
-            }
-            set {
-                hostObject = value;
-            }
+        public ITaskHost HostObject
+        {
+            get { return hostObject; }
+            set { hostObject = value; }
         }
 
-        public TaskLoggingHelper Log {
-            get {
-                return log;
-            }
+        public TaskLoggingHelper Log
+        {
+            get { return log; }
         }
 
-        protected ResourceManager TaskResources    {
-            get {
-                return log.TaskResources;
-            }
-            set {
-                log.TaskResources = value;
-            }
+        protected ResourceManager TaskResources
+        {
+            get { return log.TaskResources; }
+            set { log.TaskResources = value; }
         }
     }
 }
-

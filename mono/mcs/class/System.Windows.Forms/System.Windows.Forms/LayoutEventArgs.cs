@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,19 +29,22 @@
 
 using System.ComponentModel;
 
-namespace System.Windows.Forms {
-    public sealed class LayoutEventArgs : EventArgs {
-        private Control    affected_control;
-        private string    affected_property;
+namespace System.Windows.Forms
+{
+    public sealed class LayoutEventArgs : EventArgs
+    {
+        private Control affected_control;
+        private string affected_property;
         private IComponent affected_component;
 
         #region Public Constructors
-        public LayoutEventArgs(Control affectedControl, string affectedProperty) {
+        public LayoutEventArgs(Control affectedControl, string affectedProperty)
+        {
             this.affected_control = affectedControl;
             this.affected_property = affectedProperty;
         }
 
-        public LayoutEventArgs (IComponent affectedComponent, string affectedProperty)
+        public LayoutEventArgs(IComponent affectedComponent, string affectedProperty)
         {
             this.affected_component = affectedComponent;
             this.affected_property = affectedProperty;
@@ -49,20 +52,19 @@ namespace System.Windows.Forms {
         #endregion    // Public Constructors
 
         #region Public Instance Properties
-        public IComponent AffectedComponent {
+        public IComponent AffectedComponent
+        {
             get { return this.affected_component; }
         }
 
-        public Control AffectedControl {
-            get {
-                return this.affected_control;
-            }
+        public Control AffectedControl
+        {
+            get { return this.affected_control; }
         }
 
-        public string AffectedProperty {
-            get {
-                return this.affected_property;
-            }
+        public string AffectedProperty
+        {
+            get { return this.affected_property; }
         }
         #endregion    // Public Instance Properties
     }

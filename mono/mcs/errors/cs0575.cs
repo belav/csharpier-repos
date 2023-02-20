@@ -3,11 +3,7 @@
 
 struct X
 {
-    ~X ()
-    {
-    }
+    ~X() { }
 
-    static void Main ()
-    {
-    }
+    static void Main() { }
 }

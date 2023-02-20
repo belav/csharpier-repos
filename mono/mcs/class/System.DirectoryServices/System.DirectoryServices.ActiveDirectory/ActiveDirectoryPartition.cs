@@ -26,31 +26,23 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public abstract class ActiveDirectoryPartition : IDisposable
     {
-        public string Name {
-            get {
-                throw new NotImplementedException ();
-            }
+        public string Name
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        protected ActiveDirectoryPartition ()
-        {
-        }
+        protected ActiveDirectoryPartition() { }
 
-        public void Dispose ()
-        {
-        }
+        public void Dispose() { }
 
-        protected virtual void Dispose (bool disposing)
-        {
+        protected virtual void Dispose(bool disposing) { }
 
-        }
-
-        public override string ToString ()
+        public override string ToString()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-        public abstract DirectoryEntry GetDirectoryEntry ();
+        public abstract DirectoryEntry GetDirectoryEntry();
     }
 }

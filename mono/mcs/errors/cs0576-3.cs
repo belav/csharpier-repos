@@ -7,9 +7,9 @@ namespace A.Foo
 {
     class X
     {
-        public static void Main ()
+        public static void Main()
         {
-            A.GG ();
+            A.GG();
         }
     }
 }

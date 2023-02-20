@@ -14,28 +14,28 @@ interface InterfaceCovariant<out T>
 
 class A : InterfaceContravariat<int>, InterfaceCovariant<long>
 {
-    public static int Main ()
+    public static int Main()
     {
         return 0;
     }
 
     int InterfaceContravariat<int>.Prop
     {
-        set { throw new NotImplementedException (); }
+        set { throw new NotImplementedException(); }
     }
 
     int InterfaceContravariat<int>.this[int arg]
     {
-        set { throw new NotImplementedException (); }
+        set { throw new NotImplementedException(); }
     }
 
     long InterfaceCovariant<long>.Prop
     {
-        get { throw new NotImplementedException (); }
+        get { throw new NotImplementedException(); }
     }
 
     long InterfaceCovariant<long>.this[int arg]
     {
-        get { throw new NotImplementedException (); }
+        get { throw new NotImplementedException(); }
     }
 }

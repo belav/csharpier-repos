@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,38 +29,45 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-namespace System.Net.NetworkInformation {
+namespace System.Net.NetworkInformation
+{
     class MacOsIPInterfaceProperties : UnixIPInterfaceProperties
     {
-        public MacOsIPInterfaceProperties (MacOsNetworkInterface iface, List <IPAddress> addresses)
-            : base (iface, addresses)
-        {
-        }
+        public MacOsIPInterfaceProperties(MacOsNetworkInterface iface, List<IPAddress> addresses)
+            : base(iface, addresses) { }
 
-        public override IPv4InterfaceProperties GetIPv4Properties ()
+        public override IPv4InterfaceProperties GetIPv4Properties()
         {
             if (ipv4iface_properties == null)
-                ipv4iface_properties = new MacOsIPv4InterfaceProperties (iface as MacOsNetworkInterface);
+                ipv4iface_properties = new MacOsIPv4InterfaceProperties(
+                    iface as MacOsNetworkInterface
+                );
 
             return ipv4iface_properties;
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool ParseRouteInfo_icall (string iface, out string[] gw_addr_list);
+        private extern static bool ParseRouteInfo_icall(string iface, out string[] gw_addr_list);
 
-        public override GatewayIPAddressInformationCollection GatewayAddresses {
-            get {
-                var gateways = new IPAddressCollection ();
+        public override GatewayIPAddressInformationCollection GatewayAddresses
+        {
+            get
+            {
+                var gateways = new IPAddressCollection();
                 string[] gw_addrlist;
-                if (!ParseRouteInfo_icall (this.iface.Name.ToString(), out gw_addrlist))
-                    return new GatewayIPAddressInformationCollection ();
+                if (!ParseRouteInfo_icall(this.iface.Name.ToString(), out gw_addrlist))
+                    return new GatewayIPAddressInformationCollection();
 
-                for(int i=0; i<gw_addrlist.Length; i++) {
-                    try {
+                for (int i = 0; i < gw_addrlist.Length; i++)
+                {
+                    try
+                    {
                         IPAddress ip = IPAddress.Parse(gw_addrlist[i]);
-                        if (!ip.Equals (IPAddress.Any) && !gateways.Contains (ip))
-                            gateways.InternalAdd (ip);
-                    } catch (ArgumentNullException) {
+                        if (!ip.Equals(IPAddress.Any) && !gateways.Contains(ip))
+                            gateways.InternalAdd(ip);
+                    }
+                    catch (ArgumentNullException)
+                    {
                         /* Ignore this, as the
                          * internal call might have
                          * left some blank entries at
@@ -69,10 +76,10 @@ namespace System.Net.NetworkInformation {
                     }
                 }
 
-                return SystemGatewayIPAddressInformation.ToGatewayIpAddressInformationCollection (gateways);
+                return SystemGatewayIPAddressInformation.ToGatewayIpAddressInformationCollection(
+                    gateways
+                );
             }
         }
     }
 }
-
-

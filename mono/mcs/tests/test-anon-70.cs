@@ -6,7 +6,7 @@ using System;
 
 unsafe class UnsafeClass
 {
-    public int* GetUnsafeValue ()
+    public int* GetUnsafeValue()
     {
         return null;
     }
@@ -14,52 +14,62 @@ unsafe class UnsafeClass
 
 public class C
 {
-    delegate void D ();
-    
-    static void Test (D d)
-    {
-    }
-    
-    unsafe static void UnsafeTests ()
-    {
-        UnsafeClass v = new UnsafeClass ();
-        Test (delegate () {
-            int i = *v.GetUnsafeValue ();
-        });
+    delegate void D();
 
-        Test (delegate () {
-            byte* buffer = stackalloc byte[8192];
-        });
+    static void Test(D d) { }
+
+    unsafe static void UnsafeTests()
+    {
+        UnsafeClass v = new UnsafeClass();
+        Test(
+            delegate()
+            {
+                int i = *v.GetUnsafeValue();
+            }
+        );
+
+        Test(
+            delegate()
+            {
+                byte* buffer = stackalloc byte[8192];
+            }
+        );
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
         Exception diffException;
-        
-        Test (delegate () {
-            diffException = null;
-                    try {
-                    } catch (Exception ex) {
-                        diffException = ex;
-                    } finally {
-                    }
-                    
-                    try {
-                    } catch {
-                    }
-                });
-                
-        int[] i_a = new int [] { 1,2,3 };
-        
-        Test (delegate () {
-                foreach (int t in i_a) {
-                }
-            });
-            
-        Test (delegate () {
-            Console.WriteLine (typeof (void));
-        });
 
+        Test(
+            delegate()
+            {
+                diffException = null;
+                try { }
+                catch (Exception ex)
+                {
+                    diffException = ex;
+                }
+                finally { }
+
+                try { }
+                catch { }
+            }
+        );
+
+        int[] i_a = new int[] { 1, 2, 3 };
+
+        Test(
+            delegate()
+            {
+                foreach (int t in i_a) { }
+            }
+        );
+
+        Test(
+            delegate()
+            {
+                Console.WriteLine(typeof(void));
+            }
+        );
     }
 }
-

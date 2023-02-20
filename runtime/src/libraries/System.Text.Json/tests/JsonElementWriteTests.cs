@@ -69,13 +69,12 @@ namespace System.Text.Json.Tests
         public void WritePropertyOutsideObject(bool skipValidation)
         {
             var buffer = new ArrayBufferWriter<byte>(1024);
-            using (var doc = JsonDocument.Parse("[ null, false, true, \"hi\", 5, {}, [] ]", s_options))
+            using (
+                var doc = JsonDocument.Parse("[ null, false, true, \"hi\", 5, {}, [] ]", s_options)
+            )
             {
                 JsonElement root = doc.RootElement;
-                var options = new JsonWriterOptions
-                {
-                    SkipValidation = skipValidation,
-                };
+                var options = new JsonWriterOptions { SkipValidation = skipValidation, };
 
                 const string CharLabel = "char";
                 byte[] byteUtf8 = Encoding.UTF8.GetBytes("byte");
@@ -98,21 +97,30 @@ namespace System.Text.Json.Tests
                     writer.Flush();
 
                     JsonTestHelper.AssertContents(
-                        "\"char\":null,\"char\":null,\"byte\":null,\"char\":null," +
-                            "\"char\":false,\"char\":false,\"byte\":false,\"char\":false," +
-                            "\"char\":true,\"char\":true,\"byte\":true,\"char\":true," +
-                            "\"char\":\"hi\",\"char\":\"hi\",\"byte\":\"hi\",\"char\":\"hi\"," +
-                            "\"char\":5,\"char\":5,\"byte\":5,\"char\":5," +
-                            "\"char\":{},\"char\":{},\"byte\":{},\"char\":{}," +
-                            "\"char\":[],\"char\":[],\"byte\":[],\"char\":[]",
-                        buffer);
+                        "\"char\":null,\"char\":null,\"byte\":null,\"char\":null,"
+                            + "\"char\":false,\"char\":false,\"byte\":false,\"char\":false,"
+                            + "\"char\":true,\"char\":true,\"byte\":true,\"char\":true,"
+                            + "\"char\":\"hi\",\"char\":\"hi\",\"byte\":\"hi\",\"char\":\"hi\","
+                            + "\"char\":5,\"char\":5,\"byte\":5,\"char\":5,"
+                            + "\"char\":{},\"char\":{},\"byte\":{},\"char\":{},"
+                            + "\"char\":[],\"char\":[],\"byte\":[],\"char\":[]",
+                        buffer
+                    );
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() => writer.WritePropertyName(CharLabel));
-                    Assert.Throws<InvalidOperationException>(() => writer.WritePropertyName(CharLabel.AsSpan()));
-                    Assert.Throws<InvalidOperationException>(() => writer.WritePropertyName(byteUtf8));
-                    Assert.Throws<InvalidOperationException>(() => writer.WritePropertyName(JsonEncodedText.Encode(CharLabel)));
+                    Assert.Throws<InvalidOperationException>(
+                        () => writer.WritePropertyName(CharLabel)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => writer.WritePropertyName(CharLabel.AsSpan())
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => writer.WritePropertyName(byteUtf8)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => writer.WritePropertyName(JsonEncodedText.Encode(CharLabel))
+                    );
 
                     writer.Flush();
 
@@ -127,13 +135,12 @@ namespace System.Text.Json.Tests
         public void WriteValueInsideObject(bool skipValidation)
         {
             var buffer = new ArrayBufferWriter<byte>(1024);
-            using (var doc = JsonDocument.Parse("[ null, false, true, \"hi\", 5, {}, [] ]", s_options))
+            using (
+                var doc = JsonDocument.Parse("[ null, false, true, \"hi\", 5, {}, [] ]", s_options)
+            )
             {
                 JsonElement root = doc.RootElement;
-                var options = new JsonWriterOptions
-                {
-                    SkipValidation = skipValidation,
-                };
+                var options = new JsonWriterOptions { SkipValidation = skipValidation, };
 
                 using var writer = new Utf8JsonWriter(buffer, options);
                 writer.WriteStartObject();
@@ -148,9 +155,7 @@ namespace System.Text.Json.Tests
                     writer.WriteEndObject();
                     writer.Flush();
 
-                    JsonTestHelper.AssertContents(
-                        "{null,false,true,\"hi\",5,{},[]}",
-                        buffer);
+                    JsonTestHelper.AssertContents("{null,false,true,\"hi\",5,{},[]}", buffer);
                 }
                 else
                 {
@@ -170,11 +175,10 @@ namespace System.Text.Json.Tests
 
     public abstract class JsonDomWriteTests
     {
-        protected static readonly JsonDocumentOptions s_options =
-            new JsonDocumentOptions
-            {
-                CommentHandling = JsonCommentHandling.Skip,
-            };
+        protected static readonly JsonDocumentOptions s_options = new JsonDocumentOptions
+        {
+            CommentHandling = JsonCommentHandling.Skip,
+        };
 
         protected abstract JsonDocument PrepareDocument(string jsonIn);
         protected abstract void WriteSingleValue(JsonDocument document, Utf8JsonWriter writer);
@@ -289,7 +293,9 @@ namespace System.Text.Json.Tests
         {
             if (overwriteJson.Length != parseJson.Length)
             {
-                throw new InvalidOperationException("Invalid test, parseJson and overwriteJson must have the same length");
+                throw new InvalidOperationException(
+                    "Invalid test, parseJson and overwriteJson must have the same length"
+                );
             }
 
             byte[] utf8Data = Encoding.UTF8.GetBytes(parseJson);
@@ -308,7 +314,13 @@ namespace System.Text.Json.Tests
                         // If it doesn't hit a 100% overlap then we're not testing what we thought we were.
                         Assert.Equal(
                             utf8Data.Length,
-                            Encoding.UTF8.GetBytes(inputPtr, overwriteJson.Length, dataPtr, utf8Data.Length));
+                            Encoding.UTF8.GetBytes(
+                                inputPtr,
+                                overwriteJson.Length,
+                                dataPtr,
+                                utf8Data.Length
+                            )
+                        );
                     }
                 }
 
@@ -318,7 +330,8 @@ namespace System.Text.Json.Tests
 
                 AssertExtensions.Throws<ArgumentException>(
                     "utf8FormattedNumber",
-                    () => WriteDocument(document, writer));
+                    () => WriteDocument(document, writer)
+                );
             }
         }
 
@@ -402,11 +415,7 @@ namespace System.Text.Json.Tests
         [InlineData(true)]
         public void WriteEmptyArray(bool indented)
         {
-            WriteComplexValue(
-                indented,
-                "[        ]",
-                "[]",
-                "[]");
+            WriteComplexValue(indented, "[        ]", "[]", "[]");
         }
 
         [Theory]
@@ -414,11 +423,7 @@ namespace System.Text.Json.Tests
         [InlineData(true)]
         public void WriteEmptyObject(bool indented)
         {
-            WriteComplexValue(
-                indented,
-                "{     }",
-                "{}",
-                "{}");
+            WriteComplexValue(indented, "{     }", "{}", "{}");
         }
 
         [Theory]
@@ -426,11 +431,7 @@ namespace System.Text.Json.Tests
         [InlineData(true)]
         public void WriteEmptyCommentedArray(bool indented)
         {
-            WriteComplexValue(
-                indented,
-                "[ /* \"No values here\" */    ]",
-                "[]",
-                "[]");
+            WriteComplexValue(indented, "[ /* \"No values here\" */    ]", "[]", "[]");
         }
 
         [Theory]
@@ -438,11 +439,7 @@ namespace System.Text.Json.Tests
         [InlineData(true)]
         public void WriteEmptyCommentedObject(bool indented)
         {
-            WriteComplexValue(
-                indented,
-                "{ /* Technically empty */ }",
-                "{}",
-                "{}");
+            WriteComplexValue(indented, "{ /* Technically empty */ }", "{}", "{}");
         }
 
         [Theory]
@@ -464,7 +461,8 @@ namespace System.Text.Json.Tests
   0,
   1
 ]".NormalizeLineEndings(),
-                "[2,4,6,0,1]");
+                "[2,4,6,0,1]"
+            );
         }
 
         [Theory]
@@ -483,7 +481,8 @@ namespace System.Text.Json.Tests
   ""r"": 2,
   ""d"": 2
 }".NormalizeLineEndings(),
-                "{\"r\":2,\"d\":2}");
+                "{\"r\":2,\"d\":2}"
+            );
         }
 
         [Theory]
@@ -501,7 +500,8 @@ namespace System.Text.Json.Tests
   ""prop\u003E\u003Certy"": 3,
   ""\u003E This is one long \u0026 unusual property name. \u003C"": 4
 }",
-                "{\"prop\\u003E\\u003Certy\":3,\"\\u003E This is one long \\u0026 unusual property name. \\u003C\":4}");
+                "{\"prop\\u003E\\u003Certy\":3,\"\\u003E This is one long \\u0026 unusual property name. \\u003C\":4}"
+            );
         }
 
         [Theory]
@@ -511,7 +511,8 @@ namespace System.Text.Json.Tests
         {
             WriteComplexValue(
                 indented,
-                (@"
+                (
+                    @"
 
 [
         ""Once upon a midnight dreary"",
@@ -522,7 +523,9 @@ true,
 null,
   ""Escaping is not requ\u0069red"",
 // More comments, more problems?
- ""Some th\u0069ngs get lost in the " + "m\u00EAl\u00E9e" + @""",
+ ""Some th\u0069ngs get lost in the "
+                    + "m\u00EAl\u00E9e"
+                    + @""",
 // Array with an array (primes)
 [ 2, 3, 5, 7, /*9,*/ 11],
 { ""obj"": [ 21, { ""deep obj"": [
@@ -534,11 +537,14 @@ true,
 null,
   ""Escaping is not requ\u0069red"",
 // More comments, more problems?
- ""Some th\u0069ngs get lost in the " + "m\u00EAl\u00E9e" + @"""
+ ""Some th\u0069ngs get lost in the "
+                    + "m\u00EAl\u00E9e"
+                    + @"""
 
 ], ""more deep"": false },
 12 ], ""second property"": null }]
-").NormalizeLineEndings(),
+"
+                ).NormalizeLineEndings(),
                 @"[
   ""Once upon a midnight dreary"",
   42,
@@ -578,13 +584,14 @@ null,
     ""second property"": null
   }
 ]".NormalizeLineEndings(),
-                "[\"Once upon a midnight dreary\",42,1e400,3.141592653589793238462643383279," +
-                    "false,true,null,\"Escaping is not required\"," +
-                    "\"Some things get lost in the m\\u00EAl\\u00E9e\",[2,3,5,7,11]," +
-                    "{\"obj\":[21,{\"deep obj\":[\"Once upon a midnight dreary\",42,1e400," +
-                    "3.141592653589793238462643383279,false,true,null,\"Escaping is not required\"," +
-                    "\"Some things get lost in the m\\u00EAl\\u00E9e\"],\"more deep\":false},12]," +
-                    "\"second property\":null}]");
+                "[\"Once upon a midnight dreary\",42,1e400,3.141592653589793238462643383279,"
+                    + "false,true,null,\"Escaping is not required\","
+                    + "\"Some things get lost in the m\\u00EAl\\u00E9e\",[2,3,5,7,11],"
+                    + "{\"obj\":[21,{\"deep obj\":[\"Once upon a midnight dreary\",42,1e400,"
+                    + "3.141592653589793238462643383279,false,true,null,\"Escaping is not required\","
+                    + "\"Some things get lost in the m\\u00EAl\\u00E9e\"],\"more deep\":false},12],"
+                    + "\"second property\":null}]"
+            );
         }
 
         [Theory]
@@ -594,19 +601,19 @@ null,
         {
             WriteComplexValue(
                 indented,
-                "{" +
-                    "\"int\": 42," +
-                    "\"quadratic googol\": 1e400," +
-                    "\"precisePi\": 3.141592653589793238462643383279," +
-                    "\"lit0\": null,\"lit1\":  false,/*guess next*/\"lit2\": true," +
-                    "\"ascii\": \"pizza\"," +
-                    "\"escaped\": \"p\\u0069zza\"," +
-                    "\"utf8\": \"p\u00CDzza\"," +
-                    "\"utf8ExtraEscape\": \"p\u00CDz\\u007Aa\"," +
-                    "\"arr\": [\"hello\", \"sa\\u0069lor\", 21, \"blackjack!\" ]," +
-                    "\"obj\": {" +
-                        "\"arr\": [ 1, 3, 5, 7, /*9,*/ 11] " +
-                    "}}",
+                "{"
+                    + "\"int\": 42,"
+                    + "\"quadratic googol\": 1e400,"
+                    + "\"precisePi\": 3.141592653589793238462643383279,"
+                    + "\"lit0\": null,\"lit1\":  false,/*guess next*/\"lit2\": true,"
+                    + "\"ascii\": \"pizza\","
+                    + "\"escaped\": \"p\\u0069zza\","
+                    + "\"utf8\": \"p\u00CDzza\","
+                    + "\"utf8ExtraEscape\": \"p\u00CDz\\u007Aa\","
+                    + "\"arr\": [\"hello\", \"sa\\u0069lor\", 21, \"blackjack!\" ],"
+                    + "\"obj\": {"
+                    + "\"arr\": [ 1, 3, 5, 7, /*9,*/ 11] "
+                    + "}}",
                 @"{
   ""int"": 42,
   ""quadratic googol"": 1e400,
@@ -634,11 +641,12 @@ null,
     ]
   }
 }".NormalizeLineEndings(),
-                "{\"int\":42,\"quadratic googol\":1e400,\"precisePi\":3.141592653589793238462643383279," +
-                    "\"lit0\":null,\"lit1\":false,\"lit2\":true,\"ascii\":\"pizza\",\"escaped\":\"pizza\"," +
-                    "\"utf8\":\"p\\u00CDzza\",\"utf8ExtraEscape\":\"p\\u00CDzza\"," +
-                    "\"arr\":[\"hello\",\"sailor\",21,\"blackjack!\"]," +
-                    "\"obj\":{\"arr\":[1,3,5,7,11]}}");
+                "{\"int\":42,\"quadratic googol\":1e400,\"precisePi\":3.141592653589793238462643383279,"
+                    + "\"lit0\":null,\"lit1\":false,\"lit2\":true,\"ascii\":\"pizza\",\"escaped\":\"pizza\","
+                    + "\"utf8\":\"p\\u00CDzza\",\"utf8ExtraEscape\":\"p\\u00CDzza\","
+                    + "\"arr\":[\"hello\",\"sailor\",21,\"blackjack!\"],"
+                    + "\"obj\":{\"arr\":[1,3,5,7,11]}}"
+            );
         }
 
         [Theory]
@@ -646,7 +654,8 @@ null,
         [InlineData(true)]
         public void ReadWriteEscapedPropertyNames(bool indented)
         {
-            const string jsonIn = " { \"p\\u0069zza\": 1, \"hello\\u003c\\u003e\": 2, \"normal\": 3 }";
+            const string jsonIn =
+                " { \"p\\u0069zza\": 1, \"hello\\u003c\\u003e\": 2, \"normal\": 3 }";
 
             WriteComplexValue(
                 indented,
@@ -656,7 +665,8 @@ null,
   ""hello\u003c\u003e"": 2,
   ""normal"": 3
 }",
-                "{\"pizza\":1,\"hello\\u003c\\u003e\":2,\"normal\":3}");
+                "{\"pizza\":1,\"hello\\u003c\\u003e\":2,\"normal\":3}"
+            );
         }
 
         [Theory]
@@ -671,7 +681,8 @@ null,
                 @"{
   ""ectoplasm"": 42
 }".NormalizeLineEndings(),
-                "{\"ectoplasm\":42}");
+                "{\"ectoplasm\":42}"
+            );
         }
 
         [Theory]
@@ -688,10 +699,15 @@ null,
                 indented,
                 propertyName,
                 "42",
-                (@"{
-  ""\u00EA" + propertyName.Substring(1) + @""": 42
-}").NormalizeLineEndings(),
-                $"{{\"\\u00EA{propertyName.Substring(1)}\":42}}");
+                (
+                    @"{
+  ""\u00EA"
+                    + propertyName.Substring(1)
+                    + @""": 42
+}"
+                ).NormalizeLineEndings(),
+                $"{{\"\\u00EA{propertyName.Substring(1)}\":42}}"
+            );
         }
 
         [Theory]
@@ -706,7 +722,8 @@ null,
                 @"{
   ""m\u00EAl\u00E9e"": 1e6
 }".NormalizeLineEndings(),
-                "{\"m\\u00EAl\\u00E9e\":1e6}");
+                "{\"m\\u00EAl\\u00E9e\":1e6}"
+            );
         }
 
         [Fact]
@@ -740,7 +757,8 @@ null,
                 @"{
   ""test property"": 3.141592653589793238462643383279
 }".NormalizeLineEndings(),
-                "{\"test property\":3.141592653589793238462643383279}");
+                "{\"test property\":3.141592653589793238462643383279}"
+            );
         }
 
         [Theory]
@@ -756,7 +774,8 @@ null,
                 @"{
   ""\u0643\u0628\u064A\u0631"": 1e400
 }".NormalizeLineEndings(),
-                "{\"\\u0643\\u0628\\u064A\\u0631\":1e400}");
+                "{\"\\u0643\\u0628\\u064A\\u0631\":1e400}"
+            );
         }
 
         [Theory]
@@ -771,7 +790,8 @@ null,
                 @"{
   ""dinner"": ""pizza""
 }".NormalizeLineEndings(),
-                "{\"dinner\":\"pizza\"}");
+                "{\"dinner\":\"pizza\"}"
+            );
         }
 
         [Theory]
@@ -786,7 +806,8 @@ null,
                 @"{
   ""dinner"": ""pizza""
 }".NormalizeLineEndings(),
-                "{\"dinner\":\"pizza\"}");
+                "{\"dinner\":\"pizza\"}"
+            );
         }
 
         [Theory]
@@ -801,7 +822,8 @@ null,
                 @"{
   ""lunch"": ""p\u00CDzza""
 }".NormalizeLineEndings(),
-                "{\"lunch\":\"p\\u00CDzza\"}");
+                "{\"lunch\":\"p\\u00CDzza\"}"
+            );
         }
 
         [Theory]
@@ -816,7 +838,8 @@ null,
                 @"{
   ""lunch"": ""p\u00CDzza""
 }".NormalizeLineEndings(),
-                "{\"lunch\":\"p\\u00CDzza\"}");
+                "{\"lunch\":\"p\\u00CDzza\"}"
+            );
         }
 
         [Theory]
@@ -831,7 +854,8 @@ null,
                 @"{
   "" boolean "": true
 }".NormalizeLineEndings(),
-                "{\" boolean \":true}");
+                "{\" boolean \":true}"
+            );
         }
 
         [Theory]
@@ -846,7 +870,8 @@ null,
                 @"{
   "" boolean "": false
 }".NormalizeLineEndings(),
-                "{\" boolean \":false}");
+                "{\" boolean \":false}"
+            );
         }
 
         [Theory]
@@ -861,7 +886,8 @@ null,
                 @"{
   ""someProp"": null
 }".NormalizeLineEndings(),
-                "{\"someProp\":null}");
+                "{\"someProp\":null}"
+            );
         }
 
         [Theory]
@@ -876,7 +902,8 @@ null,
                 @"{
   ""arr"": []
 }".NormalizeLineEndings(),
-                "{\"arr\":[]}");
+                "{\"arr\":[]}"
+            );
         }
 
         [Theory]
@@ -891,7 +918,8 @@ null,
                 @"{
   ""obj"": {}
 }".NormalizeLineEndings(),
-                "{\"obj\":{}}");
+                "{\"obj\":{}}"
+            );
         }
 
         [Theory]
@@ -906,7 +934,8 @@ null,
                 @"{
   ""arr"": []
 }".NormalizeLineEndings(),
-                "{\"arr\":[]}");
+                "{\"arr\":[]}"
+            );
         }
 
         [Theory]
@@ -921,7 +950,8 @@ null,
                 @"{
   ""obj"": {}
 }".NormalizeLineEndings(),
-                "{\"obj\":{}}");
+                "{\"obj\":{}}"
+            );
         }
 
         [Theory]
@@ -942,7 +972,8 @@ null,
     1
   ]
 }".NormalizeLineEndings(),
-                "{\"valjean\":[2,4,6,0,1]}");
+                "{\"valjean\":[2,4,6,0,1]}"
+            );
         }
 
         [Theory]
@@ -964,7 +995,8 @@ null,
     ""d"": 2
   }
 }".NormalizeLineEndings(),
-                "{\"bestMinorCharacter\":{\"r\":2,\"d\":2}}");
+                "{\"bestMinorCharacter\":{\"r\":2,\"d\":2}}"
+            );
         }
 
         [Theory]
@@ -986,7 +1018,9 @@ true,
 null,
   ""Escaping is not requ\u0069red"",
 // More comments, more problems?
- ""Some th\u0069ngs get lost in the " + "m\u00EAl\u00E9e" + @""",
+ ""Some th\u0069ngs get lost in the "
+                    + "m\u00EAl\u00E9e"
+                    + @""",
 // Array with an array (primes)
 [ 2, 3, 5, 7, /*9,*/ 11],
 { ""obj"": [ 21, { ""deep obj"": [
@@ -998,7 +1032,9 @@ true,
 null,
   ""Escaping is not requ\u0069red"",
 // More comments, more problems?
- ""Some th\u0069ngs get lost in the " + "m\u00EAl\u00E9e" + @"""
+ ""Some th\u0069ngs get lost in the "
+                    + "m\u00EAl\u00E9e"
+                    + @"""
 
 ], ""more deep"": false },
 12 ], ""second property"": null }]
@@ -1044,14 +1080,14 @@ null,
     }
   ]
 }".NormalizeLineEndings(),
-
-                "{\"data\":[\"Once upon a midnight dreary\",42,1e400,3.141592653589793238462643383279," +
-                    "false,true,null,\"Escaping is not required\"," +
-                    "\"Some things get lost in the m\\u00EAl\\u00E9e\",[2,3,5,7,11]," +
-                    "{\"obj\":[21,{\"deep obj\":[\"Once upon a midnight dreary\",42,1e400," +
-                    "3.141592653589793238462643383279,false,true,null,\"Escaping is not required\"," +
-                    "\"Some things get lost in the m\\u00EAl\\u00E9e\"],\"more deep\":false},12]," +
-                    "\"second property\":null}]}");
+                "{\"data\":[\"Once upon a midnight dreary\",42,1e400,3.141592653589793238462643383279,"
+                    + "false,true,null,\"Escaping is not required\","
+                    + "\"Some things get lost in the m\\u00EAl\\u00E9e\",[2,3,5,7,11],"
+                    + "{\"obj\":[21,{\"deep obj\":[\"Once upon a midnight dreary\",42,1e400,"
+                    + "3.141592653589793238462643383279,false,true,null,\"Escaping is not required\","
+                    + "\"Some things get lost in the m\\u00EAl\\u00E9e\"],\"more deep\":false},12],"
+                    + "\"second property\":null}]}"
+            );
         }
 
         [Theory]
@@ -1062,19 +1098,19 @@ null,
             WritePropertyValueBothForms(
                 indented,
                 "data",
-                "{" +
-                    "\"int\": 42," +
-                    "\"quadratic googol\": 1e400," +
-                    "\"precisePi\": 3.141592653589793238462643383279," +
-                    "\"lit0\": null,\"lit1\":  false,/*guess next*/\"lit2\": true," +
-                    "\"ascii\": \"pizza\"," +
-                    "\"escaped\": \"p\\u0069zza\"," +
-                    "\"utf8\": \"p\u00CDzza\"," +
-                    "\"utf8ExtraEscape\": \"p\u00CDz\\u007Aa\"," +
-                    "\"arr\": [\"hello\", \"sa\\u0069lor\", 21, \"blackjack!\" ]," +
-                    "\"obj\": {" +
-                        "\"arr\": [ 1, 3, 5, 7, /*9,*/ 11] " +
-                    "}}",
+                "{"
+                    + "\"int\": 42,"
+                    + "\"quadratic googol\": 1e400,"
+                    + "\"precisePi\": 3.141592653589793238462643383279,"
+                    + "\"lit0\": null,\"lit1\":  false,/*guess next*/\"lit2\": true,"
+                    + "\"ascii\": \"pizza\","
+                    + "\"escaped\": \"p\\u0069zza\","
+                    + "\"utf8\": \"p\u00CDzza\","
+                    + "\"utf8ExtraEscape\": \"p\u00CDz\\u007Aa\","
+                    + "\"arr\": [\"hello\", \"sa\\u0069lor\", 21, \"blackjack!\" ],"
+                    + "\"obj\": {"
+                    + "\"arr\": [ 1, 3, 5, 7, /*9,*/ 11] "
+                    + "}}",
                 @"{
   ""data"": {
     ""int"": 42,
@@ -1104,12 +1140,13 @@ null,
     }
   }
 }".NormalizeLineEndings(),
-                "{\"data\":" +
-                    "{\"int\":42,\"quadratic googol\":1e400,\"precisePi\":3.141592653589793238462643383279," +
-                    "\"lit0\":null,\"lit1\":false,\"lit2\":true,\"ascii\":\"pizza\",\"escaped\":\"pizza\"," +
-                    "\"utf8\":\"p\\u00CDzza\",\"utf8ExtraEscape\":\"p\\u00CDzza\"," +
-                    "\"arr\":[\"hello\",\"sailor\",21,\"blackjack!\"]," +
-                    "\"obj\":{\"arr\":[1,3,5,7,11]}}}");
+                "{\"data\":"
+                    + "{\"int\":42,\"quadratic googol\":1e400,\"precisePi\":3.141592653589793238462643383279,"
+                    + "\"lit0\":null,\"lit1\":false,\"lit2\":true,\"ascii\":\"pizza\",\"escaped\":\"pizza\","
+                    + "\"utf8\":\"p\\u00CDzza\",\"utf8ExtraEscape\":\"p\\u00CDzza\","
+                    + "\"arr\":[\"hello\",\"sailor\",21,\"blackjack!\"],"
+                    + "\"obj\":{\"arr\":[1,3,5,7,11]}}}"
+            );
         }
 
         [Fact]
@@ -1122,12 +1159,17 @@ null,
             const int SpacesSplit = 85;
             const int SpacesPost = 4;
 
-            byte[] jsonIn = new byte[SpacesPre + TargetDepth + SpacesSplit + TargetDepth + SpacesPost];
+            byte[] jsonIn = new byte[
+                SpacesPre + TargetDepth + SpacesSplit + TargetDepth + SpacesPost
+            ];
             jsonIn.AsSpan(0, SpacesPre).Fill((byte)' ');
             Span<byte> openBrackets = jsonIn.AsSpan(SpacesPre, TargetDepth);
             openBrackets.Fill((byte)'[');
             jsonIn.AsSpan(SpacesPre + TargetDepth, SpacesSplit).Fill((byte)' ');
-            Span<byte> closeBrackets = jsonIn.AsSpan(SpacesPre + TargetDepth + SpacesSplit, TargetDepth);
+            Span<byte> closeBrackets = jsonIn.AsSpan(
+                SpacesPre + TargetDepth + SpacesSplit,
+                TargetDepth
+            );
             closeBrackets.Fill((byte)']');
             jsonIn.AsSpan(SpacesPre + TargetDepth + SpacesSplit + TargetDepth).Fill((byte)' ');
 
@@ -1142,29 +1184,52 @@ null,
                 ReadOnlySpan<byte> formatted = buffer.WrittenSpan;
 
                 Assert.Equal(TargetDepth + TargetDepth, formatted.Length);
-                Assert.True(formatted.Slice(0, TargetDepth).SequenceEqual(openBrackets), "OpenBrackets match");
-                Assert.True(formatted.Slice(TargetDepth).SequenceEqual(closeBrackets), "CloseBrackets match");
+                Assert.True(
+                    formatted.Slice(0, TargetDepth).SequenceEqual(openBrackets),
+                    "OpenBrackets match"
+                );
+                Assert.True(
+                    formatted.Slice(TargetDepth).SequenceEqual(closeBrackets),
+                    "CloseBrackets match"
+                );
             }
         }
 
         [Theory]
         [InlineData(false, "\"message\"", "\"message\"", true)]
         [InlineData(true, "\"message\"", "\"message\"", true)]
-        [InlineData(false, "\">><++>>>\\\">>\\\\>>&>>>\u6f22\u5B57>>>\"", "\">><++>>>\\\">>\\\\>>&>>>\u6f22\u5B57>>>\"", false)]
-        [InlineData(true, "\">><++>>>\\\">>\\\\>>&>>>\u6f22\u5B57>>>\"", "\">><++>>>\\\">>\\\\>>&>>>\u6f22\u5B57>>>\"", false)]
-        [InlineData(false, "\"mess\\r\\nage\\u0008\\u0001!\"", "\"mess\\r\\nage\\b\\u0001!\"", true)]
+        [InlineData(
+            false,
+            "\">><++>>>\\\">>\\\\>>&>>>\u6f22\u5B57>>>\"",
+            "\">><++>>>\\\">>\\\\>>&>>>\u6f22\u5B57>>>\"",
+            false
+        )]
+        [InlineData(
+            true,
+            "\">><++>>>\\\">>\\\\>>&>>>\u6f22\u5B57>>>\"",
+            "\">><++>>>\\\">>\\\\>>&>>>\u6f22\u5B57>>>\"",
+            false
+        )]
+        [InlineData(
+            false,
+            "\"mess\\r\\nage\\u0008\\u0001!\"",
+            "\"mess\\r\\nage\\b\\u0001!\"",
+            true
+        )]
         [InlineData(true, "\"mess\\r\\nage\\u0008\\u0001!\"", "\"mess\\r\\nage\\b\\u0001!\"", true)]
-        public void WriteWithRelaxedEscaper(bool indented, string jsonIn, string jsonOut, bool matchesRelaxedEscaping)
+        public void WriteWithRelaxedEscaper(
+            bool indented,
+            string jsonIn,
+            string jsonOut,
+            bool matchesRelaxedEscaping
+        )
         {
             var buffer = new ArrayBufferWriter<byte>(1024);
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
             {
                 {
-                    var options = new JsonWriterOptions
-                    {
-                        Indented = indented,
-                    };
+                    var options = new JsonWriterOptions { Indented = indented, };
 
                     using (var writer = new Utf8JsonWriter(buffer, options))
                     {
@@ -1206,10 +1271,7 @@ null,
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
             {
-                var options = new JsonWriterOptions
-                {
-                    Indented = indented,
-                };
+                var options = new JsonWriterOptions { Indented = indented, };
 
                 using (var writer = new Utf8JsonWriter(buffer, options))
                 {
@@ -1224,15 +1286,13 @@ null,
             bool indented,
             string jsonIn,
             string expectedIndent,
-            string expectedMinimal)
+            string expectedMinimal
+        )
         {
             var buffer = new ArrayBufferWriter<byte>(1024);
             byte[] bufferOutput;
 
-            var options = new JsonWriterOptions
-            {
-                Indented = indented
-            };
+            var options = new JsonWriterOptions { Indented = indented };
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
             {
@@ -1268,35 +1328,34 @@ null,
             string propertyName,
             string jsonIn,
             string expectedIndent,
-            string expectedMinimal)
+            string expectedMinimal
+        )
         {
-            WritePropertyValue(
-                indented,
-                propertyName,
-                jsonIn,
-                expectedIndent,
-                expectedMinimal);
+            WritePropertyValue(indented, propertyName, jsonIn, expectedIndent, expectedMinimal);
 
             WritePropertyValue(
                 indented,
                 propertyName.AsSpan(),
                 jsonIn,
                 expectedIndent,
-                expectedMinimal);
+                expectedMinimal
+            );
 
             WritePropertyValue(
                 indented,
                 Encoding.UTF8.GetBytes(propertyName ?? ""),
                 jsonIn,
                 expectedIndent,
-                expectedMinimal);
+                expectedMinimal
+            );
 
             WritePropertyValue(
                 indented,
                 JsonEncodedText.Encode(propertyName.AsSpan()),
                 jsonIn,
                 expectedIndent,
-                expectedMinimal);
+                expectedMinimal
+            );
         }
 
         private void WritePropertyValue(
@@ -1304,20 +1363,17 @@ null,
             string propertyName,
             string jsonIn,
             string expectedIndent,
-            string expectedMinimal)
+            string expectedMinimal
+        )
         {
             var buffer = new ArrayBufferWriter<byte>(1024);
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
             {
-                var options = new JsonWriterOptions
-                {
-                    Indented = indented,
-                };
+                var options = new JsonWriterOptions { Indented = indented, };
 
                 using (var writer = new Utf8JsonWriter(buffer, options))
                 {
-
                     writer.WriteStartObject();
                     writer.WritePropertyName(propertyName);
                     WriteSingleValue(doc, writer);
@@ -1333,16 +1389,14 @@ null,
             ReadOnlySpan<char> propertyName,
             string jsonIn,
             string expectedIndent,
-            string expectedMinimal)
+            string expectedMinimal
+        )
         {
             var buffer = new ArrayBufferWriter<byte>(1024);
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
             {
-                var options = new JsonWriterOptions
-                {
-                    Indented = indented,
-                };
+                var options = new JsonWriterOptions { Indented = indented, };
 
                 using (var writer = new Utf8JsonWriter(buffer, options))
                 {
@@ -1361,16 +1415,14 @@ null,
             ReadOnlySpan<byte> propertyName,
             string jsonIn,
             string expectedIndent,
-            string expectedMinimal)
+            string expectedMinimal
+        )
         {
             var buffer = new ArrayBufferWriter<byte>(1024);
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
             {
-                var options = new JsonWriterOptions
-                {
-                    Indented = indented,
-                };
+                var options = new JsonWriterOptions { Indented = indented, };
 
                 using (var writer = new Utf8JsonWriter(buffer, options))
                 {
@@ -1389,16 +1441,14 @@ null,
             JsonEncodedText propertyName,
             string jsonIn,
             string expectedIndent,
-            string expectedMinimal)
+            string expectedMinimal
+        )
         {
             var buffer = new ArrayBufferWriter<byte>(1024);
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
             {
-                var options = new JsonWriterOptions
-                {
-                    Indented = indented,
-                };
+                var options = new JsonWriterOptions { Indented = indented, };
 
                 using (var writer = new Utf8JsonWriter(buffer, options))
                 {

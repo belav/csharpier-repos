@@ -15,7 +15,9 @@ namespace Moq.Tests
 
         public AfterReturnCallbackDelegateValidationFixture()
         {
-            this.setup = new Mock<IFoo>().Setup(m => m.Method(It.IsAny<string>(), It.IsAny<object>()));
+            this.setup = new Mock<IFoo>().Setup(
+                m => m.Method(It.IsAny<string>(), It.IsAny<object>())
+            );
         }
 
         [Fact]
@@ -78,14 +80,18 @@ namespace Moq.Tests
         public void Callback_before_Returns__delegate_may_not_use_more_specific_parameter_types()
         {
             var setup = this.setup;
-            Assert.Throws<ArgumentException>(() => setup.Callback((string arg1, string arg2) => { }));
+            Assert.Throws<ArgumentException>(
+                () => setup.Callback((string arg1, string arg2) => { })
+            );
         }
 
         [Fact]
         public void Callback_after_Returns__delegate_may_not_use_more_specific_parameter_types()
         {
             var setup = this.setup.Returns(true);
-            Assert.Throws<ArgumentException>(() => setup.Callback((string arg1, string arg2) => { }));
+            Assert.Throws<ArgumentException>(
+                () => setup.Callback((string arg1, string arg2) => { })
+            );
         }
 
         public interface IFoo

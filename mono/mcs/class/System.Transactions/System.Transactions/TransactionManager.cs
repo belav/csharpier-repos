@@ -17,11 +17,15 @@ namespace System.Transactions
 {
     public static class TransactionManager
     {
-        static TransactionManager ()
+        static TransactionManager()
         {
 #if !MOBILE
-            defaultSettings = ConfigurationManager.GetSection ("system.transactions/defaultSettings") as DefaultSettingsSection;
-            machineSettings = ConfigurationManager.GetSection ("system.transactions/machineSettings") as MachineSettingsSection;
+            defaultSettings =
+                ConfigurationManager.GetSection("system.transactions/defaultSettings")
+                as DefaultSettingsSection;
+            machineSettings =
+                ConfigurationManager.GetSection("system.transactions/machineSettings")
+                as MachineSettingsSection;
 #endif
         }
 
@@ -30,10 +34,11 @@ namespace System.Transactions
         static MachineSettingsSection machineSettings;
 #endif
 
-        static TimeSpan defaultTimeout = new TimeSpan (0, 1, 0); /* 60 secs */
-        static TimeSpan maxTimeout = new TimeSpan (0, 10, 0); /* 10 mins */
+        static TimeSpan defaultTimeout = new TimeSpan(0, 1, 0); /* 60 secs */
+        static TimeSpan maxTimeout = new TimeSpan(0, 10, 0); /* 10 mins */
 
-        public static TimeSpan DefaultTimeout {
+        public static TimeSpan DefaultTimeout
+        {
             get {
                 // Obtain timeout from configuration setting..
                 //        - http://msdn.microsoft.com/en-us/library/ms973865.aspx
@@ -45,43 +50,43 @@ namespace System.Transactions
                     return defaultSettings.Timeout;
 #endif
 
-                return defaultTimeout; 
-            }
+                return defaultTimeout; }
         }
 
-        [MonoTODO ("Not implemented")]
-        public static HostCurrentTransactionCallback HostCurrentCallback {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        [MonoTODO("Not implemented")]
+        public static HostCurrentTransactionCallback HostCurrentCallback
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        public static TimeSpan MaximumTimeout {
+        public static TimeSpan MaximumTimeout
+        {
             get {
 #if !MOBILE
                 if (machineSettings != null)
                     return machineSettings.MaxTimeout;
 #endif
 
-                return maxTimeout; 
-            }
+                return maxTimeout; }
         }
 
-        [MonoTODO ("Not implemented")]
-        public static void RecoveryComplete (Guid resourceManagerIdentifier)
+        [MonoTODO("Not implemented")]
+        public static void RecoveryComplete(Guid resourceManagerIdentifier)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoTODO ("Not implemented")]
-        public static Enlistment Reenlist (Guid resourceManagerIdentifier,
+        [MonoTODO("Not implemented")]
+        public static Enlistment Reenlist(
+            Guid resourceManagerIdentifier,
             byte[] recoveryInformation,
-            IEnlistmentNotification enlistmentNotification)
+            IEnlistmentNotification enlistmentNotification
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public static event TransactionStartedEventHandler
-            DistributedTransactionStarted;
+        public static event TransactionStartedEventHandler DistributedTransactionStarted;
     }
 }
-

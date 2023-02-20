@@ -4,7 +4,7 @@ using System;
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
         bool v;
         v = (true & null) == null;
@@ -14,7 +14,7 @@ class C
         v = (false & null) != null;
         if (!v)
             return 2;
-        
+
         v = (null & true) == null;
         if (!v)
             return 3;
@@ -38,11 +38,11 @@ class C
         v = (null | false) != null;
         if (v != false)
             return 14;
-        
+
         v = (null & 1) == null;
         if (v != true)
             return 20;
-        
+
         v = (null & 0) != null;
         if (v != false)
             return 21;
@@ -55,16 +55,16 @@ class C
 
         if ((b & null) != null)
             return 51;
-        
+
         if ((null & a) != false)
             return 52;
-        
+
         if ((null & b) != null)
             return 53;
 
         if ((a & true) != false)
             return 54;
-        
+
         if ((true & a) != false)
             return 55;
 
@@ -73,16 +73,16 @@ class C
 
         if ((b | null) != true)
             return 61;
-        
+
         if ((null | a) != null)
             return 62;
-        
+
         if ((null | b) != true)
             return 63;
-        
+
         if ((a | true) != true)
             return 64;
-        
+
         if ((true | a) != true)
             return 65;
 
@@ -127,12 +127,12 @@ class C
         res = null | x_f;
         if (res.HasValue)
             return 206;
-        
+
         return 0;
     }
-    
+
     // This does not look right but C# spec needs tidying up to special case it
-    void BrokenLiftedNull ()
+    void BrokenLiftedNull()
     {
         int i = 44;
         int? u = null;

@@ -8,33 +8,28 @@ namespace Mono.Profiler.Aot
     //
     public class ProfileRecord
     {
-        public ProfileRecord (int id)
+        public ProfileRecord(int id)
         {
             Id = id;
         }
 
-        public int Id {
-            get; set;
-        }
+        public int Id { get; set; }
     }
 
     public class ModuleRecord : ProfileRecord
     {
-        public ModuleRecord (int id, string name, string mvid) : base (id)
+        public ModuleRecord(int id, string name, string mvid)
+            : base(id)
         {
             Name = name;
             Mvid = mvid;
         }
 
-        public string Name {
-            get; set;
-        }
+        public string Name { get; set; }
 
-        public string Mvid {
-            get; set;
-        }
+        public string Mvid { get; set; }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return Name;
         }
@@ -42,60 +37,59 @@ namespace Mono.Profiler.Aot
 
     public class GenericInstRecord : ProfileRecord
     {
-        public GenericInstRecord (int id, TypeRecord[] types) : base (id)
+        public GenericInstRecord(int id, TypeRecord[] types)
+            : base(id)
         {
             Types = types;
         }
 
-        public TypeRecord[] Types {
-            get; set;
-        }
+        public TypeRecord[] Types { get; set; }
 
-        public override string ToString ()
+        public override string ToString()
         {
             if (Types == null || Types.Length <= 0)
                 return "";
 
-            var sb = new StringBuilder ("<");
+            var sb = new StringBuilder("<");
             var first = true;
-            foreach (var type in Types) {
+            foreach (var type in Types)
+            {
                 if (!first)
-                    sb.Append (", ");
+                    sb.Append(", ");
                 else
                     first = false;
 
-                sb.Append (type.ToString ());
+                sb.Append(type.ToString());
             }
 
-            sb.Append (">");
+            sb.Append(">");
 
-            return sb.ToString ();
+            return sb.ToString();
         }
     }
 
     public class TypeRecord : ProfileRecord
     {
-        public TypeRecord (int id, ModuleRecord module, string name, GenericInstRecord ginst) : base (id)
+        public TypeRecord(int id, ModuleRecord module, string name, GenericInstRecord ginst)
+            : base(id)
         {
             Module = module;
             Name = name;
             GenericInst = ginst;
         }
 
-        public ModuleRecord Module {
-            get; set;
-        }
+        public ModuleRecord Module { get; set; }
 
-        public string Name {
-            get; set;
-        }
+        public string Name { get; set; }
 
-        public string FullName {
-            get {
+        public string FullName
+        {
+            get
+            {
                 string prefix;
 
-                if (Name.Length > 0 && Name [0] == '.')
-                    prefix = Module.ToString ();
+                if (Name.Length > 0 && Name[0] == '.')
+                    prefix = Module.ToString();
                 else
                     prefix = "";
 
@@ -103,11 +97,9 @@ namespace Mono.Profiler.Aot
             }
         }
 
-        public GenericInstRecord GenericInst {
-            get; set;
-        }
+        public GenericInstRecord GenericInst { get; set; }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return FullName;
         }
@@ -115,7 +107,15 @@ namespace Mono.Profiler.Aot
 
     public class MethodRecord : ProfileRecord
     {
-        public MethodRecord (int id, TypeRecord type, GenericInstRecord ginst, string name, string sig, int param_count) : base (id)
+        public MethodRecord(
+            int id,
+            TypeRecord type,
+            GenericInstRecord ginst,
+            string name,
+            string sig,
+            int param_count
+        )
+            : base(id)
         {
             Type = type;
             GenericInst = ginst;
@@ -124,29 +124,19 @@ namespace Mono.Profiler.Aot
             ParamCount = param_count;
         }
 
-        public TypeRecord Type {
-            get; set;
-        }
+        public TypeRecord Type { get; set; }
 
-        public GenericInstRecord GenericInst {
-            get; set;
-        }
+        public GenericInstRecord GenericInst { get; set; }
 
-        public string Name {
-            get; set;
-        }
+        public string Name { get; set; }
 
-        public string Signature {
-            get; set;
-        }
+        public string Signature { get; set; }
 
-        public int ParamCount {
-            get; set;
-        }
+        public int ParamCount { get; set; }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return $"{Signature.Replace ("(", $" {Type}:{Name} (")}";
+            return $"{Signature.Replace("(", $" {Type}:{Name} (")}";
         }
     }
 }

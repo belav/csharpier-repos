@@ -25,14 +25,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpReferenceHighlighting(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpReferenceHighlighting))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpReferenceHighlighting)) { }
 
         [WpfFact]
         public void Highlighting()
         {
-            var markup = @"
+            var markup =
+                @"
 class {|definition:C|}
 {
     void M<T>({|reference:C|} c) where T : {|reference:C|}
@@ -40,7 +39,11 @@ class {|definition:C|}
         {|reference:C|} c = new {|reference:C|}();
     }
 }";
-            Test.Utilities.MarkupTestFile.GetSpans(markup, out var text, out IDictionary<string, ImmutableArray<TextSpan>> spans);
+            Test.Utilities.MarkupTestFile.GetSpans(
+                markup,
+                out var text,
+                out IDictionary<string, ImmutableArray<TextSpan>> spans
+            );
             VisualStudio.Editor.SetText(text);
             Verify("C", spans);
 
@@ -51,7 +54,8 @@ class {|definition:C|}
         [WpfFact]
         public void WrittenReference()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -60,7 +64,11 @@ class C
         {|writtenreference:x|} = 3;
     }
 }";
-            Test.Utilities.MarkupTestFile.GetSpans(markup, out var text, out IDictionary<string, ImmutableArray<TextSpan>> spans);
+            Test.Utilities.MarkupTestFile.GetSpans(
+                markup,
+                out var text,
+                out IDictionary<string, ImmutableArray<TextSpan>> spans
+            );
             VisualStudio.Editor.SetText(text);
             Verify("x", spans);
 
@@ -71,7 +79,8 @@ class C
         [WpfFact]
         public void Navigation()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
    void M()
@@ -83,15 +92,23 @@ class C
             VisualStudio.Editor.SetText(text);
             VisualStudio.Editor.PlaceCaret("x");
             VisualStudio.Editor.InvokeNavigateToNextHighlightedReference();
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.ReferenceHighlighting);
-            VisualStudio.Editor.Verify.CurrentLineText("x$$ = 3;", assertCaretPosition: true, trimWhitespace: true);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ReferenceHighlighting
+            );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "x$$ = 3;",
+                assertCaretPosition: true,
+                trimWhitespace: true
+            );
         }
 
         [WorkItem(52041, "https://github.com/dotnet/roslyn/pull/52041")]
         [WpfFact]
         public void HighlightBasedOnSelection()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
    void M()
@@ -105,12 +122,26 @@ class C
             VisualStudio.Editor.PlaceCaret("x");
 
             VisualStudio.Editor.InvokeNavigateToNextHighlightedReference();
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.ReferenceHighlighting);
-            VisualStudio.Editor.Verify.CurrentLineText("x$$++;", assertCaretPosition: true, trimWhitespace: true);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ReferenceHighlighting
+            );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "x$$++;",
+                assertCaretPosition: true,
+                trimWhitespace: true
+            );
 
             VisualStudio.Editor.InvokeNavigateToNextHighlightedReference();
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.ReferenceHighlighting);
-            VisualStudio.Editor.Verify.CurrentLineText("x$$ = 3;", assertCaretPosition: true, trimWhitespace: true);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ReferenceHighlighting
+            );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "x$$ = 3;",
+                assertCaretPosition: true,
+                trimWhitespace: true
+            );
         }
 
         private void Verify(string marker, IDictionary<string, ImmutableArray<TextSpan>> spans)
@@ -122,18 +153,31 @@ class C
                 FeatureAttribute.SolutionCrawlerLegacy,
                 FeatureAttribute.DiagnosticService,
                 FeatureAttribute.Classification,
-                FeatureAttribute.ReferenceHighlighting);
+                FeatureAttribute.ReferenceHighlighting
+            );
 
-            AssertEx.SetEqual(spans["definition"], VisualStudio.Editor.GetTagSpans(DefinitionHighlightTag.TagId), message: "Testing 'definition'\r\n");
+            AssertEx.SetEqual(
+                spans["definition"],
+                VisualStudio.Editor.GetTagSpans(DefinitionHighlightTag.TagId),
+                message: "Testing 'definition'\r\n"
+            );
 
             if (spans.ContainsKey("reference"))
             {
-                AssertEx.SetEqual(spans["reference"], VisualStudio.Editor.GetTagSpans(ReferenceHighlightTag.TagId), message: "Testing 'reference'\r\n");
+                AssertEx.SetEqual(
+                    spans["reference"],
+                    VisualStudio.Editor.GetTagSpans(ReferenceHighlightTag.TagId),
+                    message: "Testing 'reference'\r\n"
+                );
             }
 
             if (spans.ContainsKey("writtenreference"))
             {
-                AssertEx.SetEqual(spans["writtenreference"], VisualStudio.Editor.GetTagSpans(WrittenReferenceHighlightTag.TagId), message: "Testing 'writtenreference'\r\n");
+                AssertEx.SetEqual(
+                    spans["writtenreference"],
+                    VisualStudio.Editor.GetTagSpans(WrittenReferenceHighlightTag.TagId),
+                    message: "Testing 'writtenreference'\r\n"
+                );
             }
         }
 
@@ -146,7 +190,8 @@ class C
                 FeatureAttribute.SolutionCrawlerLegacy,
                 FeatureAttribute.DiagnosticService,
                 FeatureAttribute.Classification,
-                FeatureAttribute.ReferenceHighlighting);
+                FeatureAttribute.ReferenceHighlighting
+            );
 
             Assert.Empty(VisualStudio.Editor.GetTagSpans(ReferenceHighlightTag.TagId));
             Assert.Empty(VisualStudio.Editor.GetTagSpans(DefinitionHighlightTag.TagId));

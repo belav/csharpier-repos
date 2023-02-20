@@ -17,7 +17,12 @@ namespace Microsoft.CodeAnalysis
         public DocumentId OldActiveContextDocumentId { get; }
         public DocumentId NewActiveContextDocumentId { get; }
 
-        public DocumentActiveContextChangedEventArgs(Solution solution, SourceTextContainer sourceTextContainer, DocumentId oldActiveContextDocumentId, DocumentId newActiveContextDocumentId)
+        public DocumentActiveContextChangedEventArgs(
+            Solution solution,
+            SourceTextContainer sourceTextContainer,
+            DocumentId oldActiveContextDocumentId,
+            DocumentId newActiveContextDocumentId
+        )
         {
             Contract.ThrowIfNull(solution);
             Contract.ThrowIfNull(sourceTextContainer);

@@ -14,4 +14,3 @@ namespace Testing
         public string PublicField2;
     }
 }
-

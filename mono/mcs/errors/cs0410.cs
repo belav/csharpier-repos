@@ -4,7 +4,7 @@
 
 delegate IA TestDelegate();
 
-interface IA {}
+interface IA { }
 
 public class MainClass : IA
 {
@@ -15,7 +15,6 @@ public class MainClass : IA
 
     public static void Main()
     {
-        TestDelegate delegateInstance = new TestDelegate (Delegate);
+        TestDelegate delegateInstance = new TestDelegate(Delegate);
     }
 }
-

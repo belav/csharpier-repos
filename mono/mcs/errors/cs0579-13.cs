@@ -8,19 +8,15 @@ namespace ConditionalAttributeTesting
 {
     class MainClass
     {
-        [Some ("Test")]
-        [Some ("Test2")]
-        public static void Test ()
-        {
-        }
+        [Some("Test")]
+        [Some("Test2")]
+        public static void Test() { }
     }
 
-    [AttributeUsage (AttributeTargets.All)]
-    [Conditional ("NOT_DEFINED")]
+    [AttributeUsage(AttributeTargets.All)]
+    [Conditional("NOT_DEFINED")]
     public sealed class SomeAttribute : Attribute
     {
-        public SomeAttribute (string someText)
-        {
-        }
+        public SomeAttribute(string someText) { }
     }
 }

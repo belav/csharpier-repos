@@ -28,9 +28,9 @@ namespace MonoTests.System.Xml
         bool removing;
 
         [SetUp]
-        public void GetReady ()
+        public void GetReady()
         {
-            document = new XmlDocument ();
+            document = new XmlDocument();
         }
 
         private void EventNodeInserted(Object sender, XmlNodeChangedEventArgs e)
@@ -38,7 +38,7 @@ namespace MonoTests.System.Xml
             inserted = true;
         }
 
-        private void EventNodeInserting (Object sender, XmlNodeChangedEventArgs e)
+        private void EventNodeInserting(Object sender, XmlNodeChangedEventArgs e)
         {
             inserting = true;
         }
@@ -48,7 +48,7 @@ namespace MonoTests.System.Xml
             changed = true;
         }
 
-        private void EventNodeChanging (Object sender, XmlNodeChangedEventArgs e)
+        private void EventNodeChanging(Object sender, XmlNodeChangedEventArgs e)
         {
             changing = true;
         }
@@ -58,34 +58,34 @@ namespace MonoTests.System.Xml
             removed = true;
         }
 
-        private void EventNodeRemoving (Object sender, XmlNodeChangedEventArgs e)
+        private void EventNodeRemoving(Object sender, XmlNodeChangedEventArgs e)
         {
             removing = true;
         }
 
         [Test]
-        public void InnerAndOuterXml ()
+        public void InnerAndOuterXml()
         {
-            text = document.CreateTextNode ("&<>\"'");
-            Assert.AreEqual (String.Empty, text.InnerXml);
-            Assert.AreEqual ("&amp;&lt;&gt;\"'", text.OuterXml);
+            text = document.CreateTextNode("&<>\"'");
+            Assert.AreEqual(String.Empty, text.InnerXml);
+            Assert.AreEqual("&amp;&lt;&gt;\"'", text.OuterXml);
         }
-        
+
         [Test]
-        public void SplitText ()
+        public void SplitText()
         {
-            document.LoadXml ("<root>test text.</root>");
+            document.LoadXml("<root>test text.</root>");
             document.NodeInserted += new XmlNodeChangedEventHandler(EventNodeInserted);
             document.NodeChanged += new XmlNodeChangedEventHandler(EventNodeChanged);
             document.NodeRemoved += new XmlNodeChangedEventHandler(EventNodeRemoved);
             XmlText t = document.DocumentElement.FirstChild as XmlText;
-            t.SplitText (5);
-            Assert.IsNotNull (t.NextSibling);
-            Assert.AreEqual ("test ", t.Value);
-            Assert.AreEqual ("text.", t.NextSibling.Value);
-            Assert.IsTrue (changed);
-            Assert.IsTrue (inserted);
-            Assert.IsTrue (!removed);
+            t.SplitText(5);
+            Assert.IsNotNull(t.NextSibling);
+            Assert.AreEqual("test ", t.Value);
+            Assert.AreEqual("text.", t.NextSibling.Value);
+            Assert.IsTrue(changed);
+            Assert.IsTrue(inserted);
+            Assert.IsTrue(!removed);
         }
     }
 }

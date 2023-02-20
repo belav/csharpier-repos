@@ -4,22 +4,18 @@ namespace Mono.Linker.Tests.Cases.Basic
 {
     class UsedGenericInterfaceIsKept
     {
-        public static void Main ()
+        public static void Main()
         {
-            A<int> a = new A<int> ();
-            var t = typeof (I<>).ToString ();
+            A<int> a = new A<int>();
+            var t = typeof(I<>).ToString();
         }
 
         [Kept]
-        [KeptInterface (typeof (I<>))]
-        [KeptMember (".ctor()")]
-        class A<T> : I<T>
-        {
-        }
+        [KeptInterface(typeof(I<>))]
+        [KeptMember(".ctor()")]
+        class A<T> : I<T> { }
 
         [Kept]
-        interface I<T>
-        {
-        }
+        interface I<T> { }
     }
 }

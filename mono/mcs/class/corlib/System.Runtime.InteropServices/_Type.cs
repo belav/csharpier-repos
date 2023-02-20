@@ -11,20 +11,34 @@ using System.Reflection;
 
 namespace System.Runtime.InteropServices
 {
-    [CLSCompliant (false)]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [Guid ("BCA8B44D-AAD6-3A86-8AB7-03349F4F2DA2")]
+    [CLSCompliant(false)]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("BCA8B44D-AAD6-3A86-8AB7-03349F4F2DA2")]
 #if !FULL_AOT_RUNTIME
-    [TypeLibImportClass (typeof (Type))]
+    [TypeLibImportClass(typeof(Type))]
 #endif
-    [ComVisible (true)]
+    [ComVisible(true)]
     public interface _Type
     {
         void GetTypeInfoCount(out uint pcTInfo);
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult,
-            IntPtr pExcepInfo, IntPtr puArgErr);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 
         String ToString();
         bool Equals(Object other);
@@ -52,43 +66,100 @@ namespace System.Runtime.InteropServices
         ConstructorInfo[] GetConstructors(BindingFlags bindingAttr);
         Type GetInterface(String name, bool ignoreCase);
         Type[] GetInterfaces();
-        Type[] FindInterfaces(TypeFilter filter,Object filterCriteria);
-        EventInfo GetEvent(String name,BindingFlags bindingAttr);
+        Type[] FindInterfaces(TypeFilter filter, Object filterCriteria);
+        EventInfo GetEvent(String name, BindingFlags bindingAttr);
         EventInfo[] GetEvents();
         EventInfo[] GetEvents(BindingFlags bindingAttr);
         Type[] GetNestedTypes(BindingFlags bindingAttr);
         Type GetNestedType(String name, BindingFlags bindingAttr);
         MemberInfo[] GetMember(String name, MemberTypes type, BindingFlags bindingAttr);
         MemberInfo[] GetDefaultMembers();
-        MemberInfo[] FindMembers(MemberTypes memberType,BindingFlags bindingAttr,MemberFilter filter,Object filterCriteria);
+        MemberInfo[] FindMembers(
+            MemberTypes memberType,
+            BindingFlags bindingAttr,
+            MemberFilter filter,
+            Object filterCriteria
+        );
         Type GetElementType();
         bool IsSubclassOf(Type c);
         bool IsInstanceOfType(Object o);
         bool IsAssignableFrom(Type c);
         InterfaceMapping GetInterfaceMap(Type interfaceType);
-        MethodInfo GetMethod(String name, BindingFlags bindingAttr, Binder binder, Type[] types, ParameterModifier[] modifiers);
+        MethodInfo GetMethod(
+            String name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type[] types,
+            ParameterModifier[] modifiers
+        );
         MethodInfo GetMethod(String name, BindingFlags bindingAttr);
         MethodInfo[] GetMethods(BindingFlags bindingAttr);
         FieldInfo GetField(String name, BindingFlags bindingAttr);
         FieldInfo[] GetFields(BindingFlags bindingAttr);
         PropertyInfo GetProperty(String name, BindingFlags bindingAttr);
-        PropertyInfo GetProperty(String name,BindingFlags bindingAttr,Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers);
+        PropertyInfo GetProperty(
+            String name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type returnType,
+            Type[] types,
+            ParameterModifier[] modifiers
+        );
         PropertyInfo[] GetProperties(BindingFlags bindingAttr);
         MemberInfo[] GetMember(String name, BindingFlags bindingAttr);
         MemberInfo[] GetMembers(BindingFlags bindingAttr);
-        Object InvokeMember(String name, BindingFlags invokeAttr, Binder binder, Object target, Object[] args, ParameterModifier[] modifiers,
-            CultureInfo culture, String[] namedParameters);
+        Object InvokeMember(
+            String name,
+            BindingFlags invokeAttr,
+            Binder binder,
+            Object target,
+            Object[] args,
+            ParameterModifier[] modifiers,
+            CultureInfo culture,
+            String[] namedParameters
+        );
         Type UnderlyingSystemType { get; }
 
-        Object InvokeMember(String name,BindingFlags invokeAttr,Binder binder, Object target, Object[] args, CultureInfo culture);
-        Object InvokeMember(String name,BindingFlags invokeAttr,Binder binder, Object target, Object[] args);
-        ConstructorInfo GetConstructor(BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers);
-        ConstructorInfo GetConstructor(BindingFlags bindingAttr, Binder binder, Type[] types, ParameterModifier[] modifiers);
+        Object InvokeMember(
+            String name,
+            BindingFlags invokeAttr,
+            Binder binder,
+            Object target,
+            Object[] args,
+            CultureInfo culture
+        );
+        Object InvokeMember(
+            String name,
+            BindingFlags invokeAttr,
+            Binder binder,
+            Object target,
+            Object[] args
+        );
+        ConstructorInfo GetConstructor(
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        );
+        ConstructorInfo GetConstructor(
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type[] types,
+            ParameterModifier[] modifiers
+        );
         ConstructorInfo GetConstructor(Type[] types);
         ConstructorInfo[] GetConstructors();
-        ConstructorInfo TypeInitializer{ get; }
+        ConstructorInfo TypeInitializer { get; }
 
-        MethodInfo GetMethod(String name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers);
+        MethodInfo GetMethod(
+            String name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        );
         MethodInfo GetMethod(String name, Type[] types, ParameterModifier[] modifiers);
         MethodInfo GetMethod(String name, Type[] types);
         MethodInfo GetMethod(String name);
@@ -97,7 +168,12 @@ namespace System.Runtime.InteropServices
         FieldInfo[] GetFields();
         Type GetInterface(String name);
         EventInfo GetEvent(String name);
-        PropertyInfo GetProperty(String name, Type returnType, Type[] types,ParameterModifier[] modifiers);
+        PropertyInfo GetProperty(
+            String name,
+            Type returnType,
+            Type[] types,
+            ParameterModifier[] modifiers
+        );
         PropertyInfo GetProperty(String name, Type returnType, Type[] types);
         PropertyInfo GetProperty(String name, Type[] types);
         PropertyInfo GetProperty(String name, Type returnType);

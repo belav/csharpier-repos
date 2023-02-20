@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,66 +31,71 @@ using System.Xml;
 using System.Xml.XPath;
 using Mono.Xml.XPath;
 
-namespace System.ServiceModel.Channels {
-
+namespace System.ServiceModel.Channels
+{
     public abstract class MessageBuffer : IXPathNavigable, IDisposable
     {
         XPathNavigator nav_cache;
 
-        protected MessageBuffer () {}
+        protected MessageBuffer() { }
 
-        public abstract void Close ();
-        public abstract Message CreateMessage ();
+        public abstract void Close();
+        public abstract Message CreateMessage();
 
-        public XPathNavigator CreateNavigator ()
+        public XPathNavigator CreateNavigator()
         {
-            return CreateNavigator (XmlSpace.Default);
+            return CreateNavigator(XmlSpace.Default);
         }
 
-        public XPathNavigator CreateNavigator (int nodeQuota)
+        public XPathNavigator CreateNavigator(int nodeQuota)
         {
-            return CreateNavigator (nodeQuota, XmlSpace.Default);
+            return CreateNavigator(nodeQuota, XmlSpace.Default);
         }
 
-        [MonoTODO ("supply proper quota")]
-        public XPathNavigator CreateNavigator (XmlSpace space)
+        [MonoTODO("supply proper quota")]
+        public XPathNavigator CreateNavigator(XmlSpace space)
         {
             // FIXME: I never counted expected quota value.
-            return CreateNavigator (1000, XmlSpace.Default);
+            return CreateNavigator(1000, XmlSpace.Default);
         }
 
-        [MonoTODO ("Handle node_quota and xmlspace")]
-        public XPathNavigator CreateNavigator (int nodeQuota, XmlSpace space)
+        [MonoTODO("Handle node_quota and xmlspace")]
+        public XPathNavigator CreateNavigator(int nodeQuota, XmlSpace space)
         {
-            if (nav_cache == null) {
-                DTMXPathDocumentWriter2 pw = new DTMXPathDocumentWriter2 (new NameTable (), nodeQuota);
-                XmlDictionaryWriter w = XmlDictionaryWriter.CreateDictionaryWriter (pw);
-                CreateMessage ().WriteMessage (w);
-                nav_cache = pw.CreateDocument ().CreateNavigator ();
+            if (nav_cache == null)
+            {
+                DTMXPathDocumentWriter2 pw = new DTMXPathDocumentWriter2(
+                    new NameTable(),
+                    nodeQuota
+                );
+                XmlDictionaryWriter w = XmlDictionaryWriter.CreateDictionaryWriter(pw);
+                CreateMessage().WriteMessage(w);
+                nav_cache = pw.CreateDocument().CreateNavigator();
             }
-            return nav_cache.Clone ();
+            return nav_cache.Clone();
         }
 
-        void IDisposable.Dispose ()
+        void IDisposable.Dispose()
         {
-            this.Close ();
+            this.Close();
         }
 
-        public virtual void WriteMessage (Stream stream)
+        public virtual void WriteMessage(Stream stream)
         {
             if (stream == null)
-                throw new ArgumentNullException ("stream is null");
-            
-            XmlDictionaryWriter w = XmlDictionaryWriter.CreateBinaryWriter (stream);
-            Message m = CreateMessage ();
+                throw new ArgumentNullException("stream is null");
 
-            m.WriteMessage (w);
-            w.Close ();
+            XmlDictionaryWriter w = XmlDictionaryWriter.CreateBinaryWriter(stream);
+            Message m = CreateMessage();
+
+            m.WriteMessage(w);
+            w.Close();
         }
 
         public abstract int BufferSize { get; }
 
-        public virtual string MessageContentType {
+        public virtual string MessageContentType
+        {
             get { return "application/soap+msbin1"; }
         }
     }

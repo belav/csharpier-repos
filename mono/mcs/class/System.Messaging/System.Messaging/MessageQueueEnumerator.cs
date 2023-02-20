@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,7 +39,7 @@ namespace System.Messaging
         private ArrayList queueList;
         private int currentIndex;
 
-        internal MessageQueueEnumerator (ArrayList queueList)
+        internal MessageQueueEnumerator(ArrayList queueList)
         {
             this.queueList = queueList;
             this.currentIndex = -1;
@@ -51,7 +51,7 @@ namespace System.Messaging
             {
                 if (currentIndex < 0 || currentIndex >= queueList.Count)
                     return null;
-                return (MessageQueue) queueList[currentIndex];
+                return (MessageQueue)queueList[currentIndex];
             }
         }
 
@@ -68,43 +68,38 @@ namespace System.Messaging
         public IntPtr LocatorHandle
         {
             [MonoTODO]
-            get
-            {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public void Close ()
+        public void Close() { }
+
+        public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        public void Dispose ()
+        protected virtual void Dispose(bool disposing)
         {
-            Dispose (true);
-            GC.SuppressFinalize (this);
-        }
-
-        protected virtual void Dispose (bool disposing)
-        {
-            Close ();
+            Close();
             disposed = true;
         }
 
-        public bool MoveNext ()
+        public bool MoveNext()
         {
             return (++currentIndex) < queueList.Count;
         }
 
-        public void Reset ()
+        public void Reset()
         {
             currentIndex = -1;
         }
 
-        ~MessageQueueEnumerator ()
+        ~MessageQueueEnumerator()
         {
             if (!disposed)
-                Dispose (false);
+                Dispose(false);
         }
     }
 }

@@ -36,16 +36,16 @@ namespace Microsoft.Win32.SafeHandles
 {
     public sealed class SafeX509ChainHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        internal SafeX509ChainHandle (IntPtr handle)
-            : base (true)
+        internal SafeX509ChainHandle(IntPtr handle)
+            : base(true)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected override bool ReleaseHandle ()
+        protected override bool ReleaseHandle()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

@@ -11,25 +11,32 @@ namespace MonoTests.System.Net.Http
         static bool usingSocketsHandler;
         static object syncLock;
 
-        internal static bool UsingSocketsHandler {
-            get {
-                LazyInitializer.EnsureInitialized (
-                    ref usingSocketsHandler, ref initialized, ref syncLock,
-                    () => typeof (HttpClient).Assembly.GetType ("System.Net.Http.SocketsHttpHandler") != null);
+        internal static bool UsingSocketsHandler
+        {
+            get
+            {
+                LazyInitializer.EnsureInitialized(
+                    ref usingSocketsHandler,
+                    ref initialized,
+                    ref syncLock,
+                    () =>
+                        typeof(HttpClient).Assembly.GetType("System.Net.Http.SocketsHttpHandler")
+                        != null
+                );
                 return usingSocketsHandler;
             }
         }
 
-        internal static bool IsSocketsHandler (HttpClientHandler handler) => false;
+        internal static bool IsSocketsHandler(HttpClientHandler handler) => false;
 
-        internal static HttpClient CreateHttpClientWithHttpClientHandler ()
+        internal static HttpClient CreateHttpClientWithHttpClientHandler()
         {
-            return new HttpClient (CreateHttpClientHandler ());
+            return new HttpClient(CreateHttpClientHandler());
         }
 
-        internal static HttpClientHandler CreateHttpClientHandler ()
+        internal static HttpClientHandler CreateHttpClientHandler()
         {
-            return new WebRequestHandler ();
+            return new WebRequestHandler();
         }
     }
 }

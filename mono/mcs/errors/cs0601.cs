@@ -3,9 +3,9 @@
 
 using System;
 using System.Runtime.InteropServices;
-      
-class Test {
-    [DllImport("cygwin1.dll", EntryPoint="puts", CharSet=CharSet.Ansi)]
-    public extern int puts (string name);
-    
+
+class Test
+{
+    [DllImport("cygwin1.dll", EntryPoint = "puts", CharSet = CharSet.Ansi)]
+    public extern int puts(string name);
 }

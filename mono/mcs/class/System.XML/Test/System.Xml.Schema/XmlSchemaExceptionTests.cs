@@ -16,12 +16,13 @@ namespace MonoTests.System.Xml
     public class XmlSchemaExceptionTests
     {
         [Test]
-        public void Bug599689_ToStringMatchesDotNet ()
+        public void Bug599689_ToStringMatchesDotNet()
         {
-            Assert.AreEqual ("System.Xml.Schema.XmlSchemaException: Test",
-                new XmlSchemaException ("Test").ToString (),
-                "Novell bug #599689 (https://bugzilla.novell.com/show_bug.cgi?id=599689) not fixed.");
+            Assert.AreEqual(
+                "System.Xml.Schema.XmlSchemaException: Test",
+                new XmlSchemaException("Test").ToString(),
+                "Novell bug #599689 (https://bugzilla.novell.com/show_bug.cgi?id=599689) not fixed."
+            );
         }
     }
 }
-

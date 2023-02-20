@@ -5,18 +5,17 @@ public enum Modifiers
 
 class Foo
 {
-    internal Modifiers Modifiers {
-        get {
-            return Modifiers.Public;
-        }
+    internal Modifiers Modifiers
+    {
+        get { return Modifiers.Public; }
     }
 }
 
 class Bar
 {
-    public static int Main ()
+    public static int Main()
     {
-        System.Console.WriteLine (Modifiers.Public);
+        System.Console.WriteLine(Modifiers.Public);
         return 0;
     }
 }

@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,13 +34,15 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Mono.Directory.LDAP 
+namespace Mono.Directory.LDAP
 {
-      class TimeVal {
+    class TimeVal
+    {
         public int tv_sec;
         public int tv_usec;
 
-        public static TimeVal FromTimeSpan (TimeSpan span) {
+        public static TimeVal FromTimeSpan(TimeSpan span)
+        {
             TimeVal tv = new TimeVal();
             long nanoseconds;
 
@@ -56,70 +58,89 @@ namespace Mono.Directory.LDAP
         }
     }
 
-    public enum SearchScope {
+    public enum SearchScope
+    {
         Base = 0x0000,
         OneLevel = 0x0001,
         SubTree = 0x0002
     }
 
-    public class LDAP {
-
+    public class LDAP
+    {
         /* Search Scopes */
-        public LDAP (string uri) {
+        public LDAP(string uri)
+        {
             int rv;
-            rv = ldap_initialize (out ld, uri);
+            rv = ldap_initialize(out ld, uri);
             // FIXME throw something here if ldap_initialize returns an error
         }
 
-        public LDAP (string host, int port) {
-            ld = ldap_init (host, port);
+        public LDAP(string host, int port)
+        {
+            ld = ldap_init(host, port);
             // FIXME throw something here if ldap_init fails.
         }
 
-        public int BindSimple (string who, string cred) {
-            return ldap_simple_bind_s (ld, who, cred);
+        public int BindSimple(string who, string cred)
+        {
+            return ldap_simple_bind_s(ld, who, cred);
         }
 
-        public int StartTLS () {
+        public int StartTLS()
+        {
             // FIXME should expose client/server ctrls
-            return ldap_start_tls_s (ld, IntPtr.Zero, IntPtr.Zero);
+            return ldap_start_tls_s(ld, IntPtr.Zero, IntPtr.Zero);
         }
 
-        public int Search (string      base_entry,
-                   SearchScope scope,
-                   string      filter,
-                   string[]    attrs,
-                   bool        attrsonly,
-                   TimeSpan    timeOut,
-                   int         sizeLimit,
-                   out LDAPMessage res) {
-          // FIXME should expose client/server ctrls
-          IntPtr serverctrls = new IntPtr();
-          IntPtr clientctrls = new IntPtr();
-          TimeVal tv = TimeVal.FromTimeSpan (timeOut);
-          IntPtr native_res;
-          int rv;
-
-          rv = ldap_search_ext_s (ld, base_entry, (int) scope, filter,
-                      attrs, attrsonly ? 1 : 0,
-                      serverctrls, clientctrls,
-                      ref tv, sizeLimit, out native_res);
-
-          if (native_res != IntPtr.Zero)
-            res = new LDAPMessage (this, native_res);
-          else
-            res = null;
-
-          return rv;
-        }
-                   
-        public void Unbind () {
+        public int Search(
+            string base_entry,
+            SearchScope scope,
+            string filter,
+            string[] attrs,
+            bool attrsonly,
+            TimeSpan timeOut,
+            int sizeLimit,
+            out LDAPMessage res
+        )
+        {
             // FIXME should expose client/server ctrls
-            ldap_unbind_ext_s (ld, IntPtr.Zero, IntPtr.Zero);
+            IntPtr serverctrls = new IntPtr();
+            IntPtr clientctrls = new IntPtr();
+            TimeVal tv = TimeVal.FromTimeSpan(timeOut);
+            IntPtr native_res;
+            int rv;
+
+            rv = ldap_search_ext_s(
+                ld,
+                base_entry,
+                (int)scope,
+                filter,
+                attrs,
+                attrsonly ? 1 : 0,
+                serverctrls,
+                clientctrls,
+                ref tv,
+                sizeLimit,
+                out native_res
+            );
+
+            if (native_res != IntPtr.Zero)
+                res = new LDAPMessage(this, native_res);
+            else
+                res = null;
+
+            return rv;
+        }
+
+        public void Unbind()
+        {
+            // FIXME should expose client/server ctrls
+            ldap_unbind_ext_s(ld, IntPtr.Zero, IntPtr.Zero);
             // FIXME throw something here if ldap_unbind_ext_s returns an error
         }
 
-        public IntPtr NativeLDAP {
+        public IntPtr NativeLDAP
+        {
             get { return ld; }
         }
 
@@ -130,31 +151,28 @@ namespace Mono.Directory.LDAP
         static extern int ldap_initialize(out IntPtr ld, string uri);
 
         [DllImport("ldap")]
-        static extern int ldap_simple_bind_s(IntPtr ld,
-                             string who, string cred);
+        static extern int ldap_simple_bind_s(IntPtr ld, string who, string cred);
 
         [DllImport("ldap")]
-        static extern int ldap_start_tls_s (IntPtr ld,
-                            IntPtr serverctrls,
-                            IntPtr clientctrls);
+        static extern int ldap_start_tls_s(IntPtr ld, IntPtr serverctrls, IntPtr clientctrls);
 
         [DllImport("ldap")]
-        static extern int ldap_search_ext_s (IntPtr    ld,
-                             string    base_entry,
-                             int    scope,
-                             string    filter,
-                             string[]    attrs,
-                             int    attrsonly,
-                             IntPtr    serverctrls,
-                             IntPtr    clientctrls,
-                             ref TimeVal timeout,
-                             int    sizelimit,
-                             out IntPtr    res);
+        static extern int ldap_search_ext_s(
+            IntPtr ld,
+            string base_entry,
+            int scope,
+            string filter,
+            string[] attrs,
+            int attrsonly,
+            IntPtr serverctrls,
+            IntPtr clientctrls,
+            ref TimeVal timeout,
+            int sizelimit,
+            out IntPtr res
+        );
 
         [DllImport("ldap")]
-        static extern int ldap_unbind_ext_s (IntPtr    ld,
-                             IntPtr    serverctrls,
-                             IntPtr    clientctrls);
+        static extern int ldap_unbind_ext_s(IntPtr ld, IntPtr serverctrls, IntPtr clientctrls);
 
         IntPtr ld;
     }

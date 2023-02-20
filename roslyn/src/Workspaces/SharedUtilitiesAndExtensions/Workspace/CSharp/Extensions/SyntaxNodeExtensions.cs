@@ -12,12 +12,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     internal static partial class SyntaxNodeExtensions
     {
         public static SyntaxNode WithPrependedNonIndentationTriviaFrom(
-            this SyntaxNode to, SyntaxNode from)
+            this SyntaxNode to,
+            SyntaxNode from
+        )
         {
             // get all the preceding trivia from the 'from' node, not counting the leading
             // indentation trivia is has.
             var finalTrivia = from.GetLeadingTrivia().ToList();
-            while (finalTrivia.Count > 0 && finalTrivia.Last().Kind() == SyntaxKind.WhitespaceTrivia)
+            while (
+                finalTrivia.Count > 0 && finalTrivia.Last().Kind() == SyntaxKind.WhitespaceTrivia
+            )
             {
                 finalTrivia.RemoveAt(finalTrivia.Count - 1);
             }
@@ -32,7 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             // Merge this trivia with the existing trivia on the node.  Format in case
             // we added comments and need them indented properly.
             return to.WithPrependedLeadingTrivia(finalTrivia)
-                     .WithAdditionalAnnotations(Formatter.Annotation);
+                .WithAdditionalAnnotations(Formatter.Annotation);
         }
     }
 }

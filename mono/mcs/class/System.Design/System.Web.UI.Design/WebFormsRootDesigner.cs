@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,15 +38,15 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-    public abstract class WebFormsRootDesigner : IRootDesigner, IDesigner, IDisposable, IDesignerFilter
+    public abstract class WebFormsRootDesigner
+        : IRootDesigner,
+            IDesigner,
+            IDisposable,
+            IDesignerFilter
     {
-        protected WebFormsRootDesigner ()
-        {
-        }
+        protected WebFormsRootDesigner() { }
 
-        ~WebFormsRootDesigner ()
-        {
-        }
+        ~WebFormsRootDesigner() { }
 
         public event EventHandler LoadComplete;
 
@@ -58,207 +58,226 @@ namespace System.Web.UI.Design
 
         public abstract WebFormsReferenceManager ReferenceManager { get; }
 
-        public abstract void AddClientScriptToDocument (ClientScriptItem scriptItem);
+        public abstract void AddClientScriptToDocument(ClientScriptItem scriptItem);
 
-        public abstract string AddControlToDocument (Control newControl, Control referenceControl, ControlLocation location);
+        public abstract string AddControlToDocument(
+            Control newControl,
+            Control referenceControl,
+            ControlLocation location
+        );
 
-        public abstract ClientScriptItemCollection GetClientScriptsInDocument ();
+        public abstract ClientScriptItemCollection GetClientScriptsInDocument();
 
-        protected internal abstract void GetControlViewAndTag (Control control, out IControlDesignerView view, out IControlDesignerTag tag);
+        protected internal abstract void GetControlViewAndTag(
+            Control control,
+            out IControlDesignerView view,
+            out IControlDesignerTag tag
+        );
 
-        public abstract void RemoveClientScriptFromDocument (string clientScriptId);
+        public abstract void RemoveClientScriptFromDocument(string clientScriptId);
 
-        public abstract void RemoveControlFromDocument (Control control);
-
-        [MonoTODO]
-        public virtual IComponent Component {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
-
-        [MonoTODO]
-        public CultureInfo CurrentCulture {
-            get { throw new NotImplementedException (); }
-        }
+        public abstract void RemoveControlFromDocument(Control control);
 
         [MonoTODO]
-        protected ViewTechnology[] SupportedTechnologies {
-            get { throw new NotImplementedException (); }
-        }
-
-        [MonoTODO]
-        protected DesignerVerbCollection Verbs {
-            get { throw new NotImplementedException (); }
-        }
-
-        [MonoTODO]
-        protected virtual DesignerActionService CreateDesignerActionService (IServiceProvider serviceProvider)
+        public virtual IComponent Component
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        protected virtual IUrlResolutionService CreateUrlResolutionService ()
+        public CultureInfo CurrentCulture
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        protected virtual void Dispose (bool disposing)
+        protected ViewTechnology[] SupportedTechnologies
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public virtual string GenerateEmptyDesignTimeHtml (Control control)
+        protected DesignerVerbCollection Verbs
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public virtual string GenerateErrorDesignTimeHtml (Control control, Exception e, string errorMessage)
+        protected virtual DesignerActionService CreateDesignerActionService(
+            IServiceProvider serviceProvider
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected internal virtual object GetService (Type serviceType)
+        protected virtual IUrlResolutionService CreateUrlResolutionService()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected object GetView (ViewTechnology viewTechnology)
+        protected virtual void Dispose(bool disposing)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void Initialize (IComponent component)
+        public virtual string GenerateEmptyDesignTimeHtml(Control control)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected virtual void OnLoadComplete (EventArgs e)
+        public virtual string GenerateErrorDesignTimeHtml(
+            Control control,
+            Exception e,
+            string errorMessage
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected internal virtual object GetService(Type serviceType)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected object GetView(ViewTechnology viewTechnology)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public virtual void Initialize(IComponent component)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected virtual void OnLoadComplete(EventArgs e)
         {
             if (LoadComplete != null)
-                LoadComplete (this, e);
+                LoadComplete(this, e);
         }
 
         [MonoTODO]
-        protected virtual void PostFilterAttributes (IDictionary attributes)
+        protected virtual void PostFilterAttributes(IDictionary attributes)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected virtual void PostFilterEvents (IDictionary events)
+        protected virtual void PostFilterEvents(IDictionary events)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected virtual void PostFilterProperties (IDictionary properties)
+        protected virtual void PostFilterProperties(IDictionary properties)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected virtual void PreFilterAttributes (IDictionary attributes)
+        protected virtual void PreFilterAttributes(IDictionary attributes)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected virtual void PreFilterEvents (IDictionary events)
+        protected virtual void PreFilterEvents(IDictionary events)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected virtual void PreFilterProperties (IDictionary properties)
+        protected virtual void PreFilterProperties(IDictionary properties)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public string ResolveUrl (string relativeUrl)
+        public string ResolveUrl(string relativeUrl)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void SetControlID (Control control, string id)
+        public virtual void SetControlID(Control control, string id)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         // Explicit interface implementations
 
         [MonoTODO]
-        DesignerVerbCollection IDesigner.Verbs {
+        DesignerVerbCollection IDesigner.Verbs
+        {
             get { return Verbs; }
         }
 
         [MonoTODO]
-        ViewTechnology [] IRootDesigner.SupportedTechnologies {
+        ViewTechnology[] IRootDesigner.SupportedTechnologies
+        {
             get { return SupportedTechnologies; }
         }
 
         [MonoTODO]
-        void IDesigner.DoDefaultAction ()
+        void IDesigner.DoDefaultAction()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        void IDesignerFilter.PostFilterAttributes (IDictionary attributes)
+        void IDesignerFilter.PostFilterAttributes(IDictionary attributes)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        void IDesignerFilter.PostFilterEvents (IDictionary events)
+        void IDesignerFilter.PostFilterEvents(IDictionary events)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        void IDesignerFilter.PostFilterProperties (IDictionary properties)
+        void IDesignerFilter.PostFilterProperties(IDictionary properties)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        void IDesignerFilter.PreFilterAttributes (IDictionary attributes)
+        void IDesignerFilter.PreFilterAttributes(IDictionary attributes)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        void IDesignerFilter.PreFilterEvents (IDictionary events)
+        void IDesignerFilter.PreFilterEvents(IDictionary events)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        void IDesignerFilter.PreFilterProperties (IDictionary properties)
+        void IDesignerFilter.PreFilterProperties(IDictionary properties)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        object IRootDesigner.GetView (ViewTechnology viewTechnology)
+        object IRootDesigner.GetView(ViewTechnology viewTechnology)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        void IDisposable.Dispose ()
+        void IDisposable.Dispose()
         {
-            Dispose (true);
+            Dispose(true);
         }
     }
 }
-

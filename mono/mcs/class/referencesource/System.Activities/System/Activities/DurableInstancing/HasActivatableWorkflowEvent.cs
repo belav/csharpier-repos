@@ -8,12 +8,12 @@ namespace System.Activities.DurableInstancing
     using System.Runtime.DurableInstancing;
     using System.Diagnostics.CodeAnalysis;
 
-    [Fx.Tag.XamlVisible(false)]   
-    public sealed class HasActivatableWorkflowEvent : InstancePersistenceEvent<HasActivatableWorkflowEvent>
+    [Fx.Tag.XamlVisible(false)]
+    public sealed class HasActivatableWorkflowEvent
+        : InstancePersistenceEvent<HasActivatableWorkflowEvent>
     {
         public HasActivatableWorkflowEvent()
             : base(InstancePersistence.ActivitiesEventNamespace.GetName("HasActivatableWorkflow"))
-        {
-        }
+        { }
     }
 }

@@ -4,7 +4,15 @@ namespace Data
 {
     public class DataA
     {
-        public DataA(int id, HtmlString icon, HtmlString html, string name, int seconds, int max, float perHour)
+        public DataA(
+            int id,
+            HtmlString icon,
+            HtmlString html,
+            string name,
+            int seconds,
+            int max,
+            float perHour
+        )
         {
             Id = id;
             Icon = icon;

@@ -3,9 +3,8 @@
 
 class C
 {
-    public System.Collections.IEnumerator GetEnumerator (__arglist)
+    public System.Collections.IEnumerator GetEnumerator(__arglist)
     {
         yield return 1;
     }
-    
 }

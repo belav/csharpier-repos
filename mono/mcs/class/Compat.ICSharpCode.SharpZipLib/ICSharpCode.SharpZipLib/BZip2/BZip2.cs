@@ -19,7 +19,7 @@
 // making a combined work based on this library.  Thus, the terms and
 // conditions of the GNU General Public License cover the whole
 // combination.
-// 
+//
 // As a special exception, the copyright holders of this library give you
 // permission to link this library with independent modules to produce an
 // executable, regardless of the license terms of these independent
@@ -35,9 +35,8 @@
 using System;
 using System.IO;
 
-namespace ICSharpCode.SharpZipLib.BZip2 
+namespace ICSharpCode.SharpZipLib.BZip2
 {
-    
     /// <summary>
     /// Does all the compress and decompress pre-operation stuff.
     /// Sets up the streams and file header characters.
@@ -45,26 +44,28 @@ namespace ICSharpCode.SharpZipLib.BZip2
     /// </summary>
     public sealed class BZip2
     {
-        public static void Decompress(Stream instream, Stream outstream) 
+        public static void Decompress(Stream instream, Stream outstream)
         {
             System.IO.Stream bos = outstream;
             System.IO.Stream bis = instream;
             BZip2InputStream bzis = new BZip2InputStream(bis);
             int ch = bzis.ReadByte();
-            while (ch != -1) {
+            while (ch != -1)
+            {
                 bos.WriteByte((byte)ch);
                 ch = bzis.ReadByte();
             }
             bos.Flush();
         }
-        
-        public static void Compress(Stream instream, Stream outstream, int blockSize) 
-        {            
+
+        public static void Compress(Stream instream, Stream outstream, int blockSize)
+        {
             System.IO.Stream bos = outstream;
             System.IO.Stream bis = instream;
             int ch = bis.ReadByte();
             BZip2OutputStream bzos = new BZip2OutputStream(bos, blockSize);
-            while(ch != -1) {
+            while (ch != -1)
+            {
                 bzos.WriteByte((byte)ch);
                 ch = bis.ReadByte();
             }

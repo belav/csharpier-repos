@@ -34,218 +34,255 @@ using NUnit.Framework;
 
 using MonoTests.Helpers;
 
-namespace MonoTests.Microsoft.Build.BuildEngine {
+namespace MonoTests.Microsoft.Build.BuildEngine
+{
     [TestFixture]
-    public class UsingTaskCollectionTest {
-        
-        Engine        engine;
-        Project        project;
-        
+    public class UsingTaskCollectionTest
+    {
+        Engine engine;
+        Project project;
+
         [Test]
-        public void TestAssemblyFile1 ()
+        public void TestAssemblyFile1()
         {
-            string documentString = @"
+            string documentString =
+                @"
                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <UsingTask
-                        AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+                        AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
                         TaskName='TrueTestTask'
                     />
                 </Project>
             ";
 
-                        engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
-                        
-                        Assert.AreEqual (1, project.UsingTasks.Count, "A1");
-                        Assert.AreEqual (false, project.UsingTasks.IsSynchronized, "A2");
-                        Assert.AreEqual (typeof (object), project.UsingTasks.SyncRoot.GetType (), "A3");
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+
+            Assert.AreEqual(1, project.UsingTasks.Count, "A1");
+            Assert.AreEqual(false, project.UsingTasks.IsSynchronized, "A2");
+            Assert.AreEqual(typeof(object), project.UsingTasks.SyncRoot.GetType(), "A3");
         }
-        
+
         [Test]
-        public void TestGetEnumerator ()
+        public void TestGetEnumerator()
         {
-            string documentString = @"
+            string documentString =
+                @"
                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <UsingTask
-                        AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+                        AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
                         TaskName='TrueTestTask'
                     />
                     <UsingTask
-                        AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+                        AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
                         TaskName='FalseTestTask'
                     />
                 </Project>
             ";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-            
-            IEnumerator en = project.UsingTasks.GetEnumerator ();
-            en.MoveNext ();
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            Assert.AreEqual (TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll"), ((UsingTask) en.Current).AssemblyFile, "A1");
-            Assert.AreEqual ("TrueTestTask", ((UsingTask) en.Current).TaskName, "A2");
+            IEnumerator en = project.UsingTasks.GetEnumerator();
+            en.MoveNext();
 
-            en.MoveNext ();
+            Assert.AreEqual(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll"),
+                ((UsingTask)en.Current).AssemblyFile,
+                "A1"
+            );
+            Assert.AreEqual("TrueTestTask", ((UsingTask)en.Current).TaskName, "A2");
 
-            Assert.AreEqual (TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll"), ((UsingTask) en.Current).AssemblyFile, "A3");
-            Assert.AreEqual ("FalseTestTask", ((UsingTask) en.Current).TaskName, "A4");
+            en.MoveNext();
 
-            Assert.IsFalse (en.MoveNext ());
+            Assert.AreEqual(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll"),
+                ((UsingTask)en.Current).AssemblyFile,
+                "A3"
+            );
+            Assert.AreEqual("FalseTestTask", ((UsingTask)en.Current).TaskName, "A4");
+
+            Assert.IsFalse(en.MoveNext());
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void TestCopyTo1 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestCopyTo1()
         {
-            string documentString = @"
+            string documentString =
+                @"
                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <UsingTask
-                        AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+                        AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
                         TaskName='TrueTestTask'
                     />
                 </Project>
             ";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            project.UsingTasks.CopyTo (null, 0);
+            project.UsingTasks.CopyTo(null, 0);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void TestCopyTo2 ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestCopyTo2()
         {
-            string documentString = @"
+            string documentString =
+                @"
                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <UsingTask
-                        AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+                        AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
                         TaskName='TrueTestTask'
                     />
                 </Project>
             ";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            project.UsingTasks.CopyTo (new UsingTask [1], -1);
+            project.UsingTasks.CopyTo(new UsingTask[1], -1);
         }
 
         [Test]
-        [Category ("NotDotNet")]
-        [ExpectedException (typeof (InvalidCastException))]
-        public void TestCopyTo3 ()
+        [Category("NotDotNet")]
+        [ExpectedException(typeof(InvalidCastException))]
+        public void TestCopyTo3()
         {
-            string documentString = @"
+            string documentString =
+                @"
                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <UsingTask
-                        AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+                        AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
                         TaskName='TrueTestTask'
                     />
                 </Project>
             ";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            project.UsingTasks.CopyTo (new UsingTask [][] { new UsingTask [] {
-                null}}, 0);
+            project.UsingTasks.CopyTo(new UsingTask[][] { new UsingTask[] { null } }, 0);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void TestCopyTo4 ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestCopyTo4()
         {
-            string documentString = @"
+            string documentString =
+                @"
                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <UsingTask
-                        AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+                        AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
                         TaskName='TrueTestTask'
                     />
                 </Project>
             ";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            project.UsingTasks.CopyTo (new UsingTask [1], 2);
+            project.UsingTasks.CopyTo(new UsingTask[1], 2);
         }
+
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void TestCopyTo5 ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestCopyTo5()
         {
-            string documentString = @"
+            string documentString =
+                @"
                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <UsingTask
-                        AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+                        AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
                         TaskName='TrueTestTask'
                     />
                 </Project>
             ";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            project.UsingTasks.CopyTo (new UsingTask [1], 1);
+            project.UsingTasks.CopyTo(new UsingTask[1], 1);
         }
 
         [Test]
-        public void TestCopyTo6 ()
+        public void TestCopyTo6()
         {
-            string documentString = @"
+            string documentString =
+                @"
                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <UsingTask
-                        AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+                        AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
                         TaskName='TrueTestTask'
                     />
                 </Project>
             ";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            UsingTask[] array = new UsingTask [1];
-            project.UsingTasks.CopyTo (array, 0);
+            UsingTask[] array = new UsingTask[1];
+            project.UsingTasks.CopyTo(array, 0);
 
-            Assert.AreEqual ("TrueTestTask", array [0].TaskName, "A1");
+            Assert.AreEqual("TrueTestTask", array[0].TaskName, "A1");
         }
 
         [Test]
-        public void TestCopyTo7 ()
+        public void TestCopyTo7()
         {
-            string documentString = @"
+            string documentString =
+                @"
                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <UsingTask
-                        AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+                        AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
                         TaskName='TrueTestTask'
                     />
                 </Project>
             ";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            UsingTask [] array = new UsingTask [1];
-            project.UsingTasks.CopyTo ((Array) array, 0);
+            UsingTask[] array = new UsingTask[1];
+            project.UsingTasks.CopyTo((Array)array, 0);
         }
     }
 }
-

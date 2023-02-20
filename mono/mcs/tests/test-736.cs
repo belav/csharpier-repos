@@ -8,9 +8,9 @@ public class TestGeneric<T>
 {
     public event EventHandler Event;
 
-    public void Raise ()
+    public void Raise()
     {
-        Event (this, EventArgs.Empty);
+        Event(this, EventArgs.Empty);
     }
 }
 
@@ -18,12 +18,12 @@ public class TestGeneric<T>
 // Note that T is used in the delegate signature for Event
 public class TestGeneric2<T>
 {
-    public delegate void GenericHandler (T t);
+    public delegate void GenericHandler(T t);
     public event GenericHandler Event;
 
-    public void Raise ()
+    public void Raise()
     {
-        Event (default (T));
+        Event(default(T));
     }
 }
 
@@ -33,13 +33,10 @@ public class Test
 {
     public event EventHandler Event;
 
-    public void Raise ()
+    public void Raise()
     {
-        Event (this, EventArgs.Empty);
+        Event(this, EventArgs.Empty);
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }
-

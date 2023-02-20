@@ -28,14 +28,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
             _editorOptionsService = editorOptionsService;
         }
 
-        public int? GetDesiredIndentation(ITextSnapshotLine line)
-            => GetDesiredIndentation(line, CancellationToken.None);
+        public int? GetDesiredIndentation(ITextSnapshotLine line) =>
+            GetDesiredIndentation(line, CancellationToken.None);
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
-        private int? GetDesiredIndentation(ITextSnapshotLine line, CancellationToken cancellationToken)
+        private int? GetDesiredIndentation(
+            ITextSnapshotLine line,
+            CancellationToken cancellationToken
+        )
         {
             if (line == null)
                 throw new ArgumentNullException(nameof(line));
@@ -50,9 +51,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
                 if (newService == null)
                     return null;
 
-                var indentationOptions = line.Snapshot.TextBuffer.GetIndentationOptions(_editorOptionsService, document.Project.Services, explicitFormat: false);
-                var parsedDocument = ParsedDocument.CreateSynchronously(document, cancellationToken);
-                var result = newService.GetIndentation(parsedDocument, line.LineNumber, indentationOptions, cancellationToken);
+                var indentationOptions = line.Snapshot.TextBuffer.GetIndentationOptions(
+                    _editorOptionsService,
+                    document.Project.Services,
+                    explicitFormat: false
+                );
+                var parsedDocument = ParsedDocument.CreateSynchronously(
+                    document,
+                    cancellationToken
+                );
+                var result = newService.GetIndentation(
+                    parsedDocument,
+                    line.LineNumber,
+                    indentationOptions,
+                    cancellationToken
+                );
                 return result.GetIndentation(_textView, line);
             }
         }

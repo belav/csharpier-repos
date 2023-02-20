@@ -4,15 +4,12 @@
 using System;
 
 [Obsolete("", true)]
-interface I
-{
-}
+interface I { }
 
 class A
 {
-        int this [I index] {
-                get {
-                        return 15;
-                }
-        }    
+    int this[I index]
+    {
+        get { return 15; }
+    }
 }

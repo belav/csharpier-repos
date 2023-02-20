@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,9 +34,8 @@ using NUnit.Framework;
 namespace MonoTests.System.Data.OleDb
 {
     [TestFixture]
-    public class OleDbDataReader_GetGuiid_I : ADONetTesterClass 
+    public class OleDbDataReader_GetGuiid_I : ADONetTesterClass
     {
-
         private const string GUID_COLUMN_NAME = "T_UNIQUEIDENTIFIER";
         private const string GUID_TABLE_NAME = ConnectedDataProvider.SPECIFIC_TYPES_TABLE_NAME;
         private const string TEST_GUID_STRING = "239A3C5E-8D41-11D1-B675-00C04FA3C554";
@@ -50,15 +49,18 @@ namespace MonoTests.System.Data.OleDb
                 tc.BeginTest("OleDbDataReader_GetGuiid_I");
                 tc.run();
             }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
 
-        
         public void run()
         {
-            
-        
             TestUsingSQLTextOnly();
             TestUsingParametersArray();
         }
@@ -67,7 +69,8 @@ namespace MonoTests.System.Data.OleDb
         public void TestUsingSQLTextOnly()
         {
             //Only apply to MSSQL
-            if ( (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)) {
+            if ((ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer))
+            {
                 return;
             }
 
@@ -79,9 +82,24 @@ namespace MonoTests.System.Data.OleDb
             {
                 BeginCase("Test using SQL text only.");
                 string rowId = "43973_" + TestCaseNumber.ToString();
-                string insertText = string.Format("INSERT INTO {0} (ID, {1}) VALUES ('{2}', '{{{3}}}')", GUID_TABLE_NAME, GUID_COLUMN_NAME, rowId, TEST_GUID_STRING);
-                string selectText = string.Format("SELECT {0} FROM {1} WHERE ID='{2}'", GUID_COLUMN_NAME, GUID_TABLE_NAME, rowId);
-                string deleteText = string.Format("DELETE FROM {0} WHERE ID='{1}'", GUID_TABLE_NAME, rowId);
+                string insertText = string.Format(
+                    "INSERT INTO {0} (ID, {1}) VALUES ('{2}', '{{{3}}}')",
+                    GUID_TABLE_NAME,
+                    GUID_COLUMN_NAME,
+                    rowId,
+                    TEST_GUID_STRING
+                );
+                string selectText = string.Format(
+                    "SELECT {0} FROM {1} WHERE ID='{2}'",
+                    GUID_COLUMN_NAME,
+                    GUID_TABLE_NAME,
+                    rowId
+                );
+                string deleteText = string.Format(
+                    "DELETE FROM {0} WHERE ID='{1}'",
+                    GUID_TABLE_NAME,
+                    rowId
+                );
                 con = new OleDbConnection(ConnectedDataProvider.ConnectionString);
                 OleDbCommand cmdInsert = new OleDbCommand(insertText, con);
                 OleDbCommand cmdSelect = new OleDbCommand(selectText, con);
@@ -91,17 +109,17 @@ namespace MonoTests.System.Data.OleDb
                 cmdInsert.ExecuteNonQuery();
                 rdr = cmdSelect.ExecuteReader();
                 rdr.Read();
-                Guid  guidValue = rdr.GetGuid (0);
+                Guid guidValue = rdr.GetGuid(0);
                 Guid origGuid = new Guid(TEST_GUID_STRING);
                 Compare(guidValue, origGuid);
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }
             finally
             {
-                if ( (rdr != null) && (!rdr.IsClosed) )
+                if ((rdr != null) && (!rdr.IsClosed))
                 {
                     rdr.Close();
                 }
@@ -109,7 +127,7 @@ namespace MonoTests.System.Data.OleDb
                 {
                     cmdDelete.ExecuteNonQuery();
                 }
-                if ( (con != null) && (con.State != ConnectionState.Closed) )
+                if ((con != null) && (con.State != ConnectionState.Closed))
                 {
                     con.Close();
                 }
@@ -122,7 +140,7 @@ namespace MonoTests.System.Data.OleDb
         public void TestUsingParametersArray()
         {
             //Only apply to MSSQL
-            if ( (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer))
+            if ((ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer))
             {
                 return;
             }
@@ -139,16 +157,16 @@ namespace MonoTests.System.Data.OleDb
                 row.ExecuteInsert(rowId);
                 row.ExecuteSelectReader(rowId, out rdr, out con);
                 rdr.Read();
-                Guid  guidValue = rdr.GetGuid (0);
+                Guid guidValue = rdr.GetGuid(0);
                 Compare(guidValue, row[GUID_COLUMN_NAME].Value);
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }
             finally
             {
-                if ( (rdr != null) && (!rdr.IsClosed) )
+                if ((rdr != null) && (!rdr.IsClosed))
                 {
                     rdr.Close();
                 }
@@ -156,16 +174,13 @@ namespace MonoTests.System.Data.OleDb
                 {
                     row.ExecuteDelete(rowId);
                 }
-                if ( (con != null) && (con.State != ConnectionState.Closed) )
+                if ((con != null) && (con.State != ConnectionState.Closed))
                 {
                     con.Close();
                 }
                 EndCase(exp);
                 exp = null;
-                
             }
         }
     }
-    
-
 }

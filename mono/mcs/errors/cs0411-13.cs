@@ -3,12 +3,10 @@
 
 class C
 {
-    public static void Foo<T> (T[] t1, T[] t2)
+    public static void Foo<T>(T[] t1, T[] t2) { }
+
+    public static void Main()
     {
-    }
-    
-    public static void Main ()
-    {
-        Foo (new int[0], new byte[0]);
+        Foo(new int[0], new byte[0]);
     }
 }

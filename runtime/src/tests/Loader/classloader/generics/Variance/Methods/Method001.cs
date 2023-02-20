@@ -4,14 +4,19 @@
 using System;
 
 public class Base { }
+
 public class Sub : Base { }
 
 public class GBase<T> { }
+
 public class GSubT<T> : GBase<T> { }
+
 public class GSubTArr<T> : GBase<T[]> { }
+
 public class GSubGRefT<T> : GBase<GRef<T>> { }
 
 public class GRef<T> { }
+
 public struct GVal<T> { }
 
 public class TestClass
@@ -30,24 +35,35 @@ public class TestClass
             Console.WriteLine("Test Failed at location: {0} @ count {1} ", location, iTestCount);
         }
     }
+
     public static Type LoadTypeInternal(string testType)
     {
-
         switch (testType)
         {
-            case "Test001PlusT": return typeof(Test001PlusT<int>);
-            case "Test002PlusT": return typeof(Test002PlusT<string>);
-            case "Test003PlusT": return typeof(Test003PlusT<object>);
-            case "Test004PlusT": return typeof(Test004PlusT<Base>);
-            case "Test005PlusT": return typeof(Test005PlusT<GVal<Sub[]>>);
+            case "Test001PlusT":
+                return typeof(Test001PlusT<int>);
+            case "Test002PlusT":
+                return typeof(Test002PlusT<string>);
+            case "Test003PlusT":
+                return typeof(Test003PlusT<object>);
+            case "Test004PlusT":
+                return typeof(Test004PlusT<Base>);
+            case "Test005PlusT":
+                return typeof(Test005PlusT<GVal<Sub[]>>);
 
-            case "Test001MinusT": return typeof(Test001MinusT<int>);
-            case "Test002MinusT": return typeof(Test002MinusT<string>);
-            case "Test003MinusT": return typeof(Test003MinusT<object>);
-            case "Test004MinusT": return typeof(Test004MinusT<Base>);
-            case "Test005MinusT": return typeof(Test005MinusT<GRef<Sub[]>>);
+            case "Test001MinusT":
+                return typeof(Test001MinusT<int>);
+            case "Test002MinusT":
+                return typeof(Test002MinusT<string>);
+            case "Test003MinusT":
+                return typeof(Test003MinusT<object>);
+            case "Test004MinusT":
+                return typeof(Test004MinusT<Base>);
+            case "Test005MinusT":
+                return typeof(Test005MinusT<GRef<Sub[]>>);
 
-            default: throw new Exception("Unexpected testType");
+            default:
+                throw new Exception("Unexpected testType");
         }
     }
 
@@ -82,7 +98,6 @@ public class TestClass
             {
                 return true;
             }
-
         }
         catch (TypeLoadException)
         {
@@ -117,10 +132,11 @@ public class TestClass
         Eval("Test004", LoadType("Test004PlusT", true));
         Eval("Test005", LoadType("Test005PlusT", true));
 
-
         if (iErrorCount > 0)
         {
-            Console.WriteLine("Total test cases: " + iTestCount + "  Failed test cases: " + iErrorCount);
+            Console.WriteLine(
+                "Total test cases: " + iTestCount + "  Failed test cases: " + iErrorCount
+            );
             return false;
         }
         else
@@ -132,7 +148,6 @@ public class TestClass
 
     public static int Main()
     {
-
         if (RunTests())
         {
             iExitCode = 100;
@@ -145,5 +160,4 @@ public class TestClass
         }
         return iExitCode;
     }
-
 }

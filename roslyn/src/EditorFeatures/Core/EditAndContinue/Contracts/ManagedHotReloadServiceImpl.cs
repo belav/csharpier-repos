@@ -14,19 +14,28 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
     {
         private readonly IManagedHotReloadService _service;
 
-        public ManagedHotReloadServiceImpl(IManagedHotReloadService service)
-            => _service = service;
+        public ManagedHotReloadServiceImpl(IManagedHotReloadService service) => _service = service;
 
-        public async ValueTask<ImmutableArray<Contracts.ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(CancellationToken cancellation)
-            => (await _service.GetActiveStatementsAsync(cancellation).ConfigureAwait(false)).SelectAsArray(a => a.ToContract());
+        public async ValueTask<
+            ImmutableArray<Contracts.ManagedActiveStatementDebugInfo>
+        > GetActiveStatementsAsync(CancellationToken cancellation) =>
+            (
+                await _service.GetActiveStatementsAsync(cancellation).ConfigureAwait(false)
+            ).SelectAsArray(a => a.ToContract());
 
-        public async ValueTask<Contracts.ManagedHotReloadAvailability> GetAvailabilityAsync(Guid module, CancellationToken cancellation)
-            => (await _service.GetAvailabilityAsync(module, cancellation).ConfigureAwait(false)).ToContract();
+        public async ValueTask<Contracts.ManagedHotReloadAvailability> GetAvailabilityAsync(
+            Guid module,
+            CancellationToken cancellation
+        ) =>
+            (
+                await _service.GetAvailabilityAsync(module, cancellation).ConfigureAwait(false)
+            ).ToContract();
 
-        public ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(CancellationToken cancellation)
-            => _service.GetCapabilitiesAsync(cancellation);
+        public ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(
+            CancellationToken cancellation
+        ) => _service.GetCapabilitiesAsync(cancellation);
 
-        public ValueTask PrepareModuleForUpdateAsync(Guid module, CancellationToken cancellation)
-            => _service.PrepareModuleForUpdateAsync(module, cancellation);
+        public ValueTask PrepareModuleForUpdateAsync(Guid module, CancellationToken cancellation) =>
+            _service.PrepareModuleForUpdateAsync(module, cancellation);
     }
 }

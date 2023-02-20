@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,119 +34,107 @@ namespace System.Management
 {
     public class PropertyDataCollection : ICollection, IEnumerable
     {
-        internal PropertyDataCollection ()
+        internal PropertyDataCollection() { }
+
+        [MonoTODO]
+        public virtual void Add(string propertyName, object propertyValue)
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void Add (string propertyName, object propertyValue)
+        public void Add(string propertyName, CimType propertyType, bool isArray)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Add (string propertyName, CimType propertyType, bool isArray)
+        public void Add(string propertyName, object propertyValue, CimType propertyType)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Add (string propertyName, object propertyValue, CimType propertyType)
+        public void CopyTo(PropertyData[] propertyArray, int index)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void CopyTo (PropertyData [] propertyArray, int index)
+        public void CopyTo(Array array, int index)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void CopyTo (Array array, int index)
+        public PropertyDataEnumerator GetEnumerator()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public PropertyDataEnumerator GetEnumerator ()
+        public virtual void Remove(string propertyName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void Remove (string propertyName)
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-
         [MonoTODO]
-        IEnumerator IEnumerable.GetEnumerator ()
+        public int Count
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public int Count {
-            get {
-                throw new NotImplementedException ();
-            }
+        public bool IsSynchronized
+        {
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public bool IsSynchronized {
-            get {
-                throw new NotImplementedException ();
-            }
+        public virtual PropertyData this[string propertyName]
+        {
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public virtual PropertyData this [string propertyName] {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        [MonoTODO]
-        public object SyncRoot {
-            get {
-                throw new NotImplementedException ();
-            }
+        public object SyncRoot
+        {
+            get { throw new NotImplementedException(); }
         }
 
         public class PropertyDataEnumerator : IEnumerator
         {
-            internal PropertyDataEnumerator ()
+            internal PropertyDataEnumerator() { }
+
+            [MonoTODO]
+            public bool MoveNext()
             {
+                throw new NotImplementedException();
             }
 
             [MonoTODO]
-            public bool MoveNext ()
+            public void Reset()
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            [MonoTODO]
-            public void Reset ()
+            public PropertyData Current
             {
-                throw new NotImplementedException ();
+                [MonoTODO]
+                get { throw new NotImplementedException(); }
             }
 
-            public PropertyData Current {
+            object IEnumerator.Current
+            {
                 [MonoTODO]
-                get {
-                    throw new NotImplementedException ();
-                }
-            }
-
-            object IEnumerator.Current {
-                [MonoTODO]
-                get {
-                    throw new NotImplementedException ();
-                }
+                get { throw new NotImplementedException(); }
             }
         }
     }
 }
-

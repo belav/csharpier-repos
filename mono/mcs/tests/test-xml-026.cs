@@ -4,21 +4,19 @@ namespace Testing
     /// test class
     public class Test
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         /// <param>anonymous</param>
-        public void Foo (int i) {}
+        public void Foo(int i) { }
 
         /// <param name='i'>correct</param>
         /// <param name='i'>duplicate</param>
-        public void Bar (int i) {}
+        public void Bar(int i) { }
 
         /// <param name='mismatch'>mismatch</param>
-        public void Baz (int i) {}
+        public void Baz(int i) { }
 
         /// <param name='arr'>varargs</param>
-        public void Var (params int [] arr) {}
+        public void Var(params int[] arr) { }
     }
 }

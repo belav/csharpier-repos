@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.LegacyCodeAnalysis.Api
         /// <remarks>
         /// This is used by the Ruleset Editor from ManagedSourceCodeAnalysis.dll in VisualStudio.
         /// </remarks>
-        IReadOnlyDictionary<string, IEnumerable<DiagnosticDescriptor>> GetAllDiagnosticDescriptors(IVsHierarchy hierarchyOpt);
+        IReadOnlyDictionary<string, IEnumerable<DiagnosticDescriptor>> GetAllDiagnosticDescriptors(
+            IVsHierarchy hierarchyOpt
+        );
 
         /// <summary>
         /// Runs all the applicable NuGet and VSIX diagnostic analyzers for the given project OR current solution in background and updates the error list.

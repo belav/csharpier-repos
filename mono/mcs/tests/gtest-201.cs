@@ -5,29 +5,30 @@ public class HashSet<T>
 {
     long value;
 
-    public HashSet (long value)
+    public HashSet(long value)
     {
         this.value = value;
     }
 
-    public long Test ()
+    public long Test()
     {
         return value;
     }
 
     public MSG.IEnumerator<long> GetEnumerator()
     {
-        yield return Test ();
+        yield return Test();
     }
 }
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        HashSet<int> hb = new HashSet<int> (12345678);
+        HashSet<int> hb = new HashSet<int>(12345678);
 
-        foreach (long value in hb) {
+        foreach (long value in hb)
+        {
             if (value != 12345678)
                 return 1;
         }

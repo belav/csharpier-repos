@@ -27,8 +27,8 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-        CountResults(new BaadbaadTest().Run(),                  ref nSuccesses, ref nFailures);
-        
+        CountResults(new BaadbaadTest().Run(), ref nSuccesses, ref nFailures);
+
         if (0 == nFailures)
         {
             Console.WriteLine("OVERALL PASS: " + nSuccesses + " tests");
@@ -45,6 +45,7 @@ public class TestSet
 public class BaadbaadTest
 {
     Trace _trace;
+
     public int Run()
     {
         _trace = new Trace("BaadbaadTest", "1234");
@@ -59,6 +60,7 @@ public class BaadbaadTest
         }
         return _trace.Match();
     }
+
     void DoStuff()
     {
         try
@@ -91,4 +93,3 @@ public class BaadbaadTest
         }
     }
 }
-

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,33 +38,42 @@ namespace System.Web.UI.WebControls
         IOrderedDictionary keys;
         IOrderedDictionary newValues;
         IOrderedDictionary oldValues;
-        
-        public DetailsViewUpdateEventArgs (object commandArgument)
+
+        public DetailsViewUpdateEventArgs(object commandArgument)
         {
             this.argument = commandArgument;
         }
-        
-        internal DetailsViewUpdateEventArgs (object argument, IOrderedDictionary keys, IOrderedDictionary oldValues, IOrderedDictionary newValues)
+
+        internal DetailsViewUpdateEventArgs(
+            object argument,
+            IOrderedDictionary keys,
+            IOrderedDictionary oldValues,
+            IOrderedDictionary newValues
+        )
         {
             this.argument = argument;
             this.keys = keys;
             this.newValues = newValues;
             this.oldValues = oldValues;
         }
-        
-        public object CommandArgument {
+
+        public object CommandArgument
+        {
             get { return argument; }
         }
 
-        public IOrderedDictionary Keys {
+        public IOrderedDictionary Keys
+        {
             get { return keys; }
         }
 
-        public IOrderedDictionary NewValues {
+        public IOrderedDictionary NewValues
+        {
             get { return newValues; }
         }
 
-        public IOrderedDictionary OldValues {
+        public IOrderedDictionary OldValues
+        {
             get { return oldValues; }
         }
     }

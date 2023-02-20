@@ -26,8 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Data.Services {
-    public interface IDataServiceConfiguration {
+namespace System.Data.Services
+{
+    public interface IDataServiceConfiguration
+    {
         int MaxBatchCount { get; set; }
         int MaxChangesetCount { get; set; }
         int MaxExpandCount { get; set; }
@@ -36,8 +38,8 @@ namespace System.Data.Services {
         int MaxResultsPerCollection { get; set; }
         bool UseVerboseErrors { get; set; }
 
-        void RegisterKnownType (Type type);
-        void SetEntitySetAccessRule (string name, EntitySetRights rights);
-        void SetServiceOperationAccessRule (string name, ServiceOperationRights rights);
+        void RegisterKnownType(Type type);
+        void SetEntitySetAccessRule(string name, EntitySetRights rights);
+        void SetServiceOperationAccessRule(string name, ServiceOperationRights rights);
     }
 }

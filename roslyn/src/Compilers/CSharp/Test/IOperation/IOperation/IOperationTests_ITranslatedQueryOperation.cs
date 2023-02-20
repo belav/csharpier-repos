@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TranslatedQueryFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -93,14 +95,19 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TranslatedQueryFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -115,7 +122,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -227,7 +235,11 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
     }
 }

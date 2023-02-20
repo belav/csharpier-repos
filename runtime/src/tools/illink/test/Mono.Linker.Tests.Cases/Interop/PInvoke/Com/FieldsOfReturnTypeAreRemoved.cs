@@ -6,22 +6,22 @@ namespace Mono.Linker.Tests.Cases.Interop.PInvoke.Com
 {
     class FieldsOfReturnTypeAreRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            var a = SomeMethod ();
+            var a = SomeMethod();
         }
 
         [Kept]
-        [KeptAttributeAttribute (typeof (GuidAttribute))]
+        [KeptAttributeAttribute(typeof(GuidAttribute))]
         [ComImport]
-        [Guid ("D7BB1889-3AB7-4681-A115-60CA9158FECA")]
+        [Guid("D7BB1889-3AB7-4681-A115-60CA9158FECA")]
         class A
         {
             private int field;
         }
 
         [Kept]
-        [MethodImpl (MethodImplOptions.InternalCall)]
-        static extern A SomeMethod ();
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        static extern A SomeMethod();
     }
 }

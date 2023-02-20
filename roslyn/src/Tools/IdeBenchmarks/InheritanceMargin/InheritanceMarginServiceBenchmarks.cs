@@ -33,7 +33,10 @@ namespace IdeBenchmarks.InheritanceMargin
         {
             // QueryVisualStudioInstances returns Visual Studio installations on .NET Framework, and .NET Core SDK
             // installations on .NET Core. We use the one with the most recent version.
-            var msBuildInstance = MSBuildLocator.QueryVisualStudioInstances().OrderByDescending(x => x.Version).First();
+            var msBuildInstance = MSBuildLocator
+                .QueryVisualStudioInstances()
+                .OrderByDescending(x => x.Version)
+                .First();
             MSBuildLocator.RegisterInstance(msBuildInstance);
         }
 
@@ -42,8 +45,13 @@ namespace IdeBenchmarks.InheritanceMargin
         {
             _useExportProviderAttribute.Before(null);
 
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
-            var solutionPath = Path.Combine(roslynRoot, @"src\Tools\IdeCoreBenchmarks\Assets\Microsoft.CodeAnalysis.sln");
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
+            var solutionPath = Path.Combine(
+                roslynRoot,
+                @"src\Tools\IdeCoreBenchmarks\Assets\Microsoft.CodeAnalysis.sln"
+            );
 
             if (!File.Exists(solutionPath))
                 throw new ArgumentException("Couldn't find solution.");
@@ -67,9 +75,9 @@ namespace IdeBenchmarks.InheritanceMargin
         [Benchmark]
         public async Task BenchmarkInheritanceMarginServiceAsync()
         {
-            var items = await BenchmarksHelpers.GenerateInheritanceMarginItemsAsync(
-                           _solution,
-                           CancellationToken.None).ConfigureAwait(false);
+            var items = await BenchmarksHelpers
+                .GenerateInheritanceMarginItemsAsync(_solution, CancellationToken.None)
+                .ConfigureAwait(false);
             Console.WriteLine($"Total {items.Length} items are generated.");
         }
     }

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -60,327 +60,406 @@ namespace System.Resources
         private XmlTextReader xmlReader;
         private string basepath;
         private bool useResXDataNodes;
-        private AssemblyName [] assemblyNames;
+        private AssemblyName[] assemblyNames;
         private OrderedDictionary hashtm;
         #endregion    // Local Variables
 
         #region Constructors & Destructor
-        public ResXResourceReader (Stream stream)
+        public ResXResourceReader(Stream stream)
         {
             if (stream == null)
-                throw new ArgumentNullException ("stream");
+                throw new ArgumentNullException("stream");
 
             if (!stream.CanRead)
-                throw new ArgumentException ("Stream was not readable.");
+                throw new ArgumentException("Stream was not readable.");
 
             this.stream = stream;
         }
 
-        public ResXResourceReader (Stream stream, ITypeResolutionService typeResolver)
-            : this (stream)
+        public ResXResourceReader(Stream stream, ITypeResolutionService typeResolver)
+            : this(stream)
         {
             this.typeresolver = typeResolver;
         }
 
-        public ResXResourceReader (string fileName)
+        public ResXResourceReader(string fileName)
         {
             this.fileName = fileName;
         }
 
-        public ResXResourceReader (string fileName, ITypeResolutionService typeResolver)
-            : this (fileName)
+        public ResXResourceReader(string fileName, ITypeResolutionService typeResolver)
+            : this(fileName)
         {
             this.typeresolver = typeResolver;
         }
 
-        public ResXResourceReader (TextReader reader)
+        public ResXResourceReader(TextReader reader)
         {
             this.reader = reader;
         }
 
-        public ResXResourceReader (TextReader reader, ITypeResolutionService typeResolver)
-            : this (reader)
+        public ResXResourceReader(TextReader reader, ITypeResolutionService typeResolver)
+            : this(reader)
         {
             this.typeresolver = typeResolver;
         }
 
-        public ResXResourceReader (Stream stream, AssemblyName [] assemblyNames)
-            : this (stream)
+        public ResXResourceReader(Stream stream, AssemblyName[] assemblyNames)
+            : this(stream)
         {
             this.assemblyNames = assemblyNames;
         }
 
-        public ResXResourceReader (string fileName, AssemblyName [] assemblyNames)
-            : this (fileName)
+        public ResXResourceReader(string fileName, AssemblyName[] assemblyNames)
+            : this(fileName)
         {
             this.assemblyNames = assemblyNames;
         }
 
-        public ResXResourceReader (TextReader reader, AssemblyName [] assemblyNames)
-            : this (reader)
+        public ResXResourceReader(TextReader reader, AssemblyName[] assemblyNames)
+            : this(reader)
         {
             this.assemblyNames = assemblyNames;
         }
 
-        ~ResXResourceReader ()
+        ~ResXResourceReader()
         {
-            Dispose (false);
+            Dispose(false);
         }
         #endregion    // Constructors & Destructor
 
-        public string BasePath {
+        public string BasePath
+        {
             get { return basepath; }
             set { basepath = value; }
         }
 
-        public bool UseResXDataNodes {
+        public bool UseResXDataNodes
+        {
             get { return useResXDataNodes; }
-            set {
+            set
+            {
                 if (xmlReader != null)
-                    throw new InvalidOperationException ();
-                useResXDataNodes = value; 
+                    throw new InvalidOperationException();
+                useResXDataNodes = value;
             }
         }
 
         #region Private Methods
-        private void LoadData ()
+        private void LoadData()
         {
-            hasht = new OrderedDictionary ();
-            hashtm = new OrderedDictionary ();
-            if (fileName != null) {
-                stream = File.OpenRead (fileName);
+            hasht = new OrderedDictionary();
+            hashtm = new OrderedDictionary();
+            if (fileName != null)
+            {
+                stream = File.OpenRead(fileName);
             }
 
-            try {
+            try
+            {
                 xmlReader = null;
-                if (stream != null) {
-                    xmlReader = new XmlTextReader (stream);
-                } else if (reader != null) {
-                    xmlReader = new XmlTextReader (reader);
+                if (stream != null)
+                {
+                    xmlReader = new XmlTextReader(stream);
+                }
+                else if (reader != null)
+                {
+                    xmlReader = new XmlTextReader(reader);
                 }
 
-                if (xmlReader == null) {
-                    throw new InvalidOperationException ("ResourceReader is closed.");
+                if (xmlReader == null)
+                {
+                    throw new InvalidOperationException("ResourceReader is closed.");
                 }
 
                 xmlReader.WhitespaceHandling = WhitespaceHandling.None;
 
-                ResXHeader header = new ResXHeader ();
-                try {
-                    while (xmlReader.Read ()) {
+                ResXHeader header = new ResXHeader();
+                try
+                {
+                    while (xmlReader.Read())
+                    {
                         if (xmlReader.NodeType != XmlNodeType.Element)
                             continue;
 
-                        switch (xmlReader.LocalName) {
-                        case "resheader":
-                            ParseHeaderNode (header);
-                            break;
-                        case "data":
-                            ParseDataNode (false);
-                            break;
-                        case "metadata":
-                            ParseDataNode (true);
-                            break;
+                        switch (xmlReader.LocalName)
+                        {
+                            case "resheader":
+                                ParseHeaderNode(header);
+                                break;
+                            case "data":
+                                ParseDataNode(false);
+                                break;
+                            case "metadata":
+                                ParseDataNode(true);
+                                break;
                         }
                     }
-                } catch (XmlException ex) {
-                    throw new ArgumentException ("Invalid ResX input.", ex);
-                } catch (SerializationException ex) {
-                    throw ex;
-                } catch (TargetInvocationException ex) {
-                    throw ex;
-                } catch (Exception ex) {
-                    XmlException xex = new XmlException (ex.Message, ex, 
-                        xmlReader.LineNumber, xmlReader.LinePosition);
-                    throw new ArgumentException ("Invalid ResX input.", xex);
                 }
-                header.Verify ();
-            } finally {
-                if (fileName != null) {
-                    stream.Close ();
+                catch (XmlException ex)
+                {
+                    throw new ArgumentException("Invalid ResX input.", ex);
+                }
+                catch (SerializationException ex)
+                {
+                    throw ex;
+                }
+                catch (TargetInvocationException ex)
+                {
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    XmlException xex = new XmlException(
+                        ex.Message,
+                        ex,
+                        xmlReader.LineNumber,
+                        xmlReader.LinePosition
+                    );
+                    throw new ArgumentException("Invalid ResX input.", xex);
+                }
+                header.Verify();
+            }
+            finally
+            {
+                if (fileName != null)
+                {
+                    stream.Close();
                     stream = null;
                 }
                 xmlReader = null;
             }
         }
 
-        private void ParseHeaderNode (ResXHeader header)
+        private void ParseHeaderNode(ResXHeader header)
         {
-            string v = GetAttribute ("name");
+            string v = GetAttribute("name");
             if (v == null)
                 return;
 
-            if (String.Compare (v, "resmimetype", true) == 0) {
-                header.ResMimeType = GetHeaderValue ();
-            } else if (String.Compare (v, "reader", true) == 0) {
-                header.Reader = GetHeaderValue ();
-            } else if (String.Compare (v, "version", true) == 0) {
-                header.Version = GetHeaderValue ();
-            } else if (String.Compare (v, "writer", true) == 0) {
-                header.Writer = GetHeaderValue ();
+            if (String.Compare(v, "resmimetype", true) == 0)
+            {
+                header.ResMimeType = GetHeaderValue();
+            }
+            else if (String.Compare(v, "reader", true) == 0)
+            {
+                header.Reader = GetHeaderValue();
+            }
+            else if (String.Compare(v, "version", true) == 0)
+            {
+                header.Version = GetHeaderValue();
+            }
+            else if (String.Compare(v, "writer", true) == 0)
+            {
+                header.Writer = GetHeaderValue();
             }
         }
 
-        private string GetHeaderValue ()
+        private string GetHeaderValue()
         {
             string value = null;
-            xmlReader.ReadStartElement ();
-            if (xmlReader.NodeType == XmlNodeType.Element) {
-                value = xmlReader.ReadElementString ();
-            } else {
-                value = xmlReader.Value.Trim ();
+            xmlReader.ReadStartElement();
+            if (xmlReader.NodeType == XmlNodeType.Element)
+            {
+                value = xmlReader.ReadElementString();
+            }
+            else
+            {
+                value = xmlReader.Value.Trim();
             }
             return value;
         }
 
-        private string GetAttribute (string name)
+        private string GetAttribute(string name)
         {
             if (!xmlReader.HasAttributes)
                 return null;
-            for (int i = 0; i < xmlReader.AttributeCount; i++) {
-                xmlReader.MoveToAttribute (i);
-                if (String.Compare (xmlReader.Name, name, true) == 0) {
+            for (int i = 0; i < xmlReader.AttributeCount; i++)
+            {
+                xmlReader.MoveToAttribute(i);
+                if (String.Compare(xmlReader.Name, name, true) == 0)
+                {
                     string v = xmlReader.Value;
-                    xmlReader.MoveToElement ();
+                    xmlReader.MoveToElement();
                     return v;
                 }
             }
-            xmlReader.MoveToElement ();
+            xmlReader.MoveToElement();
             return null;
         }
 
-        private string GetDataValue (bool meta, out string comment)
+        private string GetDataValue(bool meta, out string comment)
         {
             string value = null;
             comment = null;
-            while (xmlReader.Read ()) {
-                if (xmlReader.NodeType == XmlNodeType.EndElement && xmlReader.LocalName == (meta ? "metadata" : "data"))
+            while (xmlReader.Read())
+            {
+                if (
+                    xmlReader.NodeType == XmlNodeType.EndElement
+                    && xmlReader.LocalName == (meta ? "metadata" : "data")
+                )
                     break;
 
-                if (xmlReader.NodeType == XmlNodeType.Element) {
-                    if (xmlReader.Name.Equals ("value")) {
+                if (xmlReader.NodeType == XmlNodeType.Element)
+                {
+                    if (xmlReader.Name.Equals("value"))
+                    {
                         xmlReader.WhitespaceHandling = WhitespaceHandling.Significant;
-                        value = xmlReader.ReadString ();
+                        value = xmlReader.ReadString();
                         xmlReader.WhitespaceHandling = WhitespaceHandling.None;
-                    } else if (xmlReader.Name.Equals ("comment")) {
+                    }
+                    else if (xmlReader.Name.Equals("comment"))
+                    {
                         xmlReader.WhitespaceHandling = WhitespaceHandling.Significant;
-                        comment = xmlReader.ReadString ();
+                        comment = xmlReader.ReadString();
                         xmlReader.WhitespaceHandling = WhitespaceHandling.None;
-                        if (xmlReader.NodeType == XmlNodeType.EndElement && xmlReader.LocalName == (meta ? "metadata" : "data"))
+                        if (
+                            xmlReader.NodeType == XmlNodeType.EndElement
+                            && xmlReader.LocalName == (meta ? "metadata" : "data")
+                        )
                             break;
                     }
                 }
                 else
-                    value = xmlReader.Value.Trim ();
+                    value = xmlReader.Value.Trim();
             }
             return value;
         }
 
-        private void ParseDataNode (bool meta)
+        private void ParseDataNode(bool meta)
         {
-            OrderedDictionary hashtable = ((meta && ! useResXDataNodes) ? hashtm : hasht);
-            Point pos = new Point (xmlReader.LineNumber, xmlReader.LinePosition);
-            string name = GetAttribute ("name");
-            string type_name = GetAttribute ("type");
-            string mime_type = GetAttribute ("mimetype");
-
+            OrderedDictionary hashtable = ((meta && !useResXDataNodes) ? hashtm : hasht);
+            Point pos = new Point(xmlReader.LineNumber, xmlReader.LinePosition);
+            string name = GetAttribute("name");
+            string type_name = GetAttribute("type");
+            string mime_type = GetAttribute("mimetype");
 
             string comment = null;
-            string value = GetDataValue (meta, out comment);
+            string value = GetDataValue(meta, out comment);
 
-            ResXDataNode node = new ResXDataNode (name, mime_type, type_name, value, comment, pos, BasePath);
+            ResXDataNode node = new ResXDataNode(
+                name,
+                mime_type,
+                type_name,
+                value,
+                comment,
+                pos,
+                BasePath
+            );
 
-            if (useResXDataNodes) {
-                hashtable [name] = node;
+            if (useResXDataNodes)
+            {
+                hashtable[name] = node;
                 return;
             }
 
             if (name == null)
-                throw new ArgumentException (string.Format (CultureInfo.CurrentCulture,
-                            "Could not find a name for a resource. The resource value was '{0}'.",
-                                        node.GetValue ((AssemblyName []) null).ToString()));
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "Could not find a name for a resource. The resource value was '{0}'.",
+                        node.GetValue((AssemblyName[])null).ToString()
+                    )
+                );
 
             // useResXDataNodes is false, add to dictionary of values
-            if (assemblyNames != null) { 
-                try {
-                    hashtable [name] = node.GetValue (assemblyNames);
-                } catch (TypeLoadException ex) {
+            if (assemblyNames != null)
+            {
+                try
+                {
+                    hashtable[name] = node.GetValue(assemblyNames);
+                }
+                catch (TypeLoadException ex)
+                {
                     // different error messages depending on type of resource, hacky solution
                     if (node.handler is TypeConverterFromResXHandler)
-                        hashtable [name] = null;
-                    else 
-                        throw ex;
-                }
-            } else { // there is a typeresolver or its null
-                try {
-                    hashtable [name] = node.GetValue (typeresolver); 
-                } catch (TypeLoadException ex) {
-                    if (node.handler is TypeConverterFromResXHandler)
-                        hashtable [name] = null;
-                    else 
+                        hashtable[name] = null;
+                    else
                         throw ex;
                 }
             }
-
+            else
+            { // there is a typeresolver or its null
+                try
+                {
+                    hashtable[name] = node.GetValue(typeresolver);
+                }
+                catch (TypeLoadException ex)
+                {
+                    if (node.handler is TypeConverterFromResXHandler)
+                        hashtable[name] = null;
+                    else
+                        throw ex;
+                }
+            }
         }
 
         #endregion    // Private Methods
 
         #region Public Methods
-        public void Close ()
+        public void Close()
         {
-            if (reader != null) {
-                reader.Close ();
+            if (reader != null)
+            {
+                reader.Close();
                 reader = null;
             }
         }
 
-        public IDictionaryEnumerator GetEnumerator ()
+        public IDictionaryEnumerator GetEnumerator()
         {
-            if (hasht == null) {
-                LoadData ();
+            if (hasht == null)
+            {
+                LoadData();
             }
-            return hasht.GetEnumerator ();
+            return hasht.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator ()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IResourceReader) this).GetEnumerator ();
+            return ((IResourceReader)this).GetEnumerator();
         }
 
-        void IDisposable.Dispose ()
+        void IDisposable.Dispose()
         {
-            Dispose (true);
-            GC.SuppressFinalize (this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose (bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
-            if (disposing) {
-                Close ();
+            if (disposing)
+            {
+                Close();
             }
         }
 
-        public static ResXResourceReader FromFileContents (string fileContents)
+        public static ResXResourceReader FromFileContents(string fileContents)
         {
-            return new ResXResourceReader (new StringReader (fileContents));
+            return new ResXResourceReader(new StringReader(fileContents));
         }
 
-        public static ResXResourceReader FromFileContents (string fileContents, ITypeResolutionService typeResolver)
+        public static ResXResourceReader FromFileContents(
+            string fileContents,
+            ITypeResolutionService typeResolver
+        )
         {
-            return new ResXResourceReader (new StringReader (fileContents), typeResolver);
+            return new ResXResourceReader(new StringReader(fileContents), typeResolver);
         }
 
-        public static ResXResourceReader FromFileContents (string fileContents, AssemblyName [] assemblyNames)
+        public static ResXResourceReader FromFileContents(
+            string fileContents,
+            AssemblyName[] assemblyNames
+        )
         {
-            return new ResXResourceReader (new StringReader (fileContents), assemblyNames);
+            return new ResXResourceReader(new StringReader(fileContents), assemblyNames);
         }
 
-        public IDictionaryEnumerator GetMetadataEnumerator ()
+        public IDictionaryEnumerator GetMetadataEnumerator()
         {
             if (hashtm == null)
-                LoadData ();
-            return hashtm.GetEnumerator ();
+                LoadData();
+            return hashtm.GetEnumerator();
         }
 
         #endregion    // Public Methods
@@ -399,40 +478,47 @@ namespace System.Resources
                 set { resMimeType = value; }
             }
 
-            public string Reader {
+            public string Reader
+            {
                 get { return reader; }
                 set { reader = value; }
             }
 
-            public string Version {
+            public string Version
+            {
                 get { return version; }
                 set { version = value; }
             }
 
-            public string Writer {
+            public string Writer
+            {
                 get { return writer; }
                 set { writer = value; }
             }
 
-            public void Verify ()
+            public void Verify()
             {
                 if (!IsValid)
-                    throw new ArgumentException ("Invalid ResX input.  Could "
-                        + "not find valid \"resheader\" tags for the ResX "
-                        + "reader & writer type names.");
+                    throw new ArgumentException(
+                        "Invalid ResX input.  Could "
+                            + "not find valid \"resheader\" tags for the ResX "
+                            + "reader & writer type names."
+                    );
             }
 
-            public bool IsValid {
-                get {
-                    if (string.Compare (ResMimeType, ResXResourceWriter.ResMimeType) != 0)
+            public bool IsValid
+            {
+                get
+                {
+                    if (string.Compare(ResMimeType, ResXResourceWriter.ResMimeType) != 0)
                         return false;
                     if (Reader == null || Writer == null)
                         return false;
-                    string readerType = Reader.Split (',') [0].Trim ();
-                    if (readerType != typeof (ResXResourceReader).FullName)
+                    string readerType = Reader.Split(',')[0].Trim();
+                    if (readerType != typeof(ResXResourceReader).FullName)
                         return false;
-                    string writerType = Writer.Split (',') [0].Trim ();
-                    if (writerType != typeof (ResXResourceWriter).FullName)
+                    string writerType = Writer.Split(',')[0].Trim();
+                    if (writerType != typeof(ResXResourceWriter).FullName)
                         return false;
                     return true;
                 }

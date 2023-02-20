@@ -1,5 +1,5 @@
 //
-// CompositeControlCas.cs 
+// CompositeControlCas.cs
 //    - CAS unit tests for System.Web.UI.WebControls.CompositeControl
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,29 +40,28 @@ using System.Web.UI.WebControls;
 
 using MonoTests.System.Web.UI.WebControls;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
-
+namespace MonoCasTests.System.Web.UI.WebControls
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class CompositeControlCas {
-
+    [Category("CAS")]
+    public class CompositeControlCas
+    {
         // note: we do not inherit from AspNetHostingMinimal because
         // CompositeControl is an abstract class
 
         [SetUp]
-        public virtual void SetUp ()
+        public virtual void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
         {
-            CompositeControlTest unit = new CompositeControlTest ();
-            unit.ControlsAccessorTest ();
+            CompositeControlTest unit = new CompositeControlTest();
+            unit.ControlsAccessorTest();
         }
     }
 }
-

@@ -12,16 +12,17 @@ using Microsoft.CodeAnalysis.Host.Mef;
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     // mock default workspace event listener so that we don't try to enable solution crawler and etc implicitly
-    [ExportWorkspaceServiceFactory(typeof(IWorkspaceEventListenerService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceServiceFactory(typeof(IWorkspaceEventListenerService), ServiceLayer.Test),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal sealed class MockWorkspaceEventListenerProvider : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, true)]
-        public MockWorkspaceEventListenerProvider()
-        {
-        }
+        public MockWorkspaceEventListenerProvider() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => null;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) => null;
     }
 }

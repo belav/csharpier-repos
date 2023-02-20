@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,7 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
     public sealed class Ipv6Element : ConfigurationElement
     {
@@ -47,28 +47,28 @@ namespace System.Net.Configuration
 
         #region Constructors
 
-        static Ipv6Element ()
+        static Ipv6Element()
         {
-            enabledProp = new ConfigurationProperty ("enabled", typeof (bool), false);
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (enabledProp);
+            enabledProp = new ConfigurationProperty("enabled", typeof(bool), false);
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(enabledProp);
         }
 
-        public Ipv6Element ()
-        {
-        }
+        public Ipv6Element() { }
 
         #endregion // Constructors
 
         #region Properties
 
-        [ConfigurationProperty ("enabled", DefaultValue = "False")]
-        public bool Enabled {
-            get { return (bool) base [enabledProp]; }
-            set { base [enabledProp] = value; }
+        [ConfigurationProperty("enabled", DefaultValue = "False")]
+        public bool Enabled
+        {
+            get { return (bool)base[enabledProp]; }
+            set { base[enabledProp] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 

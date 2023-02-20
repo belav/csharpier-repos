@@ -7,15 +7,15 @@ struct S
 
     public static int[] PA { get; } = { 0, 2 };
 
-    public static int Main ()
+    public static int Main()
     {
         if (P != 4)
             return 1;
 
-        if (PA [1] != 2)
+        if (PA[1] != 2)
             return 10;
 
-        var c = new C ();
+        var c = new C();
         if (c.P != -3)
             return 2;
 
@@ -26,7 +26,7 @@ struct S
         if (c.P2 != 9)
             return 4;
 
-        var s = new S2 (null);
+        var s = new S2(null);
         if (s.P != 4)
             return 12;
 
@@ -52,7 +52,5 @@ struct S2
     public int P { get; } = 4;
     public int P2 { get; set; } = 1;
 
-    public S2 (object o)
-    {
-    }
+    public S2(object o) { }
 }

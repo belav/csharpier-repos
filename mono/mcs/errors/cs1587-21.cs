@@ -8,10 +8,8 @@ namespace TopNS
 {
     class Foo
     {
-        void  /// incorrect
-        FooBar (string foo)
-        {
-        }
+        void
+        /// incorrect
+        FooBar(string foo) { }
     }
-
 }

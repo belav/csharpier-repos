@@ -17,12 +17,10 @@ namespace Microsoft.CodeAnalysis.Completion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CompletionHelperServiceFactory()
-        {
-        }
+        public CompletionHelperServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new Service(workspaceServices.Workspace);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new Service(workspaceServices.Workspace);
 
         private sealed class Service : ICompletionHelperService, IWorkspaceService
         {
@@ -31,8 +29,7 @@ namespace Microsoft.CodeAnalysis.Completion
             private CompletionHelper? _lazyCaseSensitiveInstance;
             private CompletionHelper? _lazyCaseInsensitiveInstance;
 
-            public Service(Workspace workspace)
-                => workspace.WorkspaceChanged += OnWorkspaceChanged;
+            public Service(Workspace workspace) => workspace.WorkspaceChanged += OnWorkspaceChanged;
 
             public CompletionHelper GetCompletionHelper(Document document)
             {

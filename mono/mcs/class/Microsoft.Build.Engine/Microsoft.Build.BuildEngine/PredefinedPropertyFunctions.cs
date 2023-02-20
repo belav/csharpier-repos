@@ -34,139 +34,145 @@ namespace Microsoft.Build.BuildEngine
 {
     static class PredefinedPropertyFunctions
     {
-        public static double Add (double a, double b)
+        public static double Add(double a, double b)
         {
             return a + b;
         }
 
-        public static long Add (long a, long b)
+        public static long Add(long a, long b)
         {
             return a + b;
         }
 
-        public static double Subtract (double a, double b)
-        {
-            return a - b;            
-        }
-
-        public static long Subtract (long a, long b)
+        public static double Subtract(double a, double b)
         {
             return a - b;
         }
 
-        public static double Multiply (double a, double b)
+        public static long Subtract(long a, long b)
+        {
+            return a - b;
+        }
+
+        public static double Multiply(double a, double b)
         {
             return a * b;
         }
 
-        public static long Multiply (long a, long b)
+        public static long Multiply(long a, long b)
         {
             return a * b;
         }
 
-        public static double Divide (double a, double b)
+        public static double Divide(double a, double b)
         {
             return a / b;
         }
 
-        public static long Divide (long a, long b)
+        public static long Divide(long a, long b)
         {
             return a / b;
         }
 
-        public static double Modulo (double a, double b)
+        public static double Modulo(double a, double b)
         {
             return a % b;
         }
 
-        public static long Modulo (long a, long b)
+        public static long Modulo(long a, long b)
         {
             return a % b;
         }
 
-        public static string Escape (string unescaped)
+        public static string Escape(string unescaped)
         {
-            return MSBuildUtils.Escape (unescaped);
+            return MSBuildUtils.Escape(unescaped);
         }
 
-        public static string Unescape (string escaped)
+        public static string Unescape(string escaped)
         {
-            return MSBuildUtils.Unescape (escaped);
+            return MSBuildUtils.Unescape(escaped);
         }
 
-        public static int BitwiseOr (int first, int second)
+        public static int BitwiseOr(int first, int second)
         {
             return first | second;
         }
 
-        public static int BitwiseAnd (int first, int second)
+        public static int BitwiseAnd(int first, int second)
         {
             return first & second;
         }
 
-        public static int BitwiseXor (int first, int second)
+        public static int BitwiseXor(int first, int second)
         {
             return first ^ second;
         }
 
-        public static int BitwiseNot (int first)
+        public static int BitwiseNot(int first)
         {
             return ~first;
         }
 
-        public static bool DoesTaskHostExist (string theRuntime, string theArchitecture)
+        public static bool DoesTaskHostExist(string theRuntime, string theArchitecture)
         {
             // TODO: What is this actually supposed to do?
             return true;
         }
 
-        public static string GetDirectoryNameOfFileAbove (string path, string file)
+        public static string GetDirectoryNameOfFileAbove(string path, string file)
         {
             string filePath;
-            path = Path.GetFullPath (path);
+            path = Path.GetFullPath(path);
 
-            while (true) {
-                filePath = Path.Combine (path, file);
+            while (true)
+            {
+                filePath = Path.Combine(path, file);
 
-                if (File.Exists (filePath))
+                if (File.Exists(filePath))
                     return path;
 
-                path = Path.GetDirectoryName (path);
+                path = Path.GetDirectoryName(path);
 
-                if (path == null)  // we traversed up until root without a match, return empty string
+                if (path == null) // we traversed up until root without a match, return empty string
                     return "";
             }
         }
 
-        public static object GetRegistryValue (string key, string value)
+        public static object GetRegistryValue(string key, string value)
         {
-            throw new NotImplementedException ("GetRegistryValue");
+            throw new NotImplementedException("GetRegistryValue");
         }
 
-        public static object GetRegistryValueFromView (string key, string value, object defaultValue, params object[] views)
+        public static object GetRegistryValueFromView(
+            string key,
+            string value,
+            object defaultValue,
+            params object[] views
+        )
         {
-            throw new NotImplementedException ("GetRegistryValueFromView");
+            throw new NotImplementedException("GetRegistryValueFromView");
         }
 
-        public static string MakeRelative (string basePath, string path)
+        public static string MakeRelative(string basePath, string path)
         {
-            if (String.IsNullOrEmpty (basePath))
+            if (String.IsNullOrEmpty(basePath))
                 return path;
 
             // ensure trailing slash for basePath
-            if (basePath [basePath.Length - 1] != '\\' && basePath [basePath.Length - 1] != '/')
+            if (basePath[basePath.Length - 1] != '\\' && basePath[basePath.Length - 1] != '/')
                 basePath += '/';
 
-            var uriBasePath = new Uri (basePath, UriKind.Absolute);
-            var uriPath = new Uri (path);
+            var uriBasePath = new Uri(basePath, UriKind.Absolute);
+            var uriPath = new Uri(path);
 
-            var uriRelative = uriBasePath.MakeRelativeUri (uriPath);
-            return Uri.UnescapeDataString (uriRelative.ToString ()).Replace ('/', '\\'); // msbuild uses backslash paths everywhere
+            var uriRelative = uriBasePath.MakeRelativeUri(uriPath);
+            return Uri.UnescapeDataString(uriRelative.ToString()).Replace('/', '\\'); // msbuild uses backslash paths everywhere
         }
 
-        public static string ValueOrDefault (string value, string defaultValue)
+        public static string ValueOrDefault(string value, string defaultValue)
         {
-            return string.IsNullOrEmpty (value) ? defaultValue : value;
+            return string.IsNullOrEmpty(value) ? defaultValue : value;
         }
     }
 }

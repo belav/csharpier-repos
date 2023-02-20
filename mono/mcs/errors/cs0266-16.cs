@@ -3,7 +3,7 @@
 
 class S
 {
-    uint Test (uint a)
+    uint Test(uint a)
     {
         int b = 0;
         return a * b;

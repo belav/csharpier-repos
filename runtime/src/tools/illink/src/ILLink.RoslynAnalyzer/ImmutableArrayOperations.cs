@@ -9,25 +9,33 @@ namespace ILLink.RoslynAnalyzer
 {
     sealed class ImmutableArrayOperations
     {
-        internal static bool Contains<T, TComp> (ImmutableArray<T> list, T elem, TComp comparer)
-                    where TComp : IEqualityComparer<T>
+        internal static bool Contains<T, TComp>(ImmutableArray<T> list, T elem, TComp comparer)
+            where TComp : IEqualityComparer<T>
         {
-            foreach (var e in list) {
-                if (comparer.Equals (e, elem)) {
+            foreach (var e in list)
+            {
+                if (comparer.Equals(e, elem))
+                {
                     return true;
                 }
             }
             return false;
         }
 
-        internal static TSymbol? TryGetSingleSymbol<TSymbol> (ImmutableArray<ISymbol> members) where TSymbol : class, ISymbol
+        internal static TSymbol? TryGetSingleSymbol<TSymbol>(ImmutableArray<ISymbol> members)
+            where TSymbol : class, ISymbol
         {
             TSymbol? candidate = null;
-            foreach (var m in members) {
-                if (m is TSymbol tsym) {
-                    if (candidate is null) {
+            foreach (var m in members)
+            {
+                if (m is TSymbol tsym)
+                {
+                    if (candidate is null)
+                    {
                         candidate = tsym;
-                    } else {
+                    }
+                    else
+                    {
                         return null;
                     }
                 }
@@ -35,10 +43,15 @@ namespace ILLink.RoslynAnalyzer
             return candidate;
         }
 
-        internal static void AddIfNotNull<TSymbol> (ImmutableArray<TSymbol>.Builder properties, TSymbol? p) where TSymbol : class, ISymbol
+        internal static void AddIfNotNull<TSymbol>(
+            ImmutableArray<TSymbol>.Builder properties,
+            TSymbol? p
+        )
+            where TSymbol : class, ISymbol
         {
-            if (p != null) {
-                properties.Add (p);
+            if (p != null)
+            {
+                properties.Add(p);
             }
         }
     }

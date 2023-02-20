@@ -9,12 +9,13 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting;
 [DataContract]
 internal readonly record struct HighlightingOptions
 {
-    [DataMember] public bool HighlightRelatedRegexComponentsUnderCursor { get; init; } = true;
-    [DataMember] public bool HighlightRelatedJsonComponentsUnderCursor { get; init; } = true;
+    [DataMember]
+    public bool HighlightRelatedRegexComponentsUnderCursor { get; init; } = true;
 
-    public HighlightingOptions()
-    {
-    }
+    [DataMember]
+    public bool HighlightRelatedJsonComponentsUnderCursor { get; init; } = true;
+
+    public HighlightingOptions() { }
 
     public static HighlightingOptions Default = new();
 }

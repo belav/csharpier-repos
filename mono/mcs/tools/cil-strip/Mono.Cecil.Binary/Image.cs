@@ -26,15 +26,15 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
-
+namespace Mono.Cecil.Binary
+{
     using System;
     using System.IO;
 
     using Mono.Cecil.Metadata;
 
-    internal sealed class Image : IBinaryVisitable {
-
+    internal sealed class Image : IBinaryVisitable
+    {
         DOSHeader m_dosHeader;
         PEFileHeader m_peFileHeader;
         PEOptionalHeader m_peOptionalHeader;
@@ -56,188 +56,205 @@ namespace Mono.Cecil.Binary {
 
         FileInfo m_img;
 
-        public DOSHeader DOSHeader {
+        public DOSHeader DOSHeader
+        {
             get { return m_dosHeader; }
         }
 
-        public PEFileHeader PEFileHeader {
+        public PEFileHeader PEFileHeader
+        {
             get { return m_peFileHeader; }
         }
 
-        public PEOptionalHeader PEOptionalHeader {
+        public PEOptionalHeader PEOptionalHeader
+        {
             get { return m_peOptionalHeader; }
         }
 
-        public SectionCollection Sections {
+        public SectionCollection Sections
+        {
             get { return m_sections; }
         }
 
-        public Section TextSection {
+        public Section TextSection
+        {
             get { return m_textSection; }
             set { m_textSection = value; }
         }
 
-        public ImportAddressTable ImportAddressTable {
+        public ImportAddressTable ImportAddressTable
+        {
             get { return m_importAddressTable; }
         }
 
-        public CLIHeader CLIHeader {
+        public CLIHeader CLIHeader
+        {
             get { return m_cliHeader; }
             set { m_cliHeader = value; }
         }
 
-        public DebugHeader DebugHeader {
+        public DebugHeader DebugHeader
+        {
             get { return m_debugHeader; }
             set { m_debugHeader = value; }
         }
 
-        public MetadataRoot MetadataRoot {
+        public MetadataRoot MetadataRoot
+        {
             get { return m_mdRoot; }
         }
 
-        public ImportTable ImportTable {
+        public ImportTable ImportTable
+        {
             get { return m_importTable; }
         }
 
-        public ImportLookupTable ImportLookupTable {
+        public ImportLookupTable ImportLookupTable
+        {
             get { return m_importLookupTable; }
         }
 
-        public HintNameTable HintNameTable {
+        public HintNameTable HintNameTable
+        {
             get { return m_hintNameTable; }
         }
 
-        public ExportTable ExportTable {
+        public ExportTable ExportTable
+        {
             get { return m_exportTable; }
             set { m_exportTable = value; }
         }
 
-        internal ResourceDirectoryTable ResourceDirectoryRoot {
+        internal ResourceDirectoryTable ResourceDirectoryRoot
+        {
             get { return m_rsrcRoot; }
             set { m_rsrcRoot = value; }
         }
 
-        public FileInfo FileInformation {
+        public FileInfo FileInformation
+        {
             get { return m_img; }
         }
 
-        internal Image ()
+        internal Image()
         {
-            m_dosHeader = new DOSHeader ();
-            m_peFileHeader = new PEFileHeader ();
-            m_peOptionalHeader = new PEOptionalHeader ();
-            m_sections = new SectionCollection ();
-            m_importAddressTable = new ImportAddressTable ();
-            m_importTable = new ImportTable ();
-            m_importLookupTable = new ImportLookupTable ();
-            m_hintNameTable = new HintNameTable ();
-            m_mdRoot = new MetadataRoot (this);
+            m_dosHeader = new DOSHeader();
+            m_peFileHeader = new PEFileHeader();
+            m_peOptionalHeader = new PEOptionalHeader();
+            m_sections = new SectionCollection();
+            m_importAddressTable = new ImportAddressTable();
+            m_importTable = new ImportTable();
+            m_importLookupTable = new ImportLookupTable();
+            m_hintNameTable = new HintNameTable();
+            m_mdRoot = new MetadataRoot(this);
         }
 
-        internal Image (FileInfo img) : this ()
+        internal Image(FileInfo img)
+            : this()
         {
             m_img = img;
         }
 
-        public long ResolveVirtualAddress (RVA rva)
+        public long ResolveVirtualAddress(RVA rva)
         {
-            foreach (Section sect in this.Sections) {
-                if (rva >= sect.VirtualAddress &&
-                    rva < sect.VirtualAddress + sect.SizeOfRawData)
+            foreach (Section sect in this.Sections)
+            {
+                if (rva >= sect.VirtualAddress && rva < sect.VirtualAddress + sect.SizeOfRawData)
 
                     return rva + sect.PointerToRawData - sect.VirtualAddress;
             }
 
-            throw new ArgumentOutOfRangeException ("Cannot map the rva to any section");
+            throw new ArgumentOutOfRangeException("Cannot map the rva to any section");
         }
 
-        internal Section GetSectionAtVirtualAddress (RVA rva)
+        internal Section GetSectionAtVirtualAddress(RVA rva)
         {
-            foreach (Section sect in this.Sections) {
-                if (rva >= sect.VirtualAddress &&
-                    rva < sect.VirtualAddress + sect.SizeOfRawData) {
+            foreach (Section sect in this.Sections)
+            {
+                if (rva >= sect.VirtualAddress && rva < sect.VirtualAddress + sect.SizeOfRawData)
+                {
                     return sect;
                 }
             }
             return null;
         }
 
-        public BinaryReader GetReaderAtVirtualAddress (RVA rva)
+        public BinaryReader GetReaderAtVirtualAddress(RVA rva)
         {
-            Section sect = GetSectionAtVirtualAddress (rva);
+            Section sect = GetSectionAtVirtualAddress(rva);
             if (sect == null)
                 return null;
 
-            BinaryReader br = new BinaryReader (new MemoryStream (sect.Data));
+            BinaryReader br = new BinaryReader(new MemoryStream(sect.Data));
             br.BaseStream.Position = rva - sect.VirtualAddress;
             return br;
         }
 
-        public void AddDebugHeader ()
+        public void AddDebugHeader()
         {
-            m_debugHeader = new DebugHeader ();
-            m_debugHeader.SetDefaultValues ();
+            m_debugHeader = new DebugHeader();
+            m_debugHeader.SetDefaultValues();
         }
 
-        internal void SetFileInfo (FileInfo file)
+        internal void SetFileInfo(FileInfo file)
         {
             m_img = file;
         }
 
-        public void Accept (IBinaryVisitor visitor)
+        public void Accept(IBinaryVisitor visitor)
         {
-            visitor.VisitImage (this);
+            visitor.VisitImage(this);
 
-            m_dosHeader.Accept (visitor);
-            m_peFileHeader.Accept (visitor);
-            m_peOptionalHeader.Accept (visitor);
+            m_dosHeader.Accept(visitor);
+            m_peFileHeader.Accept(visitor);
+            m_peOptionalHeader.Accept(visitor);
 
-            m_sections.Accept (visitor);
+            m_sections.Accept(visitor);
 
-            m_importAddressTable.Accept (visitor);
+            m_importAddressTable.Accept(visitor);
 
-            AcceptIfNotNull (m_cliHeader, visitor);
-            AcceptIfNotNull (m_debugHeader, visitor);
+            AcceptIfNotNull(m_cliHeader, visitor);
+            AcceptIfNotNull(m_debugHeader, visitor);
 
-            m_importTable.Accept (visitor);
-            m_importLookupTable.Accept (visitor);
-            m_hintNameTable.Accept (visitor);
-            AcceptIfNotNull (m_exportTable, visitor);
+            m_importTable.Accept(visitor);
+            m_importLookupTable.Accept(visitor);
+            m_hintNameTable.Accept(visitor);
+            AcceptIfNotNull(m_exportTable, visitor);
 
-            visitor.TerminateImage (this);
+            visitor.TerminateImage(this);
         }
 
-        static void AcceptIfNotNull (IBinaryVisitable visitable, IBinaryVisitor visitor)
+        static void AcceptIfNotNull(IBinaryVisitable visitable, IBinaryVisitor visitor)
         {
             if (visitable == null)
                 return;
 
-            visitable.Accept (visitor);
+            visitable.Accept(visitor);
         }
 
-        public static Image CreateImage ()
+        public static Image CreateImage()
         {
-            Image img = new Image ();
+            Image img = new Image();
 
-            ImageInitializer init = new ImageInitializer (img);
-            img.Accept (init);
+            ImageInitializer init = new ImageInitializer(img);
+            img.Accept(init);
 
             return img;
         }
 
-        public static Image GetImage (string file)
+        public static Image GetImage(string file)
         {
-            return ImageReader.Read (file).Image;
+            return ImageReader.Read(file).Image;
         }
 
-        public static Image GetImage (byte [] image)
+        public static Image GetImage(byte[] image)
         {
-            return ImageReader.Read (image).Image;
+            return ImageReader.Read(image).Image;
         }
 
-        public static Image GetImage (Stream stream)
+        public static Image GetImage(Stream stream)
         {
-            return ImageReader.Read (stream).Image;
+            return ImageReader.Read(stream).Image;
         }
     }
 }

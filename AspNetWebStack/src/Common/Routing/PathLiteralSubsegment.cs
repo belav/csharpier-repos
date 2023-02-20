@@ -20,10 +20,7 @@ namespace System.Web.Mvc.Routing
 #if ROUTE_DEBUGGING
         public override string LiteralText
         {
-            get
-            {
-                return Literal;
-            }
+            get { return Literal; }
         }
 
         public override string ToString()

@@ -7,8 +7,6 @@ namespace POS_Server.Models
 {
     public class CountryModel
     {
-
-
         public long countryId { get; set; }
         public string code { get; set; }
         public string currency { get; set; }
@@ -22,8 +20,6 @@ namespace POS_Server.Models
 
     public class CityModel
     {
-
-
         public long cityId { get; set; }
         public string cityCode { get; set; }
         public Nullable<long> countryId { get; set; }

@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -27,16 +27,21 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         protected enum State
         {
-            Empty           = -4, // After last item, no items were selected
-            End             = -3, // After last item, 1+ items were selected
+            Empty = -4, // After last item, no items were selected
+            End = -3, // After last item, 1+ items were selected
             AttributePrimed = -2, // MoveNext will select an attribute (happens after remove)
-            ElementPrimed   = -1, // MoveNext will select an element   (happens after remove)
-            Initial         =  0, // Before first item
-            Element         =  1, // An element   is currently selected
-            Attribute       =  2  // An attribute is currently selected
+            ElementPrimed = -1, // MoveNext will select an element   (happens after remove)
+            Initial = 0, // Before first item
+            Element = 1, // An element   is currently selected
+            Attribute = 2 // An attribute is currently selected
         }
 
-        public SysXmlCursor(IXmlNode parent, IXmlKnownTypeMap knownTypes, IXmlNamespaceSource namespaces, CursorFlags flags)
+        public SysXmlCursor(
+            IXmlNode parent,
+            IXmlKnownTypeMap knownTypes,
+            IXmlNamespaceSource namespaces,
+            CursorFlags flags
+        )
             : base(namespaces, parent)
         {
             if (null == parent)
@@ -45,8 +50,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 throw Error.ArgumentNull(nameof(knownTypes));
 
             this.knownTypes = knownTypes;
-            this.flags      = flags;
-            this.index      = -1;
+            this.flags = flags;
+            this.index = -1;
 
             var source = parent.RequireRealizable<XmlNode>();
             if (source.IsReal)
@@ -91,7 +96,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public override bool IsNil
         {
             get { return HasCurrent && base.IsNil; }
-            set { Realize(); base.IsNil = value; }
+            set
+            {
+                Realize();
+                base.IsNil = value;
+            }
         }
 
         public override string Value
@@ -113,11 +122,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public bool MoveNext()
         {
             var hadCurrent = HasCurrent;
-            var hasCurrent = MoveNextCore() &&
-            (
-                flags.AllowsMultipleItems() ||
-                IsAtEnd()
-            );
+            var hasCurrent = MoveNextCore() && (flags.AllowsMultipleItems() || IsAtEnd());
 
             if (!hasCurrent && !hadCurrent)
                 state = State.Empty;
@@ -128,7 +133,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private bool MoveNextCore()
         {
             while (Advance())
-                if (IsMatch()) return true;
+                if (IsMatch())
+                    return true;
 
             return false;
         }
@@ -143,17 +149,28 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private bool Advance()
         {
-            for (;;)
+            for (; ; )
             {
                 switch (state)
                 {
-                    case State.Initial:         return AdvanceToFirstElement()  || AdvanceToFirstAttribute() || Fail(State.End);
-                    case State.Element:         return AdvanceToNextElement()   || AdvanceToFirstAttribute() || Fail(State.End);
-                    case State.Attribute:       return AdvanceToNextAttribute() || Fail(State.End);
-                    case State.ElementPrimed:   return Succeed(State.Element);
-                    case State.AttributePrimed: return Succeed(State.Attribute);
-                    case State.End:             return false;
-                    case State.Empty:           return false;
+                    case State.Initial:
+                        return AdvanceToFirstElement()
+                            || AdvanceToFirstAttribute()
+                            || Fail(State.End);
+                    case State.Element:
+                        return AdvanceToNextElement()
+                            || AdvanceToFirstAttribute()
+                            || Fail(State.End);
+                    case State.Attribute:
+                        return AdvanceToNextAttribute() || Fail(State.End);
+                    case State.ElementPrimed:
+                        return Succeed(State.Element);
+                    case State.AttributePrimed:
+                        return Succeed(State.Attribute);
+                    case State.End:
+                        return false;
+                    case State.Empty:
+                        return false;
                 }
             }
         }
@@ -196,7 +213,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private bool AdvanceElement(XmlNode next)
         {
-            for (;;)
+            for (; ; )
             {
                 if (next == null)
                     return false;
@@ -215,7 +232,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             var attributes = parent.Attributes;
 
-            for (;;)
+            for (; ; )
             {
                 index++;
                 if (index >= attributes.Count)
@@ -244,15 +261,15 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private bool IsAtEnd()
         {
-            var priorNode  = node;
-            var priorType  = type;
+            var priorNode = node;
+            var priorType = type;
             var priorState = state;
             var priorIndex = index;
 
             var hasNext = MoveNextCore();
 
-            node  = priorNode;
-            type  = priorType;
+            node = priorNode;
+            type = priorType;
             state = priorState;
             index = priorIndex;
 
@@ -288,7 +305,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             state = State.Attribute;
 
-            var parent = ((XmlAttribute) node).OwnerElement;
+            var parent = ((XmlAttribute)node).OwnerElement;
             var attributes = parent.Attributes;
 
             for (index = 0; index < attributes.Count; index++)
@@ -332,7 +349,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private void MoveToParentOfAttribute()
         {
-            node = ((XmlAttribute) node).OwnerElement;
+            node = ((XmlAttribute)node).OwnerElement;
         }
 
         private void MoveToRealizedParent()
@@ -343,6 +360,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         }
 
         public override event EventHandler Realized;
+
         protected virtual void OnRealized()
         {
             if (Realized != null)
@@ -376,7 +394,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             var knownType = knownTypes.Require(clrType);
 
             if (IsElement)
-                CoerceElement  (knownType);
+                CoerceElement(knownType);
             else
                 CoerceAttribute(knownType);
 
@@ -385,9 +403,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private void CoerceElement(IXmlKnownType knownType)
         {
-            var oldNode = (XmlElement) node;
-            var parent  = oldNode.ParentNode;
-            var name    = GetEffectiveName(knownType, parent);
+            var oldNode = (XmlElement)node;
+            var parent = oldNode.ParentNode;
+            var name = GetEffectiveName(knownType, parent);
 
             if (!XmlNameComparer.Default.Equals(this.Name, name))
             {
@@ -397,20 +415,21 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 if (knownType.XsiType != XmlName.Empty)
                     this.SetXsiType(knownType.XsiType);
             }
-            else this.SetXsiType(knownType.XsiType);
+            else
+                this.SetXsiType(knownType.XsiType);
         }
 
         private void CoerceAttribute(IXmlKnownType knownType)
         {
             RequireNoXsiType(knownType);
 
-            var oldNode = (XmlAttribute) node;
-            var parent  = oldNode.OwnerElement;
-            var name    = GetEffectiveName(knownType, parent);
+            var oldNode = (XmlAttribute)node;
+            var parent = oldNode.OwnerElement;
+            var name = GetEffectiveName(knownType, parent);
 
             if (!XmlNameComparer.Default.Equals(this.Name, name))
             {
-                var newNode    = CreateAttributeCore(parent, name);
+                var newNode = CreateAttributeCore(parent, name);
                 var attributes = parent.Attributes;
                 attributes.RemoveNamedItem(newNode.LocalName, newNode.NamespaceURI);
                 attributes.InsertBefore(newNode, oldNode);
@@ -421,10 +440,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public void Create(Type type)
         {
             var knownType = knownTypes.Require(type);
-            var position  = RequireCreatable();
+            var position = RequireCreatable();
 
             if (flags.IncludesElements())
-                CreateElement  (knownType, position);
+                CreateElement(knownType, position);
             else
                 CreateAttribute(knownType, position);
 
@@ -433,8 +452,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private void CreateElement(IXmlKnownType knownType, XmlNode position)
         {
-            var parent  = node;
-            var name    = GetEffectiveName(knownType, parent);
+            var parent = node;
+            var name = GetEffectiveName(knownType, parent);
             var element = CreateElementCore(parent, name);
             parent.InsertBefore(element, position);
             state = State.Element;
@@ -447,26 +466,26 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             RequireNoXsiType(knownType);
 
-            var parent    = node;
-            var name      = GetEffectiveName(knownType, parent);
+            var parent = node;
+            var name = GetEffectiveName(knownType, parent);
             var attribute = CreateAttributeCore(parent, name);
-            parent.Attributes.InsertBefore(attribute, (XmlAttribute) position);
+            parent.Attributes.InsertBefore(attribute, (XmlAttribute)position);
             state = State.Attribute;
         }
 
         private XmlElement CreateElementCore(XmlNode parent, XmlName name)
         {
-            var document = parent.OwnerDocument ?? (XmlDocument) parent;
-            var prefix   = Namespaces.GetElementPrefix(this, name.NamespaceUri);
-            var element  = document.CreateElement(prefix, name.LocalName, name.NamespaceUri);
+            var document = parent.OwnerDocument ?? (XmlDocument)parent;
+            var prefix = Namespaces.GetElementPrefix(this, name.NamespaceUri);
+            var element = document.CreateElement(prefix, name.LocalName, name.NamespaceUri);
             node = element;
             return element;
         }
 
         private XmlAttribute CreateAttributeCore(XmlNode parent, XmlName name)
         {
-            var document  = parent.OwnerDocument ?? (XmlDocument) parent;
-            var prefix    = Namespaces.GetAttributePrefix(this, name.NamespaceUri);
+            var document = parent.OwnerDocument ?? (XmlDocument)parent;
+            var prefix = Namespaces.GetAttributePrefix(this, name.NamespaceUri);
             var attribute = document.CreateAttribute(prefix, name.LocalName, name.NamespaceUri);
             node = attribute;
             return attribute;
@@ -484,12 +503,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
             return name.NamespaceUri != null
                 ? name
-                : name.WithNamespaceUri
-                (
-                    parent != null
-                        ? parent.NamespaceURI
-                        : string.Empty
-                );
+                : name.WithNamespaceUri(parent != null ? parent.NamespaceURI : string.Empty);
         }
 
         public void RemoveAllNext()
@@ -503,17 +517,21 @@ namespace Castle.Components.DictionaryAdapter.Xml
             RequireRemovable();
 
             var removedNode = node;
-            var wasElement  = IsElement;
+            var wasElement = IsElement;
             MoveNext();
 
             switch (state)
             {
-                case State.Attribute: state = State.AttributePrimed; break;
-                case State.Element:   state = State.ElementPrimed;   break;
+                case State.Attribute:
+                    state = State.AttributePrimed;
+                    break;
+                case State.Element:
+                    state = State.ElementPrimed;
+                    break;
             }
 
             if (wasElement)
-                RemoveElement  (removedNode);
+                RemoveElement(removedNode);
             else
                 RemoveAttribute(removedNode);
         }
@@ -525,7 +543,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private void RemoveAttribute(XmlNode node)
         {
-            var attribute = (XmlAttribute) node;
+            var attribute = (XmlAttribute)node;
             attribute.OwnerElement.Attributes.Remove(attribute);
         }
 
@@ -539,11 +557,23 @@ namespace Castle.Components.DictionaryAdapter.Xml
             XmlNode position;
             switch (state)
             {
-                case State.Element:   position = node; MoveToParentOfElement();   break;
-                case State.Attribute: position = node; MoveToParentOfAttribute(); break;
-                case State.Empty:     position = null; MoveToRealizedParent();    break;
-                case State.End:       position = null; break;
-                default:              throw Error.CursorNotInCreatableState();
+                case State.Element:
+                    position = node;
+                    MoveToParentOfElement();
+                    break;
+                case State.Attribute:
+                    position = node;
+                    MoveToParentOfAttribute();
+                    break;
+                case State.Empty:
+                    position = null;
+                    MoveToRealizedParent();
+                    break;
+                case State.End:
+                    position = null;
+                    break;
+                default:
+                    throw Error.CursorNotInCreatableState();
             }
             return position;
         }
@@ -560,7 +590,6 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 throw Error.CursorNotInRemovableState();
         }
 
-        protected static readonly StringComparer
-            DefaultComparer = StringComparer.OrdinalIgnoreCase;
+        protected static readonly StringComparer DefaultComparer = StringComparer.OrdinalIgnoreCase;
     }
 }

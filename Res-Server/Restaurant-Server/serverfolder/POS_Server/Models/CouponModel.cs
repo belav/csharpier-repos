@@ -28,11 +28,8 @@ namespace POS_Server.Models
         public Boolean canDelete { get; set; }
 
         public long couponMembershipId { get; set; }
-       
+
         public Nullable<long> membershipId { get; set; }
         public string forAgents { get; set; }
-
-
-
     }
 }

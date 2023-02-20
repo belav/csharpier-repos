@@ -6,8 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Web.Http
 {
     /// <summary>
-    /// The <see cref="RouteParameter"/> class can be used to indicate properties about a route parameter (the literals and placeholders 
-    /// located within segments of a <see cref="M:IHttpRoute.RouteTemplate"/>). 
+    /// The <see cref="RouteParameter"/> class can be used to indicate properties about a route parameter (the literals and placeholders
+    /// located within segments of a <see cref="M:IHttpRoute.RouteTemplate"/>).
     /// It can for example be used to indicate that a route parameter is optional.
     /// </summary>
     public sealed class RouteParameter
@@ -15,13 +15,15 @@ namespace System.Web.Http
         /// <summary>
         /// Optional Parameter
         /// </summary>
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes", Justification = "This type is immutable.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+            Justification = "This type is immutable."
+        )]
         public static readonly RouteParameter Optional = new RouteParameter();
 
         // singleton constructor
-        private RouteParameter()
-        {
-        }
+        private RouteParameter() { }
 
         /// <summary>
         /// Returns a <see cref="System.String"/> that represents this instance.

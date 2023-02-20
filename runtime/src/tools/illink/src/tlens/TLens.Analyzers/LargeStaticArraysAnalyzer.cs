@@ -11,11 +11,12 @@ namespace TLens.Analyzers
 {
     sealed class LargeStaticArraysAnalyzer : Analyzer
     {
-        readonly List<(int, MethodDefinition)> methods = new List<(int, MethodDefinition)> ();
+        readonly List<(int, MethodDefinition)> methods = new List<(int, MethodDefinition)>();
 
-        protected override void ProcessMethod (MethodDefinition method)
+        protected override void ProcessMethod(MethodDefinition method)
         {
-            foreach (var instr in method.Body.Instructions) {
+            foreach (var instr in method.Body.Instructions)
+            {
                 if (instr.OpCode.Code != Code.Ldtoken)
                     continue;
 
@@ -23,26 +24,29 @@ namespace TLens.Analyzers
                     continue;
 
                 var name = fr.FieldType.Name;
-                if (!name.StartsWith ("__StaticArrayInitTypeSize="))
+                if (!name.StartsWith("__StaticArrayInitTypeSize="))
                     continue;
 
-                if (!int.TryParse (name.AsSpan (26), out int size))
-                    throw new NotImplementedException (name);
+                if (!int.TryParse(name.AsSpan(26), out int size))
+                    throw new NotImplementedException(name);
 
-                methods.Add ((size, method));
+                methods.Add((size, method));
             }
         }
 
-        public override void PrintResults (int maxCount)
+        public override void PrintResults(int maxCount)
         {
-            var entries = methods.OrderByDescending (l => l.Item1).Take (maxCount);
-            if (!entries.Any ())
+            var entries = methods.OrderByDescending(l => l.Item1).Take(maxCount);
+            if (!entries.Any())
                 return;
 
-            PrintHeader ("Largest static arrays");
+            PrintHeader("Largest static arrays");
 
-            foreach (var entry in entries) {
-                Console.WriteLine ($"{entry.Item1} bytes large array is initialized in {entry.Item2}");
+            foreach (var entry in entries)
+            {
+                Console.WriteLine(
+                    $"{entry.Item1} bytes large array is initialized in {entry.Item2}"
+                );
             }
         }
     }

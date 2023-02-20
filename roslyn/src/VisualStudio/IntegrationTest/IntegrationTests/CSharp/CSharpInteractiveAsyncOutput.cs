@@ -15,22 +15,22 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpInteractiveAsyncOutput : AbstractInteractiveWindowTest
     {
         public CSharpInteractiveAsyncOutput(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+            : base(instanceFactory) { }
 
         [WpfFact]
         public void VerifyPreviousAndNextHistory()
         {
             VisualStudio.InteractiveWindow.SubmitText(@"#cls");
 
-            VisualStudio.InteractiveWindow.SubmitText(@"using System.Threading;
+            VisualStudio.InteractiveWindow.SubmitText(
+                @"using System.Threading;
 var t1 = new Thread(() => { for (int i = 0; ; i++) { Console.WriteLine('$'); Thread.Sleep(500); } });
 var t2 = new Thread(() => { for (int i = 0; ; i++) { Console.Write('$'); Thread.Sleep(101); } });
 var t3 = new Thread(() => { while (true) { Console.Write('\r'); Thread.Sleep(1200); } });
 t1.Start();
 t2.Start();
-t3.Start();");
+t3.Start();"
+            );
 
             VisualStudio.InteractiveWindow.SubmitText(@"#help");
             Wait(seconds: 1);
@@ -41,7 +41,10 @@ t3.Start();");
             VisualStudio.InteractiveWindow.SubmitText(@"1+2");
             Wait(seconds: 1);
 
-            VisualStudio.InteractiveWindow.Verify.ReplPromptConsistency(prompt: "....", output: "$");
+            VisualStudio.InteractiveWindow.Verify.ReplPromptConsistency(
+                prompt: "....",
+                output: "$"
+            );
 
             Wait(seconds: 1);
 
@@ -51,20 +54,28 @@ t3.Start();");
             VisualStudio.InteractiveWindow.SubmitText(@"1+5");
             Wait(seconds: 1);
 
-            VisualStudio.InteractiveWindow.Verify.ReplPromptConsistency(prompt: "....", output: "$");
+            VisualStudio.InteractiveWindow.Verify.ReplPromptConsistency(
+                prompt: "....",
+                output: "$"
+            );
 
             VisualStudio.InteractiveWindow.SubmitText(@"#cls");
             VisualStudio.InteractiveWindow.SubmitText(@"1+5");
             Wait(seconds: 1);
 
-            VisualStudio.InteractiveWindow.Verify.ReplPromptConsistency(prompt: "....", output: "$");
+            VisualStudio.InteractiveWindow.Verify.ReplPromptConsistency(
+                prompt: "....",
+                output: "$"
+            );
 
-            VisualStudio.InteractiveWindow.SubmitText(@"t1.Abort();
+            VisualStudio.InteractiveWindow.SubmitText(
+                @"t1.Abort();
 t1.Join();
 t2.Abort();
 t2.Join();
 t3.Abort();
-t3.Join();");
+t3.Join();"
+            );
 
             VisualStudio.InteractiveWindow.ClearReplText();
             VisualStudio.InteractiveWindow.Reset();

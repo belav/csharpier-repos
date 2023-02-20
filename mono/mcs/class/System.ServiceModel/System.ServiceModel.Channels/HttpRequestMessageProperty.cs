@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,44 +30,46 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-    public sealed class HttpRequestMessageProperty
-        : IMessageProperty
+    public sealed class HttpRequestMessageProperty : IMessageProperty
     {
-        public static string Name {
+        public static string Name
+        {
             get { return "httpRequest"; }
         }
 
-        WebHeaderCollection headers = new WebHeaderCollection ();
-        string method = "POST", query_string = String.Empty;
+        WebHeaderCollection headers = new WebHeaderCollection();
+        string method = "POST",
+            query_string = String.Empty;
         bool suppress_entity;
 
-        public HttpRequestMessageProperty ()
-        {
-        }
+        public HttpRequestMessageProperty() { }
 
-        public WebHeaderCollection Headers {
+        public WebHeaderCollection Headers
+        {
             get { return headers; }
         }
 
-        public string Method {
+        public string Method
+        {
             get { return method; }
             set { method = value; }
         }
 
-        public string QueryString {
+        public string QueryString
+        {
             get { return query_string; }
             set { query_string = value; }
         }
 
-        public bool SuppressEntityBody {
+        public bool SuppressEntityBody
+        {
             get { return suppress_entity; }
             set { suppress_entity = value; }
         }
-        
-        
-        IMessageProperty IMessageProperty.CreateCopy ()
+
+        IMessageProperty IMessageProperty.CreateCopy()
         {
-            var copy = new HttpRequestMessageProperty ();
+            var copy = new HttpRequestMessageProperty();
             // FIXME: Clone headers?
             copy.headers = headers;
             copy.method = method;

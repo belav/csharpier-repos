@@ -17,7 +17,10 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {
     internal sealed partial class NativeFormatRuntimeNamedTypeInfo
     {
-        internal sealed override IEnumerable<ConstructorInfo> CoreGetDeclaredConstructors(NameFilter optionalNameFilter, RuntimeTypeInfo contextTypeInfo)
+        internal sealed override IEnumerable<ConstructorInfo> CoreGetDeclaredConstructors(
+            NameFilter optionalNameFilter,
+            RuntimeTypeInfo contextTypeInfo
+        )
         {
             //
             // - It may sound odd to get a non-null name filter for a constructor search, but Type.GetMember() is an api that does this.
@@ -33,11 +36,17 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
                     continue;
 
                 if (optionalNameFilter == null || optionalNameFilter.Matches(method.Name, reader))
-                    yield return RuntimePlainConstructorInfo<NativeFormatMethodCommon>.GetRuntimePlainConstructorInfo(new NativeFormatMethodCommon(methodHandle, this, contextTypeInfo));
+                    yield return RuntimePlainConstructorInfo<NativeFormatMethodCommon>.GetRuntimePlainConstructorInfo(
+                        new NativeFormatMethodCommon(methodHandle, this, contextTypeInfo)
+                    );
             }
         }
 
-        internal sealed override IEnumerable<MethodInfo> CoreGetDeclaredMethods(NameFilter optionalNameFilter, RuntimeTypeInfo reflectedType, RuntimeTypeInfo contextTypeInfo)
+        internal sealed override IEnumerable<MethodInfo> CoreGetDeclaredMethods(
+            NameFilter optionalNameFilter,
+            RuntimeTypeInfo reflectedType,
+            RuntimeTypeInfo contextTypeInfo
+        )
         {
             MetadataReader reader = Reader;
             foreach (MethodHandle methodHandle in DeclaredMethodAndConstructorHandles)
@@ -48,45 +57,92 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
                     continue;
 
                 if (optionalNameFilter == null || optionalNameFilter.Matches(method.Name, reader))
-                    yield return RuntimeNamedMethodInfo<NativeFormatMethodCommon>.GetRuntimeNamedMethodInfo(new NativeFormatMethodCommon(methodHandle, this, contextTypeInfo), reflectedType);
+                    yield return RuntimeNamedMethodInfo<NativeFormatMethodCommon>.GetRuntimeNamedMethodInfo(
+                        new NativeFormatMethodCommon(methodHandle, this, contextTypeInfo),
+                        reflectedType
+                    );
             }
         }
 
-        internal sealed override IEnumerable<EventInfo> CoreGetDeclaredEvents(NameFilter optionalNameFilter, RuntimeTypeInfo reflectedType, RuntimeTypeInfo contextTypeInfo)
+        internal sealed override IEnumerable<EventInfo> CoreGetDeclaredEvents(
+            NameFilter optionalNameFilter,
+            RuntimeTypeInfo reflectedType,
+            RuntimeTypeInfo contextTypeInfo
+        )
         {
             MetadataReader reader = Reader;
             foreach (EventHandle eventHandle in DeclaredEventHandles)
             {
-                if (optionalNameFilter == null || optionalNameFilter.Matches(eventHandle.GetEvent(reader).Name, reader))
-                    yield return NativeFormatRuntimeEventInfo.GetRuntimeEventInfo(eventHandle, this, contextTypeInfo, reflectedType);
+                if (
+                    optionalNameFilter == null
+                    || optionalNameFilter.Matches(eventHandle.GetEvent(reader).Name, reader)
+                )
+                    yield return NativeFormatRuntimeEventInfo.GetRuntimeEventInfo(
+                        eventHandle,
+                        this,
+                        contextTypeInfo,
+                        reflectedType
+                    );
             }
         }
 
-        internal sealed override IEnumerable<FieldInfo> CoreGetDeclaredFields(NameFilter optionalNameFilter, RuntimeTypeInfo reflectedType, RuntimeTypeInfo contextTypeInfo)
+        internal sealed override IEnumerable<FieldInfo> CoreGetDeclaredFields(
+            NameFilter optionalNameFilter,
+            RuntimeTypeInfo reflectedType,
+            RuntimeTypeInfo contextTypeInfo
+        )
         {
             MetadataReader reader = Reader;
             foreach (FieldHandle fieldHandle in DeclaredFieldHandles)
             {
-                if (optionalNameFilter == null || optionalNameFilter.Matches(fieldHandle.GetField(reader).Name, reader))
-                    yield return NativeFormatRuntimeFieldInfo.GetRuntimeFieldInfo(fieldHandle, this, contextTypeInfo, reflectedType);
+                if (
+                    optionalNameFilter == null
+                    || optionalNameFilter.Matches(fieldHandle.GetField(reader).Name, reader)
+                )
+                    yield return NativeFormatRuntimeFieldInfo.GetRuntimeFieldInfo(
+                        fieldHandle,
+                        this,
+                        contextTypeInfo,
+                        reflectedType
+                    );
             }
         }
 
-        internal sealed override IEnumerable<PropertyInfo> CoreGetDeclaredProperties(NameFilter optionalNameFilter, RuntimeTypeInfo reflectedType, RuntimeTypeInfo contextTypeInfo)
+        internal sealed override IEnumerable<PropertyInfo> CoreGetDeclaredProperties(
+            NameFilter optionalNameFilter,
+            RuntimeTypeInfo reflectedType,
+            RuntimeTypeInfo contextTypeInfo
+        )
         {
             MetadataReader reader = Reader;
             foreach (PropertyHandle propertyHandle in DeclaredPropertyHandles)
             {
-                if (optionalNameFilter == null || optionalNameFilter.Matches(propertyHandle.GetProperty(reader).Name, reader))
-                    yield return NativeFormatRuntimePropertyInfo.GetRuntimePropertyInfo(propertyHandle, this, contextTypeInfo, reflectedType);
+                if (
+                    optionalNameFilter == null
+                    || optionalNameFilter.Matches(propertyHandle.GetProperty(reader).Name, reader)
+                )
+                    yield return NativeFormatRuntimePropertyInfo.GetRuntimePropertyInfo(
+                        propertyHandle,
+                        this,
+                        contextTypeInfo,
+                        reflectedType
+                    );
             }
         }
 
-        internal sealed override IEnumerable<Type> CoreGetDeclaredNestedTypes(NameFilter optionalNameFilter)
+        internal sealed override IEnumerable<Type> CoreGetDeclaredNestedTypes(
+            NameFilter optionalNameFilter
+        )
         {
             foreach (TypeDefinitionHandle nestedTypeHandle in _typeDefinition.NestedTypes)
             {
-                if (optionalNameFilter == null || optionalNameFilter.Matches(nestedTypeHandle.GetTypeDefinition(_reader).Name, _reader))
+                if (
+                    optionalNameFilter == null
+                    || optionalNameFilter.Matches(
+                        nestedTypeHandle.GetTypeDefinition(_reader).Name,
+                        _reader
+                    )
+                )
                     yield return nestedTypeHandle.GetNamedType(_reader);
             }
         }

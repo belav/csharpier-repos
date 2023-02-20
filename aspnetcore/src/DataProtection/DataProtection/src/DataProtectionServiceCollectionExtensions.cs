@@ -48,7 +48,10 @@ public static class DataProtectionServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
     /// <param name="setupAction">An <see cref="Action{DataProtectionOptions}"/> to configure the provided <see cref="DataProtectionOptions"/>.</param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
-    public static IDataProtectionBuilder AddDataProtection(this IServiceCollection services, Action<DataProtectionOptions> setupAction)
+    public static IDataProtectionBuilder AddDataProtection(
+        this IServiceCollection services,
+        Action<DataProtectionOptions> setupAction
+    )
     {
         if (services == null)
         {
@@ -75,13 +78,23 @@ public static class DataProtectionServiceCollectionExtensions
         }
 
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IConfigureOptions<KeyManagementOptions>, KeyManagementOptionsSetup>());
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<KeyManagementOptions>,
+                KeyManagementOptionsSetup
+            >()
+        );
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<DataProtectionOptions>, DataProtectionOptionsSetup>());
+            ServiceDescriptor.Transient<
+                IConfigureOptions<DataProtectionOptions>,
+                DataProtectionOptionsSetup
+            >()
+        );
 
         services.TryAddSingleton<IKeyManager, XmlKeyManager>();
         services.TryAddSingleton<IApplicationDiscriminator, HostingApplicationDiscriminator>();
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<IHostedService, DataProtectionHostedService>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<IHostedService, DataProtectionHostedService>()
+        );
 
         // Internal services
         services.TryAddSingleton<IDefaultKeyResolver, DefaultKeyResolver>();
@@ -93,12 +106,17 @@ public static class DataProtectionServiceCollectionExtensions
             var keyRingProvider = s.GetRequiredService<IKeyRingProvider>();
             var loggerFactory = s.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
 
-            IDataProtectionProvider dataProtectionProvider = new KeyRingBasedDataProtectionProvider(keyRingProvider, loggerFactory);
+            IDataProtectionProvider dataProtectionProvider = new KeyRingBasedDataProtectionProvider(
+                keyRingProvider,
+                loggerFactory
+            );
 
             // Link the provider to the supplied discriminator
             if (!string.IsNullOrEmpty(dpOptions.Value.ApplicationDiscriminator))
             {
-                dataProtectionProvider = dataProtectionProvider.CreateProtector(dpOptions.Value.ApplicationDiscriminator);
+                dataProtectionProvider = dataProtectionProvider.CreateProtector(
+                    dpOptions.Value.ApplicationDiscriminator
+                );
             }
 
             return dataProtectionProvider;

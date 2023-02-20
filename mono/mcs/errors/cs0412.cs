@@ -3,7 +3,5 @@
 
 class C
 {
-    public void Foo<T> (string T)
-    {
-    }
+    public void Foo<T>(string T) { }
 }

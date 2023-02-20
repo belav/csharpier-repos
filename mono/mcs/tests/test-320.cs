@@ -3,13 +3,12 @@
 
 using System;
 
-unsafe class X {
+unsafe class X
+{
+    unsafe public X(sbyte* value, int startIndex, int length) { }
 
-    unsafe public X (sbyte *value, int startIndex, int length) {
-    }
-
-    public static void Main ()
+    public static void Main()
     {
-        new X ((sbyte*)null, 0, 10);
+        new X((sbyte*)null, 0, 10);
     }
 }

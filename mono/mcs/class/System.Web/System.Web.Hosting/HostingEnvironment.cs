@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,10 +41,13 @@ using System.Web.Configuration;
 using System.Web.Caching;
 using System.Web.Util;
 
-namespace System.Web.Hosting {
-
-    [AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Medium)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.High)]
+namespace System.Web.Hosting
+{
+    [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Medium)]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.High
+    )]
     public sealed class HostingEnvironment : MarshalByRefObject
     {
         static bool is_hosted;
@@ -53,169 +56,179 @@ namespace System.Web.Hosting {
         static ApplicationShutdownReason shutdown_reason;
 #pragma warning restore 0649
         internal static BareApplicationHost Host;
-        static VirtualPathProvider vpath_provider = (HttpRuntime.AppDomainAppVirtualPath == null) ? null :
-                                new DefaultVirtualPathProvider ();
+        static VirtualPathProvider vpath_provider =
+            (HttpRuntime.AppDomainAppVirtualPath == null) ? null : new DefaultVirtualPathProvider();
         static int busy_count;
         static BackgroundWorkScheduler _backgroundWorkScheduler = null; // created on demand
         static readonly Task<object> _completedTask = Task.FromResult<object>(null);
 
-        internal static bool HaveCustomVPP {
-            get;
-            private set;
-        }
-        
-        public HostingEnvironment ()
+        internal static bool HaveCustomVPP { get; private set; }
+
+        public HostingEnvironment()
         {
             // The documentation says that this is called once per domain by the ApplicationManager and
             // then it throws InvalidOperationException whenever called.
-            throw new InvalidOperationException ();
+            throw new InvalidOperationException();
         }
 
-        public static string ApplicationID {
+        public static string ApplicationID
+        {
             get { return HttpRuntime.AppDomainAppId; }
         }
 
-        public static string ApplicationPhysicalPath {
+        public static string ApplicationPhysicalPath
+        {
             get { return HttpRuntime.AppDomainAppPath; }
         }
 
-        public static string ApplicationVirtualPath {
+        public static string ApplicationVirtualPath
+        {
             get { return HttpRuntime.AppDomainAppVirtualPath; }
         }
 
-        public static Cache Cache {
+        public static Cache Cache
+        {
             get { return HttpRuntime.Cache; }
         }
 
-        public static Exception InitializationException {
+        public static Exception InitializationException
+        {
             get { return HttpApplication.InitializationException; }
         }
 
-        public static bool IsHosted {
+        public static bool IsHosted
+        {
             get { return is_hosted; }
             internal set { is_hosted = value; }
         }
 
-        public static ApplicationShutdownReason ShutdownReason {
+        public static ApplicationShutdownReason ShutdownReason
+        {
             get { return shutdown_reason; }
         }
 
-        public static string SiteName {
+        public static string SiteName
+        {
             get { return site_name; }
             internal set { site_name = value; }
         }
 
-        public static VirtualPathProvider VirtualPathProvider {
+        public static VirtualPathProvider VirtualPathProvider
+        {
             get { return vpath_provider; }
         }
 
-        public static bool InClientBuildManager {
-            get {
+        public static bool InClientBuildManager
+        {
+            get
+            {
                 // Mono doesn't have a ClientBuildManager, so we can't be in it. Simple as that.
                 return false;
             }
         }
 
-        public static void DecrementBusyCount ()
+        public static void DecrementBusyCount()
         {
-            Interlocked.Decrement (ref busy_count);
+            Interlocked.Decrement(ref busy_count);
         }
 
-        [MonoTODO ("Not implemented")]
-        public static IDisposable Impersonate ()
+        [MonoTODO("Not implemented")]
+        public static IDisposable Impersonate()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoTODO ("Not implemented")]
-        public static IDisposable Impersonate (IntPtr token)
+        [MonoTODO("Not implemented")]
+        public static IDisposable Impersonate(IntPtr token)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoTODO ("Not implemented")]
-        public static IDisposable Impersonate (IntPtr userToken, string virtualPath)
+        [MonoTODO("Not implemented")]
+        public static IDisposable Impersonate(IntPtr userToken, string virtualPath)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public static void IncrementBusyCount ()
+        public static void IncrementBusyCount()
         {
-            Interlocked.Increment (ref busy_count);
+            Interlocked.Increment(ref busy_count);
         }
 
-        public override object InitializeLifetimeService ()
+        public override object InitializeLifetimeService()
         {
             return null;
         }
 
-        public static void InitiateShutdown ()
+        public static void InitiateShutdown()
         {
-            HttpRuntime.UnloadAppDomain ();
+            HttpRuntime.UnloadAppDomain();
         }
 
-        public static string MapPath (string virtualPath)
+        public static string MapPath(string virtualPath)
         {
             if (virtualPath == null || virtualPath == "")
-                throw new ArgumentNullException ("virtualPath");
-            
+                throw new ArgumentNullException("virtualPath");
+
             HttpContext context = HttpContext.Current;
             HttpRequest req = context == null ? null : context.Request;
             if (req == null)
                 return null;
 
-            return req.MapPath (virtualPath);
+            return req.MapPath(virtualPath);
         }
 
-        public static void RegisterObject (IRegisteredObject obj)
+        public static void RegisterObject(IRegisteredObject obj)
         {
             if (obj == null)
-                throw new ArgumentNullException ("obj");
+                throw new ArgumentNullException("obj");
 
             if (Host != null)
-                Host.RegisterObject (obj, false);
+                Host.RegisterObject(obj, false);
         }
 
-        public static void RegisterVirtualPathProvider (VirtualPathProvider virtualPathProvider)
+        public static void RegisterVirtualPathProvider(VirtualPathProvider virtualPathProvider)
         {
             if (HttpRuntime.AppDomainAppVirtualPath == null)
-                throw new InvalidOperationException ();
+                throw new InvalidOperationException();
 
             if (virtualPathProvider == null)
-                throw new ArgumentNullException ("virtualPathProvider");
+                throw new ArgumentNullException("virtualPathProvider");
 
             VirtualPathProvider previous = vpath_provider;
             vpath_provider = virtualPathProvider;
-            vpath_provider.InitializeAndSetPrevious (previous);
+            vpath_provider.InitializeAndSetPrevious(previous);
             if (!(virtualPathProvider is DefaultVirtualPathProvider))
                 HaveCustomVPP = true;
             else
                 HaveCustomVPP = false;
         }
-        
-        public static IDisposable SetCultures (string virtualPath)
+
+        public static IDisposable SetCultures(string virtualPath)
         {
-            GlobalizationSection gs = WebConfigurationManager.GetSection ("system.web/globalization", virtualPath) as GlobalizationSection;
+            GlobalizationSection gs =
+                WebConfigurationManager.GetSection("system.web/globalization", virtualPath)
+                as GlobalizationSection;
             IDisposable ret = Thread.CurrentThread.CurrentCulture as IDisposable;
             string culture = gs.Culture;
-            if (String.IsNullOrEmpty (culture))
+            if (String.IsNullOrEmpty(culture))
                 return ret;
-            Thread.CurrentThread.CurrentCulture = new CultureInfo (culture);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
             return ret;
         }
 
-        public static IDisposable SetCultures ()
+        public static IDisposable SetCultures()
         {
-            return SetCultures ("~/");
+            return SetCultures("~/");
         }
 
-        public static void UnregisterObject (IRegisteredObject obj)
+        public static void UnregisterObject(IRegisteredObject obj)
         {
             if (obj == null)
-                throw new ArgumentNullException ("obj");
+                throw new ArgumentNullException("obj");
 
             if (Host != null)
-                Host.UnregisterObject (obj);
+                Host.UnregisterObject(obj);
         }
 
         // Schedules a task which can run in the background, independent of any request.
@@ -238,12 +251,18 @@ namespace System.Web.Hosting {
         // This overload of QueueBackgroundWorkItem takes a void-returning callback; the
         // work item will be considered finished when the callback returns.
         [SecurityPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-        public static void QueueBackgroundWorkItem(Action<CancellationToken> workItem) {
-            if (workItem == null) {
+        public static void QueueBackgroundWorkItem(Action<CancellationToken> workItem)
+        {
+            if (workItem == null)
+            {
                 throw new ArgumentNullException("workItem");
             }
 
-            QueueBackgroundWorkItem(ct => { workItem(ct); return _completedTask; });
+            QueueBackgroundWorkItem(ct =>
+            {
+                workItem(ct);
+                return _completedTask;
+            });
         }
 
         // See documentation on the other overload for a general API overview.
@@ -252,27 +271,41 @@ namespace System.Web.Hosting {
         // work item will be considered finished when the returned Task transitions to a
         // terminal state.
         [SecurityPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-        public static void QueueBackgroundWorkItem(Func<CancellationToken, Task> workItem) {
-            if (workItem == null) {
+        public static void QueueBackgroundWorkItem(Func<CancellationToken, Task> workItem)
+        {
+            if (workItem == null)
+            {
                 throw new ArgumentNullException("workItem");
             }
-            if (Host == null) {
+            if (Host == null)
+            {
                 throw new InvalidOperationException(); // can only be called within an ASP.NET AppDomain
             }
 
             QueueBackgroundWorkItemInternal(workItem);
         }
 
-        static void QueueBackgroundWorkItemInternal(Func<CancellationToken, Task> workItem) {
+        static void QueueBackgroundWorkItemInternal(Func<CancellationToken, Task> workItem)
+        {
             Debug.Assert(workItem != null);
 
             BackgroundWorkScheduler scheduler = Volatile.Read(ref _backgroundWorkScheduler);
 
             // If the scheduler doesn't exist, lazily create it, but only allow one instance to ever be published to the backing field
-            if (scheduler == null) {
-                BackgroundWorkScheduler newlyCreatedScheduler = new BackgroundWorkScheduler(UnregisterObject, WriteUnhandledException);
-                scheduler = Interlocked.CompareExchange(ref _backgroundWorkScheduler, newlyCreatedScheduler, null) ?? newlyCreatedScheduler;
-                if (scheduler == newlyCreatedScheduler) {
+            if (scheduler == null)
+            {
+                BackgroundWorkScheduler newlyCreatedScheduler = new BackgroundWorkScheduler(
+                    UnregisterObject,
+                    WriteUnhandledException
+                );
+                scheduler =
+                    Interlocked.CompareExchange(
+                        ref _backgroundWorkScheduler,
+                        newlyCreatedScheduler,
+                        null
+                    ) ?? newlyCreatedScheduler;
+                if (scheduler == newlyCreatedScheduler)
+                {
                     RegisterObject(scheduler); // Only call RegisterObject if we just created the "winning" one
                 }
             }
@@ -280,10 +313,9 @@ namespace System.Web.Hosting {
             scheduler.ScheduleWorkItem(workItem);
         }
 
-        static void WriteUnhandledException (AppDomain appDomain, Exception exception)
+        static void WriteUnhandledException(AppDomain appDomain, Exception exception)
         {
-            Console.Error.WriteLine ("Error in background work item: " + exception);
+            Console.Error.WriteLine("Error in background work item: " + exception);
         }
     }
 }
-

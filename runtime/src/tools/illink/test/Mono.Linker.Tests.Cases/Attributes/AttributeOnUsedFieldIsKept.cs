@@ -5,25 +5,23 @@ namespace Mono.Linker.Tests.Cases.Attributes
 {
     class AttributeOnUsedFieldIsKept
     {
-        public static void Main ()
+        public static void Main()
         {
-            var val = new A ().field;
+            var val = new A().field;
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class A
         {
             [Kept]
-            [KeptAttributeAttribute (typeof (FooAttribute))]
+            [KeptAttributeAttribute(typeof(FooAttribute))]
             [Foo]
             public int field;
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (System.Attribute))]
-        class FooAttribute : Attribute
-        {
-        }
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(System.Attribute))]
+        class FooAttribute : Attribute { }
     }
 }

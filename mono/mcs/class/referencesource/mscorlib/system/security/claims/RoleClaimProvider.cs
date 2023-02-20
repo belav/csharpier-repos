@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 //
 // RoleClaimProvider.cs
 //
@@ -17,7 +17,7 @@ namespace System.Security.Claims
     /// This internal class is used to wrap role claims that can be set on GenericPrincipal.  They need to be kept distinct from other claims.
     /// ClaimsIdentity has a property the holds this type.  Since it is internal, few checks are
     /// made on parameters.
-    /// </summary>    
+    /// </summary>
 
     [System.Runtime.InteropServices.ComVisible(false)]
     internal class RoleClaimProvider
@@ -41,11 +41,17 @@ namespace System.Security.Claims
                 {
                     if (m_roles[i] != null)
                     {
-                        yield return new Claim(m_subject.RoleClaimType, m_roles[i], ClaimValueTypes.String, m_issuer, m_issuer, m_subject);
+                        yield return new Claim(
+                            m_subject.RoleClaimType,
+                            m_roles[i],
+                            ClaimValueTypes.String,
+                            m_issuer,
+                            m_issuer,
+                            m_subject
+                        );
                     }
                 }
             }
         }
     }
-
 }

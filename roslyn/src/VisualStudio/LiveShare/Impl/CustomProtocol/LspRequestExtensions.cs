@@ -12,11 +12,14 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Protocol
 {
     public static class LspRequestExtensions
     {
-        public static LS.LspRequest<TIn, TOut> ToLSRequest<TIn, TOut>(this LSP.LspRequest<TIn, TOut> lspRequest)
-            => new LS.LspRequest<TIn, TOut>(lspRequest.Name);
+        public static LS.LspRequest<TIn, TOut> ToLSRequest<TIn, TOut>(
+            this LSP.LspRequest<TIn, TOut> lspRequest
+        ) => new LS.LspRequest<TIn, TOut>(lspRequest.Name);
 
-        public static LSP.ClientCapabilities GetClientCapabilities(this LS.RequestContext requestContext)
-            => requestContext.ClientCapabilities?.ToObject<LSP.ClientCapabilities>() ?? new LSP.VSInternalClientCapabilities();
-
+        public static LSP.ClientCapabilities GetClientCapabilities(
+            this LS.RequestContext requestContext
+        ) =>
+            requestContext.ClientCapabilities?.ToObject<LSP.ClientCapabilities>()
+            ?? new LSP.VSInternalClientCapabilities();
     }
 }

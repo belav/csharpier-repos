@@ -1,5 +1,5 @@
 //
-// DataListItemCas.cs 
+// DataListItemCas.cs
 //    - CAS unit tests for System.Web.UI.WebControls.DataListItem
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,42 +38,48 @@ using System.Web.UI.WebControls;
 
 using MonoTests.System.Web.UI.WebControls;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
-
+namespace MonoCasTests.System.Web.UI.WebControls
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class DataListItemCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class DataListItemCas : AspNetHostingMinimal
+    {
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
         {
-            DataListItemTest unit = new DataListItemTest ();
-            unit.AlternatingItem ();
-            unit.EditItem ();
-            unit.Footer ();
-            unit.Header ();
-            unit.Item ();
-            unit.Pager ();
-            unit.SelectedItem ();
-            unit.Separator ();
-            unit.Bad_ListItemType ();
-            unit.Controls_Table ();
-            unit.Controls_Table_Dual ();
-            unit.Controls_LiteralControl ();
+            DataListItemTest unit = new DataListItemTest();
+            unit.AlternatingItem();
+            unit.EditItem();
+            unit.Footer();
+            unit.Header();
+            unit.Item();
+            unit.Pager();
+            unit.SelectedItem();
+            unit.Separator();
+            unit.Bad_ListItemType();
+            unit.Controls_Table();
+            unit.Controls_Table_Dual();
+            unit.Controls_LiteralControl();
         }
 
         // LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[2] { typeof (int), typeof (ListItemType) });
-            Assert.IsNotNull (ci, ".ctor(int,ListItemType)");
-            return ci.Invoke (new object[2] { 0, ListItemType.Item });
+            ConstructorInfo ci = this.Type.GetConstructor(
+                new Type[2] { typeof(int), typeof(ListItemType) }
+            );
+            Assert.IsNotNull(ci, ".ctor(int,ListItemType)");
+            return ci.Invoke(new object[2] { 0, ListItemType.Item });
         }
 
-        public override Type Type {
-            get { return typeof (DataListItem); }
+        public override Type Type
+        {
+            get { return typeof(DataListItem); }
         }
     }
 }

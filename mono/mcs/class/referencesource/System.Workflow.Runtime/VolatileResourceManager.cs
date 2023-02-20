@@ -10,7 +10,7 @@ namespace System.Workflow.Runtime
 {
     /// <summary>
     /// Volatile Resource Manager
-    /// </summary>    
+    /// </summary>
     internal sealed class VolatileResourceManager
     {
         // members
@@ -18,17 +18,12 @@ namespace System.Workflow.Runtime
         private WorkBatch _mergedBatch = null;
 
         // constructor
-        internal VolatileResourceManager()
-        {
-        }
+        internal VolatileResourceManager() { }
 
         // properties
         internal WorkBatchCollection BatchCollection
         {
-            get
-            {
-                return _workCollection;
-            }
+            get { return _workCollection; }
         }
 
         internal bool IsBatchDirty

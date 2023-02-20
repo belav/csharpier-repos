@@ -19,9 +19,8 @@ public class TagHelperExecutionContext
         string uniqueId,
         Func<Task> executeChildContentAsync,
         Action<HtmlEncoder> startTagHelperWritingScope,
-        Func<TagHelperContent> endTagHelperWritingScope)
-    {
-    }
+        Func<TagHelperContent> endTagHelperWritingScope
+    ) { }
 
     public bool ChildContentRetrieved => false;
 
@@ -33,34 +32,27 @@ public class TagHelperExecutionContext
 
     public TagHelperContext Context { get; }
 
-    public void Add(ITagHelper tagHelper)
-    {
-    }
+    public void Add(ITagHelper tagHelper) { }
 
-    public void AddHtmlAttribute(string name, object value, HtmlAttributeValueStyle valueStyle)
-    {
-    }
+    public void AddHtmlAttribute(string name, object value, HtmlAttributeValueStyle valueStyle) { }
 
-    public void AddHtmlAttribute(TagHelperAttribute attribute)
-    {
-    }
+    public void AddHtmlAttribute(TagHelperAttribute attribute) { }
 
-    public void AddTagHelperAttribute(string name, object value, HtmlAttributeValueStyle valueStyle)
-    {
-    }
+    public void AddTagHelperAttribute(
+        string name,
+        object value,
+        HtmlAttributeValueStyle valueStyle
+    ) { }
 
-    public void AddTagHelperAttribute(TagHelperAttribute attribute)
-    {
-    }
+    public void AddTagHelperAttribute(TagHelperAttribute attribute) { }
 
     public void Reinitialize(
         string tagName,
         TagMode tagMode,
         IDictionary<object, object> items,
         string uniqueId,
-        Func<Task> executeChildContentAsync)
-    {
-    }
+        Func<Task> executeChildContentAsync
+    ) { }
 
     public Task SetOutputContentAsync()
     {

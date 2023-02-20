@@ -13,7 +13,9 @@ namespace System.Collections.Frozen
     /// </remarks>
     internal sealed class FullCaseInsensitiveStringComparer : StringComparerBase
     {
-        public override bool Equals(string? x, string? y) => StringComparer.OrdinalIgnoreCase.Equals(x, y);
+        public override bool Equals(string? x, string? y) =>
+            StringComparer.OrdinalIgnoreCase.Equals(x, y);
+
         public override int GetHashCode(string s) => GetHashCodeOrdinalIgnoreCase(s.AsSpan());
     }
 }

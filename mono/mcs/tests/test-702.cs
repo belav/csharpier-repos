@@ -2,20 +2,20 @@ struct S
 {
     int a;
     int b;
-    
-    public S (int i)
+
+    public S(int i)
     {
-        this = new S ();
+        this = new S();
     }
-    
-    public S (string s, int a)
+
+    public S(string s, int a)
     {
         this.a = a;
         this.b = 2;
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        S s = new S (1);
+        S s = new S(1);
     }
 }

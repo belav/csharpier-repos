@@ -26,10 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
-
-    internal sealed class Section : IHeader, IBinaryVisitable {
-
+namespace Mono.Cecil.Binary
+{
+    internal sealed class Section : IHeader, IBinaryVisitable
+    {
         public const string Text = ".text";
         public const string Resources = ".rsrc";
         public const string Relocs = ".reloc";
@@ -46,21 +46,19 @@ namespace Mono.Cecil.Binary {
         public SectionCharacteristics Characteristics;
 
         public string Name;
-        public byte [] Data;
+        public byte[] Data;
 
-        internal Section ()
-        {
-        }
+        internal Section() { }
 
-        public void SetDefaultValues ()
+        public void SetDefaultValues()
         {
             PointerToLineNumbers = RVA.Zero;
             NumberOfLineNumbers = 0;
         }
 
-        public void Accept (IBinaryVisitor visitor)
+        public void Accept(IBinaryVisitor visitor)
         {
-            visitor.VisitSection (this);
+            visitor.VisitSection(this);
         }
     }
 }

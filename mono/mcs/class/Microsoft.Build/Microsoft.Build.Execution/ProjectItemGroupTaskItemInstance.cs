@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,27 +33,29 @@ namespace Microsoft.Build.Execution
 {
     public class ProjectItemGroupTaskItemInstance
     {
-        internal ProjectItemGroupTaskItemInstance (ProjectItemElement xml)
+        internal ProjectItemGroupTaskItemInstance(ProjectItemElement xml)
         {
             Condition = xml.Condition;
             Exclude = xml.Exclude;
             Include = xml.Include;
             ItemType = xml.ItemType;
-            Metadata = xml.Metadata.Select (m => new ProjectItemGroupTaskMetadataInstance (m)).ToArray ();
+            Metadata = xml.Metadata
+                .Select(m => new ProjectItemGroupTaskMetadataInstance(m))
+                .ToArray();
             Remove = xml.Remove;
             KeepDuplicates = xml.KeepDuplicates;
             KeepMetadata = xml.KeepMetadata;
             RemoveMetadata = xml.RemoveMetadata;
-            
+
             ConditionLocation = xml.ConditionLocation;
             ExcludeLocation = xml.ExcludeLocation;
             IncludeLocation = xml.IncludeLocation;
             Location = xml.Location;
             KeepDuplicatesLocation = xml.KeepDuplicatesLocation;
             RemoveLocation = xml.RemoveLocation;
-            RemoveMetadataLocation = xml.RemoveMetadataLocation;            
+            RemoveMetadataLocation = xml.RemoveMetadataLocation;
         }
-        
+
         public string Condition { get; private set; }
 
         public string Exclude { get; private set; }
@@ -88,4 +90,3 @@ namespace Microsoft.Build.Execution
         public ElementLocation RemoveMetadataLocation { get; private set; }
     }
 }
-

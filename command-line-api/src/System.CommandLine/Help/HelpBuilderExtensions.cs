@@ -23,18 +23,21 @@ namespace System.CommandLine.Help
             Symbol symbol,
             string? firstColumnText = null,
             string? secondColumnText = null,
-            string? defaultValue = null)
+            string? defaultValue = null
+        )
         {
-            builder.CustomizeSymbol(symbol, _ => firstColumnText, _ => secondColumnText, _ => defaultValue);
+            builder.CustomizeSymbol(
+                symbol,
+                _ => firstColumnText,
+                _ => secondColumnText,
+                _ => defaultValue
+            );
         }
 
         /// <summary>
         /// Writes help output for the specified command.
         /// </summary>
-        public static void Write(
-            this HelpBuilder helpBuilder,
-            Command command,
-            TextWriter writer)
+        public static void Write(this HelpBuilder helpBuilder, Command command, TextWriter writer)
         {
             helpBuilder.Write(new HelpContext(helpBuilder, command, writer));
         }

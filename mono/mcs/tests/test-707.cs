@@ -4,21 +4,16 @@ class Tzap
 {
     protected class Baz : Tzap.Bar
     {
-
-        public void Gazonk ()
+        public void Gazonk()
         {
-            this.Foo ();
+            this.Foo();
         }
 
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 
     protected abstract class Bar
     {
-        protected virtual void Foo ()
-        {
-        }
+        protected virtual void Foo() { }
     }
 }

@@ -6,7 +6,10 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public class ManyToManyNoTrackingQueryInMemoryTest
     : ManyToManyNoTrackingQueryTestBase<ManyToManyQueryInMemoryFixture>
 {
-    public ManyToManyNoTrackingQueryInMemoryTest(ManyToManyQueryInMemoryFixture fixture, ITestOutputHelper testOutputHelper)
+    public ManyToManyNoTrackingQueryInMemoryTest(
+        ManyToManyQueryInMemoryFixture fixture,
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;

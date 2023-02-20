@@ -1,7 +1,7 @@
 ///------------------------------------------------------------------------------
 /// <copyright file="CLRConfig.cs" company="Microsoft">
 ///     Copyright (c) Microsoft Corporation.  All rights reserved.
-/// </copyright>                               
+/// </copyright>
 ///
 /// <owner>gpaperin</owner>
 ///------------------------------------------------------------------------------
@@ -11,7 +11,8 @@ using System.Runtime.Versioning;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace System {
+namespace System
+{
     /// <summary>
     /// For now, this class should be the central point to collect all managed declarations
     /// of native functions designed to expose config switches.
@@ -19,8 +20,8 @@ namespace System {
     /// and refactor managed Fx code to access all compat switches through here.
     /// </summary>
     [FriendAccessAllowed]
-    internal class CLRConfig {
-
+    internal class CLRConfig
+    {
         [FriendAccessAllowed]
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
@@ -35,9 +36,7 @@ namespace System {
         [SuppressUnmanagedCodeSecurity]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         extern internal static bool CheckThrowUnobservedTaskExceptions();
-
-    }  // internal class CLRConfig
-
-}  // namespace System
+    } // internal class CLRConfig
+} // namespace System
 
 // file CLRConfig

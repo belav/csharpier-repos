@@ -7,12 +7,12 @@ using System.Reflection;
 
 public abstract class Base<T>
 {
-   public virtual T Get() => throw new NotImplementedException();
+    public virtual T Get() => throw new NotImplementedException();
 }
 
 public sealed class CovariantReturn : Base<object>
 {
-   public override string Get() => throw new NotImplementedException();
+    public override string Get() => throw new NotImplementedException();
 }
 
 public abstract class ABase
@@ -25,10 +25,7 @@ public sealed class Concrete<T> : ABase
 {
     public override T this[int index]
     {
-        get
-        {
-            throw null;
-        }
+        get { throw null; }
     }
 }
 
@@ -37,9 +34,13 @@ class Parent
     public virtual object Value { get; }
 }
 
-class Child<T> : Parent where T : class
+class Child<T> : Parent
+    where T : class
 {
-    public override T Value { get => (T)base.Value; }
+    public override T Value
+    {
+        get => (T)base.Value;
+    }
 }
 
 class Foo { }

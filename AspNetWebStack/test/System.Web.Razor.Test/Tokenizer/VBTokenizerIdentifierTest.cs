@@ -23,13 +23,21 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void Escaped_Identifier_Terminates_At_Whitespace()
         {
-            TestTokenizer("[foo ", new VBSymbol(0, 0, 0, "[foo", VBSymbolType.Identifier), IgnoreRemaining);
+            TestTokenizer(
+                "[foo ",
+                new VBSymbol(0, 0, 0, "[foo", VBSymbolType.Identifier),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
         public void Escaped_Identifier_Terminates_At_RightBracket_And_Does_Not_Read_TypeCharacter()
         {
-            TestTokenizer("[foo]&", new VBSymbol(0, 0, 0, "[foo]", VBSymbolType.Identifier), IgnoreRemaining);
+            TestTokenizer(
+                "[foo]&",
+                new VBSymbol(0, 0, 0, "[foo]", VBSymbolType.Identifier),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
@@ -262,7 +270,10 @@ namespace System.Web.Razor.Test.Tokenizer
 
         private void TestKeyword(string keyword, VBKeyword keywordType)
         {
-            TestTokenizer(keyword, new VBSymbol(0, 0, 0, keyword, VBSymbolType.Keyword) { Keyword = keywordType });
+            TestTokenizer(
+                keyword,
+                new VBSymbol(0, 0, 0, keyword, VBSymbolType.Keyword) { Keyword = keywordType }
+            );
         }
     }
 }

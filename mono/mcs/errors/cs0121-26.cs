@@ -7,7 +7,7 @@ namespace A.B
 {
     static class X
     {
-        public static int Test (this int o)
+        public static int Test(this int o)
         {
             return 1;
         }
@@ -18,7 +18,7 @@ namespace A.C
 {
     static class X
     {
-        public static int Test (this int o)
+        public static int Test(this int o)
         {
             return 2;
         }
@@ -32,9 +32,9 @@ namespace C
 
     class M
     {
-        public static int Main ()
+        public static int Main()
         {
-            if (1.Test () != 1)
+            if (1.Test() != 1)
                 return 1;
 
             return 0;

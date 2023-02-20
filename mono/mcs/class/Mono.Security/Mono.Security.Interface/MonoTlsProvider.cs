@@ -62,82 +62,75 @@ namespace Mono.Security.Interface
         NoEncryption
     }
 
-    public delegate bool MonoRemoteCertificateValidationCallback (
-        string targetHost, X509Certificate certificate, X509Chain chain, MonoSslPolicyErrors sslPolicyErrors);
+    public delegate bool MonoRemoteCertificateValidationCallback(
+        string targetHost,
+        X509Certificate certificate,
+        X509Chain chain,
+        MonoSslPolicyErrors sslPolicyErrors
+    );
 
-    public delegate X509Certificate MonoLocalCertificateSelectionCallback (
-        string targetHost, X509CertificateCollection localCertificates, X509Certificate remoteCertificate,
-        string[] acceptableIssuers);
+    public delegate X509Certificate MonoLocalCertificateSelectionCallback(
+        string targetHost,
+        X509CertificateCollection localCertificates,
+        X509Certificate remoteCertificate,
+        string[] acceptableIssuers
+    );
 
     public abstract class MonoTlsProvider
     {
-        internal MonoTlsProvider ()
-        {
-        }
+        internal MonoTlsProvider() { }
 
-        public abstract Guid ID {
-            get;
-        }
+        public abstract Guid ID { get; }
 
-        public abstract string Name {
-            get;
-        }
+        public abstract string Name { get; }
 
-#region SslStream
+        #region SslStream
 
         /*
          * This section abstracts the @SslStream class.
          *
          */
 
-        public abstract bool SupportsSslStream {
-            get;
-        }
+        public abstract bool SupportsSslStream { get; }
 
         /*
          * Does this provider support IMonoSslStream.GetConnectionInfo() ?
          */
-        public abstract bool SupportsConnectionInfo {
-            get;
-        }
+        public abstract bool SupportsConnectionInfo { get; }
 
         /*
          * Whether or not this TLS Provider supports Mono-specific extensions
          * (via @MonoTlsSettings).
          */
-        public abstract bool SupportsMonoExtensions {
-            get;
-        }
+        public abstract bool SupportsMonoExtensions { get; }
 
-        public abstract SslProtocols SupportedProtocols {
-            get;
-        }
+        public abstract SslProtocols SupportedProtocols { get; }
 
         /*
          * Obtain a @IMonoSslStream instance.
          *
          */
-        public abstract IMonoSslStream CreateSslStream (
-            Stream innerStream, bool leaveInnerStreamOpen,
-            MonoTlsSettings settings = null);
+        public abstract IMonoSslStream CreateSslStream(
+            Stream innerStream,
+            bool leaveInnerStreamOpen,
+            MonoTlsSettings settings = null
+        );
 
-#endregion
+        #endregion
 
-#region Native Certificate Implementation
+        #region Native Certificate Implementation
 
-        internal virtual bool HasNativeCertificates {
+        internal virtual bool HasNativeCertificates
+        {
             get { return false; }
         }
 
-#endregion
+        #endregion
 
-#region Misc
+        #region Misc
 
-        internal abstract bool SupportsCleanShutdown {
-            get;
-        }
+        internal abstract bool SupportsCleanShutdown { get; }
 
-#endregion
-
+        #endregion
     }
 }

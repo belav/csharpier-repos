@@ -30,26 +30,54 @@ namespace System.Net.Security
             return SSPIWrapper.AcquireDefaultCredential(
                 GlobalSSPI.SSPIAuth,
                 package,
-                (isServer ? Interop.SspiCli.CredentialUse.SECPKG_CRED_INBOUND : Interop.SspiCli.CredentialUse.SECPKG_CRED_OUTBOUND));
+                (
+                    isServer
+                        ? Interop.SspiCli.CredentialUse.SECPKG_CRED_INBOUND
+                        : Interop.SspiCli.CredentialUse.SECPKG_CRED_OUTBOUND
+                )
+            );
         }
 
-        internal static SafeFreeCredentials AcquireCredentialsHandle(string package, bool isServer, NetworkCredential credential)
+        internal static SafeFreeCredentials AcquireCredentialsHandle(
+            string package,
+            bool isServer,
+            NetworkCredential credential
+        )
         {
             SafeSspiAuthDataHandle? authData = null;
             try
             {
                 Interop.SECURITY_STATUS result = Interop.SspiCli.SspiEncodeStringsAsAuthIdentity(
-                    credential.UserName, credential.Domain,
-                    credential.Password, out authData);
+                    credential.UserName,
+                    credential.Domain,
+                    credential.Password,
+                    out authData
+                );
 
                 if (result != Interop.SECURITY_STATUS.OK)
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(null, SR.Format(SR.net_log_operation_failed_with_error, nameof(Interop.SspiCli.SspiEncodeStringsAsAuthIdentity), $"0x{(int)result:X}"));
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Error(
+                            null,
+                            SR.Format(
+                                SR.net_log_operation_failed_with_error,
+                                nameof(Interop.SspiCli.SspiEncodeStringsAsAuthIdentity),
+                                $"0x{(int)result:X}"
+                            )
+                        );
                     throw new Win32Exception((int)result);
                 }
 
-                return SSPIWrapper.AcquireCredentialsHandle(GlobalSSPI.SSPIAuth,
-                    package, (isServer ? Interop.SspiCli.CredentialUse.SECPKG_CRED_INBOUND : Interop.SspiCli.CredentialUse.SECPKG_CRED_OUTBOUND), ref authData);
+                return SSPIWrapper.AcquireCredentialsHandle(
+                    GlobalSSPI.SSPIAuth,
+                    package,
+                    (
+                        isServer
+                            ? Interop.SspiCli.CredentialUse.SECPKG_CRED_INBOUND
+                            : Interop.SspiCli.CredentialUse.SECPKG_CRED_OUTBOUND
+                    ),
+                    ref authData
+                );
             }
             finally
             {
@@ -59,21 +87,41 @@ namespace System.Net.Security
 
         internal static string? QueryContextAssociatedName(SafeDeleteContext securityContext)
         {
-            return SSPIWrapper.QueryStringContextAttributes(GlobalSSPI.SSPIAuth, securityContext, Interop.SspiCli.ContextAttribute.SECPKG_ATTR_NAMES);
+            return SSPIWrapper.QueryStringContextAttributes(
+                GlobalSSPI.SSPIAuth,
+                securityContext,
+                Interop.SspiCli.ContextAttribute.SECPKG_ATTR_NAMES
+            );
         }
 
         internal static string? QueryContextClientSpecifiedSpn(SafeDeleteContext securityContext)
         {
-            return SSPIWrapper.QueryStringContextAttributes(GlobalSSPI.SSPIAuth, securityContext, Interop.SspiCli.ContextAttribute.SECPKG_ATTR_CLIENT_SPECIFIED_TARGET);
+            return SSPIWrapper.QueryStringContextAttributes(
+                GlobalSSPI.SSPIAuth,
+                securityContext,
+                Interop.SspiCli.ContextAttribute.SECPKG_ATTR_CLIENT_SPECIFIED_TARGET
+            );
         }
 
         internal static string? QueryContextAuthenticationPackage(SafeDeleteContext securityContext)
         {
             SecPkgContext_NegotiationInfoW ctx = default;
-            bool success = SSPIWrapper.QueryBlittableContextAttributes(GlobalSSPI.SSPIAuth, securityContext, Interop.SspiCli.ContextAttribute.SECPKG_ATTR_NEGOTIATION_INFO, typeof(SafeFreeContextBuffer), out SafeHandle? sspiHandle, ref ctx);
+            bool success = SSPIWrapper.QueryBlittableContextAttributes(
+                GlobalSSPI.SSPIAuth,
+                securityContext,
+                Interop.SspiCli.ContextAttribute.SECPKG_ATTR_NEGOTIATION_INFO,
+                typeof(SafeFreeContextBuffer),
+                out SafeHandle? sspiHandle,
+                ref ctx
+            );
             using (sspiHandle)
             {
-                return success ? NegotiationInfoClass.GetAuthenticationPackageName(sspiHandle!, (int)ctx.NegotiationState) : null;
+                return success
+                    ? NegotiationInfoClass.GetAuthenticationPackageName(
+                        sspiHandle!,
+                        (int)ctx.NegotiationState
+                    )
+                    : null;
             }
         }
 
@@ -86,13 +134,15 @@ namespace System.Net.Security
             ChannelBinding? channelBinding,
             ref byte[]? resultBlob,
             out int resultBlobLength,
-            ref ContextFlagsPal contextFlags)
+            ref ContextFlagsPal contextFlags
+        )
         {
-
             InputSecurityBuffers inputBuffers = default;
             if (!incomingBlob.IsEmpty)
             {
-                inputBuffers.SetNextBuffer(new InputSecurityBuffer(incomingBlob, SecurityBufferType.SECBUFFER_TOKEN));
+                inputBuffers.SetNextBuffer(
+                    new InputSecurityBuffer(incomingBlob, SecurityBufferType.SECBUFFER_TOKEN)
+                );
             }
 
             if (channelBinding != null)
@@ -100,21 +150,26 @@ namespace System.Net.Security
                 inputBuffers.SetNextBuffer(new InputSecurityBuffer(channelBinding));
             }
 
-            var outSecurityBuffer = new SecurityBuffer(resultBlob, SecurityBufferType.SECBUFFER_TOKEN);
+            var outSecurityBuffer = new SecurityBuffer(
+                resultBlob,
+                SecurityBufferType.SECBUFFER_TOKEN
+            );
 
             Interop.SspiCli.ContextFlags outContextFlags = Interop.SspiCli.ContextFlags.Zero;
             // There is only one SafeDeleteContext type on Windows which is SafeDeleteSslContext so this cast is safe.
             SafeDeleteSslContext? sslContext = (SafeDeleteSslContext?)securityContext;
-            Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)SSPIWrapper.InitializeSecurityContext(
-                GlobalSSPI.SSPIAuth,
-                ref credentialsHandle,
-                ref sslContext,
-                spn,
-                ContextFlagsAdapterPal.GetInteropFromContextFlagsPal(requestedContextFlags),
-                Interop.SspiCli.Endianness.SECURITY_NETWORK_DREP,
-                inputBuffers,
-                ref outSecurityBuffer,
-                ref outContextFlags);
+            Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)
+                SSPIWrapper.InitializeSecurityContext(
+                    GlobalSSPI.SSPIAuth,
+                    ref credentialsHandle,
+                    ref sslContext,
+                    spn,
+                    ContextFlagsAdapterPal.GetInteropFromContextFlagsPal(requestedContextFlags),
+                    Interop.SspiCli.Endianness.SECURITY_NETWORK_DREP,
+                    inputBuffers,
+                    ref outSecurityBuffer,
+                    ref outContextFlags
+                );
             securityContext = sslContext;
             Debug.Assert(outSecurityBuffer.offset == 0);
             resultBlob = outSecurityBuffer.token;
@@ -125,15 +180,21 @@ namespace System.Net.Security
 
         internal static SecurityStatusPal CompleteAuthToken(
             ref SafeDeleteContext? securityContext,
-            ReadOnlySpan<byte> incomingBlob)
+            ReadOnlySpan<byte> incomingBlob
+        )
         {
             // There is only one SafeDeleteContext type on Windows which is SafeDeleteSslContext so this cast is safe.
             SafeDeleteSslContext? sslContext = (SafeDeleteSslContext?)securityContext;
-            var inSecurityBuffer = new InputSecurityBuffer(incomingBlob, SecurityBufferType.SECBUFFER_TOKEN);
-            Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)SSPIWrapper.CompleteAuthToken(
-                GlobalSSPI.SSPIAuth,
-                ref sslContext,
-                in inSecurityBuffer);
+            var inSecurityBuffer = new InputSecurityBuffer(
+                incomingBlob,
+                SecurityBufferType.SECBUFFER_TOKEN
+            );
+            Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)
+                SSPIWrapper.CompleteAuthToken(
+                    GlobalSSPI.SSPIAuth,
+                    ref sslContext,
+                    in inSecurityBuffer
+                );
             securityContext = sslContext;
             return SecurityStatusAdapterPal.GetSecurityStatusPalFromInterop(winStatus);
         }
@@ -146,12 +207,15 @@ namespace System.Net.Security
             ChannelBinding? channelBinding,
             ref byte[]? resultBlob,
             out int resultBlobLength,
-            ref ContextFlagsPal contextFlags)
+            ref ContextFlagsPal contextFlags
+        )
         {
             InputSecurityBuffers inputBuffers = default;
             if (!incomingBlob.IsEmpty)
             {
-                inputBuffers.SetNextBuffer(new InputSecurityBuffer(incomingBlob, SecurityBufferType.SECBUFFER_TOKEN));
+                inputBuffers.SetNextBuffer(
+                    new InputSecurityBuffer(incomingBlob, SecurityBufferType.SECBUFFER_TOKEN)
+                );
             }
 
             if (channelBinding != null)
@@ -159,25 +223,34 @@ namespace System.Net.Security
                 inputBuffers.SetNextBuffer(new InputSecurityBuffer(channelBinding));
             }
 
-            var outSecurityBuffer = new SecurityBuffer(resultBlob, SecurityBufferType.SECBUFFER_TOKEN);
+            var outSecurityBuffer = new SecurityBuffer(
+                resultBlob,
+                SecurityBufferType.SECBUFFER_TOKEN
+            );
 
             Interop.SspiCli.ContextFlags outContextFlags = Interop.SspiCli.ContextFlags.Zero;
             // There is only one SafeDeleteContext type on Windows which is SafeDeleteSslContext so this cast is safe.
             SafeDeleteSslContext? sslContext = (SafeDeleteSslContext?)securityContext;
-            Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)SSPIWrapper.AcceptSecurityContext(
-                GlobalSSPI.SSPIAuth,
-                credentialsHandle,
-                ref sslContext,
-                ContextFlagsAdapterPal.GetInteropFromContextFlagsPal(requestedContextFlags),
-                Interop.SspiCli.Endianness.SECURITY_NETWORK_DREP,
-                inputBuffers,
-                ref outSecurityBuffer,
-                ref outContextFlags);
+            Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)
+                SSPIWrapper.AcceptSecurityContext(
+                    GlobalSSPI.SSPIAuth,
+                    credentialsHandle,
+                    ref sslContext,
+                    ContextFlagsAdapterPal.GetInteropFromContextFlagsPal(requestedContextFlags),
+                    Interop.SspiCli.Endianness.SECURITY_NETWORK_DREP,
+                    inputBuffers,
+                    ref outSecurityBuffer,
+                    ref outContextFlags
+                );
 
             // SSPI Workaround
             // If a client sends up a blob on the initial request, Negotiate returns SEC_E_INVALID_HANDLE
             // when it should return SEC_E_INVALID_TOKEN.
-            if (winStatus == Interop.SECURITY_STATUS.InvalidHandle && securityContext == null && !incomingBlob.IsEmpty)
+            if (
+                winStatus == Interop.SECURITY_STATUS.InvalidHandle
+                && securityContext == null
+                && !incomingBlob.IsEmpty
+            )
             {
                 winStatus = Interop.SECURITY_STATUS.InvalidToken;
             }
@@ -192,20 +265,29 @@ namespace System.Net.Security
 
         internal static Win32Exception CreateExceptionFromError(SecurityStatusPal statusCode)
         {
-            return new Win32Exception((int)SecurityStatusAdapterPal.GetInteropFromSecurityStatusPal(statusCode));
+            return new Win32Exception(
+                (int)SecurityStatusAdapterPal.GetInteropFromSecurityStatusPal(statusCode)
+            );
         }
 
         internal static NegotiateAuthenticationStatusCode Unwrap(
             SafeDeleteContext securityContext,
             ReadOnlySpan<byte> input,
             IBufferWriter<byte> outputWriter,
-            out bool wasEncrypted)
+            out bool wasEncrypted
+        )
         {
             Span<byte> outputBuffer = outputWriter.GetSpan(input.Length).Slice(0, input.Length);
             NegotiateAuthenticationStatusCode statusCode;
 
             input.CopyTo(outputBuffer);
-            statusCode = UnwrapInPlace(securityContext, outputBuffer, out int unwrappedOffset, out int unwrappedLength, out wasEncrypted);
+            statusCode = UnwrapInPlace(
+                securityContext,
+                outputBuffer,
+                out int unwrappedOffset,
+                out int unwrappedLength,
+                out wasEncrypted
+            );
 
             if (statusCode == NegotiateAuthenticationStatusCode.Completed)
             {
@@ -224,11 +306,13 @@ namespace System.Net.Security
             Span<byte> input,
             out int unwrappedOffset,
             out int unwrappedLength,
-            out bool wasEncrypted)
+            out bool wasEncrypted
+        )
         {
             fixed (byte* inputPtr = input)
             {
-                Interop.SspiCli.SecBuffer* unmanagedBuffer = stackalloc Interop.SspiCli.SecBuffer[2];
+                Interop.SspiCli.SecBuffer* unmanagedBuffer =
+                    stackalloc Interop.SspiCli.SecBuffer[2];
                 Interop.SspiCli.SecBuffer* streamBuffer = &unmanagedBuffer[0];
                 Interop.SspiCli.SecBuffer* dataBuffer = &unmanagedBuffer[1];
                 streamBuffer->BufferType = SecurityBufferType.SECBUFFER_STREAM;
@@ -244,7 +328,11 @@ namespace System.Net.Security
                 };
 
                 uint qop;
-                int errorCode = GlobalSSPI.SSPIAuth.DecryptMessage(securityContext, ref sdcInOut, out qop);
+                int errorCode = GlobalSSPI.SSPIAuth.DecryptMessage(
+                    securityContext,
+                    ref sdcInOut,
+                    out qop
+                );
                 if (errorCode != 0)
                 {
                     unwrappedOffset = 0;
@@ -252,7 +340,8 @@ namespace System.Net.Security
                     wasEncrypted = false;
                     return errorCode switch
                     {
-                        (int)Interop.SECURITY_STATUS.MessageAltered => NegotiateAuthenticationStatusCode.MessageAltered,
+                        (int)Interop.SECURITY_STATUS.MessageAltered
+                            => NegotiateAuthenticationStatusCode.MessageAltered,
                         _ => NegotiateAuthenticationStatusCode.InvalidToken
                     };
                 }
@@ -265,7 +354,10 @@ namespace System.Net.Security
                 wasEncrypted = qop != Interop.SspiCli.SECQOP_WRAP_NO_ENCRYPT;
 
                 Debug.Assert((nint)dataBuffer->pvBuffer >= (nint)inputPtr);
-                Debug.Assert((nint)dataBuffer->pvBuffer + dataBuffer->cbBuffer <= (nint)inputPtr + input.Length);
+                Debug.Assert(
+                    (nint)dataBuffer->pvBuffer + dataBuffer->cbBuffer
+                        <= (nint)inputPtr + input.Length
+                );
                 unwrappedOffset = (int)((byte*)dataBuffer->pvBuffer - inputPtr);
                 unwrappedLength = dataBuffer->cbBuffer;
                 return NegotiateAuthenticationStatusCode.Completed;
@@ -277,10 +369,16 @@ namespace System.Net.Security
             ReadOnlySpan<byte> input,
             IBufferWriter<byte> outputWriter,
             bool requestEncryption,
-            out bool isEncrypted)
+            out bool isEncrypted
+        )
         {
             SecPkgContext_Sizes sizes = default;
-            bool success = SSPIWrapper.QueryBlittableContextAttributes(GlobalSSPI.SSPIAuth, securityContext, Interop.SspiCli.ContextAttribute.SECPKG_ATTR_SIZES, ref sizes);
+            bool success = SSPIWrapper.QueryBlittableContextAttributes(
+                GlobalSSPI.SSPIAuth,
+                securityContext,
+                Interop.SspiCli.ContextAttribute.SECPKG_ATTR_SIZES,
+                ref sizes
+            );
             Debug.Assert(success);
 
             // alloc new output buffer if not supplied or too small
@@ -295,7 +393,8 @@ namespace System.Net.Security
             fixed (byte* outputPtr = outputBuffer)
             {
                 // Prepare buffers TOKEN(signature), DATA and Padding.
-                Interop.SspiCli.SecBuffer* unmanagedBuffer = stackalloc Interop.SspiCli.SecBuffer[2];
+                Interop.SspiCli.SecBuffer* unmanagedBuffer =
+                    stackalloc Interop.SspiCli.SecBuffer[2];
                 Interop.SspiCli.SecBuffer* tokenBuffer = &unmanagedBuffer[0];
                 Interop.SspiCli.SecBuffer* dataBuffer = &unmanagedBuffer[1];
                 tokenBuffer->BufferType = SecurityBufferType.SECBUFFER_TOKEN;
@@ -311,14 +410,20 @@ namespace System.Net.Security
                 };
 
                 uint qop = requestEncryption ? 0 : Interop.SspiCli.SECQOP_WRAP_NO_ENCRYPT;
-                int errorCode = GlobalSSPI.SSPIAuth.EncryptMessage(securityContext, ref sdcInOut, qop);
+                int errorCode = GlobalSSPI.SSPIAuth.EncryptMessage(
+                    securityContext,
+                    ref sdcInOut,
+                    qop
+                );
 
                 if (errorCode != 0)
                 {
                     return errorCode switch
                     {
-                        (int)Interop.SECURITY_STATUS.ContextExpired => NegotiateAuthenticationStatusCode.ContextExpired,
-                        (int)Interop.SECURITY_STATUS.QopNotSupported => NegotiateAuthenticationStatusCode.QopNotSupported,
+                        (int)Interop.SECURITY_STATUS.ContextExpired
+                            => NegotiateAuthenticationStatusCode.ContextExpired,
+                        (int)Interop.SECURITY_STATUS.QopNotSupported
+                            => NegotiateAuthenticationStatusCode.QopNotSupported,
                         _ => NegotiateAuthenticationStatusCode.GenericFailure,
                     };
                 }
@@ -333,16 +438,25 @@ namespace System.Net.Security
             ReadOnlySpan<byte> buffer,
             bool isConfidential,
             bool isNtlm,
-            [NotNull] ref byte[]? output)
+            [NotNull] ref byte[]? output
+        )
         {
             SecPkgContext_Sizes sizes = default;
-            bool success = SSPIWrapper.QueryBlittableContextAttributes(GlobalSSPI.SSPIAuth, securityContext, Interop.SspiCli.ContextAttribute.SECPKG_ATTR_SIZES, ref sizes);
+            bool success = SSPIWrapper.QueryBlittableContextAttributes(
+                GlobalSSPI.SSPIAuth,
+                securityContext,
+                Interop.SspiCli.ContextAttribute.SECPKG_ATTR_SIZES,
+                ref sizes
+            );
             Debug.Assert(success);
 
             int maxCount = checked(int.MaxValue - 4 - sizes.cbBlockSize - sizes.cbSecurityTrailer);
             if (buffer.Length > maxCount)
             {
-                throw new ArgumentOutOfRangeException(nameof(buffer.Length), SR.Format(SR.net_io_out_range, maxCount));
+                throw new ArgumentOutOfRangeException(
+                    nameof(buffer.Length),
+                    SR.Format(SR.net_io_out_range, maxCount)
+                );
             }
 
             int resultSize = buffer.Length + sizes.cbSecurityTrailer + sizes.cbBlockSize;
@@ -357,7 +471,8 @@ namespace System.Net.Security
             fixed (byte* outputPtr = output)
             {
                 // Prepare buffers TOKEN(signature), DATA and Padding.
-                Interop.SspiCli.SecBuffer* unmanagedBuffer = stackalloc Interop.SspiCli.SecBuffer[3];
+                Interop.SspiCli.SecBuffer* unmanagedBuffer =
+                    stackalloc Interop.SspiCli.SecBuffer[3];
                 Interop.SspiCli.SecBuffer* tokenBuffer = &unmanagedBuffer[0];
                 Interop.SspiCli.SecBuffer* dataBuffer = &unmanagedBuffer[1];
                 Interop.SspiCli.SecBuffer* paddingBuffer = &unmanagedBuffer[2];
@@ -368,7 +483,9 @@ namespace System.Net.Security
                 dataBuffer->pvBuffer = (IntPtr)(outputPtr + 4 + sizes.cbSecurityTrailer);
                 dataBuffer->cbBuffer = buffer.Length;
                 paddingBuffer->BufferType = SecurityBufferType.SECBUFFER_PADDING;
-                paddingBuffer->pvBuffer = (IntPtr)(outputPtr + 4 + sizes.cbSecurityTrailer + buffer.Length);
+                paddingBuffer->pvBuffer = (IntPtr)(
+                    outputPtr + 4 + sizes.cbSecurityTrailer + buffer.Length
+                );
                 paddingBuffer->cbBuffer = sizes.cbBlockSize;
 
                 Interop.SspiCli.SecBufferDesc sdcInOut = new Interop.SspiCli.SecBufferDesc(3)
@@ -382,12 +499,17 @@ namespace System.Net.Security
                 }
 
                 uint qop = isConfidential ? 0 : Interop.SspiCli.SECQOP_WRAP_NO_ENCRYPT;
-                int errorCode = GlobalSSPI.SSPIAuth.EncryptMessage(securityContext, ref sdcInOut, qop);
+                int errorCode = GlobalSSPI.SSPIAuth.EncryptMessage(
+                    securityContext,
+                    ref sdcInOut,
+                    qop
+                );
 
                 if (errorCode != 0)
                 {
                     Exception e = new Win32Exception(errorCode);
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(null, e);
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Error(null, e);
                     throw new Win32Exception(errorCode);
                 }
 
@@ -397,13 +519,23 @@ namespace System.Net.Security
                 if (resultSize != sizes.cbSecurityTrailer)
                 {
                     forceCopy = true;
-                    output.AsSpan(4 + sizes.cbSecurityTrailer, dataBuffer->cbBuffer).CopyTo(output.AsSpan(4 + resultSize, dataBuffer->cbBuffer));
+                    output
+                        .AsSpan(4 + sizes.cbSecurityTrailer, dataBuffer->cbBuffer)
+                        .CopyTo(output.AsSpan(4 + resultSize, dataBuffer->cbBuffer));
                 }
 
                 resultSize += dataBuffer->cbBuffer;
-                if (paddingBuffer->cbBuffer != 0 && (forceCopy || resultSize != (buffer.Length + sizes.cbSecurityTrailer)))
+                if (
+                    paddingBuffer->cbBuffer != 0
+                    && (forceCopy || resultSize != (buffer.Length + sizes.cbSecurityTrailer))
+                )
                 {
-                    output.AsSpan(4 + sizes.cbSecurityTrailer + buffer.Length, paddingBuffer->cbBuffer).CopyTo(output.AsSpan(4 + resultSize, paddingBuffer->cbBuffer));
+                    output
+                        .AsSpan(
+                            4 + sizes.cbSecurityTrailer + buffer.Length,
+                            paddingBuffer->cbBuffer
+                        )
+                        .CopyTo(output.AsSpan(4 + resultSize, paddingBuffer->cbBuffer));
                 }
 
                 resultSize += paddingBuffer->cbBuffer;
@@ -418,7 +550,8 @@ namespace System.Net.Security
             Span<byte> buffer,
             bool isConfidential,
             bool isNtlm,
-            out int newOffset)
+            out int newOffset
+        )
         {
             if (isNtlm)
             {
@@ -430,7 +563,8 @@ namespace System.Net.Security
             //
             fixed (byte* bufferPtr = buffer)
             {
-                Interop.SspiCli.SecBuffer* unmanagedBuffer = stackalloc Interop.SspiCli.SecBuffer[2];
+                Interop.SspiCli.SecBuffer* unmanagedBuffer =
+                    stackalloc Interop.SspiCli.SecBuffer[2];
                 Interop.SspiCli.SecBuffer* streamBuffer = &unmanagedBuffer[0];
                 Interop.SspiCli.SecBuffer* dataBuffer = &unmanagedBuffer[1];
                 streamBuffer->BufferType = SecurityBufferType.SECBUFFER_STREAM;
@@ -446,12 +580,17 @@ namespace System.Net.Security
                 };
 
                 uint qop;
-                int errorCode = GlobalSSPI.SSPIAuth.DecryptMessage(securityContext, ref sdcInOut, out qop);
+                int errorCode = GlobalSSPI.SSPIAuth.DecryptMessage(
+                    securityContext,
+                    ref sdcInOut,
+                    out qop
+                );
 
                 if (errorCode != 0)
                 {
                     Exception e = new Win32Exception(errorCode);
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(null, e);
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Error(null, e);
                     throw new Win32Exception(errorCode);
                 }
 
@@ -467,7 +606,10 @@ namespace System.Net.Security
                 }
 
                 Debug.Assert((nint)dataBuffer->pvBuffer >= (nint)bufferPtr);
-                Debug.Assert((nint)dataBuffer->pvBuffer + dataBuffer->cbBuffer <= (nint)bufferPtr + buffer.Length);
+                Debug.Assert(
+                    (nint)dataBuffer->pvBuffer + dataBuffer->cbBuffer
+                        <= (nint)bufferPtr + buffer.Length
+                );
                 newOffset = (int)((byte*)dataBuffer->pvBuffer - bufferPtr);
                 return dataBuffer->cbBuffer;
             }
@@ -477,7 +619,8 @@ namespace System.Net.Security
             SafeDeleteContext securityContext,
             Span<byte> buffer,
             bool isConfidential,
-            out int newOffset)
+            out int newOffset
+        )
         {
             const int NtlmSignatureLength = 16;
 
@@ -491,7 +634,8 @@ namespace System.Net.Security
             fixed (byte* bufferPtr = buffer)
             {
                 SecurityBufferType realDataType = SecurityBufferType.SECBUFFER_DATA;
-                Interop.SspiCli.SecBuffer* unmanagedBuffer = stackalloc Interop.SspiCli.SecBuffer[2];
+                Interop.SspiCli.SecBuffer* unmanagedBuffer =
+                    stackalloc Interop.SspiCli.SecBuffer[2];
                 Interop.SspiCli.SecBuffer* tokenBuffer = &unmanagedBuffer[0];
                 Interop.SspiCli.SecBuffer* dataBuffer = &unmanagedBuffer[1];
                 tokenBuffer->BufferType = SecurityBufferType.SECBUFFER_TOKEN;
@@ -514,12 +658,17 @@ namespace System.Net.Security
                     dataBuffer->BufferType = realDataType;
                 }
 
-                errorCode = GlobalSSPI.SSPIAuth.DecryptMessage(securityContext, ref sdcInOut, out qop);
+                errorCode = GlobalSSPI.SSPIAuth.DecryptMessage(
+                    securityContext,
+                    ref sdcInOut,
+                    out qop
+                );
 
                 if (errorCode != 0)
                 {
                     Exception e = new Win32Exception(errorCode);
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(null, e);
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Error(null, e);
                     throw new Win32Exception(errorCode);
                 }
 
@@ -535,7 +684,10 @@ namespace System.Net.Security
                 }
 
                 Debug.Assert((nint)dataBuffer->pvBuffer >= (nint)bufferPtr);
-                Debug.Assert((nint)dataBuffer->pvBuffer + dataBuffer->cbBuffer <= (nint)bufferPtr + buffer.Length);
+                Debug.Assert(
+                    (nint)dataBuffer->pvBuffer + dataBuffer->cbBuffer
+                        <= (nint)bufferPtr + buffer.Length
+                );
                 newOffset = (int)((byte*)dataBuffer->pvBuffer - bufferPtr);
                 return dataBuffer->cbBuffer;
             }

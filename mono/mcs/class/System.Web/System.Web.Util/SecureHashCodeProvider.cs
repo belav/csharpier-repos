@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,34 +36,45 @@ namespace System.Web.Util
 {
     class SecureHashCodeProvider : IHashCodeProvider
     {
-        static readonly SecureHashCodeProvider singletonInvariant = new SecureHashCodeProvider (CultureInfo.InvariantCulture);
+        static readonly SecureHashCodeProvider singletonInvariant = new SecureHashCodeProvider(
+            CultureInfo.InvariantCulture
+        );
         static SecureHashCodeProvider singleton;
-        static readonly object sync = new object ();
+        static readonly object sync = new object();
         static readonly int seed;
-        
+
         TextInfo m_text; // must match MS name for serialization
 
-        public static SecureHashCodeProvider Default {
-            get {
-                lock (sync) {
-                    if (singleton == null) {
-                        singleton = new SecureHashCodeProvider ();
-                    } else if (singleton.m_text == null) {
-                        if (!AreEqual (CultureInfo.CurrentCulture, CultureInfo.InvariantCulture))
-                            singleton = new SecureHashCodeProvider ();
-                    } else if (!AreEqual (singleton.m_text, CultureInfo.CurrentCulture)) {
-                        singleton = new SecureHashCodeProvider ();
+        public static SecureHashCodeProvider Default
+        {
+            get
+            {
+                lock (sync)
+                {
+                    if (singleton == null)
+                    {
+                        singleton = new SecureHashCodeProvider();
+                    }
+                    else if (singleton.m_text == null)
+                    {
+                        if (!AreEqual(CultureInfo.CurrentCulture, CultureInfo.InvariantCulture))
+                            singleton = new SecureHashCodeProvider();
+                    }
+                    else if (!AreEqual(singleton.m_text, CultureInfo.CurrentCulture))
+                    {
+                        singleton = new SecureHashCodeProvider();
                     }
                     return singleton;
                 }
             }
         }
-        
-        public static SecureHashCodeProvider DefaultInvariant {
+
+        public static SecureHashCodeProvider DefaultInvariant
+        {
             get { return singletonInvariant; }
         }
-        
-        static SecureHashCodeProvider ()
+
+        static SecureHashCodeProvider()
         {
             // It should be enough to fend off the attack described in
             // https://bugzilla.novell.com/show_bug.cgi?id=739119
@@ -73,55 +84,60 @@ namespace System.Web.Util
             // would only be as many as 1000 possible values
             seed = (int)DateTime.UtcNow.Ticks;
         }
-        
+
         // Public instance constructor
-        public SecureHashCodeProvider ()
+        public SecureHashCodeProvider()
         {
             CultureInfo culture = CultureInfo.CurrentCulture;
-            if (!AreEqual (culture, CultureInfo.InvariantCulture))
+            if (!AreEqual(culture, CultureInfo.InvariantCulture))
                 m_text = CultureInfo.CurrentCulture.TextInfo;
         }
 
-        public SecureHashCodeProvider (CultureInfo culture)
+        public SecureHashCodeProvider(CultureInfo culture)
         {
             if (culture == null)
-                 throw new ArgumentNullException ("culture");
-            if (!AreEqual (culture, CultureInfo.InvariantCulture))
+                throw new ArgumentNullException("culture");
+            if (!AreEqual(culture, CultureInfo.InvariantCulture))
                 m_text = culture.TextInfo;
         }
 
-        static bool AreEqual (CultureInfo a, CultureInfo b)
+        static bool AreEqual(CultureInfo a, CultureInfo b)
         {
             return a.LCID == b.LCID;
         }
 
-        static bool AreEqual (TextInfo info, CultureInfo culture)
+        static bool AreEqual(TextInfo info, CultureInfo culture)
         {
             return info.LCID == culture.LCID;
         }
-        
-        public int GetHashCode (object obj)
+
+        public int GetHashCode(object obj)
         {
             if (obj == null)
-                throw new ArgumentNullException ("obj");
+                throw new ArgumentNullException("obj");
 
             string str = obj as string;
 
             if (str == null)
-                return obj.GetHashCode ();
+                return obj.GetHashCode();
 
             int h = seed;
             char c;
 
-            if ((m_text != null) && !AreEqual (m_text, CultureInfo.InvariantCulture)) {
-                str = m_text.ToLower (str);
-                for (int i = 0; i < str.Length; i++) {
-                    c = str [i];
+            if ((m_text != null) && !AreEqual(m_text, CultureInfo.InvariantCulture))
+            {
+                str = m_text.ToLower(str);
+                for (int i = 0; i < str.Length; i++)
+                {
+                    c = str[i];
                     h = h * 31 + c;
                 }
-            } else {
-                for (int i = 0; i < str.Length; i++) {
-                    c = Char.ToLower (str [i], CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                for (int i = 0; i < str.Length; i++)
+                {
+                    c = Char.ToLower(str[i], CultureInfo.InvariantCulture);
                     h = h * 31 + c;
                 }
             }

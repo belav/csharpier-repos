@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,30 +38,36 @@ namespace System.Web.UI.WebControls
         int rowIndex;
         IOrderedDictionary keys;
         IOrderedDictionary values;
-        
-        public DetailsViewDeleteEventArgs (int rowIndex)
+
+        public DetailsViewDeleteEventArgs(int rowIndex)
         {
             this.rowIndex = rowIndex;
         }
-        
-        internal DetailsViewDeleteEventArgs (int index, IOrderedDictionary keys, IOrderedDictionary values)
+
+        internal DetailsViewDeleteEventArgs(
+            int index,
+            IOrderedDictionary keys,
+            IOrderedDictionary values
+        )
         {
             this.rowIndex = index;
             this.keys = keys;
             this.values = values;
         }
-        
-        public int RowIndex {
+
+        public int RowIndex
+        {
             get { return rowIndex; }
         }
 
-        public IOrderedDictionary Keys {
+        public IOrderedDictionary Keys
+        {
             get { return keys; }
         }
 
-        public IOrderedDictionary Values {
+        public IOrderedDictionary Values
+        {
             get { return values; }
         }
     }
 }
-

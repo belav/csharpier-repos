@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,35 +31,39 @@ using System;
 using System.Collections.Generic;
 using System.Security.Permissions;
 
-namespace System.Web 
+namespace System.Web
 {
-    [AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public sealed class HttpCacheVaryByContentEncodings
     {
-        Dictionary <string, bool> encodings;
+        Dictionary<string, bool> encodings;
 
-        public
-        HttpCacheVaryByContentEncodings ()
+        public HttpCacheVaryByContentEncodings()
         {
-            encodings = new Dictionary <string, bool> ();
+            encodings = new Dictionary<string, bool>();
         }
-        
-        public bool this [string contentEncoding] {
-            get {
-                if (contentEncoding == null)
-                    throw new ArgumentNullException ("contentEncoding");
 
-                if (encodings.ContainsKey (contentEncoding))
-                    return encodings [contentEncoding];
+        public bool this[string contentEncoding]
+        {
+            get
+            {
+                if (contentEncoding == null)
+                    throw new ArgumentNullException("contentEncoding");
+
+                if (encodings.ContainsKey(contentEncoding))
+                    return encodings[contentEncoding];
 
                 return false;
             }
-            
-            set {
+            set
+            {
                 if (contentEncoding == null)
-                    throw new ArgumentNullException ("contentEncoding");
+                    throw new ArgumentNullException("contentEncoding");
 
-                encodings [contentEncoding] = value;
+                encodings[contentEncoding] = value;
             }
         }
     }

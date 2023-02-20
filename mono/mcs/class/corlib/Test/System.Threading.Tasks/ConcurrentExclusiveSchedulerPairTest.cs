@@ -40,144 +40,148 @@ namespace MonoTests.System.Threading.Tasks
         TaskFactory factory;
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void BasicExclusiveUsageTest ()
+        [Category("MultiThreaded")]
+        public void BasicExclusiveUsageTest()
         {
-            schedPair = new ConcurrentExclusiveSchedulerPair (TaskScheduler.Default, 4);
-            factory = new TaskFactory (schedPair.ExclusiveScheduler);
+            schedPair = new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, 4);
+            factory = new TaskFactory(schedPair.ExclusiveScheduler);
 
             bool launched = false;
-            factory.StartNew (() => launched = true);
-            Thread.Sleep (600);
+            factory.StartNew(() => launched = true);
+            Thread.Sleep(600);
 
-            Assert.IsTrue (launched);
+            Assert.IsTrue(launched);
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void BasicConcurrentUsageTest ()
+        [Category("MultiThreaded")]
+        public void BasicConcurrentUsageTest()
         {
-            schedPair = new ConcurrentExclusiveSchedulerPair (TaskScheduler.Default, 4);
-            factory = new TaskFactory (schedPair.ConcurrentScheduler);
+            schedPair = new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, 4);
+            factory = new TaskFactory(schedPair.ConcurrentScheduler);
 
             bool launched = false;
-            factory.StartNew (() => launched = true);
-            Thread.Sleep (600);
+            factory.StartNew(() => launched = true);
+            Thread.Sleep(600);
 
-            Assert.IsTrue (launched);
+            Assert.IsTrue(launched);
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void ExclusiveUsageTest ()
+        [Category("MultiThreaded")]
+        public void ExclusiveUsageTest()
         {
-            schedPair = new ConcurrentExclusiveSchedulerPair (TaskScheduler.Default, 4);
-            factory = new TaskFactory (schedPair.ExclusiveScheduler);
+            schedPair = new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, 4);
+            factory = new TaskFactory(schedPair.ExclusiveScheduler);
 
             int count = 0;
-            ManualResetEventSlim mreFinish = new ManualResetEventSlim (false);
-            ManualResetEventSlim mreStart = new ManualResetEventSlim (false);
+            ManualResetEventSlim mreFinish = new ManualResetEventSlim(false);
+            ManualResetEventSlim mreStart = new ManualResetEventSlim(false);
 
-            factory.StartNew (() => {
-                    mreStart.Set ();
-                    Interlocked.Increment (ref count);
-                    mreFinish.Wait ();
-                });
-            mreStart.Wait ();
-            factory.StartNew (() => Interlocked.Increment (ref count));
-            Thread.Sleep (100);
+            factory.StartNew(() =>
+            {
+                mreStart.Set();
+                Interlocked.Increment(ref count);
+                mreFinish.Wait();
+            });
+            mreStart.Wait();
+            factory.StartNew(() => Interlocked.Increment(ref count));
+            Thread.Sleep(100);
 
-            Assert.AreEqual (1, count);
-            mreFinish.Set ();
+            Assert.AreEqual(1, count);
+            mreFinish.Set();
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void ConcurrentUsageTest ()
+        [Category("MultiThreaded")]
+        public void ConcurrentUsageTest()
         {
-            schedPair = new ConcurrentExclusiveSchedulerPair (TaskScheduler.Default, 4);
-            factory = new TaskFactory (schedPair.ConcurrentScheduler);
+            schedPair = new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, 4);
+            factory = new TaskFactory(schedPair.ConcurrentScheduler);
 
             int count = 0;
-            ManualResetEventSlim mreFinish = new ManualResetEventSlim (false);
-            CountdownEvent cntd = new CountdownEvent (2);
+            ManualResetEventSlim mreFinish = new ManualResetEventSlim(false);
+            CountdownEvent cntd = new CountdownEvent(2);
 
-            factory.StartNew (() => {
-                    Interlocked.Increment (ref count);
-                    cntd.Signal ();
-                    mreFinish.Wait ();
-                });
-            factory.StartNew (() => {
-                    Interlocked.Increment (ref count);
-                    cntd.Signal ();
-                    mreFinish.Wait ();
-                });
+            factory.StartNew(() =>
+            {
+                Interlocked.Increment(ref count);
+                cntd.Signal();
+                mreFinish.Wait();
+            });
+            factory.StartNew(() =>
+            {
+                Interlocked.Increment(ref count);
+                cntd.Signal();
+                mreFinish.Wait();
+            });
 
-            cntd.Wait ();
-            Assert.AreEqual (2, count);
-            mreFinish.Set ();
+            cntd.Wait();
+            Assert.AreEqual(2, count);
+            mreFinish.Set();
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void ConcurrentUsageWithExclusiveExecutingTest ()
+        [Category("MultiThreaded")]
+        public void ConcurrentUsageWithExclusiveExecutingTest()
         {
-            schedPair = new ConcurrentExclusiveSchedulerPair (TaskScheduler.Default, 4);
-            TaskFactory exclFact = new TaskFactory (schedPair.ExclusiveScheduler);
-            TaskFactory concFact = new TaskFactory (schedPair.ConcurrentScheduler);
+            schedPair = new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, 4);
+            TaskFactory exclFact = new TaskFactory(schedPair.ExclusiveScheduler);
+            TaskFactory concFact = new TaskFactory(schedPair.ConcurrentScheduler);
 
             int count = 0;
             bool exclStarted = false;
-            ManualResetEventSlim mreStart = new ManualResetEventSlim (false);
-            ManualResetEventSlim mreFinish = new ManualResetEventSlim (false);
+            ManualResetEventSlim mreStart = new ManualResetEventSlim(false);
+            ManualResetEventSlim mreFinish = new ManualResetEventSlim(false);
 
-            exclFact.StartNew (() => {
+            exclFact.StartNew(() =>
+            {
                 exclStarted = true;
-                mreStart.Set ();
-                mreFinish.Wait ();
+                mreStart.Set();
+                mreFinish.Wait();
                 exclStarted = false;
             });
 
-            mreStart.Wait ();
+            mreStart.Wait();
 
-            concFact.StartNew (() => Interlocked.Increment (ref count));
-            concFact.StartNew (() => Interlocked.Increment (ref count));
-            Thread.Sleep (100);
+            concFact.StartNew(() => Interlocked.Increment(ref count));
+            concFact.StartNew(() => Interlocked.Increment(ref count));
+            Thread.Sleep(100);
 
-            Assert.IsTrue (exclStarted);
-            Assert.AreEqual (0, count);
-            mreFinish.Set ();
+            Assert.IsTrue(exclStarted);
+            Assert.AreEqual(0, count);
+            mreFinish.Set();
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void ExclusiveUsageWithConcurrentExecutingTest ()
+        [Category("MultiThreaded")]
+        public void ExclusiveUsageWithConcurrentExecutingTest()
         {
-            schedPair = new ConcurrentExclusiveSchedulerPair (TaskScheduler.Default, 4);
-            TaskFactory exclFact = new TaskFactory (schedPair.ExclusiveScheduler);
-            TaskFactory concFact = new TaskFactory (schedPair.ConcurrentScheduler);
+            schedPair = new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, 4);
+            TaskFactory exclFact = new TaskFactory(schedPair.ExclusiveScheduler);
+            TaskFactory concFact = new TaskFactory(schedPair.ConcurrentScheduler);
 
             int count = 0;
             bool started = false;
-            ManualResetEventSlim mreStart = new ManualResetEventSlim (false);
-            ManualResetEventSlim mreFinish = new ManualResetEventSlim (false);
+            ManualResetEventSlim mreStart = new ManualResetEventSlim(false);
+            ManualResetEventSlim mreFinish = new ManualResetEventSlim(false);
 
-            concFact.StartNew (() => {
+            concFact.StartNew(() =>
+            {
                 started = true;
-                mreStart.Set ();
-                mreFinish.Wait ();
+                mreStart.Set();
+                mreFinish.Wait();
                 started = false;
             });
 
-            mreStart.Wait ();
+            mreStart.Wait();
 
-            exclFact.StartNew (() => Interlocked.Increment (ref count));
-            Thread.Sleep (100);
+            exclFact.StartNew(() => Interlocked.Increment(ref count));
+            Thread.Sleep(100);
 
-            Assert.IsTrue (started);
-            Assert.AreEqual (0, count);
-            mreFinish.Set ();
+            Assert.IsTrue(started);
+            Assert.AreEqual(0, count);
+            mreFinish.Set();
         }
     }
 }
-

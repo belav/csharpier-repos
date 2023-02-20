@@ -35,24 +35,26 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataListItem_ItemIndex : GHTBaseWeb {
+    public class DataListItem_ItemIndex : GHTBaseWeb
+    {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) {
+        override protected void OnInit(EventArgs e)
+        {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
             //
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
             this.DataList1.ItemCreated += new DataListItemEventHandler(DataList1_ItemCreated);
-
         }
         #endregion
 
@@ -66,14 +68,14 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected GHTWebControls.GHTSubTest Ghtsubtest8;
         protected System.Web.UI.WebControls.DataList DataList1;
 
-        protected static string [] m_data = new string[] {"aaa", "bbb", "ccc", "ddd"};
+        protected static string[] m_data = new string[] { "aaa", "bbb", "ccc", "ddd" };
 
-        private void Page_Load(object sender, System.EventArgs e) {
+        private void Page_Load(object sender, System.EventArgs e)
+        {
             HtmlForm frm = (HtmlForm)FindControl("form1");
             GHTTestBegin(frm);
             DataList1.DataBind();
         }
-
 
         private void DataList1_ItemCreated(object sender, DataListItemEventArgs e)
         {
@@ -207,6 +209,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 }
             }
         }
- 
     }
 }

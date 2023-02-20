@@ -13,63 +13,84 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
 {
     using VerifyCS = CSharpCodeFixVerifier<
         ConsecutiveBracePlacementDiagnosticAnalyzer,
-        ConsecutiveBracePlacementCodeFixProvider>;
+        ConsecutiveBracePlacementCodeFixProvider
+    >;
 
     public class ConsecutiveBracePlacementTests
     {
         [Fact]
         public async Task NotForBracesOnSameLineDirectlyTouching()
         {
-            var code =
-@"class C { void M() { }}";
+            var code = @"class C { void M() { }}";
 
             await new VerifyCS.Test
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task NotForBracesOnSameLineWithSpace()
         {
-            var code =
-@"class C { void M() { } }";
+            var code = @"class C { void M() { } }";
 
             await new VerifyCS.Test
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task NotForBracesOnSameLineWithComment()
         {
-            var code =
-@"class C { void M() { }/*goo*/}";
+            var code = @"class C { void M() { }/*goo*/}";
 
             await new VerifyCS.Test
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task NotForBracesOnSameLineWithCommentAndSpaces()
         {
-            var code =
-@"class C { void M() { } /*goo*/ }";
+            var code = @"class C { void M() { } /*goo*/ }";
 
             await new VerifyCS.Test
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -77,7 +98,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task NotForBracesOnSubsequentLines_TopLevel()
         {
             var code =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -88,7 +109,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -96,7 +123,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task NotForBracesOnSubsequentLinesWithComment1_TopLevel()
         {
             var code =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -107,7 +134,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -115,7 +148,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task NotForBracesOnSubsequentLinesWithComment2_TopLevel()
         {
             var code =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -126,7 +159,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -134,7 +173,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task NotForBracesOnSubsequentLinesIndented()
         {
             var code =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -148,7 +187,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -156,7 +201,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task NotForBracesOnSubsequentLinesIndentedWithComment1()
         {
             var code =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -170,7 +215,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -178,7 +229,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task NotForBracesOnSubsequentLinesIndentedWithComment2()
         {
             var code =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -192,7 +243,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -200,7 +257,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task NotForBracesWithBlankLinesIfCommentBetween1_TopLevel()
         {
             var code =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -214,7 +271,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -222,7 +285,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task NotForBracesWithBlankLinesIfCommentBetween2_TopLevel()
         {
             var code =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -236,7 +299,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -244,7 +313,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task NotForBracesWithBlankLinesIfDirectiveBetween1_TopLeve()
         {
             var code =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -259,7 +328,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
                 TestCode = code,
                 FixedCode = code,
                 LanguageVersion = Microsoft.CodeAnalysis.CSharp.LanguageVersion.CSharp8,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -267,7 +342,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task NotForBracesWithBlankLinesIfCommentBetween1_Nested()
         {
             var code =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -284,7 +359,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -292,7 +373,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task NotForBracesWithBlankLinesIfCommentBetween2_Nested()
         {
             var code =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -309,7 +390,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -317,7 +404,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task NotForBracesWithBlankLinesIfDirectiveBetween_Nested()
         {
             var code =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -335,7 +422,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
                 TestCode = code,
                 FixedCode = code,
                 LanguageVersion = Microsoft.CodeAnalysis.CSharp.LanguageVersion.CSharp8,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -343,7 +436,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task OneBlankLineBetweenBraces_TopLevel()
         {
             var code =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -351,7 +444,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
 
 [|}|]";
             var fixedCode =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -362,7 +455,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -370,7 +469,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task OneBlankLineBetweenBraces_TopLevel_OptionDisabled()
         {
             var code =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -382,7 +481,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.TrueWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.TrueWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -390,7 +495,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task TwoBlankLinesBetweenBraces_TopLevel()
         {
             var code =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -399,7 +504,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
 
 [|}|]";
             var fixedCode =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -410,7 +515,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -418,7 +529,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task ThreeBlankLinesBetweenBraces_TopLevel()
         {
             var code =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -428,7 +539,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
 
 [|}|]";
             var fixedCode =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -439,7 +550,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -447,7 +564,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task BlankLinesBetweenBraces_LeadingComment_TopLevel()
         {
             var code =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -457,7 +574,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
 
 /*comment*/[|}|]";
             var fixedCode =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -468,7 +585,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -476,7 +599,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task BlankLinesBetweenBraces_TrailingComment_TopLevel()
         {
             var code =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -486,7 +609,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
 
 [|}|]";
             var fixedCode =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -497,7 +620,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -505,7 +634,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task OneBlankLineBetweenBraces_Nested()
         {
             var code =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -516,7 +645,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
     [|}|]
 }";
             var fixedCode =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -530,7 +659,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -538,7 +673,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task TwoBlankLinesBetweenBraces_Nested()
         {
             var code =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -550,7 +685,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
     [|}|]
 }";
             var fixedCode =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -564,7 +699,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -572,7 +713,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task ThreeBlankLinesBetweenBraces_Nested()
         {
             var code =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -585,7 +726,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
     [|}|]
 }";
             var fixedCode =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -599,7 +740,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -607,7 +754,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task BlankLinesBetweenBraces_LeadingComment_Nested()
         {
             var code =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -620,7 +767,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
     /*comment*/[|}|]
 }";
             var fixedCode =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -634,7 +781,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -642,7 +795,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task BlankLinesBetweenBraces_TrailingComment_Nested()
         {
             var code =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -655,7 +808,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
     [|}|]
 }";
             var fixedCode =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -669,7 +822,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -677,7 +836,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task FixAll1()
         {
             var code =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -689,7 +848,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
 
 [|}|]";
             var fixedCode =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -703,7 +862,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -711,7 +876,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveBra
         public async Task RealCode1()
         {
             var code =
-@"
+                @"
 #nullable enable
 
 using System;
@@ -749,7 +914,13 @@ namespace Microsoft.CodeAnalysis.Options
                 TestCode = code,
                 FixedCode = code,
                 LanguageVersion = Microsoft.CodeAnalysis.CSharp.LanguageVersion.CSharp8,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -757,7 +928,7 @@ namespace Microsoft.CodeAnalysis.Options
         public async Task RealCode2()
         {
             var code =
-@"
+                @"
 #define CODE_STYLE
 #nullable enable
 
@@ -796,7 +967,13 @@ namespace Microsoft.CodeAnalysis.Options
                 TestCode = code,
                 FixedCode = code,
                 LanguageVersion = Microsoft.CodeAnalysis.CSharp.LanguageVersion.CSharp8,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
     }

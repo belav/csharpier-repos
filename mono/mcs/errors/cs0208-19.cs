@@ -11,10 +11,10 @@ namespace CS208
 
     public class Bar
     {
-        unsafe static void Main ()
-        {            
-            Foo f = new Foo ();
-            void *s = &f;
+        unsafe static void Main()
+        {
+            Foo f = new Foo();
+            void* s = &f;
         }
     }
 }

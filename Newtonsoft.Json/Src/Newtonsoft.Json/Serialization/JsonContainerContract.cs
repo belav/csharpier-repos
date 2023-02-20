@@ -54,7 +54,8 @@ namespace Newtonsoft.Json.Serialization
                 _itemContract = value;
                 if (_itemContract != null)
                 {
-                    _finalItemContract = (_itemContract.UnderlyingType.IsSealed()) ? _itemContract : null;
+                    _finalItemContract =
+                        (_itemContract.UnderlyingType.IsSealed()) ? _itemContract : null;
                 }
                 else
                 {
@@ -97,7 +98,8 @@ namespace Newtonsoft.Json.Serialization
         internal JsonContainerContract(Type underlyingType)
             : base(underlyingType)
         {
-            JsonContainerAttribute? jsonContainerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(underlyingType);
+            JsonContainerAttribute? jsonContainerAttribute =
+                JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(underlyingType);
 
             if (jsonContainerAttribute != null)
             {
@@ -105,7 +107,8 @@ namespace Newtonsoft.Json.Serialization
                 {
                     ItemConverter = JsonTypeReflector.CreateJsonConverterInstance(
                         jsonContainerAttribute.ItemConverterType,
-                        jsonContainerAttribute.ItemConverterParameters);
+                        jsonContainerAttribute.ItemConverterParameters
+                    );
                 }
 
                 ItemIsReference = jsonContainerAttribute._itemIsReference;

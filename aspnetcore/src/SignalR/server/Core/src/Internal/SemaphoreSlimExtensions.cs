@@ -5,7 +5,11 @@ namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal static class SemaphoreSlimExtensions
 {
-    public static Task RunAsync<TState>(this SemaphoreSlim semaphoreSlim, Func<TState, Task> callback, TState state)
+    public static Task RunAsync<TState>(
+        this SemaphoreSlim semaphoreSlim,
+        Func<TState, Task> callback,
+        TState state
+    )
     {
         if (semaphoreSlim.Wait(0))
         {
@@ -16,13 +20,21 @@ internal static class SemaphoreSlimExtensions
         return RunSlowAsync(semaphoreSlim, callback, state);
     }
 
-    private static async Task<Task> RunSlowAsync<TState>(this SemaphoreSlim semaphoreSlim, Func<TState, Task> callback, TState state)
+    private static async Task<Task> RunSlowAsync<TState>(
+        this SemaphoreSlim semaphoreSlim,
+        Func<TState, Task> callback,
+        TState state
+    )
     {
         await semaphoreSlim.WaitAsync();
         return RunTask(callback, semaphoreSlim, state);
     }
 
-    static async Task RunTask<TState>(Func<TState, Task> callback, SemaphoreSlim semaphoreSlim, TState state)
+    static async Task RunTask<TState>(
+        Func<TState, Task> callback,
+        SemaphoreSlim semaphoreSlim,
+        TState state
+    )
     {
         try
         {

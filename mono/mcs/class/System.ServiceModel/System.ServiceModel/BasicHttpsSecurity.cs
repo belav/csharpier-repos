@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,34 +35,37 @@ namespace System.ServiceModel
 {
     public sealed class BasicHttpsSecurity
     {
-        public BasicHttpsSecurity ()
+        public BasicHttpsSecurity()
         {
             this.mode = BasicHttpsSecurityMode.Transport;
-            this.message = new BasicHttpMessageSecurity ();
-            this.transport = new HttpTransportSecurity ();
+            this.message = new BasicHttpMessageSecurity();
+            this.transport = new HttpTransportSecurity();
         }
 
-        internal BasicHttpsSecurity (BasicHttpsSecurityMode mode)
+        internal BasicHttpsSecurity(BasicHttpsSecurityMode mode)
         {
             this.mode = mode;
-            this.message = new BasicHttpMessageSecurity ();
-            this.transport = new HttpTransportSecurity ();
+            this.message = new BasicHttpMessageSecurity();
+            this.transport = new HttpTransportSecurity();
         }
 
         BasicHttpMessageSecurity message;
         BasicHttpsSecurityMode mode;
         HttpTransportSecurity transport;
 
-        public BasicHttpMessageSecurity Message {
+        public BasicHttpMessageSecurity Message
+        {
             get { return message; }
         }
 
-        public BasicHttpsSecurityMode Mode {
+        public BasicHttpsSecurityMode Mode
+        {
             get { return mode; }
             set { mode = value; }
         }
 
-        public HttpTransportSecurity Transport {
+        public HttpTransportSecurity Transport
+        {
             get { return transport; }
             set { transport = value; }
         }

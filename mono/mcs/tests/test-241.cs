@@ -5,28 +5,32 @@
 //
 using System;
 
-public class Foo {
-    protected virtual int SomeProperty {
+public class Foo
+{
+    protected virtual int SomeProperty
+    {
         get { return 10; }
     }
-    
-    protected virtual int M ()
+
+    protected virtual int M()
     {
         return 10;
     }
 
-    private class FooPrivate : Foo {
+    private class FooPrivate : Foo
+    {
         Foo _realFoo;
-        
-        internal FooPrivate(Foo f) {
+
+        internal FooPrivate(Foo f)
+        {
             _realFoo = f;
         }
-        
-        protected override int SomeProperty {
-            get { return this._realFoo.SomeProperty + _realFoo.M ();
-            }
+
+        protected override int SomeProperty
+        {
+            get { return this._realFoo.SomeProperty + _realFoo.M(); }
         }
     }
 
-    public static void Main () { }
+    public static void Main() { }
 }

@@ -30,7 +30,10 @@ public interface IConventionStoredProcedureParameterBuilder : IConventionAnnotat
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionStoredProcedureParameterBuilder? HasName(string name, bool fromDataAnnotation = false);
+    IConventionStoredProcedureParameterBuilder? HasName(
+        string name,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given parameter name can be set.
@@ -52,7 +55,10 @@ public interface IConventionStoredProcedureParameterBuilder : IConventionAnnotat
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionStoredProcedureParameterBuilder? HasDirection(ParameterDirection direction, bool fromDataAnnotation = false);
+    IConventionStoredProcedureParameterBuilder? HasDirection(
+        ParameterDirection direction,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given direction can be configured on the corresponding stored procedure parameter.

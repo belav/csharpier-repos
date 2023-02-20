@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 public class CompilerBug
 {
-    public static void Main ()
+    public static void Main()
     {
-        foreach (string message in Foo ())
-            Console.WriteLine (message);
+        foreach (string message in Foo())
+            Console.WriteLine(message);
     }
 
-    static IEnumerable<string> Foo ()
+    static IEnumerable<string> Foo()
     {
         Action fnAction;
         {
@@ -17,7 +17,7 @@ public class CompilerBug
         }
         yield return "Executing action";
         {
-            fnAction ();
+            fnAction();
         }
         yield return "Action executed";
     }

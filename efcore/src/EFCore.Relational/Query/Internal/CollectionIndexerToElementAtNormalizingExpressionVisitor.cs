@@ -20,8 +20,15 @@ public class CollectionIndexerToElementAtNormalizingExpressionVisitor : Expressi
     protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
     {
         // Convert list[x] to list.ElementAt(x)
-        if (methodCallExpression.Method is { Name: "get_Item", IsStatic: false, DeclaringType: { IsGenericType: true } declaringType }
-            && declaringType.GetGenericTypeDefinition() == typeof(List<>))
+        if (
+            methodCallExpression.Method
+                is {
+                    Name: "get_Item",
+                    IsStatic: false,
+                    DeclaringType: { IsGenericType: true } declaringType
+                }
+            && declaringType.GetGenericTypeDefinition() == typeof(List<>)
+        )
         {
             var source = Visit(methodCallExpression.Object!);
             var index = Visit(methodCallExpression.Arguments[0]);
@@ -29,10 +36,12 @@ public class CollectionIndexerToElementAtNormalizingExpressionVisitor : Expressi
 
             return Expression.Call(
                 QueryableMethods.ElementAt.MakeGenericMethod(sourceTypeArgument),
-                    Expression.Call(
-                        QueryableMethods.AsQueryable.MakeGenericMethod(sourceTypeArgument),
-                        source),
-                    index);
+                Expression.Call(
+                    QueryableMethods.AsQueryable.MakeGenericMethod(sourceTypeArgument),
+                    source
+                ),
+                index
+            );
         }
 
         return base.VisitMethodCall(methodCallExpression);
@@ -55,10 +64,12 @@ public class CollectionIndexerToElementAtNormalizingExpressionVisitor : Expressi
 
             return Expression.Call(
                 QueryableMethods.ElementAt.MakeGenericMethod(sourceTypeArgument),
-                    Expression.Call(
-                        QueryableMethods.AsQueryable.MakeGenericMethod(sourceTypeArgument),
-                        source),
-                    index);
+                Expression.Call(
+                    QueryableMethods.AsQueryable.MakeGenericMethod(sourceTypeArgument),
+                    source
+                ),
+                index
+            );
         }
 
         return base.VisitBinary(binaryExpression);

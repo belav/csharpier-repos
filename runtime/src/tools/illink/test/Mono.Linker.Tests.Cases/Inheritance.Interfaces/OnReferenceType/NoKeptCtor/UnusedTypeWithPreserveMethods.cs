@@ -3,36 +3,30 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptCtor
 {
-    [SetupLinkerDescriptorFile ("UnusedTypeWithPreserveMethods.xml")]
+    [SetupLinkerDescriptorFile("UnusedTypeWithPreserveMethods.xml")]
     public class UnusedTypeWithPreserveMethods
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         interface IFoo
         {
-            void Foo ();
+            void Foo();
         }
 
         interface IBar
         {
-            void Bar ();
+            void Bar();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class A : IBar, IFoo
         {
             [Kept]
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
 
             [Kept]
-            public void Bar ()
-            {
-            }
+            public void Bar() { }
         }
     }
 }

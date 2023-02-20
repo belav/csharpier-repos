@@ -11,35 +11,35 @@ namespace MonoTests.Common
     {
         public string ColumnNoAttributes { get; set; }
 
-        [DisplayFormat (
-            ApplyFormatInEditMode=true, 
-            ConvertEmptyStringToNull=true, 
-            DataFormatString="Item: {0}"
+        [DisplayFormat(
+            ApplyFormatInEditMode = true,
+            ConvertEmptyStringToNull = true,
+            DataFormatString = "Item: {0}"
         )]
         public string ColumnFormatInEditMode { get; set; }
 
-        [DataType (DataType.EmailAddress)]
+        [DataType(DataType.EmailAddress)]
         public string ColumnWithDataType { get; set; }
 
-        [DefaultValue (12345L)]
+        [DefaultValue(12345L)]
         public long ColumnWithDefaultLongValue { get; set; }
 
-        [DefaultValue ("Value")]
+        [DefaultValue("Value")]
         public string ColumnWithDefaultStringValue { get; set; }
 
-        [Description ("Description")]
+        [Description("Description")]
         public string ColumnWithDescription { get; set; }
 
-        [DisplayName ("Display Name")]
+        [DisplayName("Display Name")]
         public string ColumnWithDisplayName { get; set; }
 
-        [ScaffoldColumn (false)]
+        [ScaffoldColumn(false)]
         public string NoScaffoldColumn { get; set; }
 
-        [ScaffoldColumn (true)]
+        [ScaffoldColumn(true)]
         public string ScaffoldAttributeColumn { get; set; }
 
-        [UIHint ("UI Hint")]
+        [UIHint("UI Hint")]
         public string UIHintColumn { get; set; }
     }
 }

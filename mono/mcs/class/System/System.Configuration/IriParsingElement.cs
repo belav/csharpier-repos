@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,29 +36,37 @@ namespace System.Configuration
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty enabled_prop;
 
-        static IriParsingElement ()
+        static IriParsingElement()
         {
-            enabled_prop = new ConfigurationProperty ("enabled", typeof (bool), false, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (enabled_prop);
+            enabled_prop = new ConfigurationProperty(
+                "enabled",
+                typeof(bool),
+                false,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(enabled_prop);
         }
 
-        public IriParsingElement ()
+        public IriParsingElement() { }
+
+        [ConfigurationProperty(
+            "enabled",
+            DefaultValue = false,
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public bool Enabled
         {
+            get { return (bool)base[enabled_prop]; }
+            set { base[enabled_prop] = value; }
         }
 
-        [ConfigurationProperty ("enabled", DefaultValue = false,
-                    Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public bool Enabled {
-            get { return (bool) base [enabled_prop]; }
-            set { base [enabled_prop] = value; }
-        }
-
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
-        public override bool Equals (object o)
+        public override bool Equals(object o)
         {
             IriParsingElement e = o as IriParsingElement;
             if (e == null)
@@ -67,13 +75,11 @@ namespace System.Configuration
             return e.Enabled == Enabled;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return Convert.ToInt32 (Enabled) ^ 0x7F;
+            return Convert.ToInt32(Enabled) ^ 0x7F;
         }
     }
-
 }
 
 #endif
-

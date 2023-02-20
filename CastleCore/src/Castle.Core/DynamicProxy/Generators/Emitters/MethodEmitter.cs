@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -41,21 +41,27 @@ namespace Castle.DynamicProxy.Generators.Emitters
         }
 
         internal MethodEmitter(AbstractTypeEmitter owner, string name, MethodAttributes attributes)
-            : this(owner.TypeBuilder.DefineMethod(name, attributes))
-        {
-        }
+            : this(owner.TypeBuilder.DefineMethod(name, attributes)) { }
 
-        internal MethodEmitter(AbstractTypeEmitter owner, string name,
-                               MethodAttributes attributes, Type returnType,
-                               params Type[] argumentTypes)
+        internal MethodEmitter(
+            AbstractTypeEmitter owner,
+            string name,
+            MethodAttributes attributes,
+            Type returnType,
+            params Type[] argumentTypes
+        )
             : this(owner, name, attributes)
         {
             SetParameters(argumentTypes);
             SetReturnType(returnType);
         }
 
-        internal MethodEmitter(AbstractTypeEmitter owner, string name,
-                               MethodAttributes attributes, MethodInfo methodToUseAsATemplate)
+        internal MethodEmitter(
+            AbstractTypeEmitter owner,
+            string name,
+            MethodAttributes attributes,
+            MethodInfo methodToUseAsATemplate
+        )
             : this(owner, name, attributes)
         {
             // All code paths leading up to this constructor can be traced back to
@@ -69,7 +75,12 @@ namespace Castle.DynamicProxy.Generators.Emitters
             genericTypeParams = GenericUtil.CopyGenericArguments(methodToUseAsATemplate, builder);
             SetParameters(parameters);
             SetReturnType(returnType);
-            SetSignature(returnType, methodToUseAsATemplate.ReturnParameter, parameters, baseMethodParameters);
+            SetSignature(
+                returnType,
+                methodToUseAsATemplate.ReturnParameter,
+                parameters,
+                baseMethodParameters
+            );
             DefineParameters(baseMethodParameters);
         }
 
@@ -134,7 +145,9 @@ namespace Castle.DynamicProxy.Generators.Emitters
                 }
                 else
                 {
-                    CodeBuilder.AddStatement(new ReturnStatement(new DefaultValueExpression(ReturnType)));
+                    CodeBuilder.AddStatement(
+                        new ReturnStatement(new DefaultValueExpression(ReturnType))
+                    );
                 }
             }
         }
@@ -153,7 +166,11 @@ namespace Castle.DynamicProxy.Generators.Emitters
         {
             foreach (var parameter in parameters)
             {
-                var parameterBuilder = builder.DefineParameter(parameter.Position + 1, parameter.Attributes, parameter.Name);
+                var parameterBuilder = builder.DefineParameter(
+                    parameter.Position + 1,
+                    parameter.Attributes,
+                    parameter.Name
+                );
                 foreach (var attribute in parameter.GetNonInheritableAttributes())
                 {
                     parameterBuilder.SetCustomAttribute(attribute.Builder);
@@ -266,7 +283,10 @@ namespace Castle.DynamicProxy.Generators.Emitters
                 else if (parameterType.IsNullableType())
                 {
                     parameterNonNullableType = from.ParameterType.GetGenericArguments()[0];
-                    if (parameterNonNullableType.IsEnum || parameterNonNullableType.IsAssignableFrom(defaultValue.GetType()))
+                    if (
+                        parameterNonNullableType.IsEnum
+                        || parameterNonNullableType.IsAssignableFrom(defaultValue.GetType())
+                    )
                     {
                         // This guards against two bugs:
                         //
@@ -293,7 +313,11 @@ namespace Castle.DynamicProxy.Generators.Emitters
                 // might produce such metadata. Make a final attempt to coerce it to the required type:
                 try
                 {
-                    var coercedDefaultValue = Convert.ChangeType(defaultValue, parameterNonNullableType, CultureInfo.InvariantCulture);
+                    var coercedDefaultValue = Convert.ChangeType(
+                        defaultValue,
+                        parameterNonNullableType,
+                        CultureInfo.InvariantCulture
+                    );
                     to.SetConstant(coercedDefaultValue);
 
                     return;
@@ -312,8 +336,12 @@ namespace Castle.DynamicProxy.Generators.Emitters
             builder.SetReturnType(returnType);
         }
 
-        private void SetSignature(Type returnType, ParameterInfo returnParameter, Type[] parameters,
-                                  ParameterInfo[] baseMethodParameters)
+        private void SetSignature(
+            Type returnType,
+            ParameterInfo returnParameter,
+            Type[] parameters,
+            ParameterInfo[] baseMethodParameters
+        )
         {
             Type[] returnRequiredCustomModifiers;
             Type[] returnOptionalCustomModifiers;
@@ -331,10 +359,14 @@ namespace Castle.DynamicProxy.Generators.Emitters
             parametersOptionalCustomModifiers = new Type[parameterCount][];
             for (int i = 0; i < parameterCount; ++i)
             {
-                parametersRequiredCustomModifiers[i] = baseMethodParameters[i].GetRequiredCustomModifiers();
+                parametersRequiredCustomModifiers[i] = baseMethodParameters[
+                    i
+                ].GetRequiredCustomModifiers();
                 Array.Reverse(parametersRequiredCustomModifiers[i]);
 
-                parametersOptionalCustomModifiers[i] = baseMethodParameters[i].GetOptionalCustomModifiers();
+                parametersOptionalCustomModifiers[i] = baseMethodParameters[
+                    i
+                ].GetOptionalCustomModifiers();
                 Array.Reverse(parametersOptionalCustomModifiers[i]);
             }
 
@@ -344,7 +376,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
                 returnOptionalCustomModifiers,
                 parameters,
                 parametersRequiredCustomModifiers,
-                parametersOptionalCustomModifiers);
+                parametersOptionalCustomModifiers
+            );
         }
     }
 }

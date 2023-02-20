@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Roslyn.Utilities;
+
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
     internal static class EditorBrowsableHelpers
@@ -25,10 +26,18 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             {
                 Compilation = compilation;
                 HideModuleNameAttribute = compilation.HideModuleNameAttribute();
-                EditorBrowsableAttributeConstructor = GetSpecialEditorBrowsableAttributeConstructor(compilation);
-                TypeLibTypeAttributeConstructors = GetSpecialTypeLibTypeAttributeConstructors(compilation);
-                TypeLibFuncAttributeConstructors = GetSpecialTypeLibFuncAttributeConstructors(compilation);
-                TypeLibVarAttributeConstructors = GetSpecialTypeLibVarAttributeConstructors(compilation);
+                EditorBrowsableAttributeConstructor = GetSpecialEditorBrowsableAttributeConstructor(
+                    compilation
+                );
+                TypeLibTypeAttributeConstructors = GetSpecialTypeLibTypeAttributeConstructors(
+                    compilation
+                );
+                TypeLibFuncAttributeConstructors = GetSpecialTypeLibFuncAttributeConstructors(
+                    compilation
+                );
+                TypeLibVarAttributeConstructors = GetSpecialTypeLibVarAttributeConstructors(
+                    compilation
+                );
             }
         }
 
@@ -39,7 +48,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// point that pattern appears to be violated, return null to indicate that an appropriate constructor
         /// could not be found.
         /// </summary>
-        public static IMethodSymbol? GetSpecialEditorBrowsableAttributeConstructor(Compilation compilation)
+        public static IMethodSymbol? GetSpecialEditorBrowsableAttributeConstructor(
+            Compilation compilation
+        )
         {
             var editorBrowsableAttributeType = compilation.EditorBrowsableAttributeType();
             var editorBrowsableStateType = compilation.EditorBrowsableStateType();
@@ -49,13 +60,21 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return null;
             }
 
-            var candidateConstructors = editorBrowsableAttributeType.Constructors
-                                                                    .Where(c => c.Parameters.Length == 1 && Equals(c.Parameters[0].Type, editorBrowsableStateType));
+            var candidateConstructors = editorBrowsableAttributeType.Constructors.Where(
+                c =>
+                    c.Parameters.Length == 1
+                    && Equals(c.Parameters[0].Type, editorBrowsableStateType)
+            );
 
             // Ensure the constructor adheres to the expected EditorBrowsable pattern
-            candidateConstructors = candidateConstructors.Where(c => (!c.IsVararg &&
-                                                                      !c.Parameters[0].IsRefOrOut() &&
-                                                                      !c.Parameters[0].CustomModifiers.Any()));
+            candidateConstructors = candidateConstructors.Where(
+                c =>
+                    (
+                        !c.IsVararg
+                        && !c.Parameters[0].IsRefOrOut()
+                        && !c.Parameters[0].CustomModifiers.Any()
+                    )
+            );
 
             // If there are multiple constructors that look correct then the discovered types do not match the
             // expected pattern, so return null.
@@ -69,28 +88,37 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
         }
 
-        public static ImmutableArray<IMethodSymbol> GetSpecialTypeLibTypeAttributeConstructors(Compilation compilation)
+        public static ImmutableArray<IMethodSymbol> GetSpecialTypeLibTypeAttributeConstructors(
+            Compilation compilation
+        )
         {
             return GetSpecialTypeLibAttributeConstructorsWorker(
                 compilation,
                 "System.Runtime.InteropServices.TypeLibTypeAttribute",
-                "System.Runtime.InteropServices.TypeLibTypeFlags");
+                "System.Runtime.InteropServices.TypeLibTypeFlags"
+            );
         }
 
-        public static ImmutableArray<IMethodSymbol> GetSpecialTypeLibFuncAttributeConstructors(Compilation compilation)
+        public static ImmutableArray<IMethodSymbol> GetSpecialTypeLibFuncAttributeConstructors(
+            Compilation compilation
+        )
         {
             return GetSpecialTypeLibAttributeConstructorsWorker(
                 compilation,
                 "System.Runtime.InteropServices.TypeLibFuncAttribute",
-                "System.Runtime.InteropServices.TypeLibFuncFlags");
+                "System.Runtime.InteropServices.TypeLibFuncFlags"
+            );
         }
 
-        public static ImmutableArray<IMethodSymbol> GetSpecialTypeLibVarAttributeConstructors(Compilation compilation)
+        public static ImmutableArray<IMethodSymbol> GetSpecialTypeLibVarAttributeConstructors(
+            Compilation compilation
+        )
         {
             return GetSpecialTypeLibAttributeConstructorsWorker(
                 compilation,
                 "System.Runtime.InteropServices.TypeLibVarAttribute",
-                "System.Runtime.InteropServices.TypeLibVarFlags");
+                "System.Runtime.InteropServices.TypeLibVarFlags"
+            );
         }
 
         /// <summary>
@@ -103,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         private static ImmutableArray<IMethodSymbol> GetSpecialTypeLibAttributeConstructorsWorker(
             Compilation compilation,
             string attributeMetadataName,
-            string flagsMetadataName)
+            string flagsMetadataName
+        )
         {
             var typeLibAttributeType = compilation.GetTypeByMetadataName(attributeMetadataName);
             var typeLibFlagsType = compilation.GetTypeByMetadataName(flagsMetadataName);
@@ -114,13 +143,23 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return ImmutableArray<IMethodSymbol>.Empty;
             }
 
-            var candidateConstructors = typeLibAttributeType.Constructors
-                                                            .Where(c => c.Parameters.Length == 1 &&
-                                                                        (Equals(c.Parameters[0].Type, typeLibFlagsType) || Equals(c.Parameters[0].Type, shortType)));
+            var candidateConstructors = typeLibAttributeType.Constructors.Where(
+                c =>
+                    c.Parameters.Length == 1
+                    && (
+                        Equals(c.Parameters[0].Type, typeLibFlagsType)
+                        || Equals(c.Parameters[0].Type, shortType)
+                    )
+            );
 
-            candidateConstructors = candidateConstructors.Where(c => (!c.IsVararg &&
-                                                                      !c.Parameters[0].IsRefOrOut() &&
-                                                                      !c.Parameters[0].CustomModifiers.Any()));
+            candidateConstructors = candidateConstructors.Where(
+                c =>
+                    (
+                        !c.IsVararg
+                        && !c.Parameters[0].IsRefOrOut()
+                        && !c.Parameters[0].CustomModifiers.Any()
+                    )
+            );
 
             return candidateConstructors.ToImmutableArrayOrEmpty();
         }

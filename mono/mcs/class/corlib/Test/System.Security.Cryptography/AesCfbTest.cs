@@ -1,5 +1,5 @@
 //
-// Aes(CryptoServiceProvider) CFB Unit Tests 
+// Aes(CryptoServiceProvider) CFB Unit Tests
 //
 // Author:
 //    Sebastien Pouliot  <sebastien@xamarin.com>
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,61 +32,74 @@ using System.Security.Cryptography;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Security.Cryptography {
-    
+namespace MonoTests.System.Security.Cryptography
+{
     [TestFixture]
-    public class AesCfbTests : CfbTests {
-
-        protected override SymmetricAlgorithm GetInstance ()
+    public class AesCfbTests : CfbTests
+    {
+        protected override SymmetricAlgorithm GetInstance()
         {
-            return Aes.Create ();
+            return Aes.Create();
         }
 
         [Test]
-        [Category ("AndroidNotWorking")] // Exception is thrown: CryptographicException : Bad PKCS7 padding. Invalid length 236.
-        [Category ("MobileNotWorking")] // On testing_aot_full, above exception is thrown as well
-        public void Roundtrip ()
+        [Category("AndroidNotWorking")] // Exception is thrown: CryptographicException : Bad PKCS7 padding. Invalid length 236.
+        [Category("MobileNotWorking")] // On testing_aot_full, above exception is thrown as well
+        public void Roundtrip()
         {
             // that will return a AesCryptoServiceProvider
-            var aes = GetInstance ();
+            var aes = GetInstance();
 #if MONOTOUCH
-            Assert.AreEqual ("System.Security.Cryptography.AesManaged", aes.ToString (), "Default");
-            Assert.AreEqual (128, aes.FeedbackSize, "FeedbackSize");
+            Assert.AreEqual("System.Security.Cryptography.AesManaged", aes.ToString(), "Default");
+            Assert.AreEqual(128, aes.FeedbackSize, "FeedbackSize");
 #else
-            Assert.AreEqual ("System.Security.Cryptography.AesCryptoServiceProvider", aes.ToString (), "Default");
-            Assert.AreEqual (8, aes.FeedbackSize, "FeedbackSize");
+            Assert.AreEqual(
+                "System.Security.Cryptography.AesCryptoServiceProvider",
+                aes.ToString(),
+                "Default"
+            );
+            Assert.AreEqual(8, aes.FeedbackSize, "FeedbackSize");
 #endif
-            ProcessBlockSizes (aes);
+            ProcessBlockSizes(aes);
         }
 
         // AesCryptoServiceProvider is not *Limited* since it supports CFB8-64
         // but like all *CryptoServiceProvider implementations it refuse Padding.None
-        static PaddingMode[] csp_padding_modes = new [] { PaddingMode.PKCS7, PaddingMode.Zeros, PaddingMode.ANSIX923, PaddingMode.ISO10126 };
-        
-        protected override PaddingMode [] PaddingModes {
+        static PaddingMode[] csp_padding_modes = new[]
+        {
+            PaddingMode.PKCS7,
+            PaddingMode.Zeros,
+            PaddingMode.ANSIX923,
+            PaddingMode.ISO10126
+        };
+
+        protected override PaddingMode[] PaddingModes
+        {
             get { return csp_padding_modes; }
         }
 
-        protected override void CFB (SymmetricAlgorithm algo)
+        protected override void CFB(SymmetricAlgorithm algo)
         {
             algo.Mode = CipherMode.CFB;
             // limited from 8-64 bits (RijndaelManaged goes to blocksize - but is incompatible)
-            for (int i = 8; i <= 64; i += 8) {
+            for (int i = 8; i <= 64; i += 8)
+            {
                 algo.FeedbackSize = i;
-                CFB (algo, i);
+                CFB(algo, i);
             }
         }
-        
-        protected override string GetExpectedResult (SymmetricAlgorithm algo, byte [] encryptedData)
+
+        protected override string GetExpectedResult(SymmetricAlgorithm algo, byte[] encryptedData)
         {
 #if false
             return base.GetExpectedResult (algo, encryptedData);
 #else
-            return test_vectors [GetId (algo)];
+            return test_vectors[GetId(algo)];
 #endif
         }
-        
-        static Dictionary<int, string> test_vectors = new Dictionary<int, string> () {
+
+        static Dictionary<int, string> test_vectors = new Dictionary<int, string>()
+        {
             // padding None : The input data is not a complete block.
             // block size: 128, key size: 128, padding: PKCS7, feedback: 8
             { -2139094520, "99-69-66-99-00-71-BD-07-C1-51-7A-60-DD-3C-03-A6" },

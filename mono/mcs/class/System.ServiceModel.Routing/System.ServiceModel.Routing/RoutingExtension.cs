@@ -12,60 +12,62 @@ namespace System.ServiceModel.Routing
     {
         class InstanceProvider : IInstanceProvider
         {
-            public InstanceProvider (RoutingConfiguration config)
+            public InstanceProvider(RoutingConfiguration config)
             {
                 this.config = config;
             }
 
             RoutingConfiguration config;
 
-            public object GetInstance (InstanceContext instanceContext)
+            public object GetInstance(InstanceContext instanceContext)
             {
-                return new RoutingService () { Configuration = config };
+                return new RoutingService() { Configuration = config };
             }
 
-            public object GetInstance (InstanceContext instanceContext, Message message)
+            public object GetInstance(InstanceContext instanceContext, Message message)
             {
-                return GetInstance (instanceContext);
+                return GetInstance(instanceContext);
             }
 
-            public void ReleaseInstance (InstanceContext instanceContext, object instance)
-            {
-            }
+            public void ReleaseInstance(InstanceContext instanceContext, object instance) { }
         }
 
-        internal RoutingExtension ()
-        {
-        }
+        internal RoutingExtension() { }
 
         ServiceHostBase host;
         RoutingConfiguration configuration;
 
-        public void ApplyConfiguration (RoutingConfiguration routingConfiguration)
+        public void ApplyConfiguration(RoutingConfiguration routingConfiguration)
         {
             if (routingConfiguration == null)
-                throw new ArgumentNullException ("routingConfiguration");
+                throw new ArgumentNullException("routingConfiguration");
             configuration = routingConfiguration;
 
             if (host == null)
                 return;
 
-            host.Opened += delegate {
+            host.Opened += delegate
+            {
                 foreach (ChannelDispatcher cd in host.ChannelDispatchers)
                     foreach (var ed in cd.Endpoints)
-                        if (ed.ContractNamespace == "http://schemas.microsoft.com/netfx/2009/05/routing")
-                            ed.DispatchRuntime.InstanceProvider = new InstanceProvider (configuration);
-                };
+                        if (
+                            ed.ContractNamespace
+                            == "http://schemas.microsoft.com/netfx/2009/05/routing"
+                        )
+                            ed.DispatchRuntime.InstanceProvider = new InstanceProvider(
+                                configuration
+                            );
+            };
         }
 
-        void IExtension<ServiceHostBase>.Attach (ServiceHostBase owner)
+        void IExtension<ServiceHostBase>.Attach(ServiceHostBase owner)
         {
             host = owner;
             if (configuration != null)
-                ApplyConfiguration (configuration);
+                ApplyConfiguration(configuration);
         }
 
-        void IExtension<ServiceHostBase>.Detach (ServiceHostBase owner)
+        void IExtension<ServiceHostBase>.Detach(ServiceHostBase owner)
         {
             host = null;
         }

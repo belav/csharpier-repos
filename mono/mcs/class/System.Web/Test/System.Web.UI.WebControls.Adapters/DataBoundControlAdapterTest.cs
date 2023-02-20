@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,7 +40,6 @@ using System.Web.UI.WebControls.Adapters;
 using System.Web.Configuration;
 using MonoTests.SystemWeb.Framework;
 
-
 namespace MonoTests.System.Web.UI.WebControls.Adapters
 {
     [TestFixture]
@@ -50,33 +49,33 @@ namespace MonoTests.System.Web.UI.WebControls.Adapters
         MyDataBoundControlAdapter a;
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            c = new MyDataBoundControl ();
-            a = new MyDataBoundControlAdapter (c);
-        }
-        
-        [Test]
-        public void PerformDataBinding ()
-        {
-            ArrayList data = new ArrayList ();
-            a.PerformDataBinding (data);
-            Assert.AreEqual (data, c.data, "PerformDataBinding #1");
+            c = new MyDataBoundControl();
+            a = new MyDataBoundControlAdapter(c);
         }
 
         [Test]
-        public void Control ()
+        public void PerformDataBinding()
         {
-            Assert.AreEqual (c, a.Control, "Control #1");
+            ArrayList data = new ArrayList();
+            a.PerformDataBinding(data);
+            Assert.AreEqual(data, c.data, "PerformDataBinding #1");
         }
-                
+
+        [Test]
+        public void Control()
+        {
+            Assert.AreEqual(c, a.Control, "Control #1");
+        }
+
 #region Support classes
-        
+
         class MyDataBoundControl : DataBoundControl
         {
             internal IEnumerable data;
-            
-            protected internal override void PerformDataBinding (IEnumerable data)
+
+            protected internal override void PerformDataBinding(IEnumerable data)
             {
                 this.data = data;
             }
@@ -84,11 +83,11 @@ namespace MonoTests.System.Web.UI.WebControls.Adapters
 
         class MyDataBoundControlAdapter : SystemWebTestShim.DataBoundControlAdapter
         {
-            internal MyDataBoundControlAdapter (DataBoundControl c) : base (c)
+            internal MyDataBoundControlAdapter(DataBoundControl c)
+                : base(c) { }
+
+            new internal DataBoundControl Control
             {
-            }
-            
-            new internal DataBoundControl Control {
                 get { return base.Control; }
             }
         }

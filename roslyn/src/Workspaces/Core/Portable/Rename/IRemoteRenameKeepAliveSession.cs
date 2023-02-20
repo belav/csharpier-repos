@@ -6,8 +6,5 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Rename
 {
-    internal interface IRemoteRenameKeepAliveSession : IDisposable
-    {
-
-    }
+    internal interface IRemoteRenameKeepAliveSession : IDisposable { }
 }

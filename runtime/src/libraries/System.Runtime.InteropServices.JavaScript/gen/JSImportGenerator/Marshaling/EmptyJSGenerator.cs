@@ -10,12 +10,32 @@ namespace Microsoft.Interop.JavaScript
     internal sealed class EmptyJSGenerator : IJSMarshallingGenerator
     {
         public ManagedTypeInfo AsNativeType(TypePositionInfo info) => info.ManagedType;
-        public IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context) => Array.Empty<StatementSyntax>();
-        public IEnumerable<ExpressionSyntax> GenerateBind(TypePositionInfo info, StubCodeContext context) => Array.Empty<ExpressionSyntax>();
-        public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info) => SignatureBehavior.ManagedTypeAndAttributes;
-        public ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context) => ValueBoundaryBehavior.ManagedIdentifier;
+
+        public IEnumerable<StatementSyntax> Generate(
+            TypePositionInfo info,
+            StubCodeContext context
+        ) => Array.Empty<StatementSyntax>();
+
+        public IEnumerable<ExpressionSyntax> GenerateBind(
+            TypePositionInfo info,
+            StubCodeContext context
+        ) => Array.Empty<ExpressionSyntax>();
+
+        public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info) =>
+            SignatureBehavior.ManagedTypeAndAttributes;
+
+        public ValueBoundaryBehavior GetValueBoundaryBehavior(
+            TypePositionInfo info,
+            StubCodeContext context
+        ) => ValueBoundaryBehavior.ManagedIdentifier;
+
         public bool IsSupported(TargetFramework target, Version version) => false;
-        public bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context) => false;
+
+        public bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        ) => false;
+
         public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) => false;
     }
 }

@@ -9,8 +9,7 @@ namespace MonoBug
         TValue Value { get; }
     }
 
-    struct ValueHolder<TValue>
-        : IValue<TValue>
+    struct ValueHolder<TValue> : IValue<TValue>
     {
         public TValue Value { get; }
 
@@ -26,8 +25,7 @@ namespace MonoBug
         TValue Value { get; }
     }
 
-    struct Pair<TKey, TValue>
-        : IPair<TKey, TValue>
+    struct Pair<TKey, TValue> : IPair<TKey, TValue>
         where TValue : class
     {
         public TKey Key { get; }
@@ -41,7 +39,8 @@ namespace MonoBug
     }
 
     struct IncorrectEnumerator1<TValue>
-        : IEnumerator<ValueHolder<TValue>>, IEnumerator<IValue<TValue>>
+        : IEnumerator<ValueHolder<TValue>>,
+            IEnumerator<IValue<TValue>>
         where TValue : class
     {
         object IEnumerator.Current => null;
@@ -66,23 +65,21 @@ namespace MonoBug
             }
         }
 
-
         public bool MoveNext() => true;
+
         public void Reset() { }
+
         public void Dispose() { }
     }
 
+    class ValueBase { }
 
-    class ValueBase
-    { }
-
-    class Value
-        : ValueBase
-    { }
+    class Value : ValueBase { }
 
     class Program
     {
         internal static int exit_code;
+
         static int Main(string[] args)
         {
             IEnumerator<IValue<ValueBase>> it1 = new IncorrectEnumerator1<Value>();

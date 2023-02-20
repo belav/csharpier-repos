@@ -25,13 +25,20 @@ namespace JitBench
             {
                 _output.WriteLine("Running Process: " + runner.ReplayCommand);
                 _output.WriteLine("Working Directory: " + runner.WorkingDirectory);
-                IEnumerable<KeyValuePair<string,string>> additionalEnvVars = 
-                    runner.EnvironmentVariables.Where(kv => Environment.GetEnvironmentVariable(kv.Key) != kv.Value);
+                IEnumerable<KeyValuePair<string, string>> additionalEnvVars =
+                    runner.EnvironmentVariables.Where(
+                        kv => Environment.GetEnvironmentVariable(kv.Key) != kv.Value
+                    );
 
-                if(additionalEnvVars.Any())
+                if (additionalEnvVars.Any())
                 {
-                    _output.WriteLine("Additional Environment Variables: " +
-                        string.Join(", ", additionalEnvVars.Select(kv => kv.Key + "=" + kv.Value)));
+                    _output.WriteLine(
+                        "Additional Environment Variables: "
+                            + string.Join(
+                                ", ",
+                                additionalEnvVars.Select(kv => kv.Key + "=" + kv.Value)
+                            )
+                    );
                 }
                 _output.WriteLine("{");
             }
@@ -66,7 +73,13 @@ namespace JitBench
             {
                 TimeSpan offset = runner.StartTime - DateTime.Now;
                 _output.WriteLine("}");
-                _output.WriteLine("Exit code: " + runner.ExitCode + " ( " + offset.ToString(_timeFormat) + " elapsed)");
+                _output.WriteLine(
+                    "Exit code: "
+                        + runner.ExitCode
+                        + " ( "
+                        + offset.ToString(_timeFormat)
+                        + " elapsed)"
+                );
                 _output.WriteLine("");
             }
         }
@@ -85,7 +98,9 @@ namespace JitBench
                 {
                     reasonText = "Kill() was called";
                 }
-                _output.WriteLine("    Killing process: " + offset.ToString(_timeFormat) + ": " + reasonText);
+                _output.WriteLine(
+                    "    Killing process: " + offset.ToString(_timeFormat) + ": " + reasonText
+                );
             }
         }
 
@@ -103,7 +118,11 @@ namespace JitBench
             }
         }
 
-        private StringBuilder AppendToLineBuffer(ProcessRunner runner, ProcessStream stream, string data)
+        private StringBuilder AppendToLineBuffer(
+            ProcessRunner runner,
+            ProcessStream stream,
+            string data
+        )
         {
             StringBuilder lineBuffer = _lineBuffers[(int)stream];
             if (lineBuffer == null)
@@ -125,12 +144,12 @@ namespace JitBench
             }
 
             // xunit has a bug where a non-printable character isn't properly escaped when
-            // it is written into the xml results which ultimately results in 
+            // it is written into the xml results which ultimately results in
             // the xml being improperly truncated. For example MDbg has a test case that prints
             // \0 and dotnet tools print \u001B to colorize their console output.
-            foreach(char c in data)
+            foreach (char c in data)
             {
-                if(!char.IsControl(c))
+                if (!char.IsControl(c))
                 {
                     lineBuffer.Append(c);
                 }

@@ -14,15 +14,15 @@ namespace Moq.Expressions.Visitors
     {
         public static readonly ExpressionVisitor Rewriter = new EvaluateCaptures();
 
-        private EvaluateCaptures()
-        {
-        }
+        private EvaluateCaptures() { }
 
         protected override Expression VisitMember(MemberExpression node)
         {
-            if (node.Member is FieldInfo fi
+            if (
+                node.Member is FieldInfo fi
                 && node.Expression is ConstantExpression ce
-                && node.Member.DeclaringType.IsDefined(typeof(CompilerGeneratedAttribute)))
+                && node.Member.DeclaringType.IsDefined(typeof(CompilerGeneratedAttribute))
+            )
             {
                 return Expression.Constant(fi.GetValue(ce.Value), node.Type);
             }

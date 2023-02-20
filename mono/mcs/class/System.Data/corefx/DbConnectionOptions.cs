@@ -22,7 +22,10 @@ namespace System.Data.Common
         internal static string ExpandDataDirectory(string keyword, string value, ref string datadir)
         {
             string fullPath = null;
-            if ((null != value) && value.StartsWith(DataDirectory, StringComparison.OrdinalIgnoreCase))
+            if (
+                (null != value)
+                && value.StartsWith(DataDirectory, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 string rootFolderPath = datadir;
                 if (null == rootFolderPath)
@@ -47,9 +50,12 @@ namespace System.Data.Common
                 }
 
                 // We don't know if rootFolderpath ends with '\', and we don't know if the given name starts with onw
-                int fileNamePosition = DataDirectory.Length;    // filename starts right after the '|datadirectory|' keyword
-                bool rootFolderEndsWith = (0 < rootFolderPath.Length) && rootFolderPath[rootFolderPath.Length - 1] == '\\';
-                bool fileNameStartsWith = (fileNamePosition < value.Length) && value[fileNamePosition] == '\\';
+                int fileNamePosition = DataDirectory.Length; // filename starts right after the '|datadirectory|' keyword
+                bool rootFolderEndsWith =
+                    (0 < rootFolderPath.Length)
+                    && rootFolderPath[rootFolderPath.Length - 1] == '\\';
+                bool fileNameStartsWith =
+                    (fileNamePosition < value.Length) && value[fileNamePosition] == '\\';
 
                 // replace |datadirectory| with root folder path
                 if (!rootFolderEndsWith && !fileNameStartsWith)
@@ -169,23 +175,38 @@ namespace System.Data.Common
             return value;
         }
 
-        internal bool HasBlankPassword {
-            get {
-                if (!ConvertValueToIntegratedSecurity()) {
-                    if (_parsetable.ContainsKey(KEY.Password)) {
+        internal bool HasBlankPassword
+        {
+            get
+            {
+                if (!ConvertValueToIntegratedSecurity())
+                {
+                    if (_parsetable.ContainsKey(KEY.Password))
+                    {
                         return ADP.IsEmpty((string)_parsetable[KEY.Password]);
-                    } else
-                    if (_parsetable.ContainsKey(SYNONYM.Pwd)) {
+                    }
+                    else if (_parsetable.ContainsKey(SYNONYM.Pwd))
+                    {
                         return ADP.IsEmpty((string)_parsetable[SYNONYM.Pwd]); // MDAC 83097
-                    } else {
-                        return ((_parsetable.ContainsKey(KEY.User_ID) && !ADP.IsEmpty((string)_parsetable[KEY.User_ID])) || (_parsetable.ContainsKey(SYNONYM.UID) && !ADP.IsEmpty((string)_parsetable[SYNONYM.UID])));
+                    }
+                    else
+                    {
+                        return (
+                            (
+                                _parsetable.ContainsKey(KEY.User_ID)
+                                && !ADP.IsEmpty((string)_parsetable[KEY.User_ID])
+                            )
+                            || (
+                                _parsetable.ContainsKey(SYNONYM.UID)
+                                && !ADP.IsEmpty((string)_parsetable[SYNONYM.UID])
+                            )
+                        );
                     }
                 }
                 return false;
             }
         }
     }
-
 
     internal static class DbConnectionOptionKeywords
     {

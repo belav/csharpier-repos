@@ -9,7 +9,7 @@ enum MyEnum : byte
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
         MyEnum? e = MyEnum.A;
         byte? b = 255;
@@ -22,15 +22,14 @@ class C
         res = e + b;
         if (res != null)
             return 2;
-            
+
         MyEnum e2 = MyEnum.A;
         byte b2 = 1;
         MyEnum res2 = e2 + b2;
         if (res2 != MyEnum.B)
             return 3;
-            
-        Console.WriteLine ("OK");
+
+        Console.WriteLine("OK");
         return 0;
     }
 }
-

@@ -20,8 +20,6 @@ namespace POS_Server.Models
         public Nullable<long> posId { get; set; }
         public Nullable<long> mainInventoryId { get; set; }
 
-      
         public Boolean canDelete { get; set; }
-    
     }
 }

@@ -84,16 +84,10 @@ namespace Moq.Tests
             Assert.Throws<ArgumentException>(() => Mock.Get("foo"));
         }
 
-        public class FooBase
-        {
-        }
-        
-        public class Foo : FooBase
-        {
-        }
-        
-        public interface IFoo
-        {
-        }
+        public class FooBase { }
+
+        public class Foo : FooBase { }
+
+        public interface IFoo { }
     }
 }

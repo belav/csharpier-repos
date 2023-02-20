@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,44 +37,53 @@ namespace System.ServiceModel.Web
         HttpRequestMessageProperty hp;
         UriTemplateMatch match;
 
-        internal IncomingWebRequestContext (OperationContext context)
+        internal IncomingWebRequestContext(OperationContext context)
         {
             if (context.IncomingMessageProperties != null)
-                hp = (HttpRequestMessageProperty) context.IncomingMessageProperties [HttpRequestMessageProperty.Name];
+                hp = (HttpRequestMessageProperty)
+                    context.IncomingMessageProperties[HttpRequestMessageProperty.Name];
             else
-                hp = new HttpRequestMessageProperty ();
+                hp = new HttpRequestMessageProperty();
         }
 
-        public string Accept {
-            get { return hp.Headers.Get ("Accept"); }
+        public string Accept
+        {
+            get { return hp.Headers.Get("Accept"); }
         }
 
-        public long ContentLength {
-            get {
-                string s = hp.Headers.Get ("Content-Length");
-                return s != null ? long.Parse (s, CultureInfo.InvariantCulture) : 0;
+        public long ContentLength
+        {
+            get
+            {
+                string s = hp.Headers.Get("Content-Length");
+                return s != null ? long.Parse(s, CultureInfo.InvariantCulture) : 0;
             }
         }
 
-        public string ContentType {
-            get { return hp.Headers.Get ("Content-Type"); }
+        public string ContentType
+        {
+            get { return hp.Headers.Get("Content-Type"); }
         }
 
-        public WebHeaderCollection Headers {
+        public WebHeaderCollection Headers
+        {
             get { return hp.Headers; }
         }
 
-        public string Method {
+        public string Method
+        {
             get { return hp.Method; }
         }
 
-        public UriTemplateMatch UriTemplateMatch {
+        public UriTemplateMatch UriTemplateMatch
+        {
             get { return match; }
             set { match = value; }
         }
 
-        public string UserAgent {
-            get { return hp.Headers.Get ("User-Agent"); }
+        public string UserAgent
+        {
+            get { return hp.Headers.Get("User-Agent"); }
         }
     }
 }

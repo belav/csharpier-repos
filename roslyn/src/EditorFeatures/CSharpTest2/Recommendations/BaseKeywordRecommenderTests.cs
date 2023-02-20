@@ -16,64 +16,70 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotInTopLevelMethod()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"void Goo()
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"void Goo()
 {
     $$
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"class C { }
-$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"class C { }
+$$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement()
         {
             await VerifyAbsenceAsync(
-@"System.Console.WriteLine();
-$$", options: CSharp9ParseOptions);
+                @"System.Console.WriteLine();
+$$",
+                options: CSharp9ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration()
         {
             await VerifyAbsenceAsync(
-@"int i = 0;
-$$", options: CSharp9ParseOptions);
+                @"int i = 0;
+$$",
+                options: CSharp9ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestInClassConstructorInitializer()
         {
             await VerifyKeywordAsync(
-@"class C {
-    public C() : $$");
+                @"class C {
+    public C() : $$"
+            );
         }
 
         [Fact]
@@ -81,80 +87,88 @@ $$", options: CSharp9ParseOptions);
         {
             // The recommender doesn't work in record in script
             // Tracked by https://github.com/dotnet/roslyn/issues/44865
-            await VerifyWorkerAsync(@"
+            await VerifyWorkerAsync(
+                @"
 record C {
-    public C() : $$", absent: false, options: TestOptions.RegularPreview);
+    public C() : $$",
+                absent: false,
+                options: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public async Task TestNotInStaticClassConstructorInitializer()
         {
             await VerifyAbsenceAsync(
-@"class C {
-    static C() : $$");
+                @"class C {
+    static C() : $$"
+            );
         }
 
         [Fact]
         public async Task TestNotInStructConstructorInitializer()
         {
             await VerifyAbsenceAsync(
-@"struct C {
-    public C() : $$");
+                @"struct C {
+    public C() : $$"
+            );
         }
 
         [Fact]
         public async Task TestAfterCast()
         {
             await VerifyKeywordAsync(
-@"struct C {
-    new internal ErrorCode Code { get { return (ErrorCode)$$");
+                @"struct C {
+    new internal ErrorCode Code { get { return (ErrorCode)$$"
+            );
         }
 
         [Fact]
         public async Task TestInEmptyMethod()
         {
-            await VerifyKeywordAsync(
-                SourceCodeKind.Regular,
-                AddInsideMethod(
-@"$$"));
+            await VerifyKeywordAsync(SourceCodeKind.Regular, AddInsideMethod(@"$$"));
         }
 
         [Fact, WorkItem(538264, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538264")]
         public async Task TestNotInEnumMemberInitializer1()
         {
             await VerifyAbsenceAsync(
-@"enum E {
+                @"enum E {
     a = $$
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(544219, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544219")]
         public async Task TestNotInObjectInitializerMemberContext()
         {
-            await VerifyAbsenceAsync(@"
+            await VerifyAbsenceAsync(
+                @"
 class C
 {
     public int x, y;
     void M()
     {
-        var c = new C { x = 2, y = 3, $$");
+        var c = new C { x = 2, y = 3, $$"
+            );
         }
 
         [Fact, WorkItem(16335, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/16335")]
         public async Task InExpressionBodyAccessor()
         {
-            await VerifyKeywordAsync(@"
+            await VerifyKeywordAsync(
+                @"
 class B
 {
     public virtual int T { get => bas$$ }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAfterRefExpression()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"ref int x = ref $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"ref int x = ref $$"));
         }
     }
 }

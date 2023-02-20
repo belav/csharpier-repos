@@ -4,25 +4,23 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.TestFramework
 {
-
     /// <summary>
     /// The purpose of this test is to verify that the testing framework's define attribute is working correctly
     /// </summary>
-    [Define ("SOME_DEFINE")]
+    [Define("SOME_DEFINE")]
     public class VerifyDefineAttributeBehavior
     {
-        static void Main ()
+        static void Main()
         {
 #if SOME_DEFINE
-            MethodThatIsUsedIfDefineIsWorkingProperly ();
+            MethodThatIsUsedIfDefineIsWorkingProperly();
 #endif
         }
 
-
         [Kept]
-        static void MethodThatIsUsedIfDefineIsWorkingProperly ()
+        static void MethodThatIsUsedIfDefineIsWorkingProperly()
         {
-            Console.WriteLine ("Foo");
+            Console.WriteLine("Foo");
         }
     }
 }

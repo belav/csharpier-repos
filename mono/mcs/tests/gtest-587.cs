@@ -2,29 +2,27 @@ using System;
 
 struct S
 {
-    public static implicit operator string (S s)
+    public static implicit operator string(S s)
     {
         return "1";
     }
 
-    public static implicit operator short? (S s)
+    public static implicit operator short?(S s)
     {
         return 1;
     }
 
-    public static implicit operator E (S s)
+    public static implicit operator E(S s)
     {
         return 0;
     }
 }
 
-public enum E
-{
-}
+public enum E { }
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
         E? e = 0;
         const E e1 = (E)44;

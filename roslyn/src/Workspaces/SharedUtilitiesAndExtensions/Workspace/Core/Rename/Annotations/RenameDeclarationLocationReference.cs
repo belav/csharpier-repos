@@ -33,7 +33,12 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         /// </summary>
         public readonly bool IsOverriddenFromMetadata;
 
-        public RenameDeclarationLocationReference(DocumentId documentId, TextSpan textSpan, bool overriddenFromMetadata, int declaringSyntaxReferencesCount)
+        public RenameDeclarationLocationReference(
+            DocumentId documentId,
+            TextSpan textSpan,
+            bool overriddenFromMetadata,
+            int declaringSyntaxReferencesCount
+        )
         {
             this.DocumentId = documentId;
             this.TextSpan = textSpan;
@@ -51,10 +56,7 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
         public bool IsSourceLocation
         {
-            get
-            {
-                return Name == null;
-            }
+            get { return Name == null; }
         }
     }
 }

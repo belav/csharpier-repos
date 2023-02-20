@@ -8,6 +8,4 @@ public class C
     public event Action<I> E;
 }
 
-interface I
-{
-}
+interface I { }

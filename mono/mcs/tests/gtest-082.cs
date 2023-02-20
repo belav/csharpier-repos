@@ -6,7 +6,7 @@ public class Queue<T>
     {
         Queue<T> queue;
 
-        public Enumerator (Queue<T> queue)
+        public Enumerator(Queue<T> queue)
         {
             this.queue = queue;
         }
@@ -15,6 +15,5 @@ public class Queue<T>
 
 class X
 {
-    public static void Main ()
-    { }
+    public static void Main() { }
 }

@@ -14,24 +14,29 @@ namespace Mono.Linker
 
         public TypeDefinition? RemoveAttributeInstancesAttributeDefinition { get; set; }
 
-        public static bool IsNotSupportedExceptionCtorString (MethodDefinition method)
+        public static bool IsNotSupportedExceptionCtorString(MethodDefinition method)
         {
-            if (!method.IsConstructor || method.IsStatic || !method.HasMetadataParameters ())
+            if (!method.IsConstructor || method.IsStatic || !method.HasMetadataParameters())
                 return false;
 
-            if (method.GetMetadataParametersCount () != 1 || method.GetParameter ((ParameterIndex) 1).ParameterType.MetadataType != MetadataType.String)
+            if (
+                method.GetMetadataParametersCount() != 1
+                || method.GetParameter((ParameterIndex)1).ParameterType.MetadataType
+                    != MetadataType.String
+            )
                 return false;
 
             return true;
         }
 
-        public static bool IsSatelliteAssemblyMarker (MethodDefinition method)
+        public static bool IsSatelliteAssemblyMarker(MethodDefinition method)
         {
             if (!method.IsConstructor || method.IsStatic)
                 return false;
 
             var declaringType = method.DeclaringType;
-            return declaringType.Name == "ResourceManager" && declaringType.Namespace == "System.Resources";
+            return declaringType.Name == "ResourceManager"
+                && declaringType.Namespace == "System.Resources";
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Microsoft.CodeAnalysis.Shared.Options
     /// </summary>
     internal static class RuntimeOptions
     {
-        public static readonly Option<bool> BackgroundAnalysisSuspendedInfoBarShown = new(nameof(RuntimeOptions), "FullSolutionAnalysisInfoBarShown", defaultValue: false);
+        public static readonly Option<bool> BackgroundAnalysisSuspendedInfoBarShown =
+            new(nameof(RuntimeOptions), "FullSolutionAnalysisInfoBarShown", defaultValue: false);
     }
 }

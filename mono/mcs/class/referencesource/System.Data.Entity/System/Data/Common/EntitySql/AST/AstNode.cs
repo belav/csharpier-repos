@@ -50,9 +50,7 @@ namespace System.Data.Common.EntitySql.AST
         /// <summary>
         /// Default constructor.
         /// </summary>
-        internal NodeList()
-        {
-        }
+        internal NodeList() { }
 
         /// <summary>
         /// Initializes adding one item to the list.

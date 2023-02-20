@@ -6,7 +6,5 @@ namespace Microsoft.AspNetCore.Http.Result;
 internal sealed class OkObjectResult : ObjectResult
 {
     public OkObjectResult(object? value)
-        : base(value, StatusCodes.Status200OK)
-    {
-    }
+        : base(value, StatusCodes.Status200OK) { }
 }

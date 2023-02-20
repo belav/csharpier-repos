@@ -18,16 +18,22 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configuration.ConfigureCodeStyle
 {
-    public abstract partial class BooleanCodeStyleOptionConfigurationTests : AbstractSuppressionDiagnosticTest
+    public abstract partial class BooleanCodeStyleOptionConfigurationTests
+        : AbstractSuppressionDiagnosticTest
     {
         protected internal override string GetLanguage() => LanguageNames.CSharp;
 
         protected override ParseOptions GetScriptOptions() => Options.Script;
 
-        internal override Tuple<DiagnosticAnalyzer, IConfigurationFixProvider> CreateDiagnosticProviderAndFixer(Workspace workspace)
+        internal override Tuple<
+            DiagnosticAnalyzer,
+            IConfigurationFixProvider
+        > CreateDiagnosticProviderAndFixer(Workspace workspace)
         {
             return new Tuple<DiagnosticAnalyzer, IConfigurationFixProvider>(
-                        new CSharpUseObjectInitializerDiagnosticAnalyzer(), new ConfigureCodeStyleOptionCodeFixProvider());
+                new CSharpUseObjectInitializerDiagnosticAnalyzer(),
+                new ConfigureCodeStyleOptionCodeFixProvider()
+            );
         }
 
         [Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
@@ -38,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             [ConditionalFact(typeof(IsEnglishLocal))]
             public async Task ConfigureEditorconfig_Empty_True()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -69,7 +76,8 @@ class Program1
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -110,7 +118,8 @@ dotnet_style_object_initializer = true
             [Fact(Skip = "https://github.com/dotnet/roslyn/issues/39466")]
             public async Task ConfigureEditorconfig_RuleExists_True()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -143,7 +152,8 @@ dotnet_style_object_initializer = false:suggestion    ; Comment2
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -182,7 +192,8 @@ dotnet_style_object_initializer = true:suggestion    ; Comment2
             [ConditionalFact(typeof(IsEnglishLocal))]
             public async Task ConfigureEditorconfig_InvalidHeader_True()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -215,7 +226,8 @@ dotnet_style_object_initializer = false:suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -259,7 +271,8 @@ dotnet_style_object_initializer = true
             [Fact(Skip = "https://github.com/dotnet/roslyn/issues/39466")]
             public async Task ConfigureEditorconfig_MaintainSeverity_True()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -292,7 +305,8 @@ dotnet_style_object_initializer = false:suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -331,7 +345,8 @@ dotnet_style_object_initializer = true:suggestion
             [ConditionalFact(typeof(IsEnglishLocal))]
             public async Task ConfigureEditorconfig_InvalidRule_True()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -365,7 +380,8 @@ dotnet_style_object_initializerr = false
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -414,7 +430,8 @@ dotnet_style_object_initializer = true
             [ConditionalFact(typeof(IsEnglishLocal))]
             public async Task ConfigureEditorconfig_Empty_False()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -445,7 +462,8 @@ class Program1
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -486,7 +504,8 @@ dotnet_style_object_initializer = false
             [Fact]
             public async Task ConfigureEditorconfig_RuleExists_False()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -519,7 +538,8 @@ dotnet_style_object_initializer = true:suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -558,7 +578,8 @@ dotnet_style_object_initializer = false:suggestion
             [Fact]
             public async Task ConfigureEditorconfig_RuleExists_False_NoSeveritySuffix()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -591,7 +612,8 @@ dotnet_style_object_initializer = true
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -630,7 +652,8 @@ dotnet_style_object_initializer = false
             [ConditionalFact(typeof(IsEnglishLocal))]
             public async Task ConfigureEditorconfig_RuleExists_DotnetDiagnosticEntry()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -663,7 +686,8 @@ dotnet_diagnostic.IDE0017.severity = warning
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -705,7 +729,8 @@ dotnet_style_object_initializer = false
             [Fact]
             public async Task ConfigureEditorconfig_RuleExists_ConflitingDotnetDiagnosticEntry()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -739,7 +764,8 @@ dotnet_style_object_initializer = true:warning
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -779,7 +805,8 @@ dotnet_style_object_initializer = false:warning
             [ConditionalFact(typeof(IsEnglishLocal))]
             public async Task ConfigureEditorconfig_InvalidHeader_False()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -812,7 +839,8 @@ dotnet_style_object_initializer = true:suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -856,7 +884,8 @@ dotnet_style_object_initializer = false
             [Fact]
             public async Task ConfigureEditorconfig_MaintainSeverity_False()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -889,7 +918,8 @@ dotnet_style_object_initializer = true:suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -928,7 +958,8 @@ dotnet_style_object_initializer = false:suggestion
             [ConditionalFact(typeof(IsEnglishLocal))]
             public async Task ConfigureEditorconfig_InvalidRule_False()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -961,7 +992,8 @@ dotnet_style_object_initializerr = false:suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">

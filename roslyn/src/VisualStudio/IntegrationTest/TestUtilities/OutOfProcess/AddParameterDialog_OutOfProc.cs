@@ -16,31 +16,23 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             _inProc = CreateInProcComponent<AddParameterDialog_InProc>(visualStudioInstance);
         }
 
-        public void VerifyOpen()
-            => _inProc.VerifyOpen();
+        public void VerifyOpen() => _inProc.VerifyOpen();
 
-        public void VerifyClosed()
-            => _inProc.VerifyClosed();
+        public void VerifyClosed() => _inProc.VerifyClosed();
 
-        public bool CloseWindow()
-            => _inProc.CloseWindow();
+        public bool CloseWindow() => _inProc.CloseWindow();
 
-        public void ClickOK()
-            => _inProc.ClickOK();
+        public void ClickOK() => _inProc.ClickOK();
 
-        public void ClickCancel()
-            => _inProc.ClickCancel();
+        public void ClickCancel() => _inProc.ClickCancel();
 
-        public void FillCallSiteField(string callsiteValue)
-            => _inProc.FillCallSiteField(callsiteValue);
+        public void FillCallSiteField(string callsiteValue) =>
+            _inProc.FillCallSiteField(callsiteValue);
 
-        public void FillNameField(string parameterName)
-            => _inProc.FillNameField(parameterName);
+        public void FillNameField(string parameterName) => _inProc.FillNameField(parameterName);
 
-        public void FillTypeField(string typeName)
-            => _inProc.FillTypeField(typeName);
+        public void FillTypeField(string typeName) => _inProc.FillTypeField(typeName);
 
-        public void SetCallSiteTodo()
-            => _inProc.SetCallSiteTodo();
+        public void SetCallSiteTodo() => _inProc.SetCallSiteTodo();
     }
 }

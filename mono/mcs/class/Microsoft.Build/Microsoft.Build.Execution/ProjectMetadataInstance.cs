@@ -13,7 +13,7 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
 //
@@ -33,23 +33,23 @@ namespace Microsoft.Build.Execution
 {
     public class ProjectMetadataInstance
     {
-        internal ProjectMetadataInstance (string name, string value)
+        internal ProjectMetadataInstance(string name, string value)
         {
             Name = name;
             EvaluatedValue = value;
         }
-        
+
         public string EvaluatedValue { get; private set; }
         public string Name { get; private set; }
-        
-        public ProjectMetadataInstance DeepClone ()
+
+        public ProjectMetadataInstance DeepClone()
         {
-            return new ProjectMetadataInstance (Name, EvaluatedValue);
+            return new ProjectMetadataInstance(Name, EvaluatedValue);
         }
-        
-        public override string ToString ()
+
+        public override string ToString()
         {
-            return string.Format ("{0}={1}", Name, EvaluatedValue);
+            return string.Format("{0}={1}", Name, EvaluatedValue);
         }
     }
 }

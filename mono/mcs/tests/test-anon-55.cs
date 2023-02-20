@@ -2,31 +2,34 @@ using System;
 
 public class Foo
 {
-    protected delegate void Hello ();
+    protected delegate void Hello();
 
-    protected void Test (Hello hello)
+    protected void Test(Hello hello)
     {
-        hello ();
+        hello();
     }
 
-    private void Private ()
+    private void Private()
     {
-        Console.WriteLine ("Private!");
+        Console.WriteLine("Private!");
     }
 
-    public void Test ()
+    public void Test()
     {
-        Test (delegate {
-            Private ();
-        });
+        Test(
+            delegate
+            {
+                Private();
+            }
+        );
     }
 }
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        Foo foo = new Foo ();
-        foo.Test ();
+        Foo foo = new Foo();
+        foo.Test();
     }
 }

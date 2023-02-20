@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,66 +33,70 @@ using System.Reflection;
 using System.Security.Permissions;
 using System.Web;
 
-namespace MonoCasTests.System.Web {
-
+namespace MonoCasTests.System.Web
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class HttpCookieCas : AspNetHostingMinimal {
-
-        private void GetSetProperties (HttpCookie biscuit)
+    [Category("CAS")]
+    public class HttpCookieCas : AspNetHostingMinimal
+    {
+        private void GetSetProperties(HttpCookie biscuit)
         {
-            Assert.IsNull (biscuit.Domain, "Domain");
+            Assert.IsNull(biscuit.Domain, "Domain");
             biscuit.Domain = String.Empty;
 
-            Assert.AreEqual (DateTime.MinValue, biscuit.Expires, "Domain");
+            Assert.AreEqual(DateTime.MinValue, biscuit.Expires, "Domain");
             biscuit.Expires = DateTime.MaxValue;
 
-            Assert.IsFalse (biscuit.HasKeys, "HasKeys");
+            Assert.IsFalse(biscuit.HasKeys, "HasKeys");
             biscuit["mono"] = "monkey";
-            Assert.AreEqual ("monkey", biscuit["mono"], "this");
+            Assert.AreEqual("monkey", biscuit["mono"], "this");
 
-            Assert.IsNull (biscuit.Name, "Name");
+            Assert.IsNull(biscuit.Name, "Name");
             biscuit.Name = "my";
 
-            Assert.AreEqual ("/", biscuit.Path, "Path");
+            Assert.AreEqual("/", biscuit.Path, "Path");
             biscuit.Path = String.Empty;
 
-            Assert.IsFalse (biscuit.Secure, "Secure");
+            Assert.IsFalse(biscuit.Secure, "Secure");
             biscuit.Secure = true;
 
-            Assert.IsTrue (biscuit.Value.IndexOf ("mono=monkey") >= 0, "Value");
+            Assert.IsTrue(biscuit.Value.IndexOf("mono=monkey") >= 0, "Value");
             biscuit.Value = "monkey=mono&singe=monkey";
-            Assert.IsFalse (biscuit.HttpOnly, "HttpOnly");
+            Assert.IsFalse(biscuit.HttpOnly, "HttpOnly");
             biscuit.HttpOnly = true;
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted()
         {
-            HttpCookie biscuit = new HttpCookie (null);
-            GetSetProperties (biscuit);
+            HttpCookie biscuit = new HttpCookie(null);
+            GetSetProperties(biscuit);
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor2_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted()
         {
-            HttpCookie biscuit = new HttpCookie (null, String.Empty);
-            GetSetProperties (biscuit);
+            HttpCookie biscuit = new HttpCookie(null, String.Empty);
+            GetSetProperties(biscuit);
         }
 
         // LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (string) });
-            Assert.IsNotNull (ci, ".ctor(Type)");
-            return ci.Invoke (new object[1] { null });
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(string) });
+            Assert.IsNotNull(ci, ".ctor(Type)");
+            return ci.Invoke(new object[1] { null });
         }
 
-        public override Type Type {
-            get { return typeof (HttpCookie); }
+        public override Type Type
+        {
+            get { return typeof(HttpCookie); }
         }
     }
 }

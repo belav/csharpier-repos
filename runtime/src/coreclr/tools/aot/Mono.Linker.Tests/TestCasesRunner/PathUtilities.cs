@@ -19,15 +19,25 @@ namespace Mono.Linker.Tests.TestCasesRunner
 #error "Unknown TFM"
 #endif
 
-        public static string GetTestsSourceRootDirectory ([CallerFilePath] string? thisFile = null) =>
-            Path.GetFullPath ((string) AppContext.GetData ("Mono.Linker.Tests.NativeAotDir")!);
+        public static string GetTestsSourceRootDirectory(
+            [CallerFilePath] string? thisFile = null
+        ) => Path.GetFullPath((string)AppContext.GetData("Mono.Linker.Tests.NativeAotDir")!);
 
-        public static string GetTestAssemblyPath (string assemblyName)
+        public static string GetTestAssemblyPath(string assemblyName)
         {
-            var artifactsBinDirectory = (string) AppContext.GetData ("Mono.Linker.Tests.ArtifactsBinDir")!;
-            var targetArch = (string) AppContext.GetData ("Mono.Linker.Tests.TargetArchitecture")!;
-            var configuration = (string) AppContext.GetData ("Mono.Linker.Tests.Configuration")!;
-            return Path.GetFullPath (Path.Combine (artifactsBinDirectory, assemblyName, targetArch, configuration, $"{assemblyName}.dll"));
+            var artifactsBinDirectory = (string)
+                AppContext.GetData("Mono.Linker.Tests.ArtifactsBinDir")!;
+            var targetArch = (string)AppContext.GetData("Mono.Linker.Tests.TargetArchitecture")!;
+            var configuration = (string)AppContext.GetData("Mono.Linker.Tests.Configuration")!;
+            return Path.GetFullPath(
+                Path.Combine(
+                    artifactsBinDirectory,
+                    assemblyName,
+                    targetArch,
+                    configuration,
+                    $"{assemblyName}.dll"
+                )
+            );
         }
     }
 }

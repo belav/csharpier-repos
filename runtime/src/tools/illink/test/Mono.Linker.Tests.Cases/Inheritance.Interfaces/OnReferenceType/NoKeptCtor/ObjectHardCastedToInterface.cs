@@ -4,39 +4,33 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
 {
     public class ObjectHardCastedToInterface
     {
-        public static void Main ()
+        public static void Main()
         {
-            object o = GetAnObject ();
-            IFoo i = (IFoo) o;
-            UseAnIFoo (i);
+            object o = GetAnObject();
+            IFoo i = (IFoo)o;
+            UseAnIFoo(i);
 
             // Here to mark Foo so that we can verify the interface is removed
-            Foo.Helper ();
+            Foo.Helper();
         }
 
         [Kept]
-        static object GetAnObject ()
+        static object GetAnObject()
         {
             return null;
         }
 
         [Kept]
-        static void UseAnIFoo (IFoo arg)
-        {
-        }
+        static void UseAnIFoo(IFoo arg) { }
 
         [Kept]
         class Foo : IFoo
         {
             [Kept]
-            public static void Helper ()
-            {
-            }
+            public static void Helper() { }
         }
 
         [Kept]
-        interface IFoo
-        {
-        }
+        interface IFoo { }
     }
 }

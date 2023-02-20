@@ -5,8 +5,5 @@
 class C
 {
     /// <returns>A <see cref="int(int)" />.</returns>
-    void MM ()
-    {
-    }
+    void MM() { }
 }
-

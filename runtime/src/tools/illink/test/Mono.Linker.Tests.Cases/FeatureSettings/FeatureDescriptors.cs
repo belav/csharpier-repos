@@ -4,22 +4,23 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.FeatureSettings
 {
-    [TestCaseRequirements (TestRunCharacteristics.TargetingNetCore, "Feature settings in descriptors are not supported on Mono.")]
-    [SetupLinkerDescriptorFile ("FeatureDescriptorsGlobalTrue.xml")]
-    [SetupLinkerDescriptorFile ("FeatureDescriptorsGlobalFalse.xml")]
-    [SetupLinkerDescriptorFile ("FeatureDescriptors.xml")]
-    [SetupLinkerArgument ("--feature", "GlobalCondition", "true")]
-    [SetupLinkerArgument ("--feature", "AssemblyCondition", "false")]
-    [SetupLinkerArgument ("--feature", "TypeCondition", "true")]
-    [SetupLinkerArgument ("--feature", "MethodCondition", "false")]
-    [SetupLinkerArgument ("--feature", "FieldCondition", "true")]
-    [SetupLinkerArgument ("--feature", "PropertyCondition", "false")]
-    [SetupLinkerArgument ("--feature", "EventCondition", "true")]
+    [TestCaseRequirements(
+        TestRunCharacteristics.TargetingNetCore,
+        "Feature settings in descriptors are not supported on Mono."
+    )]
+    [SetupLinkerDescriptorFile("FeatureDescriptorsGlobalTrue.xml")]
+    [SetupLinkerDescriptorFile("FeatureDescriptorsGlobalFalse.xml")]
+    [SetupLinkerDescriptorFile("FeatureDescriptors.xml")]
+    [SetupLinkerArgument("--feature", "GlobalCondition", "true")]
+    [SetupLinkerArgument("--feature", "AssemblyCondition", "false")]
+    [SetupLinkerArgument("--feature", "TypeCondition", "true")]
+    [SetupLinkerArgument("--feature", "MethodCondition", "false")]
+    [SetupLinkerArgument("--feature", "FieldCondition", "true")]
+    [SetupLinkerArgument("--feature", "PropertyCondition", "false")]
+    [SetupLinkerArgument("--feature", "EventCondition", "true")]
     public class FeatureDescriptors
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
         static bool DefaultConditionTrue;
@@ -30,6 +31,7 @@ namespace Mono.Linker.Tests.Cases.FeatureSettings
         static bool GlobalConditionFalse;
 
         static bool AssemblyConditionTrue;
+
         [Kept]
         static bool AssemblyConditionFalse;
 
@@ -37,24 +39,26 @@ namespace Mono.Linker.Tests.Cases.FeatureSettings
         static bool TypeConditionTrue;
         static bool TypeConditionFalse;
 
-
-        static void MethodConditionTrue ()
-        {
-        }
+        static void MethodConditionTrue() { }
 
         [Kept]
-        static void MethodConditionFalse ()
-        {
-        }
+        static void MethodConditionFalse() { }
 
         [Kept]
         static bool FieldConditionTrue;
         static bool FieldConditionFalse;
 
         static bool PropertyConditionTrue { get; set; }
+
         [Kept]
         [KeptBackingField]
-        static bool PropertyConditionFalse { [Kept] get; [Kept] set; }
+        static bool PropertyConditionFalse
+        {
+            [Kept]
+            get;
+            [Kept]
+            set;
+        }
 
         [Kept]
         [KeptBackingField]

@@ -1,18 +1,21 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// Negative tests which test method signatures for generic covariant/contravariant 
-// delegate's methods 
+// Negative tests which test method signatures for generic covariant/contravariant
+// delegate's methods
 
 using System;
 
 public class Base { }
+
 public class Sub : Base { }
 
 public class GBase<T> { }
+
 public class GSubGRefT<T> : GBase<GRef<T>> { }
 
 public class GRef<T> { }
+
 public struct GVal<T> { }
 
 public class TestClass
@@ -31,28 +34,42 @@ public class TestClass
             Console.WriteLine("Test Failed at location: {0} @ count {1} ", location, iTestCount);
         }
     }
+
     public static Type LoadTypeInternal(string testType)
     {
-
         switch (testType)
         {
-            case "Test001PlusT": return typeof(Test101PlusT<int>);
-            case "Test002PlusT": return typeof(Test102PlusT<string>);
-            case "Test003PlusT": return typeof(Test103PlusT<object>);
-            case "Test004PlusT": return typeof(Test104PlusT<Base>);
-            case "Test005PlusT": return typeof(Test105PlusT<GVal<Sub[]>>);
+            case "Test001PlusT":
+                return typeof(Test101PlusT<int>);
+            case "Test002PlusT":
+                return typeof(Test102PlusT<string>);
+            case "Test003PlusT":
+                return typeof(Test103PlusT<object>);
+            case "Test004PlusT":
+                return typeof(Test104PlusT<Base>);
+            case "Test005PlusT":
+                return typeof(Test105PlusT<GVal<Sub[]>>);
 
-            case "Test001MinusT": return typeof(Test101MinusT<int>);
-            case "Test002MinusT": return typeof(Test102MinusT<string>);
-            case "Test003MinusT": return typeof(Test103MinusT<object>);
-            case "Test004MinusT": return typeof(Test104MinusT<Base>);
-            case "Test005MinusT": return typeof(Test105MinusT<GRef<Sub[]>>);
+            case "Test001MinusT":
+                return typeof(Test101MinusT<int>);
+            case "Test002MinusT":
+                return typeof(Test102MinusT<string>);
+            case "Test003MinusT":
+                return typeof(Test103MinusT<object>);
+            case "Test004MinusT":
+                return typeof(Test104MinusT<Base>);
+            case "Test005MinusT":
+                return typeof(Test105MinusT<GRef<Sub[]>>);
 
-            case "Test001PlusTMinusU": return typeof(Test101PlusTMinusU<int,GSubGRefT<Sub[]>>);
-            case "Test002PlusTMinusU": return typeof(Test102PlusTMinusU<int,GVal<string>[]>);
-            case "Test003PlusTMinusU": return typeof(Test103PlusTMinusU<Base, Sub>);
+            case "Test001PlusTMinusU":
+                return typeof(Test101PlusTMinusU<int, GSubGRefT<Sub[]>>);
+            case "Test002PlusTMinusU":
+                return typeof(Test102PlusTMinusU<int, GVal<string>[]>);
+            case "Test003PlusTMinusU":
+                return typeof(Test103PlusTMinusU<Base, Sub>);
 
-            default: throw new Exception("Unexpected testType");
+            default:
+                throw new Exception("Unexpected testType");
         }
     }
 
@@ -87,7 +104,6 @@ public class TestClass
             {
                 return true;
             }
-
         }
         catch (TypeLoadException)
         {
@@ -110,7 +126,6 @@ public class TestClass
 
     private static bool RunTests()
     {
-
         Eval("Test001", LoadType("Test001PlusT", false));
         Eval("Test002", LoadType("Test002PlusT", false));
         Eval("Test003", LoadType("Test003PlusT", false));
@@ -129,7 +144,9 @@ public class TestClass
 
         if (iErrorCount > 0)
         {
-            Console.WriteLine("Total test cases: " + iTestCount + "  Failed test cases: " + iErrorCount);
+            Console.WriteLine(
+                "Total test cases: " + iTestCount + "  Failed test cases: " + iErrorCount
+            );
             return false;
         }
         else
@@ -141,7 +158,6 @@ public class TestClass
 
     public static int Main()
     {
-
         if (RunTests())
         {
             iExitCode = 100;
@@ -154,5 +170,4 @@ public class TestClass
         }
         return iExitCode;
     }
-
 }

@@ -1,14 +1,17 @@
-class Foo {
-    public static int Main ()
+class Foo
+{
+    public static int Main()
     {
         int ret = 1;
-        try {
+        try
+        {
             goto done;
-        } finally {
+        }
+        finally
+        {
             ret = 0;
         }
-    done:
+        done:
         return ret;
     }
 }
-

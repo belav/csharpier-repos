@@ -30,75 +30,71 @@ namespace System.Security.Cryptography
 {
     public sealed class TripleDESCng : TripleDES
     {
-        public TripleDESCng ()
+        public TripleDESCng()
         {
-            throw new NotImplementedException ();
-         }
-
-        public TripleDESCng (string keyName)
-        {
-            throw new NotImplementedException ();
-         }
-
-        public TripleDESCng (string keyName, CngProvider provider)
-        {
-            throw new NotImplementedException ();
-         }
-
-        public TripleDESCng (string keyName, CngProvider provider, CngKeyOpenOptions openOptions)
-        {
-            throw new NotImplementedException ();
-         }
-
-        public override Byte[] Key {
-            get {
-                throw new NotImplementedException ();
-            } set {
-                throw new NotImplementedException ();
-            }
-        }
- 
-         public override int KeySize {
-            get {
-                throw new NotImplementedException ();
-             }
-
-             set {
-                throw new NotImplementedException ();
-            }
-        }
-        public override ICryptoTransform CreateDecryptor ()
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override ICryptoTransform CreateDecryptor (Byte[] rgbKey, Byte[] rgbIV)
+        public TripleDESCng(string keyName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override ICryptoTransform CreateEncryptor ()
+        public TripleDESCng(string keyName, CngProvider provider)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override ICryptoTransform CreateEncryptor (Byte[] rgbKey, Byte[] rgbIV)
+        public TripleDESCng(string keyName, CngProvider provider, CngKeyOpenOptions openOptions)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Byte[] Key
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+
+        public override int KeySize
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+
+        public override ICryptoTransform CreateDecryptor()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ICryptoTransform CreateDecryptor(Byte[] rgbKey, Byte[] rgbIV)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ICryptoTransform CreateEncryptor()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ICryptoTransform CreateEncryptor(Byte[] rgbKey, Byte[] rgbIV)
         {
             return default(System.Security.Cryptography.ICryptoTransform);
         }
 
-        protected override void Dispose (bool disposing) {
-            throw new NotImplementedException ();
-         }
-
-        public override void GenerateIV ()
+        protected override void Dispose(bool disposing)
         {
-            throw new NotImplementedException ();
-         }
+            throw new NotImplementedException();
+        }
 
-        public override void GenerateKey ()
+        public override void GenerateIV()
         {
-            throw new NotImplementedException ();
-         }
+            throw new NotImplementedException();
+        }
+
+        public override void GenerateKey()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

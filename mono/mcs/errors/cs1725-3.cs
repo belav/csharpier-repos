@@ -3,11 +3,9 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo ("main, Culture=neutral")]
+[assembly: InternalsVisibleTo("main, Culture=neutral")]
 
 class A
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

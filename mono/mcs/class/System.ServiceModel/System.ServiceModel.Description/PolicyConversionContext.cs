@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,31 +38,33 @@ namespace System.ServiceModel.Description
     {
         ServiceEndpoint endpoint;
 
-        protected PolicyConversionContext (ServiceEndpoint endpoint)
+        protected PolicyConversionContext(ServiceEndpoint endpoint)
         {
             this.endpoint = endpoint;
         }
 
-        internal ServiceEndpoint Endpoint {
+        internal ServiceEndpoint Endpoint
+        {
             get { return endpoint; }
         }
 
         public abstract BindingElementCollection BindingElements { get; }
 
-        public ContractDescription Contract {
+        public ContractDescription Contract
+        {
             get { return endpoint.Contract; }
         }
 
-        public abstract PolicyAssertionCollection GetBindingAssertions ();
+        public abstract PolicyAssertionCollection GetBindingAssertions();
 
-        public abstract PolicyAssertionCollection
-            GetFaultBindingAssertions (FaultDescription fault);
+        public abstract PolicyAssertionCollection GetFaultBindingAssertions(FaultDescription fault);
 
-        public abstract PolicyAssertionCollection
-            GetMessageBindingAssertions (MessageDescription message);
+        public abstract PolicyAssertionCollection GetMessageBindingAssertions(
+            MessageDescription message
+        );
 
-        public abstract PolicyAssertionCollection
-            GetOperationBindingAssertions (OperationDescription operation);
-
+        public abstract PolicyAssertionCollection GetOperationBindingAssertions(
+            OperationDescription operation
+        );
     }
 }

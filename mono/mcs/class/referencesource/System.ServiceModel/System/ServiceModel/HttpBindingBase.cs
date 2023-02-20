@@ -12,7 +12,7 @@ namespace System.ServiceModel
     using System.ServiceModel.Configuration;
     using System.Text;
     using System.Xml;
-        
+
     public abstract class HttpBindingBase : Binding, IBindingRuntimePreferences
     {
         // private BindingElements
@@ -37,11 +37,7 @@ namespace System.ServiceModel
         [DefaultValue(HttpTransportDefaults.AllowCookies)]
         public bool AllowCookies
         {
-            get 
-            { 
-                return this.httpTransport.AllowCookies; 
-            }
-
+            get { return this.httpTransport.AllowCookies; }
             set
             {
                 this.httpTransport.AllowCookies = value;
@@ -52,11 +48,7 @@ namespace System.ServiceModel
         [DefaultValue(HttpTransportDefaults.BypassProxyOnLocal)]
         public bool BypassProxyOnLocal
         {
-            get 
-            { 
-                return this.httpTransport.BypassProxyOnLocal; 
-            }
-
+            get { return this.httpTransport.BypassProxyOnLocal; }
             set
             {
                 this.httpTransport.BypassProxyOnLocal = value;
@@ -67,11 +59,7 @@ namespace System.ServiceModel
         [DefaultValue(HttpTransportDefaults.HostNameComparisonMode)]
         public HostNameComparisonMode HostNameComparisonMode
         {
-            get 
-            { 
-                return this.httpTransport.HostNameComparisonMode; 
-            }
-
+            get { return this.httpTransport.HostNameComparisonMode; }
             set
             {
                 this.httpTransport.HostNameComparisonMode = value;
@@ -82,11 +70,7 @@ namespace System.ServiceModel
         [DefaultValue(TransportDefaults.MaxBufferSize)]
         public int MaxBufferSize
         {
-            get 
-            { 
-                return this.httpTransport.MaxBufferSize; 
-            }
-
+            get { return this.httpTransport.MaxBufferSize; }
             set
             {
                 this.httpTransport.MaxBufferSize = value;
@@ -98,11 +82,7 @@ namespace System.ServiceModel
         [DefaultValue(TransportDefaults.MaxBufferPoolSize)]
         public long MaxBufferPoolSize
         {
-            get 
-            { 
-                return this.httpTransport.MaxBufferPoolSize; 
-            }
-
+            get { return this.httpTransport.MaxBufferPoolSize; }
             set
             {
                 this.httpTransport.MaxBufferPoolSize = value;
@@ -113,11 +93,7 @@ namespace System.ServiceModel
         [DefaultValue(TransportDefaults.MaxReceivedMessageSize)]
         public long MaxReceivedMessageSize
         {
-            get 
-            { 
-                return this.httpTransport.MaxReceivedMessageSize; 
-            }
-
+            get { return this.httpTransport.MaxReceivedMessageSize; }
             set
             {
                 this.httpTransport.MaxReceivedMessageSize = value;
@@ -129,11 +105,7 @@ namespace System.ServiceModel
         [TypeConverter(typeof(UriTypeConverter))]
         public Uri ProxyAddress
         {
-            get 
-            { 
-                return this.httpTransport.ProxyAddress; 
-            }
-
+            get { return this.httpTransport.ProxyAddress; }
             set
             {
                 this.httpTransport.ProxyAddress = value;
@@ -143,11 +115,7 @@ namespace System.ServiceModel
 
         public XmlDictionaryReaderQuotas ReaderQuotas
         {
-            get 
-            { 
-                return this.textEncoding.ReaderQuotas; 
-            }
-
+            get { return this.textEncoding.ReaderQuotas; }
             set
             {
                 if (value == null)
@@ -164,10 +132,7 @@ namespace System.ServiceModel
 
         public override string Scheme
         {
-            get
-            {
-                return this.GetTransport().Scheme;
-            }
+            get { return this.GetTransport().Scheme; }
         }
 
         public EnvelopeVersion EnvelopeVersion
@@ -178,11 +143,7 @@ namespace System.ServiceModel
         [TypeConverter(typeof(EncodingConverter))]
         public Encoding TextEncoding
         {
-            get 
-            { 
-                return this.textEncoding.WriteEncoding; 
-            }
-
+            get { return this.textEncoding.WriteEncoding; }
             set
             {
                 this.textEncoding.WriteEncoding = value;
@@ -193,11 +154,7 @@ namespace System.ServiceModel
         [DefaultValue(HttpTransportDefaults.TransferMode)]
         public TransferMode TransferMode
         {
-            get 
-            { 
-                return this.httpTransport.TransferMode; 
-            }
-
+            get { return this.httpTransport.TransferMode; }
             set
             {
                 this.httpTransport.TransferMode = value;
@@ -208,11 +165,7 @@ namespace System.ServiceModel
         [DefaultValue(HttpTransportDefaults.UseDefaultWebProxy)]
         public bool UseDefaultWebProxy
         {
-            get 
-            { 
-                return this.httpTransport.UseDefaultWebProxy; 
-            }
-
+            get { return this.httpTransport.UseDefaultWebProxy; }
             set
             {
                 this.httpTransport.UseDefaultWebProxy = value;
@@ -227,31 +180,19 @@ namespace System.ServiceModel
 
         internal TextMessageEncodingBindingElement TextMessageEncodingBindingElement
         {
-            get 
-            {
-                return this.textEncoding;
-            }
+            get { return this.textEncoding; }
         }
 
         internal MtomMessageEncodingBindingElement MtomMessageEncodingBindingElement
         {
-            get
-            {
-                return this.mtomEncoding;
-            }
+            get { return this.mtomEncoding; }
         }
 
-        internal abstract BasicHttpSecurity BasicHttpSecurity
-        {
-            get;
-        }
+        internal abstract BasicHttpSecurity BasicHttpSecurity { get; }
 
         internal WebSocketTransportSettings InternalWebSocketSettings
         {
-            get 
-            { 
-                return this.httpTransport.WebSocketSettings; 
-            }
+            get { return this.httpTransport.WebSocketSettings; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -266,7 +207,11 @@ namespace System.ServiceModel
             return !this.TextEncoding.Equals(BasicHttpBindingDefaults.TextEncoding);
         }
 
-        internal static bool GetSecurityModeFromTransport(HttpTransportBindingElement http, HttpTransportSecurity transportSecurity, out UnifiedSecurityMode mode)
+        internal static bool GetSecurityModeFromTransport(
+            HttpTransportBindingElement http,
+            HttpTransportSecurity transportSecurity,
+            out UnifiedSecurityMode mode
+        )
         {
             mode = UnifiedSecurityMode.None;
             if (http == null)
@@ -274,12 +219,20 @@ namespace System.ServiceModel
                 return false;
             }
 
-            Fx.Assert(http.AuthenticationScheme.IsSingleton(), "authenticationScheme used in an Http(s)ChannelFactory must be a singleton value.");
+            Fx.Assert(
+                http.AuthenticationScheme.IsSingleton(),
+                "authenticationScheme used in an Http(s)ChannelFactory must be a singleton value."
+            );
 
             if (http is HttpsTransportBindingElement)
             {
-                mode = UnifiedSecurityMode.Transport | UnifiedSecurityMode.TransportWithMessageCredential;
-                BasicHttpSecurity.EnableTransportSecurity((HttpsTransportBindingElement)http, transportSecurity);
+                mode =
+                    UnifiedSecurityMode.Transport
+                    | UnifiedSecurityMode.TransportWithMessageCredential;
+                BasicHttpSecurity.EnableTransportSecurity(
+                    (HttpsTransportBindingElement)http,
+                    transportSecurity
+                );
             }
             else if (HttpTransportSecurity.IsDisabledTransportAuthentication(http))
             {
@@ -297,17 +250,33 @@ namespace System.ServiceModel
             return true;
         }
 
-        internal static bool TryCreateSecurity(SecurityBindingElement securityElement, UnifiedSecurityMode mode, HttpTransportSecurity transportSecurity, out BasicHttpSecurity security)
+        internal static bool TryCreateSecurity(
+            SecurityBindingElement securityElement,
+            UnifiedSecurityMode mode,
+            HttpTransportSecurity transportSecurity,
+            out BasicHttpSecurity security
+        )
         {
-            return BasicHttpSecurity.TryCreate(securityElement, mode, transportSecurity, out security);
+            return BasicHttpSecurity.TryCreate(
+                securityElement,
+                mode,
+                transportSecurity,
+                out security
+            );
         }
 
         internal TransportBindingElement GetTransport()
         {
-            Fx.Assert(this.BasicHttpSecurity != null, "this.BasicHttpSecurity should not return null from a derived class."); 
+            Fx.Assert(
+                this.BasicHttpSecurity != null,
+                "this.BasicHttpSecurity should not return null from a derived class."
+            );
 
             BasicHttpSecurity basicHttpSecurity = this.BasicHttpSecurity;
-            if (basicHttpSecurity.Mode == BasicHttpSecurityMode.Transport || basicHttpSecurity.Mode == BasicHttpSecurityMode.TransportWithMessageCredential)
+            if (
+                basicHttpSecurity.Mode == BasicHttpSecurityMode.Transport
+                || basicHttpSecurity.Mode == BasicHttpSecurityMode.TransportWithMessageCredential
+            )
             {
                 basicHttpSecurity.EnableTransportSecurity(this.httpsTransport);
                 return this.httpsTransport;
@@ -327,11 +296,12 @@ namespace System.ServiceModel
 
         internal abstract EnvelopeVersion GetEnvelopeVersion();
 
-        internal virtual void SetReaderQuotas(XmlDictionaryReaderQuotas readerQuotas) 
-        { 
-        }
+        internal virtual void SetReaderQuotas(XmlDictionaryReaderQuotas readerQuotas) { }
 
-        internal virtual void InitializeFrom(HttpTransportBindingElement transport, MessageEncodingBindingElement encoding)
+        internal virtual void InitializeFrom(
+            HttpTransportBindingElement transport,
+            MessageEncodingBindingElement encoding
+        )
         {
             this.BypassProxyOnLocal = transport.BypassProxyOnLocal;
             this.HostNameComparisonMode = transport.HostNameComparisonMode;
@@ -346,18 +316,21 @@ namespace System.ServiceModel
 
             if (encoding is TextMessageEncodingBindingElement)
             {
-                TextMessageEncodingBindingElement text = (TextMessageEncodingBindingElement)encoding;
+                TextMessageEncodingBindingElement text =
+                    (TextMessageEncodingBindingElement)encoding;
                 this.TextEncoding = text.WriteEncoding;
                 this.ReaderQuotas = text.ReaderQuotas;
             }
             else if (encoding is MtomMessageEncodingBindingElement)
             {
-                MtomMessageEncodingBindingElement mtom = (MtomMessageEncodingBindingElement)encoding;
+                MtomMessageEncodingBindingElement mtom =
+                    (MtomMessageEncodingBindingElement)encoding;
                 this.TextEncoding = mtom.WriteEncoding;
                 this.ReaderQuotas = mtom.ReaderQuotas;
             }
 
-            this.BasicHttpSecurity.Transport.ExtendedProtectionPolicy = transport.ExtendedProtectionPolicy;
+            this.BasicHttpSecurity.Transport.ExtendedProtectionPolicy =
+                transport.ExtendedProtectionPolicy;
         }
 
         // In the Win8 profile, some settings for the binding security are not supported.
@@ -381,27 +354,61 @@ namespace System.ServiceModel
             }
             else if (mode == BasicHttpSecurityMode.Message)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.UnsupportedSecuritySetting, "Mode", mode)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.UnsupportedSecuritySetting, "Mode", mode)
+                    )
+                );
             }
 
             // Message.ClientCredentialType = Certificate is not supported.
             if (mode == BasicHttpSecurityMode.TransportWithMessageCredential)
             {
                 BasicHttpMessageSecurity message = security.Message;
-                if ((message != null) && (message.ClientCredentialType == BasicHttpMessageCredentialType.Certificate))
+                if (
+                    (message != null)
+                    && (message.ClientCredentialType == BasicHttpMessageCredentialType.Certificate)
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.UnsupportedSecuritySetting, "Message.ClientCredentialType", message.ClientCredentialType)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.UnsupportedSecuritySetting,
+                                "Message.ClientCredentialType",
+                                message.ClientCredentialType
+                            )
+                        )
+                    );
                 }
             }
 
             // Transport.ClientCredentialType = Certificate or InheritedFromHost are not supported.
             Fx.Assert(
-                (mode == BasicHttpSecurityMode.Transport) || (mode == BasicHttpSecurityMode.TransportCredentialOnly) || (mode == BasicHttpSecurityMode.TransportWithMessageCredential), 
-                "Unexpected BasicHttpSecurityMode value: " + mode);
+                (mode == BasicHttpSecurityMode.Transport)
+                    || (mode == BasicHttpSecurityMode.TransportCredentialOnly)
+                    || (mode == BasicHttpSecurityMode.TransportWithMessageCredential),
+                "Unexpected BasicHttpSecurityMode value: " + mode
+            );
             HttpTransportSecurity transport = security.Transport;
-            if ((transport != null) && ((transport.ClientCredentialType == HttpClientCredentialType.Certificate) || (transport.ClientCredentialType == HttpClientCredentialType.InheritedFromHost)))
+            if (
+                (transport != null)
+                && (
+                    (transport.ClientCredentialType == HttpClientCredentialType.Certificate)
+                    || (
+                        transport.ClientCredentialType == HttpClientCredentialType.InheritedFromHost
+                    )
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.UnsupportedSecuritySetting, "Transport.ClientCredentialType", transport.ClientCredentialType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(
+                            SR.UnsupportedSecuritySetting,
+                            "Transport.ClientCredentialType",
+                            transport.ClientCredentialType
+                        )
+                    )
+                );
             }
         }
     }

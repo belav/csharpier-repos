@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -22,7 +22,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
     public class XmlKnownTypeSet : IXmlKnownTypeMap, IEnumerable<IXmlKnownType>
     {
         private readonly Dictionary<IXmlIdentity, IXmlKnownType> itemsByXmlIdentity;
-        private readonly Dictionary<Type,         IXmlKnownType> itemsByClrType;
+        private readonly Dictionary<Type, IXmlKnownType> itemsByClrType;
         private readonly Type defaultType;
 
         public XmlKnownTypeSet(Type defaultType)
@@ -30,9 +30,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (defaultType == null)
                 throw Error.ArgumentNull(nameof(defaultType));
 
-            itemsByXmlIdentity = new Dictionary<IXmlIdentity, IXmlKnownType>(XmlIdentityComparer.Instance);
-            itemsByClrType     = new Dictionary<Type,         IXmlKnownType>();
-            this.defaultType   = defaultType;
+            itemsByXmlIdentity = new Dictionary<IXmlIdentity, IXmlKnownType>(
+                XmlIdentityComparer.Instance
+            );
+            itemsByClrType = new Dictionary<Type, IXmlKnownType>();
+            this.defaultType = defaultType;
         }
 
         public IXmlKnownType Default
@@ -65,13 +67,14 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
             var bits = new Dictionary<IXmlKnownType, bool>(
                 itemsByXmlIdentity.Count,
-                XmlKnownTypeNameComparer.Instance);
+                XmlKnownTypeNameComparer.Instance
+            );
 
             foreach (var knownType in itemsByXmlIdentity.Values)
             {
                 bool bit;
                 bits[knownType] = bits.TryGetValue(knownType, out bit)
-                    ? false                               // another by same name; can't add a default
+                    ? false // another by same name; can't add a default
                     : knownType.XsiType != XmlName.Empty; // first   by this name; can   add a default, if not already in default form
             }
 
@@ -79,8 +82,12 @@ namespace Castle.Components.DictionaryAdapter.Xml
             {
                 if (pair.Value)
                 {
-                    var template  = pair.Key;
-                    var knownType = new XmlKnownType(template.Name, XmlName.Empty, template.ClrType);
+                    var template = pair.Key;
+                    var knownType = new XmlKnownType(
+                        template.Name,
+                        XmlName.Empty,
+                        template.ClrType
+                    );
                     Add(knownType, true);
                 }
             }
@@ -113,8 +120,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private sealed class XmlIdentityComparer : IEqualityComparer<IXmlIdentity>
         {
-            public static readonly XmlIdentityComparer
-                Instance = new XmlIdentityComparer();
+            public static readonly XmlIdentityComparer Instance = new XmlIdentityComparer();
 
             private XmlIdentityComparer() { }
 
@@ -139,8 +145,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 var code = NameComparer.GetHashCode(name.Name.LocalName);
 
                 if (name.XsiType != XmlName.Empty)
-                    code = (code << 7 | code >> 25)
-                         ^ XsiTypeComparer.GetHashCode(name.XsiType);
+                    code = (code << 7 | code >> 25) ^ XsiTypeComparer.GetHashCode(name.XsiType);
 
                 // DO NOT include NamespaceUri in hash code.
                 // That would break 'null means any' behavior.
@@ -151,8 +156,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private sealed class XmlKnownTypeNameComparer : IEqualityComparer<IXmlKnownType>
         {
-            public static readonly XmlKnownTypeNameComparer
-                Instance = new XmlKnownTypeNameComparer();
+            public static readonly XmlKnownTypeNameComparer Instance =
+                new XmlKnownTypeNameComparer();
 
             private XmlKnownTypeNameComparer() { }
 
@@ -167,10 +172,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             }
         }
 
-        private static readonly StringComparer
-            NameComparer = StringComparer.OrdinalIgnoreCase;
+        private static readonly StringComparer NameComparer = StringComparer.OrdinalIgnoreCase;
 
-        private static readonly XmlNameComparer
-            XsiTypeComparer = XmlNameComparer.Default;
+        private static readonly XmlNameComparer XsiTypeComparer = XmlNameComparer.Default;
     }
 }

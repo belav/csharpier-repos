@@ -3,15 +3,13 @@
 
 class A
 {
-    public class T
-    {
-    }
+    public class T { }
 }
 
 class B<T> : A
 {
-    void Foo ()
+    void Foo()
     {
-        T.Equals (null, null);
+        T.Equals(null, null);
     }
 }

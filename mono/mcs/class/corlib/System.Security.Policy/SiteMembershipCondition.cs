@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,12 +31,12 @@ using System.Collections;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Policy {
-
+namespace System.Security.Policy
+{
     [Serializable]
-    [ComVisible (true)]
-    public sealed class SiteMembershipCondition : IMembershipCondition, IConstantMembershipCondition {
-
+    [ComVisible(true)]
+    public sealed class SiteMembershipCondition : IMembershipCondition, IConstantMembershipCondition
+    {
         private readonly int version = 1;
 
         private string _site;
@@ -44,46 +44,52 @@ namespace System.Security.Policy {
         // constructors
 
         // so System.Activator.CreateInstance can create an instance...
-        internal SiteMembershipCondition ()
-        {
-        }
+        internal SiteMembershipCondition() { }
 
-        public SiteMembershipCondition (string site)
+        public SiteMembershipCondition(string site)
         {
             Site = site;
         }
 
         // properties
 
-        public string Site { 
+        public string Site
+        {
             get { return _site; }
-            set {
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("site");
-                if (!System.Security.Policy.Site.IsValid (value))
-                    throw new ArgumentException ("invalid site");
+                    throw new ArgumentNullException("site");
+                if (!System.Security.Policy.Site.IsValid(value))
+                    throw new ArgumentException("invalid site");
                 _site = value;
             }
         }
 
         // methods
 
-        public bool Check (Evidence evidence) 
+        public bool Check(Evidence evidence)
         {
             if (evidence == null)
                 return false;
 
-            IEnumerator e = evidence.GetHostEnumerator ();
-            while (e.MoveNext ()) {
-                if (e.Current is Site) {
-                    string[] s1 = _site.Split ('.');
-                    string[] s2 = (e.Current as Site).origin_site.Split ('.');
-                    for (int i = s1.Length - 1, j = s2.Length - 1; i>=0; i--, j--) {
-                        if (i == 0) {
+            IEnumerator e = evidence.GetHostEnumerator();
+            while (e.MoveNext())
+            {
+                if (e.Current is Site)
+                {
+                    string[] s1 = _site.Split('.');
+                    string[] s2 = (e.Current as Site).origin_site.Split('.');
+                    for (int i = s1.Length - 1, j = s2.Length - 1; i >= 0; i--, j--)
+                    {
+                        if (i == 0)
+                        {
                             // special * case
-                            return (String.Compare (s1 [0], "*", true, CultureInfo.InvariantCulture) == 0);
+                            return (
+                                String.Compare(s1[0], "*", true, CultureInfo.InvariantCulture) == 0
+                            );
                         }
-                        if (String.Compare (s1 [i], s2 [j], true, CultureInfo.InvariantCulture) != 0)
+                        if (String.Compare(s1[i], s2[j], true, CultureInfo.InvariantCulture) != 0)
                             return false;
                     }
                     return true;
@@ -91,55 +97,59 @@ namespace System.Security.Policy {
             }
             return false;
         }
-        
-        public IMembershipCondition Copy () 
+
+        public IMembershipCondition Copy()
         {
-            return new SiteMembershipCondition (_site);
+            return new SiteMembershipCondition(_site);
         }
 
-        public override bool Equals (object o) 
+        public override bool Equals(object o)
         {
             if (o == null)
                 return false;
-            if (o is SiteMembershipCondition) {
-                Site s = new Site ((o as SiteMembershipCondition)._site);
-                return s.Equals (new Site (_site));
+            if (o is SiteMembershipCondition)
+            {
+                Site s = new Site((o as SiteMembershipCondition)._site);
+                return s.Equals(new Site(_site));
             }
             return false;
         }
 
-        public void FromXml (SecurityElement e) 
+        public void FromXml(SecurityElement e)
         {
-            FromXml (e, null);
+            FromXml(e, null);
         }
 
-        public void FromXml (SecurityElement e, PolicyLevel level) 
+        public void FromXml(SecurityElement e, PolicyLevel level)
         {
-            MembershipConditionHelper.CheckSecurityElement (e, "e", version, version);
-            _site = e.Attribute ("Site");
+            MembershipConditionHelper.CheckSecurityElement(e, "e", version, version);
+            _site = e.Attribute("Site");
             // PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
         }
 
-        public override int GetHashCode () 
+        public override int GetHashCode()
         {
-            return _site.GetHashCode ();
+            return _site.GetHashCode();
         }
 
-        public override string ToString () 
+        public override string ToString()
         {
             return "Site - " + _site;
         }
 
-        public SecurityElement ToXml () 
+        public SecurityElement ToXml()
         {
-            return ToXml (null);
+            return ToXml(null);
         }
 
-        public SecurityElement ToXml (PolicyLevel level) 
+        public SecurityElement ToXml(PolicyLevel level)
         {
             // PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
-            SecurityElement se = MembershipConditionHelper.Element (typeof (SiteMembershipCondition), version);
-            se.AddAttribute ("Site", _site);
+            SecurityElement se = MembershipConditionHelper.Element(
+                typeof(SiteMembershipCondition),
+                version
+            );
+            se.AddAttribute("Site", _site);
             return se;
         }
     }

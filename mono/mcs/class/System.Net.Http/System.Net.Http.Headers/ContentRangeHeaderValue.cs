@@ -36,195 +36,216 @@ namespace System.Net.Http.Headers
     {
         string unit = "bytes";
 
-        private ContentRangeHeaderValue ()
-        {
-        }
+        private ContentRangeHeaderValue() { }
 
-        public ContentRangeHeaderValue (long length)
+        public ContentRangeHeaderValue(long length)
         {
             if (length < 0)
-                throw new ArgumentOutOfRangeException ("length");
+                throw new ArgumentOutOfRangeException("length");
 
             this.Length = length;
         }
 
-        public ContentRangeHeaderValue (long from, long to)
+        public ContentRangeHeaderValue(long from, long to)
         {
             if (from < 0 || from > to)
-                throw new ArgumentOutOfRangeException ("from");
+                throw new ArgumentOutOfRangeException("from");
 
             this.From = from;
             this.To = to;
         }
 
-        public ContentRangeHeaderValue (long from, long to, long length)
-            : this (from, to)
+        public ContentRangeHeaderValue(long from, long to, long length)
+            : this(from, to)
         {
             if (length < 0)
-                throw new ArgumentOutOfRangeException ("length");
+                throw new ArgumentOutOfRangeException("length");
 
             if (to > length)
-                throw new ArgumentOutOfRangeException ("to");
+                throw new ArgumentOutOfRangeException("to");
 
             this.Length = length;
         }
 
         public long? From { get; private set; }
 
-        public bool HasLength {
-            get {
-                return Length != null;
-            }
+        public bool HasLength
+        {
+            get { return Length != null; }
         }
 
-        public bool HasRange {
-            get {
-                return From != null;
-            }
+        public bool HasRange
+        {
+            get { return From != null; }
         }
 
         public long? Length { get; private set; }
         public long? To { get; private set; }
 
-        public string Unit {
-            get {
-                return unit;
-            }
-            set {
+        public string Unit
+        {
+            get { return unit; }
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("Unit");
+                    throw new ArgumentNullException("Unit");
 
-                Parser.Token.Check (value);
+                Parser.Token.Check(value);
 
                 unit = value;
             }
         }
 
-        object ICloneable.Clone ()
+        object ICloneable.Clone()
         {
-            return MemberwiseClone ();
+            return MemberwiseClone();
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             var source = obj as ContentRangeHeaderValue;
             if (source == null)
                 return false;
 
-            return source.Length == Length && source.From == From && source.To == To &&
-                string.Equals (source.unit, unit, StringComparison.OrdinalIgnoreCase);
+            return source.Length == Length
+                && source.From == From
+                && source.To == To
+                && string.Equals(source.unit, unit, StringComparison.OrdinalIgnoreCase);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return Unit.GetHashCode () ^ Length.GetHashCode () ^
-                From.GetHashCode () ^ To.GetHashCode () ^
-                unit.ToLowerInvariant ().GetHashCode ();
+            return Unit.GetHashCode()
+                ^ Length.GetHashCode()
+                ^ From.GetHashCode()
+                ^ To.GetHashCode()
+                ^ unit.ToLowerInvariant().GetHashCode();
         }
 
-        public static ContentRangeHeaderValue Parse (string input)
+        public static ContentRangeHeaderValue Parse(string input)
         {
             ContentRangeHeaderValue value;
-            if (TryParse (input, out value))
+            if (TryParse(input, out value))
                 return value;
 
-            throw new FormatException (input);
+            throw new FormatException(input);
         }
 
-        public static bool TryParse (string input, out ContentRangeHeaderValue parsedValue)
+        public static bool TryParse(string input, out ContentRangeHeaderValue parsedValue)
         {
             parsedValue = null;
 
-            var lexer = new Lexer (input);
-            var t = lexer.Scan ();
+            var lexer = new Lexer(input);
+            var t = lexer.Scan();
             if (t != Token.Type.Token)
                 return false;
 
-            var value = new ContentRangeHeaderValue ();
-            value.unit = lexer.GetStringValue (t);
+            var value = new ContentRangeHeaderValue();
+            value.unit = lexer.GetStringValue(t);
 
-            t = lexer.Scan ();
+            t = lexer.Scan();
             if (t != Token.Type.Token)
                 return false;
 
             long nvalue;
-            if (!lexer.IsStarStringValue (t)) {
-                if (!lexer.TryGetNumericValue (t, out nvalue)) {
-                    var s = lexer.GetStringValue (t);
+            if (!lexer.IsStarStringValue(t))
+            {
+                if (!lexer.TryGetNumericValue(t, out nvalue))
+                {
+                    var s = lexer.GetStringValue(t);
                     if (s.Length < 3)
                         return false;
 
-                    var sep = s.Split ('-');
+                    var sep = s.Split('-');
                     if (sep.Length != 2)
                         return false;
 
-                    if (!long.TryParse (sep[0], NumberStyles.None, CultureInfo.InvariantCulture, out nvalue))
+                    if (
+                        !long.TryParse(
+                            sep[0],
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out nvalue
+                        )
+                    )
                         return false;
 
                     value.From = nvalue;
 
-                    if (!long.TryParse (sep[1], NumberStyles.None, CultureInfo.InvariantCulture, out nvalue))
+                    if (
+                        !long.TryParse(
+                            sep[1],
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out nvalue
+                        )
+                    )
                         return false;
 
                     value.To = nvalue;
-                } else {
+                }
+                else
+                {
                     value.From = nvalue;
 
-                    t = lexer.Scan (recognizeDash: true);
+                    t = lexer.Scan(recognizeDash: true);
                     if (t != Token.Type.SeparatorDash)
                         return false;
 
-                    t = lexer.Scan ();
+                    t = lexer.Scan();
 
-                    if (!lexer.TryGetNumericValue (t, out nvalue))
+                    if (!lexer.TryGetNumericValue(t, out nvalue))
                         return false;
 
                     value.To = nvalue;
                 }
             }
 
-            t = lexer.Scan ();
+            t = lexer.Scan();
 
             if (t != Token.Type.SeparatorSlash)
                 return false;
 
-            t = lexer.Scan ();
+            t = lexer.Scan();
 
-            if (!lexer.IsStarStringValue (t)) {
+            if (!lexer.IsStarStringValue(t))
+            {
                 long lvalue;
-                if (!lexer.TryGetNumericValue (t, out lvalue))
+                if (!lexer.TryGetNumericValue(t, out lvalue))
                     return false;
 
                 value.Length = lvalue;
             }
 
-            t = lexer.Scan ();
+            t = lexer.Scan();
 
             if (t != Token.Type.End)
                 return false;
 
             parsedValue = value;
- 
+
             return true;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            var sb = new StringBuilder (unit);
-            sb.Append (" ");
-            if (From == null) {
-                sb.Append ("*");
-            } else {
-                sb.Append (From.Value.ToString (CultureInfo.InvariantCulture));
-                sb.Append ("-");
-                sb.Append (To.Value.ToString (CultureInfo.InvariantCulture));
+            var sb = new StringBuilder(unit);
+            sb.Append(" ");
+            if (From == null)
+            {
+                sb.Append("*");
+            }
+            else
+            {
+                sb.Append(From.Value.ToString(CultureInfo.InvariantCulture));
+                sb.Append("-");
+                sb.Append(To.Value.ToString(CultureInfo.InvariantCulture));
             }
 
-            sb.Append ("/");
-            sb.Append (Length == null ? "*" :
-                Length.Value.ToString (CultureInfo.InvariantCulture));
+            sb.Append("/");
+            sb.Append(Length == null ? "*" : Length.Value.ToString(CultureInfo.InvariantCulture));
 
-            return sb.ToString ();
+            return sb.ToString();
         }
     }
 }

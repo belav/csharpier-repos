@@ -1,21 +1,21 @@
 /******************************************************************************
 * The MIT License
 * Copyright (c) 2003 Novell Inc.  www.novell.com
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining  a copy
 * of this software and associated documentation files (the Software), to deal
 * in the Software without restriction, including  without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
-* copies of the Software, and to  permit persons to whom the Software is 
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to  permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
-* The above copyright notice and this permission notice shall be included in 
+*
+* The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
-* THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+*
+* THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
@@ -33,25 +33,25 @@ using System;
 
 namespace Novell.Directory.Ldap
 {
-    
     /// <summary> The <code>MessageVector</code> class implements additional semantics
     /// to Vector needed for handling messages.
     /// </summary>
     /* package */
-    class MessageVector:System.Collections.IList
+    class MessageVector : System.Collections.IList
     {
         private readonly System.Collections.ArrayList _innerList;
+
         /// <summary>Returns an array containing all of the elements in this MessageVector.
         /// The elements returned are in the same order in the array as in the
         /// Vector.  The contents of the vector are cleared.
-        /// 
+        ///
         /// </summary>
         /// <returns> the array containing all of the elements.
         /// </returns>
         internal System.Object[] ObjectArray
         {
             /* package */
-            
+
             get
             {
                 lock (this.SyncRoot)
@@ -61,24 +61,26 @@ namespace Novell.Directory.Ldap
                     return results;
                 }
             }
-            
         }
+
         /* package */
         internal MessageVector(int cap, int incr)
         {
-            _innerList = System.Collections.ArrayList.Synchronized(new System.Collections.ArrayList(cap));
-            return ;
+            _innerList = System.Collections.ArrayList.Synchronized(
+                new System.Collections.ArrayList(cap)
+            );
+            return;
         }
-        
+
         /// <summary> Finds the Message object with the given MsgID, and returns the Message
         /// object. It finds the object and returns it in an atomic operation.
-        /// 
+        ///
         /// </summary>
         /// <param name="msgId">The msgId of the Message object to return
-        /// 
+        ///
         /// </param>
         /// <returns> The Message object corresponding to this MsgId.
-        /// 
+        ///
         /// @throws NoSuchFieldException when no object with the corresponding
         /// value for the MsgId field can be found.
         /// </returns>
@@ -90,7 +92,7 @@ namespace Novell.Directory.Ldap
                 Message msg = null;
                 for (int i = 0; i < Count; i++)
                 {
-                    if ((msg = (Message) this[i]) == null)
+                    if ((msg = (Message)this[i]) == null)
                     {
                         throw new System.FieldAccessException();
                     }
@@ -159,14 +161,8 @@ namespace Novell.Directory.Ldap
 
         public object this[int index]
         {
-            get
-            {
-                return _innerList[index];
-            }
-            set
-            {
-                _innerList[index] = value;
-            }
+            get { return _innerList[index]; }
+            set { _innerList[index] = value; }
         }
 
         #endregion

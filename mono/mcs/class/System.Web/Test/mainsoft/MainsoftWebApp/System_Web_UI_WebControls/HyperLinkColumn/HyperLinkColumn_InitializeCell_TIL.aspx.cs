@@ -37,13 +37,13 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class HyperLinkColumn_InitializeCell_TIL
-        : GHTBaseWeb 
+    public class HyperLinkColumn_InitializeCell_TIL : GHTBaseWeb
     {
         protected GHTWebControls.GHTSubTest GHTSubTest1;
         protected System.Web.UI.WebControls.DataGrid DataGrid1;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -51,20 +51,21 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
-            this.DataGrid1.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(this.DataGrid1_ItemDataBound);
+        private void InitializeComponent()
+        {
+            this.DataGrid1.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(
+                this.DataGrid1_ItemDataBound
+            );
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -72,12 +73,15 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestBegin(frm);
 
             GHTActiveSubTest = GHTSubTest1;
-            try 
+            try
             {
                 DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "http://");
-                System.Web.UI.WebControls.HyperLinkColumn c_id = new System.Web.UI.WebControls.HyperLinkColumn();
-                System.Web.UI.WebControls.HyperLinkColumn c_name = new System.Web.UI.WebControls.HyperLinkColumn();
-                System.Web.UI.WebControls.HyperLinkColumn c_company = new System.Web.UI.WebControls.HyperLinkColumn();
+                System.Web.UI.WebControls.HyperLinkColumn c_id =
+                    new System.Web.UI.WebControls.HyperLinkColumn();
+                System.Web.UI.WebControls.HyperLinkColumn c_name =
+                    new System.Web.UI.WebControls.HyperLinkColumn();
+                System.Web.UI.WebControls.HyperLinkColumn c_company =
+                    new System.Web.UI.WebControls.HyperLinkColumn();
 
                 c_id.DataTextField = "ID";
                 c_id.NavigateUrl = "http://www.example.com";
@@ -90,9 +94,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 DataGrid1.Columns.Add(c_name);
                 DataGrid1.Columns.Add(c_company);
 
-                DataGrid1.DataBind();;
+                DataGrid1.DataBind();
+                ;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
@@ -100,13 +105,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestEnd();
         }
 
-        private void DataGrid1_ItemDataBound(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)
+        private void DataGrid1_ItemDataBound(
+            object sender,
+            System.Web.UI.WebControls.DataGridItemEventArgs e
+        )
         {
             ListItemType itemType = (ListItemType)e.Item.ItemType;
 
-            if ((itemType != ListItemType.Header) &&
-                (itemType != ListItemType.Footer) &&
-                (itemType != ListItemType.Separator ))
+            if (
+                (itemType != ListItemType.Header)
+                && (itemType != ListItemType.Footer)
+                && (itemType != ListItemType.Separator)
+            )
             {
                 TableCell currentCell = (TableCell)e.Item.Controls[0];
                 DataGrid1.Columns[1].InitializeCell(currentCell, 1, ListItemType.Item);

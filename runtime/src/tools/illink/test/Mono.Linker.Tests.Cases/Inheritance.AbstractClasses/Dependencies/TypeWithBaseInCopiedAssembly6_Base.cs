@@ -4,12 +4,12 @@ namespace Mono.Linker.Tests.Cases.Inheritance.AbstractClasses.Dependencies
     {
         public abstract class Base
         {
-            public abstract void Method ();
+            public abstract void Method();
         }
 
         public interface IBase
         {
-            void Method ();
+            void Method();
         }
     }
 }

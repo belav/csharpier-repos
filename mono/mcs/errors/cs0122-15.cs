@@ -5,6 +5,6 @@
 public class MyEnum
 {
     int Unknown = Test.SomeValue;
-    static void Main () {}
-}
 
+    static void Main() { }
+}

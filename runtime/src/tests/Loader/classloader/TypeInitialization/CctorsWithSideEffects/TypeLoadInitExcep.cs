@@ -3,7 +3,7 @@
 
 /*
 
-A .cctor has only one chance to run in any appdomain. 
+A .cctor has only one chance to run in any appdomain.
 If it fails, the 2nd time we try to access a static field we check if .cctor has been run. And it has, but failed so we fail again.
 
 Test_TypeLoadInitExcep throws an exception inside .cctor.
@@ -14,47 +14,44 @@ Expected: Should return the same exception.
 
 using System;
 
-
-public class A 
+public class A
 {
     public static int i;
-    
+
     static A()
     {
         Console.WriteLine("In A.cctor");
 
         A.i = 5;
-        
+
         throw new Exception();
     }
 }
 
-
-public struct B 
+public struct B
 {
     public static int i;
-    
+
     static B()
     {
         Console.WriteLine("In B.cctor");
 
         B.i = 5;
-        
+
         throw new Exception();
     }
 }
 
-
 public class Test_TypeLoadInitExcep
-{    
+{
     public static int Main()
-    { 
+    {
         bool result = true;
-        
+
         try
         {
             Console.WriteLine("Accessing class's static field");
-            Console.WriteLine("A.i: " +A.i);
+            Console.WriteLine("A.i: " + A.i);
             Console.WriteLine("Did not catch expected TypeInitializationException exception");
             result = false;
         }
@@ -68,10 +65,9 @@ public class Test_TypeLoadInitExcep
             result = false;
         }
 
-
         try
         {
-            Console.WriteLine("A.i: " +A.i);
+            Console.WriteLine("A.i: " + A.i);
             Console.WriteLine("Did not catch expected TypeInitializationException exception");
             result = false;
         }
@@ -85,11 +81,10 @@ public class Test_TypeLoadInitExcep
             result = false;
         }
 
-
         Console.WriteLine("Accessing struct's static field");
         try
         {
-            Console.WriteLine("B.i: " +B.i);
+            Console.WriteLine("B.i: " + B.i);
             Console.WriteLine("Did not catch expected TypeInitializationException exception");
             result = false;
         }
@@ -103,10 +98,9 @@ public class Test_TypeLoadInitExcep
             result = false;
         }
 
-
         try
         {
-            Console.WriteLine("B.i: " +B.i);
+            Console.WriteLine("B.i: " + B.i);
             Console.WriteLine("Did not catch expected TypeInitializationException exception");
             result = false;
         }
@@ -130,6 +124,5 @@ public class Test_TypeLoadInitExcep
             Console.WriteLine("FAIL");
             return 101;
         }
-        
     }
 }

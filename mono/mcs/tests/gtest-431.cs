@@ -4,11 +4,11 @@ using System;
 
 using Library;
 
-class Program {
-
-    public static void Main ()
+class Program
+{
+    public static void Main()
     {
-        var foo = new Foo ();
-        foo.Bar ();
+        var foo = new Foo();
+        foo.Bar();
     }
 }

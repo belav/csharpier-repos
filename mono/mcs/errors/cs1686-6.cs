@@ -6,16 +6,17 @@ using System;
 
 unsafe struct S
 {
-    public fixed int i [10];
+    public fixed int i[10];
 }
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
-        unsafe {
+        unsafe
+        {
             S str;
-            Func<int> e = () => str.i [3];
+            Func<int> e = () => str.i[3];
         }
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,28 +39,27 @@ using NUnit.Framework;
 namespace MonoTests.Mono.Messaging.RabbitMQ
 {
     [TestFixture]
-    public class FailuresTest {
+    public class FailuresTest
+    {
+        [Test]
+        [ExpectedException(typeof(MessageQueueException))]
+        public void SendWithPathNotSet()
+        {
+            MessageQueue q = new MessageQueue();
+            Message m = new Message("foobar", new BinaryMessageFormatter());
+
+            q.Send(m);
+        }
 
         [Test]
-        [ExpectedException (typeof (MessageQueueException))]
-        public void SendWithPathNotSet ()
+        [ExpectedException(typeof(MessageQueueException))]
+        public void SendInTransactionWithPathNotSet()
         {
-            MessageQueue q = new MessageQueue ();
-            Message m = new Message ("foobar", new BinaryMessageFormatter ());
-            
-            q.Send (m);
+            MessageQueue q = new MessageQueue();
+            Message m = new Message("foobar", new BinaryMessageFormatter());
+            MessageQueueTransaction tx = new MessageQueueTransaction();
+
+            q.Send(m, tx);
         }
-        
-        [Test]
-        [ExpectedException (typeof (MessageQueueException))]
-        public void SendInTransactionWithPathNotSet ()
-        {
-            MessageQueue q = new MessageQueue ();
-            Message m = new Message ("foobar", new BinaryMessageFormatter ());
-            MessageQueueTransaction tx = new MessageQueueTransaction ();
-            
-            q.Send (m, tx);
-        }
-        
     }
 }

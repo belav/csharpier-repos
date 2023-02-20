@@ -16,29 +16,40 @@ using System.ComponentModel;
 using System.Security;
 using System.Text;
 
-namespace System.Configuration {
-
-    public sealed class TimeSpanMinutesOrInfiniteConverter : TimeSpanMinutesConverter {
-
-        public override object ConvertTo(ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type) {
+namespace System.Configuration
+{
+    public sealed class TimeSpanMinutesOrInfiniteConverter : TimeSpanMinutesConverter
+    {
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
+        {
             ValidateType(value, typeof(TimeSpan));
 
-            if ((TimeSpan)value == TimeSpan.MaxValue) {
+            if ((TimeSpan)value == TimeSpan.MaxValue)
+            {
                 return "Infinite";
             }
-            else {
+            else
+            {
                 return base.ConvertTo(ctx, ci, value, type);
             }
         }
-        
-        public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data) {
+
+        public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        {
             Debug.Assert(data is string, "data is string");
 
-            if ((string)data == "Infinite") {
+            if ((string)data == "Infinite")
+            {
                 // The "infinite" value is the max minutes a int can hold
                 return TimeSpan.MaxValue;
             }
-            else {
+            else
+            {
                 return base.ConvertFrom(ctx, ci, data);
             }
         }

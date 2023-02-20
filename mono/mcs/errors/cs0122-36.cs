@@ -4,9 +4,8 @@
 
 class X
 {
-    static void Main ()
+    static void Main()
     {
-        var v = new N.S ();
+        var v = new N.S();
     }
 }
-

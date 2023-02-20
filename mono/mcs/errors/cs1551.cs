@@ -3,8 +3,8 @@
 
 class Test
 {
-    public int this []
+    public int this[]
     {
-        set {}
+        set { }
     }
 }

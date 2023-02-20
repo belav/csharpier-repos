@@ -8,40 +8,79 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
 {
     class DynamicDependencyMemberTypes
     {
-        public static void Main ()
+        public static void Main()
         {
-            B.Method ();
+            B.Method();
         }
 
         static class B
         {
             [Kept]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.PublicParameterlessConstructor, typeof (TypeWithAutoImplementedPublicParameterlessConstructor))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.PublicParameterlessConstructor, typeof (TypeWithPublicParameterlessConstructor))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.PublicConstructors, typeof (TypeWithPublicConstructor))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.NonPublicConstructors, typeof (TypeWithNonPublicConstructor))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.PublicMethods, typeof (TypeWithPublicMethod))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.NonPublicMethods, typeof (TypeWithNonPublicMethod))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.PublicFields, typeof (TypeWithPublicField))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.NonPublicFields, typeof (TypeWithNonPublicField))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.PublicNestedTypes, typeof (TypeWithPublicNestedType))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.NonPublicNestedTypes, typeof (TypeWithNonPublicNestedType))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.PublicProperties, typeof (TypeWithPublicProperty))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.NonPublicProperties, typeof (TypeWithNonPublicProperty))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.PublicEvents, typeof (TypeWithPublicEvent))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.NonPublicEvents, typeof (TypeWithNonPublicEvent))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.All, typeof (TypeWithAll))]
-            [DynamicDependency (DynamicallyAccessedMemberTypes.None, typeof (TypeWithNone))]
-            public static void Method ()
-            {
-            }
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor,
+                typeof(TypeWithAutoImplementedPublicParameterlessConstructor)
+            )]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor,
+                typeof(TypeWithPublicParameterlessConstructor)
+            )]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.PublicConstructors,
+                typeof(TypeWithPublicConstructor)
+            )]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.NonPublicConstructors,
+                typeof(TypeWithNonPublicConstructor)
+            )]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.PublicMethods,
+                typeof(TypeWithPublicMethod)
+            )]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.NonPublicMethods,
+                typeof(TypeWithNonPublicMethod)
+            )]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.PublicFields,
+                typeof(TypeWithPublicField)
+            )]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.NonPublicFields,
+                typeof(TypeWithNonPublicField)
+            )]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.PublicNestedTypes,
+                typeof(TypeWithPublicNestedType)
+            )]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.NonPublicNestedTypes,
+                typeof(TypeWithNonPublicNestedType)
+            )]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.PublicProperties,
+                typeof(TypeWithPublicProperty)
+            )]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.NonPublicProperties,
+                typeof(TypeWithNonPublicProperty)
+            )]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.PublicEvents,
+                typeof(TypeWithPublicEvent)
+            )]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.NonPublicEvents,
+                typeof(TypeWithNonPublicEvent)
+            )]
+            [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(TypeWithAll))]
+            [DynamicDependency(DynamicallyAccessedMemberTypes.None, typeof(TypeWithNone))]
+            public static void Method() { }
         }
 
-
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class TypeWithAutoImplementedPublicParameterlessConstructor
         {
-            public void Method () { }
+            public void Method() { }
 
             public int field;
         }
@@ -49,40 +88,39 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
         class TypeWithPublicParameterlessConstructor
         {
             [Kept]
-            public TypeWithPublicParameterlessConstructor () { }
+            public TypeWithPublicParameterlessConstructor() { }
 
-            public TypeWithPublicParameterlessConstructor (int i) { }
+            public TypeWithPublicParameterlessConstructor(int i) { }
         }
 
         class TypeWithPublicConstructor
         {
             [Kept]
-            public TypeWithPublicConstructor (int i) { }
+            public TypeWithPublicConstructor(int i) { }
 
             [Kept]
-            public TypeWithPublicConstructor (string s) { }
+            public TypeWithPublicConstructor(string s) { }
 
-            TypeWithPublicConstructor () { }
+            TypeWithPublicConstructor() { }
         }
 
         class TypeWithNonPublicConstructor
         {
-            public TypeWithNonPublicConstructor (int i) { }
+            public TypeWithNonPublicConstructor(int i) { }
 
             [Kept]
-            TypeWithNonPublicConstructor () { }
+            TypeWithNonPublicConstructor() { }
 
             [Kept]
-            TypeWithNonPublicConstructor (string s) { }
+            TypeWithNonPublicConstructor(string s) { }
         }
-
 
         class TypeWithPublicMethod
         {
             [Kept]
-            public void PublicMethod () { }
+            public void PublicMethod() { }
 
-            void PrivateMethod () { }
+            void PrivateMethod() { }
 
             public int field;
         }
@@ -90,9 +128,9 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
         class TypeWithNonPublicMethod
         {
             [Kept]
-            void PrivateMethod () { }
+            void PrivateMethod() { }
 
-            public void NonPublicMethod () { }
+            public void NonPublicMethod() { }
         }
 
         class TypeWithPublicField
@@ -102,7 +140,7 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
 
             string nonPublicField;
 
-            public void Method () { }
+            public void Method() { }
         }
 
         class TypeWithNonPublicField
@@ -112,99 +150,114 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
 
             public string publicField;
 
-            void Method () { }
+            void Method() { }
         }
 
         [Kept]
         class TypeWithPublicNestedType
         {
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             public class PublicNestedType
             {
                 [Kept]
-                public void Method () { }
+                public void Method() { }
+
                 [Kept]
                 public int field;
+
                 [Kept]
-                void NonPublicMethod () { }
+                void NonPublicMethod() { }
+
                 [Kept]
                 static class EmptyInnerNestedType { }
             }
 
-            public void Method () { }
+            public void Method() { }
 
-            void NonPublicMethod () { }
+            void NonPublicMethod() { }
 
-            class NonPublicNestedType
-            {
-            }
+            class NonPublicNestedType { }
 
             [Kept]
-            [KeptBaseType (typeof (MulticastDelegate))]
-            [KeptMember (".ctor(System.Object,System.IntPtr)")]
-            [KeptMember ("Invoke()")]
-            [KeptMember ("BeginInvoke(System.AsyncCallback,System.Object)")]
-            [KeptMember ("EndInvoke(System.IAsyncResult)")]
-            public delegate int PublicDelegate ();
+            [KeptBaseType(typeof(MulticastDelegate))]
+            [KeptMember(".ctor(System.Object,System.IntPtr)")]
+            [KeptMember("Invoke()")]
+            [KeptMember("BeginInvoke(System.AsyncCallback,System.Object)")]
+            [KeptMember("EndInvoke(System.IAsyncResult)")]
+            public delegate int PublicDelegate();
 
-            private delegate int PrivateDelegate ();
+            private delegate int PrivateDelegate();
         }
 
         [Kept]
         class TypeWithNonPublicNestedType
         {
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             class NonPublicNestedType
             {
                 [Kept]
-                public void Method () { }
+                public void Method() { }
 
                 [Kept]
                 public int field;
 
                 [Kept]
-                void NonPublicMethod () { }
+                void NonPublicMethod() { }
             }
 
-            public void Method () { }
+            public void Method() { }
 
-            void NonPublicMethod () { }
+            void NonPublicMethod() { }
 
-            public class PublicNestedType
-            {
-            }
+            public class PublicNestedType { }
 
-            public delegate int PublicDelegate ();
+            public delegate int PublicDelegate();
 
             [Kept]
-            [KeptBaseType (typeof (MulticastDelegate))]
-            [KeptMember (".ctor(System.Object,System.IntPtr)")]
-            [KeptMember ("Invoke()")]
-            [KeptMember ("BeginInvoke(System.AsyncCallback,System.Object)")]
-            [KeptMember ("EndInvoke(System.IAsyncResult)")]
-            private delegate int PrivateDelegate ();
+            [KeptBaseType(typeof(MulticastDelegate))]
+            [KeptMember(".ctor(System.Object,System.IntPtr)")]
+            [KeptMember("Invoke()")]
+            [KeptMember("BeginInvoke(System.AsyncCallback,System.Object)")]
+            [KeptMember("EndInvoke(System.IAsyncResult)")]
+            private delegate int PrivateDelegate();
         }
 
         class TypeWithPublicProperty
         {
             [Kept]
-            public int Property { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public int Property
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
 
             int NonPublicProperty { get; set; }
 
-            public void Method () { }
+            public void Method() { }
         }
 
         class TypeWithNonPublicProperty
         {
             [Kept]
-            int NonPublicProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            int NonPublicProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
 
             public int PublicProperty { get; set; }
 
-            void NonPublicMethod () { }
+            void NonPublicMethod() { }
         }
 
         class TypeWithPublicEvent
@@ -217,7 +270,7 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
 
             event EventHandler NonPublicEvent;
 
-            public void Method () { }
+            public void Method() { }
         }
 
         class TypeWithNonPublicEvent
@@ -230,17 +283,17 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
 
             public event EventHandler PublicEven;
 
-            void NonPublicMethod () { }
+            void NonPublicMethod() { }
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class TypeWithAll
         {
             [Kept]
-            public void PublicMethod () { }
+            public void PublicMethod() { }
 
             [Kept]
-            void NonPublicMehod () { }
+            void NonPublicMehod() { }
 
             [Kept]
             public int publicField;
@@ -250,11 +303,23 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
 
             [Kept]
             [KeptBackingField]
-            public int PublicProperty { [Kept] get; [Kept] set; }
+            public int PublicProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
-            int NonPublicProperty { [Kept] get; [Kept] set; }
+            int NonPublicProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
@@ -269,43 +334,43 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
             event EventHandler NonPublicEvent;
 
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             public class PublicNestedType
             {
                 [Kept]
-                [KeptMember (".ctor()")]
+                [KeptMember(".ctor()")]
                 class RecursiveNestedType
                 {
                     [Kept]
-                    void Method () { }
+                    void Method() { }
                 }
             }
 
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             class NonPublicNestedType
             {
                 [Kept]
-                [KeptMember (".ctor()")]
+                [KeptMember(".ctor()")]
                 class RecursiveNestedType
                 {
                     [Kept]
-                    void Method () { }
+                    void Method() { }
                 }
             }
 
             [Kept]
-            [KeptBaseType (typeof (MulticastDelegate))]
-            [KeptMember (".ctor(System.Object,System.IntPtr)")]
-            [KeptMember ("Invoke()")]
-            [KeptMember ("BeginInvoke(System.AsyncCallback,System.Object)")]
-            [KeptMember ("EndInvoke(System.IAsyncResult)")]
-            public delegate int PublicDelegate ();
+            [KeptBaseType(typeof(MulticastDelegate))]
+            [KeptMember(".ctor(System.Object,System.IntPtr)")]
+            [KeptMember("Invoke()")]
+            [KeptMember("BeginInvoke(System.AsyncCallback,System.Object)")]
+            [KeptMember("EndInvoke(System.IAsyncResult)")]
+            public delegate int PublicDelegate();
         }
 
         public class TypeWithNone
         {
-            public void Method () { }
+            public void Method() { }
 
             public int field;
 

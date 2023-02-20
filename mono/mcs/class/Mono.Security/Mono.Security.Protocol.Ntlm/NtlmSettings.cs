@@ -27,8 +27,8 @@ using System;
 using System.Net;
 using System.Reflection;
 
-namespace Mono.Security.Protocol.Ntlm {
-
+namespace Mono.Security.Protocol.Ntlm
+{
     /*
      * On Windows, this is controlled by a registry setting
      * (http://msdn.microsoft.com/en-us/library/ms814176.aspx)
@@ -38,11 +38,12 @@ namespace Mono.Security.Protocol.Ntlm {
      * is LM_and_NTLM_and_try_NTLMv2_Session.
      */
 
-    public static class NtlmSettings {
-
+    public static class NtlmSettings
+    {
         static NtlmAuthLevel defaultAuthLevel = NtlmAuthLevel.LM_and_NTLM_and_try_NTLMv2_Session;
 
-        public static NtlmAuthLevel DefaultAuthLevel {
+        public static NtlmAuthLevel DefaultAuthLevel
+        {
             get { return defaultAuthLevel; }
             set { defaultAuthLevel = value; }
         }

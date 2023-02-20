@@ -12,62 +12,38 @@ namespace System.Reflection.Emit
 
         public virtual int Attributes
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public bool IsIn
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public bool IsOptional
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public bool IsOut
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public virtual string Name
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public virtual int Position
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
-        public virtual void SetConstant(object defaultValue)
-        {
-        }
+        public virtual void SetConstant(object defaultValue) { }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
-        {
-        }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
-        {
-        }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
     }
 }

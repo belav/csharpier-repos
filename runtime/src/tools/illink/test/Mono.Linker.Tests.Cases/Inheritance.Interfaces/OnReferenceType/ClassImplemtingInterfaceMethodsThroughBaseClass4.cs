@@ -4,27 +4,25 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
 {
     class ClassImplemtingInterfaceMethodsThroughBaseClass4
     {
-        public static void Main ()
+        public static void Main()
         {
-            new A ().Foo ();
+            new A().Foo();
         }
 
         interface IFoo
         {
-            void Foo ();
+            void Foo();
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class B
         {
             [Kept]
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
         }
 
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (B))]
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(B))]
         class A : B, IFoo
         {
             //my IFoo.Foo() is actually implemented by B which doesn't know about it.

@@ -19,7 +19,10 @@ namespace Moq.Tests
             try
             {
                 mock.Object.Do();
-                Assert.True(false, "Should have thrown for unexpected call with MockBehavior.Strict");
+                Assert.True(
+                    false,
+                    "Should have thrown for unexpected call with MockBehavior.Strict"
+                );
             }
             catch (MockException mex)
             {
@@ -249,6 +252,7 @@ namespace Moq.Tests
             public abstract string DoReturnString();
 
             public void DoNonVirtual() { }
+
             public virtual void DoVirtual() { }
 
             public int NonVirtualGet()

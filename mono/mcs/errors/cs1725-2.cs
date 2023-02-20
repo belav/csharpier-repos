@@ -3,11 +3,9 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo ("main, processorArchitecture=MSIL")]
+[assembly: InternalsVisibleTo("main, processorArchitecture=MSIL")]
 
 class A
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

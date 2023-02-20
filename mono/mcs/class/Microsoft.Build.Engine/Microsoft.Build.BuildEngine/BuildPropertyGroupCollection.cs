@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -28,68 +28,67 @@
 using System;
 using System.Collections;
 
-namespace Microsoft.Build.BuildEngine {
-    public class BuildPropertyGroupCollection : ICollection, IEnumerable {
+namespace Microsoft.Build.BuildEngine
+{
+    public class BuildPropertyGroupCollection : ICollection, IEnumerable
+    {
+        GroupingCollection groupingCollection;
 
-        GroupingCollection    groupingCollection;
-    
-        BuildPropertyGroupCollection ()
+        BuildPropertyGroupCollection()
         {
-            groupingCollection = new GroupingCollection (null);
+            groupingCollection = new GroupingCollection(null);
         }
 
-        internal BuildPropertyGroupCollection (GroupingCollection groupingCollection)
+        internal BuildPropertyGroupCollection(GroupingCollection groupingCollection)
         {
             this.groupingCollection = groupingCollection;
         }
-        
-        public void CopyTo (Array array, int index)
+
+        public void CopyTo(Array array, int index)
         {
             if (array == null)
-                throw new ArgumentNullException ("array");
+                throw new ArgumentNullException("array");
             if (index < 0)
-                throw new IndexOutOfRangeException ("Index was outside the bounds of the array.");
+                throw new IndexOutOfRangeException("Index was outside the bounds of the array.");
             if (array.Rank > 1)
-                throw new ArgumentException ("array is multidimensional");
+                throw new ArgumentException("array is multidimensional");
             if ((array.Length > 0) && (index >= array.Length))
-                throw new IndexOutOfRangeException ("Index was outside the bounds of the array.");
+                throw new IndexOutOfRangeException("Index was outside the bounds of the array.");
             if (index + this.Count > array.Length)
-                throw new IndexOutOfRangeException ("Index was outside the bounds of the array.");
-        
-            IEnumerator it = GetEnumerator ();
+                throw new IndexOutOfRangeException("Index was outside the bounds of the array.");
+
+            IEnumerator it = GetEnumerator();
             int i = index;
-            while (it.MoveNext ()) {
-                array.SetValue (it.Current, i++);
+            while (it.MoveNext())
+            {
+                array.SetValue(it.Current, i++);
             }
         }
 
-        public IEnumerator GetEnumerator ()
+        public IEnumerator GetEnumerator()
         {
-            return groupingCollection.GetPropertyGroupEnumerator ();
+            return groupingCollection.GetPropertyGroupEnumerator();
         }
-        
-        internal void Add (BuildPropertyGroup bpg)
+
+        internal void Add(BuildPropertyGroup bpg)
         {
             bpg.GroupingCollection = groupingCollection;
-            groupingCollection.Add (bpg);
+            groupingCollection.Add(bpg);
         }
 
-        public int Count {
-            get {
-                return groupingCollection.PropertyGroups;
-            }
+        public int Count
+        {
+            get { return groupingCollection.PropertyGroups; }
         }
 
-        public bool IsSynchronized {
-            get {
-                return false;
-            }
+        public bool IsSynchronized
+        {
+            get { return false; }
         }
 
-        public object SyncRoot {
-            get {
-                return this;
-            }
+        public object SyncRoot
+        {
+            get { return this; }
         }
     }
 }

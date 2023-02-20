@@ -8,17 +8,21 @@ using Microsoft.OData.ModelBuilder;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class GearsOfWarODataQueryTestFixture : GearsOfWarQuerySqlServerFixture, IODataQueryTestFixture
+public class GearsOfWarODataQueryTestFixture
+    : GearsOfWarQuerySqlServerFixture,
+        IODataQueryTestFixture
 {
     private IHost _selfHostServer;
 
-    protected override string StoreName
-        => "ODataGearsOfWarQueryTest";
+    protected override string StoreName => "ODataGearsOfWarQueryTest";
 
     public GearsOfWarODataQueryTestFixture()
     {
-        (BaseAddress, ClientFactory, _selfHostServer)
-            = ODataQueryTestFixtureInitializer.Initialize<GearsOfWarODataContext>(StoreName, GetEdmModel());
+        (BaseAddress, ClientFactory, _selfHostServer) =
+            ODataQueryTestFixtureInitializer.Initialize<GearsOfWarODataContext>(
+                StoreName,
+                GetEdmModel()
+            );
     }
 
     private static IEdmModel GetEdmModel()

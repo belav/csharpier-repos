@@ -54,9 +54,19 @@ namespace System.Web.WebPages.Test
             var factory2 = new Mock<IVirtualPathFactory>();
             factory2.Setup(c => c.Exists(path)).Returns(true).Verifiable();
             var factory3 = new Mock<IVirtualPathFactory>();
-            factory3.Setup(c => c.Exists(path)).Throws(new Exception("This factory should not be called since the page has already been found in 2"));
+            factory3
+                .Setup(c => c.Exists(path))
+                .Throws(
+                    new Exception(
+                        "This factory should not be called since the page has already been found in 2"
+                    )
+                );
             var defaultFactory = new Mock<IVirtualPathFactory>();
-            defaultFactory.Setup(c => c.Exists(path)).Throws(new Exception("This factory should not be called since it always called last"));
+            defaultFactory
+                .Setup(c => c.Exists(path))
+                .Throws(
+                    new Exception("This factory should not be called since it always called last")
+                );
 
             var vpfm = new VirtualPathFactoryManager(defaultFactory.Object);
             vpfm.RegisterVirtualPathFactoryInternal(factory1.Object);
@@ -84,9 +94,19 @@ namespace System.Web.WebPages.Test
             factory2.Setup(c => c.Exists(page.VirtualPath)).Returns(true).Verifiable();
             factory2.Setup(c => c.CreateInstance(page.VirtualPath)).Returns(page).Verifiable();
             var factory3 = new Mock<IVirtualPathFactory>();
-            factory3.Setup(c => c.Exists(page.VirtualPath)).Throws(new Exception("This factory should not be called since the page has already been found in 2"));
+            factory3
+                .Setup(c => c.Exists(page.VirtualPath))
+                .Throws(
+                    new Exception(
+                        "This factory should not be called since the page has already been found in 2"
+                    )
+                );
             var defaultFactory = new Mock<IVirtualPathFactory>();
-            defaultFactory.Setup(c => c.Exists(page.VirtualPath)).Throws(new Exception("This factory should not be called since it always called last"));
+            defaultFactory
+                .Setup(c => c.Exists(page.VirtualPath))
+                .Throws(
+                    new Exception("This factory should not be called since it always called last")
+                );
 
             var vpfm = new VirtualPathFactoryManager(defaultFactory.Object);
             vpfm.RegisterVirtualPathFactoryInternal(factory1.Object);

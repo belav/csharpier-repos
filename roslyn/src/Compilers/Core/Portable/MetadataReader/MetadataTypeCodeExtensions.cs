@@ -77,8 +77,8 @@ namespace Microsoft.CodeAnalysis
         internal static bool HasShortFormSignatureEncoding(this SpecialType type)
         {
             // Spec II.23.2.16: Short form signatures:
-            // The following table shows which short-forms should be used in place of each long-form item. 
-            // Long Form                             Short Form                     
+            // The following table shows which short-forms should be used in place of each long-form item.
+            // Long Form                             Short Form
             //   CLASS     System.String               ELEMENT_TYPE_STRING
             //   CLASS     System.Object               ELEMENT_TYPE_OBJECT
             //   VALUETYPE System.Void                 ELEMENT_TYPE_VOID

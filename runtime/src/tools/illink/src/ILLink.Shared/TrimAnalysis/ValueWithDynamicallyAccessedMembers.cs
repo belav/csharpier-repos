@@ -14,6 +14,6 @@ namespace ILLink.Shared.TrimAnalysis
     {
         public abstract DynamicallyAccessedMemberTypes DynamicallyAccessedMemberTypes { get; }
 
-        public abstract IEnumerable<string> GetDiagnosticArgumentsForAnnotationMismatch ();
+        public abstract IEnumerable<string> GetDiagnosticArgumentsForAnnotationMismatch();
     }
 }

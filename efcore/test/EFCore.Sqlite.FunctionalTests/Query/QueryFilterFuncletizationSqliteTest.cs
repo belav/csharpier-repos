@@ -3,12 +3,13 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class QueryFilterFuncletizationSqliteTest : QueryFilterFuncletizationTestBase<
-    QueryFilterFuncletizationSqliteTest.QueryFilterFuncletizationSqliteFixture>
+public class QueryFilterFuncletizationSqliteTest
+    : QueryFilterFuncletizationTestBase<QueryFilterFuncletizationSqliteTest.QueryFilterFuncletizationSqliteFixture>
 {
     public QueryFilterFuncletizationSqliteTest(
         QueryFilterFuncletizationSqliteFixture fixture,
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
@@ -36,7 +37,6 @@ public class QueryFilterFuncletizationSqliteTest : QueryFilterFuncletizationTest
 
     public class QueryFilterFuncletizationSqliteFixture : QueryFilterFuncletizationRelationalFixture
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
     }
 }

@@ -24,8 +24,14 @@ namespace Microsoft.Win32.RegistryTests
             string corrupt = "str1\0str2\0str3\0";
 
             SafeRegistryHandle handle = TestRegistryKey.Handle;
-            int ret = Interop.Advapi32.RegSetValueEx(handle, TestValueName, 0,
-                (int)RegistryValueKind.MultiString, corrupt, corrupt.Length * 2);
+            int ret = Interop.Advapi32.RegSetValueEx(
+                handle,
+                TestValueName,
+                0,
+                (int)RegistryValueKind.MultiString,
+                corrupt,
+                corrupt.Length * 2
+            );
             Assert.Equal(0, ret);
             try
             {
@@ -35,7 +41,6 @@ namespace Microsoft.Win32.RegistryTests
                 var strings = (string[])o;
                 string[] expected = { "str1", "str2", "str3" };
                 Assert.Equal(expected, strings);
-
             }
             finally
             {
@@ -55,8 +60,14 @@ namespace Microsoft.Win32.RegistryTests
             const string TestValueName = "CorruptData2";
 
             SafeRegistryHandle handle = TestRegistryKey.Handle;
-            int ret = Interop.Advapi32.RegSetValueEx(handle, TestValueName, 0,
-                (int)kind, contents, contents.Length);
+            int ret = Interop.Advapi32.RegSetValueEx(
+                handle,
+                TestValueName,
+                0,
+                (int)kind,
+                contents,
+                contents.Length
+            );
             Assert.Equal(0, ret);
             try
             {

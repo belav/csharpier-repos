@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,32 +31,35 @@
 using Mono.Data.Tds.Protocol;
 using System.Collections;
 
-namespace Mono.Data.Tds.Protocol {
+namespace Mono.Data.Tds.Protocol
+{
     public class TdsDataColumnCollection : IEnumerable
     {
         #region Fields
 
         ArrayList list;
-        
+
         #endregion // Fields
 
         #region Constructors
 
-        public TdsDataColumnCollection ()
+        public TdsDataColumnCollection()
         {
-            list = new ArrayList ();
+            list = new ArrayList();
         }
 
         #endregion // Constructors
 
         #region Properties
 
-        public TdsDataColumn this [int index] {
-            get { return (TdsDataColumn) list[index]; }
+        public TdsDataColumn this[int index]
+        {
+            get { return (TdsDataColumn)list[index]; }
             set { list[index] = value; }
         }
 
-        public int Count {
+        public int Count
+        {
             get { return list.Count; }
         }
 
@@ -64,30 +67,30 @@ namespace Mono.Data.Tds.Protocol {
 
         #region Methods
 
-        public int Add (TdsDataColumn schema)
+        public int Add(TdsDataColumn schema)
         {
             int index;
-            index = list.Add (schema);
+            index = list.Add(schema);
             schema.ColumnOrdinal = index;
             return index;
         }
 
-        public void Add (TdsDataColumnCollection columns)
+        public void Add(TdsDataColumnCollection columns)
         {
             foreach (TdsDataColumn col in columns)
-                Add (col);
-        }
-        
-        public IEnumerator GetEnumerator ()
-        {
-            return list.GetEnumerator ();
+                Add(col);
         }
 
-        public void Clear ()
+        public IEnumerator GetEnumerator()
         {
-            list.Clear ();
+            return list.GetEnumerator();
         }
-        
+
+        public void Clear()
+        {
+            list.Clear();
+        }
+
         #endregion // Methods
     }
 }

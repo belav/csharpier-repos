@@ -5,8 +5,16 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Web.Mvc
 {
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "No compelling performance reason to seal this type.")]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "No compelling performance reason to seal this type."
+    )]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = false
+    )]
     public class ValidateInputAttribute : FilterAttribute, IAuthorizationFilter
     {
         public ValidateInputAttribute(bool enableValidation)

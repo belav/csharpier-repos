@@ -44,7 +44,13 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
         [DataMember(Order = 4)]
         public ImmutableArray<ReferenceInfo> Dependencies { get; }
 
-        public ReferenceInfo(ReferenceType referenceType, string itemSpecification, bool treatAsUsed, ImmutableArray<string> compilationAssemblies, ImmutableArray<ReferenceInfo> dependencies)
+        public ReferenceInfo(
+            ReferenceType referenceType,
+            string itemSpecification,
+            bool treatAsUsed,
+            ImmutableArray<string> compilationAssemblies,
+            ImmutableArray<ReferenceInfo> dependencies
+        )
         {
             ReferenceType = referenceType;
             ItemSpecification = itemSpecification;
@@ -53,10 +59,16 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
             Dependencies = dependencies;
         }
 
-        public ReferenceInfo WithItemSpecification(string itemSpecification)
-            => new(ReferenceType, itemSpecification, TreatAsUsed, CompilationAssemblies, Dependencies);
+        public ReferenceInfo WithItemSpecification(string itemSpecification) =>
+            new(ReferenceType, itemSpecification, TreatAsUsed, CompilationAssemblies, Dependencies);
 
-        public ReferenceInfo WithDependencies(IEnumerable<ReferenceInfo>? dependencies)
-            => new(ReferenceType, ItemSpecification, TreatAsUsed, CompilationAssemblies, dependencies.AsImmutableOrEmpty());
+        public ReferenceInfo WithDependencies(IEnumerable<ReferenceInfo>? dependencies) =>
+            new(
+                ReferenceType,
+                ItemSpecification,
+                TreatAsUsed,
+                CompilationAssemblies,
+                dependencies.AsImmutableOrEmpty()
+            );
     }
 }

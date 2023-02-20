@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,15 +31,11 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Security
 {
-
     [MonoTODO]
-    public class InfocardInteractiveChannelInitializer
-        : IInteractiveChannelInitializer
+    public class InfocardInteractiveChannelInitializer : IInteractiveChannelInitializer
     {
         [MonoTODO]
-        public InfocardInteractiveChannelInitializer (
-            ClientCredentials credentials,
-            Binding binding)
+        public InfocardInteractiveChannelInitializer(ClientCredentials credentials, Binding binding)
         {
             this.binding = binding;
             this.credentials = credentials;
@@ -48,23 +44,25 @@ namespace System.ServiceModel.Security
         Binding binding;
         ClientCredentials credentials;
 
-        public Binding Binding {
+        public Binding Binding
+        {
             get { return binding; }
         }
 
         [MonoTODO]
-        public IAsyncResult BeginDisplayInitializationUI (
+        public IAsyncResult BeginDisplayInitializationUI(
             IClientChannel channel,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void EndDisplayInitializationUI (IAsyncResult result)
+        public void EndDisplayInitializationUI(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

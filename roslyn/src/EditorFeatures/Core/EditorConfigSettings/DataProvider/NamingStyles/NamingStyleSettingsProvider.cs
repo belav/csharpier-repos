@@ -15,22 +15,48 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.NamingStyles
 {
-    internal class NamingStyleSettingsProvider : SettingsProviderBase<NamingStyleSetting, NamingStyleSettingsUpdater, (Action<(object, object?)>, NamingStyleSetting), object>
+    internal class NamingStyleSettingsProvider
+        : SettingsProviderBase<
+            NamingStyleSetting,
+            NamingStyleSettingsUpdater,
+            (Action<(object, object?)>, NamingStyleSetting),
+            object
+        >
     {
-        public NamingStyleSettingsProvider(string fileName, NamingStyleSettingsUpdater settingsUpdater, Workspace workspace, IGlobalOptionService globalOptions)
+        public NamingStyleSettingsProvider(
+            string fileName,
+            NamingStyleSettingsUpdater settingsUpdater,
+            Workspace workspace,
+            IGlobalOptionService globalOptions
+        )
             : base(fileName, settingsUpdater, workspace, globalOptions)
         {
             Update();
         }
 
-        protected override void UpdateOptions(TieredAnalyzerConfigOptions options, ImmutableArray<Project> projectsInScope)
+        protected override void UpdateOptions(
+            TieredAnalyzerConfigOptions options,
+            ImmutableArray<Project> projectsInScope
+        )
         {
-            options.GetInitialLocationAndValue<NamingStylePreferences>(NamingStyleOptions.NamingPreferences, out var location, out var namingPreferences);
+            options.GetInitialLocationAndValue<NamingStylePreferences>(
+                NamingStyleOptions.NamingPreferences,
+                out var location,
+                out var namingPreferences
+            );
 
-            var fileName = (location.LocationKind != LocationKind.VisualStudio) ? options.EditorConfigFileName : null;
-            var namingRules = namingPreferences.NamingRules.Select(r => r.GetRule(namingPreferences));
+            var fileName =
+                (location.LocationKind != LocationKind.VisualStudio)
+                    ? options.EditorConfigFileName
+                    : null;
+            var namingRules = namingPreferences.NamingRules.Select(
+                r => r.GetRule(namingPreferences)
+            );
             var allStyles = namingPreferences.NamingStyles.DistinctBy(s => s.Name).ToArray();
-            var namingStyles = namingRules.Select(namingRule => new NamingStyleSetting(namingRule, allStyles, SettingsUpdater, fileName));
+            var namingStyles = namingRules.Select(
+                namingRule =>
+                    new NamingStyleSetting(namingRule, allStyles, SettingsUpdater, fileName)
+            );
 
             AddRange(namingStyles);
         }

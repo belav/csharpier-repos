@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,38 +39,30 @@ namespace System.ServiceModel
         MessageFault fault;
         string action;
 
-        public FaultException ()
-            : this ("Communication has faulted.")
-        {
-        }
+        public FaultException()
+            : this("Communication has faulted.") { }
 
-        public FaultException (string reason)
-            : this (new FaultReason (reason))
-        {
-        }
+        public FaultException(string reason)
+            : this(new FaultReason(reason)) { }
 
-        public FaultException (string reason, FaultCode code)
-            : this (new FaultReason (reason), code)
+        public FaultException(string reason, FaultCode code)
+            : this(new FaultReason(reason), code) { }
+
+        [MonoTODO]
+        protected FaultException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected FaultException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
-        {
-            throw new NotImplementedException ();
-        }
+        public FaultException(MessageFault fault)
+            : this(fault, String.Empty) { }
 
-        [MonoTODO]
-        public FaultException (MessageFault fault)
-            : this (fault, String.Empty)
-        {
-        }
-
-        public FaultException (MessageFault fault, string action)
+        public FaultException(MessageFault fault, string action)
         {
             if (fault == null)
-                throw new ArgumentNullException ("fault");
+                throw new ArgumentNullException("fault");
             //if (action == null)
             //    throw new ArgumentNullException ("action");
 
@@ -79,65 +71,68 @@ namespace System.ServiceModel
         }
 
         [MonoTODO]
-        public FaultException (FaultReason reason)
-            : this (reason, new FaultCode (String.Empty))
-        {
-        }
+        public FaultException(FaultReason reason)
+            : this(reason, new FaultCode(String.Empty)) { }
 
-        public FaultException (FaultReason reason, FaultCode code)
-            : this (MessageFault.CreateFault (code, reason))
-        {
-        }
+        public FaultException(FaultReason reason, FaultCode code)
+            : this(MessageFault.CreateFault(code, reason)) { }
 
-        public FaultException (string reason, FaultCode code, string action)
-            : this (MessageFault.CreateFault (code, reason), action)
-        {
-        }
+        public FaultException(string reason, FaultCode code, string action)
+            : this(MessageFault.CreateFault(code, reason), action) { }
 
-        public FaultException (FaultReason reason, FaultCode code, string action)
-            : this (MessageFault.CreateFault (code, reason), action)
+        public FaultException(FaultReason reason, FaultCode code, string action)
+            : this(MessageFault.CreateFault(code, reason), action) { }
+
+        [MonoTODO]
+        public static FaultException CreateFault(
+            MessageFault messageFault,
+            params Type[] faultDetailTypes
+        )
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static FaultException CreateFault (MessageFault messageFault,  params Type [] faultDetailTypes)
+        public static FaultException CreateFault(
+            MessageFault messageFault,
+            string action,
+            params Type[] faultDetailTypes
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoTODO]
-        public static FaultException CreateFault (MessageFault messageFault, string action, params Type[] faultDetailTypes)
-        {
-            throw new NotImplementedException ();
-        }
-
-        public virtual MessageFault CreateMessageFault ()
+        public virtual MessageFault CreateMessageFault()
         {
             return fault;
         }
 
         [MonoTODO]
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             // How could it be Serializable while none of
             // FaultReason and FaultCode are serializable.
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public string Action {
+        public string Action
+        {
             get { return action; }
         }
 
-        public FaultCode Code {
+        public FaultCode Code
+        {
             get { return fault.Code; }
         }
 
-        public FaultReason Reason {
-            get{ return fault.Reason; }
+        public FaultReason Reason
+        {
+            get { return fault.Reason; }
         }
 
-        public override string Message {
-            get { return Reason.GetMatchingTranslation ().Text; }
+        public override string Message
+        {
+            get { return Reason.GetMatchingTranslation().Text; }
         }
     }
 }

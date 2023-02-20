@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -11,14 +11,14 @@
 //
 //    Classes:    ChartAreaAxes
 //
-//  Purpose:    ChartAreaAxes is base class of Chart Area class. 
-//                This class searches for all series, which belongs 
-//                to this chart area and sets axes minimum and 
-//                maximum values using data. This class also checks 
-//                for chart types, which belong to this chart area 
-//                and prepare axis scale according to them (Stacked 
-//                chart types have different max and min values). 
-//                This class recognizes indexed values and prepares 
+//  Purpose:    ChartAreaAxes is base class of Chart Area class.
+//                This class searches for all series, which belongs
+//                to this chart area and sets axes minimum and
+//                maximum values using data. This class also checks
+//                for chart types, which belong to this chart area
+//                and prepare axis scale according to them (Stacked
+//                chart types have different max and min values).
+//                This class recognizes indexed values and prepares
 //                axes for them.
 //
 //    Reviewed:    GS - Jul 31, 2002
@@ -33,14 +33,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.Windows.Forms.DataVisualization.Charting.Data;
-    using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-    using System.Windows.Forms.DataVisualization.Charting.Utilities;
-    using System.Windows.Forms.DataVisualization.Charting.Borders3D;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Data;
+using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 #else
-    using System.Web.UI.DataVisualization.Charting.Data;
-    using System.Web.UI.DataVisualization.Charting.ChartTypes;
+using System.Web.UI.DataVisualization.Charting.Data;
+using System.Web.UI.DataVisualization.Charting.ChartTypes;
 #endif
 
 #endregion
@@ -52,8 +52,8 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
     /// <summary>
-    /// ChartAreaAxes class represents axes (X, Y, X2 and Y2) in the chart area. 
-    /// It contains methods that collect statistical information on the series data and 
+    /// ChartAreaAxes class represents axes (X, Y, X2 and Y2) in the chart area.
+    /// It contains methods that collect statistical information on the series data and
     /// other axes related methods.
     /// </summary>
     public partial class ChartArea
@@ -61,61 +61,61 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Fields
 
         // Axes which belong to this Chart Area
-        internal Axis                    axisY = null;
-        internal Axis                    axisX = null;
-        internal Axis                    axisX2 = null;
-        internal Axis                    axisY2 = null;
-        
+        internal Axis axisY = null;
+        internal Axis axisX = null;
+        internal Axis axisX2 = null;
+        internal Axis axisY2 = null;
+
         // Array of series which belong to this chart area
-        private List<string>            _series =        new List<string>();
+        private List<string> _series = new List<string>();
 
         // Array of chart types which belong to this chart area
-        internal ArrayList                chartTypes =    new ArrayList();
+        internal ArrayList chartTypes = new ArrayList();
 
         /// <summary>
         /// List of series names that last interval numbers where cashed for
         /// </summary>
-        private     string                    _intervalSeriesList = "";
+        private string _intervalSeriesList = "";
 
-        // Minimum interval between two data points for all 
+        // Minimum interval between two data points for all
         // series which belong to this chart area.
-        internal double                    intervalData = double.NaN;
+        internal double intervalData = double.NaN;
 
-        // Minimum interval between two data points for all 
+        // Minimum interval between two data points for all
         // series which belong to this chart area.
         // IsLogarithmic version of the interval.
-        internal double                    intervalLogData = double.NaN;
+        internal double intervalLogData = double.NaN;
 
-        // Series with minimum interval between two data points for all 
+        // Series with minimum interval between two data points for all
         // series which belong to this chart area.
-        private Series                    _intervalSeries = null;
+        private Series _intervalSeries = null;
 
         // Indicates that points are located through equal X intervals
-        internal bool                    intervalSameSize = false;
+        internal bool intervalSameSize = false;
 
         // Indicates that points alignment checked
-        internal bool                    diffIntervalAlignmentChecked = false;
+        internal bool diffIntervalAlignmentChecked = false;
 
         // Chart Area contains stacked chart types
-        internal bool                    stacked = false;
+        internal bool stacked = false;
 
         // Chart type with two y values used for scale ( bubble chart type )
-        internal bool                    secondYScale = false;
+        internal bool secondYScale = false;
 
         // The X and Y axes are switched
-        internal bool                    switchValueAxes = false;
+        internal bool switchValueAxes = false;
 
         // True for all chart types, which have axes. False for doughnut and pie chart.
-        internal bool                    requireAxes = true;
+        internal bool requireAxes = true;
 
         // Indicates that chart area has circular shape (like in radar or polar chart)
-        internal bool                    chartAreaIsCurcular = false;
+        internal bool chartAreaIsCurcular = false;
 
         // Chart Area contains 100 % stacked chart types
-        internal bool                    hundredPercent = false;
+        internal bool hundredPercent = false;
 
         // Chart Area contains 100 % stacked chart types
-        internal bool                    hundredPercentNegative = false;
+        internal bool hundredPercentNegative = false;
 
         #endregion
 
@@ -128,8 +128,7 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             get
             {
-                if(((ChartArea)this).Area3DStyle.Enable3D ||
-                    ((ChartArea)this).chartAreaIsCurcular)
+                if (((ChartArea)this).Area3DStyle.Enable3D || ((ChartArea)this).chartAreaIsCurcular)
                 {
                     return false;
                 }
@@ -142,10 +141,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal List<string> Series
         {
-            get
-            {
-                return _series;
-            }
+            get { return _series; }
         }
 
         /// <summary>
@@ -153,10 +149,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal ArrayList ChartTypes
         {
-            get
-            {
-                return chartTypes;
-            }
+            get { return chartTypes; }
         }
 
         #endregion
@@ -166,7 +159,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Gets main or sub axis from the chart area.
         /// </summary>
-        /// <param name="axisName">Axis name. NOTE: This parameter only defines X or Y axis. 
+        /// <param name="axisName">Axis name. NOTE: This parameter only defines X or Y axis.
         /// Second axisType parameter is used to select primary or secondary axis. </param>
         /// <param name="axisType">Axis type.</param>
         /// <param name="subAxisName">Sub-axis name or empty string.</param>
@@ -174,22 +167,22 @@ namespace System.Web.UI.DataVisualization.Charting
         internal Axis GetAxis(AxisName axisName, AxisType axisType, string subAxisName)
         {
             // Ignore sub axis in 3D
-            if( ((ChartArea)this).Area3DStyle.Enable3D)
+            if (((ChartArea)this).Area3DStyle.Enable3D)
             {
                 subAxisName = string.Empty;
             }
 
-            if(axisName == AxisName.X || axisName == AxisName.X2)
+            if (axisName == AxisName.X || axisName == AxisName.X2)
             {
-                if(axisType == AxisType.Primary)
+                if (axisType == AxisType.Primary)
                 {
                     return ((ChartArea)this).AxisX.GetSubAxis(subAxisName);
                 }
                 return ((ChartArea)this).AxisX2.GetSubAxis(subAxisName);
             }
-            else 
+            else
             {
-                if(axisType == AxisType.Primary)
+                if (axisType == AxisType.Primary)
                 {
                     return ((ChartArea)this).AxisY.GetSubAxis(subAxisName);
                 }
@@ -198,13 +191,13 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Sets default axis values for all different chart type 
+        /// Sets default axis values for all different chart type
         /// groups. Chart type groups are sets of chart types.
         /// </summary>
-        internal void SetDefaultAxesValues( )
+        internal void SetDefaultAxesValues()
         {
             // The X and Y axes are switched ( Bar chart, stacked bar ... )
-            if( switchValueAxes )
+            if (switchValueAxes)
             {
                 // Set axis positions
                 axisY.AxisPosition = AxisPosition.Bottom;
@@ -221,19 +214,19 @@ namespace System.Web.UI.DataVisualization.Charting
                 axisY2.AxisPosition = AxisPosition.Right;
             }
 
-            // Reset opposite Axes field. This cashing 
+            // Reset opposite Axes field. This cashing
             // value is used for optimization.
-            foreach( Axis axisItem in ((ChartArea)this).Axes )
+            foreach (Axis axisItem in ((ChartArea)this).Axes)
             {
                 axisItem.oppositeAxis = null;
 #if SUBAXES
-                foreach( SubAxis subAxisItem in axisItem.SubAxes )
+                foreach (SubAxis subAxisItem in axisItem.SubAxes)
                 {
                     subAxisItem.m_oppositeAxis = null;
                 }
 #endif // SUBAXES
             }
-                
+
             // ***********************
             // Primary X Axes
             // ***********************
@@ -254,7 +247,7 @@ namespace System.Web.UI.DataVisualization.Charting
             // ***********************
             // Primary X Sub-Axes
             // ***********************
-            foreach(SubAxis subAxis in axisX.SubAxes)
+            foreach (SubAxis subAxis in axisX.SubAxes)
             {
                 SetDefaultFromIndexesOrData(subAxis, AxisType.Primary);
             }
@@ -269,7 +262,7 @@ namespace System.Web.UI.DataVisualization.Charting
             // ***********************
             // Secondary X Sub-Axes
             // ***********************
-            foreach(SubAxis subAxis in axisX2.SubAxes)
+            foreach (SubAxis subAxis in axisX2.SubAxes)
             {
                 SetDefaultFromIndexesOrData(subAxis, AxisType.Secondary);
             }
@@ -278,10 +271,10 @@ namespace System.Web.UI.DataVisualization.Charting
             // ***********************
             // Primary Y axis
             // ***********************
-            if( GetYAxesSeries( AxisType.Primary, string.Empty ).Count != 0 )
+            if (GetYAxesSeries(AxisType.Primary, string.Empty).Count != 0)
             {
                 // Find minimum and maximum from Y values.
-                SetDefaultFromData( axisY );
+                SetDefaultFromData(axisY);
                 axisY.EstimateAxis();
             }
 
@@ -289,13 +282,13 @@ namespace System.Web.UI.DataVisualization.Charting
             // ***********************
             // Primary Y Sub-Axes
             // ***********************
-            foreach(SubAxis subAxis in axisY.SubAxes)
+            foreach (SubAxis subAxis in axisY.SubAxes)
             {
                 // Find the  number  of series which belong to this axis
-                if( GetYAxesSeries( AxisType.Primary, subAxis.SubAxisName ).Count != 0 )
+                if (GetYAxesSeries(AxisType.Primary, subAxis.SubAxisName).Count != 0)
                 {
                     // Find minimum and maximum from Y values.
-                    SetDefaultFromData( subAxis );
+                    SetDefaultFromData(subAxis);
                     subAxis.EstimateAxis();
                 }
             }
@@ -304,10 +297,10 @@ namespace System.Web.UI.DataVisualization.Charting
             // ***********************
             // Secondary Y axis
             // ***********************
-            if( GetYAxesSeries( AxisType.Secondary, string.Empty ).Count != 0 )
+            if (GetYAxesSeries(AxisType.Secondary, string.Empty).Count != 0)
             {
                 // Find minimum and maximum from Y values.
-                SetDefaultFromData( axisY2 );
+                SetDefaultFromData(axisY2);
                 axisY2.EstimateAxis();
             }
 
@@ -315,19 +308,19 @@ namespace System.Web.UI.DataVisualization.Charting
             // ***********************
             // Secondary Y Sub-Axes
             // ***********************
-            foreach(SubAxis subAxis in axisY2.SubAxes)
+            foreach (SubAxis subAxis in axisY2.SubAxes)
             {
                 // Find the  number  of series which belong to this axis
-                if( GetYAxesSeries( AxisType.Secondary, subAxis.SubAxisName ).Count != 0 )
+                if (GetYAxesSeries(AxisType.Secondary, subAxis.SubAxisName).Count != 0)
                 {
                     // Find minimum and maximum from Y values.
-                    SetDefaultFromData( subAxis );
+                    SetDefaultFromData(subAxis);
                     subAxis.EstimateAxis();
                 }
             }
 #endif // SUBAXES
 
-            // Sets axis position. Axis position depends 
+            // Sets axis position. Axis position depends
             // on crossing and reversed value.
             axisX.SetAxisPosition();
             axisX2.SetAxisPosition();
@@ -338,54 +331,54 @@ namespace System.Web.UI.DataVisualization.Charting
             // used in data series.
             this.EnableAxes();
 
-            
-
-
             // Get scale break segments
             Axis[] axesYArray = new Axis[] { axisY, axisY2 };
-            foreach(Axis currentAxis in axesYArray)
+            foreach (Axis currentAxis in axesYArray)
             {
                 // Get automatic scale break segments
                 currentAxis.ScaleBreakStyle.GetAxisSegmentForScaleBreaks(currentAxis.ScaleSegments);
 
                 // Make sure axis scale do not exceed segments scale
-                if(currentAxis.ScaleSegments.Count > 0)
+                if (currentAxis.ScaleSegments.Count > 0)
                 {
                     // Save flag that scale segments are used
                     currentAxis.scaleSegmentsUsed = true;
 
-                    if(currentAxis.minimum < currentAxis.ScaleSegments[0].ScaleMinimum)
+                    if (currentAxis.minimum < currentAxis.ScaleSegments[0].ScaleMinimum)
                     {
                         currentAxis.minimum = currentAxis.ScaleSegments[0].ScaleMinimum;
                     }
-                    if(currentAxis.minimum > currentAxis.ScaleSegments[currentAxis.ScaleSegments.Count - 1].ScaleMaximum)
+                    if (
+                        currentAxis.minimum
+                        > currentAxis.ScaleSegments[
+                            currentAxis.ScaleSegments.Count - 1
+                        ].ScaleMaximum
+                    )
                     {
-                        currentAxis.minimum = currentAxis.ScaleSegments[currentAxis.ScaleSegments.Count - 1].ScaleMaximum;
+                        currentAxis.minimum = currentAxis.ScaleSegments[
+                            currentAxis.ScaleSegments.Count - 1
+                        ].ScaleMaximum;
                     }
                 }
             }
-
-
 
             bool useScaleSegments = false;
 
             // Fill Labels
             Axis[] axesArray = new Axis[] { axisX, axisX2, axisY, axisY2 };
-            foreach(Axis currentAxis in axesArray)
+            foreach (Axis currentAxis in axesArray)
             {
-
                 useScaleSegments = (currentAxis.ScaleSegments.Count > 0);
 
-                if(!useScaleSegments)
+                if (!useScaleSegments)
                 {
                     currentAxis.FillLabels(true);
                 }
-
                 else
                 {
                     bool removeLabels = true;
                     int segmentIndex = 0;
-                    foreach(AxisScaleSegment scaleSegment in currentAxis.ScaleSegments)
+                    foreach (AxisScaleSegment scaleSegment in currentAxis.ScaleSegments)
                     {
                         scaleSegment.SetTempAxisScaleAndInterval();
 
@@ -395,8 +388,10 @@ namespace System.Web.UI.DataVisualization.Charting
                         scaleSegment.RestoreAxisScaleAndInterval();
 
                         // Remove last label for all segments except of the last
-                        if(segmentIndex < (currentAxis.ScaleSegments.Count - 1) &&
-                            currentAxis.CustomLabels.Count > 0)
+                        if (
+                            segmentIndex < (currentAxis.ScaleSegments.Count - 1)
+                            && currentAxis.CustomLabels.Count > 0
+                        )
                         {
                             currentAxis.CustomLabels.RemoveAt(currentAxis.CustomLabels.Count - 1);
                         }
@@ -404,7 +399,6 @@ namespace System.Web.UI.DataVisualization.Charting
                         ++segmentIndex;
                     }
                 }
-
             }
             foreach (Axis currentAxis in axesArray)
             {
@@ -413,13 +407,13 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Sets the axis defaults. 
-        /// If the at least one of the series bound to this axis is Indexed then the defaults are set using the SetDefaultsFromIndexes(). 
+        /// Sets the axis defaults.
+        /// If the at least one of the series bound to this axis is Indexed then the defaults are set using the SetDefaultsFromIndexes().
         /// Otherwise the SetDefaultFromData() is used.
         /// </summary>
         /// <param name="axis">Axis to process</param>
         /// <param name="axisType">Axis type</param>
-        private void SetDefaultFromIndexesOrData(Axis axis, AxisType axisType) 
+        private void SetDefaultFromIndexesOrData(Axis axis, AxisType axisType)
         {
             //Get array of the series that are linked to this axis
             List<string> axisSeriesNames = GetXAxesSeries(axisType, axis.SubAxisName);
@@ -431,18 +425,18 @@ namespace System.Web.UI.DataVisualization.Charting
             // DT comments 1:
             // If we have mix of indexed with non-indexed series
             // enforce  all indexed series as non-indexed;
-            // The result of mixed type of series will be more natural 
-            // and easy to detect the problem - all datapoints of indexed 
+            // The result of mixed type of series will be more natural
+            // and easy to detect the problem - all datapoints of indexed
             // series will be displayed on zero position.
             //=====================================
             // bool  nonIndexedSeries = false;
             //=======================================
             //Loop through the series looking for a indexed one
-            foreach(string seriesName in axisSeriesNames)
+            foreach (string seriesName in axisSeriesNames)
             {
                 // Get series
                 Series series = Common.DataManager.Series[seriesName];
-                // Check if series is indexed                
+                // Check if series is indexed
                 if (!ChartHelper.IndexedSeries(series))
                 {
                     // found one nonindexed series - we will treat all series as non indexed.
@@ -471,7 +465,11 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 if (axis.IsLogarithmic)
                 {
-                    throw (new InvalidOperationException(SR.ExceptionChartAreaAxisScaleLogarithmicUnsuitable));
+                    throw (
+                        new InvalidOperationException(
+                            SR.ExceptionChartAreaAxisScaleLogarithmicUnsuitable
+                        )
+                    );
                 }
                 //Set axis defaults from the indexed series
                 SetDefaultFromIndexes(axis);
@@ -479,9 +477,9 @@ namespace System.Web.UI.DataVisualization.Charting
                 return;
             }
 
-           // If haven't found any indexed series -> Set axis defaults from the series data
-           SetDefaultFromData(axis);
-           axis.EstimateAxis();
+            // If haven't found any indexed series -> Set axis defaults from the series data
+            SetDefaultFromData(axis);
+            axis.EstimateAxis();
         }
 
         /// <summary>
@@ -490,7 +488,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         private void EnableAxes()
         {
-            if( _series == null )
+            if (_series == null)
             {
                 return;
             }
@@ -501,71 +499,70 @@ namespace System.Web.UI.DataVisualization.Charting
             bool activeY2 = false;
 
             // Data series from this chart area
-            foreach( string ser in _series )
+            foreach (string ser in _series)
             {
-                Series    dataSeries = Common.DataManager.Series[ ser ];
+                Series dataSeries = Common.DataManager.Series[ser];
 
                 // X axes
-                if( dataSeries.XAxisType == AxisType.Primary )
+                if (dataSeries.XAxisType == AxisType.Primary)
                 {
                     activeX = true;
 #if SUBAXES
-                    this.Activate( axisX, true, dataSeries.XSubAxisName );
+                    this.Activate(axisX, true, dataSeries.XSubAxisName);
 #else
-                    this.Activate( axisX, true );
+                    this.Activate(axisX, true);
 #endif // SUBAXES
-
                 }
                 else
                 {
                     activeX2 = true;
 #if SUBAXES
-                    this.Activate( axisX2, true, dataSeries.XSubAxisName );
+                    this.Activate(axisX2, true, dataSeries.XSubAxisName);
 #else
-                    this.Activate( axisX2, true );
+                    this.Activate(axisX2, true);
 #endif // SUBAXES
                 }
                 // Y axes
-                if( dataSeries.YAxisType == AxisType.Primary )
+                if (dataSeries.YAxisType == AxisType.Primary)
                 {
                     activeY = true;
 #if SUBAXES
-                    this.Activate( axisY, true, dataSeries.YSubAxisName );
+                    this.Activate(axisY, true, dataSeries.YSubAxisName);
 #else
-                    this.Activate( axisY, true );
+                    this.Activate(axisY, true);
 #endif // SUBAXES
                 }
                 else
                 {
                     activeY2 = true;
 #if SUBAXES
-                    this.Activate( axisY2, true, dataSeries.YSubAxisName );
+                    this.Activate(axisY2, true, dataSeries.YSubAxisName);
 #else
-                    this.Activate( axisY2, true );
+                    this.Activate(axisY2, true);
 #endif // SUBAXES
                 }
             }
 
-#if SUBAXES            
+#if SUBAXES
             // Enable Axes
-            if(!activeX)
-                this.Activate( axisX, false, string.Empty );
-            if(!activeY)
-                this.Activate( axisY, false, string.Empty );
-            if(!activeX2)
-                this.Activate( axisX2, false, string.Empty );
-            if(!activeY2)
-                this.Activate( axisY2, false, string.Empty );
+            if (!activeX)
+                this.Activate(axisX, false, string.Empty);
+            if (!activeY)
+                this.Activate(axisY, false, string.Empty);
+            if (!activeX2)
+                this.Activate(axisX2, false, string.Empty);
+            if (!activeY2)
+                this.Activate(axisY2, false, string.Empty);
 #else // SUBAXES
             // Enable Axes
-            if(!activeX)
-                this.Activate( axisX, false);
-            if(!activeY)
-                this.Activate( axisY, false);
-            if(!activeX2)
-                this.Activate( axisX2, false);
-            if(!activeY2)
-                this.Activate( axisY2, false);
+            if (!activeX)
+                this.Activate(axisX, false);
+            if (!activeY)
+                this.Activate(axisY, false);
+            if (!activeX2)
+                this.Activate(axisX2, false);
+            if (!activeY2)
+                this.Activate(axisY2, false);
 #endif // SUBAXES
         }
 
@@ -577,23 +574,23 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="axis">Axis.</param>
         /// <param name="active">True if axis is active.</param>
         /// <param name="subAxisName">Sub axis name to activate.</param>
-        private void Activate( Axis axis, bool active, string subAxisName )
+        private void Activate(Axis axis, bool active, string subAxisName)
         {
             // Auto-Enable axis
-            if( axis.autoEnabled == true ) 
+            if (axis.autoEnabled == true)
             {
-                axis.enabled = active;        
+                axis.enabled = active;
             }
 
             // Auto-Enable sub axes
-            if(subAxisName.Length > 0)
+            if (subAxisName.Length > 0)
             {
                 SubAxis subAxis = axis.SubAxes.FindByName(subAxisName);
-                if(subAxis != null)
+                if (subAxis != null)
                 {
-                    if( subAxis.autoEnabled == true ) 
+                    if (subAxis.autoEnabled == true)
                     {
-                        subAxis.enabled = active;        
+                        subAxis.enabled = active;
                     }
                 }
             }
@@ -604,31 +601,31 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="axis">Axis.</param>
         /// <param name="active">True if axis is active.</param>
-        private void Activate( Axis axis, bool active )
+        private void Activate(Axis axis, bool active)
         {
-            if( axis.autoEnabled == true ) 
+            if (axis.autoEnabled == true)
             {
-                axis.enabled = active;        
+                axis.enabled = active;
             }
         }
 #endif // SUBAXES
 
         /// <summary>
-        /// Check if all data points from series in 
+        /// Check if all data points from series in
         /// this chart area are empty.
         /// </summary>
         /// <returns>True if all points are empty</returns>
         bool AllEmptyPoints()
         {
             // Data series from this chart area
-            foreach( string seriesName in this._series )
+            foreach (string seriesName in this._series)
             {
-                Series    dataSeries = Common.DataManager.Series[ seriesName ];
+                Series dataSeries = Common.DataManager.Series[seriesName];
 
                 // Data point loop
-                foreach( DataPoint point in dataSeries.Points )
+                foreach (DataPoint point in dataSeries.Points)
                 {
-                    if( !point.IsEmpty )
+                    if (!point.IsEmpty)
                     {
                         return false;
                     }
@@ -638,30 +635,31 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// This method sets default minimum and maximum 
-        /// values from values in the data manager. This 
+        /// This method sets default minimum and maximum
+        /// values from values in the data manager. This
         /// case is used if X values are not equal to 0 or IsXValueIndexed flag is set.
         /// </summary>
         /// <param name="axis">Axis</param>
-        private void SetDefaultFromData( Axis axis )
+        private void SetDefaultFromData(Axis axis)
         {
 #if SUBAXES
             // Process all sub-axes
-            if(!axis.IsSubAxis)
+            if (!axis.IsSubAxis)
             {
-                foreach(SubAxis subAxis in axis.SubAxes)
+                foreach (SubAxis subAxis in axis.SubAxes)
                 {
-                    this.SetDefaultFromData( subAxis );
+                    this.SetDefaultFromData(subAxis);
                 }
             }
 #endif // SUBAXES
 
-
             // Used for scrolling with logarithmic axes.
-            if( !Double.IsNaN(axis.ScaleView.Position) && 
-                !Double.IsNaN(axis.ScaleView.Size) &&
-                !axis.refreshMinMaxFromData &&
-                axis.IsLogarithmic )
+            if (
+                !Double.IsNaN(axis.ScaleView.Position)
+                && !Double.IsNaN(axis.ScaleView.Size)
+                && !axis.refreshMinMaxFromData
+                && axis.IsLogarithmic
+            )
             {
                 return;
             }
@@ -669,22 +667,30 @@ namespace System.Web.UI.DataVisualization.Charting
             // Get minimum and maximum from data source
             double autoMaximum;
             double autoMinimum;
-            this.GetValuesFromData( axis, out autoMinimum, out autoMaximum );
+            this.GetValuesFromData(axis, out autoMinimum, out autoMaximum);
 
             // ***************************************************
-            // This part of code is used to add a margin to the 
-            // axis and to set minimum value to zero if 
-            // IsStartedFromZero property is used. There is special 
-            // code for logarithmic scale, which will set minimum 
+            // This part of code is used to add a margin to the
+            // axis and to set minimum value to zero if
+            // IsStartedFromZero property is used. There is special
+            // code for logarithmic scale, which will set minimum
             // to one instead of zero.
             // ***************************************************
-            // The minimum and maximum values from data manager don’t exist.
+            // The minimum and maximum values from data manager donï¿½t exist.
 
-            if( axis.enabled &&
-                ( (axis.AutoMaximum || double.IsNaN( axis.Maximum )) && (autoMaximum == Double.MaxValue || autoMaximum == Double.MinValue)) ||
-                ( (axis.AutoMinimum || double.IsNaN( axis.Minimum )) && (autoMinimum == Double.MaxValue || autoMinimum == Double.MinValue )) )
+            if (
+                axis.enabled
+                    && (
+                        (axis.AutoMaximum || double.IsNaN(axis.Maximum))
+                        && (autoMaximum == Double.MaxValue || autoMaximum == Double.MinValue)
+                    )
+                || (
+                    (axis.AutoMinimum || double.IsNaN(axis.Minimum))
+                    && (autoMinimum == Double.MaxValue || autoMinimum == Double.MinValue)
+                )
+            )
             {
-                if( this.AllEmptyPoints() )
+                if (this.AllEmptyPoints())
                 {
                     // Supress exception and use predefined min & max
                     autoMaximum = 8.0;
@@ -692,128 +698,136 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
                 else
                 {
-                    if(!this.Common.ChartPicture.SuppressExceptions)
+                    if (!this.Common.ChartPicture.SuppressExceptions)
                     {
-                        throw (new InvalidOperationException(SR.ExceptionAxisMinimumMaximumInvalid)); 
+                        throw (
+                            new InvalidOperationException(SR.ExceptionAxisMinimumMaximumInvalid)
+                        );
                     }
                 }
             }
 
             // Axis margin used for zooming
             axis.marginView = 0.0;
-            if( axis.margin == 100 && (axis.axisType == AxisName.X || axis.axisType == AxisName.X2) )
+            if (axis.margin == 100 && (axis.axisType == AxisName.X || axis.axisType == AxisName.X2))
             {
-                axis.marginView = this.GetPointsInterval( false, 10 );
+                axis.marginView = this.GetPointsInterval(false, 10);
             }
 
             // If minimum and maximum are same margin always exist.
-            if( autoMaximum == autoMinimum &&
-                axis.Maximum == axis.Minimum )
+            if (autoMaximum == autoMinimum && axis.Maximum == axis.Minimum)
             {
                 axis.marginView = 1;
             }
 
             // Do not make axis margine for logarithmic axes
-            if( axis.IsLogarithmic )
+            if (axis.IsLogarithmic)
             {
                 axis.marginView = 0.0;
             }
 
             // Adjust Maximum - Add a gap
-            if( axis.AutoMaximum ) 
+            if (axis.AutoMaximum)
             {
                 // Add a Gap for X axis
-                if( !axis.roundedXValues && ( axis.axisType == AxisName.X || axis.axisType == AxisName.X2 ) )
+                if (
+                    !axis.roundedXValues
+                    && (axis.axisType == AxisName.X || axis.axisType == AxisName.X2)
+                )
                 {
-                    axis.SetAutoMaximum( autoMaximum + axis.marginView );
+                    axis.SetAutoMaximum(autoMaximum + axis.marginView);
                 }
                 else
                 {
-                    if( axis.isStartedFromZero && autoMaximum < 0 )
+                    if (axis.isStartedFromZero && autoMaximum < 0)
                     {
-                        axis.SetAutoMaximum( 0.0 );
+                        axis.SetAutoMaximum(0.0);
                     }
                     else
                     {
-                        axis.SetAutoMaximum( autoMaximum );
+                        axis.SetAutoMaximum(autoMaximum);
                     }
                 }
             }
 
             // Adjust Minimum - make rounded values and add a gap
-            if( axis.AutoMinimum )
+            if (axis.AutoMinimum)
             {
                 // IsLogarithmic axis
-                if( axis.IsLogarithmic )
+                if (axis.IsLogarithmic)
                 {
-                    if( autoMinimum < 1.0 ) 
+                    if (autoMinimum < 1.0)
                     {
-                        axis.SetAutoMinimum( autoMinimum );
+                        axis.SetAutoMinimum(autoMinimum);
                     }
-                    else if( axis.isStartedFromZero )
+                    else if (axis.isStartedFromZero)
                     {
-                        axis.SetAutoMinimum( 1.0 );
+                        axis.SetAutoMinimum(1.0);
                     }
                     else
                     {
-                        axis.SetAutoMinimum( autoMinimum );
+                        axis.SetAutoMinimum(autoMinimum);
                     }
                 }
                 else
                 {
-                    if( autoMinimum > 0.0 ) // If Auto calculated Minimum value is positive
+                    if (autoMinimum > 0.0) // If Auto calculated Minimum value is positive
                     {
                         // Adjust Minimum
-                        if( !axis.roundedXValues && ( axis.axisType == AxisName.X || axis.axisType == AxisName.X2 ) )
+                        if (
+                            !axis.roundedXValues
+                            && (axis.axisType == AxisName.X || axis.axisType == AxisName.X2)
+                        )
                         {
-                            axis.SetAutoMinimum( autoMinimum - axis.marginView );
+                            axis.SetAutoMinimum(autoMinimum - axis.marginView);
                         }
                         // If start From Zero property is true 0 is always on the axis.
                         // NOTE: Not applicable if date-time values are drawn. Fixes issue #5644
-                        else if( axis.isStartedFromZero && 
-                            !this.SeriesDateTimeType( axis.axisType, axis.SubAxisName ) )
+                        else if (
+                            axis.isStartedFromZero
+                            && !this.SeriesDateTimeType(axis.axisType, axis.SubAxisName)
+                        )
                         {
-                            axis.SetAutoMinimum( 0.0 );
+                            axis.SetAutoMinimum(0.0);
                         }
                         else
                         {
-                            axis.SetAutoMinimum( autoMinimum );
+                            axis.SetAutoMinimum(autoMinimum);
                         }
                     }
                     else // If Auto calculated Minimum value is non positive
                     {
-                        if( axis.axisType == AxisName.X || axis.axisType == AxisName.X2 )
+                        if (axis.axisType == AxisName.X || axis.axisType == AxisName.X2)
                         {
-                            axis.SetAutoMinimum( autoMinimum - axis.marginView );
+                            axis.SetAutoMinimum(autoMinimum - axis.marginView);
                         }
                         else
                         {
                             // If start From Zero property is true 0 is always on the axis.
-                            axis.SetAutoMinimum( autoMinimum );
+                            axis.SetAutoMinimum(autoMinimum);
                         }
                     }
                 }
-            }                    
+            }
 
             // If maximum or minimum are not auto set value to non logarithmic
-            if( axis.IsLogarithmic && axis.logarithmicConvertedToLinear )
+            if (axis.IsLogarithmic && axis.logarithmicConvertedToLinear)
             {
-                if( !axis.AutoMinimum )
+                if (!axis.AutoMinimum)
                 {
                     axis.minimum = axis.logarithmicMinimum;
                 }
 
-                if( !axis.AutoMaximum )
+                if (!axis.AutoMaximum)
                 {
                     axis.maximum = axis.logarithmicMaximum;
                 }
                 // Min and max will take real values again if scale is logarithmic.
-                axis.logarithmicConvertedToLinear = false;                        
+                axis.logarithmicConvertedToLinear = false;
             }
 
             // Check if Minimum == Maximum
-            if(this.Common.ChartPicture.SuppressExceptions &&
-                axis.maximum == axis.minimum)
+            if (this.Common.ChartPicture.SuppressExceptions && axis.maximum == axis.minimum)
             {
                 axis.minimum = axis.maximum;
                 axis.maximum = axis.minimum + 1.0;
@@ -821,32 +835,38 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// This method checks if all series in the chart area have “integer type” 
+        /// This method checks if all series in the chart area have ï¿½integer typeï¿½
         /// for specified axes, which means int, uint, long and ulong.
         /// </summary>
         /// <param name="axisName">Name of the axis</param>
         /// <param name="subAxisName">Sub axis name.</param>
         /// <returns>True if all series are integer</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "subAxisName")]
-        internal bool SeriesIntegerType( AxisName axisName, string subAxisName )
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "subAxisName"
+        )]
+        internal bool SeriesIntegerType(AxisName axisName, string subAxisName)
         {
             // Series which belong to this chart area
-            foreach( string seriesName in this._series ) 
+            foreach (string seriesName in this._series)
             {
-                Series ser = Common.DataManager.Series[ seriesName ];
+                Series ser = Common.DataManager.Series[seriesName];
                 // X axes type
-                if( axisName == AxisName.X )
+                if (axisName == AxisName.X)
                 {
 #if SUBAXES
-                    if(    ser.XAxisType == AxisType.Primary && ser.XSubAxisName == subAxisName)
+                    if (ser.XAxisType == AxisType.Primary && ser.XSubAxisName == subAxisName)
 #else //SUBAXES
-                    if (    ser.XAxisType == AxisType.Primary)
+                    if (ser.XAxisType == AxisType.Primary)
 #endif //SUBAXES
                     {
-                        if(ser.XValueType != ChartValueType.Int32 && 
-                            ser.XValueType != ChartValueType.UInt32 && 
-                            ser.XValueType != ChartValueType.UInt64 && 
-                            ser.XValueType != ChartValueType.Int64 )
+                        if (
+                            ser.XValueType != ChartValueType.Int32
+                            && ser.XValueType != ChartValueType.UInt32
+                            && ser.XValueType != ChartValueType.UInt64
+                            && ser.XValueType != ChartValueType.Int64
+                        )
                         {
                             return false;
                         }
@@ -857,19 +877,21 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
                 }
                 // X axes type
-                else if( axisName == AxisName.X2 )
+                else if (axisName == AxisName.X2)
                 {
 #if SUBAXES
-                    if(    ser.XAxisType == AxisType.Secondary && ser.XSubAxisName == subAxisName)
+                    if (ser.XAxisType == AxisType.Secondary && ser.XSubAxisName == subAxisName)
 #else //SUBAXES
-                    if (    ser.XAxisType == AxisType.Secondary)
+                    if (ser.XAxisType == AxisType.Secondary)
 #endif //SUBAXES
 
-                    { 
-                        if(ser.XValueType != ChartValueType.Int32 && 
-                            ser.XValueType != ChartValueType.UInt32 && 
-                            ser.XValueType != ChartValueType.UInt64 && 
-                            ser.XValueType != ChartValueType.Int64 )
+                    {
+                        if (
+                            ser.XValueType != ChartValueType.Int32
+                            && ser.XValueType != ChartValueType.UInt32
+                            && ser.XValueType != ChartValueType.UInt64
+                            && ser.XValueType != ChartValueType.Int64
+                        )
                         {
                             return false;
                         }
@@ -880,19 +902,21 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
                 }
                 // Y axes type
-                else if( axisName == AxisName.Y )
+                else if (axisName == AxisName.Y)
                 {
 #if SUBAXES
-                    if(    ser.YAxisType == AxisType.Primary && ser.YSubAxisName == subAxisName)
+                    if (ser.YAxisType == AxisType.Primary && ser.YSubAxisName == subAxisName)
 #else //SUBAXES
-                    if (    ser.YAxisType == AxisType.Primary)
+                    if (ser.YAxisType == AxisType.Primary)
 #endif //SUBAXES
 
-                    { 
-                        if(ser.YValueType != ChartValueType.Int32 && 
-                            ser.YValueType != ChartValueType.UInt32 && 
-                            ser.YValueType != ChartValueType.UInt64 && 
-                            ser.YValueType != ChartValueType.Int64 )
+                    {
+                        if (
+                            ser.YValueType != ChartValueType.Int32
+                            && ser.YValueType != ChartValueType.UInt32
+                            && ser.YValueType != ChartValueType.UInt64
+                            && ser.YValueType != ChartValueType.Int64
+                        )
                         {
                             return false;
                         }
@@ -902,19 +926,21 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                     }
                 }
-                else if( axisName == AxisName.Y2 )
+                else if (axisName == AxisName.Y2)
                 {
 #if SUBAXES
-                    if(    ser.YAxisType == AxisType.Secondary && ser.YSubAxisName == subAxisName)
+                    if (ser.YAxisType == AxisType.Secondary && ser.YSubAxisName == subAxisName)
 #else //SUBAXES
-                    if (    ser.YAxisType == AxisType.Secondary)
+                    if (ser.YAxisType == AxisType.Secondary)
 #endif //SUBAXES
 
-                    { 
-                        if(ser.YValueType != ChartValueType.Int32 && 
-                            ser.YValueType != ChartValueType.UInt32 && 
-                            ser.YValueType != ChartValueType.UInt64 && 
-                            ser.YValueType != ChartValueType.Int64 )
+                    {
+                        if (
+                            ser.YValueType != ChartValueType.Int32
+                            && ser.YValueType != ChartValueType.UInt32
+                            && ser.YValueType != ChartValueType.UInt64
+                            && ser.YValueType != ChartValueType.Int64
+                        )
                         {
                             return false;
                         }
@@ -929,32 +955,38 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// This method checks if all series in the chart area have “date-time type” 
+        /// This method checks if all series in the chart area have ï¿½date-time typeï¿½
         /// for specified axes.
         /// </summary>
         /// <param name="axisName">Name of the axis</param>
         /// <param name="subAxisName">Sub axis name.</param>
         /// <returns>True if all series are date-time.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "subAxisName")]
-        internal bool SeriesDateTimeType( AxisName axisName, string subAxisName )
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "subAxisName"
+        )]
+        internal bool SeriesDateTimeType(AxisName axisName, string subAxisName)
         {
             // Series which belong to this chart area
-            foreach( string seriesName in this._series ) 
+            foreach (string seriesName in this._series)
             {
-                Series ser = Common.DataManager.Series[ seriesName ];
+                Series ser = Common.DataManager.Series[seriesName];
                 // X axes type
-                if( axisName == AxisName.X )
+                if (axisName == AxisName.X)
                 {
 #if SUBAXES
-                    if(    ser.XAxisType == AxisType.Primary && ser.XSubAxisName == subAxisName)
+                    if (ser.XAxisType == AxisType.Primary && ser.XSubAxisName == subAxisName)
 #else //SUBAXES
-                    if (    ser.XAxisType == AxisType.Primary)
+                    if (ser.XAxisType == AxisType.Primary)
 #endif //SUBAXES
                     {
-                        if(ser.XValueType != ChartValueType.Date && 
-                            ser.XValueType != ChartValueType.DateTime && 
-                            ser.XValueType != ChartValueType.Time &&
-                            ser.XValueType != ChartValueType.DateTimeOffset)
+                        if (
+                            ser.XValueType != ChartValueType.Date
+                            && ser.XValueType != ChartValueType.DateTime
+                            && ser.XValueType != ChartValueType.Time
+                            && ser.XValueType != ChartValueType.DateTimeOffset
+                        )
                         {
                             return false;
                         }
@@ -964,19 +996,21 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                     }
                 }
-                    // X axes type
-                else if( axisName == AxisName.X2 )
+                // X axes type
+                else if (axisName == AxisName.X2)
                 {
 #if SUBAXES
-                    if(    ser.XAxisType == AxisType.Secondary && ser.XSubAxisName == subAxisName)
+                    if (ser.XAxisType == AxisType.Secondary && ser.XSubAxisName == subAxisName)
 #else //SUBAXES
-                    if (    ser.XAxisType == AxisType.Secondary)
+                    if (ser.XAxisType == AxisType.Secondary)
 #endif //SUBAXES
-                    { 
-                        if(ser.XValueType != ChartValueType.Date && 
-                            ser.XValueType != ChartValueType.DateTime && 
-                            ser.XValueType != ChartValueType.Time &&
-                            ser.XValueType != ChartValueType.DateTimeOffset)
+                    {
+                        if (
+                            ser.XValueType != ChartValueType.Date
+                            && ser.XValueType != ChartValueType.DateTime
+                            && ser.XValueType != ChartValueType.Time
+                            && ser.XValueType != ChartValueType.DateTimeOffset
+                        )
                         {
                             return false;
                         }
@@ -986,19 +1020,21 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                     }
                 }
-                    // Y axes type
-                else if( axisName == AxisName.Y )
+                // Y axes type
+                else if (axisName == AxisName.Y)
                 {
 #if SUBAXES
-                    if(    ser.YAxisType == AxisType.Primary && ser.YSubAxisName == subAxisName)
+                    if (ser.YAxisType == AxisType.Primary && ser.YSubAxisName == subAxisName)
 #else //SUBAXES
-                    if (    ser.YAxisType == AxisType.Primary)
+                    if (ser.YAxisType == AxisType.Primary)
 #endif //SUBAXES
-                    { 
-                        if(ser.YValueType != ChartValueType.Date && 
-                            ser.YValueType != ChartValueType.DateTime && 
-                            ser.YValueType != ChartValueType.Time &&
-                            ser.YValueType != ChartValueType.DateTimeOffset)
+                    {
+                        if (
+                            ser.YValueType != ChartValueType.Date
+                            && ser.YValueType != ChartValueType.DateTime
+                            && ser.YValueType != ChartValueType.Time
+                            && ser.YValueType != ChartValueType.DateTimeOffset
+                        )
                         {
                             return false;
                         }
@@ -1008,18 +1044,20 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                     }
                 }
-                else if( axisName == AxisName.Y2 )
+                else if (axisName == AxisName.Y2)
                 {
 #if SUBAXES
-                    if(    ser.YAxisType == AxisType.Secondary && ser.YSubAxisName == subAxisName)
+                    if (ser.YAxisType == AxisType.Secondary && ser.YSubAxisName == subAxisName)
 #else //SUBAXES
-                    if (    ser.YAxisType == AxisType.Secondary)
+                    if (ser.YAxisType == AxisType.Secondary)
 #endif //SUBAXES
-                    { 
-                        if(ser.YValueType != ChartValueType.Date && 
-                            ser.YValueType != ChartValueType.DateTime && 
-                            ser.YValueType != ChartValueType.Time &&
-                            ser.YValueType != ChartValueType.DateTimeOffset)
+                    {
+                        if (
+                            ser.YValueType != ChartValueType.Date
+                            && ser.YValueType != ChartValueType.DateTime
+                            && ser.YValueType != ChartValueType.Time
+                            && ser.YValueType != ChartValueType.DateTimeOffset
+                        )
                         {
                             return false;
                         }
@@ -1039,15 +1077,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="axis">Axis which is used to find minimum and maximum</param>
         /// <param name="autoMinimum">Minimum value from data.</param>
         /// <param name="autoMaximum">Maximum value from data.</param>
-        private void GetValuesFromData( Axis axis, out double autoMinimum, out double autoMaximum )
+        private void GetValuesFromData(Axis axis, out double autoMinimum, out double autoMaximum)
         {
             // Get number of points in series
             int currentPointsNumber = this.GetNumberOfAllPoints();
 
-            if( !axis.refreshMinMaxFromData && 
-                !double.IsNaN(axis.minimumFromData) &&
-                !double.IsNaN(axis.maximumFromData) &&
-                axis.numberOfPointsInAllSeries == currentPointsNumber )
+            if (
+                !axis.refreshMinMaxFromData
+                && !double.IsNaN(axis.minimumFromData)
+                && !double.IsNaN(axis.maximumFromData)
+                && axis.numberOfPointsInAllSeries == currentPointsNumber
+            )
             {
                 autoMinimum = axis.minimumFromData;
                 autoMaximum = axis.maximumFromData;
@@ -1056,65 +1096,91 @@ namespace System.Web.UI.DataVisualization.Charting
 
             // Set Axis type
             AxisType type = AxisType.Primary;
-            if( axis.axisType == AxisName.X2 || axis.axisType == AxisName.Y2 )
+            if (axis.axisType == AxisName.X2 || axis.axisType == AxisName.Y2)
             {
                 type = AxisType.Secondary;
             }
 
             // Creates a list of series, which have same X axis type.
-            string [] xAxesSeries = GetXAxesSeries(type, axis.SubAxisName).ToArray();
+            string[] xAxesSeries = GetXAxesSeries(type, axis.SubAxisName).ToArray();
 
             // Creates a list of series, which have same Y axis type.
-            string [] yAxesSeries = GetYAxesSeries( type, axis.SubAxisName ).ToArray();
+            string[] yAxesSeries = GetYAxesSeries(type, axis.SubAxisName).ToArray();
 
             // Get auto maximum and auto minimum value
-            if( axis.axisType == AxisName.X2 || axis.axisType == AxisName.X ) // X axis type is used (X or X2)
+            if (axis.axisType == AxisName.X2 || axis.axisType == AxisName.X) // X axis type is used (X or X2)
             {
-                if( stacked ) // Chart area has a stacked chart types
+                if (stacked) // Chart area has a stacked chart types
                 {
                     try
                     {
-                        Common.DataManager.GetMinMaxXValue(out autoMinimum, out autoMaximum, xAxesSeries );
+                        Common.DataManager.GetMinMaxXValue(
+                            out autoMinimum,
+                            out autoMaximum,
+                            xAxesSeries
+                        );
                     }
-                    catch(System.Exception)
+                    catch (System.Exception)
                     {
-                        throw (new InvalidOperationException(SR.ExceptionAxisStackedChartsDataPointsNumberMismatch));
+                        throw (
+                            new InvalidOperationException(
+                                SR.ExceptionAxisStackedChartsDataPointsNumberMismatch
+                            )
+                        );
                     }
                 }
-
                 // Chart type with two y values used for scale ( bubble chart type )
-                else if( secondYScale )
+                else if (secondYScale)
                 {
-                    autoMaximum = Common.DataManager.GetMaxXWithRadiusValue( (ChartArea)this, xAxesSeries );
-                    autoMinimum = Common.DataManager.GetMinXWithRadiusValue( (ChartArea)this, xAxesSeries );
-                    ChartValueType valueTypes = Common.DataManager.Series[xAxesSeries[0]].XValueType;
-                    if( valueTypes != ChartValueType.Date && 
-                        valueTypes != ChartValueType.DateTime && 
-                        valueTypes != ChartValueType.Time &&
-                        valueTypes != ChartValueType.DateTimeOffset ) 
+                    autoMaximum = Common.DataManager.GetMaxXWithRadiusValue(
+                        (ChartArea)this,
+                        xAxesSeries
+                    );
+                    autoMinimum = Common.DataManager.GetMinXWithRadiusValue(
+                        (ChartArea)this,
+                        xAxesSeries
+                    );
+                    ChartValueType valueTypes = Common.DataManager.Series[
+                        xAxesSeries[0]
+                    ].XValueType;
+                    if (
+                        valueTypes != ChartValueType.Date
+                        && valueTypes != ChartValueType.DateTime
+                        && valueTypes != ChartValueType.Time
+                        && valueTypes != ChartValueType.DateTimeOffset
+                    )
                     {
                         axis.roundedXValues = true;
                     }
                 }
                 else
                 {
-                    Common.DataManager.GetMinMaxXValue(out autoMinimum, out autoMaximum, xAxesSeries );
+                    Common.DataManager.GetMinMaxXValue(
+                        out autoMinimum,
+                        out autoMaximum,
+                        xAxesSeries
+                    );
                 }
             }
             else // Y axis type is used (Y or Y2)
-            {                
-                
+            {
                 // *****************************
                 // Stacked Chart AxisName
                 // *****************************
-                if( stacked ) // Chart area has a stacked chart types
+                if (stacked) // Chart area has a stacked chart types
                 {
                     try
                     {
-                        if(hundredPercent)    // It's a hundred percent stacked chart
+                        if (hundredPercent) // It's a hundred percent stacked chart
                         {
-                            autoMaximum = Common.DataManager.GetMaxHundredPercentStackedYValue(hundredPercentNegative, yAxesSeries );
-                            autoMinimum = Common.DataManager.GetMinHundredPercentStackedYValue(hundredPercentNegative, yAxesSeries );
+                            autoMaximum = Common.DataManager.GetMaxHundredPercentStackedYValue(
+                                hundredPercentNegative,
+                                yAxesSeries
+                            );
+                            autoMinimum = Common.DataManager.GetMinHundredPercentStackedYValue(
+                                hundredPercentNegative,
+                                yAxesSeries
+                            );
                         }
                         else
                         {
@@ -1126,44 +1192,68 @@ namespace System.Web.UI.DataVisualization.Charting
                             double stackMinArea = double.MaxValue;
 
                             // Split series by group names
-                            ArrayList    stackedGroups = this.SplitSeriesInStackedGroups(yAxesSeries);
-                            foreach(string[] groupSeriesNames in stackedGroups)
+                            ArrayList stackedGroups = this.SplitSeriesInStackedGroups(yAxesSeries);
+                            foreach (string[] groupSeriesNames in stackedGroups)
                             {
                                 // For stacked bar and column
-                                double stackMaxBarColumnForGroup = Common.DataManager.GetMaxStackedYValue(0, groupSeriesNames );
-                                double stackMinBarColumnForGroup = Common.DataManager.GetMinStackedYValue(0, groupSeriesNames );
+                                double stackMaxBarColumnForGroup =
+                                    Common.DataManager.GetMaxStackedYValue(0, groupSeriesNames);
+                                double stackMinBarColumnForGroup =
+                                    Common.DataManager.GetMinStackedYValue(0, groupSeriesNames);
 
                                 // For stacked area
-                                double stackMaxAreaForGroup = Common.DataManager.GetMaxUnsignedStackedYValue(0, groupSeriesNames );
-                                double stackMinAreaForGroup = Common.DataManager.GetMinUnsignedStackedYValue(0, groupSeriesNames );
+                                double stackMaxAreaForGroup =
+                                    Common.DataManager.GetMaxUnsignedStackedYValue(
+                                        0,
+                                        groupSeriesNames
+                                    );
+                                double stackMinAreaForGroup =
+                                    Common.DataManager.GetMinUnsignedStackedYValue(
+                                        0,
+                                        groupSeriesNames
+                                    );
 
                                 // Select minimum/maximum
-                                stackMaxBarColumn = Math.Max(stackMaxBarColumn, stackMaxBarColumnForGroup);
-                                stackMinBarColumn = Math.Min(stackMinBarColumn, stackMinBarColumnForGroup);
+                                stackMaxBarColumn = Math.Max(
+                                    stackMaxBarColumn,
+                                    stackMaxBarColumnForGroup
+                                );
+                                stackMinBarColumn = Math.Min(
+                                    stackMinBarColumn,
+                                    stackMinBarColumnForGroup
+                                );
                                 stackMaxArea = Math.Max(stackMaxArea, stackMaxAreaForGroup);
                                 stackMinArea = Math.Min(stackMinArea, stackMinAreaForGroup);
                             }
 
-                            
-                            autoMaximum = Math.Max(stackMaxBarColumn,stackMaxArea);
-                            autoMinimum = Math.Min(stackMinBarColumn,stackMinArea);
+                            autoMaximum = Math.Max(stackMaxBarColumn, stackMaxArea);
+                            autoMinimum = Math.Min(stackMinBarColumn, stackMinArea);
                         }
                         // IsLogarithmic axis
-                        if( axis.IsLogarithmic && autoMinimum < 1.0 )
+                        if (axis.IsLogarithmic && autoMinimum < 1.0)
                             autoMinimum = 1.0;
                     }
-                    catch(System.Exception)
+                    catch (System.Exception)
                     {
-                        throw (new InvalidOperationException(SR.ExceptionAxisStackedChartsDataPointsNumberMismatch));
+                        throw (
+                            new InvalidOperationException(
+                                SR.ExceptionAxisStackedChartsDataPointsNumberMismatch
+                            )
+                        );
                     }
                 }
                 // Chart type with two y values used for scale ( bubble chart type )
-                else if( secondYScale )
+                else if (secondYScale)
                 {
-                    autoMaximum = Common.DataManager.GetMaxYWithRadiusValue( (ChartArea)this, yAxesSeries );
-                    autoMinimum = Common.DataManager.GetMinYWithRadiusValue( (ChartArea)this, yAxesSeries );
+                    autoMaximum = Common.DataManager.GetMaxYWithRadiusValue(
+                        (ChartArea)this,
+                        yAxesSeries
+                    );
+                    autoMinimum = Common.DataManager.GetMinYWithRadiusValue(
+                        (ChartArea)this,
+                        yAxesSeries
+                    );
                 }
-
                 // *****************************
                 // Non Stacked Chart Types
                 // *****************************
@@ -1171,14 +1261,16 @@ namespace System.Web.UI.DataVisualization.Charting
                 {
                     // Check if any series in the area has ExtraYValuesConnectedToYAxis flag set
                     bool extraYValuesConnectedToYAxis = false;
-                    if(this.Common != null && this.Common.Chart != null)
+                    if (this.Common != null && this.Common.Chart != null)
                     {
-                        foreach(Series series in this.Common.Chart.Series)
+                        foreach (Series series in this.Common.Chart.Series)
                         {
-                            if(series.ChartArea == ((ChartArea)this).Name)
+                            if (series.ChartArea == ((ChartArea)this).Name)
                             {
-                                IChartType charType = Common.ChartTypeRegistry.GetChartType( series.ChartTypeName );
-                                if(charType != null && charType.ExtraYValuesConnectedToYAxis)
+                                IChartType charType = Common.ChartTypeRegistry.GetChartType(
+                                    series.ChartTypeName
+                                );
+                                if (charType != null && charType.ExtraYValuesConnectedToYAxis)
                                 {
                                     extraYValuesConnectedToYAxis = true;
                                     break;
@@ -1188,30 +1280,38 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
 
                     // The first Chart type can have many Y values (Stock Chart, Range Chart)
-                    if( extraYValuesConnectedToYAxis )
+                    if (extraYValuesConnectedToYAxis)
                     {
-                        Common.DataManager.GetMinMaxYValue(out autoMinimum, out autoMaximum, yAxesSeries );
+                        Common.DataManager.GetMinMaxYValue(
+                            out autoMinimum,
+                            out autoMaximum,
+                            yAxesSeries
+                        );
                     }
                     else
                     { // The first Chart type can have only one Y value
-                        Common.DataManager.GetMinMaxYValue(0, out autoMinimum, out autoMaximum, yAxesSeries );
+                        Common.DataManager.GetMinMaxYValue(
+                            0,
+                            out autoMinimum,
+                            out autoMaximum,
+                            yAxesSeries
+                        );
                     }
                 }
             }
 
-            // Store Minimum and maximum from data. There is no 
+            // Store Minimum and maximum from data. There is no
             // reason to calculate this values every time.
             axis.maximumFromData = autoMaximum;
             axis.minimumFromData = autoMinimum;
             axis.refreshMinMaxFromData = false;
 
-            // Make extra test for stored minimum and maximum values 
-            // from data. If Number of points is different then data 
-            // source is changed. That means that we should read 
+            // Make extra test for stored minimum and maximum values
+            // from data. If Number of points is different then data
+            // source is changed. That means that we should read
             // data again.
             axis.numberOfPointsInAllSeries = currentPointsNumber;
         }
-
 
         /// <summary>
         /// Splits a single array of series names into multiple arrays
@@ -1222,7 +1322,7 @@ namespace System.Web.UI.DataVisualization.Charting
         private ArrayList SplitSeriesInStackedGroups(string[] seriesNames)
         {
             Hashtable groupsHashTable = new Hashtable();
-            foreach(string seriesName in seriesNames)
+            foreach (string seriesName in seriesNames)
             {
                 // Get series object
                 Series series = this.Common.Chart.Series[seriesName];
@@ -1230,7 +1330,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 // NOTE: Fix for issue #6716
                 // Double check that series supports stacked group feature
                 string groupName = string.Empty;
-                if(StackedColumnChart.IsSeriesStackGroupNameSupported(series))
+                if (StackedColumnChart.IsSeriesStackGroupNameSupported(series))
                 {
                     // Get stacked group name (empty string by default)
                     groupName = StackedColumnChart.GetSeriesStackGroupName(series);
@@ -1252,14 +1352,14 @@ namespace System.Web.UI.DataVisualization.Charting
 
             // Convert results to a list that contains array of strings
             ArrayList result = new ArrayList();
-            foreach(DictionaryEntry entry in groupsHashTable)
+            foreach (DictionaryEntry entry in groupsHashTable)
             {
                 ArrayList list = (ArrayList)entry.Value;
-                if(list.Count > 0)
+                if (list.Count > 0)
                 {
                     int index = 0;
                     string[] stringArray = new String[list.Count];
-                    foreach(string str in list)
+                    foreach (string str in list)
                     {
                         stringArray[index++] = str;
                     }
@@ -1270,8 +1370,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return result;
         }
 
-
-
         /// <summary>
         /// Find number of points for all series
         /// </summary>
@@ -1279,7 +1377,7 @@ namespace System.Web.UI.DataVisualization.Charting
         private int GetNumberOfAllPoints()
         {
             int numOfPoints = 0;
-            foreach( Series series in Common.DataManager.Series )
+            foreach (Series series in Common.DataManager.Series)
             {
                 numOfPoints += series.Points.Count;
             }
@@ -1288,81 +1386,84 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// This method sets default minimum and maximum values from 
-        /// indexes. This case is used if all X values in a series 
+        /// This method sets default minimum and maximum values from
+        /// indexes. This case is used if all X values in a series
         /// have 0 value or IsXValueIndexed flag is set.
         /// </summary>
         /// <param name="axis">Axis</param>
-        private void SetDefaultFromIndexes(  Axis axis )
+        private void SetDefaultFromIndexes(Axis axis)
         {
             // Adjust margin for side-by-side charts like column
-            axis.SetTempAxisOffset( );
-            
+            axis.SetTempAxisOffset();
+
             // Set Axis type
             AxisType type = AxisType.Primary;
-            if( axis.axisType == AxisName.X2 || axis.axisType == AxisName.Y2 )
+            if (axis.axisType == AxisName.X2 || axis.axisType == AxisName.Y2)
             {
                 type = AxisType.Secondary;
             }
 
             // The maximum is equal to the number of data points.
-            double autoMaximum = Common.DataManager.GetNumberOfPoints( GetXAxesSeries( type, axis.SubAxisName ).ToArray() );
+            double autoMaximum = Common.DataManager.GetNumberOfPoints(
+                GetXAxesSeries(type, axis.SubAxisName).ToArray()
+            );
             double autoMinimum = 0.0;
 
             // Axis margin used only for zooming
             axis.marginView = 0.0;
-            if( axis.margin == 100 )
+            if (axis.margin == 100)
                 axis.marginView = 1.0;
-            
+
             // If minimum and maximum are same margin always exist.
-            if( autoMaximum + axis.margin/100 == autoMinimum - axis.margin/100 + 1 )
+            if (autoMaximum + axis.margin / 100 == autoMinimum - axis.margin / 100 + 1)
             {
                 // Set Maximum Number.
-                axis.SetAutoMaximum( autoMaximum + 1 );
-                axis.SetAutoMinimum( autoMinimum );
+                axis.SetAutoMaximum(autoMaximum + 1);
+                axis.SetAutoMinimum(autoMinimum);
             }
             else // Nomal case
             {
                 // Set Maximum Number.
-                axis.SetAutoMaximum( autoMaximum + axis.margin/100 );
-                axis.SetAutoMinimum( autoMinimum - axis.margin/100 + 1 );
+                axis.SetAutoMaximum(autoMaximum + axis.margin / 100);
+                axis.SetAutoMinimum(autoMinimum - axis.margin / 100 + 1);
             }
 
-            // Find the interval. If the nuber of points 
+            // Find the interval. If the nuber of points
             // is less then 10 interval is 1.
             double axisInterval;
-            
-            if( axis.ViewMaximum - axis.ViewMinimum <= 10 ) 
+
+            if (axis.ViewMaximum - axis.ViewMinimum <= 10)
             {
                 axisInterval = 1.0;
             }
             else
             {
-                axisInterval = axis.CalcInterval( ( axis.ViewMaximum - axis.ViewMinimum ) / 5 );
+                axisInterval = axis.CalcInterval((axis.ViewMaximum - axis.ViewMinimum) / 5);
             }
 
             ChartArea area = (ChartArea)this;
-            if( area.Area3DStyle.Enable3D && !double.IsNaN(axis.interval3DCorrection) )
+            if (area.Area3DStyle.Enable3D && !double.IsNaN(axis.interval3DCorrection))
             {
-                axisInterval = Math.Ceiling( axisInterval / axis.interval3DCorrection );
+                axisInterval = Math.Ceiling(axisInterval / axis.interval3DCorrection);
 
                 axis.interval3DCorrection = double.NaN;
 
-                // Use interval 
-                if( axisInterval > 1.0 && 
-                    axisInterval < 4.0 && 
-                    axis.ViewMaximum - axis.ViewMinimum <= 4 ) 
+                // Use interval
+                if (
+                    axisInterval > 1.0
+                    && axisInterval < 4.0
+                    && axis.ViewMaximum - axis.ViewMinimum <= 4
+                )
                 {
                     axisInterval = 1.0;
                 }
-
             }
 
             axis.SetInterval = axisInterval;
 
-            // If temporary offsets were defined for the margin, 
+            // If temporary offsets were defined for the margin,
             // adjust offset for minor ticks and grids.
-            if(axis.offsetTempSet)
+            if (axis.offsetTempSet)
             {
                 axis.minorGrid.intervalOffset -= axis.MajorGrid.GetInterval();
                 axis.minorTickMark.intervalOffset -= axis.MajorTickMark.GetInterval();
@@ -1371,7 +1472,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         /// <summary>
         /// Sets the names of all data series which belong to
-        /// this chart area to collection and sets a list of all 
+        /// this chart area to collection and sets a list of all
         /// different chart types.
         /// </summary>
         internal void SetData()
@@ -1386,7 +1487,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="initializeAxes">If set to <c>true</c> the method will initialize axes default values.</param>
         /// <param name="checkIndexedAligned">If set to <c>true</c> the method will check that all primary X axis series are aligned if use the IsXValueIndexed flag.</param>
-        internal void SetData( bool initializeAxes, bool checkIndexedAligned)
+        internal void SetData(bool initializeAxes, bool checkIndexedAligned)
         {
             // Initialize chart type properties
             stacked = false;
@@ -1396,7 +1497,7 @@ namespace System.Web.UI.DataVisualization.Charting
             hundredPercentNegative = false;
             chartAreaIsCurcular = false;
             secondYScale = false;
-            
+
             // AxisName of the chart area already set.
             bool typeSet = false;
 
@@ -1404,7 +1505,7 @@ namespace System.Web.UI.DataVisualization.Charting
             this._series.Clear();
 
             // Add series to the collection
-            foreach( Series series in Common.DataManager.Series )
+            foreach (Series series in Common.DataManager.Series)
             {
                 if (series.ChartArea == this.Name && series.IsVisible() && series.Points.Count > 0)
                 {
@@ -1416,59 +1517,91 @@ namespace System.Web.UI.DataVisualization.Charting
             this.chartTypes.Clear();
 
             // Add series to the collection
-            foreach( Series series in Common.DataManager.Series )
+            foreach (Series series in Common.DataManager.Series)
             {
                 // A item already exist.
                 bool foundItem = false;
-                if (series.IsVisible() && series.ChartArea==this.Name)
+                if (series.IsVisible() && series.ChartArea == this.Name)
                 {
-                    foreach( string type in chartTypes )
+                    foreach (string type in chartTypes)
                     {
                         // AxisName already exist in the chart area
-                        if( type == series.ChartTypeName )
+                        if (type == series.ChartTypeName)
                         {
                             foundItem = true;
                         }
                     }
                     // Add chart type to the collection of
                     // Chart area's chart types
-                    if( !foundItem )
+                    if (!foundItem)
                     {
                         // Set stacked type
-                        if( Common.ChartTypeRegistry.GetChartType(series.ChartTypeName).Stacked )
+                        if (Common.ChartTypeRegistry.GetChartType(series.ChartTypeName).Stacked)
                         {
                             stacked = true;
                         }
 
-                        if( !typeSet )
+                        if (!typeSet)
                         {
-                            if( Common.ChartTypeRegistry.GetChartType(series.ChartTypeName).SwitchValueAxes )
+                            if (
+                                Common.ChartTypeRegistry
+                                    .GetChartType(series.ChartTypeName)
+                                    .SwitchValueAxes
+                            )
                                 switchValueAxes = true;
-                            if( !Common.ChartTypeRegistry.GetChartType(series.ChartTypeName).RequireAxes )
+                            if (
+                                !Common.ChartTypeRegistry
+                                    .GetChartType(series.ChartTypeName)
+                                    .RequireAxes
+                            )
                                 requireAxes = false;
-                            if( Common.ChartTypeRegistry.GetChartType(series.ChartTypeName).CircularChartArea )
+                            if (
+                                Common.ChartTypeRegistry
+                                    .GetChartType(series.ChartTypeName)
+                                    .CircularChartArea
+                            )
                                 chartAreaIsCurcular = true;
-                            if( Common.ChartTypeRegistry.GetChartType(series.ChartTypeName).HundredPercent )
+                            if (
+                                Common.ChartTypeRegistry
+                                    .GetChartType(series.ChartTypeName)
+                                    .HundredPercent
+                            )
                                 hundredPercent = true;
-                            if( Common.ChartTypeRegistry.GetChartType(series.ChartTypeName).HundredPercentSupportNegative )
+                            if (
+                                Common.ChartTypeRegistry
+                                    .GetChartType(series.ChartTypeName)
+                                    .HundredPercentSupportNegative
+                            )
                                 hundredPercentNegative = true;
-                            if( Common.ChartTypeRegistry.GetChartType(series.ChartTypeName).SecondYScale )
+                            if (
+                                Common.ChartTypeRegistry
+                                    .GetChartType(series.ChartTypeName)
+                                    .SecondYScale
+                            )
                                 secondYScale = true;
-                            
+
                             typeSet = true;
                         }
                         else
                         {
-                            if( Common.ChartTypeRegistry.GetChartType(series.ChartTypeName).SwitchValueAxes != switchValueAxes )
+                            if (
+                                Common.ChartTypeRegistry
+                                    .GetChartType(series.ChartTypeName)
+                                    .SwitchValueAxes != switchValueAxes
+                            )
                             {
-                                throw (new InvalidOperationException(SR.ExceptionChartAreaChartTypesCanNotCombine));
+                                throw (
+                                    new InvalidOperationException(
+                                        SR.ExceptionChartAreaChartTypesCanNotCombine
+                                    )
+                                );
                             }
                         }
-                        
+
                         // Series is not empty
-                        if( Common.DataManager.GetNumberOfPoints( series.Name ) != 0 )
+                        if (Common.DataManager.GetNumberOfPoints(series.Name) != 0)
                         {
-                            this.chartTypes.Add( series.ChartTypeName );
+                            this.chartTypes.Add(series.ChartTypeName);
                         }
                     }
                 }
@@ -1479,7 +1612,10 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 for (int axisIndex = 0; axisIndex <= 1; axisIndex++)
                 {
-                    List<string> seriesArray = this.GetXAxesSeries((axisIndex == 0) ? AxisType.Primary : AxisType.Secondary, string.Empty);
+                    List<string> seriesArray = this.GetXAxesSeries(
+                        (axisIndex == 0) ? AxisType.Primary : AxisType.Secondary,
+                        string.Empty
+                    );
                     if (seriesArray.Count > 0)
                     {
                         bool indexed = false;
@@ -1498,11 +1634,19 @@ namespace System.Web.UI.DataVisualization.Charting
                             try
                             {
                                 Common.DataManipulator.CheckXValuesAlignment(
-                                    Common.DataManipulator.ConvertToSeriesArray(seriesNamesStr.TrimEnd(','), false));
+                                    Common.DataManipulator.ConvertToSeriesArray(
+                                        seriesNamesStr.TrimEnd(','),
+                                        false
+                                    )
+                                );
                             }
                             catch (Exception e)
                             {
-                                throw (new ArgumentException(SR.ExceptionAxisSeriesNotAligned + e.Message));
+                                throw (
+                                    new ArgumentException(
+                                        SR.ExceptionAxisSeriesNotAligned + e.Message
+                                    )
+                                );
                             }
                         }
                     }
@@ -1516,22 +1660,28 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Returns names of all series, which belong to this chart area 
+        /// Returns names of all series, which belong to this chart area
         /// and have same chart type.
         /// </summary>
         /// <param name="chartType">Chart type</param>
         /// <returns>Collection with series names</returns>
-        internal List<string> GetSeriesFromChartType( string chartType )
+        internal List<string> GetSeriesFromChartType(string chartType)
         {
             // New collection
             List<string> list = new List<string>();
-            
-            foreach( string seriesName in _series )
+
+            foreach (string seriesName in _series)
             {
-                if( String.Compare( chartType, Common.DataManager.Series[seriesName].ChartTypeName, StringComparison.OrdinalIgnoreCase ) == 0 )
+                if (
+                    String.Compare(
+                        chartType,
+                        Common.DataManager.Series[seriesName].ChartTypeName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     // Add a series name to the collection
-                    list.Add( seriesName );
+                    list.Add(seriesName);
                 }
             }
 
@@ -1542,12 +1692,12 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Returns all series which belong to this chart area.
         /// </summary>
         /// <returns>Collection with series</returns>
-        internal List<Series> GetSeries(  )
+        internal List<Series> GetSeries()
         {
             // New collection
             List<Series> list = new List<Series>();
-            
-            foreach( string seriesName in _series )
+
+            foreach (string seriesName in _series)
             {
                 list.Add(Common.DataManager.Series[seriesName]);
             }
@@ -1561,7 +1711,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="type">Axis type</param>
         /// <param name="subAxisName">Sub Axis name</param>
         /// <returns>A list of series</returns>
-        internal List<string> GetXAxesSeries( AxisType type, string subAxisName )
+        internal List<string> GetXAxesSeries(AxisType type, string subAxisName)
         {
             // Create a new collection of series
             List<string> list = new List<string>();
@@ -1570,41 +1720,46 @@ namespace System.Web.UI.DataVisualization.Charting
                 return list;
             }
             // Ignore sub axis in 3D
-            if( !this.IsSubAxesSupported )
+            if (!this.IsSubAxesSupported)
             {
-                if(subAxisName.Length > 0)
+                if (subAxisName.Length > 0)
                 {
                     return list;
                 }
             }
 
             // Find series which have same axis type
-            foreach( string ser in _series )
+            foreach (string ser in _series)
             {
 #if SUBAXES
-                if( Common.DataManager.Series[ser].XAxisType == type &&
-                    (Common.DataManager.Series[ser].XSubAxisName == subAxisName || !this.IsSubAxesSupported) )
+                if (
+                    Common.DataManager.Series[ser].XAxisType == type
+                    && (
+                        Common.DataManager.Series[ser].XSubAxisName == subAxisName
+                        || !this.IsSubAxesSupported
+                    )
+                )
 #else // SUBAXES
-                if ( Common.DataManager.Series[ser].XAxisType == type)
+                if (Common.DataManager.Series[ser].XAxisType == type)
 #endif // SUBAXES
                 {
                     // Add a series to the collection
-                    list.Add( ser );
+                    list.Add(ser);
                 }
             }
 
 #if SUBAXES
             // If series list is empty for the sub-axis then
             // try using the main axis.
-            if ( list.Count == 0 && subAxisName.Length > 0 )
+            if (list.Count == 0 && subAxisName.Length > 0)
             {
-                return GetXAxesSeries( type, string.Empty );
+                return GetXAxesSeries(type, string.Empty);
             }
 #endif // SUBAXES
 
             // If primary series do not exist return secondary series
             // Axis should always be connected with any series.
-            if ( list.Count == 0  )
+            if (list.Count == 0)
             {
                 if (type == AxisType.Secondary)
                 {
@@ -1612,7 +1767,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
                 return GetXAxesSeries(AxisType.Secondary, string.Empty);
             }
-            
+
             return list;
         }
 
@@ -1622,14 +1777,18 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="type">Axis type</param>
         /// <param name="subAxisName">Sub Axis name</param>
         /// <returns>A list of series</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "subAxisName")]
-        internal List<string> GetYAxesSeries( AxisType type, string subAxisName )
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "subAxisName"
+        )]
+        internal List<string> GetYAxesSeries(AxisType type, string subAxisName)
         {
             // Create a new collection of series
             List<string> list = new List<string>();
 
             // Find series which have same axis type
-            foreach( string ser in _series )
+            foreach (string ser in _series)
             {
                 // Get series Y axis type
                 AxisType seriesYAxisType = Common.DataManager.Series[ser].YAxisType;
@@ -1639,8 +1798,10 @@ namespace System.Web.UI.DataVisualization.Charting
 
                 // NOTE: Fixes issue #6969
                 // Ignore series settings if only Primary Y axis supported by the chart type
-                if (Common.DataManager.Series[ser].ChartType == SeriesChartType.Radar ||
-                    Common.DataManager.Series[ser].ChartType == SeriesChartType.Polar)
+                if (
+                    Common.DataManager.Series[ser].ChartType == SeriesChartType.Radar
+                    || Common.DataManager.Series[ser].ChartType == SeriesChartType.Polar
+                )
                 {
                     seriesYAxisType = AxisType.Primary;
 #if SUBAXES
@@ -1648,33 +1809,37 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif // SUBAXES
                 }
 
-
 #if SUBAXES
-                if( seriesYAxisType == type &&
-                    (Common.DataManager.Series[ser].YSubAxisName == seriesYSubAxisName || !this.IsSubAxesSupported) )
+                if (
+                    seriesYAxisType == type
+                    && (
+                        Common.DataManager.Series[ser].YSubAxisName == seriesYSubAxisName
+                        || !this.IsSubAxesSupported
+                    )
+                )
 #else // SUBAXES
                 if (seriesYAxisType == type)
 #endif // SUBAXES
                 {
                     // Add a series to the collection
-                    list.Add( ser );
+                    list.Add(ser);
                 }
             }
 
 #if SUBAXES
             // If series list is empty for the sub-axis then
             // try using the main axis.
-            if ( list.Count == 0 && subAxisName.Length > 0 )
+            if (list.Count == 0 && subAxisName.Length > 0)
             {
-                return GetYAxesSeries( type, string.Empty );
+                return GetYAxesSeries(type, string.Empty);
             }
 #endif // SUBAXES
 
             // If primary series do not exist return secondary series
             // Axis should always be connected with any series.
-            if ( list.Count == 0 && type == AxisType.Secondary )
+            if (list.Count == 0 && type == AxisType.Secondary)
             {
-                return GetYAxesSeries( AxisType.Primary, string.Empty );
+                return GetYAxesSeries(AxisType.Primary, string.Empty);
             }
 
             return list;
@@ -1686,16 +1851,16 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>Data series</returns>
         internal Series GetFirstSeries()
         {
-            if( _series.Count == 0 )
+            if (_series.Count == 0)
             {
                 throw (new InvalidOperationException(SR.ExceptionChartAreaSeriesNotFound));
             }
 
             return Common.DataManager.Series[_series[0]];
         }
-        
+
         /// <summary>
-        /// This method returns minimum interval between 
+        /// This method returns minimum interval between
         /// any two data points from series which belong
         /// to this chart area.
         /// </summary>
@@ -1705,12 +1870,18 @@ namespace System.Web.UI.DataVisualization.Charting
         internal double GetPointsInterval(bool isLogarithmic, double logarithmBase)
         {
             bool sameInterval;
-            return GetPointsInterval( _series, isLogarithmic, logarithmBase, false, out sameInterval );
+            return GetPointsInterval(
+                _series,
+                isLogarithmic,
+                logarithmBase,
+                false,
+                out sameInterval
+            );
         }
-        
+
         /// <summary>
-        /// This method returns minimum interval between 
-        /// any two data points from specified series. 
+        /// This method returns minimum interval between
+        /// any two data points from specified series.
         /// </summary>
         /// <param name="seriesList">List of series.</param>
         /// <param name="isLogarithmic">Indicates logarithmic scale.</param>
@@ -1718,15 +1889,28 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="checkSameInterval">True if check for the same interval should be performed.</param>
         /// <param name="sameInterval">Return true if interval is the same.</param>
         /// <returns>Minimum Interval</returns>
-        internal double GetPointsInterval( List<string> seriesList, bool isLogarithmic, double logarithmBase, bool checkSameInterval, out bool sameInterval )
+        internal double GetPointsInterval(
+            List<string> seriesList,
+            bool isLogarithmic,
+            double logarithmBase,
+            bool checkSameInterval,
+            out bool sameInterval
+        )
         {
             Series nullSeries = null;
-            return GetPointsInterval(seriesList, isLogarithmic, logarithmBase, checkSameInterval, out sameInterval, out nullSeries);
+            return GetPointsInterval(
+                seriesList,
+                isLogarithmic,
+                logarithmBase,
+                checkSameInterval,
+                out sameInterval,
+                out nullSeries
+            );
         }
-        
+
         /// <summary>
-        /// This method returns minimum interval between 
-        /// any two data points from specified series. 
+        /// This method returns minimum interval between
+        /// any two data points from specified series.
         /// </summary>
         /// <param name="seriesList">List of series.</param>
         /// <param name="isLogarithmic">Indicates logarithmic scale.</param>
@@ -1735,33 +1919,40 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="sameInterval">Return true if interval is the same.</param>
         /// <param name="series">Series with the smallest interval between points.</param>
         /// <returns>Minimum Interval</returns>
-        internal double GetPointsInterval( List<string> seriesList, bool isLogarithmic, double logarithmicBase, bool checkSameInterval, out bool sameInterval, out Series series )
+        internal double GetPointsInterval(
+            List<string> seriesList,
+            bool isLogarithmic,
+            double logarithmicBase,
+            bool checkSameInterval,
+            out bool sameInterval,
+            out Series series
+        )
         {
-            long    ticksInterval = long.MaxValue;
-            int        monthsInteval = 0;
-            double    previousInterval = double.MinValue;
-            double    oldInterval = Double.MaxValue;
+            long ticksInterval = long.MaxValue;
+            int monthsInteval = 0;
+            double previousInterval = double.MinValue;
+            double oldInterval = Double.MaxValue;
 
             // Initialize return value
             sameInterval = true;
             series = null;
 
             // Create comma separate string of series names
-            string    seriesNames = "";
-            if(seriesList != null)
+            string seriesNames = "";
+            if (seriesList != null)
             {
-                foreach( string serName in seriesList )
+                foreach (string serName in seriesList)
                 {
                     seriesNames += serName + ",";
                 }
             }
 
             // Do not calculate interval every time;
-            if( checkSameInterval == false || diffIntervalAlignmentChecked == true)
+            if (checkSameInterval == false || diffIntervalAlignmentChecked == true)
             {
                 if (!isLogarithmic)
                 {
-                    if( !double.IsNaN(intervalData) && _intervalSeriesList == seriesNames)
+                    if (!double.IsNaN(intervalData) && _intervalSeriesList == seriesNames)
                     {
                         sameInterval = intervalSameSize;
                         series = _intervalSeries;
@@ -1770,7 +1961,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
                 else
                 {
-                    if( !double.IsNaN(intervalLogData) && _intervalSeriesList == seriesNames)
+                    if (!double.IsNaN(intervalLogData) && _intervalSeriesList == seriesNames)
                     {
                         sameInterval = intervalSameSize;
                         series = _intervalSeries;
@@ -1780,20 +1971,20 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Data series loop
-            int            seriesIndex = 0;
-            Series        currentSmallestSeries = null;
+            int seriesIndex = 0;
+            Series currentSmallestSeries = null;
             ArrayList[] seriesXValues = new ArrayList[seriesList.Count];
-            foreach( string ser in seriesList )
+            foreach (string ser in seriesList)
             {
-                Series    dataSeries = Common.DataManager.Series[ ser ];
+                Series dataSeries = Common.DataManager.Series[ser];
                 bool isXValueDateTime = dataSeries.IsXValueDateTime();
 
                 // Copy X values to array and prepare for sorting Sort X values.
                 seriesXValues[seriesIndex] = new ArrayList();
-                bool    sortPoints = false;
-                double    prevXValue = double.MinValue;
-                double    curentXValue = 0.0;
-                if(dataSeries.Points.Count > 0)
+                bool sortPoints = false;
+                double prevXValue = double.MinValue;
+                double curentXValue = 0.0;
+                if (dataSeries.Points.Count > 0)
                 {
                     if (isLogarithmic)
                     {
@@ -1804,7 +1995,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         prevXValue = dataSeries.Points[0].XValue;
                     }
                 }
-                foreach( DataPoint point in dataSeries.Points )
+                foreach (DataPoint point in dataSeries.Points)
                 {
                     if (isLogarithmic)
                     {
@@ -1815,7 +2006,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         curentXValue = point.XValue;
                     }
 
-                    if(prevXValue > curentXValue)
+                    if (prevXValue > curentXValue)
                     {
                         sortPoints = true;
                     }
@@ -1825,53 +2016,60 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
 
                 //  Sort X values
-                if(sortPoints)
+                if (sortPoints)
                 {
                     seriesXValues[seriesIndex].Sort();
                 }
 
                 // Data point loop
-                for( int point = 1; point < seriesXValues[seriesIndex].Count; point++ )
+                for (int point = 1; point < seriesXValues[seriesIndex].Count; point++)
                 {
                     // Interval between two sorted data points.
-                    double    interval = Math.Abs( (double)seriesXValues[seriesIndex][ point - 1 ] - (double)seriesXValues[seriesIndex][ point ] );
+                    double interval = Math.Abs(
+                        (double)seriesXValues[seriesIndex][point - 1]
+                            - (double)seriesXValues[seriesIndex][point]
+                    );
 
                     // Check if all intervals are same
-                    if(sameInterval)
+                    if (sameInterval)
                     {
-                        if(isXValueDateTime)
+                        if (isXValueDateTime)
                         {
-                            if(ticksInterval == long.MaxValue)
+                            if (ticksInterval == long.MaxValue)
                             {
                                 // Calculate first interval
                                 GetDateInterval(
-                                    (double)seriesXValues[seriesIndex][ point - 1 ], 
-                                    (double)seriesXValues[seriesIndex][ point ],
-                                    out monthsInteval, 
-                                    out ticksInterval);
+                                    (double)seriesXValues[seriesIndex][point - 1],
+                                    (double)seriesXValues[seriesIndex][point],
+                                    out monthsInteval,
+                                    out ticksInterval
+                                );
                             }
                             else
                             {
                                 // Calculate current interval
-                                long    curentTicksInterval = long.MaxValue;
-                                int        curentMonthsInteval = 0;
+                                long curentTicksInterval = long.MaxValue;
+                                int curentMonthsInteval = 0;
                                 GetDateInterval(
-                                    (double)seriesXValues[seriesIndex][ point - 1 ], 
-                                    (double)seriesXValues[seriesIndex][ point ],
-                                    out curentMonthsInteval, 
-                                    out curentTicksInterval);
+                                    (double)seriesXValues[seriesIndex][point - 1],
+                                    (double)seriesXValues[seriesIndex][point],
+                                    out curentMonthsInteval,
+                                    out curentTicksInterval
+                                );
 
                                 // Compare current interval with previous
-                                if(curentMonthsInteval != monthsInteval || curentTicksInterval != ticksInterval)
+                                if (
+                                    curentMonthsInteval != monthsInteval
+                                    || curentTicksInterval != ticksInterval
+                                )
                                 {
                                     sameInterval = false;
                                 }
-
                             }
                         }
                         else
                         {
-                            if( previousInterval != interval && previousInterval != double.MinValue )
+                            if (previousInterval != interval && previousInterval != double.MinValue)
                             {
                                 sameInterval = false;
                             }
@@ -1881,7 +2079,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     previousInterval = interval;
 
                     // If not minimum interval keep the old one
-                    if( oldInterval > interval && interval != 0)
+                    if (oldInterval > interval && interval != 0)
                     {
                         oldInterval = interval;
                         currentSmallestSeries = dataSeries;
@@ -1893,24 +2091,32 @@ namespace System.Web.UI.DataVisualization.Charting
 
             // If interval is not the same check if points from all series are aligned
             this.diffIntervalAlignmentChecked = false;
-            if( checkSameInterval &&  !sameInterval && seriesXValues.Length > 1)
+            if (checkSameInterval && !sameInterval && seriesXValues.Length > 1)
             {
-                bool    sameXValue = false;
+                bool sameXValue = false;
                 this.diffIntervalAlignmentChecked = true;
 
                 // All X values must be same
-                int    listIndex = 0;
-                foreach(ArrayList xList in seriesXValues)
+                int listIndex = 0;
+                foreach (ArrayList xList in seriesXValues)
                 {
-                    for(int pointIndex = 0; pointIndex < xList.Count && !sameXValue; pointIndex++)
+                    for (int pointIndex = 0; pointIndex < xList.Count && !sameXValue; pointIndex++)
                     {
-                        double    xValue = (double)xList[pointIndex];
+                        double xValue = (double)xList[pointIndex];
 
                         // Loop through all other lists and see if point is there
-                        for(int index = listIndex + 1; index < seriesXValues.Length && !sameXValue; index++)
+                        for (
+                            int index = listIndex + 1;
+                            index < seriesXValues.Length && !sameXValue;
+                            index++
+                        )
                         {
-                            if( (pointIndex < seriesXValues[index].Count && (double)seriesXValues[index][pointIndex] == xValue) ||
-                                seriesXValues[index].Contains(xValue))
+                            if (
+                                (
+                                    pointIndex < seriesXValues[index].Count
+                                    && (double)seriesXValues[index][pointIndex] == xValue
+                                ) || seriesXValues[index].Contains(xValue)
+                            )
                             {
                                 sameXValue = true;
                                 break;
@@ -1921,17 +2127,15 @@ namespace System.Web.UI.DataVisualization.Charting
                     ++listIndex;
                 }
 
-
                 // Use side-by-side if at least one xommon X value between eries found
-                if(sameXValue)
+                if (sameXValue)
                 {
                     sameInterval = true;
                 }
             }
 
-
             // Interval not found. Interval is 1.
-            if( oldInterval == Double.MaxValue)
+            if (oldInterval == Double.MaxValue)
             {
                 oldInterval = 1;
             }
@@ -1962,11 +2166,16 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="value2">Second value.</param>
         /// <param name="monthsInteval">Interval in months.</param>
         /// <param name="ticksInterval">Interval in ticks.</param>
-        private void GetDateInterval(double value1, double value2, out int monthsInteval, out long ticksInterval)
+        private void GetDateInterval(
+            double value1,
+            double value2,
+            out int monthsInteval,
+            out long ticksInterval
+        )
         {
             // Convert values to dates
-            DateTime    date1 = DateTime.FromOADate(value1);
-            DateTime    date2 = DateTime.FromOADate(value2);
+            DateTime date1 = DateTime.FromOADate(value1);
+            DateTime date2 = DateTime.FromOADate(value2);
 
             // Calculate months difference
             monthsInteval = date2.Month - date1.Month;

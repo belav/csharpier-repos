@@ -32,102 +32,105 @@ namespace System.Net.Http.Headers
 {
     public class ProductHeaderValue : ICloneable
     {
-        public ProductHeaderValue (string name)
+        public ProductHeaderValue(string name)
         {
-            Parser.Token.Check (name);
+            Parser.Token.Check(name);
             Name = name;
         }
 
-        public ProductHeaderValue (string name, string version)
-            : this (name)
+        public ProductHeaderValue(string name, string version)
+            : this(name)
         {
-            if (!string.IsNullOrEmpty (version))
-                Parser.Token.Check (version);
+            if (!string.IsNullOrEmpty(version))
+                Parser.Token.Check(version);
 
             Version = version;
         }
 
-        internal ProductHeaderValue ()
-        {
-        }
+        internal ProductHeaderValue() { }
 
         public string Name { get; internal set; }
         public string Version { get; internal set; }
 
-        object ICloneable.Clone ()
+        object ICloneable.Clone()
         {
-            return MemberwiseClone ();
+            return MemberwiseClone();
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             var source = obj as ProductHeaderValue;
             if (source == null)
                 return false;
 
-            return string.Equals (source.Name, Name, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals (source.Version, Version, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(source.Name, Name, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(source.Version, Version, StringComparison.OrdinalIgnoreCase);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            var hc = Name.ToLowerInvariant ().GetHashCode ();
+            var hc = Name.ToLowerInvariant().GetHashCode();
             if (Version != null)
-                hc ^= Version.ToLowerInvariant ().GetHashCode ();
+                hc ^= Version.ToLowerInvariant().GetHashCode();
 
             return hc;
         }
 
-        public static ProductHeaderValue Parse (string input)
+        public static ProductHeaderValue Parse(string input)
         {
             ProductHeaderValue value;
-            if (TryParse (input, out value))
+            if (TryParse(input, out value))
                 return value;
 
-            throw new FormatException (input);
+            throw new FormatException(input);
         }
 
-        public static bool TryParse (string input, out ProductHeaderValue parsedValue)
+        public static bool TryParse(string input, out ProductHeaderValue parsedValue)
         {
-            var lexer = new Lexer (input);
+            var lexer = new Lexer(input);
             Token token;
-            if (TryParseElement (lexer, out parsedValue, out token) && token == Token.Type.End)
+            if (TryParseElement(lexer, out parsedValue, out token) && token == Token.Type.End)
                 return true;
 
             parsedValue = null;
             return false;
         }
 
-        internal static bool TryParse (string input, int minimalCount, out List<ProductHeaderValue> result)
+        internal static bool TryParse(
+            string input,
+            int minimalCount,
+            out List<ProductHeaderValue> result
+        )
         {
-            return CollectionParser.TryParse (input, minimalCount, TryParseElement, out result);
+            return CollectionParser.TryParse(input, minimalCount, TryParseElement, out result);
         }
 
-        static bool TryParseElement (Lexer lexer, out ProductHeaderValue parsedValue, out Token t)
+        static bool TryParseElement(Lexer lexer, out ProductHeaderValue parsedValue, out Token t)
         {
             parsedValue = null;
 
-            t = lexer.Scan ();
+            t = lexer.Scan();
             if (t != Token.Type.Token)
                 return false;
 
-            parsedValue = new ProductHeaderValue ();
-            parsedValue.Name = lexer.GetStringValue (t);
+            parsedValue = new ProductHeaderValue();
+            parsedValue.Name = lexer.GetStringValue(t);
 
-            t = lexer.Scan ();
-            if (t == Token.Type.SeparatorSlash) {
-                t = lexer.Scan ();
+            t = lexer.Scan();
+            if (t == Token.Type.SeparatorSlash)
+            {
+                t = lexer.Scan();
                 if (t != Token.Type.Token)
                     return false;
 
-                parsedValue.Version = lexer.GetStringValue (t);
-                t = lexer.Scan ();
+                parsedValue.Version = lexer.GetStringValue(t);
+                t = lexer.Scan();
             }
 
             return true;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return Version == null ? Name : Name + "/" + Version;
         }

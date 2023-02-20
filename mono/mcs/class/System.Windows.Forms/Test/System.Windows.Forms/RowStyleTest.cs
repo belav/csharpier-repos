@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,58 +30,57 @@ using NUnit.Framework;
 namespace MonoTests.System.Windows.Forms
 {
     [TestFixture]
-    public class RowStyleTest : TestHelper {
-
+    public class RowStyleTest : TestHelper
+    {
         [Test]
-        public void CtorTest1 ()
+        public void CtorTest1()
         {
-            RowStyle rs = new RowStyle ();
-            Assert.AreEqual (0.0f, rs.Height, "1");
-            Assert.AreEqual (SizeType.AutoSize, rs.SizeType, "2");
+            RowStyle rs = new RowStyle();
+            Assert.AreEqual(0.0f, rs.Height, "1");
+            Assert.AreEqual(SizeType.AutoSize, rs.SizeType, "2");
         }
 
         [Test]
-        public void CtorTest2 ()
+        public void CtorTest2()
         {
-            RowStyle rs = new RowStyle (SizeType.Absolute);
-            
-            Assert.AreEqual (0.0f, rs.Height, "1");
-            Assert.AreEqual (SizeType.Absolute, rs.SizeType, "2");
+            RowStyle rs = new RowStyle(SizeType.Absolute);
+
+            Assert.AreEqual(0.0f, rs.Height, "1");
+            Assert.AreEqual(SizeType.Absolute, rs.SizeType, "2");
         }
 
         [Test]
-        public void CtorTest3 ()
+        public void CtorTest3()
         {
-            RowStyle rs = new RowStyle (SizeType.Absolute, 5.0f);
-            
-            Assert.AreEqual (5.0, rs.Height, "1");
-            Assert.AreEqual (SizeType.Absolute, rs.SizeType, "2");
+            RowStyle rs = new RowStyle(SizeType.Absolute, 5.0f);
+
+            Assert.AreEqual(5.0, rs.Height, "1");
+            Assert.AreEqual(SizeType.Absolute, rs.SizeType, "2");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void CtorTest4 ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void CtorTest4()
         {
-            RowStyle rs = new RowStyle (SizeType.Absolute, -1.0f);
-            
-            TestHelper.RemoveWarning (rs);
+            RowStyle rs = new RowStyle(SizeType.Absolute, -1.0f);
+
+            TestHelper.RemoveWarning(rs);
         }
 
         [Test]
-        public void HeightTest1 ()
+        public void HeightTest1()
         {
-            RowStyle rs = new RowStyle ();
+            RowStyle rs = new RowStyle();
             rs.Height = 1.0f;
-            Assert.AreEqual (1.0f, rs.Height, "1");
+            Assert.AreEqual(1.0f, rs.Height, "1");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void HeightTest2 ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void HeightTest2()
         {
-            RowStyle rs = new RowStyle ();
+            RowStyle rs = new RowStyle();
             rs.Height = -1.0f;
         }
     }
 }
-

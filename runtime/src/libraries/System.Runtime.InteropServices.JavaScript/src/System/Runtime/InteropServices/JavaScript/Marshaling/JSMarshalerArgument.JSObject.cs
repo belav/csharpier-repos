@@ -43,7 +43,8 @@ namespace System.Runtime.InteropServices.JavaScript
                 }
                 slot.Type = MarshalerType.JSObject;
                 slot.JSHandle = value.JSHandle;
-                if (slot.JSHandle == IntPtr.Zero) throw new ObjectDisposedException(nameof(value));
+                if (slot.JSHandle == IntPtr.Zero)
+                    throw new ObjectDisposedException(nameof(value));
             }
         }
 

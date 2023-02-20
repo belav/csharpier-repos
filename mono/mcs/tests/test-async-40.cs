@@ -5,22 +5,22 @@ class Program
 {
     public class C
     {
-        public void M ()
-        {
-        }
+        public void M() { }
     }
 
-    public static void F (Action<C> a)
+    public static void F(Action<C> a)
     {
-        a (new C ());
+        a(new C());
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        F (async (c) => {
-            await Task.Run (() => { });
-            c.M ();
-        });
+        F(
+            async (c) =>
+            {
+                await Task.Run(() => { });
+                c.M();
+            }
+        );
     }
 }
-

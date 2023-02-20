@@ -9,30 +9,31 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Warnings.WarningSuppression
 {
-    [SetupLinkerSubstitutionFile ("DetectRedundantSuppressionsFeatureSubstitutions.xml")]
-    [SetupLinkerArgument ("--feature", "Feature", "false")]
+    [SetupLinkerSubstitutionFile("DetectRedundantSuppressionsFeatureSubstitutions.xml")]
+    [SetupLinkerArgument("--feature", "Feature", "false")]
     [ExpectedNoWarnings]
     [SkipKeptItemsValidation]
     public class DetectRedundantSuppressionsFeatureSubstitutions
     {
-        public static void Main ()
+        public static void Main()
         {
-            ReportRedundantSuppressionWhenTrimmerIncompatibleCodeDisabled.Test ();
-            DoNotReportUsefulSuppressionWhenTrimmerIncompatibleCodeEnabled.Test ();
+            ReportRedundantSuppressionWhenTrimmerIncompatibleCodeDisabled.Test();
+            DoNotReportUsefulSuppressionWhenTrimmerIncompatibleCodeEnabled.Test();
         }
 
-        public static Type TriggerUnrecognizedPattern ()
+        public static Type TriggerUnrecognizedPattern()
         {
-            return typeof (DetectRedundantSuppressionsFeatureSubstitutions);
+            return typeof(DetectRedundantSuppressionsFeatureSubstitutions);
         }
 
-        public static string TrimmerCompatibleMethod ()
+        public static string TrimmerCompatibleMethod()
         {
             return "test";
         }
 
-        public static bool IsFeatureEnabled {
-            get => throw new NotImplementedException ();
+        public static bool IsFeatureEnabled
+        {
+            get => throw new NotImplementedException();
         }
 
         class ReportRedundantSuppressionWhenTrimmerIncompatibleCodeDisabled
@@ -43,27 +44,33 @@ namespace Mono.Linker.Tests.Cases.Warnings.WarningSuppression
             // With feature switched to false, the linker sees only the 'else' branch.
             // The 'else' branch contains trimmer-compatible code, the linker identifies the suppression as redundant.
 
-            [ExpectedWarning ("IL2121", "IL2072")]
-            [UnconditionalSuppressMessage ("Test", "IL2072")]
-            public static void Test ()
+            [ExpectedWarning("IL2121", "IL2072")]
+            [UnconditionalSuppressMessage("Test", "IL2072")]
+            public static void Test()
             {
-                if (IsFeatureEnabled) {
-                    Expression.Call (TriggerUnrecognizedPattern (), "", Type.EmptyTypes);
-                } else {
-                    TrimmerCompatibleMethod ();
+                if (IsFeatureEnabled)
+                {
+                    Expression.Call(TriggerUnrecognizedPattern(), "", Type.EmptyTypes);
+                }
+                else
+                {
+                    TrimmerCompatibleMethod();
                 }
             }
         }
 
         class DoNotReportUsefulSuppressionWhenTrimmerIncompatibleCodeEnabled
         {
-            [UnconditionalSuppressMessage ("Test", "IL2072")]
-            public static void Test ()
+            [UnconditionalSuppressMessage("Test", "IL2072")]
+            public static void Test()
             {
-                if (!IsFeatureEnabled) {
-                    Expression.Call (TriggerUnrecognizedPattern (), "", Type.EmptyTypes);
-                } else {
-                    TrimmerCompatibleMethod ();
+                if (!IsFeatureEnabled)
+                {
+                    Expression.Call(TriggerUnrecognizedPattern(), "", Type.EmptyTypes);
+                }
+                else
+                {
+                    TrimmerCompatibleMethod();
                 }
             }
         }

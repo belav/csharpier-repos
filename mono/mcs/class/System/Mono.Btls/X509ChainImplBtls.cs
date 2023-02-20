@@ -50,144 +50,163 @@ namespace Mono.Btls
         X509ChainPolicy policy;
         List<X509ChainStatus> chainStatusList;
 
-        internal X509ChainImplBtls (MonoBtlsX509Chain chain)
+        internal X509ChainImplBtls(MonoBtlsX509Chain chain)
         {
-            this.chain = chain.Copy ();
-            policy = new X509ChainPolicy ();
+            this.chain = chain.Copy();
+            policy = new X509ChainPolicy();
         }
 
-        internal X509ChainImplBtls (MonoBtlsX509StoreCtx storeCtx)
+        internal X509ChainImplBtls(MonoBtlsX509StoreCtx storeCtx)
         {
-            this.storeCtx = storeCtx.Copy ();
-            this.chain = storeCtx.GetChain ();
+            this.storeCtx = storeCtx.Copy();
+            this.chain = storeCtx.GetChain();
 
-            policy = new X509ChainPolicy ();
+            policy = new X509ChainPolicy();
 
-            untrustedChain = storeCtx.GetUntrusted ();
+            untrustedChain = storeCtx.GetUntrusted();
 
-            if (untrustedChain != null) {
-                untrusted = new X509Certificate2Collection ();
+            if (untrustedChain != null)
+            {
+                untrusted = new X509Certificate2Collection();
                 policy.ExtraStore = untrusted;
-                for (int i = 0; i < untrustedChain.Count; i++) {
-                    var cert = untrustedChain.GetCertificate (i);
-                    using (var impl = new X509CertificateImplBtls (cert))
-                        untrusted.Add (new X509Certificate2 (impl));
+                for (int i = 0; i < untrustedChain.Count; i++)
+                {
+                    var cert = untrustedChain.GetCertificate(i);
+                    using (var impl = new X509CertificateImplBtls(cert))
+                        untrusted.Add(new X509Certificate2(impl));
                 }
             }
         }
 
-        internal X509ChainImplBtls ()
+        internal X509ChainImplBtls()
         {
-            chain = new MonoBtlsX509Chain ();
-            elements = new X509ChainElementCollection ();
-            policy = new X509ChainPolicy ();
+            chain = new MonoBtlsX509Chain();
+            elements = new X509ChainElementCollection();
+            policy = new X509ChainPolicy();
         }
 
-        public override bool IsValid {
+        public override bool IsValid
+        {
             get { return chain != null && chain.IsValid; }
         }
 
-        public override IntPtr Handle {
-            get { return chain.Handle.DangerousGetHandle (); }
+        public override IntPtr Handle
+        {
+            get { return chain.Handle.DangerousGetHandle(); }
         }
 
-        internal MonoBtlsX509Chain Chain {
-            get {
-                ThrowIfContextInvalid ();
+        internal MonoBtlsX509Chain Chain
+        {
+            get
+            {
+                ThrowIfContextInvalid();
                 return chain;
             }
         }
 
-        internal MonoBtlsX509StoreCtx StoreCtx {
-            get {
-                ThrowIfContextInvalid ();
+        internal MonoBtlsX509StoreCtx StoreCtx
+        {
+            get
+            {
+                ThrowIfContextInvalid();
                 return storeCtx;
             }
         }
 
-        public override X509ChainElementCollection ChainElements {
-            get {
-                ThrowIfContextInvalid ();
+        public override X509ChainElementCollection ChainElements
+        {
+            get
+            {
+                ThrowIfContextInvalid();
                 if (elements != null)
                     return elements;
 
-                elements = new X509ChainElementCollection ();
-                certificates = new X509Certificate2 [chain.Count];
+                elements = new X509ChainElementCollection();
+                certificates = new X509Certificate2[chain.Count];
 
-                for (int i = 0; i < certificates.Length; i++) {
-                    var cert = chain.GetCertificate (i);
-                    using (var impl = new X509CertificateImplBtls (cert))
-                        certificates [i] = new X509Certificate2 (impl);
-                    elements.Add (certificates [i]);
+                for (int i = 0; i < certificates.Length; i++)
+                {
+                    var cert = chain.GetCertificate(i);
+                    using (var impl = new X509CertificateImplBtls(cert))
+                        certificates[i] = new X509Certificate2(impl);
+                    elements.Add(certificates[i]);
                 }
 
                 return elements;
             }
         }
 
-        public override X509ChainPolicy ChainPolicy {
+        public override X509ChainPolicy ChainPolicy
+        {
             get { return policy; }
             set { policy = value; }
         }
 
-        public override X509ChainStatus[] ChainStatus {
-            get { 
-                return chainStatusList?.ToArray() ?? new X509ChainStatus[0];
-            }
+        public override X509ChainStatus[] ChainStatus
+        {
+            get { return chainStatusList?.ToArray() ?? new X509ChainStatus[0]; }
         }
 
-        public override void AddStatus (X509ChainStatusFlags errorCode)
+        public override void AddStatus(X509ChainStatusFlags errorCode)
         {
             if (chainStatusList == null)
                 chainStatusList = new List<X509ChainStatus>();
-            chainStatusList.Add (new X509ChainStatus(errorCode));
+            chainStatusList.Add(new X509ChainStatus(errorCode));
         }
 
-        public override bool Build (X509Certificate2 certificate)
+        public override bool Build(X509Certificate2 certificate)
         {
             return false;
         }
 
-        public override void Reset ()
+        public override void Reset()
         {
-            if (certificates != null) {
+            if (certificates != null)
+            {
                 foreach (var certificate in certificates)
-                    certificate.Dispose ();
+                    certificate.Dispose();
                 certificates = null;
             }
-            if (elements != null) {
-                elements.Clear ();
+            if (elements != null)
+            {
+                elements.Clear();
                 elements = null;
             }
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            if (disposing) {
-                if (chain != null) {
-                    chain.Dispose ();
+            if (disposing)
+            {
+                if (chain != null)
+                {
+                    chain.Dispose();
                     chain = null;
                 }
-                if (storeCtx != null) {
-                    storeCtx.Dispose ();
+                if (storeCtx != null)
+                {
+                    storeCtx.Dispose();
                     storeCtx = null;
                 }
-                if (untrustedChain != null) {
-                    untrustedChain.Dispose ();
+                if (untrustedChain != null)
+                {
+                    untrustedChain.Dispose();
                     untrustedChain = null;
                 }
-                if (untrusted != null) {
+                if (untrusted != null)
+                {
                     foreach (var cert in untrusted)
-                        cert.Dispose ();
+                        cert.Dispose();
                     untrusted = null;
                 }
-                if (certificates != null) {
+                if (certificates != null)
+                {
                     foreach (var cert in certificates)
-                        cert.Dispose ();
+                        cert.Dispose();
                     certificates = null;
                 }
             }
-            base.Dispose (disposing);
+            base.Dispose(disposing);
         }
     }
 }

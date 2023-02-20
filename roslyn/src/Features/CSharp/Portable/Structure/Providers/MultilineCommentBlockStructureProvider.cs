@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             SyntaxTrivia trivia,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var span = new BlockSpan(
                 isCollapsible: true,
@@ -23,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 hintSpan: trivia.Span,
                 type: BlockTypes.Comment,
                 bannerText: CSharpStructureHelpers.GetCommentBannerText(trivia),
-                autoCollapse: true);
+                autoCollapse: true
+            );
             spans.Add(span);
         }
     }

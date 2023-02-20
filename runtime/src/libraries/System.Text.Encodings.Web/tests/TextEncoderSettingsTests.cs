@@ -11,18 +11,29 @@ namespace System.Text.Encodings.Web.Tests
 {
     internal static class TextEncoderSettingsExtensions
     {
-        private static readonly Lazy<IntPtr> _lazyGetBitmapFnPtr = new Lazy<IntPtr>(InitializeGetBitmapFnPtr);
+        private static readonly Lazy<IntPtr> _lazyGetBitmapFnPtr = new Lazy<IntPtr>(
+            InitializeGetBitmapFnPtr
+        );
 
         private static IntPtr InitializeGetBitmapFnPtr()
         {
-            var mi = typeof(TextEncoderSettings).GetMethod("GetAllowedCodePointsBitmap", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            var mi = typeof(TextEncoderSettings).GetMethod(
+                "GetAllowedCodePointsBitmap",
+                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
+            );
             return mi.MethodHandle.GetFunctionPointer();
         }
 
-        public static unsafe ref readonly AllowedBmpCodePointsBitmap GetAllowedBmpCodePointsBitmap(this TextEncoderSettings settings)
+        public static unsafe ref readonly AllowedBmpCodePointsBitmap GetAllowedBmpCodePointsBitmap(
+            this TextEncoderSettings settings
+        )
         {
             IntPtr getBitmapFnPtr = _lazyGetBitmapFnPtr.Value;
-            return ref ((delegate* managed<TextEncoderSettings, ref readonly AllowedBmpCodePointsBitmap>)getBitmapFnPtr)(settings);
+            return ref (
+                (delegate* managed<
+                    TextEncoderSettings,
+                    ref readonly AllowedBmpCodePointsBitmap>)getBitmapFnPtr
+            )(settings);
         }
 
         public static bool IsCharacterAllowed(this TextEncoderSettings settings, char character)
@@ -78,7 +89,10 @@ namespace System.Text.Encodings.Web.Tests
         public void Ctor_UnicodeRanges()
         {
             // Act
-            var filter = new TextEncoderSettings(UnicodeRanges.LatinExtendedA, UnicodeRanges.LatinExtendedC);
+            var filter = new TextEncoderSettings(
+                UnicodeRanges.LatinExtendedA,
+                UnicodeRanges.LatinExtendedC
+            );
 
             // Assert
             for (int i = 0; i < 0x0100; i++)
@@ -106,14 +120,19 @@ namespace System.Text.Encodings.Web.Tests
         [Fact]
         public void Ctor_Null_UnicodeRanges()
         {
-            Assert.Throws<ArgumentNullException>("allowedRanges", () => new TextEncoderSettings(default(UnicodeRange[])));
+            Assert.Throws<ArgumentNullException>(
+                "allowedRanges",
+                () => new TextEncoderSettings(default(UnicodeRange[]))
+            );
         }
-
 
         [Fact]
         public void Ctor_Null_TextEncoderSettings()
         {
-            Assert.Throws<ArgumentNullException>("other", () => new TextEncoderSettings(default(TextEncoderSettings)));
+            Assert.Throws<ArgumentNullException>(
+                "other",
+                () => new TextEncoderSettings(default(TextEncoderSettings))
+            );
         }
 
         [Fact]
@@ -155,7 +174,6 @@ namespace System.Text.Encodings.Web.Tests
             Assert.True(filter.IsCharacterAllowed('\u0102'));
             Assert.False(filter.IsCharacterAllowed('\u0103'));
         }
-
 
         [Fact]
         public void AllowChars_Null()
@@ -325,7 +343,6 @@ namespace System.Text.Encodings.Web.Tests
             Assert.False(filter.IsCharacterAllowed('z'));
         }
 
-
         [Fact]
         public void ForbidChars_Null()
         {
@@ -391,8 +408,14 @@ namespace System.Text.Encodings.Web.Tests
         public void GetAllowedCodePoints()
         {
             // Arrange
-            var expected = Enumerable.Range(UnicodeRanges.BasicLatin.FirstCodePoint, UnicodeRanges.BasicLatin.Length)
-                .Concat(Enumerable.Range(UnicodeRanges.Specials.FirstCodePoint, UnicodeRanges.Specials.Length))
+            var expected = Enumerable
+                .Range(UnicodeRanges.BasicLatin.FirstCodePoint, UnicodeRanges.BasicLatin.Length)
+                .Concat(
+                    Enumerable.Range(
+                        UnicodeRanges.Specials.FirstCodePoint,
+                        UnicodeRanges.Specials.Length
+                    )
+                )
                 .Except(new int[] { 'x' })
                 .OrderBy(i => i)
                 .ToArray();

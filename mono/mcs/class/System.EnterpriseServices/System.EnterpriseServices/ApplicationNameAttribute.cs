@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.ApplicationNameAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,11 +32,12 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-    [AttributeUsage (AttributeTargets.Assembly)]
+namespace System.EnterpriseServices
+{
+    [AttributeUsage(AttributeTargets.Assembly)]
     [ComVisible(false)]
-    public sealed class ApplicationNameAttribute : Attribute, IConfigurationAttribute {
-
+    public sealed class ApplicationNameAttribute : Attribute, IConfigurationAttribute
+    {
         #region Fields
 
         string name;
@@ -45,7 +46,7 @@ namespace System.EnterpriseServices {
 
         #region Constructors
 
-        public ApplicationNameAttribute (string name)
+        public ApplicationNameAttribute(string name)
         {
             this.name = name;
         }
@@ -54,18 +55,18 @@ namespace System.EnterpriseServices {
 
         #region Implementation of IConfigurationAttribute
 
-        bool IConfigurationAttribute.AfterSaveChanges (Hashtable info)
+        bool IConfigurationAttribute.AfterSaveChanges(Hashtable info)
         {
             return false;
         }
 
         [MonoTODO]
-        bool IConfigurationAttribute.Apply (Hashtable cache)
+        bool IConfigurationAttribute.Apply(Hashtable cache)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        bool IConfigurationAttribute.IsValidTarget (string s)
+        bool IConfigurationAttribute.IsValidTarget(string s)
         {
             return (s == "Application");
         }
@@ -74,7 +75,8 @@ namespace System.EnterpriseServices {
 
         #region Properties
 
-        public string Value {    
+        public string Value
+        {
             get { return name; }
         }
 

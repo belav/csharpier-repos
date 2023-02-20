@@ -9,9 +9,10 @@ public struct EventInitializerTest
     public static void Main()
     {
         Action d = null;
-        var eit = new EventInitializerTest() {
+        var eit = new EventInitializerTest()
+        {
             a = null,
-            b = delegate {},
+            b = delegate { },
             c = d
         };
     }

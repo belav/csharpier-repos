@@ -3,31 +3,32 @@
 using System;
 using System.Runtime.InteropServices;
 
-public class UnmanagedToManaged {
-
+public class UnmanagedToManaged
+{
     ///** @dll.import("Unmanaged.dll")*/
-        [System.Runtime.InteropServices.DllImport("unmanaged.dll")]
-    public static extern void UnmanagedCode( int i) ;
+    [System.Runtime.InteropServices.DllImport("unmanaged.dll")]
+    public static extern void UnmanagedCode(int i);
 
-    public static int Main(){
+    public static int Main()
+    {
         String s = "Done";
         int retVal = 0;
-        try {
+        try
+        {
             Console.WriteLine("Calling unmanaged code...");
             UnmanagedCode(0);
             Console.WriteLine("...Returned from unmanaged code");
         }
-        catch (DivideByZeroException )
+        catch (DivideByZeroException)
         {
             Console.WriteLine("Caught a div-by-zero exception.");
             retVal = 100;
         }
-        catch (Exception )
+        catch (Exception)
         {
             Console.WriteLine("Caught a general exception");
         }
         Console.WriteLine(s);
         return retVal;
     }
-
 }

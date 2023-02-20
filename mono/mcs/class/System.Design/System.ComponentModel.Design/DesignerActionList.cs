@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,36 +37,31 @@ namespace System.ComponentModel.Design
         IComponent component;
         bool auto_show;
         DesignerActionItemCollection action_items;
-        
-        public DesignerActionList (IComponent component)
+
+        public DesignerActionList(IComponent component)
         {
             this.component = component;
-            action_items = new DesignerActionItemCollection ();
+            action_items = new DesignerActionItemCollection();
         }
 
-        public virtual bool AutoShow {
-            get {
-                return auto_show;
-            }
-            
-            set {
-                auto_show = value;    
-            }
+        public virtual bool AutoShow
+        {
+            get { return auto_show; }
+            set { auto_show = value; }
         }
 
-        public IComponent Component {
-            get {
-                return component;
-            }
+        public IComponent Component
+        {
+            get { return component; }
         }
 
-        public object GetService (Type serviceType)
+        public object GetService(Type serviceType)
         {
             return null;
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public virtual DesignerActionItemCollection GetSortedActionItems ()
+
+        public virtual DesignerActionItemCollection GetSortedActionItems()
         {
             return action_items;
         }

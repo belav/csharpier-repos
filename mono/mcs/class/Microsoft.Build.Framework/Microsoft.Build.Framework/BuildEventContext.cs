@@ -1,37 +1,46 @@
 using System;
 
-
 namespace Microsoft.Build.Framework
 {
     [Serializable]
     public class BuildEventContext
     {
-        static readonly Random rnd = new Random ();
+        static readonly Random rnd = new Random();
 
-        public static BuildEventContext Invalid = new BuildEventContext (
+        public static BuildEventContext Invalid = new BuildEventContext(
             InvalidSubmissionId,
             InvalidNodeId,
             InvalidProjectInstanceId,
             InvalidTargetId,
             InvalidProjectContextId,
-            InvalidTaskId);
+            InvalidTaskId
+        );
 
-        internal static BuildEventContext NewInstance ()
+        internal static BuildEventContext NewInstance()
         {
-            return new BuildEventContext (rnd.Next (), rnd.Next (), rnd.Next (), rnd.Next ());
+            return new BuildEventContext(rnd.Next(), rnd.Next(), rnd.Next(), rnd.Next());
         }
 
-        public BuildEventContext (int nodeId, int targetId, int projectContextId, int taskId)
-            : this (nodeId, rnd.Next (), targetId, projectContextId, taskId)
-        {
-        }
+        public BuildEventContext(int nodeId, int targetId, int projectContextId, int taskId)
+            : this(nodeId, rnd.Next(), targetId, projectContextId, taskId) { }
 
-        public BuildEventContext (int nodeId, int projectInstanceId, int projectContextId, int targetId, int taskId)
-            : this (rnd.Next (), nodeId, projectInstanceId, projectContextId, targetId, taskId)
-        {
-        }
+        public BuildEventContext(
+            int nodeId,
+            int projectInstanceId,
+            int projectContextId,
+            int targetId,
+            int taskId
+        )
+            : this(rnd.Next(), nodeId, projectInstanceId, projectContextId, targetId, taskId) { }
 
-        public BuildEventContext (int submissionId, int nodeId, int projectInstanceId, int projectContextId, int targetId, int taskId)
+        public BuildEventContext(
+            int submissionId,
+            int nodeId,
+            int projectInstanceId,
+            int projectContextId,
+            int targetId,
+            int taskId
+        )
         {
             SubmissionId = submissionId;
             NodeId = nodeId;
@@ -56,39 +65,36 @@ namespace Microsoft.Build.Framework
         public int TaskId { get; private set; }
 
         // MSDN document says "true if the references are equal, false otherwise." but that doesn't make sense.
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             var o = obj as BuildEventContext;
-            return (object) o != null &&
-                o.NodeId == NodeId &&
-                o.ProjectContextId == ProjectContextId &&
-                o.ProjectInstanceId == ProjectInstanceId &&
-                o.SubmissionId == SubmissionId &&
-                o.TargetId == TargetId &&
-                o.TaskId == TaskId;
+            return (object)o != null
+                && o.NodeId == NodeId
+                && o.ProjectContextId == ProjectContextId
+                && o.ProjectInstanceId == ProjectInstanceId
+                && o.SubmissionId == SubmissionId
+                && o.TargetId == TargetId
+                && o.TaskId == TaskId;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return
-                (NodeId << 5) +
-                (ProjectContextId << 4) +
-                (ProjectInstanceId << 3) +
-                (SubmissionId << 2) +
-                (TargetId << 1) +
-                TaskId;
+            return (NodeId << 5)
+                + (ProjectContextId << 4)
+                + (ProjectInstanceId << 3)
+                + (SubmissionId << 2)
+                + (TargetId << 1)
+                + TaskId;
         }
 
-        public static bool operator == (BuildEventContext left, BuildEventContext right)
+        public static bool operator ==(BuildEventContext left, BuildEventContext right)
         {
-            return (object) left == null ? (object)right == null : left.Equals (right);
+            return (object)left == null ? (object)right == null : left.Equals(right);
         }
 
-        public static bool operator != (BuildEventContext left, BuildEventContext right)
+        public static bool operator !=(BuildEventContext left, BuildEventContext right)
         {
-            return (object) left == null ? (object)right != null : !left.Equals (right);
+            return (object)left == null ? (object)right != null : !left.Equals(right);
         }
     }
 }
-
-

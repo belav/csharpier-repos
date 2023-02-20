@@ -3,7 +3,7 @@
 // Jonathan Pobst (monkey@jpobst.com)
 // Francis Fisher (frankie@terrorise.me.uk)
 //
-// Copyright (C) 2009 Novell, Inc (http://www.novell.com) 
+// Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,15 +32,13 @@ namespace System.Windows.Forms.DataVisualization.Charting
     public class Axis : ChartNamedElement, IDisposable
     {
         #region Constructors
-        public Axis (ChartArea chartArea, AxisName axisTypeName)
+        public Axis(ChartArea chartArea, AxisName axisTypeName)
         {
             this.ChartArea = chartArea;
             this.AxisName = axisTypeName;
         }
 
-        public Axis ()
-        {
-        }
+        public Axis() { }
         #endregion
 
         #region Public Properties
@@ -78,7 +76,8 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public Grid MinorGrid { get; set; }
         public TickMark MinorTickMark { get; set; }
 
-        public override string Name {
+        public override string Name
+        {
             get { return base.Name; }
             set { base.Name = value; }
         }
@@ -95,43 +94,43 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public string ToolTip { get; set; }
         #endregion
 
-        private ChartArea ChartArea; 
+        private ChartArea ChartArea;
 
         #region Public Methods
         [MonoTODO]
-        public double GetPosition (double axisValue)
+        public double GetPosition(double axisValue)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public double PixelPositionToValue (double position)
+        public double PixelPositionToValue(double position)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public double PositionToValue (double position)
+        public double PositionToValue(double position)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void RoundAxisValues ()
+        public void RoundAxisValues()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public double ValueToPixelPosition (double axisValue)
+        public double ValueToPixelPosition(double axisValue)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public double ValueToPosition (double axisValue)
+        public double ValueToPosition(double axisValue)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
         #endregion
     }

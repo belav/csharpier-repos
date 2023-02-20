@@ -51,25 +51,31 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 new DateTime(2010, 2, 10, 10, 0, 0, DateTimeKind.Utc)
             };
 
-            string json = JsonConvert.SerializeObject(dateList, new JsonSerializerSettings
-            {
-                DateFormatString = "d MMMM, yyyy",
-                Formatting = Formatting.Indented
-            });
+            string json = JsonConvert.SerializeObject(
+                dateList,
+                new JsonSerializerSettings
+                {
+                    DateFormatString = "d MMMM, yyyy",
+                    Formatting = Formatting.Indented
+                }
+            );
 
             Console.WriteLine(json);
             // [
             //   "7 December, 2009",
             //   "1 January, 2010",
             //   "10 February, 2010"
-            // ]            
+            // ]
             #endregion
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""7 December, 2009"",
   ""1 January, 2010"",
   ""10 February, 2010""
-]", json);
+]",
+                json
+            );
         }
     }
 }

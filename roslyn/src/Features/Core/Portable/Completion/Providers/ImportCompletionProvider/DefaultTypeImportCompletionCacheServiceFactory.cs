@@ -10,15 +10,31 @@ using Microsoft.CodeAnalysis.Shared.TestHooks;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    [ExportWorkspaceServiceFactory(typeof(IImportCompletionCacheService<TypeImportCompletionCacheEntry, TypeImportCompletionCacheEntry>), ServiceLayer.Default), Shared]
+    [
+        ExportWorkspaceServiceFactory(
+            typeof(IImportCompletionCacheService<
+                TypeImportCompletionCacheEntry,
+                TypeImportCompletionCacheEntry
+            >),
+            ServiceLayer.Default
+        ),
+        Shared
+    ]
     internal sealed class DefaultTypeImportCompletionCacheServiceFactory
-        : AbstractImportCompletionCacheServiceFactory<TypeImportCompletionCacheEntry, TypeImportCompletionCacheEntry>
+        : AbstractImportCompletionCacheServiceFactory<
+            TypeImportCompletionCacheEntry,
+            TypeImportCompletionCacheEntry
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultTypeImportCompletionCacheServiceFactory(IAsynchronousOperationListenerProvider listenerProvider)
-            : base(listenerProvider, AbstractTypeImportCompletionService.BatchUpdateCacheAsync, CancellationToken.None)
-        {
-        }
+        public DefaultTypeImportCompletionCacheServiceFactory(
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                listenerProvider,
+                AbstractTypeImportCompletionService.BatchUpdateCacheAsync,
+                CancellationToken.None
+            ) { }
     }
 }

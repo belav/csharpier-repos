@@ -6,7 +6,5 @@ using System.Runtime.CompilerServices;
 class Program
 {
     [MethodImpl((MethodImplOptions)255)]
-    void Foo()
-    {
-    }
+    void Foo() { }
 }

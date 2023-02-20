@@ -42,14 +42,22 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int startIndex,
             int count,
             bool visitAll,
-            ref int index);
+            ref int index
+        );
 
         internal static bool InRange(int startIndex, int count, int index)
         {
             return (index >= startIndex) && (index < startIndex + count);
         }
 
-        internal static void GetIntersection(int startIndex1, int count1, int startIndex2, int count2, out int startIndex3, out int count3)
+        internal static void GetIntersection(
+            int startIndex1,
+            int count1,
+            int startIndex2,
+            int count2,
+            out int startIndex3,
+            out int count3
+        )
         {
             startIndex3 = Math.Max(startIndex1, startIndex2);
             int endIndex3 = Math.Min(startIndex1 + count1, startIndex2 + count2);

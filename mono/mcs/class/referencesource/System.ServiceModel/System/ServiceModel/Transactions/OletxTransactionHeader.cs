@@ -16,8 +16,9 @@ namespace System.ServiceModel.Transactions
     {
         const string OleTxHeaderElement = OleTxTransactionExternalStrings.OleTxTransaction;
         const string OleTxNamespace = OleTxTransactionExternalStrings.Namespace;
-        static readonly XmlDictionaryString CoordinationNamespace = XD.CoordinationExternal10Dictionary.Namespace; // we keep using wscoor10 namespace for compatibility
-        
+        static readonly XmlDictionaryString CoordinationNamespace =
+            XD.CoordinationExternal10Dictionary.Namespace; // we keep using wscoor10 namespace for compatibility
+
         byte[] propagationToken;
         WsatExtendedInformation wsatInfo;
 
@@ -31,7 +32,7 @@ namespace System.ServiceModel.Transactions
         {
             get { return true; }
         }
-        
+
         public override string Name
         {
             get { return OleTxHeaderElement; }
@@ -52,22 +53,29 @@ namespace System.ServiceModel.Transactions
             get { return this.wsatInfo; }
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             if (this.wsatInfo != null)
             {
                 if (this.wsatInfo.Timeout != 0)
                 {
-                    writer.WriteAttributeString(XD.CoordinationExternalDictionary.Expires,
-                                                CoordinationNamespace,
-                                                XmlConvert.ToString(this.wsatInfo.Timeout));
+                    writer.WriteAttributeString(
+                        XD.CoordinationExternalDictionary.Expires,
+                        CoordinationNamespace,
+                        XmlConvert.ToString(this.wsatInfo.Timeout)
+                    );
                 }
 
                 if (!string.IsNullOrEmpty(this.wsatInfo.Identifier))
                 {
-                    writer.WriteAttributeString(XD.CoordinationExternalDictionary.Identifier,
-                                                CoordinationNamespace,
-                                                this.wsatInfo.Identifier);
+                    writer.WriteAttributeString(
+                        XD.CoordinationExternalDictionary.Identifier,
+                        CoordinationNamespace,
+                        this.wsatInfo.Identifier
+                    );
                 }
             }
 
@@ -84,7 +92,9 @@ namespace System.ServiceModel.Transactions
             catch (MessageHeaderException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TransactionException(SR.GetString(SR.OleTxHeaderCorrupt), e));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new TransactionException(SR.GetString(SR.OleTxHeaderCorrupt), e)
+                );
             }
 
             if (index < 0)
@@ -101,7 +111,9 @@ namespace System.ServiceModel.Transactions
                 catch (XmlException xe)
                 {
                     DiagnosticUtility.TraceHandledException(xe, TraceEventType.Error);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TransactionException(SR.GetString(SR.OleTxHeaderCorrupt), xe));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new TransactionException(SR.GetString(SR.OleTxHeaderCorrupt), xe)
+                    );
                 }
             }
 
@@ -118,10 +130,17 @@ namespace System.ServiceModel.Transactions
         {
             WsatExtendedInformation info = null;
 
-            if (reader.IsStartElement(XD.OleTxTransactionExternalDictionary.OleTxTransaction,
-                                      XD.OleTxTransactionExternalDictionary.Namespace))
+            if (
+                reader.IsStartElement(
+                    XD.OleTxTransactionExternalDictionary.OleTxTransaction,
+                    XD.OleTxTransactionExternalDictionary.Namespace
+                )
+            )
             {
-                string identifier = reader.GetAttribute(XD.CoordinationExternalDictionary.Identifier, CoordinationNamespace);
+                string identifier = reader.GetAttribute(
+                    XD.CoordinationExternalDictionary.Identifier,
+                    CoordinationNamespace
+                );
 
                 if (!string.IsNullOrEmpty(identifier))
                 {
@@ -129,11 +148,16 @@ namespace System.ServiceModel.Transactions
                     Uri uri;
                     if (!Uri.TryCreate(identifier, UriKind.Absolute, out uri))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.InvalidWsatExtendedInfo)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(SR.GetString(SR.InvalidWsatExtendedInfo))
+                        );
                     }
                 }
 
-                string attr = reader.GetAttribute(XD.CoordinationExternalDictionary.Expires, CoordinationNamespace);
+                string attr = reader.GetAttribute(
+                    XD.CoordinationExternalDictionary.Expires,
+                    CoordinationNamespace
+                );
 
                 uint timeout = 0;
                 if (!string.IsNullOrEmpty(attr))
@@ -145,12 +169,16 @@ namespace System.ServiceModel.Transactions
                     catch (FormatException e)
                     {
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.InvalidWsatExtendedInfo), e));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(SR.GetString(SR.InvalidWsatExtendedInfo), e)
+                        );
                     }
                     catch (OverflowException e)
                     {
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.InvalidWsatExtendedInfo), e));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(SR.GetString(SR.InvalidWsatExtendedInfo), e)
+                        );
                     }
                 }
 
@@ -160,8 +188,10 @@ namespace System.ServiceModel.Transactions
                 }
             }
 
-            reader.ReadFullStartElement(XD.OleTxTransactionExternalDictionary.OleTxTransaction,
-                                        XD.OleTxTransactionExternalDictionary.Namespace);
+            reader.ReadFullStartElement(
+                XD.OleTxTransactionExternalDictionary.OleTxTransaction,
+                XD.OleTxTransactionExternalDictionary.Namespace
+            );
 
             byte[] propagationToken = ReadPropagationTokenElement(reader);
 
@@ -175,29 +205,40 @@ namespace System.ServiceModel.Transactions
             return new OleTxTransactionHeader(propagationToken, info);
         }
 
-        public static void WritePropagationTokenElement(XmlDictionaryWriter writer, byte[] propagationToken)
+        public static void WritePropagationTokenElement(
+            XmlDictionaryWriter writer,
+            byte[] propagationToken
+        )
         {
-            writer.WriteStartElement(XD.OleTxTransactionExternalDictionary.PropagationToken,
-                                     XD.OleTxTransactionExternalDictionary.Namespace);
+            writer.WriteStartElement(
+                XD.OleTxTransactionExternalDictionary.PropagationToken,
+                XD.OleTxTransactionExternalDictionary.Namespace
+            );
             writer.WriteBase64(propagationToken, 0, propagationToken.Length);
             writer.WriteEndElement();
         }
 
         public static bool IsStartPropagationTokenElement(XmlDictionaryReader reader)
         {
-            return reader.IsStartElement(XD.OleTxTransactionExternalDictionary.PropagationToken,
-                                         XD.OleTxTransactionExternalDictionary.Namespace);
+            return reader.IsStartElement(
+                XD.OleTxTransactionExternalDictionary.PropagationToken,
+                XD.OleTxTransactionExternalDictionary.Namespace
+            );
         }
 
         public static byte[] ReadPropagationTokenElement(XmlDictionaryReader reader)
         {
-            reader.ReadFullStartElement(XD.OleTxTransactionExternalDictionary.PropagationToken,
-                                        XD.OleTxTransactionExternalDictionary.Namespace);
+            reader.ReadFullStartElement(
+                XD.OleTxTransactionExternalDictionary.PropagationToken,
+                XD.OleTxTransactionExternalDictionary.Namespace
+            );
 
             byte[] propagationToken = reader.ReadContentAsBase64();
             if (propagationToken.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.InvalidPropagationToken)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.InvalidPropagationToken))
+                );
             }
 
             reader.ReadEndElement();

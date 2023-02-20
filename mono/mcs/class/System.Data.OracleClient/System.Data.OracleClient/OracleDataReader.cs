@@ -1,5 +1,5 @@
 //
-// OracleDataReader.cs 
+// OracleDataReader.cs
 //
 // Part of the Mono class libraries at
 // mcs/class/System.Data.OracleClient/System.Data.OracleClient
@@ -29,8 +29,7 @@ using System.Text;
 
 namespace System.Data.OracleClient
 {
-    public sealed class OracleDataReader :
-        DbDataReader
+    public sealed class OracleDataReader : DbDataReader
     {
         #region Fields
 
@@ -49,142 +48,138 @@ namespace System.Data.OracleClient
 
         #region Constructors
 
-        internal OracleDataReader (OracleCommand command, OciStatementHandle statement, bool extHasRows, CommandBehavior behavior)
+        internal OracleDataReader(
+            OracleCommand command,
+            OciStatementHandle statement,
+            bool extHasRows,
+            CommandBehavior behavior
+        )
         {
             this.command = command;
             this.hasRows = extHasRows;
-            this.schemaTable = ConstructSchemaTable ();
+            this.schemaTable = ConstructSchemaTable();
             this.statement = statement;
-            this.statementType = statement.GetStatementType ();
+            this.statementType = statement.GetStatementType();
             this.behavior = behavior;
         }
 
-        ~OracleDataReader ()
+        ~OracleDataReader()
         {
-            Dispose (false);
+            Dispose(false);
         }
 
         #endregion // Constructors
 
         #region Properties
 
-        public
-        override
-        int Depth {
+        public override int Depth
+        {
             get { return 0; }
         }
 
-        public
-        override
-        int FieldCount {
+        public override int FieldCount
+        {
             get { return statement.ColumnCount; }
         }
 
-        public
-        override
-        bool HasRows {
+        public override bool HasRows
+        {
             get { return hasRows; }
         }
 
-        public
-        override
-        bool IsClosed {
+        public override bool IsClosed
+        {
             get { return isClosed; }
         }
 
-        public
-        override
-        object this [string name] {
-            get { return GetValue (GetOrdinal (name)); }
+        public override object this[string name]
+        {
+            get { return GetValue(GetOrdinal(name)); }
         }
 
-        public
-        override
-        object this [int i] {
-            get { return GetValue (i); }
+        public override object this[int i]
+        {
+            get { return GetValue(i); }
         }
 
-        public
-        override
-        int RecordsAffected {
-            get {
-                return GetRecordsAffected ();
-            }
+        public override int RecordsAffected
+        {
+            get { return GetRecordsAffected(); }
         }
 
         #endregion // Properties
 
         #region Methods
 
-        public
-        override
-        void Close ()
+        public override void Close()
         {
-            if (!isClosed) {
-                GetRecordsAffected ();
+            if (!isClosed)
+            {
+                GetRecordsAffected();
                 if (command != null)
-                    command.CloseDataReader ();
+                    command.CloseDataReader();
             }
-            if (statement != null) {
+            if (statement != null)
+            {
                 statement.Dispose();
                 statement = null;
             }
-            if (schemaTable != null) {
-                schemaTable.Dispose ();
+            if (schemaTable != null)
+            {
+                schemaTable.Dispose();
                 schemaTable = null;
             }
             isClosed = true;
         }
 
-        private static DataTable ConstructSchemaTable ()
+        private static DataTable ConstructSchemaTable()
         {
-            Type booleanType = typeof (bool);
-            Type stringType = typeof (string);
-            Type intType = typeof (int);
-            Type typeType = typeof (Type);
-            Type shortType = typeof (short);
+            Type booleanType = typeof(bool);
+            Type stringType = typeof(string);
+            Type intType = typeof(int);
+            Type typeType = typeof(Type);
+            Type shortType = typeof(short);
 
-            DataTable schemaTable = new DataTable ("SchemaTable");
-            schemaTable.Columns.Add ("ColumnName", stringType);
-            schemaTable.Columns.Add ("ColumnOrdinal", intType);
-            schemaTable.Columns.Add ("ColumnSize", intType);
-            schemaTable.Columns.Add ("NumericPrecision", shortType);
-            schemaTable.Columns.Add ("NumericScale", shortType);
-            schemaTable.Columns.Add ("DataType", typeType);
-            schemaTable.Columns.Add ("ProviderType", intType);
-            schemaTable.Columns.Add ("IsLong", booleanType);
-            schemaTable.Columns.Add ("AllowDBNull", booleanType);
-            schemaTable.Columns.Add ("IsAliased", booleanType);
-            schemaTable.Columns.Add ("IsExpression", booleanType);
-            schemaTable.Columns.Add ("IsKey", booleanType);
-            schemaTable.Columns.Add ("IsUnique", booleanType);
-            schemaTable.Columns.Add ("BaseSchemaName", stringType);
-            schemaTable.Columns.Add ("BaseTableName", stringType);
-            schemaTable.Columns.Add ("BaseColumnName", stringType);
+            DataTable schemaTable = new DataTable("SchemaTable");
+            schemaTable.Columns.Add("ColumnName", stringType);
+            schemaTable.Columns.Add("ColumnOrdinal", intType);
+            schemaTable.Columns.Add("ColumnSize", intType);
+            schemaTable.Columns.Add("NumericPrecision", shortType);
+            schemaTable.Columns.Add("NumericScale", shortType);
+            schemaTable.Columns.Add("DataType", typeType);
+            schemaTable.Columns.Add("ProviderType", intType);
+            schemaTable.Columns.Add("IsLong", booleanType);
+            schemaTable.Columns.Add("AllowDBNull", booleanType);
+            schemaTable.Columns.Add("IsAliased", booleanType);
+            schemaTable.Columns.Add("IsExpression", booleanType);
+            schemaTable.Columns.Add("IsKey", booleanType);
+            schemaTable.Columns.Add("IsUnique", booleanType);
+            schemaTable.Columns.Add("BaseSchemaName", stringType);
+            schemaTable.Columns.Add("BaseTableName", stringType);
+            schemaTable.Columns.Add("BaseColumnName", stringType);
 
             return schemaTable;
         }
 
-
-        public
-        override
-        bool GetBoolean (int i)
+        public override bool GetBoolean(int i)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public
-        override
-        byte GetByte (int i)
+        public override byte GetByte(int i)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public
-        override
-        long GetBytes (int i, long fieldOffset, byte[] buffer2, int bufferoffset, int length)
+        public override long GetBytes(
+            int i,
+            long fieldOffset,
+            byte[] buffer2,
+            int bufferoffset,
+            int length
+        )
         {
-            byte[] value = (byte[]) GetValue (i);
+            byte[] value = (byte[])GetValue(i);
 
             if (buffer2 == null)
                 return value.Length; // Return length of data
@@ -192,210 +187,194 @@ namespace System.Data.OracleClient
             // Copy data into buffer
             long lobLength = value.Length;
             if ((lobLength - fieldOffset) < length)
-                length = (int) (lobLength - fieldOffset);
-            Array.Copy (value, (int) fieldOffset, buffer2,
-                bufferoffset, length);
+                length = (int)(lobLength - fieldOffset);
+            Array.Copy(value, (int)fieldOffset, buffer2, bufferoffset, length);
             return length; // return actual read count
         }
 
-        public
-        override
-        char GetChar (int i)
+        public override char GetChar(int i)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public
-        override
-        long GetChars (int i, long fieldOffset, char[] buffer2, int bufferoffset, int length)
+        public override long GetChars(
+            int i,
+            long fieldOffset,
+            char[] buffer2,
+            int bufferoffset,
+            int length
+        )
         {
-            char [] value = (char[]) GetValue (i);
-            Array.Copy (value, (int) fieldOffset, buffer2,
-                bufferoffset, length);
+            char[] value = (char[])GetValue(i);
+            Array.Copy(value, (int)fieldOffset, buffer2, bufferoffset, length);
             return (value.Length - fieldOffset);
         }
 
-
-        public
-        override
-        string GetDataTypeName (int i)
+        public override string GetDataTypeName(int i)
         {
-            return dataTypeNames [i].ToString ().ToUpper ();
+            return dataTypeNames[i].ToString().ToUpper();
         }
 
-        public
-        override
-        DateTime GetDateTime (int i)
+        public override DateTime GetDateTime(int i)
         {
-            IConvertible c = (IConvertible) GetValue (i);
-            return c.ToDateTime (CultureInfo.CurrentCulture);
+            IConvertible c = (IConvertible)GetValue(i);
+            return c.ToDateTime(CultureInfo.CurrentCulture);
         }
 
-        public
-        override
-        decimal GetDecimal (int i)
+        public override decimal GetDecimal(int i)
         {
-            IConvertible c = (IConvertible) GetValue (i);
-            return c.ToDecimal (CultureInfo.CurrentCulture);
+            IConvertible c = (IConvertible)GetValue(i);
+            return c.ToDecimal(CultureInfo.CurrentCulture);
         }
 
-        public
-        override
-        double GetDouble (int i)
+        public override double GetDouble(int i)
         {
-            IConvertible c = (IConvertible) GetValue (i);
-            return c.ToDouble (CultureInfo.CurrentCulture);
+            IConvertible c = (IConvertible)GetValue(i);
+            return c.ToDouble(CultureInfo.CurrentCulture);
         }
 
-        public
-        override
-        Type GetFieldType (int i)
+        public override Type GetFieldType(int i)
         {
-            OciDefineHandle defineHandle = (OciDefineHandle) statement.Values [i];
+            OciDefineHandle defineHandle = (OciDefineHandle)statement.Values[i];
             return defineHandle.FieldType;
         }
 
-        public
-        override
-        float GetFloat (int i)
+        public override float GetFloat(int i)
         {
-            IConvertible c = (IConvertible) GetValue (i);
-            return c.ToSingle (CultureInfo.CurrentCulture);
+            IConvertible c = (IConvertible)GetValue(i);
+            return c.ToSingle(CultureInfo.CurrentCulture);
         }
 
-        public
-        override
-        Guid GetGuid (int i)
+        public override Guid GetGuid(int i)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public
-        override
-        short GetInt16 (int i)
+        public override short GetInt16(int i)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public
-        override
-        int GetInt32 (int i)
+        public override int GetInt32(int i)
         {
-            IConvertible c = (IConvertible) GetValue (i);
-            return c.ToInt32 (CultureInfo.CurrentCulture);
+            IConvertible c = (IConvertible)GetValue(i);
+            return c.ToInt32(CultureInfo.CurrentCulture);
         }
 
-        public
-        override
-        long GetInt64 (int i)
+        public override long GetInt64(int i)
         {
-            IConvertible c = (IConvertible) GetValue (i);
-            return c.ToInt64 (CultureInfo.CurrentCulture);
+            IConvertible c = (IConvertible)GetValue(i);
+            return c.ToInt64(CultureInfo.CurrentCulture);
         }
 
-        public
-        override
-        string GetName (int i)
+        public override string GetName(int i)
         {
-            return statement.GetParameter (i).GetName ();
+            return statement.GetParameter(i).GetName();
         }
 
         [MonoTODO]
-        public OracleBFile GetOracleBFile (int i)
+        public OracleBFile GetOracleBFile(int i)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public OracleBinary GetOracleBinary (int i)
+        public OracleBinary GetOracleBinary(int i)
         {
-            if (IsDBNull (i))
+            if (IsDBNull(i))
                 throw new InvalidOperationException("The value is null");
 
-            return new OracleBinary ((byte[]) GetValue (i));
+            return new OracleBinary((byte[])GetValue(i));
         }
 
-        public OracleLob GetOracleLob (int i)
+        public OracleLob GetOracleLob(int i)
         {
-            if (IsDBNull (i))
+            if (IsDBNull(i))
                 throw new InvalidOperationException("The value is null");
 
-            OracleLob output = (OracleLob) ((OciDefineHandle) statement.Values [i]).GetValue (
-                command.Connection.SessionFormatProvider, command.Connection);
+            OracleLob output = (OracleLob)
+                ((OciDefineHandle)statement.Values[i]).GetValue(
+                    command.Connection.SessionFormatProvider,
+                    command.Connection
+                );
             output.connection = command.Connection;
             return output;
         }
 
-        public OracleNumber GetOracleNumber (int i)
+        public OracleNumber GetOracleNumber(int i)
         {
-            if (IsDBNull (i))
+            if (IsDBNull(i))
                 throw new InvalidOperationException("The value is null");
 
-            return new OracleNumber (GetDecimal (i));
+            return new OracleNumber(GetDecimal(i));
         }
 
-        public OracleDateTime GetOracleDateTime (int i)
+        public OracleDateTime GetOracleDateTime(int i)
         {
-            if (IsDBNull (i))
+            if (IsDBNull(i))
                 throw new InvalidOperationException("The value is null");
 
-            return new OracleDateTime (GetDateTime (i));
+            return new OracleDateTime(GetDateTime(i));
         }
 
-        public OracleMonthSpan GetOracleMonthSpan (int i)
+        public OracleMonthSpan GetOracleMonthSpan(int i)
         {
-            if (IsDBNull (i))
+            if (IsDBNull(i))
                 throw new InvalidOperationException("The value is null");
 
-            OracleMonthSpan output = (OracleMonthSpan) ((OciDefineHandle) statement.Values [i]).GetValue (
-                command.Connection.SessionFormatProvider, command.Connection);
+            OracleMonthSpan output = (OracleMonthSpan)
+                ((OciDefineHandle)statement.Values[i]).GetValue(
+                    command.Connection.SessionFormatProvider,
+                    command.Connection
+                );
             return output;
         }
 
-        public OracleString GetOracleString (int i)
+        public OracleString GetOracleString(int i)
         {
-            if (IsDBNull (i))
+            if (IsDBNull(i))
                 throw new InvalidOperationException("The value is null");
 
-            return new OracleString (GetString (i));
+            return new OracleString(GetString(i));
         }
 
-        public object GetOracleValue (int i)
+        public object GetOracleValue(int i)
         {
-            OciDefineHandle defineHandle = (OciDefineHandle) statement.Values [i];
+            OciDefineHandle defineHandle = (OciDefineHandle)statement.Values[i];
 
-            switch (defineHandle.DataType) {
-            case OciDataType.Raw:
-                return GetOracleBinary (i);
-            case OciDataType.Date:
-                return GetOracleDateTime (i);
-            case OciDataType.Clob:
-            case OciDataType.Blob:
-                return GetOracleLob (i);
-            case OciDataType.Integer:
-            case OciDataType.Number:
-            case OciDataType.Float:
-                return GetOracleNumber (i);
-            case OciDataType.VarChar2:
-            case OciDataType.String:
-            case OciDataType.VarChar:
-            case OciDataType.Char:
-            case OciDataType.CharZ:
-            case OciDataType.OciString:
-            case OciDataType.LongVarChar:
-            case OciDataType.Long:
-            case OciDataType.RowIdDescriptor:
-                return GetOracleString (i);
-            case OciDataType.IntervalDayToSecond:
-                return GetOracleTimeSpan (i);
-            case OciDataType.IntervalYearToMonth:
-                return GetOracleMonthSpan (i);
-            default:
-                throw new NotImplementedException ();
+            switch (defineHandle.DataType)
+            {
+                case OciDataType.Raw:
+                    return GetOracleBinary(i);
+                case OciDataType.Date:
+                    return GetOracleDateTime(i);
+                case OciDataType.Clob:
+                case OciDataType.Blob:
+                    return GetOracleLob(i);
+                case OciDataType.Integer:
+                case OciDataType.Number:
+                case OciDataType.Float:
+                    return GetOracleNumber(i);
+                case OciDataType.VarChar2:
+                case OciDataType.String:
+                case OciDataType.VarChar:
+                case OciDataType.Char:
+                case OciDataType.CharZ:
+                case OciDataType.OciString:
+                case OciDataType.LongVarChar:
+                case OciDataType.Long:
+                case OciDataType.RowIdDescriptor:
+                    return GetOracleString(i);
+                case OciDataType.IntervalDayToSecond:
+                    return GetOracleTimeSpan(i);
+                case OciDataType.IntervalYearToMonth:
+                    return GetOracleMonthSpan(i);
+                default:
+                    throw new NotImplementedException();
             }
         }
 
-        public int GetOracleValues (object[] values)
+        public int GetOracleValues(object[] values)
         {
             int len = values.Length;
             int count = statement.ColumnCount;
@@ -406,91 +385,101 @@ namespace System.Data.OracleClient
             else
                 retval = len;
 
-            for (int i = 0; i < retval; i += 1) 
-                values [i] = GetOracleValue (i);
+            for (int i = 0; i < retval; i += 1)
+                values[i] = GetOracleValue(i);
 
             return retval;
         }
 
-        public OracleTimeSpan GetOracleTimeSpan (int i)
+        public OracleTimeSpan GetOracleTimeSpan(int i)
         {
-            return new OracleTimeSpan (GetTimeSpan (i));
+            return new OracleTimeSpan(GetTimeSpan(i));
         }
 
-        public
-        override
-        int GetOrdinal (string name)
+        public override int GetOrdinal(string name)
         {
-            int i = GetOrdinalInternal (name);
+            int i = GetOrdinalInternal(name);
             if (i == -1)
-                throw new IndexOutOfRangeException ();
+                throw new IndexOutOfRangeException();
             return i;
         }
 
-        private int GetOrdinalInternal (string name)
+        private int GetOrdinalInternal(string name)
         {
             int i;
-            
-            for (i = 0; i < statement.ColumnCount; i += 1) {
-                if (String.Compare (statement.GetParameter(i).GetName(), name, false) == 0)
+
+            for (i = 0; i < statement.ColumnCount; i += 1)
+            {
+                if (String.Compare(statement.GetParameter(i).GetName(), name, false) == 0)
                     return i;
             }
 
-            for (i = 0; i < statement.ColumnCount; i += 1) {
-                if (String.Compare (statement.GetParameter(i).GetName(), name, true) == 0)
+            for (i = 0; i < statement.ColumnCount; i += 1)
+            {
+                if (String.Compare(statement.GetParameter(i).GetName(), name, true) == 0)
                     return i;
             }
 
             return -1;
         }
 
-        private int GetRecordsAffected ()
+        private int GetRecordsAffected()
         {
             if (statementType == OciStatementType.Select)
                 return -1;
-            else {
-                if (!isClosed) {
+            else
+            {
+                if (!isClosed)
+                {
                     if (recordsAffected == -1)
                         if (statement != null)
-                            recordsAffected = statement.GetAttributeInt32 (OciAttributeType.RowCount, command.ErrorHandle);
+                            recordsAffected = statement.GetAttributeInt32(
+                                OciAttributeType.RowCount,
+                                command.ErrorHandle
+                            );
                 }
             }
-            
+
             return recordsAffected;
         }
 
         // get the KeyInfo about table columns (primary key)
-        private StringCollection GetKeyInfo (out string ownerName, out string tableName) 
+        private StringCollection GetKeyInfo(out string ownerName, out string tableName)
         {
-            ArrayList tables = new ArrayList ();
-            ParseSql (command.CommandText, ref tables);
+            ArrayList tables = new ArrayList();
+            ParseSql(command.CommandText, ref tables);
             // TODO: handle multiple tables
-            GetOwnerAndName ((string)tables[0], out ownerName, out tableName);
-            return GetKeyColumns (ownerName, tableName);
+            GetOwnerAndName((string)tables[0], out ownerName, out tableName);
+            return GetKeyColumns(ownerName, tableName);
         }
 
         // get the columns in a table that have a primary key
-        private StringCollection GetKeyColumns(string owner, string table) 
+        private StringCollection GetKeyColumns(string owner, string table)
         {
-            OracleCommand cmd = command.Connection.CreateCommand ();
+            OracleCommand cmd = command.Connection.CreateCommand();
 
-            StringCollection columns = new StringCollection ();
+            StringCollection columns = new StringCollection();
 
             if (command.Transaction != null)
                 cmd.Transaction = command.Transaction;
 
-            cmd.CommandText = "select col.column_name " +
-                "from all_constraints pk, all_cons_columns col " +
-                "where pk.owner = '" + owner + "' " +
-                "and pk.table_name = '" + table + "' " +
-                "and pk.constraint_type = 'P' " +
-                "and pk.owner = col.owner " +
-                "and pk.table_name = col.table_name " +
-                "and pk.constraint_name = col.constraint_name";
+            cmd.CommandText =
+                "select col.column_name "
+                + "from all_constraints pk, all_cons_columns col "
+                + "where pk.owner = '"
+                + owner
+                + "' "
+                + "and pk.table_name = '"
+                + table
+                + "' "
+                + "and pk.constraint_type = 'P' "
+                + "and pk.owner = col.owner "
+                + "and pk.table_name = col.table_name "
+                + "and pk.constraint_name = col.constraint_name";
 
-            OracleDataReader rdr = cmd.ExecuteReader ();
-            while (rdr.Read ())
-                columns.Add (rdr.GetString (0));
+            OracleDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+                columns.Add(rdr.GetString(0));
 
             rdr.Close();
             rdr = null;
@@ -504,87 +493,106 @@ namespace System.Data.OracleClient
         // TODO: parse the column aliases and table aliases too
         //       and determine if a column is a true table column
         //       or an expression
-        private void ParseSql (string sql, ref ArrayList tables) {
+        private void ParseSql(string sql, ref ArrayList tables)
+        {
             if (sql == String.Empty)
                 return;
 
-            char[] chars = sql.ToCharArray ();
-            StringBuilder wb = new StringBuilder ();
+            char[] chars = sql.ToCharArray();
+            StringBuilder wb = new StringBuilder();
 
             bool bFromFound = false;
             bool bEnd = false;
             int i = 0;
             bool bTableFound = false;
-        
-            for (; !bEnd && i < chars.Length; i++) {
+
+            for (; !bEnd && i < chars.Length; i++)
+            {
                 char ch = chars[i];
-            
-                if (Char.IsLetter (ch)) {
-                    wb.Append (ch);
-                } else if (Char.IsWhiteSpace (ch)) {
-                    if (wb.Length > 0) {
-                        if (!bFromFound) {
-                            string word = wb.ToString ().ToUpper ();
-                            if (word.Equals ("FROM")) {
+
+                if (Char.IsLetter(ch))
+                {
+                    wb.Append(ch);
+                }
+                else if (Char.IsWhiteSpace(ch))
+                {
+                    if (wb.Length > 0)
+                    {
+                        if (!bFromFound)
+                        {
+                            string word = wb.ToString().ToUpper();
+                            if (word.Equals("FROM"))
+                            {
                                 bFromFound = true;
                             }
                             wb = null;
-                            wb = new StringBuilder ();
+                            wb = new StringBuilder();
                             bTableFound = false;
-                        } else {
-                            switch (wb.ToString ().ToUpper ()) {
+                        }
+                        else
+                        {
+                            switch (wb.ToString().ToUpper())
+                            {
+                                case "WHERE":
+                                case "ORDER":
+                                case "GROUP":
+                                    bEnd = true;
+                                    bTableFound = false;
+                                    break;
+                                default:
+                                    if (bTableFound)
+                                        bTableFound = false; // this is done in case of a table alias
+                                    else
+                                    {
+                                        bTableFound = true;
+                                        tables.Add(wb.ToString().ToUpper());
+                                    }
+                                    wb = null;
+                                    wb = new StringBuilder();
+                                    break;
+                            }
+                        }
+                    }
+                }
+                else if (bFromFound)
+                {
+                    switch (ch)
+                    {
+                        case ',':
+                            if (bTableFound)
+                                bTableFound = false;
+                            else
+                                tables.Add(wb.ToString().ToUpper());
+                            wb = null;
+                            wb = new StringBuilder();
+                            break;
+                        case '$':
+                        case '_':
+                        case '.':
+                            wb.Append(ch);
+                            break;
+                    }
+                }
+            }
+            if (!bEnd)
+            {
+                if (wb.Length > 0)
+                {
+                    if (!bFromFound && wb.ToString().ToUpper().Equals("FROM"))
+                        bFromFound = true;
+                    if (bFromFound)
+                    {
+                        switch (wb.ToString().ToUpper())
+                        {
                             case "WHERE":
                             case "ORDER":
                             case "GROUP":
                                 bEnd = true;
-                                bTableFound = false;
                                 break;
                             default:
-                                if (bTableFound)
-                                    bTableFound = false; // this is done in case of a table alias
-                                else {
-                                    bTableFound = true;
-                                    tables.Add (wb.ToString ().ToUpper ());
-                                }
-                                wb = null;
-                                wb = new StringBuilder ();
+                                if (!bTableFound)
+                                    tables.Add(wb.ToString().ToUpper());
                                 break;
-                            }
-                        }
-                    }
-                } else if (bFromFound) {
-                    switch (ch) {
-                    case ',': 
-                        if (bTableFound)
-                            bTableFound = false;
-                        else
-                            tables.Add (wb.ToString ().ToUpper ());
-                        wb = null;
-                        wb = new StringBuilder ();
-                        break;
-                    case '$':
-                    case '_':
-                    case '.':
-                        wb.Append (ch);
-                        break;
-                    }
-                }
-            }
-            if (!bEnd) {
-                if (wb.Length > 0) {
-                    if (!bFromFound && wb.ToString ().ToUpper ().Equals ("FROM"))
-                        bFromFound = true;
-                    if (bFromFound) {
-                        switch(wb.ToString ().ToUpper ()) {
-                        case "WHERE":
-                        case "ORDER":
-                        case "GROUP":
-                            bEnd = true;
-                            break;
-                        default:
-                            if (!bTableFound)
-                                tables.Add (wb.ToString ().ToUpper ());
-                            break;
                         }
                     }
                 }
@@ -594,29 +602,30 @@ namespace System.Data.OracleClient
         // takes a object name like "owner.name" and parses it into "owner" and "name" strings
         // if object name is only "name", then it gets the username as the owner and returns
         // the name
-        private void GetOwnerAndName (string objectName, out string owner, out string name) 
+        private void GetOwnerAndName(string objectName, out string owner, out string name)
         {
-            int idx = objectName.IndexOf (".");
-            if (idx == -1) {
-                OracleCommand cmd = command.Connection.CreateCommand ();
+            int idx = objectName.IndexOf(".");
+            if (idx == -1)
+            {
+                OracleCommand cmd = command.Connection.CreateCommand();
                 if (command.Transaction != null)
                     cmd.Transaction = command.Transaction;
 
                 cmd.CommandText = "SELECT USER FROM DUAL";
-                owner = (string) cmd.ExecuteScalar();
+                owner = (string)cmd.ExecuteScalar();
                 name = objectName;
                 cmd.Dispose();
                 cmd = null;
-            } else {
-                owner = objectName.Substring (0, idx);
-                name = objectName.Substring (idx + 1);
+            }
+            else
+            {
+                owner = objectName.Substring(0, idx);
+                name = objectName.Substring(idx + 1);
             }
         }
 
         [MonoTODO("Implement this properly, with all needed information.")]
-        public
-        override
-        DataTable GetSchemaTable ()
+        public override DataTable GetSchemaTable()
         {
             StringCollection keyinfo = null;
 
@@ -626,100 +635,102 @@ namespace System.Data.OracleClient
             string owner = String.Empty;
             string table = String.Empty;
             if ((behavior & CommandBehavior.KeyInfo) != 0)
-                keyinfo = GetKeyInfo (out owner, out table);
+                keyinfo = GetKeyInfo(out owner, out table);
 
-            dataTypeNames = new ArrayList ();
+            dataTypeNames = new ArrayList();
 
-            for (int i = 0; i < statement.ColumnCount; i += 1) {
-                DataRow row = schemaTable.NewRow ();
+            for (int i = 0; i < statement.ColumnCount; i += 1)
+            {
+                DataRow row = schemaTable.NewRow();
 
-                OciParameterDescriptor parameter = statement.GetParameter (i);
+                OciParameterDescriptor parameter = statement.GetParameter(i);
 
-                dataTypeNames.Add (parameter.GetDataTypeName ());
+                dataTypeNames.Add(parameter.GetDataTypeName());
 
-                row ["ColumnName"]        = parameter.GetName ();
-                row ["ColumnOrdinal"]        = i + 1;
-                row ["ColumnSize"]        = parameter.GetDataSize ();
-                row ["NumericPrecision"]    = parameter.GetPrecision ();
-                row ["NumericScale"]        = parameter.GetScale ();
-                
-                string sDataTypeName        = parameter.GetDataTypeName ();
-                row ["DataType"]        = parameter.GetFieldType (sDataTypeName);
-                
+                row["ColumnName"] = parameter.GetName();
+                row["ColumnOrdinal"] = i + 1;
+                row["ColumnSize"] = parameter.GetDataSize();
+                row["NumericPrecision"] = parameter.GetPrecision();
+                row["NumericScale"] = parameter.GetScale();
+
+                string sDataTypeName = parameter.GetDataTypeName();
+                row["DataType"] = parameter.GetFieldType(sDataTypeName);
+
                 OciDataType ociType = parameter.GetDataType();
-                OracleType oraType = OciParameterDescriptor.OciDataTypeToOracleType (ociType);
-                row ["ProviderType"]        = (int) oraType;
-                
+                OracleType oraType = OciParameterDescriptor.OciDataTypeToOracleType(ociType);
+                row["ProviderType"] = (int)oraType;
+
                 if (ociType == OciDataType.Blob || ociType == OciDataType.Clob)
-                    row ["IsLong"]        = true;
+                    row["IsLong"] = true;
                 else
-                    row ["IsLong"]        = false;
+                    row["IsLong"] = false;
 
-                row ["AllowDBNull"]        = parameter.GetIsNull ();
+                row["AllowDBNull"] = parameter.GetIsNull();
 
-                row ["IsAliased"]        = DBNull.Value; // TODO:
-                row ["IsExpression"]        = DBNull.Value; // TODO:
-                
-                if ((behavior & CommandBehavior.KeyInfo) != 0) {
-                    if (keyinfo.IndexOf ((string)row ["ColumnName"]) >= 0)
-                        row ["IsKey"] = true;
+                row["IsAliased"] = DBNull.Value; // TODO:
+                row["IsExpression"] = DBNull.Value; // TODO:
+
+                if ((behavior & CommandBehavior.KeyInfo) != 0)
+                {
+                    if (keyinfo.IndexOf((string)row["ColumnName"]) >= 0)
+                        row["IsKey"] = true;
                     else
-                        row ["IsKey"] = false;
+                        row["IsKey"] = false;
 
-                    row ["IsUnique"]    = DBNull.Value; // TODO: only set this if CommandBehavior.KeyInfo, otherwise, null
-                    row ["BaseSchemaName"]    = owner;
-                    row ["BaseTableName"]    = table;
-                    row ["BaseColumnName"]    = row ["ColumnName"];
-                } else {
-                    row ["IsKey"]        = DBNull.Value;    
-                    row ["IsUnique"]    = DBNull.Value; 
-                    row ["BaseSchemaName"]    = DBNull.Value; 
-                    row ["BaseTableName"]    = DBNull.Value; 
-                    row ["BaseColumnName"]    = DBNull.Value; 
+                    row["IsUnique"] = DBNull.Value; // TODO: only set this if CommandBehavior.KeyInfo, otherwise, null
+                    row["BaseSchemaName"] = owner;
+                    row["BaseTableName"] = table;
+                    row["BaseColumnName"] = row["ColumnName"];
+                }
+                else
+                {
+                    row["IsKey"] = DBNull.Value;
+                    row["IsUnique"] = DBNull.Value;
+                    row["BaseSchemaName"] = DBNull.Value;
+                    row["BaseTableName"] = DBNull.Value;
+                    row["BaseColumnName"] = DBNull.Value;
                 }
 
-                schemaTable.Rows.Add (row);
+                schemaTable.Rows.Add(row);
             }
 
             return schemaTable;
         }
 
-        public
-        override
-        string GetString (int i)
+        public override string GetString(int i)
         {
-            return (string) GetValue (i);
+            return (string)GetValue(i);
         }
 
-        public TimeSpan GetTimeSpan (int i)
+        public TimeSpan GetTimeSpan(int i)
         {
-            return (TimeSpan) GetValue (i);
+            return (TimeSpan)GetValue(i);
         }
 
-        public
-        override
-        object GetValue (int i)
+        public override object GetValue(int i)
         {
-            OciDefineHandle defineHandle = (OciDefineHandle) statement.Values [i];
+            OciDefineHandle defineHandle = (OciDefineHandle)statement.Values[i];
 
             if (defineHandle.IsNull)
                 return DBNull.Value;
 
-            switch (defineHandle.DataType) {
-            case OciDataType.Blob:
-            case OciDataType.Clob:
-                OracleLob lob = GetOracleLob (i);
-                object value = lob.Value;
-                lob.Close ();
-                return value;
-            default:
-                return defineHandle.GetValue (command.Connection.SessionFormatProvider, command.Connection);
+            switch (defineHandle.DataType)
+            {
+                case OciDataType.Blob:
+                case OciDataType.Clob:
+                    OracleLob lob = GetOracleLob(i);
+                    object value = lob.Value;
+                    lob.Close();
+                    return value;
+                default:
+                    return defineHandle.GetValue(
+                        command.Connection.SessionFormatProvider,
+                        command.Connection
+                    );
             }
         }
 
-        public
-        override
-        int GetValues (object [] values)
+        public override int GetValues(object[] values)
         {
             int len = values.Length;
             int count = statement.ColumnCount;
@@ -730,59 +741,56 @@ namespace System.Data.OracleClient
             else
                 retval = len;
 
-            for (int i = 0; i < retval; i += 1) 
-                values [i] = GetValue (i);
+            for (int i = 0; i < retval; i += 1)
+                values[i] = GetValue(i);
 
             return retval;
         }
 
-        public override IEnumerator GetEnumerator ()
+        public override IEnumerator GetEnumerator()
         {
-            return new DbEnumerator (this);
+            return new DbEnumerator(this);
         }
 
-        public
-        override
-        bool IsDBNull (int i)
+        public override bool IsDBNull(int i)
         {
-            OciDefineHandle defineHandle = (OciDefineHandle) statement.Values [i];
+            OciDefineHandle defineHandle = (OciDefineHandle)statement.Values[i];
             return defineHandle.IsNull;
         }
 
-        void ValidateState ()
+        void ValidateState()
         {
             if (IsClosed)
-                throw new InvalidOperationException ("Invalid attempt to read data when reader is closed");
+                throw new InvalidOperationException(
+                    "Invalid attempt to read data when reader is closed"
+                );
         }
 
-        public
-        override
-        bool NextResult ()
+        public override bool NextResult()
         {
-            ValidateState ();
+            ValidateState();
 
             if (statement == null)
                 return false;
 
-            statement.Dispose ();
+            statement.Dispose();
             statement = null;
-            
-            statement = command.GetNextResult ();
-            
+
+            statement = command.GetNextResult();
+
             if (statement == null)
                 return false;
 
-            return true; 
+            return true;
         }
 
-        public
-        override
-        bool Read ()
+        public override bool Read()
         {
-            ValidateState ();
+            ValidateState();
 
-            if (hasRows) {
-                bool retval = statement.Fetch ();
+            if (hasRows)
+            {
+                bool retval = statement.Fetch();
                 hasRows = retval;
                 return retval;
             }
@@ -790,21 +798,21 @@ namespace System.Data.OracleClient
         }
 
         [MonoTODO]
-        public override Type GetProviderSpecificFieldType (int i)
+        public override Type GetProviderSpecificFieldType(int i)
         {
-            return GetOracleValue (i).GetType ();
+            return GetOracleValue(i).GetType();
         }
 
         [MonoTODO]
-        public override object GetProviderSpecificValue (int i)
+        public override object GetProviderSpecificValue(int i)
         {
-            return GetOracleValue (i);
+            return GetOracleValue(i);
         }
 
         [MonoTODO]
-        public override int GetProviderSpecificValues (object [] values)
+        public override int GetProviderSpecificValues(object[] values)
         {
-            return GetOracleValues (values);
+            return GetOracleValues(values);
         }
 
         #endregion // Methods

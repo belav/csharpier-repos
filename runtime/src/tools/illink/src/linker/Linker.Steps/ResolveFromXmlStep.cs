@@ -37,14 +37,12 @@ namespace Mono.Linker.Steps
 {
     public class ResolveFromXmlStep : ProcessLinkerXmlStepBase
     {
-        public ResolveFromXmlStep (Stream documentStream, string xmlDocumentLocation)
-            : base (documentStream, xmlDocumentLocation)
-        {
-        }
+        public ResolveFromXmlStep(Stream documentStream, string xmlDocumentLocation)
+            : base(documentStream, xmlDocumentLocation) { }
 
-        protected override void Process ()
+        protected override void Process()
         {
-            new DescriptorMarker (Context, _documentStream, _xmlDocumentLocation).Mark ();
+            new DescriptorMarker(Context, _documentStream, _xmlDocumentLocation).Mark();
         }
     }
 }

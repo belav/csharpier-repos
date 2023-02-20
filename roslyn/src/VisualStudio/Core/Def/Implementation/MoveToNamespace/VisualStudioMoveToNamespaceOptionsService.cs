@@ -28,8 +28,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
             _showDialog = viewModel => new MoveToNamespaceDialog(viewModel).ShowModal();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("RoslynDiagnosticsReliability", "RS0034:Exported parts should be marked with 'ImportingConstructorAttribute'", Justification = "Test constructor")]
-        internal VisualStudioMoveToNamespaceOptionsService(Func<MoveToNamespaceDialogViewModel, bool?> showDialog)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0034:Exported parts should be marked with 'ImportingConstructorAttribute'",
+            Justification = "Test constructor"
+        )]
+        internal VisualStudioMoveToNamespaceOptionsService(
+            Func<MoveToNamespaceDialogViewModel, bool?> showDialog
+        )
         {
             _showDialog = showDialog;
         }
@@ -37,13 +43,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
         public MoveToNamespaceOptionsResult GetChangeNamespaceOptions(
             string defaultNamespace,
             ImmutableArray<string> availableNamespaces,
-            ISyntaxFacts syntaxFactsService)
+            ISyntaxFacts syntaxFactsService
+        )
         {
             var viewModel = new MoveToNamespaceDialogViewModel(
                 defaultNamespace,
                 availableNamespaces,
                 syntaxFactsService,
-                History.WhereNotNull().ToImmutableArray());
+                History.WhereNotNull().ToImmutableArray()
+            );
 
             var result = _showDialog(viewModel);
 

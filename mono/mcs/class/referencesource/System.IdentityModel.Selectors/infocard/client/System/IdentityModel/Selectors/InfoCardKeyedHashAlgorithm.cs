@@ -4,8 +4,8 @@
 //
 // Presharp uses the c# pragma mechanism to supress its warnings.
 // These are not recognised by the base compiler so we need to explictly
-// disable the following warnings. See http://winweb/cse/Tools/PREsharp/userguide/default.asp 
-// for details. 
+// disable the following warnings. See http://winweb/cse/Tools/PREsharp/userguide/default.asp
+// for details.
 //
 #pragma warning disable 1634, 1691      // unknown message, unknown pragma
 
@@ -24,7 +24,6 @@ namespace System.IdentityModel.Selectors
     // For common & resources
     //
     using Microsoft.InfoCards;
-
 
     //
     // Summary:
@@ -52,7 +51,9 @@ namespace System.IdentityModel.Selectors
                 //
                 // Call native api to get a hashCryptoHandle.
                 //
-                int status = CardSpaceSelector.GetShim().m_csShimGetKeyedHash(cryptoHandle.InternalHandle, out nativeHandle);
+                int status = CardSpaceSelector
+                    .GetShim()
+                    .m_csShimGetKeyedHash(cryptoHandle.InternalHandle, out nativeHandle);
 
                 if (0 != status)
                 {
@@ -67,14 +68,12 @@ namespace System.IdentityModel.Selectors
             }
             catch
             {
-
                 if (null != m_cryptoHandle)
                 {
                     m_cryptoHandle.Dispose();
                 }
                 throw;
             }
-
         }
 #pragma warning disable 56503 // property gets should not throw.
         public override byte[] Key
@@ -105,9 +104,7 @@ namespace System.IdentityModel.Selectors
             get { return m_param.transform.canReuseTransform; }
         }
 #pragma warning restore 56503
-        public override void Initialize()
-        {
-        }
+        public override void Initialize() { }
 
         //
         // Summary:
@@ -125,26 +122,33 @@ namespace System.IdentityModel.Selectors
             //
             if (null != m_cachedBlock)
             {
-
                 HGlobalSafeHandle pInData = null;
                 try
                 {
                     if (0 != m_cachedBlock.Length)
                     {
                         pInData = HGlobalSafeHandle.Construct(m_cachedBlock.Length);
-                        Marshal.Copy(m_cachedBlock, 0, pInData.DangerousGetHandle(), m_cachedBlock.Length);
+                        Marshal.Copy(
+                            m_cachedBlock,
+                            0,
+                            pInData.DangerousGetHandle(),
+                            m_cachedBlock.Length
+                        );
                     }
 
-                    int status = CardSpaceSelector.GetShim().m_csShimHashCore(m_cryptoHandle.InternalHandle,
-                                                         m_cachedBlock.Length,
-                                                         null != pInData ? pInData : HGlobalSafeHandle.Construct());
+                    int status = CardSpaceSelector
+                        .GetShim()
+                        .m_csShimHashCore(
+                            m_cryptoHandle.InternalHandle,
+                            m_cachedBlock.Length,
+                            null != pInData ? pInData : HGlobalSafeHandle.Construct()
+                        );
 
                     if (0 != status)
                     {
                         ExceptionHelper.ThrowIfCardSpaceException(status);
                         throw IDT.ThrowHelperError(new Win32Exception(status));
                     }
-
                 }
                 finally
                 {
@@ -153,7 +157,6 @@ namespace System.IdentityModel.Selectors
                         pInData.Dispose();
                     }
                 }
-
             }
 
             //
@@ -185,18 +188,26 @@ namespace System.IdentityModel.Selectors
             {
                 if (null != m_cachedBlock)
                 {
-
                     if (0 != m_cachedBlock.Length)
                     {
                         pInData = HGlobalSafeHandle.Construct(m_cachedBlock.Length);
-                        Marshal.Copy(m_cachedBlock, 0, pInData.DangerousGetHandle(), m_cachedBlock.Length);
+                        Marshal.Copy(
+                            m_cachedBlock,
+                            0,
+                            pInData.DangerousGetHandle(),
+                            m_cachedBlock.Length
+                        );
                     }
 
-                    int status = CardSpaceSelector.GetShim().m_csShimHashFinal(m_cryptoHandle.InternalHandle,
-                                                         m_cachedBlock.Length,
-                                                         null != pInData ? pInData : HGlobalSafeHandle.Construct(),
-                                                         out cbOutData,
-                                                         out pOutData);
+                    int status = CardSpaceSelector
+                        .GetShim()
+                        .m_csShimHashFinal(
+                            m_cryptoHandle.InternalHandle,
+                            m_cachedBlock.Length,
+                            null != pInData ? pInData : HGlobalSafeHandle.Construct(),
+                            out cbOutData,
+                            out pOutData
+                        );
                     if (0 != status)
                     {
                         ExceptionHelper.ThrowIfCardSpaceException(status);

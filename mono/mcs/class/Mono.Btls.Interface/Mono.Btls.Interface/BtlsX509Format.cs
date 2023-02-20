@@ -34,4 +34,3 @@ namespace Mono.Btls.Interface
         PEM = 2
     }
 }
-

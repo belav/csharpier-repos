@@ -3,20 +3,18 @@
 using System;
 using System.Threading;
 
+public struct ValX1<T> { }
 
-public struct ValX1<T> {}
-public class RefX1<T> {}
+public class RefX1<T> { }
 
-
-class Gen<T> 
+class Gen<T>
 {
     public static object staticLock;
 
     public static void EnterExitTest()
     {
-
         Gen<T>.staticLock = new object();
-        
+
         TestHelper myHelper = new TestHelper(Test_EnterExit11.nThreads);
         // MonitorDelegate[] consumer = new MonitorDelegate[Test.nThreads];
         // for(int i=0;i<consumer.Length;i++){
@@ -32,10 +30,11 @@ class Gen<T>
             });
         }
 
-        for(int i=0;i<6;i++){
-            if(myHelper.m_Event.WaitOne(10000))//,true))
+        for (int i = 0; i < 6; i++)
+        {
+            if (myHelper.m_Event.WaitOne(10000)) //,true))
                 break;
-            if(myHelper.Error == true)
+            if (myHelper.Error == true)
                 break;
         }
         Test_EnterExit11.Eval(!myHelper.Error);
@@ -48,6 +47,7 @@ public class Test_EnterExit11
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -56,12 +56,11 @@ public class Test_EnterExit11
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
-        Gen<int>.EnterExitTest();    
+        Gen<int>.EnterExitTest();
         Gen<double>.EnterExitTest();
         Gen<string>.EnterExitTest();
         Gen<object>.EnterExitTest();
@@ -96,6 +95,4 @@ public class Test_EnterExit11
             return 1;
         }
     }
-}        
-
-
+}

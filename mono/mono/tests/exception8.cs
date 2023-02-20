@@ -1,24 +1,33 @@
 using System;
 
-public class TryTest {
-        public static void ThrowException() {
-                throw new Exception();
-        }
+public class TryTest
+{
+    public static void ThrowException()
+    {
+        throw new Exception();
+    }
 
-        public static int Main() {
+    public static int Main()
+    {
         int state = 0;
 
-        try {
+        try
+        {
             ThrowException();
-            try {
+            try
+            {
                 Console.WriteLine("In try block");
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 state = 1;
                 Console.WriteLine("------------------------");
                 Console.WriteLine(e);
                 Console.WriteLine("------------------------");
             }
-        } catch {
+        }
+        catch
+        {
             state = 2;
         }
 
@@ -27,5 +36,5 @@ public class TryTest {
 
         Console.WriteLine("OK");
         return 0;
-        }
+    }
 }

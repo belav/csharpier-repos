@@ -16,7 +16,9 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
     [DataContract]
-    internal sealed class CSharpSimplifierOptions : SimplifierOptions, IEquatable<CSharpSimplifierOptions>
+    internal sealed class CSharpSimplifierOptions
+        : SimplifierOptions,
+            IEquatable<CSharpSimplifierOptions>
     {
         private static readonly CodeStyleOption2<PreferBracesPreference> s_defaultPreferBraces =
             new(PreferBracesPreference.Always, NotificationOption2.Silent);
@@ -29,57 +31,119 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
         public static readonly CSharpSimplifierOptions Default = new();
 
-        [DataMember] public CodeStyleOption2<bool> VarForBuiltInTypes { get; init; } = CodeStyleOption2<bool>.Default;
-        [DataMember] public CodeStyleOption2<bool> VarWhenTypeIsApparent { get; init; } = CodeStyleOption2<bool>.Default;
-        [DataMember] public CodeStyleOption2<bool> VarElsewhere { get; init; } = CodeStyleOption2<bool>.Default;
-        [DataMember] public CodeStyleOption2<bool> PreferSimpleDefaultExpression { get; init; } = s_trueWithSuggestionEnforcement;
-        [DataMember] public CodeStyleOption2<bool> PreferParameterNullChecking { get; init; } = s_trueWithSuggestionEnforcement;
-        [DataMember] public CodeStyleOption2<bool> AllowEmbeddedStatementsOnSameLine { get; init; } = s_trueWithSilentEnforcement;
-        [DataMember] public CodeStyleOption2<PreferBracesPreference> PreferBraces { get; init; } = s_defaultPreferBraces;
-        [DataMember] public CodeStyleOption2<bool> PreferThrowExpression { get; init; } = s_trueWithSuggestionEnforcement;
+        [DataMember]
+        public CodeStyleOption2<bool> VarForBuiltInTypes { get; init; } =
+            CodeStyleOption2<bool>.Default;
 
-        public override bool Equals(object? obj)
-            => Equals(obj as CSharpSimplifierOptions);
+        [DataMember]
+        public CodeStyleOption2<bool> VarWhenTypeIsApparent { get; init; } =
+            CodeStyleOption2<bool>.Default;
 
-        public bool Equals([AllowNull] CSharpSimplifierOptions other)
-            => other is not null &&
-               Common.Equals(other.Common) &&
-               VarForBuiltInTypes.Equals(other.VarForBuiltInTypes) &&
-               VarWhenTypeIsApparent.Equals(other.VarWhenTypeIsApparent) &&
-               VarElsewhere.Equals(other.VarElsewhere) &&
-               PreferSimpleDefaultExpression.Equals(other.PreferSimpleDefaultExpression) &&
-               PreferParameterNullChecking.Equals(other.PreferParameterNullChecking) &&
-               AllowEmbeddedStatementsOnSameLine.Equals(other.AllowEmbeddedStatementsOnSameLine) &&
-               PreferBraces.Equals(other.PreferBraces) &&
-               PreferThrowExpression.Equals(other.PreferThrowExpression);
+        [DataMember]
+        public CodeStyleOption2<bool> VarElsewhere { get; init; } = CodeStyleOption2<bool>.Default;
 
-        public override int GetHashCode()
-            => Hash.Combine(VarForBuiltInTypes,
-               Hash.Combine(VarWhenTypeIsApparent,
-               Hash.Combine(VarElsewhere,
-               Hash.Combine(PreferSimpleDefaultExpression,
-               Hash.Combine(PreferParameterNullChecking,
-               Hash.Combine(AllowEmbeddedStatementsOnSameLine,
-               Hash.Combine(PreferBraces,
-               Hash.Combine(PreferThrowExpression, 0))))))));
+        [DataMember]
+        public CodeStyleOption2<bool> PreferSimpleDefaultExpression { get; init; } =
+            s_trueWithSuggestionEnforcement;
+
+        [DataMember]
+        public CodeStyleOption2<bool> PreferParameterNullChecking { get; init; } =
+            s_trueWithSuggestionEnforcement;
+
+        [DataMember]
+        public CodeStyleOption2<bool> AllowEmbeddedStatementsOnSameLine { get; init; } =
+            s_trueWithSilentEnforcement;
+
+        [DataMember]
+        public CodeStyleOption2<PreferBracesPreference> PreferBraces { get; init; } =
+            s_defaultPreferBraces;
+
+        [DataMember]
+        public CodeStyleOption2<bool> PreferThrowExpression { get; init; } =
+            s_trueWithSuggestionEnforcement;
+
+        public override bool Equals(object? obj) => Equals(obj as CSharpSimplifierOptions);
+
+        public bool Equals([AllowNull] CSharpSimplifierOptions other) =>
+            other is not null
+            && Common.Equals(other.Common)
+            && VarForBuiltInTypes.Equals(other.VarForBuiltInTypes)
+            && VarWhenTypeIsApparent.Equals(other.VarWhenTypeIsApparent)
+            && VarElsewhere.Equals(other.VarElsewhere)
+            && PreferSimpleDefaultExpression.Equals(other.PreferSimpleDefaultExpression)
+            && PreferParameterNullChecking.Equals(other.PreferParameterNullChecking)
+            && AllowEmbeddedStatementsOnSameLine.Equals(other.AllowEmbeddedStatementsOnSameLine)
+            && PreferBraces.Equals(other.PreferBraces)
+            && PreferThrowExpression.Equals(other.PreferThrowExpression);
+
+        public override int GetHashCode() =>
+            Hash.Combine(
+                VarForBuiltInTypes,
+                Hash.Combine(
+                    VarWhenTypeIsApparent,
+                    Hash.Combine(
+                        VarElsewhere,
+                        Hash.Combine(
+                            PreferSimpleDefaultExpression,
+                            Hash.Combine(
+                                PreferParameterNullChecking,
+                                Hash.Combine(
+                                    AllowEmbeddedStatementsOnSameLine,
+                                    Hash.Combine(
+                                        PreferBraces,
+                                        Hash.Combine(PreferThrowExpression, 0)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
     }
 
     internal static class CSharpSimplifierOptionsProviders
     {
-        public static CSharpSimplifierOptions GetCSharpSimplifierOptions(this IOptionsReader options, CSharpSimplifierOptions? fallbackOptions)
+        public static CSharpSimplifierOptions GetCSharpSimplifierOptions(
+            this IOptionsReader options,
+            CSharpSimplifierOptions? fallbackOptions
+        )
         {
             fallbackOptions ??= CSharpSimplifierOptions.Default;
 
             return new()
             {
-                Common = options.GetCommonSimplifierOptions(LanguageNames.CSharp, fallbackOptions.Common),
-                VarForBuiltInTypes = options.GetOption(CSharpCodeStyleOptions.VarForBuiltInTypes, fallbackOptions.VarForBuiltInTypes),
-                VarWhenTypeIsApparent = options.GetOption(CSharpCodeStyleOptions.VarWhenTypeIsApparent, fallbackOptions.VarWhenTypeIsApparent),
-                VarElsewhere = options.GetOption(CSharpCodeStyleOptions.VarElsewhere, fallbackOptions.VarElsewhere),
-                PreferSimpleDefaultExpression = options.GetOption(CSharpCodeStyleOptions.PreferSimpleDefaultExpression, fallbackOptions.PreferSimpleDefaultExpression),
-                AllowEmbeddedStatementsOnSameLine = options.GetOption(CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, fallbackOptions.AllowEmbeddedStatementsOnSameLine),
-                PreferBraces = options.GetOption(CSharpCodeStyleOptions.PreferBraces, fallbackOptions.PreferBraces),
-                PreferThrowExpression = options.GetOption(CSharpCodeStyleOptions.PreferThrowExpression, fallbackOptions.PreferThrowExpression)
+                Common = options.GetCommonSimplifierOptions(
+                    LanguageNames.CSharp,
+                    fallbackOptions.Common
+                ),
+                VarForBuiltInTypes = options.GetOption(
+                    CSharpCodeStyleOptions.VarForBuiltInTypes,
+                    fallbackOptions.VarForBuiltInTypes
+                ),
+                VarWhenTypeIsApparent = options.GetOption(
+                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                    fallbackOptions.VarWhenTypeIsApparent
+                ),
+                VarElsewhere = options.GetOption(
+                    CSharpCodeStyleOptions.VarElsewhere,
+                    fallbackOptions.VarElsewhere
+                ),
+                PreferSimpleDefaultExpression = options.GetOption(
+                    CSharpCodeStyleOptions.PreferSimpleDefaultExpression,
+                    fallbackOptions.PreferSimpleDefaultExpression
+                ),
+                AllowEmbeddedStatementsOnSameLine = options.GetOption(
+                    CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
+                    fallbackOptions.AllowEmbeddedStatementsOnSameLine
+                ),
+                PreferBraces = options.GetOption(
+                    CSharpCodeStyleOptions.PreferBraces,
+                    fallbackOptions.PreferBraces
+                ),
+                PreferThrowExpression = options.GetOption(
+                    CSharpCodeStyleOptions.PreferThrowExpression,
+                    fallbackOptions.PreferThrowExpression
+                )
             };
         }
     }

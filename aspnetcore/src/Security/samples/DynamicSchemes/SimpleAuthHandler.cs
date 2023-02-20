@@ -17,8 +17,13 @@ public class SimpleOptions : AuthenticationSchemeOptions
 
 public class SimpleAuthHandler : AuthenticationHandler<SimpleOptions>
 {
-    public SimpleAuthHandler(IOptionsMonitor<SimpleOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
-    { }
+    public SimpleAuthHandler(
+        IOptionsMonitor<SimpleOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    )
+        : base(options, logger, encoder, clock) { }
 
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {

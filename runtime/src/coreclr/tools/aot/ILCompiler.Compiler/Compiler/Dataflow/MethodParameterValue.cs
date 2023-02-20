@@ -10,13 +10,16 @@ using Internal.TypeSystem;
 
 namespace ILLink.Shared.TrimAnalysis
 {
-
     /// <summary>
     /// A value that came from a method parameter - such as the result of a ldarg.
     /// </summary>
     internal partial record MethodParameterValue : IValueWithStaticType
     {
-        public MethodParameterValue(ParameterProxy param, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes, bool overrideIsThis = false)
+        public MethodParameterValue(
+            ParameterProxy param,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes,
+            bool overrideIsThis = false
+        )
         {
             StaticType = param.ParameterType;
             Parameter = param;
@@ -28,6 +31,7 @@ namespace ILLink.Shared.TrimAnalysis
 
         public TypeDesc? StaticType { get; }
 
-        internal ParameterOrigin ParameterOrigin => new ParameterOrigin(Parameter.Method.Method, (int)Parameter.Index);
+        internal ParameterOrigin ParameterOrigin =>
+            new ParameterOrigin(Parameter.Method.Method, (int)Parameter.Index);
     }
 }

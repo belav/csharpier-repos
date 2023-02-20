@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,7 +35,7 @@ using System.Configuration;
 using System.Net.Cache;
 using System.Xml;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
     public sealed class FtpCachePolicyElement : ConfigurationElement
     {
@@ -48,29 +48,33 @@ namespace System.Net.Configuration
 
         #region Constructors
 
-        static FtpCachePolicyElement ()
+        static FtpCachePolicyElement()
         {
-            policyLevelProp = new ConfigurationProperty ("policyLevel", typeof (RequestCacheLevel), RequestCacheLevel.Default);
-            properties = new ConfigurationPropertyCollection ();
+            policyLevelProp = new ConfigurationProperty(
+                "policyLevel",
+                typeof(RequestCacheLevel),
+                RequestCacheLevel.Default
+            );
+            properties = new ConfigurationPropertyCollection();
 
-            properties.Add (policyLevelProp);
+            properties.Add(policyLevelProp);
         }
 
-        public FtpCachePolicyElement ()
-        {
-        }
+        public FtpCachePolicyElement() { }
 
         #endregion // Constructors
 
         #region Properties
 
-        [ConfigurationProperty ("policyLevel", DefaultValue = "Default")]
-        public RequestCacheLevel PolicyLevel {
-            get { return (RequestCacheLevel) base [policyLevelProp]; }
-            set { base [policyLevelProp] = value; }
+        [ConfigurationProperty("policyLevel", DefaultValue = "Default")]
+        public RequestCacheLevel PolicyLevel
+        {
+            get { return (RequestCacheLevel)base[policyLevelProp]; }
+            set { base[policyLevelProp] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
@@ -79,15 +83,15 @@ namespace System.Net.Configuration
         #region Methods
 
         [MonoTODO]
-        protected override void DeserializeElement (XmlReader reader, bool serializeCollectionKey)
+        protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected override void Reset (ConfigurationElement parentElement)
+        protected override void Reset(ConfigurationElement parentElement)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion // Methods

@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -11,23 +11,23 @@
 //
 //    Classes:    SubAxis, SubAxisCollection
 //
-//  Purpose:    Each chart area contains four main axes PrimaryX, 
-//              PrimaryY, SecondaryX and SecondaryY which are usually 
-//              positioned on each side of the plotting area. Most of 
-//              the charts use only two axes; X and Y, but for some 
-//              charts even 4 axes is not sufficient. Sub-axes were 
-//              introduced to provide unlimited number of axes in 
+//  Purpose:    Each chart area contains four main axes PrimaryX,
+//              PrimaryY, SecondaryX and SecondaryY which are usually
+//              positioned on each side of the plotting area. Most of
+//              the charts use only two axes; X and Y, but for some
+//              charts even 4 axes is not sufficient. Sub-axes were
+//              introduced to provide unlimited number of axes in
 //              the chart.
-//  
-//              Each main axis has a collection of SubAxis which is 
-//              empty by default. By adding SubAxis into this collection 
-//              user can add unlimited number of sub-axis which will 
+//
+//              Each main axis has a collection of SubAxis which is
+//              empty by default. By adding SubAxis into this collection
+//              user can add unlimited number of sub-axis which will
 //              be positioned next to the main axis.
 //
-//              Each of the SubAxis have a unique name. To associate 
-//              data series with a sub axis YSubAxisName and XSubAxisName 
+//              Each of the SubAxis have a unique name. To associate
+//              data series with a sub axis YSubAxisName and XSubAxisName
 //              properties of the Series should be used.
-//              
+//
 //    Reviewed:    AG - March 13, 2007
 //
 //===================================================================
@@ -57,14 +57,13 @@ using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 using System.Windows.Forms.DataVisualization.Charting;
 
 #else
-    using System.Web;
-    using System.Web.UI;
-    using System.Web.UI.DataVisualization.Charting;
-    using System.Web.UI.DataVisualization.Charting.Data;
-    using System.Web.UI.DataVisualization.Charting.Utilities;
-    using System.Web.UI.DataVisualization.Charting.ChartTypes;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.DataVisualization.Charting;
+using System.Web.UI.DataVisualization.Charting.Data;
+using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web.UI.DataVisualization.Charting.ChartTypes;
 #endif
-
 
 #endregion
 
@@ -73,16 +72,13 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
 #else
 namespace System.Web.UI.DataVisualization.Charting
-
 #endif
 {
     /// <summary>
     /// SubAxis class is derived from the main Axis class and provides
     /// additional axis associated with one of the main chart axis.
     /// </summary>
-    [
-    SRDescription("DescriptionAttributeSubAxis_SubAxis"),
-    DefaultProperty("Enabled"),
+    [SRDescription("DescriptionAttributeSubAxis_SubAxis"), DefaultProperty("Enabled"),
 #if WINFORMS_CONTROL
     TypeConverter(typeof(SubAxis.SubAxisConverter)),
 #endif
@@ -118,7 +114,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Default constructor
         /// </summary>
-        public SubAxis() : base()
+        public SubAxis()
+            : base()
         {
             base.Name = string.Empty;
         }
@@ -127,7 +124,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Object constructor.
         /// </summary>
         /// <param name="name">Unique name of the object.</param>
-        public SubAxis(string name) : base()
+        public SubAxis(string name)
+            : base()
         {
             base.Name = name;
         }
@@ -140,74 +138,61 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Axis automatic scale breaks style.
         /// </summary>
         [
-        Browsable(false),
-        EditorBrowsable(EditorBrowsableState.Never),
-        SRCategory("CategoryAttributeScale"),
-        SRDescription("DescriptionAttributeScaleBreakStyle"),
-        TypeConverter(typeof(NoNameExpandableObjectConverter)),
-        NotifyParentPropertyAttribute(true),
+            Browsable(false),
+            EditorBrowsable(EditorBrowsableState.Never),
+            SRCategory("CategoryAttributeScale"),
+            SRDescription("DescriptionAttributeScaleBreakStyle"),
+            TypeConverter(typeof(NoNameExpandableObjectConverter)),
+            NotifyParentPropertyAttribute(true),
 #if WINFORMS_CONTROL
         DesignerSerializationVisibility(DesignerSerializationVisibility.Content), 
 #else
-        PersistenceMode(PersistenceMode.InnerProperty),
+            PersistenceMode(PersistenceMode.InnerProperty),
 #endif
         ]
         override public AxisScaleBreakStyle ScaleBreakStyle
         {
-            get
-            {
-                return base.ScaleBreakStyle;
-            }
-            set
-            {
-                base.ScaleBreakStyle = value;
-            }
+            get { return base.ScaleBreakStyle; }
+            set { base.ScaleBreakStyle = value; }
         }
 
         /// <summary>
         /// Sub axis parent axis.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAxis"),
-        Bindable(true),
-        Browsable(false),
-        DefaultValue(null),
-        NotifyParentPropertyAttribute(true),
-        SRDescription("DescriptionAttributeSubAxis_ParentAxis"),
+            SRCategory("CategoryAttributeAxis"),
+            Bindable(true),
+            Browsable(false),
+            DefaultValue(null),
+            NotifyParentPropertyAttribute(true),
+            SRDescription("DescriptionAttributeSubAxis_ParentAxis"),
 #if !WINFORMS_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
+            PersistenceMode(PersistenceMode.Attribute),
 #endif
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden)
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden)
         ]
         public Axis ParentAxis
         {
-            get
-            {
-                return this.parentAxis;
-            }
+            get { return this.parentAxis; }
         }
-
 
         /// <summary>
         /// Sub axis location offset relative to the previous axis.
         /// </summary>
         [
-        SRCategory("CategoryAttributeLocation"),
-        Bindable(true),
-        DefaultValue(0.0),
-        NotifyParentPropertyAttribute(true),
-        SRDescription("DescriptionAttributeSubAxis_LocationOffset"),
+            SRCategory("CategoryAttributeLocation"),
+            Bindable(true),
+            DefaultValue(0.0),
+            NotifyParentPropertyAttribute(true),
+            SRDescription("DescriptionAttributeSubAxis_LocationOffset"),
 #if !WINFORMS_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
+            PersistenceMode(PersistenceMode.Attribute),
 #endif
         ]
         public double LocationOffset
         {
-            get
-            {
-                return this.locationOffset;
-            }
+            get { return this.locationOffset; }
             set
             {
                 this.locationOffset = value;
@@ -219,138 +204,115 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Axis position
         /// </summary>
         [
-        Bindable(true),
-        Browsable(false),
-        DefaultValue(AxisPosition.Left),
-        NotifyParentPropertyAttribute(true),
-        SRDescription("DescriptionAttributeReverse"),
+            Bindable(true),
+            Browsable(false),
+            DefaultValue(AxisPosition.Left),
+            NotifyParentPropertyAttribute(true),
+            SRDescription("DescriptionAttributeReverse"),
 #if !WINFORMS_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
+            PersistenceMode(PersistenceMode.Attribute),
 #endif
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden)
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden)
         ]
         override internal AxisPosition AxisPosition
         {
             get
             {
-                if(this.parentAxis != null)
+                if (this.parentAxis != null)
                 {
                     return this.parentAxis.AxisPosition;
                 }
                 return AxisPosition.Left;
             }
-            set
-            {
-            }
+            set { }
         }
 
         /// <summary>
         /// SubAxis name.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Bindable(true),
-        Browsable(true),
-        DefaultValue(""),
-        SRDescription("DescriptionAttributeSubAxis_Name"),
+            SRCategory("CategoryAttributeAppearance"),
+            Bindable(true),
+            Browsable(true),
+            DefaultValue(""),
+            SRDescription("DescriptionAttributeSubAxis_Name"),
 #if !WINFORMS_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
+            PersistenceMode(PersistenceMode.Attribute),
 #endif
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Visible),
-        SerializationVisibilityAttribute(SerializationVisibility.Attribute)
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Visible),
+            SerializationVisibilityAttribute(SerializationVisibility.Attribute)
         ]
         override public string Name
         {
-            get
-            {
-                return base.Name;
-            }
-            set
-            {
-                base.Name = value;
-            }
+            get { return base.Name; }
+            set { base.Name = value; }
         }
 
         /// <summary>
-        /// Tick marks and labels move with axis when 
+        /// Tick marks and labels move with axis when
         /// the crossing value is changed.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        EditorBrowsable(EditorBrowsableState.Never),
-        Bindable(true),
-        DefaultValue(true),
-        SRDescription("DescriptionAttributeMarksNextToAxis"),
-        NotifyParentPropertyAttribute(true),
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            EditorBrowsable(EditorBrowsableState.Never),
+            Bindable(true),
+            DefaultValue(true),
+            SRDescription("DescriptionAttributeMarksNextToAxis"),
+            NotifyParentPropertyAttribute(true),
 #if !WINFORMS_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
+            PersistenceMode(PersistenceMode.Attribute),
 #endif
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden)
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden)
         ]
         override public bool IsMarksNextToAxis
         {
-            get
-            {
-                return base.IsMarksNextToAxis;
-            }
-            set
-            {
-                base.IsMarksNextToAxis = value;
-            }
+            get { return base.IsMarksNextToAxis; }
+            set { base.IsMarksNextToAxis = value; }
         }
 
         /// <summary>
         /// Point where axis is crossed by another axis.
         /// </summary>
         [
-        SRCategory("CategoryAttributeScale"),
-        Browsable(false),
-        EditorBrowsable(EditorBrowsableState.Never),
-        Bindable(true),
-        DefaultValue(Double.NaN),
-        NotifyParentPropertyAttribute(true),
-        SRDescription("DescriptionAttributeCrossing"),
+            SRCategory("CategoryAttributeScale"),
+            Browsable(false),
+            EditorBrowsable(EditorBrowsableState.Never),
+            Bindable(true),
+            DefaultValue(Double.NaN),
+            NotifyParentPropertyAttribute(true),
+            SRDescription("DescriptionAttributeCrossing"),
 #if !WINFORMS_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
+            PersistenceMode(PersistenceMode.Attribute),
 #endif
-        TypeConverter(typeof(AxisCrossingValueConverter)),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden)
+            TypeConverter(typeof(AxisCrossingValueConverter)),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden)
         ]
         override public double Crossing
         {
-            get
-            {
-                return base.Crossing;
-            }
-            set
-            {
-                base.Crossing = value;
-            }
+            get { return base.Crossing; }
+            set { base.Crossing = value; }
         }
 
         /// <summary>
         /// Sub-axes collection.
         /// </summary>
         [
-        SRCategory("CategoryAttributeSubAxes"),
-        Browsable(false),
-        EditorBrowsable(EditorBrowsableState.Never),
-        Bindable(true),
-        SRDescription("DescriptionAttributeSubAxes"),
-        Editor(Editors.ChartCollectionEditor.Editor, Editors.ChartCollectionEditor.Base),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRCategory("CategoryAttributeSubAxes"),
+            Browsable(false),
+            EditorBrowsable(EditorBrowsableState.Never),
+            Bindable(true),
+            SRDescription("DescriptionAttributeSubAxes"),
+            Editor(Editors.ChartCollectionEditor.Editor, Editors.ChartCollectionEditor.Base),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
         ]
         override public SubAxisCollection SubAxes
         {
-            get
-            {
-                return base.SubAxes;
-            }
+            get { return base.SubAxes; }
         }
 
         /// <summary>
@@ -358,10 +320,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         override internal bool IsSubAxis
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -369,10 +328,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         override internal string SubAxisName
         {
-            get
-            {
-                return base.Name;
-            }
+            get { return base.Name; }
         }
 
 #endregion // Properties
@@ -387,25 +343,25 @@ namespace System.Web.UI.DataVisualization.Charting
         override internal double GetAxisPosition(bool ignoreCrossing)
         {
             // Parent axis must be set
-            if(this.parentAxis != null)
+            if (this.parentAxis != null)
             {
                 // Get position of the parent axis
                 double position = this.parentAxis.GetAxisPosition(ignoreCrossing);
 
                 // Addjust parent position by the offset
-                if(this.parentAxis.AxisPosition == AxisPosition.Left)
+                if (this.parentAxis.AxisPosition == AxisPosition.Left)
                 {
                     position -= this.offsetFromParent;
                 }
-                else if(this.parentAxis.AxisPosition == AxisPosition.Right)
+                else if (this.parentAxis.AxisPosition == AxisPosition.Right)
                 {
                     position += this.offsetFromParent;
                 }
-                else if(this.parentAxis.AxisPosition == AxisPosition.Top)
+                else if (this.parentAxis.AxisPosition == AxisPosition.Top)
                 {
                     position -= this.offsetFromParent;
                 }
-                else if(this.parentAxis.AxisPosition == AxisPosition.Bottom)
+                else if (this.parentAxis.AxisPosition == AxisPosition.Bottom)
                 {
                     position += this.offsetFromParent;
                 }
@@ -463,7 +419,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-#endif //#if WINFORMS_CONTROL    
+#endif //#if WINFORMS_CONTROL
 
 #endregion
     }
@@ -472,9 +428,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// <b>SubAxisCollection</b> is a strongly typed collection of chart sub-axes objects.
     /// Collection indexer can accept sub-axis index or it's unique name as a parameter.
     /// </summary>
-    [
-        SRDescription("DescriptionAttributeSubAxisCollection_SubAxisCollection"),
-    ]
+    [SRDescription("DescriptionAttributeSubAxisCollection_SubAxisCollection"),]
 #if ASPPERM_35
     [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
     [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
@@ -525,48 +479,46 @@ namespace System.Web.UI.DataVisualization.Charting
         /// SubAxis collection indexer.
         /// </summary>
         /// <remarks>
-        /// The <b>SubAxis</b> object's name or index can be provided as a parameter. Returns the <see cref="SubAxis"/> object. 
-        /// Make sure to cast the SubAxis to it's type (e.g. LineSubAxis) to access type 
+        /// The <b>SubAxis</b> object's name or index can be provided as a parameter. Returns the <see cref="SubAxis"/> object.
+        /// Make sure to cast the SubAxis to it's type (e.g. LineSubAxis) to access type
         /// specific properties.
         /// </remarks>
-        [
-        SRDescription("DescriptionAttributeSubAxisCollection_Item"),
-        ]
-        public SubAxis this[object parameter] 
+        [SRDescription("DescriptionAttributeSubAxisCollection_Item"),]
+        public SubAxis this[object parameter]
         {
-            get 
-            { 
+            get
+            {
                 // Get SubAxis by index
-                if(parameter is int)
+                if (parameter is int)
                 {
-                    return (SubAxis)this.List[(int)parameter]; 
+                    return (SubAxis)this.List[(int)parameter];
                 }
-
-                    // Get SubAxis by name
-                else if(parameter is string)
+                // Get SubAxis by name
+                else if (parameter is string)
                 {
                     // Find SubAxis with specified name
-                    foreach(SubAxis SubAxis in this.List)
+                    foreach (SubAxis SubAxis in this.List)
                     {
-                        if(SubAxis.Name == (string)parameter)
+                        if (SubAxis.Name == (string)parameter)
                         {
                             return SubAxis;
                         }
                     }
 
                     // SubAxis with specified name was not found
-                    throw(new ArgumentException( SR.ExceptionSubAxisNameNotFound( (string)parameter ) ) );
+                    throw (
+                        new ArgumentException(SR.ExceptionSubAxisNameNotFound((string)parameter))
+                    );
                 }
 
                 // Invalid type of the indexer argument
-                throw(new ArgumentException(SR.ExceptionInvalidIndexerArgumentType));
-            } 
-
-            set 
-            { 
+                throw (new ArgumentException(SR.ExceptionInvalidIndexerArgumentType));
+            }
+            set
+            {
                 // Check new SubAxis name
                 int indexSubAxis = -1;
-                if(value.Name.Length != 0)
+                if (value.Name.Length != 0)
                 {
                     indexSubAxis = this.List.IndexOf(value);
                 }
@@ -576,30 +528,37 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
 
                 // Set using index in the collection
-                if(parameter is int)
+                if (parameter is int)
                 {
                     // Check if SubAxis with this name already exists
-                    if( indexSubAxis != -1 && indexSubAxis != (int)parameter)
+                    if (indexSubAxis != -1 && indexSubAxis != (int)parameter)
                     {
-                        throw( new ArgumentException( SR.ExceptionSubAxisNameAlreadyExistsInCollection( value.Name ) ) );
+                        throw (
+                            new ArgumentException(
+                                SR.ExceptionSubAxisNameAlreadyExistsInCollection(value.Name)
+                            )
+                        );
                     }
 
                     this.List[(int)parameter] = value;
                 }
-
-                    // Set using name in the collection
-                else if(parameter is string)
+                // Set using name in the collection
+                else if (parameter is string)
                 {
                     // Find legend with specified name
                     int index = 0;
-                    foreach(SubAxis SubAxis in this.List)
+                    foreach (SubAxis SubAxis in this.List)
                     {
-                        if(SubAxis.Name == (string)parameter)
+                        if (SubAxis.Name == (string)parameter)
                         {
                             // Check if SubAxis with this name already exists
-                            if( indexSubAxis != -1 && indexSubAxis != index)
+                            if (indexSubAxis != -1 && indexSubAxis != index)
                             {
-                                throw( new ArgumentException( SR.ExceptionSubAxisNameAlreadyExistsInCollection( value.Name ) ) );
+                                throw (
+                                    new ArgumentException(
+                                        SR.ExceptionSubAxisNameAlreadyExistsInCollection(value.Name)
+                                    )
+                                );
                             }
 
                             this.List[index] = value;
@@ -610,10 +569,10 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
                 else
                 {
-                    throw(new ArgumentException(SR.ExceptionInvalidIndexerArgumentType));
+                    throw (new ArgumentException(SR.ExceptionInvalidIndexerArgumentType));
                 }
 
-                this.Invalidate();            
+                this.Invalidate();
             }
         }
 
@@ -630,7 +589,7 @@ namespace System.Web.UI.DataVisualization.Charting
         public void Remove(string name)
         {
             SubAxis axis = FindByName(name);
-            if(axis != null)
+            if (axis != null)
             {
                 this.List.Remove(axis);
             }
@@ -644,7 +603,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </param>
         public void Remove(SubAxis SubAxis)
         {
-            if(SubAxis != null)
+            if (SubAxis != null)
             {
                 this.List.Remove(SubAxis);
             }
@@ -690,18 +649,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <remarks>
         /// This is an internal method and should not be part of the documentation.
         /// </remarks>
-        protected override  void OnInsert(int index, object value)
+        protected override void OnInsert(int index, object value)
         {
             // Check SubAxis object name
-            if( ((SubAxis)value).Name.Length == 0 )
+            if (((SubAxis)value).Name.Length == 0)
             {
                 AssignUniqueName((SubAxis)value);
             }
             else
             {
-                if(this.FindByName(((SubAxis)value).Name) != null)
+                if (this.FindByName(((SubAxis)value).Name) != null)
                 {
-                    throw(new InvalidOperationException(SR.ExceptionSubAxisNameIsNotUnique( ((SubAxis)value).Name )));
+                    throw (
+                        new InvalidOperationException(
+                            SR.ExceptionSubAxisNameIsNotUnique(((SubAxis)value).Name)
+                        )
+                    );
                 }
             }
         }
@@ -719,13 +682,13 @@ namespace System.Web.UI.DataVisualization.Charting
             // Set SubAxis parent axis reference
             SubAxis subAxis = (SubAxis)value;
             subAxis.parentAxis = this.parentAxis;
-            if(this.parentAxis != null)
+            if (this.parentAxis != null)
             {
                 subAxis.chart = this.parentAxis.chart;
                 subAxis.Common = this.parentAxis.Common;
                 subAxis.chartArea = this.parentAxis.chartArea;
-                subAxis.axisType= this.parentAxis.axisType;
-                subAxis.AxisPosition= this.parentAxis.AxisPosition;
+                subAxis.axisType = this.parentAxis.axisType;
+                subAxis.AxisPosition = this.parentAxis.AxisPosition;
             }
             this.Invalidate();
         }
@@ -783,29 +746,36 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             // Generate name using SubAxis type name and unique index
             string name = string.Empty;
-            int    index = 1;
+            int index = 1;
             do
             {
                 name = "SubAxis" + index.ToString();
                 ++index;
-            } while(this.FindByName(name) != null && index < 10000 );
+            } while (this.FindByName(name) != null && index < 10000);
 
             // Asign unique name;
             SubAxis.Name = name;
         }
-        
+
         /// <summary>
         /// Finds SubAxis by name.
         /// </summary>
         /// <param name="name">Name of the chart SubAxis.</param>
         /// <returns>SubAxis or null if it does not exist.</returns>
-        internal SubAxis FindByName(string name) 
+        internal SubAxis FindByName(string name)
         {
             SubAxis result = null;
-            for(int index = 0; index < this.List.Count; index ++)
+            for (int index = 0; index < this.List.Count; index++)
             {
-                // Compare SubAxis name 
-                if(String.Compare(this[index].Name, name, true, System.Globalization.CultureInfo.CurrentCulture) == 0)
+                // Compare SubAxis name
+                if (
+                    String.Compare(
+                        this[index].Name,
+                        name,
+                        true,
+                        System.Globalization.CultureInfo.CurrentCulture
+                    ) == 0
+                )
                 {
                     result = this[index];
                     break;
@@ -815,9 +785,8 @@ namespace System.Web.UI.DataVisualization.Charting
             return result;
         }
 
-#endregion 
+#endregion
     }
 }
 
 #endif // SUBAXES
-

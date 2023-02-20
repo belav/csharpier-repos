@@ -19,10 +19,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,15 +33,14 @@
 //
 
 
-namespace System.Runtime.Remoting.Lifetime {
-
-
+namespace System.Runtime.Remoting.Lifetime
+{
     /// <summary>
     /// </summary>
-    [System.Runtime.InteropServices.ComVisible (true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    public enum LeaseState {
-
+    public enum LeaseState
+    {
         /// <summary>
         /// </summary>
         Null = 0,
@@ -62,5 +61,4 @@ namespace System.Runtime.Remoting.Lifetime {
         /// </summary>
         Expired = 4,
     } // LeaseState
-
 } // System.Runtime.Remoting.Lifetime

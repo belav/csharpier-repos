@@ -10,36 +10,38 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Routing.Configuration
 {
-    [ConfigurationCollection (typeof (BackupEndpointCollection), AddItemName = "backupList")]
+    [ConfigurationCollection(typeof(BackupEndpointCollection), AddItemName = "backupList")]
     public class BackupListCollection : ConfigurationElementCollection
     {
-        public void Add (BackupEndpointCollection element)
+        public void Add(BackupEndpointCollection element)
         {
-            BaseAdd (element);
+            BaseAdd(element);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement ()
+        protected override ConfigurationElement CreateNewElement()
         {
-            return new BackupEndpointElement ();
+            return new BackupEndpointElement();
         }
 
-        protected override Object GetElementKey (ConfigurationElement element)
+        protected override Object GetElementKey(ConfigurationElement element)
         {
-            return ((BackupEndpointElement) element).EndpointName;
+            return ((BackupEndpointElement)element).EndpointName;
         }
 
-        public void Remove (BackupEndpointCollection element)
+        public void Remove(BackupEndpointCollection element)
         {
-            BaseRemove (element);
+            BaseRemove(element);
         }
 
-        public new BackupEndpointCollection this [string name] {
-            get {
+        public new BackupEndpointCollection this[string name]
+        {
+            get
+            {
                 foreach (BackupEndpointCollection c in this)
                     if (c.Name == name)
                         return c;

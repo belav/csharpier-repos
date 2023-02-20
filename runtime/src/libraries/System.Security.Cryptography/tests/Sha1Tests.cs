@@ -15,7 +15,11 @@ namespace System.Security.Cryptography.Tests
             return SHA1.Create();
         }
 
-        protected override bool TryHashData(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        protected override bool TryHashData(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             return SHA1.TryHashData(source, destination, out bytesWritten);
         }
@@ -32,11 +36,16 @@ namespace System.Security.Cryptography.Tests
 
         protected override byte[] HashData(Stream source) => SHA1.HashData(source);
 
-        protected override ValueTask<int> HashDataAsync(Stream source, Memory<byte> destination, CancellationToken cancellationToken) =>
-            SHA1.HashDataAsync(source, destination, cancellationToken);
+        protected override ValueTask<int> HashDataAsync(
+            Stream source,
+            Memory<byte> destination,
+            CancellationToken cancellationToken
+        ) => SHA1.HashDataAsync(source, destination, cancellationToken);
 
-        protected override ValueTask<byte[]> HashDataAsync(Stream source, CancellationToken cancellationToken) =>
-            SHA1.HashDataAsync(source, cancellationToken);
+        protected override ValueTask<byte[]> HashDataAsync(
+            Stream source,
+            CancellationToken cancellationToken
+        ) => SHA1.HashDataAsync(source, cancellationToken);
 
         [Fact]
         public void Sha1_Empty()
@@ -77,7 +86,11 @@ namespace System.Security.Cryptography.Tests
         {
             // Verfied with:
             // for _ in {1..1025}; do echo -n "0102030405060708"; done | openssl dgst -sha1
-            await VerifyRepeatingAsync("0102030405060708", 1025, "18c6aa8d255c47941958729faaae9614c9793bb2");
+            await VerifyRepeatingAsync(
+                "0102030405060708",
+                1025,
+                "18c6aa8d255c47941958729faaae9614c9793bb2"
+            );
         }
 
         [Fact]
@@ -85,7 +98,11 @@ namespace System.Security.Cryptography.Tests
         {
             // Verfied with:
             // for _ in {1..1024}; do echo -n "0102030405060708"; done | openssl dgst -sha1
-            await VerifyRepeatingAsync("0102030405060708", 1024, "fc8053215c935a5e9cdc51b94bb40b3e66128d41");
+            await VerifyRepeatingAsync(
+                "0102030405060708",
+                1024,
+                "fc8053215c935a5e9cdc51b94bb40b3e66128d41"
+            );
         }
 
         // SHA1 tests are defined somewhat obliquely within RFC 3174, section 7.3
@@ -99,13 +116,21 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public void Sha1_Rfc3174_MultiBlock()
         {
-            VerifyMultiBlock("ab", "c", "A9993E364706816ABA3E25717850C26C9CD0D89D", "DA39A3EE5E6B4B0D3255BFEF95601890AFD80709");
+            VerifyMultiBlock(
+                "ab",
+                "c",
+                "A9993E364706816ABA3E25717850C26C9CD0D89D",
+                "DA39A3EE5E6B4B0D3255BFEF95601890AFD80709"
+            );
         }
 
         [Fact]
         public void Sha1_Rfc3174_2()
         {
-            Verify("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq", "84983E441C3BD26EBAAE4AA1F95129E5E54670F1");
+            Verify(
+                "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq",
+                "84983E441C3BD26EBAAE4AA1F95129E5E54670F1"
+            );
         }
 
         [Fact]
@@ -117,7 +142,11 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public void Sha1_Rfc3174_4()
         {
-            VerifyRepeating("0123456701234567012345670123456701234567012345670123456701234567", 10, "DEA356A2CDDD90C7A7ECEDC5EBB563934F460452");
+            VerifyRepeating(
+                "0123456701234567012345670123456701234567012345670123456701234567",
+                10,
+                "DEA356A2CDDD90C7A7ECEDC5EBB563934F460452"
+            );
         }
 
         [Fact]
@@ -129,7 +158,11 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public async Task Sha1_Rfc3174_4_Async()
         {
-            await VerifyRepeatingAsync("0123456701234567012345670123456701234567012345670123456701234567", 10, "DEA356A2CDDD90C7A7ECEDC5EBB563934F460452");
+            await VerifyRepeatingAsync(
+                "0123456701234567012345670123456701234567012345670123456701234567",
+                10,
+                "DEA356A2CDDD90C7A7ECEDC5EBB563934F460452"
+            );
         }
     }
 }

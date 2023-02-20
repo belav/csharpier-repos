@@ -7,27 +7,30 @@ class Expr
 
 static class X
 {
-    public static IEnumerable<int> Test (Expr expr)
+    public static IEnumerable<int> Test(Expr expr)
     {
         object exprCur = expr;
-        if (exprCur is Expr list) {
+        if (exprCur is Expr list)
+        {
             yield return list.Field;
         }
     }
 
-    public static IEnumerable<string> Test2 (int? expr)
+    public static IEnumerable<string> Test2(int? expr)
     {
         int? exprCur = expr;
-        while (exprCur != null) {
-            if (exprCur is int list) {
-                yield return list.ToString ();
+        while (exprCur != null)
+        {
+            if (exprCur is int list)
+            {
+                yield return list.ToString();
             }
         }
-    }    
+    }
 
-    public static void Main ()
+    public static void Main()
     {
-        Test (null);
-        Test2 (3);
+        Test(null);
+        Test2(3);
     }
 }

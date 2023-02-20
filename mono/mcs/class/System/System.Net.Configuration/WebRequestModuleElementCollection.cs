@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,77 +34,80 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
-    [ConfigurationCollection (typeof (WebRequestModuleElement), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    [ConfigurationCollection(
+        typeof(WebRequestModuleElement),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
     public sealed class WebRequestModuleElementCollection : ConfigurationElementCollection
     {
         #region Constructors
 
-        public WebRequestModuleElementCollection ()
-        {
-        }
+        public WebRequestModuleElementCollection() { }
 
         #endregion // Constructors
 
         #region Properties
 
         [MonoTODO]
-        public WebRequestModuleElement this [int index] {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public WebRequestModuleElement this[int index]
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public new WebRequestModuleElement this [string name] {
-            get { return (WebRequestModuleElement) base [name]; }
-            set { base [name] = value; }
+        public new WebRequestModuleElement this[string name]
+        {
+            get { return (WebRequestModuleElement)base[name]; }
+            set { base[name] = value; }
         }
 
         #endregion // Properties
 
         #region Methods
 
-        public void Add (WebRequestModuleElement element)
+        public void Add(WebRequestModuleElement element)
         {
-            BaseAdd (element);
+            BaseAdd(element);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement ()
+        protected override ConfigurationElement CreateNewElement()
         {
-            return new WebRequestModuleElement ();
+            return new WebRequestModuleElement();
         }
 
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
             if (!(element is WebRequestModuleElement))
-                throw new ArgumentException ("element");
+                throw new ArgumentException("element");
             return ((WebRequestModuleElement)element).Prefix;
         }
 
-        public int IndexOf (WebRequestModuleElement element)
+        public int IndexOf(WebRequestModuleElement element)
         {
-            return BaseIndexOf (element);
+            return BaseIndexOf(element);
         }
 
-        public void Remove (WebRequestModuleElement element)
+        public void Remove(WebRequestModuleElement element)
         {
-            BaseRemove (element.Prefix);
+            BaseRemove(element.Prefix);
         }
 
-        public void Remove (string name)
+        public void Remove(string name)
         {
-            BaseRemove (name);
+            BaseRemove(name);
         }
 
-        public void RemoveAt (int index)
+        public void RemoveAt(int index)
         {
-            BaseRemoveAt (index);
+            BaseRemoveAt(index);
         }
 
         #endregion // Methods

@@ -8,12 +8,15 @@ using Microsoft.Cci;
 
 namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 {
-    internal sealed class DeletedCustomAttribute : DeletedDefinition<ICustomAttribute>, ICustomAttribute
+    internal sealed class DeletedCustomAttribute
+        : DeletedDefinition<ICustomAttribute>,
+            ICustomAttribute
     {
-        public DeletedCustomAttribute(ICustomAttribute oldAttribute, Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers)
-            : base(oldAttribute, typesUsedByDeletedMembers)
-        {
-        }
+        public DeletedCustomAttribute(
+            ICustomAttribute oldAttribute,
+            Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers
+        )
+            : base(oldAttribute, typesUsedByDeletedMembers) { }
 
         public int ArgumentCount => OldDefinition.ArgumentCount;
 

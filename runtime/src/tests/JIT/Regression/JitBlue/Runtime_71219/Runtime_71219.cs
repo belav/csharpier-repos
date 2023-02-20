@@ -29,16 +29,18 @@ public class Runtime_71219
     private static bool ProblemWithNonFloatField(Vector4 vtor)
     {
         vtor += vtor;
-        return Unsafe.As<Vector4, StructWithIndex>(ref vtor).Value != Unsafe.As<float, int>(ref vtor.Y);
+        return Unsafe.As<Vector4, StructWithIndex>(ref vtor).Value
+            != Unsafe.As<float, int>(ref vtor.Y);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static bool ProblemWithMisalignedField(Vector128<long> vtor)
     {
         vtor += vtor;
-        return
-            Unsafe.As<Vector128<long>, StructWithLng>(ref vtor).Long !=
-            Unsafe.As<byte, long>(ref Unsafe.Add(ref Unsafe.As<Vector128<long>, byte>(ref vtor), 4));
+        return Unsafe.As<Vector128<long>, StructWithLng>(ref vtor).Long
+            != Unsafe.As<byte, long>(
+                ref Unsafe.Add(ref Unsafe.As<Vector128<long>, byte>(ref vtor), 4)
+            );
     }
 
     struct StructWithIndex

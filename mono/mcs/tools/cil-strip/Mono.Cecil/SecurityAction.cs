@@ -26,9 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
-    internal enum SecurityAction : short {
+namespace Mono.Cecil
+{
+    internal enum SecurityAction : short
+    {
         Request = 1,
         Demand = 2,
         Assert = 3,

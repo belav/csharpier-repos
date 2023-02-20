@@ -7,9 +7,9 @@ public class Bar
 {
     public const ushort FIELD = Foo.CONSTANT;
 
-    public static int Main ()
+    public static int Main()
     {
-        Console.WriteLine (FIELD);
+        Console.WriteLine(FIELD);
         if (FIELD != 65535)
             return 1;
 

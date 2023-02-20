@@ -26,31 +26,39 @@ namespace System.Windows.Forms.Theming
 {
     class ThemeElementsVisualStyles : ThemeElementsDefault
     {
-        public override Default.CheckBoxPainter CheckBoxPainter {
-            get {
+        public override Default.CheckBoxPainter CheckBoxPainter
+        {
+            get
+            {
                 if (checkBoxPainter == null)
-                    checkBoxPainter = new VisualStyles.CheckBoxPainter ();
+                    checkBoxPainter = new VisualStyles.CheckBoxPainter();
                 return checkBoxPainter;
             }
         }
-        public override Default.RadioButtonPainter RadioButtonPainter {
-            get {
+        public override Default.RadioButtonPainter RadioButtonPainter
+        {
+            get
+            {
                 if (radioButtonPainter == null)
-                    radioButtonPainter = new VisualStyles.RadioButtonPainter ();
+                    radioButtonPainter = new VisualStyles.RadioButtonPainter();
                 return radioButtonPainter;
             }
         }
-        public override Default.ToolStripPainter ToolStripPainter {
-            get {
+        public override Default.ToolStripPainter ToolStripPainter
+        {
+            get
+            {
                 if (toolStripPainter == null)
-                    toolStripPainter = new VisualStyles.ToolStripPainter ();
+                    toolStripPainter = new VisualStyles.ToolStripPainter();
                 return toolStripPainter;
             }
         }
-        public override Default.TabControlPainter TabControlPainter {
-            get {
+        public override Default.TabControlPainter TabControlPainter
+        {
+            get
+            {
                 if (tabControlPainter == null)
-                    tabControlPainter = new VisualStyles.TabControlPainter ();
+                    tabControlPainter = new VisualStyles.TabControlPainter();
                 return tabControlPainter;
             }
         }

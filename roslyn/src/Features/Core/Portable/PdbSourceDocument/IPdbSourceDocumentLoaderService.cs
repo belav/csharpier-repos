@@ -12,7 +12,14 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 {
     internal interface IPdbSourceDocumentLoaderService
     {
-        Task<SourceFileInfo?> LoadSourceDocumentAsync(string tempFilePath, SourceDocument sourceDocument, Encoding encoding, TelemetryMessage telemetry, bool useExtendedTimeout, CancellationToken cancellationToken);
+        Task<SourceFileInfo?> LoadSourceDocumentAsync(
+            string tempFilePath,
+            SourceDocument sourceDocument,
+            Encoding encoding,
+            TelemetryMessage telemetry,
+            bool useExtendedTimeout,
+            CancellationToken cancellationToken
+        );
     }
 
     /// <param name="FilePath">The path to the source file on disk</param>
@@ -20,5 +27,11 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
     /// <param name="Loader">The text loader to use</param>
     /// <param name="ChecksumAlgorithm">Algorithm to use for content checksum.</param>
     /// <param name="FromRemoteLocation">Whether the source files came from a remote location, and therefore their existence should be used to indicate that future requests can wait longer</param>
-    internal sealed record SourceFileInfo(string FilePath, string SourceDescription, TextLoader Loader, SourceHashAlgorithm ChecksumAlgorithm, bool FromRemoteLocation);
+    internal sealed record SourceFileInfo(
+        string FilePath,
+        string SourceDescription,
+        TextLoader Loader,
+        SourceHashAlgorithm ChecksumAlgorithm,
+        bool FromRemoteLocation
+    );
 }

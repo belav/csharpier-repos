@@ -4,67 +4,58 @@ using System.Collections.Generic;
 
 struct S : IDisposable, IEnumerable
 {
-    public void Dispose ()
+    public void Dispose() { }
+
+    public IEnumerator GetEnumerator()
     {
-    }
-    
-    public IEnumerator GetEnumerator ()
-    {
-        return new List<int>().GetEnumerator (); 
+        return new List<int>().GetEnumerator();
     }
 }
 
 class C
 {
-    public static void Main ()
+    public static void Main() { }
+
+    void Using_1()
     {
+        using (var s = new S()) { }
     }
 
-    void Using_1 ()
+    void Using_2()
     {
-        using (var s = new S ())
-        {
-        }
+        using (
+            S s = new S(),
+                s2 = new S()
+        ) { }
     }
-    
-    void Using_2 ()
+
+    void Using_3()
     {
-        using (S s = new S (), s2 = new S ())
-        {
-        }
+        using (S? s = new S()) { }
     }
-    
-    void Using_3 ()
+
+    void Using_4()
     {
-        using (S? s = new S ())
+        using (var ms = new System.IO.MemoryStream())
         {
+            Console.WriteLine("a");
         }
     }
 
-    void Using_4 ()
+    void Lock()
     {
-        using (var ms = new System.IO.MemoryStream ())
-        {
-            Console.WriteLine ("a");
-        }
+        lock (this) { }
     }
-    
-    void Lock ()
-    {
-        lock (this)
-        {
-        }
-    }
-    
-    void Lock_2 ()
+
+    void Lock_2()
     {
         lock (this)
         {
             return;
         }
     }
-    
-    void Switch_1 (int arg)
+
+    void Switch_1(int arg)
     {
         switch (arg)
         {
@@ -83,8 +74,8 @@ class C
                 break;
         }
     }
-    
-    void Switch_2 (int? arg)
+
+    void Switch_2(int? arg)
     {
         switch (arg)
         {
@@ -98,8 +89,8 @@ class C
                 break;
         }
     }
-    
-    void Switch_3 (string s)
+
+    void Switch_3(string s)
     {
         switch (s)
         {
@@ -123,7 +114,7 @@ class C
         }
     }
 
-    void Switch_4 (string s)
+    void Switch_4(string s)
     {
         switch (s)
         {
@@ -135,139 +126,90 @@ class C
                 break;
         }
     }
-    
-    void Checked ()
+
+    void Checked()
     {
         checked
         {
             int a = 1;
         }
-        
         unchecked
         {
             int a = 2;
         }
     }
 
-    void DoWhile (int arg)
+    void DoWhile(int arg)
     {
-        do
-        {
-        }
-        while (arg != 0);
-        
-        while (arg > 0)
-        {
-        }
+        do { } while (arg != 0);
+
+        while (arg > 0) { }
     }
-    
-    void DoWhile_2 ()
+
+    void DoWhile_2()
     {
         do
         {
             int i = 2;
-        }
-        while (true);
+        } while (true);
     }
 
-    void While_2 ()
+    void While_2()
     {
         while (true)
         {
-            Console.WriteLine ("aa");
+            Console.WriteLine("aa");
         }
     }
 
-    void If (string s)
+    void If(string s)
     {
-        if (s == "a")
-        {
-        }
-        else
-        {
-        }
-    }
-    
-    void If_2 (string s)
-    {
-        if (s == "a")
-        {
-        }
-        else if (s == "b")
-        {
-        }
-        else
-        {
-        }
-    }
-    
-    void If_3 (int i)
-    {
-        if (i == i)
-        {
-        }
-        else
-        {
-        }
+        if (s == "a") { }
+        else { }
     }
 
-    void For_1 ()
+    void If_2(string s)
     {
-        for (int i = 0;
-        i < 4;
-        ++i)
-        {
-        }
-        
-        for (;
-        ;
-        )
-        {
-        }
-    }
-    
-    void For_2 ()
-    {
-        for (int i = 0; ;)
-        {
-        }
-    }
-    
-    void ForEach (int[] args)
-    {
-        foreach (
-        var a
-        in args)
-        {
-        }
-    }
-    
-    void ForEach_2 (List<object> args)
-    {
-        foreach
-        (var a
-        in
-        args)
-        {
-        }
+        if (s == "a") { }
+        else if (s == "b") { }
+        else { }
     }
 
-    void ForEach_3 (S args)
+    void If_3(int i)
     {
-        foreach
-        (var a
-        in
-        args)
-        {
-        }
+        if (i == i) { }
+        else { }
     }
-    
-    void ForEach_4 (int[,] args)
+
+    void For_1()
     {
-        foreach (
-        var a
-        in args)
-        {
-        }
+        for (int i = 0; i < 4; ++i) { }
+
+        for (; ; ) { }
+    }
+
+    void For_2()
+    {
+        for (int i = 0; ; ) { }
+    }
+
+    void ForEach(int[] args)
+    {
+        foreach (var a in args) { }
+    }
+
+    void ForEach_2(List<object> args)
+    {
+        foreach (var a in args) { }
+    }
+
+    void ForEach_3(S args)
+    {
+        foreach (var a in args) { }
+    }
+
+    void ForEach_4(int[,] args)
+    {
+        foreach (var a in args) { }
     }
 }

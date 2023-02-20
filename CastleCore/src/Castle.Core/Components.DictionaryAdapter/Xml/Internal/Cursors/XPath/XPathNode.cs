@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -18,8 +18,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
     using System.Xml;
     using System.Xml.XPath;
 
-    public class XPathNode : XmlNodeBase, IXmlNode, IRealizable<XPathNavigator>
-        , IRealizable<XmlNode>
+    public class XPathNode
+        : XmlNodeBase,
+            IXmlNode,
+            IRealizable<XPathNavigator>,
+            IRealizable<XmlNode>
     {
         protected XPathNavigator node;
         protected readonly CompiledXPath xpath;
@@ -49,12 +52,20 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         XPathNavigator IRealizable<XPathNavigator>.Value
         {
-            get { Realize(); return node; }
+            get
+            {
+                Realize();
+                return node;
+            }
         }
 
         XmlNode IRealizable<XmlNode>.Value
         {
-            get { Realize(); return (XmlNode) node.UnderlyingObject; }
+            get
+            {
+                Realize();
+                return (XmlNode)node.UnderlyingObject;
+            }
         }
 
         public override CompiledXPath Path
@@ -91,7 +102,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public virtual string Value
         {
             get { return node.Value; }
-            set { var nil = (value == null); IsNil = nil; if (!nil) node.SetValue(value); }
+            set
+            {
+                var nil = (value == null);
+                IsNil = nil;
+                if (!nil)
+                    node.SetValue(value);
+            }
         }
 
         public virtual string Xml
@@ -154,11 +171,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public void DefineNamespace(string prefix, string namespaceUri, bool root)
         {
-            var target
-                = root        ? node.GetRootElement()
-                : IsElement   ? node
-                : IsAttribute ? node.GetParent()
-                : node.GetRootElement();
+            var target = root
+                ? node.GetRootElement()
+                : IsElement
+                    ? node
+                    : IsAttribute
+                        ? node.GetParent()
+                        : node.GetRootElement();
 
             target.CreateAttribute(Xmlns.Prefix, prefix, Xmlns.NamespaceUri, namespaceUri);
         }
@@ -167,13 +186,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             var sysXmlNode = node.AsRealizable<XmlNode>();
             if (sysXmlNode != null)
-                return sysXmlNode.IsReal
-                    && sysXmlNode.Value == this.node.UnderlyingObject;
+                return sysXmlNode.IsReal && sysXmlNode.Value == this.node.UnderlyingObject;
 
             var xPathNode = node.AsRealizable<XPathNavigator>();
             if (xPathNode != null)
-                return xPathNode.IsReal
-                    && xPathNode.Value.IsSamePosition(this.node);
+                return xPathNode.IsReal && xPathNode.Value.IsSamePosition(this.node);
 
             return false;
         }
@@ -188,7 +205,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
             return new XmlSelfCursor(this, clrType);
         }
 
-        public IXmlCursor SelectChildren(IXmlKnownTypeMap knownTypes, IXmlNamespaceSource namespaces, CursorFlags flags)
+        public IXmlCursor SelectChildren(
+            IXmlKnownTypeMap knownTypes,
+            IXmlNamespaceSource namespaces,
+            CursorFlags flags
+        )
         {
             return new SysXmlCursor(this, knownTypes, namespaces, flags);
         }
@@ -198,11 +219,16 @@ namespace Castle.Components.DictionaryAdapter.Xml
             return new SysXmlSubtreeIterator(this, Namespaces);
         }
 
-        public IXmlCursor Select(CompiledXPath path, IXmlIncludedTypeMap includedTypes, IXmlNamespaceSource namespaces, CursorFlags flags)
+        public IXmlCursor Select(
+            CompiledXPath path,
+            IXmlIncludedTypeMap includedTypes,
+            IXmlNamespaceSource namespaces,
+            CursorFlags flags
+        )
         {
             return flags.SupportsMutation()
-                ? (IXmlCursor) new XPathMutableCursor (this, path, includedTypes, namespaces, flags)
-                : (IXmlCursor) new XPathReadOnlyCursor(this, path, includedTypes, namespaces, flags);
+                ? (IXmlCursor)new XPathMutableCursor(this, path, includedTypes, namespaces, flags)
+                : (IXmlCursor)new XPathReadOnlyCursor(this, path, includedTypes, namespaces, flags);
         }
 
         public virtual object Evaluate(CompiledXPath path)

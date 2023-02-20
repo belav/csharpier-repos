@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,50 +38,75 @@ namespace System.Web.Security
 {
     internal static class AspNetDBSchemaChecker
     {
-        static DbConnection CreateConnection (DbProviderFactory factory, string connStr)
+        static DbConnection CreateConnection(DbProviderFactory factory, string connStr)
         {
-            DbConnection connection = factory.CreateConnection ();
+            DbConnection connection = factory.CreateConnection();
             connection.ConnectionString = connStr;
 
-            connection.Open ();
+            connection.Open();
             return connection;
         }
 
-        public static bool CheckMembershipSchemaVersion (DbProviderFactory factory, string connStr, string feature, string compatibleVersion)
+        public static bool CheckMembershipSchemaVersion(
+            DbProviderFactory factory,
+            string connStr,
+            string feature,
+            string compatibleVersion
+        )
         {
-            using (DbConnection connection = CreateConnection (factory, connStr)) {
-                DbCommand command = factory.CreateCommand ();
+            using (DbConnection connection = CreateConnection(factory, connStr))
+            {
+                DbCommand command = factory.CreateCommand();
                 command.Connection = connection;
                 command.CommandText = @"aspnet_CheckSchemaVersion";
                 command.CommandType = CommandType.StoredProcedure;
 
-                AddParameter (factory, command, "@Feature", ParameterDirection.Input, feature);
-                AddParameter (factory, command, "@CompatibleSchemaVersion", ParameterDirection.Input, compatibleVersion);
-                DbParameter returnValue = AddParameter (factory, command, "@ReturnVal", ParameterDirection.ReturnValue, null);
+                AddParameter(factory, command, "@Feature", ParameterDirection.Input, feature);
+                AddParameter(
+                    factory,
+                    command,
+                    "@CompatibleSchemaVersion",
+                    ParameterDirection.Input,
+                    compatibleVersion
+                );
+                DbParameter returnValue = AddParameter(
+                    factory,
+                    command,
+                    "@ReturnVal",
+                    ParameterDirection.ReturnValue,
+                    null
+                );
 
-                try {
-                    command.ExecuteNonQuery ();
+                try
+                {
+                    command.ExecuteNonQuery();
                 }
-                catch (Exception) {
-                    throw new ProviderException ("ASP.NET Membership schema not installed.");
+                catch (Exception)
+                {
+                    throw new ProviderException("ASP.NET Membership schema not installed.");
                 }
 
-                if ((int) (returnValue.Value ?? -1) == 0)
+                if ((int)(returnValue.Value ?? -1) == 0)
                     return true;
 
                 return false;
             }
         }
 
-        static DbParameter AddParameter (DbProviderFactory factory, DbCommand command, string parameterName, ParameterDirection direction, object parameterValue)
+        static DbParameter AddParameter(
+            DbProviderFactory factory,
+            DbCommand command,
+            string parameterName,
+            ParameterDirection direction,
+            object parameterValue
+        )
         {
-            DbParameter dbp = command.CreateParameter ();
+            DbParameter dbp = command.CreateParameter();
             dbp.ParameterName = parameterName;
             dbp.Value = parameterValue;
             dbp.Direction = direction;
-            command.Parameters.Add (dbp);
+            command.Parameters.Add(dbp);
             return dbp;
         }
-
     }
 }

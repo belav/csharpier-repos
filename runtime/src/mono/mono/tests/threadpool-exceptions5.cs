@@ -1,49 +1,53 @@
 using System;
 using System.Threading;
 
-class Test {
+class Test
+{
+    static ManualResetEvent mre = new ManualResetEvent(false);
 
-    static ManualResetEvent mre = new ManualResetEvent (false);
-
-    static int Main ()
+    static int Main()
     {
         AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
-        WaitCallback wcb = new WaitCallback ((a) => {
-            Thread.CurrentThread.Abort();
-        });
+        WaitCallback wcb = new WaitCallback(
+            (a) =>
+            {
+                Thread.CurrentThread.Abort();
+            }
+        );
 
-        wcb.BeginInvoke (wcb, OnCBFinished, null);
+        wcb.BeginInvoke(wcb, OnCBFinished, null);
 
-        if (!mre.WaitOne (10000))
+        if (!mre.WaitOne(10000))
             return 2;
 
-        GC.Collect ();
-        GC.WaitForPendingFinalizers ();
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
 
         /* expected exit code: 255 */
-        Thread.Sleep (10000);
+        Thread.Sleep(10000);
         return 0;
     }
 
-    static void OnUnhandledException (object sender, UnhandledExceptionEventArgs e)
+    static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
-        string str = e.ExceptionObject.ToString ();
-        if (!str.Contains ("From OnCBFinished")) {
-            Environment.Exit (3);
+        string str = e.ExceptionObject.ToString();
+        if (!str.Contains("From OnCBFinished"))
+        {
+            Environment.Exit(3);
             return;
         }
 
-        if (!e.IsTerminating) {
-            Environment.Exit (4);
+        if (!e.IsTerminating)
+        {
+            Environment.Exit(4);
             return;
         }
 
-        mre.Set ();
+        mre.Set();
     }
 
-    static void OnCBFinished (object arg)
+    static void OnCBFinished(object arg)
     {
-        throw new Exception ("From OnCBFinished");
+        throw new Exception("From OnCBFinished");
     }
 }
-

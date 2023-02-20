@@ -17,10 +17,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
     {
         public static Guid Microsoft
         {
-            get
-            {
-                return new Guid("994B45C4-E6E9-11D2-903F-00C04FA302A1");
-            }
+            get { return new Guid("994B45C4-E6E9-11D2-903F-00C04FA302A1"); }
         }
     }
 }

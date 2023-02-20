@@ -27,7 +27,8 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder ToContainer(
         this EntityTypeBuilder entityTypeBuilder,
-        string? name)
+        string? name
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
 
@@ -49,9 +50,10 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> ToContainer<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        string? name)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)ToContainer((EntityTypeBuilder)entityTypeBuilder, name);
+        string? name
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)ToContainer((EntityTypeBuilder)entityTypeBuilder, name);
 
     /// <summary>
     ///     Configures the container that the entity type maps to when targeting Azure Cosmos.
@@ -70,7 +72,8 @@ public static class CosmosEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? ToContainer(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetContainer(name, fromDataAnnotation))
         {
@@ -97,11 +100,16 @@ public static class CosmosEntityTypeBuilderExtensions
     public static bool CanSetContainer(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
 
-        return entityTypeBuilder.CanSetAnnotation(CosmosAnnotationNames.ContainerName, name, fromDataAnnotation);
+        return entityTypeBuilder.CanSetAnnotation(
+            CosmosAnnotationNames.ContainerName,
+            name,
+            fromDataAnnotation
+        );
     }
 
     /// <summary>
@@ -116,7 +124,8 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static OwnedNavigationBuilder ToJsonProperty(
         this OwnedNavigationBuilder entityTypeBuilder,
-        string? name)
+        string? name
+    )
     {
         entityTypeBuilder.OwnedEntityType.SetContainingPropertyName(name);
 
@@ -133,9 +142,10 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="name">The name of the parent property.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToJsonProperty<TOwnerEntity, TDependentEntity>(
-        this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> entityTypeBuilder,
-        string? name)
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToJsonProperty<
+        TOwnerEntity,
+        TDependentEntity
+    >(this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> entityTypeBuilder, string? name)
         where TOwnerEntity : class
         where TDependentEntity : class
     {
@@ -161,7 +171,8 @@ public static class CosmosEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? ToJsonProperty(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetJsonProperty(name, fromDataAnnotation))
         {
@@ -188,11 +199,16 @@ public static class CosmosEntityTypeBuilderExtensions
     public static bool CanSetJsonProperty(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
 
-        return entityTypeBuilder.CanSetAnnotation(CosmosAnnotationNames.PropertyName, name, fromDataAnnotation);
+        return entityTypeBuilder.CanSetAnnotation(
+            CosmosAnnotationNames.PropertyName,
+            name,
+            fromDataAnnotation
+        );
     }
 
     /// <summary>
@@ -207,7 +223,8 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder HasPartitionKey(
         this EntityTypeBuilder entityTypeBuilder,
-        string? name)
+        string? name
+    )
     {
         entityTypeBuilder.Metadata.SetPartitionKeyPropertyName(name);
 
@@ -226,9 +243,10 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> HasPartitionKey<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        string? name)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)HasPartitionKey((EntityTypeBuilder)entityTypeBuilder, name);
+        string? name
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)HasPartitionKey((EntityTypeBuilder)entityTypeBuilder, name);
 
     /// <summary>
     ///     Configures the property that is used to store the partition key.
@@ -242,12 +260,16 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> HasPartitionKey<TEntity, TProperty>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        Expression<Func<TEntity, TProperty>> propertyExpression)
+        Expression<Func<TEntity, TProperty>> propertyExpression
+    )
         where TEntity : class
     {
         Check.NotNull(propertyExpression, nameof(propertyExpression));
 
-        return HasPartitionKey(entityTypeBuilder, propertyExpression.GetMemberAccess().GetSimpleMemberName());
+        return HasPartitionKey(
+            entityTypeBuilder,
+            propertyExpression.GetMemberAccess().GetSimpleMemberName()
+        );
     }
 
     /// <summary>
@@ -267,7 +289,8 @@ public static class CosmosEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? HasPartitionKey(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetPartitionKey(name, fromDataAnnotation))
         {
@@ -294,11 +317,16 @@ public static class CosmosEntityTypeBuilderExtensions
     public static bool CanSetPartitionKey(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
 
-        return entityTypeBuilder.CanSetAnnotation(CosmosAnnotationNames.PartitionKeyName, name, fromDataAnnotation);
+        return entityTypeBuilder.CanSetAnnotation(
+            CosmosAnnotationNames.PartitionKeyName,
+            name,
+            fromDataAnnotation
+        );
     }
 
     /// <summary>
@@ -312,7 +340,8 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder UseETagConcurrency(this EntityTypeBuilder entityTypeBuilder)
     {
-        entityTypeBuilder.Property<string>("_etag")
+        entityTypeBuilder
+            .Property<string>("_etag")
             .ValueGeneratedOnAddOrUpdate()
             .IsConcurrencyToken();
 
@@ -328,9 +357,11 @@ public static class CosmosEntityTypeBuilderExtensions
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static EntityTypeBuilder<TEntity> UseETagConcurrency<TEntity>(this EntityTypeBuilder<TEntity> entityTypeBuilder)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)UseETagConcurrency((EntityTypeBuilder)entityTypeBuilder);
+    public static EntityTypeBuilder<TEntity> UseETagConcurrency<TEntity>(
+        this EntityTypeBuilder<TEntity> entityTypeBuilder
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)UseETagConcurrency((EntityTypeBuilder)entityTypeBuilder);
 
     /// <summary>
     ///     Configures the time to live for analytical store in seconds at container scope.
@@ -344,7 +375,8 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder HasAnalyticalStoreTimeToLive(
         this EntityTypeBuilder entityTypeBuilder,
-        int? seconds)
+        int? seconds
+    )
     {
         entityTypeBuilder.Metadata.SetAnalyticalStoreTimeToLive(seconds);
 
@@ -363,9 +395,11 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> HasAnalyticalStoreTimeToLive<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        int? seconds)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)HasAnalyticalStoreTimeToLive((EntityTypeBuilder)entityTypeBuilder, seconds);
+        int? seconds
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)
+            HasAnalyticalStoreTimeToLive((EntityTypeBuilder)entityTypeBuilder, seconds);
 
     /// <summary>
     ///     Configures the time to live for analytical store in seconds at container scope.
@@ -384,7 +418,8 @@ public static class CosmosEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? HasAnalyticalStoreTimeToLive(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         int? seconds,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetAnalyticalStoreTimeToLive(seconds, fromDataAnnotation))
         {
@@ -411,11 +446,16 @@ public static class CosmosEntityTypeBuilderExtensions
     public static bool CanSetAnalyticalStoreTimeToLive(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         int? seconds,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
 
-        return entityTypeBuilder.CanSetAnnotation(CosmosAnnotationNames.AnalyticalStoreTimeToLive, seconds, fromDataAnnotation);
+        return entityTypeBuilder.CanSetAnnotation(
+            CosmosAnnotationNames.AnalyticalStoreTimeToLive,
+            seconds,
+            fromDataAnnotation
+        );
     }
 
     /// <summary>
@@ -430,7 +470,8 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder HasDefaultTimeToLive(
         this EntityTypeBuilder entityTypeBuilder,
-        int? seconds)
+        int? seconds
+    )
     {
         entityTypeBuilder.Metadata.SetDefaultTimeToLive(seconds);
 
@@ -449,9 +490,11 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> HasDefaultTimeToLive<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        int? seconds)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)HasDefaultTimeToLive((EntityTypeBuilder)entityTypeBuilder, seconds);
+        int? seconds
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)
+            HasDefaultTimeToLive((EntityTypeBuilder)entityTypeBuilder, seconds);
 
     /// <summary>
     ///     Configures the default time to live in seconds at container scope.
@@ -470,7 +513,8 @@ public static class CosmosEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? HasDefaultTimeToLive(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         int? seconds,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetDefaultTimeToLive(seconds, fromDataAnnotation))
         {
@@ -497,8 +541,13 @@ public static class CosmosEntityTypeBuilderExtensions
     public static bool CanSetDefaultTimeToLive(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         int? seconds,
-        bool fromDataAnnotation = false)
-        => entityTypeBuilder.CanSetAnnotation(CosmosAnnotationNames.DefaultTimeToLive, seconds, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        entityTypeBuilder.CanSetAnnotation(
+            CosmosAnnotationNames.DefaultTimeToLive,
+            seconds,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the manual provisioned throughput offering.
@@ -509,7 +558,10 @@ public static class CosmosEntityTypeBuilderExtensions
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="throughput">The throughput to set.</param>
-    public static EntityTypeBuilder HasManualThroughput(this EntityTypeBuilder entityTypeBuilder, int? throughput)
+    public static EntityTypeBuilder HasManualThroughput(
+        this EntityTypeBuilder entityTypeBuilder,
+        int? throughput
+    )
     {
         entityTypeBuilder.Metadata.SetThroughput(throughput, autoscale: false);
 
@@ -527,9 +579,11 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <param name="throughput">The throughput to set.</param>
     public static EntityTypeBuilder<TEntity> HasManualThroughput<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        int? throughput)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)HasManualThroughput((EntityTypeBuilder)entityTypeBuilder, throughput);
+        int? throughput
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)
+            HasManualThroughput((EntityTypeBuilder)entityTypeBuilder, throughput);
 
     /// <summary>
     ///     Configures the autoscale provisioned throughput offering.
@@ -540,7 +594,10 @@ public static class CosmosEntityTypeBuilderExtensions
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="throughput">The throughput to set.</param>
-    public static EntityTypeBuilder HasAutoscaleThroughput(this EntityTypeBuilder entityTypeBuilder, int? throughput)
+    public static EntityTypeBuilder HasAutoscaleThroughput(
+        this EntityTypeBuilder entityTypeBuilder,
+        int? throughput
+    )
     {
         entityTypeBuilder.Metadata.SetThroughput(throughput, autoscale: true);
 
@@ -558,9 +615,11 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <param name="throughput">The throughput to set.</param>
     public static EntityTypeBuilder<TEntity> HasAutoscaleThroughput<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        int? throughput)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)HasAutoscaleThroughput((EntityTypeBuilder)entityTypeBuilder, throughput);
+        int? throughput
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)
+            HasAutoscaleThroughput((EntityTypeBuilder)entityTypeBuilder, throughput);
 
     /// <summary>
     ///     Configures the provisioned throughput.
@@ -577,7 +636,8 @@ public static class CosmosEntityTypeBuilderExtensions
         this IConventionEntityTypeBuilder entityTypeBuilder,
         int? throughput,
         bool autoscale,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetThroughput(throughput, autoscale, fromDataAnnotation))
         {
@@ -605,15 +665,20 @@ public static class CosmosEntityTypeBuilderExtensions
         this IConventionEntityTypeBuilder entityTypeBuilder,
         int? throughput,
         bool autoscale,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
-        var existingAnnotation = entityTypeBuilder.Metadata.FindAnnotation(CosmosAnnotationNames.Throughput);
+        var existingAnnotation = entityTypeBuilder.Metadata.FindAnnotation(
+            CosmosAnnotationNames.Throughput
+        );
         if (existingAnnotation == null)
         {
             return true;
         }
 
-        var configurationSource = fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention;
+        var configurationSource = fromDataAnnotation
+            ? ConfigurationSource.DataAnnotation
+            : ConfigurationSource.Convention;
         if (configurationSource.Overrides(existingAnnotation.GetConfigurationSource()))
         {
             return true;

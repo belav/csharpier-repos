@@ -8,7 +8,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.EmbeddedLanguages
 {
     internal static class EmbeddedLanguagesTestConstants
     {
-        public static readonly string StringSyntaxAttributeCodeCSharp = @"
+        public static readonly string StringSyntaxAttributeCodeCSharp =
+            @"
 namespace System.Diagnostics.CodeAnalysis
 {
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
@@ -35,7 +36,8 @@ namespace System.Diagnostics.CodeAnalysis
     }
 }";
 
-        public static readonly string StringSyntaxAttributeCodeVB = @"
+        public static readonly string StringSyntaxAttributeCodeVB =
+            @"
 Namespace System.Diagnostics.CodeAnalysis
     <AttributeUsage(AttributeTargets.Parameter Or AttributeTargets.Field Or AttributeTargets.Property, AllowMultiple:=False, Inherited:=False)>
     Public NotInheritable Class StringSyntaxAttribute
@@ -61,7 +63,11 @@ Namespace System.Diagnostics.CodeAnalysis
 End Namespace
 ";
 
-        public static readonly string StringSyntaxAttributeCodeCSharpXml = SecurityElement.Escape(StringSyntaxAttributeCodeCSharp);
-        public static readonly string StringSyntaxAttributeCodeVBXml = SecurityElement.Escape(StringSyntaxAttributeCodeVB);
+        public static readonly string StringSyntaxAttributeCodeCSharpXml = SecurityElement.Escape(
+            StringSyntaxAttributeCodeCSharp
+        );
+        public static readonly string StringSyntaxAttributeCodeVBXml = SecurityElement.Escape(
+            StringSyntaxAttributeCodeVB
+        );
     }
 }

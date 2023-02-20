@@ -15,6 +15,6 @@ namespace ILLink.Shared.TrimAnalysis
 
         public readonly SingleValue Size;
 
-        public partial bool TryGetValueByIndex (int index, out MultiValue value);
+        public partial bool TryGetValueByIndex(int index, out MultiValue value);
     }
 }

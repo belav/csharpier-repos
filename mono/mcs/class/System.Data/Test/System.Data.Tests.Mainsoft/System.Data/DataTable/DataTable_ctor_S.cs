@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,24 +36,29 @@ using NUnit.Framework;
 
 namespace tests.system_data_dll.System_Data
 {
-    [TestFixture] public class DataTable_ctor_S : GHTBase
+    [TestFixture]
+    public class DataTable_ctor_S : GHTBase
     {
         public void SetUp()
         {
             Exception exp = null;
             BeginCase("Setup");
-            try
+            try { }
+            catch (Exception ex)
             {
+                exp = ex;
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
-        public void TearDown()
-        {
-        }
+        public void TearDown() { }
 
-        [Test] public void Main()
+        [Test]
+        public void Main()
         {
             DataTable_ctor_S tc = new DataTable_ctor_S();
             Exception exp = null;
@@ -64,7 +69,7 @@ namespace tests.system_data_dll.System_Data
                 tc.run();
                 tc.TearDown();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -81,22 +86,36 @@ namespace tests.system_data_dll.System_Data
             string sName = "MyName";
 
             dt = new DataTable(sName);
-        
+
             try
             {
                 BeginCase("Ctor");
-                Compare(dt == null ,false );
+                Compare(dt == null, false);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
+
             try
             {
                 BeginCase("Ctor TableName");
-                Compare(dt.TableName ,sName );
+                Compare(dt.TableName, sName);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
     }
 }

@@ -2,6 +2,4 @@
 // Line: 0
 // Compiler options: -r:a:b
 
-class C
-{
-}
+class C { }

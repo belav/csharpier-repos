@@ -2,6 +2,7 @@
 // Line: 6
 // Compiler options: -warnaserror -warn:1
 
-class ExternClass {
-        static public extern implicit operator ExternClass(byte value);
+class ExternClass
+{
+    static public extern implicit operator ExternClass(byte value);
 }

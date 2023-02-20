@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,68 +35,66 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-    public class SubMenuStyleCollection: StateManagedCollection
+    public class SubMenuStyleCollection : StateManagedCollection
     {
-        static Type[] types = new Type[] { typeof (SubMenuStyle) };
-        
-        internal SubMenuStyleCollection ()
+        static Type[] types = new Type[] { typeof(SubMenuStyle) };
+
+        internal SubMenuStyleCollection() { }
+
+        public int Add(SubMenuStyle style)
         {
+            return ((IList)this).Add(style);
         }
-        
-        public int Add (SubMenuStyle style)
+
+        public bool Contains(SubMenuStyle style)
         {
-            return ((IList)this).Add (style);
+            return ((IList)this).Contains(style);
         }
-        
-        public bool Contains (SubMenuStyle style)
+
+        public void CopyTo(SubMenuStyle[] styleArray, int index)
         {
-            return ((IList)this).Contains (style);
+            ((IList)this).CopyTo(styleArray, index);
         }
-        
-        public void CopyTo (SubMenuStyle[] styleArray, int index)
+
+        protected override object CreateKnownType(int index)
         {
-            ((IList)this).CopyTo (styleArray, index);
+            return new SubMenuStyle();
         }
-        
-        protected override object CreateKnownType (int index)
-        {
-            return new SubMenuStyle ();
-        }
-        
-        protected override Type[] GetKnownTypes ()
+
+        protected override Type[] GetKnownTypes()
         {
             return types;
         }
-        
-        public int IndexOf (SubMenuStyle style)
+
+        public int IndexOf(SubMenuStyle style)
         {
-            return ((IList)this).IndexOf (style);
+            return ((IList)this).IndexOf(style);
         }
-        
-        public void Insert (int index, SubMenuStyle style)
+
+        public void Insert(int index, SubMenuStyle style)
         {
-            ((IList)this).Insert (index, style);
+            ((IList)this).Insert(index, style);
         }
-        
-        public void Remove (SubMenuStyle style)
+
+        public void Remove(SubMenuStyle style)
         {
-            ((IList)this).Remove (style);
+            ((IList)this).Remove(style);
         }
-        
-        public void RemoveAt (int index)
+
+        public void RemoveAt(int index)
         {
-            ((IList)this).RemoveAt (index);
+            ((IList)this).RemoveAt(index);
         }
-        
-        public SubMenuStyle this [int i] {
-            get { return (SubMenuStyle) ((IList)this) [i]; }
-            set { ((IList)this) [i] = value; }
-        }
-        
-        protected override void SetDirtyObject (object o)
+
+        public SubMenuStyle this[int i]
         {
-            ((SubMenuStyle)o).SetDirty ();
+            get { return (SubMenuStyle)((IList)this)[i]; }
+            set { ((IList)this)[i] = value; }
+        }
+
+        protected override void SetDirtyObject(object o)
+        {
+            ((SubMenuStyle)o).SetDirty();
         }
     }
 }
-

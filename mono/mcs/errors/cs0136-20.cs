@@ -3,10 +3,11 @@
 
 internal class Program
 {
-    public static void Main ()
+    public static void Main()
     {
         object o = null;
-        if (o is string s) {
+        if (o is string s)
+        {
             int s = 1;
         }
     }

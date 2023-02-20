@@ -2,5 +2,5 @@
 // Line: 4
 
 [assembly: System.Reflection.AssemblyCulture(de)]
-public class Hello {
-}
+
+public class Hello { }

@@ -4,12 +4,12 @@
 
 public class C
 {
-    public unsafe void Test ()
+    public unsafe void Test()
     {
-        fixed (char *p = str);
-            { }
+        fixed (char* p = str)
+            ;
+        { }
     }
 
-    static readonly char [] str = new char [] {'A'};
+    static readonly char[] str = new char[] { 'A' };
 }
-

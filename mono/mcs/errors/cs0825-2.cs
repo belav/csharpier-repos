@@ -6,4 +6,3 @@ public class Test
 {
     event var v;
 }
-

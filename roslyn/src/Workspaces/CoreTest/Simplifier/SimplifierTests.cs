@@ -35,25 +35,54 @@ public class SimplifierTests
     public async Task ExpandAsync_BadArguments()
     {
         var node = SyntaxFactory.IdentifierName(SyntaxFactory.Identifier("Test"));
-        var semanticModel = await GetDocument().GetRequiredSemanticModelAsync(CancellationToken.None);
+        var semanticModel = await GetDocument()
+            .GetRequiredSemanticModelAsync(CancellationToken.None);
 
-        await Assert.ThrowsAsync<ArgumentNullException>("node", () => Simplifier.ExpandAsync<SyntaxNode>(node: null!, document: null!));
-        await Assert.ThrowsAsync<ArgumentNullException>("document", () => Simplifier.ExpandAsync(node: node, document: null!));
-        await Assert.ThrowsAsync<ArgumentNullException>("document", () => Simplifier.ExpandAsync(token: default, document: null!));
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "node",
+            () => Simplifier.ExpandAsync<SyntaxNode>(node: null!, document: null!)
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "document",
+            () => Simplifier.ExpandAsync(node: node, document: null!)
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "document",
+            () => Simplifier.ExpandAsync(token: default, document: null!)
+        );
     }
 
     [Fact, Obsolete("Testing obsolete API")]
     public async Task Expand_BadArguments()
     {
         var node = SyntaxFactory.IdentifierName(SyntaxFactory.Identifier("Test"));
-        var semanticModel = await GetDocument().GetRequiredSemanticModelAsync(CancellationToken.None);
+        var semanticModel = await GetDocument()
+            .GetRequiredSemanticModelAsync(CancellationToken.None);
 
-        Assert.Throws<ArgumentNullException>("node", () => Simplifier.Expand<SyntaxNode>(node: null!, semanticModel: null!, services: null!));
-        Assert.Throws<ArgumentNullException>("semanticModel", () => Simplifier.Expand(node, semanticModel: null!, services: null!));
-        Assert.Throws<ArgumentNullException>("services", () => Simplifier.Expand(node, semanticModel, services: null!));
-        Assert.Throws<ArgumentNullException>("workspace", () => Simplifier.Expand(node, semanticModel, workspace: null!));
-        Assert.Throws<ArgumentNullException>("workspace", () => Simplifier.Expand(token: default, semanticModel: null!, workspace: null!));
-        Assert.Throws<ArgumentNullException>("workspace", () => Simplifier.Expand(token: default, semanticModel, workspace: null!));
+        Assert.Throws<ArgumentNullException>(
+            "node",
+            () => Simplifier.Expand<SyntaxNode>(node: null!, semanticModel: null!, services: null!)
+        );
+        Assert.Throws<ArgumentNullException>(
+            "semanticModel",
+            () => Simplifier.Expand(node, semanticModel: null!, services: null!)
+        );
+        Assert.Throws<ArgumentNullException>(
+            "services",
+            () => Simplifier.Expand(node, semanticModel, services: null!)
+        );
+        Assert.Throws<ArgumentNullException>(
+            "workspace",
+            () => Simplifier.Expand(node, semanticModel, workspace: null!)
+        );
+        Assert.Throws<ArgumentNullException>(
+            "workspace",
+            () => Simplifier.Expand(token: default, semanticModel: null!, workspace: null!)
+        );
+        Assert.Throws<ArgumentNullException>(
+            "workspace",
+            () => Simplifier.Expand(token: default, semanticModel, workspace: null!)
+        );
     }
 
     [Fact]
@@ -62,12 +91,30 @@ public class SimplifierTests
         var document = GetDocument();
 
 #pragma warning disable RS0030 // Do not used banned APIs
-        await Assert.ThrowsAsync<ArgumentNullException>("document", () => Simplifier.ReduceAsync(document: null!));
-        await Assert.ThrowsAsync<ArgumentNullException>("document", () => Simplifier.ReduceAsync(document: null!, annotation: null!));
-        await Assert.ThrowsAsync<ArgumentNullException>("annotation", () => Simplifier.ReduceAsync(document, annotation: null!));
-        await Assert.ThrowsAsync<ArgumentNullException>("document", () => Simplifier.ReduceAsync(document: null!, span: default));
-        await Assert.ThrowsAsync<ArgumentNullException>("document", () => Simplifier.ReduceAsync(document: null!, spans: null!));
-        await Assert.ThrowsAsync<ArgumentNullException>("spans", () => Simplifier.ReduceAsync(document, spans: null!));
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "document",
+            () => Simplifier.ReduceAsync(document: null!)
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "document",
+            () => Simplifier.ReduceAsync(document: null!, annotation: null!)
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "annotation",
+            () => Simplifier.ReduceAsync(document, annotation: null!)
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "document",
+            () => Simplifier.ReduceAsync(document: null!, span: default)
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "document",
+            () => Simplifier.ReduceAsync(document: null!, spans: null!)
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "spans",
+            () => Simplifier.ReduceAsync(document, spans: null!)
+        );
 #pragma warning restore
     }
 
@@ -77,24 +124,58 @@ public class SimplifierTests
         using var workspace = new AdhocWorkspace();
         var csProject = workspace.AddProject("CS", LanguageNames.CSharp);
         var vbProject = workspace.AddProject("VB", LanguageNames.VisualBasic);
-        var csDocument = workspace.AddDocument(csProject.Id, "File.cs", SourceText.From("class C { }"));
-        var vbDocument = workspace.AddDocument(vbProject.Id, "File.vb", SourceText.From("Class C : End Class"));
+        var csDocument = workspace.AddDocument(
+            csProject.Id,
+            "File.cs",
+            SourceText.From("class C { }")
+        );
+        var vbDocument = workspace.AddDocument(
+            vbProject.Id,
+            "File.vb",
+            SourceText.From("Class C : End Class")
+        );
 
-        var updatedOptions = GetOptionSetWithChangedPublicOptions(workspace.CurrentSolution.Options);
+        var updatedOptions = GetOptionSetWithChangedPublicOptions(
+            workspace.CurrentSolution.Options
+        );
 
         // Validate that options are read from specified OptionSet:
 
-        ValidateCSharpOptions((CSharpSimplifierOptions)await Simplifier.GetOptionsAsync(csDocument, updatedOptions, CancellationToken.None));
-        ValidateVisualBasicOptions((VisualBasicSimplifierOptions)await Simplifier.GetOptionsAsync(vbDocument, updatedOptions, CancellationToken.None));
+        ValidateCSharpOptions(
+            (CSharpSimplifierOptions)
+                await Simplifier.GetOptionsAsync(csDocument, updatedOptions, CancellationToken.None)
+        );
+        ValidateVisualBasicOptions(
+            (VisualBasicSimplifierOptions)
+                await Simplifier.GetOptionsAsync(vbDocument, updatedOptions, CancellationToken.None)
+        );
 
         // Validate that options are read from solution snapshot as a fallback (we have no editorconfig file, so all options should fall back):
 
         var solutionWithUpdatedOptions = workspace.CurrentSolution.WithOptions(updatedOptions);
-        var csDocumentWithUpdatedOptions = solutionWithUpdatedOptions.GetRequiredDocument(csDocument.Id);
-        var vbDocumentWithUpdatedOptions = solutionWithUpdatedOptions.GetRequiredDocument(vbDocument.Id);
+        var csDocumentWithUpdatedOptions = solutionWithUpdatedOptions.GetRequiredDocument(
+            csDocument.Id
+        );
+        var vbDocumentWithUpdatedOptions = solutionWithUpdatedOptions.GetRequiredDocument(
+            vbDocument.Id
+        );
 
-        ValidateCSharpOptions((CSharpSimplifierOptions)await Simplifier.GetOptionsAsync(csDocumentWithUpdatedOptions, optionSet: null, CancellationToken.None));
-        ValidateVisualBasicOptions((VisualBasicSimplifierOptions)await Simplifier.GetOptionsAsync(vbDocumentWithUpdatedOptions, optionSet: null, CancellationToken.None));
+        ValidateCSharpOptions(
+            (CSharpSimplifierOptions)
+                await Simplifier.GetOptionsAsync(
+                    csDocumentWithUpdatedOptions,
+                    optionSet: null,
+                    CancellationToken.None
+                )
+        );
+        ValidateVisualBasicOptions(
+            (VisualBasicSimplifierOptions)
+                await Simplifier.GetOptionsAsync(
+                    vbDocumentWithUpdatedOptions,
+                    optionSet: null,
+                    CancellationToken.None
+                )
+        );
 
         static OptionSet GetOptionSetWithChangedPublicOptions(OptionSet options)
         {
@@ -113,13 +194,18 @@ public class SimplifierTests
             var updatedOptions = options;
             foreach (var (option, newValue) in publicOptions)
             {
-                var languages = option.IsPerLanguage ? new[] { LanguageNames.CSharp, LanguageNames.VisualBasic } : new string?[] { null };
+                var languages = option.IsPerLanguage
+                    ? new[] { LanguageNames.CSharp, LanguageNames.VisualBasic }
+                    : new string?[] { null };
 
                 foreach (var language in languages)
                 {
                     var key = new OptionKey(option, language);
                     var current = (ICodeStyleOption)options.GetOption(key)!;
-                    updatedOptions = updatedOptions.WithChangedOption(key, current.WithValue(newValue));
+                    updatedOptions = updatedOptions.WithChangedOption(
+                        key,
+                        current.WithValue(newValue)
+                    );
                 }
             }
 

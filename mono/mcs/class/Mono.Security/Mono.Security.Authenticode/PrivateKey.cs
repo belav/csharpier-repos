@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,8 +35,8 @@ using System.Text;
 
 using Mono.Security.Cryptography;
 
-namespace Mono.Security.Authenticode {
-
+namespace Mono.Security.Authenticode
+{
     // References:
     // a.    http://www.drh-consultancy.demon.co.uk/pvk.html
 
@@ -45,8 +45,8 @@ namespace Mono.Security.Authenticode {
 #else
     public
 #endif
-    class PrivateKey {
-
+    class PrivateKey
+    {
         private const uint magic = 0xb0b5f11e;
 
         private bool encrypted;
@@ -54,201 +54,218 @@ namespace Mono.Security.Authenticode {
         private bool weak;
         private int keyType;
 
-        public PrivateKey () 
+        public PrivateKey()
         {
-            keyType = 2;    // required for MS makecert !!!
+            keyType = 2; // required for MS makecert !!!
         }
 
-        public PrivateKey (byte[] data, string password) 
+        public PrivateKey(byte[] data, string password)
         {
             if (data == null)
-                throw new ArgumentNullException ("data");
+                throw new ArgumentNullException("data");
 
-            if (!Decode (data, password)) {
-                throw new CryptographicException (
-                    Locale.GetText ("Invalid data and/or password"));
+            if (!Decode(data, password))
+            {
+                throw new CryptographicException(Locale.GetText("Invalid data and/or password"));
             }
         }
 
-        public bool Encrypted {
+        public bool Encrypted
+        {
             get { return encrypted; }
         }
 
-        public int KeyType {
+        public int KeyType
+        {
             get { return keyType; }
             set { keyType = value; }
         }
 
-        public RSA RSA {
+        public RSA RSA
+        {
             get { return rsa; }
             set { rsa = value; }
         }
 
-        public bool Weak {
+        public bool Weak
+        {
             get { return ((encrypted) ? weak : true); }
             set { weak = value; }
         }
 
-        private byte[] DeriveKey (byte[] salt, string password) 
+        private byte[] DeriveKey(byte[] salt, string password)
         {
-            byte[] pwd = Encoding.ASCII.GetBytes (password);
-            SHA1 sha1 = (SHA1)SHA1.Create ();
-            sha1.TransformBlock (salt, 0, salt.Length, salt, 0);
-            sha1.TransformFinalBlock (pwd, 0, pwd.Length);
-            byte[] key = new byte [16];
-            Buffer.BlockCopy (sha1.Hash, 0, key, 0, 16);
-            sha1.Clear ();
-            Array.Clear (pwd, 0, pwd.Length);
-            return key;    
+            byte[] pwd = Encoding.ASCII.GetBytes(password);
+            SHA1 sha1 = (SHA1)SHA1.Create();
+            sha1.TransformBlock(salt, 0, salt.Length, salt, 0);
+            sha1.TransformFinalBlock(pwd, 0, pwd.Length);
+            byte[] key = new byte[16];
+            Buffer.BlockCopy(sha1.Hash, 0, key, 0, 16);
+            sha1.Clear();
+            Array.Clear(pwd, 0, pwd.Length);
+            return key;
         }
 
-        private bool Decode (byte[] pvk, string password) 
+        private bool Decode(byte[] pvk, string password)
         {
             // DWORD magic
-            if (BitConverterLE.ToUInt32 (pvk, 0) != magic)
+            if (BitConverterLE.ToUInt32(pvk, 0) != magic)
                 return false;
             // DWORD reserved
-            if (BitConverterLE.ToUInt32 (pvk, 4) != 0x0)
+            if (BitConverterLE.ToUInt32(pvk, 4) != 0x0)
                 return false;
             // DWORD keytype
-            keyType = BitConverterLE.ToInt32 (pvk, 8);
+            keyType = BitConverterLE.ToInt32(pvk, 8);
             // DWORD encrypted
-            encrypted = (BitConverterLE.ToUInt32 (pvk, 12) == 1);
+            encrypted = (BitConverterLE.ToUInt32(pvk, 12) == 1);
             // DWORD saltlen
-            int saltlen = BitConverterLE.ToInt32 (pvk, 16);
+            int saltlen = BitConverterLE.ToInt32(pvk, 16);
             // DWORD keylen
-            int keylen = BitConverterLE.ToInt32 (pvk, 20);
-            byte[] keypair = new byte [keylen];
-            Buffer.BlockCopy (pvk, 24 + saltlen, keypair, 0, keylen);
+            int keylen = BitConverterLE.ToInt32(pvk, 20);
+            byte[] keypair = new byte[keylen];
+            Buffer.BlockCopy(pvk, 24 + saltlen, keypair, 0, keylen);
             // read salt (if present)
-            if (saltlen > 0) {
+            if (saltlen > 0)
+            {
                 if (password == null)
                     return false;
 
-                byte[] salt = new byte [saltlen];
-                Buffer.BlockCopy (pvk, 24, salt, 0, saltlen);
+                byte[] salt = new byte[saltlen];
+                Buffer.BlockCopy(pvk, 24, salt, 0, saltlen);
                 // first try with full (128) bits
-                byte[] key = DeriveKey (salt, password);
+                byte[] key = DeriveKey(salt, password);
                 // decrypt in place and try this
-                RC4 rc4 = RC4.Create ();
-                ICryptoTransform dec = rc4.CreateDecryptor (key, null);
-                dec.TransformBlock (keypair, 8, keypair.Length - 8, keypair, 8);
-                try {
-                    rsa = CryptoConvert.FromCapiPrivateKeyBlob (keypair);
+                RC4 rc4 = RC4.Create();
+                ICryptoTransform dec = rc4.CreateDecryptor(key, null);
+                dec.TransformBlock(keypair, 8, keypair.Length - 8, keypair, 8);
+                try
+                {
+                    rsa = CryptoConvert.FromCapiPrivateKeyBlob(keypair);
                     weak = false;
                 }
-                catch (CryptographicException) {
+                catch (CryptographicException)
+                {
                     weak = true;
                     // second chance using weak crypto
-                    Buffer.BlockCopy (pvk, 24 + saltlen, keypair, 0, keylen);
+                    Buffer.BlockCopy(pvk, 24 + saltlen, keypair, 0, keylen);
                     // truncate the key to 40 bits
-                    Array.Clear (key, 5, 11);
+                    Array.Clear(key, 5, 11);
                     // decrypt
-                    RC4 rc4b = RC4.Create ();
-                    dec = rc4b.CreateDecryptor (key, null);
-                    dec.TransformBlock (keypair, 8, keypair.Length - 8, keypair, 8);
-                    rsa = CryptoConvert.FromCapiPrivateKeyBlob (keypair);
+                    RC4 rc4b = RC4.Create();
+                    dec = rc4b.CreateDecryptor(key, null);
+                    dec.TransformBlock(keypair, 8, keypair.Length - 8, keypair, 8);
+                    rsa = CryptoConvert.FromCapiPrivateKeyBlob(keypair);
                 }
-                Array.Clear (key, 0, key.Length);
+                Array.Clear(key, 0, key.Length);
             }
-            else  {
+            else
+            {
                 weak = true;
                 // read unencrypted keypair
-                rsa = CryptoConvert.FromCapiPrivateKeyBlob (keypair);
-                Array.Clear (keypair, 0, keypair.Length);
+                rsa = CryptoConvert.FromCapiPrivateKeyBlob(keypair);
+                Array.Clear(keypair, 0, keypair.Length);
             }
 
             // zeroize pvk (which could contain the unencrypted private key)
-            Array.Clear (pvk, 0, pvk.Length);
-            
+            Array.Clear(pvk, 0, pvk.Length);
+
             return (rsa != null);
         }
 
-        public void Save (string filename) 
+        public void Save(string filename)
         {
-            Save (filename, null);
+            Save(filename, null);
         }
 
-        public void Save (string filename, string password) 
+        public void Save(string filename, string password)
         {
             if (filename == null)
-                throw new ArgumentNullException ("filename");
+                throw new ArgumentNullException("filename");
 
             byte[] blob = null;
-            FileStream fs = File.Open (filename, FileMode.Create, FileAccess.Write);
-            try {
+            FileStream fs = File.Open(filename, FileMode.Create, FileAccess.Write);
+            try
+            {
                 // header
-                byte[] empty = new byte [4];
-                byte[] data = BitConverterLE.GetBytes (magic);
-                fs.Write (data, 0, 4);    // magic
-                fs.Write (empty, 0, 4);    // reserved
-                data = BitConverterLE.GetBytes (keyType);
-                fs.Write (data, 0, 4);    // key type
+                byte[] empty = new byte[4];
+                byte[] data = BitConverterLE.GetBytes(magic);
+                fs.Write(data, 0, 4); // magic
+                fs.Write(empty, 0, 4); // reserved
+                data = BitConverterLE.GetBytes(keyType);
+                fs.Write(data, 0, 4); // key type
 
                 encrypted = (password != null);
-                blob = CryptoConvert.ToCapiPrivateKeyBlob (rsa);
-                if (encrypted) {
-                    data = BitConverterLE.GetBytes (1);
-                    fs.Write (data, 0, 4);    // encrypted
-                    data = BitConverterLE.GetBytes (16);
-                    fs.Write (data, 0, 4);    // saltlen
-                    data = BitConverterLE.GetBytes (blob.Length);
-                    fs.Write (data, 0, 4);        // keylen
+                blob = CryptoConvert.ToCapiPrivateKeyBlob(rsa);
+                if (encrypted)
+                {
+                    data = BitConverterLE.GetBytes(1);
+                    fs.Write(data, 0, 4); // encrypted
+                    data = BitConverterLE.GetBytes(16);
+                    fs.Write(data, 0, 4); // saltlen
+                    data = BitConverterLE.GetBytes(blob.Length);
+                    fs.Write(data, 0, 4); // keylen
 
-                    byte[] salt = new byte [16];
-                    RC4 rc4 = RC4.Create ();
+                    byte[] salt = new byte[16];
+                    RC4 rc4 = RC4.Create();
                     byte[] key = null;
-                    try {
+                    try
+                    {
                         // generate new salt (16 bytes)
-                        RandomNumberGenerator rng = RandomNumberGenerator.Create ();
-                        rng.GetBytes (salt);
-                        fs.Write (salt, 0, salt.Length);
-                        key = DeriveKey (salt, password);
+                        RandomNumberGenerator rng = RandomNumberGenerator.Create();
+                        rng.GetBytes(salt);
+                        fs.Write(salt, 0, salt.Length);
+                        key = DeriveKey(salt, password);
                         if (Weak)
-                            Array.Clear (key, 5, 11);
-                        ICryptoTransform enc = rc4.CreateEncryptor (key, null);
+                            Array.Clear(key, 5, 11);
+                        ICryptoTransform enc = rc4.CreateEncryptor(key, null);
                         // we don't encrypt the header part of the BLOB
-                        enc.TransformBlock (blob, 8, blob.Length - 8, blob, 8);
+                        enc.TransformBlock(blob, 8, blob.Length - 8, blob, 8);
                     }
-                    finally {
-                        Array.Clear (salt, 0, salt.Length);
-                        Array.Clear (key, 0, key.Length);
-                        rc4.Clear ();
+                    finally
+                    {
+                        Array.Clear(salt, 0, salt.Length);
+                        Array.Clear(key, 0, key.Length);
+                        rc4.Clear();
                     }
                 }
-                else {
-                    fs.Write (empty, 0, 4);    // encrypted
-                    fs.Write (empty, 0, 4);    // saltlen
-                    data = BitConverterLE.GetBytes (blob.Length);
-                    fs.Write (data, 0, 4);        // keylen
+                else
+                {
+                    fs.Write(empty, 0, 4); // encrypted
+                    fs.Write(empty, 0, 4); // saltlen
+                    data = BitConverterLE.GetBytes(blob.Length);
+                    fs.Write(data, 0, 4); // keylen
                 }
-        
-                fs.Write (blob, 0, blob.Length);
+
+                fs.Write(blob, 0, blob.Length);
             }
-            finally {
+            finally
+            {
                 // BLOB may include an uncrypted keypair
-                Array.Clear (blob, 0, blob.Length);
-                fs.Close ();
+                Array.Clear(blob, 0, blob.Length);
+                fs.Close();
             }
         }
 
-        static public PrivateKey CreateFromFile (string filename) 
+        static public PrivateKey CreateFromFile(string filename)
         {
-            return CreateFromFile (filename, null);
+            return CreateFromFile(filename, null);
         }
 
-        static public PrivateKey CreateFromFile (string filename, string password) 
+        static public PrivateKey CreateFromFile(string filename, string password)
         {
             if (filename == null)
-                throw new ArgumentNullException ("filename");
+                throw new ArgumentNullException("filename");
 
-            byte[] pvk = null;                
-            using (FileStream fs = File.Open (filename, FileMode.Open, FileAccess.Read, FileShare.Read)) {
-                pvk = new byte [fs.Length];
-                fs.Read (pvk, 0, pvk.Length);
-                fs.Close ();
+            byte[] pvk = null;
+            using (
+                FileStream fs = File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read)
+            )
+            {
+                pvk = new byte[fs.Length];
+                fs.Read(pvk, 0, pvk.Length);
+                fs.Close();
             }
-            return new PrivateKey (pvk, password);
+            return new PrivateKey(pvk, password);
         }
     }
 }

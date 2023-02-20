@@ -14,7 +14,12 @@ namespace MonoTests.Common
 {
     public interface ITestDataContext
     {
-        IList GetTableData (string tableName, DataSourceSelectArguments args, string where, ParameterCollection whereParams);
-        List <DynamicDataTable> GetTables ();
+        IList GetTableData(
+            string tableName,
+            DataSourceSelectArguments args,
+            string where,
+            ParameterCollection whereParams
+        );
+        List<DynamicDataTable> GetTables();
     }
 }

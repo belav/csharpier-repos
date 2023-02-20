@@ -4,7 +4,7 @@
 //
 using System;
 
-public delegate void OnWhateverDelegate( string s );
+public delegate void OnWhateverDelegate(string s);
 
 class cls
 {
@@ -12,30 +12,29 @@ class cls
 
     class nestedcls
     {
-        internal void CallParentDel( cls c, string s )
+        internal void CallParentDel(cls c, string s)
         {
-            c.OnWhatever( s );
+            c.OnWhatever(s);
         }
     }
-    internal void CallMyDel( string s)
+
+    internal void CallMyDel(string s)
     {
-        (new nestedcls()).CallParentDel( this, s );
+        (new nestedcls()).CallParentDel(this, s);
     }
 }
 
-class MonoEmbed 
+class MonoEmbed
 {
-    public static void Main() 
+    public static void Main()
     {
         cls c = new cls();
-        c.OnWhatever += new OnWhateverDelegate( Whatever );
-        c.CallMyDel( "test" );
+        c.OnWhatever += new OnWhateverDelegate(Whatever);
+        c.CallMyDel("test");
     }
-    static void Whatever( string s )
+
+    static void Whatever(string s)
     {
-        Console.WriteLine( s );
+        Console.WriteLine(s);
     }
 }
-
-
-

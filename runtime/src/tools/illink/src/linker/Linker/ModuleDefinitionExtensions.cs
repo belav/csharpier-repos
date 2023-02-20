@@ -8,21 +8,27 @@ namespace Mono.Linker
 {
     public static class ModuleDefinitionExtensions
     {
-
-        public static bool IsCrossgened (this ModuleDefinition module)
+        public static bool IsCrossgened(this ModuleDefinition module)
         {
-            return (module.Attributes & ModuleAttributes.ILOnly) == 0 &&
-                (module.Attributes & ModuleAttributes.ILLibrary) != 0;
+            return (module.Attributes & ModuleAttributes.ILOnly) == 0
+                && (module.Attributes & ModuleAttributes.ILLibrary) != 0;
         }
 
-        public static bool GetMatchingExportedType (this ModuleDefinition module, TypeDefinition typeDefinition, LinkContext context, [NotNullWhen (true)] out ExportedType? exportedType)
+        public static bool GetMatchingExportedType(
+            this ModuleDefinition module,
+            TypeDefinition typeDefinition,
+            LinkContext context,
+            [NotNullWhen(true)] out ExportedType? exportedType
+        )
         {
             exportedType = null;
             if (!module.HasExportedTypes)
                 return false;
 
-            foreach (var et in module.ExportedTypes) {
-                if (context.TryResolve (et) == typeDefinition) {
+            foreach (var et in module.ExportedTypes)
+            {
+                if (context.TryResolve(et) == typeDefinition)
+                {
                     exportedType = et;
                     return true;
                 }
@@ -31,9 +37,13 @@ namespace Mono.Linker
             return false;
         }
 
-        public static TypeDefinition? ResolveType (this ModuleDefinition module, string typeFullName, ITryResolveMetadata resolver)
+        public static TypeDefinition? ResolveType(
+            this ModuleDefinition module,
+            string typeFullName,
+            ITryResolveMetadata resolver
+        )
         {
-            var type = module.GetType (typeFullName);
+            var type = module.GetType(typeFullName);
             if (type != null)
                 return type;
 
@@ -41,12 +51,19 @@ namespace Mono.Linker
                 return null;
 
             // When resolving a forwarded type from a string, typeFullName should be a simple type name.
-            int idx = typeFullName.LastIndexOf ('.');
-            (string typeNamespace, string typeName) = idx > 0 ? (typeFullName.Substring (0, idx), typeFullName.Substring (idx + 1)) :
-                (string.Empty, typeFullName);
+            int idx = typeFullName.LastIndexOf('.');
+            (string typeNamespace, string typeName) =
+                idx > 0
+                    ? (typeFullName.Substring(0, idx), typeFullName.Substring(idx + 1))
+                    : (string.Empty, typeFullName);
 
-            TypeReference typeReference = new TypeReference (typeNamespace, typeName, module, module);
-            return resolver.TryResolve (typeReference);
+            TypeReference typeReference = new TypeReference(
+                typeNamespace,
+                typeName,
+                module,
+                module
+            );
+            return resolver.TryResolve(typeReference);
         }
     }
 }

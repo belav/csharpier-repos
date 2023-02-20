@@ -11,24 +11,24 @@ namespace Mono.Linker.Tests.Cases.Reflection
     [ExpectedNoWarnings]
     public class NestedTypeUsedViaReflection
     {
-        public static void Main ()
+        public static void Main()
         {
-            ByName.Test ();
-            PrivateByName.Test ();
-            NullName.Test ();
-            EmptyName.Test ();
-            NoValueName.Test ();
-            WithBindingFlags.Test ();
-            UnknownBindingFlags.Test (BindingFlags.Public);
-            UnknownBindingFlagsAndName.Test (BindingFlags.Public, "DoesntMatter");
-            NonExistingName.Test ();
-            TestNullType ();
-            TestNoValue ();
-            IgnoreCaseBindingFlags.Test ();
-            FailIgnoreCaseBindingFlags.Test ();
-            UnsupportedBindingFlags.Test ();
+            ByName.Test();
+            PrivateByName.Test();
+            NullName.Test();
+            EmptyName.Test();
+            NoValueName.Test();
+            WithBindingFlags.Test();
+            UnknownBindingFlags.Test(BindingFlags.Public);
+            UnknownBindingFlagsAndName.Test(BindingFlags.Public, "DoesntMatter");
+            NonExistingName.Test();
+            TestNullType();
+            TestNoValue();
+            IgnoreCaseBindingFlags.Test();
+            FailIgnoreCaseBindingFlags.Test();
+            UnsupportedBindingFlags.Test();
 
-            MemberOnNestedType.Test ();
+            MemberOnNestedType.Test();
         }
 
         [Kept]
@@ -38,9 +38,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
             public static class NestedType { }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                _ = typeof (ByName).GetNestedType (nameof (NestedType));
+                _ = typeof(ByName).GetNestedType(nameof(NestedType));
             }
         }
 
@@ -49,10 +49,13 @@ namespace Mono.Linker.Tests.Cases.Reflection
             static class PrivateUnreferencedNestedType { }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                _ = typeof (PrivateByName).GetNestedType (nameof (PrivateUnreferencedNestedType)); // This will not mark the nested type as GetNestedType(string) only returns public
-                _ = typeof (PrivateByName).GetNestedType (nameof (PrivateUnreferencedNestedType), BindingFlags.Public);
+                _ = typeof(PrivateByName).GetNestedType(nameof(PrivateUnreferencedNestedType)); // This will not mark the nested type as GetNestedType(string) only returns public
+                _ = typeof(PrivateByName).GetNestedType(
+                    nameof(PrivateUnreferencedNestedType),
+                    BindingFlags.Public
+                );
             }
         }
 
@@ -61,9 +64,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
             public static class UnusedNestedType { }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                _ = typeof (NullName).GetNestedType (null);
+                _ = typeof(NullName).GetNestedType(null);
             }
         }
 
@@ -72,9 +75,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
             public static class UnusedNestedType { }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                _ = typeof (EmptyName).GetNestedType (string.Empty);
+                _ = typeof(EmptyName).GetNestedType(string.Empty);
             }
         }
 
@@ -83,11 +86,11 @@ namespace Mono.Linker.Tests.Cases.Reflection
             public static class UnusedNestedType { }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
                 Type t = null;
                 string noValue = t.AssemblyQualifiedName;
-                var method = typeof (NoValueName).GetNestedType (noValue);
+                var method = typeof(NoValueName).GetNestedType(noValue);
             }
         }
 
@@ -105,11 +108,20 @@ namespace Mono.Linker.Tests.Cases.Reflection
             public static class UnusedPublicNestedType { }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                _ = typeof (WithBindingFlags).GetNestedType (nameof (PrivateNestedType), BindingFlags.NonPublic);
-                _ = typeof (WithBindingFlags).GetNestedType (nameof (PublicNestedType), BindingFlags.Public);
-                _ = typeof (WithBindingFlags).GetNestedType (nameof (ProtectedNestedType), BindingFlags.NonPublic);
+                _ = typeof(WithBindingFlags).GetNestedType(
+                    nameof(PrivateNestedType),
+                    BindingFlags.NonPublic
+                );
+                _ = typeof(WithBindingFlags).GetNestedType(
+                    nameof(PublicNestedType),
+                    BindingFlags.Public
+                );
+                _ = typeof(WithBindingFlags).GetNestedType(
+                    nameof(ProtectedNestedType),
+                    BindingFlags.NonPublic
+                );
             }
         }
 
@@ -128,10 +140,13 @@ namespace Mono.Linker.Tests.Cases.Reflection
             protected static class ProtectedNestedType { }
 
             [Kept]
-            public static void Test (BindingFlags bindingFlags)
+            public static void Test(BindingFlags bindingFlags)
             {
                 // Since the binding flags are not known linker should mark all nested types on the type
-                _ = typeof (UnknownBindingFlags).GetNestedType (nameof (PublicNestedType), bindingFlags);
+                _ = typeof(UnknownBindingFlags).GetNestedType(
+                    nameof(PublicNestedType),
+                    bindingFlags
+                );
             }
         }
 
@@ -150,10 +165,10 @@ namespace Mono.Linker.Tests.Cases.Reflection
             protected static class ProtectedNestedType { }
 
             [Kept]
-            public static void Test (BindingFlags bindingFlags, string name)
+            public static void Test(BindingFlags bindingFlags, string name)
             {
                 // Since the binding flags and name are not known linker should mark all nested types on the type
-                _ = typeof (UnknownBindingFlagsAndName).GetNestedType (name, bindingFlags);
+                _ = typeof(UnknownBindingFlagsAndName).GetNestedType(name, bindingFlags);
             }
         }
 
@@ -161,27 +176,26 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             public static class UnusedNestedType { }
 
-
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                _ = typeof (NonExistingName).GetNestedType ("NonExisting");
+                _ = typeof(NonExistingName).GetNestedType("NonExisting");
             }
         }
 
         [Kept]
-        static void TestNullType ()
+        static void TestNullType()
         {
             Type type = null;
-            _ = type.GetNestedType ("NestedType");
+            _ = type.GetNestedType("NestedType");
         }
 
         [Kept]
-        static void TestNoValue ()
+        static void TestNoValue()
         {
             Type t = null;
-            Type noValue = Type.GetTypeFromHandle (t.TypeHandle);
-            var method = noValue.GetNestedType ("NestedType");
+            Type noValue = Type.GetTypeFromHandle(t.TypeHandle);
+            var method = noValue.GetNestedType("NestedType");
         }
 
         [Kept]
@@ -190,16 +204,18 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [Kept]
             public static class PublicNestedTypeWithMembers
             {
-                public static void UnusedMethod () { }
+                public static void UnusedMethod() { }
 
                 [Kept]
-                public static void UsedMethod () { }
+                public static void UsedMethod() { }
             }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                typeof (MemberOnNestedType).GetNestedType (nameof (PublicNestedTypeWithMembers)).GetMethod (nameof (PublicNestedTypeWithMembers.UsedMethod));
+                typeof(MemberOnNestedType)
+                    .GetNestedType(nameof(PublicNestedTypeWithMembers))
+                    .GetMethod(nameof(PublicNestedTypeWithMembers.UsedMethod));
             }
         }
 
@@ -213,9 +229,12 @@ namespace Mono.Linker.Tests.Cases.Reflection
             public static class MarkedDueToIgnoreCase { }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                _ = typeof (IgnoreCaseBindingFlags).GetNestedType ("ignorecasepublicnestedtype", BindingFlags.IgnoreCase | BindingFlags.Public);
+                _ = typeof(IgnoreCaseBindingFlags).GetNestedType(
+                    "ignorecasepublicnestedtype",
+                    BindingFlags.IgnoreCase | BindingFlags.Public
+                );
             }
         }
 
@@ -225,9 +244,12 @@ namespace Mono.Linker.Tests.Cases.Reflection
             public static class FailIgnoreCasePublicNestedType { }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                _ = typeof (FailIgnoreCaseBindingFlags).GetNestedType ("failignorecasepublicnestedtype", BindingFlags.Public);
+                _ = typeof(FailIgnoreCaseBindingFlags).GetNestedType(
+                    "failignorecasepublicnestedtype",
+                    BindingFlags.Public
+                );
             }
         }
 
@@ -241,9 +263,12 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private static class MarkedDueToSuppressChangeType { }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                _ = typeof (UnsupportedBindingFlags).GetNestedType ("SuppressChangeTypeNestedType", BindingFlags.SuppressChangeType);
+                _ = typeof(UnsupportedBindingFlags).GetNestedType(
+                    "SuppressChangeTypeNestedType",
+                    BindingFlags.SuppressChangeType
+                );
             }
         }
     }

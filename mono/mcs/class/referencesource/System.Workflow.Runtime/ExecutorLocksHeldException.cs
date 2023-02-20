@@ -3,7 +3,7 @@
 //
 // CONTENTS
 //     Workflow Base exception class
-// 
+//
 // DESCRIPTION
 //     Base class for WINOE Runtime engine exception
 //
@@ -32,11 +32,11 @@ namespace System.Workflow.Runtime
      *      theEvent.WaitOne()
      * But waiting with the executor and scheduler locks held
      * will block everything else.
-     * 
+     *
      * The solution is to have a custom internal exception class that has the
      * ManualResetEvent as an internal property. If Unload() finds itself in the middle
      * of an atomic transaction, it throws the Exception. The Exception is propogated upwards
-     * until we reach the method that was the first to grab the executor lock. 
+     * until we reach the method that was the first to grab the executor lock.
      *
      * We then drop that lock and wait on the event handle. As soon as the handle is
      * Set() by DisposeTransaction(), we grab the executor lock and do everything all over.
@@ -53,10 +53,7 @@ namespace System.Workflow.Runtime
 
         internal ManualResetEvent Handle
         {
-            get
-            {
-                return handle;
-            }
+            get { return handle; }
         }
     }
 }

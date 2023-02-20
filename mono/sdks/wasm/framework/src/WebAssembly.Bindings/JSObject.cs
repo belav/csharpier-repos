@@ -1,40 +1,44 @@
 using System;
 
-namespace WebAssembly {
-
+namespace WebAssembly
+{
     /// <summary>
     ///   JSObjects are wrappers for a native JavaScript object, and
     ///   they retain a reference to the JavaScript object for the lifetime of this C# object.
     /// </summary>
-    public class JSObject : AnyRef, IJSObject, IDisposable {
+    public class JSObject : AnyRef, IJSObject, IDisposable
+    {
         internal object RawObject;
 
         // to detect redundant calls
         public bool IsDisposed { get; internal set; }
 
-        public JSObject() : this(Runtime.New<Object> ())
+        public JSObject()
+            : this(Runtime.New<Object>())
         {
-            var result = Runtime.BindCoreObject (JSHandle, (int)(IntPtr)Handle, out int exception);
+            var result = Runtime.BindCoreObject(JSHandle, (int)(IntPtr)Handle, out int exception);
             if (exception != 0)
-                throw new JSException ($"JSObject Error binding: {result.ToString ()}");
-
+                throw new JSException($"JSObject Error binding: {result.ToString()}");
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:WebAssembly.JSObject"/> class.
         /// </summary>
         /// <param name="js_handle">Js handle.</param>
-        internal JSObject (IntPtr js_handle) : base (js_handle)
+        internal JSObject(IntPtr js_handle)
+            : base(js_handle)
         {
             //Console.WriteLine ($"JSObject: {js_handle}");
         }
 
-        internal JSObject (int js_handle) : base ((IntPtr)js_handle)
+        internal JSObject(int js_handle)
+            : base((IntPtr)js_handle)
         {
             //Console.WriteLine ($"JSObject: {js_handle}");
         }
 
-        internal JSObject (int js_handle, object raw_obj) : base (js_handle)
+        internal JSObject(int js_handle, object raw_obj)
+            : base(js_handle)
         {
             RawObject = raw_obj;
         }
@@ -42,9 +46,9 @@ namespace WebAssembly {
         /// <returns>
         ///   <para>
         ///     The return value can either be a primitive (string, int, double), a <see
-        ///     <see cref="T:WebAssembly.JSObject"/> for JavaScript objects, a 
+        ///     <see cref="T:WebAssembly.JSObject"/> for JavaScript objects, a
         ///     <see cref="T:System.Threading.Tasks.Task"/>(object) for JavaScript promises, an array of
-        ///     a byte, int or double (for Javascript objects typed as ArrayBuffer) or a 
+        ///     a byte, int or double (for Javascript objects typed as ArrayBuffer) or a
         ///     <see cref="T:System.Func"/> to represent JavaScript functions.  The specific version of
         ///     the Func that will be returned depends on the parameters of the Javascript function
         ///     and return value.
@@ -54,11 +58,11 @@ namespace WebAssembly {
         ///     valuews.
         ///   </para>
         /// </returns>
-        public object Invoke (string method, params object [] args)
+        public object Invoke(string method, params object[] args)
         {
-            var res = Runtime.InvokeJSWithArgs (JSHandle, method, args, out int exception);
+            var res = Runtime.InvokeJSWithArgs(JSHandle, method, args, out int exception);
             if (exception != 0)
-                throw new JSException ((string)res);
+                throw new JSException((string)res);
             return res;
         }
 
@@ -71,10 +75,10 @@ namespace WebAssembly {
         /// </remarks>
         /// <returns>
         ///   <para>
-        ///     The return value can either be a primitive (string, int, double), a 
-        ///     <see cref="T:WebAssembly.JSObject"/> for JavaScript objects, a 
+        ///     The return value can either be a primitive (string, int, double), a
+        ///     <see cref="T:WebAssembly.JSObject"/> for JavaScript objects, a
         ///     <see cref="T:System.Threading.Tasks.Task"/>(object) for JavaScript promises, an array of
-        ///     a byte, int or double (for Javascript objects typed as ArrayBuffer) or a 
+        ///     a byte, int or double (for Javascript objects typed as ArrayBuffer) or a
         ///     <see cref="T:System.Func"/> to represent JavaScript functions.  The specific version of
         ///     the Func that will be returned depends on the parameters of the Javascript function
         ///     and return value.
@@ -84,16 +88,14 @@ namespace WebAssembly {
         ///     valuews.
         ///   </para>
         /// </returns>
-        public object GetObjectProperty (string name)
+        public object GetObjectProperty(string name)
         {
-
-            var propertyValue = Runtime.GetObjectProperty (JSHandle, name, out int exception);
+            var propertyValue = Runtime.GetObjectProperty(JSHandle, name, out int exception);
 
             if (exception != 0)
-                throw new JSException ((string)propertyValue);
+                throw new JSException((string)propertyValue);
 
             return propertyValue;
-
         }
 
         /// <summary>
@@ -107,22 +109,35 @@ namespace WebAssembly {
         /// float[], double[]) </param>
         /// <param name="createIfNotExists">Defaults to <see langword="true"/> and creates the property on the javascript object if not found, if set to <see langword="false"/> it will not create the property if it does not exist.  If the property exists, the value is updated with the provided value.</param>
         /// <param name="hasOwnProperty"></param>
-        public void SetObjectProperty (string name, object value, bool createIfNotExists = true, bool hasOwnProperty = false)
+        public void SetObjectProperty(
+            string name,
+            object value,
+            bool createIfNotExists = true,
+            bool hasOwnProperty = false
+        )
         {
-
-            var setPropResult = Runtime.SetObjectProperty (JSHandle, name, value, createIfNotExists, hasOwnProperty, out int exception);
+            var setPropResult = Runtime.SetObjectProperty(
+                JSHandle,
+                name,
+                value,
+                createIfNotExists,
+                hasOwnProperty,
+                out int exception
+            );
             if (exception != 0)
-                throw new JSException ($"Error setting {name} on (js-obj js '{JSHandle}' mono '{(IntPtr)Handle} raw '{RawObject != null})");
-
+                throw new JSException(
+                    $"Error setting {name} on (js-obj js '{JSHandle}' mono '{(IntPtr)Handle} raw '{RawObject != null})"
+                );
         }
 
         /// <summary>
         /// Gets or sets the length.
         /// </summary>
         /// <value>The length.</value>
-        public int Length {
-            get => Convert.ToInt32(GetObjectProperty ("length"));
-            set => SetObjectProperty ("length", value, false);
+        public int Length
+        {
+            get => Convert.ToInt32(GetObjectProperty("length"));
+            set => SetObjectProperty("length", value, false);
         }
 
         /// <summary>
@@ -130,55 +145,58 @@ namespace WebAssembly {
         /// </summary>
         /// <returns><c>true</c>, if the object has the specified property as own property, <c>false</c> otherwise.</returns>
         /// <param name="prop">The String name or Symbol of the property to test.</param>
-        public bool HasOwnProperty (string prop) => (bool)Invoke ("hasOwnProperty", prop);
+        public bool HasOwnProperty(string prop) => (bool)Invoke("hasOwnProperty", prop);
 
         /// <summary>
         /// Returns a boolean indicating whether the specified property is enumerable.
         /// </summary>
         /// <returns><c>true</c>, if the specified property is enumerable, <c>false</c> otherwise.</returns>
         /// <param name="prop">The String name or Symbol of the property to test.</param>
-        public bool PropertyIsEnumerable (string prop) => (bool)Invoke ("propertyIsEnumerable", prop);
+        public bool PropertyIsEnumerable(string prop) => (bool)Invoke("propertyIsEnumerable", prop);
 
-        protected void FreeHandle ()
+        protected void FreeHandle()
         {
-            Runtime.ReleaseHandle (JSHandle, out int exception);
+            Runtime.ReleaseHandle(JSHandle, out int exception);
             if (exception != 0)
-                throw new JSException ($"Error releasing handle on (js-obj js '{JSHandle}' mono '{(IntPtr)Handle} raw '{RawObject != null})");
+                throw new JSException(
+                    $"Error releasing handle on (js-obj js '{JSHandle}' mono '{(IntPtr)Handle} raw '{RawObject != null})"
+                );
         }
 
-        public override bool Equals (System.Object obj)
+        public override bool Equals(System.Object obj)
         {
-            if (obj == null || GetType () != obj.GetType ()) {
+            if (obj == null || GetType() != obj.GetType())
+            {
                 return false;
             }
             return JSHandle == (obj as JSObject).JSHandle;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
             return JSHandle;
         }
 
-        ~JSObject ()
+        ~JSObject()
         {
-            Dispose (false);
+            Dispose(false);
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
             // Dispose of unmanaged resources.
-            Dispose (true);
+            Dispose(true);
             // Suppress finalization.
-            GC.SuppressFinalize (this);
+            GC.SuppressFinalize(this);
         }
 
         // Protected implementation of Dispose pattern.
-        protected virtual void Dispose (bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
-
-            if (!IsDisposed) {
-                if (disposing) {
-
+            if (!IsDisposed)
+            {
+                if (disposing)
+                {
                     // Free any other managed objects here.
                     //
                     RawObject = null;
@@ -187,15 +205,13 @@ namespace WebAssembly {
                 IsDisposed = true;
 
                 // Free any unmanaged objects here.
-                FreeHandle ();
-
+                FreeHandle();
             }
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return $"(js-obj js '{JSHandle}' mono '{(IntPtr)Handle} raw '{RawObject != null})";
         }
-
     }
 }

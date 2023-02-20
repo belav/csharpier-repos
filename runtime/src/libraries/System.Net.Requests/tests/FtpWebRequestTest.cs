@@ -20,7 +20,12 @@ namespace System.Net.Tests
             public readonly bool UseAsync;
             public readonly bool UseOldStyleAsync;
 
-            public FtpExecutionMode(bool useSsl, bool usePassive, bool useAsync, bool useOldStyleAsync)
+            public FtpExecutionMode(
+                bool useSsl,
+                bool usePassive,
+                bool useAsync,
+                bool useOldStyleAsync
+            )
             {
                 UseSsl = useSsl;
                 UsePassive = usePassive;
@@ -49,7 +54,10 @@ namespace System.Net.Tests
             Assert.Equal(21, request.RequestUri.Port);
             Assert.True(request.RequestUri.IsDefaultPort);
             Assert.Equal("/bar", request.RequestUri.AbsolutePath);
-            Assert.Equal(request.ServicePoint, ServicePointManager.FindServicePoint(new Uri("ftp://foo.com/bar")));
+            Assert.Equal(
+                request.ServicePoint,
+                ServicePointManager.FindServicePoint(new Uri("ftp://foo.com/bar"))
+            );
             Assert.Equal(100000, request.Timeout);
             Assert.True(request.UseBinary);
             Assert.True(request.UsePassive);
@@ -75,12 +83,16 @@ namespace System.Net.Tests
             Assert.Equal(WebExceptionStatus.ConnectFailure, ex.Status);
         }
 
-        private static bool LocalServerAvailable => (Environment.GetEnvironmentVariable("USE_LOCAL_FTP_SERVER") != null);
+        private static bool LocalServerAvailable =>
+            (Environment.GetEnvironmentVariable("USE_LOCAL_FTP_SERVER") != null);
 
         private const string absoluteUri = "ftp://localhost/";
 
         private static readonly byte[] helloWorldBytes = "Hello world"u8.ToArray();
-        private static readonly byte[] largeFileBytes = Enumerable.Range(0, 10 * 1024 * 1024).Select((i) => (byte)(i % 256)).ToArray();
+        private static readonly byte[] largeFileBytes = Enumerable
+            .Range(0, 10 * 1024 * 1024)
+            .Select((i) => (byte)(i % 256))
+            .ToArray();
 
         [ConditionalTheory(nameof(LocalServerAvailable))]
         [MemberData(nameof(Modes))]
@@ -203,7 +215,10 @@ namespace System.Net.Tests
             Assert.False(DirExists(mode, dir));
         }
 
-        private static async Task<MemoryStream> DoAsync(FtpWebRequest request, MemoryStream requestBody)
+        private static async Task<MemoryStream> DoAsync(
+            FtpWebRequest request,
+            MemoryStream requestBody
+        )
         {
             if (requestBody != null)
             {
@@ -260,7 +275,13 @@ namespace System.Net.Tests
             return responseBody;
         }
 
-        private static byte[] Do(FtpExecutionMode mode, string method, string uri, byte[] requestBody, string renameTo = null)
+        private static byte[] Do(
+            FtpExecutionMode mode,
+            string method,
+            string uri,
+            byte[] requestBody,
+            string renameTo = null
+        )
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(uri);
 
@@ -306,7 +327,12 @@ namespace System.Net.Tests
             return Do(mode, method, uri, null);
         }
 
-        private static void DoUpload(FtpExecutionMode mode, string method, string uri, byte[] requestBody)
+        private static void DoUpload(
+            FtpExecutionMode mode,
+            string method,
+            string uri,
+            byte[] requestBody
+        )
         {
             byte[] responseBody = Do(mode, method, uri, requestBody);
 
@@ -314,7 +340,12 @@ namespace System.Net.Tests
             Assert.Equal(0, responseBody.Length);
         }
 
-        private static void DoCommand(FtpExecutionMode mode, string method, string uri, string renameTo = null)
+        private static void DoCommand(
+            FtpExecutionMode mode,
+            string method,
+            string uri,
+            string renameTo = null
+        )
         {
             byte[] responseBody = Do(mode, method, uri, null, renameTo);
 
@@ -327,15 +358,12 @@ namespace System.Net.Tests
             new object[] { new FtpExecutionMode(false, false, false, false) },
             new object[] { new FtpExecutionMode(false, false, true, false) },
             new object[] { new FtpExecutionMode(false, false, false, true) },
-
             new object[] { new FtpExecutionMode(true, false, false, false) },
             new object[] { new FtpExecutionMode(true, false, true, false) },
             new object[] { new FtpExecutionMode(true, false, false, true) },
-
             new object[] { new FtpExecutionMode(false, true, false, false) },
             new object[] { new FtpExecutionMode(false, true, true, false) },
             new object[] { new FtpExecutionMode(false, true, false, true) },
-
             new object[] { new FtpExecutionMode(true, true, false, false) },
             new object[] { new FtpExecutionMode(true, true, true, false) },
             new object[] { new FtpExecutionMode(true, true, false, true) },

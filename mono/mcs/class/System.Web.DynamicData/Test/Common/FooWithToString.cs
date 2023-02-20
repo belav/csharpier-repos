@@ -9,12 +9,12 @@ namespace MonoTests.Common
     {
         public string Column1 { get; set; }
 
-        public FooWithToString ()
+        public FooWithToString()
         {
             Column1 = "hello";
         }
 
-        public override string  ToString()
+        public override string ToString()
         {
             return "ValueFrom_ToString";
         }

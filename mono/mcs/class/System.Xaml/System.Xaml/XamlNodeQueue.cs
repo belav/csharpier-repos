@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,51 +30,63 @@ namespace System.Xaml
 {
     public class XamlNodeQueue
     {
-        Queue<XamlNodeLineInfo> queue = new Queue<XamlNodeLineInfo> ();
+        Queue<XamlNodeLineInfo> queue = new Queue<XamlNodeLineInfo>();
         XamlSchemaContext ctx;
         XamlReader reader;
         XamlWriter writer;
 
-        public XamlNodeQueue (XamlSchemaContext schemaContext)
+        public XamlNodeQueue(XamlSchemaContext schemaContext)
         {
             if (schemaContext == null)
-                throw new ArgumentNullException ("schemaContext");
+                throw new ArgumentNullException("schemaContext");
             this.ctx = schemaContext;
-            reader = new XamlNodeQueueReader (this);
-            writer = new XamlNodeQueueWriter (this);
+            reader = new XamlNodeQueueReader(this);
+            writer = new XamlNodeQueueWriter(this);
         }
-        
+
         internal IXamlLineInfo LineInfoProvider { get; set; }
 
-        internal XamlSchemaContext SchemaContext {
+        internal XamlSchemaContext SchemaContext
+        {
             get { return ctx; }
         }
 
-        public int Count {
+        public int Count
+        {
             get { return queue.Count; }
         }
 
-        public bool IsEmpty {
+        public bool IsEmpty
+        {
             get { return queue.Count == 0; }
         }
 
-        public XamlReader Reader {
+        public XamlReader Reader
+        {
             get { return reader; }
         }
 
-        public XamlWriter Writer {
+        public XamlWriter Writer
+        {
             get { return writer; }
         }
 
-        internal XamlNodeLineInfo Dequeue ()
+        internal XamlNodeLineInfo Dequeue()
         {
-            return queue.Dequeue ();
+            return queue.Dequeue();
         }
 
-        internal void Enqueue (XamlNodeInfo info)
+        internal void Enqueue(XamlNodeInfo info)
         {
-            var nli = (LineInfoProvider != null && LineInfoProvider.HasLineInfo) ? new XamlNodeLineInfo (info, LineInfoProvider.LineNumber, LineInfoProvider.LinePosition) : new XamlNodeLineInfo (info, 0, 0);
-            queue.Enqueue (nli);
+            var nli =
+                (LineInfoProvider != null && LineInfoProvider.HasLineInfo)
+                    ? new XamlNodeLineInfo(
+                        info,
+                        LineInfoProvider.LineNumber,
+                        LineInfoProvider.LinePosition
+                    )
+                    : new XamlNodeLineInfo(info, 0, 0);
+            queue.Enqueue(nli);
         }
     }
 }

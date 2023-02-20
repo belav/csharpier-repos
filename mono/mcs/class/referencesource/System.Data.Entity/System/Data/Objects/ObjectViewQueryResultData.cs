@@ -27,7 +27,7 @@ namespace System.Data.Objects
     /// </typeparam>
     /// <remarks>
     /// The binding list is initialized from query results.
-    /// If the binding list can be modified, 
+    /// If the binding list can be modified,
     /// objects are added or removed from the ObjectStateManager (via the ObjectContext).
     /// </remarks>
     internal sealed class ObjectViewQueryResultData<TElement> : IObjectViewData<TElement>
@@ -38,12 +38,12 @@ namespace System.Data.Objects
         /// ObjectContext used to add or delete objects when the list can be modified.
         /// </summary>
         private ObjectContext _objectContext;
-        
+
         /// <summary>
         /// If the TElement type is an Entity type of some kind,
         /// this field specifies the entity set to add entity objects.
         /// </summary>
-        private EntitySet _entitySet; 
+        private EntitySet _entitySet;
 
         private bool _canEditItems;
         private bool _canModifyList;
@@ -67,7 +67,12 @@ namespace System.Data.Objects
         /// If the TElement type is an Entity type of some kind,
         /// this field specifies the entity set to add entity objects.
         /// </param>
-        internal ObjectViewQueryResultData(IEnumerable queryResults, ObjectContext objectContext, bool forceReadOnlyList, EntitySet entitySet)
+        internal ObjectViewQueryResultData(
+            IEnumerable queryResults,
+            ObjectContext objectContext,
+            bool forceReadOnlyList,
+            EntitySet entitySet
+        )
         {
             bool canTrackItemChanges = IsEditable(typeof(TElement));
 
@@ -91,8 +96,13 @@ namespace System.Data.Objects
         /// <returns></returns>
         private bool IsEditable(Type elementType)
         {
-            return !((elementType == typeof(DbDataRecord)) ||
-                     ((elementType != typeof(DbDataRecord)) && elementType.IsSubclassOf(typeof(DbDataRecord))));
+            return !(
+                (elementType == typeof(DbDataRecord))
+                || (
+                    (elementType != typeof(DbDataRecord))
+                    && elementType.IsSubclassOf(typeof(DbDataRecord))
+                )
+            );
         }
 
         /// <summary>
@@ -153,7 +163,7 @@ namespace System.Data.Objects
             EnsureEntitySet();
 
             Debug.Assert(_objectContext != null, "ObjectContext is null.");
-            
+
             // If called for AddNew operation, add item to binding list, pending addition to ObjectContext.
             if (!isAddNew)
             {
@@ -215,14 +225,20 @@ namespace System.Data.Objects
             return removed;
         }
 
-        public ListChangedEventArgs OnCollectionChanged(object sender, CollectionChangeEventArgs e, ObjectViewListener listener)
+        public ListChangedEventArgs OnCollectionChanged(
+            object sender,
+            CollectionChangeEventArgs e,
+            ObjectViewListener listener
+        )
         {
             ListChangedEventArgs changeArgs = null;
 
             // Since event is coming from cache and it might be shared amoung different queries
             // we have to check to see if correct event is being handled.
-            if (e.Element.GetType().IsAssignableFrom(typeof(TElement)) &&
-                _bindingList.Contains((TElement)(e.Element)))
+            if (
+                e.Element.GetType().IsAssignableFrom(typeof(TElement))
+                && _bindingList.Contains((TElement)(e.Element))
+            )
             {
                 TElement item = (TElement)e.Element;
                 int itemIndex = _bindingList.IndexOf(item);
@@ -230,7 +246,10 @@ namespace System.Data.Objects
                 if (itemIndex >= 0) // Ignore entities that we don't know about.
                 {
                     // Only process "remove" events.
-                    Debug.Assert(e.Action != CollectionChangeAction.Refresh, "Cache should never fire with refresh, it does not have clear");
+                    Debug.Assert(
+                        e.Action != CollectionChangeAction.Refresh,
+                        "Cache should never fire with refresh, it does not have clear"
+                    );
 
                     if (e.Action == CollectionChangeAction.Remove)
                     {
@@ -238,7 +257,12 @@ namespace System.Data.Objects
 
                         listener.UnregisterEntityEvents(item);
 
-                        changeArgs = new ListChangedEventArgs(ListChangedType.ItemDeleted, itemIndex /* newIndex*/, -1 /* oldIndex*/);
+                        changeArgs = new ListChangedEventArgs(
+                            ListChangedType.ItemDeleted,
+                            itemIndex /* newIndex*/
+                            ,
+                            -1 /* oldIndex*/
+                        );
                     }
                 }
             }

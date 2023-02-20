@@ -35,4 +35,3 @@ namespace Mono.Security.Interface
         Tls12 = 0x303
     }
 }
-

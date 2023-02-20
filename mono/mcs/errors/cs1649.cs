@@ -8,19 +8,19 @@ class B
         public int val;
     }
 
-    public readonly A a = new A ();
+    public readonly A a = new A();
 }
 
 class C
 {
-    static void f (ref int i)
+    static void f(ref int i)
     {
-    i = 44;
+        i = 44;
     }
 
-    static void Main ()
+    static void Main()
     {
-    B b = new B (); 
-    f (ref b.a.val);
+        B b = new B();
+        f(ref b.a.val);
     }
 }

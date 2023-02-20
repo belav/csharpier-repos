@@ -3,9 +3,9 @@
 
 class MainClass
 {
-    public static void Main ()
+    public static void Main()
     {
         dynamic d = null;
-        d += delegate {};
+        d += delegate { };
     }
 }

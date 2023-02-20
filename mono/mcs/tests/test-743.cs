@@ -4,15 +4,15 @@ using System;
 
 public class C : A
 {
-    public static void Main ()
+    public static void Main()
     {
-        new C ().Test ();
+        new C().Test();
     }
-    
-    void Test ()
+
+    void Test()
     {
-        var a = new C ();
-        Console.WriteLine (a.Prop);
-        a [5] = "2";
+        var a = new C();
+        Console.WriteLine(a.Prop);
+        a[5] = "2";
     }
 }

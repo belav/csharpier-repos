@@ -10,17 +10,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal partial class
 #if DEBUG
-        NamespaceSymbolAdapter : SymbolAdapter,
+    NamespaceSymbolAdapter : SymbolAdapter,
 #else
-        NamespaceSymbol :
-#endif 
-        Cci.INamespace
+    NamespaceSymbol :
+#endif
+            Cci.INamespace
     {
-        Cci.INamespace Cci.INamespace.ContainingNamespace => AdaptedNamespaceSymbol.ContainingNamespace?.GetCciAdapter();
+        Cci.INamespace Cci.INamespace.ContainingNamespace =>
+            AdaptedNamespaceSymbol.ContainingNamespace?.GetCciAdapter();
 
         string Cci.INamedEntity.Name => AdaptedNamespaceSymbol.MetadataName;
 
-        CodeAnalysis.Symbols.INamespaceSymbolInternal Cci.INamespace.GetInternalSymbol() => AdaptedNamespaceSymbol;
+        CodeAnalysis.Symbols.INamespaceSymbolInternal Cci.INamespace.GetInternalSymbol() =>
+            AdaptedNamespaceSymbol;
     }
 
     internal partial class NamespaceSymbol
@@ -29,11 +31,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private NamespaceSymbolAdapter _lazyAdapter;
 
         protected sealed override SymbolAdapter GetCciAdapterImpl() => GetCciAdapter();
+
         internal new NamespaceSymbolAdapter GetCciAdapter()
         {
             if (_lazyAdapter is null)
             {
-                return InterlockedOperations.Initialize(ref _lazyAdapter, new NamespaceSymbolAdapter(this));
+                return InterlockedOperations.Initialize(
+                    ref _lazyAdapter,
+                    new NamespaceSymbolAdapter(this)
+                );
             }
 
             return _lazyAdapter;
@@ -45,7 +51,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return this;
         }
-#endif 
+#endif
     }
 
 #if DEBUG

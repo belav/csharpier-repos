@@ -25,14 +25,12 @@ namespace HtmlAgilityPack
     /// <summary>
     /// Represents a fragment of code in a mixed code document.
     /// </summary>
-    public class MixedCodeDocumentCodeFragment: MixedCodeDocumentFragment
+    public class MixedCodeDocumentCodeFragment : MixedCodeDocumentFragment
     {
         internal string _code;
 
-        internal MixedCodeDocumentCodeFragment(MixedCodeDocument doc):
-            base(doc, MixedCodeDocumentFragmentType.Code)
-        {
-        }
+        internal MixedCodeDocumentCodeFragment(MixedCodeDocument doc)
+            : base(doc, MixedCodeDocumentFragmentType.Code) { }
 
         /// <summary>
         /// Gets the fragment code text.
@@ -43,45 +41,41 @@ namespace HtmlAgilityPack
             {
                 if (_code == null)
                 {
-                    _code = FragmentText.Substring(_doc.TokenCodeStart.Length,
-                        FragmentText.Length - _doc.TokenCodeEnd.Length - _doc.TokenCodeStart.Length -1).Trim();
+                    _code = FragmentText
+                        .Substring(
+                            _doc.TokenCodeStart.Length,
+                            FragmentText.Length
+                                - _doc.TokenCodeEnd.Length
+                                - _doc.TokenCodeStart.Length
+                                - 1
+                        )
+                        .Trim();
                     if (_code.StartsWith("="))
                     {
-                        _code = _doc.TokenResponseWrite + _code.Substring(1, _code.Length-1);
+                        _code = _doc.TokenResponseWrite + _code.Substring(1, _code.Length - 1);
                     }
                 }
                 return _code;
             }
-            set
-            {
-                _code = value;
-            }
+            set { _code = value; }
         }
     }
 
     /// <summary>
     /// Represents a fragment of text in a mixed code document.
     /// </summary>
-    public class MixedCodeDocumentTextFragment: MixedCodeDocumentFragment
+    public class MixedCodeDocumentTextFragment : MixedCodeDocumentFragment
     {
-        internal MixedCodeDocumentTextFragment(MixedCodeDocument doc):
-            base(doc, MixedCodeDocumentFragmentType.Text)
-        {
-        }
+        internal MixedCodeDocumentTextFragment(MixedCodeDocument doc)
+            : base(doc, MixedCodeDocumentFragmentType.Text) { }
 
         /// <summary>
         /// Gets the fragment text.
         /// </summary>
         public string Text
         {
-            get
-            {
-                return FragmentText;
-            }
-            set
-            {
-                base._fragmenttext = value;
-            }
+            get { return FragmentText; }
+            set { base._fragmenttext = value; }
         }
     }
 
@@ -98,11 +92,14 @@ namespace HtmlAgilityPack
         internal int _lineposition;
         internal string _fragmenttext;
 
-        internal MixedCodeDocumentFragment(MixedCodeDocument doc, MixedCodeDocumentFragmentType type)
+        internal MixedCodeDocumentFragment(
+            MixedCodeDocument doc,
+            MixedCodeDocumentFragmentType type
+        )
         {
             _doc = doc;
             _type = type;
-            switch(type)
+            switch (type)
             {
                 case MixedCodeDocumentFragmentType.Text:
                     _doc._textfragments.Append(this);
@@ -120,10 +117,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public MixedCodeDocumentFragmentType FragmentType
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         }
 
         /// <summary>
@@ -131,10 +125,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int StreamPosition
         {
-            get
-            {
-                return _index;
-            }
+            get { return _index; }
         }
 
         /// <summary>
@@ -142,10 +133,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int Line
         {
-            get
-            {
-                return _line;
-            }
+            get { return _line; }
         }
 
         /// <summary>
@@ -153,10 +141,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int LinePosition
         {
-            get
-            {
-                return _lineposition;
-            }
+            get { return _lineposition; }
         }
 
         /// <summary>
@@ -178,7 +163,7 @@ namespace HtmlAgilityPack
     /// <summary>
     /// Represents a list of mixed code fragments.
     /// </summary>
-    public class MixedCodeDocumentFragmentList: IEnumerable
+    public class MixedCodeDocumentFragmentList : IEnumerable
     {
         private MixedCodeDocument _doc;
         private ArrayList _items = new ArrayList();
@@ -255,10 +240,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int Count
         {
-            get
-            {
-                return _items.Count;
-            }
+            get { return _items.Count; }
         }
 
         internal int GetFragmentIndex(MixedCodeDocumentFragment fragment)
@@ -267,9 +249,9 @@ namespace HtmlAgilityPack
             {
                 throw new ArgumentNullException("fragment");
             }
-            for(int i=0;i<_items.Count;i++)
+            for (int i = 0; i < _items.Count; i++)
             {
-                if (((MixedCodeDocumentFragment)_items[i])==fragment)
+                if (((MixedCodeDocumentFragment)_items[i]) == fragment)
                 {
                     return i;
                 }
@@ -282,10 +264,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public MixedCodeDocumentFragment this[int index]
         {
-            get
-            {
-                return _items[index] as MixedCodeDocumentFragment;
-            }
+            get { return _items[index] as MixedCodeDocumentFragment; }
         }
 
         internal void Clear()
@@ -296,7 +275,7 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Gets an enumerator that can iterate through the fragment list.
         /// </summary>
-        public MixedCodeDocumentFragmentEnumerator GetEnumerator() 
+        public MixedCodeDocumentFragmentEnumerator GetEnumerator()
         {
             return new MixedCodeDocumentFragmentEnumerator(_items);
         }
@@ -304,7 +283,7 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Gets an enumerator that can iterate through the fragment list.
         /// </summary>
-        IEnumerator IEnumerable.GetEnumerator() 
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
@@ -312,12 +291,12 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Represents a fragment enumerator.
         /// </summary>
-        public class MixedCodeDocumentFragmentEnumerator: IEnumerator 
+        public class MixedCodeDocumentFragmentEnumerator : IEnumerator
         {
             int _index;
             ArrayList _items;
 
-            internal MixedCodeDocumentFragmentEnumerator(ArrayList items) 
+            internal MixedCodeDocumentFragmentEnumerator(ArrayList items)
             {
                 _items = items;
                 _index = -1;
@@ -326,7 +305,7 @@ namespace HtmlAgilityPack
             /// <summary>
             /// Sets the enumerator to its initial position, which is before the first element in the collection.
             /// </summary>
-            public void Reset() 
+            public void Reset()
             {
                 _index = -1;
             }
@@ -335,32 +314,26 @@ namespace HtmlAgilityPack
             /// Advances the enumerator to the next element of the collection.
             /// </summary>
             /// <returns>true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.</returns>
-            public bool MoveNext() 
+            public bool MoveNext()
             {
                 _index++;
-                return (_index<_items.Count);
+                return (_index < _items.Count);
             }
 
             /// <summary>
             /// Gets the current element in the collection.
             /// </summary>
-            public MixedCodeDocumentFragment Current 
+            public MixedCodeDocumentFragment Current
             {
-                get 
-                {
-                    return (MixedCodeDocumentFragment)(_items[_index]);
-                }
+                get { return (MixedCodeDocumentFragment)(_items[_index]); }
             }
 
             /// <summary>
             /// Gets the current element in the collection.
             /// </summary>
-            object IEnumerator.Current 
+            object IEnumerator.Current
             {
-                get 
-                {
-                    return (Current);
-                }
+                get { return (Current); }
             }
         }
     }
@@ -401,7 +374,6 @@ namespace HtmlAgilityPack
         /// Gets or sets the token representing response write directive.
         /// </summary>
         public string TokenResponseWrite = "Response.Write ";
-
 
         private string TokenTextBlock = "TextBlock({0})";
 
@@ -462,7 +434,12 @@ namespace HtmlAgilityPack
         /// <param name="encoding">The character encoding to use.</param>
         /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
         /// <param name="buffersize">The minimum buffer size.</param>
-        public void Load(Stream stream, Encoding encoding, bool detectEncodingFromByteOrderMarks, int buffersize)
+        public void Load(
+            Stream stream,
+            Encoding encoding,
+            bool detectEncodingFromByteOrderMarks,
+            int buffersize
+        )
         {
             Load(new StreamReader(stream, encoding, detectEncodingFromByteOrderMarks, buffersize));
         }
@@ -514,7 +491,12 @@ namespace HtmlAgilityPack
         /// <param name="encoding">The character encoding to use.</param>
         /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
         /// <param name="buffersize">The minimum buffer size.</param>
-        public void Load(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks, int buffersize)
+        public void Load(
+            string path,
+            Encoding encoding,
+            bool detectEncodingFromByteOrderMarks,
+            int buffersize
+        )
         {
             Load(new StreamReader(path, encoding, detectEncodingFromByteOrderMarks, buffersize));
         }
@@ -561,10 +543,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public System.Text.Encoding StreamEncoding
         {
-            get
-            {
-                return _streamencoding;
-            }
+            get { return _streamencoding; }
         }
 
         /// <summary>
@@ -572,10 +551,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public MixedCodeDocumentFragmentList CodeFragments
         {
-            get
-            {
-                return _codefragments;
-            }
+            get { return _codefragments; }
         }
 
         /// <summary>
@@ -583,10 +559,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public MixedCodeDocumentFragmentList TextFragments
         {
-            get
-            {
-                return _textfragments;
-            }
+            get { return _textfragments; }
         }
 
         /// <summary>
@@ -594,10 +567,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public MixedCodeDocumentFragmentList Fragments
         {
-            get
-            {
-                return _fragments;
-            }
+            get { return _fragments; }
         }
 
         /// <summary>
@@ -657,7 +627,6 @@ namespace HtmlAgilityPack
         /// <param name="writer">The TextWriter to which you want to save.</param>
         public void Save(TextWriter writer)
         {
-
             writer.Flush();
         }
 
@@ -670,9 +639,9 @@ namespace HtmlAgilityPack
             {
                 string s = "";
                 int i = 0;
-                foreach(MixedCodeDocumentFragment frag in _fragments)
+                foreach (MixedCodeDocumentFragment frag in _fragments)
                 {
-                    switch(frag._type)
+                    switch (frag._type)
                     {
                         case MixedCodeDocumentFragmentType.Text:
                             s += TokenResponseWrite + string.Format(TokenTextBlock, i) + "\n";
@@ -694,7 +663,9 @@ namespace HtmlAgilityPack
         /// <returns>The newly created text fragment instance.</returns>
         public MixedCodeDocumentTextFragment CreateTextFragment()
         {
-            return (MixedCodeDocumentTextFragment)CreateFragment(MixedCodeDocumentFragmentType.Text);
+            return (MixedCodeDocumentTextFragment)CreateFragment(
+                MixedCodeDocumentFragmentType.Text
+            );
         }
 
         /// <summary>
@@ -703,12 +674,14 @@ namespace HtmlAgilityPack
         /// <returns>The newly created code fragment instance.</returns>
         public MixedCodeDocumentCodeFragment CreateCodeFragment()
         {
-            return (MixedCodeDocumentCodeFragment)CreateFragment(MixedCodeDocumentFragmentType.Code);
+            return (MixedCodeDocumentCodeFragment)CreateFragment(
+                MixedCodeDocumentFragmentType.Code
+            );
         }
 
         internal MixedCodeDocumentFragment CreateFragment(MixedCodeDocumentFragmentType type)
         {
-            switch(type)
+            switch (type)
             {
                 case MixedCodeDocumentFragmentType.Text:
                     return new MixedCodeDocumentTextFragment(this);
@@ -753,21 +726,25 @@ namespace HtmlAgilityPack
             _index = 0;
             _currentfragment = CreateFragment(MixedCodeDocumentFragmentType.Text);
 
-            while (_index<_text.Length)
+            while (_index < _text.Length)
             {
                 _c = _text[_index];
                 IncrementPosition();
 
-                switch(_state)
+                switch (_state)
                 {
                     case ParseState.Text:
-                        if (_index+TokenCodeStart.Length<_text.Length)
+                        if (_index + TokenCodeStart.Length < _text.Length)
                         {
-                            if (_text.Substring(_index-1, TokenCodeStart.Length) == TokenCodeStart)
+                            if (
+                                _text.Substring(_index - 1, TokenCodeStart.Length) == TokenCodeStart
+                            )
                             {
                                 _state = ParseState.Code;
-                                _currentfragment._length = _index -1 - _currentfragment._index;
-                                _currentfragment = CreateFragment(MixedCodeDocumentFragmentType.Code);
+                                _currentfragment._length = _index - 1 - _currentfragment._index;
+                                _currentfragment = CreateFragment(
+                                    MixedCodeDocumentFragmentType.Code
+                                );
                                 SetPosition();
                                 continue;
                             }
@@ -775,15 +752,18 @@ namespace HtmlAgilityPack
                         break;
 
                     case ParseState.Code:
-                        if (_index+TokenCodeEnd.Length<_text.Length)
+                        if (_index + TokenCodeEnd.Length < _text.Length)
                         {
-                            if (_text.Substring(_index-1, TokenCodeEnd.Length) == TokenCodeEnd)
+                            if (_text.Substring(_index - 1, TokenCodeEnd.Length) == TokenCodeEnd)
                             {
                                 _state = ParseState.Text;
-                                _currentfragment._length = _index + TokenCodeEnd.Length - _currentfragment._index;
+                                _currentfragment._length =
+                                    _index + TokenCodeEnd.Length - _currentfragment._index;
                                 _index += TokenCodeEnd.Length;
                                 _lineposition += TokenCodeEnd.Length;
-                                _currentfragment = CreateFragment(MixedCodeDocumentFragmentType.Text);
+                                _currentfragment = CreateFragment(
+                                    MixedCodeDocumentFragmentType.Text
+                                );
                                 SetPosition();
                                 continue;
                             }
@@ -794,6 +774,5 @@ namespace HtmlAgilityPack
 
             _currentfragment._length = _index - _currentfragment._index;
         }
-
     }
 }

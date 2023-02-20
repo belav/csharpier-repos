@@ -4,10 +4,8 @@ namespace Mono.Linker.Tests.Cases.Basic
 {
     class UnusedDelegateGetsRemoved
     {
-        static void Main ()
-        {
-        }
+        static void Main() { }
 
-        public delegate void Foo ();
+        public delegate void Foo();
     }
 }

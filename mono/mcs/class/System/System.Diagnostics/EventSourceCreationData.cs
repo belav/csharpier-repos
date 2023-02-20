@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,19 +39,22 @@ namespace System.Diagnostics
         string _categoryResourceFile;
         int _categoryCount;
 
-        public EventSourceCreationData (string source, string logName)
+        public EventSourceCreationData(string source, string logName)
         {
             _source = source;
             _logName = logName;
             _machineName = ".";
         }
 
-        internal EventSourceCreationData (string source, string logName, string machineName)
+        internal EventSourceCreationData(string source, string logName, string machineName)
         {
             _source = source;
-            if (logName == null || logName.Length == 0) {
+            if (logName == null || logName.Length == 0)
+            {
                 _logName = "Application";
-            } else {
+            }
+            else
+            {
                 _logName = logName;
             }
             _machineName = machineName;
@@ -60,9 +63,10 @@ namespace System.Diagnostics
         public int CategoryCount
         {
             get { return _categoryCount; }
-            set {
+            set
+            {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException ("value");
+                    throw new ArgumentOutOfRangeException("value");
                 _categoryCount = value;
             }
         }

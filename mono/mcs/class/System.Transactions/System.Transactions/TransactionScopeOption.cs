@@ -10,10 +10,10 @@
 
 namespace System.Transactions
 {
-    public enum TransactionScopeOption {
+    public enum TransactionScopeOption
+    {
         Required,
         RequiresNew,
         Suppress,
     }
 }
-

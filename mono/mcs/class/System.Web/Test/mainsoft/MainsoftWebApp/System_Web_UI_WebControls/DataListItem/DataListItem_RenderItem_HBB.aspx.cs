@@ -36,11 +36,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataListItem_RenderItem_HBB
-        : GHTBaseWeb 
+    public class DataListItem_RenderItem_HBB : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -48,19 +47,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        protected static string [] m_data = new string[] {"aaa", "bbb", "ccc", "ddd"};
+        protected static string[] m_data = new string[] { "aaa", "bbb", "ccc", "ddd" };
         private StringBuilder m_sb;
         protected System.Web.UI.WebControls.DataList DataList1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
@@ -97,14 +95,15 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected GHTWebControls.GHTSubTest Ghtsubtest32;
         HtmlTextWriter m_hw;
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             m_sb = new StringBuilder();
             System.IO.StringWriter sw = new System.IO.StringWriter(m_sb);
             m_hw = new HtmlTextWriter(sw);
             HtmlForm frm = (HtmlForm)FindControl("form1");
             GHTTestBegin(frm);
-            DataList1.DataBind();;
+            DataList1.DataBind();
+            ;
         }
 
         /*

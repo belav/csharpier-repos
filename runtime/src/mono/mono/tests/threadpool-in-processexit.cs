@@ -5,22 +5,22 @@ class Program
 {
     static AutoResetEvent mre = new AutoResetEvent(false);
 
-    static void Main ()
+    static void Main()
     {
         AppDomain.CurrentDomain.ProcessExit += SomeEndOfProcessAction;
     }
 
     static void SomeEndOfProcessAction(object sender, EventArgs args)
     {
-        ThreadPool.QueueUserWorkItem (new WaitCallback (ThreadPoolCallback));
+        ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadPoolCallback));
         if (mre.WaitOne(1000))
-            Console.WriteLine ("PASS");
+            Console.WriteLine("PASS");
         else
-            Console.WriteLine ("FAIL");
+            Console.WriteLine("FAIL");
     }
 
-    static void ThreadPoolCallback (object state)
+    static void ThreadPoolCallback(object state)
     {
-        mre.Set ();
+        mre.Set();
     }
 }

@@ -36,11 +36,10 @@ using System.Collections;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class WebControl_TableStyle_CellPadding
-        : GHTWebControlBase
+    public class WebControl_TableStyle_CellPadding : GHTWebControlBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -48,13 +47,13 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
@@ -70,10 +69,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             base.m_derivedTypes.Add(typeof(DataList));
             base.m_derivedTypes.Add(typeof(Table));
         }
- 
-        private void Page_Load(object sender, System.EventArgs e) 
+
+        private void Page_Load(object sender, System.EventArgs e)
         {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
             foreach (Type currentType in TypesToTest)
             {
@@ -89,7 +88,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Legal value.");
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.CellPadding = 10;
             }
             catch (Exception exception9)
@@ -103,7 +102,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Zero.");
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.CellPadding = 0;
             }
             catch (Exception exception10)
@@ -117,7 +116,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "-1.");
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.CellPadding = -1;
             }
             catch (Exception exception11)
@@ -131,7 +130,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "check that default is -1.");
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 this.GHTSubTestAddResult(style1.CellPadding.ToString());
             }
             catch (Exception exception12)
@@ -145,7 +144,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Set only in CssClass.");
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.CssClass = "CssClass1";
             }
             catch (Exception exception13)
@@ -159,7 +158,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Set both in CssClass and in code.");
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.CssClass = "CssClass1";
                 style1.CellPadding = 20;
             }
@@ -174,7 +173,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Throws an exception if set to less then -1.");
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.CellPadding = -2;
                 this.GHTSubTestExpectedExceptionNotCaught("ArgumentOutOfRangeException");
             }
@@ -194,6 +193,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTSubTestEnd();
         }
- 
     }
 }

@@ -11,9 +11,7 @@ namespace System.ServiceModel.Channels
 
     public class BindingElementCollection : Collection<BindingElement>
     {
-        public BindingElementCollection()
-        {
-        }
+        public BindingElementCollection() { }
 
         public BindingElementCollection(IEnumerable<BindingElement> elements)
         {
@@ -73,7 +71,9 @@ namespace System.ServiceModel.Channels
         public bool Contains(Type bindingElementType)
         {
             if (bindingElementType == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("bindingElementType");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "bindingElementType"
+                );
 
             for (int i = 0; i < this.Count; i++)
             {
@@ -158,5 +158,4 @@ namespace System.ServiceModel.Channels
             base.SetItem(index, item);
         }
     }
-
 }

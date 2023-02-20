@@ -48,15 +48,12 @@ namespace Microsoft.CodeAnalysis.CodeLens
 
         public override bool Equals(object? obj)
         {
-            return obj is ReferenceCount count
-                && Equals(count);
+            return obj is ReferenceCount count && Equals(count);
         }
 
         public bool Equals(ReferenceCount other)
         {
-            return Count == other.Count
-                && IsCapped == other.IsCapped
-                && Version == other.Version;
+            return Count == other.Count && IsCapped == other.IsCapped && Version == other.Version;
         }
 
         public override int GetHashCode()
@@ -64,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             var hashCode = -24231741;
             hashCode = hashCode * -1521134295 + Count.GetHashCode();
             hashCode = hashCode * -1521134295 + IsCapped.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Version);
+            hashCode =
+                hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Version);
             return hashCode;
         }
     }

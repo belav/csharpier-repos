@@ -13,13 +13,11 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Web.DynamicData;
 
-public partial class DynamicData_FieldTemplates_MyCustomUIHintTemplate_Text : System.Web.DynamicData.FieldTemplateUserControl
+public partial class DynamicData_FieldTemplates_MyCustomUIHintTemplate_Text
+    : System.Web.DynamicData.FieldTemplateUserControl
 {
     public override Control DataControl
     {
-        get
-        {
-            return Literal1;
-        }
-    }    
+        get { return Literal1; }
+    }
 }

@@ -19,7 +19,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public ScopeState(bool isRoot)
         {
             // When isRoot is true to reduce lock contention for singletons upon resolve we use a concurrent dictionary.
-            ResolvedServices = isRoot ? new ConcurrentDictionary<ServiceCacheKey, object>() : new Dictionary<ServiceCacheKey, object>();
+            ResolvedServices = isRoot
+                ? new ConcurrentDictionary<ServiceCacheKey, object>()
+                : new Dictionary<ServiceCacheKey, object>();
         }
 
         public void Track(ServiceProviderEngine engine)

@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
     [ContentType(ContentTypeNames.CSharpContentType)]
     [Name(nameof(ConvertNamespaceCommandHandler))]
     [Order(After = PredefinedCompletionNames.CompletionCommandHandler)]
-    internal sealed class ConvertNamespaceCommandHandler : IChainedCommandHandler<TypeCharCommandArgs>
+    internal sealed class ConvertNamespaceCommandHandler
+        : IChainedCommandHandler<TypeCharCommandArgs>
     {
         /// <summary>
         /// Option setting 'use file scoped'.  That way we can call into the helpers
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             IEditorOperationsFactoryService editorOperationsFactoryService,
             EditorOptionsService editorOptionsService,
             IGlobalOptionService globalOptions,
-            IIndentationManagerService indentationManager)
+            IIndentationManagerService indentationManager
+        )
         {
             _textUndoHistoryRegistry = textUndoHistoryRegistry;
             _editorOperationsFactoryService = editorOperationsFactoryService;
@@ -72,12 +74,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             _indentationManager = indentationManager;
         }
 
-        public CommandState GetCommandState(TypeCharCommandArgs args, Func<CommandState> nextCommandHandler)
-            => nextCommandHandler();
+        public CommandState GetCommandState(
+            TypeCharCommandArgs args,
+            Func<CommandState> nextCommandHandler
+        ) => nextCommandHandler();
 
         public string DisplayName => CSharpAnalyzersResources.Convert_to_file_scoped_namespace;
 
-        public void ExecuteCommand(TypeCharCommandArgs args, Action nextCommandHandler, CommandExecutionContext executionContext)
+        public void ExecuteCommand(
+            TypeCharCommandArgs args,
+            Action nextCommandHandler,
+            CommandExecutionContext executionContext
+        )
         {
             // Attempt to convert the block-namespace to a file-scoped namespace if we're at the right location.
             var (convertedText, semicolonSpan) = ConvertNamespace(args, executionContext);
@@ -93,15 +101,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
 
             // Otherwise, make a transaction for the edit and replace the buffer with the final text.
             using var transaction = CaretPreservingEditTransaction.TryCreate(
-                this.DisplayName, args.TextView, _textUndoHistoryRegistry, _editorOperationsFactoryService);
+                this.DisplayName,
+                args.TextView,
+                _textUndoHistoryRegistry,
+                _editorOperationsFactoryService
+            );
 
-            var edit = args.SubjectBuffer.CreateEdit(EditOptions.DefaultMinimalChange, reiteratedVersionNumber: null, editTag: null);
-            edit.Replace(new Span(0, args.SubjectBuffer.CurrentSnapshot.Length), convertedText.ToString());
+            var edit = args.SubjectBuffer.CreateEdit(
+                EditOptions.DefaultMinimalChange,
+                reiteratedVersionNumber: null,
+                editTag: null
+            );
+            edit.Replace(
+                new Span(0, args.SubjectBuffer.CurrentSnapshot.Length),
+                convertedText.ToString()
+            );
 
             edit.Apply();
 
             // Place the caret right after the semicolon of the file-scoped namespace.
-            args.TextView.Caret.MoveTo(new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, semicolonSpan.End));
+            args.TextView.Caret.MoveTo(
+                new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, semicolonSpan.End)
+            );
 
             transaction?.Complete();
         }
@@ -112,12 +133,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
         /// </summary>
         private (SourceText? convertedText, TextSpan semicolonSpan) ConvertNamespace(
             TypeCharCommandArgs args,
-            CommandExecutionContext executionContext)
+            CommandExecutionContext executionContext
+        )
         {
             if (args.TypedChar != ';' || !args.TextView.Selection.IsEmpty)
                 return default;
 
-            if (!_globalOptions.GetOption(FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon))
+            if (
+                !_globalOptions.GetOption(
+                    FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon
+                )
+            )
                 return default;
 
             var subjectBuffer = args.SubjectBuffer;
@@ -126,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
                 return default;
 
             var caret = caretOpt.Value.Position;
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return default;
 
@@ -138,8 +165,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             if (token.Kind() != SyntaxKind.IdentifierToken)
                 return default;
 
-            if (caret < token.Span.End ||
-                caret >= token.FullSpan.End)
+            if (caret < token.Span.End || caret >= token.FullSpan.End)
             {
                 return default;
             }
@@ -153,11 +179,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
                 return default;
 
             // Pass in our special options, and C#10 so that if we can convert this to file-scoped, we will.
-            if (!ConvertNamespaceAnalysis.CanOfferUseFileScoped(s_fileScopedNamespacePreferenceOption, (CompilationUnitSyntax)parsedDocument.Root, namespaceDecl, forAnalyzer: true, LanguageVersion.CSharp10))
+            if (
+                !ConvertNamespaceAnalysis.CanOfferUseFileScoped(
+                    s_fileScopedNamespacePreferenceOption,
+                    (CompilationUnitSyntax)parsedDocument.Root,
+                    namespaceDecl,
+                    forAnalyzer: true,
+                    LanguageVersion.CSharp10
+                )
+            )
                 return default;
 
-            var formattingOptions = subjectBuffer.GetSyntaxFormattingOptions(_editorOptionsService, document.Project.Services, explicitFormat: false);
-            return ConvertNamespaceTransform.ConvertNamespaceDeclaration(parsedDocument, namespaceDecl, formattingOptions, cancellationToken);
+            var formattingOptions = subjectBuffer.GetSyntaxFormattingOptions(
+                _editorOptionsService,
+                document.Project.Services,
+                explicitFormat: false
+            );
+            return ConvertNamespaceTransform.ConvertNamespaceDeclaration(
+                parsedDocument,
+                namespaceDecl,
+                formattingOptions,
+                cancellationToken
+            );
         }
     }
 }

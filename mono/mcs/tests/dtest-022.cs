@@ -2,13 +2,12 @@ using System;
 
 public class C
 {
-    static void M<T> (T t) where T : new ()
-    {
-    }
+    static void M<T>(T t)
+        where T : new() { }
 
-    public static int Main ()
+    public static int Main()
     {
-        M<dynamic> (null);
+        M<dynamic>(null);
         return 0;
     }
 }

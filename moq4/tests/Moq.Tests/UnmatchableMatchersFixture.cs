@@ -14,7 +14,10 @@ namespace Moq.Tests
         {
             var mock = new Mock<IX>();
             var ex = Assert.Throws<ArgumentException>(() => mock.Setup(x => x.UseB(It.IsAny<A>())));
-            Assert.Contains("'It.IsAny<UnmatchableMatchersFixture.A>()' is unmatchable", ex.Message);
+            Assert.Contains(
+                "'It.IsAny<UnmatchableMatchersFixture.A>()' is unmatchable",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -46,9 +49,7 @@ namespace Moq.Tests
             void UseNullableLong(long? arg);
         }
 
-        public readonly struct A
-        {
-        }
+        public readonly struct A { }
 
         public readonly struct B
         {

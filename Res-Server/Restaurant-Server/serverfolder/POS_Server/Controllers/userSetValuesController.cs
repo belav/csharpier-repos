@@ -18,60 +18,53 @@ namespace POS_Server.Controllers
     public class userSetValuesController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller> get all userSetValues
         [HttpPost]
         [Route("Get")]
-       public string Get(string token)
+        public string Get(string token)
         {
             //public stringGetPurinv(string token)
 
-           
-           
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
             }
             else
             {
-              
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         var list = entity.userSetValues
-
-                   .Select(c => new
-                   {
-                       c.id,
-                       c.userId,
-                       c.valId,
-                       c.notes,
-                       c.createDate,
-                       c.updateDate,
-                       c.createUserId,
-                       c.updateUserId,
-
-                   })
-                               .ToList();
-
+                            .Select(
+                                c =>
+                                    new
+                                    {
+                                        c.id,
+                                        c.userId,
+                                        c.valId,
+                                        c.notes,
+                                        c.createDate,
+                                        c.updateDate,
+                                        c.createUserId,
+                                        c.updateUserId,
+                                    }
+                            )
+                            .ToList();
 
                         return TokenManager.GenerateToken(list);
-
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
             }
             //var re = Request;
             //var headers = re.Headers;
@@ -115,20 +108,18 @@ namespace POS_Server.Controllers
             //    return NotFound();
         }
 
-
-
-        // GET api/<controller>  Get medal By ID 
+        // GET api/<controller>  Get medal By ID
         [HttpPost]
         [Route("GetByID")]
-       public string GetByID(string token)
+        public string GetByID(string token)
         {
             //public stringGetPurinv(string token)long emailId
 
-           
-           
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -137,7 +128,6 @@ namespace POS_Server.Controllers
             {
                 long Id = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -145,38 +135,32 @@ namespace POS_Server.Controllers
                     {
                         Id = long.Parse(c.Value);
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         var item = entity.userSetValues
-                       .Where(c => c.valId == Id)
-                       .Select(c => new
-                       {
-                           c.id,
-                           c.userId,
-                           c.valId,
-                           c.notes,
-                           c.createDate,
-                           c.updateDate,
-                           c.createUserId,
-                           c.updateUserId,
-
-
-                       })
-                       .FirstOrDefault();
-                       return TokenManager.GenerateToken(item);
-
+                            .Where(c => c.valId == Id)
+                            .Select(
+                                c =>
+                                    new
+                                    {
+                                        c.id,
+                                        c.userId,
+                                        c.valId,
+                                        c.notes,
+                                        c.createDate,
+                                        c.updateDate,
+                                        c.createUserId,
+                                        c.updateUserId,
+                                    }
+                            )
+                            .FirstOrDefault();
+                        return TokenManager.GenerateToken(item);
                     }
-
                 }
                 catch
                 {
@@ -229,20 +213,15 @@ namespace POS_Server.Controllers
             //    return NotFound();
         }
 
-
-
         [HttpPost]
         [Route("Saveu")]
-       public string Save(string token)
+        public string Save(string token)
         {
-
             //string Object string newObject
             string message = "";
-           
-           
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -258,16 +237,16 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<userSetValues>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<userSetValues>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
-
                     userSetValues tmpObject = null;
-
 
                     try
                     {
@@ -286,10 +265,9 @@ namespace POS_Server.Controllers
                             var locationEntity = entity.Set<userSetValues>();
                             if (newObject.id == 0)
                             {
-                                newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                                newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 newObject.updateUserId = newObject.createUserId;
-
 
                                 locationEntity.Add(newObject);
                                 entity.SaveChanges();
@@ -297,9 +275,11 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                              tmpObject = entity.userSetValues.Where(p => p.id == newObject.id).FirstOrDefault();
+                                tmpObject = entity.userSetValues
+                                    .Where(p => p.id == newObject.id)
+                                    .FirstOrDefault();
 
-                                tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 tmpObject.updateUserId = newObject.updateUserId;
 
                                 tmpObject.valId = newObject.valId;
@@ -312,23 +292,18 @@ namespace POS_Server.Controllers
                                 message = tmpObject.id.ToString();
                             }
                             //  entity.SaveChanges();
-
                         }
 
                         return TokenManager.GenerateToken(message);
-
                     }
                     catch
                     {
                         message = "0";
-                      return TokenManager.GenerateToken(message);
+                        return TokenManager.GenerateToken(message);
                     }
-
-
                 }
 
-              return TokenManager.GenerateToken(message);
-
+                return TokenManager.GenerateToken(message);
             }
             //var re = Request;
             //var headers = re.Headers;
@@ -400,21 +375,16 @@ namespace POS_Server.Controllers
             //return message;
         }
 
-
-
         [HttpPost]
         [Route("Delete")]
-       public string Delete(string token)
+        public string Delete(string token)
         {
-
             //public stringDelete(string token)long Id, long userId
             //long Id, long userId
             string message = "";
-           
-           
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -423,7 +393,6 @@ namespace POS_Server.Controllers
             {
                 long Id = 0;
                 long userId = 0;
-
 
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
@@ -436,7 +405,6 @@ namespace POS_Server.Controllers
                     {
                         userId = long.Parse(c.Value);
                     }
-
                 }
 
                 try
@@ -446,9 +414,7 @@ namespace POS_Server.Controllers
                         userSetValues sObj = entity.userSetValues.Find(Id);
 
                         entity.userSetValues.Remove(sObj);
-                    message=    entity.SaveChanges().ToString();
-
-
+                        message = entity.SaveChanges().ToString();
                     }
                     return TokenManager.GenerateToken(message);
                 }
@@ -456,8 +422,6 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
             }
 
             //var re = Request;

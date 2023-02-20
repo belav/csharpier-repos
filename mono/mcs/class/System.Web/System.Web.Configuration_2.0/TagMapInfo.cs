@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,74 +42,87 @@ namespace System.Web.Configuration
         static ConfigurationProperty mappedTagTypeProp;
         static ConfigurationProperty tagTypeProp;
 
-
-        static TagMapInfo ()
+        static TagMapInfo()
         {
-            mappedTagTypeProp = new ConfigurationProperty ("mappedTagType", typeof (string), null,
-                                       TypeDescriptor.GetConverter (typeof (string)),
-                                       PropertyHelper.NonEmptyStringValidator,
-                                       ConfigurationPropertyOptions.None);
-            tagTypeProp = new ConfigurationProperty ("tagType", typeof (string), "",
-                                 TypeDescriptor.GetConverter (typeof (string)),
-                                 PropertyHelper.NonEmptyStringValidator,
-                                 ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+            mappedTagTypeProp = new ConfigurationProperty(
+                "mappedTagType",
+                typeof(string),
+                null,
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.None
+            );
+            tagTypeProp = new ConfigurationProperty(
+                "tagType",
+                typeof(string),
+                "",
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (mappedTagTypeProp);
-            properties.Add (tagTypeProp);
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(mappedTagTypeProp);
+            properties.Add(tagTypeProp);
         }
 
-        internal TagMapInfo ()
-        {
-        }
-        
-        public TagMapInfo (string tagTypeName, string mappedTagTypeName)
+        internal TagMapInfo() { }
+
+        public TagMapInfo(string tagTypeName, string mappedTagTypeName)
         {
             this.TagType = tagTypeName;
             this.MappedTagType = mappedTagTypeName;
         }
 
-        public override bool Equals (object o)
+        public override bool Equals(object o)
         {
             TagMapInfo info = o as TagMapInfo;
             if (info == null)
                 return false;
 
-            return (MappedTagType == info.MappedTagType
-                && TagType == info.TagType);
+            return (MappedTagType == info.MappedTagType && TagType == info.TagType);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
             return MappedTagType.GetHashCode() + TagType.GetHashCode();
         }
 
-        protected internal override bool SerializeElement (XmlWriter writer, bool serializeCollectionKey)
+        protected internal override bool SerializeElement(
+            XmlWriter writer,
+            bool serializeCollectionKey
+        )
         {
-            bool ret = base.SerializeElement (writer, serializeCollectionKey);
+            bool ret = base.SerializeElement(writer, serializeCollectionKey);
 
             /* XXX more here? .. */
 
             return ret;
         }
 
-        [StringValidator (MinLength = 1)]
-        [ConfigurationProperty ("mappedTagType")]
-        public string MappedTagType {
-            get { return (string) base[mappedTagTypeProp]; }
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty("mappedTagType")]
+        public string MappedTagType
+        {
+            get { return (string)base[mappedTagTypeProp]; }
             set { base[mappedTagTypeProp] = value; }
         }
 
-        [StringValidator (MinLength = 1)]
-        [ConfigurationProperty ("tagType", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public string TagType {
-            get { return (string) base[tagTypeProp]; }
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "tagType",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string TagType
+        {
+            get { return (string)base[tagTypeProp]; }
             set { base[tagTypeProp] = value; }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
     }
 }
-

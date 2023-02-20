@@ -11,7 +11,6 @@ using System.IdentityModel.Tokens;
 
 using System.Security.Claims;
 
-
 namespace System.ServiceModel.Security
 {
     internal class SecurityTokenAuthenticatorAdapter : SecurityTokenAuthenticator
@@ -19,11 +18,16 @@ namespace System.ServiceModel.Security
         SecurityTokenHandler _securityTokenHandler;
         ExceptionMapper _exceptionMapper;
 
-        public SecurityTokenAuthenticatorAdapter(SecurityTokenHandler securityTokenHandler, ExceptionMapper exceptionMapper)
+        public SecurityTokenAuthenticatorAdapter(
+            SecurityTokenHandler securityTokenHandler,
+            ExceptionMapper exceptionMapper
+        )
         {
             if (securityTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityTokenHandler");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenHandler"
+                );
             }
 
             if (exceptionMapper == null)
@@ -42,10 +46,15 @@ namespace System.ServiceModel.Security
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("token");
             }
 
-            return ((token.GetType() == _securityTokenHandler.TokenType) && (_securityTokenHandler.CanValidateToken));
+            return (
+                (token.GetType() == _securityTokenHandler.TokenType)
+                && (_securityTokenHandler.CanValidateToken)
+            );
         }
 
-        protected sealed override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(SecurityToken token)
+        protected sealed override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             IEnumerable<ClaimsIdentity> subjectCollection = null;
 

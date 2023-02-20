@@ -9,20 +9,24 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI;
 /// <summary>
 /// Options for configuring authentication using Azure Active Directory.
 /// </summary>
-[Obsolete("This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
+[Obsolete(
+    "This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+)]
 public class AzureADOptions
 {
     /// <summary>
     /// Gets or sets the OpenID Connect authentication scheme to use for authentication with this instance
     /// of Azure Active Directory authentication.
     /// </summary>
-    public string OpenIdConnectSchemeName { get; set; } = OpenIdConnectDefaults.AuthenticationScheme;
+    public string OpenIdConnectSchemeName { get; set; } =
+        OpenIdConnectDefaults.AuthenticationScheme;
 
     /// <summary>
     /// Gets or sets the Cookie authentication scheme to use for sign in with this instance of
     /// Azure Active Directory authentication.
     /// </summary>
-    public string CookieSchemeName { get; set; } = CookieAuthenticationDefaults.AuthenticationScheme;
+    public string CookieSchemeName { get; set; } =
+        CookieAuthenticationDefaults.AuthenticationScheme;
 
     /// <summary>
     /// Gets or sets the Jwt bearer authentication scheme to use for validating access tokens for this

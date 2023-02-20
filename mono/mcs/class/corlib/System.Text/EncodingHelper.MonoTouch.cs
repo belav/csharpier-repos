@@ -1,18 +1,23 @@
 using System;
 
-namespace System.Text {
-
-    internal static partial class EncodingHelper {
-
+namespace System.Text
+{
+    internal static partial class EncodingHelper
+    {
         static volatile Encoding utf8Encoding;
 
-        internal static Encoding UTF8 {
-            get {
-                if (utf8Encoding == null) {
-                    lock (lockobj){
-                        if (utf8Encoding == null){
-                            utf8Encoding = new UTF8Encoding (true, false);
-                            utf8Encoding.setReadOnly ();
+        internal static Encoding UTF8
+        {
+            get
+            {
+                if (utf8Encoding == null)
+                {
+                    lock (lockobj)
+                    {
+                        if (utf8Encoding == null)
+                        {
+                            utf8Encoding = new UTF8Encoding(true, false);
+                            utf8Encoding.setReadOnly();
                         }
                     }
                 }
@@ -22,7 +27,7 @@ namespace System.Text {
         }
 
         // The mobile profile has been default'ing to UTF8 since it's creation
-        internal static Encoding GetDefaultEncoding ()
+        internal static Encoding GetDefaultEncoding()
         {
             return UTF8;
         }

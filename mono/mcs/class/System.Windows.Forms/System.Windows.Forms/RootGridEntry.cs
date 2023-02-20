@@ -31,57 +31,66 @@ namespace System.Windows.Forms.PropertyGridInternal
     /// <summary>
     /// Summary description for PropertyGridRootGridItem
     /// </summary>
-    [MonoInternalNote ("needs to implement IRootGridEntry")]
+    [MonoInternalNote("needs to implement IRootGridEntry")]
     internal class RootGridEntry : GridEntry /*, IRootGridEntry */
     {
         object[] val;
 
-        public RootGridEntry (PropertyGrid owner, object[] obj)
-            : base (owner, null)
+        public RootGridEntry(PropertyGrid owner, object[] obj)
+            : base(owner, null)
         {
             if (obj == null || obj.Length == 0)
-                throw new ArgumentNullException ("obj");
+                throw new ArgumentNullException("obj");
             val = obj;
         }
 
-        public override bool Expandable {
+        public override bool Expandable
+        {
             get { return true; }
         }
 
-        public override GridItemType GridItemType {
+        public override GridItemType GridItemType
+        {
             get { return GridItemType.Root; }
         }
 
-        public override string Label {
+        public override string Label
+        {
             get { return val.Length > 1 ? val.GetType().ToString() : val[0].GetType().ToString(); }
         }
 
-        public override object Value {
+        public override object Value
+        {
             get { return val.Length > 1 ? val : val[0]; }
         }
 
-        public override object[] Values {
+        public override object[] Values
+        {
             get { return val; }
         }
 
-        public override bool Select ()
+        public override bool Select()
         {
             return false; /* root entries aren't selectable */
         }
 
-        public override bool IsReadOnly {
+        public override bool IsReadOnly
+        {
             get { return true; }
         }
 
-        public override bool IsEditable {
+        public override bool IsEditable
+        {
             get { return false; }
         }
 
-        public override bool IsResetable {
+        public override bool IsResetable
+        {
             get { return false; }
         }
 
-        public override bool IsMerged {
+        public override bool IsMerged
+        {
             get { return val.Length > 1; }
         }
     }

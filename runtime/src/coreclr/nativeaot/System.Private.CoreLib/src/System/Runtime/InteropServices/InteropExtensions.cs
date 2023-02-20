@@ -64,7 +64,11 @@ namespace System.Runtime.InteropServices
             if (!del.IsOpenStatic)
                 return IntPtr.Zero;
 
-            IntPtr funcPtr = del.GetFunctionPointer(out RuntimeTypeHandle _, out bool _, out bool _);
+            IntPtr funcPtr = del.GetFunctionPointer(
+                out RuntimeTypeHandle _,
+                out bool _,
+                out bool _
+            );
             return funcPtr;
         }
 
@@ -88,9 +92,15 @@ namespace System.Runtime.InteropServices
             return handle.ToEETypePtr().IsInterface;
         }
 
-        public static bool AreTypesAssignable(RuntimeTypeHandle sourceType, RuntimeTypeHandle targetType)
+        public static bool AreTypesAssignable(
+            RuntimeTypeHandle sourceType,
+            RuntimeTypeHandle targetType
+        )
         {
-            return RuntimeImports.AreTypesAssignable(sourceType.ToEETypePtr(), targetType.ToEETypePtr());
+            return RuntimeImports.AreTypesAssignable(
+                sourceType.ToEETypePtr(),
+                targetType.ToEETypePtr()
+            );
         }
 
         public static RuntimeTypeHandle GetTypeHandle(this object target)

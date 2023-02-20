@@ -12,12 +12,8 @@ namespace System.CommandLine.Parsing
     {
         private Dictionary<Argument, ArgumentResult>? _defaultArgumentValues;
 
-        internal CommandResult(
-            Command command,
-            Token token,
-            CommandResult? parent = null) :
-            base(command ?? throw new ArgumentNullException(nameof(command)),
-                 parent)
+        internal CommandResult(Command command, Token token, CommandResult? parent = null)
+            : base(command ?? throw new ArgumentNullException(nameof(command)), parent)
         {
             Command = command;
             Token = token ?? throw new ArgumentNullException(nameof(token));
@@ -36,14 +32,14 @@ namespace System.CommandLine.Parsing
         internal override bool UseDefaultValueFor(Argument argument) =>
             FindResultFor(argument) switch
             {
-                ArgumentResult arg => arg.Argument.HasDefaultValue && 
-                                      arg.Tokens.Count == 0,
+                ArgumentResult arg => arg.Argument.HasDefaultValue && arg.Tokens.Count == 0,
                 _ => false
             };
 
         internal ArgumentResult GetOrCreateDefaultArgumentResult(Argument argument) =>
             (_defaultArgumentValues ??= new()).GetOrAdd(
                 argument,
-                arg => new ArgumentResult(arg, this));
+                arg => new ArgumentResult(arg, this)
+            );
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,114 +35,114 @@ using System.Security;
 using System.Security.Permissions;
 using System.Threading;
 
-namespace MonoCasTests.System.Threading {
-
+namespace MonoCasTests.System.Threading
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class ThreadCas {
-
+    [Category("CAS")]
+    public class ThreadCas
+    {
         private Type ThreadType;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            ThreadType = typeof (Thread);
+            ThreadType = typeof(Thread);
         }
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         // Partial Trust Tests - i.e. call "normal" unit with reduced privileges
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void PartialTrust_DenyUnrestricted_Success ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void PartialTrust_DenyUnrestricted_Success()
         {
-            MonoTests.System.Threading.ThreadTest tt = new MonoTests.System.Threading.ThreadTest ();
-            tt.TestCtor1 ();
+            MonoTests.System.Threading.ThreadTest tt = new MonoTests.System.Threading.ThreadTest();
+            tt.TestCtor1();
             // most tests use Abort so there's not much to call
-        }        
+        }
 
         // test Demand by denying the caller of the required privileges
 
 #if MONO_FEATURE_THREAD_ABORT
         [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlThread = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Abort ()
+        [SecurityPermission(SecurityAction.Deny, ControlThread = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Abort()
         {
-            Thread.CurrentThread.Abort ();
+            Thread.CurrentThread.Abort();
         }
 
         [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlThread = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Abort_Object ()
+        [SecurityPermission(SecurityAction.Deny, ControlThread = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Abort_Object()
         {
-            Thread.CurrentThread.Abort (new object [0]);
+            Thread.CurrentThread.Abort(new object[0]);
         }
 #endif
-        
+
         [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlThread = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void CurrentCulture ()
+        [SecurityPermission(SecurityAction.Deny, ControlThread = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void CurrentCulture()
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
         }
 
         [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlThread = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Interrupt ()
+        [SecurityPermission(SecurityAction.Deny, ControlThread = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Interrupt()
         {
-            Thread.CurrentThread.Interrupt ();
+            Thread.CurrentThread.Interrupt();
         }
 
 #if MONO_FEATURE_THREAD_ABORT
         [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlThread = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void ResetAbort ()
+        [SecurityPermission(SecurityAction.Deny, ControlThread = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void ResetAbort()
         {
-            Thread.ResetAbort ();
+            Thread.ResetAbort();
         }
 #endif
 
 #if MONO_FEATURE_THREAD_SUSPEND_RESUME
         [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlThread = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Resume ()
+        [SecurityPermission(SecurityAction.Deny, ControlThread = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Resume()
         {
-            Thread.CurrentThread.Resume ();
+            Thread.CurrentThread.Resume();
         }
 
         [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlThread = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Suspend ()
+        [SecurityPermission(SecurityAction.Deny, ControlThread = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Suspend()
         {
-            Thread.CurrentThread.Suspend ();
+            Thread.CurrentThread.Suspend();
         }
 #endif
 
         // we use reflection to call Mutex as it's named constructors are protected by
-        // a LinkDemand (which will be converted into full demand, i.e. a stack walk) 
+        // a LinkDemand (which will be converted into full demand, i.e. a stack walk)
         // when reflection is used (i.e. it gets testable).
 
         [Test]
-        [SecurityPermission (SecurityAction.Deny, Infrastructure = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void CurrentContext ()
+        [SecurityPermission(SecurityAction.Deny, Infrastructure = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void CurrentContext()
         {
-            MethodInfo mi = ThreadType.GetProperty ("CurrentContext").GetGetMethod ();
-            Assert.IsNotNull (mi, "get_CurrentContext");
-            mi.Invoke (null, null);
+            MethodInfo mi = ThreadType.GetProperty("CurrentContext").GetGetMethod();
+            Assert.IsNotNull(mi, "get_CurrentContext");
+            mi.Invoke(null, null);
         }
     }
 }

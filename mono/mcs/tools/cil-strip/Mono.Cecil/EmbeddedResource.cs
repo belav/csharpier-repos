@@ -26,31 +26,30 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
+namespace Mono.Cecil
+{
+    internal sealed class EmbeddedResource : Resource
+    {
+        byte[] m_data;
 
-    internal sealed class EmbeddedResource : Resource {
-
-        byte [] m_data;
-
-        public byte [] Data {
+        public byte[] Data
+        {
             get { return m_data; }
             set { m_data = value; }
         }
 
-        public EmbeddedResource (string name, ManifestResourceAttributes flags) :
-            base (name, flags)
-        {
-        }
+        public EmbeddedResource(string name, ManifestResourceAttributes flags)
+            : base(name, flags) { }
 
-        public EmbeddedResource (string name, ManifestResourceAttributes flags, byte [] data) :
-            base (name, flags)
+        public EmbeddedResource(string name, ManifestResourceAttributes flags, byte[] data)
+            : base(name, flags)
         {
             m_data = data;
         }
 
-        public override void Accept (IReflectionStructureVisitor visitor)
+        public override void Accept(IReflectionStructureVisitor visitor)
         {
-            visitor.VisitEmbeddedResource (this);
+            visitor.VisitEmbeddedResource(this);
         }
     }
 }

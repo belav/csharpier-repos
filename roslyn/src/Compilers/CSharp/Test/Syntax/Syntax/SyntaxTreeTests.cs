@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class SyntaxTreeTests : ParsingTests
     {
-        public SyntaxTreeTests(ITestOutputHelper output) : base(output) { }
+        public SyntaxTreeTests(ITestOutputHelper output)
+            : base(output) { }
 
         public enum SyntaxTreeFactoryKind
         {
@@ -82,20 +83,60 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var tree = factoryKind switch
             {
-                SyntaxTreeFactoryKind.Create => CSharpSyntaxTree.Create(root, options: parseOptions, path: "", encoding: null),
-                SyntaxTreeFactoryKind.ParseText => CSharpSyntaxTree.ParseText(SourceText.From(source, Encoding.UTF8, SourceHashAlgorithm.Sha256), parseOptions),
-                SyntaxTreeFactoryKind.Subclass => new MockCSharpSyntaxTree(root, SourceText.From(source, Encoding.UTF8, SourceHashAlgorithm.Sha256), parseOptions),
-                SyntaxTreeFactoryKind.SynthesizedSyntaxTree => SyntaxNode.CloneNodeAsRoot(root, syntaxTree: null).SyntaxTree,
-                SyntaxTreeFactoryKind.ParsedTreeWithPath => WithInitializedDirectives(CSharpSyntaxTree.Create(root, options: parseOptions, path: "old path", Encoding.UTF8)).WithFilePath("new path"),
-                SyntaxTreeFactoryKind.ParsedTreeWithRootAndOptions => WithInitializedDirectives(SyntaxFactory.ParseSyntaxTree("", options: parseOptions)).WithRootAndOptions(root, parseOptions),
+                SyntaxTreeFactoryKind.Create
+                    => CSharpSyntaxTree.Create(
+                        root,
+                        options: parseOptions,
+                        path: "",
+                        encoding: null
+                    ),
+                SyntaxTreeFactoryKind.ParseText
+                    => CSharpSyntaxTree.ParseText(
+                        SourceText.From(source, Encoding.UTF8, SourceHashAlgorithm.Sha256),
+                        parseOptions
+                    ),
+                SyntaxTreeFactoryKind.Subclass
+                    => new MockCSharpSyntaxTree(
+                        root,
+                        SourceText.From(source, Encoding.UTF8, SourceHashAlgorithm.Sha256),
+                        parseOptions
+                    ),
+                SyntaxTreeFactoryKind.SynthesizedSyntaxTree
+                    => SyntaxNode.CloneNodeAsRoot(root, syntaxTree: null).SyntaxTree,
+                SyntaxTreeFactoryKind.ParsedTreeWithPath
+                    => WithInitializedDirectives(
+                            CSharpSyntaxTree.Create(
+                                root,
+                                options: parseOptions,
+                                path: "old path",
+                                Encoding.UTF8
+                            )
+                        )
+                        .WithFilePath("new path"),
+                SyntaxTreeFactoryKind.ParsedTreeWithRootAndOptions
+                    => WithInitializedDirectives(
+                            SyntaxFactory.ParseSyntaxTree("", options: parseOptions)
+                        )
+                        .WithRootAndOptions(root, parseOptions),
                 _ => throw ExceptionUtilities.UnexpectedValue(factoryKind)
             };
 
-            Assert.Equal("#define U | #undef U | #define Y", ((CSharpSyntaxTree)tree).GetDirectives().GetDebuggerDisplay());
+            Assert.Equal(
+                "#define U | #undef U | #define Y",
+                ((CSharpSyntaxTree)tree).GetDirectives().GetDebuggerDisplay()
+            );
 
-            var compilation = CSharpCompilation.Create("test", new[] { tree }, TargetFrameworkUtil.GetReferences(TargetFramework.Standard), TestOptions.DebugDll);
+            var compilation = CSharpCompilation.Create(
+                "test",
+                new[] { tree },
+                TargetFrameworkUtil.GetReferences(TargetFramework.Standard),
+                TestOptions.DebugDll
+            );
 
-            CompileAndVerify(compilation).VerifyIL("C.Main", @"
+            CompileAndVerify(compilation)
+                .VerifyIL(
+                    "C.Main",
+                    @"
 {
   // Code size        8 (0x8)
   .maxstack  0
@@ -104,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   IL_0006:  nop
   IL_0007:  ret
 }
-");
+"
+                );
 
             static SyntaxTree WithInitializedDirectives(SyntaxTree tree)
             {
@@ -128,7 +170,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void Create_WithDiagnosticOptions()
         {
             var options = CreateImmutableDictionary(("CS0078", ReportDiagnostic.Suppress));
-            var tree = CSharpSyntaxTree.Create(SyntaxFactory.ParseCompilationUnit(""), options: null, path: null, encoding: null, diagnosticOptions: options);
+            var tree = CSharpSyntaxTree.Create(
+                SyntaxFactory.ParseCompilationUnit(""),
+                options: null,
+                path: null,
+                encoding: null,
+                diagnosticOptions: options
+            );
 
             Assert.Same(options, tree.DiagnosticOptions);
             Assert.Equal(SourceHashAlgorithm.Sha1, tree.GetText().ChecksumAlgorithm);
@@ -144,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 path: "",
                 diagnosticOptions: options,
                 isGeneratedCode: null,
-                cancellationToken: default);
+                cancellationToken: default
+            );
             Assert.Same(options, tree.DiagnosticOptions);
             var newTree = tree.WithChangedText(SourceText.From("class C { }"));
             Assert.Same(options, newTree.DiagnosticOptions);
@@ -159,11 +208,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 path: "",
                 diagnosticOptions: null,
                 isGeneratedCode: null,
-                cancellationToken: default);
+                cancellationToken: default
+            );
             Assert.NotNull(tree.DiagnosticOptions);
             Assert.True(tree.DiagnosticOptions.IsEmpty);
             // The default options are case insensitive but the default empty ImmutableDictionary is not
-            Assert.NotSame(ImmutableDictionary<string, ReportDiagnostic>.Empty, tree.DiagnosticOptions);
+            Assert.NotSame(
+                ImmutableDictionary<string, ReportDiagnostic>.Empty,
+                tree.DiagnosticOptions
+            );
         }
 
         [Fact]
@@ -175,10 +228,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 path: "",
                 diagnosticOptions: ImmutableDictionary<string, ReportDiagnostic>.Empty,
                 isGeneratedCode: null,
-                cancellationToken: default);
+                cancellationToken: default
+            );
             Assert.NotNull(tree.DiagnosticOptions);
             Assert.True(tree.DiagnosticOptions.IsEmpty);
-            Assert.Same(ImmutableDictionary<string, ReportDiagnostic>.Empty, tree.DiagnosticOptions);
+            Assert.Same(
+                ImmutableDictionary<string, ReportDiagnostic>.Empty,
+                tree.DiagnosticOptions
+            );
         }
 
         [Fact]
@@ -191,7 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 path: "",
                 diagnosticOptions: options,
                 isGeneratedCode: null,
-                cancellationToken: default);
+                cancellationToken: default
+            );
             Assert.Same(options, tree.DiagnosticOptions);
         }
 
@@ -217,7 +275,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void WithDiagnosticOptionsEmpty()
         {
             var tree = SyntaxFactory.SyntaxTree(SyntaxFactory.CompilationUnit());
-            var newTree = tree.WithDiagnosticOptions(ImmutableDictionary<string, ReportDiagnostic>.Empty);
+            var newTree = tree.WithDiagnosticOptions(
+                ImmutableDictionary<string, ReportDiagnostic>.Empty
+            );
             Assert.NotNull(tree.DiagnosticOptions);
             Assert.True(newTree.DiagnosticOptions.IsEmpty);
             // Default empty immutable dictionary is case sensitive
@@ -229,7 +289,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var tree = SyntaxFactory.SyntaxTree(SyntaxFactory.CompilationUnit());
             var map = ImmutableDictionary.CreateRange(
-                new[] { KeyValuePair.Create("CS00778", ReportDiagnostic.Suppress) });
+                new[] { KeyValuePair.Create("CS00778", ReportDiagnostic.Suppress) }
+            );
             var newTree = tree.WithDiagnosticOptions(map);
             Assert.NotNull(newTree.DiagnosticOptions);
             Assert.Same(map, newTree.DiagnosticOptions);
@@ -256,7 +317,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void WithRootAndOptions_ParsedTreeWithText()
         {
-            var oldText = SourceText.From("class B {}", Encoding.Unicode, SourceHashAlgorithms.Default);
+            var oldText = SourceText.From(
+                "class B {}",
+                Encoding.Unicode,
+                SourceHashAlgorithms.Default
+            );
             var oldTree = SyntaxFactory.ParseSyntaxTree(oldText);
 
             var newRoot = SyntaxFactory.ParseCompilationUnit("class C {}");
@@ -298,7 +363,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void WithFilePath_ParsedTreeWithText()
         {
-            var oldText = SourceText.From("class B {}", Encoding.Unicode, SourceHashAlgorithms.Default);
+            var oldText = SourceText.From(
+                "class B {}",
+                Encoding.Unicode,
+                SourceHashAlgorithms.Default
+            );
             var oldTree = SyntaxFactory.ParseSyntaxTree(oldText, path: "old.cs");
 
             var newTree = oldTree.WithFilePath("new.cs");
@@ -329,7 +398,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             oldTree = SyntaxFactory.ParseSyntaxTree("", path: "old.cs");
             Assert.Equal(string.Empty, oldTree.WithFilePath(null).FilePath);
             Assert.Equal(string.Empty, SyntaxFactory.ParseSyntaxTree("", path: null).FilePath);
-            Assert.Equal(string.Empty, CSharpSyntaxTree.Create((CSharpSyntaxNode)oldTree.GetRoot()).FilePath);
+            Assert.Equal(
+                string.Empty,
+                CSharpSyntaxTree.Create((CSharpSyntaxNode)oldTree.GetRoot()).FilePath
+            );
         }
 
         [Fact]
@@ -361,16 +433,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var test = "global using ns1;";
 
-            CreateCompilation(test, parseOptions: TestOptions.Regular9).VerifyDiagnostics(
-                // (1,1): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // global using ns1;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global").WithArguments("global using directive", "10.0").WithLocation(1, 1),
-                // (1,1): hidden CS8019: Unnecessary using directive.
-                // global using ns1;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using ns1;").WithLocation(1, 1),
-                // (1,14): error CS0246: The type or namespace name 'ns1' could not be found (are you missing a using directive or an assembly reference?)
-                // global using ns1;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "ns1").WithArguments("ns1").WithLocation(1, 14));
+            CreateCompilation(test, parseOptions: TestOptions.Regular9)
+                .VerifyDiagnostics(
+                    // (1,1): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // global using ns1;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global")
+                        .WithArguments("global using directive", "10.0")
+                        .WithLocation(1, 1),
+                    // (1,1): hidden CS8019: Unnecessary using directive.
+                    // global using ns1;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using ns1;")
+                        .WithLocation(1, 1),
+                    // (1,14): error CS0246: The type or namespace name 'ns1' could not be found (are you missing a using directive or an assembly reference?)
+                    // global using ns1;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "ns1")
+                        .WithArguments("ns1")
+                        .WithLocation(1, 14)
+                );
 
             UsingTree(test, TestOptions.Regular9);
 
@@ -430,19 +509,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var test = "namespace ns { global using ns1; }";
 
-            CreateCompilation(test, parseOptions: TestOptions.Regular9).VerifyDiagnostics(
-                // (1,16): error CS8914: A global using directive cannot be used in a namespace declaration.
-                // namespace ns { global using ns1; }
-                Diagnostic(ErrorCode.ERR_GlobalUsingInNamespace, "global").WithLocation(1, 16),
-                // (1,16): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // namespace ns { global using ns1; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global").WithArguments("global using directive", "10.0").WithLocation(1, 16),
-                // (1,16): hidden CS8019: Unnecessary using directive.
-                // namespace ns { global using ns1; }
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using ns1;").WithLocation(1, 16),
-                // (1,29): error CS0246: The type or namespace name 'ns1' could not be found (are you missing a using directive or an assembly reference?)
-                // namespace ns { global using ns1; }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "ns1").WithArguments("ns1").WithLocation(1, 29));
+            CreateCompilation(test, parseOptions: TestOptions.Regular9)
+                .VerifyDiagnostics(
+                    // (1,16): error CS8914: A global using directive cannot be used in a namespace declaration.
+                    // namespace ns { global using ns1; }
+                    Diagnostic(ErrorCode.ERR_GlobalUsingInNamespace, "global")
+                        .WithLocation(1, 16),
+                    // (1,16): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // namespace ns { global using ns1; }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global")
+                        .WithArguments("global using directive", "10.0")
+                        .WithLocation(1, 16),
+                    // (1,16): hidden CS8019: Unnecessary using directive.
+                    // namespace ns { global using ns1; }
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using ns1;")
+                        .WithLocation(1, 16),
+                    // (1,29): error CS0246: The type or namespace name 'ns1' could not be found (are you missing a using directive or an assembly reference?)
+                    // namespace ns { global using ns1; }
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "ns1")
+                        .WithArguments("ns1")
+                        .WithLocation(1, 29)
+                );
 
             UsingTree(test, TestOptions.Regular9);
 
@@ -503,16 +590,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var test = "global using static ns1;";
 
-            CreateCompilation(test, parseOptions: TestOptions.Regular9).VerifyDiagnostics(
-                // (1,1): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // global using static ns1;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global").WithArguments("global using directive", "10.0").WithLocation(1, 1),
-                // (1,1): hidden CS8019: Unnecessary using directive.
-                // global using static ns1;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using static ns1;").WithLocation(1, 1),
-                // (1,21): error CS0246: The type or namespace name 'ns1' could not be found (are you missing a using directive or an assembly reference?)
-                // global using static ns1;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "ns1").WithArguments("ns1").WithLocation(1, 21));
+            CreateCompilation(test, parseOptions: TestOptions.Regular9)
+                .VerifyDiagnostics(
+                    // (1,1): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // global using static ns1;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global")
+                        .WithArguments("global using directive", "10.0")
+                        .WithLocation(1, 1),
+                    // (1,1): hidden CS8019: Unnecessary using directive.
+                    // global using static ns1;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using static ns1;")
+                        .WithLocation(1, 1),
+                    // (1,21): error CS0246: The type or namespace name 'ns1' could not be found (are you missing a using directive or an assembly reference?)
+                    // global using static ns1;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "ns1")
+                        .WithArguments("ns1")
+                        .WithLocation(1, 21)
+                );
 
             UsingTree(test, TestOptions.Regular9);
 
@@ -574,19 +668,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var test = "namespace ns { global using static ns1; }";
 
-            CreateCompilation(test, parseOptions: TestOptions.Regular9).VerifyDiagnostics(
-                // (1,16): error CS8914: A global using directive cannot be used in a namespace declaration.
-                // namespace ns { global using static ns1; }
-                Diagnostic(ErrorCode.ERR_GlobalUsingInNamespace, "global").WithLocation(1, 16),
-                // (1,16): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // namespace ns { global using static ns1; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global").WithArguments("global using directive", "10.0").WithLocation(1, 16),
-                // (1,16): hidden CS8019: Unnecessary using directive.
-                // namespace ns { global using static ns1; }
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using static ns1;").WithLocation(1, 16),
-                // (1,36): error CS0246: The type or namespace name 'ns1' could not be found (are you missing a using directive or an assembly reference?)
-                // namespace ns { global using static ns1; }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "ns1").WithArguments("ns1").WithLocation(1, 36));
+            CreateCompilation(test, parseOptions: TestOptions.Regular9)
+                .VerifyDiagnostics(
+                    // (1,16): error CS8914: A global using directive cannot be used in a namespace declaration.
+                    // namespace ns { global using static ns1; }
+                    Diagnostic(ErrorCode.ERR_GlobalUsingInNamespace, "global")
+                        .WithLocation(1, 16),
+                    // (1,16): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // namespace ns { global using static ns1; }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global")
+                        .WithArguments("global using directive", "10.0")
+                        .WithLocation(1, 16),
+                    // (1,16): hidden CS8019: Unnecessary using directive.
+                    // namespace ns { global using static ns1; }
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using static ns1;")
+                        .WithLocation(1, 16),
+                    // (1,36): error CS0246: The type or namespace name 'ns1' could not be found (are you missing a using directive or an assembly reference?)
+                    // namespace ns { global using static ns1; }
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "ns1")
+                        .WithArguments("ns1")
+                        .WithLocation(1, 36)
+                );
 
             UsingTree(test, TestOptions.Regular9);
 
@@ -655,19 +757,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var test = "global using alias = ns1;";
 
-            CreateCompilation(test, parseOptions: TestOptions.Regular9).VerifyDiagnostics(
-                // (1,1): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // global using alias = ns1;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global").WithArguments("global using directive", "10.0").WithLocation(1, 1),
-                // (1,1): hidden CS8019: Unnecessary using directive.
-                // global using alias = ns1;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using alias = ns1;").WithLocation(1, 1),
-                // (1,14): warning CS8981: The type name 'alias' only contains lower-cased ascii characters. Such names may become reserved for the language.
-                // global using alias = ns1;
-                Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "alias").WithArguments("alias").WithLocation(1, 14),
-                // (1,22): error CS0246: The type or namespace name 'ns1' could not be found (are you missing a using directive or an assembly reference?)
-                // global using alias = ns1;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "ns1").WithArguments("ns1").WithLocation(1, 22));
+            CreateCompilation(test, parseOptions: TestOptions.Regular9)
+                .VerifyDiagnostics(
+                    // (1,1): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // global using alias = ns1;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global")
+                        .WithArguments("global using directive", "10.0")
+                        .WithLocation(1, 1),
+                    // (1,1): hidden CS8019: Unnecessary using directive.
+                    // global using alias = ns1;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using alias = ns1;")
+                        .WithLocation(1, 1),
+                    // (1,14): warning CS8981: The type name 'alias' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                    // global using alias = ns1;
+                    Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "alias")
+                        .WithArguments("alias")
+                        .WithLocation(1, 14),
+                    // (1,22): error CS0246: The type or namespace name 'ns1' could not be found (are you missing a using directive or an assembly reference?)
+                    // global using alias = ns1;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "ns1")
+                        .WithArguments("ns1")
+                        .WithLocation(1, 22)
+                );
 
             UsingTree(test, TestOptions.Regular9);
 
@@ -743,22 +854,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var test = "namespace ns { global using alias = ns1; }";
 
-            CreateCompilation(test, parseOptions: TestOptions.Regular9).VerifyDiagnostics(
-                // (1,16): error CS8914: A global using directive cannot be used in a namespace declaration.
-                // namespace ns { global using alias = ns1; }
-                Diagnostic(ErrorCode.ERR_GlobalUsingInNamespace, "global").WithLocation(1, 16),
-                // (1,16): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // namespace ns { global using alias = ns1; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global").WithArguments("global using directive", "10.0").WithLocation(1, 16),
-                // (1,16): hidden CS8019: Unnecessary using directive.
-                // namespace ns { global using alias = ns1; }
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using alias = ns1;").WithLocation(1, 16),
-                // (1,29): warning CS8981: The type name 'alias' only contains lower-cased ascii characters. Such names may become reserved for the language.
-                // namespace ns { global using alias = ns1; }
-                Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "alias").WithArguments("alias").WithLocation(1, 29),
-                // (1,37): error CS0246: The type or namespace name 'ns1' could not be found (are you missing a using directive or an assembly reference?)
-                // namespace ns { global using alias = ns1; }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "ns1").WithArguments("ns1").WithLocation(1, 37));
+            CreateCompilation(test, parseOptions: TestOptions.Regular9)
+                .VerifyDiagnostics(
+                    // (1,16): error CS8914: A global using directive cannot be used in a namespace declaration.
+                    // namespace ns { global using alias = ns1; }
+                    Diagnostic(ErrorCode.ERR_GlobalUsingInNamespace, "global")
+                        .WithLocation(1, 16),
+                    // (1,16): error CS8773: Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // namespace ns { global using alias = ns1; }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "global")
+                        .WithArguments("global using directive", "10.0")
+                        .WithLocation(1, 16),
+                    // (1,16): hidden CS8019: Unnecessary using directive.
+                    // namespace ns { global using alias = ns1; }
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using alias = ns1;")
+                        .WithLocation(1, 16),
+                    // (1,29): warning CS8981: The type name 'alias' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                    // namespace ns { global using alias = ns1; }
+                    Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "alias")
+                        .WithArguments("alias")
+                        .WithLocation(1, 29),
+                    // (1,37): error CS0246: The type or namespace name 'ns1' could not be found (are you missing a using directive or an assembly reference?)
+                    // namespace ns { global using alias = ns1; }
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "ns1")
+                        .WithArguments("ns1")
+                        .WithLocation(1, 37)
+                );
 
             UsingTree(test, TestOptions.Regular9);
 
@@ -800,16 +921,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void GlobalUsingDirective_13()
         {
-            var test = @"
+            var test =
+                @"
 namespace ns {}
 global using ns1;
 ";
 
-            UsingTree(test, TestOptions.RegularPreview,
+            UsingTree(
+                test,
+                TestOptions.RegularPreview,
                 // (3,1): error CS1529: A using clause must precede all other elements defined in the namespace except extern alias declarations
                 // global using ns1;
-                Diagnostic(ErrorCode.ERR_UsingAfterElements, "global using ns1;").WithLocation(3, 1)
-                );
+                Diagnostic(ErrorCode.ERR_UsingAfterElements, "global using ns1;")
+                    .WithLocation(3, 1)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -831,16 +956,19 @@ global using ns1;
         [Fact]
         public void GlobalUsingDirective_14()
         {
-            var test = @"
+            var test =
+                @"
 global using ns1;
 extern alias a;
 ";
 
-            UsingTree(test, TestOptions.RegularPreview,
+            UsingTree(
+                test,
+                TestOptions.RegularPreview,
                 // (3,1): error CS0439: An extern alias declaration must precede all other elements defined in the namespace
                 // extern alias a;
                 Diagnostic(ErrorCode.ERR_ExternAfterElements, "extern").WithLocation(3, 1)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -862,7 +990,8 @@ extern alias a;
         [Fact]
         public void GlobalUsingDirective_15()
         {
-            var test = @"
+            var test =
+                @"
 namespace ns2
 {
     namespace ns {}
@@ -870,11 +999,14 @@ namespace ns2
 }
 ";
 
-            UsingTree(test, TestOptions.RegularPreview,
+            UsingTree(
+                test,
+                TestOptions.RegularPreview,
                 // (5,5): error CS1529: A using clause must precede all other elements defined in the namespace except extern alias declarations
                 //     global using ns1;
-                Diagnostic(ErrorCode.ERR_UsingAfterElements, "global using ns1;").WithLocation(5, 5)
-                );
+                Diagnostic(ErrorCode.ERR_UsingAfterElements, "global using ns1;")
+                    .WithLocation(5, 5)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -906,7 +1038,8 @@ namespace ns2
         [Fact]
         public void GlobalUsingDirective_16()
         {
-            var test = @"
+            var test =
+                @"
 global using ns1;
 namespace ns {}
 ";
@@ -945,11 +1078,13 @@ namespace ns {}
         {
             var test = "d using ns1;";
 
-            UsingTree(test, TestOptions.Regular,
+            UsingTree(
+                test,
+                TestOptions.Regular,
                 // (1,1): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // d using ns1;
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "d").WithLocation(1, 1)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -972,11 +1107,13 @@ namespace ns {}
         {
             var test = "d global using ns1;";
 
-            UsingTree(test, TestOptions.RegularPreview,
+            UsingTree(
+                test,
+                TestOptions.RegularPreview,
                 // (1,1): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // d global using ns1;
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "d").WithLocation(1, 1)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1000,11 +1137,13 @@ namespace ns {}
         {
             var test = "using ns1; p using ns2;";
 
-            UsingTree(test, TestOptions.Regular,
+            UsingTree(
+                test,
+                TestOptions.Regular,
                 // (1,12): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // using ns1; p using ns2;
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "p").WithLocation(1, 12)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1036,11 +1175,13 @@ namespace ns {}
         {
             var test = "global using ns1; p global using ns2;";
 
-            UsingTree(test, TestOptions.RegularPreview,
+            UsingTree(
+                test,
+                TestOptions.RegularPreview,
                 // (1,19): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // global using ns1; p global using ns2;
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "p").WithLocation(1, 19)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1072,16 +1213,20 @@ namespace ns {}
         [Fact]
         public void GlobalUsingDirective_19()
         {
-            var test = @"
+            var test =
+                @"
 M();
 global using ns1;
 ";
 
-            UsingTree(test, TestOptions.RegularPreview,
+            UsingTree(
+                test,
+                TestOptions.RegularPreview,
                 // (3,1): error CS1529: A using clause must precede all other elements defined in the namespace except extern alias declarations
                 // global using ns1;
-                Diagnostic(ErrorCode.ERR_UsingAfterElements, "global using ns1;").WithLocation(3, 1)
-                );
+                Diagnostic(ErrorCode.ERR_UsingAfterElements, "global using ns1;")
+                    .WithLocation(3, 1)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1112,7 +1257,8 @@ global using ns1;
         [Fact]
         public void GlobalUsingDirective_20()
         {
-            var test = @"
+            var test =
+                @"
 global using ns1;
 using ns2;
 M();
@@ -1168,7 +1314,8 @@ M();
         [Fact]
         public void GlobalUsingDirective_21()
         {
-            var test = @"
+            var test =
+                @"
 global using alias1 = ns1;
 using alias2 = ns2;
 M();
@@ -1240,7 +1387,8 @@ M();
         [Fact]
         public void GlobalUsingDirective_22()
         {
-            var test = @"
+            var test =
+                @"
 global using static ns1;
 using static ns2;
 M();

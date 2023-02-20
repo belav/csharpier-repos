@@ -13,7 +13,8 @@ static class Program
         int Id { get; }
     }
 
-    static void Generic<T> (T item) where T : I1, I2
+    static void Generic<T>(T item)
+        where T : I1, I2
     {
         var a = item.Id;
     }

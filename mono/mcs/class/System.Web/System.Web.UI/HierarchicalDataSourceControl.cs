@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,91 +38,95 @@ using System.ComponentModel;
 namespace System.Web.UI
 {
     [NonVisualControlAttribute]
-    [DesignerAttribute ("System.Web.UI.Design.HierarchicalDataSourceDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-    [ControlBuilderAttribute (typeof(DataSourceControlBuilder))]
-    [BindableAttribute (false)]
+    [DesignerAttribute(
+        "System.Web.UI.Design.HierarchicalDataSourceDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    [ControlBuilderAttribute(typeof(DataSourceControlBuilder))]
+    [BindableAttribute(false)]
     public abstract class HierarchicalDataSourceControl : Control, IHierarchicalDataSource
     {
-        static object dataSourceChanged = new object ();
+        static object dataSourceChanged = new object();
 
-        protected HierarchicalDataSourceControl()
+        protected HierarchicalDataSourceControl() { }
+
+        protected abstract HierarchicalDataSourceView GetHierarchicalView(string viewPath);
+
+        HierarchicalDataSourceView IHierarchicalDataSource.GetHierarchicalView(string viewPath)
         {
-        }
-        
-        protected abstract HierarchicalDataSourceView GetHierarchicalView (string viewPath);
-        
-        HierarchicalDataSourceView IHierarchicalDataSource.GetHierarchicalView (string viewPath)
-        {
-            return GetHierarchicalView (viewPath);
+            return GetHierarchicalView(viewPath);
         }
 
-        [Browsable (false)]
-        [DefaultValue (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override bool EnableTheming {
+        [Browsable(false)]
+        [DefaultValue(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool EnableTheming
+        {
             get { return false; }
-            set { throw new NotSupportedException (); }
+            set { throw new NotSupportedException(); }
         }
-        
-        [Browsable (false)]
-        [DefaultValue ("")]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override string SkinID {
+
+        [Browsable(false)]
+        [DefaultValue("")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override string SkinID
+        {
             get { return string.Empty; }
-            set { throw new NotSupportedException (); }
-        }
-        
-        [Browsable (false)]
-        [DefaultValue (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override bool Visible { 
-            get { return false; }
-            set { throw new NotSupportedException (); }
+            set { throw new NotSupportedException(); }
         }
 
-        protected override ControlCollection CreateControlCollection ()
+        [Browsable(false)]
+        [DefaultValue(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool Visible
         {
-            return new EmptyControlCollection (this);
+            get { return false; }
+            set { throw new NotSupportedException(); }
         }
-        
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override Control FindControl (string id)
+
+        protected override ControlCollection CreateControlCollection()
         {
-            if (id == ID) return this;
-            else return null;
+            return new EmptyControlCollection(this);
         }
-        
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override bool HasControls ()
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override Control FindControl(string id)
+        {
+            if (id == ID)
+                return this;
+            else
+                return null;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool HasControls()
         {
             return false;
         }
-        
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override void Focus ()
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override void Focus()
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
-        
-        event EventHandler System.Web.UI.IHierarchicalDataSource.DataSourceChanged {
-            add { Events.AddHandler (dataSourceChanged, value); }
-            remove { Events.RemoveHandler (dataSourceChanged, value); }
-        }
-        
-        protected virtual void OnDataSourceChanged (EventArgs e)
+
+        event EventHandler System.Web.UI.IHierarchicalDataSource.DataSourceChanged
         {
-            EventHandler eh = Events [dataSourceChanged] as EventHandler;
+            add { Events.AddHandler(dataSourceChanged, value); }
+            remove { Events.RemoveHandler(dataSourceChanged, value); }
+        }
+
+        protected virtual void OnDataSourceChanged(EventArgs e)
+        {
+            EventHandler eh = Events[dataSourceChanged] as EventHandler;
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
-        
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override void RenderControl (HtmlTextWriter writer)
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override void RenderControl(HtmlTextWriter writer)
         {
             // nop
         }
     }
-    
-
 }
-

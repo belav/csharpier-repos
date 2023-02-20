@@ -1,5 +1,5 @@
-// 
-// System.Xml.Serialization.ImportContext.cs 
+//
+// System.Xml.Serialization.ImportContext.cs
 //
 // Author:
 //   Lluis Sanchez Gual (lluis@ximian.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,31 +33,32 @@ using System;
 using System.Collections;
 using System.Collections.Specialized;
 
-namespace System.Xml.Serialization 
+namespace System.Xml.Serialization
 {
     public class ImportContext
     {
         bool _shareTypes;
         CodeIdentifiers _typeIdentifiers;
-        StringCollection _warnings = new StringCollection ();
-        
+        StringCollection _warnings = new StringCollection();
+
         internal Hashtable MappedTypes;
         internal Hashtable DataMappedTypes;
         internal Hashtable SharedAnonymousTypes;
-        
-        public ImportContext (CodeIdentifiers identifiers, bool shareTypes)
+
+        public ImportContext(CodeIdentifiers identifiers, bool shareTypes)
         {
             _typeIdentifiers = identifiers;
             this._shareTypes = shareTypes;
-            
-            if (shareTypes) {
-                MappedTypes = new Hashtable ();
-                DataMappedTypes = new Hashtable ();
-                SharedAnonymousTypes = new Hashtable ();
+
+            if (shareTypes)
+            {
+                MappedTypes = new Hashtable();
+                DataMappedTypes = new Hashtable();
+                SharedAnonymousTypes = new Hashtable();
             }
         }
-        
-        public bool ShareTypes 
+
+        public bool ShareTypes
         {
             get { return _shareTypes; }
         }
@@ -73,4 +74,3 @@ namespace System.Xml.Serialization
         }
     }
 }
-

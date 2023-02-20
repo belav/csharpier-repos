@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             BasicBlock source,
             BasicBlock? destination,
             ControlFlowBranchSemantics semantics,
-            bool isConditionalSuccessor)
+            bool isConditionalSuccessor
+        )
         {
             Source = source;
             Destination = destination;
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     }
                     else
                     {
-                        result = CollectRegions(Destination.Ordinal, Source.EnclosingRegion).ToImmutableAndFree();
+                        result = CollectRegions(Destination.Ordinal, Source.EnclosingRegion)
+                            .ToImmutableAndFree();
                     }
 
                     ImmutableInterlocked.InterlockedInitialize(ref _lazyLeavingRegions, result);
@@ -79,7 +81,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             }
         }
 
-        private static ArrayBuilder<ControlFlowRegion> CollectRegions(int destinationOrdinal, ControlFlowRegion source)
+        private static ArrayBuilder<ControlFlowRegion> CollectRegions(
+            int destinationOrdinal,
+            ControlFlowRegion source
+        )
         {
             var builder = ArrayBuilder<ControlFlowRegion>.GetInstance();
 
@@ -112,7 +117,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     }
                     else
                     {
-                        ArrayBuilder<ControlFlowRegion> builder = CollectRegions(Source.Ordinal, Destination.EnclosingRegion);
+                        ArrayBuilder<ControlFlowRegion> builder = CollectRegions(
+                            Source.Ordinal,
+                            Destination.EnclosingRegion
+                        );
                         builder.ReverseContents();
                         result = builder.ToImmutableAndFree();
                     }
@@ -139,7 +147,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     int stopAt = leavingRegions.Length - 1;
                     for (int i = 0; i < stopAt; i++)
                     {
-                        if (leavingRegions[i].Kind == ControlFlowRegionKind.Try && leavingRegions[i + 1].Kind == ControlFlowRegionKind.TryAndFinally)
+                        if (
+                            leavingRegions[i].Kind == ControlFlowRegionKind.Try
+                            && leavingRegions[i + 1].Kind == ControlFlowRegionKind.TryAndFinally
+                        )
                         {
                             if (builder == null)
                             {
@@ -151,7 +162,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         }
                     }
 
-                    var result = builder == null ? ImmutableArray<ControlFlowRegion>.Empty : builder.ToImmutableAndFree();
+                    var result =
+                        builder == null
+                            ? ImmutableArray<ControlFlowRegion>.Empty
+                            : builder.ToImmutableAndFree();
 
                     ImmutableInterlocked.InterlockedInitialize(ref _lazyFinallyRegions, result);
                 }

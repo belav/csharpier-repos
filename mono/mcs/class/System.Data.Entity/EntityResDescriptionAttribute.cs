@@ -4,9 +4,7 @@ namespace System.Data
 {
     sealed class EntityResDescriptionAttribute : DescriptionAttribute
     {
-        public EntityResDescriptionAttribute (string description)
-            : base (description)
-        {
-        }
+        public EntityResDescriptionAttribute(string description)
+            : base(description) { }
     }
 }

@@ -1,31 +1,32 @@
-
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 
 namespace Application
 {
-    public sealed class FooClass<S> where S : class
+    public sealed class FooClass<S>
+        where S : class
     {
         public static FooClass<S> Create(string name, Action<S> action)
         {
             return new FooClass<S>(name, action);
         }
 
-        public static FooClass<S> Create<T>(S source, string name,
-            Func<S, T> func, FooClass<T> fooChild)
+        public static FooClass<S> Create<T>(
+            S source,
+            string name,
+            Func<S, T> func,
+            FooClass<T> fooChild
+        )
             where T : class
         {
             return new FooClass<S>(source, name, CreateCallback(func, fooChild));
         }
 
-        private static Action<S> CreateCallback<T>(
-            Func<S, T> func, FooClass<T> fooChild)
+        private static Action<S> CreateCallback<T>(Func<S, T> func, FooClass<T> fooChild)
             where T : class
         {
-            return delegate(S source)
-            {
-            };
+            return delegate(S source) { };
         }
 
         private FooClass(string name, Action<S> action)
@@ -53,12 +54,17 @@ namespace Application
 
     public class VarCompilerTest
     {
-
         public static void Main(string[] args)
         {
             MyClass obj = new MyClass();
             int nCalls = 0;
-            FooClass<MyClass> fooChild = FooClass<MyClass>.Create("Value", delegate { nCalls++; });
+            FooClass<MyClass> fooChild = FooClass<MyClass>.Create(
+                "Value",
+                delegate
+                {
+                    nCalls++;
+                }
+            );
             FooClass<MyClass>.Create(obj, "Child", x => x.Child, fooChild);
         }
     }

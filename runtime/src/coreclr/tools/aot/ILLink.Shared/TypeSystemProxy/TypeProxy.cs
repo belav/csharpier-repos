@@ -10,6 +10,6 @@ namespace ILLink.Shared.TypeSystemProxy
 {
     internal readonly partial struct TypeProxy : IMemberProxy
     {
-        internal partial ImmutableArray<GenericParameterProxy> GetGenericParameters ();
+        internal partial ImmutableArray<GenericParameterProxy> GetGenericParameters();
     }
 }

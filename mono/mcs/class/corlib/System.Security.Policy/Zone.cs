@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,21 +35,20 @@ using System.Runtime.InteropServices;
 
 using Mono.Security;
 
-namespace System.Security.Policy {
-
+namespace System.Security.Policy
+{
     [Serializable]
-    [ComVisible (true)]
-    public sealed class Zone :
-        EvidenceBase,
-        IIdentityPermissionFactory, IBuiltInEvidence    {
-
+    [ComVisible(true)]
+    public sealed class Zone : EvidenceBase, IIdentityPermissionFactory, IBuiltInEvidence
+    {
         private SecurityZone zone;
-        
-        public Zone (SecurityZone zone)
+
+        public Zone(SecurityZone zone)
         {
-            if (!Enum.IsDefined (typeof (SecurityZone), zone)) {
-                string msg = String.Format (Locale.GetText ("Invalid zone {0}."), zone);
-                throw new ArgumentException (msg, "zone");
+            if (!Enum.IsDefined(typeof(SecurityZone), zone))
+            {
+                string msg = String.Format(Locale.GetText("Invalid zone {0}."), zone);
+                throw new ArgumentException(msg, "zone");
             }
 
             this.zone = zone;
@@ -57,65 +56,75 @@ namespace System.Security.Policy {
 
         // properties
 
-        public SecurityZone SecurityZone {
+        public SecurityZone SecurityZone
+        {
             get { return zone; }
         }
 
         // methods
 
-        public object Copy ()
+        public object Copy()
         {
-            return new Zone (zone);
+            return new Zone(zone);
         }
 
-        public IPermission CreateIdentityPermission (Evidence evidence)
+        public IPermission CreateIdentityPermission(Evidence evidence)
         {
-            return new ZoneIdentityPermission (zone);
+            return new ZoneIdentityPermission(zone);
         }
 
-        [MonoTODO ("Not user configurable yet")]
-        public static Zone CreateFromUrl (string url)
+        [MonoTODO("Not user configurable yet")]
+        public static Zone CreateFromUrl(string url)
         {
             if (url == null)
-                throw new ArgumentNullException ("url");
+                throw new ArgumentNullException("url");
 
             SecurityZone z = SecurityZone.NoZone;
             if (url.Length == 0)
-                return new Zone (z);
+                return new Zone(z);
 
             Uri uri = null;
-            try {
-                uri = new Uri (url);
+            try
+            {
+                uri = new Uri(url);
             }
-            catch {
-                return new Zone (z);
+            catch
+            {
+                return new Zone(z);
             }
             // TODO: apply zone configuration
             // this is the only way to use the Trusted and Untrusted zones
 
-            if (z == SecurityZone.NoZone) {
+            if (z == SecurityZone.NoZone)
+            {
                 // not part of configuration, the use default mapping
-                if (uri.IsFile) {
-                    if (File.Exists (uri.LocalPath))
+                if (uri.IsFile)
+                {
+                    if (File.Exists(uri.LocalPath))
                         z = SecurityZone.MyComputer;
-                    else if (String.Compare ("FILE://", 0, url, 0, 7, true, CultureInfo.InvariantCulture) == 0)
-                        z = SecurityZone.Intranet;    // non accessible file:// 
+                    else if (
+                        String.Compare("FILE://", 0, url, 0, 7, true, CultureInfo.InvariantCulture)
+                        == 0
+                    )
+                        z = SecurityZone.Intranet; // non accessible file://
                     else
                         z = SecurityZone.Internet;
                 }
-                else if (uri.IsLoopback) {            // e.g. http://localhost/x
+                else if (uri.IsLoopback)
+                { // e.g. http://localhost/x
                     z = SecurityZone.Intranet;
                 }
-                else {
+                else
+                {
                     // all protocols, including unknown ones
                     z = SecurityZone.Internet;
                 }
             }
 
-            return new Zone (z);
+            return new Zone(z);
         }
 
-        public override bool Equals (object o)
+        public override bool Equals(object o)
         {
             Zone z = (o as Zone);
             if (z == null)
@@ -124,38 +133,38 @@ namespace System.Security.Policy {
             return (z.zone == zone);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return (int) zone;
+            return (int)zone;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            SecurityElement se = new SecurityElement ("System.Security.Policy.Zone");
-            se.AddAttribute ("version", "1");
-            se.AddChild (new SecurityElement ("Zone", zone.ToString ()));
-            return se.ToString ();
+            SecurityElement se = new SecurityElement("System.Security.Policy.Zone");
+            se.AddAttribute("version", "1");
+            se.AddChild(new SecurityElement("Zone", zone.ToString()));
+            return se.ToString();
         }
 
         // interface IBuiltInEvidence
 
-        int IBuiltInEvidence.GetRequiredSize (bool verbose)
+        int IBuiltInEvidence.GetRequiredSize(bool verbose)
         {
             return 3;
         }
 
-        int IBuiltInEvidence.InitFromBuffer (char [] buffer, int position)
+        int IBuiltInEvidence.InitFromBuffer(char[] buffer, int position)
         {
-            int new_zone = (int) buffer [position++];
-            new_zone += buffer [position++];
+            int new_zone = (int)buffer[position++];
+            new_zone += buffer[position++];
             return position;
         }
 
-        int IBuiltInEvidence.OutputToBuffer (char [] buffer, int position, bool verbose)
+        int IBuiltInEvidence.OutputToBuffer(char[] buffer, int position, bool verbose)
         {
-            buffer [position++] = '\x0003';
-            buffer [position++] = (char) (((int) zone) >> 16);
-            buffer [position++] = (char) (((int) zone) & 0x0FFFF);
+            buffer[position++] = '\x0003';
+            buffer[position++] = (char)(((int)zone) >> 16);
+            buffer[position++] = (char)(((int)zone) & 0x0FFFF);
             return position;
         }
     }

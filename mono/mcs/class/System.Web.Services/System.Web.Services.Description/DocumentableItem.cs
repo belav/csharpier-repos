@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.DocumentableItem.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,47 +33,50 @@ using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 using System.Xml;
 
-namespace System.Web.Services.Description {
-    public abstract class DocumentableItem {
-
+namespace System.Web.Services.Description
+{
+    public abstract class DocumentableItem
+    {
         #region Fields
 
         XmlElement docElement;
 
-        XmlAttribute [] extAttributes;
+        XmlAttribute[] extAttributes;
         XmlSerializerNamespaces namespaces;
 
         #endregion // Fields
 
         #region Constructors
 
-        protected DocumentableItem ()
-        {
-        }
-        
+        protected DocumentableItem() { }
+
         #endregion // Constructors
 
         #region Properties
 
         [XmlIgnore]
-        public string Documentation {
-            get { 
-                return docElement != null ? docElement.InnerText : ""; 
-            }
-            
-            set {
+        public string Documentation
+        {
+            get { return docElement != null ? docElement.InnerText : ""; }
+            set
+            {
                 if (value == null || value.Length == 0)
                     docElement = null;
-                else {
-                    XmlDocument doc = new XmlDocument ();
-                    docElement = doc.CreateElement ("wsdl", "documentation", "http://schemas.xmlsoap.org/wsdl/");
+                else
+                {
+                    XmlDocument doc = new XmlDocument();
+                    docElement = doc.CreateElement(
+                        "wsdl",
+                        "documentation",
+                        "http://schemas.xmlsoap.org/wsdl/"
+                    );
                     docElement.InnerText = value;
                 }
             }
         }
 
-        [ComVisible (false)]
-        [XmlAnyElement (Name="documentation", Namespace="http://schemas.xmlsoap.org/wsdl/")]
+        [ComVisible(false)]
+        [XmlAnyElement(Name = "documentation", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
         public XmlElement DocumentationElement
         {
             get { return docElement; }
@@ -81,21 +84,22 @@ namespace System.Web.Services.Description {
         }
 
         [XmlAnyAttribute]
-        public XmlAttribute [] ExtensibleAttributes {
+        public XmlAttribute[] ExtensibleAttributes
+        {
             get { return extAttributes; }
             set { extAttributes = value; }
         }
 
         [XmlIgnore]
-        public abstract ServiceDescriptionFormatExtensionCollection Extensions {
-            get;
-        }
+        public abstract ServiceDescriptionFormatExtensionCollection Extensions { get; }
 
         [XmlNamespaceDeclarations]
-        public XmlSerializerNamespaces Namespaces {
-            get { 
+        public XmlSerializerNamespaces Namespaces
+        {
+            get
+            {
                 if (namespaces == null)
-                    namespaces = new XmlSerializerNamespaces ();
+                    namespaces = new XmlSerializerNamespaces();
                 return namespaces;
             }
             set { namespaces = value; }

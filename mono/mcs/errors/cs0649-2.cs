@@ -5,9 +5,9 @@
 class C
 {
     int? s;
-    
-    void Test ()
+
+    void Test()
     {
-        System.Console.WriteLine (s == null);
+        System.Console.WriteLine(s == null);
     }
 }

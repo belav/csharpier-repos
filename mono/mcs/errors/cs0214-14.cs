@@ -5,8 +5,8 @@
 public class C
 {
     unsafe int* i;
-    
-    public static void Main ()
+
+    public static void Main()
     {
         var v = new C().i;
     }

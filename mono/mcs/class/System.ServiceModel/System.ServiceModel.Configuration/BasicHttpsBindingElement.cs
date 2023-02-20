@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -56,68 +56,91 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public class BasicHttpsBindingElement
-         : HttpBindingBaseElement,  IBindingConfigurationElement
+    public class BasicHttpsBindingElement : HttpBindingBaseElement, IBindingConfigurationElement
     {
         ConfigurationPropertyCollection _properties;
 
-        public BasicHttpsBindingElement ()
+        public BasicHttpsBindingElement() { }
+
+        public BasicHttpsBindingElement(string name)
+            : base(name) { }
+
+        protected override Type BindingElementType
         {
+            get { return typeof(BasicHttpsBinding); }
         }
 
-        public BasicHttpsBindingElement (string name) : base (name) { }
-
-        protected override Type BindingElementType {
-            get { return typeof (BasicHttpsBinding); }
-        }
-        
         // Properties
 
-        [ConfigurationProperty ("messageEncoding",
-             DefaultValue = "Text",
-             Options = ConfigurationPropertyOptions.None)]
-        public WSMessageEncoding MessageEncoding {
-            get { return (WSMessageEncoding) this ["messageEncoding"]; }
-            set { this ["messageEncoding"] = value; }
+        [ConfigurationProperty(
+            "messageEncoding",
+            DefaultValue = "Text",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public WSMessageEncoding MessageEncoding
+        {
+            get { return (WSMessageEncoding)this["messageEncoding"]; }
+            set { this["messageEncoding"] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
                     _properties = base.Properties;
-                    _properties.Add (new ConfigurationProperty ("messageEncoding", typeof (WSMessageEncoding), "Text", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("security", typeof (BasicHttpsSecurityElement), null, null, null, ConfigurationPropertyOptions.None));
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "messageEncoding",
+                            typeof(WSMessageEncoding),
+                            "Text",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "security",
+                            typeof(BasicHttpsSecurityElement),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
                 }
                 return _properties;
             }
         }
 
-        [ConfigurationProperty ("security",
-             Options = ConfigurationPropertyOptions.None)]
-        public BasicHttpsSecurityElement Security {
-            get { return (BasicHttpsSecurityElement) this ["security"]; }
+        [ConfigurationProperty("security", Options = ConfigurationPropertyOptions.None)]
+        public BasicHttpsSecurityElement Security
+        {
+            get { return (BasicHttpsSecurityElement)this["security"]; }
         }
 
-        protected override void OnApplyConfiguration (Binding binding)
+        protected override void OnApplyConfiguration(Binding binding)
         {
-            base.OnApplyConfiguration (binding);
-            BasicHttpsBinding basicHttpsBinding = (BasicHttpsBinding) binding;
-            
+            base.OnApplyConfiguration(binding);
+            BasicHttpsBinding basicHttpsBinding = (BasicHttpsBinding)binding;
+
             basicHttpsBinding.MessageEncoding = MessageEncoding;
 
             basicHttpsBinding.Security.Mode = Security.Mode;
-            Security.Transport.ApplyConfiguration (basicHttpsBinding.Security.Transport);
+            Security.Transport.ApplyConfiguration(basicHttpsBinding.Security.Transport);
         }
 
-        protected internal override void InitializeFrom (Binding binding)
+        protected internal override void InitializeFrom(Binding binding)
         {
-            BasicHttpsBinding b = (BasicHttpsBinding) binding;
-            base.InitializeFrom (binding);
+            BasicHttpsBinding b = (BasicHttpsBinding)binding;
+            base.InitializeFrom(binding);
 
             MessageEncoding = b.MessageEncoding;
 
             Security.Mode = b.Security.Mode;
-            Security.Transport.ApplyConfiguration (b.Security.Transport);
+            Security.Transport.ApplyConfiguration(b.Security.Transport);
         }
     }
 }

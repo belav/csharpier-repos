@@ -3,23 +3,21 @@ using System.Collections.Generic;
 
 public abstract class TestClass
 {
-    public abstract void ToString (object obj);
+    public abstract void ToString(object obj);
 
-    public IEnumerable<object> TestEnumerator ()
+    public IEnumerable<object> TestEnumerator()
     {
-        ToString (null);
+        ToString(null);
         yield break;
     }
 
-    public void Test ()
+    public void Test()
     {
-        ToString (null);
+        ToString(null);
     }
 }
 
 class M
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

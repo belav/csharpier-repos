@@ -1,9 +1,7 @@
 // CS0283: The type `S' cannot be declared const
 // Line: 10
 
-struct S
-{
-}
+struct S { }
 
 class C
 {

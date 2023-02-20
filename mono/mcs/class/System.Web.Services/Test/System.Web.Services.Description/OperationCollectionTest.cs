@@ -30,11 +30,11 @@ namespace MonoTests.System.Web.Services.Description
         [Test]
         public void TestDefaultProperties()
         {
-            Assert.AreEqual (0, operations.Count);
+            Assert.AreEqual(0, operations.Count);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void TestAddNullObject()
         {
             operations.Add(null);
@@ -43,8 +43,8 @@ namespace MonoTests.System.Web.Services.Description
         [Test]
         public void TestAddValidOperation()
         {
-            operations.Add(new Operation());    
-            Assert.AreEqual (1, operations.Count);
+            operations.Add(new Operation());
+            Assert.AreEqual(1, operations.Count);
         }
     }
 }

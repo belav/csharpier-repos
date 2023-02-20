@@ -8,8 +8,8 @@
 //
 //
 
-namespace System.DirectoryServices {
-
+namespace System.DirectoryServices
+{
     [Serializable]
     [Flags]
     public enum DirectoryServicesPermissionAccess
@@ -19,4 +19,3 @@ namespace System.DirectoryServices {
         Write = 6
     }
 }
-

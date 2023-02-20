@@ -8,25 +8,26 @@ using MonoTests.DataSource;
 
 namespace MonoTests.Common
 {
-    public class TestDataTable <DataType> : DynamicDataTable
+    public class TestDataTable<DataType> : DynamicDataTable
     {
-        public TestDataTable ()
+        public TestDataTable()
         {
-            this.DataType = typeof (DataType);
-            this.Name = typeof (DataType).Name + "Table";
+            this.DataType = typeof(DataType);
+            this.Name = typeof(DataType).Name + "Table";
         }
 
-        public override List<DynamicDataColumn> GetColumns ()
+        public override List<DynamicDataColumn> GetColumns()
         {
-            var ret = new List<DynamicDataColumn> ();
+            var ret = new List<DynamicDataColumn>();
 
-            Type type = typeof (DataType);
-            MemberInfo[] members = type.GetMembers (BindingFlags.Public | BindingFlags.Instance);
-            foreach (MemberInfo mi in members) {
+            Type type = typeof(DataType);
+            MemberInfo[] members = type.GetMembers(BindingFlags.Public | BindingFlags.Instance);
+            foreach (MemberInfo mi in members)
+            {
                 if (mi.MemberType != MemberTypes.Field && mi.MemberType != MemberTypes.Property)
                     continue;
 
-                ret.Add (new TestDataColumn <DataType> (mi));
+                ret.Add(new TestDataColumn<DataType>(mi));
             }
             return ret;
         }
