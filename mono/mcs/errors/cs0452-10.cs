@@ -3,18 +3,19 @@
 
 class A
 {
-	static int Foo<T> (T a, string s) where T : class
-	{
-		return 1;
-	}
+    static int Foo<T>(T a, string s)
+        where T : class
+    {
+        return 1;
+    }
 
-	static int Foo<T> (T a, object y)
-	{
-		return 2;
-	}
+    static int Foo<T>(T a, object y)
+    {
+        return 2;
+    }
 
-	public static void Main ()
-	{
-		A.Foo<int> (99, null);
-	}
+    public static void Main()
+    {
+        A.Foo<int>(99, null);
+    }
 }

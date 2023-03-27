@@ -19,10 +19,7 @@ namespace Sample
 
         public AppStartTask()
         {
-            measurements = new Measurement[] {
-                new PageShow(),
-                new ReachManaged(),
-            };
+            measurements = new Measurement[] { new PageShow(), new ReachManaged(), };
         }
 
         Measurement[] measurements;
@@ -58,6 +55,7 @@ namespace Sample
         {
             [JSImport("globalThis.mainApp.PageShow")]
             public static partial Task PageShow();
+
             [JSImport("globalThis.mainApp.FrameReachedManaged")]
             public static partial Task FrameReachedManaged();
         }

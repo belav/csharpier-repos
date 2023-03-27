@@ -26,52 +26,52 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
+namespace Mono.Cecil.Metadata
+{
+    using System;
+    using System.IO;
+    using System.Text;
 
-	using System;
-	using System.IO;
-	using System.Text;
+    using Mono.Cecil;
+    using Mono.Cecil.Binary;
 
-	using Mono.Cecil;
-	using Mono.Cecil.Binary;
+    sealed class MetadataInitializer : BaseMetadataVisitor
+    {
+        MetadataRoot m_root;
 
-	sealed class MetadataInitializer : BaseMetadataVisitor {
+        public MetadataInitializer(ImageInitializer init)
+        {
+            m_root = init.Image.MetadataRoot;
+        }
 
-		MetadataRoot m_root;
+        public override void VisitMetadataRoot(MetadataRoot root)
+        {
+            root.Header = new MetadataRoot.MetadataRootHeader();
+            root.Streams = new MetadataStreamCollection();
+        }
 
-		public MetadataInitializer (ImageInitializer init)
-		{
-			m_root = init.Image.MetadataRoot;
-		}
+        public override void VisitMetadataRootHeader(MetadataRoot.MetadataRootHeader header)
+        {
+            header.SetDefaultValues();
+        }
 
-		public override void VisitMetadataRoot (MetadataRoot root)
-		{
-			root.Header = new MetadataRoot.MetadataRootHeader ();
-			root.Streams = new MetadataStreamCollection ();
-		}
+        public override void VisitMetadataStreamCollection(MetadataStreamCollection coll)
+        {
+            MetadataStream tables = new MetadataStream();
+            tables.Header.Name = MetadataStream.Tables;
+            tables.Heap = MetadataHeap.HeapFactory(tables);
+            TablesHeap th = tables.Heap as TablesHeap;
+            th.Tables = new TableCollection(th);
+            m_root.Streams.Add(tables);
+        }
 
-		public override void VisitMetadataRootHeader (MetadataRoot.MetadataRootHeader header)
-		{
-			header.SetDefaultValues ();
-		}
-
-		public override void VisitMetadataStreamCollection (MetadataStreamCollection coll)
-		{
-			MetadataStream tables = new MetadataStream ();
-			tables.Header.Name = MetadataStream.Tables;
-			tables.Heap = MetadataHeap.HeapFactory (tables);
-			TablesHeap th = tables.Heap as TablesHeap;
-			th.Tables = new TableCollection (th);
-			m_root.Streams.Add (tables);
-		}
-
-		public override void VisitTablesHeap (TablesHeap th)
-		{
-			th.Reserved = 0;
-			th.MajorVersion = 1;
-			th.MinorVersion = 0;
-			th.Reserved2 = 1;
-			th.Sorted = 0x2003301fa00;
-		}
-	}
+        public override void VisitTablesHeap(TablesHeap th)
+        {
+            th.Reserved = 0;
+            th.MajorVersion = 1;
+            th.MinorVersion = 0;
+            th.Reserved2 = 1;
+            th.Sorted = 0x2003301fa00;
+        }
+    }
 }

@@ -4,12 +4,12 @@
 using System;
 using System.Reflection;
 
-[assembly: AssemblyVersion ("0.0.0.80420")]
+[assembly: AssemblyVersion("0.0.0.80420")]
 
-public class Test {
-
-	public static int Main ()
-	{
-		return 1;
-	}
+public class Test
+{
+    public static int Main()
+    {
+        return 1;
+    }
 }

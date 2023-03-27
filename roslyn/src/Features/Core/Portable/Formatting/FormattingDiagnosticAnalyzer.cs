@@ -10,24 +10,30 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Microsoft.CodeAnalysis.Formatting
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-    internal class FormattingDiagnosticAnalyzer
-        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal class FormattingDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public FormattingDiagnosticAnalyzer()
             : base(
                 IDEDiagnosticIds.FormattingDiagnosticId,
                 EnforceOnBuildValues.Formatting,
-                option: null,   // No unique option to configure diagnosticId
-                new LocalizableResourceString(nameof(FeaturesResources.Fix_formatting), FeaturesResources.ResourceManager, typeof(FeaturesResources)),
-                new LocalizableResourceString(nameof(FeaturesResources.Fix_formatting), FeaturesResources.ResourceManager, typeof(FeaturesResources)))
-        {
-        }
+                option: null, // No unique option to configure diagnosticId
+                new LocalizableResourceString(
+                    nameof(FeaturesResources.Fix_formatting),
+                    FeaturesResources.ResourceManager,
+                    typeof(FeaturesResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(FeaturesResources.Fix_formatting),
+                    FeaturesResources.ResourceManager,
+                    typeof(FeaturesResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxTreeAction(AnalyzeSyntaxTree);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxTreeAction(AnalyzeSyntaxTree);
 
         private void AnalyzeSyntaxTree(SyntaxTreeAnalysisContext context)
         {

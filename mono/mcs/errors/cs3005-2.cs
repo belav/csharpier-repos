@@ -2,15 +2,22 @@
 // Line: 14
 // Compiler options: -warnaserror
 
-[assembly:System.CLSCompliant(true)]
+[assembly: System.CLSCompliant(true)]
 
-public class X {
-        public int index { get { return 0; } }
+public class X
+{
+    public int index
+    {
+        get { return 0; }
+    }
 }
 
-public class Y: X {
-}
-    
-public class CLSClass: Y {
-        public long Index { get { return 3; } }
+public class Y : X { }
+
+public class CLSClass : Y
+{
+    public long Index
+    {
+        get { return 3; }
+    }
 }

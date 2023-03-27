@@ -27,7 +27,8 @@ internal sealed class DefaultAntiforgery : IAntiforgery
         IAntiforgeryTokenGenerator tokenGenerator,
         IAntiforgeryTokenSerializer tokenSerializer,
         IAntiforgeryTokenStore tokenStore,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         _options = antiforgeryOptionsAccessor.Value;
         _tokenGenerator = tokenGenerator;
@@ -101,10 +102,12 @@ internal sealed class DefaultAntiforgery : IAntiforgery
         CheckSSLConfig(httpContext);
 
         var method = httpContext.Request.Method;
-        if (HttpMethods.IsGet(method) ||
-            HttpMethods.IsHead(method) ||
-            HttpMethods.IsOptions(method) ||
-            HttpMethods.IsTrace(method))
+        if (
+            HttpMethods.IsGet(method)
+            || HttpMethods.IsHead(method)
+            || HttpMethods.IsOptions(method)
+            || HttpMethods.IsTrace(method)
+        )
         {
             // Validation not needed for these request types.
             return true;
@@ -124,7 +127,14 @@ internal sealed class DefaultAntiforgery : IAntiforgery
         }
 
         // Extract cookie & request tokens
-        if (!TryDeserializeTokens(httpContext, tokens, out var deserializedCookieToken, out var deserializedRequestToken))
+        if (
+            !TryDeserializeTokens(
+                httpContext,
+                tokens,
+                out var deserializedCookieToken,
+                out var deserializedRequestToken
+            )
+        )
         {
             return false;
         }
@@ -134,7 +144,8 @@ internal sealed class DefaultAntiforgery : IAntiforgery
             httpContext,
             deserializedCookieToken,
             deserializedRequestToken,
-            out var message);
+            out var message
+        );
 
         if (result)
         {
@@ -162,26 +173,32 @@ internal sealed class DefaultAntiforgery : IAntiforgery
         if (tokens.CookieToken == null)
         {
             throw new AntiforgeryValidationException(
-                Resources.FormatAntiforgery_CookieToken_MustBeProvided(_options.Cookie.Name));
+                Resources.FormatAntiforgery_CookieToken_MustBeProvided(_options.Cookie.Name)
+            );
         }
 
         if (tokens.RequestToken == null)
         {
             if (_options.HeaderName == null)
             {
-                var message = Resources.FormatAntiforgery_FormToken_MustBeProvided(_options.FormFieldName);
+                var message = Resources.FormatAntiforgery_FormToken_MustBeProvided(
+                    _options.FormFieldName
+                );
                 throw new AntiforgeryValidationException(message);
             }
             else if (!httpContext.Request.HasFormContentType)
             {
-                var message = Resources.FormatAntiforgery_HeaderToken_MustBeProvided(_options.HeaderName);
+                var message = Resources.FormatAntiforgery_HeaderToken_MustBeProvided(
+                    _options.HeaderName
+                );
                 throw new AntiforgeryValidationException(message);
             }
             else
             {
                 var message = Resources.FormatAntiforgery_RequestToken_MustBeProvided(
                     _options.FormFieldName,
-                    _options.HeaderName);
+                    _options.HeaderName
+                );
                 throw new AntiforgeryValidationException(message);
             }
         }
@@ -204,14 +221,18 @@ internal sealed class DefaultAntiforgery : IAntiforgery
             httpContext,
             antiforgeryTokenSet,
             out deserializedCookieToken,
-            out deserializedRequestToken);
+            out deserializedRequestToken
+        );
 
         // Validate
-        if (!_tokenGenerator.TryValidateTokenSet(
-            httpContext,
-            deserializedCookieToken,
-            deserializedRequestToken,
-            out var message))
+        if (
+            !_tokenGenerator.TryValidateTokenSet(
+                httpContext,
+                deserializedCookieToken,
+                deserializedRequestToken,
+                out var message
+            )
+        )
         {
             throw new AntiforgeryValidationException(message);
         }
@@ -228,12 +249,16 @@ internal sealed class DefaultAntiforgery : IAntiforgery
         CheckSSLConfig(httpContext);
 
         var antiforgeryFeature = GetCookieTokens(httpContext);
-        if (!antiforgeryFeature.HaveStoredNewCookieToken && antiforgeryFeature.NewCookieToken != null)
+        if (
+            !antiforgeryFeature.HaveStoredNewCookieToken
+            && antiforgeryFeature.NewCookieToken != null
+        )
         {
             if (antiforgeryFeature.NewCookieTokenString == null)
             {
-                antiforgeryFeature.NewCookieTokenString =
-                    _tokenSerializer.Serialize(antiforgeryFeature.NewCookieToken);
+                antiforgeryFeature.NewCookieTokenString = _tokenSerializer.Serialize(
+                    antiforgeryFeature.NewCookieToken
+                );
             }
 
             SaveCookieTokenAndHeader(httpContext, antiforgeryFeature.NewCookieTokenString);
@@ -259,7 +284,10 @@ internal sealed class DefaultAntiforgery : IAntiforgery
             _tokenStore.SaveCookieToken(httpContext, cookieToken);
         }
 
-        if (!_options.SuppressXFrameOptionsHeader && !httpContext.Response.Headers.ContainsKey(HeaderNames.XFrameOptions))
+        if (
+            !_options.SuppressXFrameOptionsHeader
+            && !httpContext.Response.Headers.ContainsKey(HeaderNames.XFrameOptions)
+        )
         {
             // Adding X-Frame-Options header to prevent ClickJacking. See
             // http://tools.ietf.org/html/draft-ietf-websec-x-frame-options-10
@@ -272,9 +300,17 @@ internal sealed class DefaultAntiforgery : IAntiforgery
     {
         if (_options.Cookie.SecurePolicy == CookieSecurePolicy.Always && !context.Request.IsHttps)
         {
-            throw new InvalidOperationException(Resources.FormatAntiforgery_RequiresSSL(
-                string.Join(".", nameof(AntiforgeryOptions), nameof(AntiforgeryOptions.Cookie), nameof(CookieBuilder.SecurePolicy)),
-                nameof(CookieSecurePolicy.Always)));
+            throw new InvalidOperationException(
+                Resources.FormatAntiforgery_RequiresSSL(
+                    string.Join(
+                        ".",
+                        nameof(AntiforgeryOptions),
+                        nameof(AntiforgeryOptions.Cookie),
+                        nameof(CookieBuilder.SecurePolicy)
+                    ),
+                    nameof(CookieSecurePolicy.Always)
+                )
+            );
         }
     }
 
@@ -363,7 +399,8 @@ internal sealed class DefaultAntiforgery : IAntiforgery
             var cookieToken = antiforgeryFeature.NewCookieToken ?? antiforgeryFeature.CookieToken;
             antiforgeryFeature.NewRequestToken = _tokenGenerator.GenerateRequestToken(
                 httpContext,
-                cookieToken!);
+                cookieToken!
+            );
         }
 
         return antiforgeryFeature;
@@ -378,8 +415,13 @@ internal sealed class DefaultAntiforgery : IAntiforgery
         var logWarning = false;
         var responseHeaders = httpContext.Response.Headers;
 
-        if (responseHeaders.TryGetValue(HeaderNames.CacheControl, out var cacheControlHeader) &&
-            CacheControlHeaderValue.TryParse(cacheControlHeader.ToString(), out var cacheControlHeaderValue))
+        if (
+            responseHeaders.TryGetValue(HeaderNames.CacheControl, out var cacheControlHeader)
+            && CacheControlHeaderValue.TryParse(
+                cacheControlHeader.ToString(),
+                out var cacheControlHeaderValue
+            )
+        )
         {
             // If the Cache-Control is already set, override it only if required
             if (!cacheControlHeaderValue.NoCache || !cacheControlHeaderValue.NoStore)
@@ -393,7 +435,10 @@ internal sealed class DefaultAntiforgery : IAntiforgery
             responseHeaders.CacheControl = "no-cache, no-store";
         }
 
-        if (responseHeaders.TryGetValue(HeaderNames.Pragma, out var pragmaHeader) && pragmaHeader.Count > 0)
+        if (
+            responseHeaders.TryGetValue(HeaderNames.Pragma, out var pragmaHeader)
+            && pragmaHeader.Count > 0
+        )
         {
             // If the Pragma is already set, override it only if required
             if (!string.Equals(pragmaHeader[0], "no-cache", StringComparison.OrdinalIgnoreCase))
@@ -424,28 +469,35 @@ internal sealed class DefaultAntiforgery : IAntiforgery
 
         if (antiforgeryFeature.NewRequestTokenString == null)
         {
-            antiforgeryFeature.NewRequestTokenString =
-                _tokenSerializer.Serialize(antiforgeryFeature.NewRequestToken);
+            antiforgeryFeature.NewRequestTokenString = _tokenSerializer.Serialize(
+                antiforgeryFeature.NewRequestToken
+            );
         }
 
-        if (antiforgeryFeature.NewCookieTokenString == null && antiforgeryFeature.NewCookieToken != null)
+        if (
+            antiforgeryFeature.NewCookieTokenString == null
+            && antiforgeryFeature.NewCookieToken != null
+        )
         {
-            antiforgeryFeature.NewCookieTokenString =
-                _tokenSerializer.Serialize(antiforgeryFeature.NewCookieToken);
+            antiforgeryFeature.NewCookieTokenString = _tokenSerializer.Serialize(
+                antiforgeryFeature.NewCookieToken
+            );
         }
 
         return new AntiforgeryTokenSet(
             antiforgeryFeature.NewRequestTokenString,
             antiforgeryFeature.NewCookieTokenString!,
             _options.FormFieldName,
-            _options.HeaderName);
+            _options.HeaderName
+        );
     }
 
     private bool TryDeserializeTokens(
         HttpContext httpContext,
         AntiforgeryTokenSet antiforgeryTokenSet,
         [NotNullWhen(true)] out AntiforgeryToken? cookieToken,
-        [NotNullWhen(true)] out AntiforgeryToken? requestToken)
+        [NotNullWhen(true)] out AntiforgeryToken? requestToken
+    )
     {
         try
         {
@@ -466,7 +518,8 @@ internal sealed class DefaultAntiforgery : IAntiforgery
         HttpContext httpContext,
         AntiforgeryTokenSet antiforgeryTokenSet,
         out AntiforgeryToken cookieToken,
-        out AntiforgeryToken requestToken)
+        out AntiforgeryToken requestToken
+    )
     {
         var antiforgeryFeature = GetAntiforgeryFeature(httpContext);
 

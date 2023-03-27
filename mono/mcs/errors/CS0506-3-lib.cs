@@ -1,15 +1,11 @@
 public interface ITest
 {
-	void Run ();
+    void Run();
 }
 
 public class A
 {
-	public void Run ()
-	{
-	}
+    public void Run() { }
 }
 
-public class B : A, ITest
-{
-}
+public class B : A, ITest { }

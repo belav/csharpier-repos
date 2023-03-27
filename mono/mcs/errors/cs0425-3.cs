@@ -3,12 +3,11 @@
 
 interface I
 {
-	void Foo<T> ();
+    void Foo<T>();
 }
 
 class C : I
 {
-	public void Foo<T> () where T : struct
-	{
-	}
+    public void Foo<T>()
+        where T : struct { }
 }

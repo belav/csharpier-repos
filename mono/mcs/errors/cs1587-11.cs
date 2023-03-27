@@ -6,10 +6,10 @@ using System;
 
 namespace TopNS
 {
-	namespace ChildNS {
-		[Flags]
-		/// comment after attribute
-		enum Enum2 {
-		}
-	}
+    namespace ChildNS
+    {
+        [Flags]
+        /// comment after attribute
+        enum Enum2 { }
+    }
 }

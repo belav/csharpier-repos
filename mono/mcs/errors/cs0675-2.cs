@@ -4,12 +4,10 @@
 
 public class C
 {
-	uint extra_flags;
-		
-	internal bool BestFitMapping {
-		set {
-			extra_flags = (uint) ((extra_flags & ~0x30) | (value ? 0x10 : 0x20));
-		}
-	}
-}
+    uint extra_flags;
 
+    internal bool BestFitMapping
+    {
+        set { extra_flags = (uint)((extra_flags & ~0x30) | (value ? 0x10 : 0x20)); }
+    }
+}

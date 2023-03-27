@@ -3,10 +3,10 @@
 
 class C
 {
-	delegate void D ();
+    delegate void D();
 
-	static void Main ()
-	{
-		D d = null ?? Main;
-	}
+    static void Main()
+    {
+        D d = null ?? Main;
+    }
 }

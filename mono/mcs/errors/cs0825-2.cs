@@ -4,6 +4,5 @@
 
 public class Test
 {
-	event var v;
+    event var v;
 }
-

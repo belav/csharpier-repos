@@ -5,7 +5,4 @@
 using System;
 
 /// <seealso cref="Method(System.String)"/>
-public class Test
-{
-}
-
+public class Test { }

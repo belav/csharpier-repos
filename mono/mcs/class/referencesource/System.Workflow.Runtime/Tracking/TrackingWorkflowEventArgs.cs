@@ -18,16 +18,20 @@ using System.Workflow.Runtime;
 using System.Workflow.Runtime.Hosting;
 using Hosting = System.Workflow.Runtime.Hosting;
 
-
 namespace System.Workflow.Runtime.Tracking
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class TrackingWorkflowChangedEventArgs : EventArgs
     {
         private Activity _def = null;
         private IList<WorkflowChangeAction> _changes = null;
 
-        internal TrackingWorkflowChangedEventArgs(IList<WorkflowChangeAction> changes, Activity definition)
+        internal TrackingWorkflowChangedEventArgs(
+            IList<WorkflowChangeAction> changes,
+            Activity definition
+        )
         {
             _def = definition;
             _changes = changes;
@@ -44,9 +48,10 @@ namespace System.Workflow.Runtime.Tracking
         }
     }
 
-
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class TrackingWorkflowTerminatedEventArgs : EventArgs
     {
         private Exception _e = null;
@@ -68,7 +73,9 @@ namespace System.Workflow.Runtime.Tracking
     }
 
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class TrackingWorkflowSuspendedEventArgs : EventArgs
     {
         private string _error = null;
@@ -84,17 +91,25 @@ namespace System.Workflow.Runtime.Tracking
         }
     }
 
-
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class TrackingWorkflowExceptionEventArgs : EventArgs
     {
         private Exception _e = null;
         private string _currentPath = null;
         private string _originalPath = null;
-        private Guid _context, _parentContext;
+        private Guid _context,
+            _parentContext;
 
-        internal TrackingWorkflowExceptionEventArgs(Exception exception, string currentPath, string originalPath, Guid contextGuid, Guid parentContextGuid)
+        internal TrackingWorkflowExceptionEventArgs(
+            Exception exception,
+            string currentPath,
+            string originalPath,
+            Guid contextGuid,
+            Guid parentContextGuid
+        )
         {
             _e = exception;
             _currentPath = currentPath;

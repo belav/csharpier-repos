@@ -3,5 +3,5 @@
 
 public class C<T>
 {
-	volatile T t;
+    volatile T t;
 }

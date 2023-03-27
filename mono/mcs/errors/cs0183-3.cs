@@ -4,10 +4,9 @@
 
 class X
 {
-	public void Foo ()
-	{
-		int? x = null;
-		if (x is int?) {
-		}
-	}
+    public void Foo()
+    {
+        int? x = null;
+        if (x is int?) { }
+    }
 }

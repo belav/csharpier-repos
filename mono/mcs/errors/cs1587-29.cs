@@ -5,7 +5,4 @@
 /// Text goes here
 //
 /// and continues here
-public class Test
-{    
-}
-
+public class Test { }

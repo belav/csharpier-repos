@@ -4,18 +4,17 @@
 
 delegate IA TestDelegate();
 
-interface IA {}
+interface IA { }
 
 public class MainClass : IA
 {
-	static MainClass Delegate()
-	{
-		return null;
-	}
+    static MainClass Delegate()
+    {
+        return null;
+    }
 
-	public static void Main()
-	{
-		TestDelegate delegateInstance = new TestDelegate (Delegate);
-	}
+    public static void Main()
+    {
+        TestDelegate delegateInstance = new TestDelegate(Delegate);
+    }
 }
-

@@ -5,9 +5,9 @@ using System.Linq;
 
 class M
 {
-	public static void Main ()
-	{
-		int[] a;
-		int m = a.FirstOrDefault<int> ();
-	}
+    public static void Main()
+    {
+        int[] a;
+        int m = a.FirstOrDefault<int>();
+    }
 }

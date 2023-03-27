@@ -3,13 +3,13 @@
 
 interface I
 {
-	int P { get; }
+    int P { get; }
 }
 
 class C : I
 {
-	public int get_P ()
-	{
-		return 1;
-	}
+    public int get_P()
+    {
+        return 1;
+    }
 }

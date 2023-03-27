@@ -3,12 +3,16 @@
 
 using System.Runtime.CompilerServices;
 
-interface A {
-	int this [int a] { set; }
+interface A
+{
+    int this[int a] { set; }
 }
 
-class X : A {
-	[IndexerName("Error")]
-	int A.this [int a] { set {} }
+class X : A
+{
+    [IndexerName("Error")]
+    int A.this[int a]
+    {
+        set { }
+    }
 }
-

@@ -17,12 +17,14 @@ namespace System.Runtime.InteropServices.JavaScript
         /// Initializes a new instance of the JSException class with a specified error message.
         /// </summary>
         /// <param name="msg">The message that describes the error.</param>
-        public JSException(string msg) : base(msg)
+        public JSException(string msg)
+            : base(msg)
         {
             jsException = null;
         }
 
-        internal JSException(string msg, JSObject? jsException) : base(msg)
+        internal JSException(string msg, JSObject? jsException)
+            : base(msg)
         {
             this.jsException = jsException;
         }
@@ -58,7 +60,6 @@ namespace System.Runtime.InteropServices.JavaScript
                 }
                 return base.StackTrace + "\r\n" + jsStackTrace;
             }
-
         }
 
         /// <inheritdoc />

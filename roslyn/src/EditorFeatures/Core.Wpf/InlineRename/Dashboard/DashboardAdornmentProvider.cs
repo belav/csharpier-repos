@@ -43,29 +43,55 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         public DashboardAdornmentProvider(
             InlineRenameService renameService,
             IEditorFormatMapService editorFormatMapService,
-            [Import(AllowDefault = true)] IDashboardColorUpdater? dashboardColorUpdater)
+            [Import(AllowDefault = true)] IDashboardColorUpdater? dashboardColorUpdater
+        )
         {
             _renameService = renameService;
             _editorFormatMapService = editorFormatMapService;
             _dashboardColorUpdater = dashboardColorUpdater;
         }
 
-        public void SubjectBuffersConnected(IWpfTextView textView, ConnectionReason reason, Collection<ITextBuffer> subjectBuffers)
+        public void SubjectBuffersConnected(
+            IWpfTextView textView,
+            ConnectionReason reason,
+            Collection<ITextBuffer> subjectBuffers
+        )
         {
             // Create it for the view if we don't already have one
-            textView.GetOrCreateAutoClosingProperty(v => new DashboardAdornmentManager(_renameService, _editorFormatMapService, _dashboardColorUpdater, v));
+            textView.GetOrCreateAutoClosingProperty(
+                v =>
+                    new DashboardAdornmentManager(
+                        _renameService,
+                        _editorFormatMapService,
+                        _dashboardColorUpdater,
+                        v
+                    )
+            );
         }
 
-        public void SubjectBuffersDisconnected(IWpfTextView textView, ConnectionReason reason, Collection<ITextBuffer> subjectBuffers)
+        public void SubjectBuffersDisconnected(
+            IWpfTextView textView,
+            ConnectionReason reason,
+            Collection<ITextBuffer> subjectBuffers
+        )
         {
             // Do we still have any buffers alive?
-            if (textView.BufferGraph.GetTextBuffers(b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType)).Any())
+            if (
+                textView.BufferGraph
+                    .GetTextBuffers(b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType))
+                    .Any()
+            )
             {
                 // Yep, some are still attached
                 return;
             }
 
-            if (textView.Properties.TryGetProperty(typeof(DashboardAdornmentManager), out DashboardAdornmentManager manager))
+            if (
+                textView.Properties.TryGetProperty(
+                    typeof(DashboardAdornmentManager),
+                    out DashboardAdornmentManager manager
+                )
+            )
             {
                 manager.Dispose();
                 textView.Properties.RemoveProperty(typeof(DashboardAdornmentManager));

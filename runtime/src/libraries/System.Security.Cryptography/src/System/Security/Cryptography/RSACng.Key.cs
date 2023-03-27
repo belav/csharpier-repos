@@ -24,13 +24,15 @@ namespace System.Security.Cryptography
                 CngKey key = _core.GetOrGenerateKey(KeySize, CngAlgorithm.Rsa);
                 return key;
             }
-
             private set
             {
                 CngKey key = value;
                 Debug.Assert(key != null, "key != null");
                 if (key.AlgorithmGroup != CngAlgorithmGroup.Rsa)
-                    throw new ArgumentException(SR.Cryptography_ArgRSARequiresRSAKey, nameof(value));
+                    throw new ArgumentException(
+                        SR.Cryptography_ArgRSARequiresRSAKey,
+                        nameof(value)
+                    );
                 _core.SetKey(key);
 
                 // Our LegalKeySizes value stores the values that we encoded as being the correct

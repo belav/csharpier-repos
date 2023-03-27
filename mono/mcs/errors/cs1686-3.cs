@@ -4,18 +4,22 @@
 
 unsafe struct S
 {
-	public int i;
+    public int i;
 }
 
 class C
 {
-	unsafe delegate int* D ();
+    unsafe delegate int* D();
 
-	static void Main ()
-	{
-		unsafe {
-			S str = new S ();
-			D d = delegate { return &str.i; };
-		}
-	}
+    static void Main()
+    {
+        unsafe
+        {
+            S str = new S();
+            D d = delegate
+            {
+                return &str.i;
+            };
+        }
+    }
 }

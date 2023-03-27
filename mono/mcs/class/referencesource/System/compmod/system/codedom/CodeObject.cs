@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeObject.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
+namespace System.CodeDom
+{
     using System.Collections;
     using System.Collections.Specialized;
     using System.Runtime.Serialization;
@@ -18,26 +18,25 @@ namespace System.CodeDom {
     ///       The base class for CodeDom objects
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeObject {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    public class CodeObject
+    {
         private IDictionary userData = null;
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeObject() {
-        }
+        public CodeObject() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public IDictionary UserData {
-            get {
-                if (userData == null) {
+        public IDictionary UserData
+        {
+            get
+            {
+                if (userData == null)
+                {
                     userData = new ListDictionary();
                 }
                 return userData;

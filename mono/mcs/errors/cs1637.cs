@@ -4,9 +4,8 @@
 
 unsafe class C
 {
-    public System.Collections.IEnumerator GetEnumerator (int* p)
+    public System.Collections.IEnumerator GetEnumerator(int* p)
     {
         yield return 1;
     }
-    
 }

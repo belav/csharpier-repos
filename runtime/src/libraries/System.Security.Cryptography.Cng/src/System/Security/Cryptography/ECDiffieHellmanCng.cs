@@ -20,9 +20,13 @@ namespace System.Security.Cryptography
     /// </summary>
     public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
     {
-        private CngAlgorithmCore _core = new CngAlgorithmCore(nameof(ECDiffieHellmanCng)) { DefaultKeyType = CngAlgorithm.ECDiffieHellman };
+        private CngAlgorithmCore _core = new CngAlgorithmCore(nameof(ECDiffieHellmanCng))
+        {
+            DefaultKeyType = CngAlgorithm.ECDiffieHellman
+        };
         private CngAlgorithm _hashAlgorithm = CngAlgorithm.Sha256;
-        private ECDiffieHellmanKeyDerivationFunction _kdf = ECDiffieHellmanKeyDerivationFunction.Hash;
+        private ECDiffieHellmanKeyDerivationFunction _kdf =
+            ECDiffieHellmanKeyDerivationFunction.Hash;
         private byte[]? _hmacKey;
         private byte[]? _label;
         private byte[]? _secretAppend;
@@ -45,11 +49,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public CngAlgorithm HashAlgorithm
         {
-            get
-            {
-                return _hashAlgorithm;
-            }
-
+            get { return _hashAlgorithm; }
             set
             {
                 if (_hashAlgorithm == null)
@@ -66,14 +66,13 @@ namespace System.Security.Cryptography
         /// </summary>
         public ECDiffieHellmanKeyDerivationFunction KeyDerivationFunction
         {
-            get
-            {
-                return _kdf;
-            }
-
+            get { return _kdf; }
             set
             {
-                if (value < ECDiffieHellmanKeyDerivationFunction.Hash || value > ECDiffieHellmanKeyDerivationFunction.Tls)
+                if (
+                    value < ECDiffieHellmanKeyDerivationFunction.Hash
+                    || value > ECDiffieHellmanKeyDerivationFunction.Tls
+                )
                 {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
@@ -160,7 +159,11 @@ namespace System.Security.Cryptography
             Key = ECCng.ImportFullKeyBlob(ecfullKeyBlob, includePrivateParameters);
         }
 
-        private void ImportKeyBlob(byte[] ecfullKeyBlob, string curveName, bool includePrivateParameters)
+        private void ImportKeyBlob(
+            byte[] ecfullKeyBlob,
+            string curveName,
+            bool includePrivateParameters
+        )
         {
             Key = ECCng.ImportKeyBlob(ecfullKeyBlob, curveName, includePrivateParameters);
         }
@@ -185,7 +188,8 @@ namespace System.Security.Cryptography
             return Key.TryExportKeyBlob(
                 Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
                 destination,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
 
         private byte[] ExportEncryptedPkcs8(ReadOnlySpan<char> pkcs8Password, int kdfCount)
@@ -197,13 +201,15 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> pkcs8Password,
             int kdfCount,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             return Key.TryExportPkcs8KeyBlob(
                 pkcs8Password,
                 kdfCount,
                 destination,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
     }
 }

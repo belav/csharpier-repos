@@ -5,7 +5,8 @@ namespace System.CommandLine.Parsing
 {
     internal class ImplicitToken : Token
     {
-        public ImplicitToken(object? value, TokenType type) : base(value?.ToString(), type)
+        public ImplicitToken(object? value, TokenType type)
+            : base(value?.ToString(), type)
         {
             ActualValue = value;
         }

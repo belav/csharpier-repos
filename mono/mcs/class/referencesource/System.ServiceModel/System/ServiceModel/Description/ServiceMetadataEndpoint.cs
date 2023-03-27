@@ -18,14 +18,13 @@ namespace System.ServiceModel.Description
     public class ServiceMetadataEndpoint : ServiceEndpoint
     {
         public ServiceMetadataEndpoint()
-            : this(MetadataExchangeBindings.CreateMexHttpBinding(), null /*address*/)
-        {
-        }
+            : this(
+                MetadataExchangeBindings.CreateMexHttpBinding(),
+                null /*address*/
+            ) { }
 
         public ServiceMetadataEndpoint(EndpointAddress address)
-            : this(MetadataExchangeBindings.CreateMexHttpBinding(), address)
-        {
-        }
+            : this(MetadataExchangeBindings.CreateMexHttpBinding(), address) { }
 
         public ServiceMetadataEndpoint(Binding binding, EndpointAddress address)
             : base(ServiceMetadataBehavior.MexContract, binding, address)
@@ -34,4 +33,3 @@ namespace System.ServiceModel.Description
         }
     }
 }
-

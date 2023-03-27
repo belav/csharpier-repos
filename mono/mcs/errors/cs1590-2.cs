@@ -4,13 +4,10 @@
 
 namespace Testing
 {
-   /// comment
-   public class Test
-   {
-	/// <include file='a' />
-	public static void Main ()
-	{
-	}
-   }
+    /// comment
+    public class Test
+    {
+        /// <include file='a' />
+        public static void Main() { }
+    }
 }
-

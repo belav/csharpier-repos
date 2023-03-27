@@ -4,8 +4,8 @@
 
 static class X
 {
-	static (long a, string x) Test ()
-	{
-		return (b: 1, "");
-	}
+    static (long a, string x) Test()
+    {
+        return (b: 1, "");
+    }
 }

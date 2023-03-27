@@ -3,7 +3,5 @@
 
 public class C
 {
-	public C (int a = "a")
-	{
-	}
+    public C(int a = "a") { }
 }

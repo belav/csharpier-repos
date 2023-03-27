@@ -29,6 +29,7 @@ internal static class AttributeRouting
                 var handler = services.GetRequiredService<MvcAttributeRouteHandler>();
                 handler.Actions = actions;
                 return handler;
-            });
+            }
+        );
     }
 }

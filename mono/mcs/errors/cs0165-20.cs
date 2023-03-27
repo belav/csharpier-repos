@@ -3,18 +3,16 @@
 
 class Program
 {
-	static void Main ()
-	{
-		S s;
-		s.Test ();
-	}
+    static void Main()
+    {
+        S s;
+        s.Test();
+    }
 }
 
 struct S
 {
-	public string pp;
-	
-	public void Test ()
-	{
-	}
+    public string pp;
+
+    public void Test() { }
 }

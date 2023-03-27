@@ -17,17 +17,24 @@ namespace System.ServiceModel
         MessageSecurityOverTcp messageSecurity;
 
         public NetTcpSecurity()
-            : this(DefaultMode, new TcpTransportSecurity(), new MessageSecurityOverTcp())
-        {
-        }
+            : this(DefaultMode, new TcpTransportSecurity(), new MessageSecurityOverTcp()) { }
 
-        NetTcpSecurity(SecurityMode mode, TcpTransportSecurity transportSecurity, MessageSecurityOverTcp messageSecurity)
+        NetTcpSecurity(
+            SecurityMode mode,
+            TcpTransportSecurity transportSecurity,
+            MessageSecurityOverTcp messageSecurity
+        )
         {
-            Fx.Assert(SecurityModeHelper.IsDefined(mode), string.Format("Invalid SecurityMode value: {0}.", mode.ToString()));
+            Fx.Assert(
+                SecurityModeHelper.IsDefined(mode),
+                string.Format("Invalid SecurityMode value: {0}.", mode.ToString())
+            );
 
             this.mode = mode;
-            this.transportSecurity = transportSecurity == null ? new TcpTransportSecurity() : transportSecurity;
-            this.messageSecurity = messageSecurity == null ? new MessageSecurityOverTcp() : messageSecurity;
+            this.transportSecurity =
+                transportSecurity == null ? new TcpTransportSecurity() : transportSecurity;
+            this.messageSecurity =
+                messageSecurity == null ? new MessageSecurityOverTcp() : messageSecurity;
         }
 
         [DefaultValue(DefaultMode)]
@@ -38,7 +45,9 @@ namespace System.ServiceModel
             {
                 if (!SecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.mode = value;
             }
@@ -55,7 +64,6 @@ namespace System.ServiceModel
             get { return this.messageSecurity; }
             set { this.messageSecurity = value; }
         }
-
 
         internal BindingElement CreateTransportSecurity()
         {
@@ -81,19 +89,30 @@ namespace System.ServiceModel
             }
             else
             {
-                return UnifiedSecurityMode.TransportWithMessageCredential | UnifiedSecurityMode.Transport;
+                return UnifiedSecurityMode.TransportWithMessageCredential
+                    | UnifiedSecurityMode.Transport;
             }
         }
 
-        internal static bool SetTransportSecurity(BindingElement transport, SecurityMode mode, TcpTransportSecurity transportSecurity)
+        internal static bool SetTransportSecurity(
+            BindingElement transport,
+            SecurityMode mode,
+            TcpTransportSecurity transportSecurity
+        )
         {
             if (mode == SecurityMode.TransportWithMessageCredential)
             {
-                return TcpTransportSecurity.SetTransportProtectionOnly(transport, transportSecurity);
+                return TcpTransportSecurity.SetTransportProtectionOnly(
+                    transport,
+                    transportSecurity
+                );
             }
             else if (mode == SecurityMode.Transport)
             {
-                return TcpTransportSecurity.SetTransportProtectionAndAuthentication(transport, transportSecurity);
+                return TcpTransportSecurity.SetTransportProtectionAndAuthentication(
+                    transport,
+                    transportSecurity
+                );
             }
             return transport == null;
         }
@@ -102,11 +121,19 @@ namespace System.ServiceModel
         {
             if (this.mode == SecurityMode.Message)
             {
-                return this.messageSecurity.CreateSecurityBindingElement(false, isReliableSessionEnabled, null);
+                return this.messageSecurity.CreateSecurityBindingElement(
+                    false,
+                    isReliableSessionEnabled,
+                    null
+                );
             }
             else if (this.mode == SecurityMode.TransportWithMessageCredential)
             {
-                return this.messageSecurity.CreateSecurityBindingElement(true, isReliableSessionEnabled, this.CreateTransportSecurity());
+                return this.messageSecurity.CreateSecurityBindingElement(
+                    true,
+                    isReliableSessionEnabled,
+                    this.CreateTransportSecurity()
+                );
             }
             else
             {
@@ -114,22 +141,47 @@ namespace System.ServiceModel
             }
         }
 
-        internal static bool TryCreate(SecurityBindingElement wsSecurity, SecurityMode mode, bool isReliableSessionEnabled, BindingElement transportSecurity, TcpTransportSecurity tcpTransportSecurity, out NetTcpSecurity security)
+        internal static bool TryCreate(
+            SecurityBindingElement wsSecurity,
+            SecurityMode mode,
+            bool isReliableSessionEnabled,
+            BindingElement transportSecurity,
+            TcpTransportSecurity tcpTransportSecurity,
+            out NetTcpSecurity security
+        )
         {
             security = null;
             MessageSecurityOverTcp messageSecurity = null;
             if (mode == SecurityMode.Message)
             {
-                if (!MessageSecurityOverTcp.TryCreate(wsSecurity, isReliableSessionEnabled, null, out messageSecurity))
+                if (
+                    !MessageSecurityOverTcp.TryCreate(
+                        wsSecurity,
+                        isReliableSessionEnabled,
+                        null,
+                        out messageSecurity
+                    )
+                )
                     return false;
             }
             else if (mode == SecurityMode.TransportWithMessageCredential)
             {
-                if (!MessageSecurityOverTcp.TryCreate(wsSecurity, isReliableSessionEnabled, transportSecurity, out messageSecurity))
+                if (
+                    !MessageSecurityOverTcp.TryCreate(
+                        wsSecurity,
+                        isReliableSessionEnabled,
+                        transportSecurity,
+                        out messageSecurity
+                    )
+                )
                     return false;
             }
             security = new NetTcpSecurity(mode, tcpTransportSecurity, messageSecurity);
-            return SecurityElement.AreBindingsMatching(security.CreateMessageSecurity(isReliableSessionEnabled), wsSecurity, false);
+            return SecurityElement.AreBindingsMatching(
+                security.CreateMessageSecurity(isReliableSessionEnabled),
+                wsSecurity,
+                false
+            );
         }
 
         internal bool InternalShouldSerialize()
@@ -140,4 +192,3 @@ namespace System.ServiceModel
         }
     }
 }
-

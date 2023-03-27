@@ -13,8 +13,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         public JsonTree(
             VirtualCharSequence text,
             JsonCompilationUnit root,
-            ImmutableArray<EmbeddedDiagnostic> diagnostics) : base(text, root, diagnostics)
-        {
-        }
+            ImmutableArray<EmbeddedDiagnostic> diagnostics
+        )
+            : base(text, root, diagnostics) { }
     }
 }

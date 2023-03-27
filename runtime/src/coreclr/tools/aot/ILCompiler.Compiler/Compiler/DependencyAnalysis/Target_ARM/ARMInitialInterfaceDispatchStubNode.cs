@@ -20,7 +20,8 @@ namespace ILCompiler.DependencyAnalysis
     /// </summary>
     public partial class InitialInterfaceDispatchStubNode : AssemblyStubNode
     {
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
@@ -29,30 +30,53 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool IsShareable => false;
 
-        protected override void EmitCode(NodeFactory factory, ref ARMEmitter instructionEncoder, bool relocsOnly)
+        protected override void EmitCode(
+            NodeFactory factory,
+            ref ARMEmitter instructionEncoder,
+            bool relocsOnly
+        )
         {
             instructionEncoder.EmitPUSH(ARM.Register.R12);
-            instructionEncoder.EmitMOV(ARM.Register.R12, factory.ExternSymbol("RhpInitialInterfaceDispatch"));
+            instructionEncoder.EmitMOV(
+                ARM.Register.R12,
+                factory.ExternSymbol("RhpInitialInterfaceDispatch")
+            );
             instructionEncoder.EmitMOV(ARM.Register.R15, ARM.Register.R12);
         }
 
         // Only ARM requires a stub
-        protected override void EmitCode(NodeFactory factory, ref X86Emitter instructionEncoder, bool relocsOnly)
+        protected override void EmitCode(
+            NodeFactory factory,
+            ref X86Emitter instructionEncoder,
+            bool relocsOnly
+        )
         {
             throw new NotImplementedException();
         }
 
-        protected override void EmitCode(NodeFactory factory, ref X64Emitter instructionEncoder, bool relocsOnly)
+        protected override void EmitCode(
+            NodeFactory factory,
+            ref X64Emitter instructionEncoder,
+            bool relocsOnly
+        )
         {
             throw new NotImplementedException();
         }
 
-        protected override void EmitCode(NodeFactory factory, ref ARM64Emitter instructionEncoder, bool relocsOnly)
+        protected override void EmitCode(
+            NodeFactory factory,
+            ref ARM64Emitter instructionEncoder,
+            bool relocsOnly
+        )
         {
             throw new NotImplementedException();
         }
 
-        protected override void EmitCode(NodeFactory factory, ref LoongArch64Emitter instructionEncoder, bool relocsOnly)
+        protected override void EmitCode(
+            NodeFactory factory,
+            ref LoongArch64Emitter instructionEncoder,
+            bool relocsOnly
+        )
         {
             throw new NotImplementedException();
         }

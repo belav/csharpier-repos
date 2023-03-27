@@ -20,7 +20,10 @@ internal sealed unsafe partial class MsQuicApi
 
     private static readonly Version MsQuicVersion = new Version(2, 1);
 
-    private static readonly delegate* unmanaged[Cdecl]<uint, QUIC_API_TABLE**, int> MsQuicOpenVersion;
+    private static readonly delegate* unmanaged[Cdecl]<
+        uint,
+        QUIC_API_TABLE**,
+        int> MsQuicOpenVersion;
     private static readonly delegate* unmanaged[Cdecl]<QUIC_API_TABLE*, void> MsQuicClose;
 
     public MsQuicSafeHandle Registration { get; }
@@ -31,7 +34,10 @@ internal sealed unsafe partial class MsQuicApi
     // Without these DynamicDependency attributes, .ctor() will be removed from the safe handles.
     // Remove once fixed: https://github.com/mono/linker/issues/1660
     [DynamicDependency(DynamicallyAccessedMemberTypes.PublicConstructors, typeof(MsQuicSafeHandle))]
-    [DynamicDependency(DynamicallyAccessedMemberTypes.PublicConstructors, typeof(MsQuicContextSafeHandle))]
+    [DynamicDependency(
+        DynamicallyAccessedMemberTypes.PublicConstructors,
+        typeof(MsQuicContextSafeHandle)
+    )]
     private MsQuicApi(QUIC_API_TABLE* apiTable)
     {
         ApiTable = apiTable;
@@ -45,9 +51,16 @@ internal sealed unsafe partial class MsQuicApi
             };
 
             QUIC_HANDLE* handle;
-            ThrowHelper.ThrowIfMsQuicError(ApiTable->RegistrationOpen(&cfg, &handle), "RegistrationOpen failed");
+            ThrowHelper.ThrowIfMsQuicError(
+                ApiTable->RegistrationOpen(&cfg, &handle),
+                "RegistrationOpen failed"
+            );
 
-            Registration = new MsQuicSafeHandle(handle, apiTable->RegistrationClose, SafeHandleType.Registration);
+            Registration = new MsQuicSafeHandle(
+                handle,
+                apiTable->RegistrationClose,
+                SafeHandleType.Registration
+            );
         }
     }
 
@@ -64,15 +77,29 @@ internal sealed unsafe partial class MsQuicApi
 #pragma warning disable CA1810 // Initialize all static fields in 'MsQuicApi' when those fields are declared and remove the explicit static constructor
     static MsQuicApi()
     {
-        if (!NativeLibrary.TryLoad($"{Interop.Libraries.MsQuic}.{MsQuicVersion.Major}", typeof(MsQuicApi).Assembly, DllImportSearchPath.AssemblyDirectory, out IntPtr msQuicHandle) &&
-            !NativeLibrary.TryLoad(Interop.Libraries.MsQuic, typeof(MsQuicApi).Assembly, DllImportSearchPath.AssemblyDirectory, out msQuicHandle))
+        if (
+            !NativeLibrary.TryLoad(
+                $"{Interop.Libraries.MsQuic}.{MsQuicVersion.Major}",
+                typeof(MsQuicApi).Assembly,
+                DllImportSearchPath.AssemblyDirectory,
+                out IntPtr msQuicHandle
+            )
+            && !NativeLibrary.TryLoad(
+                Interop.Libraries.MsQuic,
+                typeof(MsQuicApi).Assembly,
+                DllImportSearchPath.AssemblyDirectory,
+                out msQuicHandle
+            )
+        )
         {
             // MsQuic library not loaded
             return;
         }
 
-        MsQuicOpenVersion = (delegate* unmanaged[Cdecl]<uint, QUIC_API_TABLE**, int>)NativeLibrary.GetExport(msQuicHandle, nameof(MsQuicOpenVersion));
-        MsQuicClose = (delegate* unmanaged[Cdecl]<QUIC_API_TABLE*, void>)NativeLibrary.GetExport(msQuicHandle, nameof(MsQuicClose));
+        MsQuicOpenVersion = (delegate* unmanaged[Cdecl]<uint, QUIC_API_TABLE**, int>)
+            NativeLibrary.GetExport(msQuicHandle, nameof(MsQuicOpenVersion));
+        MsQuicClose = (delegate* unmanaged[Cdecl]<QUIC_API_TABLE*, void>)
+            NativeLibrary.GetExport(msQuicHandle, nameof(MsQuicClose));
 
         if (!TryOpenMsQuic(out QUIC_API_TABLE* apiTable, out _))
         {
@@ -86,23 +113,37 @@ internal sealed unsafe partial class MsQuicApi
             int arraySize = 4;
             uint* libVersion = stackalloc uint[arraySize];
             uint size = (uint)arraySize * sizeof(uint);
-            if (StatusFailed(apiTable->GetParam(null, QUIC_PARAM_GLOBAL_LIBRARY_VERSION, &size, libVersion)))
+            if (
+                StatusFailed(
+                    apiTable->GetParam(null, QUIC_PARAM_GLOBAL_LIBRARY_VERSION, &size, libVersion)
+                )
+            )
             {
                 return;
             }
 
-            var version = new Version((int)libVersion[0], (int)libVersion[1], (int)libVersion[2], (int)libVersion[3]);
+            var version = new Version(
+                (int)libVersion[0],
+                (int)libVersion[1],
+                (int)libVersion[2],
+                (int)libVersion[3]
+            );
             if (version < MsQuicVersion)
             {
                 if (NetEventSource.Log.IsEnabled())
                 {
-                    NetEventSource.Info(null, $"Incompatible MsQuic library version '{version}', expecting '{MsQuicVersion}'");
+                    NetEventSource.Info(
+                        null,
+                        $"Incompatible MsQuic library version '{version}', expecting '{MsQuicVersion}'"
+                    );
                 }
                 return;
             }
 
             // Assume SChannel is being used on windows and query for the actual provider from the library if querying is supported
-            QUIC_TLS_PROVIDER provider = OperatingSystem.IsWindows() ? QUIC_TLS_PROVIDER.SCHANNEL : QUIC_TLS_PROVIDER.OPENSSL;
+            QUIC_TLS_PROVIDER provider = OperatingSystem.IsWindows()
+                ? QUIC_TLS_PROVIDER.SCHANNEL
+                : QUIC_TLS_PROVIDER.OPENSSL;
             size = sizeof(QUIC_TLS_PROVIDER);
             apiTable->GetParam(null, QUIC_PARAM_GLOBAL_TLS_PROVIDER, &size, &provider);
             UsesSChannelBackend = provider == QUIC_TLS_PROVIDER.SCHANNEL;
@@ -114,7 +155,10 @@ internal sealed unsafe partial class MsQuicApi
                 {
                     if (NetEventSource.Log.IsEnabled())
                     {
-                        NetEventSource.Info(null, $"Current Windows version ({Environment.OSVersion}) is not supported by QUIC. Minimal supported version is {MinWindowsVersion}");
+                        NetEventSource.Info(
+                            null,
+                            $"Current Windows version ({Environment.OSVersion}) is not supported by QUIC. Minimal supported version is {MinWindowsVersion}"
+                        );
                     }
 
                     return;
@@ -167,8 +211,13 @@ internal sealed unsafe partial class MsQuicApi
         return true;
     }
 
-    private static bool IsWindowsVersionSupported() => OperatingSystem.IsWindowsVersionAtLeast(MinWindowsVersion.Major,
-        MinWindowsVersion.Minor, MinWindowsVersion.Build, MinWindowsVersion.Revision);
+    private static bool IsWindowsVersionSupported() =>
+        OperatingSystem.IsWindowsVersionAtLeast(
+            MinWindowsVersion.Major,
+            MinWindowsVersion.Minor,
+            MinWindowsVersion.Build,
+            MinWindowsVersion.Revision
+        );
 
     private static bool IsTls13Disabled(bool isServer)
     {

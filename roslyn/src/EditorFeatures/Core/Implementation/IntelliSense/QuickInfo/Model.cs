@@ -18,10 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
         public QuickInfoItem Item { get; }
         public bool TrackMouse { get; }
 
-        public Model(
-            ITextVersion textVersion,
-            QuickInfoItem item,
-            bool trackMouse)
+        public Model(ITextVersion textVersion, QuickInfoItem item, bool trackMouse)
         {
             Contract.ThrowIfNull(item);
 
@@ -30,9 +27,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             this.TrackMouse = trackMouse;
         }
 
-        internal SnapshotSpan GetCurrentSpanInSnapshot(TextSpan originalSpan, ITextSnapshot textSnapshot)
+        internal SnapshotSpan GetCurrentSpanInSnapshot(
+            TextSpan originalSpan,
+            ITextSnapshot textSnapshot
+        )
         {
-            var trackingSpan = this.TextVersion.CreateTrackingSpan(originalSpan.ToSpan(), SpanTrackingMode.EdgeInclusive);
+            var trackingSpan = this.TextVersion.CreateTrackingSpan(
+                originalSpan.ToSpan(),
+                SpanTrackingMode.EdgeInclusive
+            );
             return trackingSpan.GetSpan(textSnapshot);
         }
     }

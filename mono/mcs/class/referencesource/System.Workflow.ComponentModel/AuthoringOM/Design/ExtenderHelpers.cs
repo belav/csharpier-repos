@@ -30,21 +30,32 @@ namespace System.Workflow.ComponentModel.Design
     #region Class ExtenderHelpers
     internal static class ExtenderHelpers
     {
-        internal static void FilterDependencyProperties(IServiceProvider serviceProvider, Activity activity)
+        internal static void FilterDependencyProperties(
+            IServiceProvider serviceProvider,
+            Activity activity
+        )
         {
-            IExtenderListService extenderListService = serviceProvider.GetService(typeof(IExtenderListService)) as IExtenderListService;
+            IExtenderListService extenderListService =
+                serviceProvider.GetService(typeof(IExtenderListService)) as IExtenderListService;
             if (extenderListService != null)
             {
-                Dictionary<string, DependencyProperty> dependencyProperyies = new Dictionary<string, DependencyProperty>();
+                Dictionary<string, DependencyProperty> dependencyProperyies =
+                    new Dictionary<string, DependencyProperty>();
                 foreach (DependencyProperty property in activity.MetaDependencyProperties)
                     dependencyProperyies.Add(property.Name, property);
 
                 List<string> disallowedProperties = new List<string>();
-                foreach (IExtenderProvider extenderProvider in extenderListService.GetExtenderProviders())
+                foreach (
+                    IExtenderProvider extenderProvider in extenderListService.GetExtenderProviders()
+                )
                 {
                     if (!extenderProvider.CanExtend(activity))
                     {
-                        ProvidePropertyAttribute[] propertyAttributes = extenderProvider.GetType().GetCustomAttributes(typeof(ProvidePropertyAttribute), true) as ProvidePropertyAttribute[];
+                        ProvidePropertyAttribute[] propertyAttributes =
+                            extenderProvider
+                                .GetType()
+                                .GetCustomAttributes(typeof(ProvidePropertyAttribute), true)
+                            as ProvidePropertyAttribute[];
                         foreach (ProvidePropertyAttribute propertyAttribute in propertyAttributes)
                             disallowedProperties.Add(propertyAttribute.PropertyName);
                     }

@@ -13,6 +13,7 @@ namespace System.Xml
         ///    on a node.
         /// </devdoc>
         None,
+
         /// <devdoc>
         ///    <para>
         ///       An Element.
@@ -26,6 +27,7 @@ namespace System.Xml
         ///    DocumentFragment, EntityReference, and Element nodes.
         /// </devdoc>
         Element,
+
         /// <devdoc>
         ///    <para>
         ///       An
@@ -41,6 +43,7 @@ namespace System.Xml
         ///    </para>
         /// </devdoc>
         Attribute,
+
         /// <devdoc>
         ///    <para>
         ///       The
@@ -53,6 +56,7 @@ namespace System.Xml
         ///    </para>
         /// </devdoc>
         Text,
+
         /// <devdoc>
         ///    A CDATA section.
         ///    Example XML: &lt;![CDATA[my escaped text]]&gt;
@@ -62,6 +66,7 @@ namespace System.Xml
         ///    EntityReference, and Element nodes.
         /// </devdoc>
         CDATA,
+
         /// <devdoc>
         ///    <para>A reference to an entity.</para>
         ///    <para>Example XML: &amp;foo;</para>
@@ -72,6 +77,7 @@ namespace System.Xml
         ///       Element, and EntityReference nodes.</para>
         /// </devdoc>
         EntityReference,
+
         /// <devdoc>
         ///    <para>An entity declaration.</para>
         ///    <para>Example XML: &lt;!ENTITY ...&gt;</para>
@@ -80,6 +86,7 @@ namespace System.Xml
         ///       child of the DocumentType node.</para>
         /// </devdoc>
         Entity,
+
         /// <devdoc>
         ///    <para>
         ///       A processing instruction (PI).
@@ -94,6 +101,7 @@ namespace System.Xml
         ///    </para>
         /// </devdoc>
         ProcessingInstruction,
+
         /// <devdoc>
         ///    <para>
         ///       A Comment.
@@ -108,6 +116,7 @@ namespace System.Xml
         ///    </para>
         /// </devdoc>
         Comment,
+
         /// <devdoc>
         ///    <para>
         ///       A document object, which, as the root of the document tree, provides access
@@ -120,6 +129,7 @@ namespace System.Xml
         ///    </para>
         /// </devdoc>
         Document,
+
         /// <devdoc>
         ///    <para>
         ///       The document type declaration, indicated by the &lt;!DOCTYPE&gt; tag.
@@ -133,6 +143,7 @@ namespace System.Xml
         ///    </para>
         /// </devdoc>
         DocumentType,
+
         /// <devdoc>
         ///    <para>
         ///       A document fragment.
@@ -146,6 +157,7 @@ namespace System.Xml
         ///    </para>
         /// </devdoc>
         DocumentFragment,
+
         /// <devdoc>
         ///    <para>
         ///       A notation in the document type declaration.
@@ -159,29 +171,34 @@ namespace System.Xml
         ///    </para>
         /// </devdoc>
         Notation,
+
         /// <devdoc>
         ///    <para>
         ///       Whitespace between markup.
         ///    </para>
         /// </devdoc>
         Whitespace,
+
         /// <devdoc>
         ///    <para>
         ///       Whitespace between markup in a mixed content model.
         ///    </para>
         /// </devdoc>
         SignificantWhitespace,
+
         /// <devdoc>
         ///    <para>Returned when XmlReader gets to the end of an element.</para>
         ///    <para>Example XML: &lt;/foo&gt;</para>
         /// </devdoc>
         EndElement,
+
         /// <devdoc>
         ///    <para>Returned when XmlReader gets to the end of the entity
         ///       replacement as a result of a call to <see cref='System.Xml.XmlReader.ResolveEntity'/>
         ///       .</para>
         /// </devdoc>
         EndEntity,
+
         /// <devdoc>
         ///    <para>
         ///       The XML declaration node..

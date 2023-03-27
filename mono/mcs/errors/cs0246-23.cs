@@ -4,8 +4,8 @@
 
 class X
 {
-	public X ()
-	{
-		var? u = i;
-	}
+    public X()
+    {
+        var? u = i;
+    }
 }

@@ -21,7 +21,9 @@ namespace System.Reflection.Runtime.TypeInfos
     // TypeInfos that represent constructed generic types.
     //
     //
-    internal sealed partial class RuntimeConstructedGenericTypeInfo : RuntimeTypeInfo, IKeyedItem<RuntimeConstructedGenericTypeInfo.UnificationKey>
+    internal sealed partial class RuntimeConstructedGenericTypeInfo
+        : RuntimeTypeInfo,
+            IKeyedItem<RuntimeConstructedGenericTypeInfo.UnificationKey>
     {
         private RuntimeConstructedGenericTypeInfo(UnificationKey key)
         {
@@ -30,12 +32,18 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override bool IsTypeDefinition => false;
         public sealed override bool IsGenericTypeDefinition => false;
+
         protected sealed override bool HasElementTypeImpl() => false;
+
         protected sealed override bool IsArrayImpl() => false;
+
         public sealed override bool IsSZArray => false;
         public sealed override bool IsVariableBoundArray => false;
+
         protected sealed override bool IsByRefImpl() => false;
+
         protected sealed override bool IsPointerImpl() => false;
+
         public sealed override bool IsConstructedGenericType => true;
         public sealed override bool IsGenericParameter => false;
         public sealed override bool IsGenericTypeParameter => false;
@@ -51,9 +59,7 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         // PrepareKey() must be idempodent and thread-safe. It may be invoked multiple times and concurrently.
         //
-        public void PrepareKey()
-        {
-        }
+        public void PrepareKey() { }
 
         //
         // Implements IKeyedItem.Key.
@@ -64,12 +70,8 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         public UnificationKey Key
         {
-            get
-            {
-                return _key;
-            }
+            get { return _key; }
         }
-
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
         {
@@ -122,18 +124,12 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override Guid GUID
         {
-            get
-            {
-                return GenericTypeDefinitionTypeInfo.GUID;
-            }
+            get { return GenericTypeDefinitionTypeInfo.GUID; }
         }
 
         public sealed override Assembly Assembly
         {
-            get
-            {
-                return GenericTypeDefinitionTypeInfo.Assembly;
-            }
+            get { return GenericTypeDefinitionTypeInfo.Assembly; }
         }
 
         public sealed override bool ContainsGenericParameters
@@ -168,18 +164,12 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override StructLayoutAttribute StructLayoutAttribute
         {
-            get
-            {
-                return GenericTypeDefinitionTypeInfo.StructLayoutAttribute;
-            }
+            get { return GenericTypeDefinitionTypeInfo.StructLayoutAttribute; }
         }
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                return GenericTypeDefinitionTypeInfo.MetadataToken;
-            }
+            get { return GenericTypeDefinitionTypeInfo.MetadataToken; }
         }
 
         public sealed override string ToString()
@@ -187,16 +177,14 @@ namespace System.Reflection.Runtime.TypeInfos
             // Get the FullName of the generic type definition in a pay-for-play safe way.
             RuntimeTypeInfo genericTypeDefinition = GenericTypeDefinitionTypeInfo;
             string genericTypeDefinitionString = null;
-            if (genericTypeDefinition.InternalNameIfAvailable != null)   // Want to avoid "cry-wolf" exceptions: if we can't even get the simple name, don't bother getting the FullName.
+            if (genericTypeDefinition.InternalNameIfAvailable != null) // Want to avoid "cry-wolf" exceptions: if we can't even get the simple name, don't bother getting the FullName.
             {
                 // Given our current pay for play policy, it should now be safe to attempt getting the FullName. (But guard with a try-catch in case this assumption is wrong.)
                 try
                 {
                     genericTypeDefinitionString = genericTypeDefinition.FullName;
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             }
             // If all else fails, use the ToString() - it won't match the legacy CLR but with no metadata, we can't match it anyway.
             if (genericTypeDefinitionString == null)
@@ -246,20 +234,31 @@ namespace System.Reflection.Runtime.TypeInfos
             get
             {
                 RuntimeTypeInfo genericTypeDefinition = this.GenericTypeDefinitionTypeInfo;
-                if (!(genericTypeDefinition is RuntimeNamedTypeInfo genericTypeDefinitionNamedTypeInfo))
-                    throw ReflectionCoreExecution.ExecutionDomain.CreateMissingMetadataException(genericTypeDefinition);
+                if (
+                    !(
+                        genericTypeDefinition
+                        is RuntimeNamedTypeInfo genericTypeDefinitionNamedTypeInfo
+                    )
+                )
+                    throw ReflectionCoreExecution.ExecutionDomain.CreateMissingMetadataException(
+                        genericTypeDefinition
+                    );
                 return genericTypeDefinitionNamedTypeInfo;
             }
         }
 
-        internal sealed override bool CanBrowseWithoutMissingMetadataExceptions => GenericTypeDefinitionTypeInfo.CanBrowseWithoutMissingMetadataExceptions;
+        internal sealed override bool CanBrowseWithoutMissingMetadataExceptions =>
+            GenericTypeDefinitionTypeInfo.CanBrowseWithoutMissingMetadataExceptions;
 
         internal sealed override Type InternalDeclaringType
         {
             get
             {
                 RuntimeTypeHandle typeHandle = InternalTypeHandleIfAvailable;
-                if ((!typeHandle.IsNull()) && ReflectionCoreExecution.ExecutionEnvironment.IsReflectionBlocked(typeHandle))
+                if (
+                    (!typeHandle.IsNull())
+                    && ReflectionCoreExecution.ExecutionEnvironment.IsReflectionBlocked(typeHandle)
+                )
                     return null;
                 return GenericTypeDefinitionTypeInfo.InternalDeclaringType;
             }
@@ -267,31 +266,24 @@ namespace System.Reflection.Runtime.TypeInfos
 
         internal sealed override string InternalFullNameOfAssembly
         {
-            get
-            {
-                return GenericTypeDefinitionTypeInfo.InternalFullNameOfAssembly;
-            }
+            get { return GenericTypeDefinitionTypeInfo.InternalFullNameOfAssembly; }
         }
 
         public sealed override string InternalGetNameIfAvailable(ref Type rootCauseForFailure)
         {
-            return GenericTypeDefinitionTypeInfo.InternalGetNameIfAvailable(ref rootCauseForFailure);
+            return GenericTypeDefinitionTypeInfo.InternalGetNameIfAvailable(
+                ref rootCauseForFailure
+            );
         }
 
         internal sealed override RuntimeTypeInfo[] InternalRuntimeGenericTypeArguments
         {
-            get
-            {
-                return _key.GenericTypeArguments;
-            }
+            get { return _key.GenericTypeArguments; }
         }
 
         internal sealed override RuntimeTypeHandle InternalTypeHandleIfAvailable
         {
-            get
-            {
-                return _key.TypeHandle;
-            }
+            get { return _key.TypeHandle; }
         }
 
         //
@@ -299,10 +291,7 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         internal sealed override QTypeDefRefOrSpec TypeRefDefOrSpecForBaseType
         {
-            get
-            {
-                return this.GenericTypeDefinitionTypeInfo.TypeRefDefOrSpecForBaseType;
-            }
+            get { return this.GenericTypeDefinitionTypeInfo.TypeRefDefOrSpecForBaseType; }
         }
 
         //
@@ -322,18 +311,12 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         internal sealed override TypeContext TypeContext
         {
-            get
-            {
-                return new TypeContext(this.InternalRuntimeGenericTypeArguments, null);
-            }
+            get { return new TypeContext(this.InternalRuntimeGenericTypeArguments, null); }
         }
 
         private RuntimeTypeInfo GenericTypeDefinitionTypeInfo
         {
-            get
-            {
-                return _key.GenericTypeDefinition;
-            }
+            get { return _key.GenericTypeDefinition; }
         }
 
         private readonly UnificationKey _key;

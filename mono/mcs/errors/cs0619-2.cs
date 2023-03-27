@@ -4,10 +4,6 @@
 using System;
 
 [Obsolete("Do not use it.", true)]
-interface ObsoleteIface {
-}
+interface ObsoleteIface { }
 
-
-interface Ex: ObsoleteIface
-{
-}
+interface Ex : ObsoleteIface { }

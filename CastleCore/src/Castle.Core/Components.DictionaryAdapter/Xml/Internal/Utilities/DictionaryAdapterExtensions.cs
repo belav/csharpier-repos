@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,12 +20,21 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public static class DictionaryAdapterExtensions
     {
-        public static object CreateChildAdapter(this IDictionaryAdapter parent, Type type, XmlAdapter adapter)
+        public static object CreateChildAdapter(
+            this IDictionaryAdapter parent,
+            Type type,
+            XmlAdapter adapter
+        )
         {
             return CreateChildAdapter(parent, type, adapter, null);
         }
 
-        public static object CreateChildAdapter(this IDictionaryAdapter parent, Type type, XmlAdapter adapter, IDictionary dictionary)
+        public static object CreateChildAdapter(
+            this IDictionaryAdapter parent,
+            Type type,
+            XmlAdapter adapter,
+            IDictionary dictionary
+        )
         {
             if (null == dictionary)
                 dictionary = new Hashtable();
@@ -44,7 +53,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public static XmlAccessor GetAccessor(this PropertyDescriptor property)
         {
-            return (XmlAccessor) property.ExtendedProperties[XmlAccessorKey];
+            return (XmlAccessor)property.ExtendedProperties[XmlAccessorKey];
         }
 
         public static void SetAccessor(this PropertyDescriptor property, XmlAccessor accessor)
@@ -59,7 +68,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public static XmlMetadata GetXmlMeta(this DictionaryAdapterMeta meta)
         {
-            return (XmlMetadata) meta.ExtendedProperties[XmlMetaKey];
+            return (XmlMetadata)meta.ExtendedProperties[XmlMetaKey];
         }
 
         public static void SetXmlMeta(this DictionaryAdapterMeta meta, XmlMetadata xmlMeta)
@@ -74,7 +83,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public static string GetXmlType(this DictionaryAdapterMeta meta)
         {
-            return (string) meta.ExtendedProperties[XmlTypeKey];
+            return (string)meta.ExtendedProperties[XmlTypeKey];
         }
 
         public static void SetXmlType(this DictionaryAdapterMeta meta, string value)
@@ -82,9 +91,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             meta.ExtendedProperties[XmlTypeKey] = value;
         }
 
-        private const string
-            XmlAccessorKey  = "XmlAccessor",
-            XmlMetaKey      = "XmlMeta",
-            XmlTypeKey      = "XmlType";
+        private const string XmlAccessorKey = "XmlAccessor",
+            XmlMetaKey = "XmlMeta",
+            XmlTypeKey = "XmlType";
     }
 }

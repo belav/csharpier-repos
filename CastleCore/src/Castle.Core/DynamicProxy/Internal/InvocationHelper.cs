@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -45,8 +45,10 @@ namespace Castle.DynamicProxy.Internal
                 throw new ArgumentNullException(nameof(type));
             }
 
-            Debug.Assert(proxiedMethod.DeclaringType.IsAssignableFrom(type),
-                         "proxiedMethod.DeclaringType.IsAssignableFrom(type)");
+            Debug.Assert(
+                proxiedMethod.DeclaringType.IsAssignableFrom(type),
+                "proxiedMethod.DeclaringType.IsAssignableFrom(type)"
+            );
 
             var cacheKey = new CacheKey(proxiedMethod, type);
 
@@ -73,10 +75,18 @@ namespace Castle.DynamicProxy.Internal
             else
             {
                 // NOTE: this implementation sucks, feel free to improve it.
-                var methods = MethodFinder.GetAllInstanceMethods(type, BindingFlags.Public | BindingFlags.NonPublic);
+                var methods = MethodFinder.GetAllInstanceMethods(
+                    type,
+                    BindingFlags.Public | BindingFlags.NonPublic
+                );
                 foreach (var method in methods)
                 {
-                    if (MethodSignatureComparer.Instance.Equals(method.GetBaseDefinition(), proxiedMethod))
+                    if (
+                        MethodSignatureComparer.Instance.Equals(
+                            method.GetBaseDefinition(),
+                            proxiedMethod
+                        )
+                    )
                     {
                         methodOnTarget = method;
                         break;
@@ -86,8 +96,12 @@ namespace Castle.DynamicProxy.Internal
             if (methodOnTarget == null)
             {
                 throw new ArgumentException(
-                    string.Format("Could not find method overriding {0} on type {1}. This is most likely a bug. Please report it.",
-                                  proxiedMethod, type));
+                    string.Format(
+                        "Could not find method overriding {0} on type {1}. This is most likely a bug. Please report it.",
+                        proxiedMethod,
+                        type
+                    )
+                );
             }
 
             if (genericArguments == null)
@@ -104,13 +118,15 @@ namespace Castle.DynamicProxy.Internal
                 Method = method;
                 Type = type;
             }
+
             public MethodInfo Method { get; }
 
             public Type Type { get; }
 
             public bool Equals(CacheKey other)
             {
-                return object.ReferenceEquals(Method, other.Method) && object.ReferenceEquals(Type, other.Type);
+                return object.ReferenceEquals(Method, other.Method)
+                    && object.ReferenceEquals(Type, other.Type);
             }
 
             public override bool Equals(object obj)
@@ -124,7 +140,8 @@ namespace Castle.DynamicProxy.Internal
             {
                 unchecked
                 {
-                    return ((Method != null ? Method.GetHashCode() : 0) * 397) ^ (Type != null ? Type.GetHashCode() : 0);
+                    return ((Method != null ? Method.GetHashCode() : 0) * 397)
+                        ^ (Type != null ? Type.GetHashCode() : 0);
                 }
             }
         }

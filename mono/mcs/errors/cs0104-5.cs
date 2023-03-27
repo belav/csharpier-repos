@@ -3,33 +3,27 @@
 
 namespace A
 {
-	public class T
-	{
-		public class N
-		{
-
-		}
-	}
+    public class T
+    {
+        public class N { }
+    }
 }
 
 namespace C
 {
-	struct N
-	{
-
-	}
+    struct N { }
 }
 
 namespace B
 {
-	using static A.T;
-	using C;
+    using static A.T;
+    using C;
 
-	static class Program
-	{
-		static void Main ()
-		{
-			var u = new N ();
-		}
-	}
+    static class Program
+    {
+        static void Main()
+        {
+            var u = new N();
+        }
+    }
 }

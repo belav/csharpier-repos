@@ -11,14 +11,13 @@ using System.Security.Claims;
 using System.Web.Http;
 using System.Web;
 
-
 namespace POS_Server.Controllers
 {
-
     [RoutePrefix("api/AgentMemberships")]
     public class AgentMembershipsController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         //[HttpPost]
         //[Route("GetAll")]
         //public string GetAll(string token)
@@ -37,10 +36,10 @@ namespace POS_Server.Controllers
         //            var List = entity.agentMemberships.Select(S => new AgentMembershipsModel
         //            {
         //                agentMembershipsId = S.agentMembershipsId,
-                        
+
         //                membershipId = S.membershipId,
         //                agentId = S.agentId,
-                        
+
         //                notes = S.notes,
         //                createDate = S.createDate,
         //                updateDate = S.updateDate,
@@ -52,7 +51,7 @@ namespace POS_Server.Controllers
         //            })
         //            .ToList();
 
-                   
+
         //            return TokenManager.GenerateToken(List);
 
         //        }
@@ -89,10 +88,10 @@ namespace POS_Server.Controllers
         //           .Select(S => new
         //           {
         //               S.agentMembershipsId,
-                       
+
         //               S.membershipId,
         //               S.agentId,
-                      
+
         //               S.notes,
         //               S.createDate,
         //               S.updateDate,
@@ -160,7 +159,7 @@ namespace POS_Server.Controllers
         //                                                   name = x.name,
         //                                                   notes=  x.notes,
         //                                                   subscriptionFee = x.subscriptionFees.FirstOrDefault().Amount,
-        //                                                   subscriptionType = x.subscriptionType,                                                           
+        //                                                   subscriptionType = x.subscriptionType,
         //                                                   }).FirstOrDefault()
         //           }).FirstOrDefault();
         //            return TokenManager.GenerateToken(agentMemberShip);
@@ -205,7 +204,7 @@ namespace POS_Server.Controllers
         //            Nullable<long> id = null;
         //            newObject.createUserId = id;
         //        }
-                
+
         //        if (newObject.membershipId == 0 || newObject.membershipId == null)
         //        {
         //            Nullable<long> id = null;
@@ -238,10 +237,10 @@ namespace POS_Server.Controllers
         //                    tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
 
         //                    tmpObject.agentMembershipsId = newObject.agentMembershipsId;
-                  
+
         //                    tmpObject.membershipId = newObject.membershipId;
         //                    tmpObject.agentId = newObject.agentId;
-                   
+
         //                    tmpObject.notes = newObject.notes;
         //                  //  tmpObject.createDate = newObject.createDate;
         //                    tmpObject.updateDate = newObject.updateDate;
@@ -364,30 +363,30 @@ namespace POS_Server.Controllers
                     {
                         strObject = c.Value.Replace("\\", string.Empty);
                         strObject = strObject.Trim('"');
-                        newListObj = JsonConvert.DeserializeObject<List<AgentMembershipsModel>>(strObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        newListObj = JsonConvert.DeserializeObject<List<AgentMembershipsModel>>(
+                            strObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "membershipId")
                     {
                         membershipId = long.Parse(c.Value);
                     }
-                    else
-                  if (c.Type == "updateUserId")
+                    else if (c.Type == "updateUserId")
                     {
                         updateUserId = long.Parse(c.Value);
                     }
                 }
 
-         
                 try
                 {
                     AgentController agcont = new AgentController();
                     agcont.resetMembershipId(membershipId);
-                        foreach (var row in newListObj)
+                    foreach (var row in newListObj)
                     {
-                        agcont.UpdateMembershipId((int)row.agentId,(int) row.membershipId);
+                        agcont.UpdateMembershipId((int)row.agentId, (int)row.membershipId);
                     }
-                        
+
                     message = "1";
                     return TokenManager.GenerateToken(message);
                 }
@@ -396,9 +395,7 @@ namespace POS_Server.Controllers
                     message = "0";
                     return TokenManager.GenerateToken(message);
                 }
-
             }
-
         }
 
         /*
@@ -713,6 +710,5 @@ namespace POS_Server.Controllers
         //        }
 
         //}
-
     }
 }

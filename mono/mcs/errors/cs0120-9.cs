@@ -3,11 +3,12 @@
 
 using System.Text;
 
-class X {
-	static void Main () {
-		X.Y(null);	
-	}
-	
-	void Y(StringBuilder someParam) {
-	}
+class X
+{
+    static void Main()
+    {
+        X.Y(null);
+    }
+
+    void Y(StringBuilder someParam) { }
 }

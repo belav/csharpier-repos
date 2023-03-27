@@ -9,6 +9,13 @@ internal static partial class Interop
     internal static partial class Activeds
     {
         [LibraryImport(Interop.Libraries.Activeds, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial int ADsOpenObject(string path, string? userName, string? password, int flags, ref Guid iid, out IntPtr ppObject);
+        internal static partial int ADsOpenObject(
+            string path,
+            string? userName,
+            string? password,
+            int flags,
+            ref Guid iid,
+            out IntPtr ppObject
+        );
     }
 }

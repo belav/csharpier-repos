@@ -10,7 +10,7 @@ public class NonSharedModelUpdatesSqlServerTest : NonSharedModelUpdatesTestBase
         await base.Principal_and_dependent_roundtrips_with_cycle_breaking(async);
 
         AssertSql(
-"""
+            """
 @p0='AC South' (Size = 4000)
 
 SET IMPLICIT_TRANSACTIONS OFF;
@@ -19,8 +19,8 @@ INSERT INTO [AuthorsClub] ([Name])
 OUTPUT INSERTED.[Id]
 VALUES (@p0);
 """,
-        //
-"""
+            //
+            """
 @p1='1'
 @p2='Alice' (Size = 4000)
 
@@ -30,8 +30,8 @@ INSERT INTO [Author] ([AuthorsClubId], [Name])
 OUTPUT INSERTED.[Id]
 VALUES (@p1, @p2);
 """,
-        //
-"""
+            //
+            """
 @p3='1'
 @p4=NULL (Size = 4000)
 
@@ -41,14 +41,14 @@ INSERT INTO [Book] ([AuthorId], [Title])
 OUTPUT INSERTED.[Id]
 VALUES (@p3, @p4);
 """,
-        //
-"""
+            //
+            """
 SELECT TOP(2) [b].[Id], [b].[AuthorId], [b].[Title], [a].[Id], [a].[AuthorsClubId], [a].[Name]
 FROM [Book] AS [b]
 INNER JOIN [Author] AS [a] ON [b].[AuthorId] = [a].[Id]
 """,
-        //
-"""
+            //
+            """
 @p0='AC North' (Size = 4000)
 
 SET IMPLICIT_TRANSACTIONS OFF;
@@ -57,8 +57,8 @@ INSERT INTO [AuthorsClub] ([Name])
 OUTPUT INSERTED.[Id]
 VALUES (@p0);
 """,
-        //
-"""
+            //
+            """
 @p1='2'
 @p2='Author of the year 2023' (Size = 4000)
 
@@ -68,8 +68,8 @@ INSERT INTO [Author] ([AuthorsClubId], [Name])
 OUTPUT INSERTED.[Id]
 VALUES (@p1, @p2);
 """,
-        //
-"""
+            //
+            """
 @p4='1'
 @p3='2'
 @p5='1'
@@ -81,7 +81,8 @@ WHERE [Id] = @p4;
 DELETE FROM [Author]
 OUTPUT 1
 WHERE [Id] = @p5;
-""");
+"""
+        );
     }
 
     [ConditionalFact] // Issue #29502
@@ -93,16 +94,20 @@ WHERE [Id] = @p5;
                 mb.Entity<User>().ToTable("Users");
                 mb.Entity<DailyDigest>().ToTable("DailyDigests");
             },
-            createTestStore: () => SqlServerTestStore.GetOrCreateWithScriptPath(
-                "Issue29502",
-                Path.Combine("Update", "Issue29502.sql"),
-                shared: false));
+            createTestStore: () =>
+                SqlServerTestStore.GetOrCreateWithScriptPath(
+                    "Issue29502",
+                    Path.Combine("Update", "Issue29502.sql"),
+                    shared: false
+                )
+        );
 
         await ExecuteWithStrategyInTransactionAsync(
             contextFactory,
             async context =>
             {
-                var digests = await context.Set<User>()
+                var digests = await context
+                    .Set<User>()
                     .OrderBy(u => u.TimeCreatedUtc)
                     .Take(23)
                     .Select(u => new DailyDigest { User = u })
@@ -114,7 +119,8 @@ WHERE [Id] = @p5;
                 }
 
                 await context.SaveChangesAsync();
-            });
+            }
+        );
     }
 
     public class User
@@ -130,12 +136,16 @@ WHERE [Id] = @p5;
         public User User { get; set; }
     }
 
-    public override async Task DbUpdateException_Entries_is_correct_with_multiple_inserts(bool async)
+    public override async Task DbUpdateException_Entries_is_correct_with_multiple_inserts(
+        bool async
+    )
     {
         // SQL Server's bulk insert support makes it impossible to populate the entry which caused the exception, since the position
         // used to find the entry is returned as an output column, but the row is never received in case of an exception.
         // Instead we make sure Entries contains all entries.
-        var contextFactory = await InitializeAsync<DbContext>(onModelCreating: mb => mb.Entity<Blog>().HasIndex(b => b.Name).IsUnique());
+        var contextFactory = await InitializeAsync<DbContext>(
+            onModelCreating: mb => mb.Entity<Blog>().HasIndex(b => b.Name).IsUnique()
+        );
 
         await ExecuteWithStrategyInTransactionAsync(
             contextFactory,
@@ -158,11 +168,13 @@ WHERE [Id] = @p5;
                     exception.Entries.Select(e => (Blog)e.Entity).OrderBy(b => b.Name),
                     b => Assert.Equal("Blog1", b.Name),
                     b => Assert.Equal("Blog2", b.Name),
-                    b => Assert.Equal("Blog3", b.Name));
-            });
+                    b => Assert.Equal("Blog3", b.Name)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 @p0='Blog2' (Size = 450)
 
 SET IMPLICIT_TRANSACTIONS OFF;
@@ -171,8 +183,8 @@ INSERT INTO [Blog] ([Name])
 OUTPUT INSERTED.[Id]
 VALUES (@p0);
 """,
-        //
-"""
+            //
+            """
 @p0='Blog1' (Size = 450)
 @p1='Blog2' (Size = 450)
 @p2='Blog3' (Size = 450)
@@ -187,12 +199,12 @@ WHEN NOT MATCHED THEN
 INSERT ([Name])
 VALUES (i.[Name])
 OUTPUT INSERTED.[Id], i._Position;
-""");
+"""
+        );
     }
 
-
-    private void AssertSql(params string[] expected)
-        => TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        TestSqlLoggerFactory.AssertBaseline(expected);
 
     protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 }

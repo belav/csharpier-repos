@@ -4,4 +4,4 @@
 
 using System.Reflection;
 
-[assembly:AssemblyKeyNameAttribute ("container")]
+[assembly: AssemblyKeyNameAttribute("container")]

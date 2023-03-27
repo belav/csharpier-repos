@@ -3,4 +3,4 @@
 
 interface IContravariant<in T> { }
 
-delegate IContravariant<U[]> D<out U> ();
+delegate IContravariant<U[]> D<out U>();

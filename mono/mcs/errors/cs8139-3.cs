@@ -3,14 +3,10 @@
 
 class C
 {
-	public virtual void M ((int, int) arg)
-	{
-	}
+    public virtual void M((int, int) arg) { }
 }
 
 class D : C
 {
-	public override void M ((int c, int d) arg)
-	{
-	}
+    public override void M((int c, int d) arg) { }
 }

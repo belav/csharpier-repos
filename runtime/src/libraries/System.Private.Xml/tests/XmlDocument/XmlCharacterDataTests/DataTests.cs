@@ -34,7 +34,9 @@ namespace System.Xml.XmlDocumentTests
         public static void GetDataFromCdataNode()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<root><![CDATA[   !   <>&& very strange data 0x3000 &234   ]]></root>");
+            xmlDocument.LoadXml(
+                "<root><![CDATA[   !   <>&& very strange data 0x3000 &234   ]]></root>"
+            );
 
             var cdataNode = (XmlCharacterData)xmlDocument.DocumentElement.FirstChild;
 
@@ -57,7 +59,9 @@ namespace System.Xml.XmlDocumentTests
         public static void MoveTextNodeWithMuchWhiteSpace()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml(" <elem1 xml:space='preserve'>       content   with         spaces  </elem1>");
+            xmlDocument.LoadXml(
+                " <elem1 xml:space='preserve'>       content   with         spaces  </elem1>"
+            );
 
             var cdataNode = (XmlCharacterData)xmlDocument.FirstChild.FirstChild;
 

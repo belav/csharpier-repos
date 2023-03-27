@@ -11,21 +11,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
     {
         private static readonly CountLogAggregator<ActionInfo> s_countLogAggregator = new();
         private static readonly StatisticLogAggregator<ActionInfo> s_statisticLogAggregator = new();
-        private static readonly HistogramLogAggregator<ActionInfo> s_histogramLogAggregator = new(25, 500);
+        private static readonly HistogramLogAggregator<ActionInfo> s_histogramLogAggregator =
+            new(25, 500);
 
         private enum ActionInfo
         {
             // # of sessions where import completion is enabled by default
             SessionWithTypeImportCompletionEnabled,
+
             // # of sessions that we wait for import compeltion task to complete before return
             // curerntly it's decided by "responsive completion" options
             SessionWithImportCompletionBlocking,
-            // # of sessions where items from import completion are not included intially 
+
+            // # of sessions where items from import completion are not included intially
             SessionWithImportCompletionDelayed,
+
             // # of session among SessionWithImportCompletionDelayed where import completion items
             // are later included in list update. Note this doesn't include using of expander.
             SessionWithDelayedImportCompletionIncludedInUpdate,
-            // Among sessions in SessionWithImportCompletionDelayed, how much longer it takes 
+
+            // Among sessions in SessionWithImportCompletionDelayed, how much longer it takes
             // for import completion task to finish after regular item task is completed.
             // Knowing this would help us to decide whether a short wait would have ensure import completion
             // items to be included in the intial list.
@@ -54,20 +59,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 s_countLogAggregator.IncreaseCount(ActionInfo.SessionWithImportCompletionDelayed);
         }
 
-        internal static void LogSessionWithDelayedImportCompletionIncludedInUpdate()
-            => s_countLogAggregator.IncreaseCount(ActionInfo.SessionWithDelayedImportCompletionIncludedInUpdate);
+        internal static void LogSessionWithDelayedImportCompletionIncludedInUpdate() =>
+            s_countLogAggregator.IncreaseCount(
+                ActionInfo.SessionWithDelayedImportCompletionIncludedInUpdate
+            );
 
-        internal static void LogAdditionalTicksToCompleteDelayedImportCompletionDataPoint(TimeSpan timeSpan)
-            => s_histogramLogAggregator.LogTime(ActionInfo.AdditionalTicksToCompleteDelayedImportCompletion, timeSpan);
+        internal static void LogAdditionalTicksToCompleteDelayedImportCompletionDataPoint(
+            TimeSpan timeSpan
+        ) =>
+            s_histogramLogAggregator.LogTime(
+                ActionInfo.AdditionalTicksToCompleteDelayedImportCompletion,
+                timeSpan
+            );
 
-        internal static void LogDelayedImportCompletionIncluded()
-            => s_countLogAggregator.IncreaseCount(ActionInfo.SessionWithTypeImportCompletionEnabled);
+        internal static void LogDelayedImportCompletionIncluded() =>
+            s_countLogAggregator.IncreaseCount(ActionInfo.SessionWithTypeImportCompletionEnabled);
 
-        internal static void LogExpanderUsage()
-            => s_countLogAggregator.IncreaseCount(ActionInfo.ExpanderUsageCount);
+        internal static void LogExpanderUsage() =>
+            s_countLogAggregator.IncreaseCount(ActionInfo.ExpanderUsageCount);
 
-        internal static void LogGetDefaultsMatchTicksDataPoint(int count)
-            => s_statisticLogAggregator.AddDataPoint(ActionInfo.GetDefaultsMatchTicks, count);
+        internal static void LogGetDefaultsMatchTicksDataPoint(int count) =>
+            s_statisticLogAggregator.AddDataPoint(ActionInfo.GetDefaultsMatchTicks, count);
 
         internal static void LogSourceInitializationTicksDataPoint(TimeSpan elapsed)
         {
@@ -103,24 +115,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
         internal static void ReportTelemetry()
         {
-            Logger.Log(FunctionId.Intellisense_AsyncCompletion_Data, KeyValueLogMessage.Create(m =>
-            {
-                foreach (var kv in s_statisticLogAggregator)
+            Logger.Log(
+                FunctionId.Intellisense_AsyncCompletion_Data,
+                KeyValueLogMessage.Create(m =>
                 {
-                    var statistics = kv.Value.GetStatisticResult();
-                    statistics.WriteTelemetryPropertiesTo(m, prefix: kv.Key.ToString());
-                }
+                    foreach (var kv in s_statisticLogAggregator)
+                    {
+                        var statistics = kv.Value.GetStatisticResult();
+                        statistics.WriteTelemetryPropertiesTo(m, prefix: kv.Key.ToString());
+                    }
 
-                foreach (var kv in s_countLogAggregator)
-                {
-                    m[kv.Key.ToString()] = kv.Value.GetCount();
-                }
+                    foreach (var kv in s_countLogAggregator)
+                    {
+                        m[kv.Key.ToString()] = kv.Value.GetCount();
+                    }
 
-                foreach (var kv in s_histogramLogAggregator)
-                {
-                    kv.Value.WriteTelemetryPropertiesTo(m, prefix: kv.Key.ToString());
-                }
-            }));
+                    foreach (var kv in s_histogramLogAggregator)
+                    {
+                        kv.Value.WriteTelemetryPropertiesTo(m, prefix: kv.Key.ToString());
+                    }
+                })
+            );
         }
     }
 }

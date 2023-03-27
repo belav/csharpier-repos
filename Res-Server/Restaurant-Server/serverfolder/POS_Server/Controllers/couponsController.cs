@@ -17,6 +17,7 @@ namespace POS_Server.Controllers
     public class couponsController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller> get all coupons
         [HttpPost]
         [Route("Get")]
@@ -34,30 +35,32 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var couponsList = entity.coupons
-
-                   .Select(c => new CouponModel
-                   {
-                       cId = c.cId,
-                       name = c.name,
-                       code = c.code,
-                       isActive = c.isActive,
-                       discountType = c.discountType,
-                       discountValue = c.discountValue,
-                       startDate = c.startDate,
-                       endDate = c.endDate,
-                       notes = c.notes,
-                       quantity = c.quantity,
-                       remainQ = c.remainQ,
-                       invMin = c.invMin,
-                       invMax = c.invMax,
-                       createDate = c.createDate,
-                       updateDate = c.updateDate,
-                       createUserId = c.createUserId,
-                       updateUserId = c.updateUserId,
-                       barcode = c.barcode,
-                       forAgents=c.forAgents,
-                   })
-                   .ToList();
+                        .Select(
+                            c =>
+                                new CouponModel
+                                {
+                                    cId = c.cId,
+                                    name = c.name,
+                                    code = c.code,
+                                    isActive = c.isActive,
+                                    discountType = c.discountType,
+                                    discountValue = c.discountValue,
+                                    startDate = c.startDate,
+                                    endDate = c.endDate,
+                                    notes = c.notes,
+                                    quantity = c.quantity,
+                                    remainQ = c.remainQ,
+                                    invMin = c.invMin,
+                                    invMax = c.invMax,
+                                    createDate = c.createDate,
+                                    updateDate = c.updateDate,
+                                    createUserId = c.createUserId,
+                                    updateUserId = c.updateUserId,
+                                    barcode = c.barcode,
+                                    forAgents = c.forAgents,
+                                }
+                        )
+                        .ToList();
 
                     // can delet or not
                     if (couponsList.Count > 0)
@@ -68,7 +71,10 @@ namespace POS_Server.Controllers
                             if (couponitem.isActive == 1)
                             {
                                 long cId = (long)couponitem.cId;
-                                var copinv = entity.couponsInvoices.Where(x => x.couponId == cId).Select(x => new { x.id }).FirstOrDefault();
+                                var copinv = entity.couponsInvoices
+                                    .Where(x => x.couponId == cId)
+                                    .Select(x => new { x.id })
+                                    .FirstOrDefault();
 
                                 if ((copinv is null))
                                     canDelete = true;
@@ -77,11 +83,11 @@ namespace POS_Server.Controllers
                         }
                     }
 
-
                     return TokenManager.GenerateToken(couponsList);
                 }
             }
         }
+
         [HttpPost]
         [Route("GetEffictive")]
         public string GetEffictive(string token)
@@ -97,37 +103,46 @@ namespace POS_Server.Controllers
                 DateTime datenow = coctrlr.AddOffsetTodate(DateTime.Now);
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-
-                    var couponsList = entity.coupons.Where(x => (x.remainQ > 0 || x.quantity == 0) && (x.startDate <= datenow || x.startDate == null) && (x.endDate >= datenow || x.endDate == null) && x.isActive == 1)
-
-                   .Select(c => new CouponModel
-                   {
-                       cId = c.cId,
-                       name = c.name,
-                       code = c.code,
-                       isActive = c.isActive,
-                       discountType = c.discountType,
-                       discountValue = c.discountValue,
-                       startDate = c.startDate,
-                       endDate = c.endDate,
-                       notes = c.notes,
-                       quantity = c.quantity,
-                       remainQ = c.remainQ,
-                       invMin = c.invMin,
-                       invMax = c.invMax,
-                       createDate = c.createDate,
-                       updateDate = c.updateDate,
-                       createUserId = c.createUserId,
-                       updateUserId = c.updateUserId,
-                       barcode = c.barcode,
-                       forAgents = c.forAgents,
-                   })
-                   .ToList();
+                    var couponsList = entity.coupons
+                        .Where(
+                            x =>
+                                (x.remainQ > 0 || x.quantity == 0)
+                                && (x.startDate <= datenow || x.startDate == null)
+                                && (x.endDate >= datenow || x.endDate == null)
+                                && x.isActive == 1
+                        )
+                        .Select(
+                            c =>
+                                new CouponModel
+                                {
+                                    cId = c.cId,
+                                    name = c.name,
+                                    code = c.code,
+                                    isActive = c.isActive,
+                                    discountType = c.discountType,
+                                    discountValue = c.discountValue,
+                                    startDate = c.startDate,
+                                    endDate = c.endDate,
+                                    notes = c.notes,
+                                    quantity = c.quantity,
+                                    remainQ = c.remainQ,
+                                    invMin = c.invMin,
+                                    invMax = c.invMax,
+                                    createDate = c.createDate,
+                                    updateDate = c.updateDate,
+                                    createUserId = c.createUserId,
+                                    updateUserId = c.updateUserId,
+                                    barcode = c.barcode,
+                                    forAgents = c.forAgents,
+                                }
+                        )
+                        .ToList();
 
                     return TokenManager.GenerateToken(couponsList);
                 }
             }
         }
+
         [HttpPost]
         [Route("GetEffictiveByMemberShipID")]
         public string GetEffictiveByMemberShipID(string token)
@@ -149,76 +164,106 @@ namespace POS_Server.Controllers
                         memberShipId = long.Parse(c.Value);
                     }
                 }
-                DateTime dtnow =  coctrlr.AddOffsetTodate(DateTime.Now);
+                DateTime dtnow = coctrlr.AddOffsetTodate(DateTime.Now);
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     #region public effective coupons
-                    var couponsList = entity.coupons.Where(x => (x.remainQ > 0 || x.quantity == 0) && (x.startDate <= dtnow || x.startDate == null)
-                                                            && (x.endDate >= dtnow || x.endDate == null) && x.isActive == 1
-                                                            && x.forAgents == "pb")
-
-                   .Select(c => new CouponModel
-                   {
-                       cId = c.cId,
-                       name = c.name,
-                       code = c.code,
-                       isActive = c.isActive,
-                       discountType = c.discountType,
-                       discountValue = c.discountValue,
-                       startDate = c.startDate,
-                       endDate = c.endDate,
-                       notes = c.notes,
-                       quantity = c.quantity,
-                       remainQ = c.remainQ,
-                       invMin = c.invMin,
-                       invMax = c.invMax,
-                       createDate = c.createDate,
-                       updateDate = c.updateDate,
-                       createUserId = c.createUserId,
-                       updateUserId = c.updateUserId,
-                       barcode = c.barcode,
-                       forAgents = c.forAgents,
-                   })
-                   .ToList();
+                    var couponsList = entity.coupons
+                        .Where(
+                            x =>
+                                (x.remainQ > 0 || x.quantity == 0)
+                                && (x.startDate <= dtnow || x.startDate == null)
+                                && (x.endDate >= dtnow || x.endDate == null)
+                                && x.isActive == 1
+                                && x.forAgents == "pb"
+                        )
+                        .Select(
+                            c =>
+                                new CouponModel
+                                {
+                                    cId = c.cId,
+                                    name = c.name,
+                                    code = c.code,
+                                    isActive = c.isActive,
+                                    discountType = c.discountType,
+                                    discountValue = c.discountValue,
+                                    startDate = c.startDate,
+                                    endDate = c.endDate,
+                                    notes = c.notes,
+                                    quantity = c.quantity,
+                                    remainQ = c.remainQ,
+                                    invMin = c.invMin,
+                                    invMax = c.invMax,
+                                    createDate = c.createDate,
+                                    updateDate = c.updateDate,
+                                    createUserId = c.createUserId,
+                                    updateUserId = c.updateUserId,
+                                    barcode = c.barcode,
+                                    forAgents = c.forAgents,
+                                }
+                        )
+                        .ToList();
                     #endregion
 
                     #region memberShip Coupons
                     var publicCouponIds = couponsList.Select(x => x.cId).ToList();
-              
-                    var memberShipcoupons = (from c in entity.coupons.Where(x => (x.remainQ > 0 || x.quantity == 0) && (x.startDate <= dtnow || x.startDate == null)
-                                                             && (x.endDate >= dtnow || x.endDate == null) && x.isActive == 1
-                                                             && !publicCouponIds.Contains(x.cId))
-                                             join cm in entity.couponsMemberships.Where(x => x.membershipId == memberShipId) on c.cId equals cm.cId
-                                             join M in entity.memberships.Where(x => x.membershipId == memberShipId) on cm.membershipId equals M.membershipId
-                                             join CSH in entity.agentMembershipCash on M.membershipId equals CSH.membershipId into CS
-                                             from JCS in CS.DefaultIfEmpty()
-                                             where (M.isActive == 1 &&
-                                     (M.subscriptionType == "f" ||
-                                     (M.subscriptionType == "o" && JCS.cashTransId > 0)
-                                     || ((JCS.subscriptionType == "m" || JCS.subscriptionType == "y") && JCS.cashTransId > 0 && JCS.endDate >= dtnow)))
 
-                                             select new CouponModel
-                                             {
-                                                 cId = c.cId,
-                                                 name = c.name,
-                                                 code = c.code,
-                                                 isActive = c.isActive,
-                                                 discountType = c.discountType,
-                                                 discountValue = c.discountValue,
-                                                 startDate = c.startDate,
-                                                 endDate = c.endDate,
-                                                 notes = c.notes,
-                                                 quantity = c.quantity,
-                                                 remainQ = c.remainQ,
-                                                 invMin = c.invMin,
-                                                 invMax = c.invMax,
-                                                 createDate = c.createDate,
-                                                 updateDate = c.updateDate,
-                                                 createUserId = c.createUserId,
-                                                 updateUserId = c.updateUserId,
-                                                 barcode = c.barcode,
-                                                 forAgents = c.forAgents,
-                                             }).ToList();
+                    var memberShipcoupons = (
+                        from c in entity.coupons.Where(
+                            x =>
+                                (x.remainQ > 0 || x.quantity == 0)
+                                && (x.startDate <= dtnow || x.startDate == null)
+                                && (x.endDate >= dtnow || x.endDate == null)
+                                && x.isActive == 1
+                                && !publicCouponIds.Contains(x.cId)
+                        )
+                        join cm in entity.couponsMemberships.Where(
+                            x => x.membershipId == memberShipId
+                        )
+                            on c.cId equals cm.cId
+                        join M in entity.memberships.Where(x => x.membershipId == memberShipId)
+                            on cm.membershipId equals M.membershipId
+                        join CSH in entity.agentMembershipCash
+                            on M.membershipId equals CSH.membershipId
+                            into CS
+                        from JCS in CS.DefaultIfEmpty()
+                        where
+                            (
+                                M.isActive == 1
+                                && (
+                                    M.subscriptionType == "f"
+                                    || (M.subscriptionType == "o" && JCS.cashTransId > 0)
+                                    || (
+                                        (JCS.subscriptionType == "m" || JCS.subscriptionType == "y")
+                                        && JCS.cashTransId > 0
+                                        && JCS.endDate >= dtnow
+                                    )
+                                )
+                            )
+
+                        select new CouponModel
+                        {
+                            cId = c.cId,
+                            name = c.name,
+                            code = c.code,
+                            isActive = c.isActive,
+                            discountType = c.discountType,
+                            discountValue = c.discountValue,
+                            startDate = c.startDate,
+                            endDate = c.endDate,
+                            notes = c.notes,
+                            quantity = c.quantity,
+                            remainQ = c.remainQ,
+                            invMin = c.invMin,
+                            invMax = c.invMax,
+                            createDate = c.createDate,
+                            updateDate = c.updateDate,
+                            createUserId = c.createUserId,
+                            updateUserId = c.updateUserId,
+                            barcode = c.barcode,
+                            forAgents = c.forAgents,
+                        }
+                    ).ToList();
                     #endregion
 
 
@@ -231,7 +276,8 @@ namespace POS_Server.Controllers
                 }
             }
         }
-        // GET api/<controller>  Get Coupon By ID 
+
+        // GET api/<controller>  Get Coupon By ID
         [HttpPost]
         [Route("GetCouponByID")]
         public string GetcouponByID(string token)
@@ -256,36 +302,40 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var coupon = entity.coupons
-                   .Where(c => c.cId == cId)
-                   .Select(c => new
-                   {
-                       c.cId,
-                       c.name,
-                       c.code,
-                       c.isActive,
-                       c.discountType,
-                       c.discountValue,
-                       c.startDate,
-                       c.endDate,
-                       c.notes,
-                       c.quantity,
-                       c.remainQ,
-                       c.invMin,
-                       c.invMax,
-                       c.createDate,
-                       c.updateDate,
-                       c.createUserId,
-                       c.updateUserId,
-                       c.barcode,
-                      c.forAgents,
-                   })
-                   .FirstOrDefault();
+                        .Where(c => c.cId == cId)
+                        .Select(
+                            c =>
+                                new
+                                {
+                                    c.cId,
+                                    c.name,
+                                    c.code,
+                                    c.isActive,
+                                    c.discountType,
+                                    c.discountValue,
+                                    c.startDate,
+                                    c.endDate,
+                                    c.notes,
+                                    c.quantity,
+                                    c.remainQ,
+                                    c.invMin,
+                                    c.invMax,
+                                    c.createDate,
+                                    c.updateDate,
+                                    c.createUserId,
+                                    c.updateUserId,
+                                    c.barcode,
+                                    c.forAgents,
+                                }
+                        )
+                        .FirstOrDefault();
 
                     return TokenManager.GenerateToken(coupon);
                 }
             }
         }
-        // GET api/<controller>  Get Coupon By Code 
+
+        // GET api/<controller>  Get Coupon By Code
         [HttpPost]
         [Route("GetCouponByCode")]
         public string GetCouponByCode(string token)
@@ -310,35 +360,39 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var coupon = entity.coupons
-                   .Where(c => c.code == code)
-                   .Select(c => new
-                   {
-                       c.cId,
-                       c.name,
-                       c.code,
-                       c.isActive,
-                       c.discountType,
-                       c.discountValue,
-                       c.startDate,
-                       c.endDate,
-                       c.notes,
-                       c.quantity,
-                       c.remainQ,
-                       c.invMin,
-                       c.invMax,
-                       c.createDate,
-                       c.updateDate,
-                       c.createUserId,
-                       c.updateUserId,
-                       c.barcode,
-                        c.forAgents,
-                   })
-                   .FirstOrDefault();
+                        .Where(c => c.code == code)
+                        .Select(
+                            c =>
+                                new
+                                {
+                                    c.cId,
+                                    c.name,
+                                    c.code,
+                                    c.isActive,
+                                    c.discountType,
+                                    c.discountValue,
+                                    c.startDate,
+                                    c.endDate,
+                                    c.notes,
+                                    c.quantity,
+                                    c.remainQ,
+                                    c.invMin,
+                                    c.invMax,
+                                    c.createDate,
+                                    c.updateDate,
+                                    c.createUserId,
+                                    c.updateUserId,
+                                    c.barcode,
+                                    c.forAgents,
+                                }
+                        )
+                        .FirstOrDefault();
 
                     return TokenManager.GenerateToken(coupon);
                 }
             }
         }
+
         // GET api/<controller>  Get Coupon By Barcode
         [HttpPost]
         [Route("GetCouponByBarcode")]
@@ -364,35 +418,39 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var coupon = entity.coupons
-                   .Where(c => c.barcode == barcode)
-                   .Select(c => new
-                   {
-                       c.cId,
-                       c.name,
-                       c.code,
-                       c.isActive,
-                       c.discountType,
-                       c.discountValue,
-                       c.startDate,
-                       c.endDate,
-                       c.notes,
-                       c.quantity,
-                       c.remainQ,
-                       c.invMin,
-                       c.invMax,
-                       c.createDate,
-                       c.updateDate,
-                       c.createUserId,
-                       c.updateUserId,
-                       c.barcode,
-                    c.forAgents,
-                   })
-                   .FirstOrDefault();
+                        .Where(c => c.barcode == barcode)
+                        .Select(
+                            c =>
+                                new
+                                {
+                                    c.cId,
+                                    c.name,
+                                    c.code,
+                                    c.isActive,
+                                    c.discountType,
+                                    c.discountValue,
+                                    c.startDate,
+                                    c.endDate,
+                                    c.notes,
+                                    c.quantity,
+                                    c.remainQ,
+                                    c.invMin,
+                                    c.invMax,
+                                    c.createDate,
+                                    c.updateDate,
+                                    c.createUserId,
+                                    c.updateUserId,
+                                    c.barcode,
+                                    c.forAgents,
+                                }
+                        )
+                        .FirstOrDefault();
 
                     return TokenManager.GenerateToken(coupon);
                 }
             }
         }
+
         // GET api/<controller>  Get Coupon By code
         [HttpPost]
         [Route("IsExistcode")]
@@ -418,22 +476,25 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var coupon = entity.coupons
-                   .Where(c => c.code == code)
-                   .Select(c => new
-                   {
-                       c.cId,
-                       c.name,
-                       c.code,
-
-                       c.barcode,
-                       c.forAgents,
-                   })
-                   .FirstOrDefault();
+                        .Where(c => c.code == code)
+                        .Select(
+                            c =>
+                                new
+                                {
+                                    c.cId,
+                                    c.name,
+                                    c.code,
+                                    c.barcode,
+                                    c.forAgents,
+                                }
+                        )
+                        .FirstOrDefault();
 
                     return TokenManager.GenerateToken(coupon);
                 }
             }
         }
+
         // GET api/<controller>  Get Coupon By is active
         [HttpPost]
         [Route("GetByisActive")]
@@ -459,35 +520,39 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var coupon = entity.coupons
-                   .Where(c => c.isActive == isActive)
-                   .Select(c => new
-                   {
-                       c.cId,
-                       c.name,
-                       c.code,
-                       c.isActive,
-                       c.discountType,
-                       c.discountValue,
-                       c.startDate,
-                       c.endDate,
-                       c.notes,
-                       c.quantity,
-                       c.remainQ,
-                       c.invMin,
-                       c.invMax,
-                       c.createDate,
-                       c.updateDate,
-                       c.createUserId,
-                       c.updateUserId,
-                  c.forAgents,
-                   })
-                   .ToList();
+                        .Where(c => c.isActive == isActive)
+                        .Select(
+                            c =>
+                                new
+                                {
+                                    c.cId,
+                                    c.name,
+                                    c.code,
+                                    c.isActive,
+                                    c.discountType,
+                                    c.discountValue,
+                                    c.startDate,
+                                    c.endDate,
+                                    c.notes,
+                                    c.quantity,
+                                    c.remainQ,
+                                    c.invMin,
+                                    c.invMax,
+                                    c.createDate,
+                                    c.updateDate,
+                                    c.createUserId,
+                                    c.updateUserId,
+                                    c.forAgents,
+                                }
+                        )
+                        .ToList();
 
                     return TokenManager.GenerateToken(coupon);
                 }
             }
         }
-        // add or update coupon 
+
+        // add or update coupon
         [HttpPost]
         [Route("Save")]
         public string Save(string token)
@@ -510,7 +575,10 @@ namespace POS_Server.Controllers
                     {
                         couponObject = c.Value.Replace("\\", string.Empty);
                         couponObject = couponObject.Trim('"');
-                        Object = JsonConvert.DeserializeObject<coupons>(couponObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        Object = JsonConvert.DeserializeObject<coupons>(
+                            couponObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -523,9 +591,8 @@ namespace POS_Server.Controllers
                         var couponEntity = entity.Set<coupons>();
                         if (Object.cId == 0)
                         {
-
-                            Object.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            Object.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             Object.updateUserId = Object.createUserId;
                             couponEntity.Add(Object);
                             tmpcoupon = couponEntity.Add(Object);
@@ -535,8 +602,9 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-
-                            tmpcoupon = entity.coupons.Where(p => p.cId == Object.cId).FirstOrDefault();
+                            tmpcoupon = entity.coupons
+                                .Where(p => p.cId == Object.cId)
+                                .FirstOrDefault();
                             tmpcoupon.name = Object.name;
                             tmpcoupon.code = Object.code;
                             tmpcoupon.isActive = Object.isActive;
@@ -550,7 +618,7 @@ namespace POS_Server.Controllers
                             tmpcoupon.invMin = Object.invMin;
                             tmpcoupon.invMax = Object.invMax;
 
-                            tmpcoupon.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);// server current date;
+                            tmpcoupon.updateDate = coctrlr.AddOffsetTodate(DateTime.Now); // server current date;
 
                             tmpcoupon.updateUserId = Object.updateUserId;
                             tmpcoupon.barcode = Object.barcode;
@@ -561,7 +629,6 @@ namespace POS_Server.Controllers
                         }
                     }
                 }
-
                 catch
                 {
                     message = "0";
@@ -569,6 +636,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [HttpPost]
         [Route("Delete")]
         public string Delete(string token)
@@ -630,7 +698,7 @@ namespace POS_Server.Controllers
 
                             coupObj.isActive = 0;
                             coupObj.updateUserId = userId;
-                            coupObj.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            coupObj.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
                         }
@@ -656,7 +724,6 @@ namespace POS_Server.Controllers
             }
             else
             {
-
                 long membershipId = 0;
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
@@ -668,46 +735,41 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = (from S in entity.couponsMemberships
-                                join B in entity.coupons on S.cId equals B.cId into JB
-                                join U in entity.memberships on S.membershipId equals U.membershipId into JU
-                                from JBB in JB.DefaultIfEmpty()
-                                from JUU in JU.DefaultIfEmpty()
-                                where S.membershipId == membershipId
-                                select new CouponModel()
-                                {
-                                    cId = JBB.cId,
-                                    name = JBB.name,
-                                    code = JBB.code,
-                                    isActive = JBB.isActive,
-                                    discountType = JBB.discountType,
-                                    discountValue = JBB.discountValue,
-                                    startDate = JBB.startDate,
-                                    endDate = JBB.endDate,
-                                    notes = JBB.notes,
-                                    quantity = JBB.quantity,
-                                    remainQ = JBB.remainQ,
-                                    invMin = JBB.invMin,
-                                    invMax = JBB.invMax,
-                                    createDate = JBB.createDate,
-                                    updateDate = JBB.updateDate,
-                                    createUserId = JBB.createUserId,
-                                    updateUserId = JBB.updateUserId,
-                                    barcode = JBB.barcode,
-
-                                    couponMembershipId = S.couponMembershipId,
-
-                                    membershipId = S.membershipId,
-                                    forAgents=JBB.forAgents,
-
-                                }).ToList();
+                    var List = (
+                        from S in entity.couponsMemberships
+                        join B in entity.coupons on S.cId equals B.cId into JB
+                        join U in entity.memberships on S.membershipId equals U.membershipId into JU
+                        from JBB in JB.DefaultIfEmpty()
+                        from JUU in JU.DefaultIfEmpty()
+                        where S.membershipId == membershipId
+                        select new CouponModel()
+                        {
+                            cId = JBB.cId,
+                            name = JBB.name,
+                            code = JBB.code,
+                            isActive = JBB.isActive,
+                            discountType = JBB.discountType,
+                            discountValue = JBB.discountValue,
+                            startDate = JBB.startDate,
+                            endDate = JBB.endDate,
+                            notes = JBB.notes,
+                            quantity = JBB.quantity,
+                            remainQ = JBB.remainQ,
+                            invMin = JBB.invMin,
+                            invMax = JBB.invMax,
+                            createDate = JBB.createDate,
+                            updateDate = JBB.updateDate,
+                            createUserId = JBB.createUserId,
+                            updateUserId = JBB.updateUserId,
+                            barcode = JBB.barcode,
+                            couponMembershipId = S.couponMembershipId,
+                            membershipId = S.membershipId,
+                            forAgents = JBB.forAgents,
+                        }
+                    ).ToList();
                     return TokenManager.GenerateToken(List);
-
-
                 }
             }
         }
-
-
     }
 }

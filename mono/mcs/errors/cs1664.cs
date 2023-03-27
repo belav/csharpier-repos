@@ -4,5 +4,5 @@
 
 public unsafe struct C
 {
-    private fixed long test_1 [1073741825];
+    private fixed long test_1[1073741825];
 }

@@ -127,27 +127,35 @@ namespace System.Numerics.Tests
             Vector2 v1 = new Vector2(2.0f, 3.0f);
 
             string v1str = v1.ToString();
-            string expectedv1 = string.Format(CultureInfo.CurrentCulture
-                , "<{1:G}{0} {2:G}>"
-                , new object[] { separator, 2, 3 });
+            string expectedv1 = string.Format(
+                CultureInfo.CurrentCulture,
+                "<{1:G}{0} {2:G}>",
+                new object[] { separator, 2, 3 }
+            );
             Assert.Equal(expectedv1, v1str);
 
             string v1strformatted = v1.ToString("c", CultureInfo.CurrentCulture);
-            string expectedv1formatted = string.Format(CultureInfo.CurrentCulture
-                , "<{1:c}{0} {2:c}>"
-                , new object[] { separator, 2, 3 });
+            string expectedv1formatted = string.Format(
+                CultureInfo.CurrentCulture,
+                "<{1:c}{0} {2:c}>",
+                new object[] { separator, 2, 3 }
+            );
             Assert.Equal(expectedv1formatted, v1strformatted);
 
             string v2strformatted = v1.ToString("c", enUsCultureInfo);
-            string expectedv2formatted = string.Format(enUsCultureInfo
-                , "<{1:c}{0} {2:c}>"
-                , new object[] { enUsCultureInfo.NumberFormat.NumberGroupSeparator, 2, 3 });
+            string expectedv2formatted = string.Format(
+                enUsCultureInfo,
+                "<{1:c}{0} {2:c}>",
+                new object[] { enUsCultureInfo.NumberFormat.NumberGroupSeparator, 2, 3 }
+            );
             Assert.Equal(expectedv2formatted, v2strformatted);
 
             string v3strformatted = v1.ToString("c");
-            string expectedv3formatted = string.Format(CultureInfo.CurrentCulture
-                , "<{1:c}{0} {2:c}>"
-                , new object[] { separator, 2, 3 });
+            string expectedv3formatted = string.Format(
+                CultureInfo.CurrentCulture,
+                "<{1:c}{0} {2:c}>",
+                new object[] { separator, 2, 3 }
+            );
             Assert.Equal(expectedv3formatted, v3strformatted);
         }
 
@@ -162,7 +170,10 @@ namespace System.Numerics.Tests
             float actual;
 
             actual = Vector2.Distance(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Distance did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Distance did not return the expected value."
+            );
         }
 
         // A test for Distance (Vector2f, Vector2f)
@@ -188,7 +199,10 @@ namespace System.Numerics.Tests
             float actual;
 
             actual = Vector2.DistanceSquared(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.DistanceSquared did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.DistanceSquared did not return the expected value."
+            );
         }
 
         // A test for Dot (Vector2f, Vector2f)
@@ -202,7 +216,10 @@ namespace System.Numerics.Tests
             float actual;
 
             actual = Vector2.Dot(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Dot did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Dot did not return the expected value."
+            );
         }
 
         // A test for Dot (Vector2f, Vector2f)
@@ -227,7 +244,10 @@ namespace System.Numerics.Tests
             Vector2 b = new Vector2(float.MaxValue, float.MaxValue);
 
             float actual = Vector2.Dot(a, b);
-            Assert.True(float.IsNegativeInfinity(actual), "Vector2f.Dot did not return the expected value.");
+            Assert.True(
+                float.IsNegativeInfinity(actual),
+                "Vector2f.Dot did not return the expected value."
+            );
         }
 
         // A test for Length ()
@@ -243,7 +263,10 @@ namespace System.Numerics.Tests
 
             actual = target.Length();
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Length did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Length did not return the expected value."
+            );
         }
 
         // A test for Length ()
@@ -260,7 +283,10 @@ namespace System.Numerics.Tests
 
             actual = target.Length();
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Length did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Length did not return the expected value."
+            );
         }
 
         // A test for LengthSquared ()
@@ -276,7 +302,10 @@ namespace System.Numerics.Tests
 
             actual = target.LengthSquared();
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.LengthSquared did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.LengthSquared did not return the expected value."
+            );
         }
 
         // A test for LengthSquared ()
@@ -302,7 +331,10 @@ namespace System.Numerics.Tests
             Vector2 expected = new Vector2(-1.0f, 1.0f);
             Vector2 actual;
             actual = Vector2.Min(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Min did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Min did not return the expected value."
+            );
         }
 
         [Fact]
@@ -337,7 +369,10 @@ namespace System.Numerics.Tests
             Vector2 expected = new Vector2(2.0f, 4.0f);
             Vector2 actual;
             actual = Vector2.Max(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Max did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Max did not return the expected value."
+            );
         }
 
         // A test for Clamp (Vector2f, Vector2f, Vector2f)
@@ -352,23 +387,35 @@ namespace System.Numerics.Tests
             // Case N1: specified value is in the range.
             Vector2 expected = new Vector2(0.5f, 0.3f);
             Vector2 actual = Vector2.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Clamp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Clamp did not return the expected value."
+            );
             // Normal case.
             // Case N2: specified value is bigger than max value.
             a = new Vector2(2.0f, 3.0f);
             expected = max;
             actual = Vector2.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Clamp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Clamp did not return the expected value."
+            );
             // Case N3: specified value is smaller than max value.
             a = new Vector2(-1.0f, -2.0f);
             expected = min;
             actual = Vector2.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Clamp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Clamp did not return the expected value."
+            );
             // Case N4: combination case.
             a = new Vector2(-2.0f, 4.0f);
             expected = new Vector2(min.X, max.Y);
             actual = Vector2.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Clamp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Clamp did not return the expected value."
+            );
             // User specified min value is bigger than max value.
             max = new Vector2(0.0f, 0.1f);
             min = new Vector2(1.0f, 1.1f);
@@ -377,20 +424,29 @@ namespace System.Numerics.Tests
             a = new Vector2(0.5f, 0.3f);
             expected = max;
             actual = Vector2.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Clamp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Clamp did not return the expected value."
+            );
 
             // Normal case.
             // Case W2: specified value is bigger than max and min value.
             a = new Vector2(2.0f, 3.0f);
             expected = max;
             actual = Vector2.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Clamp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Clamp did not return the expected value."
+            );
 
             // Case W3: specified value is smaller than min and max value.
             a = new Vector2(-1.0f, -2.0f);
             expected = max;
             actual = Vector2.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Clamp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Clamp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector2f, Vector2f, float)
@@ -405,7 +461,10 @@ namespace System.Numerics.Tests
             Vector2 expected = new Vector2(2.0f, 3.0f);
             Vector2 actual;
             actual = Vector2.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector2f, Vector2f, float)
@@ -419,7 +478,10 @@ namespace System.Numerics.Tests
             float t = 0.0f;
             Vector2 expected = Vector2.Zero;
             Vector2 actual = Vector2.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector2f, Vector2f, float)
@@ -433,7 +495,10 @@ namespace System.Numerics.Tests
             float t = 1.0f;
             Vector2 expected = new Vector2(3.18f, 4.25f);
             Vector2 actual = Vector2.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector2f, Vector2f, float)
@@ -447,7 +512,10 @@ namespace System.Numerics.Tests
             float t = 2.0f;
             Vector2 expected = b * 2.0f;
             Vector2 actual = Vector2.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector2f, Vector2f, float)
@@ -461,7 +529,10 @@ namespace System.Numerics.Tests
             float t = -2.0f;
             Vector2 expected = -(b * 2.0f);
             Vector2 actual = Vector2.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector2f, Vector2f, float)
@@ -474,8 +545,14 @@ namespace System.Numerics.Tests
 
             float t = 0.408f;
             Vector2 actual = Vector2.Lerp(a, b, t);
-            Assert.True(float.IsPositiveInfinity(actual.X), "Vector2f.Lerp did not return the expected value.");
-            Assert.True(float.IsNegativeInfinity(actual.Y), "Vector2f.Lerp did not return the expected value.");
+            Assert.True(
+                float.IsPositiveInfinity(actual.X),
+                "Vector2f.Lerp did not return the expected value."
+            );
+            Assert.True(
+                float.IsNegativeInfinity(actual.Y),
+                "Vector2f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector2f, Vector2f, float)
@@ -490,7 +567,10 @@ namespace System.Numerics.Tests
 
             Vector2 expected = new Vector2(1.0f, 2.0f);
             Vector2 actual = Vector2.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector2f, Vector2f, float)
@@ -505,7 +585,10 @@ namespace System.Numerics.Tests
 
             Vector2 expected = new Vector2(0.45155275f);
             Vector2 actual = Vector2.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector2f, Vector2f, float)
@@ -521,7 +604,10 @@ namespace System.Numerics.Tests
 
             Vector2 expected = new Vector2(0.33333334f);
             Vector2 actual = Vector2.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Transform(Vector2f, Matrix4x4)
@@ -530,9 +616,9 @@ namespace System.Numerics.Tests
         {
             Vector2 v = new Vector2(1.0f, 2.0f);
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
             m.M41 = 10.0f;
             m.M42 = 20.0f;
             m.M43 = 30.0f;
@@ -541,7 +627,10 @@ namespace System.Numerics.Tests
             Vector2 actual;
 
             actual = Vector2.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform(Vector2f, Matrix3x2)
@@ -557,7 +646,10 @@ namespace System.Numerics.Tests
             Vector2 actual;
 
             actual = Vector2.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Transform did not return the expected value."
+            );
         }
 
         // A test for TransformNormal (Vector2f, Matrix4x4)
@@ -566,9 +658,9 @@ namespace System.Numerics.Tests
         {
             Vector2 v = new Vector2(1.0f, 2.0f);
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
             m.M41 = 10.0f;
             m.M42 = 20.0f;
             m.M43 = 30.0f;
@@ -577,7 +669,10 @@ namespace System.Numerics.Tests
             Vector2 actual;
 
             actual = Vector2.TransformNormal(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Transform did not return the expected value."
+            );
         }
 
         // A test for TransformNormal (Vector2f, Matrix3x2)
@@ -593,7 +688,10 @@ namespace System.Numerics.Tests
             Vector2 actual;
 
             actual = Vector2.TransformNormal(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector2f, Quaternion)
@@ -603,14 +701,17 @@ namespace System.Numerics.Tests
             Vector2 v = new Vector2(1.0f, 2.0f);
 
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
             Quaternion q = Quaternion.CreateFromRotationMatrix(m);
 
             Vector2 expected = Vector2.Transform(v, m);
             Vector2 actual = Vector2.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector2f, Quaternion)
@@ -623,7 +724,10 @@ namespace System.Numerics.Tests
             Vector2 expected = v;
 
             Vector2 actual = Vector2.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector2f, Quaternion)
@@ -636,7 +740,10 @@ namespace System.Numerics.Tests
             Vector2 expected = v;
 
             Vector2 actual = Vector2.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Transform did not return the expected value."
+            );
         }
 
         // A test for Normalize (Vector2f)
@@ -644,11 +751,17 @@ namespace System.Numerics.Tests
         public void Vector2NormalizeTest()
         {
             Vector2 a = new Vector2(2.0f, 3.0f);
-            Vector2 expected = new Vector2(0.554700196225229122018341733457f, 0.8320502943378436830275126001855f);
+            Vector2 expected = new Vector2(
+                0.554700196225229122018341733457f,
+                0.8320502943378436830275126001855f
+            );
             Vector2 actual;
 
             actual = Vector2.Normalize(a);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Normalize did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Normalize did not return the expected value."
+            );
         }
 
         // A test for Normalize (Vector2f)
@@ -658,7 +771,10 @@ namespace System.Numerics.Tests
         {
             Vector2 a = new Vector2(); // no parameter, default to 0.0f
             Vector2 actual = Vector2.Normalize(a);
-            Assert.True(float.IsNaN(actual.X) && float.IsNaN(actual.Y), "Vector2f.Normalize did not return the expected value.");
+            Assert.True(
+                float.IsNaN(actual.X) && float.IsNaN(actual.Y),
+                "Vector2f.Normalize did not return the expected value."
+            );
         }
 
         // A test for Normalize (Vector2f)
@@ -683,10 +799,11 @@ namespace System.Numerics.Tests
 
             actual = -a;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.operator - did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.operator - did not return the expected value."
+            );
         }
-
-
 
         // A test for operator - (Vector2f)
         // Negate test with special float value
@@ -697,8 +814,14 @@ namespace System.Numerics.Tests
 
             Vector2 actual = -a;
 
-            Assert.True(float.IsNegativeInfinity(actual.X), "Vector2f.operator - did not return the expected value.");
-            Assert.True(float.IsPositiveInfinity(actual.Y), "Vector2f.operator - did not return the expected value.");
+            Assert.True(
+                float.IsNegativeInfinity(actual.X),
+                "Vector2f.operator - did not return the expected value."
+            );
+            Assert.True(
+                float.IsPositiveInfinity(actual.Y),
+                "Vector2f.operator - did not return the expected value."
+            );
         }
 
         // A test for operator - (Vector2f)
@@ -709,8 +832,14 @@ namespace System.Numerics.Tests
             Vector2 a = new Vector2(float.NaN, 0.0f);
             Vector2 actual = -a;
 
-            Assert.True(float.IsNaN(actual.X), "Vector2f.operator - did not return the expected value.");
-            Assert.True(float.Equals(0.0f, actual.Y), "Vector2f.operator - did not return the expected value.");
+            Assert.True(
+                float.IsNaN(actual.X),
+                "Vector2f.operator - did not return the expected value."
+            );
+            Assert.True(
+                float.Equals(0.0f, actual.Y),
+                "Vector2f.operator - did not return the expected value."
+            );
         }
 
         // A test for operator - (Vector2f, Vector2f)
@@ -725,7 +854,10 @@ namespace System.Numerics.Tests
 
             actual = a - b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.operator - did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.operator - did not return the expected value."
+            );
         }
 
         // A test for operator * (Vector2f, float)
@@ -739,7 +871,10 @@ namespace System.Numerics.Tests
             Vector2 actual;
 
             actual = a * factor;
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.operator * did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.operator * did not return the expected value."
+            );
         }
 
         // A test for operator * (float, Vector2f)
@@ -753,7 +888,10 @@ namespace System.Numerics.Tests
             Vector2 actual;
 
             actual = factor * a;
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.operator * did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.operator * did not return the expected value."
+            );
         }
 
         // A test for operator * (Vector2f, Vector2f)
@@ -768,7 +906,10 @@ namespace System.Numerics.Tests
 
             actual = a * b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.operator * did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.operator * did not return the expected value."
+            );
         }
 
         // A test for operator / (Vector2f, float)
@@ -784,7 +925,10 @@ namespace System.Numerics.Tests
 
             actual = a / div;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.operator / did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.operator / did not return the expected value."
+            );
         }
 
         // A test for operator / (Vector2f, Vector2f)
@@ -799,7 +943,10 @@ namespace System.Numerics.Tests
 
             actual = a / b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.operator / did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.operator / did not return the expected value."
+            );
         }
 
         // A test for operator / (Vector2f, float)
@@ -813,8 +960,14 @@ namespace System.Numerics.Tests
 
             Vector2 actual = a / div;
 
-            Assert.True(float.IsNegativeInfinity(actual.X), "Vector2f.operator / did not return the expected value.");
-            Assert.True(float.IsPositiveInfinity(actual.Y), "Vector2f.operator / did not return the expected value.");
+            Assert.True(
+                float.IsNegativeInfinity(actual.X),
+                "Vector2f.operator / did not return the expected value."
+            );
+            Assert.True(
+                float.IsPositiveInfinity(actual.Y),
+                "Vector2f.operator / did not return the expected value."
+            );
         }
 
         // A test for operator / (Vector2f, Vector2f)
@@ -827,8 +980,14 @@ namespace System.Numerics.Tests
 
             Vector2 actual = a / b;
 
-            Assert.True(float.IsInfinity(actual.X), "Vector2f.operator / did not return the expected value.");
-            Assert.True(float.IsInfinity(actual.Y), "Vector2f.operator / did not return the expected value.");
+            Assert.True(
+                float.IsInfinity(actual.X),
+                "Vector2f.operator / did not return the expected value."
+            );
+            Assert.True(
+                float.IsInfinity(actual.Y),
+                "Vector2f.operator / did not return the expected value."
+            );
         }
 
         // A test for operator + (Vector2f, Vector2f)
@@ -843,7 +1002,10 @@ namespace System.Numerics.Tests
 
             actual = a + b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.operator + did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.operator + did not return the expected value."
+            );
         }
 
         // A test for Vector2f (float, float)
@@ -854,7 +1016,10 @@ namespace System.Numerics.Tests
             float y = 2.0f;
 
             Vector2 target = new Vector2(x, y);
-            Assert.True(MathHelper.Equal(target.X, x) && MathHelper.Equal(target.Y, y), "Vector2f(x,y) constructor did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(target.X, x) && MathHelper.Equal(target.Y, y),
+                "Vector2f(x,y) constructor did not return the expected value."
+            );
         }
 
         // A test for Vector2f ()
@@ -1161,19 +1326,28 @@ namespace System.Numerics.Tests
             Vector2 n = new Vector2(0.0f, 1.0f);
             Vector2 expected = new Vector2(a.X, -a.Y);
             Vector2 actual = Vector2.Reflect(a, n);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Reflect did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Reflect did not return the expected value."
+            );
 
             // Reflect on XY plane.
             n = new Vector2(0.0f, 0.0f);
             expected = new Vector2(a.X, a.Y);
             actual = Vector2.Reflect(a, n);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Reflect did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Reflect did not return the expected value."
+            );
 
             // Reflect on YZ plane.
             n = new Vector2(1.0f, 0.0f);
             expected = new Vector2(-a.X, a.Y);
             actual = Vector2.Reflect(a, n);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Reflect did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Reflect did not return the expected value."
+            );
         }
 
         // A test for Reflect (Vector2f, Vector2f)
@@ -1187,7 +1361,10 @@ namespace System.Numerics.Tests
 
             Vector2 expected = -n;
             Vector2 actual = Vector2.Reflect(a, n);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Reflect did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Reflect did not return the expected value."
+            );
         }
 
         // A test for Reflect (Vector2f, Vector2f)
@@ -1201,7 +1378,10 @@ namespace System.Numerics.Tests
 
             Vector2 expected = n;
             Vector2 actual = Vector2.Reflect(a, n);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector2f.Reflect did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector2f.Reflect did not return the expected value."
+            );
         }
 
         [Fact]

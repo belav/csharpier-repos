@@ -3,16 +3,12 @@
 
 public class D
 {
-	static void Test (bool b, string a = "s")
-	{
-	}
+    static void Test(bool b, string a = "s") { }
 
-	static void Test (bool b, int i = 9, string a = "b")
-	{
-	}
+    static void Test(bool b, int i = 9, string a = "b") { }
 
-	public static void Main ()
-	{
-		Test (false);
-	}
+    public static void Main()
+    {
+        Test(false);
+    }
 }

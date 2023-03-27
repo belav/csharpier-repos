@@ -13,17 +13,21 @@ namespace Microsoft.WebAssembly.Diagnostics
 {
     internal class InspectorClient : DevToolsClient
     {
-        List<(int, TaskCompletionSource<Result>)> pending_cmds = new List<(int, TaskCompletionSource<Result>)>();
+        List<(int, TaskCompletionSource<Result>)> pending_cmds =
+            new List<(int, TaskCompletionSource<Result>)>();
         Func<string, JObject, CancellationToken, Task> onEvent;
         int next_cmd_id;
 
-        public InspectorClient(ILogger logger) : base(logger) { }
+        public InspectorClient(ILogger logger)
+            : base(logger) { }
 
         Task HandleMessage(string msg, CancellationToken token)
         {
             var res = JObject.Parse(msg);
             if (res["id"] == null)
-                DumpProtocol(string.Format("Event method: {0} params: {1}", res["method"], res["params"]));
+                DumpProtocol(
+                    string.Format("Event method: {0} params: {1}", res["method"], res["params"])
+                );
             else
                 DumpProtocol(string.Format("Response id: {0} res: {1}", res["id"], res));
 
@@ -41,9 +45,9 @@ namespace Microsoft.WebAssembly.Diagnostics
             Uri uri,
             Func<string, JObject, CancellationToken, Task> onEvent,
             Func<CancellationToken, Task> send,
-            CancellationToken token)
+            CancellationToken token
+        )
         {
-
             this.onEvent = onEvent;
             await ConnectWithMainLoops(uri, HandleMessage, send, token);
         }
@@ -54,12 +58,14 @@ namespace Microsoft.WebAssembly.Diagnostics
             if (args == null)
                 args = new JObject();
 
-            var o = JObject.FromObject(new
-            {
-                id = id,
-                method = method,
-                @params = args
-            });
+            var o = JObject.FromObject(
+                new
+                {
+                    id = id,
+                    method = method,
+                    @params = args
+                }
+            );
 
             var tcs = new TaskCompletionSource<Result>();
             pending_cmds.Add((id, tcs));

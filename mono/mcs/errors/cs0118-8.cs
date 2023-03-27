@@ -3,15 +3,13 @@
 
 public class A
 {
-	public static void Foo (string Setting)
-	{
-	}
+    public static void Foo(string Setting) { }
 }
 
 class Example
 {
-	public void Main(string[] args)
-	{
-		A a = new A.Foo ("test");  
-	}
+    public void Main(string[] args)
+    {
+        A a = new A.Foo("test");
+    }
 }

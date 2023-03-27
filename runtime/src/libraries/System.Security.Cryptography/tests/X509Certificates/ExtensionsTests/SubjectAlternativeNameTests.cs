@@ -24,7 +24,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             Assert.Throws<ArgumentNullException>(
                 "rawData",
-                () => new X509SubjectAlternativeNameExtension((byte[])null));
+                () => new X509SubjectAlternativeNameExtension((byte[])null)
+            );
         }
 
         [Theory]
@@ -59,7 +60,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                     tmp.AsSpan().Clear();
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(loadMode), loadMode, "Unexpected mode");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(loadMode),
+                        loadMode,
+                        "Unexpected mode"
+                    );
             }
 
             Assert.Equal(new[] { "foo", "*.foo" }, ext.EnumerateDnsNames());
@@ -97,10 +102,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                     tmp.AsSpan().Clear();
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(loadMode), loadMode, "Unexpected mode");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(loadMode),
+                        loadMode,
+                        "Unexpected mode"
+                    );
             }
 
-            Assert.Equal(new[] { IPAddress.Loopback, IPAddress.IPv6Loopback }, ext.EnumerateIPAddresses());
+            Assert.Equal(
+                new[] { IPAddress.Loopback, IPAddress.IPv6Loopback },
+                ext.EnumerateIPAddresses()
+            );
         }
 
         [Theory]
@@ -131,16 +143,26 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 case LoadMode.Span:
                     byte[] tmp = new byte[built.RawData.Length + 2];
                     built.RawData.AsSpan().CopyTo(tmp.AsSpan(1));
-                    ext = new X509SubjectAlternativeNameExtension(tmp.AsSpan()[1..^1], critical: true);
+                    ext = new X509SubjectAlternativeNameExtension(
+                        tmp.AsSpan()[1..^1],
+                        critical: true
+                    );
                     tmp.AsSpan().Clear();
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(originalLoadMode), originalLoadMode, "Unexpected mode");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(originalLoadMode),
+                        originalLoadMode,
+                        "Unexpected mode"
+                    );
             }
 
             Assert.True(ext.Critical, "ext.Critical");
             Assert.Equal(new[] { "foo", "*.foo" }, ext.EnumerateDnsNames());
-            Assert.Equal(new[] { IPAddress.Loopback, IPAddress.IPv6Loopback }, ext.EnumerateIPAddresses());
+            Assert.Equal(
+                new[] { IPAddress.Loopback, IPAddress.IPv6Loopback },
+                ext.EnumerateIPAddresses()
+            );
 
             builder = new SubjectAlternativeNameBuilder();
             builder.AddDnsName("a");
@@ -179,11 +201,85 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             // dNSName: *.foo
             byte[] invalidEncoding =
             {
-                0x30, 0x4D, 0x82, 0x03, 0x66, 0x6F, 0x6F, 0x87, 0x04, 0x7F, 0x00, 0x00, 0x01, 0x87, 0x05, 0x7F,
-                0x00, 0x00, 0x01, 0x00, 0xA0, 0x20, 0x06, 0x0A, 0x2B, 0x06, 0x01, 0x04, 0x01, 0x82, 0x37, 0x14,
-                0x02, 0x03, 0xA0, 0x12, 0x0C, 0x10, 0x75, 0x73, 0x65, 0x72, 0x40, 0x73, 0x6F, 0x6D, 0x65, 0x2E,
-                0x64, 0x6F, 0x6D, 0x61, 0x69, 0x6E, 0x87, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x82, 0x05, 0x2A, 0x2E, 0x66, 0x6F, 0x6F,
+                0x30,
+                0x4D,
+                0x82,
+                0x03,
+                0x66,
+                0x6F,
+                0x6F,
+                0x87,
+                0x04,
+                0x7F,
+                0x00,
+                0x00,
+                0x01,
+                0x87,
+                0x05,
+                0x7F,
+                0x00,
+                0x00,
+                0x01,
+                0x00,
+                0xA0,
+                0x20,
+                0x06,
+                0x0A,
+                0x2B,
+                0x06,
+                0x01,
+                0x04,
+                0x01,
+                0x82,
+                0x37,
+                0x14,
+                0x02,
+                0x03,
+                0xA0,
+                0x12,
+                0x0C,
+                0x10,
+                0x75,
+                0x73,
+                0x65,
+                0x72,
+                0x40,
+                0x73,
+                0x6F,
+                0x6D,
+                0x65,
+                0x2E,
+                0x64,
+                0x6F,
+                0x6D,
+                0x61,
+                0x69,
+                0x6E,
+                0x87,
+                0x10,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x01,
+                0x82,
+                0x05,
+                0x2A,
+                0x2E,
+                0x66,
+                0x6F,
+                0x6F,
             };
 
             VerifyDecodeFailure(invalidEncoding, loadMode);
@@ -203,11 +299,83 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             // dNSName: *.foo
             byte[] invalidEncoding =
             {
-                0x30, 0x4B, 0x82, 0x03, 0x66, 0x6F, 0x6F, 0x87, 0x04, 0x7F, 0x00, 0x00, 0x01, 0xA0, 0x20, 0x06,
-                0x0A, 0x2B, 0x06, 0x01, 0x04, 0x01, 0x82, 0x37, 0x14, 0x02, 0x03, 0xA0, 0x12, 0x0C, 0x10, 0x75,
-                0x73, 0x65, 0x72, 0x40, 0x73, 0x6F, 0x6D, 0x65, 0x2E, 0x64, 0x6F, 0x6D, 0x61, 0x69, 0x6E, 0x82,
-                0x03, 0x86, 0x6F, 0x6F, 0x87, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x82, 0x05, 0x2A, 0x2E, 0x66, 0x6F, 0x6F,
+                0x30,
+                0x4B,
+                0x82,
+                0x03,
+                0x66,
+                0x6F,
+                0x6F,
+                0x87,
+                0x04,
+                0x7F,
+                0x00,
+                0x00,
+                0x01,
+                0xA0,
+                0x20,
+                0x06,
+                0x0A,
+                0x2B,
+                0x06,
+                0x01,
+                0x04,
+                0x01,
+                0x82,
+                0x37,
+                0x14,
+                0x02,
+                0x03,
+                0xA0,
+                0x12,
+                0x0C,
+                0x10,
+                0x75,
+                0x73,
+                0x65,
+                0x72,
+                0x40,
+                0x73,
+                0x6F,
+                0x6D,
+                0x65,
+                0x2E,
+                0x64,
+                0x6F,
+                0x6D,
+                0x61,
+                0x69,
+                0x6E,
+                0x82,
+                0x03,
+                0x86,
+                0x6F,
+                0x6F,
+                0x87,
+                0x10,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x01,
+                0x82,
+                0x05,
+                0x2A,
+                0x2E,
+                0x66,
+                0x6F,
+                0x6F,
             };
 
             VerifyDecodeFailure(invalidEncoding, loadMode);
@@ -219,7 +387,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             {
                 case LoadMode.CopyFrom:
                     X509Extension untyped = new X509Extension("0.0", invalidEncoding, true);
-                    X509SubjectAlternativeNameExtension ext = new X509SubjectAlternativeNameExtension();
+                    X509SubjectAlternativeNameExtension ext =
+                        new X509SubjectAlternativeNameExtension();
 
                     // The pattern for X509Extension is that CopyFrom doesn't validate data,
                     // and it blindly accepts the incoming OID.  The semantic properties then throw late.
@@ -233,14 +402,23 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 case LoadMode.Array:
                     // The ctors don't need to be so forgiving, through.
                     Assert.Throws<CryptographicException>(
-                        () => new X509SubjectAlternativeNameExtension(invalidEncoding));
+                        () => new X509SubjectAlternativeNameExtension(invalidEncoding)
+                    );
                     break;
                 case LoadMode.Span:
                     Assert.Throws<CryptographicException>(
-                        () => new X509SubjectAlternativeNameExtension(new ReadOnlySpan<byte>(invalidEncoding)));
+                        () =>
+                            new X509SubjectAlternativeNameExtension(
+                                new ReadOnlySpan<byte>(invalidEncoding)
+                            )
+                    );
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(loadMode), loadMode, "Unexpected mode");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(loadMode),
+                        loadMode,
+                        "Unexpected mode"
+                    );
             }
         }
 

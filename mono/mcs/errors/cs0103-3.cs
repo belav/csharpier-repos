@@ -3,17 +3,17 @@
 
 class ClassMain
 {
-	public static void Main ()
-	{
-		if (true) {
-			const bool test = false;
-		}
-		test = false;
-	}
-	
-	static bool Test { 
-		set {
-		}
-	}
-}
+    public static void Main()
+    {
+        if (true)
+        {
+            const bool test = false;
+        }
+        test = false;
+    }
 
+    static bool Test
+    {
+        set { }
+    }
+}

@@ -18,10 +18,7 @@ namespace System.Configuration
 
         public XmlNode ValueXml
         {
-            get
-            {
-                return _valueXml;
-            }
+            get { return _valueXml; }
             set
             {
                 _valueXml = value;
@@ -29,7 +26,10 @@ namespace System.Configuration
             }
         }
 
-        protected internal override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
+        protected internal override void DeserializeElement(
+            XmlReader reader,
+            bool serializeCollectionKey
+        )
         {
             ValueXml = _document.ReadNode(reader);
         }
@@ -75,8 +75,11 @@ namespace System.Configuration
             ValueXml = ((SettingValueElement)parentElement).ValueXml;
         }
 
-        protected internal override void Unmerge(ConfigurationElement sourceElement, ConfigurationElement parentElement,
-                                                ConfigurationSaveMode saveMode)
+        protected internal override void Unmerge(
+            ConfigurationElement sourceElement,
+            ConfigurationElement parentElement,
+            ConfigurationSaveMode saveMode
+        )
         {
             base.Unmerge(sourceElement, parentElement, saveMode);
             ValueXml = ((SettingValueElement)sourceElement).ValueXml;

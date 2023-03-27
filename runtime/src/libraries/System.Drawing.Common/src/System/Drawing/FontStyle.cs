@@ -7,25 +7,31 @@ namespace System.Drawing
     /// Specifies style information applied to text.
     /// </summary>
     [Flags]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public enum FontStyle
     {
         /// <summary>
         /// Normal text.
         /// </summary>
         Regular = 0,
+
         /// <summary>
         /// Bold text.
         /// </summary>
         Bold = 1,
+
         /// <summary>
         /// Italic text.
         /// </summary>
         Italic = 2,
+
         /// <summary>
         /// Underlined text.
         /// </summary>
         Underline = 4,
+
         /// <summary>
         /// Text with a line through the middle.
         /// </summary>

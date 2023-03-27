@@ -3,9 +3,12 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant (true)]
 
-public class CLSClass {
-        public CLSClass (long a) {}
-        public CLSClass (ref ulong a) {}
+[assembly: CLSCompliant(true)]
+
+public class CLSClass
+{
+    public CLSClass(long a) { }
+
+    public CLSClass(ref ulong a) { }
 }

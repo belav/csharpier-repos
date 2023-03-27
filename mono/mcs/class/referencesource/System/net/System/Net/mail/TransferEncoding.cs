@@ -11,7 +11,8 @@ namespace System.Net.Mime
         Base64 = 1,
         SevenBit = 2,
         EightBit = 3,
-//        Binary = 4,
+
+        //        Binary = 4,
         Unknown = -1,
     }
 }

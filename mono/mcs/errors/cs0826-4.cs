@@ -4,9 +4,8 @@
 
 public class Test
 {
-	static void Main ()
-	{
-		var e = new[,,,] { 1, 2 }; 
-	}
+    static void Main()
+    {
+        var e = new[,,,] { 1, 2 };
+    }
 }
-

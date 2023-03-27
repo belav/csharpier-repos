@@ -23,6 +23,7 @@ namespace System.CommandLine.Tests
         [InlineData("___field", "field")]
         [InlineData("m_field", "m-field")]
         [InlineData("m_Field", "m-field")]
-        public void ToKebabCase(string input, string expected) => input.ToKebabCase().Should().Be(expected);
+        public void ToKebabCase(string input, string expected) =>
+            input.ToKebabCase().Should().Be(expected);
     }
 }

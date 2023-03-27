@@ -2,11 +2,12 @@
 // Line: 8
 // Compiler options: -unsafe
 
-class X {
-        public void a ()
-        {
-            void *p;
-		}
+class X
+{
+    public void a()
+    {
+        void* p;
+    }
 
-		static void Main () {}
+    static void Main() { }
 }

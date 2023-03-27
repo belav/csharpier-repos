@@ -9,9 +9,7 @@ namespace System.Drawing.Imaging
     /// </summary>
     public sealed class PropertyItem
     {
-        internal PropertyItem()
-        {
-        }
+        internal PropertyItem() { }
 
         /// <summary>
         /// Represents the ID of the property.

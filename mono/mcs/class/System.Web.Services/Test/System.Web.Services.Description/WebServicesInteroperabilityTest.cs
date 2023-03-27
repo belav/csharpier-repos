@@ -24,37 +24,54 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.Web.Services.Description
 {
-	[TestFixture]
-	public class WebServicesInteroperabilityTest
-	{
-		[Test]
-		public void ResolveImport () // should not result in an error
-		{
-			BasicProfileViolationCollection bc = new BasicProfileViolationCollection ();
-			WebServicesInteroperability.CheckConformance (
-				WsiProfiles.BasicProfile1_1,
-				ServiceDescription.Read (TestResourceHelper.GetFullPathOfResource ("Test/System.Web.Services.Description/check-import.wsdl")), bc);
-		}
+    [TestFixture]
+    public class WebServicesInteroperabilityTest
+    {
+        [Test]
+        public void ResolveImport() // should not result in an error
+        {
+            BasicProfileViolationCollection bc = new BasicProfileViolationCollection();
+            WebServicesInteroperability.CheckConformance(
+                WsiProfiles.BasicProfile1_1,
+                ServiceDescription.Read(
+                    TestResourceHelper.GetFullPathOfResource(
+                        "Test/System.Web.Services.Description/check-import.wsdl"
+                    )
+                ),
+                bc
+            );
+        }
 
-		[Test]
-		public void CheckR2305_1 () // bug #443095
-		{
-			BasicProfileViolationCollection bc = new BasicProfileViolationCollection ();
-			WebServicesInteroperability.CheckConformance (
-				WsiProfiles.BasicProfile1_1,
-				ServiceDescription.Read (TestResourceHelper.GetFullPathOfResource ("Test/System.Web.Services.Description/443095.wsdl")), bc);
-		}
+        [Test]
+        public void CheckR2305_1() // bug #443095
+        {
+            BasicProfileViolationCollection bc = new BasicProfileViolationCollection();
+            WebServicesInteroperability.CheckConformance(
+                WsiProfiles.BasicProfile1_1,
+                ServiceDescription.Read(
+                    TestResourceHelper.GetFullPathOfResource(
+                        "Test/System.Web.Services.Description/443095.wsdl"
+                    )
+                ),
+                bc
+            );
+        }
 
-		[Test]
-		public void CheckEmptyOutput () // bug #6041
-		{
-			BasicProfileViolationCollection bc = new BasicProfileViolationCollection ();
-			WebServicesInteroperability.CheckConformance (
-				WsiProfiles.BasicProfile1_1,
-				ServiceDescription.Read (TestResourceHelper.GetFullPathOfResource ("Test/System.Web.Services.Description/6041.wsdl")), bc);
-		}
-
-	}
+        [Test]
+        public void CheckEmptyOutput() // bug #6041
+        {
+            BasicProfileViolationCollection bc = new BasicProfileViolationCollection();
+            WebServicesInteroperability.CheckConformance(
+                WsiProfiles.BasicProfile1_1,
+                ServiceDescription.Read(
+                    TestResourceHelper.GetFullPathOfResource(
+                        "Test/System.Web.Services.Description/6041.wsdl"
+                    )
+                ),
+                bc
+            );
+        }
+    }
 }
 
 #endif

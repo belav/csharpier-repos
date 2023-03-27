@@ -3,29 +3,27 @@
 
 using System;
 
-interface IList 
+interface IList
 {
-	int Count ();
+    int Count();
 }
 
-interface ICounter 
+interface ICounter
 {
-	int Count ();
+    int Count();
 }
 
 interface ICollection
 {
-	int Count { set; }
+    int Count { set; }
 }
 
-interface IListCounter: IList, ICounter, ICollection
-{
-}
+interface IListCounter : IList, ICounter, ICollection { }
 
 class Test
 {
-	static void Foo (IListCounter t)
-	{
-		t.Count ();
-	}
+    static void Foo(IListCounter t)
+    {
+        t.Count();
+    }
 }

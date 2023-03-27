@@ -34,7 +34,9 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
 
         if (Engine == null)
         {
-            throw new InvalidOperationException(Resources.FormatPhaseMustBeInitialized(nameof(Engine)));
+            throw new InvalidOperationException(
+                Resources.FormatPhaseMustBeInitialized(nameof(Engine))
+            );
         }
 
         ExecuteCore(codeDocument);
@@ -44,7 +46,9 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
     {
         if (Engine == null)
         {
-            throw new InvalidOperationException(Resources.FormatFeatureMustBeInitialized(nameof(Engine)));
+            throw new InvalidOperationException(
+                Resources.FormatFeatureMustBeInitialized(nameof(Engine))
+            );
         }
 
         var feature = Engine.Features.OfType<T>().FirstOrDefault();
@@ -61,7 +65,9 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
                 Resources.FormatPhaseDependencyMissing(
                     GetType().Name,
                     typeof(TDocumentDependency).Name,
-                    typeof(RazorCodeDocument).Name));
+                    typeof(RazorCodeDocument).Name
+                )
+            );
         }
     }
 
@@ -73,13 +79,13 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
                 Resources.FormatPhaseDependencyMissing(
                     GetType().Name,
                     typeof(TEngineDependency).Name,
-                    typeof(RazorEngine).Name));
+                    typeof(RazorEngine).Name
+                )
+            );
         }
     }
 
-    protected virtual void OnIntialized()
-    {
-    }
+    protected virtual void OnIntialized() { }
 
     protected abstract void ExecuteCore(RazorCodeDocument codeDocument);
 }

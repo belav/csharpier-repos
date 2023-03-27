@@ -35,51 +35,54 @@ using System.Threading.Tasks;
 
 namespace MonoTests.System.Net.Http
 {
-	[TestFixture]
-	public class DelegatingHandlerTest
-	{
-		class DefaultHandler : DelegatingHandler
-		{
-		}
+    [TestFixture]
+    public class DelegatingHandlerTest
+    {
+        class DefaultHandler : DelegatingHandler { }
 
-		class CustomHandler : DelegatingHandler
-		{
-			protected override async Task<HttpResponseMessage> SendAsync (HttpRequestMessage request, CancellationToken cancellationToken)
-			{
-				return await base.SendAsync (request, cancellationToken);
-			}
-		}
+        class CustomHandler : DelegatingHandler
+        {
+            protected override async Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
+            {
+                return await base.SendAsync(request, cancellationToken);
+            }
+        }
 
-		[Test]
-		public void DisposeTest ()
-		{
-			var handler = new DefaultHandler ();
-			handler.Dispose ();
-		}
+        [Test]
+        public void DisposeTest()
+        {
+            var handler = new DefaultHandler();
+            handler.Dispose();
+        }
 
-		[Test]
-		public void InnerHandler_Invalid ()
-		{
-			var handler = new DefaultHandler ();
-			try {
-				handler.InnerHandler = null;
-				Assert.Fail ("#1");
-			} catch (ArgumentNullException) {
-			}
-		}
+        [Test]
+        public void InnerHandler_Invalid()
+        {
+            var handler = new DefaultHandler();
+            try
+            {
+                handler.InnerHandler = null;
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException) { }
+        }
 
-		[Test]
-		public async void InnerHandler_NotAssigned ()
-		{
-			var httpRequestMessage = new HttpRequestMessage (HttpMethod.Get, "http://contoso.com");
-			var handler = new CustomHandler ();
+        [Test]
+        public async void InnerHandler_NotAssigned()
+        {
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://contoso.com");
+            var handler = new CustomHandler();
 
-			var invoker = new HttpMessageInvoker (handler);
-			try {
-				await invoker.SendAsync (httpRequestMessage, new CancellationToken ());
-				Assert.Fail ();
-			} catch (InvalidOperationException) {
-			}
-		}
-	}
+            var invoker = new HttpMessageInvoker(handler);
+            try
+            {
+                await invoker.SendAsync(httpRequestMessage, new CancellationToken());
+                Assert.Fail();
+            }
+            catch (InvalidOperationException) { }
+        }
+    }
 }

@@ -57,7 +57,11 @@ namespace System.Net.Sockets.Tests
                     {
                         var random = new Random();
                         var sendBuffer = new byte[512];
-                        for (int remaining = BytesToSend, sent = 0; remaining > 0; remaining -= sent)
+                        for (
+                            int remaining = BytesToSend, sent = 0;
+                            remaining > 0;
+                            remaining -= sent
+                        )
                         {
                             random.NextBytes(sendBuffer);
 

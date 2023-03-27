@@ -80,16 +80,21 @@ public abstract class LoginModel : PageModel
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task OnGetAsync([StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null) => throw new NotImplementedException();
+    public virtual Task OnGetAsync(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null
+    ) => throw new NotImplementedException();
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnPostAsync([StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null) => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnPostAsync(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null
+    ) => throw new NotImplementedException();
 }
 
-internal sealed class LoginModel<TUser> : LoginModel where TUser : class
+internal sealed class LoginModel<TUser> : LoginModel
+    where TUser : class
 {
     private readonly SignInManager<TUser> _signInManager;
     private readonly ILogger<LoginModel> _logger;
@@ -127,7 +132,12 @@ internal sealed class LoginModel<TUser> : LoginModel where TUser : class
         {
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-            var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(
+                Input.Email,
+                Input.Password,
+                Input.RememberMe,
+                lockoutOnFailure: false
+            );
             if (result.Succeeded)
             {
                 _logger.LogInformation(LoggerEventIds.UserLogin, "User logged in.");
@@ -135,7 +145,10 @@ internal sealed class LoginModel<TUser> : LoginModel where TUser : class
             }
             if (result.RequiresTwoFactor)
             {
-                return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                return RedirectToPage(
+                    "./LoginWith2fa",
+                    new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe }
+                );
             }
             if (result.IsLockedOut)
             {

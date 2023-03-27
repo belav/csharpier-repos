@@ -6,12 +6,13 @@ using System;
 
 namespace TopNS
 {
-	class Foo
-	{
-		string this [string bar] {
-			get { return ""; }
-			/// incorrect
-			set { }
-		}
-	}
+    class Foo
+    {
+        string this[string bar]
+        {
+            get { return ""; }
+            /// incorrect
+            set { }
+        }
+    }
 }

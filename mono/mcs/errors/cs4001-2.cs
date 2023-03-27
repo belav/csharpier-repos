@@ -3,8 +3,8 @@
 
 class A
 {
-	static async void Test ()
-	{
-		await 1;
-	}
+    static async void Test()
+    {
+        await 1;
+    }
 }

@@ -4,13 +4,14 @@
 
 abstract class A<T>
 {
-	public abstract bool Foo<U> (U arg) where U : T;
+    public abstract bool Foo<U>(U arg)
+        where U : T;
 }
 
 class B : A<int>
 {
-	public override bool Foo<U> (U arg)
-	{
-		return arg is U;
-	}
+    public override bool Foo<U>(U arg)
+    {
+        return arg is U;
+    }
 }

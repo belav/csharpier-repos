@@ -18,7 +18,8 @@ internal abstract class EmbeddedSyntaxTree<TSyntaxKind, TSyntaxNode, TCompilatio
     protected EmbeddedSyntaxTree(
         VirtualCharSequence text,
         TCompilationUnitSyntax root,
-        ImmutableArray<EmbeddedDiagnostic> diagnostics)
+        ImmutableArray<EmbeddedDiagnostic> diagnostics
+    )
     {
         Text = text;
         Root = root;

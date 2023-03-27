@@ -2,11 +2,11 @@
 // Line: 9
 // Compiler options: -warnaserror -warn:1
 
-class X<T> where T : class
+class X<T>
+    where T : class
 {
-	static void Foo ()
-	{
-		if (1 is T) {
-		}
-	}
+    static void Foo()
+    {
+        if (1 is T) { }
+    }
 }

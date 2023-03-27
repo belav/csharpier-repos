@@ -3,19 +3,18 @@
 
 public class A
 {
-	protected bool x = true;
-	
-	public A()
-	{}
+    protected bool x = true;
+
+    public A() { }
 }
 
 public class B
 {
-	public static void Main(string[] args)
-	{
-		if (new A().x)
-		{
-			System.Console.WriteLine("this should not compile");
-		}
-	}
+    public static void Main(string[] args)
+    {
+        if (new A().x)
+        {
+            System.Console.WriteLine("this should not compile");
+        }
+    }
 }

@@ -70,9 +70,16 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             return false;
         }
 
-        internal override StringBuilder AsEsql(StringBuilder builder, MemberPath outputMember, string blockAlias)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            MemberPath outputMember,
+            string blockAlias
+        )
         {
-            Debug.Assert(outputMember.LeafEdmMember != null, "Constant can't correspond to an empty member path.");
+            Debug.Assert(
+                outputMember.LeafEdmMember != null,
+                "Constant can't correspond to an empty member path."
+            );
             TypeUsage modelTypeUsage = Helper.GetModelTypeUsage(outputMember.LeafEdmMember);
             EdmType modelType = modelTypeUsage.EdmType;
 
@@ -138,7 +145,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
         internal override DbExpression AsCqt(DbExpression row, MemberPath outputMember)
         {
-            Debug.Assert(outputMember.LeafEdmMember != null, "Constant can't correspond to an empty member path.");
+            Debug.Assert(
+                outputMember.LeafEdmMember != null,
+                "Constant can't correspond to an empty member path."
+            );
             TypeUsage modelTypeUsage = Helper.GetModelTypeUsage(outputMember.LeafEdmMember);
             return modelTypeUsage.Constant(m_scalar);
         }

@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 namespace System.Security.Policy
 {
@@ -31,7 +31,7 @@ namespace System.Security.Policy
     ///     The Evidence class keeps track of information that can be used to make security decisions about
     ///     an assembly or an AppDomain.  There are two types of evidence, one is supplied by the CLR or a
     ///     host, the other supplied by the assembly itself.
-    ///     
+    ///
     ///     We keep a dictionary that maps each type of possbile evidence to an EvidenceTypeDescriptor which
     ///     contains the evidence objects themselves if they exist as well as some extra metadata about that
     ///     type of evidence.  This dictionary is fully populated with keys for host evidence at all times and
@@ -39,7 +39,7 @@ namespace System.Security.Policy
     ///     Type key does not exist in the dictionary, then that particular type of evidence will never be
     ///     given to the assembly or AppDomain in question as host evidence.  The only exception is if the
     ///     user later manually adds host evidence via the AddHostEvidence API.
-    ///     
+    ///
     ///     Assembly supplied evidence is created up front, however host supplied evidence may be lazily
     ///     created.  In the lazy creation case, the Type will map to either an EvidenceTypeDescriptor that does
     ///     not contain any evidence data or null.  As requests come in for that evidence, we'll populate the
@@ -49,7 +49,7 @@ namespace System.Security.Policy
     [ComVisible(true)]
     public sealed class Evidence
 #if FEATURE_CAS_POLICY
- : ICollection
+        : ICollection
 #endif // FEATURE_CAS_POLICY
     {
 #if !FEATURE_CORECLR && FEATURE_RWLOCK

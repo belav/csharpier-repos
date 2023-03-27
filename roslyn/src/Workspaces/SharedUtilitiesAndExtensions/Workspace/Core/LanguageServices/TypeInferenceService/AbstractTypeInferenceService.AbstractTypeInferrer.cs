@@ -24,18 +24,30 @@ namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService
             private readonly HashSet<SyntaxNode> _seenExpressionInferType = new();
             private readonly HashSet<SyntaxNode> _seenExpressionGetType = new();
 
-            private static readonly Func<TypeInferenceInfo, bool> s_isNotNull = t => t.InferredType != null;
+            private static readonly Func<TypeInferenceInfo, bool> s_isNotNull = t =>
+                t.InferredType != null;
 
-            protected AbstractTypeInferrer(SemanticModel semanticModel, CancellationToken cancellationToken)
+            protected AbstractTypeInferrer(
+                SemanticModel semanticModel,
+                CancellationToken cancellationToken
+            )
             {
                 this.SemanticModel = semanticModel;
                 this.CancellationToken = cancellationToken;
-                this.IsUsableTypeFunc = t => t.InferredType != null && !IsUnusableType(t.InferredType);
+                this.IsUsableTypeFunc = t =>
+                    t.InferredType != null && !IsUnusableType(t.InferredType);
             }
 
-            protected abstract IEnumerable<TypeInferenceInfo> InferTypesWorker_DoNotCallDirectly(int position);
-            protected abstract IEnumerable<TypeInferenceInfo> InferTypesWorker_DoNotCallDirectly(SyntaxNode expression);
-            protected abstract IEnumerable<TypeInferenceInfo> GetTypes_DoNotCallDirectly(SyntaxNode expression, bool objectAsDefault);
+            protected abstract IEnumerable<TypeInferenceInfo> InferTypesWorker_DoNotCallDirectly(
+                int position
+            );
+            protected abstract IEnumerable<TypeInferenceInfo> InferTypesWorker_DoNotCallDirectly(
+                SyntaxNode expression
+            );
+            protected abstract IEnumerable<TypeInferenceInfo> GetTypes_DoNotCallDirectly(
+                SyntaxNode expression,
+                bool objectAsDefault
+            );
             protected abstract bool IsUnusableType(ITypeSymbol arg);
 
             protected Compilation Compilation => SemanticModel.Compilation;
@@ -46,7 +58,10 @@ namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService
                 return Filter(types);
             }
 
-            public ImmutableArray<TypeInferenceInfo> InferTypes(SyntaxNode expression, bool filterUnusable = true)
+            public ImmutableArray<TypeInferenceInfo> InferTypes(
+                SyntaxNode expression,
+                bool filterUnusable = true
+            )
             {
                 if (expression != null)
                 {
@@ -60,7 +75,10 @@ namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService
                 return ImmutableArray<TypeInferenceInfo>.Empty;
             }
 
-            protected IEnumerable<TypeInferenceInfo> GetTypes(SyntaxNode expression, bool objectAsDefault = false)
+            protected IEnumerable<TypeInferenceInfo> GetTypes(
+                SyntaxNode expression,
+                bool objectAsDefault = false
+            )
             {
                 if (expression != null)
                 {
@@ -73,22 +91,33 @@ namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService
                 return SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
             }
 
-            private ImmutableArray<TypeInferenceInfo> Filter(IEnumerable<TypeInferenceInfo> types, bool filterUnusable = true)
+            private ImmutableArray<TypeInferenceInfo> Filter(
+                IEnumerable<TypeInferenceInfo> types,
+                bool filterUnusable = true
+            )
             {
-                return types.Where(filterUnusable ? IsUsableTypeFunc : s_isNotNull)
-                            .Distinct()
-                            .ToImmutableArray();
+                return types
+                    .Where(filterUnusable ? IsUsableTypeFunc : s_isNotNull)
+                    .Distinct()
+                    .ToImmutableArray();
             }
 
-            protected IEnumerable<TypeInferenceInfo> CreateResult(SpecialType type, NullableAnnotation nullableAnnotation = NullableAnnotation.None)
-                => CreateResult(Compilation.GetSpecialType(type).WithNullableAnnotation(nullableAnnotation));
+            protected IEnumerable<TypeInferenceInfo> CreateResult(
+                SpecialType type,
+                NullableAnnotation nullableAnnotation = NullableAnnotation.None
+            ) =>
+                CreateResult(
+                    Compilation.GetSpecialType(type).WithNullableAnnotation(nullableAnnotation)
+                );
 
-            protected static IEnumerable<TypeInferenceInfo> CreateResult(ITypeSymbol type)
-                => type == null
+            protected static IEnumerable<TypeInferenceInfo> CreateResult(ITypeSymbol type) =>
+                type == null
                     ? SpecializedCollections.EmptyCollection<TypeInferenceInfo>()
                     : SpecializedCollections.SingletonEnumerable(new TypeInferenceInfo(type));
 
-            protected static IEnumerable<ITypeSymbol> ExpandParamsParameter(IParameterSymbol parameterSymbol)
+            protected static IEnumerable<ITypeSymbol> ExpandParamsParameter(
+                IParameterSymbol parameterSymbol
+            )
             {
                 var result = new List<ITypeSymbol>();
                 result.Add(parameterSymbol.Type);
@@ -104,7 +133,9 @@ namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService
                 return result;
             }
 
-            protected static IEnumerable<TypeInferenceInfo> GetCollectionElementType(INamedTypeSymbol type)
+            protected static IEnumerable<TypeInferenceInfo> GetCollectionElementType(
+                INamedTypeSymbol type
+            )
             {
                 if (type != null)
                 {
@@ -113,7 +144,9 @@ namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService
                     var elementType = parameters.ElementAtOrDefault(0);
                     if (elementType != null)
                     {
-                        return SpecializedCollections.SingletonCollection(new TypeInferenceInfo(elementType));
+                        return SpecializedCollections.SingletonCollection(
+                            new TypeInferenceInfo(elementType)
+                        );
                     }
                 }
 
@@ -122,9 +155,9 @@ namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService
 
             protected static bool IsEnumHasFlag(ISymbol symbol)
             {
-                return symbol.Kind == SymbolKind.Method &&
-                       symbol.Name == nameof(Enum.HasFlag) &&
-                       symbol.ContainingType?.SpecialType == SpecialType.System_Enum;
+                return symbol.Kind == SymbolKind.Method
+                    && symbol.Name == nameof(Enum.HasFlag)
+                    && symbol.ContainingType?.SpecialType == SpecialType.System_Enum;
             }
         }
     }

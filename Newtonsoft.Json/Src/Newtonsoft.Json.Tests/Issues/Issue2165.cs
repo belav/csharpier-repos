@@ -47,7 +47,8 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             ExceptionAssert.Throws<JsonWriterException>(
                 () => JsonConvert.DeserializeObject<JObject>("{"),
-                "Unexpected end when reading token. Path ''.");
+                "Unexpected end when reading token. Path ''."
+            );
         }
 
         [Test]
@@ -61,7 +62,8 @@ namespace Newtonsoft.Json.Tests.Issues
 
             ExceptionAssert.Throws<JsonWriterException>(
                 () => writer.WriteToken(jsonReader),
-                "Unexpected end when reading token. Path ''.");
+                "Unexpected end when reading token. Path ''."
+            );
         }
 
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
@@ -76,7 +78,8 @@ namespace Newtonsoft.Json.Tests.Issues
 
             await ExceptionAssert.ThrowsAsync<JsonWriterException>(
                 () => writer.WriteTokenAsync(jsonReader),
-                "Unexpected end when reading token. Path ''.");
+                "Unexpected end when reading token. Path ''."
+            );
         }
 #endif
     }

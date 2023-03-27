@@ -1,4 +1,4 @@
 namespace N
 {
-	class Test<T> {}
+    class Test<T> { }
 }

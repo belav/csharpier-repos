@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,20 +29,35 @@ namespace Castle.DynamicProxy.Tests
             switch (kind)
             {
                 case ProxyKind.Class:
-                    return generator.CreateClassProxy(typeof(SimpleClass), additionalInterfacesToProxy);
+                    return generator.CreateClassProxy(
+                        typeof(SimpleClass),
+                        additionalInterfacesToProxy
+                    );
                 case ProxyKind.WithoutTarget:
-                    return generator.CreateInterfaceProxyWithoutTarget(typeof(IEmpty), additionalInterfacesToProxy);
+                    return generator.CreateInterfaceProxyWithoutTarget(
+                        typeof(IEmpty),
+                        additionalInterfacesToProxy
+                    );
                 case ProxyKind.WithTarget:
-                    return generator.CreateInterfaceProxyWithTarget(typeof(IEmpty), additionalInterfacesToProxy, new Empty());
+                    return generator.CreateInterfaceProxyWithTarget(
+                        typeof(IEmpty),
+                        additionalInterfacesToProxy,
+                        new Empty()
+                    );
                 case ProxyKind.WithTargetInterface:
-                    return generator.CreateInterfaceProxyWithTarget(typeof(IEmpty), additionalInterfacesToProxy, new Empty());
+                    return generator.CreateInterfaceProxyWithTarget(
+                        typeof(IEmpty),
+                        additionalInterfacesToProxy,
+                        new Empty()
+                    );
                 default:
                     Assert.Fail(string.Format("Invalid proxy kind: {0}", kind));
                     return null; //to satisfy the compiler
             }
         }
 
-        public static readonly object[] AllKinds = {
+        public static readonly object[] AllKinds =
+        {
             new object[] { ProxyKind.Class },
             new object[] { ProxyKind.WithoutTarget },
             new object[] { ProxyKind.WithTarget },

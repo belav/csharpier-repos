@@ -6,12 +6,11 @@ using System;
 
 namespace Testing
 {
-	public class Test
-	{
-		/// <summary>
-		/// comment for public field
-		/// </invalid>
-		public string PublicField2;
-	}
+    public class Test
+    {
+        /// <summary>
+        /// comment for public field
+        /// </invalid>
+        public string PublicField2;
+    }
 }
-

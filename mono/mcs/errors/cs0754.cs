@@ -4,10 +4,10 @@
 
 public interface I
 {
-	void Foo ();
+    void Foo();
 }
 
 public partial class C : I
 {
-	partial void I.Foo ();
+    partial void I.Foo();
 }

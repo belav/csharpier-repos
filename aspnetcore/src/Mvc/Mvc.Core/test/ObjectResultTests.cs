@@ -38,18 +38,12 @@ public class ObjectResultTests
         var result = new ObjectResult("Hello")
         {
             StatusCode = 404,
-            Formatters = new FormatterCollection<IOutputFormatter>()
-                {
-                    new NoOpOutputFormatter(),
-                },
+            Formatters = new FormatterCollection<IOutputFormatter>() { new NoOpOutputFormatter(), },
         };
 
         var actionContext = new ActionContext()
         {
-            HttpContext = new DefaultHttpContext()
-            {
-                RequestServices = CreateServices(),
-            }
+            HttpContext = new DefaultHttpContext() { RequestServices = CreateServices(), }
         };
 
         // Act
@@ -70,18 +64,12 @@ public class ObjectResultTests
         var result = new ObjectResult(details)
         {
             StatusCode = StatusCodes.Status422UnprocessableEntity,
-            Formatters = new FormatterCollection<IOutputFormatter>()
-                {
-                    new NoOpOutputFormatter(),
-                },
+            Formatters = new FormatterCollection<IOutputFormatter>() { new NoOpOutputFormatter(), },
         };
 
         var actionContext = new ActionContext()
         {
-            HttpContext = new DefaultHttpContext()
-            {
-                RequestServices = CreateServices(),
-            }
+            HttpContext = new DefaultHttpContext() { RequestServices = CreateServices(), }
         };
 
         // Act
@@ -99,18 +87,12 @@ public class ObjectResultTests
 
         var result = new ObjectResult(details)
         {
-            Formatters = new FormatterCollection<IOutputFormatter>()
-                {
-                    new NoOpOutputFormatter(),
-                },
+            Formatters = new FormatterCollection<IOutputFormatter>() { new NoOpOutputFormatter(), },
         };
 
         var actionContext = new ActionContext()
         {
-            HttpContext = new DefaultHttpContext()
-            {
-                RequestServices = CreateServices(),
-            }
+            HttpContext = new DefaultHttpContext() { RequestServices = CreateServices(), }
         };
 
         // Act
@@ -119,7 +101,10 @@ public class ObjectResultTests
         // Assert
         Assert.Equal(StatusCodes.Status413RequestEntityTooLarge, details.Status.Value);
         Assert.Equal(StatusCodes.Status413RequestEntityTooLarge, result.StatusCode.Value);
-        Assert.Equal(StatusCodes.Status413RequestEntityTooLarge, actionContext.HttpContext.Response.StatusCode);
+        Assert.Equal(
+            StatusCodes.Status413RequestEntityTooLarge,
+            actionContext.HttpContext.Response.StatusCode
+        );
     }
 
     [Fact]
@@ -130,18 +115,12 @@ public class ObjectResultTests
 
         var result = new BadRequestObjectResult(details)
         {
-            Formatters = new FormatterCollection<IOutputFormatter>()
-                {
-                    new NoOpOutputFormatter(),
-                },
+            Formatters = new FormatterCollection<IOutputFormatter>() { new NoOpOutputFormatter(), },
         };
 
         var actionContext = new ActionContext()
         {
-            HttpContext = new DefaultHttpContext()
-            {
-                RequestServices = CreateServices(),
-            }
+            HttpContext = new DefaultHttpContext() { RequestServices = CreateServices(), }
         };
 
         // Act
@@ -150,18 +129,24 @@ public class ObjectResultTests
         // Assert
         Assert.Equal(StatusCodes.Status422UnprocessableEntity, details.Status.Value);
         Assert.Equal(StatusCodes.Status400BadRequest, result.StatusCode.Value);
-        Assert.Equal(StatusCodes.Status400BadRequest, actionContext.HttpContext.Response.StatusCode);
+        Assert.Equal(
+            StatusCodes.Status400BadRequest,
+            actionContext.HttpContext.Response.StatusCode
+        );
     }
 
     private static IServiceProvider CreateServices()
     {
         var services = new ServiceCollection();
         var options = Options.Create(new MvcOptions());
-        services.AddSingleton<IActionResultExecutor<ObjectResult>>(new ObjectResultExecutor(
-            new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
-            new TestHttpResponseStreamWriterFactory(),
-            NullLoggerFactory.Instance,
-            options));
+        services.AddSingleton<IActionResultExecutor<ObjectResult>>(
+            new ObjectResultExecutor(
+                new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
+                new TestHttpResponseStreamWriterFactory(),
+                NullLoggerFactory.Instance,
+                options
+            )
+        );
         services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
 
         return services.BuildServiceProvider();

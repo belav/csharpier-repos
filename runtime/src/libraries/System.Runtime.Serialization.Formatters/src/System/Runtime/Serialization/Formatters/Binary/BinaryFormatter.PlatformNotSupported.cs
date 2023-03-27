@@ -8,15 +8,27 @@ namespace System.Runtime.Serialization.Formatters.Binary
 {
     public sealed partial class BinaryFormatter : IFormatter
     {
-        [Obsolete(Obsoletions.BinaryFormatterMessage, DiagnosticId = Obsoletions.BinaryFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.BinaryFormatterMessage,
+            DiagnosticId = Obsoletions.BinaryFormatterDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresDynamicCode(IFormatter.RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(IFormatter.RequiresUnreferencedCodeMessage)]
-        public object Deserialize(Stream serializationStream)
-            => throw new PlatformNotSupportedException(SR.BinaryFormatter_SerializationNotSupportedOnThisPlatform);
+        public object Deserialize(Stream serializationStream) =>
+            throw new PlatformNotSupportedException(
+                SR.BinaryFormatter_SerializationNotSupportedOnThisPlatform
+            );
 
-        [Obsolete(Obsoletions.BinaryFormatterMessage, DiagnosticId = Obsoletions.BinaryFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.BinaryFormatterMessage,
+            DiagnosticId = Obsoletions.BinaryFormatterDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresUnreferencedCode(IFormatter.RequiresUnreferencedCodeMessage)]
-        public void Serialize(Stream serializationStream, object graph)
-            => throw new PlatformNotSupportedException(SR.BinaryFormatter_SerializationNotSupportedOnThisPlatform);
+        public void Serialize(Stream serializationStream, object graph) =>
+            throw new PlatformNotSupportedException(
+                SR.BinaryFormatter_SerializationNotSupportedOnThisPlatform
+            );
     }
 }

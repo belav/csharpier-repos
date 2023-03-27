@@ -15,26 +15,24 @@ namespace System.ServiceModel.Configuration
     public partial class WSHttpBindingElement : WSHttpBindingBaseElement
     {
         public WSHttpBindingElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public WSHttpBindingElement()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         protected override Type BindingElementType
         {
             get { return typeof(WSHttpBinding); }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.AllowCookies, DefaultValue = HttpTransportDefaults.AllowCookies)]
+        [ConfigurationProperty(
+            ConfigurationStrings.AllowCookies,
+            DefaultValue = HttpTransportDefaults.AllowCookies
+        )]
         public bool AllowCookies
         {
             get { return (bool)base[ConfigurationStrings.AllowCookies]; }
             set { base[ConfigurationStrings.AllowCookies] = value; }
-
         }
 
         [ConfigurationProperty(ConfigurationStrings.Security)]
@@ -46,20 +44,22 @@ namespace System.ServiceModel.Configuration
         protected internal override void InitializeFrom(Binding binding)
         {
             base.InitializeFrom(binding);
-            WSHttpBinding wspBinding = (WSHttpBinding) binding;
+            WSHttpBinding wspBinding = (WSHttpBinding)binding;
 
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.AllowCookies, wspBinding.AllowCookies);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.AllowCookies,
+                wspBinding.AllowCookies
+            );
             this.Security.InitializeFrom(wspBinding.Security);
         }
 
         protected override void OnApplyConfiguration(Binding binding)
         {
             base.OnApplyConfiguration(binding);
-            WSHttpBinding wspBinding = (WSHttpBinding) binding;
+            WSHttpBinding wspBinding = (WSHttpBinding)binding;
 
             wspBinding.AllowCookies = this.AllowCookies;
             this.Security.ApplyConfiguration(wspBinding.Security);
         }
     }
-
 }

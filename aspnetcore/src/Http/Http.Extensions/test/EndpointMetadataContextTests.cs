@@ -16,7 +16,9 @@ public class EndpointMetadataContextTests
     [Fact]
     public void EndpointMetadataContext_Ctor_ThrowsArgumentNullException_WhenMethodInfoIsNull()
     {
-        Assert.Throws<ArgumentNullException>(() => new EndpointMetadataContext(null, new List<object>(), null));
+        Assert.Throws<ArgumentNullException>(
+            () => new EndpointMetadataContext(null, new List<object>(), null)
+        );
     }
 
     [Fact]
@@ -31,7 +33,9 @@ public class EndpointMetadataContextTests
     [Fact]
     public void EndpointParameterMetadataContext_Ctor_ThrowsArgumentNullException_WhenParameterInfoIsNull()
     {
-        Assert.Throws<ArgumentNullException>(() => new EndpointParameterMetadataContext(null, new List<object>(), null));
+        Assert.Throws<ArgumentNullException>(
+            () => new EndpointParameterMetadataContext(null, new List<object>(), null)
+        );
     }
 
     [Fact]
@@ -40,6 +44,8 @@ public class EndpointMetadataContextTests
         Delegate handler = (int id) => { };
         var parameter = handler.GetMethodInfo().GetParameters()[0];
 
-        Assert.Throws<ArgumentNullException>(() => new EndpointParameterMetadataContext(parameter, null, null));
+        Assert.Throws<ArgumentNullException>(
+            () => new EndpointParameterMetadataContext(parameter, null, null)
+        );
     }
 }

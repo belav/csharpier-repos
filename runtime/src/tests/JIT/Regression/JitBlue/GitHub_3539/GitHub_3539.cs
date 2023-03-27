@@ -5,16 +5,19 @@ using System;
 using System.Runtime.CompilerServices;
 
 namespace GitHub_19910
-
 {
     public class Program
     {
-        public struct Bgr { public byte B; public byte G; public byte R; }
+        public struct Bgr
+        {
+            public byte B;
+            public byte G;
+            public byte R;
+        }
 
         public class BasicReadWriteBenchmark<T>
             where T : struct
         {
-
             // NOTE: This includes cost of stack alloc
             [MethodImpl(MethodImplOptions.NoInlining)]
             static public void ReadFromStack()

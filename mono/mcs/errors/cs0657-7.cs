@@ -3,4 +3,4 @@
 // Compiler options: -warnaserror
 
 [method: Obsolete]
-delegate void Delegate ();
+delegate void Delegate();

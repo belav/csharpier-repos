@@ -5,10 +5,10 @@ using System.Collections;
 
 class X
 {
-	static Hashtable h = new Hashtable ();
+    static Hashtable h = new Hashtable();
 
-	public static void Main ()
-	{
-		ArrayList l = h ["hola"] = new ArrayList ();
-	}
+    public static void Main()
+    {
+        ArrayList l = h["hola"] = new ArrayList();
+    }
 }

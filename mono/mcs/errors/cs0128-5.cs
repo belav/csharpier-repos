@@ -3,9 +3,9 @@
 
 class X
 {
-	public static void Main ()
-	{
-		short xx;
-		var (xx, yy) = (1, 'g');
-	}
+    public static void Main()
+    {
+        short xx;
+        var (xx, yy) = (1, 'g');
+    }
 }

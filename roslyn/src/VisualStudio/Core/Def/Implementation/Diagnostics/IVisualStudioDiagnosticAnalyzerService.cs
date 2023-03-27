@@ -20,7 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
         /// <remarks>
         /// This is used by the Ruleset Editor from ManagedSourceCodeAnalysis.dll in VisualStudio.
         /// </remarks>
-        IReadOnlyDictionary<string, IEnumerable<DiagnosticDescriptor>> GetAllDiagnosticDescriptors(IVsHierarchy? hierarchy);
+        IReadOnlyDictionary<string, IEnumerable<DiagnosticDescriptor>> GetAllDiagnosticDescriptors(
+            IVsHierarchy? hierarchy
+        );
 
         /// <summary>
         /// Runs all the applicable NuGet and VSIX diagnostic analyzers for the given project OR current solution in background and updates the error list.

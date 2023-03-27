@@ -36,12 +36,22 @@ namespace System.Workflow.Activities
             invokeMethod.GetParameterPropertyDescriptors(properties);
         }
 
-        private void AddRemoveCorrelationToken(Type interfaceType, IDictionary properties, object corrRefProperty)
+        private void AddRemoveCorrelationToken(
+            Type interfaceType,
+            IDictionary properties,
+            object corrRefProperty
+        )
         {
             if (interfaceType != null)
             {
-                object[] corrProvAttribs = interfaceType.GetCustomAttributes(typeof(CorrelationProviderAttribute), false);
-                object[] corrParamAttribs = interfaceType.GetCustomAttributes(typeof(CorrelationParameterAttribute), false);
+                object[] corrProvAttribs = interfaceType.GetCustomAttributes(
+                    typeof(CorrelationProviderAttribute),
+                    false
+                );
+                object[] corrParamAttribs = interfaceType.GetCustomAttributes(
+                    typeof(CorrelationParameterAttribute),
+                    false
+                );
                 if (corrProvAttribs.Length != 0 || corrParamAttribs.Length != 0)
                 {
                     if (!properties.Contains("CorrelationToken"))
@@ -65,26 +75,42 @@ namespace System.Workflow.Activities
                     {
                         Type interfaceType = e.NewValue as Type;
                         if (interfaceType != null)
-                            new ExternalDataExchangeInterfaceTypeFilterProvider(Activity.Site).CanFilterType(interfaceType, true);
+                            new ExternalDataExchangeInterfaceTypeFilterProvider(
+                                Activity.Site
+                            ).CanFilterType(interfaceType, true);
 
-                        CallExternalMethodActivity invokeActivity = e.Activity as CallExternalMethodActivity;
-                        PropertyDescriptorUtils.SetPropertyValue(Activity.Site, TypeDescriptor.GetProperties(Activity)["MethodName"], Activity, String.Empty);
+                        CallExternalMethodActivity invokeActivity =
+                            e.Activity as CallExternalMethodActivity;
+                        PropertyDescriptorUtils.SetPropertyValue(
+                            Activity.Site,
+                            TypeDescriptor.GetProperties(Activity)["MethodName"],
+                            Activity,
+                            String.Empty
+                        );
 
-                        IExtendedUIService extUIService = (IExtendedUIService)Activity.Site.GetService(typeof(IExtendedUIService));
+                        IExtendedUIService extUIService = (IExtendedUIService)
+                            Activity.Site.GetService(typeof(IExtendedUIService));
                         if (extUIService == null)
-                            throw new Exception(SR.GetString(SR.General_MissingService, typeof(IExtendedUIService).FullName));
+                            throw new Exception(
+                                SR.GetString(
+                                    SR.General_MissingService,
+                                    typeof(IExtendedUIService).FullName
+                                )
+                            );
                     }
                 }
 
-                if ((e.Member.Name == "MethodName")
-                    && e.Activity is CallExternalMethodActivity)
+                if ((e.Member.Name == "MethodName") && e.Activity is CallExternalMethodActivity)
                     (e.Activity as CallExternalMethodActivity).ParameterBindings.Clear();
 
-                if (e.Member.Name == "InterfaceType" || e.Member.Name == "MethodName" || e.Member.Name == "CorrelationToken")
+                if (
+                    e.Member.Name == "InterfaceType"
+                    || e.Member.Name == "MethodName"
+                    || e.Member.Name == "CorrelationToken"
+                )
                     TypeDescriptor.Refresh(e.Activity);
             }
         }
-
     }
     #endregion
 

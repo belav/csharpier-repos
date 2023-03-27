@@ -3,12 +3,13 @@
 
 using System;
 
-public delegate void FooHandler ();
+public delegate void FooHandler();
 
-interface IBar {
-	event FooHandler OnFoo {
-		add { }
-		remove { }
-	}
+interface IBar
+{
+    event FooHandler OnFoo
+    {
+        add { }
+        remove { }
+    }
 }
-

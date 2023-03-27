@@ -5,9 +5,9 @@
 //-----------------------------------------------------------------------
 
 namespace System.IdentityModel.Protocols.WSTrust
-{   
+{
     /// <summary>
-    /// Used in the RST or RSTR to indicated the desired or required key type. 
+    /// Used in the RST or RSTR to indicated the desired or required key type.
     /// </summary>
     public static class KeyTypes
     {

@@ -23,7 +23,13 @@ namespace System
 {
     // Note that we make a T[] (single-dimensional w/ zero as the lower bound) implement both
     // IList<U> and IReadOnlyList<U>, where T : U dynamically.  See the SZArrayHelper class for details.
-    public abstract partial class Array : ICollection, IEnumerable, IList, IStructuralComparable, IStructuralEquatable, ICloneable
+    public abstract partial class Array
+        : ICollection,
+            IEnumerable,
+            IList,
+            IStructuralComparable,
+            IStructuralEquatable,
+            ICloneable
     {
         // CS0169: The field 'Array._numComponents' is never used
 #pragma warning disable 0169
@@ -37,6 +43,7 @@ namespace System
 #else
         private const int POINTER_SIZE = 4;
 #endif
+
         //                                    Header       + m_pEEType    + _numComponents (with an optional padding)
         private const int SZARRAY_BASE_SIZE = POINTER_SIZE + POINTER_SIZE + POINTER_SIZE;
 
@@ -49,10 +56,7 @@ namespace System
 
         internal bool IsSzArray
         {
-            get
-            {
-                return this.GetEETypePtr().BaseSize == SZARRAY_BASE_SIZE;
-            }
+            get { return this.GetEETypePtr().BaseSize == SZARRAY_BASE_SIZE; }
         }
 
         // This is the classlib-provided "get array MethodTable" function that will be invoked whenever the runtime
@@ -64,7 +68,12 @@ namespace System
         }
 
         [RequiresDynamicCode("The code for an array of the specified type might not be available.")]
-        private static unsafe Array InternalCreate(RuntimeType elementType, int rank, int* pLengths, int* pLowerBounds)
+        private static unsafe Array InternalCreate(
+            RuntimeType elementType,
+            int rank,
+            int* pLengths,
+            int* pLowerBounds
+        )
         {
             ValidateElementType(elementType);
 
@@ -73,14 +82,18 @@ namespace System
                 for (int i = 0; i < rank; i++)
                 {
                     if (pLowerBounds[i] != 0)
-                        throw new PlatformNotSupportedException(SR.PlatformNotSupported_NonZeroLowerBound);
+                        throw new PlatformNotSupportedException(
+                            SR.PlatformNotSupported_NonZeroLowerBound
+                        );
                 }
             }
 
             if (rank == 1)
             {
-                return RuntimeImports.RhNewArray(elementType.MakeArrayType().TypeHandle.ToEETypePtr(), pLengths[0]);
-
+                return RuntimeImports.RhNewArray(
+                    elementType.MakeArrayType().TypeHandle.ToEETypePtr(),
+                    pLengths[0]
+                );
             }
             else
             {
@@ -89,7 +102,11 @@ namespace System
                 for (int i = 0; i < rank; i++)
                     pImmutableLengths[i] = pLengths[i];
 
-                return NewMultiDimArray(elementType.MakeArrayType(rank).TypeHandle.ToEETypePtr(), pImmutableLengths, rank);
+                return NewMultiDimArray(
+                    elementType.MakeArrayType(rank).TypeHandle.ToEETypePtr(),
+                    pImmutableLengths,
+                    rank
+                );
             }
         }
 
@@ -113,11 +130,18 @@ namespace System
             if (!pElementEEType.IsValueType)
                 return;
 
-            IntPtr constructorEntryPoint = RuntimeAugments.TypeLoaderCallbacks.TryGetDefaultConstructorForType(new RuntimeTypeHandle(pElementEEType));
+            IntPtr constructorEntryPoint =
+                RuntimeAugments.TypeLoaderCallbacks.TryGetDefaultConstructorForType(
+                    new RuntimeTypeHandle(pElementEEType)
+                );
             if (constructorEntryPoint == IntPtr.Zero)
                 return;
 
-            var constructorFtn = (delegate*<ref byte, void>)RuntimeAugments.TypeLoaderCallbacks.ConvertUnboxingFunctionPointerToUnderlyingNonUnboxingPointer(constructorEntryPoint, new RuntimeTypeHandle(pElementEEType));
+            var constructorFtn = (delegate* <ref byte, void>)
+                RuntimeAugments.TypeLoaderCallbacks.ConvertUnboxingFunctionPointerToUnderlyingNonUnboxingPointer(
+                    constructorEntryPoint,
+                    new RuntimeTypeHandle(pElementEEType)
+                );
 
             ref byte arrayRef = ref MemoryMarshal.GetArrayDataReference(this);
             nuint elementSize = ElementSize;
@@ -141,9 +165,22 @@ namespace System
         // compatible array types based on the array element type - this
         // method does not support casting, boxing, or primitive widening.
         // It will up-cast, assuming the array types are correct.
-        public static void ConstrainedCopy(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length)
+        public static void ConstrainedCopy(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length
+        )
         {
-            CopyImpl(sourceArray, sourceIndex, destinationArray, destinationIndex, length, reliable: true);
+            CopyImpl(
+                sourceArray,
+                sourceIndex,
+                destinationArray,
+                destinationIndex,
+                length,
+                reliable: true
+            );
         }
 
         public static void Copy(Array sourceArray, Array destinationArray, int length)
@@ -154,10 +191,12 @@ namespace System
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.destinationArray);
 
             EETypePtr eeType = sourceArray.GetEETypePtr();
-            if (eeType.FastEquals(destinationArray.GetEETypePtr()) &&
-                eeType.IsSzArray &&
-                (uint)length <= sourceArray.NativeLength &&
-                (uint)length <= destinationArray.NativeLength)
+            if (
+                eeType.FastEquals(destinationArray.GetEETypePtr())
+                && eeType.IsSzArray
+                && (uint)length <= sourceArray.NativeLength
+                && (uint)length <= destinationArray.NativeLength
+            )
             {
                 nuint byteCount = (uint)length * (nuint)eeType.ComponentSize;
                 ref byte src = ref Unsafe.As<RawArrayData>(sourceArray).Data;
@@ -173,24 +212,47 @@ namespace System
             }
 
             // Less common
-            CopyImpl(sourceArray, sourceArray.GetLowerBound(0), destinationArray, destinationArray.GetLowerBound(0), length, reliable: false);
+            CopyImpl(
+                sourceArray,
+                sourceArray.GetLowerBound(0),
+                destinationArray,
+                destinationArray.GetLowerBound(0),
+                length,
+                reliable: false
+            );
         }
 
-        public static unsafe void Copy(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length)
+        public static unsafe void Copy(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length
+        )
         {
             if (sourceArray != null && destinationArray != null)
             {
                 EETypePtr eeType = sourceArray.GetEETypePtr();
-                if (eeType.FastEquals(destinationArray.GetEETypePtr()) &&
-                    eeType.IsSzArray &&
-                    length >= 0 && sourceIndex >= 0 && destinationIndex >= 0 &&
-                    (uint)(sourceIndex + length) <= sourceArray.NativeLength &&
-                    (uint)(destinationIndex + length) <= destinationArray.NativeLength)
+                if (
+                    eeType.FastEquals(destinationArray.GetEETypePtr())
+                    && eeType.IsSzArray
+                    && length >= 0
+                    && sourceIndex >= 0
+                    && destinationIndex >= 0
+                    && (uint)(sourceIndex + length) <= sourceArray.NativeLength
+                    && (uint)(destinationIndex + length) <= destinationArray.NativeLength
+                )
                 {
                     nuint elementSize = (nuint)eeType.ComponentSize;
                     nuint byteCount = (uint)length * elementSize;
-                    ref byte src = ref Unsafe.AddByteOffset(ref Unsafe.As<RawArrayData>(sourceArray).Data, (uint)sourceIndex * elementSize);
-                    ref byte dst = ref Unsafe.AddByteOffset(ref Unsafe.As<RawArrayData>(destinationArray).Data, (uint)destinationIndex * elementSize);
+                    ref byte src = ref Unsafe.AddByteOffset(
+                        ref Unsafe.As<RawArrayData>(sourceArray).Data,
+                        (uint)sourceIndex * elementSize
+                    );
+                    ref byte dst = ref Unsafe.AddByteOffset(
+                        ref Unsafe.As<RawArrayData>(destinationArray).Data,
+                        (uint)destinationIndex * elementSize
+                    );
 
                     if (eeType.HasPointers)
                         Buffer.BulkMoveWithWriteBarrier(ref dst, ref src, byteCount);
@@ -203,34 +265,60 @@ namespace System
             }
 
             // Less common
-            CopyImpl(sourceArray!, sourceIndex, destinationArray!, destinationIndex, length, reliable: false);
+            CopyImpl(
+                sourceArray!,
+                sourceIndex,
+                destinationArray!,
+                destinationIndex,
+                length,
+                reliable: false
+            );
         }
 
         //
         // Funnel for all the Array.Copy() overloads. The "reliable" parameter indicates whether the caller for ConstrainedCopy()
         // (must leave destination array unchanged on any exception.)
         //
-        private static unsafe void CopyImpl(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length, bool reliable)
+        private static unsafe void CopyImpl(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length,
+            bool reliable
+        )
         {
             if (sourceArray is null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.sourceArray);
             if (destinationArray is null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.destinationArray);
 
-            if (sourceArray.GetType() != destinationArray.GetType() && sourceArray.Rank != destinationArray.Rank)
+            if (
+                sourceArray.GetType() != destinationArray.GetType()
+                && sourceArray.Rank != destinationArray.Rank
+            )
                 throw new RankException(SR.Rank_MustMatch);
 
             if (length < 0)
-                throw new ArgumentOutOfRangeException(nameof(length), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(length),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             const int srcLB = 0;
             if (sourceIndex < srcLB || sourceIndex - srcLB < 0)
-                throw new ArgumentOutOfRangeException(nameof(sourceIndex), SR.ArgumentOutOfRange_ArrayLB);
+                throw new ArgumentOutOfRangeException(
+                    nameof(sourceIndex),
+                    SR.ArgumentOutOfRange_ArrayLB
+                );
             sourceIndex -= srcLB;
 
             const int dstLB = 0;
             if (destinationIndex < dstLB || destinationIndex - dstLB < 0)
-                throw new ArgumentOutOfRangeException(nameof(destinationIndex), SR.ArgumentOutOfRange_ArrayLB);
+                throw new ArgumentOutOfRangeException(
+                    nameof(destinationIndex),
+                    SR.ArgumentOutOfRange_ArrayLB
+                );
             destinationIndex -= dstLB;
 
             if ((uint)(sourceIndex + length) > sourceArray.NativeLength)
@@ -245,11 +333,27 @@ namespace System
             {
                 if (!sourceElementEEType.IsValueType && !sourceElementEEType.IsPointer)
                 {
-                    CopyImplGcRefArray(sourceArray, sourceIndex, destinationArray, destinationIndex, length, reliable);
+                    CopyImplGcRefArray(
+                        sourceArray,
+                        sourceIndex,
+                        destinationArray,
+                        destinationIndex,
+                        length,
+                        reliable
+                    );
                 }
-                else if (RuntimeImports.AreTypesAssignable(sourceElementEEType, destinationElementEEType))
+                else if (
+                    RuntimeImports.AreTypesAssignable(sourceElementEEType, destinationElementEEType)
+                )
                 {
-                    CopyImplValueTypeArrayToReferenceArray(sourceArray, sourceIndex, destinationArray, destinationIndex, length, reliable);
+                    CopyImplValueTypeArrayToReferenceArray(
+                        sourceArray,
+                        sourceIndex,
+                        destinationArray,
+                        destinationIndex,
+                        length,
+                        reliable
+                    );
                 }
                 else
                 {
@@ -258,15 +362,30 @@ namespace System
             }
             else
             {
-                if (RuntimeImports.AreTypesEquivalent(sourceElementEEType, destinationElementEEType))
+                if (
+                    RuntimeImports.AreTypesEquivalent(sourceElementEEType, destinationElementEEType)
+                )
                 {
                     if (sourceElementEEType.HasPointers)
                     {
-                        CopyImplValueTypeArrayWithInnerGcRefs(sourceArray, sourceIndex, destinationArray, destinationIndex, length, reliable);
+                        CopyImplValueTypeArrayWithInnerGcRefs(
+                            sourceArray,
+                            sourceIndex,
+                            destinationArray,
+                            destinationIndex,
+                            length,
+                            reliable
+                        );
                     }
                     else
                     {
-                        CopyImplValueTypeArrayNoInnerGcRefs(sourceArray, sourceIndex, destinationArray, destinationIndex, length);
+                        CopyImplValueTypeArrayNoInnerGcRefs(
+                            sourceArray,
+                            sourceIndex,
+                            destinationArray,
+                            destinationIndex,
+                            length
+                        );
                     }
                 }
                 else if (sourceElementEEType.IsPointer && destinationElementEEType.IsPointer)
@@ -275,24 +394,60 @@ namespace System
                     // to using array covariance rules (so int*[] can be copied to uint*[], but not to float*[]).
                     // This is rather weird since e.g. we don't allow casting int*[] to uint*[] otherwise.
                     // Instead of trying to replicate the behavior, we're choosing to be simply more permissive here.
-                    CopyImplValueTypeArrayNoInnerGcRefs(sourceArray, sourceIndex, destinationArray, destinationIndex, length);
+                    CopyImplValueTypeArrayNoInnerGcRefs(
+                        sourceArray,
+                        sourceIndex,
+                        destinationArray,
+                        destinationIndex,
+                        length
+                    );
                 }
-                else if (IsSourceElementABaseClassOrInterfaceOfDestinationValueType(sourceElementEEType, destinationElementEEType))
+                else if (
+                    IsSourceElementABaseClassOrInterfaceOfDestinationValueType(
+                        sourceElementEEType,
+                        destinationElementEEType
+                    )
+                )
                 {
-                    CopyImplReferenceArrayToValueTypeArray(sourceArray, sourceIndex, destinationArray, destinationIndex, length, reliable);
+                    CopyImplReferenceArrayToValueTypeArray(
+                        sourceArray,
+                        sourceIndex,
+                        destinationArray,
+                        destinationIndex,
+                        length,
+                        reliable
+                    );
                 }
                 else if (sourceElementEEType.IsPrimitive && destinationElementEEType.IsPrimitive)
                 {
-                    if (RuntimeImports.AreTypesAssignable(sourceArray.GetEETypePtr(), destinationArray.GetEETypePtr()))
+                    if (
+                        RuntimeImports.AreTypesAssignable(
+                            sourceArray.GetEETypePtr(),
+                            destinationArray.GetEETypePtr()
+                        )
+                    )
                     {
                         // If we're okay casting between these two, we're also okay blitting the values over
-                        CopyImplValueTypeArrayNoInnerGcRefs(sourceArray, sourceIndex, destinationArray, destinationIndex, length);
+                        CopyImplValueTypeArrayNoInnerGcRefs(
+                            sourceArray,
+                            sourceIndex,
+                            destinationArray,
+                            destinationIndex,
+                            length
+                        );
                     }
                     else
                     {
                         // The only case remaining is that primitive types could have a widening conversion between the source element type and the destination
                         // If a widening conversion does not exist we are going to throw an ArrayTypeMismatchException from it.
-                        CopyImplPrimitiveTypeWithWidening(sourceArray, sourceIndex, destinationArray, destinationIndex, length, reliable);
+                        CopyImplPrimitiveTypeWithWidening(
+                            sourceArray,
+                            sourceIndex,
+                            destinationArray,
+                            destinationIndex,
+                            length,
+                            reliable
+                        );
                     }
                 }
                 else
@@ -302,7 +457,10 @@ namespace System
             }
         }
 
-        private static bool IsSourceElementABaseClassOrInterfaceOfDestinationValueType(EETypePtr sourceElementEEType, EETypePtr destinationElementEEType)
+        private static bool IsSourceElementABaseClassOrInterfaceOfDestinationValueType(
+            EETypePtr sourceElementEEType,
+            EETypePtr destinationElementEEType
+        )
         {
             if (sourceElementEEType.IsValueType || sourceElementEEType.IsPointer)
                 return false;
@@ -318,7 +476,14 @@ namespace System
         //
         // Array.CopyImpl case: Gc-ref array to gc-ref array copy.
         //
-        private static unsafe void CopyImplGcRefArray(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length, bool reliable)
+        private static unsafe void CopyImplGcRefArray(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length,
+            bool reliable
+        )
         {
             // For mismatched array types, the desktop Array.Copy has a policy that determines whether to throw an ArrayTypeMismatch without any attempt to copy
             // or to throw an InvalidCastException in the middle of a copy. This code replicates that policy.
@@ -326,9 +491,14 @@ namespace System
             EETypePtr destinationElementEEType = destinationArray.ElementEEType;
 
             Debug.Assert(!sourceElementEEType.IsValueType && !sourceElementEEType.IsPointer);
-            Debug.Assert(!destinationElementEEType.IsValueType && !destinationElementEEType.IsPointer);
+            Debug.Assert(
+                !destinationElementEEType.IsValueType && !destinationElementEEType.IsPointer
+            );
 
-            bool attemptCopy = RuntimeImports.AreTypesAssignable(sourceElementEEType, destinationElementEEType);
+            bool attemptCopy = RuntimeImports.AreTypesAssignable(
+                sourceElementEEType,
+                destinationElementEEType
+            );
             bool mustCastCheckEachElement = !attemptCopy;
             if (reliable)
             {
@@ -337,7 +507,12 @@ namespace System
             }
             else
             {
-                attemptCopy = attemptCopy || RuntimeImports.AreTypesAssignable(destinationElementEEType, sourceElementEEType);
+                attemptCopy =
+                    attemptCopy
+                    || RuntimeImports.AreTypesAssignable(
+                        destinationElementEEType,
+                        sourceElementEEType
+                    );
 
                 // If either array is an interface array, we allow the attempt to copy even if the other element type does not statically implement the interface.
                 // We don't have an "IsInterface" property in EETypePtr so we instead check for a null BaseType. The only the other MethodTable with a null BaseType is
@@ -349,9 +524,15 @@ namespace System
                     throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
             }
 
-            bool reverseCopy = ((object)sourceArray == (object)destinationArray) && (sourceIndex < destinationIndex);
-            ref object? refDestinationArray = ref Unsafe.As<byte, object?>(ref MemoryMarshal.GetArrayDataReference(destinationArray));
-            ref object? refSourceArray = ref Unsafe.As<byte, object?>(ref MemoryMarshal.GetArrayDataReference(sourceArray));
+            bool reverseCopy =
+                ((object)sourceArray == (object)destinationArray)
+                && (sourceIndex < destinationIndex);
+            ref object? refDestinationArray = ref Unsafe.As<byte, object?>(
+                ref MemoryMarshal.GetArrayDataReference(destinationArray)
+            );
+            ref object? refSourceArray = ref Unsafe.As<byte, object?>(
+                ref MemoryMarshal.GetArrayDataReference(sourceArray)
+            );
             if (reverseCopy)
             {
                 sourceIndex += length - 1;
@@ -359,7 +540,11 @@ namespace System
                 for (int i = 0; i < length; i++)
                 {
                     object? value = Unsafe.Add(ref refSourceArray, sourceIndex - i);
-                    if (mustCastCheckEachElement && value != null && RuntimeImports.IsInstanceOf(destinationElementEEType, value) == null)
+                    if (
+                        mustCastCheckEachElement
+                        && value != null
+                        && RuntimeImports.IsInstanceOf(destinationElementEEType, value) == null
+                    )
                         throw new InvalidCastException(SR.InvalidCast_DownCastArrayElement);
                     Unsafe.Add(ref refDestinationArray, destinationIndex - i) = value;
                 }
@@ -369,7 +554,11 @@ namespace System
                 for (int i = 0; i < length; i++)
                 {
                     object? value = Unsafe.Add(ref refSourceArray, sourceIndex + i);
-                    if (mustCastCheckEachElement && value != null && RuntimeImports.IsInstanceOf(destinationElementEEType, value) == null)
+                    if (
+                        mustCastCheckEachElement
+                        && value != null
+                        && RuntimeImports.IsInstanceOf(destinationElementEEType, value) == null
+                    )
                         throw new InvalidCastException(SR.InvalidCast_DownCastArrayElement);
                     Unsafe.Add(ref refDestinationArray, destinationIndex + i) = value;
                 }
@@ -379,13 +568,30 @@ namespace System
         //
         // Array.CopyImpl case: Value-type array to Object[] or interface array copy.
         //
-        private static unsafe void CopyImplValueTypeArrayToReferenceArray(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length, bool reliable)
+        private static unsafe void CopyImplValueTypeArrayToReferenceArray(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length,
+            bool reliable
+        )
         {
-            Debug.Assert(sourceArray.ElementEEType.IsValueType || sourceArray.ElementEEType.IsPointer);
-            Debug.Assert(!destinationArray.ElementEEType.IsValueType && !destinationArray.ElementEEType.IsPointer);
+            Debug.Assert(
+                sourceArray.ElementEEType.IsValueType || sourceArray.ElementEEType.IsPointer
+            );
+            Debug.Assert(
+                !destinationArray.ElementEEType.IsValueType
+                    && !destinationArray.ElementEEType.IsPointer
+            );
 
             // Caller has already validated this.
-            Debug.Assert(RuntimeImports.AreTypesAssignable(sourceArray.ElementEEType, destinationArray.ElementEEType));
+            Debug.Assert(
+                RuntimeImports.AreTypesAssignable(
+                    sourceArray.ElementEEType,
+                    destinationArray.ElementEEType
+                )
+            );
 
             if (reliable)
                 throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_ConstrainedCopy);
@@ -396,7 +602,9 @@ namespace System
             fixed (byte* pSourceArray = &MemoryMarshal.GetArrayDataReference(sourceArray))
             {
                 byte* pElement = pSourceArray + (nuint)sourceIndex * sourceElementSize;
-                ref object refDestinationArray = ref Unsafe.As<byte, object>(ref MemoryMarshal.GetArrayDataReference(destinationArray));
+                ref object refDestinationArray = ref Unsafe.As<byte, object>(
+                    ref MemoryMarshal.GetArrayDataReference(destinationArray)
+                );
                 for (int i = 0; i < length; i++)
                 {
                     object boxedValue = RuntimeImports.RhBox(sourceElementEEType, ref *pElement);
@@ -409,10 +617,22 @@ namespace System
         //
         // Array.CopyImpl case: Object[] or interface array to value-type array copy.
         //
-        private static unsafe void CopyImplReferenceArrayToValueTypeArray(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length, bool reliable)
+        private static unsafe void CopyImplReferenceArrayToValueTypeArray(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length,
+            bool reliable
+        )
         {
-            Debug.Assert(!sourceArray.ElementEEType.IsValueType && !sourceArray.ElementEEType.IsPointer);
-            Debug.Assert(destinationArray.ElementEEType.IsValueType || destinationArray.ElementEEType.IsPointer);
+            Debug.Assert(
+                !sourceArray.ElementEEType.IsValueType && !sourceArray.ElementEEType.IsPointer
+            );
+            Debug.Assert(
+                destinationArray.ElementEEType.IsValueType
+                    || destinationArray.ElementEEType.IsPointer
+            );
 
             if (reliable)
                 throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
@@ -423,8 +643,11 @@ namespace System
 
             fixed (byte* pDestinationArray = &MemoryMarshal.GetArrayDataReference(destinationArray))
             {
-                ref object refSourceArray = ref Unsafe.As<byte, object>(ref MemoryMarshal.GetArrayDataReference(sourceArray));
-                byte* pElement = pDestinationArray + (nuint)destinationIndex * destinationElementSize;
+                ref object refSourceArray = ref Unsafe.As<byte, object>(
+                    ref MemoryMarshal.GetArrayDataReference(sourceArray)
+                );
+                byte* pElement =
+                    pDestinationArray + (nuint)destinationIndex * destinationElementSize;
 
                 for (int i = 0; i < length; i++)
                 {
@@ -447,17 +670,30 @@ namespace System
             }
         }
 
-
         //
         // Array.CopyImpl case: Value-type array with embedded gc-references.
         //
-        private static unsafe void CopyImplValueTypeArrayWithInnerGcRefs(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length, bool reliable)
+        private static unsafe void CopyImplValueTypeArrayWithInnerGcRefs(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length,
+            bool reliable
+        )
         {
-            Debug.Assert(RuntimeImports.AreTypesEquivalent(sourceArray.GetEETypePtr(), destinationArray.GetEETypePtr()));
+            Debug.Assert(
+                RuntimeImports.AreTypesEquivalent(
+                    sourceArray.GetEETypePtr(),
+                    destinationArray.GetEETypePtr()
+                )
+            );
             Debug.Assert(sourceArray.ElementEEType.IsValueType);
 
             EETypePtr sourceElementEEType = sourceArray.GetEETypePtr().ArrayElementType;
-            bool reverseCopy = ((object)sourceArray == (object)destinationArray) && (sourceIndex < destinationIndex);
+            bool reverseCopy =
+                ((object)sourceArray == (object)destinationArray)
+                && (sourceIndex < destinationIndex);
 
             // Copy scenario: ValueType-array to value-type array with embedded gc-refs.
             object[]? boxedElements = null;
@@ -467,7 +703,10 @@ namespace System
                 reverseCopy = false;
             }
 
-            fixed (byte* pDstArray = &MemoryMarshal.GetArrayDataReference(destinationArray), pSrcArray = &MemoryMarshal.GetArrayDataReference(sourceArray))
+            fixed (
+                byte* pDstArray = &MemoryMarshal.GetArrayDataReference(destinationArray),
+                    pSrcArray = &MemoryMarshal.GetArrayDataReference(sourceArray)
+            )
             {
                 nuint cbElementSize = sourceArray.ElementSize;
                 byte* pSourceElement = pSrcArray + (nuint)sourceIndex * cbElementSize;
@@ -486,11 +725,18 @@ namespace System
                         pDestinationElement -= cbElementSize;
                     }
 
-                    object boxedValue = RuntimeImports.RhBox(sourceElementEEType, ref *pSourceElement);
+                    object boxedValue = RuntimeImports.RhBox(
+                        sourceElementEEType,
+                        ref *pSourceElement
+                    );
                     if (boxedElements != null)
                         boxedElements[i] = boxedValue;
                     else
-                        RuntimeImports.RhUnbox(boxedValue, ref *pDestinationElement, sourceElementEEType);
+                        RuntimeImports.RhUnbox(
+                            boxedValue,
+                            ref *pDestinationElement,
+                            sourceElementEEType
+                        );
 
                     if (!reverseCopy)
                     {
@@ -508,7 +754,11 @@ namespace System
                     byte* pDestinationElement = pDstArray + (nuint)destinationIndex * cbElementSize;
                     for (int i = 0; i < length; i++)
                     {
-                        RuntimeImports.RhUnbox(boxedElements[i], ref *pDestinationElement, sourceElementEEType);
+                        RuntimeImports.RhUnbox(
+                            boxedElements[i],
+                            ref *pDestinationElement,
+                            sourceElementEEType
+                        );
                         pDestinationElement += cbElementSize;
                     }
                 }
@@ -518,26 +768,52 @@ namespace System
         //
         // Array.CopyImpl case: Value-type array without embedded gc-references.
         //
-        private static unsafe void CopyImplValueTypeArrayNoInnerGcRefs(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length)
+        private static unsafe void CopyImplValueTypeArrayNoInnerGcRefs(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length
+        )
         {
-            Debug.Assert((sourceArray.ElementEEType.IsValueType && !sourceArray.ElementEEType.HasPointers) ||
-                sourceArray.ElementEEType.IsPointer);
-            Debug.Assert((destinationArray.ElementEEType.IsValueType && !destinationArray.ElementEEType.HasPointers) ||
-                destinationArray.ElementEEType.IsPointer);
+            Debug.Assert(
+                (sourceArray.ElementEEType.IsValueType && !sourceArray.ElementEEType.HasPointers)
+                    || sourceArray.ElementEEType.IsPointer
+            );
+            Debug.Assert(
+                (
+                    destinationArray.ElementEEType.IsValueType
+                    && !destinationArray.ElementEEType.HasPointers
+                ) || destinationArray.ElementEEType.IsPointer
+            );
 
             // Copy scenario: ValueType-array to value-type array with no embedded gc-refs.
             nuint elementSize = sourceArray.ElementSize;
 
             Buffer.Memmove(
-                ref Unsafe.AddByteOffset(ref MemoryMarshal.GetArrayDataReference(destinationArray), (nuint)destinationIndex * elementSize),
-                ref Unsafe.AddByteOffset(ref MemoryMarshal.GetArrayDataReference(sourceArray), (nuint)sourceIndex * elementSize),
-                elementSize * (nuint)length);
+                ref Unsafe.AddByteOffset(
+                    ref MemoryMarshal.GetArrayDataReference(destinationArray),
+                    (nuint)destinationIndex * elementSize
+                ),
+                ref Unsafe.AddByteOffset(
+                    ref MemoryMarshal.GetArrayDataReference(sourceArray),
+                    (nuint)sourceIndex * elementSize
+                ),
+                elementSize * (nuint)length
+            );
         }
 
         //
         // Array.CopyImpl case: Primitive types that have a widening conversion
         //
-        private static unsafe void CopyImplPrimitiveTypeWithWidening(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length, bool reliable)
+        private static unsafe void CopyImplPrimitiveTypeWithWidening(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length,
+            bool reliable
+        )
         {
             EETypePtr sourceElementEEType = sourceArray.ElementEEType;
             EETypePtr destinationElementEEType = destinationArray.ElementEEType;
@@ -550,7 +826,10 @@ namespace System
             nuint srcElementSize = sourceArray.ElementSize;
             nuint destElementSize = destinationArray.ElementSize;
 
-            if ((sourceElementEEType.IsEnum || destinationElementEEType.IsEnum) && sourceElementType != destElementType)
+            if (
+                (sourceElementEEType.IsEnum || destinationElementEEType.IsEnum)
+                && sourceElementType != destElementType
+            )
                 throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
 
             if (reliable)
@@ -560,7 +839,10 @@ namespace System
                     throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_ConstrainedCopy);
             }
 
-            fixed (byte* pSrcArray = &MemoryMarshal.GetArrayDataReference(sourceArray), pDstArray = &MemoryMarshal.GetArrayDataReference(destinationArray))
+            fixed (
+                byte* pSrcArray = &MemoryMarshal.GetArrayDataReference(sourceArray),
+                    pDstArray = &MemoryMarshal.GetArrayDataReference(destinationArray)
+            )
             {
                 byte* srcData = pSrcArray + (nuint)sourceIndex * srcElementSize;
                 byte* data = pDstArray + (nuint)destinationIndex * destElementSize;
@@ -589,38 +871,40 @@ namespace System
                     switch (sourceElementType)
                     {
                         case EETypeElementType.Byte:
+                        {
+                            switch (destElementType)
                             {
-                                switch (destElementType)
-                                {
-                                    case EETypeElementType.Single:
-                                        *(float*)data = *(byte*)srcData;
-                                        break;
+                                case EETypeElementType.Single:
+                                    *(float*)data = *(byte*)srcData;
+                                    break;
 
-                                    case EETypeElementType.Double:
-                                        *(double*)data = *(byte*)srcData;
-                                        break;
+                                case EETypeElementType.Double:
+                                    *(double*)data = *(byte*)srcData;
+                                    break;
 
-                                    case EETypeElementType.Char:
-                                    case EETypeElementType.Int16:
-                                    case EETypeElementType.UInt16:
-                                        *(short*)data = *(byte*)srcData;
-                                        break;
+                                case EETypeElementType.Char:
+                                case EETypeElementType.Int16:
+                                case EETypeElementType.UInt16:
+                                    *(short*)data = *(byte*)srcData;
+                                    break;
 
-                                    case EETypeElementType.Int32:
-                                    case EETypeElementType.UInt32:
-                                        *(int*)data = *(byte*)srcData;
-                                        break;
+                                case EETypeElementType.Int32:
+                                case EETypeElementType.UInt32:
+                                    *(int*)data = *(byte*)srcData;
+                                    break;
 
-                                    case EETypeElementType.Int64:
-                                    case EETypeElementType.UInt64:
-                                        *(long*)data = *(byte*)srcData;
-                                        break;
+                                case EETypeElementType.Int64:
+                                case EETypeElementType.UInt64:
+                                    *(long*)data = *(byte*)srcData;
+                                    break;
 
-                                    default:
-                                        throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
-                                }
-                                break;
+                                default:
+                                    throw new ArrayTypeMismatchException(
+                                        SR.ArrayTypeMismatch_CantAssignType
+                                    );
                             }
+                            break;
+                        }
 
                         case EETypeElementType.SByte:
                             switch (destElementType)
@@ -646,7 +930,9 @@ namespace System
                                     break;
 
                                 default:
-                                    throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
+                                    throw new ArrayTypeMismatchException(
+                                        SR.ArrayTypeMismatch_CantAssignType
+                                    );
                             }
                             break;
 
@@ -678,7 +964,9 @@ namespace System
                                     break;
 
                                 default:
-                                    throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
+                                    throw new ArrayTypeMismatchException(
+                                        SR.ArrayTypeMismatch_CantAssignType
+                                    );
                             }
                             break;
 
@@ -702,7 +990,9 @@ namespace System
                                     break;
 
                                 default:
-                                    throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
+                                    throw new ArrayTypeMismatchException(
+                                        SR.ArrayTypeMismatch_CantAssignType
+                                    );
                             }
                             break;
 
@@ -722,7 +1012,9 @@ namespace System
                                     break;
 
                                 default:
-                                    throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
+                                    throw new ArrayTypeMismatchException(
+                                        SR.ArrayTypeMismatch_CantAssignType
+                                    );
                             }
                             break;
 
@@ -743,10 +1035,11 @@ namespace System
                                     break;
 
                                 default:
-                                    throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
+                                    throw new ArrayTypeMismatchException(
+                                        SR.ArrayTypeMismatch_CantAssignType
+                                    );
                             }
                             break;
-
 
                         case EETypeElementType.Int64:
                             switch (destElementType)
@@ -760,7 +1053,9 @@ namespace System
                                     break;
 
                                 default:
-                                    throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
+                                    throw new ArrayTypeMismatchException(
+                                        SR.ArrayTypeMismatch_CantAssignType
+                                    );
                             }
                             break;
 
@@ -783,13 +1078,15 @@ namespace System
                                     long srcValToDouble = *(long*)srcData;
                                     double d = (double)srcValToDouble;
                                     if (srcValToDouble < 0)
-                                        d += 4294967296.0 * 4294967296.0;   // This is 2^64
+                                        d += 4294967296.0 * 4294967296.0; // This is 2^64
 
                                     *(double*)data = d;
                                     break;
 
                                 default:
-                                    throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
+                                    throw new ArrayTypeMismatchException(
+                                        SR.ArrayTypeMismatch_CantAssignType
+                                    );
                             }
                             break;
 
@@ -801,12 +1098,16 @@ namespace System
                                     break;
 
                                 default:
-                                    throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
+                                    throw new ArrayTypeMismatchException(
+                                        SR.ArrayTypeMismatch_CantAssignType
+                                    );
                             }
                             break;
 
                         default:
-                            throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
+                            throw new ArrayTypeMismatchException(
+                                SR.ArrayTypeMismatch_CantAssignType
+                            );
                     }
                 }
             }
@@ -828,7 +1129,10 @@ namespace System
             else
             {
                 Debug.Assert(totalByteLength % (nuint)sizeof(IntPtr) == 0);
-                SpanHelpers.ClearWithReferences(ref Unsafe.As<byte, IntPtr>(ref pStart), totalByteLength / (nuint)sizeof(IntPtr));
+                SpanHelpers.ClearWithReferences(
+                    ref Unsafe.As<byte, IntPtr>(ref pStart),
+                    totalByteLength / (nuint)sizeof(IntPtr)
+                );
             }
         }
 
@@ -850,7 +1154,12 @@ namespace System
 
             int offset = index - lowerBound;
 
-            if (index < lowerBound || offset < 0 || length < 0 || (uint)(offset + length) > array.NativeLength)
+            if (
+                index < lowerBound
+                || offset < 0
+                || length < 0
+                || (uint)(offset + length) > array.NativeLength
+            )
                 ThrowHelper.ThrowIndexOutOfRangeException();
 
             nuint elementSize = eeType.ComponentSize;
@@ -861,7 +1170,10 @@ namespace System
             if (eeType.HasPointers)
             {
                 Debug.Assert(byteLength % (nuint)sizeof(IntPtr) == 0);
-                SpanHelpers.ClearWithReferences(ref Unsafe.As<byte, IntPtr>(ref ptr), byteLength / (uint)sizeof(IntPtr));
+                SpanHelpers.ClearWithReferences(
+                    ref Unsafe.As<byte, IntPtr>(ref ptr),
+                    byteLength / (uint)sizeof(IntPtr)
+                );
             }
             else
             {
@@ -882,10 +1194,7 @@ namespace System
 
         public int Rank
         {
-            get
-            {
-                return this.GetEETypePtr().ArrayRank;
-            }
+            get { return this.GetEETypePtr().ArrayRank; }
         }
 
         // Allocate new multidimensional array of given dimensions. Assumes that pLengths is immutable.
@@ -1021,7 +1330,10 @@ namespace System
             if (ElementEEType.IsPointer)
                 throw new NotSupportedException(SR.NotSupported_Type);
 
-            ref byte element = ref Unsafe.AddByteOffset(ref MemoryMarshal.GetArrayDataReference(this), (nuint)flattenedIndex * ElementSize);
+            ref byte element = ref Unsafe.AddByteOffset(
+                ref MemoryMarshal.GetArrayDataReference(this),
+                (nuint)flattenedIndex * ElementSize
+            );
 
             EETypePtr pElementEEType = ElementEEType;
             if (pElementEEType.IsValueType)
@@ -1042,17 +1354,38 @@ namespace System
             if (ElementEEType.IsPointer)
                 throw new NotSupportedException(SR.NotSupported_Type);
 
-            ref byte element = ref Unsafe.AddByteOffset(ref MemoryMarshal.GetArrayDataReference(this), (nuint)flattenedIndex * ElementSize);
+            ref byte element = ref Unsafe.AddByteOffset(
+                ref MemoryMarshal.GetArrayDataReference(this),
+                (nuint)flattenedIndex * ElementSize
+            );
 
             EETypePtr pElementEEType = ElementEEType;
             if (pElementEEType.IsValueType)
             {
                 // Unlike most callers of InvokeUtils.ChangeType(), Array.SetValue() does *not* permit conversion from a primitive to an Enum.
-                if (value != null && !(value.GetEETypePtr() == pElementEEType) && pElementEEType.IsEnum)
-                    throw new InvalidCastException(SR.Format(SR.Arg_ObjObjEx, value.GetType(), Type.GetTypeFromHandle(new RuntimeTypeHandle(pElementEEType))));
+                if (
+                    value != null
+                    && !(value.GetEETypePtr() == pElementEEType)
+                    && pElementEEType.IsEnum
+                )
+                    throw new InvalidCastException(
+                        SR.Format(
+                            SR.Arg_ObjObjEx,
+                            value.GetType(),
+                            Type.GetTypeFromHandle(new RuntimeTypeHandle(pElementEEType))
+                        )
+                    );
 
-                value = InvokeUtils.CheckArgument(value, pElementEEType, InvokeUtils.CheckArgumentSemantics.ArraySet, binderBundle: null);
-                Debug.Assert(value == null || RuntimeImports.AreTypesAssignable(value.GetEETypePtr(), pElementEEType));
+                value = InvokeUtils.CheckArgument(
+                    value,
+                    pElementEEType,
+                    InvokeUtils.CheckArgumentSemantics.ArraySet,
+                    binderBundle: null
+                );
+                Debug.Assert(
+                    value == null
+                        || RuntimeImports.AreTypesAssignable(value.GetEETypePtr(), pElementEEType)
+                );
 
                 RuntimeImports.RhUnbox(value, ref element, pElementEEType);
             }
@@ -1076,10 +1409,7 @@ namespace System
 
         internal EETypePtr ElementEEType
         {
-            get
-            {
-                return this.GetEETypePtr().ArrayElementType;
-            }
+            get { return this.GetEETypePtr().ArrayElementType; }
         }
 
         internal CorElementType GetCorElementTypeOfElementType()
@@ -1097,16 +1427,14 @@ namespace System
         //
         internal nuint ElementSize
         {
-            get
-            {
-                return this.GetEETypePtr().ComponentSize;
-            }
+            get { return this.GetEETypePtr().ComponentSize; }
         }
 
         private static int IndexOfImpl<T>(T[] array, T value, int startIndex, int count)
         {
             // See comment in EqualityComparerHelpers.GetComparerForReferenceTypesOnly for details
-            EqualityComparer<T> comparer = EqualityComparerHelpers.GetComparerForReferenceTypesOnly<T>();
+            EqualityComparer<T> comparer =
+                EqualityComparerHelpers.GetComparerForReferenceTypesOnly<T>();
 
             int endIndex = startIndex + count;
             if (comparer != null)
@@ -1132,7 +1460,8 @@ namespace System
         private static int LastIndexOfImpl<T>(T[] array, T value, int startIndex, int count)
         {
             // See comment in EqualityComparerHelpers.GetComparerForReferenceTypesOnly for details
-            EqualityComparer<T> comparer = EqualityComparerHelpers.GetComparerForReferenceTypesOnly<T>();
+            EqualityComparer<T> comparer =
+                EqualityComparerHelpers.GetComparerForReferenceTypesOnly<T>();
 
             int endIndex = startIndex - count + 1;
             if (comparer != null)
@@ -1182,9 +1511,7 @@ namespace System
         }
 
 #pragma warning disable CA1822 // https://github.com/dotnet/roslyn-analyzers/issues/5911
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 #pragma warning restore CA1822
     }
 
@@ -1202,15 +1529,14 @@ namespace System
             // get length so we don't have to call the Length property again in ArrayEnumerator constructor
             // and avoid more checking there too.
             int length = this.Length;
-            return length == 0 ? ArrayEnumerator.Empty : new ArrayEnumerator(Unsafe.As<T[]>(this), length);
+            return length == 0
+                ? ArrayEnumerator.Empty
+                : new ArrayEnumerator(Unsafe.As<T[]>(this), length);
         }
 
         public int Count
         {
-            get
-            {
-                return this.Length;
-            }
+            get { return this.Length; }
         }
 
         //
@@ -1221,10 +1547,7 @@ namespace System
         //
         public new bool IsReadOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public void Add(T item)
@@ -1322,10 +1645,7 @@ namespace System
 
             object IEnumerator.Current
             {
-                get
-                {
-                    return Current;
-                }
+                get { return Current; }
             }
 
             void IEnumerator.Reset()

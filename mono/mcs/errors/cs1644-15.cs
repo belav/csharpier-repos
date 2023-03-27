@@ -2,5 +2,4 @@
 // Line: 5
 // Compiler options: -langversion:iso-2
 
- public interface IFoo<out T> {
- }
+public interface IFoo<out T> { }

@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="MimeParameterReader.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
+namespace System.Web.Services.Protocols
+{
     using System.IO;
     using System;
     using System.Xml.Serialization;
@@ -18,12 +19,12 @@ namespace System.Web.Services.Protocols {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
-    public abstract class MimeParameterReader : MimeFormatter {
+    public abstract class MimeParameterReader : MimeFormatter
+    {
         /// <include file='doc\MimeParameterReader.uex' path='docs/doc[@for="MimeParameterReader.Read"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public abstract object[] Read(HttpRequest request);
     }
-
 }

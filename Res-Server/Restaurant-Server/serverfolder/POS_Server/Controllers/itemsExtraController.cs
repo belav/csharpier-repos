@@ -19,13 +19,11 @@ namespace POS_Server.Controllers
     {
         CountriesController coctrlr = new CountriesController();
 
-
         // GET api/<controller>
         [HttpPost]
         [Route("GetExtraByItemId")]
         public string GetExtraByItemId(string token)
         {
-
             token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
@@ -47,38 +45,36 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = (from IE in entity.itemsExtra
-                                    join I in entity.items on IE.itemId equals I.itemId
-                                    join E in entity.items on IE.extraId equals E.itemId
+                        var list = (
+                            from IE in entity.itemsExtra
+                            join I in entity.items on IE.itemId equals I.itemId
+                            join E in entity.items on IE.extraId equals E.itemId
 
-                                    where I.itemId == itemId
-                                    select new ItemModel
-                                    {
-
-                                        // itemExtraId = IE.itemExtraId,
-                                        //itemId = IE.itemId,
-                                        //extraId = IE.extraId,
-                                        notes = E.notes,
-                                        createDate = E.createDate,
-                                        updateDate = E.updateDate,
-                                        createUserId = E.createUserId,
-                                        updateUserId = E.updateUserId,
-                                        //itemcode=I.code,
-                                        //=I.itemsUnits.First().barcode,
-                                        //itemName = I.name,
-                                        //itemType = I.type,
-                                        //itemImage=I.image ,
-                                        itemId = E.itemId,
-                                        code = E.code,
-                                        name = E.name,
-                                        type = E.type,
-                                        //extraImage= E.image,
-                                    }
-                                    ).ToList();
-
+                            where I.itemId == itemId
+                            select new ItemModel
+                            {
+                                // itemExtraId = IE.itemExtraId,
+                                //itemId = IE.itemId,
+                                //extraId = IE.extraId,
+                                notes = E.notes,
+                                createDate = E.createDate,
+                                updateDate = E.updateDate,
+                                createUserId = E.createUserId,
+                                updateUserId = E.updateUserId,
+                                //itemcode=I.code,
+                                //=I.itemsUnits.First().barcode,
+                                //itemName = I.name,
+                                //itemType = I.type,
+                                //itemImage=I.image ,
+                                itemId = E.itemId,
+                                code = E.code,
+                                name = E.name,
+                                type = E.type,
+                                //extraImage= E.image,
+                            }
+                        ).ToList();
 
                         return TokenManager.GenerateToken(list);
-
                     }
                 }
                 catch
@@ -86,7 +82,6 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("0");
                 }
             }
-           
         }
 
         #region
@@ -109,7 +104,6 @@ namespace POS_Server.Controllers
                 long userId = 0;
                 long itemId = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -117,8 +111,10 @@ namespace POS_Server.Controllers
                     {
                         newlist = c.Value.Replace("\\", string.Empty);
                         newlist = newlist.Trim('"');
-                        newObj = JsonConvert.DeserializeObject<List<itemsExtra>>(newlist, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        newObj = JsonConvert.DeserializeObject<List<itemsExtra>>(
+                            newlist,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "userId")
                     {
@@ -128,7 +124,6 @@ namespace POS_Server.Controllers
                     {
                         itemId = long.Parse(c.Value);
                     }
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
@@ -150,7 +145,7 @@ namespace POS_Server.Controllers
 
                                 if (row.createUserId == null || row.createUserId == 0)
                                 {
-                                    row.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                    row.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                     row.updateDate = row.createDate;
 
                                     row.createUserId = userId;
@@ -158,11 +153,9 @@ namespace POS_Server.Controllers
                                 }
                                 else
                                 {
-                                    row.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                    row.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                     row.updateUserId = userId;
-
                                 }
-
                             }
                             entity.itemsExtra.AddRange(newObj);
                         }

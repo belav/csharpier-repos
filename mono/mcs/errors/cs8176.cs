@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 class X
 {
-	int x;
+    int x;
 
-	IEnumerable<int> Test ()
-	{
-		ref int y = ref x;
-		yield break;
-	}
+    IEnumerable<int> Test()
+    {
+        ref int y = ref x;
+        yield break;
+    }
 }

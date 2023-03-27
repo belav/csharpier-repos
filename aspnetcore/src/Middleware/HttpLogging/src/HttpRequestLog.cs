@@ -11,7 +11,8 @@ internal sealed class HttpRequestLog : IReadOnlyList<KeyValuePair<string, object
     private readonly List<KeyValuePair<string, object?>> _keyValues;
     private string? _cachedToString;
 
-    internal static readonly Func<object, Exception?, string> Callback = (state, exception) => ((HttpRequestLog)state).ToString();
+    internal static readonly Func<object, Exception?, string> Callback = (state, exception) =>
+        ((HttpRequestLog)state).ToString();
 
     public HttpRequestLog(List<KeyValuePair<string, object?>> keyValues)
     {

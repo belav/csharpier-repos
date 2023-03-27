@@ -15,17 +15,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 {
     [ExportStatelessXamlLspService(typeof(FormatDocumentHandler)), Shared]
     [Method(LSP.Methods.TextDocumentFormattingName)]
-    internal class FormatDocumentHandler : AbstractFormatDocumentHandlerBase<LSP.DocumentFormattingParams, LSP.TextEdit[]>
+    internal class FormatDocumentHandler
+        : AbstractFormatDocumentHandlerBase<LSP.DocumentFormattingParams, LSP.TextEdit[]>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FormatDocumentHandler()
-        {
-        }
+        public FormatDocumentHandler() { }
 
-        public override LSP.TextDocumentIdentifier GetTextDocumentIdentifier(LSP.DocumentFormattingParams request) => request.TextDocument;
+        public override LSP.TextDocumentIdentifier GetTextDocumentIdentifier(
+            LSP.DocumentFormattingParams request
+        ) => request.TextDocument;
 
-        public override Task<LSP.TextEdit[]> HandleRequestAsync(LSP.DocumentFormattingParams request, RequestContext context, CancellationToken cancellationToken)
-            => GetTextEditsAsync(request.Options, context, cancellationToken);
+        public override Task<LSP.TextEdit[]> HandleRequestAsync(
+            LSP.DocumentFormattingParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        ) => GetTextEditsAsync(request.Options, context, cancellationToken);
     }
 }

@@ -42,13 +42,21 @@ public abstract class WriteOnlyStream : Stream
     }
 
     ///<inheritdoc/>
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotSupportedException();
     }
 
     ///<inheritdoc/>
-    public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+    public override ValueTask<int> ReadAsync(
+        Memory<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotSupportedException();
     }

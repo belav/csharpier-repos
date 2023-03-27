@@ -16,6 +16,7 @@ namespace POS_Server.Classes
             }
             return branchCount;
         }
+
         public int getStroeCount()
         {
             int storeCount = 0;
@@ -25,14 +26,16 @@ namespace POS_Server.Classes
             }
             return storeCount;
         }
+
         public int getPosCount()
         {
             using (incposdbEntities entity = new incposdbEntities())
             {
-               var posCount = entity.ProgramDetails.Select(x => x.posCount).SingleOrDefault();
+                var posCount = entity.ProgramDetails.Select(x => x.posCount).SingleOrDefault();
                 return (int)posCount;
             }
         }
+
         public int getUserCount()
         {
             int userCount = 0;
@@ -42,6 +45,7 @@ namespace POS_Server.Classes
             }
             return userCount;
         }
+
         public int getVendorCount()
         {
             int vendorCount = 0;
@@ -51,15 +55,19 @@ namespace POS_Server.Classes
             }
             return vendorCount;
         }
+
         public int getCustomerCount()
         {
             int customerCount = 0;
             using (incposdbEntities entity = new incposdbEntities())
             {
-                customerCount = entity.ProgramDetails.Select(x => x.customerCount).SingleOrDefault();
+                customerCount = entity.ProgramDetails
+                    .Select(x => x.customerCount)
+                    .SingleOrDefault();
             }
             return customerCount;
         }
+
         public int getItemCount()
         {
             int itemCount = 0;
@@ -69,6 +77,7 @@ namespace POS_Server.Classes
             }
             return itemCount;
         }
+
         public int getSaleinvCount()
         {
             int invCount = 0;

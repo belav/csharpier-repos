@@ -8,13 +8,17 @@ namespace System.Net.Connections.Tests
 {
     internal class ConnectionWithoutStreamOrPipe : Connection
     {
-        public override IConnectionProperties ConnectionProperties => throw new NotImplementedException();
+        public override IConnectionProperties ConnectionProperties =>
+            throw new NotImplementedException();
 
         public override EndPoint LocalEndPoint => throw new NotImplementedException();
 
         public override EndPoint RemoteEndPoint => throw new NotImplementedException();
 
-        protected override ValueTask CloseAsyncCore(ConnectionCloseMethod method, CancellationToken cancellationToken)
+        protected override ValueTask CloseAsyncCore(
+            ConnectionCloseMethod method,
+            CancellationToken cancellationToken
+        )
         {
             throw new NotImplementedException();
         }

@@ -3,5 +3,5 @@
 
 public class C
 {
-	const object o = new { };
+    const object o = new { };
 }

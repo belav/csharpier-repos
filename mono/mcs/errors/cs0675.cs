@@ -4,11 +4,10 @@
 
 public class C
 {
-   public static void Main()
-   {
-      int x = 1;
-      int y = 1;
-      long value = (((long)x) << 32) | y;
-   }
+    public static void Main()
+    {
+        int x = 1;
+        int y = 1;
+        long value = (((long)x) << 32) | y;
+    }
 }
-

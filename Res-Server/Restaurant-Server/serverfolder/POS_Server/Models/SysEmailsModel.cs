@@ -26,6 +26,5 @@ namespace POS_Server.Models
 
         public string branchName { get; set; }
         public bool canDelete { get; set; }
-
     }
 }

@@ -7,17 +7,18 @@ using System.Collections;
 
 class Data : IEnumerable
 {
-	public IEnumerator GetEnumerator () { return null; }
-	
-	public void Add (__arglist)
-	{
-	}
+    public IEnumerator GetEnumerator()
+    {
+        return null;
+    }
+
+    public void Add(__arglist) { }
 }
 
 public class Test
 {
-	static void Main ()
-	{
-		var c = new Data { 1 };
-	}
+    static void Main()
+    {
+        var c = new Data { 1 };
+    }
 }

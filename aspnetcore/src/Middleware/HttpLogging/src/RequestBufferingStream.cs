@@ -23,7 +23,10 @@ internal sealed class RequestBufferingStream : BufferingStream
         _encoding = encoding;
     }
 
-    public override async ValueTask<int> ReadAsync(Memory<byte> destination, CancellationToken cancellationToken = default)
+    public override async ValueTask<int> ReadAsync(
+        Memory<byte> destination,
+        CancellationToken cancellationToken = default
+    )
     {
         var res = await _innerStream.ReadAsync(destination, cancellationToken);
 
@@ -32,7 +35,12 @@ internal sealed class RequestBufferingStream : BufferingStream
         return res;
     }
 
-    public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override async Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         var res = await _innerStream.ReadAsync(buffer.AsMemory(offset, count), cancellationToken);
 
@@ -96,7 +104,13 @@ internal sealed class RequestBufferingStream : BufferingStream
         HasLogged = true;
     }
 
-    public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginRead(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         return TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
     }

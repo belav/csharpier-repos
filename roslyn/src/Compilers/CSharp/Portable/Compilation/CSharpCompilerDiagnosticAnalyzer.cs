@@ -19,10 +19,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.CSharp
     {
         internal override CommonMessageProvider MessageProvider
         {
-            get
-            {
-                return CodeAnalysis.CSharp.MessageProvider.Instance;
-            }
+            get { return CodeAnalysis.CSharp.MessageProvider.Instance; }
         }
 
         internal override ImmutableArray<int> GetSupportedErrorCodes()
@@ -32,8 +29,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.CSharp
             foreach (ErrorCode errorCode in errorCodes)
             {
                 // Compiler diagnostic analyzer does not support build-only diagnostics.
-                if (!ErrorFacts.IsBuildOnlyDiagnostic(errorCode) &&
-                    errorCode is not (ErrorCode.Void or ErrorCode.Unknown))
+                if (
+                    !ErrorFacts.IsBuildOnlyDiagnostic(errorCode)
+                    && errorCode is not (ErrorCode.Void or ErrorCode.Unknown)
+                )
                 {
                     builder.Add((int)errorCode);
                 }

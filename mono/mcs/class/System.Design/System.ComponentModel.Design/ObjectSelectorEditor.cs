@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,129 +34,135 @@ using System.Windows.Forms.Design;
 
 namespace System.ComponentModel.Design
 {
-	public abstract class ObjectSelectorEditor : UITypeEditor
-	{
-		public ObjectSelectorEditor ()
-		{
-		}
+    public abstract class ObjectSelectorEditor : UITypeEditor
+    {
+        public ObjectSelectorEditor() { }
 
-		public ObjectSelectorEditor (bool subObjectSelector)
-		{
-			SubObjectSelector = subObjectSelector;
-		}
+        public ObjectSelectorEditor(bool subObjectSelector)
+        {
+            SubObjectSelector = subObjectSelector;
+        }
 
-		[MonoTODO]
-		public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override object EditValue(
+            ITypeDescriptorContext context,
+            IServiceProvider provider,
+            object value
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public bool EqualsToValue (object value)
-		{
-			return (currValue == value);
-		}
+        public bool EqualsToValue(object value)
+        {
+            return (currValue == value);
+        }
 
-		[MonoTODO]
-		protected virtual void FillTreeWithData (Selector selector, ITypeDescriptorContext context, IServiceProvider provider)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected virtual void FillTreeWithData(
+            Selector selector,
+            ITypeDescriptorContext context,
+            IServiceProvider provider
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
-		{
-			return UITypeEditorEditStyle.DropDown;
-		}
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
+        {
+            return UITypeEditorEditStyle.DropDown;
+        }
 
-		public virtual void SetValue (object value)
-		{
-			currValue = value;
-		}
+        public virtual void SetValue(object value)
+        {
+            currValue = value;
+        }
 
-		protected object currValue;
-		protected object prevValue;
-		public bool SubObjectSelector;
+        protected object currValue;
+        protected object prevValue;
+        public bool SubObjectSelector;
 
-		public class Selector : TreeView
-		{
-			[MonoTODO]
-			public Selector (ObjectSelectorEditor editor)
-			{
-				throw new NotImplementedException ();
-			}
+        public class Selector : TreeView
+        {
+            [MonoTODO]
+            public Selector(ObjectSelectorEditor editor)
+            {
+                throw new NotImplementedException();
+            }
 
-			[MonoTODO]
-			public SelectorNode AddNode (string label, object value, SelectorNode parent)
-			{
-				throw new NotImplementedException ();
-			}
+            [MonoTODO]
+            public SelectorNode AddNode(string label, object value, SelectorNode parent)
+            {
+                throw new NotImplementedException();
+            }
 
-			[MonoTODO]
-			public void Clear ()
-			{
-				throw new NotImplementedException ();
-			}
+            [MonoTODO]
+            public void Clear()
+            {
+                throw new NotImplementedException();
+            }
 
-			[MonoTODO]
-			protected void OnAfterSelect (object sender, TreeViewEventArgs e)
-			{
-				throw new NotImplementedException ();
-			}
+            [MonoTODO]
+            protected void OnAfterSelect(object sender, TreeViewEventArgs e)
+            {
+                throw new NotImplementedException();
+            }
 
-			[MonoTODO]
-			protected override void OnKeyDown (KeyEventArgs e)
-			{
-				throw new NotImplementedException ();
-			}
+            [MonoTODO]
+            protected override void OnKeyDown(KeyEventArgs e)
+            {
+                throw new NotImplementedException();
+            }
 
-			[MonoTODO]
-			protected override void OnKeyPress (KeyPressEventArgs e)
-			{
-				throw new NotImplementedException ();
-			}
+            [MonoTODO]
+            protected override void OnKeyPress(KeyPressEventArgs e)
+            {
+                throw new NotImplementedException();
+            }
 
-			[MonoTODO]
-			protected override void OnNodeMouseClick (TreeNodeMouseClickEventArgs e)
-			{
-				throw new NotImplementedException ();
-			}
+            [MonoTODO]
+            protected override void OnNodeMouseClick(TreeNodeMouseClickEventArgs e)
+            {
+                throw new NotImplementedException();
+            }
 
-			[MonoTODO]
-			public bool SetSelection (object value, TreeNodeCollection nodes)
-			{
-				throw new NotImplementedException ();
-			}
+            [MonoTODO]
+            public bool SetSelection(object value, TreeNodeCollection nodes)
+            {
+                throw new NotImplementedException();
+            }
 
-			[MonoTODO]
-			public void Start (IWindowsFormsEditorService edSvc, object value)
-			{
-				throw new NotImplementedException ();
-			}
+            [MonoTODO]
+            public void Start(IWindowsFormsEditorService edSvc, object value)
+            {
+                throw new NotImplementedException();
+            }
 
-			[MonoTODO]
-			public void Stop ()
-			{
-				throw new NotImplementedException ();
-			}
+            [MonoTODO]
+            public void Stop()
+            {
+                throw new NotImplementedException();
+            }
 
-			[MonoTODO]
-			protected override void WndProc (ref Message m)
-			{
-				throw new NotImplementedException ();
-			}
+            [MonoTODO]
+            protected override void WndProc(ref Message m)
+            {
+                throw new NotImplementedException();
+            }
 
-			[MonoTODO]
-			public bool clickSeen;
-		}
+            [MonoTODO]
+            public bool clickSeen;
+        }
 
-		public class SelectorNode : TreeNode
-		{
-			public SelectorNode (string label, object value) : base (label)
-			{
-				this.value = value;
-			}
+        public class SelectorNode : TreeNode
+        {
+            public SelectorNode(string label, object value)
+                : base(label)
+            {
+                this.value = value;
+            }
 
-			public object value;
-		}
-
-	}
+            public object value;
+        }
+    }
 }

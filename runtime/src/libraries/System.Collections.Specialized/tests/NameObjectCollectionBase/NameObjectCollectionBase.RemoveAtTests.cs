@@ -32,7 +32,10 @@ namespace System.Collections.Specialized.Tests
             // Remove the last
             nameObjectCollection.RemoveAt(nameObjectCollection.Count - 1);
             Assert.Equal(11, nameObjectCollection.Count);
-            Assert.Equal("repeated-name", nameObjectCollection.GetKey(nameObjectCollection.Count - 1));
+            Assert.Equal(
+                "repeated-name",
+                nameObjectCollection.GetKey(nameObjectCollection.Count - 1)
+            );
             Assert.Null(nameObjectCollection["repeated-name"]);
 
             // Remove all
@@ -65,8 +68,14 @@ namespace System.Collections.Specialized.Tests
         public void RemoveAt_InvalidIndex_ThrowsArgumentOutOfRangeException(int count)
         {
             MyNameObjectCollection nameObjectCollection = Helpers.CreateNameObjectCollection(count);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => nameObjectCollection.RemoveAt(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => nameObjectCollection.RemoveAt(count));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => nameObjectCollection.RemoveAt(-1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => nameObjectCollection.RemoveAt(count)
+            );
         }
 
         [Fact]

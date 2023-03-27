@@ -155,7 +155,8 @@ namespace System.Drawing.Tests
             yield return Pen(() => Pens.YellowGreen, Color.YellowGreen);
         }
 
-        public static object[] Pen(Func<Pen> getPen, Color expectedColor) => new object[] { getPen, expectedColor };
+        public static object[] Pen(Func<Pen> getPen, Color expectedColor) =>
+            new object[] { getPen, expectedColor };
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Pens_TestData))]

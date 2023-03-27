@@ -3,15 +3,13 @@
 
 struct B
 {
-	public int a;
+    public int a;
 
-	public B (int foo)
-	{
-		Test (this);
-		a = 1;
-	}
+    public B(int foo)
+    {
+        Test(this);
+        a = 1;
+    }
 
-	static void Test (B b)
-	{
-	}
+    static void Test(B b) { }
 }

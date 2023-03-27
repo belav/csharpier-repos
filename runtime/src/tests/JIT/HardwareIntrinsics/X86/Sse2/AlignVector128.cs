@@ -19,6 +19,7 @@ partial class Program
     }
 
     private static Vector128<int> s_f;
+
     // The JIT was picking a simple rsp-based frame for this function and then
     // believed the second vector is 16-byte aligned when it is not.
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -30,6 +31,8 @@ partial class Program
 
     private struct S24
     {
-        public long A, B, C;
+        public long A,
+            B,
+            C;
     }
 }

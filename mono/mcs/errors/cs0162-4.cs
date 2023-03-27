@@ -4,14 +4,21 @@
 
 using System;
 
-class C {
-	bool T () { return true; }
+class C
+{
+    bool T()
+    {
+        return true;
+    }
 
-	void Close()
-	{	
-		if (T () && false)
-			Console.WriteLine ("error");
-	}
+    void Close()
+    {
+        if (T() && false)
+            Console.WriteLine("error");
+    }
 }
 
-class XXXX { static void Main () {} }
+class XXXX
+{
+    static void Main() { }
+}

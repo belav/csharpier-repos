@@ -13,14 +13,18 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
     internal sealed class SupportedPlatformData
     {
-        // Because completion finds lots of symbols that exist in 
-        // all projects, we'll instead maintain a list of projects 
+        // Because completion finds lots of symbols that exist in
+        // all projects, we'll instead maintain a list of projects
         // missing the symbol.
         public readonly List<ProjectId> InvalidProjects;
         public readonly IEnumerable<ProjectId> CandidateProjects;
         public readonly Solution Solution;
 
-        public SupportedPlatformData(Solution solution, List<ProjectId> invalidProjects, IEnumerable<ProjectId> candidateProjects)
+        public SupportedPlatformData(
+            Solution solution,
+            List<ProjectId> invalidProjects,
+            IEnumerable<ProjectId> candidateProjects
+        )
         {
             InvalidProjects = invalidProjects;
             CandidateProjects = candidateProjects;
@@ -37,10 +41,16 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             var builder = new List<SymbolDisplayPart>();
             builder.AddLineBreak();
 
-            var projects = CandidateProjects.Select(Solution.GetRequiredProject).OrderBy(p => p.Name);
+            var projects = CandidateProjects
+                .Select(Solution.GetRequiredProject)
+                .OrderBy(p => p.Name);
             foreach (var project in projects)
             {
-                var text = string.Format(FeaturesResources._0_1, project.Name, Supported(!InvalidProjects.Contains(project.Id)));
+                var text = string.Format(
+                    FeaturesResources._0_1,
+                    project.Name,
+                    Supported(!InvalidProjects.Contains(project.Id))
+                );
                 builder.AddText(text);
                 builder.AddLineBreak();
             }
@@ -51,10 +61,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return builder;
         }
 
-        private static string Supported(bool supported)
-            => supported ? FeaturesResources.Available : FeaturesResources.Not_Available;
+        private static string Supported(bool supported) =>
+            supported ? FeaturesResources.Available : FeaturesResources.Not_Available;
 
-        public bool HasValidAndInvalidProjects()
-            => InvalidProjects.Any() && InvalidProjects.Count != CandidateProjects.Count();
+        public bool HasValidAndInvalidProjects() =>
+            InvalidProjects.Any() && InvalidProjects.Count != CandidateProjects.Count();
     }
 }

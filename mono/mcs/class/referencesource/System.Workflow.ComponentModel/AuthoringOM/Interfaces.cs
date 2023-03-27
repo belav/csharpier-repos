@@ -21,7 +21,9 @@ namespace System.Workflow.ComponentModel
 
     // Interface for objects that support mining for workflow changes.
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IWorkflowChangeDiff
     {
         IList<WorkflowChangeAction> Diff(object originalDefinition, object changedDefinition);

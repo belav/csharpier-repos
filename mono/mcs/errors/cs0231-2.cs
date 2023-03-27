@@ -2,6 +2,5 @@
 // Line: 5
 class Test
 {
-	void Foo (params object[] o, params bool[] b) {}
+    void Foo(params object[] o, params bool[] b) { }
 }
-

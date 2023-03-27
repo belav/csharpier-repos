@@ -3,11 +3,11 @@
 
 class A
 {
-	delegate void D ();
+    delegate void D();
 
-	static void Main ()
-	{
-		D d = null;
-		bool r = d == (() => { });
-	}
+    static void Main()
+    {
+        D d = null;
+        bool r = d == (() => { });
+    }
 }

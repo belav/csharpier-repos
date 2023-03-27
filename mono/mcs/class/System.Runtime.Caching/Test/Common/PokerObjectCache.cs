@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,155 +32,180 @@ using System.Runtime.Caching;
 
 namespace MonoTests.Common
 {
-	class PokerObjectCache : ObjectCache
-	{
-		Dictionary <string, object> cache;
+    class PokerObjectCache : ObjectCache
+    {
+        Dictionary<string, object> cache;
 
-		Dictionary<string, object> Cache {
-			get
-			{
-				if (cache == null)
-					cache = new Dictionary<string, object> ();
-				return cache;
-			}
-		}
+        Dictionary<string, object> Cache
+        {
+            get
+            {
+                if (cache == null)
+                    cache = new Dictionary<string, object>();
+                return cache;
+            }
+        }
 
-		public string MethodCalled { get; private set; }
+        public string MethodCalled { get; private set; }
 
-		public override object AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)
-		{
-			MethodCalled = "AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)";
-			if (String.IsNullOrEmpty (key) || value == null)
-				return null;
+        public override object AddOrGetExisting(
+            string key,
+            object value,
+            CacheItemPolicy policy,
+            string regionName = null
+        )
+        {
+            MethodCalled =
+                "AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)";
+            if (String.IsNullOrEmpty(key) || value == null)
+                return null;
 
-			object item;
-			if (Cache.TryGetValue (key, out item))
-				return item;
+            object item;
+            if (Cache.TryGetValue(key, out item))
+                return item;
 
-			Cache.Add (key, value);
-			return null;
-		}
+            Cache.Add(key, value);
+            return null;
+        }
 
-		public override CacheItem AddOrGetExisting (CacheItem value, CacheItemPolicy policy)
-		{
-			MethodCalled = "AddOrGetExisting (CacheItem value, CacheItemPolicy policy)";
-			if (value == null)
-				return null;
+        public override CacheItem AddOrGetExisting(CacheItem value, CacheItemPolicy policy)
+        {
+            MethodCalled = "AddOrGetExisting (CacheItem value, CacheItemPolicy policy)";
+            if (value == null)
+                return null;
 
-			object item;
-			if (Cache.TryGetValue (value.Key, out item))
-				return item as CacheItem;
+            object item;
+            if (Cache.TryGetValue(value.Key, out item))
+                return item as CacheItem;
 
-			Cache.Add (value.Key, value);
-			return null;
-		}
+            Cache.Add(value.Key, value);
+            return null;
+        }
 
-		public override object AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)
-		{
-			MethodCalled = "AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)";
-			if (String.IsNullOrEmpty (key) || value == null)
-				return null;
+        public override object AddOrGetExisting(
+            string key,
+            object value,
+            DateTimeOffset absoluteExpiration,
+            string regionName = null
+        )
+        {
+            MethodCalled =
+                "AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)";
+            if (String.IsNullOrEmpty(key) || value == null)
+                return null;
 
-			object item;
-			if (Cache.TryGetValue (key, out item))
-				return item;
+            object item;
+            if (Cache.TryGetValue(key, out item))
+                return item;
 
-			Cache.Add (key, value);
-			return null;
-		}
+            Cache.Add(key, value);
+            return null;
+        }
 
-		public override bool Contains (string key, string regionName = null)
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool Contains(string key, string regionName = null)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override CacheEntryChangeMonitor CreateCacheEntryChangeMonitor (IEnumerable<string> keys, string regionName = null)
-		{
-			throw new NotImplementedException ();
-		}
+        public override CacheEntryChangeMonitor CreateCacheEntryChangeMonitor(
+            IEnumerable<string> keys,
+            string regionName = null
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public override DefaultCacheCapabilities DefaultCacheCapabilities
-		{
-			get { throw new NotImplementedException (); }
-		}
+        public override DefaultCacheCapabilities DefaultCacheCapabilities
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public override object Get (string key, string regionName = null)
-		{
-			throw new NotImplementedException ();
-		}
+        public override object Get(string key, string regionName = null)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override CacheItem GetCacheItem (string key, string regionName = null)
-		{
-			throw new NotImplementedException ();
-		}
+        public override CacheItem GetCacheItem(string key, string regionName = null)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override long GetCount (string regionName = null)
-		{
-			throw new NotImplementedException ();
-		}
+        public override long GetCount(string regionName = null)
+        {
+            throw new NotImplementedException();
+        }
 
-		protected override IEnumerator<KeyValuePair<string, object>> GetEnumerator ()
-		{
-			throw new NotImplementedException ();
-		}
+        protected override IEnumerator<KeyValuePair<string, object>> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
 
-		public override IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)
-		{
-			MethodCalled = "IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)";
-			var ret = new Dictionary<string, object> ();
-			if (keys == null)
-				return ret;
-			
-			Dictionary <string, object> cache = Cache;
-			if (cache.Count == 0)
-				return ret;
+        public override IDictionary<string, object> GetValues(
+            IEnumerable<string> keys,
+            string regionName = null
+        )
+        {
+            MethodCalled =
+                "IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)";
+            var ret = new Dictionary<string, object>();
+            if (keys == null)
+                return ret;
 
-			object value;
-			foreach (string key in keys) {
-				if (!cache.TryGetValue (key, out value))
-					continue;
+            Dictionary<string, object> cache = Cache;
+            if (cache.Count == 0)
+                return ret;
 
-				ret.Add (key, value);
-			}
+            object value;
+            foreach (string key in keys)
+            {
+                if (!cache.TryGetValue(key, out value))
+                    continue;
 
-			return ret;
-		}
+                ret.Add(key, value);
+            }
 
-		public override string Name
-		{
-			get { throw new NotImplementedException (); }
-		}
+            return ret;
+        }
 
-		public override object Remove (string key, string regionName = null)
-		{
-			throw new NotImplementedException ();
-		}
+        public override string Name
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public override void Set (string key, object value, CacheItemPolicy policy, string regionName = null)
-		{
-			throw new NotImplementedException ();
-		}
+        public override object Remove(string key, string regionName = null)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override void Set (CacheItem item, CacheItemPolicy policy)
-		{
-			throw new NotImplementedException ();
-		}
+        public override void Set(
+            string key,
+            object value,
+            CacheItemPolicy policy,
+            string regionName = null
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public override void Set (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)
-		{
-			throw new NotImplementedException ();
-		}
+        public override void Set(CacheItem item, CacheItemPolicy policy)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override object this [string key]
-		{
-			get
-			{
-				throw new NotImplementedException ();
-			}
-			set
-			{
-				throw new NotImplementedException ();
-			}
-		}
-	}
+        public override void Set(
+            string key,
+            object value,
+            DateTimeOffset absoluteExpiration,
+            string regionName = null
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object this[string key]
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+    }
 }

@@ -16,12 +16,17 @@ namespace System.Reflection.Runtime.TypeInfos
     // TypeInfos returned by the Type.GetTypeFromCLSID() api. These "types" are little more than mules that hold a CLSID
     // and optional remote server name. The only useful thing to do with them is to pass them to Activator.CreateInstance().
     //
-    internal sealed partial class RuntimeCLSIDTypeInfo : RuntimeTypeDefinitionTypeInfo, IKeyedItem<RuntimeCLSIDTypeInfo.UnificationKey>
+    internal sealed partial class RuntimeCLSIDTypeInfo
+        : RuntimeTypeDefinitionTypeInfo,
+            IKeyedItem<RuntimeCLSIDTypeInfo.UnificationKey>
     {
         private RuntimeCLSIDTypeInfo(Guid clsid, string server)
         {
             _key = new UnificationKey(clsid, server);
-            _constructors = new RuntimeConstructorInfo[] { RuntimeCLSIDNullaryConstructorInfo.GetRuntimeCLSIDNullaryConstructorInfo(this) };
+            _constructors = new RuntimeConstructorInfo[]
+            {
+                RuntimeCLSIDNullaryConstructorInfo.GetRuntimeCLSIDNullaryConstructorInfo(this)
+            };
         }
 
         public sealed override Assembly Assembly => BaseType.Assembly;
@@ -32,15 +37,14 @@ namespace System.Reflection.Runtime.TypeInfos
         public sealed override bool IsGenericTypeDefinition => false;
         public sealed override int MetadataToken => BaseType.MetadataToken;
         public sealed override string Namespace => BaseType.Namespace;
-        public sealed override StructLayoutAttribute StructLayoutAttribute => BaseType.StructLayoutAttribute;
+        public sealed override StructLayoutAttribute StructLayoutAttribute =>
+            BaseType.StructLayoutAttribute;
+
         public sealed override string ToString() => BaseType.ToString();
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
         {
-            get
-            {
-                return Array.Empty<CustomAttributeData>();
-            }
+            get { return Array.Empty<CustomAttributeData>(); }
         }
 
         public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other)
@@ -53,16 +57,19 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         protected sealed override TypeAttributes GetAttributeFlagsImpl() => TypeAttributes.Public;
+
         protected sealed override int InternalGetHashCode() => _key.GetHashCode();
 
         internal sealed override Type BaseTypeWithoutTheGenericParameterQuirk => typeof(object);
         internal sealed override Type InternalDeclaringType => null;
         internal sealed override string InternalFullNameOfAssembly => BaseType.Assembly.FullName;
-        internal sealed override IEnumerable<RuntimeConstructorInfo> SyntheticConstructors => _constructors;
+        internal sealed override IEnumerable<RuntimeConstructorInfo> SyntheticConstructors =>
+            _constructors;
 
         // No RuntimeTypeHandle for this flavor of type. This does lead to the oddity that Activator.CreateInstance() returns an object whose GetType()
         // returns __ComObject rather than this specific type. But this has happened for years on the full framework without incident.
-        internal sealed override RuntimeTypeHandle InternalTypeHandleIfAvailable => default(RuntimeTypeHandle);
+        internal sealed override RuntimeTypeHandle InternalTypeHandleIfAvailable =>
+            default(RuntimeTypeHandle);
 
         internal string Server => _key.Server;
 

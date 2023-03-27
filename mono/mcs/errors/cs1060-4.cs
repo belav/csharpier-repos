@@ -4,29 +4,29 @@
 
 public class C
 {
-	public int v;
+    public int v;
 }
 
 public struct S
 {
-	public C c;
+    public C c;
 }
 
 class X
 {
-	public S s;
+    public S s;
 }
 
 struct S2
 {
-	public X x;
+    public X x;
 }
 
 public class Test
 {
-	static void Main ()
-	{
-		S2 s2;
-		s2.x.s.c.v = 5;
-	}
+    static void Main()
+    {
+        S2 s2;
+        s2.x.s.c.v = 5;
+    }
 }

@@ -17,20 +17,25 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
         /// </summary>
         public static async Task<ImmutableArray<ReferenceInfo>> ReadReferencesAsync(
             ImmutableArray<ReferenceInfo> projectReferences,
-            string projectAssetsFilePath)
+            string projectAssetsFilePath
+        )
         {
-            var doesProjectAssetsFileExist = IOUtilities.PerformIO(() => File.Exists(projectAssetsFilePath));
+            var doesProjectAssetsFileExist = IOUtilities.PerformIO(
+                () => File.Exists(projectAssetsFilePath)
+            );
             if (!doesProjectAssetsFileExist)
             {
                 return ImmutableArray<ReferenceInfo>.Empty;
             }
 
-            var projectAssetsFileContents = await IOUtilities.PerformIOAsync(async () =>
-            {
-                using var fileStream = File.OpenRead(projectAssetsFilePath);
-                using var reader = new StreamReader(fileStream);
-                return await reader.ReadToEndAsync().ConfigureAwait(false);
-            }).ConfigureAwait(false);
+            var projectAssetsFileContents = await IOUtilities
+                .PerformIOAsync(async () =>
+                {
+                    using var fileStream = File.OpenRead(projectAssetsFilePath);
+                    using var reader = new StreamReader(fileStream);
+                    return await reader.ReadToEndAsync().ConfigureAwait(false);
+                })
+                .ConfigureAwait(false);
 
             if (projectAssetsFileContents is null)
             {
@@ -39,8 +44,13 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
 
             try
             {
-                var projectAssets = JsonConvert.DeserializeObject<ProjectAssetsFile>(projectAssetsFileContents);
-                return ProjectAssetsReader.AddDependencyHierarchies(projectReferences, projectAssets);
+                var projectAssets = JsonConvert.DeserializeObject<ProjectAssetsFile>(
+                    projectAssetsFileContents
+                );
+                return ProjectAssetsReader.AddDependencyHierarchies(
+                    projectReferences,
+                    projectAssets
+                );
             }
             catch
             {

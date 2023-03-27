@@ -4,7 +4,5 @@
 using System;
 using System.Runtime.CompilerServices;
 
-[TupleElementNames (new[] { "a", "b" })]
-public class C
-{
-}
+[TupleElementNames(new[] { "a", "b" })]
+public class C { }

@@ -3,19 +3,19 @@
 
 struct S
 {
-	public object O;
+    public object O;
 }
 
 class X
 {
-	public S s;
+    public S s;
 }
 
 class C
 {
-	public static void Main ()
-	{
-		X x;
-		x.s.O = 2;
-	}
+    public static void Main()
+    {
+        X x;
+        x.s.O = 2;
+    }
 }

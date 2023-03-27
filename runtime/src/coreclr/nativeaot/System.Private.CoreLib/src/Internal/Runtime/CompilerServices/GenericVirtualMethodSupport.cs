@@ -9,7 +9,12 @@ namespace Internal.Runtime.CompilerServices
 {
     internal static class GenericVirtualMethodSupport
     {
-        private static unsafe IntPtr GVMLookupForSlotWorker(RuntimeTypeHandle type, RuntimeTypeHandle declaringType, RuntimeTypeHandle[] genericArguments, MethodNameAndSignature methodNameAndSignature)
+        private static unsafe IntPtr GVMLookupForSlotWorker(
+            RuntimeTypeHandle type,
+            RuntimeTypeHandle declaringType,
+            RuntimeTypeHandle[] genericArguments,
+            MethodNameAndSignature methodNameAndSignature
+        )
         {
             bool slotChanged = false;
 
@@ -19,7 +24,7 @@ namespace Internal.Runtime.CompilerServices
 
             bool lookForDefaultImplementations = false;
 
-        again:
+            again:
             // Walk parent hierarchy attempting to resolve
             EETypePtr eeType = type.ToEETypePtr();
 
@@ -28,12 +33,30 @@ namespace Internal.Runtime.CompilerServices
                 RuntimeTypeHandle handle = new RuntimeTypeHandle(eeType);
                 string methodName = methodNameAndSignature.Name;
                 RuntimeSignature methodSignature = methodNameAndSignature.Signature;
-                if (RuntimeAugments.TypeLoaderCallbacks.TryGetGenericVirtualTargetForTypeAndSlot(handle, ref declaringType, genericArguments, ref methodName, ref methodSignature, lookForDefaultImplementations, out functionPointer, out genericDictionary, out slotChanged))
+                if (
+                    RuntimeAugments.TypeLoaderCallbacks.TryGetGenericVirtualTargetForTypeAndSlot(
+                        handle,
+                        ref declaringType,
+                        genericArguments,
+                        ref methodName,
+                        ref methodSignature,
+                        lookForDefaultImplementations,
+                        out functionPointer,
+                        out genericDictionary,
+                        out slotChanged
+                    )
+                )
                 {
-                    methodNameAndSignature = new MethodNameAndSignature(methodName, methodSignature);
+                    methodNameAndSignature = new MethodNameAndSignature(
+                        methodName,
+                        methodSignature
+                    );
 
                     if (!slotChanged)
-                        resolution = FunctionPointerOps.GetGenericMethodFunctionPointer(functionPointer, genericDictionary);
+                        resolution = FunctionPointerOps.GetGenericMethodFunctionPointer(
+                            functionPointer,
+                            genericDictionary
+                        );
                     break;
                 }
 
@@ -44,12 +67,19 @@ namespace Internal.Runtime.CompilerServices
             // This happens when there is an interface call.
             if (slotChanged)
             {
-                return GVMLookupForSlotWorker(type, declaringType, genericArguments, methodNameAndSignature);
+                return GVMLookupForSlotWorker(
+                    type,
+                    declaringType,
+                    genericArguments,
+                    methodNameAndSignature
+                );
             }
 
-            if (resolution == IntPtr.Zero
+            if (
+                resolution == IntPtr.Zero
                 && !lookForDefaultImplementations
-                && declaringType.ToEETypePtr().IsInterface)
+                && declaringType.ToEETypePtr().IsInterface
+            )
             {
                 lookForDefaultImplementations = true;
                 goto again;
@@ -66,7 +96,12 @@ namespace Internal.Runtime.CompilerServices
                 sb.AppendLine("Instantiation:");
                 for (int i = 0; i < genericArguments.Length; i++)
                 {
-                    sb.AppendLine("  Argument " + i.LowLevelToString() + ": " + genericArguments[i].LastResortToString);
+                    sb.AppendLine(
+                        "  Argument "
+                            + i.LowLevelToString()
+                            + ": "
+                            + genericArguments[i].LastResortToString
+                    );
                 }
 
                 Environment.FailFast(sb.ToString());
@@ -75,18 +110,33 @@ namespace Internal.Runtime.CompilerServices
             return resolution;
         }
 
-        internal static unsafe IntPtr GVMLookupForSlot(RuntimeTypeHandle type, RuntimeMethodHandle slot)
+        internal static unsafe IntPtr GVMLookupForSlot(
+            RuntimeTypeHandle type,
+            RuntimeMethodHandle slot
+        )
         {
             RuntimeTypeHandle declaringTypeHandle;
             MethodNameAndSignature nameAndSignature;
             RuntimeTypeHandle[] genericMethodArgs;
-            if (!RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(slot, out declaringTypeHandle, out nameAndSignature, out genericMethodArgs))
+            if (
+                !RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(
+                    slot,
+                    out declaringTypeHandle,
+                    out nameAndSignature,
+                    out genericMethodArgs
+                )
+            )
             {
                 System.Diagnostics.Debug.Assert(false);
                 return IntPtr.Zero;
             }
 
-            return GVMLookupForSlotWorker(type, declaringTypeHandle, genericMethodArgs, nameAndSignature);
+            return GVMLookupForSlotWorker(
+                type,
+                declaringTypeHandle,
+                genericMethodArgs,
+                nameAndSignature
+            );
         }
     }
 }

@@ -38,12 +38,17 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
     /// Initializes a new instance of <see cref="TwitterHandler"/>.
     /// </summary>
     /// <inheritdoc />
-    public TwitterHandler(IOptionsMonitor<TwitterOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
-        : base(options, logger, encoder, clock)
-    { }
+    public TwitterHandler(
+        IOptionsMonitor<TwitterOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    )
+        : base(options, logger, encoder, clock) { }
 
     /// <inheritdoc />
-    protected override Task<object> CreateEventsAsync() => Task.FromResult<object>(new TwitterEvents());
+    protected override Task<object> CreateEventsAsync() =>
+        Task.FromResult<object>(new TwitterEvents());
 
     /// <inheritdoc />
     protected override async Task<HandleRequestResult> HandleRemoteAuthenticateAsync()
@@ -68,8 +73,12 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
             // Since it's a frequent scenario (that is not caused by incorrect configuration),
             // denied errors are handled differently using HandleAccessDeniedErrorAsync().
             var result = await HandleAccessDeniedErrorAsync(properties);
-            return !result.None ? result
-                : HandleRequestResult.Fail("Access was denied by the resource owner or by the remote server.", properties);
+            return !result.None
+                ? result
+                : HandleRequestResult.Fail(
+                    "Access was denied by the resource owner or by the remote server.",
+                    properties
+                );
         }
 
         var returnedToken = query["oauth_token"];
@@ -95,14 +104,36 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
 
         var accessToken = await ObtainAccessTokenAsync(requestToken, oauthVerifier.ToString());
 
-        var identity = new ClaimsIdentity(new[]
-        {
-                new Claim(ClaimTypes.NameIdentifier, accessToken.UserId, ClaimValueTypes.String, ClaimsIssuer),
-                new Claim(ClaimTypes.Name, accessToken.ScreenName, ClaimValueTypes.String, ClaimsIssuer),
-                new Claim("urn:twitter:userid", accessToken.UserId, ClaimValueTypes.String, ClaimsIssuer),
-                new Claim("urn:twitter:screenname", accessToken.ScreenName, ClaimValueTypes.String, ClaimsIssuer)
+        var identity = new ClaimsIdentity(
+            new[]
+            {
+                new Claim(
+                    ClaimTypes.NameIdentifier,
+                    accessToken.UserId,
+                    ClaimValueTypes.String,
+                    ClaimsIssuer
+                ),
+                new Claim(
+                    ClaimTypes.Name,
+                    accessToken.ScreenName,
+                    ClaimValueTypes.String,
+                    ClaimsIssuer
+                ),
+                new Claim(
+                    "urn:twitter:userid",
+                    accessToken.UserId,
+                    ClaimValueTypes.String,
+                    ClaimsIssuer
+                ),
+                new Claim(
+                    "urn:twitter:screenname",
+                    accessToken.ScreenName,
+                    ClaimValueTypes.String,
+                    ClaimsIssuer
+                )
             },
-        ClaimsIssuer);
+            ClaimsIssuer
+        );
 
         JsonDocument user;
         if (Options.RetrieveUserDetails)
@@ -118,13 +149,29 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
         {
             if (Options.SaveTokens)
             {
-                properties.StoreTokens(new[] {
-                    new AuthenticationToken { Name = "access_token", Value = accessToken.Token },
-                    new AuthenticationToken { Name = "access_token_secret", Value = accessToken.TokenSecret }
-                    });
+                properties.StoreTokens(
+                    new[]
+                    {
+                        new AuthenticationToken
+                        {
+                            Name = "access_token",
+                            Value = accessToken.Token
+                        },
+                        new AuthenticationToken
+                        {
+                            Name = "access_token_secret",
+                            Value = accessToken.TokenSecret
+                        }
+                    }
+                );
             }
 
-            var ticket = await CreateTicketAsync(identity, properties, accessToken, user.RootElement);
+            var ticket = await CreateTicketAsync(
+                identity,
+                properties,
+                accessToken,
+                user.RootElement
+            );
             return HandleRequestResult.Success(ticket);
         }
     }
@@ -138,14 +185,29 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
     /// <param name="user">The <see cref="JsonElement"/> for the user.</param>
     /// <returns>The <see cref="AuthenticationTicket"/>.</returns>
     protected virtual async Task<AuthenticationTicket> CreateTicketAsync(
-        ClaimsIdentity identity, AuthenticationProperties properties, AccessToken token, JsonElement user)
+        ClaimsIdentity identity,
+        AuthenticationProperties properties,
+        AccessToken token,
+        JsonElement user
+    )
     {
         foreach (var action in Options.ClaimActions)
         {
             action.Run(user, identity, ClaimsIssuer);
         }
 
-        var context = new TwitterCreatingTicketContext(Context, Scheme, Options, new ClaimsPrincipal(identity), properties, token.UserId, token.ScreenName, token.Token, token.TokenSecret, user);
+        var context = new TwitterCreatingTicketContext(
+            Context,
+            Scheme,
+            Options,
+            new ClaimsPrincipal(identity),
+            properties,
+            token.UserId,
+            token.ScreenName,
+            token.Token,
+            token.TokenSecret,
+            user
+        );
         await Events.CreatingTicket(context);
 
         return new AuthenticationTicket(context.Principal!, context.Properties, Scheme.Name);
@@ -160,27 +222,50 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
         }
 
         // If CallbackConfirmed is false, this will throw
-        var requestToken = await ObtainRequestTokenAsync(BuildRedirectUri(Options.CallbackPath), properties);
-        var twitterAuthenticationEndpoint = TwitterDefaults.AuthenticationEndpoint + requestToken.Token;
+        var requestToken = await ObtainRequestTokenAsync(
+            BuildRedirectUri(Options.CallbackPath),
+            properties
+        );
+        var twitterAuthenticationEndpoint =
+            TwitterDefaults.AuthenticationEndpoint + requestToken.Token;
 
         var cookieOptions = Options.StateCookie.Build(Context, Clock.UtcNow);
 
-        Response.Cookies.Append(Options.StateCookie.Name!, Options.StateDataFormat.Protect(requestToken), cookieOptions);
+        Response.Cookies.Append(
+            Options.StateCookie.Name!,
+            Options.StateDataFormat.Protect(requestToken),
+            cookieOptions
+        );
 
-        var redirectContext = new RedirectContext<TwitterOptions>(Context, Scheme, Options, properties, twitterAuthenticationEndpoint);
+        var redirectContext = new RedirectContext<TwitterOptions>(
+            Context,
+            Scheme,
+            Options,
+            properties,
+            twitterAuthenticationEndpoint
+        );
         await Events.RedirectToAuthorizationEndpoint(redirectContext);
     }
 
-    private async Task<HttpResponseMessage> ExecuteRequestAsync(string url, HttpMethod httpMethod, RequestToken? accessToken = null, Dictionary<string, string>? extraOAuthPairs = null, Dictionary<string, string>? queryParameters = null, Dictionary<string, string>? formData = null)
+    private async Task<HttpResponseMessage> ExecuteRequestAsync(
+        string url,
+        HttpMethod httpMethod,
+        RequestToken? accessToken = null,
+        Dictionary<string, string>? extraOAuthPairs = null,
+        Dictionary<string, string>? queryParameters = null,
+        Dictionary<string, string>? formData = null
+    )
     {
-        var authorizationParts = new SortedDictionary<string, string>(extraOAuthPairs ?? new Dictionary<string, string>())
-            {
-                { "oauth_consumer_key", Options.ConsumerKey! },
-                { "oauth_nonce", Guid.NewGuid().ToString("N") },
-                { "oauth_signature_method", "HMAC-SHA1" },
-                { "oauth_timestamp", GenerateTimeStamp() },
-                { "oauth_version", "1.0" }
-            };
+        var authorizationParts = new SortedDictionary<string, string>(
+            extraOAuthPairs ?? new Dictionary<string, string>()
+        )
+        {
+            { "oauth_consumer_key", Options.ConsumerKey! },
+            { "oauth_nonce", Guid.NewGuid().ToString("N") },
+            { "oauth_signature_method", "HMAC-SHA1" },
+            { "oauth_timestamp", GenerateTimeStamp() },
+            { "oauth_version", "1.0" }
+        };
 
         if (accessToken != null)
         {
@@ -206,7 +291,12 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
         var stringBuilder = new StringBuilder();
         foreach (var signaturePart in signatureParts)
         {
-            stringBuilder.AppendFormat(CultureInfo.InvariantCulture, "{0}={1}&", Uri.EscapeDataString(signaturePart.Key), Uri.EscapeDataString(signaturePart.Value));
+            stringBuilder.AppendFormat(
+                CultureInfo.InvariantCulture,
+                "{0}={1}&",
+                Uri.EscapeDataString(signaturePart.Key),
+                Uri.EscapeDataString(signaturePart.Value)
+            );
         }
         stringBuilder.Length--;
         var parameterString = stringBuilder.ToString();
@@ -218,7 +308,11 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
         stringBuilder.Append('&');
         stringBuilder.Append(Uri.EscapeDataString(parameterString));
 
-        var signature = ComputeSignature(Options.ConsumerSecret!, accessToken?.TokenSecret, stringBuilder.ToString());
+        var signature = ComputeSignature(
+            Options.ConsumerSecret!,
+            accessToken?.TokenSecret,
+            stringBuilder.ToString()
+        );
         stringBuilder.Clear();
         authorizationParts.Add("oauth_signature", signature);
 
@@ -228,7 +322,12 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
             stringBuilder.Append('?');
             foreach (var queryParam in queryParameters)
             {
-                stringBuilder.AppendFormat(CultureInfo.InvariantCulture, "{0}={1}&", queryParam.Key, queryParam.Value);
+                stringBuilder.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    "{0}={1}&",
+                    queryParam.Key,
+                    queryParam.Value
+                );
             }
             stringBuilder.Length--;
             queryString = stringBuilder.ToString();
@@ -238,7 +337,12 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
         stringBuilder.Append("OAuth ");
         foreach (var authorizationPart in authorizationParts)
         {
-            stringBuilder.AppendFormat(CultureInfo.InvariantCulture, "{0}=\"{1}\",", authorizationPart.Key, Uri.EscapeDataString(authorizationPart.Value));
+            stringBuilder.AppendFormat(
+                CultureInfo.InvariantCulture,
+                "{0}=\"{1}\",",
+                authorizationPart.Key,
+                Uri.EscapeDataString(authorizationPart.Value)
+            );
         }
         stringBuilder.Length--;
 
@@ -257,16 +361,29 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
         return await Backchannel.SendAsync(request, Context.RequestAborted);
     }
 
-    private async Task<RequestToken> ObtainRequestTokenAsync(string callBackUri, AuthenticationProperties properties)
+    private async Task<RequestToken> ObtainRequestTokenAsync(
+        string callBackUri,
+        AuthenticationProperties properties
+    )
     {
         Logger.ObtainRequestToken();
 
-        var response = await ExecuteRequestAsync(TwitterDefaults.RequestTokenEndpoint, HttpMethod.Post, extraOAuthPairs: new Dictionary<string, string>() { { "oauth_callback", callBackUri } });
+        var response = await ExecuteRequestAsync(
+            TwitterDefaults.RequestTokenEndpoint,
+            HttpMethod.Post,
+            extraOAuthPairs: new Dictionary<string, string>() { { "oauth_callback", callBackUri } }
+        );
         await EnsureTwitterRequestSuccess(response);
         var responseText = await response.Content.ReadAsStringAsync(Context.RequestAborted);
 
         var responseParameters = new FormCollection(new FormReader(responseText).ReadForm());
-        if (!string.Equals(responseParameters["oauth_callback_confirmed"], "true", StringComparison.Ordinal))
+        if (
+            !string.Equals(
+                responseParameters["oauth_callback_confirmed"],
+                "true",
+                StringComparison.Ordinal
+            )
+        )
         {
             throw new Exception("Twitter oauth_callback_confirmed is not true.");
         }
@@ -274,7 +391,9 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
         return new RequestToken
         {
             Token = Uri.UnescapeDataString(responseParameters["oauth_token"].ToString()),
-            TokenSecret = Uri.UnescapeDataString(responseParameters["oauth_token_secret"].ToString()),
+            TokenSecret = Uri.UnescapeDataString(
+                responseParameters["oauth_token_secret"].ToString()
+            ),
             CallbackConfirmed = true,
             Properties = properties,
         };
@@ -287,11 +406,18 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
         Logger.ObtainAccessToken();
 
         var formPost = new Dictionary<string, string> { { "oauth_verifier", verifier } };
-        var response = await ExecuteRequestAsync(TwitterDefaults.AccessTokenEndpoint, HttpMethod.Post, token, formData: formPost);
+        var response = await ExecuteRequestAsync(
+            TwitterDefaults.AccessTokenEndpoint,
+            HttpMethod.Post,
+            token,
+            formData: formPost
+        );
 
         if (!response.IsSuccessStatusCode)
         {
-            Logger.LogError("AccessToken request failed with a status code of " + response.StatusCode);
+            Logger.LogError(
+                "AccessToken request failed with a status code of " + response.StatusCode
+            );
             await EnsureTwitterRequestSuccess(response); // throw
         }
 
@@ -301,7 +427,9 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
         return new AccessToken
         {
             Token = Uri.UnescapeDataString(responseParameters["oauth_token"].ToString()),
-            TokenSecret = Uri.UnescapeDataString(responseParameters["oauth_token_secret"].ToString()),
+            TokenSecret = Uri.UnescapeDataString(
+                responseParameters["oauth_token_secret"].ToString()
+            ),
             UserId = Uri.UnescapeDataString(responseParameters["user_id"].ToString()),
             ScreenName = Uri.UnescapeDataString(responseParameters["screen_name"].ToString()),
         };
@@ -312,7 +440,12 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
     {
         Logger.RetrieveUserDetails();
 
-        var response = await ExecuteRequestAsync("https://api.twitter.com/1.1/account/verify_credentials.json", HttpMethod.Get, accessToken, queryParameters: new Dictionary<string, string>() { { "include_email", "true" } });
+        var response = await ExecuteRequestAsync(
+            "https://api.twitter.com/1.1/account/verify_credentials.json",
+            HttpMethod.Get,
+            accessToken,
+            queryParameters: new Dictionary<string, string>() { { "include_email", "true" } }
+        );
 
         if (!response.IsSuccessStatusCode)
         {
@@ -329,16 +462,25 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
     private string GenerateTimeStamp()
     {
         var secondsSinceUnixEpocStart = Clock.UtcNow - DateTimeOffset.UnixEpoch;
-        return Convert.ToInt64(secondsSinceUnixEpocStart.TotalSeconds).ToString(CultureInfo.InvariantCulture);
+        return Convert
+            .ToInt64(secondsSinceUnixEpocStart.TotalSeconds)
+            .ToString(CultureInfo.InvariantCulture);
     }
 
-    private static string ComputeSignature(string consumerSecret, string? tokenSecret, string signatureData)
+    private static string ComputeSignature(
+        string consumerSecret,
+        string? tokenSecret,
+        string signatureData
+    )
     {
         var key = Encoding.ASCII.GetBytes(
-            string.Format(CultureInfo.InvariantCulture,
+            string.Format(
+                CultureInfo.InvariantCulture,
                 "{0}&{1}",
                 Uri.EscapeDataString(consumerSecret),
-                string.IsNullOrEmpty(tokenSecret) ? string.Empty : Uri.EscapeDataString(tokenSecret)));
+                string.IsNullOrEmpty(tokenSecret) ? string.Empty : Uri.EscapeDataString(tokenSecret)
+            )
+        );
         var hash = HMACSHA1.HashData(key, Encoding.ASCII.GetBytes(signatureData));
         return Convert.ToBase64String(hash);
     }
@@ -346,7 +488,11 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
     // https://developer.twitter.com/en/docs/apps/callback-urls
     private async Task EnsureTwitterRequestSuccess(HttpResponseMessage response)
     {
-        var contentTypeIsJson = string.Equals(response.Content.Headers.ContentType?.MediaType ?? "", "application/json", StringComparison.OrdinalIgnoreCase);
+        var contentTypeIsJson = string.Equals(
+            response.Content.Headers.ContentType?.MediaType ?? "",
+            "application/json",
+            StringComparison.OrdinalIgnoreCase
+        );
         if (response.IsSuccessStatusCode || !contentTypeIsJson)
         {
             // Not an error or not JSON, ensure success as usual
@@ -358,8 +504,13 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
         try
         {
             // Failure, attempt to parse Twitters error message
-            var errorContentStream = await response.Content.ReadAsStreamAsync(Context.RequestAborted);
-            errorResponse = await JsonSerializer.DeserializeAsync(errorContentStream, TwitterJsonContext.DefaultWithOptions.TwitterErrorResponse);
+            var errorContentStream = await response.Content.ReadAsStreamAsync(
+                Context.RequestAborted
+            );
+            errorResponse = await JsonSerializer.DeserializeAsync(
+                errorContentStream,
+                TwitterJsonContext.DefaultWithOptions.TwitterErrorResponse
+            );
         }
         catch
         {
@@ -375,14 +526,19 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
             return;
         }
 
-        var errorMessageStringBuilder = new StringBuilder("An error has occurred while calling the Twitter API, error's returned:");
+        var errorMessageStringBuilder = new StringBuilder(
+            "An error has occurred while calling the Twitter API, error's returned:"
+        );
 
         if (errorResponse.Errors != null)
         {
             foreach (var error in errorResponse.Errors)
             {
                 errorMessageStringBuilder.Append(Environment.NewLine);
-                errorMessageStringBuilder.Append(CultureInfo.InvariantCulture, $"Code: {error.Code}, Message: '{error.Message}'");
+                errorMessageStringBuilder.Append(
+                    CultureInfo.InvariantCulture,
+                    $"Code: {error.Code}, Message: '{error.Message}'"
+                );
             }
         }
 
@@ -392,9 +548,8 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
     [JsonSerializable(typeof(TwitterErrorResponse))]
     internal sealed partial class TwitterJsonContext : JsonSerializerContext
     {
-        public static readonly TwitterJsonContext DefaultWithOptions = new TwitterJsonContext(new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        });
+        public static readonly TwitterJsonContext DefaultWithOptions = new TwitterJsonContext(
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+        );
     }
 }

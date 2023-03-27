@@ -19,12 +19,22 @@ namespace System.Runtime.Serialization.Configuration
 
         static internal string DataContractSerializerSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.DataContractSerializerSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.DataContractSerializerSectionName
+                );
+            }
         }
 
         static internal string NetDataContractSerializerSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.NetDataContractSerializerSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.NetDataContractSerializerSectionName
+                );
+            }
         }
 
         internal const string SectionGroupName = "system.runtime.serialization";

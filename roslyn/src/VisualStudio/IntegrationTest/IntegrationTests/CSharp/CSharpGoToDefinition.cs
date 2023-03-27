@@ -22,67 +22,90 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpGoToDefinition(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpGoToDefinition))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpGoToDefinition)) { }
 
-        [WpfFact, Trait(Traits.Feature, Traits.Features.GoToDefinition), Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.GoToDefinition),
+            Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)
+        ]
         public void GoToClassDeclaration()
         {
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.AddFile(project, "FileDef.cs");
             VisualStudio.SolutionExplorer.OpenFile(project, "FileDef.cs");
             VisualStudio.Editor.SetText(
-@"class SomeClass
+                @"class SomeClass
 {
-}");
+}"
+            );
             VisualStudio.SolutionExplorer.AddFile(project, "FileConsumer.cs");
             VisualStudio.SolutionExplorer.OpenFile(project, "FileConsumer.cs");
             VisualStudio.Editor.SetText(
-@"class SomeOtherClass
+                @"class SomeOtherClass
 {
     SomeClass sc;
-}");
+}"
+            );
             VisualStudio.Editor.PlaceCaret("SomeClass");
             VisualStudio.Editor.GoToDefinition("FileDef.cs");
-            VisualStudio.Editor.Verify.TextContains(@"class SomeClass$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.TextContains(
+                @"class SomeClass$$",
+                assertCaretPosition: true
+            );
             Assert.False(VisualStudio.Shell.IsActiveTabProvisional());
         }
 
-        [WpfFact, Trait(Traits.Feature, Traits.Features.GoToDefinition), Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.GoToDefinition),
+            Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)
+        ]
         public void GoToDefinitionOpensProvisionalTabIfDocumentNotAlreadyOpen()
         {
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.AddFile(project, "FileDef.cs");
             VisualStudio.SolutionExplorer.OpenFile(project, "FileDef.cs");
             VisualStudio.Editor.SetText(
-@"class SomeClass
+                @"class SomeClass
 {
 }
-");
+"
+            );
             VisualStudio.SolutionExplorer.CloseCodeFile(project, "FileDef.cs", saveFile: true);
             VisualStudio.SolutionExplorer.AddFile(project, "FileConsumer.cs");
             VisualStudio.SolutionExplorer.OpenFile(project, "FileConsumer.cs");
             VisualStudio.Editor.SetText(
-@"class SomeOtherClass
+                @"class SomeOtherClass
 {
     SomeClass sc;
-}");
+}"
+            );
             VisualStudio.Editor.PlaceCaret("SomeClass");
             VisualStudio.Editor.GoToDefinition("FileDef.cs");
-            VisualStudio.Editor.Verify.TextContains(@"class SomeClass$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.TextContains(
+                @"class SomeClass$$",
+                assertCaretPosition: true
+            );
             Assert.True(VisualStudio.Shell.IsActiveTabProvisional());
         }
 
-        [WpfFact, Trait(Traits.Feature, Traits.Features.GoToDefinition), Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.GoToDefinition),
+            Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)
+        ]
         public virtual void GoToDefinitionWithMultipleResults()
         {
             SetUpEditor(
-@"partial class /*Marker*/ $$PartialClass { }
+                @"partial class /*Marker*/ $$PartialClass { }
 
-partial class PartialClass { int i = 0; }");
+partial class PartialClass { int i = 0; }"
+            );
 
-            var declarationWindowName = VisualStudio.IsUsingLspEditor ? "'PartialClass' references" : "'PartialClass' declarations";
+            var declarationWindowName = VisualStudio.IsUsingLspEditor
+                ? "'PartialClass' references"
+                : "'PartialClass' declarations";
 
             VisualStudio.Editor.GoToDefinition(declarationWindowName);
 
@@ -97,17 +120,24 @@ partial class PartialClass { int i = 0; }");
                 {
                     reference =>
                     {
-                        Assert.Equal(expected: "partial class /*Marker*/ PartialClass { }", actual: reference.Code);
+                        Assert.Equal(
+                            expected: "partial class /*Marker*/ PartialClass { }",
+                            actual: reference.Code
+                        );
                         Assert.Equal(expected: 0, actual: reference.Line);
                         Assert.Equal(expected: 25, actual: reference.Column);
                     },
                     reference =>
                     {
-                        Assert.Equal(expected: "partial class PartialClass { int i = 0; }", actual: reference.Code);
+                        Assert.Equal(
+                            expected: "partial class PartialClass { int i = 0; }",
+                            actual: reference.Code
+                        );
                         Assert.Equal(expected: 2, actual: reference.Line);
                         Assert.Equal(expected: 14, actual: reference.Column);
                     }
-                });
+                }
+            );
         }
     }
 }

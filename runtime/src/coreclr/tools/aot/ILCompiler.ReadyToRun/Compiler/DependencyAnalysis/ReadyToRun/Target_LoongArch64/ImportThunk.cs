@@ -13,9 +13,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     /// </summary>
     public partial class ImportThunk
     {
-        protected override void EmitCode(NodeFactory factory, ref LoongArch64Emitter instructionEncoder, bool relocsOnly)
+        protected override void EmitCode(
+            NodeFactory factory,
+            ref LoongArch64Emitter instructionEncoder,
+            bool relocsOnly
+        )
         {
-
             switch (_thunkKind)
             {
                 case Kind.Eager:
@@ -65,7 +68,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             // Emit relocation for the Module* load above
             if (_thunkKind != Kind.Eager)
-                instructionEncoder.Builder.EmitReloc(factory.ModuleImport, RelocType.IMAGE_REL_BASED_DIR64);
+                instructionEncoder.Builder.EmitReloc(
+                    factory.ModuleImport,
+                    RelocType.IMAGE_REL_BASED_DIR64
+                );
         }
     }
 }

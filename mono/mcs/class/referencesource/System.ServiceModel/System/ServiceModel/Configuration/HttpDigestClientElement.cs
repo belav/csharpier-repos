@@ -15,11 +15,12 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class HttpDigestClientElement : ConfigurationElement
     {
-        public HttpDigestClientElement()
-        {
-        }
+        public HttpDigestClientElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.ImpersonationLevel, DefaultValue = WindowsClientCredential.DefaultImpersonationLevel)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ImpersonationLevel,
+            DefaultValue = WindowsClientCredential.DefaultImpersonationLevel
+        )]
         [ServiceModelEnumValidator(typeof(TokenImpersonationLevelHelper))]
         public TokenImpersonationLevel ImpersonationLevel
         {
@@ -31,7 +32,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (null == from)
             {
@@ -51,6 +54,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

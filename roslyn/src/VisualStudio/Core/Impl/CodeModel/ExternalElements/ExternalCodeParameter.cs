@@ -13,9 +13,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE.CodeParameter))]
-    public sealed class ExternalCodeParameter : AbstractExternalCodeElement, EnvDTE.CodeParameter, EnvDTE80.CodeParameter2
+    public sealed class ExternalCodeParameter
+        : AbstractExternalCodeElement,
+            EnvDTE.CodeParameter,
+            EnvDTE80.CodeParameter2
     {
-        internal static EnvDTE.CodeParameter Create(CodeModelState state, ProjectId projectId, IParameterSymbol symbol, AbstractExternalCodeMember parent)
+        internal static EnvDTE.CodeParameter Create(
+            CodeModelState state,
+            ProjectId projectId,
+            IParameterSymbol symbol,
+            AbstractExternalCodeMember parent
+        )
         {
             var element = new ExternalCodeParameter(state, projectId, symbol, parent);
             return (EnvDTE.CodeParameter)ComAggregate.CreateAggregatedObject(element);
@@ -23,7 +31,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 
         private readonly ParentHandle<AbstractExternalCodeElement> _parentHandle;
 
-        private ExternalCodeParameter(CodeModelState state, ProjectId projectId, IParameterSymbol symbol, AbstractExternalCodeElement parent)
+        private ExternalCodeParameter(
+            CodeModelState state,
+            ProjectId projectId,
+            IParameterSymbol symbol,
+            AbstractExternalCodeElement parent
+        )
             : base(state, projectId, symbol)
         {
             _parentHandle = new ParentHandle<AbstractExternalCodeElement>(parent);
@@ -34,19 +47,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             get { return (IParameterSymbol)LookupSymbol(); }
         }
 
-        protected override EnvDTE.CodeElements GetCollection()
-            => GetCollection<ExternalCodeParameter>(this.Parent);
+        protected override EnvDTE.CodeElements GetCollection() =>
+            GetCollection<ExternalCodeParameter>(this.Parent);
 
         public override EnvDTE.vsCMElement Kind
         {
             get { return EnvDTE.vsCMElement.vsCMElementParameter; }
         }
 
-        protected override string GetDocComment()
-            => string.Empty;
+        protected override string GetDocComment() => string.Empty;
 
-        protected override object GetParent()
-            => _parentHandle.Value;
+        protected override object GetParent() => _parentHandle.Value;
 
         public new EnvDTE.CodeElement Parent
         {
@@ -59,26 +70,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             {
                 return CodeTypeRef.Create(this.State, this, this.ProjectId, ParameterSymbol.Type);
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public string DefaultValue
         {
             get
             {
-                return ParameterSymbol.HasExplicitDefaultValue && ParameterSymbol.ExplicitDefaultValue != null
+                return
+                    ParameterSymbol.HasExplicitDefaultValue
+                    && ParameterSymbol.ExplicitDefaultValue != null
                     ? ParameterSymbol.ExplicitDefaultValue.ToString()
                     : null;
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public EnvDTE80.vsCMParameterKind ParameterKind
@@ -107,11 +112,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 
                 return result;
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
     }
 }

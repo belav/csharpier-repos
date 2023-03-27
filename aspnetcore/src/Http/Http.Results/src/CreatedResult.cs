@@ -39,7 +39,10 @@ internal sealed class CreatedResult : ObjectResult
         }
         else
         {
-            Location = location.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+            Location = location.GetComponents(
+                UriComponents.SerializationInfoString,
+                UriFormat.UriEscaped
+            );
         }
     }
 

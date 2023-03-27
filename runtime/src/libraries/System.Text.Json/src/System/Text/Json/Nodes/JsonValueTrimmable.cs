@@ -15,12 +15,22 @@ namespace System.Text.Json.Nodes
         private readonly JsonTypeInfo<TValue>? _jsonTypeInfo;
         private readonly JsonConverter<TValue>? _converter;
 
-        public JsonValueTrimmable(TValue value, JsonTypeInfo<TValue> jsonTypeInfo, JsonNodeOptions? options = null) : base(value, options)
+        public JsonValueTrimmable(
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo,
+            JsonNodeOptions? options = null
+        )
+            : base(value, options)
         {
             _jsonTypeInfo = jsonTypeInfo;
         }
 
-        public JsonValueTrimmable(TValue value, JsonConverter<TValue> converter, JsonNodeOptions? options = null) : base(value, options)
+        public JsonValueTrimmable(
+            TValue value,
+            JsonConverter<TValue> converter,
+            JsonNodeOptions? options = null
+        )
+            : base(value, options)
         {
             _converter = converter;
         }
@@ -38,7 +48,11 @@ namespace System.Text.Json.Nodes
 
                 if (_converter.IsInternalConverterForNumberType)
                 {
-                    _converter.WriteNumberWithCustomHandling(writer, _value, options.NumberHandling);
+                    _converter.WriteNumberWithCustomHandling(
+                        writer,
+                        _value,
+                        options.NumberHandling
+                    );
                 }
                 else
                 {

@@ -11,7 +11,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
     {
         public string? Name { get; }
 
-        public NameMetadata(IDictionary<string, object> data)
-            => this.Name = (string?)data.GetValueOrDefault(nameof(Name));
+        public NameMetadata(IDictionary<string, object> data) =>
+            this.Name = (string?)data.GetValueOrDefault(nameof(Name));
     }
 }

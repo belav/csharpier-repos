@@ -6,10 +6,10 @@ using System;
 
 class MainClass
 {
-	public static void Main ()
-	{
-		Action a = null;
-		object b = null;
-		var x = a == b;
-	}
+    public static void Main()
+    {
+        Action a = null;
+        object b = null;
+        var x = a == b;
+    }
 }

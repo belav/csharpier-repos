@@ -7,9 +7,9 @@ using System;
 
 public class X
 {
-	static int Main () 
-	{
-		int a=5;
-		return a;
-	}
+    static int Main()
+    {
+        int a = 5;
+        return a;
+    }
 }

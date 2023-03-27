@@ -11,14 +11,15 @@ namespace Microsoft.CodeAnalysis.TodoComments
     /// and then calls into the service to tell it to start analyzing the solution.  At that point we'll get
     /// created and added to the solution crawler.
     /// </remarks>
-    internal sealed class InProcTodoCommentsIncrementalAnalyzerProvider : IIncrementalAnalyzerProvider
+    internal sealed class InProcTodoCommentsIncrementalAnalyzerProvider
+        : IIncrementalAnalyzerProvider
     {
         private readonly ITodoCommentsListener _listener;
 
-        public InProcTodoCommentsIncrementalAnalyzerProvider(ITodoCommentsListener listener)
-            => _listener = listener;
+        public InProcTodoCommentsIncrementalAnalyzerProvider(ITodoCommentsListener listener) =>
+            _listener = listener;
 
-        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace)
-            => new InProcTodoCommentsIncrementalAnalyzer(_listener);
+        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
+            new InProcTodoCommentsIncrementalAnalyzer(_listener);
     }
 }

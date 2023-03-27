@@ -11,12 +11,17 @@ namespace System.Net.PeerToPeer
     {
         internal const int IPv6AddressSize = 28;
         internal const int IPv4AddressSize = 16;
+
         internal static byte[] SOCKADDRFromIPEndPoint(IPEndPoint ipEndPoint)
         {
-            byte[] buffer = new byte[ipEndPoint.AddressFamily == AddressFamily.InterNetworkV6 ? IPv6AddressSize : IPv4AddressSize];
+            byte[] buffer = new byte[
+                ipEndPoint.AddressFamily == AddressFamily.InterNetworkV6
+                    ? IPv6AddressSize
+                    : IPv4AddressSize
+            ];
 #if BIGENDIAN
-            buffer[0] = unchecked((byte)((int)family>>8));
-            buffer[1] = unchecked((byte)((int)family   ));
+            buffer[0] = unchecked((byte)((int)family >> 8));
+            buffer[1] = unchecked((byte)((int)family));
 #else
             buffer[0] = unchecked((byte)((int)ipEndPoint.AddressFamily));
             buffer[1] = unchecked((byte)((int)ipEndPoint.AddressFamily >> 8));
@@ -55,6 +60,7 @@ namespace System.Net.PeerToPeer
             }
             return buffer;
         }
+
         internal static IPEndPoint IPEndPointFromSOCKADDRBuffer(byte[] buffer)
         {
             IPAddress ip = null;
@@ -77,14 +83,17 @@ namespace System.Net.PeerToPeer
                 byte[] v6Bytes = new byte[16];
                 for (int i = 0; i < 16; i++)
                     v6Bytes[i] = buffer[8 + i];
-                long scope = ((long)(long)buffer[24] + ((long)buffer[25] << 8) + ((long)buffer[26] << 16) + ((long)buffer[27] << 24));
+                long scope = (
+                    (long)(long)buffer[24]
+                    + ((long)buffer[25] << 8)
+                    + ((long)buffer[26] << 16)
+                    + ((long)buffer[27] << 24)
+                );
                 ip = new IPAddress(v6Bytes);
                 ip.ScopeId = scope;
             }
 
             return new IPEndPoint(ip, port);
-
         }
     }
 }
-

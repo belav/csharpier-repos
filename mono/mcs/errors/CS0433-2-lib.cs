@@ -1,5 +1,4 @@
-namespace N {
-	public class Lib
-	{
-	}
+namespace N
+{
+    public class Lib { }
 }

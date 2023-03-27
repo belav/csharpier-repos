@@ -12,7 +12,13 @@ namespace Microsoft.CodeAnalysis.Host
 {
     internal partial class TemporaryStorageService
     {
-        [ExportWorkspaceServiceFactory(typeof(ITemporaryStorageServiceInternal), ServiceLayer.Default), Shared]
+        [
+            ExportWorkspaceServiceFactory(
+                typeof(ITemporaryStorageServiceInternal),
+                ServiceLayer.Default
+            ),
+            Shared
+        ]
         internal partial class Factory : IWorkspaceServiceFactory
         {
             private readonly IWorkspaceThreadingService? _workspaceThreadingService;
@@ -20,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Host
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
             public Factory(
-                [Import(AllowDefault = true)] IWorkspaceThreadingService? workspaceThreadingService)
+                [Import(AllowDefault = true)] IWorkspaceThreadingService? workspaceThreadingService
+            )
             {
                 _workspaceThreadingService = workspaceThreadingService;
             }

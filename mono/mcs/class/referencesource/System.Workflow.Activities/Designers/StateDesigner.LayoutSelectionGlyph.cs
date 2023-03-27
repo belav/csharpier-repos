@@ -38,18 +38,12 @@ namespace System.Workflow.Activities
 
             public override int Priority
             {
-                get
-                {
-                    return DesignerGlyph.HighestPriority;
-                }
+                get { return DesignerGlyph.HighestPriority; }
             }
 
             public override bool IsPrimarySelection
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public override Rectangle GetBounds(ActivityDesigner designer, bool activated)

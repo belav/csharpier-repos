@@ -11,7 +11,8 @@ namespace System.Dynamic.Utils
     /// Provides a dictionary-like object used for caches which holds onto a maximum
     /// number of elements specified at construction time.
     /// </summary>
-    internal sealed class CacheDict<TKey, TValue> where TKey : notnull
+    internal sealed class CacheDict<TKey, TValue>
+        where TKey : notnull
     {
         // cache size is always ^2.
         // items are placed at [hash ^ mask]
@@ -102,10 +103,7 @@ namespace System.Dynamic.Utils
         /// </summary>
         internal TValue this[TKey key]
         {
-            set
-            {
-                Add(key, value);
-            }
+            set { Add(key, value); }
         }
     }
 }

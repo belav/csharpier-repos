@@ -3,16 +3,11 @@
 
 class B
 {
-	public B (object o)
-	{
-	}
+    public B(object o) { }
 }
 
 class C : B
 {
-	public C ()
-		: base (this)
-	{
-	}
+    public C()
+        : base(this) { }
 }
-

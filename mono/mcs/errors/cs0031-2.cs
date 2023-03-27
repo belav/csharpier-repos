@@ -3,8 +3,8 @@
 
 public class Test
 {
-	public static void Main()
-	{
-		byte b = -1;
-	}
+    public static void Main()
+    {
+        byte b = -1;
+    }
 }

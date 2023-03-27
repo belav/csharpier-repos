@@ -3,16 +3,13 @@
 
 class C
 {
-	struct S
-	{
-		public S (int i)
-		{
-		}
-	}
-	
-	static void Main ()
-	{
-		S i = new S (1,1,1);
-	}
-}
+    struct S
+    {
+        public S(int i) { }
+    }
 
+    static void Main()
+    {
+        S i = new S(1, 1, 1);
+    }
+}

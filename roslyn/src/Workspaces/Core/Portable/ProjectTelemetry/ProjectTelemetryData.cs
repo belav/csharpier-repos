@@ -33,7 +33,15 @@ namespace Microsoft.CodeAnalysis.ProjectTelemetry
         [DataMember(Order = 6)]
         public readonly int AdditionalDocumentsCount;
 
-        public ProjectTelemetryData(ProjectId projectId, string language, int analyzerReferencesCount, int projectReferencesCount, int metadataReferencesCount, int documentsCount, int additionalDocumentsCount)
+        public ProjectTelemetryData(
+            ProjectId projectId,
+            string language,
+            int analyzerReferencesCount,
+            int projectReferencesCount,
+            int metadataReferencesCount,
+            int documentsCount,
+            int additionalDocumentsCount
+        )
         {
             ProjectId = projectId;
             Language = language;
@@ -44,12 +52,12 @@ namespace Microsoft.CodeAnalysis.ProjectTelemetry
             AdditionalDocumentsCount = additionalDocumentsCount;
         }
 
-        public bool Equals(ProjectTelemetryData other)
-            => Language.Equals(other.Language) &&
-               AnalyzerReferencesCount == other.AnalyzerReferencesCount &&
-               ProjectReferencesCount == other.ProjectReferencesCount &&
-               MetadataReferencesCount == other.MetadataReferencesCount &&
-               DocumentsCount == other.DocumentsCount &&
-               AdditionalDocumentsCount == other.AdditionalDocumentsCount;
+        public bool Equals(ProjectTelemetryData other) =>
+            Language.Equals(other.Language)
+            && AnalyzerReferencesCount == other.AnalyzerReferencesCount
+            && ProjectReferencesCount == other.ProjectReferencesCount
+            && MetadataReferencesCount == other.MetadataReferencesCount
+            && DocumentsCount == other.DocumentsCount
+            && AdditionalDocumentsCount == other.AdditionalDocumentsCount;
     }
 }

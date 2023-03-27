@@ -14,13 +14,19 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void CanSeek_Open_Close()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.Close();
 
-                Debug.WriteLine("Verifying CanSeek property throws exception After Open() then Close()");
+                Debug.WriteLine(
+                    "Verifying CanSeek property throws exception After Open() then Close()"
+                );
 
                 Assert.False(serialStream.CanSeek);
             }
@@ -29,13 +35,19 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void CanSeek_Open_BaseStreamClose()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.BaseStream.Close();
 
-                Debug.WriteLine("Verifying CanSeek property throws exception After Open() then BaseStream.Close()");
+                Debug.WriteLine(
+                    "Verifying CanSeek property throws exception After Open() then BaseStream.Close()"
+                );
 
                 Assert.False(serialStream.CanSeek);
             }
@@ -44,7 +56,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void CanSeek_AfterOpen()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Debug.WriteLine("Verifying CanSeek property returns true after a call to Open()");

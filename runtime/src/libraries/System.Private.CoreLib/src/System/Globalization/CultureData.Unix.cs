@@ -26,31 +26,44 @@ namespace System.Globalization
 
         private static int GetAnsiCodePage(string cultureName)
         {
-            int ansiCodePage = IcuLocaleData.GetLocaleDataNumericPart(cultureName, IcuLocaleDataParts.AnsiCodePage);
+            int ansiCodePage = IcuLocaleData.GetLocaleDataNumericPart(
+                cultureName,
+                IcuLocaleDataParts.AnsiCodePage
+            );
             return ansiCodePage == -1 ? CultureData.Invariant.ANSICodePage : ansiCodePage;
         }
 
         private static int GetOemCodePage(string cultureName)
         {
-            int oemCodePage = IcuLocaleData.GetLocaleDataNumericPart(cultureName, IcuLocaleDataParts.OemCodePage);
+            int oemCodePage = IcuLocaleData.GetLocaleDataNumericPart(
+                cultureName,
+                IcuLocaleDataParts.OemCodePage
+            );
             return oemCodePage == -1 ? CultureData.Invariant.OEMCodePage : oemCodePage;
         }
 
         private static int GetMacCodePage(string cultureName)
         {
-            int macCodePage = IcuLocaleData.GetLocaleDataNumericPart(cultureName, IcuLocaleDataParts.MacCodePage);
+            int macCodePage = IcuLocaleData.GetLocaleDataNumericPart(
+                cultureName,
+                IcuLocaleDataParts.MacCodePage
+            );
             return macCodePage == -1 ? CultureData.Invariant.MacCodePage : macCodePage;
         }
 
         private static int GetEbcdicCodePage(string cultureName)
         {
-            int ebcdicCodePage = IcuLocaleData.GetLocaleDataNumericPart(cultureName, IcuLocaleDataParts.EbcdicCodePage);
+            int ebcdicCodePage = IcuLocaleData.GetLocaleDataNumericPart(
+                cultureName,
+                IcuLocaleDataParts.EbcdicCodePage
+            );
             return ebcdicCodePage == -1 ? CultureData.Invariant.EBCDICCodePage : ebcdicCodePage;
         }
 
         internal static bool IsWin32Installed => false;
 
-        internal static unsafe CultureData GetCurrentRegionData() => CultureInfo.CurrentCulture._cultureData;
+        internal static unsafe CultureData GetCurrentRegionData() =>
+            CultureInfo.CurrentCulture._cultureData;
 
         private static bool ShouldUseUserOverrideNlsData => false;
     }

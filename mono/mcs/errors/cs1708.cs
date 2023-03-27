@@ -6,25 +6,24 @@ using System;
 
 unsafe struct S
 {
-    public fixed int array [2];
+    public fixed int array[2];
 }
 
 class C
 {
-    unsafe public S Get ()
+    unsafe public S Get()
     {
-	return new S ();
+        return new S();
     }
 }
 
-public class Tester 
+public class Tester
 {
     public static void Main() { }
-    
+
     unsafe void setName()
     {
-	C c = new C();
-	c.Get ().array [1] = 44;
+        C c = new C();
+        c.Get().array[1] = 44;
     }
 }
-

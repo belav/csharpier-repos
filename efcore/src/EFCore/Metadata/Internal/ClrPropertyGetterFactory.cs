@@ -19,8 +19,9 @@ public class ClrPropertyGetterFactory : ClrAccessorFactory<IClrPropertyGetter>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override IClrPropertyGetter Create(IPropertyBase property)
-        => property as IClrPropertyGetter ?? Create(property.GetMemberInfo(forMaterialization: false, forSet: false), property);
+    public override IClrPropertyGetter Create(IPropertyBase property) =>
+        property as IClrPropertyGetter
+        ?? Create(property.GetMemberInfo(forMaterialization: false, forSet: false), property);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -30,14 +31,19 @@ public class ClrPropertyGetterFactory : ClrAccessorFactory<IClrPropertyGetter>
     /// </summary>
     protected override IClrPropertyGetter CreateGeneric<TEntity, TValue, TNonNullableEnumValue>(
         MemberInfo memberInfo,
-        IPropertyBase? propertyBase)
+        IPropertyBase? propertyBase
+    )
     {
         var entityParameter = Expression.Parameter(typeof(TEntity), "entity");
 
         Expression readExpression;
         if (memberInfo.DeclaringType!.IsAssignableFrom(typeof(TEntity)))
         {
-            readExpression = PropertyBase.CreateMemberAccess(propertyBase, entityParameter, memberInfo);
+            readExpression = PropertyBase.CreateMemberAccess(
+                propertyBase,
+                entityParameter,
+                memberInfo
+            );
         }
         else
         {
@@ -50,12 +56,15 @@ public class ClrPropertyGetterFactory : ClrAccessorFactory<IClrPropertyGetter>
                 {
                     Expression.Assign(
                         converted,
-                        Expression.TypeAs(entityParameter, memberInfo.DeclaringType)),
+                        Expression.TypeAs(entityParameter, memberInfo.DeclaringType)
+                    ),
                     Expression.Condition(
                         Expression.ReferenceEqual(converted, Expression.Constant(null)),
                         Expression.Default(memberInfo.GetMemberType()),
-                        PropertyBase.CreateMemberAccess(propertyBase, converted, memberInfo))
-                });
+                        PropertyBase.CreateMemberAccess(propertyBase, converted, memberInfo)
+                    )
+                }
+            );
         }
 
         var hasDefaultValueExpression = readExpression.MakeHasDefaultValue(propertyBase);
@@ -65,11 +74,15 @@ public class ClrPropertyGetterFactory : ClrAccessorFactory<IClrPropertyGetter>
             readExpression = Expression.Condition(
                 hasDefaultValueExpression,
                 Expression.Constant(default(TValue), typeof(TValue)),
-                Expression.Convert(readExpression, typeof(TValue)));
+                Expression.Convert(readExpression, typeof(TValue))
+            );
         }
 
         return new ClrPropertyGetter<TEntity, TValue>(
             Expression.Lambda<Func<TEntity, TValue>>(readExpression, entityParameter).Compile(),
-            Expression.Lambda<Func<TEntity, bool>>(hasDefaultValueExpression, entityParameter).Compile());
+            Expression
+                .Lambda<Func<TEntity, bool>>(hasDefaultValueExpression, entityParameter)
+                .Compile()
+        );
     }
 }

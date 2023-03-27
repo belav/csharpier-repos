@@ -3,6 +3,7 @@
 //
 
 using System;
+
 public struct AA
 {
     public static int Main()
@@ -17,20 +18,20 @@ public struct AA
             return 100;
         }
     }
+
     static void Main1()
     {
         try
         {
             bool b = false;
-            b = ((bool)((
-                b ? b :
-                    (b ?
-                        (b ? (object)new AA() : (object)new CC())
-                        : (object)new CC())
-            )));
+            b = (
+                (bool)((b ? b : (b ? (b ? (object)new AA() : (object)new CC()) : (object)new CC())))
+            );
         }
         finally { }
     }
 }
+
 struct BB { }
+
 class CC { }

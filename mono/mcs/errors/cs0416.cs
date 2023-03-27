@@ -5,15 +5,11 @@ using System;
 
 public class TestAttribute : Attribute
 {
-    public TestAttribute(Type type)
-    {
-    }
+    public TestAttribute(Type type) { }
 }
 
 class C<T>
 {
     [Test(typeof(C<T>))]
-    public static void Foo()
-    {
-    }
+    public static void Foo() { }
 }

@@ -5,9 +5,9 @@ using System;
 using System.Security;
 using System.Security.Permissions;
 
-[assembly: SecurityPermission (SecurityAction.Demand, SkipVerification=true)]
+[assembly: SecurityPermission(SecurityAction.Demand, SkipVerification = true)]
 
 class Test
 {
-	static void Main () {}
+    static void Main() { }
 }

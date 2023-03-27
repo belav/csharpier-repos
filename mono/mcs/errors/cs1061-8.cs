@@ -6,10 +6,8 @@ using System.Linq;
 
 public class M
 {
-	public static void Main ()
-	{
-		var e = from values in new [] { "value" }
-			let length = values.Length2
-			select length;
-	}
+    public static void Main()
+    {
+        var e = from values in new[] { "value" } let length = values.Length2 select length;
+    }
 }

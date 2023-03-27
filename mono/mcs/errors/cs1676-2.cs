@@ -3,10 +3,10 @@
 
 class C
 {
-	delegate int D (out int i);
+    delegate int D(out int i);
 
-	public static void Main ()
-	{
-		 D d = a => 1;
-	}
+    public static void Main()
+    {
+        D d = a => 1;
+    }
 }

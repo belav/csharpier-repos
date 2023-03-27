@@ -19,11 +19,18 @@ namespace System.Collections.Frozen
         private readonly int _minimumLength;
         private readonly int _maximumLengthDiff;
 
-        internal OrdinalStringFrozenDictionary(Dictionary<string, TValue> source, IEqualityComparer<string> comparer) :
-            base(comparer)
+        internal OrdinalStringFrozenDictionary(
+            Dictionary<string, TValue> source,
+            IEqualityComparer<string> comparer
+        )
+            : base(comparer)
         {
             Debug.Assert(source.Count != 0);
-            Debug.Assert(comparer == EqualityComparer<string>.Default || comparer == StringComparer.Ordinal || comparer == StringComparer.OrdinalIgnoreCase);
+            Debug.Assert(
+                comparer == EqualityComparer<string>.Default
+                    || comparer == StringComparer.Ordinal
+                    || comparer == StringComparer.OrdinalIgnoreCase
+            );
 
             var entries = new KeyValuePair<string, TValue>[source.Count];
             ((ICollection<KeyValuePair<string, TValue>>)source).CopyTo(entries, 0);
@@ -35,7 +42,8 @@ namespace System.Collections.Frozen
                 Array.ConvertAll(entries, pair => pair.Key),
                 ignoreCase: ReferenceEquals(comparer, StringComparer.OrdinalIgnoreCase),
                 out _minimumLength,
-                out _maximumLengthDiff);
+                out _maximumLengthDiff
+            );
 
             _hashTable = FrozenHashTable.Create(
                 entries,
@@ -44,7 +52,8 @@ namespace System.Collections.Frozen
                 {
                     _keys[index] = pair.Key;
                     _values[index] = pair.Value;
-                });
+                }
+            );
         }
 
         /// <inheritdoc />

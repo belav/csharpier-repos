@@ -20,10 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         IMethodSymbol ILabelSymbol.ContainingMethod
         {
-            get
-            {
-                return _underlying.ContainingMethod.GetPublicSymbol();
-            }
+            get { return _underlying.ContainingMethod.GetPublicSymbol(); }
         }
 
         #region ISymbol Members
@@ -39,7 +36,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return visitor.VisitLabel(this);
         }
 
-        protected override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        protected override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitLabel(this, argument);
         }

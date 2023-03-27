@@ -3,14 +3,12 @@
 
 using System;
 
-public class MySubClass : MyTest, ICloneable
-{
-}
+public class MySubClass : MyTest, ICloneable { }
 
 public class MyTest
 {
-	internal object Clone ()
-	{
-		return MemberwiseClone ();
-	}
+    internal object Clone()
+    {
+        return MemberwiseClone();
+    }
 }

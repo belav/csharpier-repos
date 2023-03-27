@@ -20,7 +20,11 @@ namespace Internal.IL.Stubs.StartupCode
         private MethodSignature _signature;
         private IReadOnlyCollection<MethodDesc> _libraryInitializers;
 
-        public StartupCodeMainMethod(TypeDesc owningType, MethodDesc mainMethod, IReadOnlyCollection<MethodDesc> libraryInitializers)
+        public StartupCodeMainMethod(
+            TypeDesc owningType,
+            MethodDesc mainMethod,
+            IReadOnlyCollection<MethodDesc> libraryInitializers
+        )
         {
             _owningType = owningType;
             _mainMethod = new MainMethodWrapper(owningType, mainMethod);
@@ -29,34 +33,22 @@ namespace Internal.IL.Stubs.StartupCode
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _owningType.Context;
-            }
+            get { return _owningType.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         public override string Name
         {
-            get
-            {
-                return "StartupCodeMain";
-            }
+            get { return "StartupCodeMain"; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return "StartupCodeMain";
-            }
+            get { return "StartupCodeMain"; }
         }
 
         public override MethodIL EmitIL()
@@ -79,9 +71,10 @@ namespace Internal.IL.Stubs.StartupCode
             MetadataType startup = Context.GetOptionalHelperType("StartupCodeHelpers");
 
             // Initialize command line args if the class library supports this
-            string initArgsName = (Context.Target.OperatingSystem == TargetOS.Windows)
-                                ? "InitializeCommandLineArgsW"
-                                : "InitializeCommandLineArgs";
+            string initArgsName =
+                (Context.Target.OperatingSystem == TargetOS.Windows)
+                    ? "InitializeCommandLineArgsW"
+                    : "InitializeCommandLineArgs";
             MethodDesc initArgs = startup?.GetMethod(initArgsName, null);
             if (initArgs != null)
             {
@@ -94,8 +87,13 @@ namespace Internal.IL.Stubs.StartupCode
             MethodDesc initEntryAssembly = startup?.GetMethod("InitializeEntryAssembly", null);
             if (initEntryAssembly != null)
             {
-                ModuleDesc entrypointModule = ((MetadataType)_mainMethod.WrappedMethod.OwningType).Module;
-                codeStream.Emit(ILOpcode.ldtoken, emitter.NewToken(entrypointModule.GetGlobalModuleType()));
+                ModuleDesc entrypointModule = (
+                    (MetadataType)_mainMethod.WrappedMethod.OwningType
+                ).Module;
+                codeStream.Emit(
+                    ILOpcode.ldtoken,
+                    emitter.NewToken(entrypointModule.GetGlobalModuleType())
+                );
                 codeStream.Emit(ILOpcode.call, emitter.NewToken(initEntryAssembly));
             }
 
@@ -128,9 +126,14 @@ namespace Internal.IL.Stubs.StartupCode
             {
                 // TODO: better exception
                 if (initArgs == null)
-                    throw new Exception("Main() has parameters, but the class library doesn't support them");
+                    throw new Exception(
+                        "Main() has parameters, but the class library doesn't support them"
+                    );
 
-                codeStream.Emit(ILOpcode.call, emitter.NewToken(startup.GetKnownMethod("GetMainMethodArguments", null)));
+                codeStream.Emit(
+                    ILOpcode.call,
+                    emitter.NewToken(startup.GetKnownMethod("GetMainMethodArguments", null))
+                );
             }
 
             if (Context.Target.IsWindows)
@@ -173,11 +176,16 @@ namespace Internal.IL.Stubs.StartupCode
         {
             get
             {
-                _signature ??= new MethodSignature(MethodSignatureFlags.Static | MethodSignatureFlags.UnmanagedCallingConvention, 0,
-                            Context.GetWellKnownType(WellKnownType.Int32),
-                            new TypeDesc[2] {
-                                Context.GetWellKnownType(WellKnownType.Int32),
-                                Context.GetWellKnownType(WellKnownType.IntPtr) });
+                _signature ??= new MethodSignature(
+                    MethodSignatureFlags.Static | MethodSignatureFlags.UnmanagedCallingConvention,
+                    0,
+                    Context.GetWellKnownType(WellKnownType.Int32),
+                    new TypeDesc[2]
+                    {
+                        Context.GetWellKnownType(WellKnownType.Int32),
+                        Context.GetWellKnownType(WellKnownType.IntPtr)
+                    }
+                );
 
                 return _signature;
             }
@@ -185,10 +193,7 @@ namespace Internal.IL.Stubs.StartupCode
 
         public override bool IsUnmanagedCallersOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -207,46 +212,28 @@ namespace Internal.IL.Stubs.StartupCode
                 OwningType = owningType;
             }
 
-            public MethodDesc WrappedMethod
-            {
-                get;
-            }
+            public MethodDesc WrappedMethod { get; }
 
             public override TypeSystemContext Context
             {
-                get
-                {
-                    return OwningType.Context;
-                }
+                get { return OwningType.Context; }
             }
 
-            public override TypeDesc OwningType
-            {
-                get;
-            }
+            public override TypeDesc OwningType { get; }
 
             public override string Name
             {
-                get
-                {
-                    return "MainMethodWrapper";
-                }
+                get { return "MainMethodWrapper"; }
             }
 
             public override string DiagnosticName
             {
-                get
-                {
-                    return "MainMethodWrapper";
-                }
+                get { return "MainMethodWrapper"; }
             }
 
             public override MethodSignature Signature
             {
-                get
-                {
-                    return WrappedMethod.Signature;
-                }
+                get { return WrappedMethod.Signature; }
             }
 
             public override MethodIL EmitIL()

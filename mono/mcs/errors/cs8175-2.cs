@@ -4,16 +4,14 @@
 
 using System;
 
-public ref struct S
-{
-}
+public ref struct S { }
 
 class Test
 {
-	public static void Main ()
-	{
-		var s = new S ();
+    public static void Main()
+    {
+        var s = new S();
 
-		Action a = () => Console.WriteLine (s);
-	}
+        Action a = () => Console.WriteLine(s);
+    }
 }

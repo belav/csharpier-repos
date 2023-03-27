@@ -14,10 +14,19 @@ using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {
-    internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForTypes : NativeFormatRuntimeGenericParameterTypeInfo
+    internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForTypes
+        : NativeFormatRuntimeGenericParameterTypeInfo
     {
-        private NativeFormatRuntimeGenericParameterTypeInfoForTypes(MetadataReader reader, GenericParameterHandle genericParameterHandle, RuntimeTypeDefinitionTypeInfo declaringType)
-           : base(reader, genericParameterHandle, genericParameterHandle.GetGenericParameter(reader))
+        private NativeFormatRuntimeGenericParameterTypeInfoForTypes(
+            MetadataReader reader,
+            GenericParameterHandle genericParameterHandle,
+            RuntimeTypeDefinitionTypeInfo declaringType
+        )
+            : base(
+                reader,
+                genericParameterHandle,
+                genericParameterHandle.GetGenericParameter(reader)
+            )
         {
             _declaringType = declaringType;
         }
@@ -39,18 +48,12 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 
         internal sealed override Type InternalDeclaringType
         {
-            get
-            {
-                return _declaringType;
-            }
+            get { return _declaringType; }
         }
 
         internal sealed override TypeContext TypeContext
         {
-            get
-            {
-                return _declaringType.TypeContext;
-            }
+            get { return _declaringType.TypeContext; }
         }
 
         private readonly RuntimeTypeDefinitionTypeInfo _declaringType;

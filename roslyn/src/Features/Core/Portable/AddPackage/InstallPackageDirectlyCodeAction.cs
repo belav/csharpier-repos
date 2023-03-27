@@ -26,20 +26,29 @@ namespace Microsoft.CodeAnalysis.AddPackage
             string packageName,
             string versionOpt,
             bool includePrerelease,
-            bool isLocal)
+            bool isLocal
+        )
         {
-            Title = versionOpt == null
-                ? FeaturesResources.Find_and_install_latest_version
-                : isLocal
-                    ? string.Format(FeaturesResources.Use_local_version_0, versionOpt)
-                    : string.Format(FeaturesResources.Install_version_0, versionOpt);
+            Title =
+                versionOpt == null
+                    ? FeaturesResources.Find_and_install_latest_version
+                    : isLocal
+                        ? string.Format(FeaturesResources.Use_local_version_0, versionOpt)
+                        : string.Format(FeaturesResources.Install_version_0, versionOpt);
 
             _installPackageOperation = new InstallPackageDirectlyCodeActionOperation(
-                installerService, document, source, packageName,
-                versionOpt, includePrerelease, isLocal);
+                installerService,
+                document,
+                source,
+                packageName,
+                versionOpt,
+                includePrerelease,
+                isLocal
+            );
         }
 
-        protected override Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(CancellationToken cancellationToken)
-            => Task.FromResult(SpecializedCollections.SingletonEnumerable(_installPackageOperation));
+        protected override Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
+            CancellationToken cancellationToken
+        ) => Task.FromResult(SpecializedCollections.SingletonEnumerable(_installPackageOperation));
     }
 }

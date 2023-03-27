@@ -21,14 +21,13 @@ namespace System.CommandLine.Benchmarks.CommandLine
         {
             var option = new Option<bool>("-opt");
 
-            _testParser =
-                new CommandLineBuilder(new RootCommand { option })
-                    .UseParseDirective()
-                    .Build();
+            _testParser = new CommandLineBuilder(new RootCommand { option })
+                .UseParseDirective()
+                .Build();
         }
 
-        public IEnumerable<string> GenerateTestInputs() 
-            => new[]
+        public IEnumerable<string> GenerateTestInputs() =>
+            new[]
             {
                 "[directive1] -opt",
                 "[directive1] [directive2] -opt",
@@ -37,18 +36,19 @@ namespace System.CommandLine.Benchmarks.CommandLine
                 "[directive1:1] [directive2:2] [directive2:3] -opt",
             };
 
-        public IEnumerable<object> GenerateTestParseResults()
-            => GenerateTestInputs()
-               .Select(input => new BdnParam<ParseResult>(_testParser.Parse(input), input));
+        public IEnumerable<object> GenerateTestParseResults() =>
+            GenerateTestInputs()
+                .Select(input => new BdnParam<ParseResult>(_testParser.Parse(input), input));
 
         [Benchmark]
         [ArgumentsSource(nameof(GenerateTestInputs))]
-        public IReadOnlyDictionary<string, IReadOnlyList<string>> ParseResult_Directives(string input)
-            => _testParser.Parse(input).Directives;
+        public IReadOnlyDictionary<string, IReadOnlyList<string>> ParseResult_Directives(
+            string input
+        ) => _testParser.Parse(input).Directives;
 
         [Benchmark]
         [ArgumentsSource(nameof(GenerateTestParseResults))]
-        public string ParseResult_Diagram(BdnParam<ParseResult> parseResult)
-            => parseResult.Value.Diagram();
+        public string ParseResult_Diagram(BdnParam<ParseResult> parseResult) =>
+            parseResult.Value.Diagram();
     }
 }

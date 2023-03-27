@@ -28,9 +28,7 @@ namespace Internal.Cryptography.Pal
                     return true;
                 }
             }
-            catch (CryptographicException)
-            {
-            }
+            catch (CryptographicException) { }
 
             return false;
         }
@@ -46,7 +44,10 @@ namespace Internal.Cryptography.Pal
 
         protected override AsymmetricAlgorithm LoadKey(ReadOnlyMemory<byte> pkcs8)
         {
-            PrivateKeyInfoAsn privateKeyInfo = PrivateKeyInfoAsn.Decode(pkcs8, AsnEncodingRules.BER);
+            PrivateKeyInfoAsn privateKeyInfo = PrivateKeyInfoAsn.Decode(
+                pkcs8,
+                AsnEncodingRules.BER
+            );
             AsymmetricAlgorithm key;
 
             string algorithm = privateKeyInfo.PrivateKeyAlgorithm.Algorithm;
@@ -63,7 +64,10 @@ namespace Internal.Cryptography.Pal
                     key = new ECDsaImplementation.ECDsaAndroid();
                     break;
                 default:
-                    throw new CryptographicException(SR.Cryptography_UnknownAlgorithmIdentifier, algorithm);
+                    throw new CryptographicException(
+                        SR.Cryptography_UnknownAlgorithmIdentifier,
+                        algorithm
+                    );
             }
 
             key.ImportPkcs8PrivateKey(pkcs8.Span, out int bytesRead);

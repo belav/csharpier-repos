@@ -18,13 +18,11 @@ namespace System.ServiceModel
     {
         static public bool IsDefined(ReleaseInstanceMode x)
         {
-            return
-                x == ReleaseInstanceMode.None ||
-                x == ReleaseInstanceMode.BeforeCall ||
-                x == ReleaseInstanceMode.AfterCall ||
-                x == ReleaseInstanceMode.BeforeAndAfterCall ||
-                false;
+            return x == ReleaseInstanceMode.None
+                || x == ReleaseInstanceMode.BeforeCall
+                || x == ReleaseInstanceMode.AfterCall
+                || x == ReleaseInstanceMode.BeforeAndAfterCall
+                || false;
         }
     }
-
 }

@@ -8,7 +8,9 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.Internal;
 
-internal sealed class NamedPipeTransportFactory : IConnectionListenerFactory, IConnectionListenerFactorySelector
+internal sealed class NamedPipeTransportFactory
+    : IConnectionListenerFactory,
+        IConnectionListenerFactorySelector
 {
     private const string LocalComputerServerName = ".";
 
@@ -17,7 +19,8 @@ internal sealed class NamedPipeTransportFactory : IConnectionListenerFactory, IC
 
     public NamedPipeTransportFactory(
         ILoggerFactory loggerFactory,
-        IOptions<NamedPipeTransportOptions> options)
+        IOptions<NamedPipeTransportOptions> options
+    )
     {
         ArgumentNullException.ThrowIfNull(loggerFactory);
 
@@ -25,7 +28,10 @@ internal sealed class NamedPipeTransportFactory : IConnectionListenerFactory, IC
         _options = options.Value;
     }
 
-    public ValueTask<IConnectionListener> BindAsync(EndPoint endpoint, CancellationToken cancellationToken = default)
+    public ValueTask<IConnectionListener> BindAsync(
+        EndPoint endpoint,
+        CancellationToken cancellationToken = default
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoint);
 
@@ -35,7 +41,9 @@ internal sealed class NamedPipeTransportFactory : IConnectionListenerFactory, IC
         }
         if (namedPipeEndPoint.ServerName != LocalComputerServerName)
         {
-            throw new NotSupportedException($@"Server name '{namedPipeEndPoint.ServerName}' is invalid. The server name must be ""{LocalComputerServerName}"".");
+            throw new NotSupportedException(
+                $@"Server name '{namedPipeEndPoint.ServerName}' is invalid. The server name must be ""{LocalComputerServerName}""."
+            );
         }
 
         // Creating a named pipe server with an name isn't exclusive. Create a mutex with the pipe name to prevent multiple endpoints
@@ -46,10 +54,17 @@ internal sealed class NamedPipeTransportFactory : IConnectionListenerFactory, IC
         if (!createdNew)
         {
             mutex.Dispose();
-            throw new AddressInUseException($"Named pipe '{namedPipeEndPoint.PipeName}' is already in use by Kestrel.");
+            throw new AddressInUseException(
+                $"Named pipe '{namedPipeEndPoint.PipeName}' is already in use by Kestrel."
+            );
         }
 
-        var listener = new NamedPipeConnectionListener(namedPipeEndPoint, _options, _loggerFactory, mutex);
+        var listener = new NamedPipeConnectionListener(
+            namedPipeEndPoint,
+            _options,
+            _loggerFactory,
+            mutex
+        );
         listener.Start();
 
         return new ValueTask<IConnectionListener>(listener);

@@ -5,10 +5,10 @@
 /// <summary>
 /// <see cref="MyDelegate(int)" />
 /// </summary>
-public class Test {
-        /// <summary>
-        /// whatever
-        /// </summary>
-        public delegate void MyDelegate(int i);
+public class Test
+{
+    /// <summary>
+    /// whatever
+    /// </summary>
+    public delegate void MyDelegate(int i);
 }
-

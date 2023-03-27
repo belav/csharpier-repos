@@ -1,13 +1,9 @@
 // CS0574: Name of destructor must match name of class
 // Line: 6
 
-class X  {
+class X
+{
+    ~Y() { }
 
-	~Y ()
-	{
-	}
-
-	static void Main ()
-	{
-	}
+    static void Main() { }
 }

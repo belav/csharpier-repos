@@ -14,14 +14,17 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
 {
     [Trait(Traits.Feature, Traits.Features.Outlining)]
-    public class DestructorDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<DestructorDeclarationSyntax>
+    public class DestructorDeclarationStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<DestructorDeclarationSyntax>
     {
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new DestructorDeclarationStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new DestructorDeclarationStructureProvider();
 
         [Fact]
         public async Task TestDestructor()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint:$$~C(){|textspan:
@@ -29,14 +32,17 @@ class C
     }|}|}
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestDestructorWithComments()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|span1:// Goo
@@ -46,9 +52,11 @@ class C
     }|}|}
 }";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("span1", "// Goo ...", autoCollapse: true),
-                Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact]
@@ -56,7 +64,8 @@ class C
         {
             // Expected behavior is that the class should be outlined, but the destructor should not.
 
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     $$~C(

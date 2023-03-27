@@ -4,7 +4,5 @@
 
 class Program
 {
-	static global::System.Void Main ()
-	{
-	}
+    static global::System.Void Main() { }
 }

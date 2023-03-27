@@ -2,11 +2,9 @@
 // Line: 11
 // Compiler options: -langversion:latest
 
-public ref struct S
-{
-}
+public ref struct S { }
 
 struct Test
 {
-	S field;
+    S field;
 }

@@ -4,10 +4,9 @@
 
 class C
 {
-	unsafe static void Foo (object o)
-	{
-		bool x = false;
-		if (o is bool ? *x : null) {
-		}
-	}
+    unsafe static void Foo(object o)
+    {
+        bool x = false;
+        if (o is bool ? *x : null) { }
+    }
 }

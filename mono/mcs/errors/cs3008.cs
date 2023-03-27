@@ -3,8 +3,10 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
+
 [assembly: CLSCompliant(true)]
 
-public class CLSClass {
-        public static int _value = 3;
+public class CLSClass
+{
+    public static int _value = 3;
 }

@@ -110,13 +110,21 @@ namespace System.Drawing.Imaging
         internal ref int GetPinnableReference() => ref _key;
 
 #if NET7_0_OR_GREATER
-        [CustomMarshaller(typeof(WmfPlaceableFileHeader), MarshalMode.ManagedToUnmanagedIn, typeof(PinningMarshaller))]
+        [CustomMarshaller(
+            typeof(WmfPlaceableFileHeader),
+            MarshalMode.ManagedToUnmanagedIn,
+            typeof(PinningMarshaller)
+        )]
         internal static unsafe class PinningMarshaller
         {
-            public static ref int GetPinnableReference(WmfPlaceableFileHeader managed) => ref (managed is null ? ref Unsafe.NullRef<int>() : ref managed.GetPinnableReference());
+            public static ref int GetPinnableReference(WmfPlaceableFileHeader managed) =>
+                ref (
+                    managed is null ? ref Unsafe.NullRef<int>() : ref managed.GetPinnableReference()
+                );
 
             // All usages in our currently supported scenarios will always go through GetPinnableReference
-            public static int* ConvertToUnmanaged(WmfPlaceableFileHeader _) => throw new UnreachableException();
+            public static int* ConvertToUnmanaged(WmfPlaceableFileHeader _) =>
+                throw new UnreachableException();
         }
 #endif
     }

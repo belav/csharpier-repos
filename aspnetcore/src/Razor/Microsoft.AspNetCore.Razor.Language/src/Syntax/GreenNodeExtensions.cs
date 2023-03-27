@@ -9,19 +9,23 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
 internal static class GreenNodeExtensions
 {
-    internal static InternalSyntax.SyntaxList<T> ToGreenList<T>(this SyntaxNode node) where T : GreenNode
+    internal static InternalSyntax.SyntaxList<T> ToGreenList<T>(this SyntaxNode node)
+        where T : GreenNode
     {
-        return node != null ?
-            ToGreenList<T>(node.Green) :
-            default(InternalSyntax.SyntaxList<T>);
+        return node != null ? ToGreenList<T>(node.Green) : default(InternalSyntax.SyntaxList<T>);
     }
 
-    internal static InternalSyntax.SyntaxList<T> ToGreenList<T>(this GreenNode node) where T : GreenNode
+    internal static InternalSyntax.SyntaxList<T> ToGreenList<T>(this GreenNode node)
+        where T : GreenNode
     {
         return new InternalSyntax.SyntaxList<T>(node);
     }
 
-    public static TNode WithAnnotationsGreen<TNode>(this TNode node, params SyntaxAnnotation[] annotations) where TNode : GreenNode
+    public static TNode WithAnnotationsGreen<TNode>(
+        this TNode node,
+        params SyntaxAnnotation[] annotations
+    )
+        where TNode : GreenNode
     {
         var newAnnotations = new List<SyntaxAnnotation>();
         foreach (var candidate in annotations)
@@ -50,7 +54,11 @@ internal static class GreenNodeExtensions
         }
     }
 
-    public static TNode WithDiagnosticsGreen<TNode>(this TNode node, params RazorDiagnostic[] diagnostics) where TNode : GreenNode
+    public static TNode WithDiagnosticsGreen<TNode>(
+        this TNode node,
+        params RazorDiagnostic[] diagnostics
+    )
+        where TNode : GreenNode
     {
         return (TNode)node.SetDiagnostics(diagnostics);
     }

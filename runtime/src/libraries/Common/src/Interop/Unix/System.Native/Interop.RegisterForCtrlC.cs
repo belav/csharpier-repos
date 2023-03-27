@@ -15,7 +15,9 @@ internal static partial class Interop
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_RegisterForCtrl")]
         [SuppressGCTransition]
-        internal static extern unsafe void RegisterForCtrl(delegate* unmanaged<CtrlCode, void> handler);
+        internal static extern unsafe void RegisterForCtrl(
+            delegate* unmanaged<CtrlCode, void> handler
+        );
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_UnregisterForCtrl")]
         [SuppressGCTransition]

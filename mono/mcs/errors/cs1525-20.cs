@@ -3,16 +3,17 @@
 
 class Program
 {
-	static void Main ()
-	{
-		int x = 0;
-		switch (x) {
-		case 2:
-			int a = 1;
-		case default:
-			return;
-		case 1:
-			int b = 1;
-		}
-	}
+    static void Main()
+    {
+        int x = 0;
+        switch (x)
+        {
+            case 2:
+                int a = 1;
+            case default:
+                return;
+            case 1:
+                int b = 1;
+        }
+    }
 }

@@ -27,13 +27,19 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void ProjectionTest()
         {
-            Assert.Equal(ProjectionConstants.VirtualPropertyInfoGetter, _virtualPropertyGetter.GetType().FullName);
+            Assert.Equal(
+                ProjectionConstants.VirtualPropertyInfoGetter,
+                _virtualPropertyGetter.GetType().FullName
+            );
         }
 
         [Fact]
         public void GetCustomAttributes_WithType_Test()
         {
-            object[] attributes = _virtualPropertyGetter.GetCustomAttributes(typeof(TestGetterSetterAttribute), true);
+            object[] attributes = _virtualPropertyGetter.GetCustomAttributes(
+                typeof(TestGetterSetterAttribute),
+                true
+            );
             Assert.Single(attributes);
             Assert.IsType<TestGetterSetterAttribute>(attributes[0]);
         }
@@ -52,7 +58,8 @@ namespace System.Reflection.Context.Tests
             // This will never return any results as virtual properties never have custom attributes
             // defined in code as they are instantiated during runtime. But as the method is overridden
             // we call it for code coverage.
-            IList<CustomAttributeData> customAttributesData = _virtualPropertyGetter.GetCustomAttributesData();
+            IList<CustomAttributeData> customAttributesData =
+                _virtualPropertyGetter.GetCustomAttributesData();
             Assert.Empty(customAttributesData);
         }
 
@@ -68,35 +75,71 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void Invoke_NotEmptyParameter_Throws()
         {
-            Assert.Throws<TargetParameterCountException>(() =>
-                _virtualPropertyGetter.Invoke(_testObject, BindingFlags.GetProperty, null, new object[] { 1 }, CultureInfo.InvariantCulture));
+            Assert.Throws<TargetParameterCountException>(
+                () =>
+                    _virtualPropertyGetter.Invoke(
+                        _testObject,
+                        BindingFlags.GetProperty,
+                        null,
+                        new object[] { 1 },
+                        CultureInfo.InvariantCulture
+                    )
+            );
         }
 
         [Fact]
         public void Invoke_NullObject_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                _virtualPropertyGetter.Invoke(null, BindingFlags.GetProperty, null, null, CultureInfo.InvariantCulture));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    _virtualPropertyGetter.Invoke(
+                        null,
+                        BindingFlags.GetProperty,
+                        null,
+                        null,
+                        CultureInfo.InvariantCulture
+                    )
+            );
         }
 
         [Fact]
         public void Invoke_WrongObject_Throws()
         {
-            Assert.Throws<ArgumentException>(() =>
-                _virtualPropertyGetter.Invoke("abc", BindingFlags.GetProperty, null, null, CultureInfo.InvariantCulture));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    _virtualPropertyGetter.Invoke(
+                        "abc",
+                        BindingFlags.GetProperty,
+                        null,
+                        null,
+                        CultureInfo.InvariantCulture
+                    )
+            );
         }
 
         [Fact]
         public void Invoke_EmptyParameters_Success()
         {
-            object returnVal = _virtualPropertyGetter.Invoke(_testObject, BindingFlags.GetProperty, null, new object[] { }, CultureInfo.InvariantCulture);
+            object returnVal = _virtualPropertyGetter.Invoke(
+                _testObject,
+                BindingFlags.GetProperty,
+                null,
+                new object[] { },
+                CultureInfo.InvariantCulture
+            );
             Assert.Equal(42, returnVal);
         }
 
         [Fact]
         public void Invoke_NullParameters_Success()
         {
-            object returnVal = _virtualPropertyGetter.Invoke(_testObject, BindingFlags.GetProperty, null, null, CultureInfo.InvariantCulture);
+            object returnVal = _virtualPropertyGetter.Invoke(
+                _testObject,
+                BindingFlags.GetProperty,
+                null,
+                null,
+                CultureInfo.InvariantCulture
+            );
             Assert.Equal(42, returnVal);
         }
     }

@@ -7,7 +7,8 @@ using System.Diagnostics;
 
 internal static class DataSetUtil
 {
-    internal static void CheckArgumentNull<T>(T argumentValue, string argumentName) where T : class
+    internal static void CheckArgumentNull<T>(T argumentValue, string argumentName)
+        where T : class
     {
         if (null == argumentValue)
         {
@@ -25,7 +26,10 @@ internal static class DataSetUtil
         return new ArgumentNullException(message);
     }
 
-    internal static ArgumentOutOfRangeException ArgumentOutOfRange(string message, string parameterName)
+    internal static ArgumentOutOfRangeException ArgumentOutOfRange(
+        string message,
+        string parameterName
+    )
     {
         return new ArgumentOutOfRangeException(parameterName, message);
     }
@@ -47,7 +51,14 @@ internal static class DataSetUtil
 
     internal static ArgumentOutOfRangeException InvalidEnumerationValue(Type type, int value)
     {
-        return ArgumentOutOfRange(SR.Format(SR.DataSetLinq_InvalidEnumerationValue, type.Name, value.ToString(System.Globalization.CultureInfo.InvariantCulture)), type.Name);
+        return ArgumentOutOfRange(
+            SR.Format(
+                SR.DataSetLinq_InvalidEnumerationValue,
+                type.Name,
+                value.ToString(System.Globalization.CultureInfo.InvariantCulture)
+            ),
+            type.Name
+        );
     }
 
     internal static ArgumentOutOfRangeException InvalidDataRowState(DataRowState value)
@@ -95,11 +106,13 @@ internal static class DataSetUtil
         // a 'catchable' exception is defined by what it is not.
         Type type = e.GetType();
 
-        return ((type != s_stackOverflowType) &&
-                 (type != s_outOfMemoryType) &&
-                 (type != s_threadAbortType) &&
-                 (type != s_nullReferenceType) &&
-                 (type != s_accessViolationType) &&
-                 !s_securityType.IsAssignableFrom(type));
+        return (
+            (type != s_stackOverflowType)
+            && (type != s_outOfMemoryType)
+            && (type != s_threadAbortType)
+            && (type != s_nullReferenceType)
+            && (type != s_accessViolationType)
+            && !s_securityType.IsAssignableFrom(type)
+        );
     }
 }

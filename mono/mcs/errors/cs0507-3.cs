@@ -3,11 +3,12 @@
 
 using System;
 
-class BaseClass {
-        protected virtual event EventHandler Test;
+class BaseClass
+{
+    protected virtual event EventHandler Test;
 }
 
-class DerivedClass: BaseClass {
-        public override sealed event EventHandler Test;
+class DerivedClass : BaseClass
+{
+    public override sealed event EventHandler Test;
 }
-

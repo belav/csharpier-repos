@@ -4,8 +4,8 @@
 
 class Test
 {
-	public static void Main ()
-	{
-		B.Foo<long> (1);
-	}
+    public static void Main()
+    {
+        B.Foo<long>(1);
+    }
 }

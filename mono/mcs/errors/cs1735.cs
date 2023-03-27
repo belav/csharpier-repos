@@ -6,6 +6,4 @@
 ///  Test
 ///  <typeparamref name="T" />
 /// </summary>
-public struct S<T1, T2>
-{
-}
+public struct S<T1, T2> { }

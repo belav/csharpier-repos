@@ -32,7 +32,8 @@ namespace System.Workflow.Activities
             base.DoDefaultAction();
 
             // Do not allow editing if in debug mode.
-            WorkflowDesignerLoader workflowDesignerLoader = this.GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+            WorkflowDesignerLoader workflowDesignerLoader =
+                this.GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
             if (workflowDesignerLoader != null && workflowDesignerLoader.InDebugMode)
                 throw new InvalidOperationException(Messages.DebugModeEditsDisallowed);
 
@@ -41,15 +42,17 @@ namespace System.Workflow.Activities
             if (Helpers.IsActivityLocked(activity))
                 return;
 
-            RuleDefinitions rules = ConditionHelper.Load_Rules_DT(this, Helpers.GetRootActivity(activity));
+            RuleDefinitions rules = ConditionHelper.Load_Rules_DT(
+                this,
+                Helpers.GetRootActivity(activity)
+            );
             if (rules != null)
             {
                 RuleSetCollection ruleSetCollection = rules.RuleSets;
                 RuleSetReference ruleSetReference = activity.RuleSetReference;
                 RuleSet ruleSet = null;
                 string ruleSetName = null;
-                if (ruleSetReference != null
-                    && !string.IsNullOrEmpty(ruleSetReference.RuleSetName))
+                if (ruleSetReference != null && !string.IsNullOrEmpty(ruleSetReference.RuleSetName))
                 {
                     ruleSetName = ruleSetReference.RuleSetName;
                     if (ruleSetCollection.Contains(ruleSetName))
@@ -81,10 +84,12 @@ namespace System.Workflow.Activities
             }
 
             // force revalidation by setting a property
-            TypeDescriptor.GetProperties(activity)["RuleSetReference"].SetValue(activity, activity.RuleSetReference);
+            TypeDescriptor.GetProperties(activity)["RuleSetReference"].SetValue(
+                activity,
+                activity.RuleSetReference
+            );
         }
     }
-
 
     internal sealed class PolicyDesignerTheme : ActivityDesignerTheme
     {

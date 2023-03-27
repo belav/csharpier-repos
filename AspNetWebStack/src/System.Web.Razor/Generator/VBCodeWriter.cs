@@ -82,7 +82,10 @@ namespace System.Web.Razor.Generator
                 }
                 if (i > 0 && (i % 80) == 0)
                 {
-                    if ((Char.IsHighSurrogate(literal[i]) && (i < (literal.Length - 1))) && Char.IsLowSurrogate(literal[i + 1]))
+                    if (
+                        (Char.IsHighSurrogate(literal[i]) && (i < (literal.Length - 1)))
+                        && Char.IsLowSurrogate(literal[i + 1])
+                    )
                     {
                         InnerWriter.Write(literal[++i]);
                     }

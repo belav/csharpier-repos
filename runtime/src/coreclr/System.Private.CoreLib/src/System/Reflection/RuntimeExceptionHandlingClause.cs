@@ -39,11 +39,14 @@ namespace System.Reflection
 
         public override Type? CatchType
         {
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "Module.ResolveType is marked as RequiresUnreferencedCode because it relies on tokens" +
-                                "which are not guaranteed to be stable across trimming. So if somebody hardcodes a token it could break." +
-                                "The usage here is not like that as all these tokens come from existing metadata loaded from some IL" +
-                                "and so trimming has no effect (the tokens are read AFTER trimming occurred).")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "Module.ResolveType is marked as RequiresUnreferencedCode because it relies on tokens"
+                    + "which are not guaranteed to be stable across trimming. So if somebody hardcodes a token it could break."
+                    + "The usage here is not like that as all these tokens come from existing metadata loaded from some IL"
+                    + "and so trimming has no effect (the tokens are read AFTER trimming occurred)."
+            )]
             get
             {
                 if (_flags != ExceptionHandlingClauseOptions.Clause)
@@ -54,9 +57,17 @@ namespace System.Reflection
                 if (!MetadataToken.IsNullToken(_catchMetadataToken))
                 {
                     Type? declaringType = _methodBody._methodBase.DeclaringType;
-                    Module module = (declaringType == null) ? _methodBody._methodBase.Module : declaringType.Module;
-                    type = module.ResolveType(_catchMetadataToken, declaringType?.GetGenericArguments(),
-                        _methodBody._methodBase is MethodInfo ? _methodBody._methodBase.GetGenericArguments() : null);
+                    Module module =
+                        (declaringType == null)
+                            ? _methodBody._methodBase.Module
+                            : declaringType.Module;
+                    type = module.ResolveType(
+                        _catchMetadataToken,
+                        declaringType?.GetGenericArguments(),
+                        _methodBody._methodBase is MethodInfo
+                            ? _methodBody._methodBase.GetGenericArguments()
+                            : null
+                    );
                 }
 
                 return type;
@@ -67,21 +78,41 @@ namespace System.Reflection
         {
             if (Flags == ExceptionHandlingClauseOptions.Clause)
             {
-                return string.Format(CultureInfo.CurrentUICulture,
+                return string.Format(
+                    CultureInfo.CurrentUICulture,
                     "Flags={0}, TryOffset={1}, TryLength={2}, HandlerOffset={3}, HandlerLength={4}, CatchType={5}",
-                    Flags, TryOffset, TryLength, HandlerOffset, HandlerLength, CatchType);
+                    Flags,
+                    TryOffset,
+                    TryLength,
+                    HandlerOffset,
+                    HandlerLength,
+                    CatchType
+                );
             }
 
             if (Flags == ExceptionHandlingClauseOptions.Filter)
             {
-                return string.Format(CultureInfo.CurrentUICulture,
+                return string.Format(
+                    CultureInfo.CurrentUICulture,
                     "Flags={0}, TryOffset={1}, TryLength={2}, HandlerOffset={3}, HandlerLength={4}, FilterOffset={5}",
-                    Flags, TryOffset, TryLength, HandlerOffset, HandlerLength, FilterOffset);
+                    Flags,
+                    TryOffset,
+                    TryLength,
+                    HandlerOffset,
+                    HandlerLength,
+                    FilterOffset
+                );
             }
 
-            return string.Format(CultureInfo.CurrentUICulture,
+            return string.Format(
+                CultureInfo.CurrentUICulture,
                 "Flags={0}, TryOffset={1}, TryLength={2}, HandlerOffset={3}, HandlerLength={4}",
-                Flags, TryOffset, TryLength, HandlerOffset, HandlerLength);
+                Flags,
+                TryOffset,
+                TryLength,
+                HandlerOffset,
+                HandlerLength
+            );
         }
     }
 }

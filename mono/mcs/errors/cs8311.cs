@@ -4,9 +4,9 @@
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
         dynamic d = null;
-        d.M2 (default);
+        d.M2(default);
     }
 }

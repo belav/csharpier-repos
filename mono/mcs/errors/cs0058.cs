@@ -3,14 +3,14 @@
 
 using System;
 
-class ErrorCS0058 {
-	public ErrorCS0058 () {}
+class ErrorCS0058
+{
+    public ErrorCS0058() { }
 }
 
-public class Foo {
-	public delegate ErrorCS0058 Delegate ();
+public class Foo
+{
+    public delegate ErrorCS0058 Delegate();
 
-	public static void Main () {
-	}
+    public static void Main() { }
 }
-

@@ -5,26 +5,24 @@ using System;
 using System.Security;
 using System.Security.Permissions;
 
-public class Program {
-
-        [return: DebugPermission (SecurityAction.LinkDemand)]
-        public int Show (string message)
-        {
-                return 2;
-        }    
+public class Program
+{
+    [return: DebugPermission(SecurityAction.LinkDemand)]
+    public int Show(string message)
+    {
+        return 2;
+    }
 }
 
-[AttributeUsage (AttributeTargets.All, AllowMultiple = true, Inherited = false)]
+[AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
 [Serializable]
-public class DebugPermissionAttribute : CodeAccessSecurityAttribute {
+public class DebugPermissionAttribute : CodeAccessSecurityAttribute
+{
+    public DebugPermissionAttribute(SecurityAction action)
+        : base(action) { }
 
-	public DebugPermissionAttribute (SecurityAction action)
-		: base (action)
-	{
-	}
-        
-	public override IPermission CreatePermission ()
-	{
-		return null;
-	}
+    public override IPermission CreatePermission()
+    {
+        return null;
+    }
 }

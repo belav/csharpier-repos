@@ -2,15 +2,11 @@
 // Line: 13
 // Compiler options: -langversion:ISO-1
 
-class Class {
-
-	public int Count {
-
-		get {
-			return 0;
-		}
-
-		protected set {
-		}
-	}
+class Class
+{
+    public int Count
+    {
+        get { return 0; }
+        protected set { }
+    }
 }

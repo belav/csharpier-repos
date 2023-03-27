@@ -21,7 +21,8 @@ public class ShadowValuesFactoryFactory : SnapshotFactoryFactory<ValueBuffer>
     /// </summary>
     protected override int GetPropertyIndex(IPropertyBase propertyBase)
         // Navigations are not included in the supplied value buffer
-        => (propertyBase as IProperty)?.GetShadowIndex() ?? -1;
+        =>
+        (propertyBase as IProperty)?.GetShadowIndex() ?? -1;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -29,8 +30,8 @@ public class ShadowValuesFactoryFactory : SnapshotFactoryFactory<ValueBuffer>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override int GetPropertyCount(IEntityType entityType)
-        => entityType.ShadowPropertyCount();
+    protected override int GetPropertyCount(IEntityType entityType) =>
+        entityType.ShadowPropertyCount();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -38,8 +39,7 @@ public class ShadowValuesFactoryFactory : SnapshotFactoryFactory<ValueBuffer>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override ValueComparer? GetValueComparer(IProperty property)
-        => null;
+    protected override ValueComparer? GetValueComparer(IProperty property) => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -47,8 +47,7 @@ public class ShadowValuesFactoryFactory : SnapshotFactoryFactory<ValueBuffer>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override bool UseEntityVariable
-        => false;
+    protected override bool UseEntityVariable => false;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,13 +57,16 @@ public class ShadowValuesFactoryFactory : SnapshotFactoryFactory<ValueBuffer>
     /// </summary>
     protected override Expression CreateReadShadowValueExpression(
         ParameterExpression parameter,
-        IPropertyBase property)
-        => Expression.Convert(
+        IPropertyBase property
+    ) =>
+        Expression.Convert(
             Expression.Call(
                 parameter,
                 ValueBuffer.GetValueMethod,
-                Expression.Constant(property.GetShadowIndex())),
-            property.ClrType);
+                Expression.Constant(property.GetShadowIndex())
+            ),
+            property.ClrType
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -74,6 +76,6 @@ public class ShadowValuesFactoryFactory : SnapshotFactoryFactory<ValueBuffer>
     /// </summary>
     protected override Expression CreateReadValueExpression(
         ParameterExpression parameter,
-        IPropertyBase property)
-        => CreateReadShadowValueExpression(parameter, property);
+        IPropertyBase property
+    ) => CreateReadShadowValueExpression(parameter, property);
 }

@@ -62,7 +62,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             bool omitVersionDelimiter = true;
             RIDPart parseState = RIDPart.Base;
 
-            int partStart = 0, partLength;
+            int partStart = 0,
+                partLength;
 
             // qualifier is indistinguishable from arch so we cannot distinguish it for parsing purposes
             Debug.Assert(ArchitectureDelimiter == QualifierDelimiter);
@@ -96,7 +97,7 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                                 break;
                             }
                             SetPart();
-                            partStart = i + 1;  // skip delimiter
+                            partStart = i + 1; // skip delimiter
                             parseState = RIDPart.Architecture;
                         }
                         break;
@@ -104,7 +105,7 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                         if (current == ArchitectureDelimiter)
                         {
                             SetPart();
-                            partStart = i + 1;  // skip delimiter
+                            partStart = i + 1; // skip delimiter
                             parseState = RIDPart.Architecture;
                         }
                         break;
@@ -112,7 +113,7 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                         if (current == QualifierDelimiter)
                         {
                             SetPart();
-                            partStart = i + 1;  // skip delimiter
+                            partStart = i + 1; // skip delimiter
                             parseState = RIDPart.Qualifier;
                         }
                         break;
@@ -136,7 +137,9 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             {
                 if (partLength == 0)
                 {
-                    throw new ArgumentException($"Unexpected delimiter at position {partStart} in \"{runtimeIdentifier}\"");
+                    throw new ArgumentException(
+                        $"Unexpected delimiter at position {partStart} in \"{runtimeIdentifier}\""
+                    );
                 }
 
                 parts[(int)parseState] = runtimeIdentifier.Substring(partStart, partLength);
@@ -172,14 +175,15 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
 
         public bool Equals(RID obj)
         {
-            return object.ReferenceEquals(obj, this) ||
-                (obj is not null &&
-                BaseRID == obj.BaseRID &&
-                (Version == null || OmitVersionDelimiter == obj.OmitVersionDelimiter) &&
-                Version == obj.Version &&
-                Architecture == obj.Architecture &&
-                Qualifier == obj.Qualifier);
-
+            return object.ReferenceEquals(obj, this)
+                || (
+                    obj is not null
+                    && BaseRID == obj.BaseRID
+                    && (Version == null || OmitVersionDelimiter == obj.OmitVersionDelimiter)
+                    && Version == obj.Version
+                    && Architecture == obj.Architecture
+                    && Qualifier == obj.Qualifier
+                );
         }
 
         public override int GetHashCode()

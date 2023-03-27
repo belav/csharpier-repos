@@ -3,8 +3,8 @@
 
 class C
 {
-	public static void Main ()
-	{
-		int [] i = new int [];
-	}
+    public static void Main()
+    {
+        int[] i = new int[];
+    }
 }

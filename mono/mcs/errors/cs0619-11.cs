@@ -4,14 +4,8 @@
 using System;
 
 [Obsolete("Do not use it.", true)]
-interface I
-{
-}
+interface I { }
 
-class A
-{
-}
+class A { }
 
-class C: A, I
-{
-}
+class C : A, I { }

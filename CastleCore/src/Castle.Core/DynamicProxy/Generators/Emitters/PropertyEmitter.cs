@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,14 +25,27 @@ namespace Castle.DynamicProxy.Generators.Emitters
         private MethodEmitter getMethod;
         private MethodEmitter setMethod;
 
-        public PropertyEmitter(AbstractTypeEmitter parentTypeEmitter, string name, PropertyAttributes attributes,
-                               Type propertyType, Type[] arguments)
+        public PropertyEmitter(
+            AbstractTypeEmitter parentTypeEmitter,
+            string name,
+            PropertyAttributes attributes,
+            Type propertyType,
+            Type[] arguments
+        )
         {
             this.parentTypeEmitter = parentTypeEmitter;
 
             builder = parentTypeEmitter.TypeBuilder.DefineProperty(
-                name, attributes, CallingConventions.HasThis, propertyType,
-                null, null, arguments, null, null);
+                name,
+                attributes,
+                CallingConventions.HasThis,
+                propertyType,
+                null,
+                null,
+                arguments,
+                null,
+                null
+            );
         }
 
         public MemberInfo Member
@@ -45,8 +58,12 @@ namespace Castle.DynamicProxy.Generators.Emitters
             get { return builder.PropertyType; }
         }
 
-        public MethodEmitter CreateGetMethod(string name, MethodAttributes attrs, MethodInfo methodToOverride,
-                                             params Type[] parameters)
+        public MethodEmitter CreateGetMethod(
+            string name,
+            MethodAttributes attrs,
+            MethodInfo methodToOverride,
+            params Type[] parameters
+        )
         {
             if (getMethod != null)
             {
@@ -57,13 +74,21 @@ namespace Castle.DynamicProxy.Generators.Emitters
             return getMethod;
         }
 
-        public MethodEmitter CreateGetMethod(string name, MethodAttributes attributes, MethodInfo methodToOverride)
+        public MethodEmitter CreateGetMethod(
+            string name,
+            MethodAttributes attributes,
+            MethodInfo methodToOverride
+        )
         {
             return CreateGetMethod(name, attributes, methodToOverride, Type.EmptyTypes);
         }
 
-        public MethodEmitter CreateSetMethod(string name, MethodAttributes attrs, MethodInfo methodToOverride,
-                                             params Type[] parameters)
+        public MethodEmitter CreateSetMethod(
+            string name,
+            MethodAttributes attrs,
+            MethodInfo methodToOverride,
+            params Type[] parameters
+        )
         {
             if (setMethod != null)
             {
@@ -74,7 +99,11 @@ namespace Castle.DynamicProxy.Generators.Emitters
             return setMethod;
         }
 
-        public MethodEmitter CreateSetMethod(string name, MethodAttributes attributes, MethodInfo methodToOverride)
+        public MethodEmitter CreateSetMethod(
+            string name,
+            MethodAttributes attributes,
+            MethodInfo methodToOverride
+        )
         {
             var method = CreateSetMethod(name, attributes, methodToOverride, Type.EmptyTypes);
             return method;

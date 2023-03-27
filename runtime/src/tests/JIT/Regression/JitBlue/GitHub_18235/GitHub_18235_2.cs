@@ -13,6 +13,7 @@ struct S0
 public class Program
 {
     static uint s_0;
+
     public static int Main()
     {
         S0 vr3 = new S0();

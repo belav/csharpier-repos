@@ -3,13 +3,15 @@
 
 using System;
 
-public class Y {
-	private Y(String test) {
-	}
+public class Y
+{
+    private Y(String test) { }
 }
 
-class T : Y {
-	public T(String test, String test1) : base(test) {
-	}
-	static void Main () {}
+class T : Y
+{
+    public T(String test, String test1)
+        : base(test) { }
+
+    static void Main() { }
 }

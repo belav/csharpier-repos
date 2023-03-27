@@ -2,9 +2,13 @@
 // Line: 8
 // Compiler options: -warnaserror
 
-[assembly:System.CLSCompliant(true)]
+[assembly: System.CLSCompliant(true)]
 
-public class CLSClass {
-        protected int SET_item;
-        public int this[int index] { set {} }        
+public class CLSClass
+{
+    protected int SET_item;
+    public int this[int index]
+    {
+        set { }
+    }
 }

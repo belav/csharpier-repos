@@ -10,7 +10,7 @@ class ThreadStartUShort
     public static int Main(string[] args)
     {
         // check args
-        if(args.Length != 1)
+        if (args.Length != 1)
         {
             Console.WriteLine("USAGE: ThreadStartUShort <ushort>|min|max\n");
             return -1;
@@ -18,10 +18,10 @@ class ThreadStartUShort
 
         ushort s = 0;
         // check for max or min
-        if(args[0].ToLower() == "max")
+        if (args[0].ToLower() == "max")
             s = UInt16.MaxValue;
-        else if(args[0].ToLower() == "min")
-            s = UInt16.MinValue;       
+        else if (args[0].ToLower() == "min")
+            s = UInt16.MinValue;
         else
             s = Convert.ToUInt16(args[0]);
 

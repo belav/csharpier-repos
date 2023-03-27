@@ -13,7 +13,9 @@ public partial class RoutePatternParserTests
     [Fact]
     public void Parse_MultipleOptionalParameters()
     {
-        Test(@"""{p1?}/{p2?}/{p3?}""", @"<Tree>
+        Test(
+            @"""{p1?}/{p2?}/{p3?}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -64,13 +66,17 @@ public partial class RoutePatternParserTests
     <Parameter Name=""p2"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" />
     <Parameter Name=""p3"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>", routePatternOptions: RoutePatternOptions.ComponentsRoute);
+</Tree>",
+            routePatternOptions: RoutePatternOptions.ComponentsRoute
+        );
     }
 
     [Fact]
     public void Parse_SingleCatchAllParameter()
     {
-        Test(@"""{*p}""", @"<Tree>
+        Test(
+            @"""{*p}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -89,13 +95,17 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""p"" IsCatchAll=""true"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>", routePatternOptions: RoutePatternOptions.ComponentsRoute);
+</Tree>",
+            routePatternOptions: RoutePatternOptions.ComponentsRoute
+        );
     }
 
     [Fact]
     public void Parse_MixedLiteralAndCatchAllParameter()
     {
-        Test(@"""awesome/wow/{*p}""", @"<Tree>
+        Test(
+            @"""awesome/wow/{*p}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -130,13 +140,17 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""p"" IsCatchAll=""true"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>", routePatternOptions: RoutePatternOptions.ComponentsRoute);
+</Tree>",
+            routePatternOptions: RoutePatternOptions.ComponentsRoute
+        );
     }
 
     [Fact]
     public void Parse_MixedLiteralParameterAndCatchAllParameter()
     {
-        Test(@"""awesome/{p1}/{*p2}""", @"<Tree>
+        Test(
+            @"""awesome/{p1}/{*p2}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -176,7 +190,10 @@ public partial class RoutePatternParserTests
     <Parameter Name=""p1"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""p2"" IsCatchAll=""true"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>", routePatternOptions: RoutePatternOptions.ComponentsRoute, allowDiagnosticsMismatch: true);
+</Tree>",
+            routePatternOptions: RoutePatternOptions.ComponentsRoute,
+            allowDiagnosticsMismatch: true
+        );
     }
 
     [Theory]
@@ -186,16 +203,24 @@ public partial class RoutePatternParserTests
     [InlineData("{}}")]
     [InlineData("{=}")]
     [InlineData("{.}")]
-    public void Components_ParseRouteParameter_ThrowsIf_ParameterContainsSpecialCharacters(string template)
+    public void Components_ParseRouteParameter_ThrowsIf_ParameterContainsSpecialCharacters(
+        string template
+    )
     {
-        var tree = Test(@"""" + template + @"""", routePatternOptions: RoutePatternOptions.ComponentsRoute, allowDiagnosticsMismatch: true);
+        var tree = Test(
+            @"""" + template + @"""",
+            routePatternOptions: RoutePatternOptions.ComponentsRoute,
+            allowDiagnosticsMismatch: true
+        );
         Assert.NotEmpty(tree.Diagnostics);
     }
 
     [Fact]
     public void InvalidTemplate_LiteralAfterOptionalParam()
     {
-        Test(@"""/test/{a?}/test""", @"<Tree>
+        Test(
+            @"""/test/{a?}/test""",
+            @"<Tree>
   <CompilationUnit>
     <Seperator>
       <SlashToken>/</SlashToken>
@@ -233,13 +258,17 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""a"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>", routePatternOptions: RoutePatternOptions.ComponentsRoute);
+</Tree>",
+            routePatternOptions: RoutePatternOptions.ComponentsRoute
+        );
     }
 
     [Fact]
     public void InvalidTemplate_NonOptionalParamAfterOptionalParam()
     {
-        Test(@"""/test/{a?}/{b}""", @"<Tree>
+        Test(
+            @"""/test/{a?}/{b}""",
+            @"<Tree>
   <CompilationUnit>
     <Seperator>
       <SlashToken>/</SlashToken>
@@ -282,13 +311,17 @@ public partial class RoutePatternParserTests
     <Parameter Name=""a"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" />
     <Parameter Name=""b"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>", routePatternOptions: RoutePatternOptions.ComponentsRoute);
+</Tree>",
+            routePatternOptions: RoutePatternOptions.ComponentsRoute
+        );
     }
 
     [Fact]
     public void InvalidTemplate_CatchAllParamWithMultipleAsterisks()
     {
-        Test(@"""/test/{a}/{**b}""", @"<Tree>
+        Test(
+            @"""/test/{a}/{**b}""",
+            @"<Tree>
   <CompilationUnit>
     <Seperator>
       <SlashToken>/</SlashToken>
@@ -334,13 +367,18 @@ public partial class RoutePatternParserTests
     <Parameter Name=""a"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""b"" IsCatchAll=""true"" IsOptional=""false"" EncodeSlashes=""false"" />
   </Parameters>
-</Tree>", routePatternOptions: RoutePatternOptions.ComponentsRoute, allowDiagnosticsMismatch: true);
+</Tree>",
+            routePatternOptions: RoutePatternOptions.ComponentsRoute,
+            allowDiagnosticsMismatch: true
+        );
     }
 
     [Fact]
     public void InvalidTemplate_CatchAllParamNotLast()
     {
-        Test(@"""/test/{*a}/{b}""", @"<Tree>
+        Test(
+            @"""/test/{*a}/{b}""",
+            @"<Tree>
   <CompilationUnit>
     <Seperator>
       <SlashToken>/</SlashToken>
@@ -386,13 +424,17 @@ public partial class RoutePatternParserTests
     <Parameter Name=""a"" IsCatchAll=""true"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""b"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>", routePatternOptions: RoutePatternOptions.ComponentsRoute);
+</Tree>",
+            routePatternOptions: RoutePatternOptions.ComponentsRoute
+        );
     }
 
     [Fact]
     public void InvalidTemplate_BadOptionalCharacterPosition()
     {
-        Test(@"""/test/{a?bc}/{b}""", @"<Tree>
+        Test(
+            @"""/test/{a?bc}/{b}""",
+            @"<Tree>
   <CompilationUnit>
     <Seperator>
       <SlashToken>/</SlashToken>
@@ -435,13 +477,17 @@ public partial class RoutePatternParserTests
     <Parameter Name=""a?bc"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""b"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>", routePatternOptions: RoutePatternOptions.ComponentsRoute);
+</Tree>",
+            routePatternOptions: RoutePatternOptions.ComponentsRoute
+        );
     }
 
     [Fact]
     public void Components_TestParameterWithDefault()
     {
-        Test(@"""{id=Home}""", @"<Tree>
+        Test(
+            @"""{id=Home}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -464,13 +510,18 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""id"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" DefaultValue=""Home"" />
   </Parameters>
-</Tree>", routePatternOptions: RoutePatternOptions.ComponentsRoute, allowDiagnosticsMismatch: true);
+</Tree>",
+            routePatternOptions: RoutePatternOptions.ComponentsRoute,
+            allowDiagnosticsMismatch: true
+        );
     }
 
     [Fact]
     public void Components_Parse_ComplexSegment_OptionalParameterFollowingPeriod()
     {
-        Test(@"""{p1}.{p2?}""", @"<Tree>
+        Test(
+            @"""{p1}.{p2?}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -503,7 +554,9 @@ public partial class RoutePatternParserTests
     <Parameter Name=""p1"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""p2"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>", routePatternOptions: RoutePatternOptions.ComponentsRoute, allowDiagnosticsMismatch: true);
+</Tree>",
+            routePatternOptions: RoutePatternOptions.ComponentsRoute,
+            allowDiagnosticsMismatch: true
+        );
     }
-
 }

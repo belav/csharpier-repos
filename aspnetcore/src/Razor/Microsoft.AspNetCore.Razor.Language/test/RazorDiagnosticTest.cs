@@ -13,7 +13,11 @@ public class RazorDiagnosticTest
     public void Create_WithDescriptor_CreatesDefaultRazorDiagnostic()
     {
         // Arrange
-        var descriptor = new RazorDiagnosticDescriptor("RZ0001", () => "a", RazorDiagnosticSeverity.Error);
+        var descriptor = new RazorDiagnosticDescriptor(
+            "RZ0001",
+            () => "a",
+            RazorDiagnosticSeverity.Error
+        );
         var span = new SourceSpan("test.cs", 15, 1, 8, 5);
 
         // Act
@@ -30,7 +34,11 @@ public class RazorDiagnosticTest
     public void Create_WithDescriptor_AndArgs_CreatesDefaultRazorDiagnostic()
     {
         // Arrange
-        var descriptor = new RazorDiagnosticDescriptor("RZ0001", () => "a", RazorDiagnosticSeverity.Error);
+        var descriptor = new RazorDiagnosticDescriptor(
+            "RZ0001",
+            () => "a",
+            RazorDiagnosticSeverity.Error
+        );
         var span = new SourceSpan("test.cs", 15, 1, 8, 5);
 
         // Act
@@ -47,7 +55,11 @@ public class RazorDiagnosticTest
     public void GetMessage_WithNullDescriptorFormat_ReturnsDefaultErrorString()
     {
         // Arrange
-        var descriptor = new RazorDiagnosticDescriptor("RZ0001", () => null, RazorDiagnosticSeverity.Error);
+        var descriptor = new RazorDiagnosticDescriptor(
+            "RZ0001",
+            () => null,
+            RazorDiagnosticSeverity.Error
+        );
         var span = new SourceSpan("test.cs", 15, 1, 8, 5);
 
         // Act

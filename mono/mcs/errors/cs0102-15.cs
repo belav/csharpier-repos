@@ -3,6 +3,13 @@
 
 class C
 {
-    bool this [int i] { get { return false; } }
-    bool Item (int i) { return false; }
+    bool this[int i]
+    {
+        get { return false; }
+    }
+
+    bool Item(int i)
+    {
+        return false;
+    }
 }

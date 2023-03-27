@@ -4,11 +4,10 @@
 
 class C
 {
-   static void Main() 
-   {
-      try {}
-      catch (System.Exception) { }
-      catch {}
-   }
+    static void Main()
+    {
+        try { }
+        catch (System.Exception) { }
+        catch { }
+    }
 }
- 

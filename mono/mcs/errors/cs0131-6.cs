@@ -3,13 +3,13 @@
 
 class X
 {
-	void Test ()
-	{
-		Foo () = 1;
-	}
+    void Test()
+    {
+        Foo() = 1;
+    }
 
-	static int Foo ()
-	{
-		return 1;
-	}
+    static int Foo()
+    {
+        return 1;
+    }
 }

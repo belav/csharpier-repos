@@ -5,13 +5,13 @@ using System;
 
 class Program
 {
-	static void Main()
-	{
-		Func<string> d = Foo;
-	}
+    static void Main()
+    {
+        Func<string> d = Foo;
+    }
 
-	static dynamic Foo ()
-	{
-		return 1;
-	}
+    static dynamic Foo()
+    {
+        return 1;
+    }
 }

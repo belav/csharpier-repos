@@ -6,12 +6,16 @@ using System;
 
 unsafe class Test
 {
-	static int x;
+    static int x;
 
-	static void Main ()
-	{
-		fixed (int* p = &x) {
-			Action a = () => { var pp = p; };
-		}
-	}
+    static void Main()
+    {
+        fixed (int* p = &x)
+        {
+            Action a = () =>
+            {
+                var pp = p;
+            };
+        }
+    }
 }

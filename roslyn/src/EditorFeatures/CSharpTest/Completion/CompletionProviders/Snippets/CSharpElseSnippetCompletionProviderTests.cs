@@ -14,7 +14,8 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpElseSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpElseSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "else";
 
@@ -22,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InsertElseSnippetInMethodTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -34,7 +35,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 }";
 
             var expectedCodeAfterCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -47,14 +48,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task NoElseSnippetInMethodWithoutIfStatementTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -68,7 +73,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InsertElseSnippetGlobalTest()
         {
             var markupBeforeCommit =
-@"if (true)
+                @"if (true)
 {
 }
 $$
@@ -80,7 +85,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"if (true)
+                @"if (true)
 {
 }
 else
@@ -93,14 +98,18 @@ class Program
     {
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task NoElseSnippetInBlockNamespaceTest()
         {
             var markupBeforeCommit =
-@"
+                @"
 namespace Namespace
 {
     if (true)
@@ -121,7 +130,7 @@ namespace Namespace
         public async Task NoElseSnippetInFileScopedNamespaceTest()
         {
             var markupBeforeCommit =
-@"
+                @"
 namespace Namespace;
 if (true)
 {
@@ -141,7 +150,7 @@ class Program
         public async Task InsertElseSnippetInConstructorTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public Program()
     {
@@ -153,7 +162,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"class Program
+                @"class Program
 {
     public Program()
     {
@@ -166,14 +175,18 @@ class Program
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertElseSnippetInLocalFunctionTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -190,7 +203,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -208,14 +221,18 @@ class Program
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertElseSnippetSingleLineIfWithBlockTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -225,7 +242,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -236,14 +253,18 @@ class Program
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertElseSnippetSingleLineIfTest()
         {
             var markupBeforeCommit =
-@"using System;
+                @"using System;
 class Program
 {
     public void Method()
@@ -254,7 +275,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"using System;
+                @"using System;
 class Program
 {
     public void Method()
@@ -266,14 +287,18 @@ class Program
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertElseSnippetNestedIfTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -288,7 +313,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -304,7 +329,11 @@ class Program
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
     }
 }

@@ -14,7 +14,8 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpForEachSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpForEachSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "foreach";
 
@@ -22,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InsertForEachSnippetInMethodTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -31,7 +32,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 }";
 
             var expectedCodeAfterCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -41,14 +42,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertForEachSnippetInMethodItemUsedTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -58,7 +63,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 }";
 
             var expectedCodeAfterCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -69,30 +74,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertForEachSnippetInGlobalContextTest()
         {
             var markupBeforeCommit =
-@"Ins$$
+                @"Ins$$
 ";
 
             var expectedCodeAfterCommit =
-@"foreach (var item in collection)
+                @"foreach (var item in collection)
 {
     $$
 }
 ";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InserForEachSnippetInConstructorTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public Program()
     {
@@ -101,7 +114,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 }";
 
             var expectedCodeAfterCommit =
-@"class Program
+                @"class Program
 {
     public Program()
     {
@@ -111,14 +124,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InserForEachSnippetWithCollectionTest()
         {
             var markupBeforeCommit =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -131,7 +148,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -145,14 +162,18 @@ class Program
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertForEachSnippetInLocalFunctionTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -165,7 +186,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -179,14 +200,18 @@ class Program
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertForEachSnippetInAnonymousFunctionTest()
         {
             var markupBeforeCommit =
-@"public delegate void Print(int value);
+                @"public delegate void Print(int value);
 static void Main(string[] args)
 {
     Print print = delegate(int val) {
@@ -195,7 +220,7 @@ static void Main(string[] args)
 }";
 
             var expectedCodeAfterCommit =
-@"public delegate void Print(int value);
+                @"public delegate void Print(int value);
 static void Main(string[] args)
 {
     Print print = delegate(int val) {
@@ -205,21 +230,25 @@ static void Main(string[] args)
         }
     };
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertForEachSnippetInParenthesizedLambdaExpressionRegularTest()
         {
             var markupBeforeCommit =
-@"Func<int, int, bool> testForEquality = (x, y) =>
+                @"Func<int, int, bool> testForEquality = (x, y) =>
 {
     $$
     return x == y;
 };";
 
             var expectedCodeAfterCommit =
-@"Func<int, int, bool> testForEquality = (x, y) =>
+                @"Func<int, int, bool> testForEquality = (x, y) =>
 {
     foreach (var item in args)
     {
@@ -227,21 +256,26 @@ static void Main(string[] args)
     }
     return x == y;
 };";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit, sourceCodeKind: SourceCodeKind.Regular);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit,
+                sourceCodeKind: SourceCodeKind.Regular
+            );
         }
 
         [WpfFact]
         public async Task InsertForEachSnippetInParenthesizedLambdaExpressionScriptTest()
         {
             var markupBeforeCommit =
-@"Func<int, int, bool> testForEquality = (x, y) =>
+                @"Func<int, int, bool> testForEquality = (x, y) =>
 {
     $$
     return x == y;
 };";
 
             var expectedCodeAfterCommit =
-@"Func<int, int, bool> testForEquality = (x, y) =>
+                @"Func<int, int, bool> testForEquality = (x, y) =>
 {
     foreach (var item in collection)
     {
@@ -249,7 +283,12 @@ static void Main(string[] args)
     }
     return x == y;
 };";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
     }
 }

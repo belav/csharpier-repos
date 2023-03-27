@@ -4,8 +4,8 @@
 
 class Test
 {
-	public static void Main ()
-	{
-		var c = B.e;
-	}
+    public static void Main()
+    {
+        var c = B.e;
+    }
 }

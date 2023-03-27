@@ -4,11 +4,12 @@
 
 public class MyClass2
 {
-	static public bool b;
-	static public void Main ()
-	{
-		object o;
-		if (b)
-			o = null;
-	}
+    static public bool b;
+
+    static public void Main()
+    {
+        object o;
+        if (b)
+            o = null;
+    }
 }

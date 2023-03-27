@@ -16,14 +16,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Persistence
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestPersistenceService()
-        {
-        }
+        public TestPersistenceService() { }
 
-        public IPersistentStorage GetStorage(Solution solution)
-            => NoOpPersistentStorage.Instance;
+        public IPersistentStorage GetStorage(Solution solution) => NoOpPersistentStorage.Instance;
 
-        public ValueTask<IPersistentStorage> GetStorageAsync(Solution solution, CancellationToken cancellationToken)
-            => new(NoOpPersistentStorage.Instance);
+        public ValueTask<IPersistentStorage> GetStorageAsync(
+            Solution solution,
+            CancellationToken cancellationToken
+        ) => new(NoOpPersistentStorage.Instance);
     }
 }

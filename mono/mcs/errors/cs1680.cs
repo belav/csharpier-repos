@@ -4,7 +4,4 @@
 
 using System;
 
-public class Test
-{
-}
-
+public class Test { }

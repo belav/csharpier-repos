@@ -35,14 +35,18 @@ namespace Microsoft.Extensions.Logging
 
             foreach (IConfigurationSection configurationSection in _configuration.GetChildren())
             {
-                if (configurationSection.Key.Equals(LogLevelKey, StringComparison.OrdinalIgnoreCase))
+                if (
+                    configurationSection.Key.Equals(LogLevelKey, StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     // Load global category defaults
                     LoadRules(options, configurationSection, null);
                 }
                 else
                 {
-                    IConfigurationSection logLevelSection = configurationSection.GetSection(LogLevelKey);
+                    IConfigurationSection logLevelSection = configurationSection.GetSection(
+                        LogLevelKey
+                    );
                     if (logLevelSection != null)
                     {
                         // Load logger specific rules
@@ -52,14 +56,27 @@ namespace Microsoft.Extensions.Logging
                 }
             }
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "IConfiguration.GetValue is safe when T is a bool.")]
-            bool GetCaptureScopesValue(LoggerFilterOptions options) => _configuration.GetValue(nameof(options.CaptureScopes), options.CaptureScopes);
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "IConfiguration.GetValue is safe when T is a bool."
+            )]
+            bool GetCaptureScopesValue(LoggerFilterOptions options) =>
+                _configuration.GetValue(nameof(options.CaptureScopes), options.CaptureScopes);
         }
 
-        private static void LoadRules(LoggerFilterOptions options, IConfigurationSection configurationSection, string? logger)
+        private static void LoadRules(
+            LoggerFilterOptions options,
+            IConfigurationSection configurationSection,
+            string? logger
+        )
         {
-            foreach (System.Collections.Generic.KeyValuePair<string, string?> section in configurationSection.AsEnumerable(true))
+            foreach (
+                System.Collections.Generic.KeyValuePair<
+                    string,
+                    string?
+                > section in configurationSection.AsEnumerable(true)
+            )
             {
                 if (TryGetSwitch(section.Value, out LogLevel level))
                 {

@@ -8,16 +8,33 @@ namespace Microsoft.Web.Mvc.ModelBinding
 {
     public sealed class KeyValuePairModelBinderProvider : ModelBinderProvider
     {
-        public override IExtensibleModelBinder GetBinder(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+        public override IExtensibleModelBinder GetBinder(
+            ControllerContext controllerContext,
+            ExtensibleModelBindingContext bindingContext
+        )
         {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
-            string keyFieldName = ModelBinderUtil.CreatePropertyModelName(bindingContext.ModelName, "key");
-            string valueFieldName = ModelBinderUtil.CreatePropertyModelName(bindingContext.ModelName, "value");
+            string keyFieldName = ModelBinderUtil.CreatePropertyModelName(
+                bindingContext.ModelName,
+                "key"
+            );
+            string valueFieldName = ModelBinderUtil.CreatePropertyModelName(
+                bindingContext.ModelName,
+                "value"
+            );
 
-            if (bindingContext.ValueProvider.ContainsPrefix(keyFieldName) && bindingContext.ValueProvider.ContainsPrefix(valueFieldName))
+            if (
+                bindingContext.ValueProvider.ContainsPrefix(keyFieldName)
+                && bindingContext.ValueProvider.ContainsPrefix(valueFieldName)
+            )
             {
-                return ModelBinderUtil.GetPossibleBinderInstance(bindingContext.ModelType, typeof(KeyValuePair<,>) /* supported model type */, typeof(KeyValuePairModelBinder<,>) /* binder type */);
+                return ModelBinderUtil.GetPossibleBinderInstance(
+                    bindingContext.ModelType,
+                    typeof(KeyValuePair<,>) /* supported model type */
+                    ,
+                    typeof(KeyValuePairModelBinder<,>) /* binder type */
+                );
             }
             else
             {

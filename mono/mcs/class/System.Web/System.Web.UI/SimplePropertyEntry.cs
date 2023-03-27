@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,21 +29,23 @@
 //
 namespace System.Web.UI
 {
-	public class SimplePropertyEntry : PropertyEntry {
-		bool useSetAttribute;
-		object val;
+    public class SimplePropertyEntry : PropertyEntry
+    {
+        bool useSetAttribute;
+        object val;
 
-		internal SimplePropertyEntry () { }
+        internal SimplePropertyEntry() { }
 
-		public bool UseSetAttribute {
-			get { return useSetAttribute; }
-			set { useSetAttribute = value; }
-		}
+        public bool UseSetAttribute
+        {
+            get { return useSetAttribute; }
+            set { useSetAttribute = value; }
+        }
 
-		public object Value {
-			get { return val; }
-			set { val = value; }
-		}
-	}
+        public object Value
+        {
+            get { return val; }
+            set { val = value; }
+        }
+    }
 }
-

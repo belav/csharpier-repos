@@ -4,24 +4,25 @@
 
 using System;
 
-
 public struct ValX1<T>
 {
     public T t;
+
     public ValX1(T t)
     {
         this.t = t;
     }
 }
+
 public class RefX1<T>
 {
     public T t;
+
     public RefX1(T t)
     {
         this.t = t;
     }
 }
-
 
 public struct Gen<T>
 {
@@ -38,7 +39,8 @@ public class ArrayTest<T>
     public void DoArrayTest(T[] InArr, out T[] OutArr)
     {
         int size = 2;
-        int i, j;
+        int i,
+            j;
 
         Gen<T>[,] GenArray = new Gen<T>[size, size];
 
@@ -65,6 +67,7 @@ public class Test_struct01_gen
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -73,7 +76,6 @@ public class Test_struct01_gen
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
@@ -115,7 +117,13 @@ public class Test_struct01_gen
             Eval(object_arr[i].Equals(object_arr_res[i]));
         }
 
-        RefX1<int>[] RefX1Int_arr = new RefX1<int>[] { new RefX1<int>(0), new RefX1<int>(1), new RefX1<int>(2), new RefX1<int>(3) };
+        RefX1<int>[] RefX1Int_arr = new RefX1<int>[]
+        {
+            new RefX1<int>(0),
+            new RefX1<int>(1),
+            new RefX1<int>(2),
+            new RefX1<int>(3)
+        };
         RefX1<int>[] RefX1Int_arr_res;
 
         new ArrayTest<RefX1<int>>().DoArrayTest(RefX1Int_arr, out RefX1Int_arr_res);
@@ -124,7 +132,13 @@ public class Test_struct01_gen
             Eval(RefX1Int_arr[i].Equals(RefX1Int_arr_res[i]));
         }
 
-        ValX1<int>[] ValX1Int_arr = new ValX1<int>[] { new ValX1<int>(0), new ValX1<int>(1), new ValX1<int>(2), new ValX1<int>(3) };
+        ValX1<int>[] ValX1Int_arr = new ValX1<int>[]
+        {
+            new ValX1<int>(0),
+            new ValX1<int>(1),
+            new ValX1<int>(2),
+            new ValX1<int>(3)
+        };
         ValX1<int>[] ValX1Int_arr_res;
 
         new ArrayTest<ValX1<int>>().DoArrayTest(ValX1Int_arr, out ValX1Int_arr_res);
@@ -133,7 +147,13 @@ public class Test_struct01_gen
             Eval(ValX1Int_arr[i].Equals(ValX1Int_arr_res[i]));
         }
 
-        RefX1<string>[] RefX1_arr = new RefX1<string>[] { new RefX1<string>("0"), new RefX1<string>("1"), new RefX1<string>("2"), new RefX1<string>("3") };
+        RefX1<string>[] RefX1_arr = new RefX1<string>[]
+        {
+            new RefX1<string>("0"),
+            new RefX1<string>("1"),
+            new RefX1<string>("2"),
+            new RefX1<string>("3")
+        };
         RefX1<string>[] RefX1_arr_res;
 
         new ArrayTest<RefX1<string>>().DoArrayTest(RefX1_arr, out RefX1_arr_res);
@@ -142,7 +162,13 @@ public class Test_struct01_gen
             Eval(RefX1_arr[i].Equals(RefX1_arr_res[i]));
         }
 
-        ValX1<string>[] ValX1_arr = new ValX1<string>[] { new ValX1<string>("0"), new ValX1<string>("1"), new ValX1<string>("2"), new ValX1<string>("3") };
+        ValX1<string>[] ValX1_arr = new ValX1<string>[]
+        {
+            new ValX1<string>("0"),
+            new ValX1<string>("1"),
+            new ValX1<string>("2"),
+            new ValX1<string>("3")
+        };
         ValX1<string>[] ValX1_arr_res;
 
         new ArrayTest<ValX1<string>>().DoArrayTest(ValX1_arr, out ValX1_arr_res);
@@ -162,6 +188,4 @@ public class Test_struct01_gen
             return 1;
         }
     }
-
 }
-

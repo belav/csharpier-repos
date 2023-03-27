@@ -6,8 +6,6 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [AllowAnonymous]
     public class NoDiagnosticsAreReturned_IfAllowAnonymousIsAppliedToPageModel : PageModel
     {
-        public void OnGet()
-        {
-        }
+        public void OnGet() { }
     }
 }

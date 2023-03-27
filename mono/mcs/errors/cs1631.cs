@@ -5,18 +5,21 @@ using System.Collections;
 
 class X
 {
-	public static IEnumerable Test (int a)
-	{
-		try {
-			;
-		} catch {
-			yield return 0;
-		}
+    public static IEnumerable Test(int a)
+    {
+        try
+        {
+            ;
         }
+        catch
+        {
+            yield return 0;
+        }
+    }
 
-	static void Main ()
-	{
-		IEnumerable a = Test (3);
-		Console.WriteLine (a);
-	}
+    static void Main()
+    {
+        IEnumerable a = Test(3);
+        Console.WriteLine(a);
+    }
 }

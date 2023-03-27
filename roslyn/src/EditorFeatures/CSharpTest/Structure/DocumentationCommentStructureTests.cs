@@ -15,14 +15,17 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
 {
     [Trait(Traits.Feature, Traits.Features.Outlining)]
-    public class DocumentationCommentStructureTests : AbstractCSharpSyntaxNodeStructureTests<DocumentationCommentTriviaSyntax>
+    public class DocumentationCommentStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<DocumentationCommentTriviaSyntax>
     {
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new DocumentationCommentStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new DocumentationCommentStructureProvider();
 
         [Fact]
         public async Task TestDocumentationCommentWithoutSummaryTag1()
         {
-            const string code = @"
+            const string code =
+                @"
 {|span:/// $$XML doc comment
 /// some description
 /// of
@@ -31,14 +34,17 @@ class Class3
 {
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/// XML doc comment ...", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/// XML doc comment ...", autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestDocumentationCommentWithoutSummaryTag2()
         {
-            const string code = @"
+            const string code =
+                @"
 {|span:/** $$Block comment
 * some description
 * of
@@ -48,27 +54,33 @@ class Class3
 {
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/** Block comment ...", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/** Block comment ...", autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestDocumentationCommentWithoutSummaryTag3()
         {
-            const string code = @"
+            const string code =
+                @"
 {|span:/// $$<param name=""tree""></param>|}
 class Class3
 {
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/// <param name=\"tree\"></param> ...", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/// <param name=\"tree\"></param> ...", autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestDocumentationComment()
         {
-            const string code = @"
+            const string code =
+                @"
 {|span:/// <summary>
 /// $$Hello C#!
 /// </summary>|}
@@ -76,29 +88,37 @@ class Class3
 {
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/// <summary> Hello C#!", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/// <summary> Hello C#!", autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestDocumentationCommentWithLongBannerText()
         {
-            var code = @"
+            var code =
+                @"
 {|span:/// $$<summary>
-/// " + new string('x', 240) + @"
+/// "
+                + new string('x', 240)
+                + @"
 /// </summary>|}
 class Class3
 {
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/// <summary> " + new string('x', 106) + " ...", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/// <summary> " + new string('x', 106) + " ...", autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestMultilineDocumentationComment()
         {
-            const string code = @"
+            const string code =
+                @"
 {|span:/** <summary>
 $$Hello C#!
 </summary> */|}
@@ -106,14 +126,17 @@ class Class3
 {
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/** <summary> Hello C#!", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/** <summary> Hello C#!", autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestIndentedDocumentationComment()
         {
-            const string code = @"
+            const string code =
+                @"
     {|span:/// <summary>
     /// $$Hello C#!
     /// </summary>|}
@@ -121,14 +144,17 @@ class Class3
     {
     }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/// <summary> Hello C#!", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/// <summary> Hello C#!", autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestIndentedMultilineDocumentationComment()
         {
-            const string code = @"
+            const string code =
+                @"
     {|span:/** <summary>
     $$Hello C#!
     </summary> */|}
@@ -136,66 +162,81 @@ class Class3
     {
     }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/** <summary> Hello C#!", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/** <summary> Hello C#!", autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestDocumentationCommentOnASingleLine()
         {
-            const string code = @"
+            const string code =
+                @"
 {|span:/// <summary>$$Hello C#!</summary>|}
 class Class3
 {
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/// <summary>Hello C#!", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/// <summary>Hello C#!", autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestMultilineDocumentationCommentOnASingleLine()
         {
-            const string code = @"
+            const string code =
+                @"
 {|span:/** <summary>$$Hello C#!</summary> */|}
 class Class3
 {
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/** <summary>Hello C#!", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/** <summary>Hello C#!", autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestIndentedDocumentationCommentOnASingleLine()
         {
-            const string code = @"
+            const string code =
+                @"
     {|span:/// <summary>$$Hello C#!</summary>|}
     class Class3
     {
     }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/// <summary>Hello C#!", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/// <summary>Hello C#!", autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestIndentedMultilineDocumentationCommentOnASingleLine()
         {
-            const string code = @"
+            const string code =
+                @"
     {|span:/** <summary>$$Hello C#!</summary> */|}
     class Class3
     {
     }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/** <summary>Hello C#!", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/** <summary>Hello C#!", autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestMultilineSummaryInDocumentationComment1()
         {
-            const string code = @"
+            const string code =
+                @"
 {|span:/// <summary>
 /// $$Hello
 /// C#!
@@ -204,14 +245,17 @@ class Class3
 {
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/// <summary> Hello C#!", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/// <summary> Hello C#!", autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestMultilineSummaryInDocumentationComment2()
         {
-            const string code = @"
+            const string code =
+                @"
 {|span:/// <summary>
 /// $$Hello
 /// 
@@ -221,14 +265,17 @@ class Class3
 {
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/// <summary> Hello C#!", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/// <summary> Hello C#!", autoCollapse: true)
+            );
         }
 
         [Fact, WorkItem(2129, "https://github.com/dotnet/roslyn/issues/2129")]
         public async Task CrefInSummary()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|span:/// $$<summary>
@@ -238,14 +285,21 @@ class C
     public void M<T>(T t) { }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/// <summary> Summary with SeeClass, SeeAlsoClass, null, T, t, and not-supported.", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region(
+                    "span",
+                    "/// <summary> Summary with SeeClass, SeeAlsoClass, null, T, t, and not-supported.",
+                    autoCollapse: true
+                )
+            );
         }
 
         [Fact, WorkItem(402822, "https://devdiv.visualstudio.com/DevDiv/_workitems?id=402822")]
         public async Task TestSummaryWithPunctuation()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|span:/// $$<summary>
@@ -257,14 +311,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/// <summary> The main entrypoint for Program.", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "/// <summary> The main entrypoint for Program.", autoCollapse: true)
+            );
         }
 
         [Fact, WorkItem(20679, "https://github.com/dotnet/roslyn/issues/20679")]
         public async Task TestSummaryWithAdditionalTags()
         {
-            const string code = @"
+            const string code =
+                @"
 public class Class1
 {
     {|span:/// $$<summary>
@@ -276,8 +333,14 @@ public class Class1
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "/// <summary> Initializes a new instance of the Class1 class.", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region(
+                    "span",
+                    "/// <summary> Initializes a new instance of the Class1 class.",
+                    autoCollapse: true
+                )
+            );
         }
     }
 }

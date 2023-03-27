@@ -6,11 +6,8 @@ using System;
 
 namespace Testing
 {
-	/// <summary>
-	/// Incorrect comment markup.
-	/// </incorrect>
-	public class Test2
-	{
-	}
+    /// <summary>
+    /// Incorrect comment markup.
+    /// </incorrect>
+    public class Test2 { }
 }
-

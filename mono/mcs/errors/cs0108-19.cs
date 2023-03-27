@@ -4,10 +4,10 @@
 
 public abstract class A
 {
-	static readonly int AnInt = 2;
+    static readonly int AnInt = 2;
 
-	public class B : A
-	{
-		static readonly int AnInt = 3;
-	}
+    public class B : A
+    {
+        static readonly int AnInt = 3;
+    }
 }

@@ -16,43 +16,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
     [Trait(Traits.Feature, Traits.Features.CodeActionsInlineTemporary)]
     public class InlineTemporaryTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpInlineTemporaryCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpInlineTemporaryCodeRefactoringProvider();
 
-        private async Task TestFixOneAsync(string initial, string expected)
-            => await TestInRegularAndScript1Async(GetTreeText(initial), GetTreeText(expected));
+        private async Task TestFixOneAsync(string initial, string expected) =>
+            await TestInRegularAndScript1Async(GetTreeText(initial), GetTreeText(expected));
 
         private static string GetTreeText(string initial)
         {
             return @"class C
 {
-    void F() " + initial + @"
+    void F() "
+                + initial
+                + @"
 }";
         }
 
-        private static SyntaxNode GetNodeToFix(dynamic initialRoot, int declaratorIndex)
-            => initialRoot.Members[0].Members[0].Body.Statements[0].Declaration.Variables[declaratorIndex];
+        private static SyntaxNode GetNodeToFix(dynamic initialRoot, int declaratorIndex) =>
+            initialRoot.Members[0].Members[0].Body.Statements[0].Declaration.Variables[
+                declaratorIndex
+            ];
 
-        private static SyntaxNode GetFixedNode(dynamic fixedRoot)
-            => fixedRoot.Members[0].Members[0].BodyOpt;
-
-        [Fact]
-        public async Task NotWithNoInitializer1()
-            => await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int [||]x; System.Console.WriteLine(x); }"));
+        private static SyntaxNode GetFixedNode(dynamic fixedRoot) =>
+            fixedRoot.Members[0].Members[0].BodyOpt;
 
         [Fact]
-        public async Task NotWithNoInitializer2()
-            => await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int [||]x = ; System.Console.WriteLine(x); }"));
+        public async Task NotWithNoInitializer1() =>
+            await TestMissingInRegularAndScriptAsync(
+                GetTreeText(@"{ int [||]x; System.Console.WriteLine(x); }")
+            );
 
         [Fact]
-        public async Task NotOnSecondWithNoInitializer()
-            => await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int x = 42, [||]y; System.Console.WriteLine(y); }"));
+        public async Task NotWithNoInitializer2() =>
+            await TestMissingInRegularAndScriptAsync(
+                GetTreeText(@"{ int [||]x = ; System.Console.WriteLine(x); }")
+            );
+
+        [Fact]
+        public async Task NotOnSecondWithNoInitializer() =>
+            await TestMissingInRegularAndScriptAsync(
+                GetTreeText(@"{ int x = 42, [||]y; System.Console.WriteLine(y); }")
+            );
 
         [Fact]
         public async Task NotOnField()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int [||]x = 42;
 
@@ -60,14 +72,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
     {
         System.Console.WriteLine(x);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task WithRefInitializer1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     ref int M()
     {
@@ -75,73 +88,85 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         ref int [||]x = ref arr[2];
         return ref x;
     }
-}");
+}"
+            );
         }
 
         [Fact]
-        public async Task SingleStatement()
-            => await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int [||]x = 27; }"));
+        public async Task SingleStatement() =>
+            await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int [||]x = 27; }"));
 
         [Fact]
-        public async Task MultipleDeclarators_First()
-            => await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int [||]x = 0, y = 1, z = 2; }"));
+        public async Task MultipleDeclarators_First() =>
+            await TestMissingInRegularAndScriptAsync(
+                GetTreeText(@"{ int [||]x = 0, y = 1, z = 2; }")
+            );
 
         [Fact]
-        public async Task MultipleDeclarators_Second()
-            => await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int x = 0, [||]y = 1, z = 2; }"));
+        public async Task MultipleDeclarators_Second() =>
+            await TestMissingInRegularAndScriptAsync(
+                GetTreeText(@"{ int x = 0, [||]y = 1, z = 2; }")
+            );
 
         [Fact]
-        public async Task MultipleDeclarators_Last()
-            => await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int x = 0, y = 1, [||]z = 2; }"));
+        public async Task MultipleDeclarators_Last() =>
+            await TestMissingInRegularAndScriptAsync(
+                GetTreeText(@"{ int x = 0, y = 1, [||]z = 2; }")
+            );
 
         [Fact]
         public async Task Escaping1()
         {
             await TestFixOneAsync(
-@"{ int [||]x = 0;
+                @"{ int [||]x = 0;
 
 Console.WriteLine(x); }",
-@"{
-        Console.WriteLine(0); }");
+                @"{
+        Console.WriteLine(0); }"
+            );
         }
 
         [Fact]
         public async Task Escaping2()
         {
             await TestFixOneAsync(
-@"{ int [||]@x = 0;
+                @"{ int [||]@x = 0;
 
 Console.WriteLine(x); }",
-@"{
-        Console.WriteLine(0); }");
+                @"{
+        Console.WriteLine(0); }"
+            );
         }
 
         [Fact]
         public async Task Escaping3()
         {
             await TestFixOneAsync(
-@"{ int [||]@x = 0;
+                @"{ int [||]@x = 0;
 
 Console.WriteLine(@x); }",
-@"{
-        Console.WriteLine(0); }");
+                @"{
+        Console.WriteLine(0); }"
+            );
         }
 
         [Fact]
         public async Task Escaping4()
         {
             await TestFixOneAsync(
-@"{ int [||]x = 0;
+                @"{ int [||]x = 0;
 
 Console.WriteLine(@x); }",
-@"{
-        Console.WriteLine(0); }");
+                @"{
+        Console.WriteLine(0); }"
+            );
         }
 
         [Fact]
         public async Task Escaping5()
         {
-            var code = @"
+            var code =
+                @"
 using System.Linq;
 class C
 {
@@ -152,7 +177,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System.Linq;
 class C
 {
@@ -168,7 +194,8 @@ class C
         [Fact]
         public async Task Call()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class C 
 {
@@ -179,7 +206,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 class C 
 {
@@ -195,7 +223,8 @@ class C
         [Fact]
         public async Task Conversion_NoChange()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class C 
 {
@@ -206,7 +235,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 class C 
 {
@@ -223,18 +253,19 @@ class C
         public async Task Conversion_NoConversion()
         {
             await TestFixOneAsync(
-@"{ int [||]x = 3;
+                @"{ int [||]x = 3;
 
 x.ToString(); }",
-                       @"{ 
-3.ToString(); }");
+                @"{ 
+3.ToString(); }"
+            );
         }
 
         [Fact]
         public async Task Conversion_DifferentOverload()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 class C
 {
@@ -244,8 +275,7 @@ class C
         Console.WriteLine(x);
     }
 }",
-
-@"
+                @"
 using System;
 class C
 {
@@ -253,14 +283,15 @@ class C
     {
         Console.WriteLine((double)3);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task Conversion_DifferentMethod()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class Base 
 {
     public void M(object o) { }
@@ -278,8 +309,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 class Base 
 {
     public void M(object o) { }
@@ -295,14 +325,15 @@ class C
         ((Base)new Derived()).M(""hi"");
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task Conversion_SameMethod()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class Base 
 {
     public void M(int i) { }
@@ -320,8 +351,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 class Base 
 {
     public void M(int i) { }
@@ -337,16 +367,19 @@ class C
         new Derived().M(3);
     }
 }
-");
+"
+            );
         }
 
         [Theory]
         [InlineData(LanguageVersion.CSharp8)]
         [InlineData(LanguageVersion.CSharp9)]
-        public async Task Conversion_NonTargetTypedConditionalExpression(LanguageVersion languageVersion)
+        public async Task Conversion_NonTargetTypedConditionalExpression(
+            LanguageVersion languageVersion
+        )
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void F()
@@ -356,8 +389,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 class C
 {
     void F()
@@ -365,16 +397,21 @@ class C
         var y = true ? (int?)42 : null;
     }
 }
-", parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion));
+",
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)
+            );
         }
 
         [Theory]
         [InlineData(LanguageVersion.CSharp8, "(int?)42")]
         [InlineData(LanguageVersion.CSharp9, "42")] // In C# 9, target-typed conditionals makes this work
-        public async Task Conversion_TargetTypedConditionalExpression(LanguageVersion languageVersion, string expectedSubstitution)
+        public async Task Conversion_TargetTypedConditionalExpression(
+            LanguageVersion languageVersion,
+            string expectedSubstitution
+        )
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void F()
@@ -384,33 +421,38 @@ class C
     }
 }
 ",
-
-@"
+                @"
 class C
 {
     void F()
     {
-        int? y = true ? " + expectedSubstitution + @" : null;
+        int? y = true ? "
+                    + expectedSubstitution
+                    + @" : null;
     }
 }
-", parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion));
+",
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)
+            );
         }
 
         [Fact]
         public async Task NoCastOnVar()
         {
             await TestFixOneAsync(
-@"{ var [||]x = 0;
+                @"{ var [||]x = 0;
 
 Console.WriteLine(x); }",
-@"{
-        Console.WriteLine(0); }");
+                @"{
+        Console.WriteLine(0); }"
+            );
         }
 
         [Fact]
         public async Task DoubleAssignment()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -427,24 +469,27 @@ class C
         public async Task TestAnonymousType1()
         {
             await TestFixOneAsync(
-@"{ int [||]x = 42;
+                @"{ int [||]x = 42;
 var a = new { x }; }",
-                       @"{ var a = new { x = 42 }; }");
+                @"{ var a = new { x = 42 }; }"
+            );
         }
 
         [Fact]
         public async Task TestParenthesizedAtReference_Case3()
         {
             await TestFixOneAsync(
-@"{ int [||]x = 1 + 1;
+                @"{ int [||]x = 1 + 1;
 int y = x * 2; }",
-                       @"{ int y = (1 + 1) * 2; }");
+                @"{ int y = (1 + 1) * 2; }"
+            );
         }
 
         [Fact]
         public async Task DontBreakOverloadResolution_Case5()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void Goo(object o) { }
@@ -457,7 +502,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void Goo(object o) { }
@@ -475,7 +521,8 @@ class C
         [Fact]
         public async Task DontTouchUnrelatedBlocks()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -486,7 +533,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -502,7 +550,8 @@ class C
         [Fact]
         public async Task TestLambdaParenthesizeAndCast_Case7()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -512,7 +561,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -528,7 +578,7 @@ class C
         public async Task ParseAmbiguity1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void F(object a, object b)
@@ -539,7 +589,7 @@ class C
     }
     int f = 0;
 }",
-@"
+                @"
 class C
 {
     void F(object a, object b)
@@ -548,14 +598,19 @@ class C
         F(x < x, (x > (f)));
     }
     int f = 0;
-}");
+}"
+            );
         }
 
-        [Fact, WorkItem(538094, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538094"), WorkItem(541462, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541462")]
+        [
+            Fact,
+            WorkItem(538094, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538094"),
+            WorkItem(541462, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541462")
+        ]
         public async Task ParseAmbiguity2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void F(object a, object b)
@@ -566,7 +621,7 @@ class C
     }
     int f = 0;
 }",
-@"
+                @"
 class C
 {
     void F(object a, object b)
@@ -575,14 +630,15 @@ class C
         F(x < x, (x > (f)));
     }
     int f = 0;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(538094, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538094")]
         public async Task ParseAmbiguity3()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void F(object a, object b)
@@ -593,7 +649,7 @@ class C
     }
     int f = 0;
 }",
-@"
+                @"
 class C
 {
     void F(object a, object b)
@@ -602,14 +658,15 @@ class C
         F(x < x, (x > (int)1));
     }
     int f = 0;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(544924, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544924")]
         public async Task ParseAmbiguity4()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class Program
 {
     static void Main()
@@ -623,7 +680,7 @@ class Program
     {
     }
 }",
-@"
+                @"
 class Program
 {
     static void Main()
@@ -635,14 +692,15 @@ class Program
     static void Bar(object a, object b)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(544613, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544613")]
         public async Task ParseAmbiguity5()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class Program
 {
     static void Main()
@@ -652,7 +710,7 @@ class Program
         var z = new[] { x < x, x > y };
     }
 }",
-@"
+                @"
 class Program
 {
     static void Main()
@@ -660,31 +718,34 @@ class Program
         int x = 2;
         var z = new[] { x < x, x > 1 + 2 };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(538131, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538131")]
         public async Task TestArrayInitializer()
         {
             await TestFixOneAsync(
-@"{ int[] [||]x = {
+                @"{ int[] [||]x = {
     3,
     4,
     5
 };
 int a = Array.IndexOf(x, 3); }",
-@"{
+                @"{
         int a = Array.IndexOf(new int[] {
         3,
         4,
         5
-    }, 3); }");
+    }, 3); }"
+            );
         }
 
         [Fact, WorkItem(545657, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545657")]
         public async Task TestArrayInitializer2()
         {
-            var initial = @"
+            var initial =
+                @"
 class Program
 { 
     static void Main()
@@ -694,7 +755,8 @@ class Program
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class Program
 { 
     static void Main()
@@ -709,7 +771,8 @@ class Program
         [Fact, WorkItem(545657, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545657")]
         public async Task TestArrayInitializer3()
         {
-            var initial = @"
+            var initial =
+                @"
 class Program
 { 
     static void Main()
@@ -723,7 +786,8 @@ class Program
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class Program
 { 
     static void Main()
@@ -743,7 +807,7 @@ class Program
         public async Task TestConflict_RefParameter1()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -763,7 +827,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -789,7 +853,7 @@ class Program
         public async Task TestConflict_RefParameter2()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -804,7 +868,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -825,7 +889,7 @@ class Program
         public async Task TestConflict_AssignExpression()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -837,7 +901,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -855,7 +919,7 @@ class Program
         public async Task TestConflict_AddAssignExpression1()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -867,7 +931,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -885,7 +949,7 @@ class Program
         public async Task TestConflict_AddAssignExpression2()
         {
             var initial =
-@"using System;
+                @"using System;
 class C
 {
     static int x;
@@ -904,7 +968,7 @@ class C
         public async Task TestConflict_SubtractAssignExpression()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -916,7 +980,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -934,7 +998,7 @@ class Program
         public async Task TestConflict_MultiplyAssignExpression()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -946,7 +1010,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -964,7 +1028,7 @@ class Program
         public async Task TestConflict_DivideAssignExpression()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -976,7 +1040,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -994,7 +1058,7 @@ class Program
         public async Task TestConflict_ModuloAssignExpression()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1006,7 +1070,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1024,7 +1088,7 @@ class Program
         public async Task TestConflict_AndAssignExpression()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1036,7 +1100,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1054,7 +1118,7 @@ class Program
         public async Task TestConflict_OrAssignExpression()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1066,7 +1130,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1084,7 +1148,7 @@ class Program
         public async Task TestConflict_ExclusiveOrAssignExpression()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1096,7 +1160,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1114,7 +1178,7 @@ class Program
         public async Task TestConflict_LeftShiftAssignExpression()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1126,7 +1190,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1144,7 +1208,7 @@ class Program
         public async Task TestConflict_RightShiftAssignExpression()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1156,7 +1220,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1174,7 +1238,7 @@ class Program
         public async Task TestConflict_PostIncrementExpression()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1186,7 +1250,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1204,7 +1268,7 @@ class Program
         public async Task TestConflict_PreIncrementExpression()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1216,7 +1280,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1234,7 +1298,7 @@ class Program
         public async Task TestConflict_PostDecrementExpression()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1246,7 +1310,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1264,7 +1328,7 @@ class Program
         public async Task TestConflict_PreDecrementExpression()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1276,7 +1340,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Main()
@@ -1293,7 +1357,8 @@ class Program
         [Fact]
         public async Task TestConflict_AddressOfExpression()
         {
-            var initial = @"
+            var initial =
+                @"
 class C
 {
     unsafe void M()
@@ -1304,7 +1369,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     unsafe void M()
@@ -1322,7 +1388,7 @@ class C
         public async Task TestConflict_UsedBeforeDeclaration()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1332,7 +1398,7 @@ class C
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1347,7 +1413,8 @@ class C
         [Fact]
         public async Task Preprocessor1()
         {
-            await TestFixOneAsync(@"
+            await TestFixOneAsync(
+                @"
 {
     int [||]x = 1,
 #if true
@@ -1357,7 +1424,7 @@ class C
 
     int a = x;
 }",
-@"
+                @"
 {
         int
 #if true
@@ -1366,13 +1433,15 @@ class C
             z;
 
         int a = 1;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task Preprocessor2()
         {
-            await TestFixOneAsync(@"
+            await TestFixOneAsync(
+                @"
 {
     int y,
 #if true
@@ -1382,7 +1451,7 @@ class C
 
     int a = x;
 }",
-@"
+                @"
 {
         int y,
 #if true
@@ -1391,13 +1460,15 @@ class C
             z;
 
         int a = 1;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task Preprocessor3()
         {
-            await TestFixOneAsync(@"
+            await TestFixOneAsync(
+                @"
 {
     int y,
 #if true
@@ -1407,7 +1478,7 @@ class C
 
     int a = x;
 }",
-@"
+                @"
 {
         int y,
 #if true
@@ -1416,14 +1487,15 @@ class C
             ;
 
         int a = 1;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(540164, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540164")]
         public async Task TriviaOnArrayInitializer()
         {
             var initial =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1433,7 +1505,7 @@ class C
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1448,7 +1520,7 @@ class C
         public async Task ProperlyFormatWhenRemovingDeclarator1()
         {
             var initial =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1458,7 +1530,7 @@ class C
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1474,7 +1546,7 @@ class C
         public async Task ProperlyFormatWhenRemovingDeclarator2()
         {
             var initial =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1484,7 +1556,7 @@ class C
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1500,7 +1572,7 @@ class C
         public async Task ProperlyFormatWhenRemovingDeclarator3()
         {
             var initial =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1510,7 +1582,7 @@ class C
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1526,7 +1598,7 @@ class C
         public async Task ProperlyFormatAnonymousTypeMember()
         {
             var initial =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1536,7 +1608,7 @@ class C
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1551,7 +1623,7 @@ class C
         public async Task InlineToAnonymousTypeProperty()
         {
             var initial =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1561,7 +1633,7 @@ class C
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1576,7 +1648,7 @@ class C
         public async Task InlineIntoDelegateInvocation()
         {
             var initial =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -1587,7 +1659,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -1603,7 +1675,7 @@ class Program
         public async Task InlineAnonymousMethodIntoNullCoalescingExpression()
         {
             var initial =
-@"using System;
+                @"using System;
  
 class Program
 {
@@ -1615,7 +1687,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
  
 class Program
 {
@@ -1632,7 +1704,7 @@ class Program
         public async Task InlineLambdaIntoNullCoalescingExpression()
         {
             var initial =
-@"using System;
+                @"using System;
  
 class Program
 {
@@ -1644,7 +1716,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
  
 class Program
 {
@@ -1661,7 +1733,7 @@ class Program
         public async Task InsertCastForBoxingOperation1()
         {
             var initial =
-@"using System;
+                @"using System;
 class A
 {
     static void Main()
@@ -1673,7 +1745,7 @@ class A
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class A
 {
     static void Main()
@@ -1690,7 +1762,7 @@ class A
         public async Task InsertCastForBoxingOperation2()
         {
             var initial =
-@"using System;
+                @"using System;
 class A
 {
     static void Main()
@@ -1703,7 +1775,7 @@ class A
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class A
 {
     static void Main()
@@ -1721,7 +1793,7 @@ class A
         public async Task InsertCastForBoxingOperation3()
         {
             var initial =
-@"using System;
+                @"using System;
 class A
 {
     static void Main()
@@ -1733,7 +1805,7 @@ class A
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class A
 {
     static void Main()
@@ -1750,7 +1822,7 @@ class A
         public async Task InsertCastForBoxingOperation4()
         {
             var initial =
-@"using System;
+                @"using System;
 class A
 {
     static void Main()
@@ -1762,7 +1834,7 @@ class A
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class A
 {
     static void Main()
@@ -1779,7 +1851,7 @@ class A
         public async Task InsertCastForBoxingOperation5()
         {
             var initial =
-@"using System;
+                @"using System;
 class A
 {
     static void Main()
@@ -1791,7 +1863,7 @@ class A
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class A
 {
     static void Main()
@@ -1808,7 +1880,7 @@ class A
         public async Task TestLeadingTrivia()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1818,7 +1890,7 @@ class A
         Console.Write(i);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1826,14 +1898,15 @@ class A
         //print
         Console.Write(10);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(540278, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540278")]
         public async Task TestLeadingAndTrailingTrivia()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1843,7 +1916,7 @@ class A
         Console.Write(i);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1852,14 +1925,15 @@ class A
         //print
         Console.Write(10);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(540278, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540278")]
         public async Task TestTrailingTrivia()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1868,7 +1942,7 @@ class A
         Console.Write(i);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1876,14 +1950,15 @@ class A
         //print
         Console.Write(10);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(540278, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540278")]
         public async Task TestPreprocessor()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1894,7 +1969,7 @@ class A
 #endif
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1903,14 +1978,15 @@ class A
         Console.Write(10);
 #endif
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(540277, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540277")]
         public async Task TestFormatting()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1918,21 +1994,22 @@ class A
         Console.Write(i + j);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         int j = 110;
         Console.Write(5 + j);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(541694, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541694")]
         public async Task TestSwitchSection()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class C
 {
     void M()
@@ -1946,7 +2023,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void M()
@@ -1958,14 +2035,15 @@ class C
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(542647, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542647")]
         public async Task UnparenthesizeExpressionIfNeeded1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 class C
 {
@@ -1977,8 +2055,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 using System;
 class C
 {
@@ -1988,14 +2065,15 @@ class C
         X();
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545619, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545619")]
         public async Task UnparenthesizeExpressionIfNeeded2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 class Program
 {
@@ -2007,8 +2085,7 @@ class Program
     }
 }
 ",
-
-@"
+                @"
 using System;
 class Program
 {
@@ -2018,14 +2095,15 @@ class Program
         x();
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(542656, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542656")]
         public async Task ParenthesizeIfNecessary1()
         {
             await TestInRegularAndScriptAsync(
-            @"using System;
+                @"using System;
 using System.Collections;
 using System.Linq;
 
@@ -2039,7 +2117,7 @@ class A
         }
     }
 }",
-            @"using System;
+                @"using System;
 using System.Collections;
 using System.Linq;
 
@@ -2051,14 +2129,15 @@ class A
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(544626, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544626")]
         public async Task ParenthesizeIfNecessary2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 class C
 {
@@ -2071,7 +2150,7 @@ class C
 
     static void Goo<T>(T y) { }
 }",
-            @"
+                @"
 using System;
 class C
 {
@@ -2082,14 +2161,15 @@ class C
     }
 
     static void Goo<T>(T y) { }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(544415, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544415")]
         public async Task ParenthesizeAddressOf1()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 unsafe class C
 {
@@ -2100,7 +2180,7 @@ unsafe class C
         var i = (Int32)p;
     }
 }",
-            @"
+                @"
 using System;
 unsafe class C
 {
@@ -2109,14 +2189,15 @@ unsafe class C
         int x;
         var i = (Int32)(&x);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(544922, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544922")]
         public async Task ParenthesizeAddressOf2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 unsafe class C
 {
@@ -2127,7 +2208,7 @@ unsafe class C
         var i = p->ToString();
     }
 }",
-            @"
+                @"
 using System;
 unsafe class C
 {
@@ -2136,14 +2217,15 @@ unsafe class C
         int x;
         var i = (&x)->ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(544921, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544921")]
         public async Task ParenthesizePointerIndirection1()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 unsafe class C
 {
@@ -2154,7 +2236,7 @@ unsafe class C
         var i = (Int64)p;
     }
 }",
-            @"
+                @"
 using System;
 unsafe class C
 {
@@ -2163,14 +2245,15 @@ unsafe class C
         int* x = null;
         var i = (Int64)(*x);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(544614, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544614")]
         public async Task ParenthesizePointerIndirection2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 unsafe class C
 {
@@ -2181,7 +2264,7 @@ unsafe class C
         var i = p[1].ToString();
     }
 }",
-            @"
+                @"
 using System;
 unsafe class C
 {
@@ -2190,14 +2273,15 @@ unsafe class C
         int** x = null;
         var i = (*x)[1].ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(544563, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544563")]
         public async Task DontInlineStackAlloc()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 unsafe class C
 {
@@ -2208,14 +2292,15 @@ unsafe class C
         int* p = &values[1];
         int* q = &values[15];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(543744, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543744")]
         public async Task InlineTempLambdaExpressionCastingError()
         {
             await TestInRegularAndScriptAsync(
-            @"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -2224,22 +2309,22 @@ class Program
         Console.WriteLine(lam);
     }
 }",
-
-            @"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
     {
         Console.WriteLine((int? s) => { return s; });
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task InsertCastForNull()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 class C
 {
@@ -2249,8 +2334,7 @@ class C
         Console.WriteLine(x);
     }
 }",
-
-            @"
+                @"
 using System;
 class C
 {
@@ -2258,14 +2342,15 @@ class C
     {
         Console.WriteLine((string)null);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task InsertCastIfNeeded1()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class C
 {
     void M()
@@ -2274,21 +2359,22 @@ class C
         System.IComparable<long> y = x;
     }
 }",
-            @"
+                @"
 class C
 {
     void M()
     {
         System.IComparable<long> y = (long)1;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545161, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545161")]
         public async Task InsertCastIfNeeded2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
  
 class C
@@ -2301,7 +2387,7 @@ class C
     static void Goo(Action<int[]> x) { }
     static void Goo(Action<string[]> x) { }
 }",
-            @"
+                @"
 using System;
  
 class C
@@ -2313,14 +2399,15 @@ class C
  
     static void Goo(Action<int[]> x) { }
     static void Goo(Action<string[]> x) { }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(544612, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544612")]
         public async Task InlineIntoBracketedList()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class C
 {
     void M()
@@ -2332,8 +2419,7 @@ class C
 
     int this[object x] { set { } }
 }",
-
-            @"
+                @"
 class C
 {
     void M()
@@ -2343,14 +2429,15 @@ class C
     }
 
     int this[object x] { set { } }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(542648, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542648")]
         public async Task ParenthesizeAfterCastIfNeeded()
         {
             await TestAsync(
-            @"
+                @"
 using System;
 
 enum E { }
@@ -2363,8 +2450,7 @@ class Program
         object y = x;
     }
 }",
-
-            @"
+                @"
 using System;
 
 enum E { }
@@ -2376,14 +2462,15 @@ class Program
         object y = (global::E) -1;
     }
 }",
-            parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem(544635, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544635")]
         public async Task InsertCastForEnumZeroIfBoxed()
         {
             await TestAsync(
-            @"
+                @"
 using System;
 class Program
 {
@@ -2394,8 +2481,7 @@ class Program
         Console.WriteLine(y);
     }
 }",
-
-            @"
+                @"
 using System;
 class Program
 {
@@ -2405,7 +2491,8 @@ class Program
         Console.WriteLine(y);
     }
 }",
-            parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem(554010, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/554010")]
@@ -2413,7 +2500,7 @@ class Program
         public async Task InsertCastForMethodGroupIfNeeded1()
         {
             await TestAsync(
-            @"
+                @"
 using System;
 class Program
 {
@@ -2423,8 +2510,7 @@ class Program
         Action b = a + Console.WriteLine;
     }
 }",
-
-            @"
+                @"
 using System;
 class Program
 {
@@ -2433,7 +2519,8 @@ class Program
         Action b = (Action)Console.WriteLine + Console.WriteLine;
     }
 }",
-            parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem(554010, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/554010")]
@@ -2441,7 +2528,7 @@ class Program
         public async Task InsertCastForMethodGroupIfNeeded2()
         {
             await TestAsync(
-            @"
+                @"
 using System;
 class Program
 {
@@ -2451,8 +2538,7 @@ class Program
         object b = a;
     }
 }",
-
-            @"
+                @"
 using System;
 class Program
 {
@@ -2461,14 +2547,15 @@ class Program
         object b = (Action)Console.WriteLine;
     }
 }",
-            parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem(545103, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545103")]
         public async Task DontInsertCastForTypeThatNoLongerBindsToTheSameType()
         {
             await TestAsync(
-            @"
+                @"
 class A<T>
 {
     static T x;
@@ -2481,8 +2568,7 @@ class A<T>
         }
     }
 }",
-
-            @"
+                @"
 class A<T>
 {
     static T x;
@@ -2494,7 +2580,8 @@ class A<T>
         }
     }
 }",
-            parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/56938")]
@@ -2502,7 +2589,7 @@ class A<T>
         public async Task InsertCorrectCastForDelegateCreationExpression()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
  
 class Program
@@ -2514,8 +2601,7 @@ class Program
     }
 }
 ",
-
-            @"
+                @"
 using System;
  
 class Program
@@ -2525,14 +2611,15 @@ class Program
         var z = new Func<string, bool>(y => true);
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545523, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545523")]
         public async Task DontInsertCastForObjectCreationIfUnneeded()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 class Program
 {
@@ -2543,8 +2630,7 @@ class Program
     }
 }
 ",
-
-            @"
+                @"
 using System;
 class Program
 {
@@ -2553,14 +2639,15 @@ class Program
         Type b = new ArgumentException().GetType();
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task DontInsertCastInForeachIfUnneeded01()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2574,8 +2661,7 @@ class Program
     }
 }
 ",
-
-            @"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2587,14 +2673,15 @@ class Program
             Console.WriteLine(x);
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task InsertCastInForeachIfNeeded01()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 using System.Collections;
 
@@ -2608,8 +2695,7 @@ class Program
     }
 }
 ",
-
-            @"
+                @"
 using System;
 using System.Collections;
 
@@ -2621,14 +2707,15 @@ class Program
             Console.WriteLine(x);
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task InsertCastInForeachIfNeeded02()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 using System.Collections;
 
@@ -2642,8 +2729,7 @@ class Program
     }
 }
 ",
-
-            @"
+                @"
 using System;
 using System.Collections;
 
@@ -2655,14 +2741,15 @@ class Program
             Console.WriteLine(x);
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545601, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545601")]
         public async Task InsertCastToKeepGenericMethodInference()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 class C
 {
@@ -2675,8 +2762,7 @@ class C
     }
 }
 ",
-
-            @"
+                @"
 using System;
 class C
 {
@@ -2687,14 +2773,15 @@ class C
         IComparable<long> c = Goo(1, (long)1);
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545601, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545601")]
         public async Task InsertCastForKeepImplicitArrayInference()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class C
 {
     static void M()
@@ -2707,8 +2794,7 @@ class C
     static void Goo(object[] o) { }
 }
 ",
-
-            @"
+                @"
 class C
 {
     static void M()
@@ -2719,14 +2805,15 @@ class C
 
     static void Goo(object[] o) { }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545601, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545601")]
         public async Task InsertASingleCastToNotBreakOverloadResolution()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class C
 {
     static void M()
@@ -2738,8 +2825,7 @@ class C
     static void Goo(int x, int y) { }
     static void Goo(long x, long y) { }
 }",
-
-            @"
+                @"
 class C
 {
     static void M()
@@ -2749,14 +2835,15 @@ class C
 
     static void Goo(int x, int y) { }
     static void Goo(long x, long y) { }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545601, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545601")]
         public async Task InsertASingleCastToNotBreakOverloadResolutionInLambdas()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 class C
 {
@@ -2769,8 +2856,7 @@ class C
     static void Goo(Func<int> x, Func<int> y) { }
     static void Goo(Func<long> x, Func<long> y) { }
 }",
-
-            @"
+                @"
 using System;
 class C
 {
@@ -2781,14 +2867,15 @@ class C
 
     static void Goo(Func<int> x, Func<int> y) { }
     static void Goo(Func<long> x, Func<long> y) { }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545601, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545601")]
         public async Task InsertASingleCastToNotBreakResolutionOfOperatorOverloads()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 class C
 {
@@ -2817,8 +2904,7 @@ class C
         new C().M();
     }
 }",
-
-            @"
+                @"
 using System;
 class C
 {
@@ -2845,14 +2931,15 @@ class C
     {
         new C().M();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545561, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545561")]
         public async Task InsertCastToNotBreakOverloadResolutionInUncheckedContext()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class X
@@ -2870,8 +2957,7 @@ class X
         }
     }
 }",
-
-            @"
+                @"
 using System;
 
 class X
@@ -2887,14 +2973,15 @@ class X
             Console.WriteLine(Goo(X => (byte)X.Value, null));
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545564, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545564")]
         public async Task InsertCastToNotBreakOverloadResolutionInUnsafeContext()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 static class C
@@ -2914,8 +3001,7 @@ static class C
         }
     }
 }",
-
-            @"
+                @"
 using System;
 
 static class C
@@ -2933,14 +3019,15 @@ static class C
             Console.WriteLine(Outer(x => Inner(x, null), null));
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545783, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545783")]
         public async Task InsertCastToNotBreakOverloadResolutionInNestedLambdas()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class C
@@ -2957,8 +3044,7 @@ class C
         });
     }
 }",
-
-            @"
+                @"
 using System;
 
 class C
@@ -2973,14 +3059,15 @@ class C
             var y = (string)x;
         });
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(546069, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546069")]
         public async Task TestBrokenVariableDeclarator()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -2990,14 +3077,15 @@ class C
         };
         System.Console.WriteLine(a);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestHiddenRegion1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -3007,14 +3095,15 @@ class C
         Goo(x);
 #line default
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestHiddenRegion2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -3024,14 +3113,15 @@ class C
         Goo(x);
 #line default
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestHiddenRegion3()
         {
             await TestInRegularAndScriptAsync(
-@"#line default
+                @"#line default
 class Program
 {
     void Main()
@@ -3044,7 +3134,7 @@ class Program
         #line default
     }
 }",
-@"#line default
+                @"#line default
 class Program
 {
     void Main()
@@ -3055,14 +3145,15 @@ class Program
         Goo();
         #line default
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestHiddenRegion4()
         {
             await TestInRegularAndScriptAsync(
-@"#line default
+                @"#line default
 class Program
 {
     void Main()
@@ -3076,7 +3167,7 @@ class Program
         Goo(x);
     }
 }",
-@"#line default
+                @"#line default
 class Program
 {
     void Main()
@@ -3088,14 +3179,15 @@ class Program
 #line default
         Goo(0);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestHiddenRegion5()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -3106,14 +3198,15 @@ class Program
 #line default
         Goo(x);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(530743, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530743")]
         public async Task InlineFromLabeledStatement()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
  
 class Program
@@ -3126,8 +3219,7 @@ class Program
         int y = x;        
     }
 }",
-
-            @"
+                @"
 using System;
  
 class Program
@@ -3138,14 +3230,15 @@ class Program
         Console.WriteLine();
         int y = 1;        
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(529698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529698")]
         public async Task InlineCompoundAssignmentIntoInitializer()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System.Collections.Generic;
 
 class Program
@@ -3157,8 +3250,7 @@ class Program
         var z = new List<int> { y };
     }
 }",
-
-            @"
+                @"
 using System.Collections.Generic;
 
 class Program
@@ -3168,14 +3260,15 @@ class Program
         int x = 0;
         var z = new List<int> { (x += 1) };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(609497, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/609497")]
         public async Task Bugfix_609497()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System.Collections.Generic;
  
 class Program
@@ -3186,8 +3279,7 @@ class Program
         IList<object> y = x;
     }
 }",
-
-            @"
+                @"
 using System.Collections.Generic;
  
 class Program
@@ -3196,14 +3288,15 @@ class Program
     {
         IList<object> y = new List<object>();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(636319, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/636319")]
         public async Task Bugfix_636319()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System.Collections.Generic;
  
 class Program
@@ -3215,8 +3308,7 @@ class Program
     }
 }
 ",
-
-            @"
+                @"
 using System.Collections.Generic;
  
 class Program
@@ -3226,14 +3318,15 @@ class Program
         IList<dynamic> y = new List<dynamic>();
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(609492, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/609492")]
         public async Task Bugfix_609492()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
  
 class Program
@@ -3245,8 +3338,7 @@ class Program
     }
 }
 ",
-
-            @"
+                @"
 using System;
  
 class Program
@@ -3256,14 +3348,15 @@ class Program
         object y = 1;
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(529950, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529950")]
         public async Task InlineTempDoesNotInsertUnnecessaryExplicitTypeInLambdaParameter()
         {
             await TestInRegularAndScript1Async(
-            @"
+                @"
 using System;
 
 static class C
@@ -3281,8 +3374,7 @@ static class C
     }
 }
 ",
-
-            @"
+                @"
 using System;
 
 static class C
@@ -3299,14 +3391,15 @@ static class C
         Outer(y => Inner(x => { Action a = () => ((string)x).GetType(); }, y), null);
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(619425, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/619425")]
         public async Task Bugfix_619425_RestrictedSimpleNameExpansion()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class A<B>
 {
     class C : A<C>
@@ -3322,8 +3415,7 @@ class A<B>
     }
 }
 ",
-
-            @"
+                @"
 class A<B>
 {
     class C : A<C>
@@ -3337,14 +3429,15 @@ class A<B>
         }
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(529840, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529840")]
         public async Task Bugfix_529840_DetectSemanticChangesAtInlineSite()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
  
 class A
@@ -3371,8 +3464,7 @@ class A
     }
 }
 ",
-
-            @"
+                @"
 using System;
  
 class A
@@ -3398,14 +3490,15 @@ class A
         return 2;
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(1091946, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1091946")]
         public async Task TestConditionalAccessWithConversion()
         {
             await TestInRegularAndScriptAsync(
-@"class A
+                @"class A
 {
     bool M(string[] args)
     {
@@ -3413,20 +3506,21 @@ class A
         return x?.Length == 0;
     }
 }",
-@"class A
+                @"class A
 {
     bool M(string[] args)
     {
         return args[0]?.Length == 0;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestSimpleConditionalAccess()
         {
             await TestInRegularAndScriptAsync(
-@"class A
+                @"class A
 {
     void M(string[] args)
     {
@@ -3434,20 +3528,21 @@ class A
         var y = x?.ToString();
     }
 }",
-@"class A
+                @"class A
 {
     void M(string[] args)
     {
         var y = args.Length.ToString()?.ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestConditionalAccessWithConditionalExpression()
         {
             await TestInRegularAndScriptAsync(
-@"class A
+                @"class A
 {
     void M(string[] args)
     {
@@ -3455,20 +3550,21 @@ class A
         var y = x == 10 ? 10 : 4;
     }
 }",
-@"class A
+                @"class A
 {
     void M(string[] args)
     {
         var y = (args[0]?.Length ?? 10) == 10 ? 10 : 4;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(2593, "https://github.com/dotnet/roslyn/issues/2593")]
         public async Task TestConditionalAccessWithExtensionMethodInvocation()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3493,7 +3589,7 @@ class C
         return null;
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3516,14 +3612,15 @@ class C
 
         return null;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(2593, "https://github.com/dotnet/roslyn/issues/2593")]
         public async Task TestConditionalAccessWithExtensionMethodInvocation_2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3553,7 +3650,7 @@ class C
         return null;
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3581,14 +3678,15 @@ class C
 
         return null;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAliasQualifiedNameIntoInterpolation()
         {
             await TestInRegularAndScriptAsync(
-@"class A
+                @"class A
 {
     void M()
     {
@@ -3596,20 +3694,21 @@ class C
         var s = $""{g}"";
     }
 }",
-@"class A
+                @"class A
 {
     void M()
     {
         var s = $""{(global::System.Guid.Empty)}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestConditionalExpressionIntoInterpolation()
         {
             await TestInRegularAndScriptAsync(
-@"class A
+                @"class A
 {
     bool M(bool b)
     {
@@ -3617,20 +3716,21 @@ class C
         var s = $""{x}"";
     }
 }",
-@"class A
+                @"class A
 {
     bool M(bool b)
     {
         var s = $""{(b ? 19 : 23)}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestConditionalExpressionIntoInterpolationWithFormatClause()
         {
             await TestInRegularAndScriptAsync(
-@"class A
+                @"class A
 {
     bool M(bool b)
     {
@@ -3638,20 +3738,21 @@ class C
         var s = $""{x:x}"";
     }
 }",
-@"class A
+                @"class A
 {
     bool M(bool b)
     {
         var s = $""{(b ? 19 : 23):x}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInvocationExpressionIntoInterpolation()
         {
             await TestInRegularAndScriptAsync(
-@"class A
+                @"class A
 {
     public static void M(string s)
     {
@@ -3659,20 +3760,21 @@ class C
         var y = $""{x}"";
     }
 }",
-@"class A
+                @"class A
 {
     public static void M(string s)
     {
         var y = $""{s.ToUpper()}"";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(4583, "https://github.com/dotnet/roslyn/issues/4583")]
         public async Task DontParenthesizeInterpolatedStringWithNoInterpolation_CSharp7()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public void M()
     {
@@ -3680,13 +3782,15 @@ class C
         var s2 = string.Replace(s1, ""world"");
     }
 }",
-@"class C
+                @"class C
 {
     public void M()
     {
         var s2 = string.Replace($""hello"", ""world"");
     }
-}", parseOptions: TestOptions.Regular7);
+}",
+                parseOptions: TestOptions.Regular7
+            );
         }
 
         [Fact, WorkItem(33108, "https://github.com/dotnet/roslyn/issues/33108")]
@@ -3694,7 +3798,7 @@ class C
         public async Task CastInterpolatedStringWhenInliningIntoInvalidCall()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public void M()
     {
@@ -3702,13 +3806,14 @@ class C
         var s2 = string.Replace(s1, ""world"");
     }
 }",
-@"class C
+                @"class C
 {
     public void M()
     {
         var s2 = string.Replace($""hello"", ""world"");
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(33108, "https://github.com/dotnet/roslyn/issues/33108")]
@@ -3716,7 +3821,7 @@ class C
         public async Task DoNotCastInterpolatedStringWhenInliningIntoValidCall()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public void M()
     {
@@ -3726,7 +3831,7 @@ class C
 
     void Replace(string s1, string s2) { }
 }",
-@"class C
+                @"class C
 {
     public void M()
     {
@@ -3734,14 +3839,15 @@ class C
     }
 
     void Replace(string s1, string s2) { }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(4583, "https://github.com/dotnet/roslyn/issues/4583")]
         public async Task DontParenthesizeInterpolatedStringWithInterpolation_CSharp7()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public void M(int x)
     {
@@ -3749,13 +3855,15 @@ class C
         var s2 = string.Replace(s1, ""world"");
     }
 }",
-@"class C
+                @"class C
 {
     public void M(int x)
     {
         var s2 = string.Replace($""hello {x}"", ""world"");
     }
-}", parseOptions: TestOptions.Regular7);
+}",
+                parseOptions: TestOptions.Regular7
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/33108")]
@@ -3763,7 +3871,7 @@ class C
         public async Task DontParenthesizeInterpolatedStringWithInterpolation()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public void M(int x)
     {
@@ -3771,20 +3879,21 @@ class C
         var s2 = string.Replace(s1, ""world"");
     }
 }",
-@"class C
+                @"class C
 {
     public void M(int x)
     {
         var s2 = string.Replace($""hello {x}"", ""world"");
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(15530, "https://github.com/dotnet/roslyn/issues/15530")]
         public async Task PArenthesizeAwaitInlinedIntoReducedExtensionMethod()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Linq;
+                @"using System.Linq;
 using System.Threading.Tasks;
 
 internal class C
@@ -3795,7 +3904,7 @@ internal class C
         t.Any();
     }
 }",
-@"using System.Linq;
+                @"using System.Linq;
 using System.Threading.Tasks;
 
 internal class C
@@ -3804,15 +3913,19 @@ internal class C
     {
         (await Task.FromResult("""")).Any();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(4583, "https://github.com/dotnet/roslyn/issues/4583")]
         public async Task InlineFormattableStringIntoCallSiteRequiringFormattableString()
         {
-            const string initial = @"
+            const string initial =
+                @"
 using System;
-" + CodeSnippets.FormattableStringType + @"
+"
+                + CodeSnippets.FormattableStringType
+                + @"
 class C
 {
     static void M(FormattableString s)
@@ -3826,9 +3939,12 @@ class C
     }
 }";
 
-            const string expected = @"
+            const string expected =
+                @"
 using System;
-" + CodeSnippets.FormattableStringType + @"
+"
+                + CodeSnippets.FormattableStringType
+                + @"
 class C
 {
     static void M(FormattableString s)
@@ -3847,9 +3963,12 @@ class C
         [Fact, WorkItem(4624, "https://github.com/dotnet/roslyn/issues/4624")]
         public async Task InlineFormattableStringIntoCallSiteWithFormattableStringOverload()
         {
-            const string initial = @"
+            const string initial =
+                @"
 using System;
-" + CodeSnippets.FormattableStringType + @"
+"
+                + CodeSnippets.FormattableStringType
+                + @"
 class C
 {
     static void M(string s) { }
@@ -3862,9 +3981,12 @@ class C
     }
 }";
 
-            const string expected = @"
+            const string expected =
+                @"
 using System;
-" + CodeSnippets.FormattableStringType + @"
+"
+                + CodeSnippets.FormattableStringType
+                + @"
 class C
 {
     static void M(string s) { }
@@ -3881,7 +4003,8 @@ class C
         [Fact, WorkItem(9576, "https://github.com/dotnet/roslyn/issues/9576")]
         public async Task InlineIntoLambdaWithReturnStatementWithNoExpression()
         {
-            const string initial = @"
+            const string initial =
+                @"
 using System;
 class C
 {
@@ -3898,7 +4021,8 @@ class C
     }
 }";
 
-            const string expected = @"
+            const string expected =
+                @"
 using System;
 class C
 {
@@ -3922,7 +4046,8 @@ class C
         [InlineData(LanguageVersion.Preview)]
         public async Task Tuples(LanguageVersion version)
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class C
 {
@@ -3933,7 +4058,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 class C
 {
@@ -3946,13 +4072,15 @@ class C
             await TestInRegularAndScript1Async(
                 code,
                 expected,
-                new TestParameters(parseOptions: TestOptions.Regular.WithLanguageVersion(version)));
+                new TestParameters(parseOptions: TestOptions.Regular.WithLanguageVersion(version))
+            );
         }
 
         [Fact]
         public async Task TuplesWithNames()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class C
 {
@@ -3963,7 +4091,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 class C
 {
@@ -3979,7 +4108,8 @@ class C
         [Fact, WorkItem(11028, "https://github.com/dotnet/roslyn/issues/11028")]
         public async Task TuplesWithDifferentNames()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     public void M()
@@ -3989,7 +4119,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     public void M()
@@ -4004,7 +4135,8 @@ class C
         [Fact]
         public async Task Deconstruction()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class C
 {
@@ -4016,7 +4148,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 class C
 {
@@ -4033,7 +4166,8 @@ class C
         [Fact, WorkItem(12802, "https://github.com/dotnet/roslyn/issues/12802")]
         public async Task Deconstruction2()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     static void Main()
@@ -4051,7 +4185,8 @@ public class KVP<T1, T2>
     public void Deconstruct(out T1 item1, out T2 item2) { item1 = default(T1); item2 = default(T2); }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class Program
 {
     static void Main()
@@ -4074,7 +4209,8 @@ public class KVP<T1, T2>
         [Fact, WorkItem(11958, "https://github.com/dotnet/roslyn/issues/11958")]
         public async Task EnsureParenthesesInStringConcatenation()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -4084,7 +4220,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -4099,7 +4236,8 @@ class C
         [Fact]
         public async Task ExplicitTupleNameAdded()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -4109,7 +4247,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -4124,7 +4263,8 @@ class C
         [Fact]
         public async Task ExplicitTupleNameAdded_Trivia()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -4134,7 +4274,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -4149,7 +4290,8 @@ class C
         [Fact]
         public async Task ExplicitTupleNameAdded_Trivia2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -4162,7 +4304,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -4180,7 +4323,8 @@ class C
         [Fact]
         public async Task ExplicitTupleNameAdded_NoDuplicateNames()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -4190,7 +4334,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -4204,7 +4349,8 @@ class C
         [Fact, WorkItem(19047, "https://github.com/dotnet/roslyn/issues/19047")]
         public async Task ExplicitTupleNameAdded_DeconstructionDeclaration()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static int y = 1;
@@ -4214,7 +4360,8 @@ class C
         var t = ((i, (i, _)) = (1, (i, 3)));
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static int y = 1;
@@ -4230,7 +4377,8 @@ class C
         [Fact, WorkItem(19047, "https://github.com/dotnet/roslyn/issues/19047")]
         public async Task ExplicitTupleNameAdded_DeconstructionDeclaration2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static int y = 1;
@@ -4240,7 +4388,8 @@ class C
         var t = ((i, _) = (1, 2));
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static int y = 1;
@@ -4256,7 +4405,8 @@ class C
         [Fact]
         public async Task ExplicitTupleNameAdded_NoReservedNames()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -4266,7 +4416,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -4280,7 +4431,8 @@ class C
         [Fact]
         public async Task ExplicitTupleNameAdded_NoReservedNames2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -4290,7 +4442,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -4304,7 +4457,8 @@ class C
         [Fact]
         public async Task ExplicitTupleNameAdded_EscapeKeywords()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -4314,7 +4468,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -4328,7 +4483,8 @@ class C
         [Fact]
         public async Task ExplicitTupleNameAdded_KeepEscapedName()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -4338,7 +4494,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -4352,7 +4509,8 @@ class C
         [Fact]
         public async Task ExplicitAnonymousTypeMemberNameAdded_DuplicateNames()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -4362,7 +4520,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -4376,7 +4535,8 @@ class C
         [Fact]
         public async Task ExplicitAnonymousTypeMemberNameAdded_AssignmentEpression()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -4387,7 +4547,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -4402,7 +4563,8 @@ class C
         [Fact]
         public async Task ExplicitAnonymousTypeMemberNameAdded_Comment()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -4412,7 +4574,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -4426,7 +4589,8 @@ class C
         [Fact]
         public async Task ExplicitAnonymousTypeMemberNameAdded_Comment2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -4439,7 +4603,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -4457,7 +4622,7 @@ class C
         public async Task InlineTemporary_LocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 class C
 {
@@ -4472,8 +4637,7 @@ class C
         }
     }
 }",
-
-@"
+                @"
 using System;
 class C
 {
@@ -4486,14 +4650,15 @@ class C
 
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(11712, "https://github.com/dotnet/roslyn/issues/11712")]
         public async Task InlineTemporary_RefParams()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     bool M<T>(ref T x) 
@@ -4502,22 +4667,22 @@ class C
         return b || b;
     }
 }",
-
-@"
+                @"
 class C
 {
     bool M<T>(ref T x) 
     {
         return {|Warning:M(ref x) || M(ref x)|};
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(11712, "https://github.com/dotnet/roslyn/issues/11712")]
         public async Task InlineTemporary_OutParams()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     bool M<T>(out T x) 
@@ -4526,22 +4691,22 @@ class C
         return b || b;
     }
 }",
-
-@"
+                @"
 class C
 {
     bool M<T>(out T x) 
     {
         return {|Warning:M(out x) || M(out x)|};
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(24791, "https://github.com/dotnet/roslyn/issues/24791")]
         public async Task InlineVariableDoesNotAddUnnecessaryCast()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     bool M()
     {
@@ -4550,21 +4715,22 @@ class C
         throw null;
     }
 }",
-@"class C
+                @"class C
 {
     bool M()
     {
         if (!M()) throw null;
         throw null;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(16819, "https://github.com/dotnet/roslyn/issues/16819")]
         public async Task InlineVariableDoesNotAddsDuplicateCast()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -4574,7 +4740,7 @@ class C
         Console.Write(o == new Exception());
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -4582,14 +4748,15 @@ class C
     {
         Console.Write((Exception)null == new Exception());
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(30903, "https://github.com/dotnet/roslyn/issues/30903")]
         public async Task InlineVariableContainsAliasOfValueTupleType()
         {
             await TestInRegularAndScriptAsync(
-@"using X = System.ValueTuple<int, int>;
+                @"using X = System.ValueTuple<int, int>;
 
 class C
 {
@@ -4599,7 +4766,7 @@ class C
         var x2 = x;
     }
 }",
-@"using X = System.ValueTuple<int, int>;
+                @"using X = System.ValueTuple<int, int>;
 
 class C
 {
@@ -4607,14 +4774,15 @@ class C
     {
         var x2 = (X)(0, 0);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(30903, "https://github.com/dotnet/roslyn/issues/30903")]
         public async Task InlineVariableContainsAliasOfMixedValueTupleType()
         {
             await TestInRegularAndScriptAsync(
-@"using X = System.ValueTuple<int, (int, int)>;
+                @"using X = System.ValueTuple<int, (int, int)>;
 
 class C
 {
@@ -4624,7 +4792,7 @@ class C
         var x2 = x;
     }
 }",
-@"using X = System.ValueTuple<int, (int, int)>;
+                @"using X = System.ValueTuple<int, (int, int)>;
 
 class C
 {
@@ -4632,13 +4800,15 @@ class C
     {
         var x2 = (X)(0, (0, 0));
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(35645, "https://github.com/dotnet/roslyn/issues/35645")]
         public async Task UsingDeclaration()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class C : IDisposable
 {
@@ -4650,73 +4820,83 @@ class C : IDisposable
     public void Dispose() { }
 }";
 
-            await TestMissingInRegularAndScriptAsync(code, new TestParameters(parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp8)));
+            await TestMissingInRegularAndScriptAsync(
+                code,
+                new TestParameters(
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp8)
+                )
+            );
         }
 
         [Fact, WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task Selections1()
         {
             await TestFixOneAsync(
-    @"{ [|int x = 0;|]
+                @"{ [|int x = 0;|]
 
 Console.WriteLine(x); }",
-    @"{
-        Console.WriteLine(0); }");
+                @"{
+        Console.WriteLine(0); }"
+            );
         }
 
         [Fact, WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task Selections2()
         {
             await TestFixOneAsync(
-    @"{ int [|x = 0|], y = 1;
+                @"{ int [|x = 0|], y = 1;
 
 Console.WriteLine(x); }",
-    @"{
+                @"{
         int y = 1;
 
-        Console.WriteLine(0); }");
+        Console.WriteLine(0); }"
+            );
         }
 
         [Fact, WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task Selections3()
         {
             await TestFixOneAsync(
-    @"{ int x = 0, [|y = 1|], z = 2;
+                @"{ int x = 0, [|y = 1|], z = 2;
 
 Console.WriteLine(y); }",
-    @"{
+                @"{
         int x = 0, z = 2;
 
-        Console.WriteLine(1); }");
+        Console.WriteLine(1); }"
+            );
         }
 
         [Fact]
         public async Task WarnOnInlineIntoConditional1()
         {
             await TestFixOneAsync(
-    @"{ var [|x = true|];
+                @"{ var [|x = true|];
 
 System.Diagnostics.Debug.Assert(x); }",
-    @"{
-        {|Warning:System.Diagnostics.Debug.Assert(true)|}; }");
+                @"{
+        {|Warning:System.Diagnostics.Debug.Assert(true)|}; }"
+            );
         }
 
         [Fact]
         public async Task WarnOnInlineIntoConditional2()
         {
             await TestFixOneAsync(
-    @"{ var [|x = true|];
+                @"{ var [|x = true|];
 
 System.Diagnostics.Debug.Assert(x == true); }",
-    @"{
-        {|Warning:System.Diagnostics.Debug.Assert(true == true)|}; }");
+                @"{
+        {|Warning:System.Diagnostics.Debug.Assert(true == true)|}; }"
+            );
         }
 
         [Fact]
         public async Task WarnOnInlineIntoMultipleConditionalLocations()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -4725,21 +4905,22 @@ System.Diagnostics.Debug.Assert(x == true); }",
         System.Diagnostics.Debug.Assert(x);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         {|Warning:System.Diagnostics.Debug.Assert(true)|};
         {|Warning:System.Diagnostics.Debug.Assert(true)|};
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task OnlyWarnOnConditionalLocations()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -4750,7 +4931,7 @@ class C
         Console.Writeline(x);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -4759,14 +4940,15 @@ class C
         {|Warning:System.Diagnostics.Debug.Assert(true)|};
         Console.Writeline(true);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(40201, "https://github.com/dotnet/roslyn/issues/40201")]
         public async Task TestUnaryNegationOfDeclarationPattern()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Threading;
+                @"using System.Threading;
 
 class C
 {
@@ -4778,7 +4960,7 @@ class C
 
     object Helper(CancellationToken ct) { return null; }
 }",
-@"using System.Threading;
+                @"using System.Threading;
 
 class C
 {
@@ -4788,14 +4970,15 @@ class C
     }
 
     object Helper(CancellationToken ct) { return null; }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(18322, "https://github.com/dotnet/roslyn/issues/18322")]
         public async Task TestInlineIntoExtensionMethodInvokedOnThis()
         {
             await TestInRegularAndScriptAsync(
-@"public class Class1
+                @"public class Class1
 {
     void M()
     {
@@ -4805,7 +4988,7 @@ class C
 }
 
 public static class Class1Extensions { public static void DoStuff(this Class1 c, int x) { } }",
-@"public class Class1
+                @"public class Class1
 {
     void M()
     {
@@ -4813,13 +4996,15 @@ public static class Class1Extensions { public static void DoStuff(this Class1 c,
     }
 }
 
-public static class Class1Extensions { public static void DoStuff(this Class1 c, int x) { } }");
+public static class Class1Extensions { public static void DoStuff(this Class1 c, int x) { } }"
+            );
         }
 
         [Fact, WorkItem(8716, "https://github.com/dotnet/roslyn/issues/8716")]
         public async Task DoNotQualifyInlinedLocalFunction()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 using System;
 class C
 {
@@ -4833,7 +5018,7 @@ class C
         local();
     }
 }",
-@"
+                @"
 using System;
 class C
 {
@@ -4845,13 +5030,15 @@ class C
         }
         new Action(LocalFunc)();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(22540, "https://github.com/dotnet/roslyn/issues/22540")]
         public async Task DoNotQualifyWhenInliningIntoPattern_01()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 using Syntax;
 
 namespace Syntax
@@ -4871,7 +5058,7 @@ static class Goo
             return;
     }
 }",
-@"
+                @"
 using Syntax;
 
 namespace Syntax
@@ -4889,13 +5076,15 @@ static class Goo
         if (!(awaitExpression.Expression is ParenthesizedExpressionSyntax parenthesizedExpression))
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(45661, "https://github.com/dotnet/roslyn/issues/45661")]
         public async Task DoNotQualifyWhenInliningIntoPattern_02()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 using Syntax;
 
 namespace Syntax
@@ -4915,7 +5104,7 @@ static class Goo
             return;
     }
 }",
-@"
+                @"
 using Syntax;
 
 namespace Syntax
@@ -4933,13 +5122,15 @@ static class Goo
         if (!(awaitExpression.Expression is ParenthesizedExpressionSyntax { } parenthesizedExpression))
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42835, "https://github.com/dotnet/roslyn/issues/42835")]
         public async Task WarnWhenPossibleChangeInSemanticMeaning()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 class C
 {
     int P { get; set; }
@@ -4951,7 +5142,7 @@ class C
         var c2 = c;
     }
 }",
-@"
+                @"
 class C
 {
     int P { get; set; }
@@ -4961,13 +5152,15 @@ class C
         {|Warning:new C().P = 1|};
         var c2 = new C();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42835, "https://github.com/dotnet/roslyn/issues/42835")]
         public async Task WarnWhenPossibleChangeInSemanticMeaning_IgnoreParentheses()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 class C
 {
     int P { get; set; }
@@ -4979,7 +5172,7 @@ class C
         var c2 = c;
     }
 }",
-@"
+                @"
 class C
 {
     int P { get; set; }
@@ -4989,13 +5182,15 @@ class C
         {|Warning:new C().P = 1|};
         var c2 = new C();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42835, "https://github.com/dotnet/roslyn/issues/42835")]
         public async Task WarnWhenPossibleChangeInSemanticMeaning_MethodInvocation()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 class C
 {
     int P { get; set; }
@@ -5012,7 +5207,7 @@ class C
         return new C();
     }
 }",
-@"
+                @"
 class C
 {
     int P { get; set; }
@@ -5027,13 +5222,15 @@ class C
     {
         return new C();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42835, "https://github.com/dotnet/roslyn/issues/42835")]
         public async Task WarnWhenPossibleChangeInSemanticMeaning_MethodInvocation2()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 class C
 {
     int P { get; set; }
@@ -5050,7 +5247,7 @@ class C
         P = 1;
     }
 }",
-@"
+                @"
 class C
 {
     int P { get; set; }
@@ -5065,13 +5262,15 @@ class C
     {
         P = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42835, "https://github.com/dotnet/roslyn/issues/42835")]
         public async Task WarnWhenPossibleChangeInSemanticMeaning_NestedObjectInitialization()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 class C
 {
     int P { get; set; }
@@ -5083,7 +5282,7 @@ class C
         var c2 = c;
     }
 }",
-@"
+                @"
 class C
 {
     int P { get; set; }
@@ -5093,13 +5292,15 @@ class C
         {|Warning:(new C[1] { new C() })[0].P = 1|};
         var c2 = new C[1] { new C() };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42835, "https://github.com/dotnet/roslyn/issues/42835")]
         public async Task WarnWhenPossibleChangeInSemanticMeaning_NestedMethodCall()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 class C
 {
     int P { get; set; }
@@ -5117,7 +5318,7 @@ class C
         return new C();
     }
 }",
-@"
+                @"
 class C
 {
     int P { get; set; }
@@ -5133,13 +5334,15 @@ class C
         P += 1;
         return new C();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task InlineIntoWithExpression()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 record Person(string Name)
 {
     void M(Person p)
@@ -5155,7 +5358,7 @@ namespace System.Runtime.CompilerServices
     {
     }
 }",
-@"
+                @"
 record Person(string Name)
 {
     void M(Person p)
@@ -5169,20 +5372,26 @@ namespace System.Runtime.CompilerServices
     public sealed class IsExternalInit
     {
     }
-}", parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9));
+}",
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp9
+                )
+            );
         }
 
         [Fact, WorkItem(44263, "https://github.com/dotnet/roslyn/issues/44263")]
         public async Task Call_TopLevelStatement()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 int [||]x = 1 + 1;
 x.ToString();
 ";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 (1 + 1).ToString();
@@ -5191,19 +5400,25 @@ using System;
             // Global statements in regular code are local variables, so Inline Temporary works. Script code is not
             // tested because global statements in script code are field declarations, which are not considered
             // temporary.
-            await TestAsync(code, expected, TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+            await TestAsync(
+                code,
+                expected,
+                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
 
         [Fact, WorkItem(44263, "https://github.com/dotnet/roslyn/issues/44263")]
         public async Task TopLevelStatement()
         {
-            var code = @"
+            var code =
+                @"
 int val = 0;
 int [||]val2 = val + 1;
 System.Console.WriteLine(val2);
 ";
 
-            var expected = @"
+            var expected =
+                @"
 int val = 0;
 System.Console.WriteLine(val + 1);
 ";
@@ -5211,33 +5426,39 @@ System.Console.WriteLine(val + 1);
             // Global statements in regular code are local variables, so Inline Temporary works. Script code is not
             // tested because global statements in script code are field declarations, which are not considered
             // temporary.
-            await TestAsync(code, expected, TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+            await TestAsync(
+                code,
+                expected,
+                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
 
         [Fact, WorkItem(44263, "https://github.com/dotnet/roslyn/issues/44263")]
         public async Task TopLevelStatement_InScope()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 {
     int val = 0;
     int [||]val2 = val + 1;
     System.Console.WriteLine(val2);
 }
 ",
-@"
+                @"
 {
     int val = 0;
     System.Console.WriteLine(val + 1);
 }
 ",
-                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
 
         [Fact]
         public async Task TestWithLinkedFile()
         {
             await TestInRegularAndScript1Async(
-@"<Workspace>
+                @"<Workspace>
     <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
         <Document FilePath='C.cs'>
 using System.Collections.Generic;
@@ -5259,7 +5480,7 @@ namespace Whatever
         <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
     </Project>
 </Workspace>",
-@"<Workspace>
+                @"<Workspace>
     <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
         <Document FilePath='C.cs'>
 using System.Collections.Generic;
@@ -5279,13 +5500,15 @@ namespace Whatever
     <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
         <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact, WorkItem(50207, "https://github.com/dotnet/roslyn/issues/50207")]
         public async Task TestImplicitObjectCreation()
         {
-            var code = @"
+            var code =
+                @"
 class MyClass
 {
     void Test()
@@ -5296,7 +5519,8 @@ class MyClass
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 class MyClass
 {
     void Test()
@@ -5306,13 +5530,20 @@ class MyClass
 }
 ";
 
-            await TestInRegularAndScriptAsync(code, expected, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9));
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp9
+                )
+            );
         }
 
         [Fact, WorkItem(34143, "https://github.com/dotnet/roslyn/issues/34143")]
         public async Task TestPreserveDestinationTrivia1()
         {
-            var code = @"
+            var code =
+                @"
 class MyClass
 {
     void Goo(bool b)
@@ -5326,7 +5557,8 @@ class MyClass
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 class MyClass
 {
     void Goo(bool b)

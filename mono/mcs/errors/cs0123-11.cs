@@ -5,8 +5,8 @@ using System;
 
 class Test
 {
-	public static void Main ()
-	{
-		Func<string> f = default (TypedReference).ToString;
-	}
+    public static void Main()
+    {
+        Func<string> f = default(TypedReference).ToString;
+    }
 }

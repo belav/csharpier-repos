@@ -4,8 +4,10 @@
 
 
 using System;
-[assembly: CLSCompliantAttribute (true)]
 
-public class CLSClass_B: CLSClass_A {
-        public const int uNIVERSAL = 3;
+[assembly: CLSCompliantAttribute(true)]
+
+public class CLSClass_B : CLSClass_A
+{
+    public const int uNIVERSAL = 3;
 }

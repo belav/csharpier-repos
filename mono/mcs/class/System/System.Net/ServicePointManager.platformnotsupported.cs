@@ -28,102 +28,108 @@ using System.Net.Security;
 
 namespace System.Net
 {
-	public partial class ServicePointManager {
-		const string EXCEPTION_MESSAGE = "System.Net.ServicePointManager is not supported on the current platform.";
+    public partial class ServicePointManager
+    {
+        const string EXCEPTION_MESSAGE =
+            "System.Net.ServicePointManager is not supported on the current platform.";
 
-		public const int DefaultNonPersistentConnectionLimit = 4;
+        public const int DefaultNonPersistentConnectionLimit = 4;
 #if MOBILE
-		public const int DefaultPersistentConnectionLimit = 10;
+        public const int DefaultPersistentConnectionLimit = 10;
 #else
-		public const int DefaultPersistentConnectionLimit = 2;
+        public const int DefaultPersistentConnectionLimit = 2;
 #endif
 
-		private ServicePointManager ()
-		{
-		}
+        private ServicePointManager() { }
 
-		public static ICertificatePolicy CertificatePolicy {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static ICertificatePolicy CertificatePolicy
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static bool CheckCertificateRevocationList {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static bool CheckCertificateRevocationList
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static int DefaultConnectionLimit {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static int DefaultConnectionLimit
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static int DnsRefreshTimeout {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static int DnsRefreshTimeout
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static bool EnableDnsRoundRobin {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static bool EnableDnsRoundRobin
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static int MaxServicePointIdleTime {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static int MaxServicePointIdleTime
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static int MaxServicePoints {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static int MaxServicePoints
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static bool ReusePort {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static bool ReusePort
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static SecurityProtocolType SecurityProtocol {
-			get;
-			set;
-		} = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+        public static SecurityProtocolType SecurityProtocol { get; set; } =
+            SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
-		public static RemoteCertificateValidationCallback ServerCertificateValidationCallback {
-			get;
-			set;
-		}
+        public static RemoteCertificateValidationCallback ServerCertificateValidationCallback { get; set; }
 
-		public static EncryptionPolicy EncryptionPolicy {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static EncryptionPolicy EncryptionPolicy
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static bool Expect100Continue {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static bool Expect100Continue
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static bool UseNagleAlgorithm {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public static bool UseNagleAlgorithm
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public static void SetTcpKeepAlive (bool enabled, int keepAliveTime, int keepAliveInterval)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public static void SetTcpKeepAlive(bool enabled, int keepAliveTime, int keepAliveInterval)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public static ServicePoint FindServicePoint (Uri address)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public static ServicePoint FindServicePoint(Uri address)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public static ServicePoint FindServicePoint (string uriString, IWebProxy proxy)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public static ServicePoint FindServicePoint(string uriString, IWebProxy proxy)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public static ServicePoint FindServicePoint (Uri address, IWebProxy proxy)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
-	}
+        public static ServicePoint FindServicePoint(Uri address, IWebProxy proxy)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+    }
 }

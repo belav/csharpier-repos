@@ -3,16 +3,14 @@
 
 public enum MyEnum
 {
-	Foo = 1
+    Foo = 1
 }
 
 public class Test
 {
-	static void Main ()
-	{
-		MyEnum theEnum = MyEnum.Foo;
-		if (theEnum == theEnum.Foo)
-		{
-		}
-	}
+    static void Main()
+    {
+        MyEnum theEnum = MyEnum.Foo;
+        if (theEnum == theEnum.Foo) { }
+    }
 }

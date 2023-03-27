@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,7 +34,7 @@ namespace Castle.Core.Logging
         private StreamWriter writer;
 
         ///<summary>
-        ///  Creates a new <c>StreamLogger</c> with default encoding 
+        ///  Creates a new <c>StreamLogger</c> with default encoding
         ///  and buffer size. Initial Level is set to Debug.
         ///</summary>
         ///<param name = "name">
@@ -42,11 +42,10 @@ namespace Castle.Core.Logging
         ///</param>
         ///<param name = "stream">
         ///  The stream that will be used for logging,
-        ///  seeking while the logger is alive 
+        ///  seeking while the logger is alive
         ///</param>
-        public StreamLogger(string name, Stream stream) : this(name, new StreamWriter(stream))
-        {
-        }
+        public StreamLogger(string name, Stream stream)
+            : this(name, new StreamWriter(stream)) { }
 
         ///<summary>
         ///  Creates a new <c>StreamLogger</c> with default buffer size.
@@ -57,18 +56,17 @@ namespace Castle.Core.Logging
         ///</param>
         ///<param name = "stream">
         ///  The stream that will be used for logging,
-        ///  seeking while the logger is alive 
+        ///  seeking while the logger is alive
         ///</param>
         ///<param name = "encoding">
         ///  The encoding that will be used for this stream.
         ///  <see cref = "StreamWriter" />
         ///</param>
-        public StreamLogger(string name, Stream stream, Encoding encoding) : this(name, new StreamWriter(stream, encoding))
-        {
-        }
+        public StreamLogger(string name, Stream stream, Encoding encoding)
+            : this(name, new StreamWriter(stream, encoding)) { }
 
         ///<summary>
-        ///  Creates a new <c>StreamLogger</c>. 
+        ///  Creates a new <c>StreamLogger</c>.
         ///  Initial Level is set to Debug.
         ///</summary>
         ///<param name = "name">
@@ -76,7 +74,7 @@ namespace Castle.Core.Logging
         ///</param>
         ///<param name = "stream">
         ///  The stream that will be used for logging,
-        ///  seeking while the logger is alive 
+        ///  seeking while the logger is alive
         ///</param>
         ///<param name = "encoding">
         ///  The encoding that will be used for this stream.
@@ -87,9 +85,7 @@ namespace Castle.Core.Logging
         ///  <see cref = "StreamWriter" />
         ///</param>
         public StreamLogger(string name, Stream stream, Encoding encoding, int bufferSize)
-            : this(name, new StreamWriter(stream, encoding, bufferSize))
-        {
-        }
+            : this(name, new StreamWriter(stream, encoding, bufferSize)) { }
 
         ~StreamLogger()
         {
@@ -119,18 +115,24 @@ namespace Castle.Core.Logging
         }
 
         /// <summary>
-        ///   Creates a new <c>StreamLogger</c> with 
+        ///   Creates a new <c>StreamLogger</c> with
         ///   Debug as default Level.
         /// </summary>
         /// <param name = "name">The name of the log.</param>
         /// <param name = "writer">The <c>StreamWriter</c> the log will write to.</param>
-        protected StreamLogger(string name, StreamWriter writer) : base(name, LoggerLevel.Trace)
+        protected StreamLogger(string name, StreamWriter writer)
+            : base(name, LoggerLevel.Trace)
         {
             this.writer = writer;
             writer.AutoFlush = true;
         }
 
-        protected override void Log(LoggerLevel loggerLevel, string loggerName, string message, Exception exception)
+        protected override void Log(
+            LoggerLevel loggerLevel,
+            string loggerName,
+            string message,
+            Exception exception
+        )
         {
             if (writer == null)
             {
@@ -141,12 +143,14 @@ namespace Castle.Core.Logging
 
             if (exception != null)
             {
-                writer.WriteLine("[{0}] '{1}' {2}: {3} {4}",
-                                 loggerLevel,
-                                 loggerName,
-                                 exception.GetType().FullName,
-                                 exception.Message,
-                                 exception.StackTrace);
+                writer.WriteLine(
+                    "[{0}] '{1}' {2}: {3} {4}",
+                    loggerLevel,
+                    loggerName,
+                    exception.GetType().FullName,
+                    exception.Message,
+                    exception.StackTrace
+                );
             }
         }
 

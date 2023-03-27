@@ -2,14 +2,16 @@
 // Line: 13
 // Compiler options: -warnaserror
 
-[assembly:System.CLSCompliant(true)]
+[assembly: System.CLSCompliant(true)]
 
 public delegate void MyDelegate(int i);
 
-public class Base {
-        protected event System.ResolveEventHandler Event_a;
+public class Base
+{
+    protected event System.ResolveEventHandler Event_a;
 }
 
-public class CLSClass: Base {
-        public event MyDelegate Event_A;
+public class CLSClass : Base
+{
+    public event MyDelegate Event_A;
 }

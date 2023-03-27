@@ -3,14 +3,15 @@
 
 class C
 {
-	delegate void D (int i);
+    delegate void D(int i);
 
-	static int Prop {
-		set {}
-	}
-	
-	public static void Main ()
-	{
-		D d = set_Prop;
-	}
+    static int Prop
+    {
+        set { }
+    }
+
+    public static void Main()
+    {
+        D d = set_Prop;
+    }
 }

@@ -9,29 +9,37 @@ public class MethodCallCodeFragmentTest
     public virtual void Ctor_throw_when_too_many_parameters_extension()
     {
         _ = new MethodCallCodeFragment(_extensionFuncMethodInfo, 1);
-        Assert.Throws<ArgumentException>(() => new MethodCallCodeFragment(_extensionFuncMethodInfo, 1, 2));
+        Assert.Throws<ArgumentException>(
+            () => new MethodCallCodeFragment(_extensionFuncMethodInfo, 1, 2)
+        );
     }
 
     [ConditionalFact]
     public virtual void Ctor_throw_when_too_many_parameters_instance()
     {
         _ = new MethodCallCodeFragment(_instanceFuncMethodInfo, 1);
-        Assert.Throws<ArgumentException>(() => new MethodCallCodeFragment(_instanceFuncMethodInfo, 1, 2));
+        Assert.Throws<ArgumentException>(
+            () => new MethodCallCodeFragment(_instanceFuncMethodInfo, 1, 2)
+        );
     }
 
-    private static readonly MethodInfo _extensionFuncMethodInfo
-        = typeof(MethodCallCodeFragmentTestExtensions).GetRuntimeMethod(
-            nameof(MethodCallCodeFragmentTestExtensions.ExtensionFunc), new[] { typeof(MethodCallCodeFragmentTest), typeof(int) })!;
+    private static readonly MethodInfo _extensionFuncMethodInfo =
+        typeof(MethodCallCodeFragmentTestExtensions).GetRuntimeMethod(
+            nameof(MethodCallCodeFragmentTestExtensions.ExtensionFunc),
+            new[] { typeof(MethodCallCodeFragmentTest), typeof(int) }
+        )!;
 
-    private static readonly MethodInfo _instanceFuncMethodInfo
-        = typeof(MethodCallCodeFragmentTest).GetRuntimeMethod(nameof(InstanceFunc), new[] { typeof(int) })!;
+    private static readonly MethodInfo _instanceFuncMethodInfo =
+        typeof(MethodCallCodeFragmentTest).GetRuntimeMethod(
+            nameof(InstanceFunc),
+            new[] { typeof(int) }
+        )!;
 
-    public void InstanceFunc(int p)
-        => throw new NotSupportedException();
+    public void InstanceFunc(int p) => throw new NotSupportedException();
 }
 
 public static class MethodCallCodeFragmentTestExtensions
 {
-    public static void ExtensionFunc(this MethodCallCodeFragmentTest thisParameter, int p)
-        => throw new NotSupportedException();
+    public static void ExtensionFunc(this MethodCallCodeFragmentTest thisParameter, int p) =>
+        throw new NotSupportedException();
 }

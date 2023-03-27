@@ -47,13 +47,21 @@ internal static class MvcDetector
         }
 
         // Check name before attribute's for performance.
-        if (!typeSymbol.Name.EndsWith(ControllerTypeNameSuffix, StringComparison.OrdinalIgnoreCase) &&
-            !typeSymbol.HasAttribute(wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute)))
+        if (
+            !typeSymbol.Name.EndsWith(ControllerTypeNameSuffix, StringComparison.OrdinalIgnoreCase)
+            && !typeSymbol.HasAttribute(
+                wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute)
+            )
+        )
         {
             return false;
         }
 
-        if (typeSymbol.HasAttribute(wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_NonControllerAttribute)))
+        if (
+            typeSymbol.HasAttribute(
+                wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_NonControllerAttribute)
+            )
+        )
         {
             return false;
         }
@@ -103,7 +111,11 @@ internal static class MvcDetector
             return false;
         }
 
-        if (methodSymbol.HasAttribute(wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_NonControllerAttribute)))
+        if (
+            methodSymbol.HasAttribute(
+                wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_NonControllerAttribute)
+            )
+        )
         {
             return false;
         }

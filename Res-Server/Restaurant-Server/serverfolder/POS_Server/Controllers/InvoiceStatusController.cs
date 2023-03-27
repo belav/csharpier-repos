@@ -17,12 +17,13 @@ namespace POS_Server.Controllers
     public class InvoiceStatusController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         [HttpPost]
         [Route("Get")]
         public string Get(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
-var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -40,25 +41,29 @@ var strP = TokenManager.GetPrincipal(token);
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var invoiceStatus = entity.invoiceStatus.Where(x => x.invoiceId == invoiceId)
-
-                   .Select(c => new InvoiceStatusModel()
-                   {
-                       invStatusId = c.invStatusId,
-                       invoiceId = c.invoiceId,
-                       status = c.status,
-                       createDate = c.createDate,
-                       updateDate = c.updateDate,
-                       createUserId = c.createUserId,
-                       updateUserId = c.updateUserId,
-                       notes = c.notes,
-                       isActive = c.isActive,
-                   })
-                   .ToList();
+                    var invoiceStatus = entity.invoiceStatus
+                        .Where(x => x.invoiceId == invoiceId)
+                        .Select(
+                            c =>
+                                new InvoiceStatusModel()
+                                {
+                                    invStatusId = c.invStatusId,
+                                    invoiceId = c.invoiceId,
+                                    status = c.status,
+                                    createDate = c.createDate,
+                                    updateDate = c.updateDate,
+                                    createUserId = c.createUserId,
+                                    updateUserId = c.updateUserId,
+                                    notes = c.notes,
+                                    isActive = c.isActive,
+                                }
+                        )
+                        .ToList();
                     return TokenManager.GenerateToken(invoiceStatus);
                 }
             }
         }
+
         [HttpPost]
         [Route("Save")]
         public string Save(string token)
@@ -81,7 +86,13 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         statusObject = c.Value.Replace("\\", string.Empty);
                         statusObject = statusObject.Trim('"');
-                        Object = JsonConvert.DeserializeObject<invoiceStatus>(statusObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        Object = JsonConvert.DeserializeObject<invoiceStatus>(
+                            statusObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                         break;
                     }
                 }
@@ -93,9 +104,8 @@ var strP = TokenManager.GetPrincipal(token);
                         var statusEntity = entity.Set<invoiceStatus>();
                         if (Object.invStatusId == 0)
                         {
-
-                            Object.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            Object.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             Object.updateUserId = Object.createUserId;
                             tmpStatus = statusEntity.Add(Object);
                             entity.SaveChanges();
@@ -104,14 +114,16 @@ var strP = TokenManager.GetPrincipal(token);
                         }
                         else
                         {
-                            tmpStatus = entity.invoiceStatus.Where(p => p.invStatusId == Object.invStatusId).FirstOrDefault();
+                            tmpStatus = entity.invoiceStatus
+                                .Where(p => p.invStatusId == Object.invStatusId)
+                                .FirstOrDefault();
                             tmpStatus.notes = Object.notes;
                             tmpStatus.status = Object.status;
                             tmpStatus.createDate = Object.createDate;
                             tmpStatus.updateDate = Object.updateDate;
                             tmpStatus.updateUserId = Object.updateUserId;
                             tmpStatus.isActive = Object.isActive;
-                            tmpStatus.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);// server current date;
+                            tmpStatus.updateDate = coctrlr.AddOffsetTodate(DateTime.Now); // server current date;
                             entity.SaveChanges();
                             message = tmpStatus.invStatusId.ToString();
                             return TokenManager.GenerateToken(message);

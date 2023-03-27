@@ -2,13 +2,16 @@
 // Line: 12
 using System;
 
-class A {
-	public static int X;
+class A
+{
+    public static int X;
 }
 
-class T {
-	static void Main () {
-		A T = new A ();
-		System.Console.WriteLine (T.X);
-	}
+class T
+{
+    static void Main()
+    {
+        A T = new A();
+        System.Console.WriteLine(T.X);
+    }
 }

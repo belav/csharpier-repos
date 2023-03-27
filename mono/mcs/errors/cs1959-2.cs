@@ -3,8 +3,9 @@
 
 struct S
 {
-	public void Foo<T> () where T : struct
-	{
-		const T t = null;
-	}
+    public void Foo<T>()
+        where T : struct
+    {
+        const T t = null;
+    }
 }

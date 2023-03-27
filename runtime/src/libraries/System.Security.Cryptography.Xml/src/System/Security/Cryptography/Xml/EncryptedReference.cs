@@ -13,13 +13,11 @@ namespace System.Security.Cryptography.Xml
         private TransformChain? _transformChain;
         internal XmlElement? _cachedXml;
 
-        protected EncryptedReference() : this(string.Empty, new TransformChain())
-        {
-        }
+        protected EncryptedReference()
+            : this(string.Empty, new TransformChain()) { }
 
-        protected EncryptedReference(string uri) : this(uri, new TransformChain())
-        {
-        }
+        protected EncryptedReference(string uri)
+            : this(uri, new TransformChain()) { }
 
         protected EncryptedReference(string uri, TransformChain transformChain)
         {
@@ -31,7 +29,6 @@ namespace System.Security.Cryptography.Xml
         public string Uri
         {
             get { return _uri; }
-
             [MemberNotNull(nameof(_uri))]
             set
             {
@@ -70,15 +67,13 @@ namespace System.Security.Cryptography.Xml
         [MemberNotNullWhen(true, nameof(_cachedXml))]
         protected internal bool CacheValid
         {
-            get
-            {
-                return (_cachedXml != null);
-            }
+            get { return (_cachedXml != null); }
         }
 
         public virtual XmlElement GetXml()
         {
-            if (CacheValid) return _cachedXml;
+            if (CacheValid)
+                return _cachedXml;
 
             XmlDocument document = new XmlDocument();
             document.PreserveWhitespace = true;
@@ -91,13 +86,18 @@ namespace System.Security.Cryptography.Xml
                 throw new CryptographicException(SR.Cryptography_Xml_ReferenceTypeRequired);
 
             // Create the Reference
-            XmlElement referenceElement = document.CreateElement(ReferenceType, EncryptedXml.XmlEncNamespaceUrl);
+            XmlElement referenceElement = document.CreateElement(
+                ReferenceType,
+                EncryptedXml.XmlEncNamespaceUrl
+            );
             if (!string.IsNullOrEmpty(_uri))
                 referenceElement.SetAttribute("URI", _uri);
 
             // Add the transforms to the CipherReference
             if (TransformChain.Count > 0)
-                referenceElement.AppendChild(TransformChain.GetXml(document, SignedXml.XmlDsigNamespaceUrl));
+                referenceElement.AppendChild(
+                    TransformChain.GetXml(document, SignedXml.XmlDsigNamespaceUrl)
+                );
 
             return referenceElement;
         }

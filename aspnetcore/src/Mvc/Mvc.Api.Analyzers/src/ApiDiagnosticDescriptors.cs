@@ -5,7 +5,10 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
-[System.Diagnostics.CodeAnalysis.SuppressMessage("MicrosoftCodeAnalysisReleaseTracking", "RS2008:Enable analyzer release tracking")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage(
+    "MicrosoftCodeAnalysisReleaseTracking",
+    "RS2008:Enable analyzer release tracking"
+)]
 internal static class ApiDiagnosticDescriptors
 {
     public static readonly DiagnosticDescriptor API1000_ActionReturnsUndocumentedStatusCode =
@@ -15,7 +18,8 @@ internal static class ApiDiagnosticDescriptors
             "Action method returns undeclared status code '{0}'",
             "Usage",
             DiagnosticSeverity.Warning,
-            isEnabledByDefault: true);
+            isEnabledByDefault: true
+        );
 
     public static readonly DiagnosticDescriptor API1001_ActionReturnsUndocumentedSuccessResult =
         new DiagnosticDescriptor(
@@ -24,7 +28,8 @@ internal static class ApiDiagnosticDescriptors
             "Action method returns a success result without a corresponding ProducesResponseType",
             "Usage",
             DiagnosticSeverity.Warning,
-            isEnabledByDefault: true);
+            isEnabledByDefault: true
+        );
 
     public static readonly DiagnosticDescriptor API1002_ActionDoesNotReturnDocumentedStatusCode =
         new DiagnosticDescriptor(
@@ -33,7 +38,8 @@ internal static class ApiDiagnosticDescriptors
             "Action method documents status code '{0}' without a corresponding return type",
             "Usage",
             DiagnosticSeverity.Info,
-            isEnabledByDefault: false);
+            isEnabledByDefault: false
+        );
 
     public static readonly DiagnosticDescriptor API1003_ApiActionsDoNotRequireExplicitModelValidationCheck =
         new DiagnosticDescriptor(
@@ -43,5 +49,6 @@ internal static class ApiDiagnosticDescriptors
             "Usage",
             DiagnosticSeverity.Info,
             isEnabledByDefault: true,
-            customTags: new[] { WellKnownDiagnosticTags.Unnecessary });
+            customTags: new[] { WellKnownDiagnosticTags.Unnecessary }
+        );
 }

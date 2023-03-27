@@ -1,12 +1,12 @@
 ﻿//Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -15,7 +15,7 @@ namespace System.Data.Services.Client
     using System.Diagnostics;
 #if !ASTORIA_LIGHT
     using System.Net;
-#else    
+#else
     using System.Data.Services.Http;
 #endif
 
@@ -26,11 +26,12 @@ namespace System.Data.Services.Client
         private HttpWebResponse response;
 
         internal GetReadStreamResult(
-            object source, 
-            string method, 
-            HttpWebRequest request, 
-            AsyncCallback callback, 
-            object state)
+            object source,
+            string method,
+            HttpWebRequest request,
+            AsyncCallback callback,
+            object state
+        )
             : base(source, method, callback, state)
         {
             Debug.Assert(request != null, "Null request can't be wrapped to a result.");
@@ -43,7 +44,11 @@ namespace System.Data.Services.Client
             try
             {
                 IAsyncResult asyncResult;
-                asyncResult = BaseAsyncResult.InvokeAsync(this.request.BeginGetResponse, GetReadStreamResult.AsyncEndGetResponse, this);
+                asyncResult = BaseAsyncResult.InvokeAsync(
+                    this.request.BeginGetResponse,
+                    GetReadStreamResult.AsyncEndGetResponse,
+                    this
+                );
 
                 this.CompletedSynchronously &= asyncResult.CompletedSynchronously;
             }
@@ -57,17 +62,22 @@ namespace System.Data.Services.Client
                 this.HandleCompleted();
             }
 
-            Debug.Assert(!this.CompletedSynchronously || this.IsCompleted, "if CompletedSynchronously then MUST IsCompleted");
+            Debug.Assert(
+                !this.CompletedSynchronously || this.IsCompleted,
+                "if CompletedSynchronously then MUST IsCompleted"
+            );
         }
 
         internal DataServiceStreamResponse End()
         {
             if (this.response != null)
             {
-                DataServiceStreamResponse streamResponse = new DataServiceStreamResponse(this.response);
+                DataServiceStreamResponse streamResponse = new DataServiceStreamResponse(
+                    this.response
+                );
                 return streamResponse;
             }
-            else 
+            else
             {
                 return null;
             }
@@ -116,13 +126,19 @@ namespace System.Data.Services.Client
 
         protected override void CompletedRequest()
         {
-            Debug.Assert(null != this.response || null != this.Failure, "should have response or exception");
+            Debug.Assert(
+                null != this.response || null != this.Failure,
+                "should have response or exception"
+            );
             if (null != this.response)
             {
                 InvalidOperationException failure = null;
                 if (!WebUtil.SuccessStatusCode(this.response.StatusCode))
                 {
-                    failure = DataServiceContext.GetResponseText(this.response.GetResponseStream, this.response.StatusCode);
+                    failure = DataServiceContext.GetResponseText(
+                        this.response.GetResponseStream,
+                        this.response.StatusCode
+                    );
                 }
 
                 if (failure != null)
@@ -140,7 +156,11 @@ namespace System.Data.Services.Client
 
             try
             {
-                state.CompletedSynchronously &= asyncResult.CompletedSynchronously;                HttpWebRequest request = Util.NullCheck(state.request, InternalError.InvalidEndGetResponseRequest);
+                state.CompletedSynchronously &= asyncResult.CompletedSynchronously;
+                HttpWebRequest request = Util.NullCheck(
+                    state.request,
+                    InternalError.InvalidEndGetResponseRequest
+                );
 
                 HttpWebResponse webresponse = null;
                 try

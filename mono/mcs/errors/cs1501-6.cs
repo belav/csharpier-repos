@@ -4,16 +4,16 @@
 
 static class Extensions
 {
-	public static string Foo (this string s)
-	{
-		return s;
-	}
+    public static string Foo(this string s)
+    {
+        return s;
+    }
 }
 
 public class M
 {
-	public static void Main ()
-	{
-		1.Foo ("foo");
-	}
+    public static void Main()
+    {
+        1.Foo("foo");
+    }
 }

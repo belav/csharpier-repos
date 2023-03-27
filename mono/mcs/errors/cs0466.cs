@@ -3,9 +3,10 @@
 
 interface I
 {
-	void M(int[] values);
+    void M(int[] values);
 }
+
 class Base : I
 {
-	void I.M(params int[] values) {}
+    void I.M(params int[] values) { }
 }

@@ -177,7 +177,7 @@ namespace System.Reflection.Emit
         //
         // AssemblyBuilder inherits from Assembly, but the runtime thinks its layout inherits from RuntimeAssembly
         //
-#region Sync with RuntimeAssembly.cs and ReflectionAssembly in object-internals.h
+        #region Sync with RuntimeAssembly.cs and ReflectionAssembly in object-internals.h
         internal IntPtr _mono_assembly;
         private LoaderAllocator? m_keepalive;
 
@@ -190,7 +190,7 @@ namespace System.Reflection.Emit
         private byte[]? public_key_token;
         private Module[]? loaded_modules;
         private uint access;
-#endregion
+        #endregion
 
         private AssemblyName aname;
         private ModuleBuilder manifest_module;
@@ -209,9 +209,14 @@ namespace System.Reflection.Emit
             aname = (AssemblyName)n.Clone();
 
             if (!Enum.IsDefined(typeof(AssemblyBuilderAccess), access))
-                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture,
-                    "Argument value {0} is not valid.", (int)access),
-                    nameof(access));
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "Argument value {0} is not valid.",
+                        (int)access
+                    ),
+                    nameof(access)
+                );
 
             name = n.Name;
             this.access = (uint)access;
@@ -239,7 +244,10 @@ namespace System.Reflection.Emit
         }
 
         [RequiresDynamicCode("Defining a dynamic assembly requires dynamic code.")]
-        public static AssemblyBuilder DefineDynamicAssembly(AssemblyName name, AssemblyBuilderAccess access)
+        public static AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access
+        )
         {
             ArgumentNullException.ThrowIfNull(name);
 
@@ -247,7 +255,11 @@ namespace System.Reflection.Emit
         }
 
         [RequiresDynamicCode("Defining a dynamic assembly requires dynamic code.")]
-        public static AssemblyBuilder DefineDynamicAssembly(AssemblyName name, AssemblyBuilderAccess access, IEnumerable<CustomAttributeBuilder>? assemblyAttributes)
+        public static AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            IEnumerable<CustomAttributeBuilder>? assemblyAttributes
+        )
         {
             AssemblyBuilder ab = DefineDynamicAssembly(name, access);
             if (assemblyAttributes != null)
@@ -274,9 +286,11 @@ namespace System.Reflection.Emit
         internal static AssemblyBuilder InternalDefineDynamicAssembly(
             AssemblyName name,
             AssemblyBuilderAccess access,
-            Assembly? _ /*callingAssembly*/,
+            Assembly? _ /*callingAssembly*/
+            ,
             AssemblyLoadContext? assemblyLoadContext,
-            IEnumerable<CustomAttributeBuilder>? assemblyAttributes)
+            IEnumerable<CustomAttributeBuilder>? assemblyAttributes
+        )
         {
             Debug.Assert(assemblyLoadContext is null);
             return DefineDynamicAssembly(name, access, assemblyAttributes);
@@ -366,16 +380,20 @@ namespace System.Reflection.Emit
             return (Module[])modules.Clone();
         }
 
-        public override AssemblyName GetName(bool copiedName) => AssemblyName.Create(_mono_assembly, null);
+        public override AssemblyName GetName(bool copiedName) =>
+            AssemblyName.Create(_mono_assembly, null);
 
         [RequiresUnreferencedCode("Assembly references might be removed")]
-        public override AssemblyName[] GetReferencedAssemblies() => RuntimeAssembly.GetReferencedAssemblies(this);
+        public override AssemblyName[] GetReferencedAssemblies() =>
+            RuntimeAssembly.GetReferencedAssemblies(this);
 
-        public override Module[] GetLoadedModules(bool getResourceModules) => GetModules(getResourceModules);
+        public override Module[] GetLoadedModules(bool getResourceModules) =>
+            GetModules(getResourceModules);
 
         //FIXME MS has issues loading satellite assemblies from SRE
         [System.Security.DynamicSecurityMethod] // Methods containing StackCrawlMark local var has to be marked DynamicSecurityMethod
-        public override Assembly GetSatelliteAssembly(CultureInfo culture) => GetSatelliteAssembly(culture, null);
+        public override Assembly GetSatelliteAssembly(CultureInfo culture) =>
+            GetSatelliteAssembly(culture, null);
 
         //FIXME MS has issues loading satellite assemblies from SRE
         [System.Security.DynamicSecurityMethod] // Methods containing StackCrawlMark local var has to be marked DynamicSecurityMethod
@@ -392,11 +410,13 @@ namespace System.Reflection.Emit
         public override bool IsDefined(Type attributeType, bool inherit) =>
             CustomAttribute.IsDefined(this, attributeType, inherit);
 
-        public override object[] GetCustomAttributes(bool inherit) => CustomAttribute.GetCustomAttributes(this, inherit);
+        public override object[] GetCustomAttributes(bool inherit) =>
+            CustomAttribute.GetCustomAttributes(this, inherit);
 
         public override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
             CustomAttribute.GetCustomAttributes(this, attributeType, inherit);
 
-        public override IList<CustomAttributeData> GetCustomAttributesData() => CustomAttribute.GetCustomAttributesData(this);
+        public override IList<CustomAttributeData> GetCustomAttributesData() =>
+            CustomAttribute.GetCustomAttributesData(this);
     }
 }

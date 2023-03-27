@@ -3,14 +3,13 @@
 
 public abstract class A
 {
-	public abstract ref int Foo { get; }
+    public abstract ref int Foo { get; }
 }
 
 public class B : A
 {
-	public override ref long Foo {
-		get {
-			throw null;
-		}
-	}
+    public override ref long Foo
+    {
+        get { throw null; }
+    }
 }

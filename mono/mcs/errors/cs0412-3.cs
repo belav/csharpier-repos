@@ -3,8 +3,8 @@
 
 class C
 {
-	public void Foo<T> (int value)
-	{
-		int T;
-	}
+    public void Foo<T>(int value)
+    {
+        int T;
+    }
 }

@@ -3,9 +3,10 @@
 
 class fool { }
 
-class X {
-	static void Main ()
-	{
-		fool::Console.WriteLine ("hello");
-	}
+class X
+{
+    static void Main()
+    {
+        fool::Console.WriteLine("hello");
+    }
 }

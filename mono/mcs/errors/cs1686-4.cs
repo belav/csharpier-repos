@@ -2,15 +2,17 @@
 // Line: 11
 // Compiler options: -unsafe
 
-delegate void D ();
+delegate void D();
 
-unsafe class X {
-	public D T (int a)
-	{
-		return delegate {
-			int x = a;
-		};
-		
-		int *y = &a;
-	}
+unsafe class X
+{
+    public D T(int a)
+    {
+        return delegate
+        {
+            int x = a;
+        };
+
+        int* y = &a;
+    }
 }

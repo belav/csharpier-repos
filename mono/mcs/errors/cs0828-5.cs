@@ -4,12 +4,10 @@
 
 public class Test
 {
-	static void Error ()
-	{
-	}
-	
-	static void Main ()
-	{
-		var v = new { Value = Error () };
-	}
+    static void Error() { }
+
+    static void Main()
+    {
+        var v = new { Value = Error() };
+    }
 }

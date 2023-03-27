@@ -18,8 +18,8 @@ public class StringGuidConverter<TModel, TProvider> : ValueConverter<TModel, TPr
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     // ReSharper disable once StaticMemberInGenericType
-    protected static readonly ConverterMappingHints DefaultHints
-        = new(size: 36, valueGeneratorFactory: (_, _) => new SequentialGuidValueGenerator());
+    protected static readonly ConverterMappingHints DefaultHints =
+        new(size: 36, valueGeneratorFactory: (_, _) => new SequentialGuidValueGenerator());
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -30,10 +30,9 @@ public class StringGuidConverter<TModel, TProvider> : ValueConverter<TModel, TPr
     public StringGuidConverter(
         Expression<Func<TModel, TProvider>> convertToProviderExpression,
         Expression<Func<TProvider, TModel>> convertFromProviderExpression,
-        ConverterMappingHints? mappingHints = null)
-        : base(convertToProviderExpression, convertFromProviderExpression, mappingHints)
-    {
-    }
+        ConverterMappingHints? mappingHints = null
+    )
+        : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -41,8 +40,7 @@ public class StringGuidConverter<TModel, TProvider> : ValueConverter<TModel, TPr
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected static new Expression<Func<Guid, string>> ToString()
-        => v => v.ToString("D");
+    protected static new Expression<Func<Guid, string>> ToString() => v => v.ToString("D");
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -50,6 +48,5 @@ public class StringGuidConverter<TModel, TProvider> : ValueConverter<TModel, TPr
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected static Expression<Func<string, Guid>> ToGuid()
-        => v => new Guid(v);
+    protected static Expression<Func<string, Guid>> ToGuid() => v => new Guid(v);
 }

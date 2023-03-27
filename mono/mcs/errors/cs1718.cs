@@ -4,12 +4,12 @@
 
 class C
 {
-	public static void Main () 
-	{ 
-		int a = 20;
-		if (a > a) {
-			return;
-		}
-	}
+    public static void Main()
+    {
+        int a = 20;
+        if (a > a)
+        {
+            return;
+        }
+    }
 }
- 

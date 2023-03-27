@@ -3,10 +3,10 @@
 
 class A
 {
-	delegate string Test (string t);
+    delegate string Test(string t);
 
-	public static void Main ()
-	{
-		Test ("t");
-	}
+    public static void Main()
+    {
+        Test("t");
+    }
 }

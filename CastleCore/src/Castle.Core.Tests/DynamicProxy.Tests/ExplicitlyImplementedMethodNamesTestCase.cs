@@ -50,16 +50,22 @@ namespace Castle.DynamicProxy.Tests
             var proxy = new ProxyGenerator().CreateInterfaceProxyWithoutTarget(
                 interfaceToProxy: a,
                 additionalInterfacesToProxy: new[] { b, c },
-                interceptors: new StandardInterceptor());
+                interceptors: new StandardInterceptor()
+            );
 
             var implementingType = proxy.GetType();
 
             AssertNamingSchemeOfExplicitlyImplementedMethods(b, c, implementingType);
         }
 
-        private void AssertNamingSchemeOfExplicitlyImplementedMethods(Type b, Type c, Type implementingType)
+        private void AssertNamingSchemeOfExplicitlyImplementedMethods(
+            Type b,
+            Type c,
+            Type implementingType
+        )
         {
-            const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+            const BindingFlags bindingFlags =
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
             // The assertions at the end of this method only make sense if certain preconditions
             // are met. We verify those using NUnit assumptions:
@@ -93,7 +99,9 @@ namespace Castle.DynamicProxy.Tests
         private sealed class TripleSharedName : ISharedNameFromA, ISharedNameFromB, ISharedNameFromC
         {
             void ISharedNameFromA.M() { }
+
             void ISharedNameFromB.M() { }
+
             void ISharedNameFromC.M() { }
         }
     }

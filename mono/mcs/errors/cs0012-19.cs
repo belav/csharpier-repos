@@ -4,10 +4,10 @@
 
 class Test
 {
-	public static void Main ()
-	{
-		var b = new B ();
-		b.Test ();
-		b.Test ();
-	}
+    public static void Main()
+    {
+        var b = new B();
+        b.Test();
+        b.Test();
+    }
 }

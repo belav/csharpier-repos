@@ -4,5 +4,5 @@
 
 class Test
 {
-	int i = default (int);
+    int i = default(int);
 }

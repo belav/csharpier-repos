@@ -15,7 +15,10 @@ namespace System.Composition.UnitTests
         public class Messenger
         {
             [Export]
-            public string Message { get { return "Helo!"; } }
+            public string Message
+            {
+                get { return "Helo!"; }
+            }
         }
 
         [Fact]
@@ -32,7 +35,10 @@ namespace System.Composition.UnitTests
         public class SelfObsessed
         {
             [Export]
-            public SelfObsessed Self { get { return this; } }
+            public SelfObsessed Self
+            {
+                get { return this; }
+            }
         }
 
         [Export]

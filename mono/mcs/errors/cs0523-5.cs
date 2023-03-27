@@ -6,10 +6,10 @@ using System;
 
 struct Handle<T>
 {
-	public IntPtr Value;
+    public IntPtr Value;
 }
 
 struct Foo
 {
-	public readonly Handle<Foo> Handle;
+    public readonly Handle<Foo> Handle;
 }

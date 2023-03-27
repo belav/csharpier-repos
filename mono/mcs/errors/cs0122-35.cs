@@ -4,9 +4,8 @@
 
 class X
 {
-	static void Main ()
-	{
-		Test<float> test = new Test<float> ();
-	}
+    static void Main()
+    {
+        Test<float> test = new Test<float>();
+    }
 }
-

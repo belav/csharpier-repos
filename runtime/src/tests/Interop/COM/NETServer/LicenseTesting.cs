@@ -38,7 +38,12 @@ public class MockLicenseProvider : LicenseProvider
     public static bool DenyLicense { get; set; }
     public static string License { get; set; }
 
-    public override License GetLicense(LicenseContext context, Type type, object instance, bool allowExceptions)
+    public override License GetLicense(
+        LicenseContext context,
+        Type type,
+        object instance,
+        bool allowExceptions
+    )
     {
         if (DenyLicense)
         {
@@ -71,6 +76,6 @@ public class MockLicenseProvider : LicenseProvider
     {
         public override string LicenseKey => MockLicenseProvider.License ?? "__MOCK_LICENSE_KEY__";
 
-        public override void Dispose () { }
+        public override void Dispose() { }
     }
 }

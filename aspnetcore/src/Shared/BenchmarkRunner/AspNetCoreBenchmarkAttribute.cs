@@ -11,25 +11,21 @@ namespace BenchmarkDotNet.Attributes;
 internal class AspNetCoreBenchmarkAttribute : Attribute, IConfigSource
 {
     public AspNetCoreBenchmarkAttribute()
-        : this(typeof(DefaultCoreConfig))
-    {
-    }
+        : this(typeof(DefaultCoreConfig)) { }
 
     public AspNetCoreBenchmarkAttribute(Type configType)
-        : this(configType, typeof(DefaultCoreValidationConfig))
-    {
-    }
+        : this(configType, typeof(DefaultCoreValidationConfig)) { }
 
     public AspNetCoreBenchmarkAttribute(Type configType, Type validationConfigType)
     {
         ConfigTypes = new Dictionary<string, Type>()
-            {
-                { NamedConfiguration.Default, typeof(DefaultCoreConfig) },
-                { NamedConfiguration.Validation, typeof(DefaultCoreValidationConfig) },
-                { NamedConfiguration.Profile, typeof(DefaultCoreProfileConfig) },
-                { NamedConfiguration.Debug, typeof(DefaultCoreDebugConfig) },
-                { NamedConfiguration.PerfLab, typeof(DefaultCorePerfLabConfig) },
-            };
+        {
+            { NamedConfiguration.Default, typeof(DefaultCoreConfig) },
+            { NamedConfiguration.Validation, typeof(DefaultCoreValidationConfig) },
+            { NamedConfiguration.Profile, typeof(DefaultCoreProfileConfig) },
+            { NamedConfiguration.Debug, typeof(DefaultCoreDebugConfig) },
+            { NamedConfiguration.PerfLab, typeof(DefaultCorePerfLabConfig) },
+        };
 
         if (configType != null)
         {
@@ -46,10 +42,16 @@ internal class AspNetCoreBenchmarkAttribute : Attribute, IConfigSource
     {
         get
         {
-            if (!ConfigTypes.TryGetValue(ConfigName ?? NamedConfiguration.Default, out var configType))
+            if (
+                !ConfigTypes.TryGetValue(
+                    ConfigName ?? NamedConfiguration.Default,
+                    out var configType
+                )
+            )
             {
-                var message = $"Could not find a configuration matching {ConfigName}. " +
-                    $"Known configurations: {string.Join(", ", ConfigTypes.Keys)}";
+                var message =
+                    $"Could not find a configuration matching {ConfigName}. "
+                    + $"Known configurations: {string.Join(", ", ConfigTypes.Keys)}";
                 throw new InvalidOperationException(message);
             }
 

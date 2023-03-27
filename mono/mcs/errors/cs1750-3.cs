@@ -3,7 +3,5 @@
 
 public class TS
 {
-	public static void Test (int? i = 1m)
-	{
-	}
+    public static void Test(int? i = 1m) { }
 }

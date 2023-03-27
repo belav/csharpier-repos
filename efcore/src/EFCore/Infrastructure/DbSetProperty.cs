@@ -20,7 +20,8 @@ public readonly struct DbSetProperty
     public DbSetProperty(
         string name,
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type type,
-        IClrPropertySetter? setter)
+        IClrPropertySetter? setter
+    )
     {
         Name = name;
         Type = type;

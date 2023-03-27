@@ -5,8 +5,8 @@ using System;
 
 class Test
 {
-	public static void Main ()
-	{
-		var res = default (TypedReference).ToString ();
-	}
+    public static void Main()
+    {
+        var res = default(TypedReference).ToString();
+    }
 }

@@ -23,9 +23,7 @@ public sealed class AcceptedAtRoute : IResult, IEndpointMetadataProvider, IStatu
     /// </summary>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     internal AcceptedAtRoute(object? routeValues)
-        : this(routeName: null, routeValues: routeValues)
-    {
-    }
+        : this(routeName: null, routeValues: routeValues) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AcceptedAtRoute"/> class with the values
@@ -33,9 +31,7 @@ public sealed class AcceptedAtRoute : IResult, IEndpointMetadataProvider, IStatu
     /// </summary>
     /// <param name="routeName">The name of the route to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
-    internal AcceptedAtRoute(
-        string? routeName,
-        object? routeValues)
+    internal AcceptedAtRoute(string? routeName, object? routeValues)
     {
         RouteName = routeName;
         RouteValues = new RouteValueDictionary(routeValues);
@@ -68,7 +64,8 @@ public sealed class AcceptedAtRoute : IResult, IEndpointMetadataProvider, IStatu
             httpContext,
             RouteName,
             RouteValues,
-            fragment: FragmentString.Empty);
+            fragment: FragmentString.Empty
+        );
 
         if (string.IsNullOrEmpty(url))
         {
@@ -77,7 +74,9 @@ public sealed class AcceptedAtRoute : IResult, IEndpointMetadataProvider, IStatu
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.AcceptedAtRouteResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.AcceptedAtRouteResult"
+        );
 
         httpContext.Response.Headers.Location = url;
 
@@ -88,7 +87,10 @@ public sealed class AcceptedAtRoute : IResult, IEndpointMetadataProvider, IStatu
     }
 
     /// <inheritdoc/>
-    static void IEndpointMetadataProvider.PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+    static void IEndpointMetadataProvider.PopulateMetadata(
+        MethodInfo method,
+        EndpointBuilder builder
+    )
     {
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);

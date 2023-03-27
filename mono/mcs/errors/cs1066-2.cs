@@ -4,9 +4,7 @@
 
 public partial class C
 {
-	partial void Test (int u, string s);
-	
-	partial void Test (int u, string s = "optional")
-	{
-	}
+    partial void Test(int u, string s);
+
+    partial void Test(int u, string s = "optional") { }
 }

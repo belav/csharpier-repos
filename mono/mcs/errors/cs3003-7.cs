@@ -4,10 +4,14 @@
 
 using System;
 
-[assembly: CLSCompliant (true)]
+[assembly: CLSCompliant(true)]
 
 public class C
 {
-	public unsafe byte* _data;
-	public unsafe byte* GetData () { return _data; }
+    public unsafe byte* _data;
+
+    public unsafe byte* GetData()
+    {
+        return _data;
+    }
 }

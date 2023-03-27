@@ -9,7 +9,9 @@ namespace System.ServiceModel.Security.Tokens
     using System.IdentityModel.Tokens;
     using System.Runtime.CompilerServices;
 
-    [TypeForwardedFrom("System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class BinarySecretSecurityToken : SecurityToken
     {
         string id;
@@ -18,35 +20,37 @@ namespace System.ServiceModel.Security.Tokens
         ReadOnlyCollection<SecurityKey> securityKeys;
 
         public BinarySecretSecurityToken(int keySizeInBits)
-            : this(SecurityUniqueId.Create().Value, keySizeInBits)
-        {
-        }
+            : this(SecurityUniqueId.Create().Value, keySizeInBits) { }
 
         public BinarySecretSecurityToken(string id, int keySizeInBits)
-            : this(id, keySizeInBits, true)
-        {
-        }
+            : this(id, keySizeInBits, true) { }
 
         public BinarySecretSecurityToken(byte[] key)
-            : this(SecurityUniqueId.Create().Value, key)
-        {
-        }
+            : this(SecurityUniqueId.Create().Value, key) { }
 
         public BinarySecretSecurityToken(string id, byte[] key)
-            : this(id, key, true)
-        {
-        }
+            : this(id, key, true) { }
 
         protected BinarySecretSecurityToken(string id, int keySizeInBits, bool allowCrypto)
         {
             if (keySizeInBits <= 0 || keySizeInBits >= 512)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("keySizeInBits", SR.GetString(SR.ValueMustBeInRange, 0, 512)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "keySizeInBits",
+                        SR.GetString(SR.ValueMustBeInRange, 0, 512)
+                    )
+                );
             }
 
             if ((keySizeInBits % 8) != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("keySizeInBits", SR.GetString(SR.KeyLengthMustBeMultipleOfEight, keySizeInBits)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "keySizeInBits",
+                        SR.GetString(SR.KeyLengthMustBeMultipleOfEight, keySizeInBits)
+                    )
+                );
             }
 
             this.id = id;

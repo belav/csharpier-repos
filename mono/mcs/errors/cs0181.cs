@@ -3,13 +3,13 @@
 
 using System;
 
-class TestAttribute: Attribute
+class TestAttribute : Attribute
 {
-    public TestAttribute (int[,] i) {}
+    public TestAttribute(int[,] i) { }
 }
 
 public class E
 {
-    [Test (null)]
-    public void Method () {}
+    [Test(null)]
+    public void Method() { }
 }

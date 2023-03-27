@@ -23,23 +23,30 @@ public class Startup
     // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+        services.AddDbContext<ApplicationDbContext>(
+            options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+        );
 
-        services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+        services
+            .AddDefaultIdentity<ApplicationUser>(
+                options => options.SignIn.RequireConfirmedAccount = true
+            )
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
-        services.AddIdentityServer()
+        services
+            .AddIdentityServer()
             .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
             {
                 options.IdentityResources["openid"].UserClaims.Add("role");
                 options.ApiResources.Single().UserClaims.Add("role");
-                options.ApiResources.Add(new Duende.IdentityServer.Models.ApiResource
-                {
-                    Name = "SecondAPI",
-                    Scopes = new string[] { "SecondAPI" }
-                });
+                options.ApiResources.Add(
+                    new Duende.IdentityServer.Models.ApiResource
+                    {
+                        Name = "SecondAPI",
+                        Scopes = new string[] { "SecondAPI" }
+                    }
+                );
                 var client = options.Clients.Single();
                 client.AllowedScopes.Add("SecondAPI");
             });
@@ -47,8 +54,7 @@ public class Startup
         // Need to do this as it maps "role" to ClaimTypes.Role and causes issues
         JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
 
-        services.AddAuthentication()
-            .AddIdentityServerJwt();
+        services.AddAuthentication().AddIdentityServerJwt();
 
         services.AddMvc();
     }
@@ -62,10 +68,7 @@ public class Startup
             app.UseWebAssemblyDebugging();
         }
 
-        app.UseCookiePolicy(new CookiePolicyOptions
-        {
-            MinimumSameSitePolicy = SameSiteMode.Lax
-        });
+        app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Lax });
 
         app.UseBlazorFrameworkFiles();
         app.UseStaticFiles();

@@ -3,9 +3,8 @@
 
 public class Test
 {
-	static void Main ()
-	{
-		var e = new[] { 1, null };
-	}
+    static void Main()
+    {
+        var e = new[] { 1, null };
+    }
 }
-

@@ -59,17 +59,20 @@ namespace System.ServiceModel.Activities.Description
             return this.extensionProvider.GetService<T>();
         }
 
-        public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
-        {
-        }
+        public void AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
-        {
-        }
+        public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime) { }
 
-        public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
+        public void ApplyDispatchBehavior(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
-            WorkflowServiceHost serviceHost = endpointDispatcher.ChannelDispatcher.Host as WorkflowServiceHost;
+            WorkflowServiceHost serviceHost =
+                endpointDispatcher.ChannelDispatcher.Host as WorkflowServiceHost;
             if (serviceHost != null)
             {
                 foreach (OperationDescription operation in endpoint.Contract.Operations)
@@ -78,12 +81,13 @@ namespace System.ServiceModel.Activities.Description
                         NetDataContractSerializerOperationBehavior.ApplyTo(operation);
                 }
 
-                this.extensionProvider.PopulateExtensions(serviceHost, endpointDispatcher.EndpointAddress.Uri.AbsoluteUri);
+                this.extensionProvider.PopulateExtensions(
+                    serviceHost,
+                    endpointDispatcher.EndpointAddress.Uri.AbsoluteUri
+                );
             }
         }
 
-        public void Validate(ServiceEndpoint endpoint)
-        {
-        }
+        public void Validate(ServiceEndpoint endpoint) { }
     }
 }

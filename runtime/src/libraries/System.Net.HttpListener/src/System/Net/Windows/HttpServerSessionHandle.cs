@@ -14,7 +14,8 @@ namespace System.Net
     {
         private readonly ulong _serverSessionId;
 
-        internal HttpServerSessionHandle(ulong id) : base(true)
+        internal HttpServerSessionHandle(ulong id)
+            : base(true)
         {
             _serverSessionId = id;
 
@@ -31,8 +32,10 @@ namespace System.Net
         protected override bool ReleaseHandle()
         {
             // Closing server session also closes all open url groups under that server session.
-            return (Interop.HttpApi.HttpCloseServerSession(_serverSessionId) ==
-                Interop.HttpApi.ERROR_SUCCESS);
+            return (
+                Interop.HttpApi.HttpCloseServerSession(_serverSessionId)
+                == Interop.HttpApi.ERROR_SUCCESS
+            );
         }
     }
 }

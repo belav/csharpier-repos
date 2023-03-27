@@ -4,9 +4,11 @@
 
 using System;
 
-public abstract class CLSClass {
-        [CLSCompliant (true)]
-        public static implicit operator CLSClass(byte value) {
-                return null;
-        }
+public abstract class CLSClass
+{
+    [CLSCompliant(true)]
+    public static implicit operator CLSClass(byte value)
+    {
+        return null;
+    }
 }

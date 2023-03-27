@@ -27,7 +27,10 @@ public class CodeTargetTest
     {
         // Arrange
         var wasCalled = false;
-        Action<CodeTargetBuilder> @delegate = (b) => { wasCalled = true; };
+        Action<CodeTargetBuilder> @delegate = (b) =>
+        {
+            wasCalled = true;
+        };
 
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
         var options = RazorCodeGenerationOptions.CreateDefault();

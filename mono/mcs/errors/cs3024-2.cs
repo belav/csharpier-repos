@@ -3,17 +3,14 @@
 // Compiler options: -warn:1 -warnaserror
 
 using System;
-[assembly:CLSCompliant (true)]
 
-[CLSCompliant (false)]
-public abstract class A
-{
-}
+[assembly: CLSCompliant(true)]
+
+[CLSCompliant(false)]
+public abstract class A { }
 
 public class C
 {
-	public static void Foo<T>() where T : A
-	{
-	}
+    public static void Foo<T>()
+        where T : A { }
 }
-

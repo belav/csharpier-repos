@@ -17,7 +17,10 @@ namespace LibraryImportGenerator.IntegrationTests
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "subtract_ref_byte")]
         public static unsafe partial void Subtract_Byte_Ptr(byte a, byte* b);
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "blittablestructs_double_intfields_byref")]
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "blittablestructs_double_intfields_byref"
+        )]
         public static unsafe partial void DoubleIntFields_Ptr(IntFields* result);
     }
 
@@ -45,7 +48,9 @@ namespace LibraryImportGenerator.IntegrationTests
         [Fact]
         public unsafe void BlittableStruct()
         {
-            const int A = 24, B = 37, C = 59;
+            const int A = 24,
+                B = 37,
+                C = 59;
             var initial = new IntFields()
             {
                 a = A,

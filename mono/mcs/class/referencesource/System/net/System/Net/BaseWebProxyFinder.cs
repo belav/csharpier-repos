@@ -18,7 +18,11 @@ namespace System.Net
 
         public bool IsValid
         {
-            get { return (state == AutoWebProxyState.Completed) || (state == AutoWebProxyState.Uninitialized); }
+            get
+            {
+                return (state == AutoWebProxyState.Completed)
+                    || (state == AutoWebProxyState.Uninitialized);
+            }
         }
 
         public bool IsUnrecognizedScheme

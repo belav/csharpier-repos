@@ -29,15 +29,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public NullResultMetadataAsSourceFileProvider()
-            {
-            }
+            public NullResultMetadataAsSourceFileProvider() { }
 
-            public void CleanupGeneratedFiles(Workspace? workspace)
-            {
-            }
+            public void CleanupGeneratedFiles(Workspace? workspace) { }
 
-            public Task<MetadataAsSourceFile?> GetGeneratedFileAsync(Workspace workspace, Project project, ISymbol symbol, bool signaturesOnly, bool allowDecompilation, string tempPath, CancellationToken cancellationToken)
+            public Task<MetadataAsSourceFile?> GetGeneratedFileAsync(
+                Workspace workspace,
+                Project project,
+                ISymbol symbol,
+                bool signaturesOnly,
+                bool allowDecompilation,
+                string tempPath,
+                CancellationToken cancellationToken
+            )
             {
                 return Task.FromResult<MetadataAsSourceFile?>(NullResult);
             }
@@ -47,7 +51,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 return null;
             }
 
-            public bool TryAddDocumentToWorkspace(Workspace workspace, string filePath, Text.SourceTextContainer sourceTextContainer)
+            public bool TryAddDocumentToWorkspace(
+                Workspace workspace,
+                string filePath,
+                Text.SourceTextContainer sourceTextContainer
+            )
             {
                 return true;
             }

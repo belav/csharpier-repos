@@ -13,8 +13,8 @@ using Microsoft.Build.Utilities;
 internal sealed class CompilerCache
 {
     public CompilerCache() => FileHashes = new();
-    public CompilerCache(IDictionary<string, string> oldHashes)
-        => FileHashes = new(oldHashes);
+
+    public CompilerCache(IDictionary<string, string> oldHashes) => FileHashes = new(oldHashes);
 
     [JsonPropertyName("file_hashes")]
     public ConcurrentDictionary<string, string> FileHashes { get; set; }

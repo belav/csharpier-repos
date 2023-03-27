@@ -2,9 +2,10 @@
 // Line : 8
 // Compiler options: -unsafe
 
-class T {
-	static unsafe void Main ()
-	{
-		int *a = (T) null;
-	}
+class T
+{
+    static unsafe void Main()
+    {
+        int* a = (T)null;
+    }
 }

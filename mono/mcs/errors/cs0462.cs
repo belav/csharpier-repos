@@ -3,11 +3,12 @@
 
 abstract class A<T>
 {
-	public abstract void M (T t);
-	public virtual void M (int t) { }
+    public abstract void M(T t);
+
+    public virtual void M(int t) { }
 }
 
 class B : A<int>
 {
-	public override void M (int t) { }
+    public override void M(int t) { }
 }

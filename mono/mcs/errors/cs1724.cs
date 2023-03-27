@@ -4,4 +4,4 @@
 using System;
 using System.Runtime.InteropServices;
 
-[module: DefaultCharSet ((CharSet)30)]
+[module: DefaultCharSet((CharSet)30)]

@@ -12,12 +12,18 @@ namespace System.Activities.Core.Presentation
     partial class VerticalConnector
     {
         public static readonly DependencyProperty AllowedItemTypeProperty =
-            DependencyProperty.Register("AllowedItemType", typeof(Type), typeof(VerticalConnector), new UIPropertyMetadata(typeof(object)));
+            DependencyProperty.Register(
+                "AllowedItemType",
+                typeof(Type),
+                typeof(VerticalConnector),
+                new UIPropertyMetadata(typeof(object))
+            );
 
         public static readonly DependencyProperty ContextProperty = DependencyProperty.Register(
             "Context",
             typeof(EditingContext),
-            typeof(VerticalConnector));
+            typeof(VerticalConnector)
+        );
 
         public VerticalConnector()
         {
@@ -58,8 +64,10 @@ namespace System.Activities.Core.Presentation
         {
             if (!e.Handled)
             {
-                if (!this.Context.Items.GetValue<ReadOnlyState>().IsReadOnly &&
-                    DragDropHelper.AllowDrop(e.Data, this.Context, this.AllowedItemType))
+                if (
+                    !this.Context.Items.GetValue<ReadOnlyState>().IsReadOnly
+                    && DragDropHelper.AllowDrop(e.Data, this.Context, this.AllowedItemType)
+                )
                 {
                     BeginStoryboard((Storyboard)this.Resources[storyboardResourceName]);
                     return;

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 class C
 {
-	public async void GetValue()
-	{
-		return await Task.FromResult(100);
-	}
+    public async void GetValue()
+    {
+        return await Task.FromResult(100);
+    }
 }

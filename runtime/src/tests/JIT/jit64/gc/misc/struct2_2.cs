@@ -21,7 +21,8 @@ class Test_struct2_2
 
     public static int Main()
     {
-        S sM, sM2;
+        S sM,
+            sM2;
 
         sM.str = "test";
         sM2.str = "test2";

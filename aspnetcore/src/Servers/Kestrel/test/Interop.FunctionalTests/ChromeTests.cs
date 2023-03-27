@@ -23,7 +23,7 @@ namespace Interop.FunctionalTests;
 public class ChromeTests : LoggedTest
 {
     private static readonly string _postHtml =
-@"<!DOCTYPE html>
+        @"<!DOCTYPE html>
 <html>
  <head>
    <script type=""text/javascript"">
@@ -44,28 +44,41 @@ public class ChromeTests : LoggedTest
     private void InitializeArgs()
     {
         NetLogPath = Path.Combine(ResolvedLogOutputDirectory, $"{ResolvedTestMethodName}.nl.json");
-        StartupLogPath = Path.Combine(ResolvedLogOutputDirectory, $"{ResolvedTestMethodName}.su.json");
-        ShutdownLogPath = Path.Combine(ResolvedLogOutputDirectory, $"{ResolvedTestMethodName}.sd.json");
+        StartupLogPath = Path.Combine(
+            ResolvedLogOutputDirectory,
+            $"{ResolvedTestMethodName}.su.json"
+        );
+        ShutdownLogPath = Path.Combine(
+            ResolvedLogOutputDirectory,
+            $"{ResolvedTestMethodName}.sd.json"
+        );
 
-        ChromeArgs = new[] {
-                $"--headless",
-                $"--no-sandbox",
-                $"--disable-gpu",
-                $"--allow-insecure-localhost",
-                $"--ignore-certificate-errors",
-                $"--enable-features=NetworkService",
-                $"--enable-logging",
-                $"--log-net-log={NetLogPath}",
-                $"--trace-startup",
-                $"--trace-startup-file={StartupLogPath}",
-                $"--trace-shutdown",
-                $"--trace-shutdown-file={ShutdownLogPath}"
-            };
+        ChromeArgs = new[]
+        {
+            $"--headless",
+            $"--no-sandbox",
+            $"--disable-gpu",
+            $"--allow-insecure-localhost",
+            $"--ignore-certificate-errors",
+            $"--enable-features=NetworkService",
+            $"--enable-logging",
+            $"--log-net-log={NetLogPath}",
+            $"--trace-startup",
+            $"--trace-startup-file={StartupLogPath}",
+            $"--trace-shutdown",
+            $"--trace-shutdown-file={ShutdownLogPath}"
+        };
     }
 
-    [ConditionalTheory(Skip = "Disabling while debugging. https://github.com/dotnet/aspnetcore-internal/issues/1363")]
+    [ConditionalTheory(
+        Skip = "Disabling while debugging. https://github.com/dotnet/aspnetcore-internal/issues/1363"
+    )]
     [TlsAlpnSupported]
-    [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81, SkipReason = "Missing Windows ALPN support: https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation#Support")]
+    [MinimumOSVersion(
+        OperatingSystems.Windows,
+        WindowsVersions.Win81,
+        SkipReason = "Missing Windows ALPN support: https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation#Support"
+    )]
     [InlineData("", "Interop HTTP/2 GET")]
     [InlineData("?TestMethod=POST", "Interop HTTP/2 POST")]
     public async Task Http2(string requestSuffix, string expectedResponse)
@@ -78,30 +91,41 @@ public class ChromeTests : LoggedTest
                 webHostBuilder
                     .UseKestrel(options =>
                     {
-                        options.Listen(IPAddress.Loopback, 0, listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http2;
-                            listenOptions.UseHttps(TestResources.GetTestCertificate());
-                        });
+                        options.Listen(
+                            IPAddress.Loopback,
+                            0,
+                            listenOptions =>
+                            {
+                                listenOptions.Protocols = HttpProtocols.Http2;
+                                listenOptions.UseHttps(TestResources.GetTestCertificate());
+                            }
+                        );
                     })
-                    .Configure(app => app.Run(async context =>
-                    {
-                        if (HttpMethods.IsPost(context.Request.Query["TestMethod"]))
-                        {
-                            await context.Response.WriteAsync(_postHtml);
-                        }
-                        else
-                        {
-                            await context.Response.WriteAsync($"Interop {context.Request.Protocol} {context.Request.Method}");
-                        }
-                    }));
+                    .Configure(
+                        app =>
+                            app.Run(async context =>
+                            {
+                                if (HttpMethods.IsPost(context.Request.Query["TestMethod"]))
+                                {
+                                    await context.Response.WriteAsync(_postHtml);
+                                }
+                                else
+                                {
+                                    await context.Response.WriteAsync(
+                                        $"Interop {context.Request.Protocol} {context.Request.Method}"
+                                    );
+                                }
+                            })
+                    );
             })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
         {
             await host.StartAsync();
-            var chromeOutput = RunHeadlessChrome($"https://localhost:{host.GetPort()}/{requestSuffix}");
+            var chromeOutput = RunHeadlessChrome(
+                $"https://localhost:{host.GetPort()}/{requestSuffix}"
+            );
 
             AssertExpectedResponseOrShowDebugInstructions(expectedResponse, chromeOutput);
 
@@ -114,7 +138,12 @@ public class ChromeTests : LoggedTest
         var chromeOptions = new ChromeOptions();
         chromeOptions.AddArguments(ChromeArgs);
 
-        using (var driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), chromeOptions))
+        using (
+            var driver = new ChromeDriver(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                chromeOptions
+            )
+        )
         {
             driver.Navigate().GoToUrl(testUrl);
 
@@ -122,7 +151,10 @@ public class ChromeTests : LoggedTest
         }
     }
 
-    private void AssertExpectedResponseOrShowDebugInstructions(string expectedResponse, string actualResponse)
+    private void AssertExpectedResponseOrShowDebugInstructions(
+        string expectedResponse,
+        string actualResponse
+    )
     {
         try
         {

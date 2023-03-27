@@ -6,15 +6,13 @@ using System.Diagnostics;
 
 class C
 {
-	static int Main ()
-	{
-		int a;
-		Foo (a = 9);
-		return a;
-	}
+    static int Main()
+    {
+        int a;
+        Foo(a = 9);
+        return a;
+    }
 
-	[Conditional ("MISSING")]
-	static void Foo (int value)
-	{
-	}
+    [Conditional("MISSING")]
+    static void Foo(int value) { }
 }

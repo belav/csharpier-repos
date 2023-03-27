@@ -2,10 +2,18 @@
 // Line: 10
 // Compiler options: -warnaserror -warn:4
 
-class Base {
-	public bool this [int arg] { set {} }
+class Base
+{
+    public bool this[int arg]
+    {
+        set { }
+    }
 }
 
-class Derived : Base {
-	public new bool this [string arg] { set {} }
+class Derived : Base
+{
+    public new bool this[string arg]
+    {
+        set { }
+    }
 }

@@ -13,7 +13,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
 {
     private static void DetectMisplacedLambdaAttribute(
         in OperationAnalysisContext context,
-        IAnonymousFunctionOperation lambda)
+        IAnonymousFunctionOperation lambda
+    )
     {
         // This analyzer will only process invocations that are immediate children of the
         // AnonymousFunctionOperation provided as the delegate endpoint. We'll support checking
@@ -25,7 +26,10 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
 
         // All lambdas have a single child which is a BlockOperation. We search ChildOperations for
         // the invocation expression.
-        if (lambda.ChildOperations.Count != 1 || lambda.ChildOperations.FirstOrDefault() is not IBlockOperation blockOperation)
+        if (
+            lambda.ChildOperations.Count != 1
+            || lambda.ChildOperations.FirstOrDefault() is not IBlockOperation blockOperation
+        )
         {
             Debug.Fail("Expected a single top-level BlockOperation for all lambdas.");
             return;
@@ -44,11 +48,14 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         {
             if (IsInValidNamespace(attribute.AttributeClass?.ContainingNamespace))
             {
-                context.ReportDiagnostic(Diagnostic.Create(
-                    DiagnosticDescriptors.DetectMisplacedLambdaAttribute,
-                    location,
-                    attribute.AttributeClass?.Name,
-                    methodSymbol.Name));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.DetectMisplacedLambdaAttribute,
+                        location,
+                        attribute.AttributeClass?.Name,
+                        methodSymbol.Name
+                    )
+                );
             }
         }
 
@@ -57,7 +64,13 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             if (@namespace != null && !@namespace.IsGlobalNamespace)
             {
                 // Check for Microsoft.AspNetCore in the ContainingNamespaces for this type
-                if (@namespace.Name.Equals("AspNetCore", System.StringComparison.Ordinal) && @namespace.ContainingNamespace.Name.Equals("Microsoft", System.StringComparison.Ordinal))
+                if (
+                    @namespace.Name.Equals("AspNetCore", System.StringComparison.Ordinal)
+                    && @namespace.ContainingNamespace.Name.Equals(
+                        "Microsoft",
+                        System.StringComparison.Ordinal
+                    )
+                )
                 {
                     return true;
                 }

@@ -40,10 +40,14 @@ namespace System.Text.Encodings.Web
             var bitmap = new AllowedBmpCodePointsBitmap();
             for (int i = 0; i < 1024; i++) // include C0 controls & characters beyond ASCII range
             {
-                if (IsValueAllowed(i)) { bitmap.AllowChar((char)i); }
+                if (IsValueAllowed(i))
+                {
+                    bitmap.AllowChar((char)i);
+                }
             }
 
-            using BoundedMemory<AsciiPreescapedData> boundedMemory = BoundedMemory.Allocate<AsciiPreescapedData>(1); // use BoundedMemory to detect out-of-bound accesses
+            using BoundedMemory<AsciiPreescapedData> boundedMemory =
+                BoundedMemory.Allocate<AsciiPreescapedData>(1); // use BoundedMemory to detect out-of-bound accesses
             ref var preescapedData = ref boundedMemory.Span[0];
             preescapedData.PopulatePreescapedData(bitmap, new TestEscaper());
             boundedMemory.MakeReadonly();
@@ -64,18 +68,51 @@ namespace System.Text.Encodings.Web
                 {
                     iterExpected = (0x01ul << 56) + (uint)i; // 0x01_00_00_00_00_00_00_XX, meaning char can go unescaped
                 }
-                Assert.True(preescapedData.TryGetPreescapedData((uint)i, out preescapedEntry), "All ASCII code points must return true.");
+                Assert.True(
+                    preescapedData.TryGetPreescapedData((uint)i, out preescapedEntry),
+                    "All ASCII code points must return true."
+                );
                 Assert.Equal(iterExpected, preescapedEntry);
             }
 
             // Some known test cases
 
-            Assert.True(preescapedData.TryGetPreescapedData('L' /* = 76 dec, not multiple of 7, allowed */, out preescapedEntry));
-            Assert.Equal(0x01_00_00_00_00_00_00_4Cul /* "1......L" */, preescapedEntry);
-            Assert.True(preescapedData.TryGetPreescapedData('M' /* = 77 dec, multiple of 7, disallowed (use index 77 % 6 = 5) */, out preescapedEntry));
-            Assert.Equal(0x06_00_6C_6B_6A_69_68_67ul /* "ghijkl.6" */, preescapedEntry);
-            Assert.True(preescapedData.TryGetPreescapedData('N' /* = 78 dec, not multiple of 7, allowed */, out preescapedEntry));
-            Assert.Equal(0x01_00_00_00_00_00_00_4Eul /* "N......1" */, preescapedEntry);
+            Assert.True(
+                preescapedData.TryGetPreescapedData(
+                    'L' /* = 76 dec, not multiple of 7, allowed */
+                    ,
+                    out preescapedEntry
+                )
+            );
+            Assert.Equal(
+                0x01_00_00_00_00_00_00_4Cul /* "1......L" */
+                ,
+                preescapedEntry
+            );
+            Assert.True(
+                preescapedData.TryGetPreescapedData(
+                    'M' /* = 77 dec, multiple of 7, disallowed (use index 77 % 6 = 5) */
+                    ,
+                    out preescapedEntry
+                )
+            );
+            Assert.Equal(
+                0x06_00_6C_6B_6A_69_68_67ul /* "ghijkl.6" */
+                ,
+                preescapedEntry
+            );
+            Assert.True(
+                preescapedData.TryGetPreescapedData(
+                    'N' /* = 78 dec, not multiple of 7, allowed */
+                    ,
+                    out preescapedEntry
+                )
+            );
+            Assert.Equal(
+                0x01_00_00_00_00_00_00_4Eul /* "N......1" */
+                ,
+                preescapedEntry
+            );
 
             // And try some non-ASCII edge cases, all of which must return false
 
@@ -108,7 +145,8 @@ namespace System.Text.Encodings.Web
                 return encoding.Length;
             }
 
-            internal override int EncodeUtf8(Rune value, Span<byte> destination) => throw new NotImplementedException();
+            internal override int EncodeUtf8(Rune value, Span<byte> destination) =>
+                throw new NotImplementedException();
         }
     }
 }

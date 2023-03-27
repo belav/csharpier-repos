@@ -22,6 +22,7 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
     {
         adAffectCurrent = 1,
         adAffectGroup,
+
         [TypeLibVar(TypeLibVarFlags.FHidden)]
         adAffectAll,
         adAffectAllChapters
@@ -57,6 +58,7 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         adUseNone = 1,
         adUseServer = 2,
         adUseClient = 3,
+
         [TypeLibVar(TypeLibVarFlags.FHidden)]
         adUseClientBatch = 3
     }

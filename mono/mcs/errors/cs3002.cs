@@ -3,14 +3,18 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant(true)]
 
-public class CLSClass {
-        private ulong Valid() {
-                return 1;
-        }
-    
-        protected ulong Foo() {
-                return 1;
-        }
+[assembly: CLSCompliant(true)]
+
+public class CLSClass
+{
+    private ulong Valid()
+    {
+        return 1;
+    }
+
+    protected ulong Foo()
+    {
+        return 1;
+    }
 }

@@ -16,7 +16,7 @@ namespace System.Workflow.Activities
     internal sealed class IdentityContextData : ILogicalThreadAffinative, ISerializable
     {
         internal const string IdentityContext = "__identitycontext__";
-        
+
         String identity;
 
         internal IdentityContextData(String identity)
@@ -36,7 +36,7 @@ namespace System.Workflow.Activities
             }
         }
 
-        [SecurityPermission( SecurityAction.Demand, SerializationFormatter = true)]
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (this.identity != null)
@@ -45,10 +45,7 @@ namespace System.Workflow.Activities
 
         internal String Identity
         {
-            get
-            {
-                return identity;
-            }
+            get { return identity; }
         }
     }
 }

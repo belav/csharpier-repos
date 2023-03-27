@@ -12,21 +12,29 @@ using Microsoft.CodeAnalysis.SolutionCrawler;
 
 namespace Microsoft.CodeAnalysis.IncrementalCaches
 {
-    [ExportIncrementalAnalyzerProvider(nameof(SyntaxTreeInfoIncrementalAnalyzerProvider), new[] { WorkspaceKind.RemoteWorkspace }), Shared]
+    [
+        ExportIncrementalAnalyzerProvider(
+            nameof(SyntaxTreeInfoIncrementalAnalyzerProvider),
+            new[] { WorkspaceKind.RemoteWorkspace }
+        ),
+        Shared
+    ]
     internal class SyntaxTreeInfoIncrementalAnalyzerProvider : IIncrementalAnalyzerProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SyntaxTreeInfoIncrementalAnalyzerProvider()
-        {
-        }
+        public SyntaxTreeInfoIncrementalAnalyzerProvider() { }
 
-        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace)
-            => new IncrementalAnalyzer();
+        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
+            new IncrementalAnalyzer();
 
         private class IncrementalAnalyzer : IncrementalAnalyzerBase
         {
-            public override async Task AnalyzeSyntaxAsync(Document document, InvocationReasons reasons, CancellationToken cancellationToken)
+            public override async Task AnalyzeSyntaxAsync(
+                Document document,
+                InvocationReasons reasons,
+                CancellationToken cancellationToken
+            )
             {
                 if (!document.SupportsSyntaxTree)
                 {
@@ -34,8 +42,12 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                     return;
                 }
 
-                await SyntaxTreeIndex.PrecalculateAsync(document, cancellationToken).ConfigureAwait(false);
-                await TopLevelSyntaxTreeIndex.PrecalculateAsync(document, cancellationToken).ConfigureAwait(false);
+                await SyntaxTreeIndex
+                    .PrecalculateAsync(document, cancellationToken)
+                    .ConfigureAwait(false);
+                await TopLevelSyntaxTreeIndex
+                    .PrecalculateAsync(document, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
     }

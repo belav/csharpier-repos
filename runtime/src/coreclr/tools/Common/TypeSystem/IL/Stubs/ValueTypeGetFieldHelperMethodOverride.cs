@@ -24,18 +24,12 @@ namespace Internal.IL.Stubs
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _owningType.Context;
-            }
+            get { return _owningType.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         public override MethodSignature Signature
@@ -46,12 +40,17 @@ namespace Internal.IL.Stubs
                 {
                     TypeSystemContext context = _owningType.Context;
                     TypeDesc int32Type = context.GetWellKnownType(WellKnownType.Int32);
-                    TypeDesc eeTypePtrType = context.SystemModule.GetKnownType("System", "EETypePtr");
+                    TypeDesc eeTypePtrType = context.SystemModule.GetKnownType(
+                        "System",
+                        "EETypePtr"
+                    );
 
-                    _signature = new MethodSignature(0, 0, int32Type, new[] {
+                    _signature = new MethodSignature(
+                        0,
+                        0,
                         int32Type,
-                        eeTypePtrType.MakeByRefType()
-                    });
+                        new[] { int32Type, eeTypePtrType.MakeByRefType() }
+                    );
                 }
 
                 return _signature;
@@ -128,36 +127,24 @@ namespace Internal.IL.Stubs
 
         public override Instantiation Instantiation
         {
-            get
-            {
-                return Instantiation.Empty;
-            }
+            get { return Instantiation.Empty; }
         }
 
         public override bool IsVirtual
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         internal const string MetadataName = "__GetFieldHelper";
 
         public override string Name
         {
-            get
-            {
-                return MetadataName;
-            }
+            get { return MetadataName; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return MetadataName;
-            }
+            get { return MetadataName; }
         }
     }
 }

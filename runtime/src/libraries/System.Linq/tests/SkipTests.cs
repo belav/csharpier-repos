@@ -19,44 +19,65 @@ namespace System.Linq.Tests
         [Fact]
         public void SkipSome()
         {
-            Assert.Equal(Enumerable.Range(10, 10), NumberRangeGuaranteedNotCollectionType(0, 20).Skip(10));
+            Assert.Equal(
+                Enumerable.Range(10, 10),
+                NumberRangeGuaranteedNotCollectionType(0, 20).Skip(10)
+            );
         }
 
         [Fact]
         public void SkipSomeIList()
         {
-            Assert.Equal(Enumerable.Range(10, 10), NumberRangeGuaranteedNotCollectionType(0, 20).ToList().Skip(10));
+            Assert.Equal(
+                Enumerable.Range(10, 10),
+                NumberRangeGuaranteedNotCollectionType(0, 20).ToList().Skip(10)
+            );
         }
 
         [Fact]
         public void RunOnce()
         {
             Assert.Equal(Enumerable.Range(10, 10), Enumerable.Range(0, 20).RunOnce().Skip(10));
-            Assert.Equal(Enumerable.Range(10, 10), Enumerable.Range(0, 20).ToList().RunOnce().Skip(10));
+            Assert.Equal(
+                Enumerable.Range(10, 10),
+                Enumerable.Range(0, 20).ToList().RunOnce().Skip(10)
+            );
         }
 
         [Fact]
         public void SkipNone()
         {
-            Assert.Equal(Enumerable.Range(0, 20), NumberRangeGuaranteedNotCollectionType(0, 20).Skip(0));
+            Assert.Equal(
+                Enumerable.Range(0, 20),
+                NumberRangeGuaranteedNotCollectionType(0, 20).Skip(0)
+            );
         }
 
         [Fact]
         public void SkipNoneIList()
         {
-            Assert.Equal(Enumerable.Range(0, 20), NumberRangeGuaranteedNotCollectionType(0, 20).ToList().Skip(0));
+            Assert.Equal(
+                Enumerable.Range(0, 20),
+                NumberRangeGuaranteedNotCollectionType(0, 20).ToList().Skip(0)
+            );
         }
 
         [Fact]
         public void SkipExcessive()
         {
-            Assert.Equal(Enumerable.Empty<int>(), NumberRangeGuaranteedNotCollectionType(0, 20).Skip(42));
+            Assert.Equal(
+                Enumerable.Empty<int>(),
+                NumberRangeGuaranteedNotCollectionType(0, 20).Skip(42)
+            );
         }
 
         [Fact]
         public void SkipExcessiveIList()
         {
-            Assert.Equal(Enumerable.Empty<int>(), NumberRangeGuaranteedNotCollectionType(0, 20).ToList().Skip(42));
+            Assert.Equal(
+                Enumerable.Empty<int>(),
+                NumberRangeGuaranteedNotCollectionType(0, 20).ToList().Skip(42)
+            );
         }
 
         [Fact]
@@ -74,22 +95,40 @@ namespace System.Linq.Tests
         [Fact]
         public void SkipThrowsOnNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<DateTime>)null).Skip(3));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<DateTime>)null).Skip(3)
+            );
         }
 
         [Fact]
         public void SkipThrowsOnNullIList()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((List<DateTime>)null).Skip(3));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IList<DateTime>)null).Skip(3));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((List<DateTime>)null).Skip(3)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IList<DateTime>)null).Skip(3)
+            );
         }
 
         [Fact]
         public void SkipOnEmpty()
         {
-            Assert.Equal(Enumerable.Empty<int>(), GuaranteeNotIList(Enumerable.Empty<int>()).Skip(0));
-            Assert.Equal(Enumerable.Empty<string>(), GuaranteeNotIList(Enumerable.Empty<string>()).Skip(-1));
-            Assert.Equal(Enumerable.Empty<double>(), GuaranteeNotIList(Enumerable.Empty<double>()).Skip(1));
+            Assert.Equal(
+                Enumerable.Empty<int>(),
+                GuaranteeNotIList(Enumerable.Empty<int>()).Skip(0)
+            );
+            Assert.Equal(
+                Enumerable.Empty<string>(),
+                GuaranteeNotIList(Enumerable.Empty<string>()).Skip(-1)
+            );
+            Assert.Equal(
+                Enumerable.Empty<double>(),
+                GuaranteeNotIList(Enumerable.Empty<double>()).Skip(1)
+            );
         }
 
         [Fact]
@@ -105,21 +144,29 @@ namespace System.Linq.Tests
         [Fact]
         public void SkipNegative()
         {
-            Assert.Equal(Enumerable.Range(0, 20), NumberRangeGuaranteedNotCollectionType(0, 20).Skip(-42));
+            Assert.Equal(
+                Enumerable.Range(0, 20),
+                NumberRangeGuaranteedNotCollectionType(0, 20).Skip(-42)
+            );
         }
 
         [Fact]
         public void SkipNegativeIList()
         {
-            Assert.Equal(Enumerable.Range(0, 20), NumberRangeGuaranteedNotCollectionType(0, 20).ToList().Skip(-42));
+            Assert.Equal(
+                Enumerable.Range(0, 20),
+                NumberRangeGuaranteedNotCollectionType(0, 20).ToList().Skip(-42)
+            );
         }
 
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = GuaranteeNotIList(from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                    where x > int.MinValue
-                    select x);
+            var q = GuaranteeNotIList(
+                from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                where x > int.MinValue
+                select x
+            );
 
             Assert.Equal(q.Skip(0), q.Skip(0));
         }
@@ -127,9 +174,11 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQueryIList()
         {
-            var q = (from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                    where x > Int32.MinValue
-                    select x).ToList();
+            var q = (
+                from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                where x > Int32.MinValue
+                select x
+            ).ToList();
 
             Assert.Equal(q.Skip(0), q.Skip(0));
         }
@@ -137,9 +186,11 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = GuaranteeNotIList(from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
-                    where !string.IsNullOrEmpty(x)
-                    select x);
+            var q = GuaranteeNotIList(
+                from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
+                where !string.IsNullOrEmpty(x)
+                select x
+            );
 
             Assert.Equal(q.Skip(0), q.Skip(0));
         }
@@ -147,9 +198,11 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQueryIList()
         {
-            var q = (from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", String.Empty }
-                    where !String.IsNullOrEmpty(x)
-                    select x).ToList();
+            var q = (
+                from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", String.Empty }
+                where !String.IsNullOrEmpty(x)
+                select x
+            ).ToList();
 
             Assert.Equal(q.Skip(0), q.Skip(0));
         }
@@ -252,6 +305,7 @@ namespace System.Linq.Tests
             var expected = new[] { 7 };
             Assert.Equal(expected, source.Skip(2).Take(1).Take(int.MaxValue));
         }
+
         [Fact]
         public void FollowWithTakeThenMassiveTakeNotIList()
         {
@@ -284,8 +338,14 @@ namespace System.Linq.Tests
             Assert.Equal(3, remaining.ElementAt(0));
             Assert.Equal(4, remaining.ElementAt(1));
             Assert.Equal(6, remaining.ElementAt(3));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => remaining.ElementAt(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => remaining.ElementAt(4));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => remaining.ElementAt(-1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => remaining.ElementAt(4)
+            );
         }
 
         [Fact]
@@ -296,8 +356,14 @@ namespace System.Linq.Tests
             Assert.Equal(3, remaining.ElementAt(0));
             Assert.Equal(4, remaining.ElementAt(1));
             Assert.Equal(6, remaining.ElementAt(3));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => remaining.ElementAt(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => remaining.ElementAt(4));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => remaining.ElementAt(-1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => remaining.ElementAt(4)
+            );
         }
 
         [Fact]
@@ -492,7 +558,9 @@ namespace System.Linq.Tests
             var iterator = new FastInfiniteEnumerator<int>().Skip(1).GetEnumerator();
             iterator.MoveNext(); // Make sure the underlying enumerator has been initialized.
 
-            FieldInfo state = iterator.GetType().GetTypeInfo()
+            FieldInfo state = iterator
+                .GetType()
+                .GetTypeInfo()
                 .GetField("_state", BindingFlags.Instance | BindingFlags.NonPublic);
 
             // On platforms that do not have this change, the optimization may not be present
@@ -522,7 +590,8 @@ namespace System.Linq.Tests
             var source = new DelegateIterator<int>(
                 moveNext: () => ++state <= sourceCount,
                 current: () => 0,
-                dispose: () => state = -1);
+                dispose: () => state = -1
+            );
 
             IEnumerator<int> iterator = source.Skip(count).GetEnumerator();
             int iteratorCount = Math.Max(0, sourceCount - Math.Max(0, count));

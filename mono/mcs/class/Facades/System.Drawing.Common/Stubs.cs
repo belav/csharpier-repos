@@ -13,243 +13,872 @@ namespace System.Drawing
     public sealed partial class Bitmap : System.Drawing.Image
     {
         public Bitmap(System.Drawing.Image original) => throw new PlatformNotSupportedException();
-        public Bitmap(System.Drawing.Image original, System.Drawing.Size newSize) => throw new PlatformNotSupportedException();
-        public Bitmap(System.Drawing.Image original, int width, int height) => throw new PlatformNotSupportedException();
+
+        public Bitmap(System.Drawing.Image original, System.Drawing.Size newSize) =>
+            throw new PlatformNotSupportedException();
+
+        public Bitmap(System.Drawing.Image original, int width, int height) =>
+            throw new PlatformNotSupportedException();
+
         public Bitmap(int width, int height) => throw new PlatformNotSupportedException();
-        public Bitmap(int width, int height, System.Drawing.Graphics g) => throw new PlatformNotSupportedException();
-        public Bitmap(int width, int height, System.Drawing.Imaging.PixelFormat format) => throw new PlatformNotSupportedException();
-        public Bitmap(int width, int height, int stride, System.Drawing.Imaging.PixelFormat format, System.IntPtr scan0) => throw new PlatformNotSupportedException();
+
+        public Bitmap(int width, int height, System.Drawing.Graphics g) =>
+            throw new PlatformNotSupportedException();
+
+        public Bitmap(int width, int height, System.Drawing.Imaging.PixelFormat format) =>
+            throw new PlatformNotSupportedException();
+
+        public Bitmap(
+            int width,
+            int height,
+            int stride,
+            System.Drawing.Imaging.PixelFormat format,
+            System.IntPtr scan0
+        ) => throw new PlatformNotSupportedException();
+
         public Bitmap(System.IO.Stream stream) => throw new PlatformNotSupportedException();
-        public Bitmap(System.IO.Stream stream, bool useIcm) => throw new PlatformNotSupportedException();
+
+        public Bitmap(System.IO.Stream stream, bool useIcm) =>
+            throw new PlatformNotSupportedException();
+
         public Bitmap(string filename) => throw new PlatformNotSupportedException();
+
         public Bitmap(string filename, bool useIcm) => throw new PlatformNotSupportedException();
-        public Bitmap(System.Type type, string resource) => throw new PlatformNotSupportedException();
-        public System.Drawing.Bitmap Clone(System.Drawing.Rectangle rect, System.Drawing.Imaging.PixelFormat format) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Bitmap Clone(System.Drawing.RectangleF rect, System.Drawing.Imaging.PixelFormat format) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Bitmap FromHicon(System.IntPtr hicon) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Bitmap FromResource(System.IntPtr hinstance, string bitmapName) { throw new PlatformNotSupportedException(); }
-        [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(2))]
-        public System.IntPtr GetHbitmap() { throw new PlatformNotSupportedException(); }
-        [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(2))]
-        public System.IntPtr GetHbitmap(System.Drawing.Color background) { throw new PlatformNotSupportedException(); }
-        [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(2))]
-        public System.IntPtr GetHicon() { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Color GetPixel(int x, int y) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Imaging.BitmapData LockBits(System.Drawing.Rectangle rect, System.Drawing.Imaging.ImageLockMode flags, System.Drawing.Imaging.PixelFormat format) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Imaging.BitmapData LockBits(System.Drawing.Rectangle rect, System.Drawing.Imaging.ImageLockMode flags, System.Drawing.Imaging.PixelFormat format, System.Drawing.Imaging.BitmapData bitmapData) { throw new PlatformNotSupportedException(); }
+
+        public Bitmap(System.Type type, string resource) =>
+            throw new PlatformNotSupportedException();
+
+        public System.Drawing.Bitmap Clone(
+            System.Drawing.Rectangle rect,
+            System.Drawing.Imaging.PixelFormat format
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Bitmap Clone(
+            System.Drawing.RectangleF rect,
+            System.Drawing.Imaging.PixelFormat format
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Bitmap FromHicon(System.IntPtr hicon)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Bitmap FromResource(System.IntPtr hinstance, string bitmapName)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        [System.ComponentModel.EditorBrowsableAttribute(
+            (System.ComponentModel.EditorBrowsableState)(2)
+        )]
+        public System.IntPtr GetHbitmap()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        [System.ComponentModel.EditorBrowsableAttribute(
+            (System.ComponentModel.EditorBrowsableState)(2)
+        )]
+        public System.IntPtr GetHbitmap(System.Drawing.Color background)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        [System.ComponentModel.EditorBrowsableAttribute(
+            (System.ComponentModel.EditorBrowsableState)(2)
+        )]
+        public System.IntPtr GetHicon()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Color GetPixel(int x, int y)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Imaging.BitmapData LockBits(
+            System.Drawing.Rectangle rect,
+            System.Drawing.Imaging.ImageLockMode flags,
+            System.Drawing.Imaging.PixelFormat format
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Imaging.BitmapData LockBits(
+            System.Drawing.Rectangle rect,
+            System.Drawing.Imaging.ImageLockMode flags,
+            System.Drawing.Imaging.PixelFormat format,
+            System.Drawing.Imaging.BitmapData bitmapData
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void MakeTransparent() => throw new PlatformNotSupportedException();
-        public void MakeTransparent(System.Drawing.Color transparentColor) => throw new PlatformNotSupportedException();
-        public void SetPixel(int x, int y, System.Drawing.Color color) => throw new PlatformNotSupportedException();
-        public void SetResolution(float xDpi, float yDpi) => throw new PlatformNotSupportedException();
-        public void UnlockBits(System.Drawing.Imaging.BitmapData bitmapdata) => throw new PlatformNotSupportedException();
+
+        public void MakeTransparent(System.Drawing.Color transparentColor) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetPixel(int x, int y, System.Drawing.Color color) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetResolution(float xDpi, float yDpi) =>
+            throw new PlatformNotSupportedException();
+
+        public void UnlockBits(System.Drawing.Imaging.BitmapData bitmapdata) =>
+            throw new PlatformNotSupportedException();
     }
+
     [System.AttributeUsageAttribute((System.AttributeTargets)(1))]
     public partial class BitmapSuffixInSameAssemblyAttribute : System.Attribute
     {
         public BitmapSuffixInSameAssemblyAttribute() => throw new PlatformNotSupportedException();
     }
+
     [System.AttributeUsageAttribute((System.AttributeTargets)(1))]
     public partial class BitmapSuffixInSatelliteAssemblyAttribute : System.Attribute
     {
-        public BitmapSuffixInSatelliteAssemblyAttribute() => throw new PlatformNotSupportedException();
+        public BitmapSuffixInSatelliteAssemblyAttribute() =>
+            throw new PlatformNotSupportedException();
     }
-    public abstract partial class Brush : System.MarshalByRefObject, System.ICloneable, System.IDisposable
+
+    public abstract partial class Brush
+        : System.MarshalByRefObject,
+            System.ICloneable,
+            System.IDisposable
     {
         protected Brush() => throw new PlatformNotSupportedException();
+
         public abstract object Clone();
+
         public void Dispose() => throw new PlatformNotSupportedException();
+
         protected virtual void Dispose(bool disposing) => throw new PlatformNotSupportedException();
+
         ~Brush() => throw new PlatformNotSupportedException();
-        protected internal void SetNativeBrush(System.IntPtr brush) => throw new PlatformNotSupportedException();
+
+        protected internal void SetNativeBrush(System.IntPtr brush) =>
+            throw new PlatformNotSupportedException();
     }
+
     public static partial class Brushes
     {
-        public static System.Drawing.Brush AliceBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush AntiqueWhite { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Aqua { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Aquamarine { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Azure { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Beige { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Bisque { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Black { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush BlanchedAlmond { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Blue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush BlueViolet { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Brown { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush BurlyWood { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush CadetBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Chartreuse { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Chocolate { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Coral { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush CornflowerBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Cornsilk { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Crimson { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Cyan { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkCyan { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkGoldenrod { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkGray { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkKhaki { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkMagenta { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkOliveGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkOrange { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkOrchid { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkRed { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkSalmon { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkSeaGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkSlateBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkSlateGray { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkTurquoise { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DarkViolet { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DeepPink { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DeepSkyBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DimGray { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush DodgerBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Firebrick { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush FloralWhite { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush ForestGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Fuchsia { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Gainsboro { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush GhostWhite { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Gold { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Goldenrod { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Gray { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Green { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush GreenYellow { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Honeydew { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush HotPink { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush IndianRed { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Indigo { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Ivory { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Khaki { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Lavender { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LavenderBlush { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LawnGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LemonChiffon { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LightBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LightCoral { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LightCyan { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LightGoldenrodYellow { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LightGray { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LightGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LightPink { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LightSalmon { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LightSeaGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LightSkyBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LightSlateGray { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LightSteelBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LightYellow { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Lime { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush LimeGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Linen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Magenta { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Maroon { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MediumAquamarine { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MediumBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MediumOrchid { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MediumPurple { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MediumSeaGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MediumSlateBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MediumSpringGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MediumTurquoise { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MediumVioletRed { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MidnightBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MintCream { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MistyRose { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Moccasin { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush NavajoWhite { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Navy { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush OldLace { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Olive { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush OliveDrab { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Orange { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush OrangeRed { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Orchid { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush PaleGoldenrod { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush PaleGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush PaleTurquoise { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush PaleVioletRed { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush PapayaWhip { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush PeachPuff { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Peru { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Pink { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Plum { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush PowderBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Purple { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Red { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush RosyBrown { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush RoyalBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush SaddleBrown { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Salmon { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush SandyBrown { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush SeaGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush SeaShell { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Sienna { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Silver { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush SkyBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush SlateBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush SlateGray { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Snow { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush SpringGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush SteelBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Tan { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Teal { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Thistle { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Tomato { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Transparent { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Turquoise { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Violet { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Wheat { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush White { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush WhiteSmoke { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Yellow { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush YellowGreen { get { throw new PlatformNotSupportedException(); } }
+        public static System.Drawing.Brush AliceBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush AntiqueWhite
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Aqua
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Aquamarine
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Azure
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Beige
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Bisque
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Black
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush BlanchedAlmond
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Blue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush BlueViolet
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Brown
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush BurlyWood
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush CadetBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Chartreuse
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Chocolate
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Coral
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush CornflowerBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Cornsilk
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Crimson
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Cyan
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkCyan
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkGoldenrod
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkGray
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkKhaki
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkMagenta
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkOliveGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkOrange
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkOrchid
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkRed
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkSalmon
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkSeaGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkSlateBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkSlateGray
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkTurquoise
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DarkViolet
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DeepPink
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DeepSkyBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DimGray
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush DodgerBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Firebrick
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush FloralWhite
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush ForestGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Fuchsia
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Gainsboro
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush GhostWhite
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Gold
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Goldenrod
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Gray
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Green
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush GreenYellow
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Honeydew
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush HotPink
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush IndianRed
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Indigo
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Ivory
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Khaki
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Lavender
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LavenderBlush
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LawnGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LemonChiffon
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LightBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LightCoral
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LightCyan
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LightGoldenrodYellow
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LightGray
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LightGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LightPink
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LightSalmon
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LightSeaGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LightSkyBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LightSlateGray
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LightSteelBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LightYellow
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Lime
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush LimeGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Linen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Magenta
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Maroon
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MediumAquamarine
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MediumBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MediumOrchid
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MediumPurple
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MediumSeaGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MediumSlateBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MediumSpringGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MediumTurquoise
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MediumVioletRed
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MidnightBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MintCream
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MistyRose
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Moccasin
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush NavajoWhite
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Navy
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush OldLace
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Olive
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush OliveDrab
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Orange
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush OrangeRed
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Orchid
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush PaleGoldenrod
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush PaleGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush PaleTurquoise
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush PaleVioletRed
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush PapayaWhip
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush PeachPuff
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Peru
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Pink
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Plum
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush PowderBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Purple
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Red
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush RosyBrown
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush RoyalBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush SaddleBrown
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Salmon
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush SandyBrown
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush SeaGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush SeaShell
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Sienna
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Silver
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush SkyBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush SlateBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush SlateGray
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Snow
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush SpringGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush SteelBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Tan
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Teal
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Thistle
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Tomato
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Transparent
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Turquoise
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Violet
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Wheat
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush White
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush WhiteSmoke
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Yellow
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush YellowGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
     }
+
     public sealed partial class BufferedGraphics : System.IDisposable
     {
         internal BufferedGraphics() => throw new PlatformNotSupportedException();
-        public System.Drawing.Graphics Graphics { get { throw new PlatformNotSupportedException(); } }
+
+        public System.Drawing.Graphics Graphics
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
+
         ~BufferedGraphics() => throw new PlatformNotSupportedException();
+
         public void Render() => throw new PlatformNotSupportedException();
-        public void Render(System.Drawing.Graphics target) => throw new PlatformNotSupportedException();
+
+        public void Render(System.Drawing.Graphics target) =>
+            throw new PlatformNotSupportedException();
+
         public void Render(System.IntPtr targetDC) => throw new PlatformNotSupportedException();
     }
+
     public sealed partial class BufferedGraphicsContext : System.IDisposable
     {
         public BufferedGraphicsContext() => throw new PlatformNotSupportedException();
-        public System.Drawing.Size MaximumBuffer { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.BufferedGraphics Allocate(System.Drawing.Graphics targetGraphics, System.Drawing.Rectangle targetRectangle) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.BufferedGraphics Allocate(System.IntPtr targetDC, System.Drawing.Rectangle targetRectangle) { throw new PlatformNotSupportedException(); }
+
+        public System.Drawing.Size MaximumBuffer
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.BufferedGraphics Allocate(
+            System.Drawing.Graphics targetGraphics,
+            System.Drawing.Rectangle targetRectangle
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.BufferedGraphics Allocate(
+            System.IntPtr targetDC,
+            System.Drawing.Rectangle targetRectangle
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
+
         ~BufferedGraphicsContext() => throw new PlatformNotSupportedException();
+
         public void Invalidate() => throw new PlatformNotSupportedException();
     }
+
     public static partial class BufferedGraphicsManager
     {
-        public static System.Drawing.BufferedGraphicsContext Current { get { throw new PlatformNotSupportedException(); } }
+        public static System.Drawing.BufferedGraphicsContext Current
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
     }
+
     public partial struct CharacterRange
     {
         private int _dummy;
-        public CharacterRange(int First, int Length) { throw new PlatformNotSupportedException(); }
-        public int First { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int Length { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public override bool Equals(object obj) { throw new PlatformNotSupportedException(); }
-        public override int GetHashCode() { throw new PlatformNotSupportedException(); }
-        public static bool operator ==(System.Drawing.CharacterRange cr1, System.Drawing.CharacterRange cr2) { throw new PlatformNotSupportedException(); }
-        public static bool operator !=(System.Drawing.CharacterRange cr1, System.Drawing.CharacterRange cr2) { throw new PlatformNotSupportedException(); }
+
+        public CharacterRange(int First, int Length)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public int First
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int Length
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public override bool Equals(object obj)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override int GetHashCode()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static bool operator ==(
+            System.Drawing.CharacterRange cr1,
+            System.Drawing.CharacterRange cr2
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static bool operator !=(
+            System.Drawing.CharacterRange cr1,
+            System.Drawing.CharacterRange cr2
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public static partial class ColorTranslator
     {
-        public static System.Drawing.Color FromHtml(string htmlColor) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Color FromOle(int oleColor) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Color FromWin32(int win32Color) { throw new PlatformNotSupportedException(); }
-        public static string ToHtml(System.Drawing.Color c) { throw new PlatformNotSupportedException(); }
-        public static int ToOle(System.Drawing.Color c) { throw new PlatformNotSupportedException(); }
-        public static int ToWin32(System.Drawing.Color c) { throw new PlatformNotSupportedException(); }
+        public static System.Drawing.Color FromHtml(string htmlColor)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Color FromOle(int oleColor)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Color FromWin32(int win32Color)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static string ToHtml(System.Drawing.Color c)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static int ToOle(System.Drawing.Color c)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static int ToWin32(System.Drawing.Color c)
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public enum ContentAlignment
     {
         BottomCenter = 512,
@@ -262,6 +891,7 @@ namespace System.Drawing
         TopLeft = 1,
         TopRight = 4,
     }
+
     public enum CopyPixelOperation
     {
         Blackness = 66,
@@ -282,96 +912,360 @@ namespace System.Drawing
         SourcePaint = 15597702,
         Whiteness = 16711778,
     }
+
 #if netcoreapp
-    [System.ComponentModel.TypeConverter("System.Drawing.FontConverter, System.Windows.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51")]
+    [System.ComponentModel.TypeConverter(
+        "System.Drawing.FontConverter, System.Windows.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+    )]
 #endif
-    public sealed partial class Font : System.MarshalByRefObject, System.ICloneable, System.IDisposable, System.Runtime.Serialization.ISerializable
+    public sealed partial class Font
+        : System.MarshalByRefObject,
+            System.ICloneable,
+            System.IDisposable,
+            System.Runtime.Serialization.ISerializable
     {
-        public Font(System.Drawing.Font prototype, System.Drawing.FontStyle newStyle) => throw new PlatformNotSupportedException();
-        public Font(System.Drawing.FontFamily family, float emSize) => throw new PlatformNotSupportedException();
-        public Font(System.Drawing.FontFamily family, float emSize, System.Drawing.FontStyle style) => throw new PlatformNotSupportedException();
-        public Font(System.Drawing.FontFamily family, float emSize, System.Drawing.FontStyle style, System.Drawing.GraphicsUnit unit) => throw new PlatformNotSupportedException();
-        public Font(System.Drawing.FontFamily family, float emSize, System.Drawing.FontStyle style, System.Drawing.GraphicsUnit unit, byte gdiCharSet) => throw new PlatformNotSupportedException();
-        public Font(System.Drawing.FontFamily family, float emSize, System.Drawing.FontStyle style, System.Drawing.GraphicsUnit unit, byte gdiCharSet, bool gdiVerticalFont) => throw new PlatformNotSupportedException();
-        public Font(System.Drawing.FontFamily family, float emSize, System.Drawing.GraphicsUnit unit) => throw new PlatformNotSupportedException();
+        public Font(System.Drawing.Font prototype, System.Drawing.FontStyle newStyle) =>
+            throw new PlatformNotSupportedException();
+
+        public Font(System.Drawing.FontFamily family, float emSize) =>
+            throw new PlatformNotSupportedException();
+
+        public Font(
+            System.Drawing.FontFamily family,
+            float emSize,
+            System.Drawing.FontStyle style
+        ) => throw new PlatformNotSupportedException();
+
+        public Font(
+            System.Drawing.FontFamily family,
+            float emSize,
+            System.Drawing.FontStyle style,
+            System.Drawing.GraphicsUnit unit
+        ) => throw new PlatformNotSupportedException();
+
+        public Font(
+            System.Drawing.FontFamily family,
+            float emSize,
+            System.Drawing.FontStyle style,
+            System.Drawing.GraphicsUnit unit,
+            byte gdiCharSet
+        ) => throw new PlatformNotSupportedException();
+
+        public Font(
+            System.Drawing.FontFamily family,
+            float emSize,
+            System.Drawing.FontStyle style,
+            System.Drawing.GraphicsUnit unit,
+            byte gdiCharSet,
+            bool gdiVerticalFont
+        ) => throw new PlatformNotSupportedException();
+
+        public Font(
+            System.Drawing.FontFamily family,
+            float emSize,
+            System.Drawing.GraphicsUnit unit
+        ) => throw new PlatformNotSupportedException();
+
         public Font(string familyName, float emSize) => throw new PlatformNotSupportedException();
-        public Font(string familyName, float emSize, System.Drawing.FontStyle style) => throw new PlatformNotSupportedException();
-        public Font(string familyName, float emSize, System.Drawing.FontStyle style, System.Drawing.GraphicsUnit unit) => throw new PlatformNotSupportedException();
-        public Font(string familyName, float emSize, System.Drawing.FontStyle style, System.Drawing.GraphicsUnit unit, byte gdiCharSet) => throw new PlatformNotSupportedException();
-        public Font(string familyName, float emSize, System.Drawing.FontStyle style, System.Drawing.GraphicsUnit unit, byte gdiCharSet, bool gdiVerticalFont) => throw new PlatformNotSupportedException();
-        public Font(string familyName, float emSize, System.Drawing.GraphicsUnit unit) => throw new PlatformNotSupportedException();
-        [System.ComponentModel.DesignerSerializationVisibilityAttribute((System.ComponentModel.DesignerSerializationVisibility)(0))]
-        public bool Bold { get { throw new PlatformNotSupportedException(); } }
+
+        public Font(string familyName, float emSize, System.Drawing.FontStyle style) =>
+            throw new PlatformNotSupportedException();
+
+        public Font(
+            string familyName,
+            float emSize,
+            System.Drawing.FontStyle style,
+            System.Drawing.GraphicsUnit unit
+        ) => throw new PlatformNotSupportedException();
+
+        public Font(
+            string familyName,
+            float emSize,
+            System.Drawing.FontStyle style,
+            System.Drawing.GraphicsUnit unit,
+            byte gdiCharSet
+        ) => throw new PlatformNotSupportedException();
+
+        public Font(
+            string familyName,
+            float emSize,
+            System.Drawing.FontStyle style,
+            System.Drawing.GraphicsUnit unit,
+            byte gdiCharSet,
+            bool gdiVerticalFont
+        ) => throw new PlatformNotSupportedException();
+
+        public Font(string familyName, float emSize, System.Drawing.GraphicsUnit unit) =>
+            throw new PlatformNotSupportedException();
+
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            (System.ComponentModel.DesignerSerializationVisibility)(0)
+        )]
+        public bool Bold
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public System.Drawing.FontFamily FontFamily { get { throw new PlatformNotSupportedException(); } }
-        [System.ComponentModel.DesignerSerializationVisibilityAttribute((System.ComponentModel.DesignerSerializationVisibility)(0))]
-        public byte GdiCharSet { get { throw new PlatformNotSupportedException(); } }
-        [System.ComponentModel.DesignerSerializationVisibilityAttribute((System.ComponentModel.DesignerSerializationVisibility)(0))]
-        public bool GdiVerticalFont { get { throw new PlatformNotSupportedException(); } }
+        public System.Drawing.FontFamily FontFamily
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            (System.ComponentModel.DesignerSerializationVisibility)(0)
+        )]
+        public byte GdiCharSet
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            (System.ComponentModel.DesignerSerializationVisibility)(0)
+        )]
+        public bool GdiVerticalFont
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public int Height { get { throw new PlatformNotSupportedException(); } }
+        public int Height
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public bool IsSystemFont { get { throw new PlatformNotSupportedException(); } }
-        [System.ComponentModel.DesignerSerializationVisibilityAttribute((System.ComponentModel.DesignerSerializationVisibility)(0))]
-        public bool Italic { get { throw new PlatformNotSupportedException(); } }
-        [System.ComponentModel.DesignerSerializationVisibilityAttribute((System.ComponentModel.DesignerSerializationVisibility)(0))]
-        public string Name { get { throw new PlatformNotSupportedException(); } }
+        public bool IsSystemFont
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            (System.ComponentModel.DesignerSerializationVisibility)(0)
+        )]
+        public bool Italic
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            (System.ComponentModel.DesignerSerializationVisibility)(0)
+        )]
+        public string Name
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public string OriginalFontName { get { throw new PlatformNotSupportedException(); } }
-        public float Size { get { throw new PlatformNotSupportedException(); } }
+        public string OriginalFontName
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public float Size
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public float SizeInPoints { get { throw new PlatformNotSupportedException(); } }
-        [System.ComponentModel.DesignerSerializationVisibilityAttribute((System.ComponentModel.DesignerSerializationVisibility)(0))]
-        public bool Strikeout { get { throw new PlatformNotSupportedException(); } }
+        public float SizeInPoints
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            (System.ComponentModel.DesignerSerializationVisibility)(0)
+        )]
+        public bool Strikeout
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public System.Drawing.FontStyle Style { get { throw new PlatformNotSupportedException(); } }
+        public System.Drawing.FontStyle Style
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public string SystemFontName { get { throw new PlatformNotSupportedException(); } }
-        [System.ComponentModel.DesignerSerializationVisibilityAttribute((System.ComponentModel.DesignerSerializationVisibility)(0))]
-        public bool Underline { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.GraphicsUnit Unit { get { throw new PlatformNotSupportedException(); } }
-        public object Clone() { throw new PlatformNotSupportedException(); }
+        public string SystemFontName
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            (System.ComponentModel.DesignerSerializationVisibility)(0)
+        )]
+        public bool Underline
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.GraphicsUnit Unit
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
-        public override bool Equals(object obj) { throw new PlatformNotSupportedException(); }
+
+        public override bool Equals(object obj)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         ~Font() => throw new PlatformNotSupportedException();
-        public static System.Drawing.Font FromHdc(System.IntPtr hdc) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Font FromHfont(System.IntPtr hfont) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Font FromLogFont(object lf) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Font FromLogFont(object lf, System.IntPtr hdc) { throw new PlatformNotSupportedException(); }
-        public override int GetHashCode() { throw new PlatformNotSupportedException(); }
-        public float GetHeight() { throw new PlatformNotSupportedException(); }
-        public float GetHeight(System.Drawing.Graphics graphics) { throw new PlatformNotSupportedException(); }
-        public float GetHeight(float dpi) { throw new PlatformNotSupportedException(); }
-        void System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo si, System.Runtime.Serialization.StreamingContext context) => throw new PlatformNotSupportedException();
-        public System.IntPtr ToHfont() { throw new PlatformNotSupportedException(); }
+
+        public static System.Drawing.Font FromHdc(System.IntPtr hdc)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Font FromHfont(System.IntPtr hfont)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Font FromLogFont(object lf)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Font FromLogFont(object lf, System.IntPtr hdc)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override int GetHashCode()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public float GetHeight()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public float GetHeight(System.Drawing.Graphics graphics)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public float GetHeight(float dpi)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        void System.Runtime.Serialization.ISerializable.GetObjectData(
+            System.Runtime.Serialization.SerializationInfo si,
+            System.Runtime.Serialization.StreamingContext context
+        ) => throw new PlatformNotSupportedException();
+
+        public System.IntPtr ToHfont()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void ToLogFont(object logFont) => throw new PlatformNotSupportedException();
-        public void ToLogFont(object logFont, System.Drawing.Graphics graphics) => throw new PlatformNotSupportedException();
-        public override string ToString() { throw new PlatformNotSupportedException(); }
+
+        public void ToLogFont(object logFont, System.Drawing.Graphics graphics) =>
+            throw new PlatformNotSupportedException();
+
+        public override string ToString()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public sealed partial class FontFamily : System.MarshalByRefObject, System.IDisposable
     {
-        public FontFamily(System.Drawing.Text.GenericFontFamilies genericFamily) => throw new PlatformNotSupportedException();
+        public FontFamily(System.Drawing.Text.GenericFontFamilies genericFamily) =>
+            throw new PlatformNotSupportedException();
+
         public FontFamily(string name) => throw new PlatformNotSupportedException();
-        public FontFamily(string name, System.Drawing.Text.FontCollection fontCollection) => throw new PlatformNotSupportedException();
-        public static System.Drawing.FontFamily[] Families { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.FontFamily GenericMonospace { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.FontFamily GenericSansSerif { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.FontFamily GenericSerif { get { throw new PlatformNotSupportedException(); } }
-        public string Name { get { throw new PlatformNotSupportedException(); } }
+
+        public FontFamily(string name, System.Drawing.Text.FontCollection fontCollection) =>
+            throw new PlatformNotSupportedException();
+
+        public static System.Drawing.FontFamily[] Families
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.FontFamily GenericMonospace
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.FontFamily GenericSansSerif
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.FontFamily GenericSerif
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public string Name
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
-        public override bool Equals(object obj) { throw new PlatformNotSupportedException(); }
+
+        public override bool Equals(object obj)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         ~FontFamily() => throw new PlatformNotSupportedException();
-        public int GetCellAscent(System.Drawing.FontStyle style) { throw new PlatformNotSupportedException(); }
-        public int GetCellDescent(System.Drawing.FontStyle style) { throw new PlatformNotSupportedException(); }
-        public int GetEmHeight(System.Drawing.FontStyle style) { throw new PlatformNotSupportedException(); }
+
+        public int GetCellAscent(System.Drawing.FontStyle style)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public int GetCellDescent(System.Drawing.FontStyle style)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public int GetEmHeight(System.Drawing.FontStyle style)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         [System.ObsoleteAttribute("Do not use method GetFamilies, use property Families instead")]
-        public static System.Drawing.FontFamily[] GetFamilies(System.Drawing.Graphics graphics) { throw new PlatformNotSupportedException(); }
-        public override int GetHashCode() { throw new PlatformNotSupportedException(); }
-        public int GetLineSpacing(System.Drawing.FontStyle style) { throw new PlatformNotSupportedException(); }
-        public string GetName(int language) { throw new PlatformNotSupportedException(); }
-        public bool IsStyleAvailable(System.Drawing.FontStyle style) { throw new PlatformNotSupportedException(); }
-        public override string ToString() { throw new PlatformNotSupportedException(); }
+        public static System.Drawing.FontFamily[] GetFamilies(System.Drawing.Graphics graphics)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override int GetHashCode()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public int GetLineSpacing(System.Drawing.FontStyle style)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public string GetName(int language)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsStyleAvailable(System.Drawing.FontStyle style)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override string ToString()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     [System.FlagsAttribute]
     public enum FontStyle
     {
@@ -381,258 +1275,1435 @@ namespace System.Drawing
         Strikeout = 8,
         Underline = 4,
     }
-    public sealed partial class Graphics : System.MarshalByRefObject, System.Drawing.IDeviceContext, System.IDisposable
+
+    public sealed partial class Graphics
+        : System.MarshalByRefObject,
+            System.Drawing.IDeviceContext,
+            System.IDisposable
     {
         internal Graphics() => throw new PlatformNotSupportedException();
-        public System.Drawing.Region Clip { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.RectangleF ClipBounds { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Drawing2D.CompositingMode CompositingMode { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.CompositingQuality CompositingQuality { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float DpiX { get { throw new PlatformNotSupportedException(); } }
-        public float DpiY { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Drawing2D.InterpolationMode InterpolationMode { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public bool IsClipEmpty { get { throw new PlatformNotSupportedException(); } }
-        public bool IsVisibleClipEmpty { get { throw new PlatformNotSupportedException(); } }
-        public float PageScale { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.GraphicsUnit PageUnit { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.PixelOffsetMode PixelOffsetMode { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Point RenderingOrigin { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.SmoothingMode SmoothingMode { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int TextContrast { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Text.TextRenderingHint TextRenderingHint { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.Matrix Transform { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.RectangleF VisibleClipBounds { get { throw new PlatformNotSupportedException(); } }
+
+        public System.Drawing.Region Clip
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.RectangleF ClipBounds
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Drawing2D.CompositingMode CompositingMode
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.CompositingQuality CompositingQuality
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float DpiX
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public float DpiY
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Drawing2D.InterpolationMode InterpolationMode
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public bool IsClipEmpty
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public bool IsVisibleClipEmpty
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public float PageScale
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.GraphicsUnit PageUnit
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.PixelOffsetMode PixelOffsetMode
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Point RenderingOrigin
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.SmoothingMode SmoothingMode
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int TextContrast
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Text.TextRenderingHint TextRenderingHint
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.Matrix Transform
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.RectangleF VisibleClipBounds
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         public void AddMetafileComment(byte[] data) => throw new PlatformNotSupportedException();
-        public System.Drawing.Drawing2D.GraphicsContainer BeginContainer() { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.GraphicsContainer BeginContainer(System.Drawing.Rectangle dstrect, System.Drawing.Rectangle srcrect, System.Drawing.GraphicsUnit unit) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.GraphicsContainer BeginContainer(System.Drawing.RectangleF dstrect, System.Drawing.RectangleF srcrect, System.Drawing.GraphicsUnit unit) { throw new PlatformNotSupportedException(); }
+
+        public System.Drawing.Drawing2D.GraphicsContainer BeginContainer()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Drawing2D.GraphicsContainer BeginContainer(
+            System.Drawing.Rectangle dstrect,
+            System.Drawing.Rectangle srcrect,
+            System.Drawing.GraphicsUnit unit
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Drawing2D.GraphicsContainer BeginContainer(
+            System.Drawing.RectangleF dstrect,
+            System.Drawing.RectangleF srcrect,
+            System.Drawing.GraphicsUnit unit
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void Clear(System.Drawing.Color color) => throw new PlatformNotSupportedException();
-        public void CopyFromScreen(System.Drawing.Point upperLeftSource, System.Drawing.Point upperLeftDestination, System.Drawing.Size blockRegionSize) => throw new PlatformNotSupportedException();
-        public void CopyFromScreen(System.Drawing.Point upperLeftSource, System.Drawing.Point upperLeftDestination, System.Drawing.Size blockRegionSize, System.Drawing.CopyPixelOperation copyPixelOperation) => throw new PlatformNotSupportedException();
-        public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, System.Drawing.Size blockRegionSize) => throw new PlatformNotSupportedException();
-        public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, System.Drawing.Size blockRegionSize, System.Drawing.CopyPixelOperation copyPixelOperation) => throw new PlatformNotSupportedException();
+
+        public void CopyFromScreen(
+            System.Drawing.Point upperLeftSource,
+            System.Drawing.Point upperLeftDestination,
+            System.Drawing.Size blockRegionSize
+        ) => throw new PlatformNotSupportedException();
+
+        public void CopyFromScreen(
+            System.Drawing.Point upperLeftSource,
+            System.Drawing.Point upperLeftDestination,
+            System.Drawing.Size blockRegionSize,
+            System.Drawing.CopyPixelOperation copyPixelOperation
+        ) => throw new PlatformNotSupportedException();
+
+        public void CopyFromScreen(
+            int sourceX,
+            int sourceY,
+            int destinationX,
+            int destinationY,
+            System.Drawing.Size blockRegionSize
+        ) => throw new PlatformNotSupportedException();
+
+        public void CopyFromScreen(
+            int sourceX,
+            int sourceY,
+            int destinationX,
+            int destinationY,
+            System.Drawing.Size blockRegionSize,
+            System.Drawing.CopyPixelOperation copyPixelOperation
+        ) => throw new PlatformNotSupportedException();
+
         public void Dispose() => throw new PlatformNotSupportedException();
-        public void DrawArc(System.Drawing.Pen pen, System.Drawing.Rectangle rect, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void DrawArc(System.Drawing.Pen pen, System.Drawing.RectangleF rect, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void DrawArc(System.Drawing.Pen pen, int x, int y, int width, int height, int startAngle, int sweepAngle) => throw new PlatformNotSupportedException();
-        public void DrawArc(System.Drawing.Pen pen, float x, float y, float width, float height, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void DrawBezier(System.Drawing.Pen pen, System.Drawing.Point pt1, System.Drawing.Point pt2, System.Drawing.Point pt3, System.Drawing.Point pt4) => throw new PlatformNotSupportedException();
-        public void DrawBezier(System.Drawing.Pen pen, System.Drawing.PointF pt1, System.Drawing.PointF pt2, System.Drawing.PointF pt3, System.Drawing.PointF pt4) => throw new PlatformNotSupportedException();
-        public void DrawBezier(System.Drawing.Pen pen, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) => throw new PlatformNotSupportedException();
-        public void DrawBeziers(System.Drawing.Pen pen, System.Drawing.PointF[] points) => throw new PlatformNotSupportedException();
-        public void DrawBeziers(System.Drawing.Pen pen, System.Drawing.Point[] points) => throw new PlatformNotSupportedException();
-        public void DrawClosedCurve(System.Drawing.Pen pen, System.Drawing.PointF[] points) => throw new PlatformNotSupportedException();
-        public void DrawClosedCurve(System.Drawing.Pen pen, System.Drawing.PointF[] points, float tension, System.Drawing.Drawing2D.FillMode fillmode) => throw new PlatformNotSupportedException();
-        public void DrawClosedCurve(System.Drawing.Pen pen, System.Drawing.Point[] points) => throw new PlatformNotSupportedException();
-        public void DrawClosedCurve(System.Drawing.Pen pen, System.Drawing.Point[] points, float tension, System.Drawing.Drawing2D.FillMode fillmode) => throw new PlatformNotSupportedException();
-        public void DrawCurve(System.Drawing.Pen pen, System.Drawing.PointF[] points) => throw new PlatformNotSupportedException();
-        public void DrawCurve(System.Drawing.Pen pen, System.Drawing.PointF[] points, int offset, int numberOfSegments) => throw new PlatformNotSupportedException();
-        public void DrawCurve(System.Drawing.Pen pen, System.Drawing.PointF[] points, int offset, int numberOfSegments, float tension) => throw new PlatformNotSupportedException();
-        public void DrawCurve(System.Drawing.Pen pen, System.Drawing.PointF[] points, float tension) => throw new PlatformNotSupportedException();
-        public void DrawCurve(System.Drawing.Pen pen, System.Drawing.Point[] points) => throw new PlatformNotSupportedException();
-        public void DrawCurve(System.Drawing.Pen pen, System.Drawing.Point[] points, int offset, int numberOfSegments, float tension) => throw new PlatformNotSupportedException();
-        public void DrawCurve(System.Drawing.Pen pen, System.Drawing.Point[] points, float tension) => throw new PlatformNotSupportedException();
-        public void DrawEllipse(System.Drawing.Pen pen, System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void DrawEllipse(System.Drawing.Pen pen, System.Drawing.RectangleF rect) => throw new PlatformNotSupportedException();
-        public void DrawEllipse(System.Drawing.Pen pen, int x, int y, int width, int height) => throw new PlatformNotSupportedException();
-        public void DrawEllipse(System.Drawing.Pen pen, float x, float y, float width, float height) => throw new PlatformNotSupportedException();
-        public void DrawIcon(System.Drawing.Icon icon, System.Drawing.Rectangle targetRect) => throw new PlatformNotSupportedException();
-        public void DrawIcon(System.Drawing.Icon icon, int x, int y) => throw new PlatformNotSupportedException();
-        public void DrawIconUnstretched(System.Drawing.Icon icon, System.Drawing.Rectangle targetRect) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Point point) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.PointF point) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.PointF[] destPoints) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.PointF[] destPoints, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit srcUnit) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.PointF[] destPoints, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.PointF[] destPoints, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Imaging.ImageAttributes imageAttr, System.Drawing.Graphics.DrawImageAbort callback) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.PointF[] destPoints, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Imaging.ImageAttributes imageAttr, System.Drawing.Graphics.DrawImageAbort callback, int callbackData) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Point[] destPoints) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Point[] destPoints, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit srcUnit) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Point[] destPoints, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Point[] destPoints, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Imaging.ImageAttributes imageAttr, System.Drawing.Graphics.DrawImageAbort callback) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Point[] destPoints, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Imaging.ImageAttributes imageAttr, System.Drawing.Graphics.DrawImageAbort callback, int callbackData) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Rectangle destRect, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit srcUnit) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Rectangle destRect, int srcX, int srcY, int srcWidth, int srcHeight, System.Drawing.GraphicsUnit srcUnit) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Rectangle destRect, int srcX, int srcY, int srcWidth, int srcHeight, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Rectangle destRect, int srcX, int srcY, int srcWidth, int srcHeight, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Imaging.ImageAttributes imageAttr, System.Drawing.Graphics.DrawImageAbort callback) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Rectangle destRect, int srcX, int srcY, int srcWidth, int srcHeight, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Imaging.ImageAttributes imageAttrs, System.Drawing.Graphics.DrawImageAbort callback, System.IntPtr callbackData) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Rectangle destRect, float srcX, float srcY, float srcWidth, float srcHeight, System.Drawing.GraphicsUnit srcUnit) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Rectangle destRect, float srcX, float srcY, float srcWidth, float srcHeight, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Imaging.ImageAttributes imageAttrs) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Rectangle destRect, float srcX, float srcY, float srcWidth, float srcHeight, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Imaging.ImageAttributes imageAttrs, System.Drawing.Graphics.DrawImageAbort callback) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.Rectangle destRect, float srcX, float srcY, float srcWidth, float srcHeight, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Imaging.ImageAttributes imageAttrs, System.Drawing.Graphics.DrawImageAbort callback, System.IntPtr callbackData) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.RectangleF rect) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, System.Drawing.RectangleF destRect, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit srcUnit) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, int x, int y) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, int x, int y, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit srcUnit) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, int x, int y, int width, int height) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, float x, float y) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, float x, float y, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit srcUnit) => throw new PlatformNotSupportedException();
-        public void DrawImage(System.Drawing.Image image, float x, float y, float width, float height) => throw new PlatformNotSupportedException();
-        public void DrawImageUnscaled(System.Drawing.Image image, System.Drawing.Point point) => throw new PlatformNotSupportedException();
-        public void DrawImageUnscaled(System.Drawing.Image image, System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void DrawImageUnscaled(System.Drawing.Image image, int x, int y) => throw new PlatformNotSupportedException();
-        public void DrawImageUnscaled(System.Drawing.Image image, int x, int y, int width, int height) => throw new PlatformNotSupportedException();
-        public void DrawImageUnscaledAndClipped(System.Drawing.Image image, System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void DrawLine(System.Drawing.Pen pen, System.Drawing.Point pt1, System.Drawing.Point pt2) => throw new PlatformNotSupportedException();
-        public void DrawLine(System.Drawing.Pen pen, System.Drawing.PointF pt1, System.Drawing.PointF pt2) => throw new PlatformNotSupportedException();
-        public void DrawLine(System.Drawing.Pen pen, int x1, int y1, int x2, int y2) => throw new PlatformNotSupportedException();
-        public void DrawLine(System.Drawing.Pen pen, float x1, float y1, float x2, float y2) => throw new PlatformNotSupportedException();
-        public void DrawLines(System.Drawing.Pen pen, System.Drawing.PointF[] points) => throw new PlatformNotSupportedException();
-        public void DrawLines(System.Drawing.Pen pen, System.Drawing.Point[] points) => throw new PlatformNotSupportedException();
-        public void DrawPath(System.Drawing.Pen pen, System.Drawing.Drawing2D.GraphicsPath path) => throw new PlatformNotSupportedException();
-        public void DrawPie(System.Drawing.Pen pen, System.Drawing.Rectangle rect, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void DrawPie(System.Drawing.Pen pen, System.Drawing.RectangleF rect, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void DrawPie(System.Drawing.Pen pen, int x, int y, int width, int height, int startAngle, int sweepAngle) => throw new PlatformNotSupportedException();
-        public void DrawPie(System.Drawing.Pen pen, float x, float y, float width, float height, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void DrawPolygon(System.Drawing.Pen pen, System.Drawing.PointF[] points) => throw new PlatformNotSupportedException();
-        public void DrawPolygon(System.Drawing.Pen pen, System.Drawing.Point[] points) => throw new PlatformNotSupportedException();
-        public void DrawRectangle(System.Drawing.Pen pen, System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void DrawRectangle(System.Drawing.Pen pen, int x, int y, int width, int height) => throw new PlatformNotSupportedException();
-        public void DrawRectangle(System.Drawing.Pen pen, float x, float y, float width, float height) => throw new PlatformNotSupportedException();
-        public void DrawRectangles(System.Drawing.Pen pen, System.Drawing.RectangleF[] rects) => throw new PlatformNotSupportedException();
-        public void DrawRectangles(System.Drawing.Pen pen, System.Drawing.Rectangle[] rects) => throw new PlatformNotSupportedException();
-        public void DrawString(string s, System.Drawing.Font font, System.Drawing.Brush brush, System.Drawing.PointF point) => throw new PlatformNotSupportedException();
-        public void DrawString(string s, System.Drawing.Font font, System.Drawing.Brush brush, System.Drawing.PointF point, System.Drawing.StringFormat format) => throw new PlatformNotSupportedException();
-        public void DrawString(string s, System.Drawing.Font font, System.Drawing.Brush brush, System.Drawing.RectangleF layoutRectangle) => throw new PlatformNotSupportedException();
-        public void DrawString(string s, System.Drawing.Font font, System.Drawing.Brush brush, System.Drawing.RectangleF layoutRectangle, System.Drawing.StringFormat format) => throw new PlatformNotSupportedException();
-        public void DrawString(string s, System.Drawing.Font font, System.Drawing.Brush brush, float x, float y) => throw new PlatformNotSupportedException();
-        public void DrawString(string s, System.Drawing.Font font, System.Drawing.Brush brush, float x, float y, System.Drawing.StringFormat format) => throw new PlatformNotSupportedException();
-        public void EndContainer(System.Drawing.Drawing2D.GraphicsContainer container) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Point destPoint, System.Drawing.Graphics.EnumerateMetafileProc callback) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Point destPoint, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Point destPoint, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Point destPoint, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Graphics.EnumerateMetafileProc callback) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Point destPoint, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Point destPoint, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit unit, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.PointF destPoint, System.Drawing.Graphics.EnumerateMetafileProc callback) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.PointF destPoint, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.PointF destPoint, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.PointF destPoint, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Graphics.EnumerateMetafileProc callback) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.PointF destPoint, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.PointF destPoint, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit unit, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.PointF[] destPoints, System.Drawing.Graphics.EnumerateMetafileProc callback) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.PointF[] destPoints, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.PointF[] destPoints, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.PointF[] destPoints, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Graphics.EnumerateMetafileProc callback) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.PointF[] destPoints, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.PointF[] destPoints, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit unit, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Point[] destPoints, System.Drawing.Graphics.EnumerateMetafileProc callback) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Point[] destPoints, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Point[] destPoints, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Point[] destPoints, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Graphics.EnumerateMetafileProc callback) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Point[] destPoints, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Point[] destPoints, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit unit, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Rectangle destRect, System.Drawing.Graphics.EnumerateMetafileProc callback) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Rectangle destRect, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Rectangle destRect, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Rectangle destRect, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Graphics.EnumerateMetafileProc callback) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Rectangle destRect, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.Rectangle destRect, System.Drawing.Rectangle srcRect, System.Drawing.GraphicsUnit unit, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.RectangleF destRect, System.Drawing.Graphics.EnumerateMetafileProc callback) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.RectangleF destRect, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.RectangleF destRect, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.RectangleF destRect, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Graphics.EnumerateMetafileProc callback) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.RectangleF destRect, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit srcUnit, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData) => throw new PlatformNotSupportedException();
-        public void EnumerateMetafile(System.Drawing.Imaging.Metafile metafile, System.Drawing.RectangleF destRect, System.Drawing.RectangleF srcRect, System.Drawing.GraphicsUnit unit, System.Drawing.Graphics.EnumerateMetafileProc callback, System.IntPtr callbackData, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public void ExcludeClip(System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void ExcludeClip(System.Drawing.Region region) => throw new PlatformNotSupportedException();
-        public void FillClosedCurve(System.Drawing.Brush brush, System.Drawing.PointF[] points) => throw new PlatformNotSupportedException();
-        public void FillClosedCurve(System.Drawing.Brush brush, System.Drawing.PointF[] points, System.Drawing.Drawing2D.FillMode fillmode) => throw new PlatformNotSupportedException();
-        public void FillClosedCurve(System.Drawing.Brush brush, System.Drawing.PointF[] points, System.Drawing.Drawing2D.FillMode fillmode, float tension) => throw new PlatformNotSupportedException();
-        public void FillClosedCurve(System.Drawing.Brush brush, System.Drawing.Point[] points) => throw new PlatformNotSupportedException();
-        public void FillClosedCurve(System.Drawing.Brush brush, System.Drawing.Point[] points, System.Drawing.Drawing2D.FillMode fillmode) => throw new PlatformNotSupportedException();
-        public void FillClosedCurve(System.Drawing.Brush brush, System.Drawing.Point[] points, System.Drawing.Drawing2D.FillMode fillmode, float tension) => throw new PlatformNotSupportedException();
-        public void FillEllipse(System.Drawing.Brush brush, System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void FillEllipse(System.Drawing.Brush brush, System.Drawing.RectangleF rect) => throw new PlatformNotSupportedException();
-        public void FillEllipse(System.Drawing.Brush brush, int x, int y, int width, int height) => throw new PlatformNotSupportedException();
-        public void FillEllipse(System.Drawing.Brush brush, float x, float y, float width, float height) => throw new PlatformNotSupportedException();
-        public void FillPath(System.Drawing.Brush brush, System.Drawing.Drawing2D.GraphicsPath path) => throw new PlatformNotSupportedException();
-        public void FillPie(System.Drawing.Brush brush, System.Drawing.Rectangle rect, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void FillPie(System.Drawing.Brush brush, int x, int y, int width, int height, int startAngle, int sweepAngle) => throw new PlatformNotSupportedException();
-        public void FillPie(System.Drawing.Brush brush, float x, float y, float width, float height, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void FillPolygon(System.Drawing.Brush brush, System.Drawing.PointF[] points) => throw new PlatformNotSupportedException();
-        public void FillPolygon(System.Drawing.Brush brush, System.Drawing.PointF[] points, System.Drawing.Drawing2D.FillMode fillMode) => throw new PlatformNotSupportedException();
-        public void FillPolygon(System.Drawing.Brush brush, System.Drawing.Point[] points) => throw new PlatformNotSupportedException();
-        public void FillPolygon(System.Drawing.Brush brush, System.Drawing.Point[] points, System.Drawing.Drawing2D.FillMode fillMode) => throw new PlatformNotSupportedException();
-        public void FillRectangle(System.Drawing.Brush brush, System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void FillRectangle(System.Drawing.Brush brush, System.Drawing.RectangleF rect) => throw new PlatformNotSupportedException();
-        public void FillRectangle(System.Drawing.Brush brush, int x, int y, int width, int height) => throw new PlatformNotSupportedException();
-        public void FillRectangle(System.Drawing.Brush brush, float x, float y, float width, float height) => throw new PlatformNotSupportedException();
-        public void FillRectangles(System.Drawing.Brush brush, System.Drawing.RectangleF[] rects) => throw new PlatformNotSupportedException();
-        public void FillRectangles(System.Drawing.Brush brush, System.Drawing.Rectangle[] rects) => throw new PlatformNotSupportedException();
-        public void FillRegion(System.Drawing.Brush brush, System.Drawing.Region region) => throw new PlatformNotSupportedException();
+
+        public void DrawArc(
+            System.Drawing.Pen pen,
+            System.Drawing.Rectangle rect,
+            float startAngle,
+            float sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawArc(
+            System.Drawing.Pen pen,
+            System.Drawing.RectangleF rect,
+            float startAngle,
+            float sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawArc(
+            System.Drawing.Pen pen,
+            int x,
+            int y,
+            int width,
+            int height,
+            int startAngle,
+            int sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawArc(
+            System.Drawing.Pen pen,
+            float x,
+            float y,
+            float width,
+            float height,
+            float startAngle,
+            float sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawBezier(
+            System.Drawing.Pen pen,
+            System.Drawing.Point pt1,
+            System.Drawing.Point pt2,
+            System.Drawing.Point pt3,
+            System.Drawing.Point pt4
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawBezier(
+            System.Drawing.Pen pen,
+            System.Drawing.PointF pt1,
+            System.Drawing.PointF pt2,
+            System.Drawing.PointF pt3,
+            System.Drawing.PointF pt4
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawBezier(
+            System.Drawing.Pen pen,
+            float x1,
+            float y1,
+            float x2,
+            float y2,
+            float x3,
+            float y3,
+            float x4,
+            float y4
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawBeziers(System.Drawing.Pen pen, System.Drawing.PointF[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawBeziers(System.Drawing.Pen pen, System.Drawing.Point[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawClosedCurve(System.Drawing.Pen pen, System.Drawing.PointF[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawClosedCurve(
+            System.Drawing.Pen pen,
+            System.Drawing.PointF[] points,
+            float tension,
+            System.Drawing.Drawing2D.FillMode fillmode
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawClosedCurve(System.Drawing.Pen pen, System.Drawing.Point[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawClosedCurve(
+            System.Drawing.Pen pen,
+            System.Drawing.Point[] points,
+            float tension,
+            System.Drawing.Drawing2D.FillMode fillmode
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawCurve(System.Drawing.Pen pen, System.Drawing.PointF[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawCurve(
+            System.Drawing.Pen pen,
+            System.Drawing.PointF[] points,
+            int offset,
+            int numberOfSegments
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawCurve(
+            System.Drawing.Pen pen,
+            System.Drawing.PointF[] points,
+            int offset,
+            int numberOfSegments,
+            float tension
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawCurve(
+            System.Drawing.Pen pen,
+            System.Drawing.PointF[] points,
+            float tension
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawCurve(System.Drawing.Pen pen, System.Drawing.Point[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawCurve(
+            System.Drawing.Pen pen,
+            System.Drawing.Point[] points,
+            int offset,
+            int numberOfSegments,
+            float tension
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawCurve(
+            System.Drawing.Pen pen,
+            System.Drawing.Point[] points,
+            float tension
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawEllipse(System.Drawing.Pen pen, System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawEllipse(System.Drawing.Pen pen, System.Drawing.RectangleF rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawEllipse(System.Drawing.Pen pen, int x, int y, int width, int height) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawEllipse(
+            System.Drawing.Pen pen,
+            float x,
+            float y,
+            float width,
+            float height
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawIcon(System.Drawing.Icon icon, System.Drawing.Rectangle targetRect) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawIcon(System.Drawing.Icon icon, int x, int y) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawIconUnstretched(
+            System.Drawing.Icon icon,
+            System.Drawing.Rectangle targetRect
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(System.Drawing.Image image, System.Drawing.Point point) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawImage(System.Drawing.Image image, System.Drawing.PointF point) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawImage(System.Drawing.Image image, System.Drawing.PointF[] destPoints) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.PointF[] destPoints,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit srcUnit
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.PointF[] destPoints,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.PointF[] destPoints,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Imaging.ImageAttributes imageAttr,
+            System.Drawing.Graphics.DrawImageAbort callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.PointF[] destPoints,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Imaging.ImageAttributes imageAttr,
+            System.Drawing.Graphics.DrawImageAbort callback,
+            int callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(System.Drawing.Image image, System.Drawing.Point[] destPoints) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.Point[] destPoints,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit srcUnit
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.Point[] destPoints,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.Point[] destPoints,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Imaging.ImageAttributes imageAttr,
+            System.Drawing.Graphics.DrawImageAbort callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.Point[] destPoints,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Imaging.ImageAttributes imageAttr,
+            System.Drawing.Graphics.DrawImageAbort callback,
+            int callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(System.Drawing.Image image, System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.Rectangle destRect,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit srcUnit
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.Rectangle destRect,
+            int srcX,
+            int srcY,
+            int srcWidth,
+            int srcHeight,
+            System.Drawing.GraphicsUnit srcUnit
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.Rectangle destRect,
+            int srcX,
+            int srcY,
+            int srcWidth,
+            int srcHeight,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.Rectangle destRect,
+            int srcX,
+            int srcY,
+            int srcWidth,
+            int srcHeight,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Imaging.ImageAttributes imageAttr,
+            System.Drawing.Graphics.DrawImageAbort callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.Rectangle destRect,
+            int srcX,
+            int srcY,
+            int srcWidth,
+            int srcHeight,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Imaging.ImageAttributes imageAttrs,
+            System.Drawing.Graphics.DrawImageAbort callback,
+            System.IntPtr callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.Rectangle destRect,
+            float srcX,
+            float srcY,
+            float srcWidth,
+            float srcHeight,
+            System.Drawing.GraphicsUnit srcUnit
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.Rectangle destRect,
+            float srcX,
+            float srcY,
+            float srcWidth,
+            float srcHeight,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Imaging.ImageAttributes imageAttrs
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.Rectangle destRect,
+            float srcX,
+            float srcY,
+            float srcWidth,
+            float srcHeight,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Imaging.ImageAttributes imageAttrs,
+            System.Drawing.Graphics.DrawImageAbort callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.Rectangle destRect,
+            float srcX,
+            float srcY,
+            float srcWidth,
+            float srcHeight,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Imaging.ImageAttributes imageAttrs,
+            System.Drawing.Graphics.DrawImageAbort callback,
+            System.IntPtr callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(System.Drawing.Image image, System.Drawing.RectangleF rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            System.Drawing.RectangleF destRect,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit srcUnit
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(System.Drawing.Image image, int x, int y) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            int x,
+            int y,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit srcUnit
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(System.Drawing.Image image, int x, int y, int width, int height) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawImage(System.Drawing.Image image, float x, float y) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            float x,
+            float y,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit srcUnit
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImage(
+            System.Drawing.Image image,
+            float x,
+            float y,
+            float width,
+            float height
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImageUnscaled(System.Drawing.Image image, System.Drawing.Point point) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawImageUnscaled(System.Drawing.Image image, System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawImageUnscaled(System.Drawing.Image image, int x, int y) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawImageUnscaled(
+            System.Drawing.Image image,
+            int x,
+            int y,
+            int width,
+            int height
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawImageUnscaledAndClipped(
+            System.Drawing.Image image,
+            System.Drawing.Rectangle rect
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawLine(
+            System.Drawing.Pen pen,
+            System.Drawing.Point pt1,
+            System.Drawing.Point pt2
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawLine(
+            System.Drawing.Pen pen,
+            System.Drawing.PointF pt1,
+            System.Drawing.PointF pt2
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawLine(System.Drawing.Pen pen, int x1, int y1, int x2, int y2) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawLine(System.Drawing.Pen pen, float x1, float y1, float x2, float y2) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawLines(System.Drawing.Pen pen, System.Drawing.PointF[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawLines(System.Drawing.Pen pen, System.Drawing.Point[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawPath(System.Drawing.Pen pen, System.Drawing.Drawing2D.GraphicsPath path) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawPie(
+            System.Drawing.Pen pen,
+            System.Drawing.Rectangle rect,
+            float startAngle,
+            float sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawPie(
+            System.Drawing.Pen pen,
+            System.Drawing.RectangleF rect,
+            float startAngle,
+            float sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawPie(
+            System.Drawing.Pen pen,
+            int x,
+            int y,
+            int width,
+            int height,
+            int startAngle,
+            int sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawPie(
+            System.Drawing.Pen pen,
+            float x,
+            float y,
+            float width,
+            float height,
+            float startAngle,
+            float sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawPolygon(System.Drawing.Pen pen, System.Drawing.PointF[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawPolygon(System.Drawing.Pen pen, System.Drawing.Point[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawRectangle(System.Drawing.Pen pen, System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawRectangle(System.Drawing.Pen pen, int x, int y, int width, int height) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawRectangle(
+            System.Drawing.Pen pen,
+            float x,
+            float y,
+            float width,
+            float height
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawRectangles(System.Drawing.Pen pen, System.Drawing.RectangleF[] rects) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawRectangles(System.Drawing.Pen pen, System.Drawing.Rectangle[] rects) =>
+            throw new PlatformNotSupportedException();
+
+        public void DrawString(
+            string s,
+            System.Drawing.Font font,
+            System.Drawing.Brush brush,
+            System.Drawing.PointF point
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawString(
+            string s,
+            System.Drawing.Font font,
+            System.Drawing.Brush brush,
+            System.Drawing.PointF point,
+            System.Drawing.StringFormat format
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawString(
+            string s,
+            System.Drawing.Font font,
+            System.Drawing.Brush brush,
+            System.Drawing.RectangleF layoutRectangle
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawString(
+            string s,
+            System.Drawing.Font font,
+            System.Drawing.Brush brush,
+            System.Drawing.RectangleF layoutRectangle,
+            System.Drawing.StringFormat format
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawString(
+            string s,
+            System.Drawing.Font font,
+            System.Drawing.Brush brush,
+            float x,
+            float y
+        ) => throw new PlatformNotSupportedException();
+
+        public void DrawString(
+            string s,
+            System.Drawing.Font font,
+            System.Drawing.Brush brush,
+            float x,
+            float y,
+            System.Drawing.StringFormat format
+        ) => throw new PlatformNotSupportedException();
+
+        public void EndContainer(System.Drawing.Drawing2D.GraphicsContainer container) =>
+            throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Point destPoint,
+            System.Drawing.Graphics.EnumerateMetafileProc callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Point destPoint,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Point destPoint,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Point destPoint,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Point destPoint,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Point destPoint,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit unit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.PointF destPoint,
+            System.Drawing.Graphics.EnumerateMetafileProc callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.PointF destPoint,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.PointF destPoint,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.PointF destPoint,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.PointF destPoint,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.PointF destPoint,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit unit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.PointF[] destPoints,
+            System.Drawing.Graphics.EnumerateMetafileProc callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.PointF[] destPoints,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.PointF[] destPoints,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.PointF[] destPoints,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.PointF[] destPoints,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.PointF[] destPoints,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit unit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Point[] destPoints,
+            System.Drawing.Graphics.EnumerateMetafileProc callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Point[] destPoints,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Point[] destPoints,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Point[] destPoints,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Point[] destPoints,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Point[] destPoints,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit unit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Rectangle destRect,
+            System.Drawing.Graphics.EnumerateMetafileProc callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Rectangle destRect,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Rectangle destRect,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Rectangle destRect,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Rectangle destRect,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.Rectangle destRect,
+            System.Drawing.Rectangle srcRect,
+            System.Drawing.GraphicsUnit unit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.RectangleF destRect,
+            System.Drawing.Graphics.EnumerateMetafileProc callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.RectangleF destRect,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.RectangleF destRect,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.RectangleF destRect,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.RectangleF destRect,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit srcUnit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData
+        ) => throw new PlatformNotSupportedException();
+
+        public void EnumerateMetafile(
+            System.Drawing.Imaging.Metafile metafile,
+            System.Drawing.RectangleF destRect,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.GraphicsUnit unit,
+            System.Drawing.Graphics.EnumerateMetafileProc callback,
+            System.IntPtr callbackData,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public void ExcludeClip(System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void ExcludeClip(System.Drawing.Region region) =>
+            throw new PlatformNotSupportedException();
+
+        public void FillClosedCurve(System.Drawing.Brush brush, System.Drawing.PointF[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void FillClosedCurve(
+            System.Drawing.Brush brush,
+            System.Drawing.PointF[] points,
+            System.Drawing.Drawing2D.FillMode fillmode
+        ) => throw new PlatformNotSupportedException();
+
+        public void FillClosedCurve(
+            System.Drawing.Brush brush,
+            System.Drawing.PointF[] points,
+            System.Drawing.Drawing2D.FillMode fillmode,
+            float tension
+        ) => throw new PlatformNotSupportedException();
+
+        public void FillClosedCurve(System.Drawing.Brush brush, System.Drawing.Point[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void FillClosedCurve(
+            System.Drawing.Brush brush,
+            System.Drawing.Point[] points,
+            System.Drawing.Drawing2D.FillMode fillmode
+        ) => throw new PlatformNotSupportedException();
+
+        public void FillClosedCurve(
+            System.Drawing.Brush brush,
+            System.Drawing.Point[] points,
+            System.Drawing.Drawing2D.FillMode fillmode,
+            float tension
+        ) => throw new PlatformNotSupportedException();
+
+        public void FillEllipse(System.Drawing.Brush brush, System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void FillEllipse(System.Drawing.Brush brush, System.Drawing.RectangleF rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void FillEllipse(System.Drawing.Brush brush, int x, int y, int width, int height) =>
+            throw new PlatformNotSupportedException();
+
+        public void FillEllipse(
+            System.Drawing.Brush brush,
+            float x,
+            float y,
+            float width,
+            float height
+        ) => throw new PlatformNotSupportedException();
+
+        public void FillPath(
+            System.Drawing.Brush brush,
+            System.Drawing.Drawing2D.GraphicsPath path
+        ) => throw new PlatformNotSupportedException();
+
+        public void FillPie(
+            System.Drawing.Brush brush,
+            System.Drawing.Rectangle rect,
+            float startAngle,
+            float sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void FillPie(
+            System.Drawing.Brush brush,
+            int x,
+            int y,
+            int width,
+            int height,
+            int startAngle,
+            int sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void FillPie(
+            System.Drawing.Brush brush,
+            float x,
+            float y,
+            float width,
+            float height,
+            float startAngle,
+            float sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void FillPolygon(System.Drawing.Brush brush, System.Drawing.PointF[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void FillPolygon(
+            System.Drawing.Brush brush,
+            System.Drawing.PointF[] points,
+            System.Drawing.Drawing2D.FillMode fillMode
+        ) => throw new PlatformNotSupportedException();
+
+        public void FillPolygon(System.Drawing.Brush brush, System.Drawing.Point[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void FillPolygon(
+            System.Drawing.Brush brush,
+            System.Drawing.Point[] points,
+            System.Drawing.Drawing2D.FillMode fillMode
+        ) => throw new PlatformNotSupportedException();
+
+        public void FillRectangle(System.Drawing.Brush brush, System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void FillRectangle(System.Drawing.Brush brush, System.Drawing.RectangleF rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void FillRectangle(
+            System.Drawing.Brush brush,
+            int x,
+            int y,
+            int width,
+            int height
+        ) => throw new PlatformNotSupportedException();
+
+        public void FillRectangle(
+            System.Drawing.Brush brush,
+            float x,
+            float y,
+            float width,
+            float height
+        ) => throw new PlatformNotSupportedException();
+
+        public void FillRectangles(System.Drawing.Brush brush, System.Drawing.RectangleF[] rects) =>
+            throw new PlatformNotSupportedException();
+
+        public void FillRectangles(System.Drawing.Brush brush, System.Drawing.Rectangle[] rects) =>
+            throw new PlatformNotSupportedException();
+
+        public void FillRegion(System.Drawing.Brush brush, System.Drawing.Region region) =>
+            throw new PlatformNotSupportedException();
+
         ~Graphics() => throw new PlatformNotSupportedException();
+
         public void Flush() => throw new PlatformNotSupportedException();
-        public void Flush(System.Drawing.Drawing2D.FlushIntention intention) => throw new PlatformNotSupportedException();
-        [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(2))]
-        public static System.Drawing.Graphics FromHdc(System.IntPtr hdc) { throw new PlatformNotSupportedException(); }
-        [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(2))]
-        public static System.Drawing.Graphics FromHdc(System.IntPtr hdc, System.IntPtr hdevice) { throw new PlatformNotSupportedException(); }
-        [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(2))]
-        public static System.Drawing.Graphics FromHdcInternal(System.IntPtr hdc) { throw new PlatformNotSupportedException(); }
-        [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(2))]
-        public static System.Drawing.Graphics FromHwnd(System.IntPtr hwnd) { throw new PlatformNotSupportedException(); }
-        [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(2))]
-        public static System.Drawing.Graphics FromHwndInternal(System.IntPtr hwnd) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Graphics FromImage(System.Drawing.Image image) { throw new PlatformNotSupportedException(); }
-        [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(1))]
-        public object GetContextInfo() { throw new PlatformNotSupportedException(); }
-        public static System.IntPtr GetHalftonePalette() { throw new PlatformNotSupportedException(); }
-        public System.IntPtr GetHdc() { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Color GetNearestColor(System.Drawing.Color color) { throw new PlatformNotSupportedException(); }
-        public void IntersectClip(System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void IntersectClip(System.Drawing.RectangleF rect) => throw new PlatformNotSupportedException();
-        public void IntersectClip(System.Drawing.Region region) => throw new PlatformNotSupportedException();
-        public bool IsVisible(System.Drawing.Point point) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.PointF point) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.Rectangle rect) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.RectangleF rect) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(int x, int y) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(int x, int y, int width, int height) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(float x, float y) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(float x, float y, float width, float height) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Region[] MeasureCharacterRanges(string text, System.Drawing.Font font, System.Drawing.RectangleF layoutRect, System.Drawing.StringFormat stringFormat) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.SizeF MeasureString(string text, System.Drawing.Font font) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.SizeF MeasureString(string text, System.Drawing.Font font, System.Drawing.PointF origin, System.Drawing.StringFormat stringFormat) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.SizeF MeasureString(string text, System.Drawing.Font font, System.Drawing.SizeF layoutArea) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.SizeF MeasureString(string text, System.Drawing.Font font, System.Drawing.SizeF layoutArea, System.Drawing.StringFormat stringFormat) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.SizeF MeasureString(string text, System.Drawing.Font font, System.Drawing.SizeF layoutArea, System.Drawing.StringFormat stringFormat, out int charactersFitted, out int linesFilled) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.SizeF MeasureString(string text, System.Drawing.Font font, int width) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.SizeF MeasureString(string text, System.Drawing.Font font, int width, System.Drawing.StringFormat format) { throw new PlatformNotSupportedException(); }
-        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix) => throw new PlatformNotSupportedException();
-        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+
+        public void Flush(System.Drawing.Drawing2D.FlushIntention intention) =>
+            throw new PlatformNotSupportedException();
+
+        [System.ComponentModel.EditorBrowsableAttribute(
+            (System.ComponentModel.EditorBrowsableState)(2)
+        )]
+        public static System.Drawing.Graphics FromHdc(System.IntPtr hdc)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        [System.ComponentModel.EditorBrowsableAttribute(
+            (System.ComponentModel.EditorBrowsableState)(2)
+        )]
+        public static System.Drawing.Graphics FromHdc(System.IntPtr hdc, System.IntPtr hdevice)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        [System.ComponentModel.EditorBrowsableAttribute(
+            (System.ComponentModel.EditorBrowsableState)(2)
+        )]
+        public static System.Drawing.Graphics FromHdcInternal(System.IntPtr hdc)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        [System.ComponentModel.EditorBrowsableAttribute(
+            (System.ComponentModel.EditorBrowsableState)(2)
+        )]
+        public static System.Drawing.Graphics FromHwnd(System.IntPtr hwnd)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        [System.ComponentModel.EditorBrowsableAttribute(
+            (System.ComponentModel.EditorBrowsableState)(2)
+        )]
+        public static System.Drawing.Graphics FromHwndInternal(System.IntPtr hwnd)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Graphics FromImage(System.Drawing.Image image)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        [System.ComponentModel.EditorBrowsableAttribute(
+            (System.ComponentModel.EditorBrowsableState)(1)
+        )]
+        public object GetContextInfo()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.IntPtr GetHalftonePalette()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.IntPtr GetHdc()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Color GetNearestColor(System.Drawing.Color color)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void IntersectClip(System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void IntersectClip(System.Drawing.RectangleF rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void IntersectClip(System.Drawing.Region region) =>
+            throw new PlatformNotSupportedException();
+
+        public bool IsVisible(System.Drawing.Point point)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.PointF point)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.Rectangle rect)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.RectangleF rect)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(int x, int y)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(int x, int y, int width, int height)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(float x, float y)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(float x, float y, float width, float height)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Region[] MeasureCharacterRanges(
+            string text,
+            System.Drawing.Font font,
+            System.Drawing.RectangleF layoutRect,
+            System.Drawing.StringFormat stringFormat
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.SizeF MeasureString(string text, System.Drawing.Font font)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.SizeF MeasureString(
+            string text,
+            System.Drawing.Font font,
+            System.Drawing.PointF origin,
+            System.Drawing.StringFormat stringFormat
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.SizeF MeasureString(
+            string text,
+            System.Drawing.Font font,
+            System.Drawing.SizeF layoutArea
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.SizeF MeasureString(
+            string text,
+            System.Drawing.Font font,
+            System.Drawing.SizeF layoutArea,
+            System.Drawing.StringFormat stringFormat
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.SizeF MeasureString(
+            string text,
+            System.Drawing.Font font,
+            System.Drawing.SizeF layoutArea,
+            System.Drawing.StringFormat stringFormat,
+            out int charactersFitted,
+            out int linesFilled
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.SizeF MeasureString(string text, System.Drawing.Font font, int width)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.SizeF MeasureString(
+            string text,
+            System.Drawing.Font font,
+            int width,
+            System.Drawing.StringFormat format
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix) =>
+            throw new PlatformNotSupportedException();
+
+        public void MultiplyTransform(
+            System.Drawing.Drawing2D.Matrix matrix,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
+
         public void ReleaseHdc() => throw new PlatformNotSupportedException();
-        [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(2))]
+
+        [System.ComponentModel.EditorBrowsableAttribute(
+            (System.ComponentModel.EditorBrowsableState)(2)
+        )]
         public void ReleaseHdc(System.IntPtr hdc) => throw new PlatformNotSupportedException();
-        [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(1))]
-        public void ReleaseHdcInternal(System.IntPtr hdc) => throw new PlatformNotSupportedException();
+
+        [System.ComponentModel.EditorBrowsableAttribute(
+            (System.ComponentModel.EditorBrowsableState)(1)
+        )]
+        public void ReleaseHdcInternal(System.IntPtr hdc) =>
+            throw new PlatformNotSupportedException();
+
         public void ResetClip() => throw new PlatformNotSupportedException();
+
         public void ResetTransform() => throw new PlatformNotSupportedException();
-        public void Restore(System.Drawing.Drawing2D.GraphicsState gstate) => throw new PlatformNotSupportedException();
+
+        public void Restore(System.Drawing.Drawing2D.GraphicsState gstate) =>
+            throw new PlatformNotSupportedException();
+
         public void RotateTransform(float angle) => throw new PlatformNotSupportedException();
-        public void RotateTransform(float angle, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
-        public System.Drawing.Drawing2D.GraphicsState Save() { throw new PlatformNotSupportedException(); }
+
+        public void RotateTransform(float angle, System.Drawing.Drawing2D.MatrixOrder order) =>
+            throw new PlatformNotSupportedException();
+
+        public System.Drawing.Drawing2D.GraphicsState Save()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void ScaleTransform(float sx, float sy) => throw new PlatformNotSupportedException();
-        public void ScaleTransform(float sx, float sy, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
-        public void SetClip(System.Drawing.Drawing2D.GraphicsPath path) => throw new PlatformNotSupportedException();
-        public void SetClip(System.Drawing.Drawing2D.GraphicsPath path, System.Drawing.Drawing2D.CombineMode combineMode) => throw new PlatformNotSupportedException();
+
+        public void ScaleTransform(
+            float sx,
+            float sy,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetClip(System.Drawing.Drawing2D.GraphicsPath path) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetClip(
+            System.Drawing.Drawing2D.GraphicsPath path,
+            System.Drawing.Drawing2D.CombineMode combineMode
+        ) => throw new PlatformNotSupportedException();
+
         public void SetClip(System.Drawing.Graphics g) => throw new PlatformNotSupportedException();
-        public void SetClip(System.Drawing.Graphics g, System.Drawing.Drawing2D.CombineMode combineMode) => throw new PlatformNotSupportedException();
-        public void SetClip(System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void SetClip(System.Drawing.Rectangle rect, System.Drawing.Drawing2D.CombineMode combineMode) => throw new PlatformNotSupportedException();
-        public void SetClip(System.Drawing.RectangleF rect) => throw new PlatformNotSupportedException();
-        public void SetClip(System.Drawing.RectangleF rect, System.Drawing.Drawing2D.CombineMode combineMode) => throw new PlatformNotSupportedException();
-        public void SetClip(System.Drawing.Region region, System.Drawing.Drawing2D.CombineMode combineMode) => throw new PlatformNotSupportedException();
-        public void TransformPoints(System.Drawing.Drawing2D.CoordinateSpace destSpace, System.Drawing.Drawing2D.CoordinateSpace srcSpace, System.Drawing.PointF[] pts) => throw new PlatformNotSupportedException();
-        public void TransformPoints(System.Drawing.Drawing2D.CoordinateSpace destSpace, System.Drawing.Drawing2D.CoordinateSpace srcSpace, System.Drawing.Point[] pts) => throw new PlatformNotSupportedException();
+
+        public void SetClip(
+            System.Drawing.Graphics g,
+            System.Drawing.Drawing2D.CombineMode combineMode
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetClip(System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetClip(
+            System.Drawing.Rectangle rect,
+            System.Drawing.Drawing2D.CombineMode combineMode
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetClip(System.Drawing.RectangleF rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetClip(
+            System.Drawing.RectangleF rect,
+            System.Drawing.Drawing2D.CombineMode combineMode
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetClip(
+            System.Drawing.Region region,
+            System.Drawing.Drawing2D.CombineMode combineMode
+        ) => throw new PlatformNotSupportedException();
+
+        public void TransformPoints(
+            System.Drawing.Drawing2D.CoordinateSpace destSpace,
+            System.Drawing.Drawing2D.CoordinateSpace srcSpace,
+            System.Drawing.PointF[] pts
+        ) => throw new PlatformNotSupportedException();
+
+        public void TransformPoints(
+            System.Drawing.Drawing2D.CoordinateSpace destSpace,
+            System.Drawing.Drawing2D.CoordinateSpace srcSpace,
+            System.Drawing.Point[] pts
+        ) => throw new PlatformNotSupportedException();
+
         public void TranslateClip(int dx, int dy) => throw new PlatformNotSupportedException();
+
         public void TranslateClip(float dx, float dy) => throw new PlatformNotSupportedException();
-        public void TranslateTransform(float dx, float dy) => throw new PlatformNotSupportedException();
-        public void TranslateTransform(float dx, float dy, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+
+        public void TranslateTransform(float dx, float dy) =>
+            throw new PlatformNotSupportedException();
+
+        public void TranslateTransform(
+            float dx,
+            float dy,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
+
         public delegate bool DrawImageAbort(System.IntPtr callbackdata);
-        public delegate bool EnumerateMetafileProc(System.Drawing.Imaging.EmfPlusRecordType recordType, int flags, int dataSize, System.IntPtr data, System.Drawing.Imaging.PlayRecordCallback callbackData);
+        public delegate bool EnumerateMetafileProc(
+            System.Drawing.Imaging.EmfPlusRecordType recordType,
+            int flags,
+            int dataSize,
+            System.IntPtr data,
+            System.Drawing.Imaging.PlayRecordCallback callbackData
+        );
     }
+
     public enum GraphicsUnit
     {
         Display = 1,
@@ -643,360 +2714,1324 @@ namespace System.Drawing
         Point = 3,
         World = 0,
     }
+
 #if netcoreapp
-    [System.ComponentModel.TypeConverter("System.Drawing.IconConverter, System.Windows.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51")]
+    [System.ComponentModel.TypeConverter(
+        "System.Drawing.IconConverter, System.Windows.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+    )]
 #endif
-    public sealed partial class Icon : System.MarshalByRefObject, System.ICloneable, System.IDisposable, System.Runtime.Serialization.ISerializable
+    public sealed partial class Icon
+        : System.MarshalByRefObject,
+            System.ICloneable,
+            System.IDisposable,
+            System.Runtime.Serialization.ISerializable
     {
-        public Icon(System.Drawing.Icon original, System.Drawing.Size size) => throw new PlatformNotSupportedException();
-        public Icon(System.Drawing.Icon original, int width, int height) => throw new PlatformNotSupportedException();
+        public Icon(System.Drawing.Icon original, System.Drawing.Size size) =>
+            throw new PlatformNotSupportedException();
+
+        public Icon(System.Drawing.Icon original, int width, int height) =>
+            throw new PlatformNotSupportedException();
+
         public Icon(System.IO.Stream stream) => throw new PlatformNotSupportedException();
-        public Icon(System.IO.Stream stream, System.Drawing.Size size) => throw new PlatformNotSupportedException();
-        public Icon(System.IO.Stream stream, int width, int height) => throw new PlatformNotSupportedException();
+
+        public Icon(System.IO.Stream stream, System.Drawing.Size size) =>
+            throw new PlatformNotSupportedException();
+
+        public Icon(System.IO.Stream stream, int width, int height) =>
+            throw new PlatformNotSupportedException();
+
         public Icon(string fileName) => throw new PlatformNotSupportedException();
-        public Icon(string fileName, System.Drawing.Size size) => throw new PlatformNotSupportedException();
-        public Icon(string fileName, int width, int height) => throw new PlatformNotSupportedException();
+
+        public Icon(string fileName, System.Drawing.Size size) =>
+            throw new PlatformNotSupportedException();
+
+        public Icon(string fileName, int width, int height) =>
+            throw new PlatformNotSupportedException();
+
         public Icon(System.Type type, string resource) => throw new PlatformNotSupportedException();
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public System.IntPtr Handle { get { throw new PlatformNotSupportedException(); } }
+        public System.IntPtr Handle
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public int Height { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Size Size { get { throw new PlatformNotSupportedException(); } }
+        public int Height
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Size Size
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public int Width { get { throw new PlatformNotSupportedException(); } }
-        public object Clone() { throw new PlatformNotSupportedException(); }
+        public int Width
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
-        public static System.Drawing.Icon ExtractAssociatedIcon(string filePath) { throw new PlatformNotSupportedException(); }
+
+        public static System.Drawing.Icon ExtractAssociatedIcon(string filePath)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         ~Icon() => throw new PlatformNotSupportedException();
-        public static System.Drawing.Icon FromHandle(System.IntPtr handle) { throw new PlatformNotSupportedException(); }
-        public void Save(System.IO.Stream outputStream) => throw new PlatformNotSupportedException();
-        void System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) => throw new PlatformNotSupportedException();
-        public System.Drawing.Bitmap ToBitmap() { throw new PlatformNotSupportedException(); }
-        public override string ToString() { throw new PlatformNotSupportedException(); }
+
+        public static System.Drawing.Icon FromHandle(System.IntPtr handle)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void Save(System.IO.Stream outputStream) =>
+            throw new PlatformNotSupportedException();
+
+        void System.Runtime.Serialization.ISerializable.GetObjectData(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        ) => throw new PlatformNotSupportedException();
+
+        public System.Drawing.Bitmap ToBitmap()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override string ToString()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public partial interface IDeviceContext : System.IDisposable
     {
         System.IntPtr GetHdc();
         void ReleaseHdc();
     }
+
 #if netcoreapp
-    [System.ComponentModel.TypeConverter("System.Drawing.ImageConverter, System.Windows.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51")]
+    [System.ComponentModel.TypeConverter(
+        "System.Drawing.ImageConverter, System.Windows.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+    )]
 #endif
     [System.ComponentModel.ImmutableObjectAttribute(true)]
-    public abstract partial class Image : System.MarshalByRefObject, System.ICloneable, System.IDisposable, System.Runtime.Serialization.ISerializable
+    public abstract partial class Image
+        : System.MarshalByRefObject,
+            System.ICloneable,
+            System.IDisposable,
+            System.Runtime.Serialization.ISerializable
     {
         internal Image() => throw new PlatformNotSupportedException();
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public int Flags { get { throw new PlatformNotSupportedException(); } }
+        public int Flags
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public System.Guid[] FrameDimensionsList { get { throw new PlatformNotSupportedException(); } }
+        public System.Guid[] FrameDimensionsList
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.DefaultValueAttribute(false)]
-        [System.ComponentModel.DesignerSerializationVisibilityAttribute((System.ComponentModel.DesignerSerializationVisibility)(0))]
-        public int Height { get { throw new PlatformNotSupportedException(); } }
-        public float HorizontalResolution { get { throw new PlatformNotSupportedException(); } }
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            (System.ComponentModel.DesignerSerializationVisibility)(0)
+        )]
+        public int Height
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public float HorizontalResolution
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public System.Drawing.Imaging.ColorPalette Palette { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.SizeF PhysicalDimension { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Imaging.PixelFormat PixelFormat { get { throw new PlatformNotSupportedException(); } }
+        public System.Drawing.Imaging.ColorPalette Palette
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.SizeF PhysicalDimension
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Imaging.PixelFormat PixelFormat
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public int[] PropertyIdList { get { throw new PlatformNotSupportedException(); } }
+        public int[] PropertyIdList
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        public System.Drawing.Imaging.PropertyItem[] PropertyItems { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Imaging.ImageFormat RawFormat { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Size Size { get { throw new PlatformNotSupportedException(); } }
+        public System.Drawing.Imaging.PropertyItem[] PropertyItems
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Imaging.ImageFormat RawFormat
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Size Size
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.DefaultValueAttribute(null)]
         [System.ComponentModel.LocalizableAttribute(false)]
-        public object Tag { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float VerticalResolution { get { throw new PlatformNotSupportedException(); } }
+        public object Tag
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float VerticalResolution
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.DefaultValueAttribute(false)]
-        [System.ComponentModel.DesignerSerializationVisibilityAttribute((System.ComponentModel.DesignerSerializationVisibility)(0))]
-        public int Width { get { throw new PlatformNotSupportedException(); } }
-        public object Clone() { throw new PlatformNotSupportedException(); }
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            (System.ComponentModel.DesignerSerializationVisibility)(0)
+        )]
+        public int Width
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
+
         protected virtual void Dispose(bool disposing) => throw new PlatformNotSupportedException();
+
         ~Image() => throw new PlatformNotSupportedException();
-        public static System.Drawing.Image FromFile(string filename) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Image FromFile(string filename, bool useEmbeddedColorManagement) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Bitmap FromHbitmap(System.IntPtr hbitmap) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Bitmap FromHbitmap(System.IntPtr hbitmap, System.IntPtr hpalette) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Image FromStream(System.IO.Stream stream) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Image FromStream(System.IO.Stream stream, bool useEmbeddedColorManagement) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Image FromStream(System.IO.Stream stream, bool useEmbeddedColorManagement, bool validateImageData) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.RectangleF GetBounds(ref System.Drawing.GraphicsUnit pageUnit) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Imaging.EncoderParameters GetEncoderParameterList(System.Guid encoder) { throw new PlatformNotSupportedException(); }
-        public int GetFrameCount(System.Drawing.Imaging.FrameDimension dimension) { throw new PlatformNotSupportedException(); }
-        public static int GetPixelFormatSize(System.Drawing.Imaging.PixelFormat pixfmt) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Imaging.PropertyItem GetPropertyItem(int propid) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Image GetThumbnailImage(int thumbWidth, int thumbHeight, System.Drawing.Image.GetThumbnailImageAbort callback, System.IntPtr callbackData) { throw new PlatformNotSupportedException(); }
-        public static bool IsAlphaPixelFormat(System.Drawing.Imaging.PixelFormat pixfmt) { throw new PlatformNotSupportedException(); }
-        public static bool IsCanonicalPixelFormat(System.Drawing.Imaging.PixelFormat pixfmt) { throw new PlatformNotSupportedException(); }
-        public static bool IsExtendedPixelFormat(System.Drawing.Imaging.PixelFormat pixfmt) { throw new PlatformNotSupportedException(); }
+
+        public static System.Drawing.Image FromFile(string filename)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Image FromFile(
+            string filename,
+            bool useEmbeddedColorManagement
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Bitmap FromHbitmap(System.IntPtr hbitmap)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Bitmap FromHbitmap(
+            System.IntPtr hbitmap,
+            System.IntPtr hpalette
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Image FromStream(System.IO.Stream stream)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Image FromStream(
+            System.IO.Stream stream,
+            bool useEmbeddedColorManagement
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Image FromStream(
+            System.IO.Stream stream,
+            bool useEmbeddedColorManagement,
+            bool validateImageData
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.RectangleF GetBounds(ref System.Drawing.GraphicsUnit pageUnit)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Imaging.EncoderParameters GetEncoderParameterList(System.Guid encoder)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public int GetFrameCount(System.Drawing.Imaging.FrameDimension dimension)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static int GetPixelFormatSize(System.Drawing.Imaging.PixelFormat pixfmt)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Imaging.PropertyItem GetPropertyItem(int propid)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Image GetThumbnailImage(
+            int thumbWidth,
+            int thumbHeight,
+            System.Drawing.Image.GetThumbnailImageAbort callback,
+            System.IntPtr callbackData
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static bool IsAlphaPixelFormat(System.Drawing.Imaging.PixelFormat pixfmt)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static bool IsCanonicalPixelFormat(System.Drawing.Imaging.PixelFormat pixfmt)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static bool IsExtendedPixelFormat(System.Drawing.Imaging.PixelFormat pixfmt)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void RemovePropertyItem(int propid) => throw new PlatformNotSupportedException();
-        public void RotateFlip(System.Drawing.RotateFlipType rotateFlipType) => throw new PlatformNotSupportedException();
-        public void Save(System.IO.Stream stream, System.Drawing.Imaging.ImageCodecInfo encoder, System.Drawing.Imaging.EncoderParameters encoderParams) => throw new PlatformNotSupportedException();
-        public void Save(System.IO.Stream stream, System.Drawing.Imaging.ImageFormat format) => throw new PlatformNotSupportedException();
+
+        public void RotateFlip(System.Drawing.RotateFlipType rotateFlipType) =>
+            throw new PlatformNotSupportedException();
+
+        public void Save(
+            System.IO.Stream stream,
+            System.Drawing.Imaging.ImageCodecInfo encoder,
+            System.Drawing.Imaging.EncoderParameters encoderParams
+        ) => throw new PlatformNotSupportedException();
+
+        public void Save(System.IO.Stream stream, System.Drawing.Imaging.ImageFormat format) =>
+            throw new PlatformNotSupportedException();
+
         public void Save(string filename) => throw new PlatformNotSupportedException();
-        public void Save(string filename, System.Drawing.Imaging.ImageCodecInfo encoder, System.Drawing.Imaging.EncoderParameters encoderParams) => throw new PlatformNotSupportedException();
-        public void Save(string filename, System.Drawing.Imaging.ImageFormat format) => throw new PlatformNotSupportedException();
-        public void SaveAdd(System.Drawing.Image image, System.Drawing.Imaging.EncoderParameters encoderParams) => throw new PlatformNotSupportedException();
-        public void SaveAdd(System.Drawing.Imaging.EncoderParameters encoderParams) => throw new PlatformNotSupportedException();
-        public int SelectActiveFrame(System.Drawing.Imaging.FrameDimension dimension, int frameIndex) { throw new PlatformNotSupportedException(); }
-        public void SetPropertyItem(System.Drawing.Imaging.PropertyItem propitem) => throw new PlatformNotSupportedException();
-        void System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) => throw new PlatformNotSupportedException();
+
+        public void Save(
+            string filename,
+            System.Drawing.Imaging.ImageCodecInfo encoder,
+            System.Drawing.Imaging.EncoderParameters encoderParams
+        ) => throw new PlatformNotSupportedException();
+
+        public void Save(string filename, System.Drawing.Imaging.ImageFormat format) =>
+            throw new PlatformNotSupportedException();
+
+        public void SaveAdd(
+            System.Drawing.Image image,
+            System.Drawing.Imaging.EncoderParameters encoderParams
+        ) => throw new PlatformNotSupportedException();
+
+        public void SaveAdd(System.Drawing.Imaging.EncoderParameters encoderParams) =>
+            throw new PlatformNotSupportedException();
+
+        public int SelectActiveFrame(
+            System.Drawing.Imaging.FrameDimension dimension,
+            int frameIndex
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void SetPropertyItem(System.Drawing.Imaging.PropertyItem propitem) =>
+            throw new PlatformNotSupportedException();
+
+        void System.Runtime.Serialization.ISerializable.GetObjectData(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        ) => throw new PlatformNotSupportedException();
+
         public delegate bool GetThumbnailImageAbort();
     }
+
     public sealed partial class ImageAnimator
     {
         internal ImageAnimator() => throw new PlatformNotSupportedException();
-        public static void Animate(System.Drawing.Image image, System.EventHandler onFrameChangedHandler) => throw new PlatformNotSupportedException();
-        public static bool CanAnimate(System.Drawing.Image image) { throw new PlatformNotSupportedException(); }
-        public static void StopAnimate(System.Drawing.Image image, System.EventHandler onFrameChangedHandler) => throw new PlatformNotSupportedException();
+
+        public static void Animate(
+            System.Drawing.Image image,
+            System.EventHandler onFrameChangedHandler
+        ) => throw new PlatformNotSupportedException();
+
+        public static bool CanAnimate(System.Drawing.Image image)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static void StopAnimate(
+            System.Drawing.Image image,
+            System.EventHandler onFrameChangedHandler
+        ) => throw new PlatformNotSupportedException();
+
         public static void UpdateFrames() => throw new PlatformNotSupportedException();
-        public static void UpdateFrames(System.Drawing.Image image) => throw new PlatformNotSupportedException();
+
+        public static void UpdateFrames(System.Drawing.Image image) =>
+            throw new PlatformNotSupportedException();
     }
-    public sealed partial class Pen : System.MarshalByRefObject, System.ICloneable, System.IDisposable
+
+    public sealed partial class Pen
+        : System.MarshalByRefObject,
+            System.ICloneable,
+            System.IDisposable
     {
         public Pen(System.Drawing.Brush brush) => throw new PlatformNotSupportedException();
-        public Pen(System.Drawing.Brush brush, float width) => throw new PlatformNotSupportedException();
+
+        public Pen(System.Drawing.Brush brush, float width) =>
+            throw new PlatformNotSupportedException();
+
         public Pen(System.Drawing.Color color) => throw new PlatformNotSupportedException();
-        public Pen(System.Drawing.Color color, float width) => throw new PlatformNotSupportedException();
-        public System.Drawing.Drawing2D.PenAlignment Alignment { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Brush Brush { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Color Color { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float[] CompoundArray { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.CustomLineCap CustomEndCap { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.CustomLineCap CustomStartCap { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.DashCap DashCap { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float DashOffset { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float[] DashPattern { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.DashStyle DashStyle { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.LineCap EndCap { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.LineJoin LineJoin { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float MiterLimit { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.PenType PenType { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Drawing2D.LineCap StartCap { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.Matrix Transform { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Width { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public object Clone() { throw new PlatformNotSupportedException(); }
+
+        public Pen(System.Drawing.Color color, float width) =>
+            throw new PlatformNotSupportedException();
+
+        public System.Drawing.Drawing2D.PenAlignment Alignment
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Brush Brush
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Color Color
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float[] CompoundArray
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.CustomLineCap CustomEndCap
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.CustomLineCap CustomStartCap
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.DashCap DashCap
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float DashOffset
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float[] DashPattern
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.DashStyle DashStyle
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.LineCap EndCap
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.LineJoin LineJoin
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float MiterLimit
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.PenType PenType
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Drawing2D.LineCap StartCap
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.Matrix Transform
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Width
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
+
         ~Pen() => throw new PlatformNotSupportedException();
-        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix) => throw new PlatformNotSupportedException();
-        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+
+        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix) =>
+            throw new PlatformNotSupportedException();
+
+        public void MultiplyTransform(
+            System.Drawing.Drawing2D.Matrix matrix,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
+
         public void ResetTransform() => throw new PlatformNotSupportedException();
+
         public void RotateTransform(float angle) => throw new PlatformNotSupportedException();
-        public void RotateTransform(float angle, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+
+        public void RotateTransform(float angle, System.Drawing.Drawing2D.MatrixOrder order) =>
+            throw new PlatformNotSupportedException();
+
         public void ScaleTransform(float sx, float sy) => throw new PlatformNotSupportedException();
-        public void ScaleTransform(float sx, float sy, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
-        public void SetLineCap(System.Drawing.Drawing2D.LineCap startCap, System.Drawing.Drawing2D.LineCap endCap, System.Drawing.Drawing2D.DashCap dashCap) => throw new PlatformNotSupportedException();
-        public void TranslateTransform(float dx, float dy) => throw new PlatformNotSupportedException();
-        public void TranslateTransform(float dx, float dy, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+
+        public void ScaleTransform(
+            float sx,
+            float sy,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetLineCap(
+            System.Drawing.Drawing2D.LineCap startCap,
+            System.Drawing.Drawing2D.LineCap endCap,
+            System.Drawing.Drawing2D.DashCap dashCap
+        ) => throw new PlatformNotSupportedException();
+
+        public void TranslateTransform(float dx, float dy) =>
+            throw new PlatformNotSupportedException();
+
+        public void TranslateTransform(
+            float dx,
+            float dy,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
     }
+
     public static partial class Pens
     {
-        public static System.Drawing.Pen AliceBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen AntiqueWhite { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Aqua { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Aquamarine { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Azure { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Beige { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Bisque { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Black { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen BlanchedAlmond { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Blue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen BlueViolet { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Brown { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen BurlyWood { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen CadetBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Chartreuse { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Chocolate { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Coral { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen CornflowerBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Cornsilk { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Crimson { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Cyan { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkCyan { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkGoldenrod { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkGray { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkKhaki { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkMagenta { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkOliveGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkOrange { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkOrchid { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkRed { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkSalmon { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkSeaGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkSlateBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkSlateGray { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkTurquoise { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DarkViolet { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DeepPink { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DeepSkyBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DimGray { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen DodgerBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Firebrick { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen FloralWhite { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen ForestGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Fuchsia { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Gainsboro { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen GhostWhite { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Gold { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Goldenrod { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Gray { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Green { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen GreenYellow { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Honeydew { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen HotPink { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen IndianRed { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Indigo { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Ivory { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Khaki { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Lavender { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LavenderBlush { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LawnGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LemonChiffon { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LightBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LightCoral { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LightCyan { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LightGoldenrodYellow { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LightGray { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LightGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LightPink { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LightSalmon { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LightSeaGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LightSkyBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LightSlateGray { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LightSteelBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LightYellow { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Lime { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen LimeGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Linen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Magenta { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Maroon { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MediumAquamarine { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MediumBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MediumOrchid { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MediumPurple { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MediumSeaGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MediumSlateBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MediumSpringGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MediumTurquoise { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MediumVioletRed { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MidnightBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MintCream { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MistyRose { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Moccasin { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen NavajoWhite { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Navy { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen OldLace { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Olive { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen OliveDrab { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Orange { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen OrangeRed { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Orchid { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen PaleGoldenrod { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen PaleGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen PaleTurquoise { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen PaleVioletRed { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen PapayaWhip { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen PeachPuff { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Peru { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Pink { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Plum { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen PowderBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Purple { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Red { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen RosyBrown { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen RoyalBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen SaddleBrown { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Salmon { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen SandyBrown { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen SeaGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen SeaShell { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Sienna { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Silver { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen SkyBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen SlateBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen SlateGray { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Snow { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen SpringGreen { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen SteelBlue { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Tan { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Teal { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Thistle { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Tomato { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Transparent { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Turquoise { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Violet { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Wheat { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen White { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen WhiteSmoke { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Yellow { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen YellowGreen { get { throw new PlatformNotSupportedException(); } }
+        public static System.Drawing.Pen AliceBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen AntiqueWhite
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Aqua
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Aquamarine
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Azure
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Beige
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Bisque
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Black
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen BlanchedAlmond
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Blue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen BlueViolet
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Brown
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen BurlyWood
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen CadetBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Chartreuse
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Chocolate
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Coral
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen CornflowerBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Cornsilk
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Crimson
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Cyan
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkCyan
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkGoldenrod
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkGray
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkKhaki
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkMagenta
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkOliveGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkOrange
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkOrchid
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkRed
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkSalmon
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkSeaGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkSlateBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkSlateGray
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkTurquoise
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DarkViolet
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DeepPink
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DeepSkyBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DimGray
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen DodgerBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Firebrick
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen FloralWhite
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen ForestGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Fuchsia
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Gainsboro
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen GhostWhite
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Gold
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Goldenrod
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Gray
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Green
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen GreenYellow
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Honeydew
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen HotPink
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen IndianRed
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Indigo
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Ivory
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Khaki
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Lavender
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LavenderBlush
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LawnGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LemonChiffon
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LightBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LightCoral
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LightCyan
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LightGoldenrodYellow
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LightGray
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LightGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LightPink
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LightSalmon
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LightSeaGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LightSkyBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LightSlateGray
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LightSteelBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LightYellow
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Lime
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen LimeGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Linen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Magenta
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Maroon
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MediumAquamarine
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MediumBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MediumOrchid
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MediumPurple
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MediumSeaGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MediumSlateBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MediumSpringGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MediumTurquoise
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MediumVioletRed
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MidnightBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MintCream
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MistyRose
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Moccasin
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen NavajoWhite
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Navy
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen OldLace
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Olive
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen OliveDrab
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Orange
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen OrangeRed
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Orchid
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen PaleGoldenrod
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen PaleGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen PaleTurquoise
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen PaleVioletRed
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen PapayaWhip
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen PeachPuff
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Peru
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Pink
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Plum
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen PowderBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Purple
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Red
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen RosyBrown
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen RoyalBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen SaddleBrown
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Salmon
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen SandyBrown
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen SeaGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen SeaShell
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Sienna
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Silver
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen SkyBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen SlateBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen SlateGray
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Snow
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen SpringGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen SteelBlue
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Tan
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Teal
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Thistle
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Tomato
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Transparent
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Turquoise
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Violet
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Wheat
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen White
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen WhiteSmoke
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Yellow
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen YellowGreen
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
     }
+
     public sealed partial class Region : System.MarshalByRefObject, System.IDisposable
     {
         public Region() => throw new PlatformNotSupportedException();
-        public Region(System.Drawing.Drawing2D.GraphicsPath path) => throw new PlatformNotSupportedException();
-        public Region(System.Drawing.Drawing2D.RegionData rgnData) => throw new PlatformNotSupportedException();
+
+        public Region(System.Drawing.Drawing2D.GraphicsPath path) =>
+            throw new PlatformNotSupportedException();
+
+        public Region(System.Drawing.Drawing2D.RegionData rgnData) =>
+            throw new PlatformNotSupportedException();
+
         public Region(System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
+
         public Region(System.Drawing.RectangleF rect) => throw new PlatformNotSupportedException();
-        public System.Drawing.Region Clone() { throw new PlatformNotSupportedException(); }
-        public void Complement(System.Drawing.Drawing2D.GraphicsPath path) => throw new PlatformNotSupportedException();
-        public void Complement(System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void Complement(System.Drawing.RectangleF rect) => throw new PlatformNotSupportedException();
-        public void Complement(System.Drawing.Region region) => throw new PlatformNotSupportedException();
+
+        public System.Drawing.Region Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void Complement(System.Drawing.Drawing2D.GraphicsPath path) =>
+            throw new PlatformNotSupportedException();
+
+        public void Complement(System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void Complement(System.Drawing.RectangleF rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void Complement(System.Drawing.Region region) =>
+            throw new PlatformNotSupportedException();
+
         public void Dispose() => throw new PlatformNotSupportedException();
-        public bool Equals(System.Drawing.Region region, System.Drawing.Graphics g) { throw new PlatformNotSupportedException(); }
-        public void Exclude(System.Drawing.Drawing2D.GraphicsPath path) => throw new PlatformNotSupportedException();
-        public void Exclude(System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void Exclude(System.Drawing.RectangleF rect) => throw new PlatformNotSupportedException();
-        public void Exclude(System.Drawing.Region region) => throw new PlatformNotSupportedException();
+
+        public bool Equals(System.Drawing.Region region, System.Drawing.Graphics g)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void Exclude(System.Drawing.Drawing2D.GraphicsPath path) =>
+            throw new PlatformNotSupportedException();
+
+        public void Exclude(System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void Exclude(System.Drawing.RectangleF rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void Exclude(System.Drawing.Region region) =>
+            throw new PlatformNotSupportedException();
+
         ~Region() => throw new PlatformNotSupportedException();
-        public static System.Drawing.Region FromHrgn(System.IntPtr hrgn) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.RectangleF GetBounds(System.Drawing.Graphics g) { throw new PlatformNotSupportedException(); }
-        public System.IntPtr GetHrgn(System.Drawing.Graphics g) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.RegionData GetRegionData() { throw new PlatformNotSupportedException(); }
-        public System.Drawing.RectangleF[] GetRegionScans(System.Drawing.Drawing2D.Matrix matrix) { throw new PlatformNotSupportedException(); }
-        public void Intersect(System.Drawing.Drawing2D.GraphicsPath path) => throw new PlatformNotSupportedException();
-        public void Intersect(System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void Intersect(System.Drawing.RectangleF rect) => throw new PlatformNotSupportedException();
-        public void Intersect(System.Drawing.Region region) => throw new PlatformNotSupportedException();
-        public bool IsEmpty(System.Drawing.Graphics g) { throw new PlatformNotSupportedException(); }
-        public bool IsInfinite(System.Drawing.Graphics g) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.Point point) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.Point point, System.Drawing.Graphics g) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.PointF point) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.PointF point, System.Drawing.Graphics g) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.Rectangle rect) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.Rectangle rect, System.Drawing.Graphics g) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.RectangleF rect) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.RectangleF rect, System.Drawing.Graphics g) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(int x, int y, System.Drawing.Graphics g) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(int x, int y, int width, int height) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(int x, int y, int width, int height, System.Drawing.Graphics g) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(float x, float y) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(float x, float y, System.Drawing.Graphics g) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(float x, float y, float width, float height) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(float x, float y, float width, float height, System.Drawing.Graphics g) { throw new PlatformNotSupportedException(); }
+
+        public static System.Drawing.Region FromHrgn(System.IntPtr hrgn)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.RectangleF GetBounds(System.Drawing.Graphics g)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.IntPtr GetHrgn(System.Drawing.Graphics g)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Drawing2D.RegionData GetRegionData()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.RectangleF[] GetRegionScans(System.Drawing.Drawing2D.Matrix matrix)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void Intersect(System.Drawing.Drawing2D.GraphicsPath path) =>
+            throw new PlatformNotSupportedException();
+
+        public void Intersect(System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void Intersect(System.Drawing.RectangleF rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void Intersect(System.Drawing.Region region) =>
+            throw new PlatformNotSupportedException();
+
+        public bool IsEmpty(System.Drawing.Graphics g)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsInfinite(System.Drawing.Graphics g)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.Point point)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.Point point, System.Drawing.Graphics g)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.PointF point)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.PointF point, System.Drawing.Graphics g)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.Rectangle rect)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.Rectangle rect, System.Drawing.Graphics g)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.RectangleF rect)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.RectangleF rect, System.Drawing.Graphics g)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(int x, int y, System.Drawing.Graphics g)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(int x, int y, int width, int height)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(int x, int y, int width, int height, System.Drawing.Graphics g)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(float x, float y)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(float x, float y, System.Drawing.Graphics g)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(float x, float y, float width, float height)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(
+            float x,
+            float y,
+            float width,
+            float height,
+            System.Drawing.Graphics g
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void MakeEmpty() => throw new PlatformNotSupportedException();
+
         public void MakeInfinite() => throw new PlatformNotSupportedException();
-        public void ReleaseHrgn(System.IntPtr regionHandle) => throw new PlatformNotSupportedException();
-        public void Transform(System.Drawing.Drawing2D.Matrix matrix) => throw new PlatformNotSupportedException();
+
+        public void ReleaseHrgn(System.IntPtr regionHandle) =>
+            throw new PlatformNotSupportedException();
+
+        public void Transform(System.Drawing.Drawing2D.Matrix matrix) =>
+            throw new PlatformNotSupportedException();
+
         public void Translate(int dx, int dy) => throw new PlatformNotSupportedException();
+
         public void Translate(float dx, float dy) => throw new PlatformNotSupportedException();
-        public void Union(System.Drawing.Drawing2D.GraphicsPath path) => throw new PlatformNotSupportedException();
-        public void Union(System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void Union(System.Drawing.RectangleF rect) => throw new PlatformNotSupportedException();
-        public void Union(System.Drawing.Region region) => throw new PlatformNotSupportedException();
-        public void Xor(System.Drawing.Drawing2D.GraphicsPath path) => throw new PlatformNotSupportedException();
+
+        public void Union(System.Drawing.Drawing2D.GraphicsPath path) =>
+            throw new PlatformNotSupportedException();
+
+        public void Union(System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void Union(System.Drawing.RectangleF rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void Union(System.Drawing.Region region) =>
+            throw new PlatformNotSupportedException();
+
+        public void Xor(System.Drawing.Drawing2D.GraphicsPath path) =>
+            throw new PlatformNotSupportedException();
+
         public void Xor(System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void Xor(System.Drawing.RectangleF rect) => throw new PlatformNotSupportedException();
+
+        public void Xor(System.Drawing.RectangleF rect) =>
+            throw new PlatformNotSupportedException();
+
         public void Xor(System.Drawing.Region region) => throw new PlatformNotSupportedException();
     }
+
     public enum RotateFlipType
     {
         Rotate180FlipNone = 2,
@@ -1016,19 +4051,33 @@ namespace System.Drawing
         RotateNoneFlipXY = 2,
         RotateNoneFlipY = 6,
     }
+
     public sealed partial class SolidBrush : System.Drawing.Brush
     {
         public SolidBrush(System.Drawing.Color color) => throw new PlatformNotSupportedException();
-        public System.Drawing.Color Color { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public override object Clone() { throw new PlatformNotSupportedException(); }
-        protected override void Dispose(bool disposing) => throw new PlatformNotSupportedException();
+
+        public System.Drawing.Color Color
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public override object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        protected override void Dispose(bool disposing) =>
+            throw new PlatformNotSupportedException();
     }
+
     public enum StringAlignment
     {
         Center = 1,
         Far = 2,
         Near = 0,
     }
+
     public enum StringDigitSubstitute
     {
         National = 2,
@@ -1036,30 +4085,96 @@ namespace System.Drawing
         Traditional = 3,
         User = 0,
     }
-    public sealed partial class StringFormat : System.MarshalByRefObject, System.ICloneable, System.IDisposable
+
+    public sealed partial class StringFormat
+        : System.MarshalByRefObject,
+            System.ICloneable,
+            System.IDisposable
     {
         public StringFormat() => throw new PlatformNotSupportedException();
-        public StringFormat(System.Drawing.StringFormat format) => throw new PlatformNotSupportedException();
-        public StringFormat(System.Drawing.StringFormatFlags options) => throw new PlatformNotSupportedException();
-        public StringFormat(System.Drawing.StringFormatFlags options, int language) => throw new PlatformNotSupportedException();
-        public System.Drawing.StringAlignment Alignment { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int DigitSubstitutionLanguage { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.StringDigitSubstitute DigitSubstitutionMethod { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.StringFormatFlags FormatFlags { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public static System.Drawing.StringFormat GenericDefault { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.StringFormat GenericTypographic { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Text.HotkeyPrefix HotkeyPrefix { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.StringAlignment LineAlignment { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.StringTrimming Trimming { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public object Clone() { throw new PlatformNotSupportedException(); }
+
+        public StringFormat(System.Drawing.StringFormat format) =>
+            throw new PlatformNotSupportedException();
+
+        public StringFormat(System.Drawing.StringFormatFlags options) =>
+            throw new PlatformNotSupportedException();
+
+        public StringFormat(System.Drawing.StringFormatFlags options, int language) =>
+            throw new PlatformNotSupportedException();
+
+        public System.Drawing.StringAlignment Alignment
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int DigitSubstitutionLanguage
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.StringDigitSubstitute DigitSubstitutionMethod
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.StringFormatFlags FormatFlags
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public static System.Drawing.StringFormat GenericDefault
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.StringFormat GenericTypographic
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Text.HotkeyPrefix HotkeyPrefix
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.StringAlignment LineAlignment
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.StringTrimming Trimming
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
+
         ~StringFormat() => throw new PlatformNotSupportedException();
-        public float[] GetTabStops(out float firstTabOffset) { throw new PlatformNotSupportedException(); }
-        public void SetDigitSubstitution(int language, System.Drawing.StringDigitSubstitute substitute) => throw new PlatformNotSupportedException();
-        public void SetMeasurableCharacterRanges(System.Drawing.CharacterRange[] ranges) => throw new PlatformNotSupportedException();
-        public void SetTabStops(float firstTabOffset, float[] tabStops) => throw new PlatformNotSupportedException();
-        public override string ToString() { throw new PlatformNotSupportedException(); }
+
+        public float[] GetTabStops(out float firstTabOffset)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void SetDigitSubstitution(
+            int language,
+            System.Drawing.StringDigitSubstitute substitute
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetMeasurableCharacterRanges(System.Drawing.CharacterRange[] ranges) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetTabStops(float firstTabOffset, float[] tabStops) =>
+            throw new PlatformNotSupportedException();
+
+        public override string ToString()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     [System.FlagsAttribute]
     public enum StringFormatFlags
     {
@@ -1073,6 +4188,7 @@ namespace System.Drawing
         NoFontFallback = 1024,
         NoWrap = 4096,
     }
+
     public enum StringTrimming
     {
         Character = 1,
@@ -1082,6 +4198,7 @@ namespace System.Drawing
         None = 0,
         Word = 2,
     }
+
     public enum StringUnit
     {
         Display = 1,
@@ -1093,184 +4210,628 @@ namespace System.Drawing
         Point = 3,
         World = 0,
     }
+
     public static partial class SystemBrushes
     {
-        public static System.Drawing.Brush ActiveBorder { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush ActiveCaption { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush ActiveCaptionText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush AppWorkspace { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush ButtonFace { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush ButtonHighlight { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush ButtonShadow { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Control { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush ControlDark { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush ControlDarkDark { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush ControlLight { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush ControlLightLight { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush ControlText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Desktop { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush GradientActiveCaption { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush GradientInactiveCaption { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush GrayText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Highlight { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush HighlightText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush HotTrack { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush InactiveBorder { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush InactiveCaption { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush InactiveCaptionText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Info { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush InfoText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Menu { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MenuBar { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MenuHighlight { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush MenuText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush ScrollBar { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush Window { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush WindowFrame { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush WindowText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Brush FromSystemColor(System.Drawing.Color c) { throw new PlatformNotSupportedException(); }
+        public static System.Drawing.Brush ActiveBorder
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush ActiveCaption
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush ActiveCaptionText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush AppWorkspace
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush ButtonFace
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush ButtonHighlight
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush ButtonShadow
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Control
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush ControlDark
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush ControlDarkDark
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush ControlLight
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush ControlLightLight
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush ControlText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Desktop
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush GradientActiveCaption
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush GradientInactiveCaption
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush GrayText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Highlight
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush HighlightText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush HotTrack
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush InactiveBorder
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush InactiveCaption
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush InactiveCaptionText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Info
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush InfoText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Menu
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MenuBar
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MenuHighlight
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush MenuText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush ScrollBar
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush Window
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush WindowFrame
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Brush WindowText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public static System.Drawing.Brush FromSystemColor(System.Drawing.Color c)
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
 
     public static partial class SystemFonts
     {
-        public static System.Drawing.Font CaptionFont { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Font DefaultFont { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Font DialogFont { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Font IconTitleFont { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Font MenuFont { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Font MessageBoxFont { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Font SmallCaptionFont { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Font StatusFont { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Font GetFontByName(string systemFontName) { throw new PlatformNotSupportedException(); }
+        public static System.Drawing.Font CaptionFont
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Font DefaultFont
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Font DialogFont
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Font IconTitleFont
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Font MenuFont
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Font MessageBoxFont
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Font SmallCaptionFont
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Font StatusFont
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public static System.Drawing.Font GetFontByName(string systemFontName)
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public static partial class SystemIcons
     {
-        public static System.Drawing.Icon Application { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Icon Asterisk { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Icon Error { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Icon Exclamation { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Icon Hand { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Icon Information { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Icon Question { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Icon Shield { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Icon Warning { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Icon WinLogo { get { throw new PlatformNotSupportedException(); } }
+        public static System.Drawing.Icon Application
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Icon Asterisk
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Icon Error
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Icon Exclamation
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Icon Hand
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Icon Information
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Icon Question
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Icon Shield
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Icon Warning
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Icon WinLogo
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
     }
+
     public static partial class SystemPens
     {
-        public static System.Drawing.Pen ActiveBorder { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen ActiveCaption { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen ActiveCaptionText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen AppWorkspace { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen ButtonFace { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen ButtonHighlight { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen ButtonShadow { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Control { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen ControlDark { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen ControlDarkDark { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen ControlLight { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen ControlLightLight { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen ControlText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Desktop { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen GradientActiveCaption { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen GradientInactiveCaption { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen GrayText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Highlight { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen HighlightText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen HotTrack { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen InactiveBorder { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen InactiveCaption { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen InactiveCaptionText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Info { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen InfoText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Menu { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MenuBar { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MenuHighlight { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen MenuText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen ScrollBar { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen Window { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen WindowFrame { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen WindowText { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Pen FromSystemColor(System.Drawing.Color c) { throw new PlatformNotSupportedException(); }
+        public static System.Drawing.Pen ActiveBorder
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen ActiveCaption
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen ActiveCaptionText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen AppWorkspace
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen ButtonFace
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen ButtonHighlight
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen ButtonShadow
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Control
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen ControlDark
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen ControlDarkDark
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen ControlLight
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen ControlLightLight
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen ControlText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Desktop
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen GradientActiveCaption
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen GradientInactiveCaption
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen GrayText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Highlight
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen HighlightText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen HotTrack
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen InactiveBorder
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen InactiveCaption
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen InactiveCaptionText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Info
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen InfoText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Menu
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MenuBar
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MenuHighlight
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen MenuText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen ScrollBar
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen Window
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen WindowFrame
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Pen WindowText
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public static System.Drawing.Pen FromSystemColor(System.Drawing.Color c)
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public sealed partial class TextureBrush : System.Drawing.Brush
     {
-        public TextureBrush(System.Drawing.Image bitmap) => throw new PlatformNotSupportedException();
-        public TextureBrush(System.Drawing.Image image, System.Drawing.Drawing2D.WrapMode wrapMode) => throw new PlatformNotSupportedException();
-        public TextureBrush(System.Drawing.Image image, System.Drawing.Drawing2D.WrapMode wrapMode, System.Drawing.Rectangle dstRect) => throw new PlatformNotSupportedException();
-        public TextureBrush(System.Drawing.Image image, System.Drawing.Drawing2D.WrapMode wrapMode, System.Drawing.RectangleF dstRect) => throw new PlatformNotSupportedException();
-        public TextureBrush(System.Drawing.Image image, System.Drawing.Rectangle dstRect) => throw new PlatformNotSupportedException();
-        public TextureBrush(System.Drawing.Image image, System.Drawing.Rectangle dstRect, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public TextureBrush(System.Drawing.Image image, System.Drawing.RectangleF dstRect) => throw new PlatformNotSupportedException();
-        public TextureBrush(System.Drawing.Image image, System.Drawing.RectangleF dstRect, System.Drawing.Imaging.ImageAttributes imageAttr) => throw new PlatformNotSupportedException();
-        public System.Drawing.Image Image { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Drawing2D.Matrix Transform { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.WrapMode WrapMode { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public override object Clone() { throw new PlatformNotSupportedException(); }
-        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix) => throw new PlatformNotSupportedException();
-        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+        public TextureBrush(System.Drawing.Image bitmap) =>
+            throw new PlatformNotSupportedException();
+
+        public TextureBrush(
+            System.Drawing.Image image,
+            System.Drawing.Drawing2D.WrapMode wrapMode
+        ) => throw new PlatformNotSupportedException();
+
+        public TextureBrush(
+            System.Drawing.Image image,
+            System.Drawing.Drawing2D.WrapMode wrapMode,
+            System.Drawing.Rectangle dstRect
+        ) => throw new PlatformNotSupportedException();
+
+        public TextureBrush(
+            System.Drawing.Image image,
+            System.Drawing.Drawing2D.WrapMode wrapMode,
+            System.Drawing.RectangleF dstRect
+        ) => throw new PlatformNotSupportedException();
+
+        public TextureBrush(System.Drawing.Image image, System.Drawing.Rectangle dstRect) =>
+            throw new PlatformNotSupportedException();
+
+        public TextureBrush(
+            System.Drawing.Image image,
+            System.Drawing.Rectangle dstRect,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public TextureBrush(System.Drawing.Image image, System.Drawing.RectangleF dstRect) =>
+            throw new PlatformNotSupportedException();
+
+        public TextureBrush(
+            System.Drawing.Image image,
+            System.Drawing.RectangleF dstRect,
+            System.Drawing.Imaging.ImageAttributes imageAttr
+        ) => throw new PlatformNotSupportedException();
+
+        public System.Drawing.Image Image
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Drawing2D.Matrix Transform
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.WrapMode WrapMode
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public override object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix) =>
+            throw new PlatformNotSupportedException();
+
+        public void MultiplyTransform(
+            System.Drawing.Drawing2D.Matrix matrix,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
+
         public void ResetTransform() => throw new PlatformNotSupportedException();
+
         public void RotateTransform(float angle) => throw new PlatformNotSupportedException();
-        public void RotateTransform(float angle, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+
+        public void RotateTransform(float angle, System.Drawing.Drawing2D.MatrixOrder order) =>
+            throw new PlatformNotSupportedException();
+
         public void ScaleTransform(float sx, float sy) => throw new PlatformNotSupportedException();
-        public void ScaleTransform(float sx, float sy, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
-        public void TranslateTransform(float dx, float dy) => throw new PlatformNotSupportedException();
-        public void TranslateTransform(float dx, float dy, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+
+        public void ScaleTransform(
+            float sx,
+            float sy,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
+
+        public void TranslateTransform(float dx, float dy) =>
+            throw new PlatformNotSupportedException();
+
+        public void TranslateTransform(
+            float dx,
+            float dy,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
     }
+
     [System.AttributeUsageAttribute((System.AttributeTargets)(4))]
     public partial class ToolboxBitmapAttribute : System.Attribute
     {
         public static readonly System.Drawing.ToolboxBitmapAttribute Default;
-        public ToolboxBitmapAttribute(string imageFile) => throw new PlatformNotSupportedException();
+
+        public ToolboxBitmapAttribute(string imageFile) =>
+            throw new PlatformNotSupportedException();
+
         public ToolboxBitmapAttribute(System.Type t) => throw new PlatformNotSupportedException();
-        public ToolboxBitmapAttribute(System.Type t, string name) => throw new PlatformNotSupportedException();
-        public override bool Equals(object value) { throw new PlatformNotSupportedException(); }
-        public override int GetHashCode() { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Image GetImage(object component) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Image GetImage(object component, bool large) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Image GetImage(System.Type type) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Image GetImage(System.Type type, bool large) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Image GetImage(System.Type type, string imgName, bool large) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Image GetImageFromResource(System.Type t, string imageName, bool large) { throw new PlatformNotSupportedException(); }
+
+        public ToolboxBitmapAttribute(System.Type t, string name) =>
+            throw new PlatformNotSupportedException();
+
+        public override bool Equals(object value)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override int GetHashCode()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Image GetImage(object component)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Image GetImage(object component, bool large)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Image GetImage(System.Type type)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Image GetImage(System.Type type, bool large)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Image GetImage(System.Type type, string imgName, bool large)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Image GetImageFromResource(
+            System.Type t,
+            string imageName,
+            bool large
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
 }
+
 namespace System.Drawing.Design
 {
     public sealed partial class CategoryNameCollection : System.Collections.ReadOnlyCollectionBase
     {
-        public CategoryNameCollection(System.Drawing.Design.CategoryNameCollection value) => throw new PlatformNotSupportedException();
+        public CategoryNameCollection(System.Drawing.Design.CategoryNameCollection value) =>
+            throw new PlatformNotSupportedException();
+
         public CategoryNameCollection(string[] value) => throw new PlatformNotSupportedException();
-        public string this[int index] { get { throw new PlatformNotSupportedException(); } }
-        public bool Contains(string value) { throw new PlatformNotSupportedException(); }
+
+        public string this[int index]
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public bool Contains(string value)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void CopyTo(string[] array, int index) => throw new PlatformNotSupportedException();
-        public int IndexOf(string value) { throw new PlatformNotSupportedException(); }
+
+        public int IndexOf(string value)
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
 }
+
 namespace System.Drawing.Drawing2D
 {
     public sealed partial class AdjustableArrowCap : System.Drawing.Drawing2D.CustomLineCap
     {
-        public AdjustableArrowCap(float width, float height) : base (default(System.Drawing.Drawing2D.GraphicsPath), default(System.Drawing.Drawing2D.GraphicsPath)) => throw new PlatformNotSupportedException();
-        public AdjustableArrowCap(float width, float height, bool isFilled) : base (default(System.Drawing.Drawing2D.GraphicsPath), default(System.Drawing.Drawing2D.GraphicsPath)) => throw new PlatformNotSupportedException();
-        public bool Filled { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Height { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float MiddleInset { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Width { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+        public AdjustableArrowCap(float width, float height)
+            : base(
+                default(System.Drawing.Drawing2D.GraphicsPath),
+                default(System.Drawing.Drawing2D.GraphicsPath)
+            ) => throw new PlatformNotSupportedException();
+
+        public AdjustableArrowCap(float width, float height, bool isFilled)
+            : base(
+                default(System.Drawing.Drawing2D.GraphicsPath),
+                default(System.Drawing.Drawing2D.GraphicsPath)
+            ) => throw new PlatformNotSupportedException();
+
+        public bool Filled
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Height
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float MiddleInset
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Width
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
     }
+
     public sealed partial class Blend
     {
         public Blend() => throw new PlatformNotSupportedException();
+
         public Blend(int count) => throw new PlatformNotSupportedException();
-        public float[] Factors { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float[] Positions { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+
+        public float[] Factors
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float[] Positions
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
     }
+
     public sealed partial class ColorBlend
     {
         public ColorBlend() => throw new PlatformNotSupportedException();
+
         public ColorBlend(int count) => throw new PlatformNotSupportedException();
-        public System.Drawing.Color[] Colors { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float[] Positions { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+
+        public System.Drawing.Color[] Colors
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float[] Positions
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
     }
+
     public enum CombineMode
     {
         Complement = 5,
@@ -1280,11 +4841,13 @@ namespace System.Drawing.Drawing2D
         Union = 2,
         Xor = 3,
     }
+
     public enum CompositingMode
     {
         SourceCopy = 1,
         SourceOver = 0,
     }
+
     public enum CompositingQuality
     {
         AssumeLinear = 4,
@@ -1294,34 +4857,90 @@ namespace System.Drawing.Drawing2D
         HighSpeed = 1,
         Invalid = -1,
     }
+
     public enum CoordinateSpace
     {
         Device = 2,
         Page = 1,
         World = 0,
     }
-    public partial class CustomLineCap : System.MarshalByRefObject, System.ICloneable, System.IDisposable
+
+    public partial class CustomLineCap
+        : System.MarshalByRefObject,
+            System.ICloneable,
+            System.IDisposable
     {
-        public CustomLineCap(System.Drawing.Drawing2D.GraphicsPath fillPath, System.Drawing.Drawing2D.GraphicsPath strokePath) => throw new PlatformNotSupportedException();
-        public CustomLineCap(System.Drawing.Drawing2D.GraphicsPath fillPath, System.Drawing.Drawing2D.GraphicsPath strokePath, System.Drawing.Drawing2D.LineCap baseCap) => throw new PlatformNotSupportedException();
-        public CustomLineCap(System.Drawing.Drawing2D.GraphicsPath fillPath, System.Drawing.Drawing2D.GraphicsPath strokePath, System.Drawing.Drawing2D.LineCap baseCap, float baseInset) => throw new PlatformNotSupportedException();
-        public System.Drawing.Drawing2D.LineCap BaseCap { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float BaseInset { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.LineJoin StrokeJoin { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float WidthScale { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public object Clone() { throw new PlatformNotSupportedException(); }
+        public CustomLineCap(
+            System.Drawing.Drawing2D.GraphicsPath fillPath,
+            System.Drawing.Drawing2D.GraphicsPath strokePath
+        ) => throw new PlatformNotSupportedException();
+
+        public CustomLineCap(
+            System.Drawing.Drawing2D.GraphicsPath fillPath,
+            System.Drawing.Drawing2D.GraphicsPath strokePath,
+            System.Drawing.Drawing2D.LineCap baseCap
+        ) => throw new PlatformNotSupportedException();
+
+        public CustomLineCap(
+            System.Drawing.Drawing2D.GraphicsPath fillPath,
+            System.Drawing.Drawing2D.GraphicsPath strokePath,
+            System.Drawing.Drawing2D.LineCap baseCap,
+            float baseInset
+        ) => throw new PlatformNotSupportedException();
+
+        public System.Drawing.Drawing2D.LineCap BaseCap
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float BaseInset
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.LineJoin StrokeJoin
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float WidthScale
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
+
         protected virtual void Dispose(bool disposing) => throw new PlatformNotSupportedException();
+
         ~CustomLineCap() => throw new PlatformNotSupportedException();
-        public void GetStrokeCaps(out System.Drawing.Drawing2D.LineCap startCap, out System.Drawing.Drawing2D.LineCap endCap) { throw new PlatformNotSupportedException(); }
-        public void SetStrokeCaps(System.Drawing.Drawing2D.LineCap startCap, System.Drawing.Drawing2D.LineCap endCap) => throw new PlatformNotSupportedException();
+
+        public void GetStrokeCaps(
+            out System.Drawing.Drawing2D.LineCap startCap,
+            out System.Drawing.Drawing2D.LineCap endCap
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void SetStrokeCaps(
+            System.Drawing.Drawing2D.LineCap startCap,
+            System.Drawing.Drawing2D.LineCap endCap
+        ) => throw new PlatformNotSupportedException();
     }
+
     public enum DashCap
     {
         Flat = 0,
         Round = 2,
         Triangle = 3,
     }
+
     public enum DashStyle
     {
         Custom = 5,
@@ -1331,149 +4950,572 @@ namespace System.Drawing.Drawing2D
         Dot = 2,
         Solid = 0,
     }
+
     public enum FillMode
     {
         Alternate = 0,
         Winding = 1,
     }
+
     public enum FlushIntention
     {
         Flush = 0,
         Sync = 1,
     }
+
     public sealed partial class GraphicsContainer : System.MarshalByRefObject
     {
         internal GraphicsContainer() => throw new PlatformNotSupportedException();
     }
-    public sealed partial class GraphicsPath : System.MarshalByRefObject, System.ICloneable, System.IDisposable
+
+    public sealed partial class GraphicsPath
+        : System.MarshalByRefObject,
+            System.ICloneable,
+            System.IDisposable
     {
         public GraphicsPath() => throw new PlatformNotSupportedException();
-        public GraphicsPath(System.Drawing.Drawing2D.FillMode fillMode) => throw new PlatformNotSupportedException();
-        public GraphicsPath(System.Drawing.PointF[] pts, byte[] types) => throw new PlatformNotSupportedException();
-        public GraphicsPath(System.Drawing.PointF[] pts, byte[] types, System.Drawing.Drawing2D.FillMode fillMode) => throw new PlatformNotSupportedException();
-        public GraphicsPath(System.Drawing.Point[] pts, byte[] types) => throw new PlatformNotSupportedException();
-        public GraphicsPath(System.Drawing.Point[] pts, byte[] types, System.Drawing.Drawing2D.FillMode fillMode) => throw new PlatformNotSupportedException();
-        public System.Drawing.Drawing2D.FillMode FillMode { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.PathData PathData { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.PointF[] PathPoints { get { throw new PlatformNotSupportedException(); } }
-        public byte[] PathTypes { get { throw new PlatformNotSupportedException(); } }
-        public int PointCount { get { throw new PlatformNotSupportedException(); } }
-        public void AddArc(System.Drawing.Rectangle rect, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void AddArc(System.Drawing.RectangleF rect, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void AddArc(int x, int y, int width, int height, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void AddArc(float x, float y, float width, float height, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void AddBezier(System.Drawing.Point pt1, System.Drawing.Point pt2, System.Drawing.Point pt3, System.Drawing.Point pt4) => throw new PlatformNotSupportedException();
-        public void AddBezier(System.Drawing.PointF pt1, System.Drawing.PointF pt2, System.Drawing.PointF pt3, System.Drawing.PointF pt4) => throw new PlatformNotSupportedException();
-        public void AddBezier(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) => throw new PlatformNotSupportedException();
-        public void AddBezier(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) => throw new PlatformNotSupportedException();
-        public void AddBeziers(System.Drawing.PointF[] points) => throw new PlatformNotSupportedException();
-        public void AddBeziers(params System.Drawing.Point[] points) => throw new PlatformNotSupportedException();
-        public void AddClosedCurve(System.Drawing.PointF[] points) => throw new PlatformNotSupportedException();
-        public void AddClosedCurve(System.Drawing.PointF[] points, float tension) => throw new PlatformNotSupportedException();
-        public void AddClosedCurve(System.Drawing.Point[] points) => throw new PlatformNotSupportedException();
-        public void AddClosedCurve(System.Drawing.Point[] points, float tension) => throw new PlatformNotSupportedException();
-        public void AddCurve(System.Drawing.PointF[] points) => throw new PlatformNotSupportedException();
-        public void AddCurve(System.Drawing.PointF[] points, int offset, int numberOfSegments, float tension) => throw new PlatformNotSupportedException();
-        public void AddCurve(System.Drawing.PointF[] points, float tension) => throw new PlatformNotSupportedException();
-        public void AddCurve(System.Drawing.Point[] points) => throw new PlatformNotSupportedException();
-        public void AddCurve(System.Drawing.Point[] points, int offset, int numberOfSegments, float tension) => throw new PlatformNotSupportedException();
-        public void AddCurve(System.Drawing.Point[] points, float tension) => throw new PlatformNotSupportedException();
-        public void AddEllipse(System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void AddEllipse(System.Drawing.RectangleF rect) => throw new PlatformNotSupportedException();
-        public void AddEllipse(int x, int y, int width, int height) => throw new PlatformNotSupportedException();
-        public void AddEllipse(float x, float y, float width, float height) => throw new PlatformNotSupportedException();
-        public void AddLine(System.Drawing.Point pt1, System.Drawing.Point pt2) => throw new PlatformNotSupportedException();
-        public void AddLine(System.Drawing.PointF pt1, System.Drawing.PointF pt2) => throw new PlatformNotSupportedException();
-        public void AddLine(int x1, int y1, int x2, int y2) => throw new PlatformNotSupportedException();
-        public void AddLine(float x1, float y1, float x2, float y2) => throw new PlatformNotSupportedException();
-        public void AddLines(System.Drawing.PointF[] points) => throw new PlatformNotSupportedException();
-        public void AddLines(System.Drawing.Point[] points) => throw new PlatformNotSupportedException();
-        public void AddPath(System.Drawing.Drawing2D.GraphicsPath addingPath, bool connect) => throw new PlatformNotSupportedException();
-        public void AddPie(System.Drawing.Rectangle rect, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void AddPie(int x, int y, int width, int height, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void AddPie(float x, float y, float width, float height, float startAngle, float sweepAngle) => throw new PlatformNotSupportedException();
-        public void AddPolygon(System.Drawing.PointF[] points) => throw new PlatformNotSupportedException();
-        public void AddPolygon(System.Drawing.Point[] points) => throw new PlatformNotSupportedException();
-        public void AddRectangle(System.Drawing.Rectangle rect) => throw new PlatformNotSupportedException();
-        public void AddRectangle(System.Drawing.RectangleF rect) => throw new PlatformNotSupportedException();
-        public void AddRectangles(System.Drawing.RectangleF[] rects) => throw new PlatformNotSupportedException();
-        public void AddRectangles(System.Drawing.Rectangle[] rects) => throw new PlatformNotSupportedException();
-        public void AddString(string s, System.Drawing.FontFamily family, int style, float emSize, System.Drawing.Point origin, System.Drawing.StringFormat format) => throw new PlatformNotSupportedException();
-        public void AddString(string s, System.Drawing.FontFamily family, int style, float emSize, System.Drawing.PointF origin, System.Drawing.StringFormat format) => throw new PlatformNotSupportedException();
-        public void AddString(string s, System.Drawing.FontFamily family, int style, float emSize, System.Drawing.Rectangle layoutRect, System.Drawing.StringFormat format) => throw new PlatformNotSupportedException();
-        public void AddString(string s, System.Drawing.FontFamily family, int style, float emSize, System.Drawing.RectangleF layoutRect, System.Drawing.StringFormat format) => throw new PlatformNotSupportedException();
+
+        public GraphicsPath(System.Drawing.Drawing2D.FillMode fillMode) =>
+            throw new PlatformNotSupportedException();
+
+        public GraphicsPath(System.Drawing.PointF[] pts, byte[] types) =>
+            throw new PlatformNotSupportedException();
+
+        public GraphicsPath(
+            System.Drawing.PointF[] pts,
+            byte[] types,
+            System.Drawing.Drawing2D.FillMode fillMode
+        ) => throw new PlatformNotSupportedException();
+
+        public GraphicsPath(System.Drawing.Point[] pts, byte[] types) =>
+            throw new PlatformNotSupportedException();
+
+        public GraphicsPath(
+            System.Drawing.Point[] pts,
+            byte[] types,
+            System.Drawing.Drawing2D.FillMode fillMode
+        ) => throw new PlatformNotSupportedException();
+
+        public System.Drawing.Drawing2D.FillMode FillMode
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.PathData PathData
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.PointF[] PathPoints
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public byte[] PathTypes
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public int PointCount
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public void AddArc(System.Drawing.Rectangle rect, float startAngle, float sweepAngle) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddArc(System.Drawing.RectangleF rect, float startAngle, float sweepAngle) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddArc(
+            int x,
+            int y,
+            int width,
+            int height,
+            float startAngle,
+            float sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void AddArc(
+            float x,
+            float y,
+            float width,
+            float height,
+            float startAngle,
+            float sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void AddBezier(
+            System.Drawing.Point pt1,
+            System.Drawing.Point pt2,
+            System.Drawing.Point pt3,
+            System.Drawing.Point pt4
+        ) => throw new PlatformNotSupportedException();
+
+        public void AddBezier(
+            System.Drawing.PointF pt1,
+            System.Drawing.PointF pt2,
+            System.Drawing.PointF pt3,
+            System.Drawing.PointF pt4
+        ) => throw new PlatformNotSupportedException();
+
+        public void AddBezier(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddBezier(
+            float x1,
+            float y1,
+            float x2,
+            float y2,
+            float x3,
+            float y3,
+            float x4,
+            float y4
+        ) => throw new PlatformNotSupportedException();
+
+        public void AddBeziers(System.Drawing.PointF[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddBeziers(params System.Drawing.Point[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddClosedCurve(System.Drawing.PointF[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddClosedCurve(System.Drawing.PointF[] points, float tension) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddClosedCurve(System.Drawing.Point[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddClosedCurve(System.Drawing.Point[] points, float tension) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddCurve(System.Drawing.PointF[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddCurve(
+            System.Drawing.PointF[] points,
+            int offset,
+            int numberOfSegments,
+            float tension
+        ) => throw new PlatformNotSupportedException();
+
+        public void AddCurve(System.Drawing.PointF[] points, float tension) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddCurve(System.Drawing.Point[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddCurve(
+            System.Drawing.Point[] points,
+            int offset,
+            int numberOfSegments,
+            float tension
+        ) => throw new PlatformNotSupportedException();
+
+        public void AddCurve(System.Drawing.Point[] points, float tension) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddEllipse(System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddEllipse(System.Drawing.RectangleF rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddEllipse(int x, int y, int width, int height) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddEllipse(float x, float y, float width, float height) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddLine(System.Drawing.Point pt1, System.Drawing.Point pt2) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddLine(System.Drawing.PointF pt1, System.Drawing.PointF pt2) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddLine(int x1, int y1, int x2, int y2) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddLine(float x1, float y1, float x2, float y2) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddLines(System.Drawing.PointF[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddLines(System.Drawing.Point[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddPath(System.Drawing.Drawing2D.GraphicsPath addingPath, bool connect) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddPie(System.Drawing.Rectangle rect, float startAngle, float sweepAngle) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddPie(
+            int x,
+            int y,
+            int width,
+            int height,
+            float startAngle,
+            float sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void AddPie(
+            float x,
+            float y,
+            float width,
+            float height,
+            float startAngle,
+            float sweepAngle
+        ) => throw new PlatformNotSupportedException();
+
+        public void AddPolygon(System.Drawing.PointF[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddPolygon(System.Drawing.Point[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddRectangle(System.Drawing.Rectangle rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddRectangle(System.Drawing.RectangleF rect) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddRectangles(System.Drawing.RectangleF[] rects) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddRectangles(System.Drawing.Rectangle[] rects) =>
+            throw new PlatformNotSupportedException();
+
+        public void AddString(
+            string s,
+            System.Drawing.FontFamily family,
+            int style,
+            float emSize,
+            System.Drawing.Point origin,
+            System.Drawing.StringFormat format
+        ) => throw new PlatformNotSupportedException();
+
+        public void AddString(
+            string s,
+            System.Drawing.FontFamily family,
+            int style,
+            float emSize,
+            System.Drawing.PointF origin,
+            System.Drawing.StringFormat format
+        ) => throw new PlatformNotSupportedException();
+
+        public void AddString(
+            string s,
+            System.Drawing.FontFamily family,
+            int style,
+            float emSize,
+            System.Drawing.Rectangle layoutRect,
+            System.Drawing.StringFormat format
+        ) => throw new PlatformNotSupportedException();
+
+        public void AddString(
+            string s,
+            System.Drawing.FontFamily family,
+            int style,
+            float emSize,
+            System.Drawing.RectangleF layoutRect,
+            System.Drawing.StringFormat format
+        ) => throw new PlatformNotSupportedException();
+
         public void ClearMarkers() => throw new PlatformNotSupportedException();
-        public object Clone() { throw new PlatformNotSupportedException(); }
+
+        public object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void CloseAllFigures() => throw new PlatformNotSupportedException();
+
         public void CloseFigure() => throw new PlatformNotSupportedException();
+
         public void Dispose() => throw new PlatformNotSupportedException();
+
         ~GraphicsPath() => throw new PlatformNotSupportedException();
+
         public void Flatten() => throw new PlatformNotSupportedException();
-        public void Flatten(System.Drawing.Drawing2D.Matrix matrix) => throw new PlatformNotSupportedException();
-        public void Flatten(System.Drawing.Drawing2D.Matrix matrix, float flatness) => throw new PlatformNotSupportedException();
-        public System.Drawing.RectangleF GetBounds() { throw new PlatformNotSupportedException(); }
-        public System.Drawing.RectangleF GetBounds(System.Drawing.Drawing2D.Matrix matrix) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.RectangleF GetBounds(System.Drawing.Drawing2D.Matrix matrix, System.Drawing.Pen pen) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.PointF GetLastPoint() { throw new PlatformNotSupportedException(); }
-        public bool IsOutlineVisible(System.Drawing.Point point, System.Drawing.Pen pen) { throw new PlatformNotSupportedException(); }
-        public bool IsOutlineVisible(System.Drawing.Point pt, System.Drawing.Pen pen, System.Drawing.Graphics graphics) { throw new PlatformNotSupportedException(); }
-        public bool IsOutlineVisible(System.Drawing.PointF point, System.Drawing.Pen pen) { throw new PlatformNotSupportedException(); }
-        public bool IsOutlineVisible(System.Drawing.PointF pt, System.Drawing.Pen pen, System.Drawing.Graphics graphics) { throw new PlatformNotSupportedException(); }
-        public bool IsOutlineVisible(int x, int y, System.Drawing.Pen pen) { throw new PlatformNotSupportedException(); }
-        public bool IsOutlineVisible(int x, int y, System.Drawing.Pen pen, System.Drawing.Graphics graphics) { throw new PlatformNotSupportedException(); }
-        public bool IsOutlineVisible(float x, float y, System.Drawing.Pen pen) { throw new PlatformNotSupportedException(); }
-        public bool IsOutlineVisible(float x, float y, System.Drawing.Pen pen, System.Drawing.Graphics graphics) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.Point point) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.Point pt, System.Drawing.Graphics graphics) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.PointF point) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(System.Drawing.PointF pt, System.Drawing.Graphics graphics) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(int x, int y) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(int x, int y, System.Drawing.Graphics graphics) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(float x, float y) { throw new PlatformNotSupportedException(); }
-        public bool IsVisible(float x, float y, System.Drawing.Graphics graphics) { throw new PlatformNotSupportedException(); }
+
+        public void Flatten(System.Drawing.Drawing2D.Matrix matrix) =>
+            throw new PlatformNotSupportedException();
+
+        public void Flatten(System.Drawing.Drawing2D.Matrix matrix, float flatness) =>
+            throw new PlatformNotSupportedException();
+
+        public System.Drawing.RectangleF GetBounds()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.RectangleF GetBounds(System.Drawing.Drawing2D.Matrix matrix)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.RectangleF GetBounds(
+            System.Drawing.Drawing2D.Matrix matrix,
+            System.Drawing.Pen pen
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.PointF GetLastPoint()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsOutlineVisible(System.Drawing.Point point, System.Drawing.Pen pen)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsOutlineVisible(
+            System.Drawing.Point pt,
+            System.Drawing.Pen pen,
+            System.Drawing.Graphics graphics
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsOutlineVisible(System.Drawing.PointF point, System.Drawing.Pen pen)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsOutlineVisible(
+            System.Drawing.PointF pt,
+            System.Drawing.Pen pen,
+            System.Drawing.Graphics graphics
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsOutlineVisible(int x, int y, System.Drawing.Pen pen)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsOutlineVisible(
+            int x,
+            int y,
+            System.Drawing.Pen pen,
+            System.Drawing.Graphics graphics
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsOutlineVisible(float x, float y, System.Drawing.Pen pen)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsOutlineVisible(
+            float x,
+            float y,
+            System.Drawing.Pen pen,
+            System.Drawing.Graphics graphics
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.Point point)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.Point pt, System.Drawing.Graphics graphics)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.PointF point)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(System.Drawing.PointF pt, System.Drawing.Graphics graphics)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(int x, int y)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(int x, int y, System.Drawing.Graphics graphics)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(float x, float y)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsVisible(float x, float y, System.Drawing.Graphics graphics)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void Reset() => throw new PlatformNotSupportedException();
+
         public void Reverse() => throw new PlatformNotSupportedException();
+
         public void SetMarkers() => throw new PlatformNotSupportedException();
+
         public void StartFigure() => throw new PlatformNotSupportedException();
-        public void Transform(System.Drawing.Drawing2D.Matrix matrix) => throw new PlatformNotSupportedException();
-        public void Warp(System.Drawing.PointF[] destPoints, System.Drawing.RectangleF srcRect) => throw new PlatformNotSupportedException();
-        public void Warp(System.Drawing.PointF[] destPoints, System.Drawing.RectangleF srcRect, System.Drawing.Drawing2D.Matrix matrix) => throw new PlatformNotSupportedException();
-        public void Warp(System.Drawing.PointF[] destPoints, System.Drawing.RectangleF srcRect, System.Drawing.Drawing2D.Matrix matrix, System.Drawing.Drawing2D.WarpMode warpMode) => throw new PlatformNotSupportedException();
-        public void Warp(System.Drawing.PointF[] destPoints, System.Drawing.RectangleF srcRect, System.Drawing.Drawing2D.Matrix matrix, System.Drawing.Drawing2D.WarpMode warpMode, float flatness) => throw new PlatformNotSupportedException();
+
+        public void Transform(System.Drawing.Drawing2D.Matrix matrix) =>
+            throw new PlatformNotSupportedException();
+
+        public void Warp(System.Drawing.PointF[] destPoints, System.Drawing.RectangleF srcRect) =>
+            throw new PlatformNotSupportedException();
+
+        public void Warp(
+            System.Drawing.PointF[] destPoints,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.Drawing2D.Matrix matrix
+        ) => throw new PlatformNotSupportedException();
+
+        public void Warp(
+            System.Drawing.PointF[] destPoints,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.Drawing2D.Matrix matrix,
+            System.Drawing.Drawing2D.WarpMode warpMode
+        ) => throw new PlatformNotSupportedException();
+
+        public void Warp(
+            System.Drawing.PointF[] destPoints,
+            System.Drawing.RectangleF srcRect,
+            System.Drawing.Drawing2D.Matrix matrix,
+            System.Drawing.Drawing2D.WarpMode warpMode,
+            float flatness
+        ) => throw new PlatformNotSupportedException();
+
         public void Widen(System.Drawing.Pen pen) => throw new PlatformNotSupportedException();
-        public void Widen(System.Drawing.Pen pen, System.Drawing.Drawing2D.Matrix matrix) => throw new PlatformNotSupportedException();
-        public void Widen(System.Drawing.Pen pen, System.Drawing.Drawing2D.Matrix matrix, float flatness) => throw new PlatformNotSupportedException();
+
+        public void Widen(System.Drawing.Pen pen, System.Drawing.Drawing2D.Matrix matrix) =>
+            throw new PlatformNotSupportedException();
+
+        public void Widen(
+            System.Drawing.Pen pen,
+            System.Drawing.Drawing2D.Matrix matrix,
+            float flatness
+        ) => throw new PlatformNotSupportedException();
     }
+
     public sealed partial class GraphicsPathIterator : System.MarshalByRefObject, System.IDisposable
     {
-        public GraphicsPathIterator(System.Drawing.Drawing2D.GraphicsPath path) => throw new PlatformNotSupportedException();
-        public int Count { get { throw new PlatformNotSupportedException(); } }
-        public int SubpathCount { get { throw new PlatformNotSupportedException(); } }
-        public int CopyData(ref System.Drawing.PointF[] points, ref byte[] types, int startIndex, int endIndex) { throw new PlatformNotSupportedException(); }
+        public GraphicsPathIterator(System.Drawing.Drawing2D.GraphicsPath path) =>
+            throw new PlatformNotSupportedException();
+
+        public int Count
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public int SubpathCount
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public int CopyData(
+            ref System.Drawing.PointF[] points,
+            ref byte[] types,
+            int startIndex,
+            int endIndex
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
-        public int Enumerate(ref System.Drawing.PointF[] points, ref byte[] types) { throw new PlatformNotSupportedException(); }
+
+        public int Enumerate(ref System.Drawing.PointF[] points, ref byte[] types)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         ~GraphicsPathIterator() => throw new PlatformNotSupportedException();
-        public bool HasCurve() { throw new PlatformNotSupportedException(); }
-        public int NextMarker(System.Drawing.Drawing2D.GraphicsPath path) { throw new PlatformNotSupportedException(); }
-        public int NextMarker(out int startIndex, out int endIndex) { throw new PlatformNotSupportedException(); }
-        public int NextPathType(out byte pathType, out int startIndex, out int endIndex) { throw new PlatformNotSupportedException(); }
-        public int NextSubpath(System.Drawing.Drawing2D.GraphicsPath path, out bool isClosed) { throw new PlatformNotSupportedException(); }
-        public int NextSubpath(out int startIndex, out int endIndex, out bool isClosed) { throw new PlatformNotSupportedException(); }
+
+        public bool HasCurve()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public int NextMarker(System.Drawing.Drawing2D.GraphicsPath path)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public int NextMarker(out int startIndex, out int endIndex)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public int NextPathType(out byte pathType, out int startIndex, out int endIndex)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public int NextSubpath(System.Drawing.Drawing2D.GraphicsPath path, out bool isClosed)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public int NextSubpath(out int startIndex, out int endIndex, out bool isClosed)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void Rewind() => throw new PlatformNotSupportedException();
     }
+
     public sealed partial class GraphicsState : System.MarshalByRefObject
     {
         internal GraphicsState() => throw new PlatformNotSupportedException();
     }
+
     public sealed partial class HatchBrush : System.Drawing.Brush
     {
-        public HatchBrush(System.Drawing.Drawing2D.HatchStyle hatchstyle, System.Drawing.Color foreColor) => throw new PlatformNotSupportedException();
-        public HatchBrush(System.Drawing.Drawing2D.HatchStyle hatchstyle, System.Drawing.Color foreColor, System.Drawing.Color backColor) => throw new PlatformNotSupportedException();
-        public System.Drawing.Color BackgroundColor { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Color ForegroundColor { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Drawing2D.HatchStyle HatchStyle { get { throw new PlatformNotSupportedException(); } }
-        public override object Clone() { throw new PlatformNotSupportedException(); }
+        public HatchBrush(
+            System.Drawing.Drawing2D.HatchStyle hatchstyle,
+            System.Drawing.Color foreColor
+        ) => throw new PlatformNotSupportedException();
+
+        public HatchBrush(
+            System.Drawing.Drawing2D.HatchStyle hatchstyle,
+            System.Drawing.Color foreColor,
+            System.Drawing.Color backColor
+        ) => throw new PlatformNotSupportedException();
+
+        public System.Drawing.Color BackgroundColor
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Color ForegroundColor
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Drawing2D.HatchStyle HatchStyle
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public override object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public enum HatchStyle
     {
         BackwardDiagonal = 3,
@@ -1533,6 +5575,7 @@ namespace System.Drawing.Drawing2D
         WideUpwardDiagonal = 23,
         ZigZag = 36,
     }
+
     public enum InterpolationMode
     {
         Bicubic = 4,
@@ -1545,38 +5588,151 @@ namespace System.Drawing.Drawing2D
         Low = 1,
         NearestNeighbor = 5,
     }
+
     public sealed partial class LinearGradientBrush : System.Drawing.Brush
     {
-        public LinearGradientBrush(System.Drawing.Point point1, System.Drawing.Point point2, System.Drawing.Color color1, System.Drawing.Color color2) => throw new PlatformNotSupportedException();
-        public LinearGradientBrush(System.Drawing.PointF point1, System.Drawing.PointF point2, System.Drawing.Color color1, System.Drawing.Color color2) => throw new PlatformNotSupportedException();
-        public LinearGradientBrush(System.Drawing.Rectangle rect, System.Drawing.Color color1, System.Drawing.Color color2, System.Drawing.Drawing2D.LinearGradientMode linearGradientMode) => throw new PlatformNotSupportedException();
-        public LinearGradientBrush(System.Drawing.Rectangle rect, System.Drawing.Color color1, System.Drawing.Color color2, float angle) => throw new PlatformNotSupportedException();
-        public LinearGradientBrush(System.Drawing.Rectangle rect, System.Drawing.Color color1, System.Drawing.Color color2, float angle, bool isAngleScaleable) => throw new PlatformNotSupportedException();
-        public LinearGradientBrush(System.Drawing.RectangleF rect, System.Drawing.Color color1, System.Drawing.Color color2, System.Drawing.Drawing2D.LinearGradientMode linearGradientMode) => throw new PlatformNotSupportedException();
-        public LinearGradientBrush(System.Drawing.RectangleF rect, System.Drawing.Color color1, System.Drawing.Color color2, float angle) => throw new PlatformNotSupportedException();
-        public LinearGradientBrush(System.Drawing.RectangleF rect, System.Drawing.Color color1, System.Drawing.Color color2, float angle, bool isAngleScaleable) => throw new PlatformNotSupportedException();
-        public System.Drawing.Drawing2D.Blend Blend { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public bool GammaCorrection { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.ColorBlend InterpolationColors { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Color[] LinearColors { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.RectangleF Rectangle { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Drawing2D.Matrix Transform { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.WrapMode WrapMode { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public override object Clone() { throw new PlatformNotSupportedException(); }
-        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix) => throw new PlatformNotSupportedException();
-        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+        public LinearGradientBrush(
+            System.Drawing.Point point1,
+            System.Drawing.Point point2,
+            System.Drawing.Color color1,
+            System.Drawing.Color color2
+        ) => throw new PlatformNotSupportedException();
+
+        public LinearGradientBrush(
+            System.Drawing.PointF point1,
+            System.Drawing.PointF point2,
+            System.Drawing.Color color1,
+            System.Drawing.Color color2
+        ) => throw new PlatformNotSupportedException();
+
+        public LinearGradientBrush(
+            System.Drawing.Rectangle rect,
+            System.Drawing.Color color1,
+            System.Drawing.Color color2,
+            System.Drawing.Drawing2D.LinearGradientMode linearGradientMode
+        ) => throw new PlatformNotSupportedException();
+
+        public LinearGradientBrush(
+            System.Drawing.Rectangle rect,
+            System.Drawing.Color color1,
+            System.Drawing.Color color2,
+            float angle
+        ) => throw new PlatformNotSupportedException();
+
+        public LinearGradientBrush(
+            System.Drawing.Rectangle rect,
+            System.Drawing.Color color1,
+            System.Drawing.Color color2,
+            float angle,
+            bool isAngleScaleable
+        ) => throw new PlatformNotSupportedException();
+
+        public LinearGradientBrush(
+            System.Drawing.RectangleF rect,
+            System.Drawing.Color color1,
+            System.Drawing.Color color2,
+            System.Drawing.Drawing2D.LinearGradientMode linearGradientMode
+        ) => throw new PlatformNotSupportedException();
+
+        public LinearGradientBrush(
+            System.Drawing.RectangleF rect,
+            System.Drawing.Color color1,
+            System.Drawing.Color color2,
+            float angle
+        ) => throw new PlatformNotSupportedException();
+
+        public LinearGradientBrush(
+            System.Drawing.RectangleF rect,
+            System.Drawing.Color color1,
+            System.Drawing.Color color2,
+            float angle,
+            bool isAngleScaleable
+        ) => throw new PlatformNotSupportedException();
+
+        public System.Drawing.Drawing2D.Blend Blend
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public bool GammaCorrection
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.ColorBlend InterpolationColors
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Color[] LinearColors
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.RectangleF Rectangle
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Drawing2D.Matrix Transform
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.WrapMode WrapMode
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public override object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix) =>
+            throw new PlatformNotSupportedException();
+
+        public void MultiplyTransform(
+            System.Drawing.Drawing2D.Matrix matrix,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
+
         public void ResetTransform() => throw new PlatformNotSupportedException();
+
         public void RotateTransform(float angle) => throw new PlatformNotSupportedException();
-        public void RotateTransform(float angle, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+
+        public void RotateTransform(float angle, System.Drawing.Drawing2D.MatrixOrder order) =>
+            throw new PlatformNotSupportedException();
+
         public void ScaleTransform(float sx, float sy) => throw new PlatformNotSupportedException();
-        public void ScaleTransform(float sx, float sy, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
-        public void SetBlendTriangularShape(float focus) => throw new PlatformNotSupportedException();
-        public void SetBlendTriangularShape(float focus, float scale) => throw new PlatformNotSupportedException();
+
+        public void ScaleTransform(
+            float sx,
+            float sy,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetBlendTriangularShape(float focus) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetBlendTriangularShape(float focus, float scale) =>
+            throw new PlatformNotSupportedException();
+
         public void SetSigmaBellShape(float focus) => throw new PlatformNotSupportedException();
-        public void SetSigmaBellShape(float focus, float scale) => throw new PlatformNotSupportedException();
-        public void TranslateTransform(float dx, float dy) => throw new PlatformNotSupportedException();
-        public void TranslateTransform(float dx, float dy, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+
+        public void SetSigmaBellShape(float focus, float scale) =>
+            throw new PlatformNotSupportedException();
+
+        public void TranslateTransform(float dx, float dy) =>
+            throw new PlatformNotSupportedException();
+
+        public void TranslateTransform(
+            float dx,
+            float dy,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
     }
+
     public enum LinearGradientMode
     {
         BackwardDiagonal = 3,
@@ -1584,6 +5740,7 @@ namespace System.Drawing.Drawing2D
         Horizontal = 0,
         Vertical = 1,
     }
+
     public enum LineCap
     {
         AnchorMask = 240,
@@ -1598,6 +5755,7 @@ namespace System.Drawing.Drawing2D
         SquareAnchor = 17,
         Triangle = 3,
     }
+
     public enum LineJoin
     {
         Bevel = 1,
@@ -1605,84 +5763,258 @@ namespace System.Drawing.Drawing2D
         MiterClipped = 3,
         Round = 2,
     }
+
     public sealed partial class Matrix : System.MarshalByRefObject, System.IDisposable
     {
         public Matrix() => throw new PlatformNotSupportedException();
-        public Matrix(System.Drawing.Rectangle rect, System.Drawing.Point[] plgpts) => throw new PlatformNotSupportedException();
-        public Matrix(System.Drawing.RectangleF rect, System.Drawing.PointF[] plgpts) => throw new PlatformNotSupportedException();
-        public Matrix(float m11, float m12, float m21, float m22, float dx, float dy) => throw new PlatformNotSupportedException();
-        public float[] Elements { get { throw new PlatformNotSupportedException(); } }
-        public bool IsIdentity { get { throw new PlatformNotSupportedException(); } }
-        public bool IsInvertible { get { throw new PlatformNotSupportedException(); } }
-        public float OffsetX { get { throw new PlatformNotSupportedException(); } }
-        public float OffsetY { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Drawing2D.Matrix Clone() { throw new PlatformNotSupportedException(); }
+
+        public Matrix(System.Drawing.Rectangle rect, System.Drawing.Point[] plgpts) =>
+            throw new PlatformNotSupportedException();
+
+        public Matrix(System.Drawing.RectangleF rect, System.Drawing.PointF[] plgpts) =>
+            throw new PlatformNotSupportedException();
+
+        public Matrix(float m11, float m12, float m21, float m22, float dx, float dy) =>
+            throw new PlatformNotSupportedException();
+
+        public float[] Elements
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public bool IsIdentity
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public bool IsInvertible
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public float OffsetX
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public float OffsetY
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public System.Drawing.Drawing2D.Matrix Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
-        public override bool Equals(object obj) { throw new PlatformNotSupportedException(); }
+
+        public override bool Equals(object obj)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         ~Matrix() => throw new PlatformNotSupportedException();
-        public override int GetHashCode() { throw new PlatformNotSupportedException(); }
+
+        public override int GetHashCode()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void Invert() => throw new PlatformNotSupportedException();
-        public void Multiply(System.Drawing.Drawing2D.Matrix matrix) => throw new PlatformNotSupportedException();
-        public void Multiply(System.Drawing.Drawing2D.Matrix matrix, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+
+        public void Multiply(System.Drawing.Drawing2D.Matrix matrix) =>
+            throw new PlatformNotSupportedException();
+
+        public void Multiply(
+            System.Drawing.Drawing2D.Matrix matrix,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
+
         public void Reset() => throw new PlatformNotSupportedException();
+
         public void Rotate(float angle) => throw new PlatformNotSupportedException();
-        public void Rotate(float angle, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
-        public void RotateAt(float angle, System.Drawing.PointF point) => throw new PlatformNotSupportedException();
-        public void RotateAt(float angle, System.Drawing.PointF point, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+
+        public void Rotate(float angle, System.Drawing.Drawing2D.MatrixOrder order) =>
+            throw new PlatformNotSupportedException();
+
+        public void RotateAt(float angle, System.Drawing.PointF point) =>
+            throw new PlatformNotSupportedException();
+
+        public void RotateAt(
+            float angle,
+            System.Drawing.PointF point,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
+
         public void Scale(float scaleX, float scaleY) => throw new PlatformNotSupportedException();
-        public void Scale(float scaleX, float scaleY, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+
+        public void Scale(float scaleX, float scaleY, System.Drawing.Drawing2D.MatrixOrder order) =>
+            throw new PlatformNotSupportedException();
+
         public void Shear(float shearX, float shearY) => throw new PlatformNotSupportedException();
-        public void Shear(float shearX, float shearY, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
-        public void TransformPoints(System.Drawing.PointF[] pts) => throw new PlatformNotSupportedException();
-        public void TransformPoints(System.Drawing.Point[] pts) => throw new PlatformNotSupportedException();
-        public void TransformVectors(System.Drawing.PointF[] pts) => throw new PlatformNotSupportedException();
-        public void TransformVectors(System.Drawing.Point[] pts) => throw new PlatformNotSupportedException();
-        public void Translate(float offsetX, float offsetY) => throw new PlatformNotSupportedException();
-        public void Translate(float offsetX, float offsetY, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
-        public void VectorTransformPoints(System.Drawing.Point[] pts) => throw new PlatformNotSupportedException();
+
+        public void Shear(float shearX, float shearY, System.Drawing.Drawing2D.MatrixOrder order) =>
+            throw new PlatformNotSupportedException();
+
+        public void TransformPoints(System.Drawing.PointF[] pts) =>
+            throw new PlatformNotSupportedException();
+
+        public void TransformPoints(System.Drawing.Point[] pts) =>
+            throw new PlatformNotSupportedException();
+
+        public void TransformVectors(System.Drawing.PointF[] pts) =>
+            throw new PlatformNotSupportedException();
+
+        public void TransformVectors(System.Drawing.Point[] pts) =>
+            throw new PlatformNotSupportedException();
+
+        public void Translate(float offsetX, float offsetY) =>
+            throw new PlatformNotSupportedException();
+
+        public void Translate(
+            float offsetX,
+            float offsetY,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
+
+        public void VectorTransformPoints(System.Drawing.Point[] pts) =>
+            throw new PlatformNotSupportedException();
     }
+
     public enum MatrixOrder
     {
         Append = 1,
         Prepend = 0,
     }
+
     public sealed partial class PathData
     {
         public PathData() => throw new PlatformNotSupportedException();
-        public System.Drawing.PointF[] Points { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public byte[] Types { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+
+        public System.Drawing.PointF[] Points
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public byte[] Types
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
     }
+
     public sealed partial class PathGradientBrush : System.Drawing.Brush
     {
-        public PathGradientBrush(System.Drawing.Drawing2D.GraphicsPath path) => throw new PlatformNotSupportedException();
-        public PathGradientBrush(System.Drawing.PointF[] points) => throw new PlatformNotSupportedException();
-        public PathGradientBrush(System.Drawing.PointF[] points, System.Drawing.Drawing2D.WrapMode wrapMode) => throw new PlatformNotSupportedException();
-        public PathGradientBrush(System.Drawing.Point[] points) => throw new PlatformNotSupportedException();
-        public PathGradientBrush(System.Drawing.Point[] points, System.Drawing.Drawing2D.WrapMode wrapMode) => throw new PlatformNotSupportedException();
-        public System.Drawing.Drawing2D.Blend Blend { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Color CenterColor { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.PointF CenterPoint { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.PointF FocusScales { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.ColorBlend InterpolationColors { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.RectangleF Rectangle { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Color[] SurroundColors { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.Matrix Transform { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Drawing2D.WrapMode WrapMode { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public override object Clone() { throw new PlatformNotSupportedException(); }
-        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix) => throw new PlatformNotSupportedException();
-        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+        public PathGradientBrush(System.Drawing.Drawing2D.GraphicsPath path) =>
+            throw new PlatformNotSupportedException();
+
+        public PathGradientBrush(System.Drawing.PointF[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public PathGradientBrush(
+            System.Drawing.PointF[] points,
+            System.Drawing.Drawing2D.WrapMode wrapMode
+        ) => throw new PlatformNotSupportedException();
+
+        public PathGradientBrush(System.Drawing.Point[] points) =>
+            throw new PlatformNotSupportedException();
+
+        public PathGradientBrush(
+            System.Drawing.Point[] points,
+            System.Drawing.Drawing2D.WrapMode wrapMode
+        ) => throw new PlatformNotSupportedException();
+
+        public System.Drawing.Drawing2D.Blend Blend
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Color CenterColor
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.PointF CenterPoint
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.PointF FocusScales
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.ColorBlend InterpolationColors
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.RectangleF Rectangle
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Color[] SurroundColors
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.Matrix Transform
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Drawing2D.WrapMode WrapMode
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public override object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix) =>
+            throw new PlatformNotSupportedException();
+
+        public void MultiplyTransform(
+            System.Drawing.Drawing2D.Matrix matrix,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
+
         public void ResetTransform() => throw new PlatformNotSupportedException();
+
         public void RotateTransform(float angle) => throw new PlatformNotSupportedException();
-        public void RotateTransform(float angle, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+
+        public void RotateTransform(float angle, System.Drawing.Drawing2D.MatrixOrder order) =>
+            throw new PlatformNotSupportedException();
+
         public void ScaleTransform(float sx, float sy) => throw new PlatformNotSupportedException();
-        public void ScaleTransform(float sx, float sy, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
-        public void SetBlendTriangularShape(float focus) => throw new PlatformNotSupportedException();
-        public void SetBlendTriangularShape(float focus, float scale) => throw new PlatformNotSupportedException();
+
+        public void ScaleTransform(
+            float sx,
+            float sy,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetBlendTriangularShape(float focus) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetBlendTriangularShape(float focus, float scale) =>
+            throw new PlatformNotSupportedException();
+
         public void SetSigmaBellShape(float focus) => throw new PlatformNotSupportedException();
-        public void SetSigmaBellShape(float focus, float scale) => throw new PlatformNotSupportedException();
-        public void TranslateTransform(float dx, float dy) => throw new PlatformNotSupportedException();
-        public void TranslateTransform(float dx, float dy, System.Drawing.Drawing2D.MatrixOrder order) => throw new PlatformNotSupportedException();
+
+        public void SetSigmaBellShape(float focus, float scale) =>
+            throw new PlatformNotSupportedException();
+
+        public void TranslateTransform(float dx, float dy) =>
+            throw new PlatformNotSupportedException();
+
+        public void TranslateTransform(
+            float dx,
+            float dy,
+            System.Drawing.Drawing2D.MatrixOrder order
+        ) => throw new PlatformNotSupportedException();
     }
+
     public enum PathPointType
     {
         Bezier = 3,
@@ -1694,6 +6026,7 @@ namespace System.Drawing.Drawing2D
         PathTypeMask = 7,
         Start = 0,
     }
+
     public enum PenAlignment
     {
         Center = 0,
@@ -1702,6 +6035,7 @@ namespace System.Drawing.Drawing2D
         Outset = 2,
         Right = 4,
     }
+
     public enum PenType
     {
         HatchFill = 1,
@@ -1710,6 +6044,7 @@ namespace System.Drawing.Drawing2D
         SolidColor = 0,
         TextureFill = 2,
     }
+
     public enum PixelOffsetMode
     {
         Default = 0,
@@ -1719,6 +6054,7 @@ namespace System.Drawing.Drawing2D
         Invalid = -1,
         None = 3,
     }
+
     public enum QualityMode
     {
         Default = 0,
@@ -1726,11 +6062,18 @@ namespace System.Drawing.Drawing2D
         Invalid = -1,
         Low = 1,
     }
+
     public sealed partial class RegionData
     {
         internal RegionData() => throw new PlatformNotSupportedException();
-        public byte[] Data { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+
+        public byte[] Data
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
     }
+
     public enum SmoothingMode
     {
         AntiAlias = 4,
@@ -1740,11 +6083,13 @@ namespace System.Drawing.Drawing2D
         Invalid = -1,
         None = 3,
     }
+
     public enum WarpMode
     {
         Bilinear = 1,
         Perspective = 0,
     }
+
     public enum WrapMode
     {
         Clamp = 4,
@@ -1754,18 +6099,45 @@ namespace System.Drawing.Drawing2D
         TileFlipY = 2,
     }
 }
+
 namespace System.Drawing.Imaging
 {
     public sealed partial class BitmapData
     {
         public BitmapData() => throw new PlatformNotSupportedException();
-        public int Height { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Imaging.PixelFormat PixelFormat { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int Reserved { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.IntPtr Scan0 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int Stride { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int Width { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+
+        public int Height
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Imaging.PixelFormat PixelFormat
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int Reserved
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.IntPtr Scan0
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int Stride
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int Width
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
     }
+
     public enum ColorAdjustType
     {
         Any = 6,
@@ -1776,6 +6148,7 @@ namespace System.Drawing.Imaging
         Pen = 3,
         Text = 4,
     }
+
     public enum ColorChannelFlag
     {
         ColorChannelC = 0,
@@ -1784,66 +6157,195 @@ namespace System.Drawing.Imaging
         ColorChannelM = 1,
         ColorChannelY = 2,
     }
+
     public sealed partial class ColorMap
     {
         public ColorMap() => throw new PlatformNotSupportedException();
-        public System.Drawing.Color NewColor { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Color OldColor { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+
+        public System.Drawing.Color NewColor
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Color OldColor
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
     }
+
     public enum ColorMapType
     {
         Brush = 1,
         Default = 0,
     }
+
     public sealed partial class ColorMatrix
     {
         public ColorMatrix() => throw new PlatformNotSupportedException();
+
         [System.CLSCompliantAttribute(false)]
         public ColorMatrix(float[][] newColorMatrix) => throw new PlatformNotSupportedException();
-        public float this[int row, int column] { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix00 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix01 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix02 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix03 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix04 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix10 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix11 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix12 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix13 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix14 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix20 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix21 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix22 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix23 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix24 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix30 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix31 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix32 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix33 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix34 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix40 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix41 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix42 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix43 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float Matrix44 { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+
+        public float this[int row, int column]
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix00
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix01
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix02
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix03
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix04
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix10
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix11
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix12
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix13
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix14
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix20
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix21
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix22
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix23
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix24
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix30
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix31
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix32
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix33
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix34
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix40
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix41
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix42
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix43
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float Matrix44
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
     }
+
     public enum ColorMatrixFlag
     {
         AltGrays = 2,
         Default = 0,
         SkipGrays = 1,
     }
+
     public enum ColorMode
     {
         Argb32Mode = 0,
         Argb64Mode = 1,
     }
+
     public sealed partial class ColorPalette
     {
         internal ColorPalette() => throw new PlatformNotSupportedException();
-        public System.Drawing.Color[] Entries { get { throw new PlatformNotSupportedException(); } }
-        public int Flags { get { throw new PlatformNotSupportedException(); } }
+
+        public System.Drawing.Color[] Entries
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public int Flags
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
     }
+
     public enum EmfPlusRecordType
     {
         BeginContainer = 16423,
@@ -2100,12 +6602,14 @@ namespace System.Drawing.Imaging
         WmfStretchDib = 69443,
         WmfTextOut = 66849,
     }
+
     public enum EmfType
     {
         EmfOnly = 3,
         EmfPlusDual = 5,
         EmfPlusOnly = 4,
     }
+
     public sealed partial class Encoder
     {
         public static readonly System.Drawing.Imaging.Encoder ChrominanceTable;
@@ -2118,43 +6622,145 @@ namespace System.Drawing.Imaging
         public static readonly System.Drawing.Imaging.Encoder ScanMethod;
         public static readonly System.Drawing.Imaging.Encoder Transformation;
         public static readonly System.Drawing.Imaging.Encoder Version;
+
         public Encoder(System.Guid guid) => throw new PlatformNotSupportedException();
-        public System.Guid Guid { get { throw new PlatformNotSupportedException(); } }
+
+        public System.Guid Guid
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
     }
+
     public sealed partial class EncoderParameter : System.IDisposable
     {
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, byte value) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, byte value, bool undefined) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, byte[] value) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, byte[] value, bool undefined) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, short value) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, short[] value) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, int numberValues, System.Drawing.Imaging.EncoderParameterValueType type, System.IntPtr value) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, int numerator, int denominator) => throw new PlatformNotSupportedException();
-        [System.ObsoleteAttribute("This constructor has been deprecated. Use EncoderParameter(Encoder encoder, int numberValues, EncoderParameterValueType type, IntPtr value) instead.  https://go.microsoft.com/fwlink/?linkid=14202")]
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, int NumberOfValues, int Type, int Value) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, int numerator1, int demoninator1, int numerator2, int demoninator2) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, int[] numerator, int[] denominator) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, int[] numerator1, int[] denominator1, int[] numerator2, int[] denominator2) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, long value) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, long rangebegin, long rangeend) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, long[] value) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, long[] rangebegin, long[] rangeend) => throw new PlatformNotSupportedException();
-        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, string value) => throw new PlatformNotSupportedException();
-        public System.Drawing.Imaging.Encoder Encoder { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int NumberOfValues { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Imaging.EncoderParameterValueType Type { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Imaging.EncoderParameterValueType ValueType { get { throw new PlatformNotSupportedException(); } }
+        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, byte value) =>
+            throw new PlatformNotSupportedException();
+
+        public EncoderParameter(
+            System.Drawing.Imaging.Encoder encoder,
+            byte value,
+            bool undefined
+        ) => throw new PlatformNotSupportedException();
+
+        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, byte[] value) =>
+            throw new PlatformNotSupportedException();
+
+        public EncoderParameter(
+            System.Drawing.Imaging.Encoder encoder,
+            byte[] value,
+            bool undefined
+        ) => throw new PlatformNotSupportedException();
+
+        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, short value) =>
+            throw new PlatformNotSupportedException();
+
+        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, short[] value) =>
+            throw new PlatformNotSupportedException();
+
+        public EncoderParameter(
+            System.Drawing.Imaging.Encoder encoder,
+            int numberValues,
+            System.Drawing.Imaging.EncoderParameterValueType type,
+            System.IntPtr value
+        ) => throw new PlatformNotSupportedException();
+
+        public EncoderParameter(
+            System.Drawing.Imaging.Encoder encoder,
+            int numerator,
+            int denominator
+        ) => throw new PlatformNotSupportedException();
+
+        [System.ObsoleteAttribute(
+            "This constructor has been deprecated. Use EncoderParameter(Encoder encoder, int numberValues, EncoderParameterValueType type, IntPtr value) instead.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        public EncoderParameter(
+            System.Drawing.Imaging.Encoder encoder,
+            int NumberOfValues,
+            int Type,
+            int Value
+        ) => throw new PlatformNotSupportedException();
+
+        public EncoderParameter(
+            System.Drawing.Imaging.Encoder encoder,
+            int numerator1,
+            int demoninator1,
+            int numerator2,
+            int demoninator2
+        ) => throw new PlatformNotSupportedException();
+
+        public EncoderParameter(
+            System.Drawing.Imaging.Encoder encoder,
+            int[] numerator,
+            int[] denominator
+        ) => throw new PlatformNotSupportedException();
+
+        public EncoderParameter(
+            System.Drawing.Imaging.Encoder encoder,
+            int[] numerator1,
+            int[] denominator1,
+            int[] numerator2,
+            int[] denominator2
+        ) => throw new PlatformNotSupportedException();
+
+        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, long value) =>
+            throw new PlatformNotSupportedException();
+
+        public EncoderParameter(
+            System.Drawing.Imaging.Encoder encoder,
+            long rangebegin,
+            long rangeend
+        ) => throw new PlatformNotSupportedException();
+
+        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, long[] value) =>
+            throw new PlatformNotSupportedException();
+
+        public EncoderParameter(
+            System.Drawing.Imaging.Encoder encoder,
+            long[] rangebegin,
+            long[] rangeend
+        ) => throw new PlatformNotSupportedException();
+
+        public EncoderParameter(System.Drawing.Imaging.Encoder encoder, string value) =>
+            throw new PlatformNotSupportedException();
+
+        public System.Drawing.Imaging.Encoder Encoder
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int NumberOfValues
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Imaging.EncoderParameterValueType Type
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Imaging.EncoderParameterValueType ValueType
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
+
         ~EncoderParameter() => throw new PlatformNotSupportedException();
     }
+
     public sealed partial class EncoderParameters : System.IDisposable
     {
         public EncoderParameters() => throw new PlatformNotSupportedException();
+
         public EncoderParameters(int count) => throw new PlatformNotSupportedException();
-        public System.Drawing.Imaging.EncoderParameter[] Param { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+
+        public System.Drawing.Imaging.EncoderParameter[] Param
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
     }
+
     public enum EncoderParameterValueType
     {
         ValueTypeAscii = 2,
@@ -2166,6 +6772,7 @@ namespace System.Drawing.Imaging
         ValueTypeShort = 3,
         ValueTypeUndefined = 7,
     }
+
     public enum EncoderValue
     {
         ColorTypeCMYK = 0,
@@ -2193,66 +6800,202 @@ namespace System.Drawing.Imaging
         VersionGif87 = 9,
         VersionGif89 = 10,
     }
+
     public sealed partial class FrameDimension
     {
         public FrameDimension(System.Guid guid) => throw new PlatformNotSupportedException();
-        public System.Guid Guid { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Imaging.FrameDimension Page { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Imaging.FrameDimension Resolution { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Imaging.FrameDimension Time { get { throw new PlatformNotSupportedException(); } }
-        public override bool Equals(object o) { throw new PlatformNotSupportedException(); }
-        public override int GetHashCode() { throw new PlatformNotSupportedException(); }
-        public override string ToString() { throw new PlatformNotSupportedException(); }
+
+        public System.Guid Guid
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Imaging.FrameDimension Page
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Imaging.FrameDimension Resolution
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Imaging.FrameDimension Time
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public override bool Equals(object o)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override int GetHashCode()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override string ToString()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public sealed partial class ImageAttributes : System.ICloneable, System.IDisposable
     {
         public ImageAttributes() => throw new PlatformNotSupportedException();
+
         public void ClearBrushRemapTable() => throw new PlatformNotSupportedException();
+
         public void ClearColorKey() => throw new PlatformNotSupportedException();
-        public void ClearColorKey(System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
+
+        public void ClearColorKey(System.Drawing.Imaging.ColorAdjustType type) =>
+            throw new PlatformNotSupportedException();
+
         public void ClearColorMatrix() => throw new PlatformNotSupportedException();
-        public void ClearColorMatrix(System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
+
+        public void ClearColorMatrix(System.Drawing.Imaging.ColorAdjustType type) =>
+            throw new PlatformNotSupportedException();
+
         public void ClearGamma() => throw new PlatformNotSupportedException();
-        public void ClearGamma(System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
+
+        public void ClearGamma(System.Drawing.Imaging.ColorAdjustType type) =>
+            throw new PlatformNotSupportedException();
+
         public void ClearNoOp() => throw new PlatformNotSupportedException();
-        public void ClearNoOp(System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
+
+        public void ClearNoOp(System.Drawing.Imaging.ColorAdjustType type) =>
+            throw new PlatformNotSupportedException();
+
         public void ClearOutputChannel() => throw new PlatformNotSupportedException();
-        public void ClearOutputChannel(System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
+
+        public void ClearOutputChannel(System.Drawing.Imaging.ColorAdjustType type) =>
+            throw new PlatformNotSupportedException();
+
         public void ClearOutputChannelColorProfile() => throw new PlatformNotSupportedException();
-        public void ClearOutputChannelColorProfile(System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
+
+        public void ClearOutputChannelColorProfile(System.Drawing.Imaging.ColorAdjustType type) =>
+            throw new PlatformNotSupportedException();
+
         public void ClearRemapTable() => throw new PlatformNotSupportedException();
-        public void ClearRemapTable(System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
+
+        public void ClearRemapTable(System.Drawing.Imaging.ColorAdjustType type) =>
+            throw new PlatformNotSupportedException();
+
         public void ClearThreshold() => throw new PlatformNotSupportedException();
-        public void ClearThreshold(System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
-        public object Clone() { throw new PlatformNotSupportedException(); }
+
+        public void ClearThreshold(System.Drawing.Imaging.ColorAdjustType type) =>
+            throw new PlatformNotSupportedException();
+
+        public object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
+
         ~ImageAttributes() => throw new PlatformNotSupportedException();
-        public void GetAdjustedPalette(System.Drawing.Imaging.ColorPalette palette, System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
-        public void SetBrushRemapTable(System.Drawing.Imaging.ColorMap[] map) => throw new PlatformNotSupportedException();
-        public void SetColorKey(System.Drawing.Color colorLow, System.Drawing.Color colorHigh) => throw new PlatformNotSupportedException();
-        public void SetColorKey(System.Drawing.Color colorLow, System.Drawing.Color colorHigh, System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
-        public void SetColorMatrices(System.Drawing.Imaging.ColorMatrix newColorMatrix, System.Drawing.Imaging.ColorMatrix grayMatrix) => throw new PlatformNotSupportedException();
-        public void SetColorMatrices(System.Drawing.Imaging.ColorMatrix newColorMatrix, System.Drawing.Imaging.ColorMatrix grayMatrix, System.Drawing.Imaging.ColorMatrixFlag flags) => throw new PlatformNotSupportedException();
-        public void SetColorMatrices(System.Drawing.Imaging.ColorMatrix newColorMatrix, System.Drawing.Imaging.ColorMatrix grayMatrix, System.Drawing.Imaging.ColorMatrixFlag mode, System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
-        public void SetColorMatrix(System.Drawing.Imaging.ColorMatrix newColorMatrix) => throw new PlatformNotSupportedException();
-        public void SetColorMatrix(System.Drawing.Imaging.ColorMatrix newColorMatrix, System.Drawing.Imaging.ColorMatrixFlag flags) => throw new PlatformNotSupportedException();
-        public void SetColorMatrix(System.Drawing.Imaging.ColorMatrix newColorMatrix, System.Drawing.Imaging.ColorMatrixFlag mode, System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
+
+        public void GetAdjustedPalette(
+            System.Drawing.Imaging.ColorPalette palette,
+            System.Drawing.Imaging.ColorAdjustType type
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetBrushRemapTable(System.Drawing.Imaging.ColorMap[] map) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetColorKey(System.Drawing.Color colorLow, System.Drawing.Color colorHigh) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetColorKey(
+            System.Drawing.Color colorLow,
+            System.Drawing.Color colorHigh,
+            System.Drawing.Imaging.ColorAdjustType type
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetColorMatrices(
+            System.Drawing.Imaging.ColorMatrix newColorMatrix,
+            System.Drawing.Imaging.ColorMatrix grayMatrix
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetColorMatrices(
+            System.Drawing.Imaging.ColorMatrix newColorMatrix,
+            System.Drawing.Imaging.ColorMatrix grayMatrix,
+            System.Drawing.Imaging.ColorMatrixFlag flags
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetColorMatrices(
+            System.Drawing.Imaging.ColorMatrix newColorMatrix,
+            System.Drawing.Imaging.ColorMatrix grayMatrix,
+            System.Drawing.Imaging.ColorMatrixFlag mode,
+            System.Drawing.Imaging.ColorAdjustType type
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetColorMatrix(System.Drawing.Imaging.ColorMatrix newColorMatrix) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetColorMatrix(
+            System.Drawing.Imaging.ColorMatrix newColorMatrix,
+            System.Drawing.Imaging.ColorMatrixFlag flags
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetColorMatrix(
+            System.Drawing.Imaging.ColorMatrix newColorMatrix,
+            System.Drawing.Imaging.ColorMatrixFlag mode,
+            System.Drawing.Imaging.ColorAdjustType type
+        ) => throw new PlatformNotSupportedException();
+
         public void SetGamma(float gamma) => throw new PlatformNotSupportedException();
-        public void SetGamma(float gamma, System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
+
+        public void SetGamma(float gamma, System.Drawing.Imaging.ColorAdjustType type) =>
+            throw new PlatformNotSupportedException();
+
         public void SetNoOp() => throw new PlatformNotSupportedException();
-        public void SetNoOp(System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
-        public void SetOutputChannel(System.Drawing.Imaging.ColorChannelFlag flags) => throw new PlatformNotSupportedException();
-        public void SetOutputChannel(System.Drawing.Imaging.ColorChannelFlag flags, System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
-        public void SetOutputChannelColorProfile(string colorProfileFilename) => throw new PlatformNotSupportedException();
-        public void SetOutputChannelColorProfile(string colorProfileFilename, System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
-        public void SetRemapTable(System.Drawing.Imaging.ColorMap[] map) => throw new PlatformNotSupportedException();
-        public void SetRemapTable(System.Drawing.Imaging.ColorMap[] map, System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
+
+        public void SetNoOp(System.Drawing.Imaging.ColorAdjustType type) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetOutputChannel(System.Drawing.Imaging.ColorChannelFlag flags) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetOutputChannel(
+            System.Drawing.Imaging.ColorChannelFlag flags,
+            System.Drawing.Imaging.ColorAdjustType type
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetOutputChannelColorProfile(string colorProfileFilename) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetOutputChannelColorProfile(
+            string colorProfileFilename,
+            System.Drawing.Imaging.ColorAdjustType type
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetRemapTable(System.Drawing.Imaging.ColorMap[] map) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetRemapTable(
+            System.Drawing.Imaging.ColorMap[] map,
+            System.Drawing.Imaging.ColorAdjustType type
+        ) => throw new PlatformNotSupportedException();
+
         public void SetThreshold(float threshold) => throw new PlatformNotSupportedException();
-        public void SetThreshold(float threshold, System.Drawing.Imaging.ColorAdjustType type) => throw new PlatformNotSupportedException();
-        public void SetWrapMode(System.Drawing.Drawing2D.WrapMode mode) => throw new PlatformNotSupportedException();
-        public void SetWrapMode(System.Drawing.Drawing2D.WrapMode mode, System.Drawing.Color color) => throw new PlatformNotSupportedException();
-        public void SetWrapMode(System.Drawing.Drawing2D.WrapMode mode, System.Drawing.Color color, bool clamp) => throw new PlatformNotSupportedException();
+
+        public void SetThreshold(float threshold, System.Drawing.Imaging.ColorAdjustType type) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetWrapMode(System.Drawing.Drawing2D.WrapMode mode) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetWrapMode(
+            System.Drawing.Drawing2D.WrapMode mode,
+            System.Drawing.Color color
+        ) => throw new PlatformNotSupportedException();
+
+        public void SetWrapMode(
+            System.Drawing.Drawing2D.WrapMode mode,
+            System.Drawing.Color color,
+            bool clamp
+        ) => throw new PlatformNotSupportedException();
     }
+
     [System.FlagsAttribute]
     public enum ImageCodecFlags
     {
@@ -2266,25 +7009,82 @@ namespace System.Drawing.Imaging
         System = 131072,
         User = 262144,
     }
+
     public sealed partial class ImageCodecInfo
     {
         internal ImageCodecInfo() => throw new PlatformNotSupportedException();
-        public System.Guid Clsid { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public string CodecName { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public string DllName { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public string FilenameExtension { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Imaging.ImageCodecFlags Flags { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public string FormatDescription { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Guid FormatID { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public string MimeType { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+
+        public System.Guid Clsid
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public string CodecName
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public string DllName
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public string FilenameExtension
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Imaging.ImageCodecFlags Flags
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public string FormatDescription
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Guid FormatID
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public string MimeType
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
         [System.CLSCompliantAttribute(false)]
-        public byte[][] SignatureMasks { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+        public byte[][] SignatureMasks
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
         [System.CLSCompliantAttribute(false)]
-        public byte[][] SignaturePatterns { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int Version { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Imaging.ImageCodecInfo[] GetImageDecoders() { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Imaging.ImageCodecInfo[] GetImageEncoders() { throw new PlatformNotSupportedException(); }
+        public byte[][] SignaturePatterns
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int Version
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Imaging.ImageCodecInfo[] GetImageDecoders()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Imaging.ImageCodecInfo[] GetImageEncoders()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     [System.FlagsAttribute]
     public enum ImageFlags
     {
@@ -2303,27 +7103,77 @@ namespace System.Drawing.Imaging
         ReadOnly = 65536,
         Scalable = 1,
     }
+
 #if netcoreapp
-    [System.ComponentModel.TypeConverter("System.Drawing.ImageFormatConverter, System.Windows.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51")]
+    [System.ComponentModel.TypeConverter(
+        "System.Drawing.ImageFormatConverter, System.Windows.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+    )]
 #endif
     public sealed partial class ImageFormat
     {
         public ImageFormat(System.Guid guid) => throw new PlatformNotSupportedException();
-        public static System.Drawing.Imaging.ImageFormat Bmp { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Imaging.ImageFormat Emf { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Imaging.ImageFormat Exif { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Imaging.ImageFormat Gif { get { throw new PlatformNotSupportedException(); } }
-        public System.Guid Guid { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Imaging.ImageFormat Icon { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Imaging.ImageFormat Jpeg { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Imaging.ImageFormat MemoryBmp { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Imaging.ImageFormat Png { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Imaging.ImageFormat Tiff { get { throw new PlatformNotSupportedException(); } }
-        public static System.Drawing.Imaging.ImageFormat Wmf { get { throw new PlatformNotSupportedException(); } }
-        public override bool Equals(object o) { throw new PlatformNotSupportedException(); }
-        public override int GetHashCode() { throw new PlatformNotSupportedException(); }
-        public override string ToString() { throw new PlatformNotSupportedException(); }
+
+        public static System.Drawing.Imaging.ImageFormat Bmp
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Imaging.ImageFormat Emf
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Imaging.ImageFormat Exif
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Imaging.ImageFormat Gif
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Guid Guid
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Imaging.ImageFormat Icon
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Imaging.ImageFormat Jpeg
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Imaging.ImageFormat MemoryBmp
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Imaging.ImageFormat Png
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Imaging.ImageFormat Tiff
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public static System.Drawing.Imaging.ImageFormat Wmf
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public override bool Equals(object o)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override int GetHashCode()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override string ToString()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public enum ImageLockMode
     {
         ReadOnly = 1,
@@ -2331,55 +7181,297 @@ namespace System.Drawing.Imaging
         UserInputBuffer = 4,
         WriteOnly = 2,
     }
+
     public sealed partial class Metafile : System.Drawing.Image
     {
-        public Metafile(System.IntPtr henhmetafile, bool deleteEmf) => throw new PlatformNotSupportedException();
-        public Metafile(System.IntPtr referenceHdc, System.Drawing.Imaging.EmfType emfType) => throw new PlatformNotSupportedException();
-        public Metafile(System.IntPtr referenceHdc, System.Drawing.Imaging.EmfType emfType, string description) => throw new PlatformNotSupportedException();
-        public Metafile(System.IntPtr hmetafile, System.Drawing.Imaging.WmfPlaceableFileHeader wmfHeader) => throw new PlatformNotSupportedException();
-        public Metafile(System.IntPtr hmetafile, System.Drawing.Imaging.WmfPlaceableFileHeader wmfHeader, bool deleteWmf) => throw new PlatformNotSupportedException();
-        public Metafile(System.IntPtr referenceHdc, System.Drawing.Rectangle frameRect) => throw new PlatformNotSupportedException();
-        public Metafile(System.IntPtr referenceHdc, System.Drawing.Rectangle frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit) => throw new PlatformNotSupportedException();
-        public Metafile(System.IntPtr referenceHdc, System.Drawing.Rectangle frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit, System.Drawing.Imaging.EmfType type) => throw new PlatformNotSupportedException();
-        public Metafile(System.IntPtr referenceHdc, System.Drawing.Rectangle frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit, System.Drawing.Imaging.EmfType type, string desc) => throw new PlatformNotSupportedException();
-        public Metafile(System.IntPtr referenceHdc, System.Drawing.RectangleF frameRect) => throw new PlatformNotSupportedException();
-        public Metafile(System.IntPtr referenceHdc, System.Drawing.RectangleF frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit) => throw new PlatformNotSupportedException();
-        public Metafile(System.IntPtr referenceHdc, System.Drawing.RectangleF frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit, System.Drawing.Imaging.EmfType type) => throw new PlatformNotSupportedException();
-        public Metafile(System.IntPtr referenceHdc, System.Drawing.RectangleF frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit, System.Drawing.Imaging.EmfType type, string description) => throw new PlatformNotSupportedException();
+        public Metafile(System.IntPtr henhmetafile, bool deleteEmf) =>
+            throw new PlatformNotSupportedException();
+
+        public Metafile(System.IntPtr referenceHdc, System.Drawing.Imaging.EmfType emfType) =>
+            throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IntPtr referenceHdc,
+            System.Drawing.Imaging.EmfType emfType,
+            string description
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IntPtr hmetafile,
+            System.Drawing.Imaging.WmfPlaceableFileHeader wmfHeader
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IntPtr hmetafile,
+            System.Drawing.Imaging.WmfPlaceableFileHeader wmfHeader,
+            bool deleteWmf
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(System.IntPtr referenceHdc, System.Drawing.Rectangle frameRect) =>
+            throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IntPtr referenceHdc,
+            System.Drawing.Rectangle frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IntPtr referenceHdc,
+            System.Drawing.Rectangle frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit,
+            System.Drawing.Imaging.EmfType type
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IntPtr referenceHdc,
+            System.Drawing.Rectangle frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit,
+            System.Drawing.Imaging.EmfType type,
+            string desc
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(System.IntPtr referenceHdc, System.Drawing.RectangleF frameRect) =>
+            throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IntPtr referenceHdc,
+            System.Drawing.RectangleF frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IntPtr referenceHdc,
+            System.Drawing.RectangleF frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit,
+            System.Drawing.Imaging.EmfType type
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IntPtr referenceHdc,
+            System.Drawing.RectangleF frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit,
+            System.Drawing.Imaging.EmfType type,
+            string description
+        ) => throw new PlatformNotSupportedException();
+
         public Metafile(System.IO.Stream stream) => throw new PlatformNotSupportedException();
-        public Metafile(System.IO.Stream stream, System.IntPtr referenceHdc) => throw new PlatformNotSupportedException();
-        public Metafile(System.IO.Stream stream, System.IntPtr referenceHdc, System.Drawing.Imaging.EmfType type) => throw new PlatformNotSupportedException();
-        public Metafile(System.IO.Stream stream, System.IntPtr referenceHdc, System.Drawing.Imaging.EmfType type, string description) => throw new PlatformNotSupportedException();
-        public Metafile(System.IO.Stream stream, System.IntPtr referenceHdc, System.Drawing.Rectangle frameRect) => throw new PlatformNotSupportedException();
-        public Metafile(System.IO.Stream stream, System.IntPtr referenceHdc, System.Drawing.Rectangle frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit) => throw new PlatformNotSupportedException();
-        public Metafile(System.IO.Stream stream, System.IntPtr referenceHdc, System.Drawing.Rectangle frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit, System.Drawing.Imaging.EmfType type) => throw new PlatformNotSupportedException();
-        public Metafile(System.IO.Stream stream, System.IntPtr referenceHdc, System.Drawing.Rectangle frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit, System.Drawing.Imaging.EmfType type, string description) => throw new PlatformNotSupportedException();
-        public Metafile(System.IO.Stream stream, System.IntPtr referenceHdc, System.Drawing.RectangleF frameRect) => throw new PlatformNotSupportedException();
-        public Metafile(System.IO.Stream stream, System.IntPtr referenceHdc, System.Drawing.RectangleF frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit) => throw new PlatformNotSupportedException();
-        public Metafile(System.IO.Stream stream, System.IntPtr referenceHdc, System.Drawing.RectangleF frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit, System.Drawing.Imaging.EmfType type) => throw new PlatformNotSupportedException();
-        public Metafile(System.IO.Stream stream, System.IntPtr referenceHdc, System.Drawing.RectangleF frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit, System.Drawing.Imaging.EmfType type, string description) => throw new PlatformNotSupportedException();
+
+        public Metafile(System.IO.Stream stream, System.IntPtr referenceHdc) =>
+            throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IO.Stream stream,
+            System.IntPtr referenceHdc,
+            System.Drawing.Imaging.EmfType type
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IO.Stream stream,
+            System.IntPtr referenceHdc,
+            System.Drawing.Imaging.EmfType type,
+            string description
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IO.Stream stream,
+            System.IntPtr referenceHdc,
+            System.Drawing.Rectangle frameRect
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IO.Stream stream,
+            System.IntPtr referenceHdc,
+            System.Drawing.Rectangle frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IO.Stream stream,
+            System.IntPtr referenceHdc,
+            System.Drawing.Rectangle frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit,
+            System.Drawing.Imaging.EmfType type
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IO.Stream stream,
+            System.IntPtr referenceHdc,
+            System.Drawing.Rectangle frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit,
+            System.Drawing.Imaging.EmfType type,
+            string description
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IO.Stream stream,
+            System.IntPtr referenceHdc,
+            System.Drawing.RectangleF frameRect
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IO.Stream stream,
+            System.IntPtr referenceHdc,
+            System.Drawing.RectangleF frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IO.Stream stream,
+            System.IntPtr referenceHdc,
+            System.Drawing.RectangleF frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit,
+            System.Drawing.Imaging.EmfType type
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            System.IO.Stream stream,
+            System.IntPtr referenceHdc,
+            System.Drawing.RectangleF frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit,
+            System.Drawing.Imaging.EmfType type,
+            string description
+        ) => throw new PlatformNotSupportedException();
+
         public Metafile(string filename) => throw new PlatformNotSupportedException();
-        public Metafile(string fileName, System.IntPtr referenceHdc) => throw new PlatformNotSupportedException();
-        public Metafile(string fileName, System.IntPtr referenceHdc, System.Drawing.Imaging.EmfType type) => throw new PlatformNotSupportedException();
-        public Metafile(string fileName, System.IntPtr referenceHdc, System.Drawing.Imaging.EmfType type, string description) => throw new PlatformNotSupportedException();
-        public Metafile(string fileName, System.IntPtr referenceHdc, System.Drawing.Rectangle frameRect) => throw new PlatformNotSupportedException();
-        public Metafile(string fileName, System.IntPtr referenceHdc, System.Drawing.Rectangle frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit) => throw new PlatformNotSupportedException();
-        public Metafile(string fileName, System.IntPtr referenceHdc, System.Drawing.Rectangle frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit, System.Drawing.Imaging.EmfType type) => throw new PlatformNotSupportedException();
-        public Metafile(string fileName, System.IntPtr referenceHdc, System.Drawing.Rectangle frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit, System.Drawing.Imaging.EmfType type, string description) => throw new PlatformNotSupportedException();
-        public Metafile(string fileName, System.IntPtr referenceHdc, System.Drawing.Rectangle frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit, string description) => throw new PlatformNotSupportedException();
-        public Metafile(string fileName, System.IntPtr referenceHdc, System.Drawing.RectangleF frameRect) => throw new PlatformNotSupportedException();
-        public Metafile(string fileName, System.IntPtr referenceHdc, System.Drawing.RectangleF frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit) => throw new PlatformNotSupportedException();
-        public Metafile(string fileName, System.IntPtr referenceHdc, System.Drawing.RectangleF frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit, System.Drawing.Imaging.EmfType type) => throw new PlatformNotSupportedException();
-        public Metafile(string fileName, System.IntPtr referenceHdc, System.Drawing.RectangleF frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit, System.Drawing.Imaging.EmfType type, string description) => throw new PlatformNotSupportedException();
-        public Metafile(string fileName, System.IntPtr referenceHdc, System.Drawing.RectangleF frameRect, System.Drawing.Imaging.MetafileFrameUnit frameUnit, string desc) => throw new PlatformNotSupportedException();
-        public System.IntPtr GetHenhmetafile() { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Imaging.MetafileHeader GetMetafileHeader() { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Imaging.MetafileHeader GetMetafileHeader(System.IntPtr henhmetafile) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Imaging.MetafileHeader GetMetafileHeader(System.IntPtr hmetafile, System.Drawing.Imaging.WmfPlaceableFileHeader wmfHeader) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Imaging.MetafileHeader GetMetafileHeader(System.IO.Stream stream) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Imaging.MetafileHeader GetMetafileHeader(string fileName) { throw new PlatformNotSupportedException(); }
-        public void PlayRecord(System.Drawing.Imaging.EmfPlusRecordType recordType, int flags, int dataSize, byte[] data) => throw new PlatformNotSupportedException();
+
+        public Metafile(string fileName, System.IntPtr referenceHdc) =>
+            throw new PlatformNotSupportedException();
+
+        public Metafile(
+            string fileName,
+            System.IntPtr referenceHdc,
+            System.Drawing.Imaging.EmfType type
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            string fileName,
+            System.IntPtr referenceHdc,
+            System.Drawing.Imaging.EmfType type,
+            string description
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            string fileName,
+            System.IntPtr referenceHdc,
+            System.Drawing.Rectangle frameRect
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            string fileName,
+            System.IntPtr referenceHdc,
+            System.Drawing.Rectangle frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            string fileName,
+            System.IntPtr referenceHdc,
+            System.Drawing.Rectangle frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit,
+            System.Drawing.Imaging.EmfType type
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            string fileName,
+            System.IntPtr referenceHdc,
+            System.Drawing.Rectangle frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit,
+            System.Drawing.Imaging.EmfType type,
+            string description
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            string fileName,
+            System.IntPtr referenceHdc,
+            System.Drawing.Rectangle frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit,
+            string description
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            string fileName,
+            System.IntPtr referenceHdc,
+            System.Drawing.RectangleF frameRect
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            string fileName,
+            System.IntPtr referenceHdc,
+            System.Drawing.RectangleF frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            string fileName,
+            System.IntPtr referenceHdc,
+            System.Drawing.RectangleF frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit,
+            System.Drawing.Imaging.EmfType type
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            string fileName,
+            System.IntPtr referenceHdc,
+            System.Drawing.RectangleF frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit,
+            System.Drawing.Imaging.EmfType type,
+            string description
+        ) => throw new PlatformNotSupportedException();
+
+        public Metafile(
+            string fileName,
+            System.IntPtr referenceHdc,
+            System.Drawing.RectangleF frameRect,
+            System.Drawing.Imaging.MetafileFrameUnit frameUnit,
+            string desc
+        ) => throw new PlatformNotSupportedException();
+
+        public System.IntPtr GetHenhmetafile()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Imaging.MetafileHeader GetMetafileHeader()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Imaging.MetafileHeader GetMetafileHeader(
+            System.IntPtr henhmetafile
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Imaging.MetafileHeader GetMetafileHeader(
+            System.IntPtr hmetafile,
+            System.Drawing.Imaging.WmfPlaceableFileHeader wmfHeader
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Imaging.MetafileHeader GetMetafileHeader(
+            System.IO.Stream stream
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Imaging.MetafileHeader GetMetafileHeader(string fileName)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void PlayRecord(
+            System.Drawing.Imaging.EmfPlusRecordType recordType,
+            int flags,
+            int dataSize,
+            byte[] data
+        ) => throw new PlatformNotSupportedException();
     }
+
     public enum MetafileFrameUnit
     {
         Document = 5,
@@ -2389,28 +7481,93 @@ namespace System.Drawing.Imaging
         Pixel = 2,
         Point = 3,
     }
+
     public sealed partial class MetafileHeader
     {
         internal MetafileHeader() => throw new PlatformNotSupportedException();
-        public System.Drawing.Rectangle Bounds { get { throw new PlatformNotSupportedException(); } }
-        public float DpiX { get { throw new PlatformNotSupportedException(); } }
-        public float DpiY { get { throw new PlatformNotSupportedException(); } }
-        public int EmfPlusHeaderSize { get { throw new PlatformNotSupportedException(); } }
-        public int LogicalDpiX { get { throw new PlatformNotSupportedException(); } }
-        public int LogicalDpiY { get { throw new PlatformNotSupportedException(); } }
-        public int MetafileSize { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Imaging.MetafileType Type { get { throw new PlatformNotSupportedException(); } }
-        public int Version { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Imaging.MetaHeader WmfHeader { get { throw new PlatformNotSupportedException(); } }
-        public bool IsDisplay() { throw new PlatformNotSupportedException(); }
-        public bool IsEmf() { throw new PlatformNotSupportedException(); }
-        public bool IsEmfOrEmfPlus() { throw new PlatformNotSupportedException(); }
-        public bool IsEmfPlus() { throw new PlatformNotSupportedException(); }
-        public bool IsEmfPlusDual() { throw new PlatformNotSupportedException(); }
-        public bool IsEmfPlusOnly() { throw new PlatformNotSupportedException(); }
-        public bool IsWmf() { throw new PlatformNotSupportedException(); }
-        public bool IsWmfPlaceable() { throw new PlatformNotSupportedException(); }
+
+        public System.Drawing.Rectangle Bounds
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public float DpiX
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public float DpiY
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public int EmfPlusHeaderSize
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public int LogicalDpiX
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public int LogicalDpiY
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public int MetafileSize
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Imaging.MetafileType Type
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public int Version
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Imaging.MetaHeader WmfHeader
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public bool IsDisplay()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsEmf()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsEmfOrEmfPlus()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsEmfPlus()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsEmfPlusDual()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsEmfPlusOnly()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsWmf()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsWmfPlaceable()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public enum MetafileType
     {
         Emf = 3,
@@ -2420,17 +7577,48 @@ namespace System.Drawing.Imaging
         Wmf = 1,
         WmfPlaceable = 2,
     }
+
     public sealed partial class MetaHeader
     {
         public MetaHeader() => throw new PlatformNotSupportedException();
-        public short HeaderSize { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int MaxRecord { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public short NoObjects { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public short NoParameters { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int Size { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public short Type { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public short Version { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+
+        public short HeaderSize
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int MaxRecord
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public short NoObjects
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public short NoParameters
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int Size
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public short Type
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public short Version
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
     }
+
     [System.FlagsAttribute]
     public enum PaletteFlags
     {
@@ -2438,6 +7626,7 @@ namespace System.Drawing.Imaging
         Halftone = 4,
         HasAlpha = 1,
     }
+
     public enum PixelFormat
     {
         Alpha = 262144,
@@ -2464,29 +7653,92 @@ namespace System.Drawing.Imaging
         PAlpha = 524288,
         Undefined = 0,
     }
-    public delegate void PlayRecordCallback(System.Drawing.Imaging.EmfPlusRecordType recordType, int flags, int dataSize, System.IntPtr recordData);
+
+    public delegate void PlayRecordCallback(
+        System.Drawing.Imaging.EmfPlusRecordType recordType,
+        int flags,
+        int dataSize,
+        System.IntPtr recordData
+    );
+
     public sealed partial class PropertyItem
     {
         internal PropertyItem() => throw new PlatformNotSupportedException();
-        public int Id { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int Len { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public short Type { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public byte[] Value { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+
+        public int Id
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int Len
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public short Type
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public byte[] Value
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
     }
+
     public sealed partial class WmfPlaceableFileHeader
     {
         public WmfPlaceableFileHeader() => throw new PlatformNotSupportedException();
-        public short BboxBottom { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public short BboxLeft { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public short BboxRight { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public short BboxTop { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public short Checksum { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public short Hmf { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public short Inch { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int Key { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int Reserved { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+
+        public short BboxBottom
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public short BboxLeft
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public short BboxRight
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public short BboxTop
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public short Checksum
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public short Hmf
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public short Inch
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int Key
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int Reserved
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
     }
 }
+
 namespace System.Drawing.Printing
 {
     public enum Duplex
@@ -2496,50 +7748,169 @@ namespace System.Drawing.Printing
         Simplex = 1,
         Vertical = 2,
     }
+
     public partial class InvalidPrinterException : System.SystemException
     {
-        public InvalidPrinterException(System.Drawing.Printing.PrinterSettings settings) => throw new PlatformNotSupportedException();
-        protected InvalidPrinterException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) => throw new PlatformNotSupportedException();
-        public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) => throw new PlatformNotSupportedException();
+        public InvalidPrinterException(System.Drawing.Printing.PrinterSettings settings) =>
+            throw new PlatformNotSupportedException();
+
+        protected InvalidPrinterException(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        ) => throw new PlatformNotSupportedException();
+
+        public override void GetObjectData(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        ) => throw new PlatformNotSupportedException();
     }
+
 #if netcoreapp
-    [System.ComponentModel.TypeConverter("System.Drawing.Printing.MarginsConverter, System.Windows.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51")]
+    [System.ComponentModel.TypeConverter(
+        "System.Drawing.Printing.MarginsConverter, System.Windows.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+    )]
 #endif
     public partial class Margins : System.ICloneable
     {
         public Margins() => throw new PlatformNotSupportedException();
-        public Margins(int left, int right, int top, int bottom) => throw new PlatformNotSupportedException();
-        public int Bottom { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int Left { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int Right { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int Top { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public object Clone() { throw new PlatformNotSupportedException(); }
-        public override bool Equals(object obj) { throw new PlatformNotSupportedException(); }
-        public override int GetHashCode() { throw new PlatformNotSupportedException(); }
-        public static bool operator ==(System.Drawing.Printing.Margins m1, System.Drawing.Printing.Margins m2) { throw new PlatformNotSupportedException(); }
-        public static bool operator !=(System.Drawing.Printing.Margins m1, System.Drawing.Printing.Margins m2) { throw new PlatformNotSupportedException(); }
-        public override string ToString() { throw new PlatformNotSupportedException(); }
+
+        public Margins(int left, int right, int top, int bottom) =>
+            throw new PlatformNotSupportedException();
+
+        public int Bottom
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int Left
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int Right
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int Top
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override bool Equals(object obj)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override int GetHashCode()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static bool operator ==(
+            System.Drawing.Printing.Margins m1,
+            System.Drawing.Printing.Margins m2
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static bool operator !=(
+            System.Drawing.Printing.Margins m1,
+            System.Drawing.Printing.Margins m2
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override string ToString()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public partial class PageSettings : System.ICloneable
     {
         public PageSettings() => throw new PlatformNotSupportedException();
-        public PageSettings(System.Drawing.Printing.PrinterSettings printerSettings) => throw new PlatformNotSupportedException();
-        public System.Drawing.Rectangle Bounds { get { throw new PlatformNotSupportedException(); } }
-        public bool Color { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public float HardMarginX { get { throw new PlatformNotSupportedException(); } }
-        public float HardMarginY { get { throw new PlatformNotSupportedException(); } }
-        public bool Landscape { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Printing.Margins Margins { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Printing.PaperSize PaperSize { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Printing.PaperSource PaperSource { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.RectangleF PrintableArea { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Printing.PrinterResolution PrinterResolution { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Printing.PrinterSettings PrinterSettings { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public object Clone() { throw new PlatformNotSupportedException(); }
-        public void CopyToHdevmode(System.IntPtr hdevmode) => throw new PlatformNotSupportedException();
-        public void SetHdevmode(System.IntPtr hdevmode) => throw new PlatformNotSupportedException();
-        public override string ToString() { throw new PlatformNotSupportedException(); }
+
+        public PageSettings(System.Drawing.Printing.PrinterSettings printerSettings) =>
+            throw new PlatformNotSupportedException();
+
+        public System.Drawing.Rectangle Bounds
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public bool Color
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public float HardMarginX
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public float HardMarginY
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public bool Landscape
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Printing.Margins Margins
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Printing.PaperSize PaperSize
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Printing.PaperSource PaperSource
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.RectangleF PrintableArea
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Printing.PrinterResolution PrinterResolution
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Printing.PrinterSettings PrinterSettings
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void CopyToHdevmode(System.IntPtr hdevmode) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetHdevmode(System.IntPtr hdevmode) =>
+            throw new PlatformNotSupportedException();
+
+        public override string ToString()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public enum PaperKind
     {
         A2 = 66,
@@ -2660,25 +8031,70 @@ namespace System.Drawing.Printing
         TabloidExtra = 52,
         USStandardFanfold = 39,
     }
+
     public partial class PaperSize
     {
         public PaperSize() => throw new PlatformNotSupportedException();
-        public PaperSize(string name, int width, int height) => throw new PlatformNotSupportedException();
-        public int Height { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Printing.PaperKind Kind { get { throw new PlatformNotSupportedException(); } }
-        public string PaperName { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int RawKind { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int Width { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public override string ToString() { throw new PlatformNotSupportedException(); }
+
+        public PaperSize(string name, int width, int height) =>
+            throw new PlatformNotSupportedException();
+
+        public int Height
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Printing.PaperKind Kind
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public string PaperName
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int RawKind
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int Width
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public override string ToString()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public partial class PaperSource
     {
         public PaperSource() => throw new PlatformNotSupportedException();
-        public System.Drawing.Printing.PaperSourceKind Kind { get { throw new PlatformNotSupportedException(); } }
-        public int RawKind { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public string SourceName { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public override string ToString() { throw new PlatformNotSupportedException(); }
+
+        public System.Drawing.Printing.PaperSourceKind Kind
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public int RawKind
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public string SourceName
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public override string ToString()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public enum PaperSourceKind
     {
         AutomaticFeed = 7,
@@ -2696,73 +8112,220 @@ namespace System.Drawing.Printing
         TractorFeed = 8,
         Upper = 1,
     }
+
     public sealed partial class PreviewPageInfo
     {
-        public PreviewPageInfo(System.Drawing.Image image, System.Drawing.Size physicalSize) => throw new PlatformNotSupportedException();
-        public System.Drawing.Image Image { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Size PhysicalSize { get { throw new PlatformNotSupportedException(); } }
+        public PreviewPageInfo(System.Drawing.Image image, System.Drawing.Size physicalSize) =>
+            throw new PlatformNotSupportedException();
+
+        public System.Drawing.Image Image
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Size PhysicalSize
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
     }
+
     public partial class PreviewPrintController : System.Drawing.Printing.PrintController
     {
         public PreviewPrintController() => throw new PlatformNotSupportedException();
-        public override bool IsPreview { get { throw new PlatformNotSupportedException(); } }
-        public virtual bool UseAntiAlias { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Printing.PreviewPageInfo[] GetPreviewPageInfo() { throw new PlatformNotSupportedException(); }
-        public override void OnEndPage(System.Drawing.Printing.PrintDocument document, System.Drawing.Printing.PrintPageEventArgs e) => throw new PlatformNotSupportedException();
-        public override void OnEndPrint(System.Drawing.Printing.PrintDocument document, System.Drawing.Printing.PrintEventArgs e) => throw new PlatformNotSupportedException();
-        public override System.Drawing.Graphics OnStartPage(System.Drawing.Printing.PrintDocument document, System.Drawing.Printing.PrintPageEventArgs e) { throw new PlatformNotSupportedException(); }
-        public override void OnStartPrint(System.Drawing.Printing.PrintDocument document, System.Drawing.Printing.PrintEventArgs e) => throw new PlatformNotSupportedException();
+
+        public override bool IsPreview
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public virtual bool UseAntiAlias
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Printing.PreviewPageInfo[] GetPreviewPageInfo()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override void OnEndPage(
+            System.Drawing.Printing.PrintDocument document,
+            System.Drawing.Printing.PrintPageEventArgs e
+        ) => throw new PlatformNotSupportedException();
+
+        public override void OnEndPrint(
+            System.Drawing.Printing.PrintDocument document,
+            System.Drawing.Printing.PrintEventArgs e
+        ) => throw new PlatformNotSupportedException();
+
+        public override System.Drawing.Graphics OnStartPage(
+            System.Drawing.Printing.PrintDocument document,
+            System.Drawing.Printing.PrintPageEventArgs e
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override void OnStartPrint(
+            System.Drawing.Printing.PrintDocument document,
+            System.Drawing.Printing.PrintEventArgs e
+        ) => throw new PlatformNotSupportedException();
     }
+
     public enum PrintAction
     {
         PrintToFile = 0,
         PrintToPreview = 1,
         PrintToPrinter = 2,
     }
+
     public abstract partial class PrintController
     {
         protected PrintController() => throw new PlatformNotSupportedException();
-        public virtual bool IsPreview { get { throw new PlatformNotSupportedException(); } }
-        public virtual void OnEndPage(System.Drawing.Printing.PrintDocument document, System.Drawing.Printing.PrintPageEventArgs e) => throw new PlatformNotSupportedException();
-        public virtual void OnEndPrint(System.Drawing.Printing.PrintDocument document, System.Drawing.Printing.PrintEventArgs e) => throw new PlatformNotSupportedException();
-        public virtual System.Drawing.Graphics OnStartPage(System.Drawing.Printing.PrintDocument document, System.Drawing.Printing.PrintPageEventArgs e) { throw new PlatformNotSupportedException(); }
-        public virtual void OnStartPrint(System.Drawing.Printing.PrintDocument document, System.Drawing.Printing.PrintEventArgs e) => throw new PlatformNotSupportedException();
+
+        public virtual bool IsPreview
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
+        public virtual void OnEndPage(
+            System.Drawing.Printing.PrintDocument document,
+            System.Drawing.Printing.PrintPageEventArgs e
+        ) => throw new PlatformNotSupportedException();
+
+        public virtual void OnEndPrint(
+            System.Drawing.Printing.PrintDocument document,
+            System.Drawing.Printing.PrintEventArgs e
+        ) => throw new PlatformNotSupportedException();
+
+        public virtual System.Drawing.Graphics OnStartPage(
+            System.Drawing.Printing.PrintDocument document,
+            System.Drawing.Printing.PrintPageEventArgs e
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public virtual void OnStartPrint(
+            System.Drawing.Printing.PrintDocument document,
+            System.Drawing.Printing.PrintEventArgs e
+        ) => throw new PlatformNotSupportedException();
     }
+
     public partial class PrintDocument : System.ComponentModel.Component
     {
         public PrintDocument() => throw new PlatformNotSupportedException();
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        [System.ComponentModel.DesignerSerializationVisibilityAttribute((System.ComponentModel.DesignerSerializationVisibility)(0))]
-        public System.Drawing.Printing.PageSettings DefaultPageSettings { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            (System.ComponentModel.DesignerSerializationVisibility)(0)
+        )]
+        public System.Drawing.Printing.PageSettings DefaultPageSettings
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
         [System.ComponentModel.DefaultValueAttribute("document")]
-        public string DocumentName { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+        public string DocumentName
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
         [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool OriginAtMargins { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+        public bool OriginAtMargins
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        [System.ComponentModel.DesignerSerializationVisibilityAttribute((System.ComponentModel.DesignerSerializationVisibility)(0))]
-        public System.Drawing.Printing.PrintController PrintController { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            (System.ComponentModel.DesignerSerializationVisibility)(0)
+        )]
+        public System.Drawing.Printing.PrintController PrintController
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
         [System.ComponentModel.BrowsableAttribute(false)]
-        [System.ComponentModel.DesignerSerializationVisibilityAttribute((System.ComponentModel.DesignerSerializationVisibility)(0))]
-        public System.Drawing.Printing.PrinterSettings PrinterSettings { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public event System.Drawing.Printing.PrintEventHandler BeginPrint { add => throw new PlatformNotSupportedException(); remove => throw new PlatformNotSupportedException(); }
-        public event System.Drawing.Printing.PrintEventHandler EndPrint { add => throw new PlatformNotSupportedException(); remove => throw new PlatformNotSupportedException(); }
-        public event System.Drawing.Printing.PrintPageEventHandler PrintPage { add => throw new PlatformNotSupportedException(); remove => throw new PlatformNotSupportedException(); }
-        public event System.Drawing.Printing.QueryPageSettingsEventHandler QueryPageSettings { add => throw new PlatformNotSupportedException(); remove => throw new PlatformNotSupportedException(); }
-        protected virtual void OnBeginPrint(System.Drawing.Printing.PrintEventArgs e) => throw new PlatformNotSupportedException();
-        protected virtual void OnEndPrint(System.Drawing.Printing.PrintEventArgs e) => throw new PlatformNotSupportedException();
-        protected virtual void OnPrintPage(System.Drawing.Printing.PrintPageEventArgs e) => throw new PlatformNotSupportedException();
-        protected virtual void OnQueryPageSettings(System.Drawing.Printing.QueryPageSettingsEventArgs e) => throw new PlatformNotSupportedException();
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(
+            (System.ComponentModel.DesignerSerializationVisibility)(0)
+        )]
+        public System.Drawing.Printing.PrinterSettings PrinterSettings
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public event System.Drawing.Printing.PrintEventHandler BeginPrint
+        {
+            add => throw new PlatformNotSupportedException();
+            remove => throw new PlatformNotSupportedException();
+        }
+        public event System.Drawing.Printing.PrintEventHandler EndPrint
+        {
+            add => throw new PlatformNotSupportedException();
+            remove => throw new PlatformNotSupportedException();
+        }
+        public event System.Drawing.Printing.PrintPageEventHandler PrintPage
+        {
+            add => throw new PlatformNotSupportedException();
+            remove => throw new PlatformNotSupportedException();
+        }
+        public event System.Drawing.Printing.QueryPageSettingsEventHandler QueryPageSettings
+        {
+            add => throw new PlatformNotSupportedException();
+            remove => throw new PlatformNotSupportedException();
+        }
+
+        protected virtual void OnBeginPrint(System.Drawing.Printing.PrintEventArgs e) =>
+            throw new PlatformNotSupportedException();
+
+        protected virtual void OnEndPrint(System.Drawing.Printing.PrintEventArgs e) =>
+            throw new PlatformNotSupportedException();
+
+        protected virtual void OnPrintPage(System.Drawing.Printing.PrintPageEventArgs e) =>
+            throw new PlatformNotSupportedException();
+
+        protected virtual void OnQueryPageSettings(
+            System.Drawing.Printing.QueryPageSettingsEventArgs e
+        ) => throw new PlatformNotSupportedException();
+
         public void Print() => throw new PlatformNotSupportedException();
-        public override string ToString() { throw new PlatformNotSupportedException(); }
+
+        public override string ToString()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public partial class PrinterResolution
     {
         public PrinterResolution() => throw new PlatformNotSupportedException();
-        public System.Drawing.Printing.PrinterResolutionKind Kind { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int X { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int Y { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public override string ToString() { throw new PlatformNotSupportedException(); }
+
+        public System.Drawing.Printing.PrinterResolutionKind Kind
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int X
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int Y
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public override string ToString()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public enum PrinterResolutionKind
     {
         Custom = 0,
@@ -2771,106 +8334,395 @@ namespace System.Drawing.Printing
         Low = -2,
         Medium = -3,
     }
+
     public partial class PrinterSettings : System.ICloneable
     {
         public PrinterSettings() => throw new PlatformNotSupportedException();
-        public bool CanDuplex { get { throw new PlatformNotSupportedException(); } }
-        public bool Collate { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public short Copies { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Printing.PageSettings DefaultPageSettings { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Printing.Duplex Duplex { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int FromPage { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Printing.PrinterSettings.StringCollection InstalledPrinters { get { throw new PlatformNotSupportedException(); } }
-        public bool IsDefaultPrinter { get { throw new PlatformNotSupportedException(); } }
-        public bool IsPlotter { get { throw new PlatformNotSupportedException(); } }
-        public bool IsValid { get { throw new PlatformNotSupportedException(); } }
-        public int LandscapeAngle { get { throw new PlatformNotSupportedException(); } }
-        public int MaximumCopies { get { throw new PlatformNotSupportedException(); } }
-        public int MaximumPage { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public int MinimumPage { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Printing.PrinterSettings.PaperSizeCollection PaperSizes { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Printing.PrinterSettings.PaperSourceCollection PaperSources { get { throw new PlatformNotSupportedException(); } }
-        public string PrinterName { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Printing.PrinterSettings.PrinterResolutionCollection PrinterResolutions { get { throw new PlatformNotSupportedException(); } }
-        public string PrintFileName { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Printing.PrintRange PrintRange { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public bool PrintToFile { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public bool SupportsColor { get { throw new PlatformNotSupportedException(); } }
-        public int ToPage { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public object Clone() { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Graphics CreateMeasurementGraphics() { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Graphics CreateMeasurementGraphics(bool honorOriginAtMargins) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Graphics CreateMeasurementGraphics(System.Drawing.Printing.PageSettings pageSettings) { throw new PlatformNotSupportedException(); }
-        public System.Drawing.Graphics CreateMeasurementGraphics(System.Drawing.Printing.PageSettings pageSettings, bool honorOriginAtMargins) { throw new PlatformNotSupportedException(); }
-        public System.IntPtr GetHdevmode() { throw new PlatformNotSupportedException(); }
-        public System.IntPtr GetHdevmode(System.Drawing.Printing.PageSettings pageSettings) { throw new PlatformNotSupportedException(); }
-        public System.IntPtr GetHdevnames() { throw new PlatformNotSupportedException(); }
-        public bool IsDirectPrintingSupported(System.Drawing.Image image) { throw new PlatformNotSupportedException(); }
-        public bool IsDirectPrintingSupported(System.Drawing.Imaging.ImageFormat imageFormat) { throw new PlatformNotSupportedException(); }
-        public void SetHdevmode(System.IntPtr hdevmode) => throw new PlatformNotSupportedException();
-        public void SetHdevnames(System.IntPtr hdevnames) => throw new PlatformNotSupportedException();
-        public override string ToString() { throw new PlatformNotSupportedException(); }
-        public partial class PaperSizeCollection : System.Collections.ICollection, System.Collections.IEnumerable
+
+        public bool CanDuplex
         {
-            public PaperSizeCollection(System.Drawing.Printing.PaperSize[] array) => throw new PlatformNotSupportedException();
-            public int Count { get { throw new PlatformNotSupportedException(); } }
-            public virtual System.Drawing.Printing.PaperSize this[int index] { get { throw new PlatformNotSupportedException(); } }
-            int System.Collections.ICollection.Count { get { throw new PlatformNotSupportedException(); } }
-            bool System.Collections.ICollection.IsSynchronized { get { throw new PlatformNotSupportedException(); } }
-            object System.Collections.ICollection.SyncRoot { get { throw new PlatformNotSupportedException(); } }
-            [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(1))]
-            public int Add(System.Drawing.Printing.PaperSize paperSize) { throw new PlatformNotSupportedException(); }
-            public void CopyTo(System.Drawing.Printing.PaperSize[] paperSizes, int index) => throw new PlatformNotSupportedException();
-            public System.Collections.IEnumerator GetEnumerator() { throw new PlatformNotSupportedException(); }
-            void System.Collections.ICollection.CopyTo(System.Array array, int index) => throw new PlatformNotSupportedException();
-            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() { throw new PlatformNotSupportedException(); }
+            get { throw new PlatformNotSupportedException(); }
         }
-        public partial class PaperSourceCollection : System.Collections.ICollection, System.Collections.IEnumerable
+        public bool Collate
         {
-            public PaperSourceCollection(System.Drawing.Printing.PaperSource[] array) => throw new PlatformNotSupportedException();
-            public int Count { get { throw new PlatformNotSupportedException(); } }
-            public virtual System.Drawing.Printing.PaperSource this[int index] { get { throw new PlatformNotSupportedException(); } }
-            int System.Collections.ICollection.Count { get { throw new PlatformNotSupportedException(); } }
-            bool System.Collections.ICollection.IsSynchronized { get { throw new PlatformNotSupportedException(); } }
-            object System.Collections.ICollection.SyncRoot { get { throw new PlatformNotSupportedException(); } }
-            [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(1))]
-            public int Add(System.Drawing.Printing.PaperSource paperSource) { throw new PlatformNotSupportedException(); }
-            public void CopyTo(System.Drawing.Printing.PaperSource[] paperSources, int index) => throw new PlatformNotSupportedException();
-            public System.Collections.IEnumerator GetEnumerator() { throw new PlatformNotSupportedException(); }
-            void System.Collections.ICollection.CopyTo(System.Array array, int index) => throw new PlatformNotSupportedException();
-            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() { throw new PlatformNotSupportedException(); }
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
         }
-        public partial class PrinterResolutionCollection : System.Collections.ICollection, System.Collections.IEnumerable
+        public short Copies
         {
-            public PrinterResolutionCollection(System.Drawing.Printing.PrinterResolution[] array) => throw new PlatformNotSupportedException();
-            public int Count { get { throw new PlatformNotSupportedException(); } }
-            public virtual System.Drawing.Printing.PrinterResolution this[int index] { get { throw new PlatformNotSupportedException(); } }
-            int System.Collections.ICollection.Count { get { throw new PlatformNotSupportedException(); } }
-            bool System.Collections.ICollection.IsSynchronized { get { throw new PlatformNotSupportedException(); } }
-            object System.Collections.ICollection.SyncRoot { get { throw new PlatformNotSupportedException(); } }
-            [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(1))]
-            public int Add(System.Drawing.Printing.PrinterResolution printerResolution) { throw new PlatformNotSupportedException(); }
-            public void CopyTo(System.Drawing.Printing.PrinterResolution[] printerResolutions, int index) => throw new PlatformNotSupportedException();
-            public System.Collections.IEnumerator GetEnumerator() { throw new PlatformNotSupportedException(); }
-            void System.Collections.ICollection.CopyTo(System.Array array, int index) => throw new PlatformNotSupportedException();
-            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() { throw new PlatformNotSupportedException(); }
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
         }
-        public partial class StringCollection : System.Collections.ICollection, System.Collections.IEnumerable
+        public System.Drawing.Printing.PageSettings DefaultPageSettings
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Printing.Duplex Duplex
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int FromPage
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public static System.Drawing.Printing.PrinterSettings.StringCollection InstalledPrinters
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public bool IsDefaultPrinter
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public bool IsPlotter
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public bool IsValid
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public int LandscapeAngle
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public int MaximumCopies
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public int MaximumPage
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public int MinimumPage
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Printing.PrinterSettings.PaperSizeCollection PaperSizes
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Printing.PrinterSettings.PaperSourceCollection PaperSources
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public string PrinterName
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Printing.PrinterSettings.PrinterResolutionCollection PrinterResolutions
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public string PrintFileName
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Printing.PrintRange PrintRange
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public bool PrintToFile
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public bool SupportsColor
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public int ToPage
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+
+        public object Clone()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Graphics CreateMeasurementGraphics()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Graphics CreateMeasurementGraphics(bool honorOriginAtMargins)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Graphics CreateMeasurementGraphics(
+            System.Drawing.Printing.PageSettings pageSettings
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.Drawing.Graphics CreateMeasurementGraphics(
+            System.Drawing.Printing.PageSettings pageSettings,
+            bool honorOriginAtMargins
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.IntPtr GetHdevmode()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.IntPtr GetHdevmode(System.Drawing.Printing.PageSettings pageSettings)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public System.IntPtr GetHdevnames()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsDirectPrintingSupported(System.Drawing.Image image)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public bool IsDirectPrintingSupported(System.Drawing.Imaging.ImageFormat imageFormat)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public void SetHdevmode(System.IntPtr hdevmode) =>
+            throw new PlatformNotSupportedException();
+
+        public void SetHdevnames(System.IntPtr hdevnames) =>
+            throw new PlatformNotSupportedException();
+
+        public override string ToString()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public partial class PaperSizeCollection
+            : System.Collections.ICollection,
+                System.Collections.IEnumerable
+        {
+            public PaperSizeCollection(System.Drawing.Printing.PaperSize[] array) =>
+                throw new PlatformNotSupportedException();
+
+            public int Count
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            public virtual System.Drawing.Printing.PaperSize this[int index]
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            int System.Collections.ICollection.Count
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            bool System.Collections.ICollection.IsSynchronized
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            object System.Collections.ICollection.SyncRoot
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+
+            [System.ComponentModel.EditorBrowsableAttribute(
+                (System.ComponentModel.EditorBrowsableState)(1)
+            )]
+            public int Add(System.Drawing.Printing.PaperSize paperSize)
+            {
+                throw new PlatformNotSupportedException();
+            }
+
+            public void CopyTo(System.Drawing.Printing.PaperSize[] paperSizes, int index) =>
+                throw new PlatformNotSupportedException();
+
+            public System.Collections.IEnumerator GetEnumerator()
+            {
+                throw new PlatformNotSupportedException();
+            }
+
+            void System.Collections.ICollection.CopyTo(System.Array array, int index) =>
+                throw new PlatformNotSupportedException();
+
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+            {
+                throw new PlatformNotSupportedException();
+            }
+        }
+
+        public partial class PaperSourceCollection
+            : System.Collections.ICollection,
+                System.Collections.IEnumerable
+        {
+            public PaperSourceCollection(System.Drawing.Printing.PaperSource[] array) =>
+                throw new PlatformNotSupportedException();
+
+            public int Count
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            public virtual System.Drawing.Printing.PaperSource this[int index]
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            int System.Collections.ICollection.Count
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            bool System.Collections.ICollection.IsSynchronized
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            object System.Collections.ICollection.SyncRoot
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+
+            [System.ComponentModel.EditorBrowsableAttribute(
+                (System.ComponentModel.EditorBrowsableState)(1)
+            )]
+            public int Add(System.Drawing.Printing.PaperSource paperSource)
+            {
+                throw new PlatformNotSupportedException();
+            }
+
+            public void CopyTo(System.Drawing.Printing.PaperSource[] paperSources, int index) =>
+                throw new PlatformNotSupportedException();
+
+            public System.Collections.IEnumerator GetEnumerator()
+            {
+                throw new PlatformNotSupportedException();
+            }
+
+            void System.Collections.ICollection.CopyTo(System.Array array, int index) =>
+                throw new PlatformNotSupportedException();
+
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+            {
+                throw new PlatformNotSupportedException();
+            }
+        }
+
+        public partial class PrinterResolutionCollection
+            : System.Collections.ICollection,
+                System.Collections.IEnumerable
+        {
+            public PrinterResolutionCollection(System.Drawing.Printing.PrinterResolution[] array) =>
+                throw new PlatformNotSupportedException();
+
+            public int Count
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            public virtual System.Drawing.Printing.PrinterResolution this[int index]
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            int System.Collections.ICollection.Count
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            bool System.Collections.ICollection.IsSynchronized
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            object System.Collections.ICollection.SyncRoot
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+
+            [System.ComponentModel.EditorBrowsableAttribute(
+                (System.ComponentModel.EditorBrowsableState)(1)
+            )]
+            public int Add(System.Drawing.Printing.PrinterResolution printerResolution)
+            {
+                throw new PlatformNotSupportedException();
+            }
+
+            public void CopyTo(
+                System.Drawing.Printing.PrinterResolution[] printerResolutions,
+                int index
+            ) => throw new PlatformNotSupportedException();
+
+            public System.Collections.IEnumerator GetEnumerator()
+            {
+                throw new PlatformNotSupportedException();
+            }
+
+            void System.Collections.ICollection.CopyTo(System.Array array, int index) =>
+                throw new PlatformNotSupportedException();
+
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+            {
+                throw new PlatformNotSupportedException();
+            }
+        }
+
+        public partial class StringCollection
+            : System.Collections.ICollection,
+                System.Collections.IEnumerable
         {
             public StringCollection(string[] array) => throw new PlatformNotSupportedException();
-            public int Count { get { throw new PlatformNotSupportedException(); } }
-            public virtual string this[int index] { get { throw new PlatformNotSupportedException(); } }
-            int System.Collections.ICollection.Count { get { throw new PlatformNotSupportedException(); } }
-            bool System.Collections.ICollection.IsSynchronized { get { throw new PlatformNotSupportedException(); } }
-            object System.Collections.ICollection.SyncRoot { get { throw new PlatformNotSupportedException(); } }
-            [System.ComponentModel.EditorBrowsableAttribute((System.ComponentModel.EditorBrowsableState)(1))]
-            public int Add(string value) { throw new PlatformNotSupportedException(); }
-            public void CopyTo(string[] strings, int index) => throw new PlatformNotSupportedException();
-            public System.Collections.IEnumerator GetEnumerator() { throw new PlatformNotSupportedException(); }
-            void System.Collections.ICollection.CopyTo(System.Array array, int index) => throw new PlatformNotSupportedException();
-            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() { throw new PlatformNotSupportedException(); }
+
+            public int Count
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            public virtual string this[int index]
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            int System.Collections.ICollection.Count
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            bool System.Collections.ICollection.IsSynchronized
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+            object System.Collections.ICollection.SyncRoot
+            {
+                get { throw new PlatformNotSupportedException(); }
+            }
+
+            [System.ComponentModel.EditorBrowsableAttribute(
+                (System.ComponentModel.EditorBrowsableState)(1)
+            )]
+            public int Add(string value)
+            {
+                throw new PlatformNotSupportedException();
+            }
+
+            public void CopyTo(string[] strings, int index) =>
+                throw new PlatformNotSupportedException();
+
+            public System.Collections.IEnumerator GetEnumerator()
+            {
+                throw new PlatformNotSupportedException();
+            }
+
+            void System.Collections.ICollection.CopyTo(System.Array array, int index) =>
+                throw new PlatformNotSupportedException();
+
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
     }
+
     public enum PrinterUnit
     {
         Display = 0,
@@ -2878,33 +8730,120 @@ namespace System.Drawing.Printing
         TenthsOfAMillimeter = 3,
         ThousandthsOfAnInch = 1,
     }
+
     public sealed partial class PrinterUnitConvert
     {
         internal PrinterUnitConvert() => throw new PlatformNotSupportedException();
-        public static double Convert(double value, System.Drawing.Printing.PrinterUnit fromUnit, System.Drawing.Printing.PrinterUnit toUnit) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Point Convert(System.Drawing.Point value, System.Drawing.Printing.PrinterUnit fromUnit, System.Drawing.Printing.PrinterUnit toUnit) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Printing.Margins Convert(System.Drawing.Printing.Margins value, System.Drawing.Printing.PrinterUnit fromUnit, System.Drawing.Printing.PrinterUnit toUnit) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Rectangle Convert(System.Drawing.Rectangle value, System.Drawing.Printing.PrinterUnit fromUnit, System.Drawing.Printing.PrinterUnit toUnit) { throw new PlatformNotSupportedException(); }
-        public static System.Drawing.Size Convert(System.Drawing.Size value, System.Drawing.Printing.PrinterUnit fromUnit, System.Drawing.Printing.PrinterUnit toUnit) { throw new PlatformNotSupportedException(); }
-        public static int Convert(int value, System.Drawing.Printing.PrinterUnit fromUnit, System.Drawing.Printing.PrinterUnit toUnit) { throw new PlatformNotSupportedException(); }
+
+        public static double Convert(
+            double value,
+            System.Drawing.Printing.PrinterUnit fromUnit,
+            System.Drawing.Printing.PrinterUnit toUnit
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Point Convert(
+            System.Drawing.Point value,
+            System.Drawing.Printing.PrinterUnit fromUnit,
+            System.Drawing.Printing.PrinterUnit toUnit
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Printing.Margins Convert(
+            System.Drawing.Printing.Margins value,
+            System.Drawing.Printing.PrinterUnit fromUnit,
+            System.Drawing.Printing.PrinterUnit toUnit
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Rectangle Convert(
+            System.Drawing.Rectangle value,
+            System.Drawing.Printing.PrinterUnit fromUnit,
+            System.Drawing.Printing.PrinterUnit toUnit
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static System.Drawing.Size Convert(
+            System.Drawing.Size value,
+            System.Drawing.Printing.PrinterUnit fromUnit,
+            System.Drawing.Printing.PrinterUnit toUnit
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public static int Convert(
+            int value,
+            System.Drawing.Printing.PrinterUnit fromUnit,
+            System.Drawing.Printing.PrinterUnit toUnit
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
+
     public partial class PrintEventArgs : System.ComponentModel.CancelEventArgs
     {
         public PrintEventArgs() => throw new PlatformNotSupportedException();
-        public System.Drawing.Printing.PrintAction PrintAction { get { throw new PlatformNotSupportedException(); } }
+
+        public System.Drawing.Printing.PrintAction PrintAction
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
     }
+
     public delegate void PrintEventHandler(object sender, System.Drawing.Printing.PrintEventArgs e);
+
     public partial class PrintPageEventArgs : System.EventArgs
     {
-        public PrintPageEventArgs(System.Drawing.Graphics graphics, System.Drawing.Rectangle marginBounds, System.Drawing.Rectangle pageBounds, System.Drawing.Printing.PageSettings pageSettings) => throw new PlatformNotSupportedException();
-        public bool Cancel { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Graphics Graphics { get { throw new PlatformNotSupportedException(); } }
-        public bool HasMorePages { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
-        public System.Drawing.Rectangle MarginBounds { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Rectangle PageBounds { get { throw new PlatformNotSupportedException(); } }
-        public System.Drawing.Printing.PageSettings PageSettings { get { throw new PlatformNotSupportedException(); } }
+        public PrintPageEventArgs(
+            System.Drawing.Graphics graphics,
+            System.Drawing.Rectangle marginBounds,
+            System.Drawing.Rectangle pageBounds,
+            System.Drawing.Printing.PageSettings pageSettings
+        ) => throw new PlatformNotSupportedException();
+
+        public bool Cancel
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Graphics Graphics
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public bool HasMorePages
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
+        public System.Drawing.Rectangle MarginBounds
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Rectangle PageBounds
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public System.Drawing.Printing.PageSettings PageSettings
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
     }
-    public delegate void PrintPageEventHandler(object sender, System.Drawing.Printing.PrintPageEventArgs e);
+
+    public delegate void PrintPageEventHandler(
+        object sender,
+        System.Drawing.Printing.PrintPageEventArgs e
+    );
+
     public enum PrintRange
     {
         AllPages = 0,
@@ -2912,54 +8851,103 @@ namespace System.Drawing.Printing
         Selection = 1,
         SomePages = 2,
     }
+
     public partial class QueryPageSettingsEventArgs : System.Drawing.Printing.PrintEventArgs
     {
-        public QueryPageSettingsEventArgs(System.Drawing.Printing.PageSettings pageSettings) => throw new PlatformNotSupportedException();
-        public System.Drawing.Printing.PageSettings PageSettings { get { throw new PlatformNotSupportedException(); } set => throw new PlatformNotSupportedException(); }
+        public QueryPageSettingsEventArgs(System.Drawing.Printing.PageSettings pageSettings) =>
+            throw new PlatformNotSupportedException();
+
+        public System.Drawing.Printing.PageSettings PageSettings
+        {
+            get { throw new PlatformNotSupportedException(); }
+            set => throw new PlatformNotSupportedException();
+        }
     }
-    public delegate void QueryPageSettingsEventHandler(object sender, System.Drawing.Printing.QueryPageSettingsEventArgs e);
+
+    public delegate void QueryPageSettingsEventHandler(
+        object sender,
+        System.Drawing.Printing.QueryPageSettingsEventArgs e
+    );
+
     public partial class StandardPrintController : System.Drawing.Printing.PrintController
     {
         public StandardPrintController() => throw new PlatformNotSupportedException();
-        public override void OnEndPage(System.Drawing.Printing.PrintDocument document, System.Drawing.Printing.PrintPageEventArgs e) => throw new PlatformNotSupportedException();
-        public override void OnEndPrint(System.Drawing.Printing.PrintDocument document, System.Drawing.Printing.PrintEventArgs e) => throw new PlatformNotSupportedException();
-        public override System.Drawing.Graphics OnStartPage(System.Drawing.Printing.PrintDocument document, System.Drawing.Printing.PrintPageEventArgs e) { throw new PlatformNotSupportedException(); }
-        public override void OnStartPrint(System.Drawing.Printing.PrintDocument document, System.Drawing.Printing.PrintEventArgs e) => throw new PlatformNotSupportedException();
+
+        public override void OnEndPage(
+            System.Drawing.Printing.PrintDocument document,
+            System.Drawing.Printing.PrintPageEventArgs e
+        ) => throw new PlatformNotSupportedException();
+
+        public override void OnEndPrint(
+            System.Drawing.Printing.PrintDocument document,
+            System.Drawing.Printing.PrintEventArgs e
+        ) => throw new PlatformNotSupportedException();
+
+        public override System.Drawing.Graphics OnStartPage(
+            System.Drawing.Printing.PrintDocument document,
+            System.Drawing.Printing.PrintPageEventArgs e
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public override void OnStartPrint(
+            System.Drawing.Printing.PrintDocument document,
+            System.Drawing.Printing.PrintEventArgs e
+        ) => throw new PlatformNotSupportedException();
     }
 }
+
 namespace System.Drawing.Text
 {
     public abstract partial class FontCollection : System.IDisposable
     {
         internal FontCollection() => throw new PlatformNotSupportedException();
-        public System.Drawing.FontFamily[] Families { get { throw new PlatformNotSupportedException(); } }
+
+        public System.Drawing.FontFamily[] Families
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         public void Dispose() => throw new PlatformNotSupportedException();
+
         protected virtual void Dispose(bool disposing) => throw new PlatformNotSupportedException();
+
         ~FontCollection() => throw new PlatformNotSupportedException();
     }
+
     public enum GenericFontFamilies
     {
         Monospace = 2,
         SansSerif = 1,
         Serif = 0,
     }
+
     public enum HotkeyPrefix
     {
         Hide = 2,
         None = 0,
         Show = 1,
     }
+
     public sealed partial class InstalledFontCollection : System.Drawing.Text.FontCollection
     {
         public InstalledFontCollection() => throw new PlatformNotSupportedException();
     }
+
     public sealed partial class PrivateFontCollection : System.Drawing.Text.FontCollection
     {
         public PrivateFontCollection() => throw new PlatformNotSupportedException();
+
         public void AddFontFile(string filename) => throw new PlatformNotSupportedException();
-        public void AddMemoryFont(System.IntPtr memory, int length) => throw new PlatformNotSupportedException();
-        protected override void Dispose(bool disposing) => throw new PlatformNotSupportedException();
+
+        public void AddMemoryFont(System.IntPtr memory, int length) =>
+            throw new PlatformNotSupportedException();
+
+        protected override void Dispose(bool disposing) =>
+            throw new PlatformNotSupportedException();
     }
+
     public enum TextRenderingHint
     {
         AntiAlias = 4,

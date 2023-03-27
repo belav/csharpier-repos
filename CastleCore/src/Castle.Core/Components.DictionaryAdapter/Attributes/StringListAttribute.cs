@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,7 +25,10 @@ namespace Castle.Components.DictionaryAdapter
     /// Identifies a property should be represented as a delimited string value.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public class StringListAttribute : DictionaryBehaviorAttribute, IDictionaryPropertyGetter, IDictionaryPropertySetter
+    public class StringListAttribute
+        : DictionaryBehaviorAttribute,
+            IDictionaryPropertyGetter,
+            IDictionaryPropertySetter
     {
         public StringListAttribute()
         {
@@ -39,8 +42,13 @@ namespace Castle.Components.DictionaryAdapter
 
         #region IDictionaryPropertyGetter
 
-        object IDictionaryPropertyGetter.GetPropertyValue(IDictionaryAdapter dictionaryAdapter,
-            string key, object storedValue, PropertyDescriptor property, bool ifExists)
+        object IDictionaryPropertyGetter.GetPropertyValue(
+            IDictionaryAdapter dictionaryAdapter,
+            string key,
+            object storedValue,
+            PropertyDescriptor property,
+            bool ifExists
+        )
         {
             var propertyType = property.PropertyType;
 
@@ -50,16 +58,28 @@ namespace Castle.Components.DictionaryAdapter
                 {
                     var genericDef = propertyType.GetGenericTypeDefinition();
 
-                    if (genericDef == typeof(IList<>) || genericDef == typeof(ICollection<>) ||
-                        genericDef == typeof(List<>) || genericDef == typeof(IEnumerable<>))
+                    if (
+                        genericDef == typeof(IList<>)
+                        || genericDef == typeof(ICollection<>)
+                        || genericDef == typeof(List<>)
+                        || genericDef == typeof(IEnumerable<>)
+                    )
                     {
                         var paramType = propertyType.GetGenericArguments()[0];
                         var converter = TypeDescriptor.GetConverter(paramType);
 
                         if (converter != null && converter.CanConvertFrom(typeof(string)))
                         {
-                            var genericList = typeof(StringListWrapper<>).MakeGenericType(new[] { paramType });
-                            return Activator.CreateInstance(genericList, key, storedValue, Separator, dictionaryAdapter.This.Dictionary);
+                            var genericList = typeof(StringListWrapper<>).MakeGenericType(
+                                new[] { paramType }
+                            );
+                            return Activator.CreateInstance(
+                                genericList,
+                                key,
+                                storedValue,
+                                Separator,
+                                dictionaryAdapter.This.Dictionary
+                            );
                         }
                     }
                 }
@@ -72,8 +92,12 @@ namespace Castle.Components.DictionaryAdapter
 
         #region IDictionaryPropertySetter Members
 
-        bool IDictionaryPropertySetter.SetPropertyValue(IDictionaryAdapter dictionaryAdapter,
-            string key, ref object value, PropertyDescriptor property)
+        bool IDictionaryPropertySetter.SetPropertyValue(
+            IDictionaryAdapter dictionaryAdapter,
+            string key,
+            ref object value,
+            PropertyDescriptor property
+        )
         {
             var enumerable = value as IEnumerable;
             if (enumerable != null)
@@ -116,7 +140,12 @@ namespace Castle.Components.DictionaryAdapter
             private readonly IDictionary dictionary;
             private readonly List<T> inner;
 
-            public StringListWrapper(string key, string list, char separator, IDictionary dictionary)
+            public StringListWrapper(
+                string key,
+                string list,
+                char separator,
+                IDictionary dictionary
+            )
             {
                 this.key = key;
                 this.separator = separator;
@@ -241,5 +270,5 @@ namespace Castle.Components.DictionaryAdapter
         }
     }
 
-    #endregion
+        #endregion
 }

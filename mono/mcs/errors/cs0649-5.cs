@@ -4,22 +4,20 @@
 
 public struct Bar
 {
-	public int x;
+    public int x;
 }
 
 public class TestClass
 {
-	Bar b;
+    Bar b;
 
-	public bool Foo ()
-	{
-		if (b.x == 0)
-			return false;
+    public bool Foo()
+    {
+        if (b.x == 0)
+            return false;
 
-		return true;
-	}
+        return true;
+    }
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

@@ -5,20 +5,14 @@ using System;
 
 public interface ITest
 {
-	[MyAttribute]
-	void Method();
+    [MyAttribute]
+    void Method();
 }
 
-[AttributeUsage (AttributeTargets.Interface)]
-public class MyAttributeAttribute : Attribute
+[AttributeUsage(AttributeTargets.Interface)]
+public class MyAttributeAttribute : Attribute { }
+
+public class Foo
 {
+    public static void Main() { }
 }
-
-public class Foo {
-
-        public static void Main ()
-        {
-        }
-}
-
-

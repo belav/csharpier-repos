@@ -4,10 +4,9 @@
 
 public class Splay<T>
 {
-  unsafe private class Node
-  {
-    private Node *            parent;
-    private T                 data;
-  } 
+    unsafe private class Node
+    {
+        private Node* parent;
+        private T data;
+    }
 }
-

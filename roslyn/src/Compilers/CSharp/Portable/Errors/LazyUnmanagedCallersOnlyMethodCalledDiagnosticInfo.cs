@@ -13,7 +13,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly MethodSymbol _method;
         private readonly bool _isDelegateConversion;
 
-        internal LazyUnmanagedCallersOnlyMethodCalledDiagnosticInfo(MethodSymbol method, bool isDelegateConversion)
+        internal LazyUnmanagedCallersOnlyMethodCalledDiagnosticInfo(
+            MethodSymbol method,
+            bool isDelegateConversion
+        )
         {
             _method = method;
             _isDelegateConversion = isDelegateConversion;
@@ -21,16 +24,29 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected override DiagnosticInfo? ResolveInfo()
         {
-            UnmanagedCallersOnlyAttributeData? unmanagedCallersOnlyAttributeData = _method.GetUnmanagedCallersOnlyAttributeData(forceComplete: true);
-            Debug.Assert(!ReferenceEquals(unmanagedCallersOnlyAttributeData, UnmanagedCallersOnlyAttributeData.Uninitialized));
-            Debug.Assert(!ReferenceEquals(unmanagedCallersOnlyAttributeData, UnmanagedCallersOnlyAttributeData.AttributePresentDataNotBound));
+            UnmanagedCallersOnlyAttributeData? unmanagedCallersOnlyAttributeData =
+                _method.GetUnmanagedCallersOnlyAttributeData(forceComplete: true);
+            Debug.Assert(
+                !ReferenceEquals(
+                    unmanagedCallersOnlyAttributeData,
+                    UnmanagedCallersOnlyAttributeData.Uninitialized
+                )
+            );
+            Debug.Assert(
+                !ReferenceEquals(
+                    unmanagedCallersOnlyAttributeData,
+                    UnmanagedCallersOnlyAttributeData.AttributePresentDataNotBound
+                )
+            );
 
             return unmanagedCallersOnlyAttributeData is null
                 ? null
-                : new CSDiagnosticInfo(_isDelegateConversion
-                                           ? ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate
-                                           : ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                                       _method);
+                : new CSDiagnosticInfo(
+                    _isDelegateConversion
+                        ? ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate
+                        : ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                    _method
+                );
         }
     }
 }

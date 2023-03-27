@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -130,17 +130,34 @@ namespace Castle.Components.DictionaryAdapter.Tests
             person.BillingAddress = GetAdapter<IAddress>();
         }
 
-        private T GetAdapter<T>() where T : class
+        private T GetAdapter<T>()
+            where T : class
         {
-            return (T)factory.GetAdapter(typeof(T), new Hashtable(), new PropertyDescriptor()
-                .AddBehaviors(XmlMetadataBehavior.Default, new MemberwiseEqualityHashCodeStrategy()));
+            return (T)
+                factory.GetAdapter(
+                    typeof(T),
+                    new Hashtable(),
+                    new PropertyDescriptor().AddBehaviors(
+                        XmlMetadataBehavior.Default,
+                        new MemberwiseEqualityHashCodeStrategy()
+                    )
+                );
         }
 
-        private T GetXmlAdapter<T>() where T : class
+        private T GetXmlAdapter<T>()
+            where T : class
         {
             var xpath = new XmlAdapter(new XmlDocument());
-            return (T)factory.GetAdapter(typeof(T), new Hashtable(), new PropertyDescriptor()
-                .AddBehaviors(XmlMetadataBehavior.Default, xpath, new MemberwiseEqualityHashCodeStrategy()));
+            return (T)
+                factory.GetAdapter(
+                    typeof(T),
+                    new Hashtable(),
+                    new PropertyDescriptor().AddBehaviors(
+                        XmlMetadataBehavior.Default,
+                        xpath,
+                        new MemberwiseEqualityHashCodeStrategy()
+                    )
+                );
         }
     }
 }

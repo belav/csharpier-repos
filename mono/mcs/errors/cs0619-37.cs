@@ -6,6 +6,7 @@ using System;
 enum ObsoleteEnum
 {
     value_A,
+
     [Obsolete("It's obsolete", true)]
     value_B
 }

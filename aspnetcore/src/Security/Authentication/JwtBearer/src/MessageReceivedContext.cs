@@ -17,7 +17,8 @@ public class MessageReceivedContext : ResultContext<JwtBearerOptions>
     public MessageReceivedContext(
         HttpContext context,
         AuthenticationScheme scheme,
-        JwtBearerOptions options)
+        JwtBearerOptions options
+    )
         : base(context, scheme, options) { }
 
     /// <summary>

@@ -11,7 +11,10 @@ namespace System.Globalization.Tests
         [Fact]
         public void AbbreviatedDayNames_GetInvariantInfo_ReturnsExpected()
         {
-            Assert.Equal(new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" }, DateTimeFormatInfo.InvariantInfo.AbbreviatedDayNames);
+            Assert.Equal(
+                new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" },
+                DateTimeFormatInfo.InvariantInfo.AbbreviatedDayNames
+            );
         }
 
         [Fact]
@@ -46,20 +49,30 @@ namespace System.Globalization.Tests
         public void AbbreviatedDayNames_SetNulValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.AbbreviatedDayNames = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.AbbreviatedDayNames = null
+            );
         }
 
         [Fact]
         public void AbbreviatedDayNames_SetNulValueInValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.AbbreviatedDayNames = new string[] { "1", "2", "3", null, "5", "6", "7" });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () =>
+                    format.AbbreviatedDayNames = new string[] { "1", "2", "3", null, "5", "6", "7" }
+            );
         }
 
         public static IEnumerable<object[]> AbbreviatedDayNames_SetInvalidLength_TestData()
         {
             yield return new object[] { new string[] { "Sun" } };
-            yield return new object[] { new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Additional" } };
+            yield return new object[]
+            {
+                new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Additional" }
+            };
         }
 
         [Theory]
@@ -67,13 +80,28 @@ namespace System.Globalization.Tests
         public void AbbreviatedDayNames_SetInvalidLength_ThrowsArgumentException(string[] value)
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentException>("value", (() => format.AbbreviatedDayNames = value));
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                (() => format.AbbreviatedDayNames = value)
+            );
         }
 
         [Fact]
         public void AbbreviatedDayNames_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.AbbreviatedDayNames = new string[] { "1", "2", "3", "4", "5", "6", "7" });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    DateTimeFormatInfo.InvariantInfo.AbbreviatedDayNames = new string[]
+                    {
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7"
+                    }
+            );
         }
     }
 }

@@ -9,22 +9,30 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static int Min(this IEnumerable<int> source) => MinMaxInteger<int, MinCalc<int>>(source);
+        public static int Min(this IEnumerable<int> source) =>
+            MinMaxInteger<int, MinCalc<int>>(source);
 
-        public static long Min(this IEnumerable<long> source) => MinMaxInteger<long, MinCalc<long>>(source);
+        public static long Min(this IEnumerable<long> source) =>
+            MinMaxInteger<long, MinCalc<long>>(source);
 
-        private struct MinCalc<T> : IMinMaxCalc<T> where T : struct, IBinaryInteger<T>
+        private struct MinCalc<T> : IMinMaxCalc<T>
+            where T : struct, IBinaryInteger<T>
         {
             public static bool Compare(T left, T right) => left < right;
-            public static Vector128<T> Compare(Vector128<T> left, Vector128<T> right) => Vector128.Min(left, right);
-            public static Vector256<T> Compare(Vector256<T> left, Vector256<T> right) => Vector256.Min(left, right);
+
+            public static Vector128<T> Compare(Vector128<T> left, Vector128<T> right) =>
+                Vector128.Min(left, right);
+
+            public static Vector256<T> Compare(Vector256<T> left, Vector256<T> right) =>
+                Vector256.Min(left, right);
         }
 
         public static int? Min(this IEnumerable<int?> source) => MinInteger(source);
 
         public static long? Min(this IEnumerable<long?> source) => MinInteger(source);
 
-        private static T? MinInteger<T>(this IEnumerable<T?> source) where T : struct, IBinaryInteger<T>
+        private static T? MinInteger<T>(this IEnumerable<T?> source)
+            where T : struct, IBinaryInteger<T>
         {
             if (source == null)
             {
@@ -44,8 +52,7 @@ namespace System.Linq
                     }
 
                     value = e.Current;
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 // Keep hold of the wrapped value, and do comparisons on that, rather than
                 // using the lifted operation each time.
@@ -76,7 +83,8 @@ namespace System.Linq
 
         public static double? Min(this IEnumerable<double?> source) => MinFloat(source);
 
-        private static T MinFloat<T>(this IEnumerable<T> source) where T : struct, IFloatingPointIeee754<T>
+        private static T MinFloat<T>(this IEnumerable<T> source)
+            where T : struct, IFloatingPointIeee754<T>
         {
             T value;
 
@@ -124,7 +132,6 @@ namespace System.Linq
                     {
                         value = x;
                     }
-
                     // Normally NaN < anything is false, as is anything < NaN
                     // However, this leads to some irksome outcomes in Min and Max.
                     // If we use those semantics then Min(NaN, 5.0) is NaN, but
@@ -143,7 +150,8 @@ namespace System.Linq
             return value;
         }
 
-        private static T? MinFloat<T>(this IEnumerable<T?> source) where T : struct, IFloatingPointIeee754<T>
+        private static T? MinFloat<T>(this IEnumerable<T?> source)
+            where T : struct, IFloatingPointIeee754<T>
         {
             if (source == null)
             {
@@ -161,8 +169,7 @@ namespace System.Linq
                     }
 
                     value = e.Current;
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 T valueVal = value.GetValueOrDefault();
                 if (T.IsNaN(valueVal))
@@ -254,8 +261,7 @@ namespace System.Linq
                     }
 
                     value = e.Current;
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 decimal valueVal = value.GetValueOrDefault();
                 while (e.MoveNext())
@@ -273,7 +279,8 @@ namespace System.Linq
             return value;
         }
 
-        public static TSource? Min<TSource>(this IEnumerable<TSource> source) => Min(source, comparer: null);
+        public static TSource? Min<TSource>(this IEnumerable<TSource> source) =>
+            Min(source, comparer: null);
 
         /// <summary>Returns the minimum value in a generic sequence.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
@@ -287,7 +294,10 @@ namespace System.Linq
         /// <para>If <typeparamref name="TSource" /> is a reference type and the source sequence is empty or contains only values that are <see langword="null" />, this method returns <see langword="null" />.</para>
         /// <para>In Visual Basic query expression syntax, an `Aggregate Into Min()` clause translates to an invocation of <see cref="O:Enumerable.Min" />.</para>
         /// </remarks>
-        public static TSource? Min<TSource>(this IEnumerable<TSource> source, IComparer<TSource>? comparer)
+        public static TSource? Min<TSource>(
+            this IEnumerable<TSource> source,
+            IComparer<TSource>? comparer
+        )
         {
             if (source == null)
             {
@@ -296,16 +306,35 @@ namespace System.Linq
 
             comparer ??= Comparer<TSource>.Default;
 
-            if (typeof(TSource) == typeof(byte) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<byte, MinCalc<byte>>((IEnumerable<byte>)source);
-            if (typeof(TSource) == typeof(sbyte) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<sbyte, MinCalc<sbyte>>((IEnumerable<sbyte>)source);
-            if (typeof(TSource) == typeof(ushort) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<ushort, MinCalc<ushort>>((IEnumerable<ushort>)source);
-            if (typeof(TSource) == typeof(short) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<short, MinCalc<short>>((IEnumerable<short>)source);
-            if (typeof(TSource) == typeof(uint) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<uint, MinCalc<uint>>((IEnumerable<uint>)source);
-            if (typeof(TSource) == typeof(int) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<int, MinCalc<int>>((IEnumerable<int>)source);
-            if (typeof(TSource) == typeof(ulong) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<ulong, MinCalc<ulong>>((IEnumerable<ulong>)source);
-            if (typeof(TSource) == typeof(long) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<long, MinCalc<long>>((IEnumerable<long>)source);
-            if (typeof(TSource) == typeof(nuint) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<nuint, MinCalc<nuint>>((IEnumerable<nuint>)source);
-            if (typeof(TSource) == typeof(nint) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<nint, MinCalc<nint>>((IEnumerable<nint>)source);
+            if (typeof(TSource) == typeof(byte) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<byte, MinCalc<byte>>((IEnumerable<byte>)source);
+            if (typeof(TSource) == typeof(sbyte) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<sbyte, MinCalc<sbyte>>((IEnumerable<sbyte>)source);
+            if (typeof(TSource) == typeof(ushort) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<ushort, MinCalc<ushort>>((IEnumerable<ushort>)source);
+            if (typeof(TSource) == typeof(short) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<short, MinCalc<short>>((IEnumerable<short>)source);
+            if (typeof(TSource) == typeof(uint) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<uint, MinCalc<uint>>((IEnumerable<uint>)source);
+            if (typeof(TSource) == typeof(int) && comparer == Comparer<TSource>.Default)
+                return (TSource)(object)MinMaxInteger<int, MinCalc<int>>((IEnumerable<int>)source);
+            if (typeof(TSource) == typeof(ulong) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<ulong, MinCalc<ulong>>((IEnumerable<ulong>)source);
+            if (typeof(TSource) == typeof(long) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<long, MinCalc<long>>((IEnumerable<long>)source);
+            if (typeof(TSource) == typeof(nuint) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<nuint, MinCalc<nuint>>((IEnumerable<nuint>)source);
+            if (typeof(TSource) == typeof(nint) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<nint, MinCalc<nint>>((IEnumerable<nint>)source);
 
             TSource? value = default;
             using (IEnumerator<TSource> e = source.GetEnumerator())
@@ -320,8 +349,7 @@ namespace System.Linq
                         }
 
                         value = e.Current;
-                    }
-                    while (value == null);
+                    } while (value == null);
 
                     while (e.MoveNext())
                     {
@@ -379,7 +407,10 @@ namespace System.Linq
         /// <remarks>
         /// <para>If <typeparamref name="TKey" /> is a reference type and the source sequence is empty or contains only values that are <see langword="null" />, this method returns <see langword="null" />.</para>
         /// </remarks>
-        public static TSource? MinBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector) => MinBy(source, keySelector, comparer: null);
+        public static TSource? MinBy<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector
+        ) => MinBy(source, keySelector, comparer: null);
 
         /// <summary>Returns the minimum value in a generic sequence according to a specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
@@ -393,7 +424,11 @@ namespace System.Linq
         /// <remarks>
         /// <para>If <typeparamref name="TKey" /> is a reference type and the source sequence is empty or contains only values that are <see langword="null" />, this method returns <see langword="null" />.</para>
         /// </remarks>
-        public static TSource? MinBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey>? comparer)
+        public static TSource? MinBy<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IComparer<TKey>? comparer
+        )
         {
             if (source == null)
             {
@@ -440,8 +475,7 @@ namespace System.Linq
 
                         value = e.Current;
                         key = keySelector(value);
-                    }
-                    while (key == null);
+                    } while (key == null);
                 }
 
                 while (e.MoveNext())
@@ -488,15 +522,31 @@ namespace System.Linq
             return value;
         }
 
-        public static int Min<TSource>(this IEnumerable<TSource> source, Func<TSource, int> selector) => MinInteger(source, selector);
+        public static int Min<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int> selector
+        ) => MinInteger(source, selector);
 
-        public static int? Min<TSource>(this IEnumerable<TSource> source, Func<TSource, int?> selector) => MinInteger(source, selector);
+        public static int? Min<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int?> selector
+        ) => MinInteger(source, selector);
 
-        public static long Min<TSource>(this IEnumerable<TSource> source, Func<TSource, long> selector) => MinInteger(source, selector);
+        public static long Min<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, long> selector
+        ) => MinInteger(source, selector);
 
-        public static long? Min<TSource>(this IEnumerable<TSource> source, Func<TSource, long?> selector) => MinInteger(source, selector);
+        public static long? Min<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, long?> selector
+        ) => MinInteger(source, selector);
 
-        private static TResult MinInteger<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector) where TResult : struct, IBinaryInteger<TResult>
+        private static TResult MinInteger<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult> selector
+        )
+            where TResult : struct, IBinaryInteger<TResult>
         {
             if (source == null)
             {
@@ -530,7 +580,11 @@ namespace System.Linq
             return value;
         }
 
-        private static TResult? MinInteger<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult?> selector) where TResult : struct, IBinaryInteger<TResult>
+        private static TResult? MinInteger<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult?> selector
+        )
+            where TResult : struct, IBinaryInteger<TResult>
         {
             if (source == null)
             {
@@ -555,8 +609,7 @@ namespace System.Linq
                     }
 
                     value = selector(e.Current);
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 // Keep hold of the wrapped value, and do comparisons on that, rather than
                 // using the lifted operation each time.
@@ -579,15 +632,31 @@ namespace System.Linq
             return value;
         }
 
-        public static float Min<TSource>(this IEnumerable<TSource> source, Func<TSource, float> selector) => MinFloat(source, selector);
+        public static float Min<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, float> selector
+        ) => MinFloat(source, selector);
 
-        public static float? Min<TSource>(this IEnumerable<TSource> source, Func<TSource, float?> selector) => MinFloat(source, selector);
+        public static float? Min<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, float?> selector
+        ) => MinFloat(source, selector);
 
-        public static double Min<TSource>(this IEnumerable<TSource> source, Func<TSource, double> selector) => MinFloat(source, selector);
+        public static double Min<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, double> selector
+        ) => MinFloat(source, selector);
 
-        public static double? Min<TSource>(this IEnumerable<TSource> source, Func<TSource, double?> selector) => MinFloat(source, selector);
+        public static double? Min<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, double?> selector
+        ) => MinFloat(source, selector);
 
-        private static TResult MinFloat<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector) where TResult : struct, IFloatingPointIeee754<TResult>
+        private static TResult MinFloat<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult> selector
+        )
+            where TResult : struct, IFloatingPointIeee754<TResult>
         {
             if (source == null)
             {
@@ -620,7 +689,6 @@ namespace System.Linq
                     {
                         value = x;
                     }
-
                     // Normally NaN < anything is false, as is anything < NaN
                     // However, this leads to some irksome outcomes in Min and Max.
                     // If we use those semantics then Min(NaN, 5.0) is NaN, but
@@ -639,7 +707,11 @@ namespace System.Linq
             return value;
         }
 
-        private static TResult? MinFloat<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult?> selector) where TResult : struct, IFloatingPointIeee754<TResult>
+        private static TResult? MinFloat<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult?> selector
+        )
+            where TResult : struct, IFloatingPointIeee754<TResult>
         {
             if (source == null)
             {
@@ -662,8 +734,7 @@ namespace System.Linq
                     }
 
                     value = selector(e.Current);
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 TResult valueVal = value.GetValueOrDefault();
                 if (TResult.IsNaN(valueVal))
@@ -693,7 +764,10 @@ namespace System.Linq
             return value;
         }
 
-        public static decimal Min<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal> selector)
+        public static decimal Min<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, decimal> selector
+        )
         {
             if (source == null)
             {
@@ -727,7 +801,10 @@ namespace System.Linq
             return value;
         }
 
-        public static decimal? Min<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal?> selector)
+        public static decimal? Min<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, decimal?> selector
+        )
         {
             if (source == null)
             {
@@ -750,8 +827,7 @@ namespace System.Linq
                     }
 
                     value = selector(e.Current);
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 decimal valueVal = value.GetValueOrDefault();
                 while (e.MoveNext())
@@ -769,7 +845,10 @@ namespace System.Linq
             return value;
         }
 
-        public static TResult? Min<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+        public static TResult? Min<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult> selector
+        )
         {
             if (source == null)
             {
@@ -794,8 +873,7 @@ namespace System.Linq
                         }
 
                         value = selector(e.Current);
-                    }
-                    while (value == null);
+                    } while (value == null);
 
                     Comparer<TResult> comparer = Comparer<TResult>.Default;
                     while (e.MoveNext())

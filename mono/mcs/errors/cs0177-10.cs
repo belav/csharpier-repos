@@ -3,14 +3,14 @@
 
 class Test
 {
-	static bool TryAction<T> (out T output)
-	{
-		return false;
-	}
+    static bool TryAction<T>(out T output)
+    {
+        return false;
+    }
 
-	static void Main ()
-	{
-		Test value;
-		TryAction<Test> (out value);
-	}
+    static void Main()
+    {
+        Test value;
+        TryAction<Test>(out value);
+    }
 }

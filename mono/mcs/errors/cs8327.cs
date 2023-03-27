@@ -3,12 +3,12 @@
 
 class Program
 {
-	static int x;
-	static byte y;
+    static int x;
+    static byte y;
 
-	public static void Main ()
-	{
-		bool b = false;
-		ref int targetBucket = ref b ? ref x : ref y;
-	}
+    public static void Main()
+    {
+        bool b = false;
+        ref int targetBucket = ref b ? ref x : ref y;
+    }
 }

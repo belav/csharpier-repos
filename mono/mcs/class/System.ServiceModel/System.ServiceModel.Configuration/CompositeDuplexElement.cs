@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,35 +54,37 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class CompositeDuplexElement
-		 : BindingElementExtensionElement
-	{
-		public CompositeDuplexElement () {
-		}
+    public sealed class CompositeDuplexElement : BindingElementExtensionElement
+    {
+        public CompositeDuplexElement() { }
 
-		// Properties
+        // Properties
 
-		public override Type BindingElementType {
-			get { return typeof (CompositeDuplexBindingElement); }
-		}
+        public override Type BindingElementType
+        {
+            get { return typeof(CompositeDuplexBindingElement); }
+        }
 
-		[ConfigurationProperty ("clientBaseAddress",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = null)]
-		public Uri ClientBaseAddress {
-			get { return (Uri) base ["clientBaseAddress"]; }
-			set { base ["clientBaseAddress"] = value; }
-		}
+        [ConfigurationProperty(
+            "clientBaseAddress",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = null
+        )]
+        public Uri ClientBaseAddress
+        {
+            get { return (Uri)base["clientBaseAddress"]; }
+            set { base["clientBaseAddress"] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return base.Properties; }
+        }
 
-		[MonoTODO]
-		protected internal override BindingElement CreateBindingElement () {
-			throw new NotImplementedException ();
-		}
-
-	}
-
+        [MonoTODO]
+        protected internal override BindingElement CreateBindingElement()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

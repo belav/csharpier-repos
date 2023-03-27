@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
         public SplitStringLiteralCommandHandler(
             ITextUndoHistoryRegistry undoHistoryRegistry,
             IEditorOperationsFactoryService editorOperationsFactoryService,
-            EditorOptionsService editorOptionsService)
+            EditorOptionsService editorOptionsService
+        )
         {
             _undoHistoryRegistry = undoHistoryRegistry;
             _editorOperationsFactoryService = editorOperationsFactoryService;
@@ -50,11 +51,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
 
         public string DisplayName => CSharpEditorResources.Split_string;
 
-        public CommandState GetCommandState(ReturnKeyCommandArgs args)
-            => CommandState.Unspecified;
+        public CommandState GetCommandState(ReturnKeyCommandArgs args) => CommandState.Unspecified;
 
-        public bool ExecuteCommand(ReturnKeyCommandArgs args, CommandExecutionContext context)
-            => ExecuteCommandWorker(args);
+        public bool ExecuteCommand(ReturnKeyCommandArgs args, CommandExecutionContext context) =>
+            ExecuteCommandWorker(args);
 
         public bool ExecuteCommandWorker(ReturnKeyCommandArgs args)
         {
@@ -92,14 +92,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
                 }
             }
 
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return false;
             }
 
-            var parsedDocument = ParsedDocument.CreateSynchronously(document, CancellationToken.None);
-            var options = subjectBuffer.GetIndentationOptions(_editorOptionsService, parsedDocument.LanguageServices, explicitFormat: false);
+            var parsedDocument = ParsedDocument.CreateSynchronously(
+                document,
+                CancellationToken.None
+            );
+            var options = subjectBuffer.GetIndentationOptions(
+                _editorOptionsService,
+                parsedDocument.LanguageServices,
+                explicitFormat: false
+            );
 
             // We now go through the verified string literals and split each of them.
             // The list of spans is traversed in reverse order so we do not have to
@@ -108,9 +116,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
             foreach (var span in spans.Reverse())
             {
                 using var transaction = CaretPreservingEditTransaction.TryCreate(
-                    CSharpEditorResources.Split_string, textView, _undoHistoryRegistry, _editorOperationsFactoryService);
+                    CSharpEditorResources.Split_string,
+                    textView,
+                    _undoHistoryRegistry,
+                    _editorOperationsFactoryService
+                );
 
-                var splitter = StringSplitter.TryCreate(parsedDocument, span.Start.Position, options, CancellationToken.None);
+                var splitter = StringSplitter.TryCreate(
+                    parsedDocument,
+                    span.Start.Position,
+                    options,
+                    CancellationToken.None
+                );
                 if (splitter?.TrySplit(out var newRoot, out var newPosition) != true)
                 {
                     return false;
@@ -118,7 +135,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
 
                 // apply the change:
                 var newDocument = parsedDocument.WithChangedRoot(newRoot!, CancellationToken.None);
-                var newSnapshot = subjectBuffer.ApplyChanges(newDocument.GetChanges(parsedDocument));
+                var newSnapshot = subjectBuffer.ApplyChanges(
+                    newDocument.GetChanges(parsedDocument)
+                );
                 parsedDocument = newDocument;
 
                 // The buffer edit may have adjusted to position of the current caret but we might need a different location.
@@ -129,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
                         new SnapshotPoint(newSnapshot, newPosition),
                         PointTrackingMode.Negative,
                         PositionAffinity.Predecessor,
-                        textView.TextBuffer);
+                        textView.TextBuffer
+                    );
 
                     if (newCaretPoint != null)
                     {

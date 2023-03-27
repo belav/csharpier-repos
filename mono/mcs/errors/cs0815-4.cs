@@ -4,9 +4,8 @@
 
 public class Test
 {
-	static void Main ()
-	{
-		var d = delegate {};
-	}
+    static void Main()
+    {
+        var d = delegate { };
+    }
 }
-

@@ -3,5 +3,5 @@
 
 abstract class C
 {
-	public abstract int P { get; } = 4;
+    public abstract int P { get; } = 4;
 }

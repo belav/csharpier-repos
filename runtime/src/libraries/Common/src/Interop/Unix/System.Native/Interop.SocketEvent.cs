@@ -34,18 +34,43 @@ internal static partial class Interop
         internal static partial Error CloseSocketEventPort(IntPtr port);
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_CreateSocketEventBuffer")]
-        internal static unsafe partial Error CreateSocketEventBuffer(int count, SocketEvent** buffer);
+        internal static unsafe partial Error CreateSocketEventBuffer(
+            int count,
+            SocketEvent** buffer
+        );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_FreeSocketEventBuffer")]
         internal static unsafe partial Error FreeSocketEventBuffer(SocketEvent* buffer);
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_TryChangeSocketEventRegistration")]
-        internal static partial Error TryChangeSocketEventRegistration(IntPtr port, SafeHandle socket, SocketEvents currentEvents, SocketEvents newEvents, IntPtr data);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_TryChangeSocketEventRegistration"
+        )]
+        internal static partial Error TryChangeSocketEventRegistration(
+            IntPtr port,
+            SafeHandle socket,
+            SocketEvents currentEvents,
+            SocketEvents newEvents,
+            IntPtr data
+        );
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_TryChangeSocketEventRegistration")]
-        internal static partial Error TryChangeSocketEventRegistration(IntPtr port, IntPtr socket, SocketEvents currentEvents, SocketEvents newEvents, IntPtr data);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_TryChangeSocketEventRegistration"
+        )]
+        internal static partial Error TryChangeSocketEventRegistration(
+            IntPtr port,
+            IntPtr socket,
+            SocketEvents currentEvents,
+            SocketEvents newEvents,
+            IntPtr data
+        );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_WaitForSocketEvents")]
-        internal static unsafe partial Error WaitForSocketEvents(IntPtr port, SocketEvent* buffer, int* count);
+        internal static unsafe partial Error WaitForSocketEvents(
+            IntPtr port,
+            SocketEvent* buffer,
+            int* count
+        );
     }
 }

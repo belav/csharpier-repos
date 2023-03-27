@@ -13,70 +13,61 @@ namespace System.CommandLine
         private readonly Argument<T> _argument;
 
         /// <inheritdoc/>
-        public Option(
-            string name,
-            string? description = null) 
-            : this(name, description, new Argument<T>())
-        { }
+        public Option(string name, string? description = null)
+            : this(name, description, new Argument<T>()) { }
 
         /// <inheritdoc/>
-        public Option(
-            string[] aliases,
-            string? description = null) 
-            : this(aliases, description, new Argument<T>())
-        { }
+        public Option(string[] aliases, string? description = null)
+            : this(aliases, description, new Argument<T>()) { }
 
         /// <inheritdoc/>
         public Option(
             string name,
             Func<ArgumentResult, T> parseArgument,
             bool isDefault = false,
-            string? description = null) 
-            : this(name, description, 
-                  new Argument<T>(parseArgument ?? throw new ArgumentNullException(nameof(parseArgument)), isDefault))
-        { }
+            string? description = null
+        )
+            : this(
+                name,
+                description,
+                new Argument<T>(
+                    parseArgument ?? throw new ArgumentNullException(nameof(parseArgument)),
+                    isDefault
+                )
+            ) { }
 
         /// <inheritdoc/>
         public Option(
             string[] aliases,
             Func<ArgumentResult, T> parseArgument,
             bool isDefault = false,
-            string? description = null) 
-            : this(aliases, description, new Argument<T>(parseArgument ?? throw new ArgumentNullException(nameof(parseArgument)), isDefault))
-        { }
+            string? description = null
+        )
+            : this(
+                aliases,
+                description,
+                new Argument<T>(
+                    parseArgument ?? throw new ArgumentNullException(nameof(parseArgument)),
+                    isDefault
+                )
+            ) { }
 
         /// <inheritdoc/>
-        public Option(
-            string name,
-            Func<T> defaultValueFactory,
-            string? description = null) 
-            : this(name, description, 
-                  new Argument<T>(defaultValueFactory))
-        { }
+        public Option(string name, Func<T> defaultValueFactory, string? description = null)
+            : this(name, description, new Argument<T>(defaultValueFactory)) { }
 
         /// <inheritdoc/>
-        public Option(
-            string[] aliases,
-            Func<T> defaultValueFactory,
-            string? description = null)
-            : this(aliases, description, new Argument<T>(defaultValueFactory))
-        {
-        }
+        public Option(string[] aliases, Func<T> defaultValueFactory, string? description = null)
+            : this(aliases, description, new Argument<T>(defaultValueFactory)) { }
 
-        private protected Option(
-            string name,
-            string? description,
-            Argument<T> argument)
+        private protected Option(string name, string? description, Argument<T> argument)
             : base(name, description)
         {
             argument.AddParent(this);
             _argument = argument;
         }
 
-        private protected Option(
-            string[] aliases,
-            string? description,
-            Argument<T> argument)
+        private protected Option(string[] aliases, string? description, Argument<T> argument)
             : base(aliases, description)
         {
             argument.AddParent(this);
@@ -103,7 +94,8 @@ namespace System.CommandLine
         /// Configures the option to accept only the specified values, and to suggest them as command line completions.
         /// </summary>
         /// <param name="values">The values that are allowed for the option.</param>
-        public void AcceptOnlyFromAmong(params string[] values) => _argument.AcceptOnlyFromAmong(values);
+        public void AcceptOnlyFromAmong(params string[] values) =>
+            _argument.AcceptOnlyFromAmong(values);
 
         /// <summary>
         /// Configures the option to accept only values representing legal file paths.

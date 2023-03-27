@@ -48,7 +48,10 @@ public class EventCallbackFactoryBinderExtensionsTest
     {
         // Arrange
         var component = new EventCountingComponent();
-        Action<int> setter = (_) => { throw new InvalidTimeZoneException(); };
+        Action<int> setter = (_) =>
+        {
+            throw new InvalidTimeZoneException();
+        };
 
         var binder = EventCallback.Factory.CreateBinder(component, setter, 17);
 
@@ -393,7 +396,9 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4, 1, 2, 3);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture), }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -412,7 +417,9 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4, 1, 2, 3);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture), }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -432,7 +439,12 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(format, CultureInfo.InvariantCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs()
+            {
+                Value = expectedValue.ToString(format, CultureInfo.InvariantCulture),
+            }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -452,7 +464,12 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(format, CultureInfo.InvariantCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs()
+            {
+                Value = expectedValue.ToString(format, CultureInfo.InvariantCulture),
+            }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -471,7 +488,9 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4, 1, 2, 3);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture), }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -490,7 +509,9 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4, 1, 2, 3);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture), }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -510,7 +531,12 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(format, CultureInfo.InvariantCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs()
+            {
+                Value = expectedValue.ToString(format, CultureInfo.InvariantCulture),
+            }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -530,7 +556,12 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(format, CultureInfo.InvariantCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs()
+            {
+                Value = expectedValue.ToString(format, CultureInfo.InvariantCulture),
+            }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -586,7 +617,10 @@ public class EventCallbackFactoryBinderExtensionsTest
 
         var binder = EventCallback.Factory.CreateBinder(component, setter, value);
 
-        var expectedValue = new SecretMessage() { Message = "TypeConverter may be old, but it still works!", };
+        var expectedValue = new SecretMessage()
+        {
+            Message = "TypeConverter may be old, but it still works!",
+        };
 
         // Act
         await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(), });
@@ -602,12 +636,15 @@ public class EventCallbackFactoryBinderExtensionsTest
         var component = new EventCountingComponent();
         Action<ClassWithoutTypeConverter> setter = (_) => value = _;
 
-        var ex = Assert.Throws<InvalidOperationException>(() => EventCallback.Factory.CreateBinder(component, setter, value));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => EventCallback.Factory.CreateBinder(component, setter, value)
+        );
 
         Assert.Equal(
-            $"The type '{typeof(ClassWithoutTypeConverter).FullName}' does not have an associated TypeConverter that supports conversion from a string. " +
-            $"Apply 'TypeConverterAttribute' to the type to register a converter.",
-            ex.Message);
+            $"The type '{typeof(ClassWithoutTypeConverter).FullName}' does not have an associated TypeConverter that supports conversion from a string. "
+                + $"Apply 'TypeConverterAttribute' to the type to register a converter.",
+            ex.Message
+        );
     }
 
     [Fact(Skip = "https://github.com/dotnet/aspnetcore/issues/30312")]
@@ -638,7 +675,12 @@ public class EventCallbackFactoryBinderExtensionsTest
         var component = new EventCountingComponent();
         Action<int> setter = (_) => value = _;
 
-        var binder = EventCallback.Factory.CreateBinder(component, setter, value, CultureInfo.InvariantCulture);
+        var binder = EventCallback.Factory.CreateBinder(
+            component,
+            setter,
+            value,
+            CultureInfo.InvariantCulture
+        );
 
         var expectedValue = 42_000;
 
@@ -670,9 +712,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         }
     }
 
-    private class ClassWithoutTypeConverter
-    {
-    }
+    private class ClassWithoutTypeConverter { }
 
     [TypeConverter(typeof(SecretMessageTypeConverter))]
     private class SecretMessage
@@ -696,7 +736,12 @@ public class EventCallbackFactoryBinderExtensionsTest
 
             return false;
         }
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             if (value is string message)
             {

@@ -20,21 +20,13 @@ namespace Build.Tasks
         /// File name of the assembly with Win32 resources to be dumped.
         /// </summary>
         [Required]
-        public string MainAssembly
-        {
-            get;
-            set;
-        }
+        public string MainAssembly { get; set; }
 
         /// <summary>
         /// File name into which to dump the Win32 resources.
         /// </summary>
         [Required]
-        public string ResourceFile
-        {
-            get;
-            set;
-        }
+        public string ResourceFile { get; set; }
 
         public override bool Execute()
         {
@@ -42,8 +34,10 @@ namespace Build.Tasks
             using (PEReader peFile = new PEReader(fs))
             {
                 DirectoryEntry resourceDirectory = peFile.PEHeaders.PEHeader.ResourceTableDirectory;
-                if (resourceDirectory.Size != 0
-                    && peFile.PEHeaders.TryGetDirectoryOffset(resourceDirectory, out int rsrcOffset))
+                if (
+                    resourceDirectory.Size != 0
+                    && peFile.PEHeaders.TryGetDirectoryOffset(resourceDirectory, out int rsrcOffset)
+                )
                 {
                     using (var bw = new BinaryWriter(File.OpenWrite(ResourceFile)))
                     {
@@ -84,7 +78,13 @@ namespace Build.Tasks
         private object _resourceIdOrName;
         private int _languageId;
 
-        private ResWriter(PEMemoryBlock memoryBlock, PEReader peReader, int rsrcOffset, int rsrcSize, BinaryWriter bw)
+        private ResWriter(
+            PEMemoryBlock memoryBlock,
+            PEReader peReader,
+            int rsrcOffset,
+            int rsrcSize,
+            BinaryWriter bw
+        )
         {
             _memoryBlock = memoryBlock;
             _peReader = peReader;
@@ -93,16 +93,54 @@ namespace Build.Tasks
             _bw = bw;
         }
 
-        public static void WriteResources(PEReader reader, int rsrcOffset, int rsrcSize, BinaryWriter bw)
+        public static void WriteResources(
+            PEReader reader,
+            int rsrcOffset,
+            int rsrcSize,
+            BinaryWriter bw
+        )
         {
             var rw = new ResWriter(reader.GetEntireImage(), reader, rsrcOffset, rsrcSize, bw);
 
             // First entry is a null resource entry
 
-            bw.Write(new byte[] {
-                            0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00,
-                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                        });
+            bw.Write(
+                new byte[]
+                {
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x20,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0xFF,
+                    0xFF,
+                    0x00,
+                    0x00,
+                    0xFF,
+                    0xFF,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                }
+            );
 
             rw.DumpDirectory(reader.GetEntireImage().GetReader(rsrcOffset, rsrcSize), 0);
         }
@@ -129,7 +167,10 @@ namespace Build.Tasks
                 if (i < numNamed)
                 {
                     nameOffsetOrId = nameOffsetOrId &= 0x7FFFFFFF;
-                    BlobReader nameReader = _memoryBlock.GetReader(_rsrcOffset + nameOffsetOrId, _rsrcSize - nameOffsetOrId);
+                    BlobReader nameReader = _memoryBlock.GetReader(
+                        _rsrcOffset + nameOffsetOrId,
+                        _rsrcSize - nameOffsetOrId
+                    );
                     ushort nameLength = nameReader.ReadUInt16();
                     StringBuilder sb = new StringBuilder(nameLength);
                     for (int charIndex = 0; charIndex < nameLength; charIndex++)
@@ -170,11 +211,22 @@ namespace Build.Tasks
                     if ((entryTableOrSubdirectoryOffset & 0x80000000) == 0)
                         throw new BadImageFormatException();
                     entryTableOrSubdirectoryOffset &= 0x7FFFFFFF;
-                    DumpDirectory(_memoryBlock.GetReader(_rsrcOffset + (int)entryTableOrSubdirectoryOffset, _rsrcSize - (int)entryTableOrSubdirectoryOffset), level + 1);
+                    DumpDirectory(
+                        _memoryBlock.GetReader(
+                            _rsrcOffset + (int)entryTableOrSubdirectoryOffset,
+                            _rsrcSize - (int)entryTableOrSubdirectoryOffset
+                        ),
+                        level + 1
+                    );
                 }
                 else
                 {
-                    DumpEntry(_memoryBlock.GetReader(_rsrcOffset + (int)entryTableOrSubdirectoryOffset, _rsrcSize - (int)entryTableOrSubdirectoryOffset));
+                    DumpEntry(
+                        _memoryBlock.GetReader(
+                            _rsrcOffset + (int)entryTableOrSubdirectoryOffset,
+                            _rsrcSize - (int)entryTableOrSubdirectoryOffset
+                        )
+                    );
                 }
             }
         }
@@ -229,7 +281,6 @@ namespace Build.Tasks
                 _bw.Write((byte)0);
                 totalSize++;
             }
-
         }
     }
 

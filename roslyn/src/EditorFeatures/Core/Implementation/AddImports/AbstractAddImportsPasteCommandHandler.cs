@@ -18,7 +18,8 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.AddImports
 {
-    internal abstract class AbstractAddImportsPasteCommandHandler : IChainedCommandHandler<PasteCommandArgs>
+    internal abstract class AbstractAddImportsPasteCommandHandler
+        : IChainedCommandHandler<PasteCommandArgs>
     {
         /// <summary>
         /// The command handler display name
@@ -33,19 +34,33 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AddImports
         private readonly IThreadingContext _threadingContext;
         private readonly IGlobalOptionService _globalOptions;
 
-        public AbstractAddImportsPasteCommandHandler(IThreadingContext threadingContext, IGlobalOptionService globalOptions)
+        public AbstractAddImportsPasteCommandHandler(
+            IThreadingContext threadingContext,
+            IGlobalOptionService globalOptions
+        )
         {
             _threadingContext = threadingContext;
             _globalOptions = globalOptions;
         }
 
-        public CommandState GetCommandState(PasteCommandArgs args, Func<CommandState> nextCommandHandler)
-            => nextCommandHandler();
+        public CommandState GetCommandState(
+            PasteCommandArgs args,
+            Func<CommandState> nextCommandHandler
+        ) => nextCommandHandler();
 
-        public void ExecuteCommand(PasteCommandArgs args, Action nextCommandHandler, CommandExecutionContext executionContext)
+        public void ExecuteCommand(
+            PasteCommandArgs args,
+            Action nextCommandHandler,
+            CommandExecutionContext executionContext
+        )
         {
             // If the feature is not explicitly enabled we can exit early
-            if (_globalOptions.GetOption(FeatureOnOffOptions.AddImportsOnPaste, args.SubjectBuffer.GetLanguageName()) != true)
+            if (
+                _globalOptions.GetOption(
+                    FeatureOnOffOptions.AddImportsOnPaste,
+                    args.SubjectBuffer.GetLanguageName()
+                ) != true
+            )
             {
                 nextCommandHandler();
                 return;
@@ -60,7 +75,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AddImports
             }
 
             // Create a tracking span from the pre-paste caret position that will grow as text is inserted.
-            var trackingSpan = caretPosition.Value.Snapshot.CreateTrackingSpan(caretPosition.Value.Position, 0, SpanTrackingMode.EdgeInclusive);
+            var trackingSpan = caretPosition.Value.Snapshot.CreateTrackingSpan(
+                caretPosition.Value.Position,
+                0,
+                SpanTrackingMode.EdgeInclusive
+            );
 
             // Perform the paste command before adding imports
             nextCommandHandler();
@@ -85,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AddImports
         private void ExecuteCommandWorker(
             PasteCommandArgs args,
             CommandExecutionContext executionContext,
-            ITrackingSpan trackingSpan)
+            ITrackingSpan trackingSpan
+        )
         {
             if (!args.SubjectBuffer.CanApplyChangeDocumentToWorkspace())
             {
@@ -114,16 +134,31 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AddImports
                 return;
             }
 
-            using var _ = executionContext.OperationContext.AddScope(allowCancellation: true, DialogText);
+            using var _ = executionContext.OperationContext.AddScope(
+                allowCancellation: true,
+                DialogText
+            );
             var cancellationToken = executionContext.OperationContext.UserCancellationToken;
 
-            // We're going to log the same thing on success or failure since this blocks the UI thread. This measurement is 
-            // intended to tell us how long we're blocking the user from typing with this action. 
-            using var blockLogger = Logger.LogBlock(FunctionId.CommandHandler_Paste_ImportsOnPaste, KeyValueLogMessage.Create(LogType.UserAction), cancellationToken);
+            // We're going to log the same thing on success or failure since this blocks the UI thread. This measurement is
+            // intended to tell us how long we're blocking the user from typing with this action.
+            using var blockLogger = Logger.LogBlock(
+                FunctionId.CommandHandler_Paste_ImportsOnPaste,
+                KeyValueLogMessage.Create(LogType.UserAction),
+                cancellationToken
+            );
 
-            var addMissingImportsService = document.GetRequiredLanguageService<IAddMissingImportsFeatureService>();
+            var addMissingImportsService =
+                document.GetRequiredLanguageService<IAddMissingImportsFeatureService>();
 #pragma warning disable VSTHRD102 // Implement internal logic asynchronously
-            var updatedDocument = _threadingContext.JoinableTaskFactory.Run(() => addMissingImportsService.AddMissingImportsAsync(document, textSpan, cancellationToken));
+            var updatedDocument = _threadingContext.JoinableTaskFactory.Run(
+                () =>
+                    addMissingImportsService.AddMissingImportsAsync(
+                        document,
+                        textSpan,
+                        cancellationToken
+                    )
+            );
 #pragma warning restore VSTHRD102 // Implement internal logic asynchronously
             if (updatedDocument is null)
             {

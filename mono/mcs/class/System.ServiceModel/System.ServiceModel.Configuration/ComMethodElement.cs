@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,48 +54,48 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class ComMethodElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty exposed_method;
+    [MonoTODO]
+    public sealed partial class ComMethodElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty exposed_method;
 
-		static ComMethodElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			exposed_method = new ConfigurationProperty ("exposedMethod",
-				typeof (string), null, new StringConverter (), null,
-				ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+        static ComMethodElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            exposed_method = new ConfigurationProperty(
+                "exposedMethod",
+                typeof(string),
+                null,
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-			properties.Add (exposed_method);
-		}
+            properties.Add(exposed_method);
+        }
 
-		public ComMethodElement ()
-		{
-		}
+        public ComMethodElement() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "exposedMethod",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+            IsRequired = true,
+            IsKey = true
+        )]
+        [StringValidator(MinLength = 1, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string ExposedMethod
+        {
+            get { return (string)base[exposed_method]; }
+            set { base[exposed_method] = value; }
+        }
 
-		[ConfigurationProperty ("exposedMethod",
-			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-			IsRequired = true,
-			IsKey = true)]
-		[StringValidator ( MinLength = 1,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string ExposedMethod {
-			get { return (string) base [exposed_method]; }
-			set { base [exposed_method] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-
-	}
-
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

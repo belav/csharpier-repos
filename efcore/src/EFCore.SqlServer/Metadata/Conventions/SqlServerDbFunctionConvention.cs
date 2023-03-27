@@ -23,7 +23,8 @@ public class SqlServerDbFunctionConvention : IModelFinalizingConvention
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public SqlServerDbFunctionConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -42,12 +43,12 @@ public class SqlServerDbFunctionConvention : IModelFinalizingConvention
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         foreach (var dbFunction in modelBuilder.Metadata.GetDbFunctions())
         {
-            if (!dbFunction.IsBuiltIn
-                && string.IsNullOrEmpty(dbFunction.Schema))
+            if (!dbFunction.IsBuiltIn && string.IsNullOrEmpty(dbFunction.Schema))
             {
                 dbFunction.SetSchema("dbo");
             }

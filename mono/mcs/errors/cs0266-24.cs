@@ -6,17 +6,17 @@ using System.Collections.Generic;
 
 public class Hoge<T>
 {
-	public static implicit operator Hoge<T> (T value)
-	{
-		return null;
-	}
+    public static implicit operator Hoge<T>(T value)
+    {
+        return null;
+    }
 }
 
 public class Test
 {
-	static void Main ()
-	{
-		IList<int> x = new List<int> ();
-		Hoge<IList<int>> hoge = x;
-	}
+    static void Main()
+    {
+        IList<int> x = new List<int>();
+        Hoge<IList<int>> hoge = x;
+    }
 }

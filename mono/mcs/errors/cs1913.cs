@@ -7,17 +7,17 @@ using System.Collections.Generic;
 
 class Data
 {
-	public delegate int Count ();
+    public delegate int Count();
 }
 
 public class Test
 {
-	delegate void S ();
-	
-	static void Main ()
-	{
-		//S s = new S ();
-		//string drawBackLabel = string.Length("absDrawBack");
-		var c = new Data { Count = 10 };
-	}
+    delegate void S();
+
+    static void Main()
+    {
+        //S s = new S ();
+        //string drawBackLabel = string.Length("absDrawBack");
+        var c = new Data { Count = 10 };
+    }
 }

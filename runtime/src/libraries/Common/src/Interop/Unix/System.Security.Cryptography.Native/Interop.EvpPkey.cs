@@ -16,17 +16,17 @@ internal static partial class Interop
         [LibraryImport(Libraries.CryptoNative)]
         private static partial SafeEvpPKeyHandle CryptoNative_EvpPKeyDuplicate(
             SafeEvpPKeyHandle currentKey,
-            EvpAlgorithmId algorithmId);
+            EvpAlgorithmId algorithmId
+        );
 
         internal static SafeEvpPKeyHandle EvpPKeyDuplicate(
             SafeEvpPKeyHandle currentKey,
-            EvpAlgorithmId algorithmId)
+            EvpAlgorithmId algorithmId
+        )
         {
             Debug.Assert(!currentKey.IsInvalid);
 
-            SafeEvpPKeyHandle pkey = CryptoNative_EvpPKeyDuplicate(
-                currentKey,
-                algorithmId);
+            SafeEvpPKeyHandle pkey = CryptoNative_EvpPKeyDuplicate(currentKey, algorithmId);
 
             if (pkey.IsInvalid)
             {
@@ -50,17 +50,20 @@ internal static partial class Interop
         private static unsafe partial SafeEvpPKeyHandle CryptoNative_DecodeSubjectPublicKeyInfo(
             byte* buf,
             int len,
-            int algId);
+            int algId
+        );
 
         [LibraryImport(Libraries.CryptoNative)]
         private static unsafe partial SafeEvpPKeyHandle CryptoNative_DecodePkcs8PrivateKey(
             byte* buf,
             int len,
-            int algId);
+            int algId
+        );
 
         internal static unsafe SafeEvpPKeyHandle DecodeSubjectPublicKeyInfo(
             ReadOnlySpan<byte> source,
-            EvpAlgorithmId algorithmId)
+            EvpAlgorithmId algorithmId
+        )
         {
             SafeEvpPKeyHandle handle;
 
@@ -69,7 +72,8 @@ internal static partial class Interop
                 handle = CryptoNative_DecodeSubjectPublicKeyInfo(
                     sourcePtr,
                     source.Length,
-                    (int)algorithmId);
+                    (int)algorithmId
+                );
             }
 
             if (handle.IsInvalid)
@@ -83,7 +87,8 @@ internal static partial class Interop
 
         internal static unsafe SafeEvpPKeyHandle DecodePkcs8PrivateKey(
             ReadOnlySpan<byte> source,
-            EvpAlgorithmId algorithmId)
+            EvpAlgorithmId algorithmId
+        )
         {
             SafeEvpPKeyHandle handle;
 
@@ -92,7 +97,8 @@ internal static partial class Interop
                 handle = CryptoNative_DecodePkcs8PrivateKey(
                     sourcePtr,
                     source.Length,
-                    (int)algorithmId);
+                    (int)algorithmId
+                );
             }
 
             if (handle.IsInvalid)
@@ -124,13 +130,18 @@ internal static partial class Interop
                 case MissingPrivateKey:
                     throw new CryptographicException(SR.Cryptography_CSP_NoPrivateKey);
                 default:
-                    Debug.Fail($"Unexpected return '{ret}' value from {nameof(CryptoNative_GetPkcs8PrivateKeySize)}.");
+                    Debug.Fail(
+                        $"Unexpected return '{ret}' value from {nameof(CryptoNative_GetPkcs8PrivateKeySize)}."
+                    );
                     throw new CryptographicException();
             }
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static unsafe partial int CryptoNative_EncodePkcs8PrivateKey(IntPtr pkey, byte* buf);
+        private static unsafe partial int CryptoNative_EncodePkcs8PrivateKey(
+            IntPtr pkey,
+            byte* buf
+        );
 
         internal static ArraySegment<byte> RentEncodePkcs8PrivateKey(SafeEvpPKeyHandle pkey)
         {
@@ -144,7 +155,6 @@ internal static partial class Interop
                 int size = GetPkcs8PrivateKeySize(handle);
                 byte[] rented = CryptoPool.Rent(size);
                 int written;
-
                 unsafe
                 {
                     fixed (byte* buf = rented)
@@ -181,7 +191,10 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static unsafe partial int CryptoNative_EncodeSubjectPublicKeyInfo(IntPtr pkey, byte* buf);
+        private static unsafe partial int CryptoNative_EncodeSubjectPublicKeyInfo(
+            IntPtr pkey,
+            byte* buf
+        );
 
         internal static ArraySegment<byte> RentEncodeSubjectPublicKeyInfo(SafeEvpPKeyHandle pkey)
         {
@@ -195,7 +208,6 @@ internal static partial class Interop
                 int size = GetSubjectPublicKeyInfoSize(handle);
                 byte[] rented = CryptoPool.Rent(size);
                 int written;
-
                 unsafe
                 {
                     fixed (byte* buf = rented)

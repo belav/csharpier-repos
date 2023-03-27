@@ -3,12 +3,13 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant(true)]
+
+[assembly: CLSCompliant(true)]
 
 public class CLSClass
 {
-	protected ulong[] Foo()
-	{
-		return null;
-	}
+    protected ulong[] Foo()
+    {
+        return null;
+    }
 }

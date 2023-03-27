@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -98,8 +98,8 @@ namespace Castle.DynamicProxy.Serialization
                 interfaces[i] = Type.GetType(_interfaceNames[i]);
             }
 
-            proxyGenerationOptions =
-                (ProxyGenerationOptions)info.GetValue("__proxyGenerationOptions", typeof(ProxyGenerationOptions));
+            proxyGenerationOptions = (ProxyGenerationOptions)
+                info.GetValue("__proxyGenerationOptions", typeof(ProxyGenerationOptions));
             proxy = RecreateProxy();
 
             // We'll try to deserialize as much of the proxy state as possible here. This is just best effort; due to deserialization dependency reasons,
@@ -131,7 +131,12 @@ namespace Castle.DynamicProxy.Serialization
 
         private object RecreateClassProxyWithTarget()
         {
-            var generator = new ClassProxyWithTargetGenerator(scope, baseType, interfaces, proxyGenerationOptions);
+            var generator = new ClassProxyWithTargetGenerator(
+                scope,
+                baseType,
+                interfaces,
+                proxyGenerationOptions
+            );
             var proxyType = generator.GetProxyType();
             return InstantiateClassProxy(proxyType);
         }
@@ -144,22 +149,42 @@ namespace Castle.DynamicProxy.Serialization
             BaseInterfaceProxyGenerator generator;
             if (generatorType == ProxyTypeConstants.InterfaceWithTarget)
             {
-                generator = new InterfaceProxyWithTargetGenerator(scope, @interface, interfaces, targetType, proxyGenerationOptions);
+                generator = new InterfaceProxyWithTargetGenerator(
+                    scope,
+                    @interface,
+                    interfaces,
+                    targetType,
+                    proxyGenerationOptions
+                );
             }
             else if (generatorType == ProxyTypeConstants.InterfaceWithoutTarget)
             {
-                generator = new InterfaceProxyWithoutTargetGenerator(scope, @interface, interfaces, targetType, proxyGenerationOptions);
+                generator = new InterfaceProxyWithoutTargetGenerator(
+                    scope,
+                    @interface,
+                    interfaces,
+                    targetType,
+                    proxyGenerationOptions
+                );
             }
             else if (generatorType == ProxyTypeConstants.InterfaceWithTargetInterface)
             {
-                generator = new InterfaceProxyWithTargetInterfaceGenerator(scope, @interface, interfaces, targetType, proxyGenerationOptions);
+                generator = new InterfaceProxyWithTargetInterfaceGenerator(
+                    scope,
+                    @interface,
+                    interfaces,
+                    targetType,
+                    proxyGenerationOptions
+                );
             }
             else
             {
                 throw new InvalidOperationException(
                     string.Format(
                         "Got value {0} for the interface generator type, which is not known for the purpose of serialization.",
-                        generatorType));
+                        generatorType
+                    )
+                );
             }
 
             var proxyType = generator.GetProxyType();
@@ -168,7 +193,12 @@ namespace Castle.DynamicProxy.Serialization
 
         public object RecreateClassProxy()
         {
-            var generator = new ClassProxyGenerator(scope, baseType, interfaces, proxyGenerationOptions);
+            var generator = new ClassProxyGenerator(
+                scope,
+                baseType,
+                interfaces,
+                proxyGenerationOptions
+            );
             var proxyType = generator.GetProxyType();
             return InstantiateClassProxy(proxyType);
         }
@@ -201,7 +231,7 @@ namespace Castle.DynamicProxy.Serialization
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            // There is no need to implement this method as 
+            // There is no need to implement this method as
             // this class would never be serialized.
         }
 
@@ -238,7 +268,11 @@ namespace Castle.DynamicProxy.Serialization
                 deserializedMembers.Add(member);
                 deserializedValues.Add(value);
             }
-            FormatterServices.PopulateObjectMembers(proxy, deserializedMembers.ToArray(), deserializedValues.ToArray());
+            FormatterServices.PopulateObjectMembers(
+                proxy,
+                deserializedMembers.ToArray(),
+                deserializedValues.ToArray()
+            );
         }
 
         private void DeserializeProxyState()
@@ -262,11 +296,14 @@ namespace Castle.DynamicProxy.Serialization
 
         private void SetTarget(object target)
         {
-            var targetField = proxy.GetType().GetField("__target", BindingFlags.Instance | BindingFlags.NonPublic);
+            var targetField = proxy
+                .GetType()
+                .GetField("__target", BindingFlags.Instance | BindingFlags.NonPublic);
             if (targetField == null)
             {
                 throw new SerializationException(
-                    "The SerializationInfo specifies an invalid interface proxy type, which has no __target field.");
+                    "The SerializationInfo specifies an invalid interface proxy type, which has no __target field."
+                );
             }
 
             targetField.SetValue(proxy, target);
@@ -274,11 +311,14 @@ namespace Castle.DynamicProxy.Serialization
 
         private void SetInterceptors(IInterceptor[] interceptors)
         {
-            var interceptorField = proxy.GetType().GetField("__interceptors", BindingFlags.Instance | BindingFlags.NonPublic);
+            var interceptorField = proxy
+                .GetType()
+                .GetField("__interceptors", BindingFlags.Instance | BindingFlags.NonPublic);
             if (interceptorField == null)
             {
                 throw new SerializationException(
-                    "The SerializationInfo specifies an invalid proxy type, which has no __interceptors field.");
+                    "The SerializationInfo specifies an invalid proxy type, which has no __interceptors field."
+                );
             }
 
             interceptorField.SetValue(proxy, interceptors);

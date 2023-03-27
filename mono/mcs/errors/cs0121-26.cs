@@ -5,39 +5,39 @@ using System;
 
 namespace A.B
 {
-	static class X
-	{
-		public static int Test (this int o)
-		{
-			return 1;
-		}
-	}
+    static class X
+    {
+        public static int Test(this int o)
+        {
+            return 1;
+        }
+    }
 }
 
 namespace A.C
 {
-	static class X
-	{
-		public static int Test (this int o)
-		{
-			return 2;
-		}
-	}
+    static class X
+    {
+        public static int Test(this int o)
+        {
+            return 2;
+        }
+    }
 }
 
 namespace C
 {
-	using A.B;
-	using static A.C.X;
+    using A.B;
+    using static A.C.X;
 
-	class M
-	{
-		public static int Main ()
-		{
-			if (1.Test () != 1)
-				return 1;
+    class M
+    {
+        public static int Main()
+        {
+            if (1.Test() != 1)
+                return 1;
 
-			return 0;
-		}
-	}
+            return 0;
+        }
+    }
 }

@@ -29,23 +29,36 @@ namespace Microsoft.CodeAnalysis.Notification
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public GlobalOperationNotificationService(IAsynchronousOperationListenerProvider listenerProvider)
+        public GlobalOperationNotificationService(
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
-            _eventQueue = new TaskQueue(listenerProvider.GetListener(FeatureAttribute.GlobalOperation), TaskScheduler.Default);
+            _eventQueue = new TaskQueue(
+                listenerProvider.GetListener(FeatureAttribute.GlobalOperation),
+                TaskScheduler.Default
+            );
         }
 
         private void RaiseGlobalOperationStarted()
         {
             var started = this.Started;
             if (started != null)
-                _eventQueue.ScheduleTask(nameof(RaiseGlobalOperationStarted), () => this.Started?.Invoke(this, EventArgs.Empty), CancellationToken.None);
+                _eventQueue.ScheduleTask(
+                    nameof(RaiseGlobalOperationStarted),
+                    () => this.Started?.Invoke(this, EventArgs.Empty),
+                    CancellationToken.None
+                );
         }
 
         private void RaiseGlobalOperationStopped()
         {
             var stopped = this.Stopped;
             if (stopped != null)
-                _eventQueue.ScheduleTask(nameof(RaiseGlobalOperationStopped), () => this.Stopped?.Invoke(this, EventArgs.Empty), CancellationToken.None);
+                _eventQueue.ScheduleTask(
+                    nameof(RaiseGlobalOperationStopped),
+                    () => this.Stopped?.Invoke(this, EventArgs.Empty),
+                    CancellationToken.None
+                );
         }
 
         public IDisposable Start(string operation)
@@ -90,7 +103,10 @@ namespace Microsoft.CodeAnalysis.Notification
             if (!Environment.HasShutdownStarted)
             {
                 Contract.ThrowIfFalse(_registrations.Count == 0);
-                Contract.ThrowIfFalse(_operations.Count == 0, $"Non-disposed operations: {string.Join(", ", _operations)}");
+                Contract.ThrowIfFalse(
+                    _operations.Count == 0,
+                    $"Non-disposed operations: {string.Join(", ", _operations)}"
+                );
             }
         }
     }

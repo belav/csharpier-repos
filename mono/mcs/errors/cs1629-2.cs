@@ -4,12 +4,13 @@
 
 using System.Collections;
 
-class X {
-	static IEnumerator GetIt ()
-	{
-	    unsafe {
-		yield return 1;
-	    }
-	}
-	
+class X
+{
+    static IEnumerator GetIt()
+    {
+        unsafe
+        {
+            yield return 1;
+        }
+    }
 }

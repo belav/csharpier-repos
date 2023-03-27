@@ -2,12 +2,12 @@
 // Line: 9
 
 
-delegate void D (int x);
+delegate void D(int x);
 
 class X
 {
-	static void Main ()
-	{
-		D d2 = (ref int x) => {};
-	}
+    static void Main()
+    {
+        D d2 = (ref int x) => { };
+    }
 }

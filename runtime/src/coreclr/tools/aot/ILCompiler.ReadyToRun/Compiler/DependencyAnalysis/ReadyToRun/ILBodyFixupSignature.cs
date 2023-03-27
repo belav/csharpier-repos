@@ -33,7 +33,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             context.AddMarkedILBodyFixupSignature(this);
         }
 
-        public static void NotifyComplete(NodeFactory factory, List<ILBodyFixupSignature> completeListOfSigs)
+        public static void NotifyComplete(
+            NodeFactory factory,
+            List<ILBodyFixupSignature> completeListOfSigs
+        )
         {
             completeListOfSigs.MergeSort(new ObjectNodeComparer(CompilerComparer.Instance));
             foreach (var ilbodyFixupSig in completeListOfSigs)
@@ -47,7 +50,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (factory.CompilationModuleGroup.VersionsWithMethodBody(_method))
                 return new ModuleToken(_method.Module, _method.Handle);
             else
-                return new ModuleToken(factory.ManifestMetadataTable._mutableModule, factory.ManifestMetadataTable._mutableModule.TryGetEntityHandle(_method.GetTypicalMethodDefinition()).Value);
+                return new ModuleToken(
+                    factory.ManifestMetadataTable._mutableModule,
+                    factory.ManifestMetadataTable._mutableModule
+                        .TryGetEntityHandle(_method.GetTypicalMethodDefinition())
+                        .Value
+                );
         }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
@@ -61,7 +69,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 ModuleToken moduleToken = GetModuleToken(factory);
 
                 IEcmaModule targetModule = moduleToken.Module;
-                SignatureContext innerContext = dataBuilder.EmitFixup(factory, _fixupKind, targetModule, factory.SignatureContext);
+                SignatureContext innerContext = dataBuilder.EmitFixup(
+                    factory,
+                    _fixupKind,
+                    targetModule,
+                    factory.SignatureContext
+                );
 
                 var metadata = ReadyToRunStandaloneMethodMetadata.Compute(_method);
                 dataBuilder.EmitUInt(checked((uint)metadata.ConstantData.Length));
@@ -69,7 +82,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 dataBuilder.EmitUInt(checked((uint)metadata.TypeRefs.Length));
                 foreach (var typeRef in metadata.TypeRefs)
                 {
-                    if (factory.SignatureContext.Resolver.GetModuleTokenForType((EcmaType)typeRef, allowDynamicallyCreatedReference: true, throwIfNotFound: false).Module == null)
+                    if (
+                        factory.SignatureContext.Resolver
+                            .GetModuleTokenForType(
+                                (EcmaType)typeRef,
+                                allowDynamicallyCreatedReference: true,
+                                throwIfNotFound: false
+                            )
+                            .Module == null
+                    )
                     {
                         // If there isn't a module token yet for this type, force it to exist
                         factory.ManifestMetadataTable._mutableModule.TryGetEntityHandle(typeRef);
@@ -77,8 +98,20 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     dataBuilder.EmitTypeSignature(typeRef, innerContext);
                 }
 
-                MethodWithToken method = new MethodWithToken(_method, moduleToken, null, unboxing: false, context: null);
-                dataBuilder.EmitMethodSignature(method, enforceDefEncoding: false, enforceOwningType: false, innerContext, false);
+                MethodWithToken method = new MethodWithToken(
+                    _method,
+                    moduleToken,
+                    null,
+                    unboxing: false,
+                    context: null
+                );
+                dataBuilder.EmitMethodSignature(
+                    method,
+                    enforceDefEncoding: false,
+                    enforceOwningType: false,
+                    innerContext,
+                    false
+                );
             }
 
             return dataBuilder.ToObjectData();

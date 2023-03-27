@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,54 +54,60 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public partial class CommonBehaviorsSection
-		 : ConfigurationSection
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty endpoint_behaviors;
-		static ConfigurationProperty service_behaviors;
+    [MonoTODO]
+    public partial class CommonBehaviorsSection : ConfigurationSection
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty endpoint_behaviors;
+        static ConfigurationProperty service_behaviors;
 
-		static CommonBehaviorsSection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			endpoint_behaviors = new ConfigurationProperty ("endpointBehaviors",
-				typeof (CommonEndpointBehaviorElement), null, null/* FIXME: get converter for CommonEndpointBehaviorElement*/, null,
-				ConfigurationPropertyOptions.None);
+        static CommonBehaviorsSection()
+        {
+            properties = new ConfigurationPropertyCollection();
+            endpoint_behaviors = new ConfigurationProperty(
+                "endpointBehaviors",
+                typeof(CommonEndpointBehaviorElement),
+                null,
+                null /* FIXME: get converter for CommonEndpointBehaviorElement*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			service_behaviors = new ConfigurationProperty ("serviceBehaviors",
-				typeof (CommonServiceBehaviorElement), null, null/* FIXME: get converter for CommonServiceBehaviorElement*/, null,
-				ConfigurationPropertyOptions.None);
+            service_behaviors = new ConfigurationProperty(
+                "serviceBehaviors",
+                typeof(CommonServiceBehaviorElement),
+                null,
+                null /* FIXME: get converter for CommonServiceBehaviorElement*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			properties.Add (endpoint_behaviors);
-			properties.Add (service_behaviors);
-		}
+            properties.Add(endpoint_behaviors);
+            properties.Add(service_behaviors);
+        }
 
-		public CommonBehaviorsSection ()
-		{
-		}
+        public CommonBehaviorsSection() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty("endpointBehaviors", Options = ConfigurationPropertyOptions.None)]
+        public CommonEndpointBehaviorElement EndpointBehaviors
+        {
+            get { return (CommonEndpointBehaviorElement)base[endpoint_behaviors]; }
+        }
 
-		[ConfigurationProperty ("endpointBehaviors",
-			 Options = ConfigurationPropertyOptions.None)]
-		public CommonEndpointBehaviorElement EndpointBehaviors {
-			get { return (CommonEndpointBehaviorElement) base [endpoint_behaviors]; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-		[ConfigurationProperty ("serviceBehaviors",
-			 Options = ConfigurationPropertyOptions.None)]
-		public CommonServiceBehaviorElement ServiceBehaviors {
-			get { return (CommonServiceBehaviorElement) base [service_behaviors]; }
-		}
-
-
-	}
-
+        [ConfigurationProperty("serviceBehaviors", Options = ConfigurationPropertyOptions.None)]
+        public CommonServiceBehaviorElement ServiceBehaviors
+        {
+            get { return (CommonServiceBehaviorElement)base[service_behaviors]; }
+        }
+    }
 }

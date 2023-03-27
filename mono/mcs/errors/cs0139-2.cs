@@ -2,15 +2,15 @@
 // Line: 10
 public class Test
 {
-        public static void Foo (char c)
+    public static void Foo(char c)
+    {
+        switch (char.GetUnicodeCategory(c))
         {
-                switch (char.GetUnicodeCategory (c)) {
-                default:
-                        if (c == 'a')
-                                continue;
-                        System.Console.WriteLine ();
-                        break;
-                }
+            default:
+                if (c == 'a')
+                    continue;
+                System.Console.WriteLine();
+                break;
         }
+    }
 }
-

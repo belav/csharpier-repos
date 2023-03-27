@@ -3,12 +3,15 @@
 
 struct Sample
 {
-	public Sample (int arg)
-	{
-		text = this.Prop;
-	}
-	
-	int Prop { get { return 1; } }
+    public Sample(int arg)
+    {
+        text = this.Prop;
+    }
 
-	public int text;
+    int Prop
+    {
+        get { return 1; }
+    }
+
+    public int text;
 }

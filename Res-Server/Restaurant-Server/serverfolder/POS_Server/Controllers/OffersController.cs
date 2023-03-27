@@ -17,13 +17,14 @@ namespace POS_Server.Controllers
     public class OffersController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         [HttpPost]
         [Route("Get")]
         public string Get(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             Boolean canDelete = false;
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -33,24 +34,27 @@ var strP = TokenManager.GetPrincipal(token);
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var offersList = entity.offers
-                    .Select(L => new OfferModel
-                    {
-                        offerId = L.offerId,
-                        name = L.name,
-                        code = L.code,
-                        isActive = L.isActive,
-                        discountType = L.discountType,
-                        discountValue = L.discountValue,
-                        startDate = L.startDate,
-                        endDate = L.endDate,
-                        createDate = L.createDate,
-                        updateDate = L.updateDate,
-                        createUserId = L.createUserId,
-                        updateUserId = L.updateUserId,
-                        notes = L.notes,
-                        forAgents = L.forAgents,
-                    })
-                    .ToList();
+                        .Select(
+                            L =>
+                                new OfferModel
+                                {
+                                    offerId = L.offerId,
+                                    name = L.name,
+                                    code = L.code,
+                                    isActive = L.isActive,
+                                    discountType = L.discountType,
+                                    discountValue = L.discountValue,
+                                    startDate = L.startDate,
+                                    endDate = L.endDate,
+                                    createDate = L.createDate,
+                                    updateDate = L.updateDate,
+                                    createUserId = L.createUserId,
+                                    updateUserId = L.updateUserId,
+                                    notes = L.notes,
+                                    forAgents = L.forAgents,
+                                }
+                        )
+                        .ToList();
 
                     if (offersList.Count > 0)
                     {
@@ -59,9 +63,12 @@ var strP = TokenManager.GetPrincipal(token);
                             if (offersList[i].isActive == 1)
                             {
                                 long offerId = (long)offersList[i].offerId;
-                                var offerItems = entity.itemsOffers.Where(x => x.offerId == offerId).Select(b => new { b.offerId }).FirstOrDefault();
-                               
-                                if (offerItems is null) 
+                                var offerItems = entity.itemsOffers
+                                    .Where(x => x.offerId == offerId)
+                                    .Select(b => new { b.offerId })
+                                    .FirstOrDefault();
+
+                                if (offerItems is null)
                                     canDelete = true;
                             }
                             offersList[i].canDelete = canDelete;
@@ -71,13 +78,14 @@ var strP = TokenManager.GetPrincipal(token);
                 }
             }
         }
+
         // GET api/<controller>
         [HttpPost]
         [Route("GetOfferByID")]
         public string GetOfferByID(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
-var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -96,29 +104,33 @@ var strP = TokenManager.GetPrincipal(token);
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var offer = entity.offers
-                   .Where(u => u.offerId == offerId)
-                   .Select(L => new
-                   {
-                       L.offerId,
-                       L.name,
-                       L.code,
-                       L.isActive,
-                       L.discountType,
-                       L.discountValue,
-                       L.startDate,
-                       L.endDate,
-                       L.createDate,
-                       L.updateDate,
-                       L.createUserId,
-                       L.updateUserId,
-                       L.notes,
-                      L.forAgents,
-                   })
-                   .FirstOrDefault();
+                        .Where(u => u.offerId == offerId)
+                        .Select(
+                            L =>
+                                new
+                                {
+                                    L.offerId,
+                                    L.name,
+                                    L.code,
+                                    L.isActive,
+                                    L.discountType,
+                                    L.discountValue,
+                                    L.startDate,
+                                    L.endDate,
+                                    L.createDate,
+                                    L.updateDate,
+                                    L.createUserId,
+                                    L.updateUserId,
+                                    L.notes,
+                                    L.forAgents,
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(offer);
                 }
             }
         }
+
         // add or update offer
         [HttpPost]
         [Route("Save")]
@@ -142,12 +154,15 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         offerObject = c.Value.Replace("\\", string.Empty);
                         offerObject = offerObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<offers>(offerObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<offers>(
+                            offerObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
 
-                 if (newObject.updateUserId == 0 || newObject.updateUserId == null)
+                if (newObject.updateUserId == 0 || newObject.updateUserId == null)
                 {
                     Nullable<long> id = null;
                     newObject.updateUserId = id;
@@ -165,8 +180,8 @@ var strP = TokenManager.GetPrincipal(token);
                         var offerEntity = entity.Set<offers>();
                         if (newObject.offerId == 0)
                         {
-                            newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            
+                            newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+
                             newObject.updateDate = newObject.createDate;
                             oldObject = offerEntity.Add(newObject);
                             entity.SaveChanges();
@@ -175,7 +190,9 @@ var strP = TokenManager.GetPrincipal(token);
                         }
                         else
                         {
-                            oldObject = entity.offers.Where(p => p.offerId == newObject.offerId).FirstOrDefault();
+                            oldObject = entity.offers
+                                .Where(p => p.offerId == newObject.offerId)
+                                .FirstOrDefault();
                             oldObject.name = newObject.name;
                             oldObject.code = newObject.code;
                             oldObject.discountType = newObject.discountType;
@@ -200,13 +217,14 @@ var strP = TokenManager.GetPrincipal(token);
             }
             return TokenManager.GenerateToken(message);
         }
+
         [HttpPost]
         [Route("Delete")]
         public string Delete(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             string message = "";
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -261,7 +279,7 @@ var strP = TokenManager.GetPrincipal(token);
 
                             offerObj.isActive = 0;
                             offerObj.updateUserId = userId;
-                            offerObj.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            offerObj.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
                         }
@@ -275,7 +293,6 @@ var strP = TokenManager.GetPrincipal(token);
             }
         }
 
-
         [HttpPost]
         [Route("GetOffersByMembershipId")]
         public string GetOffersByMembershipId(string token)
@@ -288,7 +305,6 @@ var strP = TokenManager.GetPrincipal(token);
             }
             else
             {
-
                 long membershipId = 0;
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
@@ -300,40 +316,36 @@ var strP = TokenManager.GetPrincipal(token);
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = (from S in entity.membershipsOffers
-                                join B in entity.offers on S.offerId equals B.offerId into JB
-                                join U in entity.memberships on S.membershipId equals U.membershipId into JU
-                                from JBB in JB.DefaultIfEmpty()
-                                from JUU in JU.DefaultIfEmpty()
-                                where S.membershipId == membershipId
-                                select new OfferModel()
-                                {
-                                    offerId = JBB.offerId,
-                                    name = JBB.name,
-                                    code = JBB.code,
-                                    isActive = JBB.isActive,
-                                    discountType = JBB.discountType,
-                                    discountValue = JBB.discountValue,
-                                    startDate = JBB.startDate,
-                                    endDate = JBB.endDate,
-                                    createDate = JBB.createDate,
-                                    updateDate = JBB.updateDate,
-                                    createUserId = JBB.createUserId,
-                                    updateUserId = JBB.updateUserId,
-                                    notes = JBB.notes,
-
-                                    membershipOfferId = S.membershipOfferId,
-
-                                    membershipId = S.membershipId,
-                                    forAgents = JBB.forAgents,
-
-                                }).ToList();
+                    var List = (
+                        from S in entity.membershipsOffers
+                        join B in entity.offers on S.offerId equals B.offerId into JB
+                        join U in entity.memberships on S.membershipId equals U.membershipId into JU
+                        from JBB in JB.DefaultIfEmpty()
+                        from JUU in JU.DefaultIfEmpty()
+                        where S.membershipId == membershipId
+                        select new OfferModel()
+                        {
+                            offerId = JBB.offerId,
+                            name = JBB.name,
+                            code = JBB.code,
+                            isActive = JBB.isActive,
+                            discountType = JBB.discountType,
+                            discountValue = JBB.discountValue,
+                            startDate = JBB.startDate,
+                            endDate = JBB.endDate,
+                            createDate = JBB.createDate,
+                            updateDate = JBB.updateDate,
+                            createUserId = JBB.createUserId,
+                            updateUserId = JBB.updateUserId,
+                            notes = JBB.notes,
+                            membershipOfferId = S.membershipOfferId,
+                            membershipId = S.membershipId,
+                            forAgents = JBB.forAgents,
+                        }
+                    ).ToList();
                     return TokenManager.GenerateToken(List);
-
-
                 }
             }
         }
-
     }
 }

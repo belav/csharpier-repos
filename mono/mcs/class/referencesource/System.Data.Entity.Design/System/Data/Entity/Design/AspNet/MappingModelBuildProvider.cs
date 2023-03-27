@@ -23,16 +23,14 @@ namespace System.Data.Entity.Design.AspNet
     /// <summary>
     /// The ASP .NET Build provider for the MSL in ADO .NET
     /// </summary>
-    /// 
+    ///
     [BuildProviderAppliesTo(BuildProviderAppliesTo.Code)]
     public class MappingModelBuildProvider : System.Web.Compilation.BuildProvider
     {
         /// <summary>
         /// Default constructor
         /// </summary>
-        public MappingModelBuildProvider()
-        {
-        }
+        public MappingModelBuildProvider() { }
 
         /// <summary>
         /// We want ASP .NET to always reset the app domain when we have to rebuild
@@ -42,10 +40,10 @@ namespace System.Data.Entity.Design.AspNet
         public override BuildProviderResultFlags GetResultFlags(CompilerResults results)
         {
             return BuildProviderResultFlags.ShutdownAppDomainOnChange;
-        } 
+        }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="assemblyBuilder"></param>
         public override void GenerateCode(AssemblyBuilder assemblyBuilder)

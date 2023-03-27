@@ -14,22 +14,38 @@ namespace System.ServiceModel.Activation.Configuration
     {
         static string GetSectionPath(string sectionName)
         {
-            return string.Format(CultureInfo.InvariantCulture, @"{0}/{1}", ConfigurationStrings.SectionGroupName, sectionName);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                @"{0}/{1}",
+                ConfigurationStrings.SectionGroupName,
+                sectionName
+            );
         }
 
         static internal string DiagnosticSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.DiagnosticSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.DiagnosticSectionName
+                );
+            }
         }
 
         static internal string NetTcpSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.NetTcpSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(ConfigurationStrings.NetTcpSectionName);
+            }
         }
 
         static internal string NetPipeSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.NetPipeSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(ConfigurationStrings.NetPipeSectionName);
+            }
         }
 
         internal const string SectionGroupName = "system.serviceModel.activation";

@@ -43,7 +43,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     public sealed partial class MethodBuilder : MethodInfo
     {
-#region Sync with MonoReflectionMethodBuilder in object-internals.h
+        #region Sync with MonoReflectionMethodBuilder in object-internals.h
         private RuntimeMethodHandle mhandle;
         private Type? rtype;
         internal Type[]? parameters;
@@ -70,12 +70,23 @@ namespace System.Reflection.Emit
         private Type[]? returnModOpt;
         private Type[][]? paramModReq;
         private Type[][]? paramModOpt;
-#endregion
+        #endregion
 
         private RuntimeMethodInfo? created;
 
-        [DynamicDependency(nameof(paramModOpt))]  // Automatically keeps all previous fields too due to StructLayout
-        internal MethodBuilder(TypeBuilder tb, string name, MethodAttributes attributes, CallingConventions callingConvention, Type? returnType, Type[]? returnModReq, Type[]? returnModOpt, Type[]? parameterTypes, Type[][]? paramModReq, Type[][]? paramModOpt)
+        [DynamicDependency(nameof(paramModOpt))] // Automatically keeps all previous fields too due to StructLayout
+        internal MethodBuilder(
+            TypeBuilder tb,
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? returnModReq,
+            Type[]? returnModOpt,
+            Type[]? parameterTypes,
+            Type[][]? paramModReq,
+            Type[][]? paramModOpt
+        )
         {
             this.name = name;
             this.attrs = attributes;
@@ -93,7 +104,10 @@ namespace System.Reflection.Emit
             {
                 for (int i = 0; i < parameterTypes.Length; ++i)
                     if (parameterTypes[i] == null)
-                        throw new ArgumentException("Elements of the parameterTypes array cannot be null", nameof(parameterTypes));
+                        throw new ArgumentException(
+                            "Elements of the parameterTypes array cannot be null",
+                            nameof(parameterTypes)
+                        );
 
                 this.parameters = new Type[parameterTypes.Length];
                 Array.Copy(parameterTypes, this.parameters, parameterTypes.Length);
@@ -104,10 +118,34 @@ namespace System.Reflection.Emit
             ((ModuleBuilder)tb.Module).RegisterToken(this, MetadataToken);
         }
 
-        internal MethodBuilder(TypeBuilder tb, string name, MethodAttributes attributes,
-                                CallingConventions callingConvention, Type? returnType, Type[]? returnModReq, Type[]? returnModOpt, Type[]? parameterTypes, Type[][]? paramModReq, Type[][]? paramModOpt,
-            string dllName, string entryName, CallingConvention nativeCConv, CharSet nativeCharset)
-            : this(tb, name, attributes, callingConvention, returnType, returnModReq, returnModOpt, parameterTypes, paramModReq, paramModOpt)
+        internal MethodBuilder(
+            TypeBuilder tb,
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? returnModReq,
+            Type[]? returnModOpt,
+            Type[]? parameterTypes,
+            Type[][]? paramModReq,
+            Type[][]? paramModOpt,
+            string dllName,
+            string entryName,
+            CallingConvention nativeCConv,
+            CharSet nativeCharset
+        )
+            : this(
+                tb,
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                returnModReq,
+                returnModOpt,
+                parameterTypes,
+                paramModReq,
+                paramModOpt
+            )
         {
             pi_dll = dllName;
             pi_entry = entryName;
@@ -135,18 +173,12 @@ namespace System.Reflection.Emit
 
         public override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                throw NotSupported();
-            }
+            get { throw NotSupported(); }
         }
 
         internal RuntimeMethodHandle MethodHandleInternal
         {
-            get
-            {
-                return mhandle;
-            }
+            get { return mhandle; }
         }
 
         public override Type ReturnType
@@ -192,37 +224,25 @@ namespace System.Reflection.Emit
         /* Used by mcs */
         internal bool BestFitMapping
         {
-            set
-            {
-                extra_flags = (uint)((extra_flags & ~0x30) | (uint)(value ? 0x10 : 0x20));
-            }
+            set { extra_flags = (uint)((extra_flags & ~0x30) | (uint)(value ? 0x10 : 0x20)); }
         }
 
         /* Used by mcs */
         internal bool ThrowOnUnmappableChar
         {
-            set
-            {
-                extra_flags = (uint)((extra_flags & ~0x3000) | (uint)(value ? 0x1000 : 0x2000));
-            }
+            set { extra_flags = (uint)((extra_flags & ~0x3000) | (uint)(value ? 0x1000 : 0x2000)); }
         }
 
         /* Used by mcs */
         internal bool ExactSpelling
         {
-            set
-            {
-                extra_flags = (uint)((extra_flags & ~0x01) | (uint)(value ? 0x01 : 0x00));
-            }
+            set { extra_flags = (uint)((extra_flags & ~0x01) | (uint)(value ? 0x01 : 0x00)); }
         }
 
         /* Used by mcs */
         internal bool SetLastError
         {
-            set
-            {
-                extra_flags = (uint)((extra_flags & ~0x40) | (uint)(value ? 0x40 : 0x00));
-            }
+            set { extra_flags = (uint)((extra_flags & ~0x40) | (uint)(value ? 0x40 : 0x00)); }
         }
 
         public override MethodInfo GetBaseDefinition()
@@ -279,7 +299,13 @@ namespace System.Reflection.Emit
             return type.Module;
         }
 
-        public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw NotSupported();
         }
@@ -317,18 +343,26 @@ namespace System.Reflection.Emit
 
         public ILGenerator GetILGenerator(int size)
         {
-            if (((iattrs & MethodImplAttributes.CodeTypeMask) !=
-                 MethodImplAttributes.IL) ||
-                ((iattrs & MethodImplAttributes.ManagedMask) !=
-                 MethodImplAttributes.Managed))
+            if (
+                ((iattrs & MethodImplAttributes.CodeTypeMask) != MethodImplAttributes.IL)
+                || ((iattrs & MethodImplAttributes.ManagedMask) != MethodImplAttributes.Managed)
+            )
                 throw new InvalidOperationException("Method body should not exist.");
             if (ilgen != null)
                 return ilgen;
-            ilgen = new ILGenerator(type.Module, ((ModuleBuilder)type.Module).GetTokenGenerator(), size);
+            ilgen = new ILGenerator(
+                type.Module,
+                ((ModuleBuilder)type.Module).GetTokenGenerator(),
+                size
+            );
             return ilgen;
         }
 
-        public ParameterBuilder DefineParameter(int position, ParameterAttributes attributes, string strParamName)
+        public ParameterBuilder DefineParameter(
+            int position,
+            ParameterAttributes attributes,
+            string strParamName
+        )
         {
             RejectIfCreated();
 
@@ -351,20 +385,38 @@ namespace System.Reflection.Emit
                 foreach (MethodInfo m in override_methods)
                 {
                     if (m.IsVirtual && !IsVirtual)
-                        throw new TypeLoadException(string.Format("Method '{0}' override '{1}' but it is not virtual", name, m));
+                        throw new TypeLoadException(
+                            string.Format(
+                                "Method '{0}' override '{1}' but it is not virtual",
+                                name,
+                                m
+                            )
+                        );
                 }
             }
         }
 
         internal void fixup()
         {
-            if (((attrs & (MethodAttributes.Abstract | MethodAttributes.PinvokeImpl)) == 0) && ((iattrs & (MethodImplAttributes.Runtime | MethodImplAttributes.InternalCall)) == 0))
+            if (
+                ((attrs & (MethodAttributes.Abstract | MethodAttributes.PinvokeImpl)) == 0)
+                && (
+                    (iattrs & (MethodImplAttributes.Runtime | MethodImplAttributes.InternalCall))
+                    == 0
+                )
+            )
             {
                 // do not allow zero length method body on MS.NET 2.0 (and higher)
-                if (((ilgen == null) || (ilgen.ILOffset == 0)) && (code == null || code.Length == 0))
+                if (
+                    ((ilgen == null) || (ilgen.ILOffset == 0)) && (code == null || code.Length == 0)
+                )
                     throw new InvalidOperationException(
-                                         string.Format("Method '{0}.{1}' does not have a method body.",
-                                                DeclaringType!.FullName, Name));
+                        string.Format(
+                            "Method '{0}.{1}' does not have a method body.",
+                            DeclaringType!.FullName,
+                            Name
+                        )
+                    );
             }
             ilgen?.label_fixup(this);
         }
@@ -402,7 +454,8 @@ namespace System.Reflection.Emit
                     return;
 
                 case "System.Runtime.InteropServices.DllImportAttribute":
-                    CustomAttributeBuilder.CustomAttributeInfo attr = CustomAttributeBuilder.decode_cattr(customBuilder);
+                    CustomAttributeBuilder.CustomAttributeInfo attr =
+                        CustomAttributeBuilder.decode_cattr(customBuilder);
                     bool preserveSig = true;
 
                     /*
@@ -540,8 +593,12 @@ namespace System.Reflection.Emit
             return new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
-        [RequiresDynamicCode("The native code for this instantiation might not be available at runtime.")]
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresDynamicCode(
+            "The native code for this instantiation might not be available at runtime."
+        )]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public override MethodInfo MakeGenericMethod(params Type[] typeArguments)
         {
             if (!IsGenericMethodDefinition)
@@ -557,18 +614,12 @@ namespace System.Reflection.Emit
 
         public override bool IsGenericMethodDefinition
         {
-            get
-            {
-                return generic_params != null;
-            }
+            get { return generic_params != null; }
         }
 
         public override bool IsGenericMethod
         {
-            get
-            {
-                return generic_params != null;
-            }
+            get { return generic_params != null; }
         }
 
         public override MethodInfo GetGenericMethodDefinition()
@@ -620,14 +671,24 @@ namespace System.Reflection.Emit
             {
                 for (int i = 0; i < parameterTypes.Length; ++i)
                     if (parameterTypes[i] == null)
-                        throw new ArgumentNullException(nameof(parameterTypes), "Elements of the parameterTypes array cannot be null");
+                        throw new ArgumentNullException(
+                            nameof(parameterTypes),
+                            "Elements of the parameterTypes array cannot be null"
+                        );
 
                 this.parameters = new Type[parameterTypes.Length];
                 Array.Copy(parameterTypes, this.parameters, parameterTypes.Length);
             }
         }
 
-        public void SetSignature(Type? returnType, Type[]? returnTypeRequiredCustomModifiers, Type[]? returnTypeOptionalCustomModifiers, Type[]? parameterTypes, Type[][]? parameterTypeRequiredCustomModifiers, Type[][]? parameterTypeOptionalCustomModifiers)
+        public void SetSignature(
+            Type? returnType,
+            Type[]? returnTypeRequiredCustomModifiers,
+            Type[]? returnTypeOptionalCustomModifiers,
+            Type[]? parameterTypes,
+            Type[][]? parameterTypeRequiredCustomModifiers,
+            Type[][]? parameterTypeOptionalCustomModifiers
+        )
         {
             SetReturnType(returnType);
             SetParameters(parameterTypes);
@@ -639,10 +700,7 @@ namespace System.Reflection.Emit
 
         public override Module Module
         {
-            get
-            {
-                return GetModule();
-            }
+            get { return GetModule(); }
         }
 
         public override ParameterInfo ReturnParameter
@@ -703,8 +761,15 @@ namespace System.Reflection.Emit
             get { return m_kind; }
         }
 
-        internal ExceptionHandler(int tryStartOffset, int tryEndOffset, int filterOffset, int handlerStartOffset, int handlerEndOffset,
-            int kind, int exceptionTypeToken)
+        internal ExceptionHandler(
+            int tryStartOffset,
+            int tryEndOffset,
+            int filterOffset,
+            int handlerStartOffset,
+            int handlerEndOffset,
+            int kind,
+            int exceptionTypeToken
+        )
         {
             m_tryStartOffset = tryStartOffset;
             m_tryEndOffset = tryEndOffset;
@@ -732,7 +797,13 @@ namespace System.Reflection.Emit
 
         public override int GetHashCode()
         {
-            return m_exceptionClass ^ m_tryStartOffset ^ m_tryEndOffset ^ m_filterOffset ^ m_handlerStartOffset ^ m_handlerEndOffset ^ (int)m_kind;
+            return m_exceptionClass
+                ^ m_tryStartOffset
+                ^ m_tryEndOffset
+                ^ m_filterOffset
+                ^ m_handlerStartOffset
+                ^ m_handlerEndOffset
+                ^ (int)m_kind;
         }
 
         public override bool Equals(object? obj)
@@ -742,14 +813,13 @@ namespace System.Reflection.Emit
 
         public bool Equals(ExceptionHandler other)
         {
-            return
-                other.m_exceptionClass == m_exceptionClass &&
-                other.m_tryStartOffset == m_tryStartOffset &&
-                other.m_tryEndOffset == m_tryEndOffset &&
-                other.m_filterOffset == m_filterOffset &&
-                other.m_handlerStartOffset == m_handlerStartOffset &&
-                other.m_handlerEndOffset == m_handlerEndOffset &&
-                other.m_kind == m_kind;
+            return other.m_exceptionClass == m_exceptionClass
+                && other.m_tryStartOffset == m_tryStartOffset
+                && other.m_tryEndOffset == m_tryEndOffset
+                && other.m_filterOffset == m_filterOffset
+                && other.m_handlerStartOffset == m_handlerStartOffset
+                && other.m_handlerEndOffset == m_handlerEndOffset
+                && other.m_kind == m_kind;
         }
 
         public static bool operator ==(ExceptionHandler left, ExceptionHandler right)

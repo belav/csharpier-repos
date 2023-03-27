@@ -25,10 +25,15 @@ namespace Microsoft.CodeAnalysis
         public Project Project => Document.Project;
         public SyntaxTree SyntaxTree => Root.SyntaxTree;
 
-        public static async ValueTask<SyntacticDocument> CreateAsync(Document document, CancellationToken cancellationToken)
+        public static async ValueTask<SyntacticDocument> CreateAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             return new SyntacticDocument(document, text, root);
         }
     }

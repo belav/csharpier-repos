@@ -3,9 +3,11 @@
 
 class X
 {
-	static int y;
-	static void Main () {
-		y = 10;
-		int y = 5;
-	}
+    static int y;
+
+    static void Main()
+    {
+        y = 10;
+        int y = 5;
+    }
 }

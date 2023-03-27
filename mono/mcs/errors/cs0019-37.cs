@@ -3,11 +3,11 @@
 
 class C
 {
-	static bool HasSessionId (string path)
-	{
-		if (path == null || path.Length < 5)
-			return false;
+    static bool HasSessionId(string path)
+    {
+        if (path == null || path.Length < 5)
+            return false;
 
-		return path.StartsWith ("/(") == 0;
-	}
+        return path.StartsWith("/(") == 0;
+    }
 }

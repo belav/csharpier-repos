@@ -3,9 +3,6 @@
 
 using System;
 
-class Stack<T> : X
-{ }
+class Stack<T> : X { }
 
-class X : Attribute
-{
-}
+class X : Attribute { }

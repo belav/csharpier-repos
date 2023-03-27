@@ -12,17 +12,16 @@ namespace System.Activities
     [Fx.Tag.XamlVisible(false)]
     public class InvokeCompletedEventArgs : AsyncCompletedEventArgs
     {
-        internal InvokeCompletedEventArgs(Exception error, bool cancelled, AsyncInvokeContext context)
+        internal InvokeCompletedEventArgs(
+            Exception error,
+            bool cancelled,
+            AsyncInvokeContext context
+        )
             : base(error, cancelled, context.UserState)
         {
             this.Outputs = context.Outputs;
-            
         }
 
-        public IDictionary<string, object> Outputs
-        {
-            get;
-            private set;
-        }
+        public IDictionary<string, object> Outputs { get; private set; }
     }
 }

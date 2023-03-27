@@ -201,8 +201,11 @@ namespace Newtonsoft.Json.Tests.Linq
             writer.WriteComment("fail");
             writer.WriteEndArray();
 
-            StringAssert.AreEqual(@"[
-  /*fail*/]", writer.Token.ToString());
+            StringAssert.AreEqual(
+                @"[
+  /*fail*/]",
+                writer.Token.ToString()
+            );
         }
 
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
@@ -220,9 +223,12 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(new BigInteger(123), i.Value);
             Assert.AreEqual(JTokenType.Integer, i.Type);
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   123
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 #endif
 
@@ -239,20 +245,19 @@ namespace Newtonsoft.Json.Tests.Linq
             // this is a bug. write raw shouldn't be autocompleting like this
             // hard to fix without introducing Raw and RawValue token types
             // meh
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   fail,
   fail
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
         public void WriteTokenWithParent()
         {
-            JObject o = new JObject
-            {
-                ["prop1"] = new JArray(1),
-                ["prop2"] = 1
-            };
+            JObject o = new JObject { ["prop1"] = new JArray(1), ["prop2"] = 1 };
 
             JTokenWriter writer = new JTokenWriter();
 
@@ -266,14 +271,17 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Console.WriteLine(writer.Token.ToString());
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""prop1"": [
       1
     ],
     ""prop2"": 1
   }
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -292,9 +300,12 @@ namespace Newtonsoft.Json.Tests.Linq
 
             writer.WriteEndObject();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Prop1"": 1
-}", writer.Token.ToString());
+}",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -312,9 +323,12 @@ namespace Newtonsoft.Json.Tests.Linq
 
             writer.WriteEndArray();
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   1
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -322,9 +336,7 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             JObject o = new JObject();
             JsonReader reader = o.CreateReader();
-            while (reader.Read())
-            {   
-            }
+            while (reader.Read()) { }
 
             JTokenWriter writer = new JTokenWriter();
 
@@ -349,10 +361,13 @@ namespace Newtonsoft.Json.Tests.Linq
             writer.WriteRawValue("fail");
             writer.WriteEndArray();
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   fail,
   fail
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -372,9 +387,12 @@ namespace Newtonsoft.Json.Tests.Linq
 
             writer.WriteEndObject();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""prop1"": []
-}", writer.Token.ToString());
+}",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -413,7 +431,10 @@ namespace Newtonsoft.Json.Tests.Linq
                 token = jsonWriter.Token;
             }
 
-            Assert.AreEqual(@"[1,{""integer"":2147483647,""null-string"":null}]", token.ToString(Formatting.None));
+            Assert.AreEqual(
+                @"[1,{""integer"":2147483647,""null-string"":null}]",
+                token.ToString(Formatting.None)
+            );
         }
     }
 }

@@ -12,12 +12,12 @@ namespace AVHelper
         void SpinThread();
         int ThreadName();
     }
-    
+
     public class CreateAV : ICreateAV
     {
         public String myAV;
-        
-        public CreateAV(){}
+
+        public CreateAV() { }
 
         public void SpinThread()
         {
@@ -34,6 +34,6 @@ namespace AVHelper
         ~CreateAV()
         {
             Thread.Sleep(Timeout.Infinite);
-         }
+        }
     }
 }

@@ -5,8 +5,8 @@ using System;
 
 public class X
 {
-	public static void Main()
-	{
-		Void v;
-	}
+    public static void Main()
+    {
+        Void v;
+    }
 }

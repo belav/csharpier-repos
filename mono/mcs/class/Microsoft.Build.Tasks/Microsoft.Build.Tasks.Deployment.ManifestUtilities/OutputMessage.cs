@@ -30,36 +30,36 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public sealed class OutputMessage {
-	
-		string			name;
-		string			text;
-		OutputMessageType	type;
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public sealed class OutputMessage
+    {
+        string name;
+        string text;
+        OutputMessageType type;
 
-		OutputMessage ()
-		{
-		}
-	
-		[MonoTODO]
-		public string[] GetArguments ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public string Name {
-			get { return name; }
-		}
-		
-		public string Text {
-			get { return text; }
-		}
-		
-		public OutputMessageType Type {
-			get { return type; }
-		}
-	}
+        OutputMessage() { }
+
+        [MonoTODO]
+        public string[] GetArguments()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Name
+        {
+            get { return name; }
+        }
+
+        public string Text
+        {
+            get { return text; }
+        }
+
+        public OutputMessageType Type
+        {
+            get { return type; }
+        }
+    }
 }
-

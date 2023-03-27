@@ -13,21 +13,21 @@ using NUnit.Framework;
 using System;
 using System.Web.Services.Discovery;
 
-namespace MonoTests.System.Web.Services.Discovery {
+namespace MonoTests.System.Web.Services.Discovery
+{
+    [TestFixture]
+    public class ContractReferenceTest
+    {
+        [Test]
+        public void TestConstructors()
+        {
+            ContractReference contractReference;
+        }
 
-	[TestFixture]
-	public class ContractReferenceTest {
-
-		[Test]
-		public void TestConstructors ()
-		{
-			ContractReference contractReference;
-		}
-
-		[Test]
-		public void TestConstants ()
-		{
-			Assert.AreEqual ("http://schemas.xmlsoap.org/disco/scl/", ContractReference.Namespace);
-		}
-	}
+        [Test]
+        public void TestConstants()
+        {
+            Assert.AreEqual("http://schemas.xmlsoap.org/disco/scl/", ContractReference.Namespace);
+        }
+    }
 }

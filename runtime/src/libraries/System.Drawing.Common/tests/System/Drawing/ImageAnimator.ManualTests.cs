@@ -12,8 +12,13 @@ namespace System.Drawing.Tests
 {
     public class ImageAnimatorManualTests
     {
-        public static bool ManualTestsEnabled => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("MANUAL_TESTS"));
-        public static string OutputFolder = Path.Combine(Environment.CurrentDirectory, "ImageAnimatorManualTests", DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
+        public static bool ManualTestsEnabled =>
+            !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("MANUAL_TESTS"));
+        public static string OutputFolder = Path.Combine(
+            Environment.CurrentDirectory,
+            "ImageAnimatorManualTests",
+            DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")
+        );
 
         // To run these tests, change the working directory to src/libraries/System.Drawing.Common,
         // set the `MANUAL_TESTS` environment variable to any non-empty value, and run
@@ -54,21 +59,34 @@ namespace System.Drawing.Tests
 
             foreach (var imageName in images)
             {
-                string testOutputFolder = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(imageName));
+                string testOutputFolder = Path.Combine(
+                    OutputFolder,
+                    Path.GetFileNameWithoutExtension(imageName)
+                );
                 Directory.CreateDirectory(testOutputFolder);
                 frameIndexes[imageName] = 0;
 
-                handlers[imageName] = new EventHandler(new Action<object, EventArgs>((object o, EventArgs e) =>
-                {
-                    Bitmap animation = (Bitmap)o;
-                    ImageAnimator.UpdateFrames(animation);
+                handlers[imageName] = new EventHandler(
+                    new Action<object, EventArgs>(
+                        (object o, EventArgs e) =>
+                        {
+                            Bitmap animation = (Bitmap)o;
+                            ImageAnimator.UpdateFrames(animation);
 
-                    // We save captures using jpg so that:
-                    // a) The images don't get saved as animated gifs again, and just a single frame is saved
-                    // b) Saving pngs in this test on Linux was leading to sporadic GDI+ errors; Jpeg is more reliable
-                    string timestamp = stopwatch.ElapsedMilliseconds.ToString("000000");
-                    animation.Save(Path.Combine(testOutputFolder, $"{++frameIndexes[imageName]}_{timestamp}.jpg"), ImageFormat.Jpeg);
-                }));
+                            // We save captures using jpg so that:
+                            // a) The images don't get saved as animated gifs again, and just a single frame is saved
+                            // b) Saving pngs in this test on Linux was leading to sporadic GDI+ errors; Jpeg is more reliable
+                            string timestamp = stopwatch.ElapsedMilliseconds.ToString("000000");
+                            animation.Save(
+                                Path.Combine(
+                                    testOutputFolder,
+                                    $"{++frameIndexes[imageName]}_{timestamp}.jpg"
+                                ),
+                                ImageFormat.Jpeg
+                            );
+                        }
+                    )
+                );
 
                 bitmaps[imageName] = new Bitmap(Helpers.GetTestBitmapPath(imageName));
                 ImageAnimator.Animate(bitmaps[imageName], handlers[imageName]);

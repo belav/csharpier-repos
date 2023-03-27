@@ -24,9 +24,12 @@ namespace System.ServiceModel.Diagnostics
 
         internal PiiTraceSource(string name, string eventSourceName)
             : base(name)
-        { 
+        {
 #pragma warning disable 618
-            Fx.Assert(!String.IsNullOrEmpty(eventSourceName), "Event log source name must be valid");
+            Fx.Assert(
+                !String.IsNullOrEmpty(eventSourceName),
+                "Event log source name must be valid"
+            );
 #pragma warning restore 618
             this.eventSourceName = eventSourceName;
         }
@@ -35,7 +38,10 @@ namespace System.ServiceModel.Diagnostics
             : base(name, levels)
         {
 #pragma warning disable 618
-            Fx.Assert(!String.IsNullOrEmpty(eventSourceName), "Event log source name must be valid");
+            Fx.Assert(
+                !String.IsNullOrEmpty(eventSourceName),
+                "Event log source name must be valid"
+            );
 #pragma warning restore 618
             this.eventSourceName = eventSourceName;
         }
@@ -61,7 +67,11 @@ namespace System.ServiceModel.Diagnostics
                         if (shouldLogPii)
                         {
 #pragma warning disable 618
-                            System.Runtime.Diagnostics.EventLogger logger = new System.Runtime.Diagnostics.EventLogger(this.eventSourceName, null);
+                            System.Runtime.Diagnostics.EventLogger logger =
+                                new System.Runtime.Diagnostics.EventLogger(
+                                    this.eventSourceName,
+                                    null
+                                );
 #pragma warning restore 618
 #if !NO_CONFIGURATION
                             if (MachineSettingsSection.EnableLoggingKnownPii)
@@ -69,18 +79,29 @@ namespace System.ServiceModel.Diagnostics
                             if (false)
 #endif
                             {
-                                logger.LogEvent(TraceEventType.Information,
-                                    (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
+                                logger.LogEvent(
+                                    TraceEventType.Information,
+                                    (ushort)
+                                        System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
                                     (uint)System.Runtime.Diagnostics.EventLogEventId.PiiLoggingOn,
-                                    false);
+                                    false
+                                );
                                 this.shouldLogPii = true;
                             }
                             else
                             {
-                                logger.LogEvent(TraceEventType.Error,
-                                        (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
-                                        (uint)System.Runtime.Diagnostics.EventLogEventId.PiiLoggingNotAllowed,
-                                        false);
+                                logger.LogEvent(
+                                    TraceEventType.Error,
+                                    (ushort)
+                                        System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
+                                    (uint)
+                                        System
+                                            .Runtime
+                                            .Diagnostics
+                                            .EventLogEventId
+                                            .PiiLoggingNotAllowed,
+                                    false
+                                );
                             }
                         }
                         this.initialized = true;

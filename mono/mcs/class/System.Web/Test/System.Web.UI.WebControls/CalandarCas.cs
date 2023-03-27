@@ -1,5 +1,5 @@
 //
-// CalandarCas.cs 
+// CalandarCas.cs
 //	- CAS unit tests for System.Web.UI.WebControls.Calandar
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,44 +38,45 @@ using System.Web.UI.WebControls;
 
 using MonoTests.System.Web.UI.WebControls;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
+namespace MonoCasTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class CalendarCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            CalendarTest unit = new CalendarTest();
+            unit.Calendar_DefaultValues();
+            unit.NextMonthTextProperty();
+            unit.NextPrevFormatProperty();
+            unit.DayHeaderStyleProperty();
+            unit.NextPrevStyleProperty();
+            unit.SelectorStyleProperty();
+            unit.OtherMonthDayStyleProperty();
+            unit.SelectedDayStyleProperty();
+            unit.TodayDayStyleProperty();
+            unit.WeekendDayStyleProperty();
+            unit.SelectDateProperty();
+            unit.PrevMonthTextProperty();
+            unit.ShowNextPrevMonthProperty();
+            unit.ShowTitleProperty();
+            unit.SelectionChanged();
+            unit.VisibleMonthChanged();
+            unit.DayRender();
+            unit.Calendar_ViewState();
+            unit.TestDayRenderCellAdd();
+            unit.TestRenderMonthStartsOnSunday();
+            unit.TestSelectedColorDefault();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CalendarCas : AspNetHostingMinimal {
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			CalendarTest unit = new CalendarTest ();
-			unit.Calendar_DefaultValues ();
-			unit.NextMonthTextProperty ();
-			unit.NextPrevFormatProperty ();
-			unit.DayHeaderStyleProperty ();
-			unit.NextPrevStyleProperty ();
-			unit.SelectorStyleProperty ();
-			unit.OtherMonthDayStyleProperty ();
-			unit.SelectedDayStyleProperty ();
-			unit.TodayDayStyleProperty ();
-			unit.WeekendDayStyleProperty ();
-			unit.SelectDateProperty ();
-			unit.PrevMonthTextProperty ();
-			unit.ShowNextPrevMonthProperty ();
-			unit.ShowTitleProperty ();
-			unit.SelectionChanged ();
-			unit.VisibleMonthChanged ();
-			unit.DayRender ();
-			unit.Calendar_ViewState ();
-			unit.TestDayRenderCellAdd ();
-			unit.TestRenderMonthStartsOnSunday ();
-			unit.TestSelectedColorDefault ();
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (Calendar); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(Calendar); }
+        }
+    }
 }

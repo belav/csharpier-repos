@@ -15,12 +15,12 @@ namespace System.ServiceModel.Dispatcher
     public class MessageQueryTable<TItem> : IDictionary<MessageQuery, TItem>
     {
         Dictionary<Type, MessageQueryCollection> collectionsByType;
-        Dictionary<MessageQuery, TItem> dictionary;        
+        Dictionary<MessageQuery, TItem> dictionary;
 
         public MessageQueryTable()
-        {            
+        {
             this.dictionary = new Dictionary<MessageQuery, TItem>();
-            this.collectionsByType = new Dictionary<Type, MessageQueryCollection>();           
+            this.collectionsByType = new Dictionary<Type, MessageQueryCollection>();
         }
 
         public int Count
@@ -45,17 +45,16 @@ namespace System.ServiceModel.Dispatcher
 
         public TItem this[MessageQuery key]
         {
-            get
-            {
-                return this.dictionary[key];
-            }
-            set
-            {
-                this.Add(key, value);
-            }
+            get { return this.dictionary[key]; }
+            set { this.Add(key, value); }
         }
 
-        [SuppressMessage(FxCop.Category.Usage, "CA2301:EmbeddableTypesInContainersRule", MessageId = "collectionsByType", Justification = "No need to support type equivalence here.")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            "CA2301:EmbeddableTypesInContainersRule",
+            MessageId = "collectionsByType",
+            Justification = "No need to support type equivalence here."
+        )]
         public void Add(MessageQuery key, TItem value)
         {
             if (key == null)
@@ -72,14 +71,14 @@ namespace System.ServiceModel.Dispatcher
 
                 if (collection == null)
                 {
-                    collection = new SequentialMessageQueryCollection();                    
+                    collection = new SequentialMessageQueryCollection();
                 }
 
                 this.collectionsByType.Add(queryType, collection);
             }
-           
-           collection.Add(key);
-           this.dictionary.Add(key, value);
+
+            collection.Add(key);
+            this.dictionary.Add(key, value);
         }
 
         public void Add(KeyValuePair<MessageQuery, TItem> item)
@@ -88,14 +87,14 @@ namespace System.ServiceModel.Dispatcher
         }
 
         public void Clear()
-        {            
+        {
             this.collectionsByType.Clear();
             this.dictionary.Clear();
         }
 
         public bool Contains(KeyValuePair<MessageQuery, TItem> item)
         {
-            return ((ICollection<KeyValuePair<MessageQuery, TItem>>) this.dictionary).Contains(item);
+            return ((ICollection<KeyValuePair<MessageQuery, TItem>>)this.dictionary).Contains(item);
         }
 
         public bool ContainsKey(MessageQuery key)
@@ -105,7 +104,10 @@ namespace System.ServiceModel.Dispatcher
 
         public void CopyTo(KeyValuePair<MessageQuery, TItem>[] array, int arrayIndex)
         {
-            ((ICollection<KeyValuePair<MessageQuery, TItem>>) this.dictionary).CopyTo(array, arrayIndex);
+            ((ICollection<KeyValuePair<MessageQuery, TItem>>)this.dictionary).CopyTo(
+                array,
+                arrayIndex
+            );
         }
 
         public IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(Message message)
@@ -118,7 +120,9 @@ namespace System.ServiceModel.Dispatcher
             return new MessageEnumerable<TResult>(this, message);
         }
 
-        public IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(MessageBuffer buffer)
+        public IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(
+            MessageBuffer buffer
+        )
         {
             if (buffer == null)
             {
@@ -130,7 +134,9 @@ namespace System.ServiceModel.Dispatcher
 
         public IEnumerator<KeyValuePair<MessageQuery, TItem>> GetEnumerator()
         {
-            return ((ICollection<KeyValuePair<MessageQuery, TItem>>) this.dictionary).GetEnumerator();
+            return (
+                (ICollection<KeyValuePair<MessageQuery, TItem>>)this.dictionary
+            ).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -138,7 +144,12 @@ namespace System.ServiceModel.Dispatcher
             return this.GetEnumerator();
         }
 
-        [SuppressMessage(FxCop.Category.Usage, "CA2301:EmbeddableTypesInContainersRule", MessageId = "collectionsByType", Justification = "No need to support type equivalence here.")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            "CA2301:EmbeddableTypesInContainersRule",
+            MessageId = "collectionsByType",
+            Justification = "No need to support type equivalence here."
+        )]
         public bool Remove(MessageQuery key)
         {
             if (this.dictionary.Remove(key))
@@ -153,7 +164,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     this.collectionsByType.Remove(queryType);
                 }
-               
+
                 return true;
             }
             else
@@ -174,22 +185,30 @@ namespace System.ServiceModel.Dispatcher
 
         class SequentialMessageQueryCollection : MessageQueryCollection
         {
-            public override IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(Message message)
+            public override IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(
+                Message message
+            )
             {
                 return new MessageSequentialResultEnumerable<TResult>(this, message);
             }
 
-            public override IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(MessageBuffer buffer)
+            public override IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(
+                MessageBuffer buffer
+            )
             {
                 return new MessageBufferSequentialResultEnumerable<TResult>(this, buffer);
             }
 
-            abstract class SequentialResultEnumerable<TSource, TResult> : IEnumerable<KeyValuePair<MessageQuery, TResult>>
+            abstract class SequentialResultEnumerable<TSource, TResult>
+                : IEnumerable<KeyValuePair<MessageQuery, TResult>>
             {
                 SequentialMessageQueryCollection collection;
                 TSource source;
 
-                public SequentialResultEnumerable(SequentialMessageQueryCollection collection, TSource source)
+                public SequentialResultEnumerable(
+                    SequentialMessageQueryCollection collection,
+                    TSource source
+                )
                 {
                     this.collection = collection;
                     this.source = source;
@@ -197,18 +216,12 @@ namespace System.ServiceModel.Dispatcher
 
                 SequentialMessageQueryCollection Collection
                 {
-                    get
-                    {
-                        return this.collection;
-                    }
+                    get { return this.collection; }
                 }
 
                 protected TSource Source
                 {
-                    get
-                    {
-                        return this.source;
-                    }
+                    get { return this.source; }
                 }
 
                 public IEnumerator<KeyValuePair<MessageQuery, TResult>> GetEnumerator()
@@ -221,42 +234,39 @@ namespace System.ServiceModel.Dispatcher
                     return this.GetEnumerator();
                 }
 
-                protected abstract TResult Evaluate(MessageQuery query);                
+                protected abstract TResult Evaluate(MessageQuery query);
 
                 class SequentialResultEnumerator : IEnumerator<KeyValuePair<MessageQuery, TResult>>
                 {
                     SequentialResultEnumerable<TSource, TResult> enumerable;
                     IEnumerator<MessageQuery> queries;
 
-                    public SequentialResultEnumerator(SequentialResultEnumerable<TSource, TResult> enumerable)
+                    public SequentialResultEnumerator(
+                        SequentialResultEnumerable<TSource, TResult> enumerable
+                    )
                     {
                         this.enumerable = enumerable;
                         this.queries = enumerable.Collection.GetEnumerator();
                     }
-                   
+
                     public KeyValuePair<MessageQuery, TResult> Current
                     {
-                        get 
+                        get
                         {
                             MessageQuery query = queries.Current;
                             TResult result = enumerable.Evaluate(query);
 
                             return new KeyValuePair<MessageQuery, TResult>(query, result);
                         }
-                    }  
+                    }
 
                     object IEnumerator.Current
                     {
-                        get 
-                        { 
-                            return this.Current; 
-                        }
+                        get { return this.Current; }
                     }
 
-                    public void Dispose()
-                    {                        
-                    } 
-                    
+                    public void Dispose() { }
+
                     public bool MoveNext()
                     {
                         return this.queries.MoveNext();
@@ -264,18 +274,21 @@ namespace System.ServiceModel.Dispatcher
 
                     public void Reset()
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
-                    }                    
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException()
+                        );
+                    }
                 }
             }
 
-            class MessageSequentialResultEnumerable<TResult> : SequentialResultEnumerable<Message, TResult>
+            class MessageSequentialResultEnumerable<TResult>
+                : SequentialResultEnumerable<Message, TResult>
             {
                 public MessageSequentialResultEnumerable(
-                    SequentialMessageQueryCollection collection,  Message message)
-                    : base(collection, message)
-                {
-                }
+                    SequentialMessageQueryCollection collection,
+                    Message message
+                )
+                    : base(collection, message) { }
 
                 protected override TResult Evaluate(MessageQuery query)
                 {
@@ -283,13 +296,14 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            class MessageBufferSequentialResultEnumerable<TResult> : SequentialResultEnumerable<MessageBuffer, TResult>
+            class MessageBufferSequentialResultEnumerable<TResult>
+                : SequentialResultEnumerable<MessageBuffer, TResult>
             {
                 public MessageBufferSequentialResultEnumerable(
-                    SequentialMessageQueryCollection collection, MessageBuffer buffer)
-                    : base(collection, buffer)
-                {                    
-                }
+                    SequentialMessageQueryCollection collection,
+                    MessageBuffer buffer
+                )
+                    : base(collection, buffer) { }
 
                 protected override TResult Evaluate(MessageQuery query)
                 {
@@ -298,7 +312,8 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        abstract class Enumerable<TSource, TResult> : IEnumerable<KeyValuePair<MessageQuery, TResult>>
+        abstract class Enumerable<TSource, TResult>
+            : IEnumerable<KeyValuePair<MessageQuery, TResult>>
         {
             TSource source;
             MessageQueryTable<TItem> table;
@@ -311,10 +326,7 @@ namespace System.ServiceModel.Dispatcher
 
             protected TSource Source
             {
-                get
-                {
-                    return this.source;
-                }
+                get { return this.source; }
             }
 
             public IEnumerator<KeyValuePair<MessageQuery, TResult>> GetEnumerator()
@@ -322,7 +334,9 @@ namespace System.ServiceModel.Dispatcher
                 return new Enumerator(this);
             }
 
-            protected abstract IEnumerator<KeyValuePair<MessageQuery, TResult>> GetInnerEnumerator(MessageQueryCollection collection);
+            protected abstract IEnumerator<KeyValuePair<MessageQuery, TResult>> GetInnerEnumerator(
+                MessageQueryCollection collection
+            );
 
             IEnumerator IEnumerable.GetEnumerator()
             {
@@ -337,7 +351,8 @@ namespace System.ServiceModel.Dispatcher
 
                 public Enumerator(Enumerable<TSource, TResult> enumerable)
                 {
-                    this.outerEnumerator = enumerable.table.collectionsByType.Values.GetEnumerator();
+                    this.outerEnumerator =
+                        enumerable.table.collectionsByType.Values.GetEnumerator();
                     this.enumerable = enumerable;
                 }
 
@@ -348,15 +363,10 @@ namespace System.ServiceModel.Dispatcher
 
                 object IEnumerator.Current
                 {
-                    get
-                    {
-                        return this.Current;
-                    }
+                    get { return this.Current; }
                 }
 
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
 
                 public bool MoveNext()
                 {
@@ -382,7 +392,9 @@ namespace System.ServiceModel.Dispatcher
 
                 public void Reset()
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
                 }
             }
         }
@@ -390,12 +402,11 @@ namespace System.ServiceModel.Dispatcher
         class MessageBufferEnumerable<TResult> : Enumerable<MessageBuffer, TResult>
         {
             public MessageBufferEnumerable(MessageQueryTable<TItem> table, MessageBuffer buffer)
-                : base(table, buffer)
-            {
-            }
+                : base(table, buffer) { }
 
             protected override IEnumerator<KeyValuePair<MessageQuery, TResult>> GetInnerEnumerator(
-                MessageQueryCollection collection)
+                MessageQueryCollection collection
+            )
             {
                 return collection.Evaluate<TResult>(this.Source).GetEnumerator();
             }
@@ -404,12 +415,11 @@ namespace System.ServiceModel.Dispatcher
         class MessageEnumerable<TResult> : Enumerable<Message, TResult>
         {
             public MessageEnumerable(MessageQueryTable<TItem> table, Message message)
-                : base(table, message)
-            {
-            }
+                : base(table, message) { }
 
             protected override IEnumerator<KeyValuePair<MessageQuery, TResult>> GetInnerEnumerator(
-                MessageQueryCollection collection)
+                MessageQueryCollection collection
+            )
             {
                 return collection.Evaluate<TResult>(this.Source).GetEnumerator();
             }

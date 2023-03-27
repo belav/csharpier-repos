@@ -4,8 +4,6 @@
 
 public unsafe struct Foo
 {
-        public Foo *foo;
-	string x;
+    public Foo* foo;
+    string x;
 }
-
-

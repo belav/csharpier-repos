@@ -4,9 +4,10 @@ using System;
 
 class X
 {
-	static void Main ()
-	{
-		bool? a = false, b = false;
-		Console.WriteLine (a && b);
-	}
+    static void Main()
+    {
+        bool? a = false,
+            b = false;
+        Console.WriteLine(a && b);
+    }
 }
